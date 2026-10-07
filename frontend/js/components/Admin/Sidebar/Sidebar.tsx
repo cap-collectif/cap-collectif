@@ -299,7 +299,15 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                     }
                   />
                   {features.privacy_policy && (
-                    <SidebarLink text="admin.label.pages.privacy" href="/admin/settings/pages.privacy/list" />
+                    // Sonata route retained during the Admin Next migration rollout. Remove it when the migration feature flag is removed.
+                    <SidebarLink
+                      text="admin.label.pages.privacy"
+                      href={
+                        features.unstable__sonata_migration_to_admin_next
+                          ? '/admin-next/privacy-settings'
+                          : '/admin/settings/pages.privacy/list'
+                      }
+                    />
                   )}
                   {/* Sonata route retained during the Admin Next migration rollout. Remove it when the migration feature flag is removed. */}
                   <SidebarLink

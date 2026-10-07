@@ -1,0 +1,255 @@
+<?php
+
+namespace CapcoTests\Mutation;
+
+use Capco\AppBundle\Entity\SiteParameter;
+use Capco\AppBundle\Entity\SiteParameterTranslation;
+use Capco\AppBundle\GraphQL\Mutation\PrivacySettings\UpdatePrivacySettingMutation;
+use Capco\AppBundle\GraphQL\Mutation\UpdateSiteParameterMutation;
+use Capco\AppBundle\Repository\LocaleRepository;
+use Capco\AppBundle\Repository\SiteParameterRepository;
+use Capco\AppBundle\Toggle\Manager;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ObjectRepository;
+use Overblog\GraphQLBundle\Definition\Argument;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+
+/**
+ * @internal
+ * @coversNothing
+ * @phpunit-status non-compliant
+ * @phpunit-reason Invokes GraphQL mutations directly with mocked dependencies instead of verifying the HTTP
+ * contract and persisted effects.
+ */
+class UpdatePrivacySettingMutationTest extends TestCase
+{
+    private const DEFAULT_LOCALE = 'fr-FR';
+
+    private SiteParameterRepository & MockObject $repository;
+    private LocaleRepository & MockObject $localeRepository;
+    private EntityManagerInterface & MockObject $entityManager;
+    private ObjectRepository & MockObject $translationRepository;
+    private UpdateSiteParameterMutation & MockObject $cacheInvalidator;
+    private Manager & MockObject $toggleManager;
+
+    protected function setUp(): void
+    {
+        $this->repository = $this->createMock(SiteParameterRepository::class);
+        $this->localeRepository = $this->createMock(LocaleRepository::class);
+        $this->localeRepository->method('getDefaultCode')->willReturn(self::DEFAULT_LOCALE);
+        $this->translationRepository = $this->createMock(ObjectRepository::class);
+        $this->entityManager = $this->createMock(EntityManagerInterface::class);
+        $this->entityManager
+            ->method('getRepository')
+            ->with(SiteParameterTranslation::class)
+            ->willReturn($this->translationRepository)
+        ;
+        $this->cacheInvalidator = $this->createMock(UpdateSiteParameterMutation::class);
+        $this->toggleManager = $this->createMock(Manager::class);
+    }
+
+    public function testSavesEveryReceivedLocaleAtOnceWhenMultilangueIsActive(): void
+    {
+        $siteParameter = $this->createSiteParameter('privacy-policy');
+        $frenchTranslation = $this->createTranslation($siteParameter, 'fr-FR', 'Ancienne politique');
+        $this->repository->method('find')->with('privacy-policy')->willReturn($siteParameter);
+        $this->toggleManager->method('isActive')->with(Manager::multilangue)->willReturn(true);
+        $this->translationRepository
+            ->method('findOneBy')
+            ->willReturnCallback(static fn (array $criteria) => 'fr-FR' === $criteria['locale'] ? $frenchTranslation : null)
+        ;
+
+        $this->entityManager
+            ->expects(self::once())
+            ->method('persist')
+            ->with(self::callback(
+                static fn (SiteParameterTranslation $translation) => 'en-GB' === $translation->getLocale()
+                    && 'New privacy policy' === $translation->getValue()
+                    && $translation->getTranslatable() === $siteParameter
+            ))
+        ;
+        $this->entityManager->expects(self::never())->method('remove');
+        $this->entityManager->expects(self::once())->method('flush');
+        $this->entityManager->expects(self::once())->method('refresh')->with($siteParameter);
+        $this->cacheInvalidator
+            ->expects(self::exactly(2))
+            ->method('invalidateCache')
+            ->withConsecutive([$siteParameter, 'fr-FR'], [$siteParameter, 'en-GB'])
+        ;
+
+        $payload = $this->invoke([
+            'id' => 'privacy-policy',
+            'translations' => [
+                ['locale' => 'fr-FR', 'value' => 'Nouvelle politique'],
+                ['locale' => 'en-GB', 'value' => 'New privacy policy'],
+            ],
+            'isEnabled' => true,
+        ]);
+
+        self::assertSame($siteParameter, $payload['siteParameter']);
+        self::assertSame('Nouvelle politique', $frenchTranslation->getValue());
+        self::assertTrue($siteParameter->getIsEnabled());
+    }
+
+    public function testStoresTheValueUnderTheDefaultLocaleWhenMultilangueIsInactive(): void
+    {
+        $siteParameter = $this->createSiteParameter('privacy-policy');
+        $frenchTranslation = $this->createTranslation($siteParameter, 'fr-FR', 'Ancienne politique');
+        $this->repository->method('find')->willReturn($siteParameter);
+        $this->toggleManager->method('isActive')->with(Manager::multilangue)->willReturn(false);
+        $this->translationRepository
+            ->expects(self::once())
+            ->method('findOneBy')
+            ->with(['translatable' => $siteParameter, 'locale' => self::DEFAULT_LOCALE])
+            ->willReturn($frenchTranslation)
+        ;
+
+        $this->entityManager->expects(self::never())->method('persist');
+        $this->entityManager->expects(self::once())->method('flush');
+        $this->cacheInvalidator
+            ->expects(self::once())
+            ->method('invalidateCache')
+            ->with($siteParameter, self::DEFAULT_LOCALE)
+        ;
+
+        // The admin browses in English, but without multilangue only the default locale exists.
+        $this->invoke([
+            'id' => 'privacy-policy',
+            'translations' => [['locale' => 'en-GB', 'value' => 'Single privacy policy']],
+            'isEnabled' => true,
+        ]);
+
+        self::assertSame('Single privacy policy', $frenchTranslation->getValue());
+    }
+
+    /**
+     * @dataProvider emptiedValueProvider
+     */
+    public function testAnEmptiedValueRemovesTheTranslationOfThatLocale(string $emptiedValue): void
+    {
+        $siteParameter = $this->createSiteParameter('privacy-policy');
+        $englishTranslation = $this->createTranslation($siteParameter, 'en-GB', 'Old privacy policy');
+        $this->repository->method('find')->willReturn($siteParameter);
+        $this->toggleManager->method('isActive')->willReturn(true);
+        $this->translationRepository->method('findOneBy')->willReturn($englishTranslation);
+
+        $this->entityManager->expects(self::once())->method('remove')->with($englishTranslation);
+        $this->entityManager->expects(self::never())->method('persist');
+        $this->entityManager->expects(self::once())->method('flush');
+        $this->cacheInvalidator->expects(self::once())->method('invalidateCache')->with($siteParameter, 'en-GB');
+
+        $this->invoke([
+            'id' => 'privacy-policy',
+            'translations' => [['locale' => 'en-GB', 'value' => $emptiedValue]],
+            'isEnabled' => true,
+        ]);
+    }
+
+    /**
+     * @return iterable<string, array{string}>
+     */
+    public static function emptiedValueProvider(): iterable
+    {
+        yield 'blank string' => ['   '];
+        yield 'cleared rich text editor' => ['<p><br></p>'];
+        yield 'cleared rich text editor with self-closing br' => ['<p><br /></p>'];
+        yield 'non-breaking space entity' => ['&nbsp;'];
+    }
+
+    public function testRejectsASocialNetworkDescriptionLongerThan160CharactersInAnyLocale(): void
+    {
+        $siteParameter = $this->createSiteParameter('privacy-policy')->setIsSocialNetworkDescription(true);
+        $this->repository->method('find')->willReturn($siteParameter);
+        $this->toggleManager->method('isActive')->willReturn(true);
+
+        $this->translationRepository->expects(self::never())->method('findOneBy');
+        $this->entityManager->expects(self::never())->method('flush');
+        $this->cacheInvalidator->expects(self::never())->method('invalidateCache');
+
+        $payload = $this->invoke([
+            'id' => 'privacy-policy',
+            'translations' => [
+                ['locale' => 'fr-FR', 'value' => 'Politique courte'],
+                ['locale' => 'en-GB', 'value' => str_repeat('a', 161)],
+            ],
+            'isEnabled' => true,
+        ]);
+
+        self::assertSame(['errorCode' => UpdatePrivacySettingMutation::INVALID_VALUE], $payload);
+    }
+
+    public function testSavesIsEnabledAloneWhenNoValueChanged(): void
+    {
+        $siteParameter = $this->createSiteParameter('privacy-policy');
+        $this->repository->method('find')->willReturn($siteParameter);
+
+        $this->toggleManager->expects(self::never())->method('isActive');
+        $this->localeRepository->expects(self::never())->method('getDefaultCode');
+        $this->translationRepository->expects(self::never())->method('findOneBy');
+        $this->entityManager->expects(self::once())->method('flush');
+        $this->entityManager->expects(self::once())->method('refresh')->with($siteParameter);
+        // The Doctrine SiteParameterCacheSubscriber invalidates every published locale on postFlush.
+        $this->cacheInvalidator->expects(self::never())->method('invalidateCache');
+
+        $payload = $this->invoke(['id' => 'privacy-policy', 'translations' => [], 'isEnabled' => false]);
+
+        self::assertSame($siteParameter, $payload['siteParameter']);
+        self::assertFalse($siteParameter->getIsEnabled());
+    }
+
+    public function testRejectsASettingOfAnotherCategory(): void
+    {
+        $siteParameter = $this->createSiteParameter('login.text.top')->setCategory('pages.login');
+        $this->repository->method('find')->willReturn($siteParameter);
+
+        $this->entityManager->expects(self::never())->method('flush');
+
+        $payload = $this->invoke(['id' => 'login-title', 'translations' => [], 'isEnabled' => true]);
+
+        self::assertSame(['errorCode' => UpdatePrivacySettingMutation::PRIVACY_PARAMETER_NOT_FOUND], $payload);
+    }
+
+    /**
+     * @param array<string, mixed> $input
+     *
+     * @return array{siteParameter?: SiteParameter, errorCode?: string}
+     */
+    private function invoke(array $input): array
+    {
+        $mutation = new UpdatePrivacySettingMutation(
+            $this->repository,
+            $this->localeRepository,
+            $this->entityManager,
+            $this->cacheInvalidator,
+            $this->toggleManager
+        );
+
+        return $mutation(new Argument(['input' => $input]));
+    }
+
+    private function createSiteParameter(string $keyname): SiteParameter
+    {
+        return (new SiteParameter())
+            ->setId('privacy-' . $keyname)
+            ->setKeyname($keyname)
+            ->setCategory('pages.privacy')
+            ->setType((string) SiteParameter::TYPE_RICH_TEXT)
+        ;
+    }
+
+    private function createTranslation(
+        SiteParameter $siteParameter,
+        string $locale,
+        string $value
+    ): SiteParameterTranslation {
+        $translation = (new SiteParameterTranslation())
+            ->setTranslatable($siteParameter)
+            ->setLocale($locale)
+            ->setValue($value)
+        ;
+        $siteParameter->addTranslation($translation);
+
+        return $translation;
+    }
+}

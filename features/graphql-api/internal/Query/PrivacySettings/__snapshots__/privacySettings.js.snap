@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|privacySettings returns the privacy settings as super-admin 1`] = `
+Object {
+  "privacySettings": Array [
+    Object {
+      "isEnabled": true,
+      "isTranslatable": true,
+      "keyname": "privacy-policy",
+      "type": 1,
+    },
+  ],
+}
+`;

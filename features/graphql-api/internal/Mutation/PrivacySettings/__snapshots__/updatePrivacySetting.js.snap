@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|updatePrivacySetting creates, updates and removes the translation of another locale when multilangue is enabled: create 1`] = `
+Object {
+  "updatePrivacySetting": Object {
+    "errorCode": null,
+    "siteParameter": Object {
+      "isEnabled": true,
+      "keyname": "privacy-policy",
+      "translations": Array [
+        Object {
+          "locale": "en-GB",
+          "value": "<p>Privacy policy</p>",
+        },
+        Object {
+          "locale": "fr-FR",
+          "value": "<p>Politique de confidentialité</p>",
+        },
+      ],
+      "value": "<p>Politique de confidentialité</p>",
+    },
+  },
+}
+`;
+
+exports[`Internal|updatePrivacySetting creates, updates and removes the translation of another locale when multilangue is enabled: remove 1`] = `
+Object {
+  "updatePrivacySetting": Object {
+    "errorCode": null,
+    "siteParameter": Object {
+      "isEnabled": true,
+      "keyname": "privacy-policy",
+      "translations": Array [
+        Object {
+          "locale": "fr-FR",
+          "value": "<p>Politique de confidentialité</p>",
+        },
+      ],
+      "value": "<p>Politique de confidentialité</p>",
+    },
+  },
+}
+`;
+
+exports[`Internal|updatePrivacySetting creates, updates and removes the translation of another locale when multilangue is enabled: update 1`] = `
+Object {
+  "updatePrivacySetting": Object {
+    "errorCode": null,
+    "siteParameter": Object {
+      "isEnabled": true,
+      "keyname": "privacy-policy",
+      "translations": Array [
+        Object {
+          "locale": "en-GB",
+          "value": "<p>Privacy policy, edited</p>",
+        },
+        Object {
+          "locale": "fr-FR",
+          "value": "<p>Politique de confidentialité</p>",
+        },
+      ],
+      "value": "<p>Politique de confidentialité</p>",
+    },
+  },
+}
+`;
+
+exports[`Internal|updatePrivacySetting stores the value under the platform default locale when multilangue is disabled 1`] = `
+Object {
+  "updatePrivacySetting": Object {
+    "errorCode": null,
+    "siteParameter": Object {
+      "isEnabled": true,
+      "keyname": "privacy-policy",
+      "translations": Array [
+        Object {
+          "locale": "fr-FR",
+          "value": "Stored under the default locale",
+        },
+      ],
+      "value": "Stored under the default locale",
+    },
+  },
+}
+`;
+
+exports[`Internal|updatePrivacySetting updates the value and isEnabled as super-admin 1`] = `
+Object {
+  "updatePrivacySetting": Object {
+    "errorCode": null,
+    "siteParameter": Object {
+      "isEnabled": false,
+      "keyname": "privacy-policy",
+      "translations": Array [
+        Object {
+          "locale": "fr-FR",
+          "value": "New privacy policy",
+        },
+      ],
+      "value": "New privacy policy",
+    },
+  },
+}
+`;

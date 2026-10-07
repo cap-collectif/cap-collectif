@@ -1636,6 +1636,14 @@ InternalMutation:
                     inputType: UpdateProjectImageInput
                     payloadType: UpdateProjectImagePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ProjectSettings\\UpdateProjectImageMutation", args)'
+            updatePrivacySetting:
+                description: 'update a SiteParameter of the pages.privacy category.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdatePrivacySettingInput
+                    payloadType: UpdatePrivacySettingPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\PrivacySettings\\UpdatePrivacySettingMutation", args)'
             updateLoginSetting:
                 description: 'update a SiteParameter of the pages.login category.'
                 access: "@=hasRole('ROLE_ADMIN')"

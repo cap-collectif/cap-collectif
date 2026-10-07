@@ -319,6 +319,15 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
     ci-dessous, autonome et à appliquer telle quelle. Elle couvre aussi les catégories qui mélangent des
     `keyname` traduisibles et non traduisibles dans une même liste (ex: `pages.events` avec `event.customcode`),
     ainsi que la validation par langue, l'invalidation du cache et la vérification côté site public.
+  - **Catégorie à un seul paramètre texte riche** (ex: `pages.cookies`, `pages.privacy` ; à vérifier pour
+    `pages.legal`, `pages.charter`) : pas de `Table` ni de modale, le formulaire est rendu directement dans la
+    page (`Box bg="white"` + sélecteur de langue + `TextEditor` + `Switch` « Publié » + bouton « Enregistrer »),
+    la query `xSettings` et le paramètre étant récupérés par `find(setting => setting.keyname === '...')`. Le
+    backend et la gestion des langues restent ceux de la recette ci-dessous. Voir
+    `PrivacySettings/PrivacySettingsForm.tsx`. Si le lien de menu dépend d'un feature flag fonctionnel (ex:
+    `privacy_policy` pour `pages.privacy`), les tests unitaires des menus doivent l'activer
+    (`{ ...features, privacy_policy: true }`), sinon l'entrée n'est pas rendue ; la page Sonata, elle, n'exigeait
+    pas ce flag (`FeaturesCategoryResolver` sans condition), donc ne pas l'ajouter à la query/mutation.
   - **Snapshots e2e GraphQL, Cypress et dump `var/db.backup`** : `jest-setup-global.e2e.js` (tests e2e
     GraphQL) et le hook `before:run` de `cypress/plugins/index.ts` commencent par `fab local.qa.save-db`,
     c'est-à-dire qu'ils **écrasent le dump avec l'état courant de la base locale**, puis `_setupDB.js` /
@@ -1032,8 +1041,11 @@ prop-drillé entre la liste et un ancêtre.
     piloter un vrai navigateur headless (voir le piège `playwright-core` plus haut) avec
     `page.on('console', msg => ...)` filtré sur `msg.type() === 'error' && msg.text().includes('Maximum update
     depth exceeded')`, se connecter via `context.request.post('/login_check', ...)` (JSON, cf. piège dédié),
-    puis un `page.goto()` du **premier** rendu Symfony (`/`, pour peupler la session Redis) suivi du
-    `page.goto()` de la page admin-next à tester. Compter les occurrences juste après le chargement (avant
+    puis un `page.goto()` d'une page **Sonata** (ex: `/admin/settings/pages.privacy/list` — `/` seul ne suffit
+    pas toujours : `capco_nextjs_1` logge alors « The Json session is empty ! » et redirige vers `/`) pour
+    peupler la session Redis, suivi du `page.goto()` de la page admin-next à tester. Attacher l'écoute
+    `console` **après** ces pages PHP, sinon leurs warnings (legacy `ReactDOM.render`, etc.) sont attribués à
+    tort à la page migrée. Compter les occurrences juste après le chargement (avant
     toute interaction) pour confirmer que le bug est bien un problème de rendu initial et non déclenché par une
     action utilisateur, puis retirer/modifier une seule prop suspecte à la fois entre deux runs (HMR recompile
     en ~2s, vérifiable dans `docker logs capco_nextjs_1`) pour confirmer/infirmer chaque hypothèse — beaucoup
@@ -1220,6 +1232,10 @@ prop-drillé entre la liste et un ancêtre.
   entrée, où Prettier échoue explicitement) car il s'agit ici d'un JSON *valide en entrée* mal *ré-émis* en
   sortie. Formater les `.json` dans une commande Prettier séparée des `.ts`/`.tsx`, et vérifier le diff (`git
   diff --stat`) d'un fichier de config JSON après un passage Prettier avant de continuer.
+
+- **`npx prettier --write` depuis la racine sur `frontend/js/components/Admin/Sidebar/Sidebar.tsx`** reformate
+  aussi des lignes sans rapport (largeur de ligne différente de celle avec laquelle le fichier a été formaté) :
+  vérifier `git diff` et remettre à l'identique les blocs non concernés par la migration.
 
 - **`FieldInput type="email"` dans un `<form>` : ajouter `noValidate` sur le formulaire.** Sans ça, la
   validation native du navigateur bloque la soumission avant que `handleSubmit` n'appelle yup : l'utilisatrice

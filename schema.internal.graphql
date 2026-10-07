@@ -10038,6 +10038,9 @@ type Mutation {
   """Update a project page image."""
   updateProjectImage(input: UpdateProjectImageInput!): UpdateProjectImagePayload
 
+  """update a SiteParameter of the pages.privacy category."""
+  updatePrivacySetting(input: UpdatePrivacySettingInput!): UpdatePrivacySettingPayload
+
   """update a SiteParameter of the pages.login category."""
   updateLoginSetting(input: UpdateLoginSettingInput!): UpdateLoginSettingPayload
 
@@ -15422,6 +15425,9 @@ type Query {
 
   """get all site parameters of the pages.legal category"""
   legalSettings: [SiteParameter!]!
+
+  """get all site parameters of the pages.privacy category"""
+  privacySettings: [SiteParameter!]!
 
   """List global custom code configurations with their version history."""
   customCodeConfiguration(
@@ -21694,6 +21700,46 @@ input UpdatePresentationProjectTabInput {
   enabled: Boolean!
   body: String
   clientMutationId: String
+}
+
+enum UpdatePrivacySettingErrorCode {
+  PRIVACY_PARAMETER_NOT_FOUND
+  INVALID_VALUE
+}
+
+input UpdatePrivacySettingInput {
+  """The id of the SiteParameter to update."""
+  id: ID!
+
+  """
+  The values to save, one per locale. Locales that are not listed are left
+  untouched. For a non-translatable setting, or when the multilangue feature is
+  disabled, a single value is expected.
+  """
+  translations: [UpdatePrivacySettingTranslationInput!]!
+
+  """Whether the SiteParameter is enabled."""
+  isEnabled: Boolean!
+  clientMutationId: String
+}
+
+type UpdatePrivacySettingPayload {
+  siteParameter: SiteParameter
+  errorCode: UpdatePrivacySettingErrorCode
+  clientMutationId: String
+}
+
+"""
+The value of a SiteParameter of the pages.privacy category for a given locale.
+"""
+input UpdatePrivacySettingTranslationInput {
+  """The locale of the value."""
+  locale: TranslationLocale!
+
+  """
+  The value for this locale. An empty value removes the translation of this locale.
+  """
+  value: String!
 }
 
 input UpdateProfileAccountEmailInput {

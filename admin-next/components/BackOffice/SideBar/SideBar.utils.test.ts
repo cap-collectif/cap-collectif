@@ -69,6 +69,27 @@ describe('getSideBarItemsFiltered', () => {
     )
   })
 
+  const getPrivacySettingsItem = (featureFlags = { ...defaultFeatureFlags, privacy_policy: true }) => {
+    const sideBarItems = getSideBarItemsFiltered(true, true, featureFlags, false, null, false)
+    return sideBarItems
+      .find(item => item.id === 'pages')
+      ?.items.find(item => item.title === 'admin.label.pages.privacy')
+  }
+
+  it('keeps the Sonata privacy settings route while the migration is disabled', () => {
+    expect(getPrivacySettingsItem()?.href).toBe('/admin/settings/pages.privacy/list')
+  })
+
+  it('uses the Admin Next privacy settings route while the migration is enabled', () => {
+    expect(
+      getPrivacySettingsItem({
+        ...defaultFeatureFlags,
+        privacy_policy: true,
+        unstable__sonata_migration_to_admin_next: true,
+      })?.href,
+    ).toBe('/admin-next/privacy-settings')
+  })
+
   it('hides the Hub API Green item when its feature flag is disabled', () => {
     const sideBarItems = getSideBarItemsFiltered(
       true,

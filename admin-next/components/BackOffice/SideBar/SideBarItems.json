@@ -357,7 +357,7 @@
             },
             {
                 "title": "admin.label.pages.privacy",
-                "href": "/admin/settings/pages.privacy/list",
+                "href": "/admin-next/privacy-settings",
                 "rolesRequired": [],
                 "featuresRequired": ["privacy_policy"]
             },

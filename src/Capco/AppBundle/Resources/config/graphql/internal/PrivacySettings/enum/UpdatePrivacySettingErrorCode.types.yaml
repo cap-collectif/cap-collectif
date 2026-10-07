@@ -1,0 +1,9 @@
+UpdatePrivacySettingErrorCode:
+    type: enum
+    config:
+        name: UpdatePrivacySettingErrorCode
+        values:
+            PRIVACY_PARAMETER_NOT_FOUND:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\PrivacySettings\UpdatePrivacySettingMutation::PRIVACY_PARAMETER_NOT_FOUND
+            INVALID_VALUE:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\PrivacySettings\UpdatePrivacySettingMutation::INVALID_VALUE
