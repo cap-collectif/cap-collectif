@@ -1,0 +1,11 @@
+UpdateCharterSettingInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of updateCharterSetting mutation.'
+        fields:
+            id:
+                type: 'ID!'
+            translations:
+                type: '[UpdateCharterSettingTranslationInput!]!'
+            isEnabled:
+                type: 'Boolean!'

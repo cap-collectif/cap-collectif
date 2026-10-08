@@ -10047,6 +10047,9 @@ type Mutation {
   """update a SiteParameter of the pages.legal category."""
   updateLegalSetting(input: UpdateLegalSettingInput!): UpdateLegalSettingPayload
 
+  """update a SiteParameter of the pages.charter category."""
+  updateCharterSetting(input: UpdateCharterSettingInput!): UpdateCharterSettingPayload
+
   """update a SiteParameter of the pages.cookies category."""
   updateCookieSetting(input: UpdateCookieSettingInput!): UpdateCookieSettingPayload
 
@@ -15429,6 +15432,9 @@ type Query {
   """get all site parameters of the pages.privacy category"""
   privacySettings: [SiteParameter!]!
 
+  """get all site parameters of the pages.charter category"""
+  charterSettings: [SiteParameter!]!
+
   """List global custom code configurations with their version history."""
   customCodeConfiguration(
     """Maximum number of versions returned for each custom code."""
@@ -20122,6 +20128,35 @@ type UpdateCASSSOConfigurationPayload {
   ssoConfiguration: CASSSOConfiguration
   errorCode: updateCASSSOConfiguratonErrorCode
   clientMutationId: String
+}
+
+"""Available errors for an `updateCharterSetting` mutation."""
+enum UpdateCharterSettingErrorCode {
+  """
+  No SiteParameter of the `pages.charter` category was found for the given id.
+  """
+  SITE_PARAMETER_NOT_FOUND
+}
+
+input UpdateCharterSettingInput {
+  id: ID!
+  translations: [UpdateCharterSettingTranslationInput!]!
+  isEnabled: Boolean!
+  clientMutationId: String
+}
+
+type UpdateCharterSettingPayload {
+  siteParameter: SiteParameter
+  errorCode: UpdateCharterSettingErrorCode
+  clientMutationId: String
+}
+
+"""
+The value of a SiteParameter of the pages.charter category for a given locale.
+"""
+input UpdateCharterSettingTranslationInput {
+  locale: TranslationLocale!
+  value: String!
 }
 
 """Available errors for an `updateCivicIA` mutation."""

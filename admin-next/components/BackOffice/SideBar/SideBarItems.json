@@ -369,7 +369,7 @@
             },
             {
                 "title": "admin.label.pages.charter",
-                "href": "/admin/settings/pages.charter/list",
+                "href": "/admin-next/charter-settings",
                 "rolesRequired": [],
                 "featuresRequired": []
             },

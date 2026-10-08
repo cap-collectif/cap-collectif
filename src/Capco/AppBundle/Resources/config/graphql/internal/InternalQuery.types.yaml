@@ -536,6 +536,12 @@ InternalQuery:
                 access: "@=hasRole('ROLE_ADMIN')"
                 type: '[SiteParameter!]!'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\PrivacySettings\\PrivacySettingsQueryResolver")'
+
+            charterSettings:
+                description: 'get all site parameters of the pages.charter category'
+                access: "@=hasRole('ROLE_ADMIN')"
+                type: '[SiteParameter!]!'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\CharterSettings\\CharterSettingsQueryResolver")'
             customCodeConfiguration:
                 description: 'List global custom code configurations with their version history.'
                 access: "@=hasRole('ROLE_ADMIN')"

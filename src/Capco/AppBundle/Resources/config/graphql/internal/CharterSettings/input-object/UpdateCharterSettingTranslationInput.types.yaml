@@ -1,0 +1,10 @@
+UpdateCharterSettingTranslationInput:
+    type: input-object
+    config:
+        name: UpdateCharterSettingTranslationInput
+        description: 'The value of a SiteParameter of the pages.charter category for a given locale.'
+        fields:
+            locale:
+                type: 'TranslationLocale!'
+            value:
+                type: 'String!'

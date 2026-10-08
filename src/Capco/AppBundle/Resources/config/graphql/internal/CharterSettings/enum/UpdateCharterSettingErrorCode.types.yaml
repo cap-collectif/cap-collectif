@@ -1,0 +1,9 @@
+UpdateCharterSettingErrorCode:
+    type: enum
+    config:
+        name: UpdateCharterSettingErrorCode
+        description: 'Available errors for an `updateCharterSetting` mutation.'
+        values:
+            SITE_PARAMETER_NOT_FOUND:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\CharterSettings\UpdateCharterSettingMutation::SITE_PARAMETER_NOT_FOUND
+                description: 'No SiteParameter of the `pages.charter` category was found for the given id.'

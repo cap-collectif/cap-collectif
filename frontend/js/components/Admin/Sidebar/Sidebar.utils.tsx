@@ -78,6 +78,7 @@ export const URL_MAP = {
     '/admin-next/legal-settings',
     '/admin-next/privacy-settings',
     '/admin/settings/pages.legal/',
+    '/admin-next/charter-settings',
     '/admin/settings/pages.charter/',
     '/admin/settings/pages.shield/',
   ],
