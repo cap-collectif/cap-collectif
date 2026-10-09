@@ -12,11 +12,11 @@ interface TimeRangeable
 
     public function setEndAt(?\DateTime $endAt = null);
 
-    public function hasStarted(): bool;
+    public function hasStarted(?\DateTime $now = null): bool;
 
-    public function hasEnded(): bool;
+    public function hasEnded(?\DateTime $now = null): bool;
 
-    public function getRemainingTime(): ?array;
+    public function getRemainingTime(?\DateTime $now = null): ?array;
 
     public function lastOneDay(): bool;
 

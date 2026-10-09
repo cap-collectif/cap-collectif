@@ -28,13 +28,15 @@ trait TimeRangeableTrait
         return $this;
     }
 
-    public function hasStarted(): bool
+    public function hasStarted(?\DateTime $now = null): bool
     {
         if ($this->isTimeless()) {
             return true;
         }
 
-        $now = new \DateTime('now');
+        if (null === $now) {
+            $now = new \DateTime('now');
+        }
 
         if (null !== $this->startAt) {
             return $now >= $this->startAt;
@@ -43,21 +45,25 @@ trait TimeRangeableTrait
         return false;
     }
 
-    public function hasEnded(): bool
+    public function hasEnded(?\DateTime $now = null): bool
     {
         if ($this->isTimeless()) {
             return false;
         }
 
-        $now = new \DateTime('now');
+        if (null === $now) {
+            $now = new \DateTime('now');
+        }
 
         return $this->endAt ? $now >= $this->endAt : false;
     }
 
-    public function getRemainingTime(): ?array
+    public function getRemainingTime(?\DateTime $now = null): ?array
     {
-        $now = new \DateTime();
-        if ($this->isOpen()) {
+        if (null === $now) {
+            $now = new \DateTime();
+        }
+        if ($this->isOpen($now)) {
             if ($this->endAt) {
                 $time = $this->endAt->diff($now);
             } else {

@@ -7,6 +7,8 @@ use PhpSpec\ObjectBehavior;
 
 class EventSpec extends ObjectBehavior
 {
+    private const NOW = '2026-10-08 12:00:00';
+
     public function it_is_initializable()
     {
         $this->shouldHaveType(Event::class);
@@ -28,82 +30,87 @@ class EventSpec extends ObjectBehavior
 
     public function it_event_ongoing()
     {
-        $start = new \DateTime('now');
-        $end = new \DateTime('now + 2 days');
+        $now = new \DateTime(self::NOW);
+        $start = new \DateTime('2026-10-08 11:00:00');
+        $end = new \DateTime('2026-10-10 11:30:00');
         $this->setStartAt($start);
         $this->setEndAt($end);
-        $this->hasStarted()->shouldReturn(true);
-        $this->hasEnded()->shouldReturn(false);
+        $this->hasStarted($now)->shouldReturn(true);
+        $this->hasEnded($now)->shouldReturn(false);
         $this->lastOneDay()->shouldReturn(false);
-        $this->isOpen()->shouldReturn(true);
-        $this->isClosed()->shouldReturn(false);
-        $this->isFuture()->shouldReturn(false);
-        $this->getRemainingTime()->shouldBeLike(['days' => 1, 'hours' => 23]);
+        $this->isOpen($now)->shouldReturn(true);
+        $this->isClosed($now)->shouldReturn(false);
+        $this->isFuture($now)->shouldReturn(false);
+        $this->getRemainingTime($now)->shouldBeLike(['days' => 1, 'hours' => 23]);
     }
 
     public function it_event_not_started_yet()
     {
-        $start = new \DateTime('now + 2 days');
-        $end = new \DateTime('now + 3 days');
+        $now = new \DateTime(self::NOW);
+        $start = new \DateTime('2026-10-10 12:00:00');
+        $end = new \DateTime('2026-10-11 12:00:00');
         $this->setStartAt($start);
         $this->setEndAt($end);
-        $this->hasStarted()->shouldReturn(false);
-        $this->hasEnded()->shouldReturn(false);
+        $this->hasStarted($now)->shouldReturn(false);
+        $this->hasEnded($now)->shouldReturn(false);
         $this->lastOneDay()->shouldReturn(false);
-        $this->isOpen()->shouldReturn(false);
-        $this->isClosed()->shouldReturn(false);
-        $this->isFuture()->shouldReturn(true);
-        $this->getRemainingTime()->shouldBeLike(null);
+        $this->isOpen($now)->shouldReturn(false);
+        $this->isClosed($now)->shouldReturn(false);
+        $this->isFuture($now)->shouldReturn(true);
+        $this->getRemainingTime($now)->shouldBeLike(null);
     }
 
     public function it_event_closed()
     {
-        $start = new \DateTime('now -3 days');
-        $end = new \DateTime('now -1 days');
+        $now = new \DateTime(self::NOW);
+        $start = new \DateTime('2026-10-05 12:00:00');
+        $end = new \DateTime('2026-10-07 12:00:00');
         $this->setStartAt($start);
         $this->setEndAt($end);
-        $this->hasStarted()->shouldReturn(true);
-        $this->hasEnded()->shouldReturn(true);
+        $this->hasStarted($now)->shouldReturn(true);
+        $this->hasEnded($now)->shouldReturn(true);
         $this->lastOneDay()->shouldReturn(false);
-        $this->isOpen()->shouldReturn(false);
-        $this->isClosed()->shouldReturn(true);
-        $this->isFuture()->shouldReturn(false);
-        $this->getRemainingTime()->shouldBeLike(null);
+        $this->isOpen($now)->shouldReturn(false);
+        $this->isClosed($now)->shouldReturn(true);
+        $this->isFuture($now)->shouldReturn(false);
+        $this->getRemainingTime($now)->shouldBeLike(null);
     }
 
     public function it_event_last_one_day()
     {
-        $start = new \DateTime('now');
-        $end = new \DateTime('now + 1 hour + 10 minutes');
+        $now = new \DateTime(self::NOW);
+        $start = new \DateTime('2026-10-08 12:00:00');
+        $end = new \DateTime('2026-10-08 13:10:00');
         $this->setStartAt($start);
         $this->setEndAt($end);
 
         $this->getStartAt()->shouldBeLike($start);
         $this->getEndAt()->shouldBeLike($end);
-        $this->hasStarted()->shouldReturn(true);
-        $this->hasEnded()->shouldReturn(false);
+        $this->hasStarted($now)->shouldReturn(true);
+        $this->hasEnded($now)->shouldReturn(false);
         $this->lastOneDay()->shouldReturn(true);
-        $this->isOpen()->shouldReturn(true);
-        $this->isClosed()->shouldReturn(false);
-        $this->isFuture()->shouldReturn(false);
-        $this->getRemainingTime()->shouldBeLike(['days' => 0, 'hours' => 1]);
+        $this->isOpen($now)->shouldReturn(true);
+        $this->isClosed($now)->shouldReturn(false);
+        $this->isFuture($now)->shouldReturn(false);
+        $this->getRemainingTime($now)->shouldBeLike(['days' => 0, 'hours' => 1]);
     }
 
     public function it_event_occurs_in_future()
     {
-        $start = new \DateTime('now + 1 day');
-        $end = new \DateTime('now + 4 days');
+        $now = new \DateTime(self::NOW);
+        $start = new \DateTime('2026-10-09 12:00:00');
+        $end = new \DateTime('2026-10-12 12:00:00');
         $this->setStartAt($start);
         $this->setEndAt($end);
 
         $this->getStartAt()->shouldBeLike($start);
         $this->getEndAt()->shouldBeLike($end);
-        $this->hasStarted()->shouldReturn(false);
-        $this->hasEnded()->shouldReturn(false);
+        $this->hasStarted($now)->shouldReturn(false);
+        $this->hasEnded($now)->shouldReturn(false);
         $this->lastOneDay()->shouldReturn(false);
-        $this->isOpen()->shouldReturn(false);
-        $this->isClosed()->shouldReturn(false);
-        $this->isFuture()->shouldReturn(true);
-        $this->getRemainingTime()->shouldBeLike(null);
+        $this->isOpen($now)->shouldReturn(false);
+        $this->isClosed($now)->shouldReturn(false);
+        $this->isFuture($now)->shouldReturn(true);
+        $this->getRemainingTime($now)->shouldBeLike(null);
     }
 }
