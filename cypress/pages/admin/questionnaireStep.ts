@@ -118,7 +118,7 @@ export default new (class AdminQuestionnaireStepPage {
   }
 
   getFromModelTab() {
-    return cy.get('label[for="MODEL"]')
+    return cy.get('[role="tab"]#MODEL')
   }
   getFromModelTabListInput() {
     return cy.get('div.cap-async-select__input-container')

@@ -1759,9 +1759,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@cap-collectif/ui@npm:6.0.12":
-  version: 6.0.12
-  resolution: "@cap-collectif/ui@npm:6.0.12"
+"@cap-collectif/ui@npm:6.1.0":
+  version: 6.1.0
+  resolution: "@cap-collectif/ui@npm:6.1.0"
   dependencies:
     "@ariakit/react": "npm:^0.4.17"
     "@atlaskit/pragmatic-drag-and-drop": "npm:^1.7.7"
@@ -1779,14 +1779,13 @@ __metadata:
     react-infinite-scroller: "npm:^1.2.4"
     react-select: "npm:^5.10.1"
     react-with-direction: "npm:^1.3.1"
-    reakit: "npm:1.3.10"
   peerDependencies:
     "@styled-system/css": ^5.0.0
     framer-motion: ">=4.0.0"
     moment: ^2.29.1
     react: ">=18"
     styled-components: ^6.1.8
-  checksum: 10c0/4fe7e03cd938f3888925fc52c97271af17e93f31c1232092950d6792d184acfa0516b7a8c1a257e6520e8c6ca5e612f149b2fae18ad6a875dc4bc3ce690532dc
+  checksum: 10c0/f225eb5c5acbd8da1d8dce0948390d815bd019882d968bf7a63a2016adba0c4bd16fd3503a681d7f52ccac5ffac583d23b150d62b37b1482d63d731163cb9f02
   languageName: node
   linkType: hard
 
@@ -7665,7 +7664,7 @@ __metadata:
     "@babel/preset-stage-0": "npm:^7.0.0"
     "@babel/preset-typescript": "npm:^7.23.0"
     "@babel/runtime-corejs3": "npm:^7.28.4"
-    "@cap-collectif/ui": "npm:6.0.12"
+    "@cap-collectif/ui": "npm:6.1.0"
     "@cfaester/enzyme-adapter-react-18": "npm:0.7.1"
     "@emotion/babel-preset-css-prop": "npm:^11.11.0"
     "@emotion/cache": "npm:^10.0.29"
@@ -18104,7 +18103,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"reakit@npm:1.3.10, reakit@npm:^1.3.7":
+"reakit@npm:^1.3.7":
   version: 1.3.10
   resolution: "reakit@npm:1.3.10"
   dependencies:

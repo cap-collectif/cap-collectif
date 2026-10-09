@@ -53,7 +53,7 @@ export default new (class EventFormPage {
     this.startAt.type(date)
   }
   chooseRegistrationType(type: 'PLATFORM' | 'EXTERNAL' | 'DISABLED') {
-    this.cy.get(`input#${type}`).click({ force: true })
+    this.cy.get(`[role="tab"]#${type}`).click({ force: true })
   }
   toggleIsMeasurable() {
     this.cy.get('input#isMeasurable').click({ force: true })
