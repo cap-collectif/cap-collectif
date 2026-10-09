@@ -5,35 +5,28 @@ namespace Capco\AppBundle\Manager;
 use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Entity\MenuItem;
 use Capco\AppBundle\Repository\MenuItemRepository;
+use Capco\AppBundle\Service\MenuItemUrlGenerator;
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Validator\Constraints\Url;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class MenuItemResolver
 {
     final public const MENU_CACHE_KEY = 'getEnabledMenuItemsWithChildren';
     protected $repository;
     protected $manager;
-    protected $router;
-    protected $validator;
     protected $cache;
     protected $requestStack;
 
     public function __construct(
         MenuItemRepository $repository,
         Manager $toggleManager,
-        RouterInterface $router,
-        ValidatorInterface $validator,
+        private readonly MenuItemUrlGenerator $urlGenerator,
         RedisCache $cache,
         RequestStack $requestStack
     ) {
         $this->repository = $repository;
         $this->manager = $toggleManager;
-        $this->router = $router;
-        $this->validator = $validator;
         $this->cache = $cache;
         $this->requestStack = $requestStack;
     }
@@ -107,61 +100,7 @@ class MenuItemResolver
      */
     public function getMenuUrl(MenuItem $item, Request $request): string
     {
-        $locale = $this->resolveLocale($request);
-        if ($item->getPage()) {
-            $slug = $item->getPage()->getSlug($locale, true);
-            if (!$slug) {
-                return '';
-            }
-
-            return $this->router->generate('app_page_show', [
-                'slug' => $slug,
-                '_locale' => $locale,
-            ]);
-        }
-        $url = $item->getLink($locale, true) ?? '';
-        if ('/' === $url) {
-            return $this->router->generate('app_homepage', ['_locale' => $locale]);
-        }
-        if ('' === $url) {
-            return '';
-        }
-
-        $constraint = new Url([
-            'message' => 'not_valid_url',
-            'payload' => ['severity' => 'warning'],
-        ]);
-        $errorList = $this->validator->validate($url, $constraint);
-
-        if (0 === \count($errorList)) {
-            return $url;
-        }
-
-        $routeMatch = $this->router->match("/{$url}");
-        $routeParams = $this->getUrlParams($routeMatch);
-
-        if ('capco_app_cms' === $routeMatch['_route']) {
-            $route = $this->router->generate(
-                'capco_app_cms',
-                array_merge(['url' => $url], $routeParams)
-            );
-        } else {
-            $route = $this->router->generate(
-                $routeMatch['_route'],
-                array_merge(['_locale' => $locale], $routeParams)
-            );
-        }
-
-        return $route;
-    }
-
-    private function getUrlParams(array $routeMatch): array
-    {
-        return array_filter(
-            $routeMatch,
-            fn ($value) => '_' !== $value[0],
-            \ARRAY_FILTER_USE_KEY
-        );
+        return $this->urlGenerator->generate($item, $request->getLocale());
     }
 
     private function urlMatchCurrent($link = null, $current = null)
@@ -172,10 +111,5 @@ class MenuItemResolver
         $fixedLink = '/' . $link;
 
         return $link === $current || str_ends_with((string) $current, $fixedLink);
-    }
-
-    private function resolveLocale(Request $request): string
-    {
-        return $request->getLocale();
     }
 }
