@@ -3,18 +3,6 @@ from infrastructure.deploylib import qa, environments
 
 
 @task
-def blackfire_curl(ctx, url):
-    environments.local()
-    qa.blackfire_curl(url)
-
-
-@task
-def blackfire_run(ctx, cli):
-    environments.local()
-    qa.blackfire_curl(cli)
-
-
-@task
 def clear_fixtures(ctx):
     environments.local()
     qa.clear_fixtures()

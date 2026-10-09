@@ -33,11 +33,6 @@ sub vcl_recv {
     return (pass);
   }
 
-  # Disable cache for blackfire
-  if (req.http.X-Blackfire-Query) {
-    return (pass);
-  }
-
   # Allow purge
   if (req.method == "PURGE") {
       return (purge);

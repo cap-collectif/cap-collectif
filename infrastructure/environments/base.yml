@@ -38,7 +38,7 @@ services:
             - elasticsearch:elasticsearch
             - redis:redis
             - mailcatcher:mailcatchersmtp
-        extra_hosts: # Used to ban varnish cache and blackfire
+        extra_hosts: # Used to ban varnish cache
             - 'capco.test:0.0.0.0'
             - 'capco.dev:0.0.0.0'
 

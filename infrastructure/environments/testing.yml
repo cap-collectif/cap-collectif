@@ -3,7 +3,6 @@ services:
         hostname: capco.test
         environment:
             DOCKER_GID: 998
-            BLACKFIRE_LOG_LEVEL: 1
             CI: ${CI}
             CIRCLE_JOB: ${CIRCLE_JOB}
             # Set the following variables on CircleCI

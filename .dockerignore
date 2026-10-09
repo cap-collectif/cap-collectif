@@ -12,7 +12,6 @@ coverage
 .php_cs
 .php_cs.cache
 .prettierignore
-.blackfire.yml
 phpstan.neon
 fabfile.py
 .scss-lint.yml

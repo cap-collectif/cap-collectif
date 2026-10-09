@@ -267,12 +267,3 @@ def clear_fixtures():
 def kill_database_container():
     run('docker ps -a | grep databasefixtures | awk \'{print $1}\' | xargs -I {} docker kill {}', warn=True)
 
-
-def blackfire_curl(url):
-    "Blackfire curl"
-    run('eval docker exec -u root -i capco_application_1 blackfire curl ' + url + '--insecure')
-
-
-def blackfire_run(cli):
-    "Blackfire run"
-    run('eval docker exec -u root -i capco_application_1 blackfire run ' + cli)
