@@ -9,7 +9,7 @@ module.exports = async () => {
 
   console.log('Saving database…')
   console.time('save_db')
-  const { stderrDb } = await exec('fab ' + env + '.qa.save-db')
+  const { stderrDb } = await exec('castor ' + env + ':qa:save-db')
 
   if (stderrDb) {
     console.error(`error: ${stderrDb}`)
@@ -19,7 +19,7 @@ module.exports = async () => {
 
   console.log('Writing ElasticSearch snapshot…')
   console.time('save_es')
-  const { stderr } = await exec('fab ' + env + '.qa.save-es-snapshot')
+  const { stderr } = await exec('castor ' + env + ':qa:save-es-snapshot')
 
   if (stderr) {
     console.error(`error: ${stderr}`)

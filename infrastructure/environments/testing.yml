@@ -57,6 +57,7 @@ services:
             - 'nextjs:127.0.0.1'
         volumes:
             - ../../:/var/www
+            - ../../public/media:/var/www/public/media
             - /etc/localtime:/etc/localtime:ro
             - /tmp:/tmp
 

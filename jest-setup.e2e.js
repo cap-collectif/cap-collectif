@@ -105,7 +105,7 @@ global.rawInternalGraphql = async (query, variables, credentials = null) => {
 }
 
 global.runSQL = async sql => {
-  const { stdout } = await exec(`fab ${env}.app.sql --sql='${sql}' --environment=test`)
+  const { stdout } = await exec(`castor ${env}:app:sql --sql='${sql}' --environment=test`)
   return stdout
 }
 
@@ -130,8 +130,8 @@ global.resetFeatureFlags = async () => {
 }
 
 global.runSql = async sql => {
-  console.log(`fab ${env}.app.sql --sql="${sql}" --environment=test`)
-  await exec(`fab ${env}.app.sql --sql='${sql}' --environment=test`)
+  console.log(`castor ${env}:app:sql --sql="${sql}" --environment=test`)
+  await exec(`castor ${env}:app:sql --sql='${sql}' --environment=test`)
   return Promise.resolve(null)
 };
 

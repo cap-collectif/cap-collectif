@@ -1,6 +1,6 @@
 describe('Contact page', () => {
   const disableFeatureForDev = (feature: string) =>
-    cy.exec(`fab local.app.toggle-disable --toggle=${feature} --environment=dev`, {
+    cy.exec(`castor local:app:toggle-disable --toggle=${feature} --environment=dev`, {
       failOnNonZeroExit: true,
       log: false,
     })

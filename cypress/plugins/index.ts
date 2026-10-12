@@ -21,6 +21,8 @@ const exec = util.promisify(cp.exec)
 const execFile = util.promisify(cp.execFile)
 
 const env = process.env.CI ? 'ci' : 'local'
+const castor = (group: string, task: string) => `castor ${env}:${group}:${task}`
+const confirm = env === 'local' ? ' --confirm' : ''
 
 // `capco:toggle:enable/disable` picks its Redis namespace from the Symfony kernel env passed via
 // `--env`. Cypress always runs against `capco.test` (see `baseUrl` in cypress.config.ts), and
@@ -32,7 +34,7 @@ const env = process.env.CI ? 'ci' : 'local'
 // silently never appears enabled to any HTTP request, even though `docker exec ... bin/console
 // capco:toggle:list` reports it as active (that command inherits the container's own default env,
 // `dev`, which is irrelevant to how nginx routes a `capco.test` request).
-const toggleEnvironment = 'test'
+    const toggleEnvironment = 'test'
 
 const logRestoreTimings = (output: string) => {
   output
@@ -97,13 +99,13 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
     'db:restore': async () => {
       console.log('Purging RabbitMQ…')
       console.time('purge_mq')
-      await exec(`fab ${env}.qa.purge-rabbitmq`)
+      await exec(castor('qa', 'purge-rabbitmq') + confirm)
       console.log('Successfully purged RabbitMQ !')
       console.timeEnd('purge_mq')
 
       console.log('Restoring database…')
       console.time('restore_db')
-      const { stdout: stdoutDb, stderr: stderrDb } = await exec(`fab ${env}.qa.restore-db`)
+      const { stdout: stdoutDb, stderr: stderrDb } = await exec(castor('qa', 'restore-db') + confirm)
       logRestoreTimings(`${stdoutDb}\n${stderrDb}`)
 
       if (stderrDb) {
@@ -114,7 +116,7 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
 
       console.log('Restoring ElasticSearch snapshot…')
       console.time('restore_es')
-      const { stdout: stdoutEs, stderr: stderrEs } = await exec(`fab ${env}.qa.restore-es-snapshot`)
+      const { stdout: stdoutEs, stderr: stderrEs } = await exec(castor('qa', 'restore-es-snapshot') + confirm)
       logRestoreTimings(`${stdoutEs}\n${stderrEs}`)
       if (stderrEs) {
         console.error(`error: ${stderrEs}`)
@@ -126,14 +128,14 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
     },
     'swarrot:consume': async (name: string) => {
       console.log(`Consumming swarrot "${name}"...`)
-      exec(`fab ${env}.app.swarrot-consume ${name}`)
+      exec(`${castor('app', 'swarrot-consume')} ${name}`)
       return Promise.resolve(null)
     },
     'enable:feature': async (name: string) => {
       console.log(`Enabling feature flag "${name}"...`)
       console.time('enable_feature')
 
-      await exec(`fab ${env}.app.toggle-enable --toggle=${name} --environment=${toggleEnvironment}`)
+      await exec(`${castor('app', 'toggle-enable')} --toggle=${name} --environment=${toggleEnvironment}`)
       console.log(`Successfully enabled "${name}"`)
       console.timeEnd('enable_feature')
       return Promise.resolve(null)
@@ -142,21 +144,21 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
       console.log(`Disabling feature flag "${name}"...`)
       console.time('disable_feature')
 
-      await exec(`fab ${env}.app.toggle-disable --toggle=${name} --environment=${toggleEnvironment}`)
+      await exec(`${castor('app', 'toggle-disable')} --toggle=${name} --environment=${toggleEnvironment}`)
       console.log(`Successfully disabled "${name}"`)
       console.timeEnd('enable_disable')
       return Promise.resolve(null)
     },
     'run:sql': async (sql: string) => {
-      console.log(`fab ${env}.app.sql --sql=<redacted> --environment=test`)
-      await execFile('fab', [`${env}.app.sql`, `--sql=${sql}`, '--environment=test'])
+      console.log(`${castor('app', 'sql')} --sql=<redacted> --environment=test`)
+      await execFile('castor', [`${env}:app:sql`, `--sql=${sql}`, '--environment=test'])
       return Promise.resolve(null)
     },
     'run:command': async (name: string) => {
       console.log(`Run command "${name}"...`)
       console.time('run_command')
 
-      await exec(`fab ${env}.app.cmd --commandName=${name} --environment=test`)
+      await execFile('castor', [`${env}:app:cmd`, `--command-name=${name}`, '--environment=test'])
       console.log(`Successfully run command "${name}"`)
       console.timeEnd('run_command')
       return Promise.resolve(null)
@@ -168,7 +170,7 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
 
     console.log('Saving database…')
     console.time('save_db')
-    const { stderr: stderrDb } = await exec(`fab ${env}.qa.save-db`)
+    const { stderr: stderrDb } = await exec(castor('qa', 'save-db'))
 
     if (stderrDb) {
       console.error(`error: ${stderrDb}`)
@@ -178,7 +180,7 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
 
     console.log('Writing ElasticSearch snapshot…')
     console.time('save_es')
-    const { stderr: stderrEs } = await exec(`fab ${env}.qa.save-es-snapshot`)
+    const { stderr: stderrEs } = await exec(castor('qa', 'save-es-snapshot'))
 
     if (stderrEs) {
       console.error(`error: ${stderrEs}`)
