@@ -10,8 +10,6 @@ import NavBarQuery from '@shared/navbar/NavBarQuery'
 import NavbarRight from '~/components/Navbar/NavbarRight'
 import NavBarMenu from '@shared/navbar/menu/NavBarMenu'
 import { useNavBarContext } from '@shared/navbar/NavBar.context'
-import { ChartModalQuery } from '@shared/register/ChartModal'
-import PrivacyModal from '@shared/register/PrivacyModal'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 type LanguageProps = {
@@ -70,10 +68,6 @@ export const Navbar = ({
         />
       ) : null}
       <React.Suspense fallback={null}>
-        <React.Suspense fallback={null}>
-          <ChartModalQuery />
-          <PrivacyModal />
-        </React.Suspense>
         <NavBarQuery>
           <Flex alignItems="center" justifyContent="center">
             {isAuthenticated ? (

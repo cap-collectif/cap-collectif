@@ -96,7 +96,10 @@ const ConsentPrivacyPolicyRequirementModal: React.FC<Props> = ({ hideGoBackArrow
                 as="button"
                 type="button"
                 id="privacy-policy"
-                onClick={() => dispatchEvent(new Event(openPrivacyModal))}
+                onClick={event => {
+                  event.stopPropagation()
+                  dispatchEvent(new Event(openPrivacyModal))
+                }}
                 name="privacy"
                 sx={{
                   textDecoration: 'underline',

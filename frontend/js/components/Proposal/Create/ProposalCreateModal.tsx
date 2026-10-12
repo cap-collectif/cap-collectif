@@ -210,7 +210,8 @@ const ProposalCreateModal = ({
                               type="button"
                               fontSize={CapUIFontSize.BodyRegular}
                               mt={1}
-                              onClick={() => {
+                              onClick={event => {
+                                event.stopPropagation()
                                 dispatchEvent(new Event(openChartModal))
                               }}
                             >

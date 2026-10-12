@@ -5,12 +5,6 @@ exports[`<Navbar /> should render correctly 1`] = `
   <Suspense
     fallback={null}
   >
-    <Suspense
-      fallback={null}
-    >
-      <ChartModalQuery />
-      <PrivacyModalQuery />
-    </Suspense>
     <NavBarQuery>
       <ForwardRef
         alignItems="center"
@@ -28,12 +22,6 @@ exports[`<Navbar /> should render correctly when authenticated 1`] = `
   <Suspense
     fallback={null}
   >
-    <Suspense
-      fallback={null}
-    >
-      <ChartModalQuery />
-      <PrivacyModalQuery />
-    </Suspense>
     <NavBarQuery>
       <ForwardRef
         alignItems="center"
@@ -57,12 +45,6 @@ exports[`<Navbar /> should render correctly with header 1`] = `
   <Suspense
     fallback={null}
   >
-    <Suspense
-      fallback={null}
-    >
-      <ChartModalQuery />
-      <PrivacyModalQuery />
-    </Suspense>
     <NavBarQuery>
       <ForwardRef
         alignItems="center"
