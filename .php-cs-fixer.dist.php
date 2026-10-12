@@ -9,8 +9,8 @@ $finder = PhpCsFixer\Finder::create()
         'src', 
         'spec',
         'tests',
+        '.castor',
     ])
-    ->append(['rector.php'])
     ->exclude('Capco/AppBundle/GraphQL/__generated__');
 
 $config = new PhpCsFixer\Config();

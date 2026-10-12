@@ -1,5 +1,6 @@
 # Generated files
 **/__generated__/**
+.castor.stub.php
 
 /frontend/js/__generated__/**
 !frontend/js/__generated__/.gitkeep

@@ -17,6 +17,7 @@ return RectorConfig::configure()
         'src',
         'tests',
         'spec',
+        '.castor',
     ])
     ->withSkip([
         'src/Capco/AppBundle/GraphQL/__generated__',
