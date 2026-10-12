@@ -14,7 +14,6 @@ RUN apt-get update && \
         libmagickwand-dev \
         locales \
         pkg-config \
-        software-properties-common \
         runit \
         wget \
         libicu-dev \
@@ -238,9 +237,6 @@ RUN groupadd --gid=1000 capco && \
 
 #New Root certificates used by let's encrypt (useful at least for france-connect-v2) - Remove this hack when switching base image from Debian 11 to Debian 12
 RUN wget https://letsencrypt.org/certs/isrg-root-x2.pem && mv isrg-root-x2.pem isrg-root-x2.crt && cp isrg-root-x2.crt /usr/local/share/ca-certificates/ && update-ca-certificates
-
-# Binaries
-COPY rabbitmq/rabbitmqadmin     /usr/local/bin/rabbitmqadmin
 
 # Service
 COPY nginx/run                  /etc/service/nginx/run

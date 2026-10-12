@@ -55,7 +55,7 @@ function purgeRabbitmq(bool $confirm = false): void
         throw new \InvalidArgumentException('RabbitMQ purge is destructive; pass --confirm.');
     }
 
-    application('rabbitmqadmin purge queue name=elasticsearch_indexation --vhost="capco"');
+    application('rabbitmqctl purge_queue elasticsearch_indexation --vhost=capco', 'root');
 }
 
 #[AsTask(description: 'Run PHPSpec in the application container.')]

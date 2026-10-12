@@ -26,7 +26,6 @@ RUN set -x \
         wget \
         libicu-dev \
         sqlite3 \
-        software-properties-common \
         locales \
         gnupg2 \
         dirmngr \
@@ -202,7 +201,6 @@ COPY infrastructure/services/remote/logrotate/mysql-slow-logs      /etc/logrotat
 COPY infrastructure/services/remote/supervisord/                   /etc/supervisord
 
 # Binaries / Scripts
-COPY infrastructure/services/remote/rabbitmq/rabbitmqadmin                /usr/local/bin/rabbitmqadmin
 COPY infrastructure/services/remote/cron/antivirus                        /etc/cron.daily
 COPY infrastructure/services/remote/cron/check_db_schema                  /etc/cron.hourly
 COPY infrastructure/services/remote/cron/rabbitmq_queues_supervision      /usr/local/bin/rabbitmq_queues_supervision
