@@ -1,6 +1,0 @@
-[packages]
-docker = "*"
-PyYAML = "<5.4"
-Fabric = "*"
-paramiko = "*"
-pycodestyle = "*"
