@@ -150,10 +150,10 @@ maximum les patterns déjà en place dans `admin-next/` plutôt qu'en inventant 
       (regénère `schema.internal.graphql` à la racine, utilisé par le compilateur Relay de `admin-next`).
    3. Un `bin/console cache:clear` peut être nécessaire avant l'étape 1 si le cache Symfony est déjà chaud
       et ne détecte pas les nouveaux fichiers yaml.
-   4. La CI compare les schémas générés par `pipenv run fab local.qa.graphql-schemas` (les 4 schémas, en
+   4. La CI compare les schémas générés par `castor local:qa:graphql-schemas` (les 4 schémas, en
       `--no-debug`) : régénérer avec cette commande et committer aussi `schema.dev.graphql`, qui embarque les
       types internes. Si elle échoue avec `Could not find type with alias "..."`, le cache `--no-debug` est
-      périmé : `pipenv run fab local.app.clear-cache` puis `pipenv run fab local.qa.compile-graphql` avant de
+      périmé : `castor local:app:clear-cache` puis `castor local:qa:compile-graphql` avant de
       relancer.
 11. **Lancer `yarn relay` dans `admin-next/`** après avoir écrit les requêtes/fragments/mutations GraphQL
     (les artefacts générés vivent tous dans `admin-next/__generated__/`, pas de dossier colocalisé).
@@ -329,14 +329,14 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
     (`{ ...features, privacy_policy: true }`), sinon l'entrée n'est pas rendue ; la page Sonata, elle, n'exigeait
     pas ce flag (`FeaturesCategoryResolver` sans condition), donc ne pas l'ajouter à la query/mutation.
   - **Snapshots e2e GraphQL, Cypress et dump `var/db.backup`** : `jest-setup-global.e2e.js` (tests e2e
-    GraphQL) et le hook `before:run` de `cypress/plugins/index.ts` commencent par `fab local.qa.save-db`,
+    GraphQL) et le hook `before:run` de `cypress/plugins/index.ts` commencent par `castor local:qa:save-db`,
     c'est-à-dire qu'ils **écrasent le dump avec l'état courant de la base locale**, puis `_setupDB.js` /
     `cy.task('db:restore')` restaurent ce dump. Si la base locale a été modifiée à la main (traductions ajoutées
     depuis l'UI pendant des tests manuels) ou par un run Cypress précédent (un spec qui enregistre des données
     laisse la base dans cet état à la fin), les snapshots générés avec `-u` embarquent ces données et ne
     correspondent plus aux fixtures, et un spec Cypress qui suppose l'état des fixtures échoue dès son premier
     `should` — le symptôme est un snapshot ou un test qui change alors que le code testé n'a pas bougé. Avant de
-    (re)générer des snapshots ou d'enchaîner des runs Cypress : `pipenv run fab local.database.generate` pour
+    (re)générer des snapshots ou d'enchaîner des runs Cypress : `castor local:database:generate` pour
     repartir des fixtures. Le champ `translations` est renvoyé dans l'ordre de la base, non déterministe pour
     des lignes fraîchement insérées : trier par `locale` dans le test avant `toMatchSnapshot()`.
   - **Cypress en local + feature flag Redis (`unstable__sonata_migration_to_admin_next`, `multilangue`...) —
@@ -1175,7 +1175,7 @@ prop-drillé entre la liste et un ancêtre.
   un test de suppression passait une fois puis se mettait à échouer de façon apparemment aléatoire sur un
   tout autre test qui `cy.contains()` une ligne de fixture désormais absente. Si des tests Cypress locaux
   échouent de façon incohérente en réutilisant des lignes de fixtures normalement présentes, relancer
-  `pipenv run fab local.database.generate` pour repartir d'un état propre avant de chercher un bug côté
+  `castor local:database:generate` pour repartir d'un état propre avant de chercher un bug côté
   code.
 - **`GlobalIdResolver::resolve()` ne sait pas résoudre un id de `Media`** : `Media.id` est exposé **brut** (pas
   de `Relay::GlobalId`, ex: `media4`, ou l'uuid renvoyé par l'uploader), or `resolve()` ne gère que les global
@@ -1219,7 +1219,7 @@ prop-drillé entre la liste et un ancêtre.
 - **Après un changement de signature d'une méthode publique d'un repository** (ex: `getPaginated(): array`
   → `: Paginator`), le conteneur compilé de l'env `test` garde un proxy lazy avec l'ancienne signature et
   **toute** requête `capco.test` répond 500 (`Compile Error: Declaration of ... must be compatible`) — l'env
-  `dev` recompile seul en debug. Vider le cache avec `pipenv run fab local.app.clear-cache --environment=test`
+  `dev` recompile seul en debug. Vider le cache avec `castor local:app:clear-cache --environment=test`
   (qui fait `rm -rf var/cache/test`), **pas** avec `bin/console cache:clear --env=test` via `docker exec`, qui
   reconstruit le conteneur avec les variables d'env du shell et non celles du serveur.
 - **Ne jamais passer un fichier `.json` (ex: `SideBarItems.json`) dans la même commande `prettier --write`

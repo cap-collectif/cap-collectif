@@ -923,7 +923,7 @@ Les trois fichiers existants du job CircleCI `e2e-cypress-frontoffice-workflow` 
 | Sélection | Participant avec exigences et consentements ; connexion locale dans le workflow ; fusion de votes avec un User existant |
 | Questionnaire | Ajout/modification/suppression d'une réponse anonyme ; connexion locale dans le workflow ; deux réponses du même Participant |
 
-Chaque scénario est dans sa propre suite avec `db:restore` en `before`, puis désactivation du feature flag et restauration de la base en `after`. Les scénarios anonymes utilisent des e-mails/numéros distincts et valident le CAPTCHA final. Les assertions de questionnaire attendent la réponse de `ValidateContributionMutation` plutôt qu'un écran transitoire. Ces specs ne contiennent plus de SQL direct, `.only` ou `.skip`. Les tâches Fabric du runner Cypress passent par `pipenv run fab`.
+Chaque scénario est dans sa propre suite avec `db:restore` en `before`, puis désactivation du feature flag et restauration de la base en `after`. Les scénarios anonymes utilisent des e-mails/numéros distincts et valident le CAPTCHA final. Les assertions de questionnaire attendent la réponse de `ValidateContributionMutation` plutôt qu'un écran transitoire. Ces specs ne contiennent plus de SQL direct, `.only` ou `.skip`. Les tâches du runner Cypress passent par Castor.
 
 | Ancien bloc ignoré | Décision explicite |
 |---|---|

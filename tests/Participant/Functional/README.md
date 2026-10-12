@@ -23,10 +23,10 @@ docker exec -w /var/www capco_application_1 bin/phpunit tests/Participant/Functi
 
 Cases labelled `CharacterizationGap` expose current limitations, not permanent product requirements. See [the audit](../../../user-tests-audit.md) for outstanding production decisions.
 
-CircleCI discovers every concrete class through `tests/**/*Test.php`. The three Cypress workflow specs retain three independent scenarios each, restoring MySQL, Elasticsearch and queues before and after each one-scenario suite. Their scenario data is deterministic, their mutations are awaited, and their success assertions require an HTTP 200 response, no GraphQL errors and a nonempty redirect URL. Fabric tasks must run through `pipenv run fab`, as required by `AGENTS.md`.
+CircleCI discovers every concrete class through `tests/**/*Test.php`. The three Cypress workflow specs retain three independent scenarios each, restoring MySQL, Elasticsearch and queues before and after each one-scenario suite. Their scenario data is deterministic, their mutations are awaited, and their success assertions require an HTTP 200 response, no GraphQL errors and a nonempty redirect URL. Test orchestration uses Castor, as required by `AGENTS.md`.
 
 Historical Cypress validation required rebuilding development assets with a temporary TypeScript target override after `graphql: Unexpected invocation` in `admin-next/shared/navbar/NavBarQuery.tsx`. See the audit for the current validation result; neither a local run nor discovery checks establish a successful remote CI run.
 
 Review of `abc4401621` on 6 October 2026: the eight concrete PHPUnit classes pass together in random order (seed `20284`), with **151 tests and 3,800 assertions**. Targeted PHPStan, PHP-CS-Fixer dry-run, Rector dry-run and ESLint pass. A temporary test-only indexer callback that corrupts vote ownership makes the HTTP matrix fail; it was removed after verification without changing production files.
 
-The three scoped Cypress specs also pass: **9/9 scenarios**, without retries or skipped tests, in 5 min 8 s. This run used the installed assets, with no rebuild or configuration change. A temporary PATH wrapper routed the existing Fabric tasks through `pipenv run fab`; the plugin itself was outside this commit scope and was not changed. Remote CI remains unverified.
+The three scoped Cypress specs also pass: **9/9 scenarios**, without retries or skipped tests, in 5 min 8 s. This run used the installed assets, with no rebuild or configuration change. Remote CI remains unverified.

@@ -71,11 +71,11 @@ This file provides guidance to WARP (warp.dev) when working with code in this re
 
 ### Infrastructure & local environment
 
-- Local and CI environments are orchestrated via Python Fabric/Invoke tasks defined under `infrastructure/deploylib/**` and exposed via `fabfile.py`.
-- The main pattern is to call tasks via Pipenv + Fabric collections:
+- Local and CI environments are orchestrated via Castor tasks defined under `.castor/` and exposed via `castor.php`.
+- The main pattern is to call namespaced tasks with Castor:
   - Collections: `local.*` for developer workflows, `ci.*` for CI.
   - Sub-collections under `local.*` include `app`, `database`, `infrastructures`, `qa`, and `system`.
-- The Symfony app is typically exposed locally at `https://capco.dev` using the Symfony binary and custom proxy configuration (see the "Development on MacOS" section in `README.md`).
+- The Symfony app is typically exposed locally at `https://capco.dev` using the Symfony binary and local vhost configuration (see the "Development on MacOS" section in `README.md`).
 
 ## Core commands (root of repo)
 
@@ -86,69 +86,74 @@ All commands below are run from the repository root unless otherwise specified.
 - Node/Yarn dependencies (monorepo using Yarn workspaces):
 
   ```bash
-  yarn install
+  corepack enable
+  corepack yarn install --immutable
   ```
 
-- Python tooling for Fabric/Invoke-based tasks:
+- Castor task runner (static binary pinned in `.castor-version`):
 
   ```bash
-  pipenv install
+  mkdir -p "$HOME/.local/bin"
+  castor_version="$(tr -d '[:space:]' < .castor-version)"
+  curl -fsSL https://castor.jolicode.com/install | bash -s -- \
+      --static \
+      --version="$castor_version" \
+      --install-dir="$HOME/.local/bin"
   ```
 
 - PHP dependencies via Composer:
 
   ```bash
-  composer install
+  castor local:app:composer --composer-command="install --prefer-dist --no-interaction --ignore-platform-reqs --no-suggest --no-progress"
   ```
 
-(Exact setup steps and system prerequisites are described in the external install docs; use those as the source of truth.)
+See [the local installation guide](doc/installation-locale.md) for the
+prerequisites and the complete first-installation order.
 
 ### Local Docker stack & Symfony app
 
-Fabric tasks are namespaced; use `pipenv run fab` with the `local.*` namespace.
+Castor tasks are namespaced; use `castor` with the `local:*` namespace.
 
 - Build or rebuild local Docker images:
 
   ```bash
-  pipenv run fab local.infrastructures.build
+  castor local:infrastructures:build
   ```
 
 - Start the full local stack (Docker services, Symfony app, etc.):
 
   ```bash
-  pipenv run fab local.infrastructures.up
+  castor local:infrastructures:up
   ```
 
 - Stop or reboot the stack:
 
   ```bash
-  pipenv run fab local.infrastructures.stop
-  pipenv run fab local.infrastructures.reboot
+  castor local:infrastructures:stop
+  castor local:infrastructures:reboot
   ```
 
-- Initial Symfony deployment inside the containers (installs PHP deps, compiles GraphQL, warms cache, sets up assets, and configures local `.env.local` when appropriate):
+- Initial Symfony deployment inside the containers (compiles GraphQL, warms the cache, installs assets, and creates RabbitMQ queues):
 
   ```bash
-  pipenv run fab local.app.deploy
+  castor local:app:deploy
   ```
 
-- Generate or refresh the local database schema:
+- Generate or refresh the local database, fixtures, Elasticsearch indices, and media directories:
 
   ```bash
-  pipenv run fab local.database.generate
+  castor local:database:generate --environment=dev
   ```
 
-- Set up default local environment variables (`.env.local`):
-
-  ```bash
-  pipenv run fab local.app.setup-default-env-vars
-  ```
+`local:app:deploy` does not generate the database. On a first installation,
+install Composer dependencies, run `local:database:generate`, then run
+`local:app:deploy`. Database generation is destructive for local data.
 
 - Start/stop background consumers (RabbitMQ via Swarrot + supervisord):
 
   ```bash
-  pipenv run fab local.app.start-consumers
-  pipenv run fab local.app.stop-consumers
+  castor local:app:start-consumers
+  castor local:app:stop-consumers
   ```
 
 > Many backend tests (Jest e2e tests and Cypress) assume the Docker stack, database, and queues are up and the app is reachable at local domains (e.g. `https://capco.dev`).
@@ -241,7 +246,7 @@ Root-level Jest configuration (`jest.config.js` and `jest.config.e2e.js`) drives
 
   ```bash
   yarn test-e2e           # full suite
-  yarn test-e2e:watch    # watch mode (ensures local feature toggle is enabled via Fabric)
+  yarn test-e2e:watch    # watch mode (ensures local feature toggle is enabled via Castor)
   ```
 
 - Split GraphQL E2E suites:
@@ -309,7 +314,7 @@ Cypress tests live under `cypress/**` and are exposed via root `package.json` sc
 
 ### Backend PHP quality and tests
 
-Backend quality tooling is surfaced as a Yarn script and via Composer / Fabric.
+Backend quality tooling is surfaced as a Yarn script and via Composer / Castor.
 
 - Full PHP quality pass (CS fixer + PHPStan + PHPSpec):
 
@@ -350,4 +355,4 @@ Translations are synchronized through Localise.biz and tooling under `packages/t
   - Backend PHP changes → `yarn php:quality` and, where relevant, targeted PHPUnit suites.
 - For changes that touch GraphQL types, resolvers, or front-end queries:
   - Regenerate schemas and Relay artifacts with `yarn relay` (or `yarn generate-graphql-files` + `yarn build-relay-schema`).
-  - For end-to-end behaviours (email flows, exports, queues, etc.), ensure the Docker-based local stack is running (`pipenv run fab local.infrastructures.up` + `pipenv run fab local.app.deploy` + `pipenv run fab local.database.generate`) before executing Cypress or Jest E2E suites.
+  - For end-to-end behaviours (email flows, exports, queues, etc.), ensure the Docker-based local stack is running (`castor local:infrastructures:up` + `castor local:database:generate --environment=dev` + `castor local:app:deploy`) before executing Cypress or Jest E2E suites.

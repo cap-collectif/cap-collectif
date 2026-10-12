@@ -53,7 +53,7 @@ Dans l'image de test, Elasticsearch utilise l'UID 1001 et partage le GID 1000 av
 
 Les médias des fixtures restent possédés par l'application (UID 1000) et sont accessibles en écriture au groupe de l'exécuteur CircleCI, afin que les tests GraphQL puissent créer leurs copies temporaires.
 
-Les logs Cypress affichent `restore_db` et `restore_es` pour la durée totale de chaque tâche. Les lignes `CI_RESTORE_TIMING` détaillent l'import MySQL dans le conteneur et les appels Elasticsearch (en millisecondes). L'écart avec les durées totales comprend notamment le démarrage de Fabric et les opérations de la tâche hors de ces appels. Comparer ces durées sur le sous-job le plus lent avant de modifier la restauration.
+Les logs Cypress affichent `restore_db` et `restore_es` pour la durée totale de chaque tâche. Les lignes `CI_RESTORE_TIMING` détaillent l'import MySQL dans le conteneur et les appels Elasticsearch (en millisecondes). L'écart avec les durées totales comprend notamment le démarrage de Castor et les opérations de la tâche hors de ces appels. Comparer ces durées sur le sous-job le plus lent avant de modifier la restauration.
 
 #### 5. Vérification de la couverture des specs Cypress
 

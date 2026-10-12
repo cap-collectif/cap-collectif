@@ -86,8 +86,8 @@ pendant qu'une autre exécution l'utilise.
 Le setup global local sauvegarde le socle MySQL/Elasticsearch ; en CI, le socle
 peut provenir des données préparées par le workflow. Aucun de ces mécanismes ne
 garantit à lui seul l'isolation de chaque test. Les helpers historiques qui
-invoquent `fab` directement doivent être corrigés lors de leur adaptation : toute
-nouvelle invocation Fabric utilise `pipenv run fab`, selon [AGENTS.md](../../../AGENTS.md).
+invoquaient Fabric doivent utiliser les tâches Castor correspondantes
+(`castor local:*` ou `castor ci:*`), selon [AGENTS.md](../../../AGENTS.md).
 
 Le choix du runner et les commandes sont décrits dans le [guide d’exécution](execution.md).
 La restauration des globals et doubles est décrite dans le [guide d’isolation](donnees-isolation.md).

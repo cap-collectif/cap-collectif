@@ -81,7 +81,7 @@ Cap Collectif is a civic participation SaaS platform built with:
 
 Before running certain commands, **ALWAYS verify** these critical preconditions:
 
-### PHP and Fabric Commands
+### PHP and Castor Commands
 
 **Never run PHP executables on the host machine.** Run every PHP command directly in the application container, using this wrapper:
 ```bash
@@ -90,7 +90,9 @@ docker exec -w /var/www capco_application_1 <command>
 
 This applies to `php`, `bin/phpunit`, `bin/phpstan`, `bin/console`, `bin/php-cs-fixer`, and `bin/phpspec`. Do not first try the host executable.
 
-**Never run `fab` directly.** Fabric is available through Pipenv only, so every Fabric command must start with `pipenv run fab`.
+**Run project tasks with Castor.** Install the pinned static binary using the
+instructions in [the local installation guide](doc/installation-locale.md),
+then use `castor <namespace>:<task>` from the repository root.
 
 ### Cypress E2E Tests
 
@@ -158,17 +160,27 @@ yarn prettier                 # Format JS/TS/YAML
 docker exec -w /var/www capco_application_1 bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php -v
 ```
 
-### Fabric Commands (Docker & Infrastructure)
+### Castor Commands (Docker & Infrastructure)
 ```bash
-pipenv run fab local.infrastructures.up             # Start Docker containers
-pipenv run fab local.infrastructures.stop           # Stop Docker containers
-pipenv run fab local.infrastructures.reboot         # Restart Docker containers
-pipenv run fab local.database.generate              # Reinitialize DB + Fixtures + Elasticsearch
-pipenv run fab local.app.clear-cache                # Clear Symfony cache
-pipenv run fab local.qa.restore-db                  # Restore test database
-pipenv run fab local.qa.compile-graphql             # Compile GraphQL schema
-pipenv run fab local.qa.graphql-schemas             # Dump GraphQL schemas
+castor local:infrastructures:build                     # Build local Docker images
+castor local:infrastructures:up                     # Start Docker containers
+castor local:infrastructures:stop                   # Stop Docker containers
+castor local:infrastructures:reboot                 # Restart Docker containers
+castor local:app:composer                            # Run Composer in the application container
+castor local:database:generate --environment=dev    # Reinitialize DB + Fixtures + Elasticsearch
+castor local:app:deploy                              # Prepare Symfony app and create queues
+castor local:app:start-consumers                     # Start RabbitMQ/Messenger consumers
+castor local:app:stop-consumers                      # Stop RabbitMQ/Messenger consumers
+castor local:app:clear-cache                        # Clear Symfony cache
+castor local:qa:restore-db --confirm                # Restore test database
+castor local:qa:compile-graphql                     # Compile GraphQL schema
+castor local:qa:graphql-schemas                     # Dump GraphQL schemas
 ```
+
+For a complete first installation and the required command order, see
+[`doc/installation-locale.md`](doc/installation-locale.md). In particular,
+`local:app:deploy` does not create the database: install Composer dependencies,
+generate the database, then deploy the application.
 
 ### Symfony Console Commands
 ```bash
@@ -187,8 +199,8 @@ docker exec -w /var/www capco_application_1 php -d memory_limit=-1 bin/console c
 # Preview how many identities would be anonymized without modifying application data
 docker exec -w /var/www capco_application_1 php -d memory_limit=-1 bin/console capco:anonymize_users_automated --startAt=2020-01-01 --endAt=2020-12-31 --dry-run
 
-# Run any Symfony command via fabric
-pipenv run fab local.app.cmd --commandName="<cmd>"
+# Run any Symfony command via Castor
+castor local:app:cmd --command-name="<cmd>"
 ```
 
 The `--startAt` and `--endAt` account-anonymization options must be supplied together in

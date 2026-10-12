@@ -5,7 +5,14 @@ This is our [Next.js](https://nextjs.org/) implementation for our new administra
 
 ### Requirements
 
-Check all docker containers are running (`fab local.infrastructures.up`), because `admin-next` is using Redis to access the user's session.
+Follow the [local installation guide](../doc/installation-locale.md), then
+check that the Docker stack is running:
+
+```bash
+castor local:infrastructures:up
+```
+
+`admin-next` uses Redis to access the user's session.
 
 ### Daily commands
 
