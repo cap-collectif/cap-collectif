@@ -34,15 +34,15 @@ const anonymousReplyVariables = { replyId: toGlobalId('Reply', 'replyAnonymous1'
  * data.
  */
 describe('Internal|Reply.responses', () => {
-  it('returns questionnaire responses to an anonymous user', async () => {
+  it('denies questionnaire responses to an anonymous user', async () => {
     await expect(graphql(ReplyResponsesQuery, variables, 'internal')).resolves.toMatchObject({
-      reply: { responses: expect.arrayContaining([{ value: 'secret' }]) },
+      reply: null,
     })
   })
 
-  it('returns anonymous replies and response nodes without a participant cookie', async () => {
+  it('denies anonymous replies and response nodes without a participant cookie', async () => {
     await expect(graphql(ReplyResponsesQuery, anonymousReplyVariables, 'internal')).resolves.toMatchObject({
-      reply: { responses: expect.arrayContaining([{ value: 'bien' }]) },
+      reply: null,
     })
     await expect(
       graphql(
@@ -50,6 +50,6 @@ describe('Internal|Reply.responses', () => {
         { responseId: toGlobalId('ValueResponse', 'responseAnonymousQuestionnaire1') },
         'internal',
       ),
-    ).resolves.toMatchObject({ node: { value: 'bien' } })
+    ).resolves.toMatchObject({ node: null })
   })
 })

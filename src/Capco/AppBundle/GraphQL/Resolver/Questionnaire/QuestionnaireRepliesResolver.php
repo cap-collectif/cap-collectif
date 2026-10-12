@@ -17,17 +17,28 @@ class QuestionnaireRepliesResolver implements QueryInterface
 {
     public function __construct(
         private readonly ReplySearch $replySearch,
-        private readonly LoggerInterface $logger
+        private readonly LoggerInterface $logger,
+        private readonly QuestionnaireResultsAccessResolver $resultsAccess
     ) {
     }
 
     public function __invoke(
         Questionnaire $questionnaire,
         Arg $args,
-        ?User $viewer = null
+        ?User $viewer = null,
+        ?\ArrayObject $context = null
     ): ConnectionInterface {
         if (!$questionnaire->canDisplay($viewer)) {
             return ConnectionBuilder::empty();
+        }
+
+        if (!$this->resultsAccess->canViewResults($questionnaire, $context)) {
+            $connection = ConnectionBuilder::empty();
+            $connection->setTotalCount($questionnaire->getStep()
+                ? $this->replySearch->getRepliesByStep($questionnaire->getStep()->getId(), ['published' => true, 'draft' => false], 0, null)->getTotalCount()
+                : 0);
+
+            return $connection;
         }
 
         $includeUnpublished = false;

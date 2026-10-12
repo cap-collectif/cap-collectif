@@ -3,14 +3,13 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Reply;
-use Capco\AppBundle\Exception\ParticipantNotFoundException;
 use Capco\AppBundle\Form\ReplyType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
-use Capco\AppBundle\Service\ParticipantHelper;
+use Capco\AppBundle\Service\ParticipantAuthentication;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -29,24 +28,23 @@ class UpdateAnonymousReplyMutation extends ReplyMutation implements MutationInte
         private readonly ResponsesFormatter $responsesFormatter,
         private readonly Publisher $publisher,
         private readonly GlobalIdResolver $globalIdResolver,
-        private readonly ParticipantHelper $participantHelper,
+        private readonly ParticipantAuthentication $participantAuthentication,
         ValidatePhoneReusabilityMutation $validatePhoneReusabilityMutation
     ) {
         parent::__construct($validatePhoneReusabilityMutation);
     }
 
-    public function __invoke(Argument $input): array
+    public function __invoke(Argument $input, ?\ArrayObject $context = null): array
     {
         $this->formatInput($input);
         $reply = $this->getReply($input);
 
-        $participantToken = $input->offsetGet('participantToken');
+        $participant = $reply->getParticipant();
+        $participantToken = $participant->getToken();
 
         if (!$this->canReusePhone($reply, $participantToken)) {
             return ['errorCode' => ValidatePhoneReusabilityMutation::PHONE_ALREADY_USED];
         }
-
-        $participant = $this->participantHelper->getParticipantByToken($participantToken);
 
         $reply = $this->updateReply($reply, $input);
 
@@ -77,12 +75,9 @@ class UpdateAnonymousReplyMutation extends ReplyMutation implements MutationInte
     {
         $replyId = $argument->offsetGet('replyId');
 
-        $participantToken = $argument->offsetGet('participantToken');
-
-        try {
-            $participant = $this->participantHelper->getParticipantByToken($participantToken);
-        } catch (ParticipantNotFoundException $e) {
-            throw new UserError($e->getMessage());
+        $participant = $this->participantAuthentication->getParticipant();
+        if (!$participant) {
+            throw new UserError('Participant not found.');
         }
         /** * @var Reply $reply  */
         $reply = $this->globalIdResolver->resolve($replyId, $participant);
@@ -117,7 +112,7 @@ class UpdateAnonymousReplyMutation extends ReplyMutation implements MutationInte
     private function formatValuesForForm(Argument $argument): array
     {
         $values = $argument->getArrayCopy();
-        unset($values['participantToken'], $values['replyId']);
+        unset($values['replyId']);
 
         $values['responses'] = $this->responsesFormatter->format($values['responses']);
 

@@ -46,6 +46,6 @@ describe('mutations.deleteUserReplyMutation', () => {
         },
         'internal_user',
       ),
-    ).rejects.toThrowError('You are not the author of this reply')
+    ).rejects.toThrowError('Reply not found')
   })
 })

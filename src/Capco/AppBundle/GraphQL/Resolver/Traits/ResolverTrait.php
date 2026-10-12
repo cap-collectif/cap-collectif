@@ -23,7 +23,7 @@ trait ResolverTrait
         }
     }
 
-    private function preventNullableViewer($viewer): ContributorInterface
+    private function preventNullableViewer(mixed $viewer): ContributorInterface
     {
         if (!$viewer) {
             throw new UserWarning('Cannot call this resolver with a nullable viewer.');
@@ -50,7 +50,7 @@ trait ResolverTrait
         return false;
     }
 
-    private function isAdminOrAuthorized(?\ArrayObject $context = null, $viewer = null): bool
+    private function isAdminOrAuthorized(?\ArrayObject $context = null, mixed $viewer = null): bool
     {
         return ($viewer instanceof User && $viewer->isAdmin())
             || ($context

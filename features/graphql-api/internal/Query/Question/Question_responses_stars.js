@@ -43,6 +43,19 @@ const unstarResponseMutation = /** GraphQL */ `
  * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
  */
 describe('Internal|Question.stars', () => {
+  afterAll(async () => {
+    await graphql(
+      starResponseMutation,
+      { input: { responseId: toGlobalId('ValueResponse', 'responseTagCloud23') } },
+      'internal_admin',
+    )
+    await graphql(
+      unstarResponseMutation,
+      { input: { responseId: toGlobalId('ValueResponse', 'responseTagCloud27') } },
+      'internal_admin',
+    )
+  })
+
   it('fail to get stars if not project admin', async () => {
     await expect(
       graphql(
@@ -52,7 +65,7 @@ describe('Internal|Question.stars', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot()
+    ).resolves.toEqual({ question: { responses: { edges: [] } } })
   })
   it('get stars on responses', async () => {
     await expect(

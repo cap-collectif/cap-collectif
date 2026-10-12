@@ -16,5 +16,6 @@ InternalMediaResponse:
             question:
                 type: 'InternalQuestion!'
             medias:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireResultsAccessResolver").canViewResponse(value, getUser(), context, info)'
                 type: '[InternalMedia!]!'
                 description: 'Medias'

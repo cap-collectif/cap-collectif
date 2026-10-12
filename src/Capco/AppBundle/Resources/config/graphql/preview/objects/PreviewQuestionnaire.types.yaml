@@ -8,20 +8,20 @@ PreviewQuestionnaire:
             questions:
                 type: '[PreviewQuestion!]!'
                 description: 'The list of questions of the questionnaire.'
-                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionsListResolver", value)'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionsListResolver", value, args)'
             replies:
                 type: 'PreviewReplyConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     includeUnpublished:
                         type: Boolean
-                        description: '(ROLE_ADMIN only) Select also unpublished replies.'
+                        description: '(Authorized managers only) Select also unpublished replies.'
                         defaultValue: false
                     includeDraft:
-                        description: '(ROLE_ADMIN only) Select also draft replies.'
+                        description: '(Authorized managers only) Select also draft replies.'
                         type: Boolean
                         defaultValue: false
-                description: 'A list of replies to the questionnaire.'
-                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireRepliesResolver", value, args, getUser())'
+                description: 'Private replies to the questionnaire. Unauthorized viewers receive only the public participation count.'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireRepliesResolver", value, args, getUser(), context)'
             participants:
                 type: 'PreviewUserConnection!'

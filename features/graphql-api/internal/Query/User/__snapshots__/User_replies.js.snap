@@ -46,8 +46,22 @@ Object {
             },
           },
         },
+        Object {
+          "node": Object {
+            "author": Object {
+              "_id": "userAdmin",
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "_id": "userAdmin",
+            },
+          },
+        },
       ],
-      "totalCount": 4,
+      "totalCount": 6,
     },
   },
 }
@@ -143,12 +157,56 @@ Object {
               "username": "user",
             },
             "createdAt": "2019-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlHcm91cA==",
+            "private": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2019-03-20 00:00:00",
             "id": "UmVwbHk6cmVwbHlQcml2YXRl",
             "private": true,
           },
         },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2019-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlVbnB1Ymxpc2hlZA==",
+            "private": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2019-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlVbnB1Ymxpc2hlZEFuZERyYWZ0",
+            "private": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2016-03-08 00:00:00",
+            "id": "UmVwbHk6cmVwbHk4",
+            "private": false,
+          },
+        },
       ],
-      "totalCount": 8,
+      "totalCount": 12,
     },
   },
 }
@@ -259,8 +317,41 @@ Object {
             "private": true,
           },
         },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2019-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlVbnB1Ymxpc2hlZA==",
+            "private": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2019-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlVbnB1Ymxpc2hlZEFuZERyYWZ0",
+            "private": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2016-03-08 00:00:00",
+            "id": "UmVwbHk6cmVwbHk4",
+            "private": false,
+          },
+        },
       ],
-      "totalCount": 9,
+      "totalCount": 12,
     },
   },
 }
@@ -356,12 +447,56 @@ Object {
               "username": "user",
             },
             "createdAt": "2019-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlHcm91cA==",
+            "private": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2019-03-20 00:00:00",
             "id": "UmVwbHk6cmVwbHlQcml2YXRl",
             "private": true,
           },
         },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2019-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlVbnB1Ymxpc2hlZA==",
+            "private": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2019-03-20 00:00:00",
+            "id": "UmVwbHk6cmVwbHlVbnB1Ymxpc2hlZEFuZERyYWZ0",
+            "private": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "id": "VXNlcjp1c2VyNQ==",
+              "username": "user",
+            },
+            "createdAt": "2016-03-08 00:00:00",
+            "id": "UmVwbHk6cmVwbHk4",
+            "private": false,
+          },
+        },
       ],
-      "totalCount": 8,
+      "totalCount": 12,
     },
   },
 }

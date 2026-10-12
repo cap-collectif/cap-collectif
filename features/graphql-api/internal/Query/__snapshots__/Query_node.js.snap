@@ -49,10 +49,7 @@ Object {
   "requirement": Object {
     "id": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQx",
   },
-  "response": Object {
-    "__typename": "ValueResponse",
-    "id": "VmFsdWVSZXNwb25zZTpyZXNwb25zZVRhZ0Nsb3VkMjk=",
-  },
+  "response": null,
 }
 `;
 

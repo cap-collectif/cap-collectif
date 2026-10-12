@@ -162,6 +162,16 @@ class ReplyRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
+    public function getProfileVisibleByAuthorQueryBuilder(?User $viewer, User $author): QueryBuilder
+    {
+        return $this->setPublicityConstraints($viewer, $this->getPublishedNonDraftByAuthorQueryBuilder($author))
+            ->andWhere('reply.private = false')
+            ->andWhere('reply.completionStatus = :profileCompletionStatus')
+            ->andWhere('step.isEnabled = true')
+            ->setParameter('profileCompletionStatus', ContributionCompletionStatus::COMPLETED)
+        ;
+    }
+
     public function getByAuthor(User $author): iterable
     {
         $qb = $this->getPublicPublishedNonDraftByAuthorQueryBuilder($author);

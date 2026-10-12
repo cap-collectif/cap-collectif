@@ -9,10 +9,12 @@ PreviewValueResponse:
         description: 'A value response.'
         fields:
             value:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireResultsAccessResolver").canViewResponse(value, getUser(), context, info)'
                 type: 'String'
                 description: 'The response value which can be a string or a JSON.'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Response\\ResponseValueResolver", value)'
             formattedValue:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireResultsAccessResolver").canViewResponse(value, getUser(), context, info)'
                 type: 'String'
                 description: 'The response value formatted.'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Type\\FormattedValueResponseTypeResolver", value)'

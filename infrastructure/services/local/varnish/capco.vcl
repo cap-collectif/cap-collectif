@@ -10,6 +10,11 @@ backend default {
 
 # Called at the beginning of a request, after the complete request has been received and parsed.
 sub vcl_recv {
+  # Preserve credentials and bypass stored copies for protected media.
+  if (req.url ~ "^/media/" || req.url ~ "^/download/") {
+    return (pass);
+  }
+
   # Delete cookie for static files
   if (req.url ~ "\.(jpeg|jpg|png|gif|ico|webp|js|css)$") {
     unset req.http.Cookie;

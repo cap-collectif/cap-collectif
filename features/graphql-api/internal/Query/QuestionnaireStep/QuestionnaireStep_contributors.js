@@ -1,5 +1,4 @@
 //* eslint-env jest */
-import '../../../_setupES'
 
 const QuestionnaireStepContributorsQuery = /* GraphQL */ `
   query QuestionnaireStepContributorsQuery($id: ID!) {
@@ -26,15 +25,9 @@ const QuestionnaireStepContributorsQuery = /* GraphQL */ `
  * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
  */
 describe('Preview|QuestionnaireStep.contributors connection', () => {
-  it('fetches the contributors of a questionnaire step', async () => {
-    await expect(
-      graphql(
-        QuestionnaireStepContributorsQuery,
-        {
-          id: 'questionnairestep1',
-        },
-        'internal',
-      ),
-    ).resolves.toMatchSnapshot()
+  it('keeps the participation count without exposing identities', async () => {
+    const result = await graphql(QuestionnaireStepContributorsQuery, { id: 'questionnairestep1' }, 'internal')
+    expect(result.node.contributors.totalCount).toBeGreaterThan(0)
+    expect(result.node.contributors.edges).toEqual([])
   })
 })

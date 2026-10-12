@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\Entity\Media;
+use Capco\AppBundle\Service\MediaAccessResolver;
 use Capco\AppBundle\Service\MediaManager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
@@ -12,7 +13,8 @@ use Doctrine\ORM\Events;
 class MediaSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private readonly MediaManager $mediaManager
+        private readonly MediaManager $mediaManager,
+        private readonly MediaAccessResolver $mediaAccess
     ) {
     }
 
@@ -40,7 +42,7 @@ class MediaSubscriber implements EventSubscriberInterface
 
         [$oldValue, $newValue] = $mediaChanges;
 
-        if ($oldValue instanceof Media && null === $newValue) {
+        if ($oldValue instanceof Media && null === $newValue && !$this->mediaAccess->isPrivate($oldValue)) {
             $this->mediaManager->removeWithFileIfFileExists($oldValue);
         }
     }

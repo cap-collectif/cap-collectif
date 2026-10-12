@@ -20,7 +20,7 @@ PreviewReply:
                     typeName: Reply
             responses:
                 type: '[PreviewResponse]!'
-                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyResponsesResolver", value, getUser(), context)'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyResponsesResolver", value, getUser(), context, info)'
                 description: 'The responses of the reply.'
             url:
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyUrlResolver", value)'

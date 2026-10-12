@@ -16,21 +16,20 @@ type Props = {
   readonly questionnaire: DeleteReplyModal_questionnaire
 }
 export const DeleteReplyModal = ({ reply, questionnaire }: Props) => {
-  const intl = useIntl();
+  const intl = useIntl()
 
-  const { anonymousRepliesIds } = React.useContext(QuestionnaireStepPageContext);
-  const isAnonymousReply = reply.isAnonymous;
+  const { anonymousRepliesIds } = React.useContext(QuestionnaireStepPageContext)
+  const isAnonymousReply = reply.isAnonymous
 
   const handleSubmit = async onClose => {
-    const participantToken = CookieMonster.getHashedAnonymousReplyCookie(questionnaire.id, reply.id)
     onClose()
 
-    if (isAnonymousReply && participantToken) {
+    if (isAnonymousReply) {
       try {
+        CookieMonster.restoreParticipantCookieForReply(questionnaire.id, reply.id)
         const response = await DeleteAnonymousReplyMutation.commit({
           input: {
             replyId: reply.id,
-            participantToken,
           },
           anonymousRepliesIds,
         })
@@ -43,7 +42,7 @@ export const DeleteReplyModal = ({ reply, questionnaire }: Props) => {
             }),
           })
         }
-        return;
+        return
       } catch {
         return mutationErrorToast(intl)
       }

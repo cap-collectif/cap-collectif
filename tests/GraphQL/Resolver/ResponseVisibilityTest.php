@@ -18,22 +18,23 @@ use PHPUnit\Framework\TestCase;
 final class ResponseVisibilityTest extends TestCase
 {
     /** @dataProvider visibilityContexts */
-    public function testPrivilegedInternalContextIncludesPrivateAndHiddenResponses(bool $disableAcl): void
+    public function testPrivilegedInternalContextIncludesPrivateAndHiddenResponses(bool $disableAcl, bool $hasAuthor): void
     {
         $public = (new ValueResponse())->setQuestion((new SimpleQuestion())->setPrivate(false));
         $private = (new ValueResponse())->setQuestion((new SimpleQuestion())->setPrivate(true));
         $hidden = (new ValueResponse())->setQuestion((new SimpleQuestion())->setHidden(true));
         $responses = new ArrayCollection([$public, $private, $hidden]);
         $visibility = new UserResponsesResolver(new ConnectionBuilder());
-        $author = new User();
+        $author = $hasAuthor ? new User() : null;
 
         self::assertSame($disableAcl ? [$public, $private, $hidden] : [$public], $visibility->filterVisibleResponses($responses, $author, null, new \ArrayObject(['disable_acl' => $disableAcl]))->toArray());
     }
 
-    /** @return iterable<string, array{bool}> */
+    /** @return iterable<string, array{bool, bool}> */
     public static function visibilityContexts(): iterable
     {
-        yield 'ordinary anonymous context' => [false];
-        yield 'privileged internal context' => [true];
+        yield 'ordinary anonymous context' => [false, true];
+        yield 'privileged internal context' => [true, true];
+        yield 'missing author' => [false, false];
     }
 }

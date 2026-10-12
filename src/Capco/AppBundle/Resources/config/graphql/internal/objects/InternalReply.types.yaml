@@ -15,7 +15,7 @@ InternalReply:
         fields:
             responses:
                 type: '[InternalResponse]!'
-                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyResponsesResolver", value, getUser(), context)'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyResponsesResolver", value, getUser(), context, info)'
                 description: 'The responses of the reply.'
             questionnaire:
                 type: 'InternalQuestionnaire!'

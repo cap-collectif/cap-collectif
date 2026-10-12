@@ -20,7 +20,7 @@ class ProjectContributionResolver implements QueryInterface
     ) {
     }
 
-    public function __invoke(Project $project, ?Argument $args = null, mixed $viewer = null): ConnectionInterface
+    public function __invoke(Project $project, ?Argument $args = null, mixed $viewer = null, ?\ArrayObject $context = null): ConnectionInterface
     {
         if (!$args) {
             $args = new Arg(['first' => 0]);
@@ -31,7 +31,9 @@ class ProjectContributionResolver implements QueryInterface
             $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
                 &$totalCount,
                 $project,
-                $args
+                $args,
+                $viewer,
+                $context
             ) {
                 $filters = [];
                 if ($args->offsetExists('orderBy')) {
@@ -62,7 +64,9 @@ class ProjectContributionResolver implements QueryInterface
                     $order,
                     $filters,
                     $limit,
-                    $cursor
+                    $cursor,
+                    $viewer,
+                    $context
                 );
 
                 $totalCount = $this->contributionSearch->getContributionsByProject(
@@ -70,7 +74,10 @@ class ProjectContributionResolver implements QueryInterface
                     $order,
                     $filters,
                     0,
-                    null
+                    null,
+                    $viewer,
+                    $context,
+                    true
                 )->getTotalCount();
 
                 return $response;

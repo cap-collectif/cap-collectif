@@ -1,5 +1,6 @@
 /* eslint-env jest */
 import '../../../_setupDB'
+import { request, participantCookie } from '../../../_privacyGraphql'
 
 const DeleteAnonymousReplyMutation = /* GraphQL*/ `
     mutation DeleteAnonymousReplyMutation($input: DeleteAnonymousReplyInput!) {
@@ -18,19 +19,16 @@ describe('mutations.deleteAnonymousReply', () => {
    * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
    * and identity.
    */
-  it('should throw an error when participant token is not found', async () => {
-    await expect(
-      graphql(
-        DeleteAnonymousReplyMutation,
-        {
-          input: {
-            replyId: toGlobalId('Reply', 'replyAnonymous1'),
-            participantToken: 'def',
-          },
-        },
-        'internal',
-      ),
-    ).rejects.toThrowError('Participant not found.')
+  it('should reject an invalid participant cookie before execution', async () => {
+    const result = await request(
+      DeleteAnonymousReplyMutation,
+      { input: { replyId: toGlobalId('Reply', 'replyAnonymous1') } },
+      'internal',
+      participantCookie('invalid'),
+      true,
+    )
+    expect(result.errors[0].extensions.code).toBe('INVALID_PARTICIPANT_COOKIE')
+    expect(result.data).toBeUndefined()
   })
 
   /**
@@ -38,15 +36,15 @@ describe('mutations.deleteAnonymousReply', () => {
    * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
    */
   it('should delete an anonymous reply', async () => {
-    const response = await graphql(
+    const response = await request(
       DeleteAnonymousReplyMutation,
       {
         input: {
           replyId: toGlobalId('Reply', 'replyAnonymous1'),
-          participantToken: btoa('fakeToken1'),
         },
       },
       'internal',
+      participantCookie('fakeToken1'),
     )
 
     expect(response).toMatchSnapshot()

@@ -1,5 +1,4 @@
 /* eslint-dev jest*/
-import '../../../_setupES'
 
 const ProjectContributorsQuery = /* GraphQL */ `
   query ProjectContributors(

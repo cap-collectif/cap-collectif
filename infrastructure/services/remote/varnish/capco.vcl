@@ -23,6 +23,11 @@ sub vcl_recv {
   # https://httpoxy.org/#fix-now
   unset req.http.proxy;
 
+  # Media access can depend on user or participant cookies, including cached images.
+  if (req.url ~ "^/media/" || req.url ~ "^/download/") {
+    return (pass);
+  }
+
   # Only cache requests to eelv
   if (req.http.host == "projet.lesecologistes.fr") {
     # Continue to caching logic
@@ -63,16 +68,21 @@ sub vcl_recv {
   unset req.http.X-Body-Len;
   unset req.http.X-User-Logged-In;
 
-  # Delete cookie for static files
-  if (req.url ~ "\.(jpeg|jpg|png|gif|ico|webp|js|css|woff|ott)$") {
-    unset req.http.Cookie;
-  }
-
   # Ensure that the Symfony Router generates URLs correctly with Varnish
   if (req.http.X-Forwarded-Proto == "https" ) {
     set req.http.X-Forwarded-Port = "443";
   } else {
     set req.http.X-Forwarded-Port = "80";
+  }
+
+  # Participation cookies and credentials must bypass both cache reads and writes.
+  if (req.http.Authorization || req.http.Cookie ~ "(^|;)[[:space:]]*(CapcoAnonReply|CapcoParticipant|PHPSESSID|SimpleSAMLAuthToken|SimpleSAMLSessionID)=") {
+    return (pass);
+  }
+
+  # Delete cookie for static files
+  if (req.url ~ "\.(jpeg|jpg|png|gif|ico|webp|js|css|woff|ott)$") {
+    unset req.http.Cookie;
   }
 
   # Allow to invalidate cache
@@ -170,9 +180,8 @@ sub vcl_backend_fetch {
 
 # Called after the response headers are successfully retrieved from the backend.
 sub vcl_backend_response {
-    # Don't cache responses for authenticated users
-    # The backend sets X-User-Logged-In: 1 for authenticated users
-    if (beresp.http.X-User-Logged-In == "1") {
+    # Preserve backend privacy even when an anonymous participant is not logged in.
+    if (bereq.uncacheable || beresp.http.X-User-Logged-In == "1" || beresp.http.Cache-Control ~ "(?i)(private|no-store|no-cache)") {
         set beresp.uncacheable = true;
         set beresp.ttl = 0s;
         return (deliver);

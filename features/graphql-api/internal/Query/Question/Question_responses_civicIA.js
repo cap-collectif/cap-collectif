@@ -35,7 +35,7 @@ describe('Internal|Question.civicIA', () => {
         },
         'internal_user',
       ),
-    ).resolves.toMatchSnapshot()
+    ).resolves.toEqual({ question: { responses: { edges: [] } } })
   })
   it('get civicIA analysis on responses', async () => {
     await expect(

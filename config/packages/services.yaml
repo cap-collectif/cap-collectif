@@ -29,6 +29,9 @@ services:
     Capco\AppBundle\Service\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Service/*'
 
+    Capco\AppBundle\Service\MediaAccessResolver:
+        public: true
+
     Capco\AppBundle\Factory\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Factory/*'
 

@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Questions\SectionQuestion;
 use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\Enum\ResponsesOrderField;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireResultsAccessResolver;
 use Capco\AppBundle\Search\ResponseSearch;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
@@ -17,13 +18,18 @@ class QuestionResponsesResolver implements QueryInterface
 {
     public function __construct(
         private readonly ResponseSearch $responseSearch,
-        private readonly LoggerInterface $logger
+        private readonly LoggerInterface $logger,
+        private readonly QuestionnaireResultsAccessResolver $resultsAccess
     ) {
     }
 
-    public function __invoke(AbstractQuestion $question, Arg $args, $viewer)
+    public function __invoke(AbstractQuestion $question, Arg $args, $viewer, ?\ArrayObject $context = null)
     {
         $emptyConnection = ConnectionBuilder::empty();
+
+        if (!$this->resultsAccess->canViewQuestionResults($question, $context)) {
+            return $emptyConnection;
+        }
 
         if ($question->getQuestionnaire() && !$question->getQuestionnaire()->canDisplay($viewer)) {
             return $emptyConnection;

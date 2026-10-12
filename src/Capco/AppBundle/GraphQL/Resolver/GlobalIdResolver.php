@@ -11,11 +11,14 @@ use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\SmsCredit;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Exception\ParticipantNotFoundException;
 use Capco\AppBundle\Filter\ContributionCompletionStatusFilter;
+use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireResultsAccessResolver;
 use Capco\AppBundle\Model\ModerableInterface;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\AbstractStepRepository;
@@ -156,7 +159,8 @@ class GlobalIdResolver
         private readonly EntityManagerInterface $entityManager,
         private readonly RepositoryManager $repositoryManager,
         private readonly RequestStack $requestStack,
-        private readonly ParticipantHelper $participantHelper
+        private readonly ParticipantHelper $participantHelper,
+        private readonly QuestionnaireResultsAccessResolver $resultsAccess
     ) {
     }
 
@@ -187,20 +191,22 @@ class GlobalIdResolver
             }
         }
 
-        if ($this->entityManager->getFilters()->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)) {
-            $this->entityManager->getFilters()->disable(ContributionCompletionStatusFilter::FILTER_NAME);
+        $filters = $this->entityManager->getFilters();
+        $wasEnabled = $filters->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME);
+        if ($wasEnabled) {
+            $filters->disable(ContributionCompletionStatusFilter::FILTER_NAME);
         }
 
-        // We try to decode the global id
-        $decodeGlobalId = self::getDecodedId($uuidOrGlobalId);
+        try {
+            $decodeGlobalId = self::getDecodedId($uuidOrGlobalId);
+            $node = $this->getNode($decodeGlobalId, $uuidOrGlobalId);
 
-        $node = $this->getNode($decodeGlobalId, $uuidOrGlobalId);
-
-        if (!$this->entityManager->getFilters()->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)) {
-            $this->entityManager->getFilters()->enable(ContributionCompletionStatusFilter::FILTER_NAME);
+            return $this->viewerCanSee($node, $user, $skipVerification, $participant, $context) ? $node : null;
+        } finally {
+            if ($wasEnabled) {
+                $filters->enable(ContributionCompletionStatusFilter::FILTER_NAME);
+            }
         }
-
-        return $this->viewerCanSee($node, $user, $skipVerification, $participant) ? $node : null;
     }
 
     public function resolveTypeByIds(
@@ -272,7 +278,7 @@ class GlobalIdResolver
 
             $viewerCanSee = true;
             foreach ($node as $item) {
-                $viewerCanSee = $this->viewerCanSee($item, $user, $skipVerification);
+                $viewerCanSee = $this->viewerCanSee($item, $user, $skipVerification, null, $context);
             }
 
             return $viewerCanSee ? $node : null;
@@ -295,7 +301,7 @@ class GlobalIdResolver
         }
         $viewerCanSee = true;
         foreach ($node as $item) {
-            $viewerCanSee = $this->viewerCanSee($item, $user, $skipVerification);
+            $viewerCanSee = $this->viewerCanSee($item, $user, $skipVerification, null, $context);
         }
 
         return $viewerCanSee ? $node : null;
@@ -339,8 +345,18 @@ class GlobalIdResolver
         throw new NotFoundHttpException();
     }
 
-    private function viewerCanSee($node, ?User $user, bool $skipVerification, ?Participant $participant = null): bool
+    private function viewerCanSee($node, ?User $user, bool $skipVerification, ?Participant $participant = null, ?\ArrayObject $context = null): bool
     {
+        if ($skipVerification) {
+            return true;
+        }
+        if ($node instanceof Reply) {
+            return $this->resultsAccess->canViewReply($node, $user, $context, $participant);
+        }
+        if ($node instanceof AbstractResponse) {
+            return $this->resultsAccess->canViewResponse($node, $user, $context);
+        }
+
         $projectContributionClass = [
             Project::class,
             Proposal::class,
@@ -354,10 +370,6 @@ class GlobalIdResolver
         ];
 
         foreach ($projectContributionClass as $object) {
-            if ($skipVerification) {
-                return true;
-            }
-
             if ($node instanceof Proposal) {
                 return $node->viewerCanSee($user) || $this->participantCanSeeProposal($node, $user);
             }

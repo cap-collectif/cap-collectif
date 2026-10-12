@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\AnalysisConfiguration;
 use Capco\AppBundle\Entity\Interfaces\Owner;
+use Capco\AppBundle\Entity\Organization\OrganizationMember;
 use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Questionnaire;
@@ -24,6 +25,31 @@ use Doctrine\ORM\QueryBuilder;
  */
 class QuestionnaireRepository extends EntityRepository
 {
+    /**
+     * Non-admin result managers, matching ProjectVoter::VIEW or QuestionnaireVoter::EXPORT.
+     * A user owner takes precedence over an organization owner, as in OwnerableTrait.
+     *
+     * @return array<string, null|string> questionnaire IDs mapped to their optional step IDs
+     */
+    public function getManagedQuestionnaireStepIds(User $viewer): array
+    {
+        /** @var list<array{id: string, stepId: null|string}> $rows */
+        $rows = $this->createQueryBuilder('q')
+            ->select('q.id', 's.id AS stepId')
+            ->leftJoin('q.step', 's')
+            ->leftJoin('s.projectAbstractStep', 'pas')
+            ->leftJoin('pas.project', 'p')
+            ->leftJoin(OrganizationMember::class, 'pm', 'WITH', 'pm.organization = p.organizationOwner AND pm.user = :viewer')
+            ->leftJoin(OrganizationMember::class, 'qm', 'WITH', 'qm.organization = q.organizationOwner AND qm.user = :viewer')
+            ->where('(p.id IS NOT NULL AND (p.owner = :viewer OR (p.owner IS NULL AND pm.id IS NOT NULL)))
+                OR (p.id IS NULL AND (q.owner = :viewer OR (q.owner IS NULL AND qm.id IS NOT NULL)))')
+            ->setParameter('viewer', $viewer->getId())
+            ->getQuery()->getArrayResult()
+        ;
+
+        return array_column($rows, 'stepId', 'id');
+    }
+
     /**
      * @param $id
      *

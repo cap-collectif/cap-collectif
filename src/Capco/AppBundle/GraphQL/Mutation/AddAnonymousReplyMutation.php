@@ -12,6 +12,7 @@ use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Capco\AppBundle\Repository\ReplyRepository;
+use Capco\AppBundle\Service\ParticipantAuthentication;
 use Capco\AppBundle\Service\ParticipantHelper;
 use Capco\AppBundle\Service\ReplyCounterIndexer;
 use Capco\AppBundle\Utils\RequestGuesserInterface;
@@ -41,20 +42,21 @@ class AddAnonymousReplyMutation extends ReplyMutation implements MutationInterfa
         private readonly ReplyCounterIndexer $replyCounterIndexer,
         private readonly ParticipantIsMeetingRequirementsResolver $participantIsMeetingRequirementsResolver,
         private readonly ParticipantHelper $participantHelper,
+        private readonly ParticipantAuthentication $participantAuthentication,
         private readonly ReplyRepository $replyRepository,
         ValidatePhoneReusabilityMutation $validatePhoneReusabilityMutation
     ) {
         parent::__construct($validatePhoneReusabilityMutation);
     }
 
-    public function __invoke(Argument $input): array
+    public function __invoke(Argument $input, ?\ArrayObject $context = null): array
     {
         $this->formatInput($input);
         $values = $input->getArrayCopy();
 
         /** @var Questionnaire $questionnaire */
         $questionnaire = $this->globalIdResolver->resolve($values['questionnaireId'], null);
-        unset($values['questionnaireId'], $values['participantToken']);
+        unset($values['questionnaireId']);
 
         $step = $questionnaire->getStep();
 
@@ -70,7 +72,7 @@ class AddAnonymousReplyMutation extends ReplyMutation implements MutationInterfa
         $form = $this->formFactory->create(ReplyAnonymousType::class, $replyAnonymous);
         $form->submit($values, false);
 
-        $participant = $this->participantHelper->getOrCreateParticipant($input->offsetGet('participantToken'));
+        $participant = $this->participantAuthentication->getParticipant() ?? $this->participantHelper->getOrCreateParticipant();
         $participantToken = $participant->getToken();
 
         $isParticipantMeetingRequirements = $this->participantIsMeetingRequirementsResolver->__invoke($participant, new Argument(['stepId' => GlobalId::toGlobalId('AbstractStep', $step->getId()),

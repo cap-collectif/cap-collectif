@@ -1,5 +1,4 @@
 /* eslint-env jest */
-import '../../../_setupES'
 
 const QuestionChoiceRankingQuery = /* GraphQL */ `
   query QuestionChoiceRankingQuery($questionnaireId: ID!) {
@@ -32,13 +31,14 @@ const QuestionChoiceRankingQuery = /* GraphQL */ `
  * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
  */
 describe('Internal|QuestionChoice.ranking', () => {
-  it('returns the ranking of answered choices', async () => {
-    await expect(
-      graphql(
-        QuestionChoiceRankingQuery,
-        { questionnaireId: 'UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlNA==' },
-        'internal_user',
-      ),
-    ).resolves.toMatchSnapshot()
+  it('hides choice rankings from ordinary users', async () => {
+    const result = await graphql(
+      QuestionChoiceRankingQuery,
+      { questionnaireId: toGlobalId('Questionnaire', 'questionnaire4') },
+      'internal_user',
+    )
+    const choices = result.questionnaire.questions.flatMap(question => question.choices?.edges || [])
+    expect(choices.length).toBeGreaterThan(0)
+    choices.forEach(({ node }) => expect(node.ranking).toEqual([]))
   })
 })

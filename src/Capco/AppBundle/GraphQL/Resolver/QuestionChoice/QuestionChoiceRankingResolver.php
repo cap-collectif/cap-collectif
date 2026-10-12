@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\QuestionChoice;
 
 use Capco\AppBundle\Entity\QuestionChoice;
+use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireResultsAccessResolver;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
@@ -10,12 +11,17 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 class QuestionChoiceRankingResolver implements QueryInterface
 {
     public function __construct(
-        private readonly AbstractResponseRepository $responseRepository
+        private readonly AbstractResponseRepository $responseRepository,
+        private readonly QuestionnaireResultsAccessResolver $resultsAccess
     ) {
     }
 
-    public function __invoke(QuestionChoice $questionChoice, ?User $viewer = null): ?array
+    public function __invoke(QuestionChoice $questionChoice, ?User $viewer = null, ?\ArrayObject $context = null): ?array
     {
+        if (!$this->resultsAccess->canViewQuestionResults($questionChoice->getQuestion(), $context)) {
+            return [];
+        }
+
         if (
             $questionChoice->getQuestion()
             && 'ranking' !== $questionChoice->getQuestion()->getInputType()

@@ -5,30 +5,33 @@ namespace Capco\AppBundle\GraphQL\Resolver\Questionnaire;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\Search\ReplySearch;
-use Capco\AppBundle\Security\ProjectVoter;
-use Capco\AppBundle\Security\QuestionnaireVoter;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class QuestionnaireAdminRepliesResolver implements QueryInterface
 {
     public function __construct(
         private readonly ReplySearch $replySearch,
         private readonly LoggerInterface $logger,
-        private readonly AuthorizationCheckerInterface $authorizationChecker
+        private readonly QuestionnaireResultsAccessResolver $resultsAccess
     ) {
     }
 
     public function __invoke(
         Questionnaire $questionnaire,
         Arg $args,
-        ?User $viewer = null
+        ?User $viewer = null,
+        ?\ArrayObject $context = null
     ): ConnectionInterface {
+        if (!$this->resultsAccess->canViewResults($questionnaire, $context)) {
+            return ConnectionBuilder::empty();
+        }
+
         $filtersStatus = $args->offsetGet('filterStatus') ?? [];
         $term = $args->offsetGet('term') ?? null;
         $orderBy = $args->offsetGet('orderBy') ?? null;
@@ -62,12 +65,8 @@ class QuestionnaireAdminRepliesResolver implements QueryInterface
         return $paginator->auto($args);
     }
 
-    public function isGranted(Questionnaire $questionnaire): bool
+    public function isGranted(Questionnaire $questionnaire, ?\ArrayObject $context = null): bool
     {
-        $project = $questionnaire->getStep()?->getProject();
-
-        return $project
-            ? $this->authorizationChecker->isGranted(ProjectVoter::VIEW, $project)
-            : $this->authorizationChecker->isGranted(QuestionnaireVoter::EXPORT, $questionnaire);
+        return $this->resultsAccess->canViewResults($questionnaire, $context);
     }
 }

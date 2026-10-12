@@ -6,9 +6,6 @@ UpdateAnonymousReplyInput:
             replyId:
                 type: 'ID!'
                 description: 'The Reply ID.'
-            participantToken:
-                type: 'String!'
-                description: 'The participant token.'
             responses:
                 type: '[ResponseInput!]!'
                 description: 'The responses to the questionnaire questions'

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Question;
 
 use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireResultsAccessResolver;
 use Capco\AppBundle\Search\ResponseSearch;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -11,16 +12,21 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QuestionTagCloudResolver implements QueryInterface
 {
-    final public const CACHE_KEY = 'questionTagCloudData';
+    final public const CACHE_KEY = 'questionTagCloudData-v2';
 
     public function __construct(
         private readonly ResponseSearch $responseSearch,
-        private readonly RedisCache $cache
+        private readonly RedisCache $cache,
+        private readonly QuestionnaireResultsAccessResolver $resultsAccess
     ) {
     }
 
-    public function __invoke(AbstractQuestion $question, Argument $args, ?User $viewer = null): array
+    public function __invoke(AbstractQuestion $question, Argument $args, ?User $viewer = null, ?\ArrayObject $context = null): array
     {
+        if (!$this->resultsAccess->canViewQuestionResults($question, $context)) {
+            return [];
+        }
+
         $size = $args->offsetGet('size');
         $cachedQuestionTagCloudData = $this->cache->getItem(
             self::CACHE_KEY . '-' . $question->getId() . '-' . $size

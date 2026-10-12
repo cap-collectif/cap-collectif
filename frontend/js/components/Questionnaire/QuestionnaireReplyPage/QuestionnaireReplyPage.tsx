@@ -27,6 +27,7 @@ export const queryReply = graphql`
     reply: node(id: $replyId) {
       id
       ... on Reply {
+        isAnonymous
         createdAt
         publishedAt
         questionnaire {
@@ -101,7 +102,7 @@ export const QuestionnaireReplyPage = ({
   const { props: propsPrefetch } = usePreloadedQuery(dataPrefetch || queryPreload)
   const reply = propsPrefetch ? propsPrefetch?.reply : propsQuery?.reply
   if (!reply || !questionnaire) return <Loader />
-  const isAnonymousReply = CookieMonster.hasAnonymousReplyCookie(questionnaire?.id, reply?.id)
+  const isAnonymousReply = !isAuthenticated && reply.isAnonymous
   return (
     <QuestionnaireReplyPageContainer>
       {questionnaire.step && <StepPageHeader step={questionnaire.step} />}

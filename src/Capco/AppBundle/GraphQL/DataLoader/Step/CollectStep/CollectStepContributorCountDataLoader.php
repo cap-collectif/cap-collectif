@@ -6,8 +6,7 @@ use Capco\AppBundle\Cache\RedisTagCache;
 use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
-use Capco\AppBundle\GraphQL\Resolver\Step\StepContributorResolver;
-use Overblog\GraphQLBundle\Definition\Argument;
+use Capco\AppBundle\Search\UserSearch;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
@@ -18,7 +17,7 @@ class CollectStepContributorCountDataLoader extends BatchDataLoader
         PromiseAdapterInterface $promiseFactory,
         RedisTagCache $cache,
         LoggerInterface $logger,
-        private readonly StepContributorResolver $stepContributorResolver,
+        private readonly UserSearch $userSearch,
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
@@ -65,14 +64,13 @@ class CollectStepContributorCountDataLoader extends BatchDataLoader
     {
         return [
             'collectStepId' => $key['collectStep']->getId(),
+            // Discard counts previously cached through the anonymous list resolver.
+            'version' => 2,
         ];
     }
 
     private function resolve(CollectStep $step): int
     {
-        return $this->stepContributorResolver
-            ->__invoke($step, new Argument(['first' => 0]))
-            ->getTotalCount()
-        ;
+        return $this->userSearch->getContributorByStep($step, 0)->getTotalCount();
     }
 }

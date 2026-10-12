@@ -5,6 +5,7 @@ UpdateAnonymousReplyPayload:
         fields:
             reply:
                 type: 'InternalReply'
+                resolve: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireResultsAccessResolver").authorizeReply(value, context, info)'
                 description: 'The updated AnonymousReply'
             errorCode:
                 type: 'UpdateAnonymousReplyErrorCode'

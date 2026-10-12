@@ -11,5 +11,6 @@ PreviewMediaResponse:
             question:
                 type: 'PreviewQuestion!'
             medias:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireResultsAccessResolver").canViewResponse(value, getUser(), context, info)'
                 type: '[PreviewMedia!]!'
                 description: 'Identifies medias of the response.'

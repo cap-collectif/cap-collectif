@@ -5,6 +5,7 @@ namespace spec\Capco\AppBundle\GraphQL\Resolver\Question;
 use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\GraphQL\Resolver\Question\QuestionTagCloudResolver;
+use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireResultsAccessResolver;
 use Capco\AppBundle\Search\ResponseSearch;
 use Elastica\ResultSet;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -13,9 +14,9 @@ use Symfony\Contracts\Cache\ItemInterface;
 
 class QuestionTagCloudResolverSpec extends ObjectBehavior
 {
-    public function let(ResponseSearch $responseSearch, RedisCache $cache): void
+    public function let(ResponseSearch $responseSearch, RedisCache $cache, QuestionnaireResultsAccessResolver $resultsAccess): void
     {
-        $this->beConstructedWith($responseSearch, $cache);
+        $this->beConstructedWith($responseSearch, $cache, $resultsAccess);
     }
 
     public function it_is_initializable(): void
@@ -29,8 +30,10 @@ class QuestionTagCloudResolverSpec extends ObjectBehavior
         SimpleQuestion $question,
         ItemInterface $cacheItem,
         Argument $args,
-        ResultSet $resultSet
+        ResultSet $resultSet,
+        QuestionnaireResultsAccessResolver $resultsAccess
     ): void {
+        $resultsAccess->canViewQuestionResults($question, null)->willReturn(true);
         $results = [
             [
                 'value' => 'bonsoir',
@@ -45,7 +48,7 @@ class QuestionTagCloudResolverSpec extends ObjectBehavior
         $question->getId()->willReturn('question1');
         $args->offsetGet('size')->willReturn(2);
         $cache
-            ->getItem('questionTagCloudData-question1-2')
+            ->getItem(QuestionTagCloudResolver::CACHE_KEY . '-question1-2')
             ->willReturn($cacheItem)
             ->shouldBeCalled()
         ;
@@ -89,8 +92,10 @@ class QuestionTagCloudResolverSpec extends ObjectBehavior
         SimpleQuestion $question,
         ItemInterface $cacheItem,
         Argument $args,
-        ResultSet $resultSet
+        ResultSet $resultSet,
+        QuestionnaireResultsAccessResolver $resultsAccess
     ): void {
+        $resultsAccess->canViewQuestionResults($question, null)->willReturn(true);
         $results = [
             [
                 'value' => 'bonsoir',
@@ -106,12 +111,26 @@ class QuestionTagCloudResolverSpec extends ObjectBehavior
         $question->getId()->willReturn('question2');
         $args->offsetGet('size')->willReturn(2);
         $cache
-            ->getItem('questionTagCloudData-question2-2')
+            ->getItem(QuestionTagCloudResolver::CACHE_KEY . '-question2-2')
             ->willReturn($cacheItem)
             ->shouldBeCalled()
         ;
         $cacheItem->isHit()->willReturn(true);
         $cacheItem->get()->willReturn($results);
         $this->__invoke($question, $args)->shouldReturn($results);
+    }
+
+    public function it_should_refuse_access_before_reading_cache_or_searching(
+        RedisCache $cache,
+        ResponseSearch $responseSearch,
+        SimpleQuestion $question,
+        Argument $args,
+        QuestionnaireResultsAccessResolver $resultsAccess
+    ): void {
+        $resultsAccess->canViewQuestionResults($question, null)->willReturn(false);
+        $cache->getItem(\Prophecy\Argument::any())->shouldNotBeCalled();
+        $responseSearch->getTagCloud(\Prophecy\Argument::cetera())->shouldNotBeCalled();
+
+        $this->__invoke($question, $args)->shouldReturn([]);
     }
 }

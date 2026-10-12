@@ -1,0 +1,56 @@
+varnishtest "Participation credentials and private backend responses never enter shared cache"
+
+server s1 {
+    rxreq
+    expect req.http.Cookie ~ "CapcoAnonReply="
+    txresp -hdr "X-User-Logged-In: 0" -hdr "Cache-Control: public, max-age=60" -body "PRIVATE_LEGACY_REPLY"
+    rxreq
+    expect req.http.Cookie == <undef>
+    txresp -hdr "X-User-Logged-In: 0" -hdr "Cache-Control: public, max-age=60" -body "PUBLIC_REPLY"
+    rxreq
+    expect req.http.Cookie ~ "CapcoParticipant="
+    txresp -hdr "X-User-Logged-In: 0" -hdr "Cache-Control: public, max-age=60" -body "PRIVATE_PARTICIPANT_REPLY"
+    rxreq
+    txresp -hdr "X-User-Logged-In: 0" -hdr "Cache-Control: private, no-store" -body "PRIVATE_BACKEND_REPLY"
+    rxreq
+    txresp -hdr "X-User-Logged-In: 0" -hdr "Cache-Control: private, no-store" -body "EMPTY_REPLY"
+} -start
+
+varnish v1 -vcl {
+    vcl 4.0;
+    backend test_backend { .host = "${s1_addr}"; .port = "${s1_port}"; }
+    sub vcl_recv { set req.backend_hint = test_backend; }
+    include "${testdir}/capco.vcl";
+} -start
+
+client c1 {
+    txreq -req POST -url "/graphql/internal" -hdr "Host: projet.lesecologistes.fr" -hdr "Cookie: locale=fr; CapcoAnonReply=synthetic" -body "query replies"
+    rxresp
+    expect resp.status == 200
+    expect resp.body == "PRIVATE_LEGACY_REPLY"
+
+    txreq -req POST -url "/graphql/internal" -hdr "Host: projet.lesecologistes.fr" -body "query replies"
+    rxresp
+    expect resp.body == "PUBLIC_REPLY"
+
+    txreq -req POST -url "/graphql/internal" -hdr "Host: projet.lesecologistes.fr" -hdr "Cookie: CapcoParticipant=synthetic" -body "query replies"
+    rxresp
+    expect resp.body == "PRIVATE_PARTICIPANT_REPLY"
+
+    txreq -req POST -url "/graphql/internal" -hdr "Host: projet.lesecologistes.fr" -body "query replies"
+    rxresp
+    expect resp.body == "PUBLIC_REPLY"
+
+    txreq -req POST -url "/graphql/internal" -hdr "Host: projet.lesecologistes.fr" -body "query private"
+    rxresp
+    expect resp.body == "PRIVATE_BACKEND_REPLY"
+    expect resp.http.Cache-Control == "private, no-store"
+
+    txreq -req POST -url "/graphql/internal" -hdr "Host: projet.lesecologistes.fr" -body "query private"
+    rxresp
+    expect resp.body == "EMPTY_REPLY"
+    expect resp.http.Cache-Control == "private, no-store"
+} -run
+
+server s1 -wait
+varnish v1 -expect MAIN.cache_hit == 1

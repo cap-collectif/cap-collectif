@@ -51,7 +51,7 @@ InternalQuestionnaire:
             adminReplies:
                 type: 'InternalReplyConnection!'
                 description: 'List of replies used in contributions admin page'
-                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireAdminRepliesResolver").isGranted(value)'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireAdminRepliesResolver").isGranted(value, context)'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     term:
@@ -73,7 +73,7 @@ InternalQuestionnaire:
                         description: 'Filter by status'
                         type: '[ReplyStatus]'
                         defaultValue: !php/const Capco\AppBundle\Enum\ReplyStatus::DEFAULT_STATUSES
-                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireAdminRepliesResolver", value, args, getUser())'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireAdminRepliesResolver", value, args, getUser(), context)'
             exportResultsUrl:
                 type: 'URI!'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireExportResultsUrlResolver", value)'

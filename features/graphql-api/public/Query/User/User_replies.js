@@ -17,9 +17,17 @@ const UserRepliesQuery = /* GraphQL */ `
  * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
  */
 describe('User.replies connection', () => {
-  it("fetches a user's published, non-draft, public replies", async () => {
+  it('counts only profile-visible replies for anonymous visitors', async () => {
     await Promise.all(
-      ['user1', 'user2', 'user3', 'userAdmin', 'adminCapco', 'user5', 'user_not_confirmed'].map(async id => {
+      [
+        ['user1', 2],
+        ['user2', 0],
+        ['user3', 0],
+        ['userAdmin', 3],
+        ['adminCapco', 0],
+        ['user5', 0],
+        ['user_not_confirmed', 0],
+      ].map(async ([id, totalCount]) => {
         await expect(
           graphql(
             UserRepliesQuery,
@@ -28,7 +36,7 @@ describe('User.replies connection', () => {
             },
             'internal',
           ),
-        ).resolves.toMatchSnapshot(id)
+        ).resolves.toEqual({ node: { replies: { totalCount } } })
       }),
     )
   })

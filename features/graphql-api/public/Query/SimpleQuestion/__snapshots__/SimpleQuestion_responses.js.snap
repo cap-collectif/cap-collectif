@@ -15,99 +15,8 @@ exports[`SimpleQuestion.responses array fetches a simple question's responses: 2
 Object {
   "node": Object {
     "responses": Object {
-      "edges": Array [
-        Object {
-          "node": Object {
-            "value": "Ca va être fou ! Des sportifs de hauts niveaux.",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "Et une petite dernière pour la route quand même juste pour vous demandez comment vous allez ? Et la je rajoute des petits mots clés tels que : sportifs, sport, JO, athlètes, beurre de cacahuète, bruit, divertissement, sirop d'érable, une bouteille d'huile et des raviolis mais je crois que je viens de lire ma liste de course en même temps.",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "D'ailleurs en parlant de sports et de sportifs, je suis toujours aussi dégouté que l'escalade ce soit toujours fermé ça se trouve en 2024 ça aurait pu être moi aux JO à flex sur des murs de fou la. Je continue à remplir un peu cette ligne histoire de faire genre je suis une longue phrase de sportif.",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "Une autre phrase, parce que le mot phrase il va finir par pas mal remonté au final dans toutes ces réponses qui sont censées être liées au sport. Mais bon a cause du covid y'a plus trop de sport en vrai ou alors tu en fait à la maison mais c'est un peu ghetto quand même tu trouve pas ?",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "Aller encore une autre phrase un peu longue parce que bon il faut bien tester tout les cas, comme le cas K , et le cas K des lapins c'est caca, c'est incroyable et fou non comme le lundi à Paris",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "L'autre jour j'étais à la boulangerie des sportifs, des sportifs ? Oui mec des sportifs. Jure des sportifs ? Oui oui des sportfs qui font du sport et du bruit et des phrases un peu longues pour le divertissement à Paris, cette phrase va plus vouloir rien dire mais c'est pas mal et ça régale.",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "Enfin un peu de divertissement. Car le divertissement c'est bien à la maison.",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "Le sport c'est cool",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "Pas trop non plus, j'aime pas le sport. or",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "Bof, non pas trop ça va faire du bruit Donc !",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "Incroyable ! Tout ces sportifs la wow. est",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "Il va y avoir du divertissement ! Et des sportifs ou !",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "C'est génial ! On va se régaler. mais",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "Oui c'est vraiment trop cool.",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "Incroyable ! Tout ces sportifs la wow.",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "Trop cool ! On va voir Tibo qui cours en slip !",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "Youpi ! J'adore des JO",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "Trop bien ! On va voir de supers athlètes à Paris !",
-          },
-        },
-      ],
-      "totalCount": 18,
+      "edges": Array [],
+      "totalCount": 0,
     },
   },
 }
@@ -238,14 +147,8 @@ exports[`SimpleQuestion.responses array fetches a simple question's responses: 1
 Object {
   "node": Object {
     "responses": Object {
-      "edges": Array [
-        Object {
-          "node": Object {
-            "value": "secret",
-          },
-        },
-      ],
-      "totalCount": 1,
+      "edges": Array [],
+      "totalCount": 0,
     },
   },
 }

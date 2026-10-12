@@ -2,14 +2,40 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
+use Capco\AppBundle\Entity\Responses\MediaResponse;
+use Capco\AppBundle\Filter\ContributionCompletionStatusFilter;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class MediaResponseRepository extends EntityRepository
 {
+    /** @return list<MediaResponse> */
+    public function findByMedia(Media $media): array
+    {
+        $filters = $this->getEntityManager()->getFilters();
+        $wasEnabled = $filters->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME);
+        if ($wasEnabled) {
+            $filters->disable(ContributionCompletionStatusFilter::FILTER_NAME);
+        }
+
+        try {
+            // Load incomplete replies before restoring the filter so attachment ownership can be checked.
+            return $this->createQueryBuilder('r')
+                ->addSelect('reply')->leftJoin('r.reply', 'reply')
+                ->innerJoin('r.medias', 'm')
+                ->where('m = :media')->setParameter('media', $media)
+                ->getQuery()->getResult();
+        } finally {
+            if ($wasEnabled) {
+                $filters->enable(ContributionCompletionStatusFilter::FILTER_NAME);
+            }
+        }
+    }
+
     public function countParticipantsByQuestion(
         MediaQuestion $question,
         bool $withNotConfirmedUser = false

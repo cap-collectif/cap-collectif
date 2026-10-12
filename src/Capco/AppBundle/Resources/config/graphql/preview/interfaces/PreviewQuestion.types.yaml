@@ -18,5 +18,5 @@ PreviewQuestion:
             responses:
                 type: 'PreviewResponseConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionResponsesResolver", value, args, getUser())'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionResponsesResolver", value, args, getUser(), context)'
                 description: 'Return responses on this questions.'

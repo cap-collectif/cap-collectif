@@ -298,6 +298,13 @@ class CookieMonster {
     return Cookies.get(PARTICIPANT_NAME)
   }
 
+  restoreParticipantCookieForReply = (questionnaireId: string, replyId: string): void => {
+    if (this.getParticipantCookie() !== undefined) return
+
+    const token = this.getAnonymousRepliesCookie(questionnaireId, replyId)?.token
+    if (token) this.addParticipantCookie(token)
+  }
+
   isDoNotTrackActive = () => {
     const doNotTrack = navigator.doNotTrack
     return doNotTrack === 'yes' || doNotTrack === '1'

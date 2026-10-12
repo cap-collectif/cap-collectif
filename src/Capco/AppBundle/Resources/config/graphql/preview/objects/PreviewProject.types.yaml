@@ -19,7 +19,7 @@ PreviewProject:
                         type: 'UserOrder'
                         description: 'Ordering options for contributors returning from the connection.'
                         defaultValue: { field: CREATED_AT, direction: DESC }
-                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributorResolver", value, info, args)'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributorResolver", value, info, args, getUser(), context)'
             contributionsCount:
                 type: 'Int!'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributionCountResolver", value)'
@@ -29,7 +29,7 @@ PreviewProject:
                 type: 'ContributionConnection!'
                 description: 'Contributions associated with the project.'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributionResolver", value, args, getUser())'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributionResolver", value, args, getUser(), context)'
             cover:
                 type: 'PreviewMedia'
                 resolve: '@=value.getCover()'

@@ -9,7 +9,6 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
-use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireRepliesResolver;
 use Capco\AppBundle\GraphQL\Resolver\Step\CollectStepProposalCountResolver;
 use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
@@ -17,6 +16,7 @@ use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\AppBundle\Repository\SourceRepository;
+use Capco\AppBundle\Search\ReplySearch;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
@@ -46,7 +46,7 @@ class StepContributionsDataLoader extends BatchDataLoader
         ArgumentRepository $argumentRepository,
         OpinionVersionRepository $opinionVersionRepository,
         CollectStepProposalCountResolver $proposalCountResolver,
-        private readonly QuestionnaireRepliesResolver $questionnaireRepliesResolver,
+        private readonly ReplySearch $replySearch,
         ReplyRepository $replyRepository,
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         bool $debug,
@@ -122,9 +122,9 @@ class StepContributionsDataLoader extends BatchDataLoader
             // $totalCount += $this->proposalCollectVoteRepository->countPublishedCollectVoteByStep(
             //     $step
             // );
-        } elseif ($step instanceof QuestionnaireStep && $step->getQuestionnaire()) {
-            $totalCount += $this->questionnaireRepliesResolver
-                ->__invoke($step->getQuestionnaire(), new Argument(['first' => 0]))
+        } elseif ($step instanceof QuestionnaireStep && $step->getQuestionnaire()?->canDisplay()) {
+            $totalCount += $this->replySearch
+                ->getRepliesByStep($step->getId(), ['published' => true, 'draft' => false], 0, null)
                 ->getTotalCount()
             ;
         }

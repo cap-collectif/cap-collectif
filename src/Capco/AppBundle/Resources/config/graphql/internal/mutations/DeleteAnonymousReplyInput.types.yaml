@@ -6,6 +6,3 @@ DeleteAnonymousReplyInput:
             replyId:
                 type: 'ID!'
                 description: 'The reply id to delete.'
-            participantToken:
-                type: 'String!'
-                description: 'The token of the participant who created the reply.'

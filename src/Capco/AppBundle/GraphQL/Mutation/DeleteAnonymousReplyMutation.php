@@ -5,11 +5,10 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Reply;
-use Capco\AppBundle\Exception\ParticipantNotFoundException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
-use Capco\AppBundle\Service\ParticipantHelper;
+use Capco\AppBundle\Service\ParticipantAuthentication;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -26,7 +25,7 @@ class DeleteAnonymousReplyMutation implements MutationInterface
         private Indexer $indexer,
         private Publisher $publisher,
         private GlobalIdResolver $globalIdResolver,
-        private ParticipantHelper $participantHelper,
+        private ParticipantAuthentication $participantAuthentication,
     ) {
     }
 
@@ -84,14 +83,10 @@ class DeleteAnonymousReplyMutation implements MutationInterface
     {
         $replyId = $argument->offsetGet('replyId');
 
-        $participantToken = $argument->offsetGet('participantToken');
-
-        try {
-            $participant = $this->participantHelper->getParticipantByToken($participantToken);
-        } catch (ParticipantNotFoundException $e) {
-            throw new UserError($e->getMessage());
+        $participant = $this->participantAuthentication->getParticipant();
+        if (!$participant) {
+            throw new UserError('Participant not found.');
         }
-
         /** * @var Reply $reply  */
         $reply = $this->globalIdResolver->resolve($replyId, $participant);
 

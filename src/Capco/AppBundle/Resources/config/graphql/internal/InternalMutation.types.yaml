@@ -233,13 +233,13 @@ InternalMutation:
                 builderConfig:
                     inputType: AddAnonymousReplyInput
                     payloadType: AddAnonymousReplyPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddAnonymousReplyMutation", args)'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddAnonymousReplyMutation", args, context)'
             updateAnonymousReply:
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: UpdateAnonymousReplyInput
                     payloadType: UpdateAnonymousReplyPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateAnonymousReplyMutation", args)'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateAnonymousReplyMutation", args, context)'
             deleteAnonymousReply:
                 builder: 'Relay::Mutation'
                 builderConfig:

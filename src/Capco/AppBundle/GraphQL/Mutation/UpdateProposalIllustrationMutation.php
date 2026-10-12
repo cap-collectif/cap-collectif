@@ -17,6 +17,7 @@ use Capco\AppBundle\Repository\MediaRepository;
 use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Service\MediaAccessResolver;
 use Capco\AppBundle\Service\ParticipantHelper;
 use Capco\AppBundle\Service\ProjectParticipantsTotalCountCacheHandler;
 use Capco\AppBundle\Toggle\Manager;
@@ -55,7 +56,8 @@ class UpdateProposalIllustrationMutation extends CreateProposalMutation
         ParticipantHelper $participantHelper,
         ParticipantRepository $participantRepository,
         ProjectParticipantsTotalCountCacheHandler $participantsTotalCountCacheHandler,
-        TokenGeneratorInterface $tokenGenerator
+        TokenGeneratorInterface $tokenGenerator,
+        private readonly MediaAccessResolver $mediaAccess
     ) {
         parent::__construct(
             $logger,
@@ -86,7 +88,7 @@ class UpdateProposalIllustrationMutation extends CreateProposalMutation
         try {
             $viewer = $this->preventNullableViewer($user);
             $proposal = $this->getProposal($input, $viewer);
-            $this->updateProposalIllustration($input, $proposal);
+            $this->updateProposalIllustration($input, $proposal, $user);
 
             return ['proposal' => $proposal, 'errorCode' => null];
         } catch (UserError $error) {
@@ -111,7 +113,7 @@ class UpdateProposalIllustrationMutation extends CreateProposalMutation
         return $proposal;
     }
 
-    private function updateProposalIllustration(Arg $input, Proposal $proposal): void
+    private function updateProposalIllustration(Arg $input, Proposal $proposal, ?User $viewer): void
     {
         $values = $input->getArrayCopy();
         $media = null;
@@ -122,6 +124,9 @@ class UpdateProposalIllustrationMutation extends CreateProposalMutation
             throw new UserError(self::MEDIA_NOT_FOUND);
         }
 
+        if ($media && !$this->mediaAccess->canView($media, $viewer)) {
+            throw new UserError(BaseProposalError::ACCESS_DENIED);
+        }
         $proposal->setMedia($media);
         $this->em->flush();
     }

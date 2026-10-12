@@ -149,13 +149,14 @@ describe('Preview|Questionnaire.replies connection', () => {
    * @jest-status non-compliant
    * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
    */
-  it('fetches the first hundred published replies with a cursor', async () => {
-    await expect(
-      graphql(OpenDataRepliesQuery, {
-        id: toGlobalId('Questionnaire', 'questionnaire1'),
-        count: 100,
-      }),
-    ).resolves.toMatchSnapshot()
+  it('preserves the public volume without returning replies or cursors', async () => {
+    const result = await graphql(OpenDataRepliesQuery, {
+      id: toGlobalId('Questionnaire', 'questionnaire1'),
+      count: 100,
+    })
+    expect(result.node.replies.totalCount).toBeGreaterThan(0)
+    expect(result.node.replies.edges).toEqual([])
+    expect(result.node.replies.pageInfo).toEqual({ hasNextPage: false, endCursor: null })
   })
 
   /**
@@ -214,7 +215,7 @@ describe('Preview|Questionnaire.replies connection', () => {
    * @jest-reason Checks only presence or a positive count instead of the expected API data or authorization
    * contract.
    */
-  it('returns replies and participation volume to an anonymous user', async () => {
+  it('returns only the participation volume to an anonymous user', async () => {
     const result = await graphql(AllRepliesQuery, {
       id: toGlobalId('Questionnaire', 'questionnaireAnonymous'),
       count: 1,
@@ -223,6 +224,8 @@ describe('Preview|Questionnaire.replies connection', () => {
     })
 
     expect(result.node.replies.totalCount).toBeGreaterThan(0)
+    expect(result.node.replies.edges).toEqual([])
+    expect(result.node.replies.pageInfo).toEqual({ hasNextPage: false, endCursor: null })
   })
 
   /**
@@ -230,19 +233,19 @@ describe('Preview|Questionnaire.replies connection', () => {
    * @jest-reason Checks only presence or a positive count instead of the expected API data or authorization
    * contract.
    */
-  it('returns response values and participation volume to an anonymous user', async () => {
+  it('hides response values and per-question counts from anonymous users', async () => {
     const result = await graphql(QuestionnaireResponsesQuery, {
       id: toGlobalId('Question', 1403),
     })
 
-    expect(result.node.responses.totalCount).toBeGreaterThan(0)
+    expect(result.node.responses).toEqual({ totalCount: 0, edges: [] })
   })
 
   /**
    * @jest-status non-compliant
    * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
    */
-  it('exposes replies as contributions in the preview schema', async () => {
+  it('hides direct reply contributions in the preview schema', async () => {
     await expect(
       graphql(
         ReplyContributionFieldsQuery,
@@ -251,6 +254,6 @@ describe('Preview|Questionnaire.replies connection', () => {
         },
         'preview',
       ),
-    ).resolves.toMatchSnapshot()
+    ).resolves.toEqual({ node: null })
   })
 })

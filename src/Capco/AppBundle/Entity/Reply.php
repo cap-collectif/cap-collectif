@@ -176,7 +176,7 @@ class Reply implements EntityInterface, Publishable, DraftableInterface, Contrib
 
     public function getQuestionnaire(): ?Questionnaire
     {
-        return $this->questionnaire;
+        return $this->questionnaire ?? null;
     }
 
     public function getStep(): ?QuestionnaireStep

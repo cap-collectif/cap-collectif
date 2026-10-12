@@ -5,9 +5,13 @@ namespace Capco\AppBundle\GraphQL\Resolver\Project;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\GraphQLRequestedFields;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireResultsAccessResolver;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousVoteRepository;
 use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
@@ -15,6 +19,7 @@ use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Search\UserSearch;
 use Capco\AppBundle\Service\ProjectContributorSearch;
 use Capco\AppBundle\Service\ProjectParticipantsTotalCountCacheHandler;
+use Capco\UserBundle\Entity\User;
 use GraphQL\Type\Definition\ResolveInfo;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
@@ -36,11 +41,17 @@ class ProjectContributorResolver implements QueryInterface
         private readonly ParticipantRepository $participantRepository,
         private readonly ProjectParticipantsTotalCountCacheHandler $projectParticipantsTotalCountCacheHandler,
         private readonly DebateAnonymousVoteRepository $debateAnonymousVoteRepository,
+        private readonly QuestionnaireResultsAccessResolver $resultsAccess,
     ) {
     }
 
-    public function __invoke(Project $project, ?ResolveInfo $info = null, ?Arg $args = null): ConnectionInterface
+    public function __invoke(Project $project, ?ResolveInfo $info = null, ?Arg $args = null, ?User $viewer = null, ?\ArrayObject $context = null): ConnectionInterface
     {
+        if (true !== ($context['disable_acl'] ?? false) && !$project->canDisplay($viewer)) {
+            return ConnectionBuilder::empty(['anonymousCount' => 0]);
+        }
+        $canViewResults = $this->resultsAccess->canViewProjectResults($project, $context);
+        $hideQuestionnaireResults = !$canViewResults && null !== $project->getFirstQuestionnaireStep();
         $isOnlyFetchingTotalCount = $info ? $this->graphQLRequestedFields->isOnlyFetchingTotalCount($info) : false;
 
         $totalCount = 0;
@@ -73,27 +84,69 @@ class ProjectContributorResolver implements QueryInterface
                 $args->offsetGet('orderBy') ?: [],
             ];
 
+            $hasContributorFilters = isset($providedFilters['step'])
+                || isset($providedFilters['vip'])
+                || isset($providedFilters['userType'])
+                || (isset($providedFilters['term']) && '' !== $providedFilters['term'])
+                || true === $providedFilters['emailConfirmed']
+                || true === $providedFilters['consentInternalCommunication'];
+            $countFilteredContributors = !$hideQuestionnaireResults;
+            if ($hideQuestionnaireResults && $hasContributorFilters) {
+                foreach ($project->getRealSteps() as $step) {
+                    if (
+                        ($step instanceof CollectStep || $step instanceof ConsultationStep || $step instanceof SelectionStep || $step instanceof DebateStep)
+                        && (!isset($providedFilters['step']) || $step->getId() === $providedFilters['step'])
+                    ) {
+                        $countFilteredContributors = true;
+
+                        break;
+                    }
+                }
+            }
+
             $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
                 $project,
                 $orderBy,
                 $providedFilters,
                 $isOnlyFetchingTotalCount,
+                $canViewResults,
+                $hideQuestionnaireResults,
+                $countFilteredContributors,
+                $hasContributorFilters,
                 &$totalCount
             ) {
                 try {
-                    if ($isOnlyFetchingTotalCount) {
+                    if ($countFilteredContributors) {
+                        $response = $this->projectContributorSearch->findContributors(
+                            $project,
+                            $providedFilters,
+                            $orderBy,
+                            $isOnlyFetchingTotalCount ? 0 : $limit,
+                            $isOnlyFetchingTotalCount ? null : $cursor,
+                            $canViewResults
+                        );
+                        $totalCount = $response->getTotalCount();
+                        if (!$hasContributorFilters) {
+                            $totalCount += $this->debateAnonymousVoteRepository->countAnonymousContributorsByProject($project);
+                        }
+
+                        return $response;
+                    }
+
+                    $countFilters = $hideQuestionnaireResults ? [] : $providedFilters;
+                    if ($isOnlyFetchingTotalCount || $hideQuestionnaireResults) {
                         $response = $this->userSearch->getContributorByProject(
                             $project,
                             $orderBy,
-                            $providedFilters,
+                            $countFilters,
                             0,
-                            $cursor
+                            null
                         );
 
                         $participantsCount = $this->getParticipantsCount(
                             $project,
-                            $providedFilters['step'],
-                            $providedFilters['term']
+                            $countFilters['step'] ?? null,
+                            $countFilters['term'] ?? null
                         );
                         $debateAnonymousCount = $this->debateAnonymousVoteRepository->countAnonymousContributorsByProject(
                             $project
@@ -102,7 +155,9 @@ class ProjectContributorResolver implements QueryInterface
                         $totalCount = $response->getTotalCount() + $participantsCount + $debateAnonymousCount;
                         $response->setTotalCount($totalCount);
 
-                        return $response;
+                        if ($isOnlyFetchingTotalCount) {
+                            return $response;
+                        }
                     }
 
                     $response = $this->projectContributorSearch->findContributors(
@@ -110,11 +165,9 @@ class ProjectContributorResolver implements QueryInterface
                         $providedFilters,
                         $orderBy,
                         $limit,
-                        $cursor
+                        $cursor,
+                        $canViewResults
                     );
-                    $totalCount = $response->getTotalCount()
-                        + $this->debateAnonymousVoteRepository->countAnonymousContributorsByProject($project);
-                    $response->setTotalCount($totalCount);
 
                     return $response;
                 } catch (\RuntimeException $exception) {

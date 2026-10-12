@@ -15,12 +15,18 @@ class UserHasReplyResolver implements QueryInterface
     public function __construct(
         private readonly ReplyRepository $replyRepository,
         private readonly UserRepository $userRepository,
-        private readonly LoggerInterface $logger
+        private readonly LoggerInterface $logger,
+        private readonly QuestionnaireResultsAccessResolver $resultsAccess
     ) {
     }
 
-    public function __invoke(Questionnaire $questionnaire, Argument $args, ?User $viewer = null): bool
+    public function __invoke(Questionnaire $questionnaire, Argument $args, ?User $viewer = null, ?\ArrayObject $context = null): bool
     {
+        if (!$this->resultsAccess->canViewResults($questionnaire, $context)
+            && (!$viewer || 0 !== strcasecmp($viewer->getEmail(), (string) $args->offsetGet('login')))) {
+            return false;
+        }
+
         $user = $this->userRepository->findOneByEmail($args->offsetGet('login'));
 
         if (!$user) {

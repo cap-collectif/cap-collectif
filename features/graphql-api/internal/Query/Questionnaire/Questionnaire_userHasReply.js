@@ -17,7 +17,7 @@ const QuestionnaireUserHasReplyQuery = /* GraphQL */ `
  * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
  */
 describe('Internal|Questionnaire.userHasReply', () => {
-  it('checks whether users replied to a questionnaire', async () => {
+  it('does not reveal whether other users replied to a questionnaire', async () => {
     await expect(
       graphql(
         QuestionnaireUserHasReplyQuery,
@@ -29,6 +29,8 @@ describe('Internal|Questionnaire.userHasReply', () => {
         },
         'internal',
       ),
-    ).resolves.toMatchSnapshot()
+    ).resolves.toEqual({
+      questionnaire: { spylHasReply: false, msantostefanoHasReply: false, unknownUserHasReply: false },
+    })
   })
 })

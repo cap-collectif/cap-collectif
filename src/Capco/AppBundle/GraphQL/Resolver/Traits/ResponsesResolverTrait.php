@@ -39,18 +39,19 @@ trait ResponsesResolverTrait
         $viewer,
         \ArrayObject $context,
         bool $isLegacyAnalyst = false,
-        bool $isAnalyst = false
+        bool $isAnalyst = false,
+        bool $canViewPrivateResponses = false
     ): iterable {
         $skipVerification =
             $context->offsetExists('disable_acl')
             && true === $context->offsetGet('disable_acl');
-        $isAuthor = $author === $viewer;
+        $isAuthor = null !== $author && $author === $viewer;
         $isAnalystOrAdmin = $skipVerification;
         if (!$skipVerification) {
             $isAnalystOrAdmin =
                 ($viewer instanceof User && $viewer->isAdmin()) || $isLegacyAnalyst || $isAnalyst;
         }
-        $viewerCanSeePrivateResponses = $skipVerification || $isAuthor || $isAnalystOrAdmin;
+        $viewerCanSeePrivateResponses = $skipVerification || $isAuthor || $isAnalystOrAdmin || $canViewPrivateResponses;
 
         return $responses->filter(function ($response) use (
             $viewerCanSeePrivateResponses,
@@ -72,7 +73,7 @@ trait ResponsesResolverTrait
         $questions = $this->abstractQuestionRepository->findByProposalForm($proposal->getForm());
 
         foreach ($questions as $question) {
-            $this->handleQuestionResponses($question, $responses);
+            $this->handleQuestionResponses($question, $responses, $proposal);
         }
 
         return $responses;
@@ -88,7 +89,7 @@ trait ResponsesResolverTrait
             : new ArrayCollection();
 
         foreach ($questions as $question) {
-            $this->handleQuestionResponses($question, $responses);
+            $this->handleQuestionResponses($question, $responses, $reply);
         }
 
         return $responses;
@@ -107,7 +108,7 @@ trait ResponsesResolverTrait
             : new ArrayCollection();
 
         foreach ($questions as $question) {
-            $this->handleQuestionResponses($question, $responses);
+            $this->handleQuestionResponses($question, $responses, $evaluation);
         }
 
         return $responses;
@@ -115,7 +116,8 @@ trait ResponsesResolverTrait
 
     private function handleQuestionResponses(
         AbstractQuestion $question,
-        Collection $responses
+        Collection $responses,
+        Proposal|Reply|ProposalEvaluation $parent
     ): void {
         $found = false;
         foreach ($responses as $response) {
@@ -140,6 +142,7 @@ trait ResponsesResolverTrait
             // to avoid Relay global ID collisions between multiple empty responses.
             $response->setId($this->tokenGenerator->generateToken());
             $response->setQuestion($question);
+            $parent->setResponseOn($response);
             $responses->add($response);
         }
     }

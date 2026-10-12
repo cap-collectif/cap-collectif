@@ -393,9 +393,7 @@ class UserSearch extends Search
             ],
         ]);
 
-        if ($limit) {
-            $query->setSize($limit);
-        }
+        $query->setSize($limit);
 
         $this->applyCursor($query, $cursor);
         $query->setSource(['id']);

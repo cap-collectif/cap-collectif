@@ -12,7 +12,9 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\ViewConfiguration;
+use Capco\AppBundle\Exception\ParticipantNotFoundException;
 use Capco\AppBundle\Filter\ContributionCompletionStatusFilter;
+use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireResultsAccessResolver;
 use Capco\AppBundle\Helper\ProjectHelper;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
@@ -24,7 +26,7 @@ use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\AppBundle\Search\OpinionSearch;
 use Capco\AppBundle\Search\VersionSearch;
 use Capco\AppBundle\Security\StepVoter;
-use Capco\AppBundle\Service\ParticipantAccessResolver;
+use Capco\AppBundle\Service\ParticipantAuthentication;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
@@ -47,7 +49,8 @@ class StepController extends Controller
         private readonly OpinionSearch $opinionSearch,
         private readonly VersionSearch $versionSearch,
         private readonly LocaleRepository $localeRepo,
-        private readonly ParticipantAccessResolver $participantAccessResolver,
+        private readonly QuestionnaireResultsAccessResolver $questionnaireResultsAccessResolver,
+        private readonly ParticipantAuthentication $participantAuthentication,
         private readonly EntityManagerInterface $em,
         private readonly AuthorizationCheckerInterface $authorizationChecker
     ) {
@@ -401,13 +404,12 @@ class StepController extends Controller
                 ]);
             }
 
-            $anonReplyBase64 = $request->cookies->get('CapcoAnonReply');
-            $participantHasAccess = !$viewer && $this->participantAccessResolver->canViewReplyFromCookie(
-                $reply,
-                $anonReplyBase64
-            );
-
-            $hasAccess = $participantHasAccess || ($reply && $viewer && $reply->viewerCanSee($viewer));
+            try {
+                $this->participantAuthentication->authenticate($request);
+                $hasAccess = $this->questionnaireResultsAccessResolver->canViewReply($reply, $viewer);
+            } catch (ParticipantNotFoundException) {
+                $hasAccess = false;
+            }
 
             if (!$hasAccess) {
                 return $this->redirectToRoute('app_project_show_questionnaire', [

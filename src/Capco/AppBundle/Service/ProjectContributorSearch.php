@@ -46,11 +46,12 @@ class ProjectContributorSearch
         array $providedFilters,
         array $orderBy,
         int $limit,
-        ?string $cursor = null
+        ?string $cursor = null,
+        bool $includeQuestionnaireReplies = false
     ): ElasticsearchPaginatedResult {
         $offset = $this->getOffset($cursor);
         $queryLimit = 0 === $limit ? 1 : $limit;
-        $query = $this->buildQuery($providedFilters, $orderBy);
+        $query = $this->buildQuery($providedFilters, $orderBy, $includeQuestionnaireReplies);
 
         /** @var array<int, array{contributor_type: string, contributor_id: string, total_count: int|string}> $rows */
         $rows = $this->connection->fetchAllAssociative(
@@ -60,6 +61,16 @@ class ProjectContributorSearch
         );
 
         $totalCount = [] !== $rows ? (int) $rows[0]['total_count'] : 0;
+        if ([] === $rows && $offset > 0) {
+            $totalCount = $this->findContributors(
+                $project,
+                $providedFilters,
+                $orderBy,
+                0,
+                null,
+                $includeQuestionnaireReplies
+            )->getTotalCount();
+        }
         if (0 === $limit) {
             return new ElasticsearchPaginatedResult([], [], $totalCount);
         }
@@ -160,7 +171,7 @@ class ProjectContributorSearch
      * } $providedFilters
      * @param array{field?: string, direction?: string} $orderBy
      */
-    private function buildQuery(array $providedFilters, array $orderBy): string
+    private function buildQuery(array $providedFilters, array $orderBy, bool $includeQuestionnaireReplies): string
     {
         $filters = ['aggregated.project_id = :projectId'];
         $contributionFilters = [];
@@ -259,7 +270,7 @@ class ProjectContributorSearch
                 ORDER BY %s
                 LIMIT :limit OFFSET :offset
                 SQL,
-            $this->getUnionSQL(),
+            $this->getUnionSQL($includeQuestionnaireReplies),
             [] !== $contributionFilters ? 'WHERE ' . implode(' AND ', $contributionFilters) : '',
             implode(' AND ', $filters),
             $orderSql
@@ -327,13 +338,12 @@ class ProjectContributorSearch
         ];
     }
 
-    private function getUnionSQL(): string
+    private function getUnionSQL(bool $includeQuestionnaireReplies): string
     {
         return implode(
             ' UNION ALL ',
             [
-                $this->getUserReplySQL(),
-                $this->getParticipantReplySQL(),
+                ...($includeQuestionnaireReplies ? [$this->getUserReplySQL(), $this->getParticipantReplySQL()] : []),
                 $this->getOpinionSQL(),
                 $this->getOpinionVersionSQL(),
                 $this->getArgumentSQL(),

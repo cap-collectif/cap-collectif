@@ -70,6 +70,7 @@ trait HasResponsesTrait
                     $response = new ValueResponse();
                 }
                 $response->setQuestion($question);
+                $this->setResponseOn($response);
                 $responses->add($response);
             }
         }

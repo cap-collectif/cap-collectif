@@ -4,6 +4,7 @@ PreviewMedia:
         - UniformResourceLocatable
     config:
         name: Media
+        fieldsDefaultAccess: '@=service("Capco\\AppBundle\\Service\\MediaAccessResolver").canView(value, getUser(), context, info)'
         interfaces:
             - UniformResourceLocatable
         description: 'A file uploaded by a user.'

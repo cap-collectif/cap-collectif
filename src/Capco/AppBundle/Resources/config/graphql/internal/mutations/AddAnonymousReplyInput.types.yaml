@@ -9,6 +9,3 @@ AddAnonymousReplyInput:
             responses:
                 type: '[ResponseInput!]!'
                 description: 'The responses to the questionnaire questions'
-            participantToken:
-                type: 'String'
-                description: 'Token of existing participant.'

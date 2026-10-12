@@ -21,7 +21,7 @@ PreviewConsultationStep:
             contributors:
                 description: 'A list of contributor associated with the consultation step.'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", value, args)'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", value, args, getUser(), context)'
                 type: 'PreviewUserConnection!'
             votesCount:
                 type: 'Int'

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Provider\MediaProvider;
+use Capco\AppBundle\Service\MediaAccessResolver;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -12,6 +13,7 @@ class MediaExtension extends AbstractExtension
     public function __construct(
         private readonly MediaProvider $mediaProvider,
         private readonly string $routerRequestContextHost,
+        private readonly MediaAccessResolver $mediaAccess,
         private ?string $assetsHost = null
     ) {
     }
@@ -32,7 +34,7 @@ class MediaExtension extends AbstractExtension
 
     private function generatePublicUrlForProvider(Media $media, string $format): string
     {
-        return $this->assetsHost
+        return $this->assetsHost && !$this->mediaAccess->isPrivate($media)
             ? str_replace(
                 $this->routerRequestContextHost,
                 $this->assetsHost,

@@ -23,7 +23,7 @@ PublicQuestionnaire:
                     login:
                         type: 'String!'
                         description: "The user's login (for example, an email)."
-                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\UserHasReplyResolver", value, args, getUser())'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\UserHasReplyResolver", value, args, getUser(), context)'
             participants:
                 type: 'PublicUserConnection!'
                 argsBuilder: 'Relay::ForwardConnection'

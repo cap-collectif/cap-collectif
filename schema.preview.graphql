@@ -1636,7 +1636,9 @@ type Questionnaire implements Node {
   """The list of questions of the questionnaire."""
   questions: [Question!]!
 
-  """A list of replies to the questionnaire."""
+  """
+  Private replies to the questionnaire. Unauthorized viewers receive only the public participation count.
+  """
   replies(
     """
     Returns the elements in the list that come after the specified cursor.
@@ -1646,10 +1648,10 @@ type Questionnaire implements Node {
     """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    """(ROLE_ADMIN only) Select also unpublished replies."""
+    """(Authorized managers only) Select also unpublished replies."""
     includeUnpublished: Boolean = false
 
-    """(ROLE_ADMIN only) Select also draft replies."""
+    """(Authorized managers only) Select also draft replies."""
     includeDraft: Boolean = false
   ): ReplyConnection!
 }

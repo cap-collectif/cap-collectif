@@ -26,7 +26,8 @@ class UserContributionResolver implements ContainerAwareInterface, QueryInterfac
         User $user,
         Argument $args,
         $viewer,
-        RequestStack $request
+        RequestStack $request,
+        ?\ArrayObject $context = null
     ): ConnectionInterface {
         if (!$args) {
             $args = new Argument(['first' => 0]);
@@ -52,7 +53,9 @@ class UserContributionResolver implements ContainerAwareInterface, QueryInterfac
             $type,
             $cursor,
             [],
-            $includeTrashed
+            $includeTrashed,
+            $viewer,
+            $context
         ));
 
         return $paginator->auto($args);

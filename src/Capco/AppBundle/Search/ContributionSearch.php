@@ -18,6 +18,7 @@ use Capco\AppBundle\Enum\ContributionCompletionStatus;
 use Capco\AppBundle\Enum\ContributionOrderField;
 use Capco\AppBundle\Enum\ContributionType;
 use Capco\AppBundle\Enum\OrderDirection;
+use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireResultsAccessResolver;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Elastica\Aggregation\Terms;
@@ -45,7 +46,8 @@ class ContributionSearch extends Search
 
     public function __construct(
         Index $index,
-        private readonly EntityManagerInterface $entityManager
+        private readonly EntityManagerInterface $entityManager,
+        private readonly QuestionnaireResultsAccessResolver $resultsAccess
     ) {
         parent::__construct($index);
     }
@@ -97,7 +99,9 @@ class ContributionSearch extends Search
         ?string $type,
         ?string $cursor,
         array $filters = [],
-        bool $includeTrashed = false
+        bool $includeTrashed = false,
+        ?User $viewer = null,
+        ?\ArrayObject $context = null
     ): ElasticsearchPaginatedResult {
         $contributions = ['results' => []];
         $inConsultation = true;
@@ -168,6 +172,7 @@ class ContributionSearch extends Search
             $inConsultation,
             $includeTrashed
         );
+        $this->resultsAccess->restrictContributionQuery($boolQuery, $viewer, $context);
         $query = $this->createSortedQuery($order, $boolQuery, $seed);
         $this->applyCursor($query, $cursor);
         $query->setSize($limit);
@@ -213,7 +218,10 @@ class ContributionSearch extends Search
         string $order,
         array $filters,
         int $limit,
-        ?string $cursor = null
+        ?string $cursor = null,
+        ?User $viewer = null,
+        ?\ArrayObject $context = null,
+        bool $countAll = false
     ): ElasticsearchPaginatedResult {
         $boolQuery = new Query\BoolQuery();
         $boolQuery->addFilter(new Query\Term(['project.id' => $projectId]));
@@ -239,6 +247,10 @@ class ContributionSearch extends Search
                 )
                 ->addShould(new Query\MatchAll())
         );
+
+        if (!$countAll) {
+            $this->resultsAccess->restrictContributionQuery($boolQuery, $viewer, $context);
+        }
 
         $query = new Query($boolQuery);
         if ($order) {

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Capco\AppBundle\Controller\Api;
 
+use Capco\AppBundle\Exception\ParticipantNotFoundException;
+use Capco\AppBundle\Service\ParticipantAuthentication;
 use Capco\AppBundle\Toggle\Manager;
 use Overblog\GraphQLBundle\Controller\GraphController as BaseController;
 use Overblog\GraphQLBundle\Request\BatchParser;
@@ -39,7 +41,8 @@ class GraphQLController extends BaseController
         Parser $requestParser,
         private readonly LoggerInterface $logger,
         private readonly Manager $manager,
-        private readonly string $env
+        private readonly string $env,
+        private readonly ParticipantAuthentication $participantAuthentication
     ) {
         parent::__construct($batchParser, $requestExecutor, $requestParser, false, $graphqlBatchingMethod = 'apollo');
         $this->batchParser = $batchParser;
@@ -102,6 +105,25 @@ class GraphQLController extends BaseController
             $this->requestExecutor->enableIntrospectionQuery();
         }
 
+        try {
+            $this->participantAuthentication->authenticate($request);
+        } catch (ParticipantNotFoundException) {
+            $response = new JsonResponse(['errors' => [['message' => 'Invalid participant cookie.', 'extensions' => ['code' => 'INVALID_PARTICIPANT_COOKIE']]]], 401);
+            $this->addCORSAndCacheHeadersIfNeeded($response, $request);
+
+            return $response;
+        }
+
+        if ($this->participantAuthentication->getParticipant()
+            && (($request->headers->has('Origin') && $request->headers->get('Origin') !== $request->getSchemeAndHttpHost())
+                || 'cross-site' === $request->headers->get('Sec-Fetch-Site'))) {
+            $response = new JsonResponse(['errors' => [['message' => 'Cross-site participant request denied.']]], 403);
+            $response->setPrivate();
+            $response->headers->addCacheControlDirective('no-store');
+
+            return $response;
+        }
+
         $payload = $this->processQuery($request, $schemaName, $batched);
 
         // look for a syntax error in graphql response
@@ -142,16 +164,9 @@ class GraphQLController extends BaseController
             $response->headers->set('Access-Control-Max-Age', '3600', true);
         }
 
-        // We had Cache headers here
-        $response->setSharedMaxAge(60);
-        $response->setPublic();
-        $response->setVary([
-            'Accept-Encoding',
-            'Accept-Language',
-            'Origin',
-            'Access-Control-Request-Headers',
-            'Access-Control-Request-Method',
-        ]);
+        // Even a credential-free mutation can return a newly created participant token.
+        $response->setPrivate();
+        $response->headers->addCacheControlDirective('no-store');
     }
 
     private function processQuery(Request $request, ?string $schemaName, bool $batched): array

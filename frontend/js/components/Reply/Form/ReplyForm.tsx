@@ -110,13 +110,10 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props, state: G
     data.replyId = reply.id
 
     if (isAnonymousReply) {
-      const participantToken = CookieMonster.getHashedAnonymousReplyCookie(questionnaire.id, reply.id)
-
-      if (!participantToken) return
+      if (!isAuthenticated) CookieMonster.restoreParticipantCookieForReply(questionnaire.id, reply.id)
       return UpdateAnonymousReplyMutation.commit({
         input: {
           replyId: reply.id,
-          participantToken,
           responses: data.responses,
         },
         isAuthenticated: false,
@@ -198,13 +195,10 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props, state: G
   }
 
   if (!isAuthenticated) {
-    const participantToken = CookieMonster.getParticipantCookie()
-
     return AddAnonymousReplyMutation.commit({
       input: {
         questionnaireId: data.questionnaireId,
         responses: data.responses,
-        participantToken,
       },
       isAuthenticated: false,
       anonymousRepliesIds,
@@ -464,7 +458,7 @@ export class ReplyForm extends React.Component<Props, State> {
     }
 
     if (showRequirementsModal) {
-        return <ParticipationWorkflow stepId={step.id} contributionId={replyId} />
+      return <ParticipationWorkflow stepId={step.id} contributionId={replyId} />
     }
 
     return (

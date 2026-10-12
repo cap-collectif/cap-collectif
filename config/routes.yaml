@@ -139,6 +139,13 @@ _liip_imagine:
     resource: '@LiipImagineBundle/Resources/config/routing.yaml'
     options: { i18n: false }
 
+app_media_file:
+    path: /media/{path}
+    controller: Capco\AppBundle\Controller\Site\MediaFileController
+    methods: [GET, HEAD]
+    requirements: { path: .+ }
+    options: { i18n: false }
+
 facebook_login:
     path: /login/check-facebook
     options: { i18n: false }

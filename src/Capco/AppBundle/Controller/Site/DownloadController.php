@@ -5,9 +5,13 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Entity\Security\UserIdentificationCodeList;
+use Capco\AppBundle\Exception\ParticipantNotFoundException;
 use Capco\AppBundle\Generator\CSV\IdentificationCodeListCSVGenerator;
+use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireResultsAccessResolver;
 use Capco\AppBundle\Provider\MediaProvider;
 use Capco\AppBundle\Repository\Security\UserIdentificationCodeListRepository;
+use Capco\AppBundle\Service\MediaAccessResolver;
+use Capco\AppBundle\Service\ParticipantAuthentication;
 use Capco\AppBundle\Twig\MediaExtension;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
@@ -26,7 +30,10 @@ class DownloadController extends Controller
     public function __construct(
         private readonly LoggerInterface $logger,
         private readonly UserIdentificationCodeListRepository $userIdentificationCodeListRepository,
-        private readonly MediaProvider $mediaProvider
+        private readonly MediaProvider $mediaProvider,
+        private readonly QuestionnaireResultsAccessResolver $questionnaireResultsAccessResolver,
+        private readonly ParticipantAuthentication $participantAuthentication,
+        private readonly MediaAccessResolver $mediaAccess
     ) {
     }
 
@@ -35,28 +42,35 @@ class DownloadController extends Controller
      * @Entity("mediaResponse", options={"mapping": {"responseId": "id"}})
      * @Entity("media", options={"mapping": {"mediaId": "id"}})
      */
-    public function downloadAction(MediaResponse $mediaResponse, Media $media, Request $request)
+    public function downloadAction(MediaResponse $mediaResponse, Media $media, Request $request): Response
     {
-        if (
-            !$mediaResponse->getQuestion()
-            || !$mediaResponse->getQuestion()->isPrivate()
-            || $this->getUser() === $mediaResponse->getProposal()->getAuthor()
-            || $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
-        ) {
-            // Depending on the file type we redirect to the file or download it
-            $type = $media->getContentType();
-            $redirectFileTypes = ['application/pdf', 'image/jpeg', 'image/png'];
-            if (\in_array($type, $redirectFileTypes, true)) {
-                $url =
-                    $request->getUriForPath('/media') .
-                    $this->get(MediaExtension::class)->getMediaUrl($media, 'reference');
+        if (!\in_array($media, [...$mediaResponse->getMedias()], true)) {
+            throw $this->createNotFoundException();
+        }
 
-                return new RedirectResponse($url);
+        $viewer = $this->getUser();
+
+        try {
+            if (MediaAccessResolver::isPrivateResponse($mediaResponse)) {
+                $this->participantAuthentication->authenticate($request);
             }
+            $hasAccess = $this->questionnaireResultsAccessResolver->canViewResponse($mediaResponse, $viewer);
+        } catch (ParticipantNotFoundException) {
+            $hasAccess = false;
+        }
 
+        if (!$hasAccess || !$this->mediaAccess->canView($media, $viewer)) {
+            return new Response('Sorry, you are not allowed to see this file.', Response::HTTP_FORBIDDEN, ['Cache-Control' => 'private, no-store']);
+        }
+
+        // Depending on the file type we redirect to the file or download it.
+        $type = $media->getContentType();
+        if (\in_array($type, ['application/pdf', 'image/jpeg', 'image/png'], true)) {
+            $url = $request->getUriForPath('/media') . $this->get(MediaExtension::class)->getMediaUrl($media, 'reference');
+            $response = new RedirectResponse($url);
+        } else {
             $file = $this->mediaProvider->getOrGenerateReferenceFile($media);
-
-            return new StreamedResponse(
+            $response = new StreamedResponse(
                 static function () use ($file) {
                     echo $file->getContent();
                 },
@@ -71,7 +85,10 @@ class DownloadController extends Controller
             );
         }
 
-        return new Response('Sorry, you are not allowed to see this file.');
+        $response->setPrivate();
+        $response->headers->addCacheControlDirective('no-store');
+
+        return $response;
     }
 
     /**

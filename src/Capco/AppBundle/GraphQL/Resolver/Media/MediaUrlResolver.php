@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Media;
 
 use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Provider\MediaProvider;
+use Capco\AppBundle\Service\MediaAccessResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -14,6 +15,7 @@ class MediaUrlResolver implements QueryInterface
         private readonly MediaProvider $mediaProvider,
         private readonly RouterInterface $router,
         private readonly string $routerRequestContextHost,
+        private readonly MediaAccessResolver $mediaAccess,
         private ?string $assetsHost = null
     ) {
     }
@@ -27,6 +29,7 @@ class MediaUrlResolver implements QueryInterface
             && true === $context->offsetGet('disable_acl');
 
         $routingContext = $this->router->getContext();
+        $assetsHost = $this->mediaAccess->isPrivate($media) ? null : $this->assetsHost;
 
         if ('reference' === $format) {
             $path =
@@ -36,8 +39,8 @@ class MediaUrlResolver implements QueryInterface
                 '/' .
                 'media' .
                 $this->mediaProvider->generatePublicUrl($media, 'reference');
-            if ($this->assetsHost && !$isExportContext) {
-                $path = str_replace($this->routerRequestContextHost, $this->assetsHost, $path);
+            if ($assetsHost && !$isExportContext) {
+                $path = str_replace($this->routerRequestContextHost, $assetsHost, $path);
             }
 
             return $path;
@@ -48,17 +51,17 @@ class MediaUrlResolver implements QueryInterface
                 '/' .
                 'media' .
                 $this->mediaProvider->generatePublicUrl($media, 'reference');
-            if ($this->assetsHost && !$isExportContext) {
-                $path = str_replace($this->routerRequestContextHost, $this->assetsHost, $path);
+            if ($assetsHost && !$isExportContext) {
+                $path = str_replace($this->routerRequestContextHost, $assetsHost, $path);
             }
 
             return $path;
         }
 
-        return $this->assetsHost
+        return $assetsHost
             ? str_replace(
                 $this->routerRequestContextHost,
-                $this->assetsHost,
+                $assetsHost,
                 $this->mediaProvider->generatePublicUrl($media, $format)
             )
             : $this->mediaProvider->generatePublicUrl($media, $format);

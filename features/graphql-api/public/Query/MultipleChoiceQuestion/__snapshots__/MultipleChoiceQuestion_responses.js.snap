@@ -46,94 +46,8 @@ exports[`MultipleChoiceQuestion.responses array fetches a multiple choice questi
 Object {
   "node": Object {
     "responses": Object {
-      "edges": Array [
-        Object {
-          "node": Object {
-            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Bon chance Agui pour le nuage de mots. G\\"}",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Un jeu stylé de fou.\\"}",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Plus d'idées de jeux.\\"}",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Total War: Rome\\"}",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Bon chance Agui pour le nuage de mots. !\\"}",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Bon chance Agui pour le nuage de mots. B\\"}",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Bon chance Agui pour le nuage de mots. M\\"}",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Bon chance Agui pour le nuage de mots. T\\"}",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Bon chance Agui pour le nuage de mots. J\\"}",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Total War 3: Warhammer\\"}",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Total War: Britannia\\"}",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Total War: Warhammer\\"}",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Total War Saga: Troy\\"}",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Total War: Three Kingdoms \\"}",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Total War 2: Warhammer\\"}",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "{\\"labels\\":[\\"Natation\\",\\"Sports collectifs\\"],\\"other\\":\\"Civilization 6\\"}",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Guild Wars 2\\"}",
-          },
-        },
-      ],
-      "totalCount": 17,
+      "edges": Array [],
+      "totalCount": 0,
     },
   },
 }
@@ -143,14 +57,8 @@ exports[`MultipleChoiceQuestion.responses array fetches a multiple choice questi
 Object {
   "node": Object {
     "responses": Object {
-      "edges": Array [
-        Object {
-          "node": Object {
-            "value": "{\\"labels\\":[\\"Maxime Arrouard\\"],\\"other\\":null}",
-          },
-        },
-      ],
-      "totalCount": 1,
+      "edges": Array [],
+      "totalCount": 0,
     },
   },
 }
@@ -160,19 +68,8 @@ exports[`MultipleChoiceQuestion.responses array fetches a multiple choice questi
 Object {
   "node": Object {
     "responses": Object {
-      "edges": Array [
-        Object {
-          "node": Object {
-            "value": "Pas assez fort (Mon sonotone est en panne)",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "Assez fort (Mon sonotone est mal réglé)",
-          },
-        },
-      ],
-      "totalCount": 2,
+      "edges": Array [],
+      "totalCount": 0,
     },
   },
 }
@@ -204,14 +101,8 @@ exports[`MultipleChoiceQuestion.responses array fetches a multiple choice questi
 Object {
   "node": Object {
     "responses": Object {
-      "edges": Array [
-        Object {
-          "node": Object {
-            "value": "{\\"labels\\":[\\"Logo 1\\"],\\"other\\":null}",
-          },
-        },
-      ],
-      "totalCount": 1,
+      "edges": Array [],
+      "totalCount": 0,
     },
   },
 }
@@ -221,24 +112,8 @@ exports[`MultipleChoiceQuestion.responses array fetches a multiple choice questi
 Object {
   "node": Object {
     "responses": Object {
-      "edges": Array [
-        Object {
-          "node": Object {
-            "value": "{\\"labels\\":[\\"Il bluffe\\"],\\"other\\":null}",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "{\\"labels\\":[\\"Il bluffe\\"],\\"other\\":null}",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "{\\"labels\\":[\\"Oui\\"],\\"other\\":null}",
-          },
-        },
-      ],
-      "totalCount": 3,
+      "edges": Array [],
+      "totalCount": 0,
     },
   },
 }
@@ -248,24 +123,8 @@ exports[`MultipleChoiceQuestion.responses array fetches a multiple choice questi
 Object {
   "node": Object {
     "responses": Object {
-      "edges": Array [
-        Object {
-          "node": Object {
-            "value": "{\\"labels\\":[\\"Au top\\"],\\"other\\":null}",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "{\\"labels\\":[\\"Incohérente\\"],\\"other\\":null}",
-          },
-        },
-        Object {
-          "node": Object {
-            "value": "{\\"labels\\":[\\"Au top\\"],\\"other\\":null}",
-          },
-        },
-      ],
-      "totalCount": 3,
+      "edges": Array [],
+      "totalCount": 0,
     },
   },
 }

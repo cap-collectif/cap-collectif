@@ -4,6 +4,7 @@ InternalMedia:
         - PreviewMedia
     config:
         name: Media
+        fieldsDefaultAccess: '@=service("Capco\\AppBundle\\Service\\MediaAccessResolver").canView(value, getUser(), context, info)'
         description: 'A media'
         fields:
             id:
