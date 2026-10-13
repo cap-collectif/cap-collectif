@@ -8,6 +8,7 @@ import { Box, Button } from '@cap-collectif/ui'
 import {
   isInterpellationContextFromStep,
   getProposalLabelByType,
+  isOpinionFormStep,
 } from '~/utils/interpellationLabelHelper'
 import type { Dispatch, GlobalState } from '~/types'
 import type { ProposalStepPageHeader_step } from '~relay/ProposalStepPageHeader_step.graphql'
@@ -15,7 +16,7 @@ import ProposalCreateModal from '../Proposal/Create/ProposalCreateModal'
 import { formName } from '../Proposal/Form/ProposalForm'
 import useIsMobile from '~/utils/hooks/useIsMobile'
 import type { ProposalViewMode } from '~/redux/modules/proposal'
-import { getContributionObjectTypeTranslationKey } from '@shared/constants/proposalStepObjectType'
+import { isProposalLikeObjectType } from '@shared/constants/proposalStepObjectType'
 
 type Props = {
   step: ProposalStepPageHeader_step
@@ -36,17 +37,33 @@ export const ProposalStepPageHeader = ({ step, displayMode, contributorConsentPr
   const total = step.allProposals.totalCount
   const { fusionCount } = step.allProposals
   const isInterpellation = isInterpellationContextFromStep(step)
-  const objectType = getContributionObjectTypeTranslationKey(step.form?.objectType)
-  const titleTradKey = isInterpellation
-    ? getProposalLabelByType(projectType, 'add')
-    : `front.contribution.${objectType}.add`
+  const isOpinion = isOpinionFormStep(step)
+  const isProposalForm = isProposalLikeObjectType(step.form?.objectType)
+  const titleTradKey = step.form?.objectType === 'QUESTION'
+    ? 'submit-a-question'
+    : isOpinion
+    ? 'submit-opinion'
+    : getProposalLabelByType(projectType, 'add')
   const tradKeyForTotalCount = isInterpellation
     ? 'interpellation.count_with_total'
-    : `front.contribution.${objectType}.count-with-total`
-  const tradKeyForCount = isInterpellation ? 'interpellation.count' : `front.contribution.${objectType}.count`
-  const tradKeyForFusion = isInterpellation
-    ? 'interpellation.count_fusions'
-    : `front.contribution.${objectType}.count-fusions`
+    : isOpinion
+    ? 'opinion.count_with_total'
+    : isProposalForm
+    ? 'proposal.count_with_total'
+    : 'question-total-count'
+  const tradKeyForCount = isInterpellation
+    ? 'interpellation.count'
+    : isOpinion
+    ? 'opinion.count'
+    : isProposalForm
+    ? 'proposal.count'
+    : 'count-questions'
+  const tradKeyForFusion =
+    isInterpellation
+      ? 'interpellation.count_fusions'
+      : isOpinion
+      ? 'opinion.count_fusions'
+      : 'proposal.count_fusions'
   return (
     <>
       <ProposalCreateModal

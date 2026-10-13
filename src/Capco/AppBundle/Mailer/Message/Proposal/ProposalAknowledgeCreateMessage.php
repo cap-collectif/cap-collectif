@@ -73,7 +73,6 @@ final class ProposalAknowledgeCreateMessage extends AbstractExternalMessage
             'proposalTitle' => $proposal->getTitle(),
             'proposalPublishedDate' => 'proposalPublishedDate',
             'proposalPublishedDateTime' => 'proposalPublishedDateTime',
-            'proposal' => $proposal,
             'typeOfMail' => 'create',
             'sendAt' => $proposal->getPublishedAt(),
             'endAt' => $proposal->getStep()->getEndAt(),

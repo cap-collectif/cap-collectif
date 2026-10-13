@@ -10,7 +10,6 @@ const SONATA_URL_BY_ADMIN_NEXT_URL: Record<string, string> = {
   '/admin-next/legal-settings': '/admin/settings/pages.legal/list',
   '/admin-next/privacy-settings': '/admin/settings/pages.privacy/list',
   '/admin-next/charter-settings': '/admin/settings/pages.charter/list',
-  '/admin-next/footer-settings': '/admin/settings/pages.footer/list',
 }
 
 export const getSideBarItemsFiltered = (

@@ -164,47 +164,23 @@ docker exec -w /var/www capco_application_1 bin/php-cs-fixer fix --config=.php-c
 ```bash
 castor local:infrastructures:build                     # Build local Docker images
 castor local:infrastructures:up                     # Start Docker containers
-castor local:infrastructures:recreate               # Rebuild images and recreate containers, preserving volumes
 castor local:infrastructures:stop                   # Stop Docker containers
-castor local:infrastructures:restart                 # Restart Docker containers
-castor local:infrastructures:down                   # Remove containers and networks, preserving volumes
-castor local:infrastructures:destroy                # Remove containers, networks and data volumes
-castor local:database:reset --environment=dev        # Reset DB, fixtures and Elasticsearch
-castor local:database:migrate --environment=dev      # Apply pending migrations to existing DB without resetting it
-castor local:database:mysql                         # Open the local interactive MySQL console
-castor local:database:reset-elasticsearch           # Rebuild active ES index from current DB
-castor local:app:composer                           # Install PHP dependencies with project options
-castor local:app:composer -- require vendor/package  # Add a PHP dependency in the application container
-castor local:app:install-assets                      # Install Symfony assets
-castor local:app:generate-graphql                     # Generate PHP schemas and both Relay frontends
+castor local:infrastructures:reboot                 # Restart Docker containers
+castor local:app:composer                            # Run Composer in the application container
+castor local:database:generate --environment=dev    # Reinitialize DB + Fixtures + Elasticsearch
+castor local:app:deploy                              # Prepare Symfony app and create queues
 castor local:app:start-consumers                     # Start RabbitMQ/Messenger consumers
 castor local:app:stop-consumers                      # Stop RabbitMQ/Messenger consumers
 castor local:app:clear-cache                        # Clear Symfony cache
 castor local:qa:restore-db --confirm                # Restore test database
+castor local:qa:compile-graphql                     # Compile GraphQL schema
+castor local:qa:graphql-schemas                     # Dump GraphQL schemas
 ```
-
-CI commands use the same arguments for common operations, with Symfony `test`
-as their default environment. Shared task implementations live in
-`.castor/shared/`; `local:*` and `ci:*` wrappers define their public interfaces.
 
 For a complete first installation and the required command order, see
 [`doc/installation-locale.md`](doc/installation-locale.md). In particular,
-Install JavaScript and PHP dependencies, reset the database if needed, then
-run `local:app:generate-graphql` and `local:app:install-assets`. Create RabbitMQ
-queues separately on first installation.
-
-#### Castor regression scripts for agents
-
-These scripts are primarily lightweight regression checks for coding agents
-working on Castor tasks. They use mocked external tools and temporary files;
-they do not replace validating workflows against real Docker services.
-
-- [`scripts/test-castor-ci-workflows.sh`](scripts/test-castor-ci-workflows.sh) checks CI and local task arguments, confirmation flags, GraphQL workflows, and infrastructure options.
-- [`scripts/test-castor-compose-terminal.sh`](scripts/test-castor-compose-terminal.sh) checks terminal-aware Docker Compose output and exit-code forwarding.
-- [`scripts/test-castor-doctor.sh`](scripts/test-castor-doctor.sh) checks `local:system:doctor` detection of missing tools, stopped Docker, and version mismatches.
-- [`scripts/test-castor-toggles.sh`](scripts/test-castor-toggles.sh) checks feature-toggle arguments and verifies that a missing toggle is rejected before Docker is called.
-
-Run them from the repository root with `bash <script-path>`.
+`local:app:deploy` does not create the database: install Composer dependencies,
+generate the database, then deploy the application.
 
 ### Symfony Console Commands
 ```bash
@@ -224,7 +200,7 @@ docker exec -w /var/www capco_application_1 php -d memory_limit=-1 bin/console c
 docker exec -w /var/www capco_application_1 php -d memory_limit=-1 bin/console capco:anonymize_users_automated --startAt=2020-01-01 --endAt=2020-12-31 --dry-run
 
 # Run any Symfony command via Castor
-castor local:app:console --command-name="<cmd>"
+castor local:app:cmd --command-name="<cmd>"
 ```
 
 The `--startAt` and `--endAt` account-anonymization options must be supplied together in

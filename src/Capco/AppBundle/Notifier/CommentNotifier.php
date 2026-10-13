@@ -54,7 +54,6 @@ class CommentNotifier extends BaseNotifier
     {
         if ($comment instanceof ProposalComment) {
             $isAnonymous = null === $comment->getAuthor();
-            $objectType = $comment->getProposal()->getProposalForm()->getObjectType();
 
             if (
                 $comment
@@ -75,7 +74,6 @@ class CommentNotifier extends BaseNotifier
                             'comment' => $comment,
                             'commentURL' => $this->commentShowUrlResolver->__invoke($comment),
                             'adminURL' => $this->commentResolver->getAdminUrl($comment, true),
-                            'objectType' => $objectType,
                         ],
                         null,
                         $comment
@@ -93,7 +91,6 @@ class CommentNotifier extends BaseNotifier
                             'commentURL' => $this->commentShowUrlResolver->__invoke($comment),
                             'adminURL' => $this->commentResolver->getAdminUrl($comment, true),
                             'authorURL' => $this->userUrlResolver->__invoke($comment->getAuthor()),
-                            'objectType' => $objectType,
                         ],
                         null,
                         $comment
@@ -129,7 +126,6 @@ class CommentNotifier extends BaseNotifier
                                 $user
                             ),
                             'notificationURL' => $this->userShowNotificationsPreferencesUrlResolver->__invoke(),
-                            'objectType' => $objectType,
                         ],
                         $user
                     );
@@ -146,7 +142,6 @@ class CommentNotifier extends BaseNotifier
                                 $user
                             ),
                             'notificationURL' => $this->userShowNotificationsPreferencesUrlResolver->__invoke(),
-                            'objectType' => $objectType,
                         ],
                         $user
                     );
@@ -170,8 +165,7 @@ class CommentNotifier extends BaseNotifier
      *                       'projectSlug' => string,
      *                       'stepSlug' => string,
      *                       'proposalSlug' => string,
-     *                       'proposalFormNotificationEmail' => string | null,
-     *                       'objectType' => string
+     *                       'proposalFormNotificationEmail' => string | null
      *                       ]
      */
     public function onDelete(array $comment)
@@ -232,7 +226,6 @@ class CommentNotifier extends BaseNotifier
     {
         if ($comment instanceof ProposalComment) {
             $isAnonymous = null === $comment->getAuthor();
-            $objectType = $comment->getProposal()->getProposalForm()->getObjectType();
 
             if (
                 $comment
@@ -253,7 +246,6 @@ class CommentNotifier extends BaseNotifier
                             'comment' => $comment,
                             'commentURL' => $this->commentShowUrlResolver->__invoke($comment),
                             'adminURL' => $this->commentResolver->getAdminUrl($comment, true),
-                            'objectType' => $objectType,
                         ],
                         null,
                         $comment
@@ -271,7 +263,6 @@ class CommentNotifier extends BaseNotifier
                             'commentURL' => $this->commentShowUrlResolver->__invoke($comment),
                             'adminURL' => $this->commentResolver->getAdminUrl($comment, true),
                             'authorURL' => $this->userUrlResolver->__invoke($comment->getAuthor()),
-                            'objectType' => $objectType,
                         ],
                         null,
                         $comment

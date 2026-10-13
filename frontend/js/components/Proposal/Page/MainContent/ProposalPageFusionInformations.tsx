@@ -7,7 +7,6 @@ import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables'
 import { styleGuideColors } from '~/utils/colors'
 import type { ProposalPageFusionInformations_proposal } from '~relay/ProposalPageFusionInformations_proposal.graphql'
-import { getContributionObjectTypeTranslationKey } from '@shared/constants/proposalStepObjectType'
 import { translateContent } from '@shared/utils/contentTranslator'
 import { bootstrapGrid } from '~/utils/sizes'
 
@@ -50,10 +49,10 @@ const ProposalPageFusionInformationsContainer = styled.div`
 `
 export const ProposalPageFusionInformations = ({ proposal }: Props) => {
   if (!proposal || (!proposal.hasBeenMerged && !proposal.mergedFrom.length)) return null
-  const objectType = getContributionObjectTypeTranslationKey(proposal.form?.objectType)
-  const title = `front.contribution.${objectType}.merged`
-  const bodyFrom = `front.contribution.${objectType}.merged-from`
-  const bodyInto = `front.contribution.${objectType}.merged-into`
+  const objectType = proposal.form?.objectType === 'OPINION' ? 'opinion' : 'proposal'
+  const title = `${objectType}s.fusionned`
+  const bodyFrom = `new.${objectType}.fusionnedFrom`
+  const bodyInto = `new.${objectType}.fusionnedInto`
   return (
     <>
       {proposal.mergedFrom.length > 0 && (

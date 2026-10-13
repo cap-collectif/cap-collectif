@@ -62,7 +62,6 @@ class CommentSubscriber implements EventSubscriberInterface
                         ->getProposalForm()
                         ->getNotificationsConfiguration()
                         ->getEmail(),
-                    'objectType' => $comment->getProposal()->getProposalForm()->getObjectType(),
                 ];
                 $this->publisher->publish('comment.delete', new Message(json_encode($comment)));
             }

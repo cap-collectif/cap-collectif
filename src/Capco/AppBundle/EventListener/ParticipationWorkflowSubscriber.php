@@ -5,11 +5,9 @@ namespace Capco\AppBundle\EventListener;
 use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Exception\ParticipantNotFoundException;
 use Capco\AppBundle\Repository\ParticipantPhoneVerificationSmsRepository;
-use Capco\AppBundle\Repository\VocalContributionRepository;
 use Capco\AppBundle\Service\ParticipantHelper;
 use Capco\AppBundle\Service\ParticipationWorkflow\ProposalReconcillier;
 use Capco\AppBundle\Service\ParticipationWorkflow\ReplyReconcilier;
-use Capco\AppBundle\Service\ParticipationWorkflow\VocalContributionReconcilier;
 use Capco\AppBundle\Service\ParticipationWorkflow\VotesReconcilier;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,8 +28,6 @@ class ParticipationWorkflowSubscriber implements EventSubscriberInterface
         private readonly ParticipantHelper $participantHelper,
         private readonly VotesReconcilier $votesReconcilier,
         private readonly ProposalReconcillier $proposalReconcillier,
-        private readonly VocalContributionReconcilier $vocalContributionReconcilier,
-        private readonly VocalContributionRepository $vocalContributionRepository,
         private readonly ParticipantPhoneVerificationSmsRepository $participantPhoneVerificationSmsRepository
     ) {
     }
@@ -69,14 +65,12 @@ class ParticipationWorkflowSubscriber implements EventSubscriberInterface
         }
 
         $this->votesReconcilier->reconcile($participant, $viewer);
-        $this->vocalContributionReconcilier->reconcile($participant, $viewer);
 
         $hasVotes = $participant->getVotes()->count() > 0;
         $hasReplies = $participant->getReplies()->count() > 0;
         $hasProposals = $participant->getProposals()->count() > 0;
-        $hasVocalContributions = 0 < \count($this->vocalContributionRepository->findBy(['participant' => $participant]));
 
-        if ($hasVotes || $hasReplies || $hasProposals || $hasVocalContributions) {
+        if ($hasVotes || $hasReplies || $hasProposals) {
             return;
         }
 

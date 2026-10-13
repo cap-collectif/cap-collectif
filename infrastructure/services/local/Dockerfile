@@ -9,7 +9,6 @@ RUN apt-get update && \
         apt-transport-https \
         build-essential \
         cron \
-        ffmpeg \
         curl \
         imagemagick \
         libmagickwand-dev \
@@ -268,7 +267,6 @@ COPY supervisord/                   /etc/supervisord
 # Volume for log / cache ...
 VOLUME /var/www/var/cache
 VOLUME /var/www/var/logs
-VOLUME /var/www/var/vocal-contributions
 
 WORKDIR /var/www
 

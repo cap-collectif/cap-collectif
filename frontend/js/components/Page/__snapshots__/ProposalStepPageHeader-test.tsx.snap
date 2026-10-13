@@ -14,7 +14,7 @@ exports[`<ProposalStepPageHeader /> renders with a map view 1`] = `
       }
     }
     show={false}
-    title="front.contribution.proposal.add"
+    title="proposal.add"
   />
   <div
     id="proposal-step-page-header"
@@ -23,7 +23,7 @@ exports[`<ProposalStepPageHeader /> renders with a map view 1`] = `
       className="h3 d-ib mb-15"
     >
       <FormattedMessage
-        id="front.contribution.proposal.count"
+        id="proposal.count"
         values={
           Object {
             "count": 5,
@@ -217,7 +217,7 @@ exports[`<ProposalStepPageHeader /> renders with proposal context in collect ste
       }
     }
     show={false}
-    title="front.contribution.proposal.add"
+    title="proposal.add"
   />
   <div
     id="proposal-step-page-header"
@@ -226,7 +226,7 @@ exports[`<ProposalStepPageHeader /> renders with proposal context in collect ste
       className="h3 d-ib mb-15"
     >
       <FormattedMessage
-        id="front.contribution.proposal.count"
+        id="proposal.count"
         values={
           Object {
             "count": 5,
@@ -239,7 +239,7 @@ exports[`<ProposalStepPageHeader /> renders with proposal context in collect ste
       >
          
         <FormattedMessage
-          id="front.contribution.proposal.count-fusions"
+          id="proposal.count_fusions"
           values={
             Object {
               "num": 2,
@@ -327,7 +327,7 @@ exports[`<ProposalStepPageHeader /> renders with proposal context in collect ste
           ]
         }
       >
-        front.contribution.proposal.add
+        proposal.add
       </Button>
     </Box>
   </div>
@@ -348,7 +348,7 @@ exports[`<ProposalStepPageHeader /> renders with proposal context in selection s
       }
     }
     show={false}
-    title="front.contribution.proposal.add"
+    title="proposal.add"
   />
   <div
     id="proposal-step-page-header"
@@ -357,7 +357,7 @@ exports[`<ProposalStepPageHeader /> renders with proposal context in selection s
       className="h3 d-ib mb-15"
     >
       <FormattedMessage
-        id="front.contribution.proposal.count"
+        id="proposal.count"
         values={
           Object {
             "count": 5,
@@ -384,7 +384,7 @@ exports[`<ProposalStepPageHeader /> renders with question context in selection s
       }
     }
     show={false}
-    title="front.contribution.question.add"
+    title="submit-a-question"
   />
   <div
     id="proposal-step-page-header"
@@ -393,7 +393,7 @@ exports[`<ProposalStepPageHeader /> renders with question context in selection s
       className="h3 d-ib mb-15"
     >
       <FormattedMessage
-        id="front.contribution.question.count"
+        id="count-questions"
         values={
           Object {
             "count": 5,

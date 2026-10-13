@@ -98,35 +98,6 @@ class CollectStepRepository extends AbstractStepRepository
         ;
     }
 
-    public function findVocalContributionStep(): ?CollectStep
-    {
-        $step = $this->findOneBy(['isVocalContributionEnabled' => true]);
-        if (null === $step) {
-            return null;
-        }
-
-        \assert($step instanceof CollectStep);
-
-        return $step;
-    }
-
-    /**
-     * Only one collect step can receive the vocal contributions.
-     */
-    public function disableVocalContributionExcept(CollectStep $collectStep): void
-    {
-        $this->createQueryBuilder('s')
-            ->update()
-            ->set('s.isVocalContributionEnabled', ':disabled')
-            ->andWhere('s.isVocalContributionEnabled = true')
-            ->andWhere('s.id != :id')
-            ->setParameter('disabled', false)
-            ->setParameter('id', $collectStep->getId())
-            ->getQuery()
-            ->execute()
-        ;
-    }
-
     /**
      * @return array<CollectStep>
      */

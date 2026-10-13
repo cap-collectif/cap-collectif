@@ -4,7 +4,6 @@ import { graphql, useFragment } from 'react-relay'
 import { VotesPopup_proposalStep$key } from '@relay/VotesPopup_proposalStep.graphql'
 import VotesPopupCard from './VotesPopupCard'
 import { useIntl } from 'react-intl'
-import { getContributionObjectTypeTranslationKey } from '@shared/constants/proposalStepObjectType'
 
 interface Props {
   step: VotesPopup_proposalStep$key
@@ -14,9 +13,6 @@ const FRAGMENT = graphql`
   fragment VotesPopup_proposalStep on ProposalStep {
     id
     actionButtonLabel
-    form {
-      objectType
-    }
     ...VotesPopupCard_proposalStep
     viewerVotes {
       edges {
@@ -37,9 +33,7 @@ const VotesPopup: FC<Props> = ({ step: stepKey }) => {
   const intl = useIntl()
   const step = useFragment(FRAGMENT, stepKey)
   const emptyVoteLabelId =
-    step.actionButtonLabel === 'SUPPORT'
-      ? 'front.proposal.empty-support'
-      : `front.contribution.${getContributionObjectTypeTranslationKey(step.form?.objectType)}.empty-vote`
+    step.actionButtonLabel === 'SUPPORT' ? 'front.proposal.empty-support' : 'front.proposal.empty-vote'
 
   return (
     <Flex width="100%" justifyContent="flex-start" flexDirection="column" gap="md">

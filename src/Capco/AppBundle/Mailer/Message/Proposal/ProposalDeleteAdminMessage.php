@@ -21,7 +21,6 @@ final class ProposalDeleteAdminMessage extends AbstractAdminMessage
             'proposalExcerpt' => self::escape($proposal->getBodyTextExcerpt()),
             'proposalUrl' => $params['proposalURL'],
             'proposalUrlBack' => $params['adminURL'],
-            'objectType' => $proposal->getProposalForm()->getObjectType(),
             'project' => self::escape(
                 $proposal
                     ->getProposalForm()

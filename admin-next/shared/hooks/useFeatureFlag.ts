@@ -86,7 +86,6 @@ export const defaultFeatureFlags: FeatureFlags = {
   user_anonymization_automated: false,
   new_project_card: false,
   antivirus: false,
-  vocal_contribution: false,
   mailjet_sandbox: false,
   new_project_page: false,
   hub_api_green: false,

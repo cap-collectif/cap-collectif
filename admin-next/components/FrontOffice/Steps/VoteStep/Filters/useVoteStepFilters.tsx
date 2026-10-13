@@ -1,6 +1,5 @@
 import { useVoteStepFilters_Query } from '@relay/useVoteStepFilters_Query.graphql'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
-import { isFeminineContributionObjectType } from '@shared/constants/proposalStepObjectType'
 import { useIntl } from 'react-intl'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 
@@ -98,9 +97,6 @@ export type Filters = Record<FilterType, Filter>
 type ReturnType = {
   totalCount: number
   filters: Filters
-  form: {
-    objectType: string
-  }
 } | null
 
 export const useVoteStepFilters = (stepId: string): ReturnType => {
@@ -131,7 +127,8 @@ export const useVoteStepFilters = (stepId: string): ReturnType => {
     const orderByPoints = step.votesRanking
     const orderByComments = form?.commentable
     const orderByCost = form?.costable
-    const filterPrefix = isFeminineContributionObjectType(form.objectType) ? 'global.filter_f' : 'global.filter'
+    const isOpinion = form?.objectType === 'OPINION'
+    const filterPrefix = isOpinion ? 'global.filter' : 'global.filter_f'
     const options = [
       {
         id: 'random',
@@ -263,7 +260,6 @@ export const useVoteStepFilters = (stepId: string): ReturnType => {
   return {
     totalCount: proposals?.totalCount ?? 0,
     filters,
-    form,
   }
 }
 export default useVoteStepFilters

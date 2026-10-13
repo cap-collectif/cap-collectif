@@ -1,8 +1,0 @@
-InternalVocalContributionConnection:
-    type: relay-connection
-    config:
-        name: VocalContributionConnection
-        nodeType: InternalVocalContribution!
-        connectionFields:
-            totalCount:
-                type: Int!

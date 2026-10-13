@@ -23,13 +23,6 @@ services:
             - /etc/localtime:/etc/localtime:ro
             - php_sf_cache:/var/www/var/cache
 
-    # These images run under emulation on ARM hosts.
-    mailcatcher:
-        platform: linux/amd64
-
-    kibana:
-        platform: linux/amd64
-
     nextjs:
         container_name: capco_nextjs_1
         image: 'node:20.19'
@@ -55,12 +48,9 @@ services:
             MYSQL_DATABASE: 'symfony'
         volumes:
             - /tmp:/tmp
-            - database_data:/var/lib/mysql
 
     elasticsearch:
         build: ../services/elasticsearch
-        volumes:
-            - elasticsearch_data:/usr/share/elasticsearch/data
         environment:
             - cluster.name=capco
             - bootstrap.memory_lock=true
@@ -74,6 +64,4 @@ services:
             - '9200:9200'
 
 volumes:
-    database_data:
-    elasticsearch_data:
     php_sf_cache:

@@ -47,9 +47,6 @@ const PROPOSALS_FRAGMENT = graphql`
         }
       }
     }
-    form {
-      objectType
-    }
     proposals(
       first: $count
       after: $cursor
@@ -172,7 +169,7 @@ export const VoteStepProposalsList: React.FC<Props> = ({ step: stepKey, template
       ))}
     </Grid>
   ) : (
-    <VoteStepEmptyList objectType={data.form?.objectType} />
+    <VoteStepEmptyList />
   )
 }
 export default VoteStepProposalsList

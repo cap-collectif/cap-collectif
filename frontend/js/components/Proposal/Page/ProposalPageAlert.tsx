@@ -3,7 +3,6 @@ import { Alert } from 'react-bootstrap'
 import { FormattedMessage } from 'react-intl'
 import { graphql, createFragmentContainer } from 'react-relay'
 import type { ProposalPageAlert_proposal } from '~relay/ProposalPageAlert_proposal.graphql'
-import { getContributionObjectTypeTranslationKey } from '@shared/constants/proposalStepObjectType'
 
 type Props = {
   proposal: ProposalPageAlert_proposal
@@ -22,9 +21,7 @@ export class ProposalPageAlert extends React.Component<Props> {
           }}
         >
           <strong>
-            <FormattedMessage
-              id={`front.contribution.${getContributionObjectTypeTranslationKey(proposal.form?.objectType)}.trashed.label`}
-            />
+            <FormattedMessage id="proposal.trashed.label" />
           </strong>
           {proposal.trashedReason && (
             <span>
@@ -49,9 +46,6 @@ export default createFragmentContainer(ProposalPageAlert, {
     fragment ProposalPageAlert_proposal on Proposal {
       publicationStatus
       trashedReason
-      form {
-        objectType
-      }
     }
   `,
 })

@@ -25,10 +25,6 @@ class MediaAccessResolver
             return true;
         }
 
-        if (Media::VOCAL_CONTRIBUTION_CONTEXT === $media->getContext()) {
-            return false;
-        }
-
         $private = '1' === $media->getMetadataValue(self::PRIVATE_ATTACHMENT);
         foreach ($this->responseRepository->findByMedia($media) as $response) {
             if (!self::isPrivateResponse($response)) {
@@ -46,10 +42,6 @@ class MediaAccessResolver
 
     public function isPrivate(Media $media): bool
     {
-        if (Media::VOCAL_CONTRIBUTION_CONTEXT === $media->getContext()) {
-            return true;
-        }
-
         if ('1' === $media->getMetadataValue(self::PRIVATE_ATTACHMENT)) {
             return true;
         }

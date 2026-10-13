@@ -107,11 +107,6 @@ class CollectStep extends AbstractStep implements SluggableInterface, Participat
     private bool $isCollectByEmailEnabled = false;
 
     /**
-     * @ORM\Column(name="is_vocal_contribution_enabled", type="boolean", nullable=false, options={"default":0})
-     */
-    private bool $isVocalContributionEnabled = false;
-
-    /**
      * @ORM\Column(name="vote_button_icon", type="string", nullable=false, options={"default": "thumb_up"})
      */
     private string $voteButtonIcon = VoteButtonIcon::THUMB_UP;
@@ -297,18 +292,6 @@ class CollectStep extends AbstractStep implements SluggableInterface, Participat
     public function setIsCollectByEmailEnabled(bool $isCollectByEmailEnabled): self
     {
         $this->isCollectByEmailEnabled = $isCollectByEmailEnabled;
-
-        return $this;
-    }
-
-    public function isVocalContributionEnabled(): bool
-    {
-        return $this->isVocalContributionEnabled;
-    }
-
-    public function setIsVocalContributionEnabled(bool $isVocalContributionEnabled): self
-    {
-        $this->isVocalContributionEnabled = $isVocalContributionEnabled;
 
         return $this;
     }

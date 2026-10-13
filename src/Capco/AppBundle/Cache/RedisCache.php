@@ -22,9 +22,4 @@ class RedisCache extends RedisAdapter
         parent::__construct($redisClient, $namespace, $defaultLifetime);
         $this->client = $redisClient;
     }
-
-    public function getItemTtl(string $key): int
-    {
-        return (int) $this->client->ttl($this->getId($key));
-    }
 }

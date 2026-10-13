@@ -9,7 +9,8 @@ const env = process.env.CI ? 'ci' : 'local'
 beforeEach(async () => {
   console.log('Restoring ElasticSearch snapshot…')
   console.time('restore_es')
-  const { stderrEs } = await exec('castor ' + env + ':qa:restore-es-snapshot --confirm')
+  const confirm = env === 'local' ? ' --confirm' : ''
+  const { stderrEs } = await exec('castor ' + env + ':qa:restore-es-snapshot' + confirm)
 
   if (stderrEs) {
     console.error(`error: ${stderrEs}`)

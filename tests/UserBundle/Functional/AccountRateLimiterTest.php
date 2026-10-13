@@ -8,17 +8,17 @@ use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Exception\RecentlySentException;
 use Capco\AppBundle\Security\RateLimiter;
 use Capco\AppBundle\Service\EmailRateLimiter;
+use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * @internal
  * @phpunit-status compliant
- * @phpunit-reason Exercises public limiter rules with isolated in-memory doubles and one real Redis expiration contract.
+ * @phpunit-reason Exercises public limiter rules with isolated cache storage and stubs at external boundaries.
  */
-final class AccountRateLimiterTest extends KernelTestCase
+final class AccountRateLimiterTest extends TestCase
 {
     public function testActionLimitIsIsolatedByActionAndIdentity(): void
     {
@@ -66,37 +66,12 @@ final class AccountRateLimiterTest extends KernelTestCase
         $emailLimiter->rateLimit('email');
     }
 
-    public function testRedisExpirationIsPreservedWhenIncrementing(): void
-    {
-        self::bootKernel();
-        $cache = self::getContainer()->get(RedisCache::class);
-        self::assertInstanceOf(RedisCache::class, $cache);
-        $suffix = bin2hex(random_bytes(8));
-        $action = 'rate-limiter-test-' . $suffix;
-        $identifier = 'identity-' . $suffix;
-        $cacheKey = RateLimiter::USER_CACHE_KEY . '-' . $action . '-' . $identifier;
-        $limiter = new RateLimiter($cache, new NullLogger(), $this->kernel('prod'));
-        $limiter->setLimit(3);
-
-        try {
-            self::assertTrue($limiter->canDoAction($action, $identifier, 60));
-            self::assertGreaterThan(0, $cache->getItemTtl($cacheKey));
-
-            self::assertTrue($limiter->canDoAction($action, $identifier, 60));
-            self::assertGreaterThan(0, $cache->getItemTtl($cacheKey));
-        } finally {
-            $cache->deleteItem($cacheKey);
-            self::ensureKernelShutdown();
-        }
-    }
-
     private function cache(): RedisCache
     {
         $pool = new ArrayAdapter();
         $cache = $this->createStub(RedisCache::class);
         $cache->method('getItem')->willReturnCallback($pool->getItem(...));
         $cache->method('save')->willReturnCallback($pool->save(...));
-        $cache->method('getItemTtl')->willReturn(900);
 
         return $cache;
     }

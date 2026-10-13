@@ -4,7 +4,6 @@ import { useIntl } from 'react-intl'
 import type { useVoteStepFiltersQuery } from '~relay/useVoteStepFiltersQuery.graphql'
 import { State } from '~/types'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
-import { isFeminineContributionObjectType } from '@shared/constants/proposalStepObjectType'
 
 const QUERY = graphql`
   query useVoteStepFiltersQuery($stepId: ID!) {
@@ -97,7 +96,8 @@ export const useVoteStepFilters = (stepId: string): ReturnType => {
     const orderByPoints = step.votesRanking
     const orderByComments = form?.commentable
     const orderByCost = form?.costable
-    const filterPrefix = isFeminineContributionObjectType(form?.objectType) ? 'global.filter_f' : 'global.filter'
+    const isOpinion = form?.objectType === 'OPINION'
+    const filterPrefix = isOpinion ? 'global.filter' : 'global.filter_f'
     const options = [
       {
         id: 'random',

@@ -33,10 +33,7 @@ import { validateProposalContent } from '../Admin/ProposalAdminContentForm'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import type { ResponsesInReduxForm } from '~/components/Form/Form.type'
 import { isInterpellationContextFromProposal, isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper'
-import {
-  getContributionObjectTypeTranslationKey,
-  isProposalLikeObjectType,
-} from '@shared/constants/proposalStepObjectType'
+import { isProposalLikeObjectType } from '@shared/constants/proposalStepObjectType'
 import formatSubmitResponses from '~/utils/form/formatSubmitResponses'
 import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesValues'
 import renderResponses from '~/components/Form/RenderResponses'
@@ -299,7 +296,9 @@ const onSubmit = (
       const message =
         createdProposal && isInterpellationContextFromProposal(createdProposal)
           ? 'interpellation.create.redirecting'
-          : `front.contribution.${getContributionObjectTypeTranslationKey(proposalForm.objectType)}.create.redirecting`
+          : proposalForm.objectType === 'OPINION'
+          ? 'opinion.create.redirecting'
+          : 'proposal.create.redirecting'
       toast({
         variant: 'success',
         content: intl.formatHTMLMessage({

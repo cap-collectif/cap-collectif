@@ -108,7 +108,6 @@ export const features: FeatureToggles = {
   full_proposal_card: false,
   mailjet_sandbox: false,
   hub_api_green: false,
-  vocal_contribution: false,
 }
 export const initialState: State = {
   themes: [],

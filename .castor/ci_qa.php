@@ -4,46 +4,53 @@ declare(strict_types=1);
 
 namespace Ci\Qa;
 
-use function Capco\Castor\Qa\phpunit as sharedPhpunit;
-use function Capco\Castor\Qa\purgeRabbitmq as sharedPurgeRabbitmq;
-use function Capco\Castor\Qa\restoreDb as sharedRestoreDb;
-use function Capco\Castor\Qa\restoreEsSnapshot as sharedRestoreEsSnapshot;
-use function Capco\Castor\Qa\saveDb as sharedSaveDb;
-use function Capco\Castor\Qa\saveEsSnapshot as sharedSaveEsSnapshot;
 use Castor\Attribute\AsTask;
+use function Local\Qa\graphqlSchemas as localGraphqlSchemas;
+use function Local\Qa\phpunit as localPhpunit;
+use function Local\Qa\purgeRabbitmq as localPurgeRabbitmq;
+use function Local\Qa\restoreDb as localRestoreDb;
+use function Local\Qa\restoreEsSnapshot as localRestoreEsSnapshot;
+use function Local\Qa\saveDb as localSaveDb;
+use function Local\Qa\saveEsSnapshot as localSaveEsSnapshot;
+
+#[AsTask(description: 'Generate GraphQL schemas in CI.')]
+function graphqlSchemas(bool $checkSame = false): void
+{
+    localGraphqlSchemas($checkSame);
+}
 
 #[AsTask(description: 'Purge the Elasticsearch RabbitMQ queue in CI.')]
 function purgeRabbitmq(bool $confirm = false): void
 {
-    sharedPurgeRabbitmq(confirm: $confirm);
+    localPurgeRabbitmq(confirm: true);
 }
 
 #[AsTask(description: 'Restore the CI MySQL database dump.')]
 function restoreDb(bool $confirm = false): void
 {
-    sharedRestoreDb(confirm: $confirm);
+    localRestoreDb(confirm: true);
 }
 
 #[AsTask(description: 'Save the CI MySQL database dump.')]
 function saveDb(): void
 {
-    sharedSaveDb();
+    localSaveDb();
 }
 
 #[AsTask(description: 'Run PHPUnit in CI.')]
-function phpunit(string $filter = 'false', string $tests = 'false', string $logJunit = 'false'): void
+function phpunit(string $tests = 'false', string $logJunit = 'false'): void
 {
-    sharedPhpunit(filter: $filter, tests: $tests, logJunit: $logJunit);
+    localPhpunit(tests: $tests, logJunit: $logJunit);
 }
 
 #[AsTask(description: 'Save the CI Elasticsearch test snapshot.')]
 function saveEsSnapshot(): void
 {
-    sharedSaveEsSnapshot();
+    localSaveEsSnapshot();
 }
 
 #[AsTask(description: 'Restore the CI Elasticsearch test snapshot.')]
 function restoreEsSnapshot(bool $confirm = false): void
 {
-    sharedRestoreEsSnapshot(confirm: $confirm);
+    localRestoreEsSnapshot(confirm: true);
 }

@@ -178,7 +178,6 @@ export type FormValues = {
   metaDescription: string
   customCode: string
   isCollectByEmailEnabled: boolean
-  isVocalContributionEnabled: boolean
   preventProposalEdit: boolean
   preventProposalDelete: boolean
   cover: { id: string; name: string; size: string; type: string; url: string } | null
@@ -388,7 +387,6 @@ const COLLECT_FRAGMENT = graphql`
         ...ProposalStepRequirementsTabs_proposalStep
         ...ProposalStepOptionnalAccordion_step
         isCollectByEmailEnabled
-        isVocalContributionEnabled
         cover {
           id
           name

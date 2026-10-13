@@ -6,7 +6,6 @@ import { useIntl } from 'react-intl'
 import { filtersToUrlParams, getActiveFiltersCount, getDefaultAccordions, urlFiltersToLocalState } from './utils'
 import useVoteStepFilters, { DEFAULT_FILTERS, FilterState } from './useVoteStepFilters'
 import VoteStepFiltersAccordions from './VoteStepFiltersAccordions'
-import { getContributionObjectTypeTranslationKey } from '@shared/constants/proposalStepObjectType'
 
 type Props = {
   stepId: string
@@ -14,8 +13,7 @@ type Props = {
 
 const VoteStepFiltersModal: React.FC<Props> = ({ stepId }) => {
   const intl = useIntl()
-  const { filters, totalCount, form } = useVoteStepFilters(stepId)
-  const objectType = getContributionObjectTypeTranslationKey(form?.objectType)
+  const { filters, totalCount } = useVoteStepFilters(stepId)
 
   const { isOpen, onOpen, onClose } = useDisclosure(false)
 
@@ -84,12 +82,12 @@ const VoteStepFiltersModal: React.FC<Props> = ({ stepId }) => {
         show={isOpen}
         onClose={onClose}
         id="modal-section-contributors"
-        ariaLabel={intl.formatMessage({ id: `front.contribution.${objectType}.filter` })}
+        ariaLabel={intl.formatMessage({ id: 'vote.step.filter_project' })}
         size={CapUIModalSize.Xl}
       >
         <Modal.Header>
           <Heading as="h4" color="blue.900">
-            {intl.formatMessage({ id: `front.contribution.${objectType}.filter-count` }, { n: totalCount })}
+            {intl.formatMessage({ id: 'front.collect-vote-step.filter-n-proposals' }, { n: totalCount })}
           </Heading>
         </Modal.Header>
 
@@ -118,7 +116,7 @@ const VoteStepFiltersModal: React.FC<Props> = ({ stepId }) => {
               {intl.formatMessage({ id: 'front.collect-vote-step.reset-filters' })}
             </Button>
             <Button variant="primary" variantColor="primary" variantSize="medium" onClick={applyFilters}>
-              {intl.formatMessage({ id: `front.contribution.${objectType}.filter-apply` })}
+              {intl.formatMessage({ id: 'front.collect-vote-step.filter-proposals' })}
             </Button>
           </Flex>
         </Modal.Footer>

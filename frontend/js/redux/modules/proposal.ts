@@ -7,7 +7,6 @@ import AddProposalSmsVoteMutation from '../../mutations/AddProposalSmsVoteMutati
 import DeleteProposalMutation from '../../mutations/DeleteProposalMutation'
 import type { Exact, Dispatch, Uuid, Action } from '../../types'
 import { isInterpellationContextFromStep, isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper'
-import { getContributionObjectTypeTranslationKey } from '@shared/constants/proposalStepObjectType'
 import CookieMonster from '@shared/utils/CookieMonster'
 export type ProposalViewMode = 'LIST' | 'GRID' | 'MAP'
 export type Filters = {
@@ -193,13 +192,6 @@ const deleteRequest = (): RequestDeleteAction => ({
   type: 'proposal/DELETE_REQUEST',
 })
 
-export const getDeleteProposalSuccessTranslationKey = (
-  proposal: Parameters<typeof isInterpellationContextFromProposal>[0],
-): string =>
-  isInterpellationContextFromProposal(proposal)
-    ? 'interpellation.request.delete.success'
-    : `front.contribution.${getContributionObjectTypeTranslationKey(proposal?.form?.objectType)}.deleted-successfully`
-
 export const deleteProposal = (
   proposalId: string,
   dispatch: Dispatch,
@@ -223,7 +215,12 @@ export const deleteProposal = (
       }
       oldToast({
         content: intl.formatMessage({
-          id: getDeleteProposalSuccessTranslationKey(response.deleteProposal?.proposal),
+          id:
+            response.deleteProposal &&
+            response.deleteProposal.proposal &&
+            isInterpellationContextFromProposal(response.deleteProposal.proposal)
+              ? 'interpellation.request.delete.success'
+              : 'proposal.request.delete.success',
         }),
         variant: 'success',
       })

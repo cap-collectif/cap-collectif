@@ -48,17 +48,7 @@ function compose(array $arguments, string $environment = 'local'): void
         $command[] = $file;
     }
 
-    $processContext = context();
-
-    if ('local' === $environment
-        && $processContext->supportsInteraction()
-        && stream_isatty(\STDOUT)
-        && stream_isatty(\STDERR)
-    ) {
-        $processContext = $processContext->withTty();
-    }
-
-    run([...$command, ...$arguments], context: $processContext);
+    run([...$command, ...$arguments]);
 }
 
 /**
@@ -81,5 +71,5 @@ function application(string $command, string $user = 'capco', bool $interactive 
     $dockerCommand[] = '-lc';
     $dockerCommand[] = $command;
 
-    run($dockerCommand, context: $interactive ? context()->withTimeout(null)->withTty() : null);
+    run($dockerCommand, context: $interactive ? context()->toInteractive() : null);
 }

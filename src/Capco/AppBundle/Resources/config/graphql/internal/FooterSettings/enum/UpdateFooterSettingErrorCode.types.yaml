@@ -1,9 +1,0 @@
-UpdateFooterSettingErrorCode:
-    type: enum
-    config:
-        name: UpdateFooterSettingErrorCode
-        values:
-            FOOTER_PARAMETER_NOT_FOUND:
-                value: !php/const Capco\AppBundle\GraphQL\Mutation\FooterSettings\UpdateFooterSettingMutation::FOOTER_PARAMETER_NOT_FOUND
-            INVALID_VALUE:
-                value: !php/const Capco\AppBundle\GraphQL\Mutation\FooterSettings\UpdateFooterSettingMutation::INVALID_VALUE

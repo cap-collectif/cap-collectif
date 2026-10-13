@@ -10,7 +10,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\File as FileConstraint;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -28,9 +27,7 @@ class MediaManager
     public function createFileFromUploadedFile(
         UploadedFile $file,
         string $context = 'default',
-        ?string $providerReference = null,
-        ?string $authorName = null,
-        bool $flush = true
+        ?string $providerReference = null
     ): Media {
         $name = $file->getClientOriginalName();
         $size = $file->getSize();
@@ -43,7 +40,6 @@ class MediaManager
             $providerReference ?: $this->mediaProvider->generateName($media)
         );
         $media->setName($name);
-        $media->setAuthorName($authorName);
         $media->setContentType($contentType);
         $media->setSize($size);
         $media->setContext($context);
@@ -51,9 +47,7 @@ class MediaManager
         $this->entityManager->persist($media);
         $this->mediaProvider->writeBinaryContentInFile($media);
 
-        if ($flush) {
-            $this->entityManager->flush();
-        }
+        $this->entityManager->flush();
 
         return $media;
     }
@@ -87,20 +81,15 @@ class MediaManager
 
     /**
      * For security reasons, we have to check the file size, type and if it is infected by a virus.
-     *
-     * @param string[] $allowedMimeTypes
      */
-    public function validateUploadedFile(
-        UploadedFile $file,
-        array $allowedMimeTypes = AllowedExtensions::ALLOWED_MIMETYPES,
-        ?Constraint $folderSizeConstraint = null
-    ): bool {
+    public function validateUploadedFile(UploadedFile $file): bool
+    {
         $violations = $this->validator->validate($file, [
             new FileConstraint([
                 'maxSize' => $this->mediaSizeLimit,
-                'mimeTypes' => $allowedMimeTypes,
+                'mimeTypes' => AllowedExtensions::ALLOWED_MIMETYPES,
             ]),
-            $folderSizeConstraint ?? new MaxFolderSize(),
+            new MaxFolderSize(),
         ]);
 
         $violationsCount = $violations->count();

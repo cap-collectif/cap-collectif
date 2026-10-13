@@ -12,7 +12,6 @@ use Capco\AppBundle\Repository\UserPhoneVerificationSmsRepository;
 use Capco\AppBundle\Service\ParticipationWorkflow\PhoneContributorResolver;
 use Capco\AppBundle\Service\ParticipationWorkflow\ProposalReconcillier;
 use Capco\AppBundle\Service\ParticipationWorkflow\ReplyReconcilier;
-use Capco\AppBundle\Service\ParticipationWorkflow\VocalContributionReconcilier;
 use Capco\AppBundle\Service\ParticipationWorkflow\VotesReconcilier;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -35,8 +34,7 @@ class VerifyUserPhoneNumberMutation implements MutationInterface
         private PhoneContributorResolver $phoneContributorResolver,
         private ReplyReconcilier $replyReconcilier,
         private VotesReconcilier $votesReconcilier,
-        private ProposalReconcillier $proposalReconcillier,
-        private VocalContributionReconcilier $vocalContributionReconcilier
+        private ProposalReconcillier $proposalReconcillier
     ) {
         $this->smsProvider = $smsProviderFactory->fetch();
     }
@@ -86,7 +84,6 @@ class VerifyUserPhoneNumberMutation implements MutationInterface
             $this->replyReconcilier->reconcile($matchingParticipant, $viewer);
             $this->proposalReconcillier->reconcile($matchingParticipant, $viewer);
             $this->votesReconcilier->reconcile($matchingParticipant, $viewer);
-            $this->vocalContributionReconcilier->reconcile($matchingParticipant, $viewer);
             $this->em->remove($matchingParticipant);
             $reconciliationMode = PhoneReconciliationMode::PARTICIPANT_MERGED;
         }

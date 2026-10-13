@@ -44,12 +44,6 @@ const ContributionValidationModal: React.FC<Props> = ({ contributionId }) => {
       svg: <ReplyValidationSVG />,
       successTranslationKey: 'your-participation-is-confirmed',
     },
-    VocalContribution: {
-      title: intl.formatMessage({ id: 'participation-workflow.validation' }),
-      info: intl.formatMessage({ id: 'participation-workflow.no_fault' }),
-      svg: <ReplyValidationSVG />,
-      successTranslationKey: 'your-participation-is-confirmed',
-    },
   }
 
   const { title, info, svg: SVG, successTranslationKey } = config[contributionTypeName]

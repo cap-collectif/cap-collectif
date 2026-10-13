@@ -1620,20 +1620,6 @@ InternalMutation:
                     inputType: UpdateAppearanceImageInput
                     payloadType: UpdateAppearanceImagePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AppearanceSettings\\UpdateAppearanceImageMutation", args)'
-            updateFooterSetting:
-                access: "@=hasRole('ROLE_ADMIN')"
-                builder: 'Relay::Mutation'
-                builderConfig:
-                    inputType: UpdateFooterSettingInput
-                    payloadType: UpdateFooterSettingPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\FooterSettings\\UpdateFooterSettingMutation", args)'
-            updateFooterColor:
-                access: "@=hasRole('ROLE_ADMIN')"
-                builder: 'Relay::Mutation'
-                builderConfig:
-                    inputType: UpdateFooterColorInput
-                    payloadType: UpdateFooterColorPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\FooterSettings\\UpdateFooterColorMutation", args)'
             updateProjectSetting:
                 description: 'Update a project page setting.'
                 access: "@=hasRole('ROLE_ADMIN')"
@@ -2201,13 +2187,6 @@ InternalMutation:
                     inputType: ValidateContributionInput
                     payloadType: ValidateContributionPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ValidateContributionMutation", args, getUser())'
-            addVocalContribution:
-                access: "hasFeatureFlag('vocal_contribution')"
-                builder: 'Relay::Mutation'
-                builderConfig:
-                    inputType: AddVocalContributionInput
-                    payloadType: AddVocalContributionPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddVocalContributionMutation", args, getUser())'
             # Mediator
             addMediators:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\AddMediatorsMutation").isGranted(args["input"]["stepId"], getUser())'

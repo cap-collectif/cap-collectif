@@ -101,142 +101,11 @@ anglais, au présent, terminé par `(#16850)`.
 | --- | --- | --- |
 | Socle Castor | Porté | `castor.php`, version `v1.8.1`, installation statique, helpers Docker et exécution applicative |
 | Tâches locales Docker, base et application | Porté | Les commandes actives sont portées, y compris `setup-default-env-vars` |
-| Tâches locales QA | Porté | PHPUnit, PHPSpec, GraphQL, snapshots, MySQL, Elasticsearch et RabbitMQ ; les opérations destructives demandent `--confirm` |
+| Tâches locales QA | Porté | PHPUnit, PHPSpec, GraphQL, snapshots, MySQL, Elasticsearch, RabbitMQ et Blackfire ; les opérations destructives demandent `--confirm` |
 | Tâches locales système | Porté | Diagnostic, vhosts, certificats et hook Git portés ; les installations de dépendances système restent hors périmètre |
 | Tâches CI Docker, base, application et QA | Partiel | Wrappers actifs portés ; `ci:app:run-sql` n'est pas repris car l'implémentation Fabric appelle une fonction inexistante |
 | Appelants de tests et scripts locaux | Partiel | Package scripts, hooks Jest, plugin Cypress et helpers principaux migrés ; l'ancien script `good-morning.sh` a été supprimé |
 | Workflows CircleCI et nettoyage Python | Porté | Castor est installé depuis `.castor-version`, les appels actifs sont remplacés et Fabric/Pipenv sont supprimés |
-
-Les tâches locales `local:qa:blackfire-curl`, `local:qa:blackfire-run`,
-`local:qa:clear-fixtures` et `local:qa:kill-database-container`, portées
-initialement depuis Fabric, ont été supprimées lors du nettoyage des tâches
-obsolètes. Les deux dernières ciblaient l'ancienne infrastructure de containers
-de fixtures. Les tableaux d'inventaire ci-dessus décrivent le périmètre
-historique de la migration.
-
-La tâche globale `local:qa:snapshots` a également été supprimée : son option
-`tags` désactivait la génération au lieu de filtrer les exports, elle écrasait
-la sauvegarde DB sans la restaurer et modifiait le flag `export` sans rétablir
-son état. La suppression préalable des références pouvait laisser une mise à
-jour partielle en cas d'échec. Les mises à jour ciblées restent disponibles
-via l'option `--updateSnapshot` des commandes Symfony d'export.
-
-### Ajustements des commandes locales après migration
-
-`local:system:doctor` vérifie les prérequis de la configuration Castor statique
-et ne contrôle plus PHP, Composer ou les extensions PHP sur l’hôte. Les erreurs
-sont agrégées afin qu’un outil absent ou Docker inaccessible n’empêche pas les
-autres contrôles. Les scénarios de régression utilisent uniquement des outils
-simulés et s’exécutent avec `bash scripts/test-castor-doctor.sh`.
-
-Les commandes Compose locales transmettent le terminal à Docker lorsqu’il est
-disponible, pour conserver son affichage de progression natif. La CI et les
-sorties redirigées conservent le contexte d’exécution par défaut. Les scénarios
-de régression utilisent un faux Docker et s’exécutent avec
-`bash scripts/test-castor-compose-terminal.sh`.
-
-La configuration Compose retire les imports de cache `capco-application` et
-`capco_elasticsearch` du fichier de base : ces sources provoquaient des erreurs
-d’import sans empêcher la construction et aucun export de ces caches n’est
-configuré dans la CI. Le cache local de BuildKit et son affichage de progression
-natif restent actifs. La CI conserve son cache d’images complètes, sauvegardées
-avec `docker image save` puis chargées avec `docker image load`.
-
-Les commandes locales `toggle-enable` et `toggle-disable` exigent désormais le
-nom du flag en argument, sans sélectionner `public_api` par défaut. Les options
-des commandes CI sont désormais alignées sur cette syntaxe. La validation des arguments utilise un
-faux Docker : `bash scripts/test-castor-toggles.sh`.
-
-La commande `local:app:composer`, alias `composer`, remplace
-`local:app:install-dependencies` et l’alias `vendors`. Sans argument, elle conserve
-les options d’installation du projet ; les arguments après `--` sont transmis à
-Composer dans le container applicatif.
-
-Le guide d’installation décrit les usages actuels ; les changements de noms et
-les étapes de transition sont regroupés ici. Les catégories `app`, `database`,
-`qa`, `infrastructures` et `system` restent communes au local et à la CI.
-
-| Ancienne commande locale | Commande actuelle / évolution |
-| --- | --- |
-| `infrastructures:reboot` | `infrastructures:restart` redémarre les containers existants |
-| `infrastructures:destroy` | `infrastructures:down` conserve les volumes |
-| `infrastructures:clean` | `infrastructures:destroy` supprime aussi les volumes |
-| `app:cmd` | `app:console` |
-| `app:deploy`, `app:prepare-php` | Opérations séparées : `app:composer`, `app:generate-graphql` et `app:install-assets` |
-| `qa:compile-graphql`, `qa:graphql-schemas` | Étapes internes de `app:generate-graphql` |
-| `database:generate` | `database:reset` garde le reset par défaut hérité de Fabric |
-| `database:reset --migrate` | `database:migrate` applique les migrations à la base existante sans la réinitialiser |
-| `database:mysqlconsole` | `database:mysql`, avec l’alias `mysql` |
-| `app:sql` | Wrapper retiré en local et en CI ; utiliser `app:console --command-name=doctrine:query:sql -- "SQL"` |
-
-Les commandes locales `prepare`, `composer`, `ssh`/`shell` et les nettoyages
-`clean-dependencies`/`clean-graphql` ne sont plus exposés. Les options Docker
-locales `--use-cache=false`, `--force-recreate=true` et `--no-cache=true` sont
-remplacées par les flags `--no-cache` et `--force-recreate` selon la commande.
-
-#### Alignement des interfaces CI
-
-Les commandes CI utilisent les mêmes noms et arguments que les commandes locales
-pour les opérations communes, sans ajouter d’alias courts à la CI.
-
-| Ancienne commande CI | Commande actuelle |
-| --- | --- |
-| `ci:app:cmd` | `ci:app:console` ; arguments Symfony après `--` |
-| `ci:app:toggle-enable --toggle=flag` | `ci:app:toggle-enable flag` |
-| `ci:app:toggle-disable --toggle=flag` | `ci:app:toggle-disable flag` |
-| `ci:database:generate` | `ci:database:reset` ; comportement de réinitialisation conservé |
-| `ci:infrastructures:build --use-cache=false` | `ci:infrastructures:build --no-cache` |
-| `ci:infrastructures:up --force-recreate=true --no-cache=true` | `ci:infrastructures:up --force-recreate --no-cache` |
-
-#### Workflows CI
-
-Les opérations Symfony CI utilisent `test` par défaut. `ci:database:reset`
-recrée le schéma, marque les migrations comme exécutées sans les appliquer,
-puis recharge les fixtures et Elasticsearch. L’ancien `--migrate` est retiré :
-pour appliquer des migrations à une base existante, utiliser
-`ci:app:console --command-name=doctrine:migration:migrate`.
-
-`ci:app:dump-graphql-schemas` remplace `ci:qa:graphql-schemas` et exporte
-uniquement les quatre schémas ; `--check-same` vérifie les fichiers commités.
-`ci:app:generate-graphql` suit le workflow local complet ; `--backend-only`
-limite la génération au backend, sans lancer les compilateurs Relay.
-
-Les restaurations DB/Elasticsearch et la purge RabbitMQ exigent `--confirm`
-en local comme en CI ; ce flag est explicite et ne déclenche aucun prompt.
-`ci:qa:phpunit` accepte les mêmes options `--filter`, `--tests` et
-`--log-junit` que sa commande locale.
-Les contrats sont vérifiés avec un faux Docker par
-`bash scripts/test-castor-ci-workflows.sh`.
-
-#### Implémentation commune et nettoyage CI
-
-Les opérations partagées sont extraites dans `.castor/shared/` ; les wrappers
-locaux et CI ne définissent que leurs interfaces et leurs valeurs par défaut.
-Les tests de contrats vérifient les deux contextes avec un faux Docker.
-
-Les commandes `ci:app:deploy`, `ci:app:prepare-php`,
-`ci:system:generate-ssl` et `ci:system:install-git-hook` sont retirées après
-vérification de leurs usages dans le dépôt. CircleCI installe déjà les
-dépendances avant le lancement des containers et injecte ses certificats ;
-aucune de ces étapes ne dépend de ces wrappers.
-
-Le wrapper SQL CI est également retiré. Cypress et Jest transmettent désormais
-leurs requêtes à `app:console --command-name=doctrine:query:sql -- "SQL"`, en
-conservant chaque requête comme un argument unique.
-
-#### Passage aux volumes nommés MySQL et Elasticsearch
-
-Pour une installation existante qui n'utilisait pas ces volumes, le premier
-démarrage avec cette configuration crée des volumes vides : les données de
-l'ancien volume anonyme MySQL et les index de l'ancien container Elasticsearch
-ne sont pas transférés automatiquement. Pour conserver la base, exécuter
-`castor local:qa:save-db` avant de recréer les containers, puis
-`castor local:qa:restore-db --confirm` après leur démarrage. Reconstruire ensuite
-les index depuis cette base avec `castor local:app:console --command-name="capco:es:create"`
-puis `castor local:app:console --command-name="capco:es:populate"`. Pour repartir des
-fixtures, suivre les étapes de génération de la base ci-dessous.
-
-### Restauration Elasticsearch partagée
 
 La restauration Elasticsearch partagée vérifie la présence de `analytics_test`,
 supprime les anciens index `capco_*`, `capco_restore_*`, les éventuels
@@ -276,21 +145,17 @@ Créer un point d'entrée `castor.php` à la racine et déplacer les tâches dan
   ci_app.php
   ci_database.php
   ci_qa.php
-  shared/
-    app.php
-    database.php
-    infrastructures.php
-    qa.php
+  ci_system.php
 ```
 
 Exemples de commandes cibles :
 
 ```text
 castor local:infrastructures:up
-castor local:database:reset --environment=dev
-castor local:app:console --command-name="cache:clear"
+castor local:database:generate --environment=dev
+castor local:app:cmd --command-name="cache:clear"
 castor ci:qa:phpunit --tests="tests/Command/MigrationCommandTest.php"
-castor ci:qa:restore-db --confirm
+castor ci:qa:restore-db
 ```
 
 Les noms exacts peuvent être ajustés pendant l'implémentation, mais il faut

@@ -113,7 +113,6 @@ class GlobalIdResolver
         'Contributor',
         'SectionCarrouselElement',
         'Media',
-        'VocalContribution',
         'AbstractVote',
         'HttpRedirect',
         'SocialNetwork',

@@ -1,7 +1,0 @@
-UpdateFooterColorErrorCode:
-    type: enum
-    config:
-        name: UpdateFooterColorErrorCode
-        values:
-            SITE_COLOR_NOT_FOUND:
-                value: !php/const Capco\AppBundle\GraphQL\Mutation\FooterSettings\UpdateFooterColorMutation::SITE_COLOR_NOT_FOUND

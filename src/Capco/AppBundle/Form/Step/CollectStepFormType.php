@@ -53,7 +53,6 @@ class CollectStepFormType extends AbstractStepFormType
             ->add('proposalArchivedTime')
             ->add('proposalArchivedUnitTime')
             ->add('isCollectByEmailEnabled')
-            ->add('isVocalContributionEnabled')
             ->add('actionButtonLabel', TextType::class, ['data' => ActionButtonLabel::VOTE])
             ->add('voteButtonIcon', TextType::class, ['data' => VoteButtonIcon::THUMB_UP])
             ->add('preventProposalEdit')

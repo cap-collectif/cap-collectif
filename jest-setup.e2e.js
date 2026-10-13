@@ -10,7 +10,6 @@ const ENDPOINT = HOSTNAME + '/graphql'
 
 const util = require('util')
 const exec = util.promisify(require('child_process').exec)
-const execFile = util.promisify(require('child_process').execFile)
 
 const phpContainerName = 'capco_application_1'
 
@@ -106,13 +105,7 @@ global.rawInternalGraphql = async (query, variables, credentials = null) => {
 }
 
 global.runSQL = async sql => {
-  const { stdout } = await execFile('castor', [
-    `${env}:app:console`,
-    '--command-name=doctrine:query:sql',
-    '--environment=test',
-    '--',
-    sql,
-  ])
+  const { stdout } = await exec(`castor ${env}:app:sql --sql='${sql}' --environment=test`)
   return stdout
 }
 
@@ -137,14 +130,8 @@ global.resetFeatureFlags = async () => {
 }
 
 global.runSql = async sql => {
-  console.log(`castor ${env}:app:console --command-name=doctrine:query:sql --environment=test -- <redacted>`)
-  await execFile('castor', [
-    `${env}:app:console`,
-    '--command-name=doctrine:query:sql',
-    '--environment=test',
-    '--',
-    sql,
-  ])
+  console.log(`castor ${env}:app:sql --sql="${sql}" --environment=test`)
+  await exec(`castor ${env}:app:sql --sql='${sql}' --environment=test`)
   return Promise.resolve(null)
 };
 

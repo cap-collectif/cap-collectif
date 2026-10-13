@@ -1,5 +1,4 @@
 import ReactOnRails from 'react-on-rails'
-import VocalContributionApp from './startup/VocalContributionApp'
 import ProjectsListApp from './startup/ProjectsListAppClient'
 import CustomProjectsListApp from './startup/CustomProjectsListApp'
 import NavbarApp from './startup/NavbarAppClient'
@@ -168,7 +167,6 @@ ReactOnRails.register({
   UserSliderApp,
   GlobalStepApp,
   HomeHeaderApp,
-  VocalContributionApp,
   ImageSliderApp,
   ParticipationTutorialApp,
   ParticipationMotivationApp,

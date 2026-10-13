@@ -1,7 +1,7 @@
 {% extends "@CapcoMail/standardLayout.html.twig" %}
 
 {% block html_title %}
-    {{ ('notification.proposal.assessment.title.' ~ proposal.form.objectType|lower)|trans({'supervisorName': proposal.supervisor.username, 'proposalName': proposal.title}, 'CapcoAppBundle', user_locale) }}
+    {{ 'notification.proposal.assessment.title'|trans({'supervisorName': proposal.supervisor.username, 'proposalName': proposal.title}, 'CapcoAppBundle', user_locale) }}
 {% endblock %}
 
 {% set logoUrl = app_logo_url() %}
@@ -20,7 +20,7 @@
         <table width="100%" class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
             <tr>
                 <td>
-                    {{ ('notification.assessment.body.' ~ proposal.form.objectType|lower)
+                    {{ 'notification.assessment.body'
                         |trans({
                             'supervisorUrl': supervisorUrl,
                             'supervisorName': proposal.supervisor.username,

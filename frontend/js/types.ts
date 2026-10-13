@@ -110,7 +110,6 @@ export type FeatureToggles = {
   full_proposal_card: boolean | null | undefined
   mailjet_sandbox: boolean | null | undefined
   hub_api_green: boolean | null | undefined
-  vocal_contribution: boolean | null | undefined
 }
 export type FeatureToggle = $Keys<FeatureToggles>
 export type Action =

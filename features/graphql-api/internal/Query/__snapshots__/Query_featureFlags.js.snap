@@ -244,9 +244,6 @@ Object {
       "type": "collect_proposals_by_email",
     },
     Object {
-      "type": "vocal_contribution",
-    },
-    Object {
       "type": "user_anonymization_automated",
     },
     Object {

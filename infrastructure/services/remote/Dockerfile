@@ -17,7 +17,6 @@ RUN set -x \
         bzip2 \
         cron \
         curl \
-        ffmpeg \
         git \
         imagemagick \
         libmagickwand-dev \
@@ -287,7 +286,6 @@ RUN mkdir -m 755 -p translations var public/bundles src/Capco/AppBundle/GraphQL/
     && chown -R capco:capco bin translations src public templates config app fixtures admin-next \
     && mkdir -p var/cache/prod \
     && mkdir -p var/cache/prod/translations \
-    && mkdir -p var/vocal-contributions \
     && chmod -R 777 var \
     && chown -R capco:capco var
 
@@ -392,7 +390,5 @@ COPY infrastructure/services/remote/cron/crontab                   /etc/cron.d/c
 RUN chmod 0644 /etc/cron.d/crontab
 RUN set -ex; \
     crontab -uroot /etc/cron.d/crontab
-
-VOLUME /var/www/var/vocal-contributions
 
 CMD ["/usr/bin/runsvdir", "-P", "/etc/service"]

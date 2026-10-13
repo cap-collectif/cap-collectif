@@ -84,8 +84,6 @@ maximum les patterns déjà en place dans `admin-next/` plutôt qu'en inventant 
 5. **Repérer une page `admin-next/` déjà migrée avec une structure similaire** pour copier le pattern plutôt
    que d'en inventer un nouveau. Voir la section "Patterns de référence" ci-dessous pour choisir le bon
    template selon la forme de la donnée (liste plate vs paginée, avec/sans traductions, avec/sans couleur...).
-   Réutiliser `Layout` et les composants `Table` de CapUI pour les nouvelles listes,
-   y compris les prototypes ; ne pas recréer une liste Twig lorsque la cible demandée est admin-next.
 6. **Créer la page** dans `admin-next/pages/admin-next/<nom-en-kebab-case>.tsx` (le nom de fichier = la route).
 7. **Créer le(s) composant(s)** dans `admin-next/components/BackOffice/<NomDeLaFeature>/` (PascalCase pour le
    dossier et les fichiers de composants).
@@ -152,10 +150,11 @@ maximum les patterns déjà en place dans `admin-next/` plutôt qu'en inventant 
       (regénère `schema.internal.graphql` à la racine, utilisé par le compilateur Relay de `admin-next`).
    3. Un `bin/console cache:clear` peut être nécessaire avant l'étape 1 si le cache Symfony est déjà chaud
       et ne détecte pas les nouveaux fichiers yaml.
-   4. Régénérer les classes PHP, les quatre schémas et les deux frontends Relay avec
-      `castor local:app:generate-graphql`, puis committer les schémas modifiés, y compris
-      `schema.dev.graphql` qui embarque les types internes. La commande nettoie le cache
-      Symfony avant la compilation pour éviter les alias de types périmés.
+   4. La CI compare les schémas générés par `castor local:qa:graphql-schemas` (les 4 schémas, en
+      `--no-debug`) : régénérer avec cette commande et committer aussi `schema.dev.graphql`, qui embarque les
+      types internes. Si elle échoue avec `Could not find type with alias "..."`, le cache `--no-debug` est
+      périmé : `castor local:app:clear-cache` puis `castor local:qa:compile-graphql` avant de
+      relancer.
 11. **Lancer `yarn relay` dans `admin-next/`** après avoir écrit les requêtes/fragments/mutations GraphQL
     (les artefacts générés vivent tous dans `admin-next/__generated__/`, pas de dossier colocalisé).
 12. **Vérifier** : `yarn ts` (TypeScript), `yarn lint` (ESLint), et un test visuel réel dans le navigateur
@@ -337,7 +336,7 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
     laisse la base dans cet état à la fin), les snapshots générés avec `-u` embarquent ces données et ne
     correspondent plus aux fixtures, et un spec Cypress qui suppose l'état des fixtures échoue dès son premier
     `should` — le symptôme est un snapshot ou un test qui change alors que le code testé n'a pas bougé. Avant de
-    (re)générer des snapshots ou d'enchaîner des runs Cypress : `castor local:database:reset` pour
+    (re)générer des snapshots ou d'enchaîner des runs Cypress : `castor local:database:generate` pour
     repartir des fixtures. Le champ `translations` est renvoyé dans l'ordre de la base, non déterministe pour
     des lignes fraîchement insérées : trier par `locale` dans le test avant `toMatchSnapshot()`.
   - **Cypress en local + feature flag Redis (`unstable__sonata_migration_to_admin_next`, `multilangue`...) —
@@ -1176,7 +1175,7 @@ prop-drillé entre la liste et un ancêtre.
   un test de suppression passait une fois puis se mettait à échouer de façon apparemment aléatoire sur un
   tout autre test qui `cy.contains()` une ligne de fixture désormais absente. Si des tests Cypress locaux
   échouent de façon incohérente en réutilisant des lignes de fixtures normalement présentes, relancer
-  `castor local:database:reset` pour repartir d'un état propre avant de chercher un bug côté
+  `castor local:database:generate` pour repartir d'un état propre avant de chercher un bug côté
   code.
 - **`GlobalIdResolver::resolve()` ne sait pas résoudre un id de `Media`** : `Media.id` est exposé **brut** (pas
   de `Relay::GlobalId`, ex: `media4`, ou l'uuid renvoyé par l'uploader), or `resolve()` ne gère que les global

@@ -23,7 +23,6 @@ const FRAGMENT = graphql`
     }
     form {
       contribuable
-      objectType
       ...ProposalFormModal_proposalForm
     }
     ...VoteStepListActions_proposalStep
@@ -49,7 +48,7 @@ const VoteStepListHeader: React.FC<Props> = ({ step: stepKey, onWorkflowTrigger 
                 onWorkflowTrigger={onWorkflowTrigger}
               />
             ) : null}
-            <VoteStepSearchBar proposalsCount={step.allProposals?.totalCount ?? 0} objectType={step.form?.objectType} />
+            <VoteStepSearchBar proposalsCount={step.allProposals?.totalCount ?? 0} />
           </Flex>
           <VoteStepListActions step={step} />
         </Flex>

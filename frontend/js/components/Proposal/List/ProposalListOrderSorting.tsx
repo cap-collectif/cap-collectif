@@ -8,7 +8,6 @@ import { PROPOSAL_AVAILABLE_ORDERS } from '~/constants/ProposalConstants'
 import type { Dispatch, State } from '~/types'
 import Select from '../../Ui/Form/Select/Select'
 import SelectOption from '../../Ui/Form/Select/SelectOption'
-import { isFeminineContributionObjectType } from '@shared/constants/proposalStepObjectType'
 
 type Props = {
   orderByPoints?: boolean
@@ -60,15 +59,15 @@ export class ProposalListOrderSorting extends React.Component<Props, ComponentSt
   render() {
     const { order, dispatch, intl, objectType } = this.props
     const { displayedOrders } = this.state
-    const feminineObjectType = isFeminineContributionObjectType(objectType)
-    const getTranslationKey = (choice: string) => `global.filter_${feminineObjectType ? 'f_' : ''}${choice}`
+    const isOpinion = objectType === 'OPINION'
+    const filterPrefix = isOpinion ? '' : 'f_'
     return (
       <div>
         <Select
           label={
             order
               ? intl.formatMessage({
-                  id: getTranslationKey(order),
+                  id: `global.filter_${filterPrefix}${order}`,
                 })
               : intl.formatMessage({
                   id: 'global.filter',
@@ -84,7 +83,7 @@ export class ProposalListOrderSorting extends React.Component<Props, ComponentSt
               value={choice}
             >
               {intl.formatMessage({
-                id: getTranslationKey(choice),
+                id: `global.filter_${filterPrefix}${choice}`,
               })}
             </SelectOption>
           ))}

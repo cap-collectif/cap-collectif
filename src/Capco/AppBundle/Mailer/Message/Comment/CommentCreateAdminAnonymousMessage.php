@@ -22,7 +22,6 @@ final class CommentCreateAdminAnonymousMessage extends AbstractAdminMessage
             'comment' => self::escape($comment->getBodyTextExcerpt()),
             'proposalUrl' => $params['commentURL'],
             'commentUrlBack' => $params['adminURL'],
-            'objectType' => $params['objectType'],
         ];
     }
 
@@ -30,7 +29,6 @@ final class CommentCreateAdminAnonymousMessage extends AbstractAdminMessage
     {
         return [
             'username' => self::escape($comment->getAuthorName()),
-            'objectType' => $params['objectType'],
         ];
     }
 }

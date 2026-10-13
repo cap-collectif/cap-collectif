@@ -3,14 +3,12 @@ import debounce from '@shared/utils/debounce-promise'
 import { useQueryState } from 'nuqs'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import { getContributionObjectTypeTranslationKey } from '@shared/constants/proposalStepObjectType'
 
 type Props = {
   proposalsCount: number
-  objectType?: string | null
 }
 
-const VoteStepSearchBar: React.FC<Props> = ({ proposalsCount, objectType }) => {
+const VoteStepSearchBar: React.FC<Props> = ({ proposalsCount }) => {
   const intl = useIntl()
   const [term, setTerm] = useQueryState('term')
 
@@ -25,13 +23,8 @@ const VoteStepSearchBar: React.FC<Props> = ({ proposalsCount, objectType }) => {
       onChange={onTermChange}
       value={term}
       autoFocus
-      inputTitle={intl.formatMessage({
-        id: `front.contribution.${getContributionObjectTypeTranslationKey(objectType)}.search`,
-      })}
-      placeholder={intl.formatMessage(
-        { id: `front.contribution.${getContributionObjectTypeTranslationKey(objectType)}.search-placeholder` },
-        { n: proposalsCount },
-      )}
+      inputTitle={intl.formatMessage({ id: 'global.search_proposal' })}
+      placeholder={intl.formatMessage({ id: 'front.vote-step.search-proposals' }, { n: proposalsCount })}
     />
   )
 }

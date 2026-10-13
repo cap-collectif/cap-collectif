@@ -3,7 +3,7 @@
 cd /var/www
 
 echo "[$(date -u)][PHP-FPM] Creating var/ files..."
-for directory in var/cache var/log var/logs var/vocal-contributions public/bundles public/media/default public/media/sonata_category; do
+for directory in var/cache var/log var/logs public/bundles public/media/default public/media/sonata_category; do
   if [ ! -d "$directory" ]; then
     mkdir -p -m 777 $directory
     chown capco:capco $directory

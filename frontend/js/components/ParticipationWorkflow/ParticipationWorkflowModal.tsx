@@ -39,12 +39,11 @@ import moment from 'moment'
 import UsernameRequirementModal from './UsernameRequirementModal'
 import MediaRequirementModal from './MediaRequirementModal'
 import { buildToastUrl } from '~/components/ParticipationWorkflow/utils/buildToastUrl'
-import { ensureGlobalId, fromGlobalId } from '@shared/utils/fromGlobalId'
+import { ensureGlobalId } from '@shared/utils/fromGlobalId'
 
 export type Props = {
   stepId: string
   contributionId: string
-  shouldTriggerConsentInternalCommunication?: boolean
 }
 
 export type FormValues = {
@@ -144,9 +143,6 @@ export const QUERY = graphql`
         requirementsUrl
         completionStatus
       }
-      ... on VocalContribution {
-        completionStatus
-      }
     }
     siteImage(keyname: "image.logo") {
       media {
@@ -179,22 +175,15 @@ const getParticipantToken = (): string | null => {
   return encodedToken ? window.atob(encodedToken) : null
 }
 
-const ParticipationWorkflowModal: React.FC<Props> = ({
-  stepId,
-  contributionId,
-  shouldTriggerConsentInternalCommunication = false,
-}) => {
+const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId }) => {
   const isAuthenticated = useSelector((state: GlobalState) => !!state.user.user)
   const participantToken = getParticipantToken()
   const contributionGlobalId = ensureGlobalId('AbstractVote', contributionId)
-  const isVocalContributionId = fromGlobalId(contributionGlobalId).type === 'VocalContribution'
   const query = useLazyLoadQuery<ParticipationWorkflowModalQuery>(QUERY, {
-      stepId,
-      participantToken,
-      isAuthenticated,
-      contributionId: contributionGlobalId,
-  }, {
-      fetchPolicy: isVocalContributionId ? 'network-only' : 'store-or-network',
+    stepId,
+    participantToken,
+    isAuthenticated,
+    contributionId: contributionGlobalId,
   })
 
   const viewer = query?.viewer ?? null
@@ -208,12 +197,9 @@ const ParticipationWorkflowModal: React.FC<Props> = ({
 
   const logo = siteImage?.media ?? null
   const contributionTypeName = contribution?.__typename as string
-  // A vocal contribution is submitted from the homepage, which resumes this workflow from the URL parameters
-  const isVocalContribution = isVocalContributionId || contributionTypeName === 'VocalContribution'
-  const giveUpUrl = isVocalContribution ? '/' : step?.url ?? ''
-  const contributionUrl =
-    contributionTypeName === 'Proposal' ? contribution.url : isVocalContribution ? '/' : step?.url ?? '/'
-  const requirementsUrl = isVocalContribution ? window.location.href : (contribution?.requirementsUrl as string)
+  const giveUpUrl = step?.url ?? '';
+  const contributionUrl = contributionTypeName === 'Proposal' ? contribution.url : step?.url ?? '/'
+  const requirementsUrl = contribution?.requirementsUrl as string
 
   useEffect(() => {
     clearToasts()
@@ -333,16 +319,8 @@ const ParticipationWorkflowModal: React.FC<Props> = ({
   const hasMetAllRequirements = filteredRequirements.length === 0 && contribution?.completionStatus === 'COMPLETED'
   const email = viewer?.email ?? participant?.email
   const consentInternalCommunication = viewer?.consentInternalCommunication ?? participant?.consentInternalCommunication
-  const shouldAskConsent = shouldTriggerConsentInternalCommunication || consentInternalCommunication !== true
-  const workflowStepKey = [
-    phonesRequirements.map(requirement => requirement.__typename).join(','),
-    filteredRequirements.map(requirement => requirement.__typename).join(','),
-    contribution?.completionStatus ?? '',
-    email ? 'email-known' : 'email-unknown',
-    shouldAskConsent ? 'consent-required' : 'consent-not-required',
-  ].join('|')
 
-  if (!contribution && !isVocalContribution && step?.url) {
+  if (!contribution && step?.url) {
     window.location.href = buildToastUrl(step.url, {
       variant: 'danger',
       message: 'participant-already-contributed-title',
@@ -375,7 +353,6 @@ const ParticipationWorkflowModal: React.FC<Props> = ({
     >
       <FormProvider {...formMethods}>
         <MultiStepModal
-          key={workflowStepKey}
           hideOnClickOutside={false}
           ariaLabel={intl.formatMessage({ id: 'participation-workflow.requirements' })}
           size={CapUIModalSize.Fullscreen}
@@ -476,11 +453,9 @@ const ParticipationWorkflowModal: React.FC<Props> = ({
             }
           })}
           {(!emailRequirement || isMeetingEmailRequirement) && !hasMetAllRequirements && <CaptchaModal />}
-          {(!hasMetAllRequirements || showUsername || shouldShowMedia) && (
-            <ContributionValidationModal contributionId={contributionGlobalId} />
-          )}
-          {!email && shouldAskConsent && <ConsentInternalCommunicationEmailModal />}
-          {email && shouldAskConsent && <ConsentInternalCommunicationModal />}
+          {!hasMetAllRequirements && <ContributionValidationModal contributionId={contributionGlobalId} />}
+          {!email && !consentInternalCommunication && <ConsentInternalCommunicationEmailModal />}
+          {email && !consentInternalCommunication && <ConsentInternalCommunicationModal />}
           {/* Uncomment when registration is implemented */}
           {/*{*/}
           {/*  (!isAuthenticated && emailRequirement && isMeetingEmailRequirement && consentInternalCommunication) && (*/}

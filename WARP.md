@@ -104,7 +104,7 @@ All commands below are run from the repository root unless otherwise specified.
 - PHP dependencies via Composer:
 
   ```bash
-  castor local:app:composer
+  castor local:app:composer --composer-command="install --prefer-dist --no-interaction --ignore-platform-reqs --no-suggest --no-progress"
   ```
 
 See [the local installation guide](doc/installation-locale.md) for the
@@ -130,34 +130,24 @@ Castor tasks are namespaced; use `castor` with the `local:*` namespace.
 
   ```bash
   castor local:infrastructures:stop
-  castor local:infrastructures:restart
+  castor local:infrastructures:reboot
   ```
 
-- Generate GraphQL schemas, both Relay frontends and install Symfony assets:
+- Initial Symfony deployment inside the containers (compiles GraphQL, warms the cache, installs assets, and creates RabbitMQ queues):
 
   ```bash
-  castor local:app:generate-graphql
-  castor local:app:install-assets
+  castor local:app:deploy
   ```
 
 - Generate or refresh the local database, fixtures, Elasticsearch indices, and media directories:
 
   ```bash
-  castor local:database:reset --environment=dev
+  castor local:database:generate --environment=dev
   ```
 
-  This recreates the schema from current entities and marks migrations as executed
-  without running them. To apply pending migrations to the existing database
-  without resetting it or reloading fixtures:
-
-  ```bash
-  castor local:database:migrate --environment=dev
-  ```
-
-On first installation, install JavaScript and PHP dependencies, reset the
-database, generate GraphQL and install assets. Database reset is destructive
-for local data. Create RabbitMQ queues separately with
-`local:app:rabbitmq-queues` on first installation; this erases the vhost.
+`local:app:deploy` does not generate the database. On a first installation,
+install Composer dependencies, run `local:database:generate`, then run
+`local:app:deploy`. Database generation is destructive for local data.
 
 - Start/stop background consumers (RabbitMQ via Swarrot + supervisord):
 
@@ -365,4 +355,4 @@ Translations are synchronized through Localise.biz and tooling under `packages/t
   - Backend PHP changes → `yarn php:quality` and, where relevant, targeted PHPUnit suites.
 - For changes that touch GraphQL types, resolvers, or front-end queries:
   - Regenerate schemas and Relay artifacts with `yarn relay` (or `yarn generate-graphql-files` + `yarn build-relay-schema`).
-  - For end-to-end behaviours (email flows, exports, queues, etc.), ensure the Docker-based local stack is running (`castor local:infrastructures:up` + `castor local:database:reset --environment=dev` + `castor local:app:generate-graphql` + `castor local:app:install-assets`) before executing Cypress or Jest E2E suites.
+  - For end-to-end behaviours (email flows, exports, queues, etc.), ensure the Docker-based local stack is running (`castor local:infrastructures:up` + `castor local:database:generate --environment=dev` + `castor local:app:deploy`) before executing Cypress or Jest E2E suites.

@@ -13,22 +13,20 @@ final class CommentUpdateAdminAnonymousMessage extends AbstractAdminMessage
     public static function getMyTemplateVars(Comment $comment, array $params): array
     {
         return [
-            'username' => self::escape($comment->getAuthorName()),
-            'proposal' => self::escape($comment->getRelatedObject()->getTitle()),
-            'date' => $comment->getUpdatedAt()->format('d/m/Y'),
-            'time' => $comment->getUpdatedAt()->format('H:i:s'),
-            'comment' => self::escape($comment->getBodyTextExcerpt()),
-            'proposalUrl' => $params['commentURL'],
-            'commentUrlBack' => $params['adminURL'],
-            'objectType' => $params['objectType'],
+            '%username%' => self::escape($comment->getAuthorName()),
+            '%proposal%' => self::escape($comment->getRelatedObject()->getTitle()),
+            '%date%' => $comment->getUpdatedAt()->format('d/m/Y'),
+            '%time%' => $comment->getUpdatedAt()->format('H:i:s'),
+            '%comment%' => self::escape($comment->getBodyTextExcerpt()),
+            '%proposalUrl%' => $params['commentURL'],
+            '%commentUrlBack%' => $params['adminURL'],
         ];
     }
 
     public static function getMySubjectVars(Comment $comment, array $params): array
     {
         return [
-            'username' => self::escape($comment->getAuthorName()),
-            'objectType' => $params['objectType'],
+            '%username%' => self::escape($comment->getAuthorName()),
         ];
     }
 }

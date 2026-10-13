@@ -10,7 +10,6 @@ use Capco\AppBundle\Service\Encryptor;
 use Capco\AppBundle\Service\ParticipantHelper;
 use Capco\AppBundle\Service\ParticipationWorkflow\ProposalReconcillier;
 use Capco\AppBundle\Service\ParticipationWorkflow\ReplyReconcilier;
-use Capco\AppBundle\Service\ParticipationWorkflow\VocalContributionReconcilier;
 use Capco\AppBundle\Service\ParticipationWorkflow\VotesReconcilier;
 use Capco\UserBundle\Authenticator\MagicLinkAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
@@ -40,7 +39,6 @@ class MagicLinkController extends AbstractController
         private readonly VotesReconcilier $votesReconcilier,
         private readonly TranslatorInterface $translator,
         private readonly ProposalReconcillier $proposalReconcillier,
-        private readonly VocalContributionReconcilier $vocalContributionReconcilier,
         private readonly ParticipantPhoneVerificationSmsRepository $participantPhoneVerificationSmsRepository
     ) {
     }
@@ -106,7 +104,6 @@ class MagicLinkController extends AbstractController
 
         $this->votesReconcilier->reconcile($participant, $viewer);
         $this->proposalReconcillier->reconcile($participant, $viewer);
-        $this->vocalContributionReconcilier->reconcile($participant, $viewer);
 
         $decryptedReplyCookie = ($cookies['replyCookie'] ?? null)
             ? $this->encryptor->decryptData($cookies['replyCookie'])

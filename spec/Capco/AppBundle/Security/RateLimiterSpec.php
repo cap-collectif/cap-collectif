@@ -37,12 +37,6 @@ class RateLimiterSpec extends ObjectBehavior
     public function it_should_be_true_up_to_10_tries(RedisCache $cache, ItemInterface $cachedItem)
     {
         $this->prepareMocks(9, 10, $cachedItem, $cache);
-        $cache->getItemTtl(RateLimiter::USER_CACHE_KEY . '-someAction-123456')->shouldBeCalled()->willReturn(60);
-        $cachedItem
-            ->expiresAfter(60)
-            ->shouldBeCalled()
-            ->willReturn($cachedItem)
-        ;
 
         $this->canDoAction('someAction', '123456')->shouldBe(true);
     }
@@ -50,7 +44,6 @@ class RateLimiterSpec extends ObjectBehavior
     public function it_should_be_false_over_10_tries(RedisCache $cache, ItemInterface $cachedItem)
     {
         $this->prepareMocks(10, 'RATE_LIMIT_REACHED', $cachedItem, $cache);
-        $cache->getItemTtl(RateLimiter::USER_CACHE_KEY . '-someAction-123456')->shouldBeCalled()->willReturn(60);
         $cachedItem
             ->expiresAfter(300)
             ->shouldBeCalled()
@@ -64,7 +57,6 @@ class RateLimiterSpec extends ObjectBehavior
     {
         $specificLimit = 3;
         $this->prepareMocks($specificLimit, 'RATE_LIMIT_REACHED', $cachedItem, $cache);
-        $cache->getItemTtl(RateLimiter::USER_CACHE_KEY . '-someAction-123456')->shouldBeCalled()->willReturn(60);
         $cachedItem
             ->expiresAfter(300)
             ->shouldBeCalled()
@@ -88,32 +80,6 @@ class RateLimiterSpec extends ObjectBehavior
         ;
 
         $this->canDoAction('someAction', '123:456')->shouldBe(true);
-    }
-
-    public function it_should_reset_a_counter_without_expiration(RedisCache $cache, ItemInterface $cachedItem)
-    {
-        $this->prepareMocks(10, 1, $cachedItem, $cache);
-        $cache->getItemTtl(RateLimiter::USER_CACHE_KEY . '-someAction-123456')->shouldBeCalled()->willReturn(-1);
-        $cachedItem
-            ->expiresAfter(60)
-            ->shouldBeCalled()
-            ->willReturn($cachedItem)
-        ;
-
-        $this->canDoAction('someAction', '123456')->shouldBe(true);
-    }
-
-    public function it_should_reset_a_reached_limit_without_expiration(RedisCache $cache, ItemInterface $cachedItem)
-    {
-        $this->prepareMocks(RateLimiter::LIMIT_REACHED, 1, $cachedItem, $cache);
-        $cache->getItemTtl(RateLimiter::USER_CACHE_KEY . '-someAction-123456')->shouldBeCalled()->willReturn(-1);
-        $cachedItem
-            ->expiresAfter(60)
-            ->shouldBeCalled()
-            ->willReturn($cachedItem)
-        ;
-
-        $this->canDoAction('someAction', '123456')->shouldBe(true);
     }
 
     /**

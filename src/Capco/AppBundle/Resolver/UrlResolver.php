@@ -105,21 +105,6 @@ class UrlResolver
         return $this->stepUrlResolver->__invoke($step);
     }
 
-    public function getHomeUrl(bool $absolute = false): string
-    {
-        $locale = $this->defaultLocale;
-        $request = $this->requestStack->getCurrentRequest();
-        if ($request) {
-            $locale = $request->getLocale();
-        }
-
-        return $this->router->generate(
-            'app_homepage',
-            ['_locale' => $locale],
-            $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH
-        );
-    }
-
     public function getObjectUrl($object, bool $absolute = false): string
     {
         $locale = $this->defaultLocale;

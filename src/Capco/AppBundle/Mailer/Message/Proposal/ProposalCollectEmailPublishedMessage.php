@@ -19,7 +19,6 @@ class ProposalCollectEmailPublishedMessage extends AbstractExternalMessage
             'confirmationUrl' => $params['confirmationUrl'],
             'baseUrl' => $params['baseURL'],
             'publishedAt' => $params['publishedAt'],
-            'proposal' => $proposal,
         ];
     }
 

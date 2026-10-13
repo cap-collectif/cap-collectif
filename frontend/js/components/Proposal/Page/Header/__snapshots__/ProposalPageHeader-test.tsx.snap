@@ -10,7 +10,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
         defaultStepUrl="/step"
         originStepUrl=""
         platformLocale="fr-FR"
-        tradKeyToBack="front.contribution.question.back"
+        tradKeyToBack="questions-list"
       />
       <div />
     </ProposalPageHeader__HeaderActions>
@@ -121,7 +121,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
         defaultStepUrl="/step"
         originStepUrl=""
         platformLocale="fr-FR"
-        tradKeyToBack="front.contribution.proposal.back"
+        tradKeyToBack="proposal.back"
       />
       <div />
     </ProposalPageHeader__HeaderActions>
@@ -239,7 +239,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
         defaultStepUrl="/step"
         originStepUrl=""
         platformLocale="fr-FR"
-        tradKeyToBack="front.contribution.proposal.back"
+        tradKeyToBack="proposal.back"
       />
       <div>
         <button
@@ -369,7 +369,7 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
         defaultStepUrl="/step"
         originStepUrl=""
         platformLocale="fr-FR"
-        tradKeyToBack="front.contribution.question.back"
+        tradKeyToBack="questions-list"
       />
       <div />
     </ProposalPageHeader__HeaderActions>

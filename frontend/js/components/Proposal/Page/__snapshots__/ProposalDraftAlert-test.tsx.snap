@@ -15,7 +15,7 @@ exports[`<ProposalDraftAlert /> should render draft alert 1`] = `
     fontWeight={400}
     withIcon={true}
   >
-    front.contribution.proposal.draft.explain
+    proposal.draft.explain
   </InfoMessage.Title>
 </ProposalDraftAlert___StyledInfoMessage>
 `;

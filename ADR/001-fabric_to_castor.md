@@ -31,13 +31,6 @@ dans `.castor/`, avec un point d'entrée `castor.php` à la racine. Les namespac
 locaux et ceux de la CI. La syntaxe cible sera celle de Castor, par exemple
 `castor local:infrastructures:up` et `castor ci:qa:phpunit`.
 
-Les implémentations communes vivent dans `.castor/shared/`, sous les namespaces
-`Capco\Castor\App`, `Database`, `Infrastructures` et `Qa`. Les fichiers de tâches
-exposent les commandes `local:*` et `ci:*` comme wrappers : ils définissent les
-arguments, les descriptions et les valeurs par défaut de leur contexte. La CI
-utilise Symfony `test` et les fichiers Compose de test ; les alias courts restent
-réservés au développement local.
-
 La migration devra :
 
 1. porter les primitives communes d'exécution de commandes, Docker Compose,
