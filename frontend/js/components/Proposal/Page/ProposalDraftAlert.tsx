@@ -5,6 +5,7 @@ import { InfoMessage } from '@cap-collectif/ui'
 // Waiting for flow type on DS
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type'
 import type { ProposalDraftAlert_proposal } from '~relay/ProposalDraftAlert_proposal.graphql'
+import { getContributionObjectTypeTranslationKey } from '@shared/constants/proposalStepObjectType'
 type Props = AppBoxProps & {
   readonly proposal: ProposalDraftAlert_proposal | null | undefined
   readonly message?: string
@@ -13,7 +14,7 @@ export const ProposalDraftAlert = ({ proposal, message, ...rest }: Props) => {
   const intl = useIntl()
 
   if (proposal?.publicationStatus === 'DRAFT') {
-    const defaultMessage = proposal.form.objectType === 'OPINION' ? 'opinion.draft.explain' : 'proposal.draft.explain'
+    const defaultMessage = `front.contribution.${getContributionObjectTypeTranslationKey(proposal.form.objectType)}.draft.explain`
     return (
       // TODO: Virer le css une fois le code global nette #12925
       <InfoMessage

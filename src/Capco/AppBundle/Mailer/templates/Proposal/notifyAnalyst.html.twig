@@ -1,7 +1,7 @@
 {% extends "@CapcoMail/standardLayout.html.twig" %}
 
 {% block html_title %}
-    {{ 'notification.title.assigned'|trans({}, 'CapcoAppBundle', user_locale) }}
+    {{ ('notification.title.assigned.' ~ (proposals|first).form.objectType|lower)|trans({'proposalName': (proposals|first).title}, 'CapcoAppBundle', user_locale) }}
 {% endblock %}
 
 {% set logoUrl = app_logo_url() %}

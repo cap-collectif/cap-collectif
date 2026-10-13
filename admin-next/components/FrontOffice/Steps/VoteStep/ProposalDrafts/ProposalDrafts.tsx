@@ -23,6 +23,7 @@ import { pxToRem } from '@shared/utils/pxToRem'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment, useLazyLoadQuery } from 'react-relay'
+import { getContributionObjectTypeTranslationKey } from '@shared/constants/proposalStepObjectType'
 import ProposalFormModal from '../ProposalForm/ProposalFormModal'
 
 type Props = {
@@ -38,6 +39,7 @@ const FRAGMENT = graphql`
     }
     form {
       id
+      objectType
       ...ProposalFormModal_proposalForm
     }
   }
@@ -94,6 +96,7 @@ const ProposalDraftsList: React.FC<ProposalDraftsListProps> = ({ stepId, isAuthe
   if (!data?.step || !isAuthenticated) return null
 
   const drafts = data.step.viewerProposalDrafts?.edges || []
+  const objectType = getContributionObjectTypeTranslationKey(proposalForm.objectType)
 
   if (drafts.length === 0) return null
 
@@ -102,7 +105,7 @@ const ProposalDraftsList: React.FC<ProposalDraftsListProps> = ({ stepId, isAuthe
       <Flex alignItems="center" lineHeight={CapUILineHeight.Normal} gap={2}>
         <Icon name={CapUIIcon.Lock} size={CapUIIconSize.Sm} lineHeight={CapUILineHeight.Normal} alignSelf="center" />
         <Text as="h4" fontSize={CapUIFontSize.BodyRegular} fontWeight={600} lineHeight={CapUILineHeight.Normal}>
-          {intl.formatMessage({ id: 'front.proposal.your-drafts' })}
+          {intl.formatMessage({ id: `front.contribution.${objectType}.your-drafts` })}
         </Text>
         <Text fontSize={CapUIFontSize.BodySmall} color="text.secondary" lineHeight={CapUILineHeight.Normal}>
           {intl.formatMessage({ id: 'global.draft.only_visible_by_you' })}
@@ -142,7 +145,7 @@ const ProposalDraftsList: React.FC<ProposalDraftsListProps> = ({ stepId, isAuthe
                   setIsEditModalOpen(true)
                 }}
               >
-                {intl.formatMessage({ id: 'front.proposal.keep-editing' })}
+                {intl.formatMessage({ id: `front.contribution.${objectType}.keep-editing` })}
               </Button>
             </CardContent>
           </Card>

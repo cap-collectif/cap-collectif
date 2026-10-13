@@ -29,4 +29,8 @@ describe('<ProposalListOrderSorting />', () => {
     const wrapper = shallow(<ProposalListOrderSorting {...props} canDisplayBallot={false} />)
     expect(wrapper).toMatchSnapshot()
   })
+  it('uses the masculine commented label for projects', () => {
+    const wrapper = shallow(<ProposalListOrderSorting {...props} objectType="PROJECT" orderByComments />)
+    expect(wrapper).toMatchSnapshot()
+  })
 })

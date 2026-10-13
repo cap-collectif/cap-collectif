@@ -36,6 +36,7 @@ final class ProposalCreateAdminMessage extends AbstractAdminMessage
     {
         return [
             'username' => self::escape($proposal->getAuthor()->getDisplayName()),
+            'objectType' => $proposal->getProposalForm()->getObjectType(),
             'project' => self::escape(
                 $proposal
                     ->getProposalForm()

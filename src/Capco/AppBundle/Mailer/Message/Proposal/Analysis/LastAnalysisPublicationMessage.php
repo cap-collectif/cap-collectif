@@ -13,7 +13,10 @@ class LastAnalysisPublicationMessage extends AbstractExternalMessage
 
     public static function getMySubjectVars(Proposal $proposal, array $params): array
     {
-        return ['proposalName' => $proposal->getTitle()];
+        return [
+            'proposalName' => $proposal->getTitle(),
+            'objectType' => $proposal->getProposalForm()->getObjectType(),
+        ];
     }
 
     public static function getMyTemplateVars(Proposal $proposal, array $params): array

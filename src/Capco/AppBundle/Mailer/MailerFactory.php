@@ -45,13 +45,16 @@ class MailerFactory
                 : $this->siteParams->getValue('admin.mail.notifications.receive_address');
         }
 
+        $subjectVars = \call_user_func("{$type}::getMySubjectVars", $element, $params);
+        $templateVars = \call_user_func("{$type}::getMyTemplateVars", $element, $params);
+
         /** @var AbstractMessage $message */
         $message = new $type(
             $recipientEmail,
-            \constant("{$type}::SUBJECT"),
-            \call_user_func("{$type}::getMySubjectVars", $element, $params),
-            \constant("{$type}::TEMPLATE"),
-            \call_user_func("{$type}::getMyTemplateVars", $element, $params),
+            self::resolveTranslationKey(\constant("{$type}::SUBJECT"), $subjectVars),
+            $subjectVars,
+            self::resolveTranslationKey(\constant("{$type}::TEMPLATE"), $templateVars),
+            $templateVars,
             $recipient,
             $replyTo
         );
@@ -110,6 +113,18 @@ class MailerFactory
         );
         $message->setFooterTemplate($footer);
         $message->setFooterTemplateVars($footerVars);
+    }
+
+    /**
+     * @param array<string, mixed> $vars
+     */
+    private static function resolveTranslationKey(string $key, array $vars): string
+    {
+        if (str_ends_with($key, '.twig') || !isset($vars['objectType']) || !\is_string($vars['objectType'])) {
+            return $key;
+        }
+
+        return $key . '.' . strtolower($vars['objectType']);
     }
 
     private static function getMessageTypeFromClass(string $class): string

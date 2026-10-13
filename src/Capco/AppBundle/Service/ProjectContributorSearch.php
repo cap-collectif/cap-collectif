@@ -753,9 +753,8 @@ class ProjectContributorSearch
 
     private function getUserOpinionVoteSQL(): string
     {
-        // Keep project steps first to avoid scanning all users before filtering their votes.
         return <<<'SQL'
-            SELECT STRAIGHT_JOIN
+            SELECT
                 0 AS source_priority,
                 'user' AS contributor_type,
                 u.id AS contributor_id,
@@ -824,9 +823,8 @@ class ProjectContributorSearch
 
     private function getUserArgumentVoteSQL(): string
     {
-        // Keep project steps first to avoid scanning all users before filtering their votes.
         return <<<'SQL'
-            SELECT STRAIGHT_JOIN
+            SELECT
                 0 AS source_priority,
                 'user' AS contributor_type,
                 u.id AS contributor_id,
@@ -857,7 +855,7 @@ class ProjectContributorSearch
               AND a.published = 1
               AND o.published = 1
             UNION ALL
-            SELECT STRAIGHT_JOIN
+            SELECT
                 0 AS source_priority,
                 'user' AS contributor_type,
                 u.id AS contributor_id,

@@ -18,6 +18,7 @@ import { getDefaultAccordions } from './utils'
 import useVoteStepFilters, { DEFAULT_FILTERS, FilterState } from './useVoteStepFilters'
 import VoteStepFiltersAccordions from './VoteStepFiltersAccordions'
 import VoteStepSearchBar from './VoteStepSearchBar'
+import { getContributionObjectTypeTranslationKey } from '@shared/constants/proposalStepObjectType'
 
 type Props = {
   stepId: string
@@ -28,7 +29,8 @@ type Props = {
 
 const VoteStepMobileFiltersModal: React.FC<Props> = ({ stepId, proposalsCount, isActive = false, onButtonClick }) => {
   const intl = useIntl()
-  const { filters } = useVoteStepFilters(stepId)
+  const { filters, form } = useVoteStepFilters(stepId)
+  const objectType = getContributionObjectTypeTranslationKey(form?.objectType)
   const { isOpen, onOpen, onClose } = useDisclosure(false)
 
   const handleOpen = () => {
@@ -80,16 +82,16 @@ const VoteStepMobileFiltersModal: React.FC<Props> = ({ stepId, proposalsCount, i
         onClose={onClose}
         size={CapUIModalSize.Fullscreen}
         height="100%"
-        ariaLabel={intl.formatMessage({ id: 'vote.step.filter_project' })}
+        ariaLabel={intl.formatMessage({ id: `front.contribution.${objectType}.filter` })}
         fullSizeOnMobile
       >
         <Modal.Header>
           <Heading as="h4" color="blue.900">
-            {intl.formatMessage({ id: 'vote.step.filter_project' })}
+            {intl.formatMessage({ id: `front.contribution.${objectType}.filter` })}
           </Heading>
         </Modal.Header>
         <Modal.Body spacing={5}>
-          <VoteStepSearchBar proposalsCount={proposalsCount} />
+          <VoteStepSearchBar proposalsCount={proposalsCount} objectType={form?.objectType} />
           <Box mt="md">
             <VoteStepFiltersAccordions
               filters={filters}
@@ -101,7 +103,7 @@ const VoteStepMobileFiltersModal: React.FC<Props> = ({ stepId, proposalsCount, i
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" variantColor="primary" variantSize="medium" onClick={applyFilters}>
-            {intl.formatMessage({ id: 'front.collect-vote-step.filter-proposals' })}
+            {intl.formatMessage({ id: `front.contribution.${objectType}.filter-apply` })}
           </Button>
         </Modal.Footer>
       </Modal>

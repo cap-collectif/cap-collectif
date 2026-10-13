@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Mailer\Message\Comment;
 
 use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Enum\ProposalFormObjectType;
 use Capco\AppBundle\Mailer\Message\AbstractAdminMessage;
 
 final class CommentDeleteAdminMessage extends AbstractAdminMessage
@@ -18,6 +19,7 @@ final class CommentDeleteAdminMessage extends AbstractAdminMessage
             'proposal' => self::escape($params['comment']['proposal']),
             'comment' => self::escape($params['comment']['body']),
             'proposalUrl' => $params['proposalURL'],
+            'objectType' => $params['comment']['objectType'] ?? ProposalFormObjectType::PROPOSAL,
         ];
     }
 
@@ -25,6 +27,7 @@ final class CommentDeleteAdminMessage extends AbstractAdminMessage
     {
         return [
             'username' => self::escape($params['comment']['username']),
+            'objectType' => $params['comment']['objectType'] ?? ProposalFormObjectType::PROPOSAL,
         ];
     }
 }
