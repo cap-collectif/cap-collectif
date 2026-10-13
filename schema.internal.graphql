@@ -10025,6 +10025,8 @@ type Mutation {
   updateBlogImage(input: UpdateBlogImageInput!): UpdateBlogImagePayload
   updateAppearanceColor(input: UpdateAppearanceColorInput!): UpdateAppearanceColorPayload
   updateAppearanceImage(input: UpdateAppearanceImageInput!): UpdateAppearanceImagePayload
+  updateFooterSetting(input: UpdateFooterSettingInput!): UpdateFooterSettingPayload
+  updateFooterColor(input: UpdateFooterColorInput!): UpdateFooterColorPayload
 
   """Update a project page setting."""
   updateProjectSetting(input: UpdateProjectSettingInput!): UpdateProjectSettingPayload
@@ -15500,6 +15502,8 @@ type Query {
   siteColors: [SiteColor!]!
   appearanceColors: [SiteColor!]!
   appearanceImages: [SiteImage!]!
+  footerSettings: [SiteParameter!]!
+  footerColors: [SiteColor!]!
 
   """Retrieve the current version of the app."""
   appVersion: String
@@ -20776,6 +20780,46 @@ type UpdateFollowProposalPayload {
   followerEdge: FollowerEdge
   proposal: Proposal
   clientMutationId: String
+}
+
+enum UpdateFooterColorErrorCode {
+  SITE_COLOR_NOT_FOUND
+}
+
+input UpdateFooterColorInput {
+  id: ID!
+  value: String!
+  isEnabled: Boolean!
+  clientMutationId: String
+}
+
+type UpdateFooterColorPayload {
+  siteColor: SiteColor
+  errorCode: UpdateFooterColorErrorCode
+  clientMutationId: String
+}
+
+enum UpdateFooterSettingErrorCode {
+  FOOTER_PARAMETER_NOT_FOUND
+  INVALID_VALUE
+}
+
+input UpdateFooterSettingInput {
+  id: ID!
+  translations: [UpdateFooterSettingTranslationInput!]!
+  isEnabled: Boolean!
+  clientMutationId: String
+}
+
+type UpdateFooterSettingPayload {
+  siteParameter: SiteParameter
+  errorCode: UpdateFooterSettingErrorCode
+  clientMutationId: String
+}
+
+input UpdateFooterSettingTranslationInput {
+  locale: TranslationLocale!
+  value: String!
 }
 
 input UpdateFooterSocialNetworkInput {

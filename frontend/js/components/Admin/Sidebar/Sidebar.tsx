@@ -288,7 +288,15 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                         : '/admin/settings/pages.login/list'
                     }
                   />
-                  <SidebarLink text="admin.label.pages.footer" href="/admin/settings/pages.footer/list" />
+                  {/* Sonata route retained during the Admin Next migration rollout. Remove it when the migration feature flag is removed. */}
+                  <SidebarLink
+                    text="admin.label.pages.footer"
+                    href={
+                      features.unstable__sonata_migration_to_admin_next
+                        ? '/admin-next/footer-settings'
+                        : '/admin/settings/pages.footer/list'
+                    }
+                  />
                   {/* Sonata route retained during the Admin Next migration rollout. Remove it when the migration feature flag is removed. */}
                   <SidebarLink
                     text="admin.label.pages.cookies"

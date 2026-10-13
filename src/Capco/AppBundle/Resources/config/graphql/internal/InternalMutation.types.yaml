@@ -1620,6 +1620,20 @@ InternalMutation:
                     inputType: UpdateAppearanceImageInput
                     payloadType: UpdateAppearanceImagePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AppearanceSettings\\UpdateAppearanceImageMutation", args)'
+            updateFooterSetting:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateFooterSettingInput
+                    payloadType: UpdateFooterSettingPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\FooterSettings\\UpdateFooterSettingMutation", args)'
+            updateFooterColor:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateFooterColorInput
+                    payloadType: UpdateFooterColorPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\FooterSettings\\UpdateFooterColorMutation", args)'
             updateProjectSetting:
                 description: 'Update a project page setting.'
                 access: "@=hasRole('ROLE_ADMIN')"

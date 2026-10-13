@@ -652,6 +652,14 @@ InternalQuery:
                 type: '[SiteImage!]!'
                 access: "@=hasRole('ROLE_ADMIN')"
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\AppearanceSettings\\AppearanceImagesQueryResolver")'
+            footerSettings:
+                type: '[SiteParameter!]!'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\FooterSettings\\FooterSettingsQueryResolver")'
+            footerColors:
+                type: '[InternalSiteColor!]!'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\FooterSettings\\FooterColorsQueryResolver")'
             appVersion:
                 description: 'Retrieve the current version of the app.'
                 type: 'String'
