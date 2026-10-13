@@ -7,8 +7,6 @@ services:
             context: ../services/local
             args:
                 DOCKER_BUILDKIT: 1
-            cache_from:
-                - 'capco-application'
         ports:
             - '443:443'
             - '1337:1337'
@@ -58,8 +56,6 @@ services:
         container_name: capco_elasticsearch_1
         build:
             context: '../services/elasticsearch'
-            cache_from:
-                - 'capco_elasticsearch'
         environment:
             - cluster.name='%SYMFONY_ELASTICSEARCH_INDEX'
             - bootstrap.memory_lock=true

@@ -6,24 +6,90 @@ namespace Local\System;
 
 use Castor\Attribute\AsTask;
 use function Castor\context;
+use function Castor\io;
 use function Castor\run;
+use Symfony\Component\Process\ExecutableFinder;
 
-#[AsTask(description: 'Display the versions of local development tools.')]
+#[AsTask(description: 'Check local prerequisites, pinned tool versions and Docker availability; report all failures before exiting.', aliases: ['doctor'])]
 function doctor(): void
 {
-    run(['docker', '--version']);
-    run(['docker', 'compose', 'version']);
-    run(['node', '--version']);
-    run(['yarn', '--version']);
+    $package = json_decode(file_get_contents('package.json') ?: '{}', true, 512, \JSON_THROW_ON_ERROR);
+    $checks = [
+        ['Git', ['git', '--version'], null],
+        ['Docker CLI', ['docker', '--version'], null],
+        ['Docker Compose', ['docker', 'compose', 'version'], null],
+        ['Docker daemon', ['docker', 'info', '--format', '{{.ServerVersion}}'], null],
+        ['Node.js', ['node', '--version'], trim(file_get_contents('.nvmrc') ?: '')],
+        ['Corepack', ['corepack', '--version'], null],
+        ['Yarn via Corepack', ['corepack', 'yarn', '--version'], str_replace('yarn@', '', (string) ($package['packageManager'] ?? ''))],
+        ['Castor', ['castor', '--version'], trim(file_get_contents('.castor-version') ?: '')],
+        ['mkcert', ['mkcert', '-version'], null],
+        ['curl', ['curl', '--version'], null],
+    ];
 
     if ('Darwin' === \PHP_OS_FAMILY) {
-        run(['php', '--version']);
-        run(['composer', '--version']);
-        run(['symfony', '-V']);
-        run(['sh', '-c', 'php -m | grep -qi redis && echo "PHP extension: redis enabled" || echo "PHP extension: redis not found"']);
-        run(['sh', '-c', 'php -m | grep -qi imagick && echo "PHP extension: imagick enabled" || echo "PHP extension: imagick not found"']);
-        run(['sh', '-c', 'php -m | grep -qi amqp && echo "PHP extension: amqp enabled" || echo "PHP extension: amqp not found"']);
+        $checks[] = ['Symfony CLI', ['symfony', '-V'], null];
     }
+
+    $failures = [];
+
+    foreach ($checks as [$label, $command, $expectedVersion]) {
+        if (!doctorCheck($label, $command, $expectedVersion)) {
+            $failures[] = $label;
+        }
+    }
+
+    if ([] !== $failures) {
+        throw new \RuntimeException('Local prerequisites are not ready: ' . implode(', ', $failures) . '. See doc/installation-locale.md.');
+    }
+
+    io()->success('All local prerequisites are ready.');
+}
+
+/** @param list<string> $command */
+function doctorCheck(string $label, array $command, ?string $expectedVersion = null): bool
+{
+    if (null === (new ExecutableFinder())->find($command[0])) {
+        io()->writeln(sprintf('<error>[MISSING] %s: executable "%s" not found in PATH.</error>', $label, $command[0]));
+
+        return false;
+    }
+
+    try {
+        $process = run($command, context: context()
+            ->withAllowFailure()
+            ->withQuiet()
+            ->withTimeout(15)
+            ->withEnvironment(['COREPACK_ENABLE_NETWORK' => '0', 'COREPACK_ENABLE_DOWNLOAD_PROMPT' => '0']));
+    } catch (\Exception $exception) {
+        io()->writeln(sprintf('<error>[ERROR] %s: %s</error>', $label, $exception->getMessage()));
+
+        return false;
+    }
+
+    if (!$process->isSuccessful()) {
+        $message = 'Docker daemon' === $label
+            ? 'Docker is installed, but its daemon is stopped or inaccessible.'
+            : 'Command failed: ' . implode(' ', $command);
+        io()->writeln(sprintf('<error>[ERROR] %s: %s</error>', $label, $message));
+        io()->text(trim((string) ($process->getErrorOutput() ?: $process->getOutput())));
+
+        return false;
+    }
+
+    $output = trim((string) ($process->getOutput() ?: $process->getErrorOutput()));
+
+    if (null !== $expectedVersion
+        && ('' === $expectedVersion || !preg_match('/(?<![0-9.])v?' . preg_quote(ltrim($expectedVersion, 'v'), '/') . '(?![0-9.])/', $output))
+    ) {
+        io()->writeln(sprintf('<error>[VERSION] %s: expected %s, got %s.</error>', $label, $expectedVersion ?: 'a pinned version in the repository', $output));
+
+        return false;
+    }
+
+    io()->writeln(sprintf('<info>[OK] %s: %s</info>', $label, strtok($output, "\n") ?: 'available'));
+
+    return true;
 }
 
 #[AsTask(description: 'Configure local development virtual hosts.')]

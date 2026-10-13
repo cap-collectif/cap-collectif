@@ -6,13 +6,11 @@ use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Mailer\Enum\RecipientType;
 use Capco\AppBundle\Mailer\Model\EmailCampaignRecipient;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Contracts\Service\Attribute\Required;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * This class uses a setter injection to initialize the routes (cf #[Required] private function initRoutes() method).
- * This is for performance reasons, generating the (same) route from the $router service for each recipient costs too much.
- * Instead, we generate the route with placeholders and then we use str_replace() for each recipient.
+ * Unsubscribe routes are generated on first use so service initialization does not require a database.
+ * The URLs are then reused with recipient placeholders to avoid generating routes for every message.
  */
 class MessageBuilder
 {
@@ -23,22 +21,6 @@ class MessageBuilder
         private readonly TranslatorInterface $translator,
         private readonly UrlGeneratorInterface $router,
     ) {
-    }
-
-    #[Required]
-    public function initRoutes(): void
-    {
-        $this->unsubscribeUserBaseUrl = $this->router->generate(
-            name: 'capco_app_action_token',
-            parameters: ['token' => '_UNSUBSCRIBE_TOKEN_'],
-            referenceType: UrlGeneratorInterface::ABSOLUTE_URL
-        );
-
-        $this->unsubscribeParticipantBaseUrl = $this->router->generate(
-            name: 'capco_app_unsubscribe_anonymous',
-            parameters: ['token' => '_UNSUBSCRIBE_TOKEN_', 'email' => '_EMAIL_'],
-            referenceType: UrlGeneratorInterface::ABSOLUTE_URL
-        );
     }
 
     // We ignore missingType.iterableValue because the messages structure depends on the MailJet API
@@ -79,6 +61,28 @@ class MessageBuilder
                 'signaturePart' => $this->translateSignaturePart($recipientFromPage->getLocale()),
             ],
         ];
+    }
+
+    private function initRoutes(): void
+    {
+        if (null !== $this->unsubscribeUserBaseUrl && null !== $this->unsubscribeParticipantBaseUrl) {
+            return;
+        }
+
+        $userBaseUrl = $this->router->generate(
+            name: 'capco_app_action_token',
+            parameters: ['token' => '_UNSUBSCRIBE_TOKEN_'],
+            referenceType: UrlGeneratorInterface::ABSOLUTE_URL
+        );
+
+        $participantBaseUrl = $this->router->generate(
+            name: 'capco_app_unsubscribe_anonymous',
+            parameters: ['token' => '_UNSUBSCRIBE_TOKEN_', 'email' => '_EMAIL_'],
+            referenceType: UrlGeneratorInterface::ABSOLUTE_URL
+        );
+
+        $this->unsubscribeUserBaseUrl = $userBaseUrl;
+        $this->unsubscribeParticipantBaseUrl = $participantBaseUrl;
     }
 
     private function translateUnsubscribePart(?string $locale): string
@@ -126,6 +130,8 @@ class MessageBuilder
         EmailCampaignRecipient $recipient,
         ?string $unsubscribeToken
     ): string {
+        $this->initRoutes();
+
         if (RecipientType::User === $recipient->getType()) {
             $baseUrl = $this->unsubscribeUserBaseUrl;
         } else {

@@ -103,6 +103,7 @@ use Symfony\Component\Console\Exception\ExceptionInterface;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Stopwatch\Stopwatch;
@@ -517,21 +518,31 @@ class ReinitCommand extends Command
     protected function mockMigrations(OutputInterface $output): void
     {
         $this->stopwatch->start('mockMigrations');
+        $migrationOutput = new BufferedOutput($output->getVerbosity(), $output->isDecorated());
 
-        $this->runCommands(
-            [
-                'doctrine:migration:version' => [
-                    '--add' => true,
-                    '--all' => true,
-                    '--quiet' => true,
-                    '--no-debug' => true,
+        try {
+            $this->runCommands(
+                [
+                    'doctrine:migration:version' => [
+                        '--add' => true,
+                        '--all' => true,
+                        '--no-debug' => true,
+                    ],
                 ],
-            ],
-            $output
-        );
+                $migrationOutput
+            );
+        } catch (\Throwable $exception) {
+            $output->write($migrationOutput->fetch());
+
+            throw $exception;
+        }
+
+        if ($output->isVerbose()) {
+            $output->write($migrationOutput->fetch());
+        }
 
         $event = $this->stopwatch->stop('mockMigrations');
-        $this->io->info(sprintf('Mocking migrations duration: %s.', $event->getDuration() / 1000));
+        $this->io->info(sprintf('Migrations marked as executed without running migration SQL in %ss.', $event->getDuration() / 1000));
     }
 
     /**
