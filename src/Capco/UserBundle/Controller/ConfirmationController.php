@@ -15,6 +15,7 @@ use Capco\AppBundle\Service\Encryptor;
 use Capco\AppBundle\Service\ParticipationWorkflow\ParticipationCookieManager;
 use Capco\AppBundle\Service\ParticipationWorkflow\ProposalReconcillier;
 use Capco\AppBundle\Service\ParticipationWorkflow\ReplyReconcilier;
+use Capco\AppBundle\Service\ParticipationWorkflow\VocalContributionReconcilier;
 use Capco\AppBundle\Service\ParticipationWorkflow\VotesReconcilier;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
@@ -51,7 +52,8 @@ class ConfirmationController extends Controller
         private readonly Encryptor $encryptor,
         private readonly ReplyReconcilier $replyReconcilier,
         private readonly VotesReconcilier $votesReconcilier,
-        private readonly ProposalReconcillier $proposalReconcillier
+        private readonly ProposalReconcillier $proposalReconcillier,
+        private readonly VocalContributionReconcilier $vocalContributionReconcilier
     ) {
         $this->login = true;
     }
@@ -268,6 +270,7 @@ class ConfirmationController extends Controller
 
         if ($existingParticipant && ($cookies['participantCookie'] ?? null)) {
             $this->votesReconcilier->reconcile($participant, $existingParticipant);
+            $this->vocalContributionReconcilier->reconcile($participant, $existingParticipant);
             $this->votesReconcilier->updateParticipantInfos($existingParticipant, $participant);
             $decryptedParticipantCookies = $this->encryptor->decryptData($cookies['participantCookie']);
             $participantCookie = Cookie::create(ParticipationCookieManager::PARTICIPANT_COOKIE, $decryptedParticipantCookies, (new \DateTime())->modify('+1 year'), null, null, false, false);
@@ -418,5 +421,6 @@ class ConfirmationController extends Controller
 
         $this->proposalReconcillier->reconcile($participant, $user);
         $this->votesReconcilier->reconcile($participant, $user);
+        $this->vocalContributionReconcilier->reconcile($participant, $user);
     }
 }

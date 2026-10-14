@@ -83,6 +83,12 @@ services:
         tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Steps\CollectStep']
 
+    Capco\AppBundle\Repository\VocalContributionRepository:
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        tags: ['repository.manager']
+        arguments: ['CapcoAppBundle:VocalContribution']
+
     Capco\AppBundle\Repository\DebateStepRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true

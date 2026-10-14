@@ -19,6 +19,8 @@ class Media implements EntityInterface, \Stringable
 {
     use UuidTrait;
 
+    public const VOCAL_CONTRIBUTION_CONTEXT = 'vocal_contribution';
+
     /**
      * @ORM\Column(type="string", name="name", length=255, nullable=false)
      */

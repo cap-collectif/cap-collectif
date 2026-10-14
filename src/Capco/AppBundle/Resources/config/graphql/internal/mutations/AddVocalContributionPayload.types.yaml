@@ -1,0 +1,19 @@
+AddVocalContributionPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            contributionId:
+                type: 'ID!'
+                description: 'The VocalContribution global ID.'
+            shouldTriggerParticipationWorkflow:
+                type: 'Boolean!'
+                description: 'Whether the participation requirements workflow must be opened.'
+            shouldTriggerConsentInternalCommunication:
+                type: 'Boolean!'
+                description: 'Whether the internal communication consent must be requested.'
+            completionStatus:
+                type: 'ContributionCompletionStatus!'
+                description: 'The completion status of the vocal contribution.'
+            participantToken:
+                type: 'String'
+                description: 'The anonymous participant token created for this contribution.'

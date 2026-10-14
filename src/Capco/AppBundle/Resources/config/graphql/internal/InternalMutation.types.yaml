@@ -2201,6 +2201,13 @@ InternalMutation:
                     inputType: ValidateContributionInput
                     payloadType: ValidateContributionPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ValidateContributionMutation", args, getUser())'
+            addVocalContribution:
+                access: "hasFeatureFlag('vocal_contribution')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: AddVocalContributionInput
+                    payloadType: AddVocalContributionPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddVocalContributionMutation", args, getUser())'
             # Mediator
             addMediators:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\AddMediatorsMutation").isGranted(args["input"]["stepId"], getUser())'

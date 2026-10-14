@@ -84,6 +84,8 @@ maximum les patterns déjà en place dans `admin-next/` plutôt qu'en inventant 
 5. **Repérer une page `admin-next/` déjà migrée avec une structure similaire** pour copier le pattern plutôt
    que d'en inventer un nouveau. Voir la section "Patterns de référence" ci-dessous pour choisir le bon
    template selon la forme de la donnée (liste plate vs paginée, avec/sans traductions, avec/sans couleur...).
+   Réutiliser `Layout` et les composants `Table` de CapUI pour les nouvelles listes,
+   y compris les prototypes ; ne pas recréer une liste Twig lorsque la cible demandée est admin-next.
 6. **Créer la page** dans `admin-next/pages/admin-next/<nom-en-kebab-case>.tsx` (le nom de fichier = la route).
 7. **Créer le(s) composant(s)** dans `admin-next/components/BackOffice/<NomDeLaFeature>/` (PascalCase pour le
    dossier et les fichiers de composants).

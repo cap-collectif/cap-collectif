@@ -5,6 +5,7 @@ namespace Capco\Tests\Controller\Api;
 use Capco\AppBundle\Antivirus\AntivirusScanner;
 use Capco\AppBundle\Controller\Api\MediasController;
 use Capco\AppBundle\Manager\MediaManager;
+use Capco\AppBundle\Service\VocalContributionUploadService;
 use Capco\AppBundle\Twig\MediaExtension;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -28,10 +29,14 @@ class MediasControllerTest extends KernelTestCase
         $mediaManager = static::getContainer()->get(MediaManager::class);
         \assert($mediaManager instanceof MediaManager);
 
+        $vocalContributionUploadService = static::getContainer()->get(VocalContributionUploadService::class);
+        \assert($vocalContributionUploadService instanceof VocalContributionUploadService);
+
         $controller = new MediasController(
             $mediaManager,
             $this->createStub(MediaExtension::class),
-            $this->createStub(AntivirusScanner::class)
+            $this->createStub(AntivirusScanner::class),
+            $vocalContributionUploadService
         );
         $controller->setContainer(static::getContainer());
         $file = new UploadedFile(

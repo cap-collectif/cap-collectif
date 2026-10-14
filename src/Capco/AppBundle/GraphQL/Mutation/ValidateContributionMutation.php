@@ -18,12 +18,14 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ProposalStepInterface;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Entity\VocalContribution;
 use Capco\AppBundle\Exception\ParticipantNotFoundException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Participant\ParticipantIsMeetingRequirementsResolver;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\ViewerIsMeetingRequirementsResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Model\Publishable;
+use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
@@ -31,6 +33,7 @@ use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\Service\ParticipantHelper;
 use Capco\AppBundle\Service\ProjectParticipantsTotalCountCacheHandler;
 use Capco\AppBundle\Service\ReplyCounterIndexer;
+use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -59,6 +62,8 @@ class ValidateContributionMutation implements MutationInterface
         private readonly ProjectParticipantsTotalCountCacheHandler $projectParticipantsTotalCountCacheHandler,
         private readonly ParticipantRepository $paritcipantRepository,
         private readonly Publisher $publisher,
+        private readonly CollectStepRepository $collectStepRepository,
+        private readonly Manager $toggleManager,
     ) {
     }
 
@@ -83,6 +88,18 @@ class ValidateContributionMutation implements MutationInterface
         $contributor = $participant ?? $viewer;
 
         $contributionId = $input->offsetGet('contributionId');
+        if ('VocalContribution' === (GlobalId::fromGlobalId($contributionId)['type'] ?? null)) {
+            if (!$this->toggleManager->isActive(Manager::vocal_contribution)) {
+                throw new UserError('Vocal contributions feature is disabled.');
+            }
+
+            $vocal = $this->getVocalContribution($contributionId, $viewer, $participant);
+            $this->validateVocalContribution($vocal, $viewer, $participant);
+            $this->em->flush();
+
+            return ['redirectUrl' => '/'];
+        }
+
         $contribution = $this->getContribution($contributionId, $viewer, $participant);
         $step = $this->getStep($contribution);
 
@@ -97,6 +114,45 @@ class ValidateContributionMutation implements MutationInterface
         $this->em->flush();
 
         return ['redirectUrl' => $redirectUrl];
+    }
+
+    private function getVocalContribution(string $contributionId, ?User $viewer, ?Participant $participant): VocalContribution
+    {
+        $context = null;
+        if (!$viewer && $participant) {
+            $context = new \ArrayObject(['disable_acl' => true]);
+        }
+
+        $vocal = $this->globalIdResolver->resolve($contributionId, $viewer ?? $participant, $context);
+        if (!$vocal instanceof VocalContribution) {
+            throw new UserError(sprintf('Vocal contribution with ID %s not found.', $contributionId));
+        }
+
+        return $vocal;
+    }
+
+    private function validateVocalContribution(VocalContribution $vocal, ?User $viewer, ?Participant $participant): void
+    {
+        $step = $this->collectStepRepository->findVocalContributionStep();
+        if (!$step || !$step->isOpen()) {
+            throw new UserError('Step closed');
+        }
+
+        if ($viewer) {
+            if ($vocal->getUser() !== $viewer) {
+                if (!$participant || $vocal->getParticipant() !== $participant) {
+                    throw new UserError('Given viewer is not the author of the vocal contribution');
+                }
+                $vocal->setUser($viewer);
+            }
+            $this->validateViewerRequirements($step, $viewer);
+        } elseif (!$participant || $vocal->getParticipant() !== $participant) {
+            throw new UserError('Given participant is not the author of the vocal contribution');
+        } else {
+            $this->validateParticipantRequirements($participant, $step);
+        }
+
+        $vocal->setCompletedStatus();
     }
 
     private function getContribution(string $contributionId, ?User $viewer = null, ?Participant $participant = null): ContributionInterface

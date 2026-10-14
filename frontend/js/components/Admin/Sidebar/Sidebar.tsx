@@ -179,6 +179,11 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                   <SidebarLink text="admin.label.argument" href="/admin/capco/app/argument/list" />
                   <SidebarLink text="admin.label.source" href="/admin/capco/app/source/list" />
                   <SidebarLink text="admin.label.comment" href="/admin/capco/app/comment/list" />
+                  <SidebarLink
+                    text="admin.voice-messages.title"
+                    defaultMessage="Messages vocaux"
+                    href="/admin-next/voice-messages"
+                  />
                 </SidebarAccordionPanel>
               </SidebarAccordionItem>
             ) : null}

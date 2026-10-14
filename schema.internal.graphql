@@ -929,6 +929,33 @@ type AddVersionPayload {
   clientMutationId: String
 }
 
+input AddVocalContributionInput {
+  """The VocalContribution global ID returned by the upload route."""
+  vocalId: ID!
+
+  """The anonymous participant token."""
+  participantToken: String
+  clientMutationId: String
+}
+
+type AddVocalContributionPayload {
+  """The VocalContribution global ID."""
+  contributionId: ID!
+
+  """Whether the participation requirements workflow must be opened."""
+  shouldTriggerParticipationWorkflow: Boolean!
+
+  """Whether the internal communication consent must be requested."""
+  shouldTriggerConsentInternalCommunication: Boolean!
+
+  """The completion status of the vocal contribution."""
+  completionStatus: ContributionCompletionStatus!
+
+  """The anonymous participant token created for this contribution."""
+  participantToken: String
+  clientMutationId: String
+}
+
 """Represent an aggregrated result that should be displayed in a chart"""
 type AggregatedResult {
   """A unique key that distinguish one result from another"""
@@ -2646,6 +2673,9 @@ type CollectStep implements NodeSlug & Node & Step & ProposalStep & RequirementS
 
   """Whether or not collect by email is enabled."""
   isCollectByEmailEnabled: Boolean!
+
+  """Whether or not vocal contributions are enabled."""
+  isVocalContributionEnabled: Boolean!
 
   """
   Whether or not users can edit their proposal after the step is closed.
@@ -7782,6 +7812,9 @@ enum FeatureFlagType {
   """Whether or not collect proposals by email is enabled"""
   collect_proposals_by_email
 
+  """Whether or not vocal contributions are enabled"""
+  vocal_contribution
+
   """Whether or not user anonymization automated is enabled"""
   user_anonymization_automated
 
@@ -10144,6 +10177,7 @@ type Mutation {
   sendConfirmationEmailParticipant(input: SendConfirmationEmailParticipantInput!): SendConfirmationEmailParticipantPayload
   updateParticipant(input: UpdateParticipantInput!): UpdateParticipantPayload
   validateContribution(input: ValidateContributionInput!): ValidateContributionPayload
+  addVocalContribution(input: AddVocalContributionInput!): AddVocalContributionPayload
   addMediators(input: AddMediatorsInput!): AddMediatorsPayload
   deleteMediator(input: DeleteMediatorInput!): DeleteMediatorPayload
   addMediatorVotes(input: AddMediatorVotesInput!): AddMediatorVotesPayload
@@ -15389,6 +15423,18 @@ type Query {
     showProfilePictures: Boolean! = true
   ): MediaConnection!
 
+  """List all vocal contributions."""
+  vocals(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+    status: ContributionCompletionStatus
+  ): VocalContributionConnection!
+
   """List all locales on the platform."""
   availableLocales(includeDisabled: Boolean): [Locale!]!
 
@@ -15497,6 +15543,11 @@ type Query {
   Check availability of a given email list among existing users and invitations.
   """
   userInvitationsAvailabilitySearch(emails: [String!]!): UserInvitationsAvailabilityConnection!
+
+  """
+  The collect step that receives the vocal contributions submitted from the homepage, if the feature is enabled.
+  """
+  vocalContributionStep: CollectStep
 
   """List all site colors."""
   siteColors: [SiteColor!]!
@@ -20281,6 +20332,9 @@ input UpdateCollectStepInput {
   """Whether or not collect by email is enabled."""
   isCollectByEmailEnabled: Boolean!
 
+  """Whether or not vocal contributions are enabled."""
+  isVocalContributionEnabled: Boolean
+
   """Whether or not proposal edit is disabled after the step is closed."""
   preventProposalEdit: Boolean!
 
@@ -24582,6 +24636,42 @@ type VideoTranslation {
   locale: TranslationLocale!
   title: String!
   body: String
+}
+
+type VocalContribution implements Node {
+  """The ID of an object"""
+  id: ID!
+
+  """
+  The contribution status wether or not the participant/user has meet all requirements
+  """
+  completionStatus: ContributionCompletionStatus!
+
+  """The protected Media global ID used by the BO."""
+  file: ID!
+  user: User
+  participant: Participant
+  createdAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type VocalContributionConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [VocalContributionEdge]
+}
+
+"""An edge in a connection."""
+type VocalContributionEdge {
+  """The item at the end of the edge."""
+  node: VocalContribution!
+
+  """A cursor for use in pagination."""
+  cursor: String!
 }
 
 interface Vote {

@@ -2,6 +2,7 @@ import * as React from 'react'
 
 export const URL_MAP = {
   contributions: [
+    '/admin-next/voice-messages',
     '/admin/reporting',
     '/admin/capco/app/reporting',
     '/admin/capco/app/proposal/',

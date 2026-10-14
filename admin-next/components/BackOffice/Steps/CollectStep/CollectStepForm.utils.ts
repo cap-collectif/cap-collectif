@@ -138,6 +138,7 @@ export const getInitialValues = (
       labels: stepEnabledType,
     },
     isCollectByEmailEnabled: step?.isCollectByEmailEnabled,
+    isVocalContributionEnabled: step?.isVocalContributionEnabled ?? false,
     cover: step?.cover
       ? { id: step.cover.id, name: step.cover.name, size: step.cover.size, type: step.cover.type, url: step.cover.url }
       : null,
@@ -236,6 +237,7 @@ export const getCollectStepInput = (
     allowAuthorsToAddNews: Boolean(formValues.allowAuthorsToAddNews),
     private: formValues.stepVisibilityType?.labels[0] === StepVisibilityTypeEnum.RESTRICTED,
     isCollectByEmailEnabled: formValues.isCollectByEmailEnabled ?? false,
+    isVocalContributionEnabled: formValues.isVocalContributionEnabled,
     preventProposalEdit: formValues.preventProposalEdit ?? false,
     preventProposalDelete: formValues.preventProposalDelete ?? false,
     cover: (formValues.cover as any)?.id ?? null,

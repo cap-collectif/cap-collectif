@@ -11,9 +11,11 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Service\ProposalStepSplitViewService;
 use Capco\AppBundle\Logger\ActionLogger;
+use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\HubMetadataRepository;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\AppBundle\Service\HubDocumentsStepGuard;
+use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
@@ -37,7 +39,9 @@ class UpdateCollectStepMutation implements MutationInterface
         private readonly ActionLogger $actionLogger,
         private readonly HubApiGreenClient $hubApiGreenClient,
         private readonly HubMetadataRepository $hubMetadataRepository,
-        private readonly HubDocumentsStepGuard $hubDocumentsStepGuard
+        private readonly HubDocumentsStepGuard $hubDocumentsStepGuard,
+        private readonly Manager $toggleManager,
+        private readonly CollectStepRepository $collectStepRepository
     ) {
     }
 
@@ -47,11 +51,20 @@ class UpdateCollectStepMutation implements MutationInterface
         $data = $input->getArrayCopy();
         $collectStepId = $input->offsetGet('stepId');
         $operationType = $input->offsetGet('operationType');
+
         $collectStep = $this->getCollectStep($collectStepId, $viewer);
         $previousStartAt = $collectStep->getStartAt()?->format('Y-m-d H:i:s');
         $previousEndAt = $collectStep->getEndAt()?->format('Y-m-d H:i:s');
 
         unset($data['stepId'], $data['operationType']);
+
+        if (
+            true === ($data['isVocalContributionEnabled'] ?? null)
+            && !$collectStep->isVocalContributionEnabled()
+            && !$this->toggleManager->isActive(Manager::vocal_contribution)
+        ) {
+            throw new UserError('Vocal contributions are disabled.');
+        }
 
         $form = $this->formFactory->create(CollectStepFormType::class, $collectStep);
         $form->submit($data, false);
@@ -63,6 +76,9 @@ class UpdateCollectStepMutation implements MutationInterface
         }
 
         $this->synchronizeHubConsultationDates($collectStep, $previousStartAt, $previousEndAt);
+        if ($collectStep->isVocalContributionEnabled()) {
+            $this->collectStepRepository->disableVocalContributionExcept($collectStep);
+        }
         $this->em->flush();
 
         $this->actionLogger->logGraphQLMutation(

@@ -7,6 +7,13 @@
         "rolesRequired": ["admin"],
         "items": [
             {
+                "title": "admin.voice-messages.title",
+                "defaultMessage": "Messages vocaux",
+                "href": "/admin-next/voice-messages",
+                "rolesRequired": ["admin"],
+                "featuresRequired": ["vocal_contribution"]
+            },
+            {
                 "title": "admin.label.reporting",
                 "href": "/admin/reporting",
                 "rolesRequired": [],

@@ -31,6 +31,7 @@ services:
             - /var/www/public/export
             - /var/www/var/cache
             - /var/www/var/logs
+            - vocal_contributions:/var/www/var/vocal-contributions
         links:
             - database:database
             - elasticsearch:elasticsearch
@@ -83,3 +84,6 @@ services:
             - '5601:5601'
     # volumes:
     #     - ../services/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
+
+volumes:
+    vocal_contributions:

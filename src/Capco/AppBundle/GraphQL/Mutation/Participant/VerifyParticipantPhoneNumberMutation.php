@@ -14,6 +14,7 @@ use Capco\AppBundle\Service\ParticipantHelper;
 use Capco\AppBundle\Service\ParticipationWorkflow\PhoneContributorResolver;
 use Capco\AppBundle\Service\ParticipationWorkflow\ProposalReconcillier;
 use Capco\AppBundle\Service\ParticipationWorkflow\ReplyReconcilier;
+use Capco\AppBundle\Service\ParticipationWorkflow\VocalContributionReconcilier;
 use Capco\AppBundle\Service\ParticipationWorkflow\VotesReconcilier;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -45,6 +46,7 @@ class VerifyParticipantPhoneNumberMutation implements MutationInterface
         private ReplyReconcilier $replyReconcilier,
         private VotesReconcilier $votesReconcilier,
         private ProposalReconcillier $proposalReconcillier,
+        private VocalContributionReconcilier $vocalContributionReconcilier,
         private LoginManagerInterface $loginManager,
         private TokenStorageInterface $tokenStorage,
         private RequestStack $requestStack,
@@ -155,6 +157,7 @@ class VerifyParticipantPhoneNumberMutation implements MutationInterface
         $this->replyReconcilier->reconcile($participant, $contributorTarget);
         $this->proposalReconcillier->reconcile($participant, $contributorTarget);
         $this->votesReconcilier->reconcile($participant, $contributorTarget);
+        $this->vocalContributionReconcilier->reconcile($participant, $contributorTarget);
     }
 
     private function transferPhoneVerificationSms(Participant $sourceParticipant, Participant $targetParticipant): void

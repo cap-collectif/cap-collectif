@@ -51,6 +51,7 @@ const UpdateCollectStep = /* GraphQL*/ `
             }
           }
           isSecretBallot
+          isVocalContributionEnabled
           actionButtonLabel
           voteButtonIcon
         }
@@ -106,6 +107,7 @@ const input = {
   proposalArchivedTime: 0,
   proposalArchivedUnitTime: 'MONTHS',
   isCollectByEmailEnabled: false,
+  isVocalContributionEnabled: false,
   preventProposalDelete: true,
   preventProposalEdit: true,
   actionButtonLabel: 'VOTE',
@@ -123,6 +125,10 @@ const updateCollectStepWithVoteIconAndButtonLabelInput = {
  * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
  */
 describe('mutations.updateCollectStep', () => {
+  beforeEach(async () => {
+    await global.enableFeatureFlag('vocal_contribution')
+  })
+
   it('admin should be able to edit collectStep step.', async () => {
     const response = await graphql(UpdateCollectStep, { input: { ...input } }, 'internal_admin')
     expect(response).toMatchSnapshot()
@@ -135,5 +141,69 @@ describe('mutations.updateCollectStep', () => {
       'internal_admin',
     )
     expect(response).toMatchSnapshot()
+  })
+})
+
+const CollectStepVocalContributionQuery = /* GraphQL*/ `
+  query CollectStepVocalContributionQuery($id: ID!) {
+    node(id: $id) {
+      ... on CollectStep {
+        isVocalContributionEnabled
+      }
+    }
+  }
+`
+
+const VocalContributionStepQuery = /* GraphQL*/ `
+  query VocalContributionStepQuery {
+    vocalContributionStep {
+      id
+    }
+  }
+`
+
+const closedStepId = toGlobalId('CollectStep', 'collectstep2')
+
+const isVocalContributionEnabled = async id =>
+  (await graphql(CollectStepVocalContributionQuery, { id }, 'internal_admin')).node.isVocalContributionEnabled
+
+describe('mutations.updateCollectStep vocal contribution', () => {
+  beforeEach(async () => {
+    await enableFeatureFlag('vocal_contribution')
+  })
+
+  afterEach(async () => {
+    await disableFeatureFlag('vocal_contribution')
+  })
+
+  it('keeps a single collect step receiving the vocal contributions', async () => {
+    await graphql(UpdateCollectStep, { input: { ...input, isVocalContributionEnabled: true } }, 'internal_admin')
+    await graphql(
+      UpdateCollectStep,
+      { input: { ...input, stepId: closedStepId, proposalForm: 'proposalForm2', isVocalContributionEnabled: true } },
+      'internal_admin',
+    )
+
+    expect(await isVocalContributionEnabled(stepId)).toBe(false)
+    expect(await isVocalContributionEnabled(closedStepId)).toBe(true)
+    const response = await graphql(VocalContributionStepQuery, {}, 'internal')
+    expect(response.vocalContributionStep).toEqual({ id: closedStepId })
+  })
+
+  it('refuses to enable the vocal contribution when the feature is disabled', async () => {
+    await disableFeatureFlag('vocal_contribution')
+
+    await expect(
+      graphql(UpdateCollectStep, { input: { ...input, isVocalContributionEnabled: true } }, 'internal_admin'),
+    ).rejects.toThrowError('Vocal contributions are disabled.')
+    expect(await isVocalContributionEnabled(stepId)).toBe(false)
+  })
+
+  it('hides the vocal contribution step when the feature is disabled', async () => {
+    await graphql(UpdateCollectStep, { input: { ...input, isVocalContributionEnabled: true } }, 'internal_admin')
+    await disableFeatureFlag('vocal_contribution')
+
+    const response = await graphql(VocalContributionStepQuery, {}, 'internal')
+    expect(response.vocalContributionStep).toBeNull()
   })
 })

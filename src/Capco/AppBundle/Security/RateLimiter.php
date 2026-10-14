@@ -31,7 +31,7 @@ class RateLimiter
     /**
      * @param string $identifier For example, $user->getId() or $request->getClientIp()
      */
-    public function canDoAction(string $action, string $identifier): bool
+    public function canDoAction(string $action, string $identifier, int $windowInSeconds = RedisCache::ONE_MINUTE, int $blockDurationInSeconds = 5 * RedisCache::ONE_MINUTE): bool
     {
         $env = $this->kernel->getEnvironment();
 
@@ -53,11 +53,25 @@ class RateLimiter
             // In case of problem with cache system, we do not block the underlying functionality.
             return true;
         }
-        $valueItem = $cachedItem->get();
-
         // first try
         if (!$cachedItem->isHit()) {
-            $cachedItem->set(1)->expiresAfter(RedisCache::ONE_MINUTE);
+            $cachedItem->set(1)->expiresAfter($windowInSeconds);
+            $this->cache->save($cachedItem);
+
+            return true;
+        }
+
+        try {
+            $remainingTtl = $this->cache->getItemTtl($cacheKey);
+        } catch (\Throwable $exception) {
+            $this->logger->warning('Rate limiter cache exception: ' . $exception->getMessage());
+
+            return true;
+        }
+
+        $valueItem = $cachedItem->get();
+        if ($remainingTtl <= 0) {
+            $cachedItem->set(1)->expiresAfter($windowInSeconds);
             $this->cache->save($cachedItem);
 
             return true;
@@ -66,13 +80,13 @@ class RateLimiter
             return false;
         }
         if ($valueItem < $this->limit) {
-            $cachedItem->set($valueItem + 1);
+            $cachedItem->set($valueItem + 1)->expiresAfter($remainingTtl);
             $this->cache->save($cachedItem);
 
             return true;
         }
 
-        $cachedItem->set(self::LIMIT_REACHED)->expiresAfter(5 * RedisCache::ONE_MINUTE);
+        $cachedItem->set(self::LIMIT_REACHED)->expiresAfter($blockDurationInSeconds);
         $this->cache->save($cachedItem);
 
         return false;

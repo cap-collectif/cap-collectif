@@ -473,6 +473,15 @@ InternalQuery:
                         type: 'Boolean!'
                         description: 'Filter medias linked to a profile.'
                         defaultValue: true
+            vocals:
+                type: 'InternalVocalContributionConnection!'
+                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('vocal_contribution')"
+                argsBuilder: 'Relay::ForwardConnection'
+                description: 'List all vocal contributions.'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\VocalContribution\\VocalContributionConnectionResolver", args, getUser())'
+                args:
+                    status:
+                        type: 'ContributionCompletionStatus'
 
             availableLocales:
                 description: 'List all locales on the platform.'
@@ -640,6 +649,10 @@ InternalQuery:
                     emails:
                         type: '[String!]!'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\UserInvitationsAvailabilitySearchQueryResolver", args)'
+            vocalContributionStep:
+                description: 'The collect step that receives the vocal contributions submitted from the homepage, if the feature is enabled.'
+                type: 'InternalCollectStep'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryVocalContributionStepResolver", getUser())'
             siteColors:
                 description: 'List all site colors.'
                 type: '[InternalSiteColor!]!'

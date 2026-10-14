@@ -38,6 +38,7 @@ use Capco\AppBundle\Security\QuestionnaireVoter;
 use Capco\AppBundle\Service\ExportOnDemandAvailability;
 use Capco\AppBundle\Service\ExportOnDemandManager;
 use Capco\AppBundle\Service\ExportOnDemandRequest;
+use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Utils\Text;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -637,6 +638,37 @@ class ExportController extends Controller
         $response = $this->file($filePath);
         $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
         $this->logStepContributionsExport($request, $step);
+
+        return $response;
+    }
+
+    /**
+     * @Route("/export-voice-messages", name="app_export_voice_messages", methods={"GET"}, options={"i18n" = false})
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
+    public function downloadVoiceMessagesAction(Request $request, Manager $toggleManager): Response
+    {
+        if (!$toggleManager->isActive(Manager::vocal_contribution)) {
+            throw new AccessDeniedException();
+        }
+
+        $fileName = 'vocals_' . (new \DateTime())->format('Y-m-d') . '.zip';
+        $filePath = $this->exportDir . 'vocals/' . $fileName;
+        $pendingResponse = $this->handleOnDemandExport(
+            request: $request,
+            commandName: 'capco:export:voice-messages',
+            commandOptions: ['filePath' => $filePath],
+            filePath: $filePath,
+            fileName: $fileName
+        );
+        if ($pendingResponse instanceof Response) {
+            return $pendingResponse;
+        }
+
+        $response = $this->file($filePath, $fileName);
+        $response->headers->set('Content-Type', 'application/zip');
+        $response->headers->set('Cache-Control', 'private, no-store');
+        $response->headers->set('X-Content-Type-Options', 'nosniff');
 
         return $response;
     }

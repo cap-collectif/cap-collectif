@@ -108,6 +108,8 @@ const ConsentInternalCommunicationEmailModal = () => {
           goToNextStep()
           return
         }
+
+        window.location.href = redirectUrl
       },
       onError: () => {
         return mutationErrorToast(intl)

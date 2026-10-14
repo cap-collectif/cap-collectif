@@ -61,6 +61,12 @@
 {% endblock %}
 
 {% block body %}
+    {% if is_feature_enabled('vocal_contribution') %}
+        {{ react_render_component('VocalContributionApp', {'props': {
+            'uploadUrl': path('upload_voice_message'),
+            'csrfToken': csrf_token('voice_message')
+        }}) }}
+    {% endif %}
 
     {% for section in sections %}
 

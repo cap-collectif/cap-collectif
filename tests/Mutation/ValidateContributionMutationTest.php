@@ -3,15 +3,19 @@
 namespace Capco\Tests\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Entity\VocalContribution;
 use Capco\AppBundle\GraphQL\Mutation\ProposalVoteAccountHandler;
 use Capco\AppBundle\GraphQL\Mutation\ValidateContributionMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Participant\ParticipantIsMeetingRequirementsResolver;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\ViewerIsMeetingRequirementsResolver;
+use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
@@ -19,6 +23,7 @@ use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\Service\ParticipantHelper;
 use Capco\AppBundle\Service\ProjectParticipantsTotalCountCacheHandler;
 use Capco\AppBundle\Service\ReplyCounterIndexer;
+use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
@@ -66,9 +71,16 @@ class ValidateContributionMutationTest extends TestCase
     private ParticipantRepository $participantRepository;
     private Publisher $publisher;
 
+    private CollectStepRepository $collectStepRepository;
+
+    private EntityManagerInterface $em;
+
+    private Manager $toggleManager;
+
     protected function setUp(): void
     {
         $em = $this->createMock(EntityManagerInterface::class);
+        $this->em = $em;
         $this->globalIdResolver = $this->createMock(GlobalIdResolver::class);
         $this->participantIsMeetingRequirementsResolver = $this->createMock(ParticipantIsMeetingRequirementsResolver::class);
         $this->viewerIsMeetingRequirementsResolver = $this->createMock(ViewerIsMeetingRequirementsResolver::class);
@@ -87,6 +99,8 @@ class ValidateContributionMutationTest extends TestCase
         $this->projectParticipantsTotalCountCacheHandler = $this->createMock(ProjectParticipantsTotalCountCacheHandler::class);
         $this->participantRepository = $this->createMock(ParticipantRepository::class);
         $this->publisher = $this->createMock(Publisher::class);
+        $this->collectStepRepository = $this->createMock(CollectStepRepository::class);
+        $this->toggleManager = $this->createMock(Manager::class);
         $this->validateContributionMutation = new ValidateContributionMutation(
             $em,
             $this->globalIdResolver,
@@ -101,7 +115,9 @@ class ValidateContributionMutationTest extends TestCase
             $this->proposalCollectVoteRepository,
             $this->projectParticipantsTotalCountCacheHandler,
             $this->participantRepository,
-            $this->publisher
+            $this->publisher,
+            $this->collectStepRepository,
+            $this->toggleManager
         );
     }
 
@@ -226,6 +242,49 @@ class ValidateContributionMutationTest extends TestCase
         $this->expectExceptionMessage('Contribution with ID missingContributionId not found.');
 
         $this->validateContributionMutation->__invoke($args, $this->viewer);
+    }
+
+    public function testCompletesAnonymousVocalContribution(): void
+    {
+        $vocalId = GlobalId::toGlobalId('VocalContribution', 'vocal-id');
+        $vocal = (new VocalContribution())
+            ->setId('vocal-id')
+            ->setParticipant($this->participant)
+            ->setMedia((new Media())->setContext(Media::VOCAL_CONTRIBUTION_CONTEXT))
+        ;
+        $step = $this->createMock(CollectStep::class);
+        $step->method('isOpen')->willReturn(true);
+        $this->participantHelper->expects(self::once())->method('getParticipantByToken')->with('token')->willReturn($this->participant);
+        $this->toggleManager->expects(self::once())->method('isActive')->with(Manager::vocal_contribution)->willReturn(true);
+        $this->globalIdResolver->expects(self::once())->method('resolve')->with(
+            $vocalId,
+            $this->participant,
+            $this->callback(static fn ($context): bool => $context instanceof \ArrayObject && true === $context->offsetGet('disable_acl'))
+        )->willReturn($vocal);
+        $this->collectStepRepository->expects(self::once())->method('findVocalContributionStep')->willReturn($step);
+        $this->participantIsMeetingRequirementsResolver->expects(self::once())->method('__invoke')->willReturn(true);
+        $this->em->expects(self::once())->method('flush');
+
+        $result = $this->validateContributionMutation->__invoke(new Argument(['input' => [
+            'token' => 'token',
+            'contributionId' => $vocalId,
+        ]]));
+
+        self::assertSame('/', $result['redirectUrl']);
+        self::assertSame('COMPLETED', $vocal->getCompletionStatus());
+    }
+
+    public function testCannotValidateVocalContributionWhenFeatureIsDisabled(): void
+    {
+        $vocalId = GlobalId::toGlobalId('VocalContribution', 'vocal-id');
+        $this->toggleManager->expects(self::once())->method('isActive')->with(Manager::vocal_contribution)->willReturn(false);
+
+        $this->expectException(UserError::class);
+        $this->expectExceptionMessage('Vocal contributions feature is disabled.');
+
+        $this->validateContributionMutation->__invoke(new Argument(['input' => [
+            'contributionId' => $vocalId,
+        ]]), $this->viewer);
     }
 
     /**
