@@ -40,7 +40,14 @@ describe('Crop Media', () => {
       },
       'internal_admin',
     )
-    return Jimp.read(cropMediaResponse.cropMedia.media.url).then(image => {
+    const response = await fetch(cropMediaResponse.cropMedia.media.url, {
+      headers: {
+        'Cache-Control': 'no-cache',
+      },
+    })
+    expect(response.ok).toBe(true)
+
+    return Jimp.read(Buffer.from(await response.arrayBuffer())).then(image => {
       expect(image.bitmap.width).toBe(150)
       expect(image.bitmap.height).toBe(200)
     })

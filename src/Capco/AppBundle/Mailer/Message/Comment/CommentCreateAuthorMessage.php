@@ -24,6 +24,7 @@ final class CommentCreateAuthorMessage extends AbstractExternalMessage
             'proposalUrl' => $params['elementURL'],
             'disableNotificationsUrl' => $params['disableNotificationURL'],
             'notificationsUrl' => $params['notificationURL'],
+            'objectType' => $params['objectType'],
         ];
     }
 
@@ -31,6 +32,7 @@ final class CommentCreateAuthorMessage extends AbstractExternalMessage
     {
         return [
             'username' => self::escape($comment->getAuthor()->getDisplayName()),
+            'objectType' => $params['objectType'],
         ];
     }
 }

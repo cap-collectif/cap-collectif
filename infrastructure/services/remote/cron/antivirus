@@ -2,7 +2,10 @@
 set -u
 
 # === Configuration ===
-SCAN_DIR="/var/www/public/media/default"
+SCAN_DIRS=(
+  "/var/www/public/media/default"
+  "/var/www/var/vocal-contributions"
+)
 LOG_DIR="/var/www/public/media/clamav-logs"
 mkdir -p "$LOG_DIR"
 LOG_FILE="$LOG_DIR/scan_$(date +'%Y%m%d_%H%M%S').log"
@@ -45,22 +48,38 @@ scan_modified_files() {
 
     if [[ "$FIRST_SCAN" = true ]]; then
         echo "[INFO] Premier scan de tous les fichiers..." | tee -a "$LOG_FILE"
-        scan_result=$(clamscan -r --log="$LOG_FILE" --remove=yes --scan-archive=yes -v "$SCAN_DIR" 2>&1)
+        scan_result=$(clamscan -r --log="$LOG_FILE" --remove=yes --scan-archive=yes -v "${SCAN_DIRS[@]}" 2>&1)
+        scan_exit_code=$?
     else
-        files_to_scan=$(find "$SCAN_DIR" -type f -newer "$LAST_SCAN_DATE_PATH" -print0)
+        scan_result=""
+        scan_exit_code=0
+        files_found=false
 
-        if [[ -n "$files_to_scan" ]]; then
-            echo "[INFO] Scan des fichiers modifiés depuis le dernier passage..." | tee -a "$LOG_FILE"
+        for scan_dir in "${SCAN_DIRS[@]}"; do
+            if [[ ! -d "$scan_dir" ]]; then
+                continue
+            fi
 
-            scan_result=$(find "$SCAN_DIR" -type f -newer "$LAST_SCAN_DATE_PATH" -exec \
-                    clamscan --log=$LOG_FILE --remove=yes --scan-archive=yes -v {} + 2>&1)
-        else
+            if [[ -n "$(find "$scan_dir" -type f -newer "$LAST_SCAN_DATE_PATH" -print -quit)" ]]; then
+                files_found=true
+                echo "[INFO] Scan des fichiers modifiés depuis le dernier passage..." | tee -a "$LOG_FILE"
+
+                directory_scan_result=$(find "$scan_dir" -type f -newer "$LAST_SCAN_DATE_PATH" -exec \
+                        clamscan --log="$LOG_FILE" --remove=yes --scan-archive=yes -v {} + 2>&1)
+                directory_scan_exit_code=$?
+                scan_result+="$directory_scan_result"$'\n'
+
+                if [[ "$directory_scan_exit_code" -gt "$scan_exit_code" ]]; then
+                    scan_exit_code=$directory_scan_exit_code
+                fi
+            fi
+        done
+
+        if [[ "$files_found" = false ]]; then
             echo "[INFO] Aucun fichier à scanner."
             scan_result="[INFO] Aucun fichier à scanner."
         fi
     fi
-
-    scan_exit_code=$?
 
     if [[ $scan_exit_code -eq 1 ]]; then
         echo "[ERROR] Virus détecté ! Cache non mis à jour. Voir $LOG_FILE" | tee -a "$LOG_FILE"

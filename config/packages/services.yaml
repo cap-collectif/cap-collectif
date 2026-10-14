@@ -32,6 +32,10 @@ services:
     Capco\AppBundle\Service\MediaAccessResolver:
         public: true
 
+    Capco\AppBundle\Service\VocalContributionUploadService:
+        bind:
+            $mediaSizeLimit: '%media_size_limit%'
+
     Capco\AppBundle\Factory\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Factory/*'
 
@@ -569,6 +573,11 @@ services:
         class: Symfony\Component\Finder\Finder
 
     Capco\AppBundle\Validator\Constraints\MaxFolderSizeValidator:
+        arguments:
+            $maxSize: '%max_media_folder_size%'
+            $projectDir: '%kernel.project_dir%'
+
+    Capco\AppBundle\Validator\Constraints\MaxVocalFolderSizeValidator:
         arguments:
             $maxSize: '%max_media_folder_size%'
             $projectDir: '%kernel.project_dir%'

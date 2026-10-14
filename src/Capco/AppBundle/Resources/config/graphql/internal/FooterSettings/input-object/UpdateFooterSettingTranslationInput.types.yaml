@@ -1,0 +1,8 @@
+UpdateFooterSettingTranslationInput:
+    type: input-object
+    config:
+        fields:
+            locale:
+                type: 'TranslationLocale!'
+            value:
+                type: 'String!'

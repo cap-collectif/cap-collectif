@@ -15,6 +15,7 @@ import {
 } from '@cap-collectif/ui'
 import { useDisclosure } from '@liinkiing/react-hooks'
 import useIsMobile from '@shared/hooks/useIsMobile'
+import { getContributionObjectTypeTranslationKey } from '@shared/constants/proposalStepObjectType'
 import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 import { yupResolver } from '@hookform/resolvers/yup'
 import ChangeProposalContentMutation from '@mutations/ChangeProposalContentMutation'
@@ -613,7 +614,11 @@ const ProposalFormModal: React.FC<Props> = props => {
         if (response.changeProposalContent?.proposal) {
           successToast(
             intl.formatMessage(
-              { id: isDraft ? 'draft.create.registered' : 'proposal-create' },
+              {
+                id: `front.contribution.${getContributionObjectTypeTranslationKey(proposalForm.objectType)}.${
+                  isDraft ? 'draft-saved' : 'published-successfully'
+                }`,
+              },
               { title: response.changeProposalContent.proposal.title },
             ),
           )
@@ -679,7 +684,11 @@ const ProposalFormModal: React.FC<Props> = props => {
 
           successToast(
             intl.formatMessage(
-              { id: isDraft ? 'draft.create.registered' : 'proposal-create' },
+              {
+                id: `front.contribution.${getContributionObjectTypeTranslationKey(proposalForm.objectType)}.${
+                  isDraft ? 'draft-saved' : 'created-successfully'
+                }`,
+              },
               { title: createProposal.proposal.title },
             ),
           )
@@ -695,7 +704,14 @@ const ProposalFormModal: React.FC<Props> = props => {
   const renderFormContent = (hide?: () => void) => (
     <FormProvider {...methods}>
       <Modal.Header>
-        <Heading>{intl.formatMessage({ id: mode === 'edit' ? 'global.edit' : 'proposal.add' })}</Heading>
+        <Heading>
+          {intl.formatMessage({
+            id:
+              mode === 'edit'
+                ? 'global.edit'
+                : `front.contribution.${getContributionObjectTypeTranslationKey(proposalForm.objectType)}.add`,
+          })}
+        </Heading>
       </Modal.Header>
       <Modal.Body pt={4}>
         <Flex as="form" direction="column" gap={4}>
@@ -824,7 +840,12 @@ const ProposalFormModal: React.FC<Props> = props => {
                 handlePublish(hide)
               }}
             >
-              {intl.formatMessage({ id: mode === 'edit' ? 'global.publish' : 'front.collect.submit-proposal' })}
+              {intl.formatMessage({
+                id:
+                  mode === 'edit'
+                    ? 'global.publish'
+                    : `front.contribution.${getContributionObjectTypeTranslationKey(proposalForm.objectType)}.submit`,
+              })}
             </Button>
           </ButtonGroup>
 
@@ -891,11 +912,15 @@ const ProposalFormModal: React.FC<Props> = props => {
           >
             <Icon name={CapUIIcon.Add} size={CapUIIconSize.Md} />
             <Box as="span" fontSize={CapUIFontSize.BodySmall} lineHeight={CapUILineHeight.S}>
-              {intl.formatMessage({ id: 'global.collect' })}
+              {intl.formatMessage({
+                id: `front.contribution.${getContributionObjectTypeTranslationKey(proposalForm.objectType)}.add`,
+              })}
             </Box>
           </Button>
         }
-        ariaLabel={intl.formatMessage({ id: 'proposal.submit' })}
+        ariaLabel={intl.formatMessage({
+          id: `front.contribution.${getContributionObjectTypeTranslationKey(proposalForm.objectType)}.submit`,
+        })}
         size={CapUIModalSize.Fullscreen}
         onClose={handleMobileClose}
         fullSizeOnMobile
@@ -912,10 +937,14 @@ const ProposalFormModal: React.FC<Props> = props => {
     <Modal
       disclosure={
         <Button disabled={props.disabled} flex="none" variant="primary" leftIcon={CapUIIcon.Add}>
-          {intl.formatMessage({ id: 'front.collect.proposal-submit' })}
+          {intl.formatMessage({
+            id: `front.contribution.${getContributionObjectTypeTranslationKey(proposalForm.objectType)}.submit`,
+          })}
         </Button>
       }
-      ariaLabel={intl.formatMessage({ id: 'proposal.submit' })}
+      ariaLabel={intl.formatMessage({
+        id: `front.contribution.${getContributionObjectTypeTranslationKey(proposalForm.objectType)}.submit`,
+      })}
       size={CapUIModalSize.Xl}
       onClose={resetProposalForm}
       hideOnClickOutside={false}

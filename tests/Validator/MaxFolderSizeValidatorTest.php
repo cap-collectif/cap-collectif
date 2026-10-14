@@ -4,6 +4,8 @@ namespace Capco\Tests\Validator;
 
 use Capco\AppBundle\Validator\Constraints\MaxFolderSize;
 use Capco\AppBundle\Validator\Constraints\MaxFolderSizeValidator;
+use Capco\AppBundle\Validator\Constraints\MaxVocalFolderSize;
+use Capco\AppBundle\Validator\Constraints\MaxVocalFolderSizeValidator;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Finder\Finder;
@@ -111,6 +113,19 @@ class MaxFolderSizeValidatorTest extends TestCase
         $maxFolderSizeValidator->validate($this->getUploadedFile(), $this->constraint);
     }
 
+    public function testValidateVocalFolder(): void
+    {
+        $maxFolderSizeValidator = new MaxVocalFolderSizeValidator(1000000, '/tmp/test', $this->finder, $this->logger);
+        $maxFolderSizeValidator->initialize($this->context);
+        $constraint = new MaxVocalFolderSize();
+
+        $this->mockFinder([], MaxVocalFolderSize::FOLDER);
+
+        $this->context->expects($this->never())->method('buildViolation');
+
+        $maxFolderSizeValidator->validate($this->getUploadedFile(), $constraint);
+    }
+
     public function testValidateWithLargeFiles(): void
     {
         $maxFolderSizeValidator = $this->init();
@@ -182,7 +197,7 @@ class MaxFolderSizeValidatorTest extends TestCase
     /**
      * @param SplFileInfo[] $files
      */
-    private function mockFinder(array $files): void
+    private function mockFinder(array $files, string $folder = 'public/media/default/0001/01'): void
     {
         $this->finder->expects($this->once())
             ->method('files')
@@ -197,7 +212,7 @@ class MaxFolderSizeValidatorTest extends TestCase
 
         $this->finder->expects($this->once())
             ->method('in')
-            ->with('/tmp/test/public/media/default/0001/01/')
+            ->with('/tmp/test/' . trim($folder, '/') . '/')
             ->willReturnSelf()
         ;
 

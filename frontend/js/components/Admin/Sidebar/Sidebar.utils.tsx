@@ -2,6 +2,7 @@ import * as React from 'react'
 
 export const URL_MAP = {
   contributions: [
+    '/admin-next/voice-messages',
     '/admin/reporting',
     '/admin/capco/app/reporting',
     '/admin/capco/app/proposal/',
@@ -72,6 +73,7 @@ export const URL_MAP = {
     '/admin/settings/pages.login/',
     '/admin-next/login-settings',
     '/admin/settings/pages.footer/',
+    '/admin-next/footer-settings',
     '/admin/settings/pages.cookies/',
     '/admin-next/cookie-settings',
     '/admin/settings/pages.privacy/',

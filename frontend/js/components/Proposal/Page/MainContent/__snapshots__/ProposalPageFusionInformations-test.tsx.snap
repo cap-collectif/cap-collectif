@@ -11,13 +11,13 @@ exports[`<ProposalPageFusionInformations /> should render a list of proposal mer
           size={12}
         />
         <FormattedMessage
-          id="proposals.fusionned"
+          id="front.contribution.proposal.merged"
           values={Object {}}
         />
       </span>
       <div>
         <FormattedMessage
-          id="new.proposal.fusionnedInto"
+          id="front.contribution.proposal.merged-into"
           values={Object {}}
         />
         <div
@@ -55,13 +55,13 @@ exports[`<ProposalPageFusionInformations /> should render a list of proposal of 
           size={12}
         />
         <FormattedMessage
-          id="proposals.fusionned"
+          id="front.contribution.proposal.merged"
           values={Object {}}
         />
       </span>
       <div>
         <FormattedMessage
-          id="new.proposal.fusionnedFrom"
+          id="front.contribution.proposal.merged-from"
           values={
             Object {
               "num": 2,

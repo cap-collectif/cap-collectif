@@ -179,6 +179,11 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                   <SidebarLink text="admin.label.argument" href="/admin/capco/app/argument/list" />
                   <SidebarLink text="admin.label.source" href="/admin/capco/app/source/list" />
                   <SidebarLink text="admin.label.comment" href="/admin/capco/app/comment/list" />
+                  <SidebarLink
+                    text="admin.voice-messages.title"
+                    defaultMessage="Messages vocaux"
+                    href="/admin-next/voice-messages"
+                  />
                 </SidebarAccordionPanel>
               </SidebarAccordionItem>
             ) : null}
@@ -288,7 +293,15 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                         : '/admin/settings/pages.login/list'
                     }
                   />
-                  <SidebarLink text="admin.label.pages.footer" href="/admin/settings/pages.footer/list" />
+                  {/* Sonata route retained during the Admin Next migration rollout. Remove it when the migration feature flag is removed. */}
+                  <SidebarLink
+                    text="admin.label.pages.footer"
+                    href={
+                      features.unstable__sonata_migration_to_admin_next
+                        ? '/admin-next/footer-settings'
+                        : '/admin/settings/pages.footer/list'
+                    }
+                  />
                   {/* Sonata route retained during the Admin Next migration rollout. Remove it when the migration feature flag is removed. */}
                   <SidebarLink
                     text="admin.label.pages.cookies"

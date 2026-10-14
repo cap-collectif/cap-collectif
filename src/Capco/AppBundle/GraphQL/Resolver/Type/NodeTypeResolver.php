@@ -53,6 +53,7 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\UserInvite;
+use Capco\AppBundle\Entity\VocalContribution;
 use Capco\AppBundle\GraphQL\Resolver\ContributorTypeResolver;
 use Capco\AppBundle\GraphQL\Resolver\District\DistrictTypeResolver;
 use Capco\AppBundle\GraphQL\Resolver\Question\QuestionTypeResolver;
@@ -345,6 +346,10 @@ class NodeTypeResolver implements QueryInterface
 
         if ($node instanceof SectionCarrouselElement) {
             return $this->typeResolver->resolve('SectionCarrouselElement');
+        }
+
+        if ($node instanceof VocalContribution) {
+            return $this->typeResolver->resolve('InternalVocalContribution');
         }
 
         throw new UserError('Could not resolve type of Node.');

@@ -79,7 +79,7 @@ const SideBar: FC<SideBarProps> = () => {
                 href={item.href}
                 selected={item.href.includes(pathname)}
               >
-                {intl.formatMessage({ id: item.title })}
+                {intl.formatMessage({ id: item.title, defaultMessage: item.defaultMessage })}
               </SideBarUI.Menu.Item>
             ))}
           </SideBarUI.Menu>

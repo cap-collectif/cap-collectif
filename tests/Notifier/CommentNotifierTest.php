@@ -43,7 +43,13 @@ class CommentNotifierTest extends TestCase
         $mailer
             ->expects($this->once())
             ->method('createAndSendMessage')
-            ->with(CommentCreateAdminMessage::class, $comment, $this->isType('array'), null, 'admin@example.com')
+            ->with(
+                CommentCreateAdminMessage::class,
+                $comment,
+                $this->callback(fn (array $params): bool => 'PROJECT' === $params['objectType']),
+                null,
+                'admin@example.com'
+            )
         ;
 
         $notifier->onCreate($comment);
@@ -148,6 +154,7 @@ class CommentNotifierTest extends TestCase
         $proposalForm->method('isNotifyingCommentOnCreate')->willReturn($isNotifying);
         $proposalForm->method('isNotifyingCommentOnUpdate')->willReturn($isNotifying);
         $proposalForm->method('getNotificationsConfiguration')->willReturn($notificationConfiguration);
+        $proposalForm->method('getObjectType')->willReturn('PROJECT');
 
         $proposal = $this->createMock(Proposal::class);
         $proposal->method('getProposalForm')->willReturn($proposalForm);

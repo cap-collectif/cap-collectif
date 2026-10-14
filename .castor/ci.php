@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Ci\Infrastructures;
 
+use function Capco\Castor\Infrastructures\build as sharedBuild;
+use function Capco\Castor\Infrastructures\up as sharedUp;
 use Castor\Attribute\AsTask;
-use function Local\Infrastructures\build as localBuild;
-use function Local\Infrastructures\up as localUp;
 
 #[AsTask(description: 'Build CI Docker services.')]
-function build(string $useCache = 'true'): void
+function build(bool $noCache = false): void
 {
-    localBuild($useCache, 'ci');
+    sharedBuild($noCache, 'ci');
 }
 
 #[AsTask(description: 'Start CI Docker services.')]
-function up(string $forceRecreate = 'false', string $noCache = 'false', bool $buildAtUp = false): void
+function up(bool $forceRecreate = false, bool $noCache = false, bool $buildAtUp = false): void
 {
     if ($buildAtUp) {
-        localBuild('true' === $noCache ? 'false' : 'true', 'ci');
+        sharedBuild($noCache, 'ci');
     }
 
-    localUp($forceRecreate, $noCache, false, 'ci');
+    sharedUp($forceRecreate, $noCache, false, 'ci');
 }

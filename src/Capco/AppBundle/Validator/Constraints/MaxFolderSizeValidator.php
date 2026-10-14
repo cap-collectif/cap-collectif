@@ -27,6 +27,11 @@ class MaxFolderSizeValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, MaxFolderSize::class);
         }
 
+        $this->validateFolderSize($value, $constraint, 'public/media/default/0001/01');
+    }
+
+    protected function validateFolderSize(mixed $value, Constraint $constraint, string $folder): void
+    {
         if (
             !$value instanceof UploadedFile
             && !$value instanceof File
@@ -35,21 +40,20 @@ class MaxFolderSizeValidator extends ConstraintValidator
         }
 
         $uploadedFileSize = $value instanceof UploadedFile ? $value->getSize() : $value->getFileSize();
-
-        $totalSize = $this->getMediaFolderSize() + $uploadedFileSize;
+        $totalSize = $this->getFolderSize($folder) + $uploadedFileSize;
 
         if ($totalSize > $this->maxSize) {
             $this->context->buildViolation($constraint->message)
                 ->addViolation()
             ;
 
-            $this->logger->error(sprintf('The size of the folder %s exceeds the allowed limit of %s.', MediaManager::formatBytes($totalSize), MediaManager::formatBytes($this->maxSize)));
+            $this->logFolderSize($totalSize);
         }
     }
 
-    private function getMediaFolderSize(): int
+    protected function getFolderSize(string $folder): int
     {
-        $this->finder->files()->depth('== 0')->in(sprintf('%s/public/media/default/0001/01/', $this->projectDir));
+        $this->finder->files()->depth('== 0')->in(sprintf('%s/%s/', $this->projectDir, trim($folder, '/')));
 
         $totalSize = 0;
 
@@ -64,5 +68,10 @@ class MaxFolderSizeValidator extends ConstraintValidator
         }
 
         return $totalSize;
+    }
+
+    protected function logFolderSize(int $totalSize): void
+    {
+        $this->logger->error(sprintf('The size of the folder %s exceeds the allowed limit of %s.', MediaManager::formatBytes($totalSize), MediaManager::formatBytes($this->maxSize)));
     }
 }

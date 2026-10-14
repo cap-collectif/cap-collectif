@@ -11,6 +11,7 @@ import { isInterpellationContextFromProposal } from '~/utils/interpellationLabel
 import { Card, CategoryCircledIcon } from '~/components/Proposal/Page/ProposalPage.style'
 import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import colors from '~/utils/colors'
+import { getContributionObjectTypeTranslationKey } from '@shared/constants/proposalStepObjectType'
 
 type Props = {
   proposal: ProposalPageVoteThreshold_proposal
@@ -65,21 +66,21 @@ export const ProposalPageVoteThreshold = ({ step, proposal, showPoints }: Props)
   }
 
   const isInterpellation = isInterpellationContextFromProposal(proposal)
-  const isOpinion = proposal.form?.objectType === 'OPINION'
+  const objectType = getContributionObjectTypeTranslationKey(proposal.form?.objectType)
   return (
     <Card id="ProposalPageVoteThreshold">
       <ProposalPageVoteThresholdContainer>
         <h2>
           {voteThreshold && votesPercentage >= 100
             ? intl.formatMessage({
-                id: isInterpellation ? 'interpellation.vote.threshold.reached' : 'proposal.vote.threshold.reached',
+                id: isInterpellation
+                  ? 'interpellation.vote.threshold.reached'
+                  : `front.contribution.${objectType}.vote.threshold.reached`,
               })
             : intl.formatMessage({
                 id: isInterpellation
                   ? 'interpellation.support.threshold.title'
-                  : isOpinion
-                  ? 'opinion.vote.threshold.title'
-                  : 'proposal.vote.threshold.title',
+                  : `front.contribution.${objectType}.vote.threshold.title`,
               })}
         </h2>
         <p>

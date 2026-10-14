@@ -120,6 +120,11 @@
                         "title": "capco.module.collect_proposals_by_email",
                         "description": "description.module.collect_proposals_by_email",
                         "onlySuperAdmin": true
+                    },
+                    "vocal_contribution": {
+                        "title": "admin.feature.vocal-contribution",
+                        "description": "admin.feature.vocal-contribution-help",
+                        "onlySuperAdmin": true
                     }
                 }
             }

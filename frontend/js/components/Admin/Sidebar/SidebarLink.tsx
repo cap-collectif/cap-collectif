@@ -11,6 +11,7 @@ import Text from '~ui/Primitives/Text'
 import { getBaseUrlWithAdminNextSupport } from '~/config'
 type Props = LinkProps & {
   readonly text: string
+  readonly defaultMessage?: string
   readonly icon?: $Values<typeof ICON_NAME>
   readonly beta?: boolean
   readonly withLabel?: boolean
@@ -29,6 +30,7 @@ const IconActivePin = () => (
 
 export const SidebarLink = ({
   text,
+  defaultMessage,
   href,
   icon,
   beta,
@@ -80,6 +82,7 @@ export const SidebarLink = ({
           <Text as="span" verticalAlign="middle" lineHeight="normal">
             {intl.formatMessage({
               id: text,
+              defaultMessage,
             })}
           </Text>
         )}

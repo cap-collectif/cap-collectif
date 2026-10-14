@@ -5,13 +5,17 @@ namespace Capco\AppBundle\Provider;
 use Capco\AppBundle\Entity\Media;
 use Gaufrette\Filesystem;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
+use Symfony\Component\Filesystem\Filesystem as LocalFilesystem;
 use Symfony\Component\HttpFoundation\File\File;
 
 class MediaProvider
 {
+    public const PRIVATE_VOICE_MESSAGES_DIRECTORY = 'var/vocal-contributions';
+
     public function __construct(
         protected Filesystem $filesystem,
-        protected CacheManager $cacheManager
+        protected CacheManager $cacheManager,
+        private readonly string $projectDir
     ) {
     }
 
@@ -37,6 +41,10 @@ class MediaProvider
 
     public function getOrGenerateReferenceFile(Media $media): \Gaufrette\File
     {
+        if (Media::VOCAL_CONTRIBUTION_CONTEXT === $media->getContext()) {
+            throw new \LogicException('Voice messages must be read through the protected admin route.');
+        }
+
         return $this->filesystem->get($this->getImagePath($media), true);
     }
 
@@ -46,8 +54,34 @@ class MediaProvider
             return;
         }
 
-        $this->setFileContents($media);
+        try {
+            if (Media::VOCAL_CONTRIBUTION_CONTEXT === $media->getContext()) {
+                (new LocalFilesystem())->copy($media->getBinaryContent()->getPathname(), $this->getPrivateVoiceMessagePath($media));
+            } else {
+                $this->setFileContents($media);
+            }
+        } catch (\Throwable $exception) {
+            if (Media::VOCAL_CONTRIBUTION_CONTEXT === $media->getContext()) {
+                $this->removePrivateVoiceMessageFile($media);
+            }
+
+            throw $exception;
+        }
         $media->resetBinaryContent();
+    }
+
+    public function getPrivateVoiceMessagePath(Media $media): string
+    {
+        if (Media::VOCAL_CONTRIBUTION_CONTEXT !== $media->getContext()) {
+            throw new \InvalidArgumentException('Expected a voice message.');
+        }
+
+        return $this->projectDir . '/' . self::PRIVATE_VOICE_MESSAGES_DIRECTORY . '/' . basename($media->getProviderReference());
+    }
+
+    public function removePrivateVoiceMessageFile(Media $media): void
+    {
+        (new LocalFilesystem())->remove($this->getPrivateVoiceMessagePath($media));
     }
 
     public function generateName(Media $media): string

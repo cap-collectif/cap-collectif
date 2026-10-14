@@ -2,10 +2,13 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
-use Capco\AppBundle\Antivirus\AntivirusScanner;
+use Capco\AppBundle\Exception\VocalContributionUploadException;
 use Capco\AppBundle\Manager\MediaManager;
+use Capco\AppBundle\Service\VocalContributionUploadService;
 use Capco\AppBundle\Twig\MediaExtension;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,8 +22,45 @@ class MediasController extends AbstractController
     public function __construct(
         private readonly MediaManager $mediaManager,
         private readonly MediaExtension $mediaExtension,
-        private readonly AntivirusScanner $antivirusScanner
+        private readonly \Capco\AppBundle\Antivirus\AntivirusScanner $antivirusScanner,
+        private readonly VocalContributionUploadService $vocalContributionUploadService
     ) {
+    }
+
+    /**
+     * @Route("/voice-messages", name="upload_voice_message", methods={"POST"}, options={"i18n" = false})
+     */
+    public function postVoiceMessageAction(Request $request): JsonResponse
+    {
+        if (!$this->isCsrfTokenValid('voice_message', $request->headers->get('X-CSRF-Token'))) {
+            return $this->json(['errorCode' => 'INVALID_CSRF_TOKEN'], Response::HTTP_FORBIDDEN);
+        }
+
+        $file = $request->files->get('file');
+        if (!$file instanceof UploadedFile) {
+            return $this->json(['errorCode' => 'INVALID_VOICE_MESSAGE'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $user = $this->getUser();
+
+        try {
+            $contribution = $this->vocalContributionUploadService->upload(
+                $file,
+                $user,
+                $request->request->get('participantToken') ?? $request->cookies->get('CapcoParticipant')
+            );
+        } catch (VocalContributionUploadException $exception) {
+            return $this->json(['errorCode' => $exception->errorCode], $exception->statusCode);
+        }
+
+        $payload = [
+            'vocalId' => GlobalId::toGlobalId('VocalContribution', $contribution->getId()),
+        ];
+        if (null === $user && null !== $contribution->getParticipant()) {
+            $payload['participantToken'] = $contribution->getParticipant()->getToken();
+        }
+
+        return $this->json($payload, Response::HTTP_CREATED);
     }
 
     /**

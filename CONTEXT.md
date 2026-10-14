@@ -41,6 +41,12 @@ Direct response identifiers grant no additional permissions. Private proposal an
 
 Questionnaire result permissions require no data migration or `private_result` column. Deploy the backend with GraphQL definitions rebuilt and Symfony caches renewed. The word-cloud cache uses a new namespace, and authorization runs before cache reads. Production resolution requires targeted anonymous checks on the reported questionnaires, followed by checks of authorized participation and management flows; do not retain personal response values during verification.
 
+## Voice messages
+
+**Voice message**:
+A standalone audio message recorded and submitted by a visitor from the homepage, with or without signing in. It can only be listened to or downloaded by administrators and is not attached to a proposal or another contribution.
+_Avoid_: Voice vote, transcription
+
 ## Example dialogue
 
 > **Product:** The user chose account anonymization. Will their proposal remain visible?

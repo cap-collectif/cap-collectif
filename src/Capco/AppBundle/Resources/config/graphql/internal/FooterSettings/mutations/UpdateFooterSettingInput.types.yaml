@@ -1,0 +1,10 @@
+UpdateFooterSettingInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            id:
+                type: 'ID!'
+            translations:
+                type: '[UpdateFooterSettingTranslationInput!]!'
+            isEnabled:
+                type: 'Boolean!'

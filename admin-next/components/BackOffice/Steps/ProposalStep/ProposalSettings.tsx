@@ -29,6 +29,7 @@ type Props = {
 const ProposalSettings: React.FC<Props> = ({ step: stepRef }) => {
   const step = useFragment(STEP_FRAGMENT, stepRef)
   const newVoteStep = useFeatureFlag('new_new_vote_step')
+  const vocalContribution = useFeatureFlag('vocal_contribution')
   const intl = useIntl()
   const { control } = useFormContext()
   const { proposalFormKey } = useCollectStep()
@@ -89,6 +90,21 @@ const ProposalSettings: React.FC<Props> = ({ step: stepRef }) => {
       <CollectStepImapConfig>
         <CollectStepImapConfigForm step={step} />
       </CollectStepImapConfig>
+      {vocalContribution && (
+        <FormControl name="isVocalContributionEnabled" control={control} mb={6}>
+          <FieldInput
+            id="isVocalContributionEnabled"
+            name="isVocalContributionEnabled"
+            control={control}
+            type="checkbox"
+          >
+            {intl.formatMessage({ id: 'admin.step.vocal-contribution-enabled' })}
+          </FieldInput>
+          <Text color="gray.700" fontSize={CapUIFontSize.BodySmall}>
+            {intl.formatMessage({ id: 'admin.step.vocal-contribution-enabled-help' })}
+          </Text>
+        </FormControl>
+      )}
       <FormControl name="allowAuthorsToAddNews" control={control} mb={6}>
         <FormLabel htmlFor="allowAuthorsToAddNews" label={intl.formatMessage({ id: 'proposal-news-label' })} />
         <FieldInput id="allowAuthorsToAddNews" name="allowAuthorsToAddNews" control={control} type="checkbox">

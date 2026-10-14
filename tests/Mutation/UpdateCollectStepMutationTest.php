@@ -13,11 +13,13 @@ use Capco\AppBundle\GraphQL\Mutation\UpdateCollectStepMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Service\ProposalStepSplitViewService;
 use Capco\AppBundle\Logger\ActionLogger;
+use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\HubMetadataRepository;
 use Capco\AppBundle\Service\HubDocumentsStepGuard;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
@@ -104,6 +106,68 @@ class UpdateCollectStepMutationTest extends TestCase
     }
 
     /**
+     * @dataProvider vocalContributionActivationCases
+     */
+    public function testRefusesVocalContributionActivationOnlyWhenFeatureIsDisabled(
+        bool $isFeatureActive,
+        bool $isAlreadyEnabled,
+        bool $isRefused
+    ): void {
+        $collectStep = $this->createMock(CollectStep::class);
+        $collectStep->method('isVocalContributionEnabled')->willReturn($isAlreadyEnabled);
+        $viewer = $this->createMock(User::class);
+        $globalIdResolver = $this->createMock(GlobalIdResolver::class);
+        $globalIdResolver->method('resolve')->willReturn($collectStep);
+        $toggleManager = $this->createMock(Manager::class);
+        $toggleManager->method('isActive')->with(Manager::vocal_contribution)->willReturn($isFeatureActive);
+
+        // The form is the next step of the mutation: reaching it means the input was accepted
+        $formFactory = $this->createMock(FormFactoryInterface::class);
+        $formFactory
+            ->expects($isRefused ? $this->never() : $this->once())
+            ->method('create')
+            ->willThrowException(new \LogicException('Form reached'))
+        ;
+
+        $mutation = new UpdateCollectStepMutation(
+            globalIdResolver: $globalIdResolver,
+            em: $this->createMock(EntityManagerInterface::class),
+            authorizationChecker: $this->createMock(AuthorizationCheckerInterface::class),
+            formFactory: $formFactory,
+            logger: $this->createMock(LoggerInterface::class),
+            proposalStepSplitViewService: $this->createMock(ProposalStepSplitViewService::class),
+            actionLogger: $this->createMock(ActionLogger::class),
+            hubApiGreenClient: $this->createMock(HubApiGreenClient::class),
+            hubMetadataRepository: $this->createMock(HubMetadataRepository::class),
+            hubDocumentsStepGuard: new HubDocumentsStepGuard($toggleManager),
+            collectStepRepository: $this->createMock(CollectStepRepository::class),
+            toggleManager: $toggleManager,
+        );
+
+        $this->expectException($isRefused ? UserError::class : \LogicException::class);
+        $mutation(
+            new Argument([
+                'input' => [
+                    'stepId' => 'collect-step',
+                    'operationType' => 'EDIT',
+                    'isVocalContributionEnabled' => true,
+                ],
+            ]),
+            $viewer
+        );
+    }
+
+    /**
+     * @return iterable<string, array{bool, bool, bool}>
+     */
+    public static function vocalContributionActivationCases(): iterable
+    {
+        yield 'activation with the feature disabled' => [false, false, true];
+        yield 'activation with the feature enabled' => [true, false, false];
+        yield 'already enabled step with the feature disabled' => [false, true, false];
+    }
+
+    /**
      * @param list<string> $events
      *
      * @return array{
@@ -178,11 +242,9 @@ class UpdateCollectStepMutationTest extends TestCase
         }
 
         $toggleManager = $this->createMock(Manager::class);
-        $toggleManager
-            ->expects($datesChanged ? $this->once() : $this->never())
+        $toggleManager->expects($this->exactly($datesChanged ? 1 : 0))
             ->method('isActive')
-            ->with(Manager::hub_api_green)
-            ->willReturn(true)
+            ->willReturnCallback(static fn (string $toggle): bool => Manager::hub_api_green === $toggle)
         ;
 
         $hubMetadataRepository = $this->createMock(HubMetadataRepository::class);
@@ -223,6 +285,8 @@ class UpdateCollectStepMutationTest extends TestCase
                 hubApiGreenClient: $hubApiGreenClient,
                 hubMetadataRepository: $hubMetadataRepository,
                 hubDocumentsStepGuard: new HubDocumentsStepGuard($toggleManager),
+                toggleManager: $toggleManager,
+                collectStepRepository: $this->createMock(CollectStepRepository::class),
             ),
             'collectStep' => $collectStep,
             'viewer' => $viewer,

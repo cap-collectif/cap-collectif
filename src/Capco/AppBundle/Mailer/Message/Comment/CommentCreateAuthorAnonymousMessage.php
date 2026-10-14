@@ -23,6 +23,7 @@ final class CommentCreateAuthorAnonymousMessage extends AbstractExternalMessage
             'proposalUrl' => $params['elementURL'],
             'disableNotificationsUrl' => $params['disableNotificationURL'],
             'notificationsUrl' => $params['notificationURL'],
+            'objectType' => $params['objectType'],
         ];
     }
 
@@ -30,6 +31,7 @@ final class CommentCreateAuthorAnonymousMessage extends AbstractExternalMessage
     {
         return [
             'username' => self::escape($comment->getAuthorName()),
+            'objectType' => $params['objectType'],
         ];
     }
 }

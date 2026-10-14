@@ -22,7 +22,7 @@ const execFile = util.promisify(cp.execFile)
 
 const env = process.env.CI ? 'ci' : 'local'
 const castor = (group: string, task: string) => `castor ${env}:${group}:${task}`
-const confirm = env === 'local' ? ' --confirm' : ''
+const confirm = ' --confirm'
 
 // `capco:toggle:enable/disable` picks its Redis namespace from the Symfony kernel env passed via
 // `--env`. Cypress always runs against `capco.test` (see `baseUrl` in cypress.config.ts), and
@@ -135,7 +135,7 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
       console.log(`Enabling feature flag "${name}"...`)
       console.time('enable_feature')
 
-      await exec(`${castor('app', 'toggle-enable')} --toggle=${name} --environment=${toggleEnvironment}`)
+      await execFile('castor', [`${env}:app:toggle-enable`, name, `--environment=${toggleEnvironment}`])
       console.log(`Successfully enabled "${name}"`)
       console.timeEnd('enable_feature')
       return Promise.resolve(null)
@@ -144,21 +144,31 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
       console.log(`Disabling feature flag "${name}"...`)
       console.time('disable_feature')
 
-      await exec(`${castor('app', 'toggle-disable')} --toggle=${name} --environment=${toggleEnvironment}`)
+      await execFile('castor', [`${env}:app:toggle-disable`, name, `--environment=${toggleEnvironment}`])
       console.log(`Successfully disabled "${name}"`)
       console.timeEnd('enable_disable')
       return Promise.resolve(null)
     },
     'run:sql': async (sql: string) => {
-      console.log(`${castor('app', 'sql')} --sql=<redacted> --environment=test`)
-      await execFile('castor', [`${env}:app:sql`, `--sql=${sql}`, '--environment=test'])
+      console.log(`${castor('app', 'console')} --command-name=doctrine:query:sql --environment=test -- <redacted>`)
+      await execFile('castor', [
+        `${env}:app:console`,
+        '--command-name=doctrine:query:sql',
+        '--environment=test',
+        '--',
+        sql,
+      ])
       return Promise.resolve(null)
     },
     'run:command': async (name: string) => {
       console.log(`Run command "${name}"...`)
       console.time('run_command')
 
-      await execFile('castor', [`${env}:app:cmd`, `--command-name=${name}`, '--environment=test'])
+      await execFile('castor', [
+        `${env}:app:console`,
+        `--command-name=${name}`,
+        '--environment=test',
+      ])
       console.log(`Successfully run command "${name}"`)
       console.timeEnd('run_command')
       return Promise.resolve(null)

@@ -1,6 +1,7 @@
 import { Box, Button, CapUIIcon, Flex, Tag, useTheme } from '@cap-collectif/ui'
 import { VoteStepListActions_proposalStep$key } from '@relay/VoteStepListActions_proposalStep.graphql'
 import useWindowWidth from '@shared/hooks/useWindowWidth'
+import { isFeminineContributionObjectType } from '@shared/constants/proposalStepObjectType'
 import { parseAsInteger, useQueryState } from 'nuqs'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
@@ -41,6 +42,7 @@ const FRAGMENT = graphql`
     }
     ...VoteStepQuickFilter_proposalStep
     form {
+      objectType
       isMapViewEnabled
       isGridViewEnabled
       isListViewEnabled
@@ -88,7 +90,11 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
       icon: CapUIIcon.ThumbUpO,
     },
     {
-      label: intl.formatMessage({ id: 'step.vote.list_actions.quick_filter.comments' }),
+      label: intl.formatMessage({
+        id: isFeminineContributionObjectType(step.form?.objectType)
+          ? 'step.vote.list_actions.quick_filter.comments_f'
+          : 'step.vote.list_actions.quick_filter.comments',
+      }),
       filter: 'comments',
       icon: CapUIIcon.BubbleO,
     },

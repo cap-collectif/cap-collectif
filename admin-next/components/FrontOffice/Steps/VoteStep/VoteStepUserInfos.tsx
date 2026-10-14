@@ -24,6 +24,7 @@ import VotesPopup from '@components/FrontOffice/Steps/VoteStep/VotesPopup/VotesP
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import useIsMobile from '@shared/hooks/useIsMobile'
 import { useMatchMedia } from '@liinkiing/react-hooks'
+import { getContributionObjectTypeTranslationKey } from '@shared/constants/proposalStepObjectType'
 
 export type StepUserVotesType =
   | 'minMaxRanking'
@@ -146,6 +147,9 @@ const FRAGMENT = graphql`
     voteThreshold
     voteTypes
     actionButtonLabel
+    form {
+      objectType
+    }
     viewerVotes {
       totalCount
       edges {
@@ -161,6 +165,7 @@ const FRAGMENT = graphql`
 
 const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
   const step = useFragment(FRAGMENT, stepKey)
+  const objectType = getContributionObjectTypeTranslationKey(step.form?.objectType)
   const intl = useIntl()
   const isMobile = useIsMobile()
   const isTabletOrSmaller = useMatchMedia(`screen and (max-width: 1024px)`)
@@ -199,6 +204,18 @@ const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
   const buttonNamespace = isSupport ? 'supports' : 'votes'
   const displayButtonKey = isSupport && buttonKey === 'votes' ? 'supports' : buttonKey
   const helpLabelId = isSupport ? 'front.proposal.supports-popup.help' : 'front.proposal.votes-popup.help'
+  const titleTranslationKey =
+    isSupport
+      ? `proposal.step.user.${titleNamespace}.infos.title.${titleKey}`
+      : titleKey === 'proposals' || titleKey === 'proposal-number'
+        ? `front.contribution.${objectType}.votes.title.${titleKey}`
+      : `proposal.step.user.votes.infos.title.${titleKey}`
+  const descTranslationKey =
+    isSupport
+      ? `proposal.step.user.${descNamespace}.infos.desc.${supportDescKey ?? descKey}`
+      : descKey === 'vote-more' || descKey === 'vote-others'
+        ? `front.contribution.${objectType}.votes.desc.${descKey}`
+      : `proposal.step.user.votes.infos.desc.${descKey}`
 
   // Remaining votes/budget toward the next milestone, used by `proposal-number` title
   const titleValue = (() => {
@@ -248,15 +265,12 @@ const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
         )}
         <Box color="text.primary" fontSize={CapUIFontSize.BodyLarge} flex="1">
           <Box fontWeight={CapUIFontWeight.Semibold}>
-            {intl.formatMessage(
-              { id: `proposal.step.user.${titleNamespace}.infos.title.${titleKey}` },
-              { n: titleValue },
-            )}
+            {intl.formatMessage({ id: titleTranslationKey }, { n: titleValue })}
           </Box>
           {descKey && (
             <Box as="p">
               {intl.formatMessage(
-                { id: `proposal.step.user.${descNamespace}.infos.desc.${supportDescKey ?? descKey}` },
+                { id: descTranslationKey },
                 { n: descriptionValue, v: (step.votesLimit ?? 0) - voteProgress },
               )}
             </Box>

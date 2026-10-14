@@ -92,6 +92,7 @@ class Manager
     final public const full_proposal_card = 'full_proposal_card';
     final public const multi_consultations = 'multi_consultations';
     final public const collect_proposals_by_email = 'collect_proposals_by_email';
+    final public const vocal_contribution = 'vocal_contribution';
     final public const user_anonymization_automated = 'user_anonymization_automated';
     final public const antivirus = 'antivirus';
     final public const mailjet_sandbox = 'mailjet_sandbox';
@@ -132,6 +133,7 @@ class Manager
         self::full_proposal_card,
         self::multi_consultations,
         self::collect_proposals_by_email,
+        self::vocal_contribution,
         self::user_anonymization_automated,
         self::antivirus,
     ];
@@ -149,6 +151,7 @@ class Manager
         self::hub_api_green,
         self::captchetat,
         self::unstable__sonata_migration_to_admin_next,
+        self::vocal_contribution,
     ];
 
     public static $toggles = [
@@ -232,6 +235,7 @@ class Manager
         self::full_proposal_card,
         self::multi_consultations,
         self::collect_proposals_by_email,
+        self::vocal_contribution,
         self::user_anonymization_automated,
         self::antivirus,
         self::mailjet_sandbox,

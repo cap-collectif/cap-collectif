@@ -6,7 +6,7 @@ exports[`<ProposalPageVoteThreshold /> should render proposal page vote threshol
 >
   <ProposalPageVoteThreshold__ProposalPageVoteThresholdContainer>
     <h2>
-      proposal.vote.threshold.title
+      front.contribution.proposal.vote.threshold.title
     </h2>
     <p>
       <Tooltip
@@ -93,7 +93,7 @@ exports[`<ProposalPageVoteThreshold /> should render proposal page vote threshol
 >
   <ProposalPageVoteThreshold__ProposalPageVoteThresholdContainer>
     <h2>
-      proposal.vote.threshold.reached
+      front.contribution.proposal.vote.threshold.reached
     </h2>
     <p>
       <Tooltip

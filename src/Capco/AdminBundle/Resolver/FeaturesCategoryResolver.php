@@ -64,6 +64,7 @@ class FeaturesCategoryResolver
                     Manager::full_proposal_card,
                     Manager::multi_consultations,
                     Manager::collect_proposals_by_email,
+                    Manager::vocal_contribution,
                     Manager::user_anonymization_automated,
                     Manager::antivirus,
                 ],

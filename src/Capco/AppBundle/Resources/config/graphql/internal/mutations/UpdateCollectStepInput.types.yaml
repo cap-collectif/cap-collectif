@@ -105,6 +105,9 @@ UpdateCollectStepInput:
             isCollectByEmailEnabled:
                 type: 'Boolean!'
                 description: 'Whether or not collect by email is enabled.'
+            isVocalContributionEnabled:
+                type: 'Boolean'
+                description: 'Whether or not vocal contributions are enabled.'
             preventProposalEdit:
                 type: 'Boolean!'
                 description: 'Whether or not proposal edit is disabled after the step is closed.'

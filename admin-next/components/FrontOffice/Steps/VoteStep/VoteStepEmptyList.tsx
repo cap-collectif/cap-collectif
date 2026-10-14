@@ -3,6 +3,7 @@ import { useIntl } from 'react-intl'
 import { Box, Button, CapUIFontSize, Flex, Text, useTheme } from '@cap-collectif/ui'
 import { parseAsString, useQueryStates } from 'nuqs'
 import { checkIfAllFiltersAreNull } from '@shared/utils/filtersHelper'
+import { getContributionObjectTypeTranslationKey } from '@shared/constants/proposalStepObjectType'
 
 const filterParsers = {
   term: parseAsString,
@@ -16,7 +17,11 @@ const filterParsers = {
   latlngBounds: parseAsString,
 }
 
-const VoteStepEmptyList: React.FC = () => {
+type Props = {
+  objectType?: string | null
+}
+
+const VoteStepEmptyList: React.FC<Props> = ({ objectType }) => {
   const intl = useIntl()
   const { colors } = useTheme()
   const [filters, setFilters] = useQueryStates(filterParsers, {
@@ -630,7 +635,9 @@ const VoteStepEmptyList: React.FC = () => {
       <Box width={!hasData ? '100%' : ''} p="md">
         <Text as="h2" role="status" mb="xxs" color="text.primary" fontSize={CapUIFontSize.Headline} fontWeight="700">
           {intl.formatMessage({
-            id: !hasData ? 'front.proposal.empty-list' : 'no-result-on-search',
+            id: !hasData
+              ? `front.contribution.${getContributionObjectTypeTranslationKey(objectType)}.empty-list`
+              : 'no-result-on-search',
           })}
         </Text>
         {hasData ? (
