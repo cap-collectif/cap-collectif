@@ -6,6 +6,11 @@ import '../../../_setupDB'
  * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
  */
 describe('Internal|ShieldConfig', () => {
+  // The mutation changes Redis; restoring MySQL does not reset this flag.
+  afterEach(async () => {
+    await global.disableFeatureFlag('shield_mode')
+  })
+
   it('Updates a shield config as admin', async () => {
     await expect(
       graphql(

@@ -1,11 +1,12 @@
 import { ProposalPage } from '~e2e-pages/index'
 
 context('Proposal Page', () => {
+  beforeEach(() => {
+    cy.task('db:restore')
+    cy.task('disable:feature', 'new_vote_step')
+  })
+
   describe('Project Page FO', () => {
-    beforeEach(() => {
-      cy.task('db:restore')
-      cy.task('disable:feature', 'new_vote_step')
-    })
     afterEach(() => {
       cy.task('disable:feature', 'blog')
       cy.task('disable:feature', 'captcha')

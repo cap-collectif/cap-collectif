@@ -8,6 +8,11 @@ describe('Admin Questionnaire - Import Choices', () => {
     cy.interceptGraphQLOperation({ operationName: 'QuestionnaireAdminPageQuery' })
     // Go to the admin questionnaire edit page
     cy.visit('/admin/capco/app/questionnaire/questionnaireAdmin/edit')
+    cy.wait('@QuestionnaireAdminPageQuery').its('response').as('questionnaireResponse')
+    cy.get('@questionnaireResponse').its('statusCode').should('eq', 200)
+    cy.get('@questionnaireResponse').its('body').should('not.have.property', 'errors')
+    cy.get('@questionnaireResponse').its('body.data.questionnaire').should('exist')
+    cy.get('@questionnaireResponse').its('body.data.viewer').should('exist')
     cy.get('#parameters-submit').should('exist')
 
     // Add a new question
@@ -34,7 +39,6 @@ describe('Admin Questionnaire - Import Choices', () => {
     // Import over_1500.csv
     cy.get('input#csv-file_field').selectFile('fixtures/over_1500.csv', { force: true })
     cy.contains('n-items-found').should('exist') // num: 1612
-    cy.wait('@QuestionnaireAdminPageQuery')
     cy.get('#import-file').click()
     cy.contains('75015 - PARIS ANTENNE DEX GRAND SUD OUEST').should('exist')
 

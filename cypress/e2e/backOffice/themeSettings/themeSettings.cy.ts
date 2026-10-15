@@ -24,7 +24,11 @@ describe('Theme settings back office', () => {
 
   it('rejects a theme social network description longer than 160 characters', () => {
     cy.directLoginAs('admin')
+    cy.interceptGraphQLOperation({ operationName: 'ThemeSettingsListQuery' })
     cy.visit('/admin-next/theme-settings')
+    cy.wait('@ThemeSettingsListQuery').its('response.statusCode').should('eq', 200)
+    cy.get('@ThemeSettingsListQuery').its('response.body.errors').should('not.exist')
+    cy.get('@ThemeSettingsListQuery').its('response.body.data.themeSettings').should('not.be.empty')
 
     cy.contains('themes.metadescription')
       .closest('tr')
@@ -35,6 +39,8 @@ describe('Theme settings back office', () => {
     cy.interceptGraphQLOperation({ operationName: 'UpdateThemeSettingMutation' })
     cy.get('[id$="-value"]').filter(':visible').clear().type('a'.repeat(161), { delay: 0 })
     cy.contains('button', 'global.save').filter(':visible').click()
-    cy.wait('@UpdateThemeSettingMutation').its('response.body.data.updateThemeSetting.errorCode').should('eq', 'INVALID_VALUE')
+    cy.wait('@UpdateThemeSettingMutation')
+      .its('response.body.data.updateThemeSetting.errorCode')
+      .should('eq', 'INVALID_VALUE')
   })
 })

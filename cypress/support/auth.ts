@@ -111,15 +111,10 @@ Cypress.Commands.add('loginAs', (email: Cypress.LoginAsUsernames) => {
 })
 
 Cypress.Commands.add('directLogin', ({ email, password }: Cypress.LoginOptions) => {
-  cy.session(
+  return cy.session(
     [email, password],
     () => {
-      cy.url().then(url => {
-        if (url === 'about:blank') {
-          cy.visit('/')
-        }
-      })
-
+      // cy.request uses baseUrl and applies login cookies without loading the application.
       const log = Cypress.log({
         name: 'login',
         displayName: 'LOGIN',
@@ -138,6 +133,7 @@ Cypress.Commands.add('directLogin', ({ email, password }: Cypress.LoginOptions) 
         retryOnNetworkFailure: true,
       }).then(response => {
         expect(response.status).to.eq(200)
+        expect(response.body.success).to.eq(true)
         log.set({
           consoleProps() {
             return {
@@ -155,6 +151,12 @@ Cypress.Commands.add('directLogin', ({ email, password }: Cypress.LoginOptions) 
     {
       validate() {
         cy.getCookie('PHPSESSID').should('exist')
+        // A cached cookie may outlive its server session; verify the requested identity.
+        cy.request('POST', '/graphql/internal', { query: '{ viewer { email } }' }).then(response => {
+          expect(response.status).to.eq(200)
+          expect(response.body.errors).to.eq(undefined)
+          expect(response.body.data?.viewer?.email).to.eq(email)
+        })
       },
     },
   )

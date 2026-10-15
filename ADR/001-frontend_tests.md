@@ -59,6 +59,28 @@ cy.task('disable:feature', 'captcha')
 cy.task('enaable:feature', 'calendar')
 ```
 
+### Connexion directe et sessions Cypress
+
+`cy.directLoginAs()` se connecte avec `cy.request()` sans charger la page
+d'accueil. La validation de `cy.session()` interroge l'API GraphQL interne et
+vérifie que `viewer.email` correspond au compte demandé : un cookie `PHPSESSID`
+présent ne prouve pas que la session serveur est encore authentifiée. Cypress
+recrée une session restaurée dont cette validation échoue.
+
+La spec `backOffice/user/directLogin.cy.ts` vérifie la connexion sans accueil,
+la réutilisation d'une session valide et la reconnexion après une déconnexion
+côté serveur. Les visites de profils administrateurs vérifient également leur
+URL et la réponse de `UserAdminPageQuery` avant les interactions avec le formulaire.
+
+### Attendre l'indexation asynchrone
+
+`cy.task('swarrot:consume', 'elasticsearch_indexation')` consomme les messages
+présents et attend que la file ne contienne plus de messages prêts ou non
+acquittés, avec une limite de 30 secondes. Appeler cette tâche après l'action
+qui publie les messages, puis recharger la page : attendre uniquement la réponse
+GraphQL ne garantit pas que l'index Elasticsearch reflète déjà la mutation.
+Le consommateur est borné pour ne pas rester actif pendant les resets suivants.
+
 ### Visiter une page
 
 ```ts

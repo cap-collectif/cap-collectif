@@ -70,6 +70,14 @@ Ce script utilise une base temporaire, compare les dumps après chaque restaurat
 et vérifie les clés étrangères, les données binaires, les tables vides et les
 compteurs d'identifiants. Ses durées locales ne prédisent pas les durées CircleCI.
 
+#### Disponibilité d'Admin Next avant Cypress
+
+Avant les tests Cypress backoffice, la CI attend une réponse HTTP 2xx ou 3xx d'Admin Next
+via le proxy `capco.test`. Le service lance son build en arrière-plan ; démarrer
+Docker ne garantit pas que Next.js écoute déjà sur son port. La vérification
+est limitée à cinq minutes et fait échouer la préparation si les erreurs réseau
+ou 5xx persistent, plutôt que de les ignorer dans les scénarios navigateur.
+
 #### 5. Vérification de la couverture des specs Cypress
 
 **Décision** : Un job `check-cypress-spec-coverage` s'exécute avant les jobs `e2e-*` / `api-*` (au même titre que `unit-php`, `phpunit-tests`, `lint-js`, `unit-js`, `typecheck-js`, etc.) et fait échouer la CI si un fichier de spec Cypress se trouve en dehors des dossiers `frontOffice`, `frontOfficeWorkflow` ou `backOffice` couverts par les jobs `e2e-cypress-*`.

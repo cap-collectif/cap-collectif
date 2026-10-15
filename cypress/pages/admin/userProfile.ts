@@ -8,7 +8,15 @@ export default new (class AdminUserPage {
   }
 
   visitProfile(userId: string) {
-    return this.cy.visit(this.pathProfileUser(userId))
+    this.cy.interceptGraphQLOperation({ operationName: 'UserAdminPageQuery' })
+    this.cy.visit(this.pathProfileUser(userId))
+    this.cy.location('pathname').should('eq', `/${this.pathProfileUser(userId)}`)
+    return this.cy.wait('@UserAdminPageQuery').then(({ response }) => {
+      expect(response?.statusCode).to.eq(200)
+      expect(response?.body.errors).to.eq(undefined)
+      expect(response?.body.data?.user).to.exist
+      expect(response?.body.data?.viewer).to.exist
+    })
   }
 
   userProfileAccountTab() {

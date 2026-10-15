@@ -91,7 +91,6 @@ describe('Moderation', () => {
     it('should moderate argument for guideline violation', () => {
       cy.interceptGraphQLOperation({ operationName: 'ArgumentListQuery' })
       cy.intercept('GET', '/moderate/**').as('moderate')
-      cy.task('swarrot:consume', 'elasticsearch_indexation')
       cy.visit('/moderate/argument1ModerationToken/reason/moderation-guideline-violation', {
         failOnStatusCode: false,
       })
@@ -101,9 +100,10 @@ describe('Moderation', () => {
       })
 
       // The page fetches FOR and AGAINST arguments separately. Wait for the initial render,
-      // then reload after the Elasticsearch consumer processes the moderation update.
+      // then consume and acknowledge the index updates before fetching the list again.
       cy.wait('@ArgumentListQuery').its('response.statusCode').should('eq', 200)
       cy.wait('@ArgumentListQuery').its('response.statusCode').should('eq', 200)
+      cy.task('swarrot:consume', 'elasticsearch_indexation')
       cy.reload()
       cy.wait('@ArgumentListQuery').its('response.statusCode').should('eq', 200)
       cy.wait('@ArgumentListQuery').its('response.statusCode').should('eq', 200)

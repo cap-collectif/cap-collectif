@@ -34,7 +34,7 @@ const confirm = ' --confirm'
 // silently never appears enabled to any HTTP request, even though `docker exec ... bin/console
 // capco:toggle:list` reports it as active (that command inherits the container's own default env,
 // `dev`, which is irrelevant to how nginx routes a `capco.test` request).
-    const toggleEnvironment = 'test'
+const toggleEnvironment = 'test'
 
 const logRestoreTimings = (output: string) => {
   output
@@ -127,9 +127,57 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
       return Promise.resolve(null)
     },
     'swarrot:consume': async (name: string) => {
-      console.log(`Consumming swarrot "${name}"...`)
-      exec(`${castor('app', 'swarrot-consume')} ${name}`)
-      return Promise.resolve(null)
+      if (!/^[a-zA-Z0-9_.:-]+$/.test(name)) throw new Error('Invalid consumer name.')
+      const deadline = Date.now() + 30000
+
+      // Wait for acknowledgements instead of leaving a consumer running across DB resets.
+      do {
+        const { stdout } = await execFile(
+          'docker',
+          [
+            'exec',
+            'capco_application_1',
+            'rabbitmqctl',
+            'list_queues',
+            '--vhost=capco',
+            'name',
+            'messages_ready',
+            'messages_unacknowledged',
+            '--formatter=json',
+          ],
+          { timeout: 10000 },
+        )
+        const queues = JSON.parse(stdout) as Array<{
+          name: string
+          messages_ready: number
+          messages_unacknowledged: number
+        }>
+        const queue = queues.find(queue => queue.name === name)
+        if (!queue) throw new Error(`Queue "${name}" does not exist.`)
+        if (queue.messages_ready === 0 && queue.messages_unacknowledged === 0) return null
+
+        if (queue.messages_ready > 0) {
+          await execFile(
+            'castor',
+            [
+              `${env}:app:console`,
+              `--command-name=swarrot:consume:${name}`,
+              '--environment=test',
+              '--',
+              name,
+              `--max-messages=${queue.messages_ready}`,
+              '--max-execution-time=10',
+              '--no-retry',
+              '--no-interaction',
+            ],
+            { timeout: 15000 },
+          )
+        } else {
+          await new Promise(resolve => setTimeout(resolve, 100))
+        }
+      } while (Date.now() < deadline)
+
+      throw new Error(`Queue "${name}" did not finish processing within 30 seconds.`)
     },
     'enable:feature': async (name: string) => {
       console.log(`Enabling feature flag "${name}"...`)
@@ -164,11 +212,7 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
       console.log(`Run command "${name}"...`)
       console.time('run_command')
 
-      await execFile('castor', [
-        `${env}:app:console`,
-        `--command-name=${name}`,
-        '--environment=test',
-      ])
+      await execFile('castor', [`${env}:app:console`, `--command-name=${name}`, '--environment=test'])
       console.log(`Successfully run command "${name}"`)
       console.timeEnd('run_command')
       return Promise.resolve(null)

@@ -20,9 +20,10 @@ describe('Opinion versions actions', () => {
   })
 
   it('should allow the author of a version to delete it', () => {
-    cy.directLoginAs('user')
+    cy.loginAs('user')
     OpinionPage.visitVersionPage()
 
+    cy.isLoggedIn()
     cy.get('.loader').should('not.exist')
 
     cy.get('#opinion-delete').should('exist').click({ force: true })

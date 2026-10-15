@@ -9,7 +9,8 @@ describe('User invitation as admin', () => {
     cy.directLoginAs('admin')
     UserInvitePage.visitInviteUser()
     return cy.wait('@inviteQuery').then(req => {
-      expect(req.response?.statusCode).not.eq(500)
+      expect(req.response?.statusCode).to.eq(200)
+      expect(req.response?.body.errors).to.eq(undefined)
     })
   })
 

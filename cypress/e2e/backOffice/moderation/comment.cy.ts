@@ -7,11 +7,8 @@ describe('Comments moderation', () => {
     cy.interceptGraphQLOperation({ operationName: 'AdminRightNavbarAppQuery' })
     cy.directLoginAs('admin')
     cy.visit('/admin/capco/app/comment/list')
-    Cypress.on('uncaught:exception', (err, runnable) => {
-      // returning false here prevents Cypress from failing the test
-      return false
-    })
-    cy.wait('@AdminRightNavbarAppQuery')
+    cy.wait('@AdminRightNavbarAppQuery').its('response.statusCode').should('eq', 200)
+    cy.get('@AdminRightNavbarAppQuery').its('response.body.errors').should('not.exist')
     cy.get('a').contains('global.contenu').should('exist').and('be.visible')
     cy.get('table tbody tr').should('have.length.greaterThan', 23)
   })

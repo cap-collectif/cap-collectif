@@ -15,11 +15,15 @@ context('Events list page as admin', () => {
     cy.directLoginAs('admin')
   })
   beforeEach(() => {
+    cy.interceptGraphQLOperation({ operationName: 'EventListPageQuery' })
+    cy.interceptGraphQLOperation({ operationName: 'EventRefetchRefetchQuery' })
     cy.visit('/events')
+    cy.wait('@EventListPageQuery').its('response.statusCode').should('eq', 200)
   })
   describe('within future events list', () => {
     it('should filter events by *title* and display correct results', () => {
       EventPage.typeInEventSearchInput('without')
+      cy.wait('@EventRefetchRefetchQuery').its('response.statusCode').should('eq', 200)
       EventPage.waitForEventPreviewsToAppear()
       EventPage.checkEventPreviewCount(1)
       EventPage.checkEventPreviewContains(/Event without\s*registrations/)
@@ -30,6 +34,7 @@ context('Events list page as admin', () => {
       EventPage.openFiltersMenu()
       EventPage.openSelectThemeDropdown()
       cy.get('.react-select__option').contains('Justice').click({ force: true })
+      cy.wait('@EventRefetchRefetchQuery').its('response.statusCode').should('eq', 200)
 
       EventPage.getEventPreviews().and('have.length', 2)
 
@@ -40,10 +45,10 @@ context('Events list page as admin', () => {
   describe('within archived events list', () => {
     it('should filter archived events by *title* and display correct results', () => {
       EventPage.filterArchivedEvents()
+      cy.wait('@EventRefetchRefetchQuery').its('response.statusCode').should('eq', 200)
 
       EventPage.typeInEventSearchInput('ParisWeb2014')
-
-      cy.get('.loader').should('exist').and('be.visible')
+      cy.wait('@EventRefetchRefetchQuery').its('response.statusCode').should('eq', 200)
       EventPage.getEventPreviews().and('have.length', 1)
 
       EventPage.checkEventPreviewContains(/ParisWeb.*/) // the text can be truncated so we're only trying to match the beginning
@@ -55,10 +60,10 @@ context('Events list page as admin', () => {
       EventPage.openFiltersMenu()
       EventPage.openSelectThemeDropdown()
       cy.get('.react-select__option').contains('Justice').click({ force: true })
+      cy.wait('@EventRefetchRefetchQuery').its('response.statusCode').should('eq', 200)
 
       EventPage.filterArchivedEvents()
-
-      cy.get('.loader').should('exist').and('be.visible')
+      cy.wait('@EventRefetchRefetchQuery').its('response.statusCode').should('eq', 200)
       EventPage.getEventPreviews().and('have.length', 1)
 
       EventPage.checkEventPreviewContains(/^evenementPasseSansDate.*/) // the text can be truncated so we're only trying to match the beginning
