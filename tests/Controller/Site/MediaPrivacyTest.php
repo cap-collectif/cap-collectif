@@ -90,8 +90,10 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         self::assertStringNotContainsString($media->getProviderReference(), json_encode($result, \JSON_THROW_ON_ERROR));
     }
 
-    public function testOriginalCachedImageAndGenerationRequirePermission(): void
+    /** @dataProvider shieldModes */
+    public function testOriginalCachedImageAndGenerationRequirePermission(bool $shield): void
     {
+        $this->setFeature('shield_mode', $shield);
         $owner = $this->account();
         $media = [...$this->attachment($owner)->getMedias()][0];
         $relative = 'default/0001/01/' . $media->getProviderReference();
@@ -116,8 +118,10 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         self::assertResponseStatusCodeSame(403);
     }
 
-    public function testPublicImageAndGeneratedThumbnailRemainReadable(): void
+    /** @dataProvider shieldModes */
+    public function testPublicImageAndGeneratedThumbnailRemainReadable(bool $shield): void
     {
+        $this->setFeature('shield_mode', $shield);
         $media = $this->media();
         $relative = 'default/0001/01/' . $media->getProviderReference();
         $this->files[] = $this->root() . '/cache/default_avatar/' . $relative;
@@ -130,6 +134,13 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         self::assertResponseStatusCodeSame(302);
         $this->browser->followRedirect();
         self::assertResponseStatusCodeSame(200);
+    }
+
+    /** @return iterable<string, array{bool}> */
+    public static function shieldModes(): iterable
+    {
+        yield 'without shield' => [false];
+        yield 'with shield' => [true];
     }
 
     public function testRemovingReplyDoesNotPublishTheFile(): void

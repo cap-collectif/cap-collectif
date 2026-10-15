@@ -14,6 +14,7 @@ class ShieldListener
     final public const AVAILABLE_ROUTES = [
         // Basics
         '_wdt',
+        'app_media_file',
 
         // Login
         'login_check',
