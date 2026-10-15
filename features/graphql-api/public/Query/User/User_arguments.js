@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setupES'
+import '../../../_setupESOnce'
 
 const UserArgumentsQuery = /* GraphQL */ `
   query UserArgumentsQuery($id: ID!, $count: Int!, $cursor: String) {

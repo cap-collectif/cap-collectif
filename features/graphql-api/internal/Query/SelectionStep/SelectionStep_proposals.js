@@ -1,5 +1,5 @@
 //* eslint-env jest */
-import '../../../_setupES'
+import '../../../_setupESOnce'
 
 const SelectionStepProposalsQuery = /* GraphQL */ `
   query SelectionStepProposalsQuery($id: ID!, $userType: ID, $status: ID, $excludeViewerVotes: Boolean) {

@@ -42,6 +42,12 @@ Les helpers actuels fournissent une stratégie de restauration avant chaque test
   Elasticsearch avant chaque test. Lorsque les données existent dans les deux
   stockages, coordonner cette restauration avec celle de MySQL pour retrouver un
   socle cohérent avant la préparation du scénario.
+- Pour un fichier dont tous les scénarios laissent les index ES des fixtures
+  inchangés, [`_setupESOnce`](../../../features/graphql-api/_setupESOnce.js) restaure
+  le snapshot une seule fois dans `beforeAll`. Cette restauration à l'entrée du
+  fichier protège contre l'état laissé par une spec précédente. Vérifier les
+  effets de la préparation et des requêtes avant de choisir ce helper ; une
+  mutation ou une écriture dans ces index nécessite une isolation par scénario.
 
 Une restauration avant le prochain test peut assurer son isolation, mais elle ne
 nettoie pas immédiatement les effets du dernier test exécuté. Prévoir un nettoyage

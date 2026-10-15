@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setupES'
+import '../../../_setupESOnce'
 
 const ProposalVotesPreviewData = /* GraphQL */ `
   query ProposalVotesPreviewData($collectStepId: ID!) {

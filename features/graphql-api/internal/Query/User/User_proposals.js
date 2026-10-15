@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setupES'
+import '../../../_setupESOnce'
 
 const UserProposalsVisibilityQuery = /* GraphQL */ `
   query UserProposalsVisibilityQuery($userId: ID!, $after: String) {

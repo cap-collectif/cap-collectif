@@ -1,5 +1,5 @@
 //* eslint-env jest */
-import '../../../_setupES'
+import '../../../_setupESOnce'
 
 const SelectionStepMediatorsParticipantsQuery = /* GraphQL */ `
   query SelectionStepMediatorsParticipantsQuery($stepId: ID!, $mediatorId: ID, $orderBy: ParticipantOrder) {

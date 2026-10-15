@@ -1,5 +1,5 @@
 /* eslint-dev jest*/
-import '../../../_setupES'
+import '../../../_setupESOnce'
 
 const ProjectVotesQuery = /* GraphQL */ `
   query ProjectCounters($projectId: ID!, $anonymous: Boolean) {

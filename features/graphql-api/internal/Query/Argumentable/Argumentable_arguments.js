@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setupES'
+import '../../../_setupESOnce'
 
 const ArgumentableArgumentsQuery = /* GraphQL */ `
   query ArgumentableArgumentsQuery($id: ID!, $includeTrashed: Boolean!, $type: ArgumentValue) {

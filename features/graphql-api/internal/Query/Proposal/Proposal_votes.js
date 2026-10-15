@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setupES'
+import '../../../_setupESOnce'
 
 const ProposalVoteMiniumQuery = /* GraphQL */ `
   query ProposalVoteMiniumQuery($id: ID!, $includeNotAccounted: Boolean!, $includeUnpublished: Boolean!) {

@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setupES'
+import '../../../_setupESOnce'
 
 const SelectionStepContributorsQuery = /* GraphQL */ `
   query SelectionStepContributorsQuery($id: ID!, $count: Int) {

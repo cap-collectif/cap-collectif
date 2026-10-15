@@ -99,7 +99,6 @@ describe('User invitation as admin', () => {
   })
 
   it('deletes invitations with quick action delete button', () => {
-    cy.task('db:restore') // restore to have all invitations and not be impacted by previous tests
     cy.interceptGraphQLOperation({ operationName: 'CancelUserInvitationsMutation' })
     cy.directLoginAs('admin')
     UserInvitePage.visitInviteUser()
@@ -111,7 +110,6 @@ describe('User invitation as admin', () => {
   })
 
   it('deletes invitations by checking boxes and clicking the delete button', () => {
-    cy.task('db:restore') // restore to have all invitations and not be impacted by previous tests
     cy.interceptGraphQLOperation({ operationName: 'CancelUserInvitationsMutation' })
     cy.directLoginAs('admin')
     UserInvitePage.visitInviteUser()

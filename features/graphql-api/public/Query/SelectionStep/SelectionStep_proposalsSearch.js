@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setupES'
+import '../../../_setupESOnce'
 
 const SelectionStepProposalsSearchQuery = /* GraphQL */ `
   query SelectionStepContributorsQuery($id: ID!, $terms: String, $reference: String) {

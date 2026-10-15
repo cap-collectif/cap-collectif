@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setupES'
+import '../../../_setupESOnce'
 
 const DebateVotesQuery = /* GraphQL */ `
   query DebateVotesQuery($id: ID!, $count: Int!, $cursor: String, $type: ForOrAgainstValue, $isPublished: Boolean) {

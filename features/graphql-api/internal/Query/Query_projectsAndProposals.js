@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../_setupES'
+import '../../_setupESOnce'
 
 const ProjectCommentsQuery = /* GraphQL */ `
   query ProjectCommentsQuery($projectId: ID!, $first: Int, $onlyTrashed: Boolean, $orderBy: CommentOrder!) {

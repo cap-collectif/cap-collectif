@@ -1,5 +1,5 @@
 //* eslint-env jest */
-import '../../../_setupES'
+import '../../../_setupESOnce'
 
 const CollectStepProposalsArchivedQuery = /* GraphQL */ `
   query CollectStepProposalsArchivedQuery($id: ID!, $state: ProposalsState) {

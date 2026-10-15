@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setupES'
+import '../../../_setupESOnce'
 
 const SelectionStepProposalVotesQuery = /* GraphQL */ `
   query SelectionStepProposalVotesQuery($selectionStepId: ID!, $count: Int) {

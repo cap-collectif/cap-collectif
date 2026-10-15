@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../../_setupES'
+import '../../../_setupESOnce'
 
 const UserVotesQuery = /* GraphQL */ `
   query UserVotesQuery($id: ID!, $count: Int, $cursor: String, $contribuableId: ID) {

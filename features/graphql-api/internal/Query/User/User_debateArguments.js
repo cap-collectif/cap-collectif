@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import '../../../_setupES'
+import '../../../_setupESOnce'
 
 const UserDebateArgumentsQuery = /* GraphQL */ `
   query UserDebateArgumentsQuery($userId: ID!, $orderBy: DebateArgumentOrder) {

@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import '../../_setupES'
+import '../../_setupESOnce'
 
 const ArgumentsQuery = /* GraphQL */ `
   query arguments($term: String, $first: Int, $after: String, $orderBy: ArgumentOrder) {
