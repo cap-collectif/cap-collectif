@@ -4,6 +4,7 @@ import TextEditor from '@components/BackOffice/Form/TextEditor/TextEditor'
 import type { CharterSettingsFormQuery, CharterSettingsFormQuery$data } from '@relay/CharterSettingsFormQuery.graphql'
 import UpdateCharterSettingMutation from '@mutations/UpdateCharterSettingMutation'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import { pxToRem } from '@shared/utils/pxToRem'
 import { mutationErrorToast, successToast } from '@shared/utils/toasts'
 import { formatCodeToLocale } from '@utils/locale-helper'
 import * as React from 'react'
@@ -135,7 +136,7 @@ const CharterSettingsForm: React.FC = () => {
             <FieldInput type="switch" control={control} name="isEnabled" id="isEnabled" />
           </FormControl>
           <Flex justify="flex-end" mt={6}>
-            <ButtonGroup>
+            <ButtonGroup mr={pxToRem(69)}>
               <Button
                 type="submit"
                 form={formId}

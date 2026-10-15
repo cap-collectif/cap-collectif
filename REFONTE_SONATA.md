@@ -16,6 +16,12 @@ Toutes les pages d'administration encore construites avec Sonata (`src/Capco/Adm
 Relay + `@cap-collectif/ui`). La migration se fait **page par page, une PR par page**, en réutilisant au
 maximum les patterns déjà en place dans `admin-next/` plutôt qu'en inventant de nouvelles conventions.
 
+### Widgets flottants
+
+Lorsque le beacon Help Scout est activé, il occupe le coin inférieur droit. Pour une page avec un CTA
+persistant aligné à droite en bas du formulaire, réserver **69 px à droite** (widget de 61 px + marge de 8 px)
+afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant de finaliser la page.
+
 ## Méthodologie pour migrer une page Sonata
 
 1. **Identifier la Sonata Admin class** correspondante dans `src/Capco/AdminBundle/Admin/` (ex:
