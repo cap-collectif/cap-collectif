@@ -96,19 +96,16 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
 7. **Créer le(s) composant(s)** dans `admin-next/components/BackOffice/<NomDeLaFeature>/` (PascalCase pour le
    dossier et les fichiers de composants).
 8. **Choisir le mode de livraison — avec ou sans feature flag de migration — en demandant à l'utilisateurice
-   lequel s'applique à la PR en cours.** Deux cas coexistent tant que les premières refontes ne sont pas toutes
-   fusionnées :
-   - **Sans feature flag** (PR ouvertes avant la décision d'utiliser un feature flag de migration, ex:
-     `pages.blog`, `pages.projects`, `pages.events`) : la route Admin Next remplace définitivement la route
-     Sonata **dans la PR de migration elle-même** — liens de menu (`SideBarItems.json`, `Sidebar.tsx`,
+   lequel s'applique à la PR en cours.** Les deux modes restent valides : le feature flag est le cas courant, mais
+   une refonte peut encore être livrée sans feature flag quand l'utilisateurice le décide. Ne jamais choisir
+   seul :
+   - **Sans feature flag** (ex: `pages.blog`, `pages.projects`, `pages.events`) : la route Admin Next remplace
+     définitivement la route Sonata **dans la PR de migration elle-même** — liens de menu (`SideBarItems.json`, `Sidebar.tsx`,
      `URL_MAP`) pointés directement sur `/admin-next/...`, et code/références Sonata de la page supprimés en
      suivant les consignes de nettoyage de l'étape 14 (ex: entrée de la catégorie dans
      `FeaturesCategoryResolver::$categories`). Les règles « avec feature flag » des étapes 8, 9 et 14 ne
      s'appliquent pas à ce cas ; leurs consignes de repérage et de nettoyage des références Sonata, si.
-   - **Avec feature flag** (toute PR ouverte depuis cette décision) : règles ci-dessous, code Sonata conservé.
-
-   Quand toutes les PR « sans feature flag » seront fusionnées, cette nuance sera retirée et la suppression du
-   code Sonata sera interdite hors PR de nettoyage dédiée.
+   - **Avec feature flag** : règles ci-dessous, code Sonata conservé jusqu'à une PR de nettoyage dédiée.
 
    **Avec feature flag : déployer la refonte derrière un feature flag dédié à la migration — ne pas remplacer
    définitivement les routes Sonata pendant la PR de migration.** Le feature flag fonctionnel existant de la page (ex:
@@ -124,7 +121,7 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
      sur Sonata.
    - lorsqu'une page sort définitivement du rollout, faire une PR de nettoyage dédiée : rendre son URL Admin
      Next permanente et supprimer ses références Sonata. Conserver le feature flag global et son mécanisme pour
-     les autres pages encore en rollout.
+     les autres pages encore en rollout. Suivre la recette « PR de nettoyage : sortie du rollout » ci-dessous.
 9. **Maintenir les références de menu dans les deux interfaces** : il existe DEUX menus latéraux distincts,
    plus d'éventuelles autres références à traquer au cas par cas :
    (Les consignes « dépendre du feature flag » ci-dessous valent pour le cas « avec feature flag » de l'étape 8 ;
@@ -224,6 +221,73 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
       (groupes du dashboard) — vérifier ces deux derniers fichiers même s'ils ne contiennent souvent rien de
       spécifique à la catégorie migrée (l'admin `SiteParameter`/`SiteColor`/`SiteImage` y est enregistré une
       seule fois pour toutes les catégories, sous `admin.group.parameters`, sans filtre par catégorie).
+
+## Recette : PR de nettoyage, sortie du rollout d'une ou plusieurs pages
+
+À appliquer uniquement aux pages dont la refonte a été validée. Plusieurs pages peuvent sortir dans la même PR.
+Le feature flag `unstable__sonata_migration_to_admin_next` reste en place tant qu'une page est encore en
+rollout : on retire seulement ses usages pour les pages qui sortent.
+
+Pour chaque page qui sort :
+
+1. **Page Admin Next** (`admin-next/pages/admin-next/<page>.tsx`, et la page d'édition associée s'il y en a une,
+   ex: `video.tsx` en plus de `videos.tsx`) : remplacer le garde temporaire par le garde standard.
+   ```typescript
+   // Avant
+   import { withFeatureFlagRequired } from '@utils/withPageAuthRequired'
+   export const getServerSideProps = withFeatureFlagRequired(
+     'unstable__sonata_migration_to_admin_next',
+     '/admin/settings/pages.login/list',
+   )
+   // Après
+   import withPageAuthRequired from '@utils/withPageAuthRequired'
+   export const getServerSideProps = withPageAuthRequired
+   ```
+2. **Menu Admin Next** : retirer l'entrée de la page dans `SONATA_URL_BY_ADMIN_NEXT_URL`
+   (`admin-next/components/BackOffice/SideBar/SideBar.utils.ts`). `SideBarItems.json` pointe déjà sur la route
+   Admin Next : rien à y changer.
+3. **Menu legacy** (`frontend/js/components/Admin/Sidebar/Sidebar.tsx`) : remplacer le `href` conditionnel par
+   la route Admin Next en dur et supprimer le commentaire « Sonata route retained… ». Dans `URL_MAP`
+   (`Sidebar.utils.tsx`), retirer le préfixe Sonata et garder le préfixe Admin Next.
+4. **Tests unitaires des menus** (`SideBar.utils.test.ts`, `Sidebar-test.tsx`) : remplacer la paire « Sonata
+   quand le flag est désactivé / Admin Next quand il est activé » par un seul test qui attend la route Admin Next
+   **avec les feature flags par défaut** (flag désactivé). C'est ce test qui prouve que la page ne dépend plus du
+   flag. Garder les flags fonctionnels requis par l'entrée (ex: `privacy_policy: true`).
+5. **Specs Cypress** de la page : supprimer les `cy.task('enable:feature' | 'disable:feature',
+   'unstable__sonata_migration_to_admin_next')` et `cy.enableFeatureFlag(...)`. Ne pas supprimer les commandes
+   `enableFeatureFlag`/`disableFeatureFlag` de `cypress/support/featureFlags.ts`, même si plus aucun spec ne
+   les appelle : ce sont des utilitaires génériques.
+6. **Code Sonata**, selon le type de page :
+   - **Admin d'entité** (`/admin/capco/app/<entité>/list`) : supprimer la classe
+     `src/Capco/AdminBundle/Admin/<X>Admin.php`, son service dans `config/packages/admin.yaml`, sa ligne dans
+     le groupe du dashboard de `config/packages/sonata_admin.yaml`, et ses entrées dans `phpstan-baseline.neon`
+     (PHPStan ne signale pas les entrées orphelines, `reportUnmatchedIgnoredErrors: false`, il faut donc les
+     retirer soi-même). Vérifier avant qu'aucune autre
+     Admin ne dépende de celle-ci (`ModelListType`/`ModelAutocompleteType` vers la même entité, `addChild`).
+   - **Catégorie de `/admin/settings/{category}/list`** : retirer seulement la catégorie de
+     `FeaturesCategoryResolver::$categories`, ce qui fait répondre 404 à l'ancienne URL. Ne pas toucher au
+     contrôleur, au template ni à `SiteParameterAdmin`, partagés avec les autres catégories (voir l'étape 14).
+   - Ne pas toucher aux clés de traduction (`translations/` est généré) ni au backend GraphQL de la page.
+7. **Vérifier** : `git grep` de l'URL Sonata, du nom de la classe Admin et de la chaîne de catégorie (en dehors
+   des fixtures, des migrations Doctrine et de ce fichier) ne doit plus rien renvoyer. Lancer ensuite
+   la quality gate PHP d'AGENTS.md, `bin/console lint:container` (services Sonata supprimés), les tests Jest des
+   deux menus, `yarn ts` dans `admin-next/`, et les specs Cypress de la page **avec le flag désactivé**. Après
+   un spec qui l'activait sans le désactiver, le flag peut rester actif dans le namespace Redis `test` : le
+   désactiver avant de lancer le spec, sinon le run ne prouve rien.
+
+**Ne jamais supprimer le code qui pourrait servir à une prochaine refonte** (le flag, `withFeatureFlagRequired`,
+`SONATA_URL_BY_ADMIN_NEXT_URL`, les commandes Cypress de feature flag, le contrôleur générique des réglages…) tant
+que l'utilisateurice n'a pas dit explicitement que les refontes Sonata sont terminées. Certaines refontes ne sont
+pas encore commencées, et des pages fusionnées peuvent ne pas encore être validées : une page fusionnée n'est pas
+une page sortie du rollout. On ne nettoie que les pages que l'utilisateurice désigne comme validées.
+
+**Uniquement quand l'utilisateurice annonce explicitement la fin des refontes**, supprimer aussi le flag lui-même : constante et listes de
+`src/Capco/AppBundle/Toggle/Manager.php`, valeur de `InternalFeatureFlagType.types.yaml` (puis regénérer les
+schémas), valeurs par défaut (`admin-next/shared/hooks/useFeatureFlag.ts`, `admin-next/tests/mocks.tsx`,
+`admin-next/utils/feature-flags-resolver.ts`, `frontend/js/redux/modules/default.ts`, `frontend/js/types.ts`),
+entrée de `admin-next/components/BackOffice/FeatureList/FeatureItems.json`, snapshots qui le contiennent
+(`Query_featureFlags.js.snap`, snapshots Jest du front), `SONATA_URL_BY_ADMIN_NEXT_URL` et la substitution
+associée dans `getSideBarItemsFiltered`, et `withFeatureFlagRequired` s'il n'a plus d'appelant.
 
 ## Patterns de référence dans `admin-next/`
 

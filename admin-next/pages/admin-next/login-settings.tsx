@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
 import Layout from '@components/BackOffice/Layout/Layout'
 import LoginSettingsList from '@components/BackOffice/LoginSettings/LoginSettingsList'
-import { withFeatureFlagRequired } from '@utils/withPageAuthRequired'
+import withPageAuthRequired from '@utils/withPageAuthRequired'
 
 const LoginSettings: React.FC = () => {
   const intl = useIntl()
@@ -24,9 +24,6 @@ const LoginSettings: React.FC = () => {
   )
 }
 
-export const getServerSideProps = withFeatureFlagRequired(
-  'unstable__sonata_migration_to_admin_next',
-  '/admin/settings/pages.login/list',
-)
+export const getServerSideProps = withPageAuthRequired
 
 export default LoginSettings

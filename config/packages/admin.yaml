@@ -233,19 +233,6 @@ services:
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
-    Capco\AdminBundle\Admin\NewsletterSubscriptionAdmin:
-        arguments: [~, Capco\AppBundle\Entity\NewsletterSubscription, Capco\AdminBundle\Controller\CRUDController]
-        tags:
-            - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: sonata.admin.group.user,
-                  label: admin.label.newsletter_subscription,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
-        calls:
-            - [setTranslationDomain, [CapcoAppBundle]]
-
     Capco\AdminBundle\Admin\OpinionTypeAdmin:
         arguments:
             [
@@ -395,19 +382,6 @@ services:
                   manager_type: orm,
                   group: admin.group.content,
                   label: admin.label.events,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
-        calls:
-            - [setTranslationDomain, [CapcoAppBundle]]
-
-    Capco\AdminBundle\Admin\VideoAdmin:
-        arguments: [~, Capco\AppBundle\Entity\Video, Capco\AdminBundle\Controller\CRUDController]
-        tags:
-            - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.content,
-                  label: admin.label.video,
                   label_translator_strategy: 'sonata.admin.label.strategy.noop',
               }
         calls:

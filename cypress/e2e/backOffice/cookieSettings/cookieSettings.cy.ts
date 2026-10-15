@@ -28,7 +28,6 @@ describe('Cookie settings back office', () => {
   })
 
   it('edits the cookie list in several languages as admin', () => {
-    cy.task('enable:feature', 'unstable__sonata_migration_to_admin_next')
     cy.task('enable:feature', 'multilangue')
     cy.directLoginAs('admin')
     cy.interceptGraphQLOperation({ operationName: 'CookieSettingsFormQuery' })
@@ -64,7 +63,5 @@ describe('Cookie settings back office', () => {
     editor().should('contain', 'Liste des cookies')
     selectLanguage('english')
     editor().should('contain', 'Cookie list')
-
-    cy.task('disable:feature', 'unstable__sonata_migration_to_admin_next')
   })
 })

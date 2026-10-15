@@ -5,7 +5,7 @@ import { CONNECTION_NODES_PER_PAGE } from '@components/BackOffice/Videos/utils'
 import { videos_Query } from '@relay/videos_Query.graphql'
 import debounce from '@shared/utils/debounce-promise'
 import TablePlaceholder from '@ui/Table/TablePlaceholder'
-import { withFeatureFlagRequired } from '@utils/withPageAuthRequired'
+import withPageAuthRequired from '@utils/withPageAuthRequired'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { graphql, GraphQLTaggedNode, useLazyLoadQuery } from 'react-relay'
@@ -49,10 +49,7 @@ const VideosTab: React.FC = () => {
   )
 }
 
-export const getServerSideProps = withFeatureFlagRequired(
-  'unstable__sonata_migration_to_admin_next',
-  '/admin/capco/app/video/list',
-)
+export const getServerSideProps = withPageAuthRequired
 
 const VideosPage: React.FC = () => {
   const intl = useIntl()

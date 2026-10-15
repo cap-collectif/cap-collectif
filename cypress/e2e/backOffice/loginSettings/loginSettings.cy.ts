@@ -34,7 +34,6 @@ describe('Login settings back office', () => {
   })
 
   it('edits the login texts in several languages as admin', () => {
-    cy.task('enable:feature', 'unstable__sonata_migration_to_admin_next')
     cy.task('enable:feature', 'multilangue')
     cy.directLoginAs('admin')
     cy.interceptGraphQLOperation({ operationName: 'LoginSettingsListQuery' })

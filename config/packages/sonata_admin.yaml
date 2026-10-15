@@ -41,7 +41,6 @@ sonata_admin:
                     - Capco\AdminBundle\Admin\ThemeAdmin
                     - Capco\AdminBundle\Admin\PostAdmin
                     - Capco\AdminBundle\Admin\EventAdmin
-                    - Capco\AdminBundle\Admin\VideoAdmin
                     - Capco\AdminBundle\Admin\PageAdmin
                     - Capco\AdminBundle\Admin\MediaAdmin
             admin.group.project:
@@ -54,7 +53,6 @@ sonata_admin:
             sonata.admin.group.user:
                 items:
                     - Capco\AdminBundle\Admin\UserAdmin
-                    - Capco\AdminBundle\Admin\NewsletterSubscriptionAdmin
             admin.group.parameters:
                 items:
                     - Capco\AdminBundle\Admin\MenuItemAdmin

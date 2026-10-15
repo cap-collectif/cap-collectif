@@ -196,17 +196,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                     <SidebarLink text="admin.label.post" href="/admin-next/posts" />
                   )}
                   {features.calendar && <SidebarLink text="admin.label.events" href="/admin-next/events" />}
-                  {isAdmin && (
-                    // Sonata route retained during the Admin Next migration rollout. Remove it when the migration feature flag is removed.
-                    <SidebarLink
-                      text="admin.label.video"
-                      href={
-                        features.unstable__sonata_migration_to_admin_next
-                          ? '/admin-next/videos'
-                          : '/admin/capco/app/video/list'
-                      }
-                    />
-                  )}
+                  {isAdmin && <SidebarLink text="admin.label.video" href="/admin-next/videos" />}
                   {isAdmin && <SidebarLink text="admin.label.page" href="/admin/capco/app/page/list" />}
                   {isAdmin && <SidebarLink text="media" href="/admin-next/medias" />}
                 </SidebarAccordionPanel>
@@ -284,15 +274,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                   {features.members_list && (
                     <SidebarLink text="admin.label.pages.members" href="/admin-next/member-settings" />
                   )}
-                  {/* Sonata route retained during the Admin Next migration rollout. Remove it when the migration feature flag is removed. */}
-                  <SidebarLink
-                    text="admin.label.pages.login"
-                    href={
-                      features.unstable__sonata_migration_to_admin_next
-                        ? '/admin-next/login-settings'
-                        : '/admin/settings/pages.login/list'
-                    }
-                  />
+                  <SidebarLink text="admin.label.pages.login" href="/admin-next/login-settings" />
                   {/* Sonata route retained during the Admin Next migration rollout. Remove it when the migration feature flag is removed. */}
                   <SidebarLink
                     text="admin.label.pages.footer"
@@ -302,25 +284,9 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                         : '/admin/settings/pages.footer/list'
                     }
                   />
-                  {/* Sonata route retained during the Admin Next migration rollout. Remove it when the migration feature flag is removed. */}
-                  <SidebarLink
-                    text="admin.label.pages.cookies"
-                    href={
-                      features.unstable__sonata_migration_to_admin_next
-                        ? '/admin-next/cookie-settings'
-                        : '/admin/settings/pages.cookies/list'
-                    }
-                  />
+                  <SidebarLink text="admin.label.pages.cookies" href="/admin-next/cookie-settings" />
                   {features.privacy_policy && (
-                    // Sonata route retained during the Admin Next migration rollout. Remove it when the migration feature flag is removed.
-                    <SidebarLink
-                      text="admin.label.pages.privacy"
-                      href={
-                        features.unstable__sonata_migration_to_admin_next
-                          ? '/admin-next/privacy-settings'
-                          : '/admin/settings/pages.privacy/list'
-                      }
-                    />
+                    <SidebarLink text="admin.label.pages.privacy" href="/admin-next/privacy-settings" />
                   )}
                   {/* Sonata route retained during the Admin Next migration rollout. Remove it when the migration feature flag is removed. */}
                   <SidebarLink
@@ -354,14 +320,9 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                     <SidebarLink text="admin-menu-parameters" href="/admin/mailingParameters/list" />
                   ) : null}
                   {(isAdmin || isSuperAdmin) && (
-                    // Sonata route retained during the Admin Next migration rollout. Remove it when the migration feature flag is removed.
                     <SidebarLink
                       text="admin.label.newsletter_subscription"
-                      href={
-                        features.unstable__sonata_migration_to_admin_next
-                          ? '/admin-next/newsletter-subscriptions'
-                          : '/admin/capco/app/newslettersubscription/list'
-                      }
+                      href="/admin-next/newsletter-subscriptions"
                     />
                   )}
                 </SidebarAccordionPanel>

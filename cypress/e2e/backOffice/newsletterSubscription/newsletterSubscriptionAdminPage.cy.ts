@@ -14,7 +14,6 @@ describe('Newsletter Subscription Admin Page', () => {
 
   beforeEach(() => {
     cy.task('db:restore')
-    cy.enableFeatureFlag('unstable__sonata_migration_to_admin_next')
   })
 
   it('redirects a non-admin account to 403 page', () => {

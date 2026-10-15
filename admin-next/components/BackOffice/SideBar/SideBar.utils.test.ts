@@ -30,14 +30,8 @@ describe('getSideBarItemsFiltered', () => {
     return sideBarItems.find(item => item.id === 'pages')?.items.find(item => item.title === 'admin.label.pages.login')
   }
 
-  it('keeps the Sonata login settings route while the migration is disabled', () => {
-    expect(getLoginSettingsItem()?.href).toBe('/admin/settings/pages.login/list')
-  })
-
-  it('uses the Admin Next login settings route while the migration is enabled', () => {
-    expect(getLoginSettingsItem({ ...defaultFeatureFlags, unstable__sonata_migration_to_admin_next: true })?.href).toBe(
-      '/admin-next/login-settings',
-    )
+  it('uses the Admin Next login settings route', () => {
+    expect(getLoginSettingsItem()?.href).toBe('/admin-next/login-settings')
   })
 
   const getCookieSettingsItem = (featureFlags = defaultFeatureFlags) => {
@@ -47,14 +41,8 @@ describe('getSideBarItemsFiltered', () => {
       ?.items.find(item => item.title === 'admin.label.pages.cookies')
   }
 
-  it('keeps the Sonata cookies settings route while the migration is disabled', () => {
-    expect(getCookieSettingsItem()?.href).toBe('/admin/settings/pages.cookies/list')
-  })
-
-  it('uses the Admin Next cookies settings route while the migration is enabled', () => {
-    expect(
-      getCookieSettingsItem({ ...defaultFeatureFlags, unstable__sonata_migration_to_admin_next: true })?.href,
-    ).toBe('/admin-next/cookie-settings')
+  it('uses the Admin Next cookies settings route', () => {
+    expect(getCookieSettingsItem()?.href).toBe('/admin-next/cookie-settings')
   })
 
   it('switches the legal settings route with the migration flag', () => {
@@ -76,18 +64,8 @@ describe('getSideBarItemsFiltered', () => {
       ?.items.find(item => item.title === 'admin.label.pages.privacy')
   }
 
-  it('keeps the Sonata privacy settings route while the migration is disabled', () => {
-    expect(getPrivacySettingsItem()?.href).toBe('/admin/settings/pages.privacy/list')
-  })
-
-  it('uses the Admin Next privacy settings route while the migration is enabled', () => {
-    expect(
-      getPrivacySettingsItem({
-        ...defaultFeatureFlags,
-        privacy_policy: true,
-        unstable__sonata_migration_to_admin_next: true,
-      })?.href,
-    ).toBe('/admin-next/privacy-settings')
+  it('uses the Admin Next privacy settings route', () => {
+    expect(getPrivacySettingsItem()?.href).toBe('/admin-next/privacy-settings')
   })
 
   const getCharterSettingsItem = (featureFlags = defaultFeatureFlags) => {

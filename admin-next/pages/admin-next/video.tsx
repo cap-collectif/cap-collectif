@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Layout from '@components/BackOffice/Layout/Layout'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
-import { withFeatureFlagRequired } from '@utils/withPageAuthRequired'
+import withPageAuthRequired from '@utils/withPageAuthRequired'
 import useUrlState from '@hooks/useUrlState'
 import VideoFormWrapper, { VideoFormWrapperWithData } from '@components/BackOffice/Videos/VideoFormWrapper'
 
@@ -23,9 +23,6 @@ const Video = (): React.JSX.Element => {
   )
 }
 
-export const getServerSideProps = withFeatureFlagRequired(
-  'unstable__sonata_migration_to_admin_next',
-  '/admin/capco/app/video/list',
-)
+export const getServerSideProps = withPageAuthRequired
 
 export default Video

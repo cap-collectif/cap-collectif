@@ -296,16 +296,6 @@ parameters:
 			path: src/Capco/AdminBundle/Admin/MenuItemAdmin.php
 
 		-
-			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\NewsletterSubscriptionAdmin\\:\\:getFeatures\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/NewsletterSubscriptionAdmin.php
-
-		-
-			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\NewsletterSubscriptionAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/NewsletterSubscriptionAdmin.php
-
-		-
 			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/OpinionAdmin.php
@@ -714,21 +704,6 @@ parameters:
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\UserAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/UserAdmin.php
-
-		-
-			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\VideoAdmin\\:\\:__construct\\(\\) has parameter \\$baseControllerName with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/VideoAdmin.php
-
-		-
-			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\VideoAdmin\\:\\:__construct\\(\\) has parameter \\$code with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/VideoAdmin.php
-
-		-
-			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\VideoAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/VideoAdmin.php
 
 		-
 			message: "#^Method Capco\\\\AdminBundle\\\\Block\\\\HelpBlockService\\:\\:getName\\(\\) has no return type specified\\.$#"

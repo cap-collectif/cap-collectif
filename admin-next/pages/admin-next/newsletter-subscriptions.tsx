@@ -8,7 +8,7 @@ import { NewsletterSubscriptionList_query$key } from '@relay/NewsletterSubscript
 import debounce from '@shared/utils/debounce-promise'
 import TablePlaceholder from '@ui/Table/TablePlaceholder'
 import downloadCSV from '@utils/download-csv'
-import { withFeatureFlagRequired } from '@utils/withPageAuthRequired'
+import withPageAuthRequired from '@utils/withPageAuthRequired'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { graphql, GraphQLTaggedNode, RefetchFnDynamic, useLazyLoadQuery } from 'react-relay'
@@ -90,11 +90,7 @@ const NewsletterSubscriptionsTab: React.FC = () => {
   )
 }
 
-export const getServerSideProps = withFeatureFlagRequired(
-  'unstable__sonata_migration_to_admin_next',
-  // Sonata route retained during the Admin Next migration rollout. Remove it with the migration feature flag.
-  '/admin/capco/app/newslettersubscription/list',
-)
+export const getServerSideProps = withPageAuthRequired
 
 const NewsletterSubscriptionsPage: React.FC = () => {
   const intl = useIntl()
