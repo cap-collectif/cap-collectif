@@ -91,7 +91,7 @@ final class MediaPrivacyTest extends IdentityWebTestCase
     }
 
     /** @dataProvider shieldModes */
-    public function testOriginalCachedImageAndGenerationRequirePermission(bool $shield): void
+    public function testPrivateAttachmentsAreTemporarilyReadableByDirectUrl(bool $shield): void
     {
         $this->setFeature('shield_mode', $shield);
         $owner = $this->account();
@@ -99,12 +99,12 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         $relative = 'default/0001/01/' . $media->getProviderReference();
         $this->write('cache/default_avatar/' . $relative, base64_decode(self::PNG));
         $paths = ['/media/' . $relative, '/media/cache/default_avatar/' . $relative, '/media/cache/resolve/default_avatar/' . $relative];
-        foreach ($paths as $path) {
+        foreach ($paths as $index => $path) {
             foreach (['GET', 'HEAD'] as $method) {
                 $this->browser->request($method, $path);
-                self::assertResponseStatusCodeSame(403);
+                self::assertResponseStatusCodeSame(2 === $index ? 302 : 200);
                 self::assertTrue($this->browser->getResponse()->headers->hasCacheControlDirective('no-store'));
-                self::assertFalse($this->browser->getResponse()->headers->has('Location'));
+                self::assertSame(2 === $index, $this->browser->getResponse()->headers->has('Location'));
             }
         }
         $this->login($owner->getEmail());
@@ -115,7 +115,22 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         }
         $this->logout();
         $this->browser->request('GET', $paths[1]);
-        self::assertResponseStatusCodeSame(403);
+        self::assertResponseStatusCodeSame(200);
+    }
+
+    /** @dataProvider shieldModes */
+    public function testVoiceMessagesRemainProtectedDuringTemporaryPublicDelivery(bool $shield): void
+    {
+        $this->setFeature('shield_mode', $shield);
+        $media = (new Media())->setName('private.webm')->setProviderReference(bin2hex(random_bytes(16)) . '.webm')->setContext(Media::VOCAL_CONTRIBUTION_CONTEXT)->setContentType('audio/webm')->setSize(1);
+        $this->em->persist($media);
+        $this->em->flush();
+        $relative = Media::VOCAL_CONTRIBUTION_CONTEXT . '/0001/01/' . $media->getProviderReference();
+        foreach (['/media/' . $relative, '/media/cache/default_avatar/' . $relative, '/media/cache/resolve/default_avatar/' . $relative] as $path) {
+            $this->browser->request('GET', $path);
+            self::assertResponseStatusCodeSame(403);
+            self::assertTrue($this->browser->getResponse()->headers->hasCacheControlDirective('no-store'));
+        }
     }
 
     /** @dataProvider shieldModes */
@@ -143,20 +158,22 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         yield 'with shield' => [true];
     }
 
-    public function testRemovingReplyDoesNotPublishTheFile(): void
+    public function testRemovingReplyPreservesPrivacyMarkerDuringTemporaryPublicDelivery(): void
     {
         $response = $this->attachment($this->account());
         $media = [...$response->getMedias()][0];
         $path = '/media/default/0001/01/' . $media->getProviderReference();
+        $mediaId = $media->getId();
         $this->em->remove($response->getReply());
         $this->em->flush();
         $this->em->clear();
         $this->browser->request('GET', $path);
-        self::assertResponseStatusCodeSame(403);
+        self::assertResponseStatusCodeSame(200);
+        self::assertSame('1', $this->em->find(Media::class, $mediaId)->getMetadataValue('private_attachment'));
     }
 
     /** @dataProvider analysisAttachments */
-    public function testAnalysisAndHiddenAttachmentsStayConfidential(string $source, bool $legacy): void
+    public function testAnalysisAndHiddenAttachmentsKeepProtectedDownloadsDuringTemporaryPublicDelivery(string $source, bool $legacy): void
     {
         $owner = $this->account();
         $analyst = $this->account();
@@ -213,7 +230,7 @@ final class MediaPrivacyTest extends IdentityWebTestCase
             $allowed = $viewer === $analyst || $viewer === $admin;
             foreach (['/media/' . $relative => 200, '/media/cache/default_avatar/' . $relative => 200, '/media/cache/resolve/default_avatar/' . $relative => 302, '/download/' . $responseId . '/media/' . $mediaId => 302] as $path => $status) {
                 $this->browser->request('GET', $path);
-                self::assertResponseStatusCodeSame($allowed ? $status : 403);
+                self::assertResponseStatusCodeSame($allowed || str_starts_with($path, '/media/') ? $status : 403);
                 self::assertTrue($this->browser->getResponse()->headers->hasCacheControlDirective('no-store'));
             }
             if ($viewer) {
@@ -225,7 +242,7 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         $this->em->flush();
         $this->em->clear();
         $this->browser->request('GET', '/media/' . $relative);
-        self::assertResponseStatusCodeSame(403);
+        self::assertResponseStatusCodeSame(200);
     }
 
     /** @return iterable<string, array{string, bool}> */
@@ -261,7 +278,7 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         }
         $this->em->flush();
         $responseId = $ownResponse->getId();
-        $privatePath = '/media/default/0001/01/' . $private->getProviderReference();
+        $privatePath = '/download/' . $ownerResponse->getId() . '/media/' . $private->getId();
         $this->login($viewer->getEmail());
         $this->browser->request('GET', $privatePath);
         self::assertResponseStatusCodeSame(403);
@@ -293,7 +310,7 @@ final class MediaPrivacyTest extends IdentityWebTestCase
     }
 
     /** @dataProvider privateAttachmentRemovalModes */
-    public function testPrivatizingAQuestionProtectsItsRemovedAttachments(string $mode): void
+    public function testPrivatizingAQuestionMarksItsRemovedAttachmentsDuringTemporaryPublicDelivery(string $mode): void
     {
         $author = $this->account();
         $author->addRole('ROLE_ADMIN');
@@ -325,7 +342,7 @@ final class MediaPrivacyTest extends IdentityWebTestCase
             $this->em->clear();
             self::assertSame('1', $this->em->find(Media::class, $media->getId())->getMetadataValue('private_attachment'));
             $this->browser->request('GET', $path);
-            self::assertResponseStatusCodeSame(403);
+            self::assertResponseStatusCodeSame(200);
         } else {
             $this->em->find(MediaQuestion::class, $questionId)->setPrivate(true);
         }
@@ -339,7 +356,7 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         $this->em->clear();
         self::assertCount(0, $this->em->find(MediaResponse::class, $responseId)->getMedias());
         $this->browser->request('GET', $path);
-        self::assertResponseStatusCodeSame(403);
+        self::assertResponseStatusCodeSame(200);
     }
 
     /** @return iterable<string, array{string}> */

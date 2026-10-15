@@ -192,7 +192,7 @@ final class MediaResponseDownloadTest extends IdentityWebTestCase
         }
 
         $this->browser->request('GET', '/media/default/0001/01/' . $media->getProviderReference());
-        self::assertResponseStatusCodeSame($allowed ? 200 : 403);
+        self::assertResponseStatusCodeSame(200);
         self::assertTrue($this->browser->getResponse()->headers->hasCacheControlDirective('no-store'));
     }
 }

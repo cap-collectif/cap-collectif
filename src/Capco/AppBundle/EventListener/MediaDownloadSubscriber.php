@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\EventListener;
 
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Exception\ParticipantNotFoundException;
 use Capco\AppBundle\Repository\MediaRepository;
 use Capco\AppBundle\Service\MediaAccessResolver;
@@ -55,6 +56,10 @@ class MediaDownloadSubscriber implements EventSubscriberInterface
 
         try {
             foreach ($medias as $media) {
+                // shortcut: public file delivery until explicit public/private media copies are implemented.
+                if (Media::VOCAL_CONTRIBUTION_CONTEXT !== $media->getContext()) {
+                    continue;
+                }
                 if ($this->access->isPrivate($media)) {
                     $this->participantAuthentication->authenticate($request);
                 }

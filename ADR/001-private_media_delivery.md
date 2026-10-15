@@ -4,6 +4,22 @@
 
 Accepted, 9 October 2026.
 
+## Temporary exception — 15 October 2026
+
+Direct `/media/` delivery temporarily allows anonymous access to registered media,
+including confidential attachments, cached thumbnails and image generation. This
+restores historical rich-text images that reuse private attachments while explicit
+public/private copies are being designed. Voice messages remain protected.
+
+This exception overrides the delivery restrictions below, including for orphaned
+attachments: anyone knowing a file URL can read it. Response permissions, GraphQL
+media permissions, media selection and `/download/{responseId}/media/{mediaId}`
+authorization remain enforced. Privacy markers are retained and `private, no-store`
+headers still apply. No SQL change or migration is required. Remove the temporary
+bypass in `MediaDownloadSubscriber::authorize` and restore the restricted-delivery
+test expectations when the replacement system tracked in
+[#20499](https://github.com/cap-collectif/platform/issues/20499) is ready.
+
 ## Context
 
 Questionnaire attachments shared the public media directory with avatars and site
