@@ -70,6 +70,15 @@ Ce script utilise une base temporaire, compare les dumps après chaque restaurat
 et vérifie les clés étrangères, les données binaires, les tables vides et les
 compteurs d'identifiants. Ses durées locales ne prédisent pas les durées CircleCI.
 
+#### Dépendances des tests API et Cypress
+
+Les tests API GraphQL et Cypress attendent les images Docker, les données de test
+et les contrôles de qualité et tests unitaires déclarés dans `require-e2e` et
+`require-e2e-api`. Ils n'attendent pas `migrations` ni `phpunit-tests` : ces jobs
+s'exécutent en parallèle, ne leur fournissent pas d'artefact et restent requis
+pour que le workflow soit vert. Un échec d'une suite n'annule pas les autres
+suites déjà lancées.
+
 #### Disponibilité d'Admin Next avant Cypress
 
 Avant les tests Cypress backoffice, la CI attend une réponse HTTP 2xx ou 3xx d'Admin Next
