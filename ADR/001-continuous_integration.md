@@ -92,6 +92,16 @@ Voir `.circleci/check-cypress-spec-coverage.sh`. Si un nouveau dossier de premie
 
 **Raison** : Si le code a été mergé via PR avec une CI verte, ces vérifications sont redondantes sur master.
 
+#### Version de Node et Yarn
+
+Tous les jobs exécutant JavaScript sur l'exécuteur CircleCI utilisent
+`.circleci/setup-node.sh`. Ce script lit la version exacte de `.nvmrc`, réutilise
+Node si la version correspond et installe sinon le binaire officiel après
+vérification SHA-256. Le PATH est transmis aux étapes suivantes via `BASH_ENV`.
+Corepack sélectionne la version de Yarn déclarée dans `package.json`.
+Les conteneurs applicatifs conservent leur version Node fixée dans le Dockerfile ;
+elle doit rester identique à `.nvmrc` lors d'une montée de version.
+
 ### Bonnes pratiques
 
 #### Pour les développeuses
