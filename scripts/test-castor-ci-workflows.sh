@@ -55,6 +55,9 @@ for namespace in local ci; do
     grep -Fq -- "--filter='MigrationCommandTest' 'tests/Command' --log-junit='results.xml'" "$CASTOR_WORKFLOW_RECORD"
 done
 
+CI_SHARED_TEST_DATA=1 run_castor ci:qa:restore-db --confirm
+grep -Fq 'bash .circleci/profile-mysql-restore.sh' "$CASTOR_WORKFLOW_RECORD"
+
 run_castor local:app:composer -- require vendor/package
 grep -Fq "composer 'require' 'vendor/package'" "$CASTOR_WORKFLOW_RECORD"
 run_castor local:app:install-assets --environment=test

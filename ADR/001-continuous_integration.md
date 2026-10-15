@@ -55,6 +55,21 @@ Les médias des fixtures restent possédés par l'application (UID 1000) et sont
 
 Les logs Cypress affichent `restore_db` et `restore_es` pour la durée totale de chaque tâche. Les lignes `CI_RESTORE_TIMING` détaillent l'import MySQL dans le conteneur et les appels Elasticsearch (en millisecondes). L'écart avec les durées totales comprend notamment le démarrage de Castor et les opérations de la tâche hors de ces appels. Comparer ces durées sur le sous-job le plus lent avant de modifier la restauration.
 
+MySQL est restauré avec son schéma au démarrage de chaque exécuteur. Les resets
+entre tests utilisent ensuite `var/db.restore.sql` : suppression des lignes et
+réimport dans une transaction, puis restauration des compteurs `AUTO_INCREMENT`
+du socle. Le schéma et les contraintes restent en place ; cette méthode suppose
+que les scénarios ne modifient pas le schéma. Le test de migrations reste isolé
+dans son job dédié. Les resets locaux conservent l'import complet historique.
+Les deux fichiers SQL sont produits et transmis par `prepare-test-data` ; un
+fichier manquant fait échouer le job sans repli silencieux sur une autre méthode.
+
+Pour comparer les deux méthodes sur le dump local, exécuter
+`docker exec -w /var/www capco_application_1 bash scripts/benchmark-mysql-restore.sh`.
+Ce script utilise une base temporaire, compare les dumps après chaque restauration
+et vérifie les clés étrangères, les données binaires, les tables vides et les
+compteurs d'identifiants. Ses durées locales ne prédisent pas les durées CircleCI.
+
 #### 5. Vérification de la couverture des specs Cypress
 
 **Décision** : Un job `check-cypress-spec-coverage` s'exécute avant les jobs `e2e-*` / `api-*` (au même titre que `unit-php`, `phpunit-tests`, `lint-js`, `unit-js`, `typecheck-js`, etc.) et fait échouer la CI si un fichier de spec Cypress se trouve en dehors des dossiers `frontOffice`, `frontOfficeWorkflow` ou `backOffice` couverts par les jobs `e2e-cypress-*`.
