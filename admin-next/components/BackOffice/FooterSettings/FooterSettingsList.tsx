@@ -141,7 +141,13 @@ const SettingModal = ({ setting, locales }: { setting: Setting; locales: Locale[
           </Modal.Header>
           <FormProvider {...form}>
             <Modal.Body direction="column">
-              <Flex as="form" id={id} direction="column" onSubmit={form.handleSubmit(values => submit(values, hide))}>
+              <Flex
+                as="form"
+                id={id}
+                direction="column"
+                spacing={4}
+                onSubmit={form.handleSubmit(values => submit(values, hide))}
+              >
                 {setting.isTranslatable && multilangue && (
                   <Box width="180px">
                     <Select
@@ -202,6 +208,7 @@ const ColorModal = ({ color }: { color: Color }) => {
     <Modal
       ariaLabel="edit-footer-color"
       size={CapUIModalSize.Md}
+      scrollBehavior="outside"
       disclosure={
         <ButtonQuickAction
           icon={CapUIIcon.Pencil}
@@ -217,11 +224,12 @@ const ColorModal = ({ color }: { color: Color }) => {
           <Modal.Header>
             <Heading>{intl.formatMessage({ id: color.keyname })}</Heading>
           </Modal.Header>
-          <Modal.Body direction="column">
+          <Modal.Body direction="column" overflow="visible">
             <Flex
               as="form"
               id={id}
               direction="column"
+              spacing={4}
               onSubmit={form.handleSubmit(async values => {
                 try {
                   const response = await UpdateFooterColorMutation.commit({
