@@ -16,7 +16,11 @@
 
 {% block core_mail %}
     <div>
-        <img style="margin-bottom: 10px;" src="{{ baseUrl ~ asset('apple-icon-76x76.png') }}" alt="" />
+        {% if logo is not null %}
+            <img style="margin-bottom: 10px;" src="{{ logo }}" alt="logo {{ siteName }}" />
+        {% else %}
+            <img style="margin-bottom: 10px;" src="{{ baseUrl ~ asset('apple-icon-76x76.png') }}" alt="" />
+        {% endif %}
 
         <div style="margin: 20px 0; color: #2B2B2B; text-align: left;">
             <p style="margin: 0 0 24px 0; font-weight: 600; line-height: 32px; color: #2B2B2B; font-size: 24px;">
