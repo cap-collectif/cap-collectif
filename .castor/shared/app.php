@@ -262,7 +262,7 @@ function validateEnvironment(string $environment): void
 function composer(array $arguments = []): void
 {
     if ([] === $arguments) {
-        $arguments = ['install', '--prefer-dist', '--no-interaction', '--ignore-platform-reqs', '--no-suggest', '--no-progress'];
+        $arguments = ['install', '--prefer-dist', '--no-interaction', '--ignore-platform-reqs', '--no-progress'];
     }
 
     application(

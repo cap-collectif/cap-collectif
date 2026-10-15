@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
     application:
         container_name: capco_application_1
@@ -17,6 +15,7 @@ services:
             - '1234:1234'
         environment:
             TERM: xterm
+            COMPOSER_ROOT_VERSION: '1.0.0'
             SYMFONY_INSTANCE_NAME: dev
             SYMFONY_DATABASE_HOST: database
             SYMFONY_DATABASE_SERVER_VERSION: 5.5.46-0+deb8u1

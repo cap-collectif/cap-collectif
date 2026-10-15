@@ -64,6 +64,16 @@ const devConf = {
     type: 'filesystem',
   },
 
+  module: {
+    rules: [
+      {
+        test: /maplibre-gl\/dist\/maplibre-gl\.mjs$/,
+        // MapLibre resolves worker URLs at runtime; static asset URLs still need bundling.
+        parser: { dynamicUrl: false },
+      },
+    ],
+  },
+
   entry: {
     vendor: [
       path.join(webpackConfig.nodeModulesDir, 'bootstrap-sass/assets/javascripts/bootstrap/alert.js'),

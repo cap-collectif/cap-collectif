@@ -96,9 +96,6 @@ alias ls='ls \$LS_OPTIONS'
 alias ll='ls \$LS_OPTIONS -l'
 alias l='ls \$LS_OPTIONS -lA'
 " >> /root/.bashrc
-mkdir /home/capco/
-chown capco: /home/capco/
-cp /root/.bashrc /home/capco/
 EOF
 
 
@@ -233,7 +230,8 @@ RUN set -ex; \
 
 # Install fake user 1000
 RUN groupadd --gid=1000 capco && \
-    /usr/sbin/useradd --system --uid 1000 --home /home/capco --shell /bin/bash --gid 1000 capco
+    /usr/sbin/useradd --system --uid 1000 --create-home --home /home/capco --shell /bin/bash --gid 1000 capco && \
+    install -o capco -g capco -m 644 /root/.bashrc /home/capco/.bashrc
 
 
 #New Root certificates used by let's encrypt (useful at least for france-connect-v2) - Remove this hack when switching base image from Debian 11 to Debian 12
