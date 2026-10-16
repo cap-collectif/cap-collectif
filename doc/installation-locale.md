@@ -276,6 +276,7 @@ Les alias `rabbitmq`, `enable` et `disable` correspondent à
 | Commande | Usage |
 | --- | --- |
 | `local:database:reset` | Repartir des fixtures : base, médias, feature flags, compteurs et Elasticsearch. |
+| `local:qa:regenerate-test-data` | Recharger les fixtures de test et réenregistrer le dump MySQL ainsi que le snapshot ES utilisés par Cypress. |
 | `local:database:migrate` | Appliquer les migrations en attente sur la base existante, sans reset ni rechargement des fixtures. |
 | `local:app:generate-graphql` | Régénérer le backend GraphQL et les deux frontends Relay. |
 | `local:app:clear-cache` | Vider le cache Symfony. |
@@ -287,8 +288,9 @@ L’alias `castor reset-db` correspond à `castor local:database:reset` et accep
 les mêmes options. Il supprime les données locales avant de recharger les fixtures.
 
 `reset` supprime les données locales, crée le schéma depuis les entités actuelles,
-marque les migrations comme exécutées sans les lancer, puis recharge les fixtures
-et reconstruit Elasticsearch. Il ne teste donc pas les migrations. `migrate`
+marque les migrations comme exécutées sans les lancer, puis recharge les fixtures,
+reconstruit Elasticsearch.
+Il ne teste donc pas les migrations. `migrate`
 exécute les migrations en attente sur les données existantes ; leur SQL peut
 modifier ces données, mais la commande ne réinitialise pas la base, les médias,
 les feature flags ou Elasticsearch.
@@ -332,13 +334,15 @@ corepack yarn test-e2e-mutations
 Cypress :
 
 ```bash
+castor local:qa:regenerate-test-data --confirm
 corepack yarn cy:open
 corepack yarn cy:run
 corepack yarn cy:run:ci
 ```
 
-Les hooks Jest et Cypress utilisent Castor pour sauvegarder ou restaurer la
-base, Elasticsearch et les queues RabbitMQ.
+Les hooks Jest et Cypress utilisent Castor pour restaurer la base, Elasticsearch
+et les queues RabbitMQ. Cypress ne réécrit plus automatiquement les sauvegardes
+de référence au début de `cy:run`.
 
 ### Mise à jour des références d’exports
 
@@ -383,6 +387,14 @@ ls -lh var/db.backup
 
 La sauvegarde est écrite dans `var/db.backup` sans sortie console en cas de
 succès.
+
+Régénérer les données de test Cypress — opération destructive qui recharge les
+fixtures en environnement `test`, puis réécrit `var/db.backup` et le snapshot
+Elasticsearch :
+
+```bash
+castor local:qa:regenerate-test-data --confirm
+```
 
 Réinitialiser les queues et les consumers :
 

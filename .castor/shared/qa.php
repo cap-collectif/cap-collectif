@@ -11,7 +11,7 @@ use function Castor\io;
 use function Castor\run;
 
 /** @param null|array<string, mixed> $data */
-function elasticsearchCurl(string $method, string $path, ?array $data = null): string
+function elasticsearchCurl(string $method, string $path, ?array $data = null, bool $allowNotFound = false): string
 {
     $command = ['docker', 'exec', 'capco_application_1', 'curl', '-fsS', '-X', $method, 'http://elasticsearch:9200' . $path];
 
@@ -22,7 +22,20 @@ function elasticsearchCurl(string $method, string $path, ?array $data = null): s
         $command[] = json_encode($data, \JSON_THROW_ON_ERROR);
     }
 
-    return capture($command);
+    if (!$allowNotFound) {
+        return capture($command);
+    }
+
+    $process = run($command, context: context()->withAllowFailure()->withQuiet());
+    if ($process->isSuccessful()) {
+        return (string) $process->getOutput();
+    }
+
+    if (22 === $process->getExitCode() && str_contains((string) $process->getErrorOutput(), 'returned error: 404')) {
+        return '';
+    }
+
+    throw new \RuntimeException(trim((string) ($process->getErrorOutput() ?: $process->getOutput())) ?: 'The Elasticsearch request failed.');
 }
 
 function saveDb(): void
@@ -115,7 +128,7 @@ function saveEsSnapshot(): void
     }
 }
 
-function restoreEsSnapshot(bool $confirm = false): void
+function restoreEsSnapshot(bool $confirm, string $recoveryTask): void
 {
     if (!$confirm) {
         throw new \InvalidArgumentException('Elasticsearch restoration is destructive; pass --confirm.');
@@ -140,17 +153,32 @@ function restoreEsSnapshot(bool $confirm = false): void
         ]));
     }
 
-    $snapshot = json_decode((string) $timed('es_read_snapshot', static fn (): string => elasticsearchCurl('GET', '/_snapshot/repository_qa/snap_qa?pretty')), true, 512, \JSON_THROW_ON_ERROR);
+    $snapshotResponse = $timed('es_read_snapshot', static fn (): string => elasticsearchCurl('GET', '/_snapshot/repository_qa/snap_qa?pretty', allowNotFound: true));
+    if ('' === $snapshotResponse) {
+        throw new \RuntimeException(sprintf('The Elasticsearch test snapshot is missing. Run %s first.', $recoveryTask));
+    }
+
+    $snapshot = json_decode((string) $snapshotResponse, true, 512, \JSON_THROW_ON_ERROR);
+    $snapshots = $snapshot['snapshots'] ?? null;
+    if (!\is_array($snapshots) || !\is_array($snapshots[0] ?? null)) {
+        throw new \RuntimeException(sprintf('The Elasticsearch test snapshot is missing or empty. Run %s first.', $recoveryTask));
+    }
+
+    $snapshotIndices = $snapshots[0]['indices'] ?? null;
+    if (!\is_array($snapshotIndices)) {
+        throw new \RuntimeException('The Elasticsearch test snapshot does not contain any indices.');
+    }
+
     $indices = array_values(array_filter(
-        $snapshot['snapshots'][0]['indices'],
-        static fn (string $index): bool => str_starts_with($index, 'capco_'),
+        $snapshotIndices,
+        static fn (mixed $index): bool => \is_string($index) && str_starts_with($index, 'capco_'),
     ));
 
     if ([] === $indices) {
         throw new \RuntimeException('Could not identify the Elasticsearch index in snap_qa.');
     }
 
-    if ($shared && !\in_array('analytics_test', $snapshot['snapshots'][0]['indices'], true)) {
+    if ($shared && !\in_array('analytics_test', $snapshotIndices, true)) {
         throw new \RuntimeException('The shared Elasticsearch snapshot does not contain analytics_test.');
     }
 

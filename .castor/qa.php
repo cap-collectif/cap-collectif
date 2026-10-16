@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Local\Qa;
 
+use Capco\Castor\Database;
 use Capco\Castor\Qa as Shared;
 use Castor\Attribute\AsTask;
 
@@ -46,5 +47,17 @@ function saveEsSnapshot(): void
 #[AsTask(description: 'Restore the Elasticsearch test snapshot.')]
 function restoreEsSnapshot(bool $confirm = false): void
 {
-    Shared\restoreEsSnapshot($confirm);
+    Shared\restoreEsSnapshot(confirm: $confirm, recoveryTask: 'local:qa:regenerate-test-data --confirm');
+}
+
+#[AsTask(description: 'Reload test fixtures, then overwrite the MySQL dump and Elasticsearch snapshot used by Cypress.')]
+function regenerateTestData(bool $confirm = false): void
+{
+    if (!$confirm) {
+        throw new \InvalidArgumentException('Test data regeneration deletes local data; pass --confirm.');
+    }
+
+    Database\reset('test');
+    Shared\saveDb();
+    Shared\saveEsSnapshot();
 }

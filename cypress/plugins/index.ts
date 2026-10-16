@@ -219,29 +219,6 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
     },
     ...mailcatcherTasks,
   })
-  on('before:run', async () => {
-    if (process.env.CI_SHARED_TEST_DATA === '1') return
-
-    console.log('Saving database…')
-    console.time('save_db')
-    const { stderr: stderrDb } = await exec(castor('qa', 'save-db'))
-
-    if (stderrDb) {
-      console.error(`error: ${stderrDb}`)
-    }
-    console.log('Successfully saved database')
-    console.timeEnd('save_db')
-
-    console.log('Writing ElasticSearch snapshot…')
-    console.time('save_es')
-    const { stderr: stderrEs } = await exec(castor('qa', 'save-es-snapshot'))
-
-    if (stderrEs) {
-      console.error(`error: ${stderrEs}`)
-    }
-    console.log('Successfully saved ElasticSearch snapshot')
-    console.timeEnd('save_es')
-  })
   return {
     ...defaults,
     ...environments,

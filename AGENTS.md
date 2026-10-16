@@ -108,6 +108,13 @@ NEXT_PUBLIC_SYMFONY_ENV=test
 
 > **Why:** Cypress tests require the test environment to be configured in Next.js. Without this variable, tests will fail or run against the wrong environment.
 
+Before running Cypress after resetting or modifying the local database, regenerate the reference data:
+```bash
+castor local:qa:regenerate-test-data --confirm
+```
+
+Cypress no longer overwrites the reference database dump or Elasticsearch snapshot at the start of `cy:run`.
+
 ### Yarn Version
 
 The package manager is Yarn 4.x (Berry), managed via [Corepack](https://nodejs.org/api/corepack.html) — the exact version is pinned in the `packageManager` field of `package.json`, not installed globally.
@@ -170,6 +177,7 @@ castor local:infrastructures:restart                 # Restart Docker containers
 castor local:infrastructures:down                   # Remove containers and networks, preserving volumes
 castor local:infrastructures:destroy                # Remove containers, networks and data volumes
 castor local:database:reset --environment=dev        # Reset DB, fixtures and Elasticsearch
+castor local:qa:regenerate-test-data --confirm      # Reload test fixtures and rebuild Cypress DB dump/ES snapshot
 castor local:database:migrate --environment=dev      # Apply pending migrations to existing DB without resetting it
 castor local:database:mysql                         # Open the local interactive MySQL console
 castor local:database:reset-elasticsearch           # Rebuild active ES index from current DB

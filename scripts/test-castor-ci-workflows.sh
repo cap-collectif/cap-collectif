@@ -11,6 +11,24 @@ mkdir -p "$test_directory/bin"
 cat > "$test_directory/bin/docker" <<'SH'
 #!/bin/sh
 printf '%s\n' "$*" >> "$CASTOR_WORKFLOW_RECORD"
+case "$*" in
+    *"/_snapshot/repository_qa/snap_qa?pretty"*)
+        if [ "${CASTOR_ES_SNAPSHOT_MODE:-empty}" = missing ]; then
+            printf '%s\n' 'curl: (22) The requested URL returned error: 404' >&2
+            exit 22
+        elif [ "${CASTOR_ES_SNAPSHOT_MODE:-empty}" = valid ]; then
+            printf '%s\n' '{"snapshots":[{"indices":["capco_20260101000000"]}]}'
+        else
+            printf '%s\n' '{"snapshots":[]}'
+        fi
+        ;;
+    *"/snap_qa/_restore?wait_for_completion=true"*)
+        printf '%s\n' '{"snapshot":{"shards":{"failed":0}}}'
+        ;;
+    *"snap_qa?wait_for_completion=true"*)
+        printf '%s\n' '{"snapshot":{"state":"SUCCESS","indices":["capco"]}}'
+        ;;
+esac
 SH
 chmod +x "$test_directory/bin/docker"
 export PATH="$test_directory/bin:$PATH"
@@ -63,12 +81,64 @@ grep -Fq "composer 'require' 'vendor/package'" "$CASTOR_WORKFLOW_RECORD"
 run_castor local:app:install-assets --environment=test
 grep -Fq "assets:install public --symlink --env='test'" "$CASTOR_WORKFLOW_RECORD"
 
+: > "$CASTOR_WORKFLOW_RECORD"
+if "$castor_binary" --castor-file="$project_directory/castor.php" \
+    local:qa:regenerate-test-data --no-interaction > "$test_directory/output" 2>&1; then
+    printf 'local:qa:regenerate-test-data accepted a missing --confirm.\n' >&2
+    exit 1
+fi
+grep -Fq 'pass --confirm' "$test_directory/output"
+test ! -s "$CASTOR_WORKFLOW_RECORD"
+
+run_castor local:qa:regenerate-test-data --confirm
+grep -Fq "capco:reinit --force --env='test'" "$CASTOR_WORKFLOW_RECORD"
+grep -Fq 'mysqldump --opt -h database -u root symfony > var/db.backup' "$CASTOR_WORKFLOW_RECORD"
+grep -Fq 'repository_qa' "$CASTOR_WORKFLOW_RECORD"
+grep -Fq 'snap_qa?wait_for_completion=true' "$CASTOR_WORKFLOW_RECORD"
+
 run_castor ci:database:reset
 grep -Fq "capco:reinit --force --env='test'" "$CASTOR_WORKFLOW_RECORD"
 if grep -Fq -- '--migrate' "$CASTOR_WORKFLOW_RECORD"; then
     printf 'Reset unexpectedly applies migrations.\n' >&2
     exit 1
 fi
+
+run_castor local:database:reset
+grep -Fq "capco:reinit --force --env='dev'" "$CASTOR_WORKFLOW_RECORD"
+if grep -Fq 'mysqldump --opt -h database -u root symfony > var/db.backup' "$CASTOR_WORKFLOW_RECORD"; then
+    printf 'Database reset unexpectedly regenerated QA data.\n' >&2
+    exit 1
+fi
+
+: > "$CASTOR_WORKFLOW_RECORD"
+CASTOR_ES_SNAPSHOT_MODE=valid "$castor_binary" --castor-file="$project_directory/castor.php" \
+    local:qa:restore-es-snapshot --confirm --no-interaction > "$test_directory/output" 2>&1
+grep -Fq 'snap_qa/_restore?wait_for_completion=true' "$CASTOR_WORKFLOW_RECORD"
+grep -Fq 'http://elasticsearch:9200/_aliases' "$CASTOR_WORKFLOW_RECORD"
+
+: > "$CASTOR_WORKFLOW_RECORD"
+if "$castor_binary" --castor-file="$project_directory/castor.php" \
+    local:qa:restore-es-snapshot --confirm --no-interaction > "$test_directory/output" 2>&1; then
+    printf 'restore-es-snapshot accepted a missing snapshot.\n' >&2
+    exit 1
+fi
+grep -Fq 'The Elasticsearch test snapshot is missing or empty' "$test_directory/output"
+
+: > "$CASTOR_WORKFLOW_RECORD"
+if CASTOR_ES_SNAPSHOT_MODE=missing "$castor_binary" --castor-file="$project_directory/castor.php" \
+    local:qa:restore-es-snapshot --confirm --no-interaction > "$test_directory/output" 2>&1; then
+    printf 'restore-es-snapshot accepted an HTTP 404 snapshot response.\n' >&2
+    exit 1
+fi
+tr -d '[:space:]' < "$test_directory/output" | grep -Fq 'local:qa:regenerate-test-data--confirm'
+
+: > "$CASTOR_WORKFLOW_RECORD"
+if "$castor_binary" --castor-file="$project_directory/castor.php" \
+    ci:qa:restore-es-snapshot --confirm --no-interaction > "$test_directory/output" 2>&1; then
+    printf 'CI restore-es-snapshot accepted a missing snapshot.\n' >&2
+    exit 1
+fi
+grep -Fq 'ci:qa:save-es-snap' "$test_directory/output"
 
 run_castor ci:app:dump-graphql-schemas
 for schema in public preview internal dev; do

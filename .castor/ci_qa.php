@@ -45,5 +45,5 @@ function saveEsSnapshot(): void
 #[AsTask(description: 'Restore the CI Elasticsearch test snapshot.')]
 function restoreEsSnapshot(bool $confirm = false): void
 {
-    sharedRestoreEsSnapshot(confirm: $confirm);
+    sharedRestoreEsSnapshot(confirm: $confirm, recoveryTask: 'ci:qa:save-es-snapshot');
 }
