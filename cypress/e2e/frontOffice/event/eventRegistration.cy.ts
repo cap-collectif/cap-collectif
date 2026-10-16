@@ -34,7 +34,7 @@ context('Event registration as anonymous user', () => {
     Event.openRegistrationModal()
     Event.fillRegistration()
 
-    Base.visitHomepage()
+    Base.visitHomepage({ operationName: 'NavBarQueryNewQuery' })
     visitEventPage()
 
     Event.openRegistrationModal()
