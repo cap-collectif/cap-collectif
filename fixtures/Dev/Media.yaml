@@ -53,6 +53,13 @@ Capco\AppBundle\Entity\Media:
         name: Laurent Brunet
         category: '@MediaCategory1'
         providerReference: providerReference9.jpg
+    # Keep confidential analysis attachments separate from public avatars and proposal responses.
+    AnalysisPictureIdfGenshinImpactOmar:
+        id: media-analysis-idf-omar
+        binaryContentPath: user/sfavot.jpg
+        name: Genshin Impact analysis attachment
+        category: '@MediaCategory1'
+        providerReference: analysis-idf-genshin-impact-omar.jpg
     ProfilePicXavier:
         id: media9
         binaryContentPath: user/xlacot.jpg

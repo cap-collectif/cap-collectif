@@ -5,7 +5,7 @@ import getFeatureFlags from '@utils/feature-flags-resolver'
 import getSessionFromSessionCookie from '@utils/session-resolver'
 import getViewerJsonFromRedisSession from '@utils/session-decoder'
 import { defaultFeatureFlags } from '@shared/hooks/useFeatureFlag'
-import { cookies } from 'next/headers'
+import { cookies, headers } from 'next/headers'
 import { ssrGraphqlWithLocale } from '../../server/ssr-graphql-with-locale'
 import TestProjectLayout from './layout'
 
@@ -35,6 +35,7 @@ jest.mock('../../server/ssr-graphql-with-locale', () => ({
 
 jest.mock('next/headers', () => ({
   cookies: jest.fn(),
+  headers: jest.fn(),
 }))
 
 jest.mock('next/navigation', () => ({
@@ -49,6 +50,9 @@ jest.mock('next/navigation', () => ({
 describe('test-project layout', () => {
   beforeEach(() => {
     jest.clearAllMocks()
+    ;(headers as jest.Mock).mockReturnValue({
+      get: jest.fn((name: string) => (name === 'host' ? 'capco.test' : null)),
+    })
     ;(cookies as jest.Mock).mockReturnValue({
       get: jest.fn(() => ({ value: 'php-session-id' })),
     })
@@ -94,26 +98,34 @@ describe('test-project layout', () => {
     expect(ssrGraphqlWithLocale).not.toHaveBeenCalled()
   })
 
-  it('renders the page when the feature flag is enabled for a super admin', async () => {
-    ;(getFeatureFlags as jest.Mock).mockResolvedValue({
-      ...defaultFeatureFlags,
-      new_project_page: true,
-    })
-    ;(ssrGraphqlWithLocale as jest.Mock).mockResolvedValue({
-      project: { id: 'project-id' },
-    })
+  it.each(['capco.test', 'capco.dev'])(
+    'renders the page for a super admin with the feature flag enabled on %s',
+    async host => {
+      ;(headers as jest.Mock).mockReturnValue({
+        get: jest.fn((name: string) => (name === 'host' ? host : null)),
+      })
+      ;(getFeatureFlags as jest.Mock).mockResolvedValue({
+        ...defaultFeatureFlags,
+        new_project_page: true,
+      })
+      ;(ssrGraphqlWithLocale as jest.Mock).mockResolvedValue({
+        project: { id: 'project-id' },
+      })
 
-    const element = await TestProjectLayout({
-      children: <div>Project page</div>,
-      params: Promise.resolve({ projectSlug: 'my-project' }),
-    })
+      const element = await TestProjectLayout({
+        children: <div>Project page</div>,
+        params: Promise.resolve({ projectSlug: 'my-project' }),
+      })
 
-    expect(ssrGraphqlWithLocale).toHaveBeenCalledWith(expect.anything(), {
-      projectSlug: 'my-project',
-    })
-    expect(element).toMatchObject({
-      type: 'main',
-      props: { id: 'project-page' },
-    })
-  })
+      expect(getFeatureFlags).toHaveBeenCalledWith(host)
+      expect(getSessionFromSessionCookie).toHaveBeenCalledWith('php-session-id', host)
+      expect(ssrGraphqlWithLocale).toHaveBeenCalledWith(expect.anything(), {
+        projectSlug: 'my-project',
+      })
+      expect(element).toMatchObject({
+        type: 'main',
+        props: { id: 'project-page' },
+      })
+    },
+  )
 })

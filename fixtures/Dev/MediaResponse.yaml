@@ -26,4 +26,4 @@ Capco\AppBundle\Entity\Responses\MediaResponse:
     mediaResponseIdfGenshinImpactPictureOmar:
         question: '@mediaquestionIdfQuestionnaireEvaluation'
         analysis: '@proposalAnalysisIdf1Omar'
-        medias: ['@ProfilePicSfavot']
+        medias: ['@AnalysisPictureIdfGenshinImpactOmar']
