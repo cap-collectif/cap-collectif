@@ -100,17 +100,9 @@ then use `castor <namespace>:<task>` from the repository root.
 
 ### Cypress E2E Tests
 
-**Before running `yarn cy:open` or `yarn cy:run`**, ensure that `admin-next/.env.local` contains:
-```
-NEXT_PUBLIC_SYMFONY_ENV=test
-```
-
-**Actions required:**
-- Check if the file exists and contains the variable (uncommented)
-- If missing or commented, add/uncomment it
-- If the file doesn't exist, create it with this variable
-
-> **Why:** Cypress tests require the test environment to be configured in Next.js. Without this variable, tests will fail or run against the wrong environment.
+Cypress targets `capco.test`, and admin-next resolves the Symfony environment from
+the request hostname (`capco.test` → `test`, `capco.dev` → `dev`). No
+`NEXT_PUBLIC_SYMFONY_ENV` entry is required in `admin-next/.env.local`.
 
 Before running Cypress after resetting or modifying the local database, regenerate the reference data:
 ```bash
@@ -174,7 +166,7 @@ yarn test-e2e-mutations       # Mutations only
 yarn test-e2e-types -u        # Update query snapshots
 yarn test-e2e-mutations -u    # Update mutation snapshots
 
-# Cypress (E2E tests) ✅ Active - requires admin-next/.env.local with NEXT_PUBLIC_SYMFONY_ENV=test
+# Cypress (E2E tests) ✅ Active - the request hostname selects the Symfony environment
 yarn cy:open                  # Open Cypress UI
 yarn cy:run                   # Run Cypress tests
 

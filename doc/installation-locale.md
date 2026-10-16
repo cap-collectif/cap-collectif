@@ -317,12 +317,6 @@ PHP et aux fichiers de schéma.
 
 ## Tests
 
-Avant Cypress, vérifier que `admin-next/.env.local` contient :
-
-```env
-NEXT_PUBLIC_SYMFONY_ENV=test
-```
-
 Jest :
 
 ```bash

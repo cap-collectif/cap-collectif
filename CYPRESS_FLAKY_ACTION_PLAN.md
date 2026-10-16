@@ -67,8 +67,8 @@ GraphQL ou une redirection pourraient aussi expliquer l’élément absent.
 
 1. Lire `git status` et préserver les changements existants.
 2. Vérifier les services locaux et l’accès à `https://capco.test`.
-3. Vérifier que `admin-next/.env.local` contient, sans commentaire :
-   `NEXT_PUBLIC_SYMFONY_ENV=test`. Pour une première installation, suivre
+3. Cypress cible `capco.test`, qui sélectionne automatiquement l’environnement
+   Symfony `test` côté admin-next. Pour une première installation, suivre
    `doc/installation-locale.md`.
 4. Exécuter `corepack enable` avant toute commande Yarn.
 5. Lancer Cypress depuis `cypress/`, où le plugin résout ses chemins relatifs.

@@ -9,6 +9,7 @@ import { Locale } from 'types'
 import { createHeaders } from '@utils/fetch'
 import { formatCookiesForServer } from '@shared/utils/cookies'
 import { getRequestLocale } from './request-locale'
+import { getEnv } from 'config'
 
 type SsrGraphqlWithLocaleOptions = {
   locale?: Locale
@@ -23,7 +24,7 @@ export const ssrGraphqlWithLocale = async <T, U = any>(
   const cookieStore = cookies()
   const cookieHeader = formatCookiesForServer(cookieStore, { locale })
   const host = headers().get('host')
-  const env = process.env.NEXT_PUBLIC_SYMFONY_ENV || process.env.SYMFONY_ENV
+  const env = getEnv(host)
   const endpoint = env === 'prod' ? 'http://127.0.0.1/graphql/internal' : 'http://application:8080/graphql/internal'
   const response = await nodeFetch(`${endpoint}?tl=${encodeURIComponent(locale)}`, {
     method: 'POST',

@@ -92,15 +92,14 @@ export const defaultFeatureFlags: FeatureFlags = {
   hub_api_green: false,
 }
 
-const getRedisFeatureFlagKey = (flag: string) => {
+const getRedisFeatureFlagKey = (flag: string, host?: string) => {
   // Mirrors config/packages/{test/,}quandidate_toggle.yaml: the `test` Symfony env hardcodes the
   // `testfeature_toggle` Redis namespace (ignoring `%redis_prefix%`), every other env uses
   // `%redis_prefix%feature_toggle`. `SYMFONY_REDIS_PREFIX` alone can't tell a `capco.dev` request from a
   // `capco.test` one apart: the local `yarn dev` script (see package.json) hardcodes it to `dev`
   // regardless of which hostname served the request, since both are proxied to the same Next.js
-  // process. `getEnv()` (driven by `NEXT_PUBLIC_SYMFONY_ENV`, see `admin-next/.env.local`) is what
-  // actually resolves per request — same pattern already used by `session-resolver.ts`.
-  const namespace = getEnv() === 'test' ? 'testfeature_toggle' : `${process.env.SYMFONY_REDIS_PREFIX}feature_toggle`
+  // process. `getEnv(host)` resolves the namespace from the request hostname.
+  const namespace = getEnv(host) === 'test' ? 'testfeature_toggle' : `${process.env.SYMFONY_REDIS_PREFIX}feature_toggle`
   return `${namespace}__TOGGLE__${flag}`
 }
 
@@ -108,13 +107,13 @@ export const decodePHPFlag = (encodedFlag: string): boolean => {
   return encodedFlag.includes(';i:2;')
 }
 
-const getFeatureFlags = async (): Promise<FeatureFlags> => {
+const getFeatureFlags = async (host?: string): Promise<FeatureFlags> => {
   const redisClient = await getRedisClient()
 
-  const featureFlags = defaultFeatureFlags
+  const featureFlags = { ...defaultFeatureFlags }
 
   for (const flag of Object.keys(featureFlags)) {
-    const flagKey = getRedisFeatureFlagKey(flag)
+    const flagKey = getRedisFeatureFlagKey(flag, host)
     const encodedPHPFlag: string | null = await redisClient.get(flagKey)
     featureFlags[flag] = encodedPHPFlag ? decodePHPFlag(encodedPHPFlag) : !!encodedPHPFlag
   }

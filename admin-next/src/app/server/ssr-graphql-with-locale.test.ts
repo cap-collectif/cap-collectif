@@ -8,13 +8,8 @@ jest.mock('next/headers', () => ({
   headers: jest.fn(),
 }))
 
-/**
- * @jest-status non-compliant
- * @jest-reason Overwrites NEXT_PUBLIC_SYMFONY_ENV in shared setup without restoring the environment.
- */
 describe('ssrGraphqlWithLocale', () => {
   beforeEach(() => {
-    process.env.NEXT_PUBLIC_SYMFONY_ENV = 'test'
     ;(cookies as jest.Mock).mockReturnValue({ get: () => undefined, getAll: () => [] })
     ;(headers as jest.Mock).mockReturnValue({
       get: (name: string) => (name === 'host' ? 'capco.dev' : null),

@@ -14,7 +14,7 @@ import ocMessages from '@translations/oc-OC.json'
 import euMessages from '@translations/eu-EU.json'
 import urMessages from '@translations/ur-IN.json'
 import sideBarItems from '@components/BackOffice/SideBar/SideBarItems.json'
-import { __isTest__ } from '../config'
+import { getEnv } from '../config'
 import { getLocaleFromReq } from '../utils/locale-helper'
 import { IntlType, Locale, PageProps } from '../types'
 
@@ -35,12 +35,14 @@ export const messages = {
 // Used by pages that want to render their normal `Layout` (with the sidebar/navbar) even when
 // they can't render their usual content, e.g. `pages/admin-next/403.tsx`.
 export const resolveViewerPageProps = async (req: GetServerSidePropsContext['req']): Promise<PageProps | null> => {
+  const host = req.headers.host
+  const isTest = getEnv(host) === 'test'
   const sessionCookie = getSessionCookieFromReq(req)
   if (!sessionCookie) {
     return null
   }
 
-  const redisSession = await getSessionFromSessionCookie(sessionCookie)
+  const redisSession = await getSessionFromSessionCookie(sessionCookie, host)
   if (!redisSession) {
     return null
   }
@@ -55,10 +57,10 @@ export const resolveViewerPageProps = async (req: GetServerSidePropsContext['req
     locale: locale || Locale.frFR,
     // For tests we disable translations
     // @ts-ignore fixme
-    messages: __isTest__ ? {} : messages[locale] || messages[Locale.frFR],
+    messages: isTest ? {} : messages[locale] || messages[Locale.frFR],
   }
 
-  const featureFlags = await getFeatureFlags()
+  const featureFlags = await getFeatureFlags(host)
   const appVersion = process.env.SYMFONY_APP_VERSION || 'dev'
 
   return { intl, viewerSession, featureFlags, appVersion }
@@ -121,13 +123,14 @@ const withPageAuthRequired: GetServerSideProps = async ({ req, res }) => {
   // We fetch the value of session cookie
   let sessionCookie = getSessionCookieFromReq(req)
   let serverHostname = req.headers.host
+  const isTest = getEnv(serverHostname) === 'test'
 
   if (!sessionCookie) {
     return redirectToHome(res, `No "PHPSESSID" cookie, viewer is not logged in on "https://${serverHostname}".`)
   }
 
   // We have a cookie, so let's try to get the session in our redis.
-  const redisSession = await getSessionFromSessionCookie(sessionCookie)
+  const redisSession = await getSessionFromSessionCookie(sessionCookie, serverHostname)
   if (!redisSession) {
     return redirectToHome(
       res,
@@ -173,10 +176,10 @@ const withPageAuthRequired: GetServerSideProps = async ({ req, res }) => {
     locale: locale || Locale.frFR,
     // For tests we disable translations
     // @ts-ignore fixme
-    messages: __isTest__ ? {} : messages[locale] || messages[Locale.frFR],
+    messages: isTest ? {} : messages[locale] || messages[Locale.frFR],
   }
 
-  const featureFlags = await getFeatureFlags()
+  const featureFlags = await getFeatureFlags(serverHostname)
   const appVersion = process.env.SYMFONY_APP_VERSION || 'dev'
 
   const pageProps: PageProps = {

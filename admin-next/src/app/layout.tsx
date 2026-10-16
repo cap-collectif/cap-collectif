@@ -3,9 +3,9 @@
 import Providers from './Providers'
 import getFeatureFlags from '@utils/feature-flags-resolver'
 import { IntlType, Locale } from 'types'
-import { __isTest__ } from 'config'
+import { getEnv } from 'config'
 import { messages } from '@utils/withPageAuthRequired'
-import { cookies } from 'next/headers'
+import { cookies, headers } from 'next/headers'
 import getSessionFromSessionCookie from '@utils/session-resolver'
 import getViewerJsonFromRedisSession from '@utils/session-decoder'
 import { CookiesProvider } from 'next-client-cookies/server'
@@ -118,21 +118,23 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const host = headers().get('host')
+  const isTest = getEnv(host) === 'test'
   const cookieStore = cookies()
   let sessionCookie = cookieStore.get('PHPSESSID')
   let redisSession = null
   let viewerSession = null
   if (sessionCookie) {
-    redisSession = await getSessionFromSessionCookie(sessionCookie.value)
+    redisSession = await getSessionFromSessionCookie(sessionCookie.value, host)
     if (redisSession) viewerSession = getViewerJsonFromRedisSession(redisSession)
   }
 
-  const featureFlags = await getFeatureFlags()
+  const featureFlags = await getFeatureFlags(host)
   const locale = getRequestLocale()
 
   const intl: IntlType = {
     locale,
-    messages: __isTest__ ? {} : messages[locale] || messages[Locale.frFR],
+    messages: isTest ? {} : messages[locale] || messages[Locale.frFR],
   }
 
   const SSRData = await ssrGraphqlWithLocale<layoutQuery$data>(layoutQuery, null, { locale })

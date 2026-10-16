@@ -1,7 +1,13 @@
 import { SymfonyEnv } from './types'
 
-// We need to know if we are in dev or production.
-export const getEnv = (): SymfonyEnv => {
+// We need to know if we are in dev, test or production.
+export const getEnv = (host?: string): SymfonyEnv => {
+  const requestHost = host ?? (typeof window !== 'undefined' ? window.location.host : undefined)
+  const hostname = requestHost?.split(':')[0]
+
+  if (hostname === 'capco.test') return 'test'
+  if (hostname === 'capco.dev') return 'dev'
+
   const symfonyEnv = process.env.NEXT_PUBLIC_SYMFONY_ENV || process.env.SYMFONY_ENV
   const isTestEnv = process.env.SYMFONY_REDIS_HOST === 'redis'
 
@@ -26,7 +32,7 @@ export const getBaseUrl = (): string => {
 }
 
 export const getBaseUrlWithAdminNextSupport = (): string => {
-  if (__isDev__) {
+  if (getEnv() === 'dev') {
     return 'https://capco.dev'
   }
   return getBaseUrl()
