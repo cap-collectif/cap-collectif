@@ -14,7 +14,7 @@
     }
   },
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "prettier"],
+  "plugins": ["@typescript-eslint", "jest", "prettier"],
   "extends": ["plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
   "parserOptions": {
     "ecmaVersion": 2018,
@@ -66,7 +66,12 @@
         "ts": "never",
         "tsx": "never"
       }
-    ]
+    ],
+    "jest/no-focused-tests": "error",
+    "no-fixed-wait": "warn",
+    "reference-requires-db-restore": "error",
+    "valid-status": "error",
+    "feature-toggle-cleanup": "warn"
   },
   "overrides": []
 }

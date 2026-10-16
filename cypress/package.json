@@ -5,7 +5,8 @@
     "license": "proprietary",
     "main": "index.js",
     "scripts": {
-        "lint": "eslint --cache --fix --report-unused-disable-directives {support,plugins,pages}",
+        "lint": "eslint --cache --rulesdir eslint-rules --report-unused-disable-directives {support,plugins,pages,e2e,eslint-rules}",
+        "lint:fix": "eslint --cache --fix --rulesdir eslint-rules --report-unused-disable-directives {support,plugins,pages,e2e,eslint-rules}",
         "cy:open": "cypress open",
         "cy:run": "cross-env NODE_ENV=development cypress run",
         "cy:run:ci": "NODE_ENV=ci cypress run",

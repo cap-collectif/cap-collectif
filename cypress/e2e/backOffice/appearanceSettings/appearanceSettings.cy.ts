@@ -1,3 +1,7 @@
+/**
+ * @cypress-status reference
+ * @cypress-reason Canonical example for an authenticated back-office page with a GraphQL-synchronised visit.
+ */
 describe('Appearance settings back office', () => {
   const visitAppearanceSettingsPage = () => cy.visit('/admin-next/appearance-settings', { failOnStatusCode: false })
 
@@ -17,7 +21,7 @@ describe('Appearance settings back office', () => {
     visitAppearanceSettingsPage()
     cy.wait('@AppearanceSettingsListQuery').its('response.statusCode').should('not.eq', 500)
 
-    cy.get('button[aria-label="global.edit"]').first().should('be.visible').click()
-    cy.get('#value').filter(':visible').should('exist')
+    cy.get('button[aria-label="global.edit"]').first().should('exist').and('be.visible').click()
+    cy.get('#value').filter(':visible').should('exist').and('be.visible')
   })
 })

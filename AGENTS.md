@@ -11,6 +11,10 @@ Symlinks: `CLAUDE.md` and `GEMINI.md` point to this file.
 This is a single-context repository with its glossary at `CONTEXT.md`; architecture records live in `ADR/`.
 See `docs/agents/domain.md`.
 
+### Repository skills
+
+- `docs/agents/skills/cypress-local/SKILL.md`: launch and troubleshoot local Cypress E2E tests with the project's configured Node version and Chrome.
+
 ## Rules for AI Assistants
 
 1. **Comments in English**: Always write code comments in English, regardless of the conversation language.
@@ -114,6 +118,28 @@ castor local:qa:regenerate-test-data --confirm
 ```
 
 Cypress no longer overwrites the reference database dump or Elasticsearch snapshot at the start of `cy:run`.
+
+### Cypress test conventions for new tests
+
+The normative Cypress conventions are documented in [`ADR/001-frontend_tests.md`](ADR/001-frontend_tests.md).
+Do not infer conventions from unmarked existing tests: the Cypress suite contains tests that are
+non-compliant or legacy.
+
+Only tests marked `@cypress-status reference` may be used as templates for new tests. The allowed
+statuses are `reference`, `compliant`, `non-compliant`, `legacy`, and `obsolete`. Apply the marker at
+the smallest relevant scope (file, `describe`, or `it`); do not mark an entire mixed file as legacy.
+
+Use this format in English:
+
+```ts
+/**
+ * @cypress-status reference
+ * @cypress-reason Canonical example for this type of Cypress test.
+ */
+```
+
+For `legacy`, `non-compliant`, or `obsolete` tests, explain the reason and add a migration ticket when
+available. Do not copy their implementation into new tests, even when the test still passes.
 
 ### Yarn Version
 

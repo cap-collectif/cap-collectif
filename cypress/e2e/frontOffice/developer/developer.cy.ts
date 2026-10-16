@@ -1,11 +1,17 @@
 import { Base } from '~e2e-pages/index'
 
+/**
+ * @cypress-status reference
+ * @cypress-reason Canonical example for read-only pages synchronized with a GraphQL query.
+ */
 describe('Developer page', () => {
   before(() => {
+    cy.task('db:restore')
     cy.task('enable:feature', 'developer_documentation')
   })
-  beforeEach(() => {
-    cy.task('db:restore')
+
+  after(() => {
+    cy.task('disable:feature', 'developer_documentation')
   })
 
   // ------------------ Developer page access as anonymous ------------------

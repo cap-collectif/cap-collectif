@@ -120,7 +120,8 @@ export default new (class AdminUserGroupsListPage {
         .within(() => {
           cy.get('.cap-table__td').should('contain', value)
           cy.get('.cap-table__td').eq(0).click() // click the group title to open edit modal
-          cy.wait(300) // modal appearance animation time
+          // eslint-disable-next-line no-fixed-wait -- The modal appearance animation takes 300 ms.
+          cy.wait(300)
         })
       return this.cy.get('.cap-modal').contains('admin.users.edit-group').should('exist').and('be.visible')
     } else {

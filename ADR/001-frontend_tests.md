@@ -20,6 +20,102 @@ Afin de garantir que les tests soient bien joués dans la CI, il est nécessaire
 ## Convention de nommage
 Nommage : `featureNameInCamelCase.cy.ts`
 
+## Statut des tests et sources de référence
+
+Les tests existants ne sont pas tous des exemples à reproduire. Leur présence dans
+`cypress/e2e/` ne signifie pas qu'ils respectent les conventions actuelles.
+
+Chaque statut décrit l'état d'un fichier, d'une suite (`describe`) ou d'un test (`it`).
+Le statut doit être posé au niveau le plus précis possible : ne pas marquer tout un
+fichier si seule une suite est concernée.
+
+- `reference` : exemple canonique respectant les conventions actuelles. Seuls ces
+  tests doivent servir de modèle pour écrire un nouveau test.
+- `compliant` : test conforme, mais qui n'a pas été retenu comme exemple canonique.
+- `non-compliant` : test encore utile, mais qui ne respecte pas une ou plusieurs
+  conventions actuelles. Il ne doit pas être copié pour un nouveau test.
+- `legacy` : test fondé sur une ancienne approche, une ancienne architecture ou un
+  workaround qui doit être migré. Un test non conforme n'est pas automatiquement
+  legacy.
+- `obsolete` : test ou comportement qui n'est plus supporté et doit être supprimé,
+  plutôt que migré.
+
+Un fichier entier peut être marqué si son organisation ou son setup partagé rend
+l'ensemble non représentatif. Dans un fichier mixte, le statut doit être placé sur
+le `describe` ou le `it` concerné. Les tests sans statut explicite ne sont jamais
+considérés comme des références.
+
+### Format du commentaire
+
+Utiliser un commentaire JSDoc en anglais, afin qu'il soit facilement repérable par
+les outils et les assistants de développement :
+
+```ts
+/**
+ * @cypress-status reference
+ * @cypress-reason Canonical example for GraphQL-synchronised page tests.
+ */
+describe('Search feature', () => {
+  // ...
+})
+```
+
+Pour un test non canonique, préciser la raison et le ticket de migration lorsqu'il
+existe :
+
+```ts
+/**
+ * @cypress-status legacy
+ * @cypress-reason Uses fixed waits required by the old captcha integration.
+ * @cypress-migration #1234
+ */
+describe('Legacy captcha workflow', () => {
+  // ...
+})
+```
+
+Les valeurs autorisées sont `reference`, `compliant`, `non-compliant`, `legacy` et
+`obsolete`. Le commentaire seul ne remplace pas les contrôles CI : les conventions
+doivent également être vérifiées automatiquement lorsque cela est possible.
+
+### Tests de référence actuels
+
+Les suites suivantes sont les exemples canoniques à consulter pour écrire un nouveau
+test Cypress :
+
+- `cypress/e2e/frontOffice/developer/developer.cy.ts` : navigation synchronisée avec GraphQL ;
+- `cypress/e2e/backOffice/appearanceSettings/appearanceSettings.cy.ts` : accès back-office et interaction simple ;
+- `cypress/e2e/backOffice/socialNetwork/socialNetwork.cy.ts` : workflow CRUD back-office ;
+- `cypress/e2e/frontOffice/proposal/proposalStep.cy.ts` : affichage authentifié et filtres ;
+- `cypress/e2e/frontOffice/event/eventRegistration.cy.ts` : formulaire anonyme et parcours authentifié.
+
+### Contrôles automatiques
+
+Le lint Cypress est lancé avec :
+
+```bash
+yarn workspace cypress lint
+```
+
+Il couvre `support`, `plugins`, `pages`, `e2e` et les règles ESLint spécifiques à Cypress.
+Les règles personnalisées signalent les attentes fixes (`cy.wait(<nombre>)`), vérifient les statuts
+de tests et exigent un `db:restore` dans les fichiers marqués `reference`. Les attentes fixes et le
+nettoyage des feature toggles restent des warnings pour permettre la migration progressive des tests
+existants. Le nettoyage des feature toggles est toutefois obligatoire pour toute nouvelle suite et
+pour les tests marqués `reference`.
+
+Une attente fixe exceptionnellement nécessaire peut être désactivée localement avec la directive
+ESLint `no-fixed-wait`. La directive doit être placée juste au-dessus de l'attente et expliquer la
+raison de l'exception :
+
+```ts
+// eslint-disable-next-line no-fixed-wait -- Captcha completion cannot be intercepted.
+cy.wait(1000)
+```
+
+Une désactivation globale du fichier ou de la suite est à éviter : l'exception doit rester limitée
+à l'attente concernée.
+
 
 ## Bonnes pratiques
 - Isoler les tests : nettoyer l'état entre tests : faire un `cy.task('db:restore')` au début de chaque suite de test dans la fonction `before(() => {})`.

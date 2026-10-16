@@ -7,11 +7,20 @@ const visitEventPage = () => {
   cy.get('@EventPageQuery').its('response.body.errors').should('not.exist')
 }
 
+/**
+ * @cypress-status reference
+ * @cypress-reason Canonical example for an anonymous form workflow with isolated data and feature setup.
+ */
 context('Event registration as anonymous user', () => {
   beforeEach(() => {
     cy.task('db:restore')
     cy.task('enable:feature', 'calendar')
     visitEventPage()
+  })
+
+  after(() => {
+    cy.task('db:restore')
+    cy.task('disable:feature', 'calendar')
   })
 
   it('allows anonymous user to register with visible name', () => {
@@ -35,10 +44,20 @@ context('Event registration as anonymous user', () => {
   })
 })
 
+/**
+ * @cypress-status reference
+ * @cypress-reason Canonical example for a logged-in user workflow with explicit GraphQL synchronisation.
+ */
 context('Event registration as logged in user', () => {
   before(() => {
+    cy.task('db:restore')
     cy.task('enable:feature', 'calendar')
     cy.directLoginAs('user')
+  })
+
+  after(() => {
+    cy.task('db:restore')
+    cy.task('disable:feature', 'calendar')
   })
 
   it('should allow logged in user to register with one click', () => {

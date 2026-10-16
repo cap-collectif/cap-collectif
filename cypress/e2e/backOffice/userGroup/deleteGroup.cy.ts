@@ -16,7 +16,8 @@ describe('Group deletion from the users groups page', () => {
         cy.get('.cap-table__td').eq(0).should('contain', 'Comité de suvi')
         cy.get('.cap-table__td').eq(3).find('button').should('have.attr', 'aria-label', 'global.delete').click()
       })
-    cy.wait(300) // modal appearance animation time
+    // eslint-disable-next-line no-fixed-wait -- The modal appearance animation takes 300 ms.
+    cy.wait(300)
     AdminGroupsPage.getConfirmGroupDeletionButton().click()
     cy.wait('@DeleteGroupMutation')
     AdminGroupsPage.checkToast('admin.group-deletion-success')

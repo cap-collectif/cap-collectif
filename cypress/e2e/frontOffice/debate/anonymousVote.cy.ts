@@ -12,9 +12,11 @@ describe('Debate - Anonymous vote', () => {
     cy.interceptGraphQLOperation({ operationName: 'AddDebateAnonymousVoteMutation' })
     DebatePage.clickOnVoteForButton()
     cy.contains('publish-anonymous-debate-vote-bot').should('exist')
-    cy.wait(1000) // wait for the captcha
+    // eslint-disable-next-line no-fixed-wait -- Captcha completion cannot be intercepted.
+    cy.wait(1000)
     cy.confirmCaptcha()
-    cy.wait(1000) // wait for the captcha
+    // eslint-disable-next-line no-fixed-wait -- Captcha completion cannot be intercepted.
+    cy.wait(1000)
     cy.wait('@AddDebateAnonymousVoteMutation')
     cy.contains('thanks-for-your-vote').should('exist')
     cy.contains('delete.vote.for').should('exist')
@@ -23,9 +25,11 @@ describe('Debate - Anonymous vote', () => {
     cy.interceptGraphQLOperation({ operationName: 'AddDebateAnonymousVoteMutation' })
     DebatePage.clickOnVoteAgainstButton()
     cy.contains('publish-anonymous-debate-vote-bot').should('exist')
-    cy.wait(1000) // wait for the captcha
+    // eslint-disable-next-line no-fixed-wait -- Captcha completion cannot be intercepted.
+    cy.wait(1000)
     cy.confirmCaptcha()
-    cy.wait(1000) // wait for the captcha
+    // eslint-disable-next-line no-fixed-wait -- Captcha completion cannot be intercepted.
+    cy.wait(1000)
 
     cy.wait('@AddDebateAnonymousVoteMutation')
     cy.contains('thanks-for-your-vote').should('exist')

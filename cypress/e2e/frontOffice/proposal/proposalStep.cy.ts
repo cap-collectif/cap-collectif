@@ -1,11 +1,20 @@
 import { ProposalStepPage } from '~e2e-pages/index'
 
+/**
+ * @cypress-status reference
+ * @cypress-reason Canonical example for authenticated visibility and filter tests synchronized with GraphQL queries.
+ */
 context('Proposal Step Page', () => {
+  before(() => {
+    cy.task('db:restore')
+    cy.task('disable:feature', 'new_vote_step')
+  })
+
+  after(() => {
+    cy.task('disable:feature', 'new_vote_step')
+  })
+
   describe('Project Step Page FO', () => {
-    beforeEach(() => {
-      cy.task('db:restore')
-      cy.task('disable:feature', 'new_vote_step')
-    })
     it('should not see votes', () => {
       cy.directLoginAs('user')
       ProposalStepPage.visitSelectionStepWithOpenedVoteButNotDisplayed()
@@ -26,23 +35,23 @@ context('Proposal Step Page', () => {
       })
 
       // filter archived
-      ProposalStepPage.getFilterStateButton().click()
-      cy.contains('global-archived').click()
       cy.interceptGraphQLOperation({ operationName: 'ProposalStepPageQuery' })
+      ProposalStepPage.getFilterStateButton().should('exist').and('be.visible').click()
+      cy.contains('global-archived').should('exist').and('be.visible').click()
       cy.wait('@ProposalStepPageQuery')
       ProposalStepPage.getProposalsCards().should('have.length', 1)
 
       // filter non archived
-      ProposalStepPage.getFilterStateButton().click()
-      cy.contains('global.published').click()
       cy.interceptGraphQLOperation({ operationName: 'ProposalStepPageQuery' })
+      ProposalStepPage.getFilterStateButton().should('exist').and('be.visible').click()
+      cy.contains('global.published').should('exist').and('be.visible').click()
       cy.wait('@ProposalStepPageQuery')
       ProposalStepPage.getProposalsCards().should('have.length', 1)
 
       // filter all
-      ProposalStepPage.getFilterStateButton().click()
-      cy.contains('global.select_state').click()
       cy.interceptGraphQLOperation({ operationName: 'ProposalStepPageQuery' })
+      ProposalStepPage.getFilterStateButton().should('exist').and('be.visible').click()
+      cy.contains('global.select_state').should('exist').and('be.visible').click()
       cy.wait('@ProposalStepPageQuery')
       ProposalStepPage.getProposalsCards().should('have.length', 2)
     })

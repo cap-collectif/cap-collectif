@@ -16,9 +16,11 @@ export default new (class InvitationPage {
     cy.get('input[name="charte"]').check({ force: true })
     cy.get('div[id^=turnstile_captcha-]').should('exist')
     cy.confirmCaptcha()
-    cy.wait(500) // wait for captcha, cannot be intercepted
+    // eslint-disable-next-line no-fixed-wait -- Captcha completion cannot be intercepted.
+    cy.wait(500)
     cy.get('#confirm-register').click({ force: true })
-    cy.wait(500) // wait for redirect, can't figure out why intercepts are not working here
+    // eslint-disable-next-line no-fixed-wait -- Redirect completion cannot be intercepted reliably here.
+    cy.wait(500)
     cy.url().should('eq', `${Cypress.config().baseUrl}/`)
     cy.get('#navbar-username').contains('RemChanDaiSki').should('exist').and('be.visible')
   }

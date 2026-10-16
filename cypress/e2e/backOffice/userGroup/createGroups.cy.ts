@@ -11,7 +11,8 @@ describe('Create a new group and add members to it', () => {
     AdminGroupsPage.visitGroupsList()
     cy.checkTableLength(9)
     AdminGroupsPage.getOpenCreateGroupModalButton().click()
-    cy.wait(300) // modal appearance animation time
+    // eslint-disable-next-line no-fixed-wait -- The modal appearance animation takes 300 ms.
+    cy.wait(300)
     AdminGroupsPage.findModal().should('exist').and('be.visible').and('contain', 'information')
     AdminGroupsPage.fillInGroupName()
     AdminGroupsPage.fillInGroupDescription()

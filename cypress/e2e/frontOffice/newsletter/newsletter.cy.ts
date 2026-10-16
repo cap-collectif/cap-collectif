@@ -56,7 +56,8 @@ describe('Newsletter', () => {
     Base.visitHomepage()
     cy.get('#newsletter_subscription_email').type('iwantsomenews2@gmail.com')
     cy.confirmCaptcha()
-    cy.wait(1500) // captcha takes longer to proceed
+    // eslint-disable-next-line no-fixed-wait -- Captcha takes longer to complete here.
+    cy.wait(1500)
 
     cy.contains('global.register').should('be.enabled').click()
     cy.contains('registration.constraints.captcha.invalid').should('not.be.visible')

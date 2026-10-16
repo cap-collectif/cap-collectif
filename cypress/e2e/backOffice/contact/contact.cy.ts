@@ -24,7 +24,8 @@ describe('Contact page logged as admin', () => {
     cy.get('textarea[name="custom.customcode"]').clear().type('<script> console.log("Je suis le code perso")')
     ContactPageBO.saveChanges()
 
-    cy.wait(1000) // cannot intercept the mutation reliably
+    // eslint-disable-next-line no-fixed-wait -- The mutation cannot be intercepted reliably here.
+    cy.wait(1000)
     ContactPageBO.changesAreSaved()
   })
 

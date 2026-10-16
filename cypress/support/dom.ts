@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 Cypress.Commands.add('confirmCaptcha', () => {
-  cy.wait(1000) // cannot be intercepted
+  // eslint-disable-next-line no-fixed-wait -- Captcha completion cannot be intercepted.
+  cy.wait(1000)
   return cy.window().then(win => {
     const $recaptcha = win.document.querySelector("iframe[src*='recaptcha']")
 
