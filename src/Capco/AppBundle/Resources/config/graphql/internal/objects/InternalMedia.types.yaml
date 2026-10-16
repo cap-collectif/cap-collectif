@@ -4,7 +4,7 @@ InternalMedia:
         - PreviewMedia
     config:
         name: Media
-        fieldsDefaultAccess: '@=service("Capco\\AppBundle\\Service\\MediaAccessResolver").canView(value, getUser(), context, info)'
+        # shortcut: expose media fields until the public/private usage model in #20499 is implemented.
         description: 'A media'
         fields:
             id:

@@ -20,6 +20,23 @@ bypass in `MediaDownloadSubscriber::authorize` and restore the restricted-delive
 test expectations when the replacement system tracked in
 [#20499](https://github.com/cap-collectif/platform/issues/20499) is ready.
 
+## Temporary GraphQL exception — 16 October 2026
+
+Media fields in the internal and preview GraphQL schemas no longer enforce
+`MediaAccessResolver.canView`. This restores proposal covers whose media also
+belongs to a confidential response. All fields of an otherwise reachable Media,
+including its URL and metadata, are readable without the media-level permission
+check. This exception supersedes the GraphQL restriction stated above.
+
+Response permissions, media selection, cropping, protected response downloads
+and voice-message delivery keep their existing checks. Privacy markers are not
+removed. The exception does not grant access to an otherwise inaccessible parent
+response, but an existing public association can expose a private media's metadata
+and URL. Combined with the direct-delivery exception, that URL can expose the file.
+
+Regenerate GraphQL types and clear Symfony caches when deploying this change.
+Restore media field checks alongside the public/private usage model in #20499.
+
 ## Context
 
 Questionnaire attachments shared the public media directory with avatars and site

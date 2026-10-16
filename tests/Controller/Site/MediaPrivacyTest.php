@@ -77,7 +77,7 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         yield 'personal profile' => ['updateProfilePersonalData', 'UpdateProfilePersonalDataInput'];
     }
 
-    public function testLegacyAvatarCannotExposePrivateMediaMetadata(): void
+    public function testLegacyAvatarExposesMediaMetadataDuringTemporaryGraphqlBypass(): void
     {
         $owner = $this->account();
         $viewer = $this->account();
@@ -86,8 +86,9 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         $this->em->flush();
 
         $result = $this->graphResponse('query($id:ID!){node(id:$id){...on User{media{id url name providerReference}}}}', ['id' => GlobalId::toGlobalId('User', $viewer->getId())]);
-        self::assertNull($result['data']['node']['media'], json_encode($result, \JSON_THROW_ON_ERROR));
-        self::assertStringNotContainsString($media->getProviderReference(), json_encode($result, \JSON_THROW_ON_ERROR));
+        self::assertSame($media->getId(), $result['data']['node']['media']['id']);
+        self::assertSame($media->getName(), $result['data']['node']['media']['name']);
+        self::assertSame($media->getProviderReference(), $result['data']['node']['media']['providerReference']);
     }
 
     /** @dataProvider shieldModes */
@@ -474,12 +475,47 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         self::assertSame($publicMedia->getId(), $proposal->getMedia()?->getId());
     }
 
-    private function attachment(User $owner): MediaResponse
+    public function testProposalCoverRemainsReadableAfterItsMediaBecomesPrivate(): void
+    {
+        $owner = $this->account();
+        $public = $this->media();
+        $proposal = (new Proposal())->setTitle('Public cover')->setProposalForm($this->em->getRepository(ProposalForm::class)->findOneBy([]))->setAuthor($owner)->setDraft(false)->setPublishedAt(new \DateTime('2020-01-01'))->setMedia($public);
+        $this->em->persist($proposal);
+        $this->em->flush();
+        $id = $proposal->getId();
+        $query = 'query($id:ID!){node(id:$id){...on Proposal{media{id url}}}}';
+        $variables = ['id' => GlobalId::toGlobalId('Proposal', $id)];
+
+        $result = $this->graphql($query, $variables);
+        self::assertSame($public->getId(), $result['node']['media']['id']);
+        $this->browser->request('GET', $result['node']['media']['url']);
+        self::assertResponseStatusCodeSame(200);
+
+        $this->login($owner->getEmail());
+        $owner = $this->em->find(User::class, $owner->getId());
+        $public = $this->em->find(Media::class, $public->getId());
+        $attachment = $this->attachment($owner, $public);
+        $this->logout();
+        self::assertSame('1', $public->getMetadataValue('private_attachment'));
+        $this->em->clear();
+
+        $result = $this->graphql($query, $variables);
+        self::assertNotNull($result['node']['media'], 'A private attachment reused as a cover must still expose its URL.');
+        self::assertSame($public->getId(), $result['node']['media']['id']);
+        $this->browser->request('GET', $result['node']['media']['url']);
+        self::assertResponseStatusCodeSame(200);
+
+        $this->browser->request('GET', '/download/' . $attachment->getId() . '/media/' . $public->getId());
+        self::assertResponseStatusCodeSame(403);
+        self::assertSame('1', $this->em->find(Media::class, $public->getId())->getMetadataValue('private_attachment'));
+    }
+
+    private function attachment(User $owner, ?Media $media = null): MediaResponse
     {
         $questionnaire = (new Questionnaire())->setTitle('Private files')->setOwner($owner);
         $reply = (new Reply())->setQuestionnaire($questionnaire)->setAuthor($owner);
         $question = (new MediaQuestion())->setTitle('Document')->setPrivate(false);
-        $response = (new MediaResponse())->setQuestion($question)->setReply($reply)->addMedia($this->media());
+        $response = (new MediaResponse())->setQuestion($question)->setReply($reply)->addMedia($media ?? $this->media());
         foreach ([$questionnaire, $reply, $question, $response] as $entity) {
             $this->em->persist($entity);
         }
