@@ -14,9 +14,6 @@ class FeaturesCategoryResolver
             'conditions' => [],
             'features' => ['user_type', 'zipcode_at_register'],
         ],
-        'pages.footer' => ['conditions' => [], 'features' => []],
-        'pages.legal' => ['conditions' => [], 'features' => []],
-        'pages.charter' => ['conditions' => [], 'features' => []],
         'pages.shield' => ['conditions' => [], 'features' => ['shield_mode']],
         'settings.global' => ['conditions' => [], 'features' => []],
         'settings.modules' => [

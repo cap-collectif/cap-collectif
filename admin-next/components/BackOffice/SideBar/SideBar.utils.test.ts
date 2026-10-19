@@ -45,18 +45,6 @@ describe('getSideBarItemsFiltered', () => {
     expect(getCookieSettingsItem()?.href).toBe('/admin-next/cookie-settings')
   })
 
-  it('switches the legal settings route with the migration flag', () => {
-    const getLegalSettingsItem = (featureFlags = defaultFeatureFlags) =>
-      getSideBarItemsFiltered(true, true, featureFlags, false, null, false)
-        .find(item => item.id === 'pages')
-        ?.items.find(item => item.title === 'admin.label.pages.legal')
-
-    expect(getLegalSettingsItem()?.href).toBe('/admin/settings/pages.legal/list')
-    expect(getLegalSettingsItem({ ...defaultFeatureFlags, unstable__sonata_migration_to_admin_next: true })?.href).toBe(
-      '/admin-next/legal-settings',
-    )
-  })
-
   const getPrivacySettingsItem = (featureFlags = { ...defaultFeatureFlags, privacy_policy: true }) => {
     const sideBarItems = getSideBarItemsFiltered(true, true, featureFlags, false, null, false)
     return sideBarItems
@@ -66,23 +54,6 @@ describe('getSideBarItemsFiltered', () => {
 
   it('uses the Admin Next privacy settings route', () => {
     expect(getPrivacySettingsItem()?.href).toBe('/admin-next/privacy-settings')
-  })
-
-  const getCharterSettingsItem = (featureFlags = defaultFeatureFlags) => {
-    const sideBarItems = getSideBarItemsFiltered(true, true, featureFlags, false, null, false)
-    return sideBarItems
-      .find(item => item.id === 'pages')
-      ?.items.find(item => item.title === 'admin.label.pages.charter')
-  }
-
-  it('keeps the Sonata charter settings route while the migration is disabled', () => {
-    expect(getCharterSettingsItem()?.href).toBe('/admin/settings/pages.charter/list')
-  })
-
-  it('uses the Admin Next charter settings route while the migration is enabled', () => {
-    expect(
-      getCharterSettingsItem({ ...defaultFeatureFlags, unstable__sonata_migration_to_admin_next: true })?.href,
-    ).toBe('/admin-next/charter-settings')
   })
 
   it('hides the Hub API Green item when its feature flag is disabled', () => {

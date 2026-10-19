@@ -275,37 +275,13 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                     <SidebarLink text="admin.label.pages.members" href="/admin-next/member-settings" />
                   )}
                   <SidebarLink text="admin.label.pages.login" href="/admin-next/login-settings" />
-                  {/* Sonata route retained during the Admin Next migration rollout. Remove it when the migration feature flag is removed. */}
-                  <SidebarLink
-                    text="admin.label.pages.footer"
-                    href={
-                      features.unstable__sonata_migration_to_admin_next
-                        ? '/admin-next/footer-settings'
-                        : '/admin/settings/pages.footer/list'
-                    }
-                  />
+                  <SidebarLink text="admin.label.pages.footer" href="/admin-next/footer-settings" />
                   <SidebarLink text="admin.label.pages.cookies" href="/admin-next/cookie-settings" />
                   {features.privacy_policy && (
                     <SidebarLink text="admin.label.pages.privacy" href="/admin-next/privacy-settings" />
                   )}
-                  {/* Sonata route retained during the Admin Next migration rollout. Remove it when the migration feature flag is removed. */}
-                  <SidebarLink
-                    text="admin.label.pages.legal"
-                    href={
-                      features.unstable__sonata_migration_to_admin_next
-                        ? '/admin-next/legal-settings'
-                        : '/admin/settings/pages.legal/list'
-                    }
-                  />
-                  {/* Sonata route retained during the Admin Next migration rollout. Remove it when the migration feature flag is removed. */}
-                  <SidebarLink
-                    text="admin.label.pages.charter"
-                    href={
-                      features.unstable__sonata_migration_to_admin_next
-                        ? '/admin-next/charter-settings'
-                        : '/admin/settings/pages.charter/list'
-                    }
-                  />
+                  <SidebarLink text="admin.label.pages.legal" href="/admin-next/legal-settings" />
+                  <SidebarLink text="admin.label.pages.charter" href="/admin-next/charter-settings" />
                   <SidebarLink text="admin.label.pages.shield" href="/admin-next/authentication" />
                 </SidebarAccordionPanel>
               </SidebarAccordionItem>

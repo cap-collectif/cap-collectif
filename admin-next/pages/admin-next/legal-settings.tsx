@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
 import Layout from '@components/BackOffice/Layout/Layout'
 import LegalSettingsForm from '@components/BackOffice/LegalSettings/LegalSettingsForm'
-import { withFeatureFlagRequired } from '@utils/withPageAuthRequired'
+import withPageAuthRequired from '@utils/withPageAuthRequired'
 
 const LegalSettings: React.FC = () => {
   const intl = useIntl()
@@ -24,9 +24,6 @@ const LegalSettings: React.FC = () => {
   )
 }
 
-export const getServerSideProps = withFeatureFlagRequired(
-  'unstable__sonata_migration_to_admin_next',
-  '/admin/settings/pages.legal/list',
-)
+export const getServerSideProps = withPageAuthRequired
 
 export default LegalSettings

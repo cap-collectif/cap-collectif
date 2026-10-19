@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
 import Layout from '@components/BackOffice/Layout/Layout'
 import FooterSettingsList from '@components/BackOffice/FooterSettings/FooterSettingsList'
-import { withFeatureFlagRequired } from '@utils/withPageAuthRequired'
+import withPageAuthRequired from '@utils/withPageAuthRequired'
 import { useIntl } from 'react-intl'
 
 const FooterSettings = () => {
@@ -22,8 +22,5 @@ const FooterSettings = () => {
   )
 }
 
-export const getServerSideProps = withFeatureFlagRequired(
-  'unstable__sonata_migration_to_admin_next',
-  '/admin/settings/pages.footer/list',
-)
+export const getServerSideProps = withPageAuthRequired
 export default FooterSettings
