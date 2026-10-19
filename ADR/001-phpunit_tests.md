@@ -27,12 +27,14 @@ Chaque scénario reste indépendant. Autoriser un socle de fixtures restaurable
 limite le coût de préparation des contextes complexes sans sacrifier l’isolation.
 Voir le [guide des données et de l’isolation](../docs/tests/phpunit/donnees-isolation.md).
 
-La migration pilote des feature flags utilise une extension PHPUnit activée
-explicitement par classe : elle prépare le preset Redis avant chaque test et le
-rétablit après son nettoyage, y compris en cas d’échec. Le resetter partagé avec
+Les tests Symfony dérivés de `KernelTestCase` ou `WebTestCase` reçoivent
+automatiquement le preset des feature flags avant chaque test et après son
+nettoyage, y compris en cas d’échec. Les préconditions spécifiques sont déclarées
+explicitement par classe ou par scénario ; les tests unitaires classiques qui
+simulent les flags ne déclenchent pas de reset Redis. Le resetter partagé avec
 Jest et Cypress est appelé directement dans le processus PHPUnit, sans démarrer
-Symfony ni un sous-processus PHP ; les autres tests conservent
-leur isolation actuelle pendant cette adoption progressive.
+Symfony ni un sous-processus PHP. Les changements de scénario invalident aussi
+le cache du manager Symfony déjà créé, pour éviter les lectures périmées.
 
 ### Assertions et doubles
 

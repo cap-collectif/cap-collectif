@@ -4,8 +4,6 @@ namespace Capco\Tests\Command;
 
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
-use Qandidate\Toggle\Context;
-use Qandidate\Toggle\ContextFactory;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -23,11 +21,6 @@ class LegacyExportCommandsTest extends DatabaseCommandTestCase
     private const EXPORT_DIRECTORY = __DIR__ . '/../../public/export';
     private const SNAPSHOT_DIRECTORY = __DIR__ . '/../../__snapshots__/exports';
 
-    private Manager $featureManager;
-    private Context $featureContext;
-    private bool $exportInitialState;
-    private bool $legacyUsersExportInitialState;
-    private bool $multilangueInitialState;
     private ?TokenInterface $previousToken = null;
 
     /** @var list<string> */
@@ -45,24 +38,6 @@ class LegacyExportCommandsTest extends DatabaseCommandTestCase
         $this->previousToken = $tokenStorage->getToken();
         $tokenStorage->setToken(new UsernamePasswordToken($admin, 'main', $admin->getRoles()));
 
-        $featureManager = self::getContainer()->get(Manager::class);
-        \assert($featureManager instanceof Manager);
-        $this->featureManager = $featureManager;
-
-        $contextFactory = self::getContainer()->get('qandidate.toggle.user_context_factory');
-        \assert($contextFactory instanceof ContextFactory);
-        $this->featureContext = $contextFactory->createContext();
-
-        $this->exportInitialState = $this->isFeatureActive(Manager::export);
-        $this->legacyUsersExportInitialState = $this->isFeatureActive(
-            Manager::export_legacy_users
-        );
-        $this->multilangueInitialState = $this->isFeatureActive(Manager::multilangue);
-
-        $this->featureManager->activate(Manager::export);
-        $this->featureManager->activate(Manager::export_legacy_users);
-        $this->featureManager->deactivate(Manager::multilangue);
-
         $snapshotUser = $this->entityManager->getRepository(User::class)->find('user5');
         \assert($snapshotUser instanceof User);
         $snapshotUser->setConsentInternalCommunication(true);
@@ -77,14 +52,12 @@ class LegacyExportCommandsTest extends DatabaseCommandTestCase
             $filesystem->remove($generatedFile);
         }
 
-        $this->featureManager->set(Manager::export, $this->exportInitialState);
-        $this->featureManager->set(
-            Manager::export_legacy_users,
-            $this->legacyUsersExportInitialState
-        );
-        $this->featureManager->set(Manager::multilangue, $this->multilangueInitialState);
-
         parent::tearDown();
+    }
+
+    public static function featureFlagOverrides(): array
+    {
+        return [Manager::export => true, Manager::export_legacy_users => true, Manager::multilangue => false];
     }
 
     /**
@@ -207,10 +180,5 @@ class LegacyExportCommandsTest extends DatabaseCommandTestCase
 
             self::assertFileEquals(self::SNAPSHOT_DIRECTORY . '/' . $expectedFile, $exportPath);
         }
-    }
-
-    private function isFeatureActive(string $feature): bool
-    {
-        return $this->featureManager->getToggleManager()->active($feature, $this->featureContext);
     }
 }

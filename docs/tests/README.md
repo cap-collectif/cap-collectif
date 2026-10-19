@@ -10,7 +10,7 @@ test historique sans vérifier son statut.
 | Sujet | Guide |
 |---|---|
 | Frontière publique, intégration HTTP/CLI et emplacements | [Frontières et emplacements](phpunit/frontieres.md) |
-| Fixtures, transactions, nettoyage et Elasticsearch | [Données et isolation](phpunit/donnees-isolation.md) |
+| Fixtures, transactions, feature flags, nettoyage et Elasticsearch | [Données et isolation](phpunit/donnees-isolation.md) |
 | Scénarios, data providers, assertions, mocks et stubs | [Assertions et doubles](phpunit/assertions-doubles.md) |
 | Commandes, découverte et vérifications avant revue | [Exécution](phpunit/execution.md) |
 

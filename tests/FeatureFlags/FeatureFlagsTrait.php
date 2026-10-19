@@ -2,6 +2,9 @@
 
 namespace Capco\Tests\FeatureFlags;
 
+use Capco\AppBundle\Toggle\Manager;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+
 trait FeatureFlagsTrait
 {
     /** @var array<string, bool> */
@@ -17,6 +20,7 @@ trait FeatureFlagsTrait
     protected function clearFeatureFlagChanges(): void
     {
         $this->featureFlagChanges = [];
+        $this->resetFeatureFlagCache();
     }
 
     /** @param array<string, bool> $overrides */
@@ -25,5 +29,15 @@ trait FeatureFlagsTrait
         $changes = array_replace($this->featureFlagChanges, $overrides);
         FeatureFlagsExtension::reset(array_replace(static::featureFlagOverrides(), $changes));
         $this->featureFlagChanges = $changes;
+        $this->resetFeatureFlagCache();
+    }
+
+    private function resetFeatureFlagCache(): void
+    {
+        if ($this instanceof KernelTestCase && null !== static::$kernel) {
+            $manager = static::getContainer()->get(Manager::class);
+            \assert($manager instanceof Manager);
+            $manager->resetCache();
+        }
     }
 }

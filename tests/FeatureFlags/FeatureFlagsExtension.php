@@ -4,6 +4,7 @@ namespace Capco\Tests\FeatureFlags;
 
 use PHPUnit\Runner\AfterTestHook;
 use PHPUnit\Runner\BeforeTestHook;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class FeatureFlagsExtension implements BeforeTestHook, AfterTestHook
 {
@@ -11,7 +12,7 @@ final class FeatureFlagsExtension implements BeforeTestHook, AfterTestHook
     {
         $class = $this->featureFlagTestClass($test);
         if (null !== $class) {
-            self::reset($class::featureFlagOverrides());
+            self::reset(is_a($class, FeatureFlagsAwareTest::class, true) ? $class::featureFlagOverrides() : []);
         }
     }
 
@@ -28,11 +29,11 @@ final class FeatureFlagsExtension implements BeforeTestHook, AfterTestHook
         (new FeatureFlagsResetter())->reset($overrides);
     }
 
-    /** @return null|class-string<FeatureFlagsAwareTest> */
+    /** @return null|class-string<FeatureFlagsAwareTest>|class-string<KernelTestCase> */
     private function featureFlagTestClass(string $test): ?string
     {
         $class = explode('::', $test, 2)[0];
 
-        return is_a($class, FeatureFlagsAwareTest::class, true) ? $class : null;
+        return is_a($class, KernelTestCase::class, true) || is_a($class, FeatureFlagsAwareTest::class, true) ? $class : null;
     }
 }

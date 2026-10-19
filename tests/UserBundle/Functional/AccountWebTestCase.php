@@ -7,18 +7,20 @@ namespace Capco\Tests\UserBundle\Functional;
 use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Mailer\MailerService;
-use Capco\AppBundle\Toggle\Manager;
+use Capco\Tests\FeatureFlags\FeatureFlagsAwareTest;
+use Capco\Tests\FeatureFlags\FeatureFlagsTrait;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Qandidate\Toggle\Toggle;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-abstract class AccountWebTestCase extends WebTestCase
+abstract class AccountWebTestCase extends WebTestCase implements FeatureFlagsAwareTest
 {
+    use FeatureFlagsTrait;
+
     protected const PASSWORD = 'Account123!';
     protected KernelBrowser $browser;
     protected EntityManagerInterface $em;
@@ -26,8 +28,6 @@ abstract class AccountWebTestCase extends WebTestCase
     protected MailerService $mailer;
     /** @var list<array{type: string, body: array<string, mixed>}> */
     protected array $messages = [];
-    /** @var array<string, null|Toggle> */
-    private array $featureStates = [];
     /** @var array<string, true> */
     private array $sessionIds = [];
     /** @var array<string, list<\Monolog\Handler\HandlerInterface>> */
@@ -73,9 +73,6 @@ abstract class AccountWebTestCase extends WebTestCase
             $this->messages[] = ['type' => $type, 'body' => json_decode((string) $message->getBody(), true, 512, \JSON_THROW_ON_ERROR)];
         });
         $container->set('swarrot.publisher', $publisher);
-        foreach (['registration' => true, 'restrict_registration_via_email_domain' => false, 'login_cas' => false, 'login_saml' => false, 'shield_mode' => false] as $feature => $enabled) {
-            $this->setFeature($feature, $enabled);
-        }
     }
 
     protected function tearDown(): void
@@ -92,46 +89,38 @@ abstract class AccountWebTestCase extends WebTestCase
             }
         } finally {
             try {
-                if ($this->featureStates) {
-                    $manager = self::getContainer()->get(Manager::class);
-                    foreach ($this->featureStates as $feature => $toggle) {
-                        if (null === $toggle) {
-                            $manager->getToggleManager()->remove($feature);
-                        } else {
-                            $manager->getToggleManager()->update($toggle);
-                        }
+                if ($this->sessionIds) {
+                    $session = self::getContainer()->get('session');
+                    if ($session->isStarted()) {
+                        $session->save();
+                    }
+                    $handler = self::getContainer()->get(\Capco\UserBundle\Security\SessionWithJsonHandler::class);
+                    foreach (array_keys($this->sessionIds) as $id) {
+                        $handler->destroy($id);
                     }
                 }
             } finally {
-                try {
-                    if ($this->sessionIds) {
-                        $session = self::getContainer()->get('session');
-                        if ($session->isStarted()) {
-                            $session->save();
-                        }
-                        $handler = self::getContainer()->get(\Capco\UserBundle\Security\SessionWithJsonHandler::class);
-                        foreach (array_keys($this->sessionIds) as $id) {
-                            $handler->destroy($id);
-                        }
-                    }
-                } finally {
-                    foreach ($this->logHandlers as $service => $handlers) {
-                        self::getContainer()->get($service)->setHandlers($handlers);
-                    }
-                    if (null === $this->backchannelEnv) {
-                        unset($_ENV['SYMFONY_OPENID_BACKCHANNEL_SECRET']);
-                    } else {
-                        $_ENV['SYMFONY_OPENID_BACKCHANNEL_SECRET'] = $this->backchannelEnv;
-                    }
-                    if (null === $this->backchannelServer) {
-                        unset($_SERVER['SYMFONY_OPENID_BACKCHANNEL_SECRET']);
-                    } else {
-                        $_SERVER['SYMFONY_OPENID_BACKCHANNEL_SECRET'] = $this->backchannelServer;
-                    }
-                    parent::tearDown();
+                foreach ($this->logHandlers as $service => $handlers) {
+                    self::getContainer()->get($service)->setHandlers($handlers);
                 }
+                if (null === $this->backchannelEnv) {
+                    unset($_ENV['SYMFONY_OPENID_BACKCHANNEL_SECRET']);
+                } else {
+                    $_ENV['SYMFONY_OPENID_BACKCHANNEL_SECRET'] = $this->backchannelEnv;
+                }
+                if (null === $this->backchannelServer) {
+                    unset($_SERVER['SYMFONY_OPENID_BACKCHANNEL_SECRET']);
+                } else {
+                    $_SERVER['SYMFONY_OPENID_BACKCHANNEL_SECRET'] = $this->backchannelServer;
+                }
+                parent::tearDown();
             }
         }
+    }
+
+    public static function featureFlagOverrides(): array
+    {
+        return ['registration' => true, 'restrict_registration_via_email_domain' => false, 'login_cas' => false, 'login_saml' => false, 'shield_mode' => false];
     }
 
     protected function createIndexer(): Indexer
@@ -159,13 +148,7 @@ abstract class AccountWebTestCase extends WebTestCase
 
     protected function setFeature(string $feature, bool $enabled): void
     {
-        $container = self::getContainer();
-        $manager = $container->get(Manager::class);
-        if (!\array_key_exists($feature, $this->featureStates)) {
-            $toggles = $manager->getToggleManager()->all();
-            $this->featureStates[$feature] = isset($toggles[$feature]) ? clone $toggles[$feature] : null;
-        }
-        $manager->set($feature, $enabled);
+        $this->setFeatureFlags([$feature => $enabled]);
     }
 
     protected function allowRegistrationWithoutCustomResponses(): void

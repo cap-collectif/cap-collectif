@@ -62,9 +62,9 @@ Choisir une stratégie adaptée aux stockages réellement utilisés :
   complexe, à condition de restaurer tous les stockages concernés dans un environnement
   réservé à cette exécution. Ne pas réinitialiser un stockage utilisé simultanément
   par d'autres tests.
-- Pour les tests migrés, utiliser le preset et les overrides décrits plus bas.
-  Pour les autres tests, capturer puis restaurer la valeur initiale des feature flags
-  et de la configuration, plutôt que de les désactiver systématiquement. Les caches et les messages en attente
+- Utiliser le preset et les overrides décrits plus bas pour les feature flags des
+  tests d’intégration Symfony. Dans les tests unitaires, simuler les flags sans Redis.
+  Restaurer aussi les autres configurations modifiées. Les caches et les messages en attente
   doivent également être traités lorsqu'ils peuvent affecter le scénario suivant.
 
 La restauration CI d'un jeu initial par exécuteur ne remplace pas l'isolation
@@ -107,15 +107,16 @@ l'indexation applicative.
 
 - [Elasticsearch — visibilité après refresh](https://www.elastic.co/docs/reference/elasticsearch/rest-apis/refresh-parameter).
 
-## Feature flags Redis — migration pilote
+## Feature flags Redis
 
-Les tests d’intégration qui implémentent `FeatureFlagsAwareTest` utilisent le
+Tous les tests Symfony dérivés de `KernelTestCase` ou `WebTestCase` utilisent le
 preset `EnvironmentPresets::TEST`, comme Jest et Cypress. L’extension déclarée
-dans `phpunit.xml` prépare ce preset avant `setUp()` et le rétablit après
+dans `phpunit.xml` prépare automatiquement ce preset avant `setUp()` et le rétablit après
 `tearDown()`, y compris après une assertion échouée, une exception dans la
 préparation ou le nettoyage, ou un test ignoré. Elle fonctionne aussi avec
-`@runTestsInSeparateProcesses`. Elle ne touche pas les classes non migrées ni
-les tests unitaires qui simulent les flags.
+`@runTestsInSeparateProcesses`. Les tests unitaires classiques dérivés de
+`PHPUnit\Framework\TestCase` ne déclenchent aucun reset Redis, sauf opt-in
+explicite via `FeatureFlagsAwareTest`.
 
 ```php
 use Capco\Tests\FeatureFlags\FeatureFlagsAwareTest;
@@ -133,12 +134,17 @@ class ExampleTest extends KernelTestCase implements FeatureFlagsAwareTest
 }
 ```
 
-Déclarer les préconditions communes dans `featureFlagOverrides()`. Une classe
+Pour déclarer des préconditions communes, implémenter `FeatureFlagsAwareTest`,
+utiliser `FeatureFlagsTrait` et définir `featureFlagOverrides()`. Une classe
 fille peut compléter celles de son parent avec `array_replace(parent::featureFlagOverrides(), [...])`.
 Pour modifier des flags pendant un scénario, utiliser
 `$this->setFeatureFlags(['shield_mode' => true])` : les appels successifs conservent
 les overrides explicites précédents et ceux de la classe. Ces changements sont
-oubliés à chaque nouvelle exécution du test.
+oubliés à chaque nouvelle exécution du test. Le helper invalide aussi le cache
+`Manager::isActive()` du kernel déjà démarré via `Manager::resetCache()` : une
+lecture après changement utilise donc les nouvelles valeurs, même avec le même
+manager ou un navigateur dont le reboot est désactivé. Préparer des flags avant
+le boot reste possible et ne démarre pas le kernel.
 
 La préparation appelle directement `Capco\Tests\FeatureFlags\FeatureFlagsResetter`
 dans le processus PHPUnit, sans lancer de sous-processus ni démarrer Symfony.
@@ -149,6 +155,8 @@ Ces préconditions n’émettent pas les événements métier des commandes Symf
 un test de ces commandes continue à appeler la commande réellement testée.
 Ce reset ne remplace pas le nettoyage SQL, Elasticsearch ou des autres clés Redis.
 
-La migration pilote porte sur `FeatureToggleCommandTest`, `GraphQLControllerTest`
-et `RemindUserAccountConfirmationCommandTest`. Les autres tests conservent leur
-fonctionnement actuel jusqu’à leur migration explicite.
+Les socles `IdentityWebTestCase`, `AccountWebTestCase` et `DatabaseCommandTestCase`
+centralisent les préconditions communes. Leurs helpers historiques `setFeature()`
+délèguent au même reset Redis ; les scénarios ne capturent plus puis restaurent
+manuellement les anciens états de flags. Les commandes Symfony de feature flags
+restent appelées lorsqu’elles sont elles-mêmes le comportement testé.

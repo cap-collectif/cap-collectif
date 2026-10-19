@@ -7,18 +7,20 @@ namespace Capco\Tests;
 use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Mailer\MailerService;
-use Capco\AppBundle\Toggle\Manager;
+use Capco\Tests\FeatureFlags\FeatureFlagsAwareTest;
+use Capco\Tests\FeatureFlags\FeatureFlagsTrait;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Qandidate\Toggle\Toggle;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-abstract class IdentityWebTestCase extends WebTestCase
+abstract class IdentityWebTestCase extends WebTestCase implements FeatureFlagsAwareTest
 {
+    use FeatureFlagsTrait;
+
     protected const PASSWORD = 'Account123!';
     protected KernelBrowser $browser;
     protected EntityManagerInterface $em;
@@ -26,8 +28,6 @@ abstract class IdentityWebTestCase extends WebTestCase
     protected MailerService $mailer;
     /** @var list<array{type: string, body: array<string, mixed>}> */
     protected array $messages = [];
-    /** @var array<string, null|Toggle> */
-    private array $featureStates = [];
     /** @var array<string, true> */
     private array $sessionIds = [];
     /** @var list<string> */
@@ -73,9 +73,6 @@ abstract class IdentityWebTestCase extends WebTestCase
             $this->messages[] = ['type' => $type, 'body' => json_decode((string) $message->getBody(), true, 512, \JSON_THROW_ON_ERROR)];
         });
         $container->set('swarrot.publisher', $publisher);
-        foreach (['registration' => true, 'restrict_registration_via_email_domain' => false, 'login_cas' => false, 'login_saml' => false, 'shield_mode' => false] as $feature => $enabled) {
-            $this->setFeature($feature, $enabled);
-        }
     }
 
     protected function tearDown(): void
@@ -94,44 +91,31 @@ abstract class IdentityWebTestCase extends WebTestCase
                 }
             } finally {
                 try {
-                    if ($this->featureStates) {
-                        $manager = self::getContainer()->get(Manager::class);
-                        foreach ($this->featureStates as $feature => $toggle) {
-                            if (null === $toggle) {
-                                $manager->getToggleManager()->remove($feature);
-                            } else {
-                                $manager->getToggleManager()->update($toggle);
+                    foreach ($this->indexedEntities as [$class, $id]) {
+                        $this->searchIndexer->remove($class, $id);
+                    }
+                    if ($this->indexedEntities) {
+                        $this->searchIndexer->finishBulk();
+                    }
+                } finally {
+                    // Preparation can save a session before the first HTTP response,
+                    // including when an assertion fails immediately after loginUser().
+                    if (isset($this->browser)) {
+                        /** @var \Symfony\Component\HttpFoundation\Session\SessionInterface $session */
+                        $session = self::getContainer()->get('session');
+                        if ('' !== $session->getId()) {
+                            $this->sessionIds[$session->getId()] = true;
+                        }
+                        foreach ($this->browser->getCookieJar()->all() as $cookie) {
+                            if ($cookie->getName() === $session->getName() && '' !== $cookie->getValue()) {
+                                $this->sessionIds[$cookie->getValue()] = true;
                             }
                         }
                     }
-                } finally {
-                    try {
-                        foreach ($this->indexedEntities as [$class, $id]) {
-                            $this->searchIndexer->remove($class, $id);
-                        }
-                        if ($this->indexedEntities) {
-                            $this->searchIndexer->finishBulk();
-                        }
-                    } finally {
-                        // Preparation can save a session before the first HTTP response,
-                        // including when an assertion fails immediately after loginUser().
-                        if (isset($this->browser)) {
-                            /** @var \Symfony\Component\HttpFoundation\Session\SessionInterface $session */
-                            $session = self::getContainer()->get('session');
-                            if ('' !== $session->getId()) {
-                                $this->sessionIds[$session->getId()] = true;
-                            }
-                            foreach ($this->browser->getCookieJar()->all() as $cookie) {
-                                if ($cookie->getName() === $session->getName() && '' !== $cookie->getValue()) {
-                                    $this->sessionIds[$cookie->getValue()] = true;
-                                }
-                            }
-                        }
-                        if ($this->sessionIds) {
-                            $handler = self::getContainer()->get(\Capco\UserBundle\Security\SessionWithJsonHandler::class);
-                            foreach (array_keys($this->sessionIds) as $id) {
-                                $handler->destroy($id);
-                            }
+                    if ($this->sessionIds) {
+                        $handler = self::getContainer()->get(\Capco\UserBundle\Security\SessionWithJsonHandler::class);
+                        foreach (array_keys($this->sessionIds) as $id) {
+                            $handler->destroy($id);
                         }
                     }
                 }
@@ -162,6 +146,11 @@ abstract class IdentityWebTestCase extends WebTestCase
         }
     }
 
+    public static function featureFlagOverrides(): array
+    {
+        return ['registration' => true, 'restrict_registration_via_email_domain' => false, 'login_cas' => false, 'login_saml' => false, 'shield_mode' => false];
+    }
+
     /**
      * Prepare search data only; this does not test application-triggered indexation.
      * SQL is rolled back and these documents are removed even after a failed assertion.
@@ -182,13 +171,7 @@ abstract class IdentityWebTestCase extends WebTestCase
 
     protected function setFeature(string $feature, bool $enabled): void
     {
-        $container = self::getContainer();
-        $manager = $container->get(Manager::class);
-        if (!\array_key_exists($feature, $this->featureStates)) {
-            $toggles = $manager->getToggleManager()->all();
-            $this->featureStates[$feature] = isset($toggles[$feature]) ? clone $toggles[$feature] : null;
-        }
-        $manager->set($feature, $enabled);
+        $this->setFeatureFlags([$feature => $enabled]);
     }
 
     /**

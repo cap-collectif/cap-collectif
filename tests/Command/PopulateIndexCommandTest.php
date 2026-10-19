@@ -3,6 +3,8 @@
 namespace Capco\Tests\Command;
 
 use Capco\AppBundle\Toggle\Manager;
+use Capco\Tests\FeatureFlags\FeatureFlagsAwareTest;
+use Capco\Tests\FeatureFlags\FeatureFlagsTrait;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -11,15 +13,15 @@ use Symfony\Component\Console\Tester\CommandTester;
  * @internal
  * @coversNothing
  * @phpunit-status non-compliant
- * @phpunit-reason Changes the indexation flag and Elasticsearch contents without restoring their initial
- * states in teardown.
+ * @phpunit-reason Changes Elasticsearch contents without restoring their initial state in teardown.
  */
-class PopulateIndexCommandTest extends KernelTestCase
+class PopulateIndexCommandTest extends KernelTestCase implements FeatureFlagsAwareTest
 {
+    use FeatureFlagsTrait;
+
     private const COMMAND = 'capco:es:populate';
 
     private CommandTester $commandTester;
-    private Manager $featureFlagManager;
 
     protected function setUp(): void
     {
@@ -28,16 +30,11 @@ class PopulateIndexCommandTest extends KernelTestCase
         $application = new Application(self::$kernel);
         $command = $application->find(self::COMMAND);
         $this->commandTester = new CommandTester($command);
-
-        $container = self::getContainer();
-        $featureFlagManager = $container->get(Manager::class);
-        \assert($featureFlagManager instanceof Manager);
-        $this->featureFlagManager = $featureFlagManager;
     }
 
     public function testCommandFailsWhenIndexationFeatureIsDisabled(): void
     {
-        $this->featureFlagManager->deactivate(Manager::indexation);
+        $this->setFeatureFlags([Manager::indexation => false]);
 
         $this->commandTester->execute([]);
 
@@ -49,7 +46,7 @@ class PopulateIndexCommandTest extends KernelTestCase
 
     public function testCommandExecutesSuccessfullyWhenIndexationFeatureIsEnabled(): void
     {
-        $this->featureFlagManager->activate(Manager::indexation);
+        $this->setFeatureFlags([Manager::indexation => true]);
 
         $this->commandTester->execute([]);
 
@@ -65,7 +62,7 @@ class PopulateIndexCommandTest extends KernelTestCase
 
     public function testCommandAcceptsTypeArgument(): void
     {
-        $this->featureFlagManager->activate(Manager::indexation);
+        $this->setFeatureFlags([Manager::indexation => true]);
 
         $this->commandTester->execute([
             'type' => 'proposal',
@@ -79,7 +76,7 @@ class PopulateIndexCommandTest extends KernelTestCase
 
     public function testCommandAcceptsOffsetArgument(): void
     {
-        $this->featureFlagManager->activate(Manager::indexation);
+        $this->setFeatureFlags([Manager::indexation => true]);
 
         $this->commandTester->execute([
             'offset' => 10,

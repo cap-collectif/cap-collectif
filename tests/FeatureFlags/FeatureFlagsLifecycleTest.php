@@ -93,7 +93,7 @@ final class FeatureFlagsLifecycleTest extends TestCase
         yield 'isolated failure' => ['assertion failure', true, false];
     }
 
-    public function testUnmigratedTestsDoNotResetRedis(): void
+    public function testUnitTestsDoNotResetRedis(): void
     {
         file_put_contents($this->fixture, $this->probeSource(false));
         FeatureFlagsExtension::reset(['calendar' => false, 'public_api' => true]);
@@ -102,6 +102,19 @@ final class FeatureFlagsLifecycleTest extends TestCase
 
         self::assertTrue($process->isSuccessful(), $process->getOutput() . $process->getErrorOutput());
         self::assertSame($before, $this->redis->mget(array_keys($this->initialValues)));
+    }
+
+    public function testKernelTestsReceiveThePresetWithoutOptIn(): void
+    {
+        $source = str_replace('extends TestCase', 'extends \\Symfony\\Bundle\\FrameworkBundle\\Test\\KernelTestCase', $this->probeSource(false));
+        file_put_contents($this->fixture, $source);
+        FeatureFlagsExtension::reset(['calendar' => false, 'shield_mode' => true]);
+        $process = $this->runProbe('kernel defaults', false);
+
+        self::assertTrue($process->isSuccessful(), $process->getOutput() . $process->getErrorOutput());
+        $collection = new PredisCollection('testfeature_toggle', $this->redis);
+        self::assertSame(Toggle::ALWAYS_ACTIVE, $collection->get('calendar')?->getStatus());
+        self::assertSame(Toggle::INACTIVE, $collection->get('shield_mode')?->getStatus());
     }
 
     public function testProbeDetectsAMissingExtension(): void
@@ -172,6 +185,11 @@ final class FeatureFlagsLifecycleTest extends TestCase
                     }
                     $redis = new Client(sprintf('tcp://%s:%s', getenv('SYMFONY_REDIS_HOST') ?: '127.0.0.1', getenv('SYMFONY_REDIS_PORT') ?: '6379'));
                     $this->manager = new ToggleManager(new PredisCollection('testfeature_toggle', $redis));
+                    if ('kernel defaults' === getenv('CAPCO_FEATURE_FLAGS_PROBE')) {
+                        self::assertTrue($this->manager->active('calendar', new Context()));
+                        self::assertFalse($this->manager->active('shield_mode', new Context()));
+                        return;
+                    }
                     self::assertFalse($this->manager->active('calendar', new Context()));
                     self::assertTrue($this->manager->active('shield_mode', new Context()));
                     self::assertTrue($this->manager->active('public_api', new Context()));
@@ -198,6 +216,12 @@ final class FeatureFlagsLifecycleTest extends TestCase
                 {
                     if ('unmanaged' === getenv('CAPCO_FEATURE_FLAGS_PROBE')) {
                         self::assertTrue(true);
+                        return;
+                    }
+                    if ('kernel defaults' === getenv('CAPCO_FEATURE_FLAGS_PROBE')) {
+                        \Capco\Tests\FeatureFlags\FeatureFlagsExtension::reset(['calendar' => false, 'shield_mode' => true]);
+                        self::assertFalse($this->manager->active('calendar', new Context()));
+                        self::assertTrue($this->manager->active('shield_mode', new Context()));
                         return;
                     }
                     $this->setFeatureFlags(['public_api' => false]);

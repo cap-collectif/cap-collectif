@@ -4,14 +4,18 @@ namespace Capco\Tests\Command;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\Tests\FeatureFlags\FeatureFlagsAwareTest;
+use Capco\Tests\FeatureFlags\FeatureFlagsTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Filesystem\Filesystem;
 
-abstract class DatabaseCommandTestCase extends KernelTestCase
+abstract class DatabaseCommandTestCase extends KernelTestCase implements FeatureFlagsAwareTest
 {
+    use FeatureFlagsTrait;
+
     protected EntityManagerInterface $entityManager;
     private string $temporaryDirectory;
 

@@ -5,8 +5,9 @@ namespace Capco\Tests\Controller\Site;
 use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\Tests\FeatureFlags\FeatureFlagsAwareTest;
+use Capco\Tests\FeatureFlags\FeatureFlagsTrait;
 use Doctrine\ORM\EntityManagerInterface;
-use Qandidate\Toggle\ContextFactory;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,25 +19,16 @@ use Symfony\Component\HttpFoundation\Request;
  * @phpunit-reason Checks the private Symfony security session target-path key rather than proving the
  * destination through the HTTP login flow.
  */
-final class SSOControllerTest extends WebTestCase
+final class SSOControllerTest extends WebTestCase implements FeatureFlagsAwareTest
 {
+    use FeatureFlagsTrait;
+
     private KernelBrowser $client;
-    private Manager $toggleManager;
-    private bool $loginOpenidWasActive;
     private bool $providerWasEnabled;
 
     protected function setUp(): void
     {
         $this->client = self::createClient();
-
-        $this->toggleManager = self::getContainer()->get(Manager::class);
-        $contextFactory = self::getContainer()->get('qandidate.toggle.user_context_factory');
-        self::assertInstanceOf(ContextFactory::class, $contextFactory);
-        $this->loginOpenidWasActive = $this->toggleManager
-            ->getToggleManager()
-            ->active(Manager::login_openid, $contextFactory->createContext())
-        ;
-        $this->toggleManager->activate(Manager::login_openid);
 
         $configuration = $this->getOauth2Configuration();
         $this->providerWasEnabled = $configuration->isEnabled();
@@ -54,13 +46,17 @@ final class SSOControllerTest extends WebTestCase
         $configuration = $this->getOauth2Configuration();
         $configuration->setEnabled($this->providerWasEnabled);
         self::getContainer()->get(EntityManagerInterface::class)->flush();
-        $this->toggleManager->set(Manager::login_openid, $this->loginOpenidWasActive);
         self::getContainer()
             ->get(RedisCache::class)
             ->deleteItem('SSOConfiguration - openid')
         ;
 
         parent::tearDown();
+    }
+
+    public static function featureFlagOverrides(): array
+    {
+        return [Manager::login_openid => true];
     }
 
     /**

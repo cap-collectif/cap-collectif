@@ -5,8 +5,6 @@ namespace Capco\Tests\Command;
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Command\RemindUserAccountConfirmationCommand;
 use Capco\AppBundle\Toggle\Manager;
-use Capco\Tests\FeatureFlags\FeatureFlagsAwareTest;
-use Capco\Tests\FeatureFlags\FeatureFlagsTrait;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Psr\Log\LoggerInterface;
@@ -19,10 +17,8 @@ use Symfony\Component\Console\Tester\CommandTester;
  * @phpunit-reason Checks reminder selection and repeated CLI execution with restored flags and transactional
  * scenario data.
  */
-class RemindUserAccountConfirmationCommandTest extends MailerSnapshotCommandTestCase implements FeatureFlagsAwareTest
+class RemindUserAccountConfirmationCommandTest extends MailerSnapshotCommandTestCase
 {
-    use FeatureFlagsTrait;
-
     private Manager $featureManager;
 
     protected function setUp(): void

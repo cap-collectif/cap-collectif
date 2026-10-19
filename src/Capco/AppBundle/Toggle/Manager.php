@@ -314,6 +314,11 @@ class Manager
         return $this->knownValues[$name];
     }
 
+    public function resetCache(): void
+    {
+        $this->knownValues = [];
+    }
+
     public function hasOneActive(array $names): bool
     {
         if (0 === \count($names)) {

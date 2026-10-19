@@ -143,6 +143,15 @@ Use `cy.setFeatureFlags` for changes inside a scenario; it merges with the curre
 explicit overrides and writes directly to Redis. Do not configure flags in hooks.
 See `ADR/001-frontend_tests.md` for the contract and the Castor tasks.
 
+### Deterministic PHPUnit feature flags
+
+All Symfony `KernelTestCase`/`WebTestCase` tests reset the Redis test preset before
+and after each test. Declare class overrides with `FeatureFlagsAwareTest` and
+`FeatureFlagsTrait`, and use `setFeatureFlags()` for scenario changes; it also
+invalidates the existing Symfony feature manager cache. The shared web/command
+test bases provide this contract. Plain unit tests using mocked flags do not
+reset Redis. See `docs/tests/phpunit/donnees-isolation.md`.
+
 ### Yarn Version
 
 The package manager is Yarn 4.x (Berry), managed via [Corepack](https://nodejs.org/api/corepack.html) — the exact version is pinned in the `packageManager` field of `package.json`, not installed globally.

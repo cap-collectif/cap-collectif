@@ -10,7 +10,6 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
-use Qandidate\Toggle\ContextFactory;
 use Symfony\Component\Console\Command\Command;
 
 /**
@@ -24,33 +23,9 @@ class AnonymizeUsersAutomatedCommandTest extends DatabaseCommandTestCase
 {
     private const COMMAND = 'capco:anonymize_users_automated';
 
-    private Manager $featureManager;
-    private bool $initialFeatureState;
-
-    protected function setUp(): void
+    public static function featureFlagOverrides(): array
     {
-        parent::setUp();
-
-        $featureManager = self::getContainer()->get(Manager::class);
-        \assert($featureManager instanceof Manager);
-        $this->featureManager = $featureManager;
-
-        $contextFactory = self::getContainer()->get('qandidate.toggle.user_context_factory');
-        \assert($contextFactory instanceof ContextFactory);
-        $this->initialFeatureState = $this->featureManager
-            ->getToggleManager()
-            ->active(Manager::user_anonymization_automated, $contextFactory->createContext())
-        ;
-        $this->featureManager->activate(Manager::user_anonymization_automated);
-    }
-
-    protected function tearDown(): void
-    {
-        $this->initialFeatureState
-            ? $this->featureManager->activate(Manager::user_anonymization_automated)
-            : $this->featureManager->deactivate(Manager::user_anonymization_automated);
-
-        parent::tearDown();
+        return [Manager::user_anonymization_automated => true];
     }
 
     public function testAnonymizesOnlyInactiveUserInsideExplicitDateRange(): void
@@ -586,7 +561,7 @@ class AnonymizeUsersAutomatedCommandTest extends DatabaseCommandTestCase
 
     public function testInactiveFeatureFlagPreventsExplicitDateRangeMutation(): void
     {
-        $this->featureManager->deactivate(Manager::user_anonymization_automated);
+        $this->setFeatureFlags([Manager::user_anonymization_automated => false]);
         $user = $this->entityManager->find(User::class, 'user190');
         self::assertInstanceOf(User::class, $user);
         $user->setLastLogin(new \DateTime('2020-01-15 12:00:00'));
@@ -615,7 +590,7 @@ class AnonymizeUsersAutomatedCommandTest extends DatabaseCommandTestCase
 
     public function testInactiveFeatureFlagPreventsScheduledModeMutation(): void
     {
-        $this->featureManager->deactivate(Manager::user_anonymization_automated);
+        $this->setFeatureFlags([Manager::user_anonymization_automated => false]);
         $user = $this->entityManager->find(User::class, 'user190');
         self::assertInstanceOf(User::class, $user);
         $user->setLastLogin(new \DateTime('2020-01-15 12:00:00'));
