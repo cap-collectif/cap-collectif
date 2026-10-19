@@ -218,11 +218,11 @@ exports[`<Carrousel /> renders correctly with a carrouselHighlighted 1`] = `
           <div
             class="sc-bcXGCL dwbxzy"
           >
-            <h3
-              class="sc-bcXGCL jZrWcn cap-heading"
+            <h2
+              class="sc-bcXGCL YIciv cap-heading"
             >
               Title
-            </h3>
+            </h2>
           </div>
           <div
             aria-live="off"
@@ -305,11 +305,11 @@ exports[`<Carrousel /> renders correctly with a carrouselHighlighted on mobile 1
     aria-roledescription="global.carrousel"
     class="sc-bcXGCL eqchdY"
   >
-    <h3
-      class="sc-bcXGCL kbFwwM cap-heading"
+    <h2
+      class="sc-bcXGCL iNRlOo cap-heading"
     >
       TitleMobile
-    </h3>
+    </h2>
     <div
       class="slick-slider slick-initialized"
     >

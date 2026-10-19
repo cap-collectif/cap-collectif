@@ -9,14 +9,13 @@ import {
   Text,
   useTheme,
 } from '@cap-collectif/ui'
-import React, { useState } from 'react'
-import { FC } from 'react'
-import { pxToRem } from '@shared/utils/pxToRem'
 import useIsMobile from '@shared/hooks/useIsMobile'
-import { useIntl } from 'react-intl'
 import Image from '@shared/ui/Image'
-import WhatsNewMobile, { DateItem, getCardLabel, getPlaceholder, SECTION_TITLE_MAX_LENGTH } from './WhatsNewMobile'
+import { pxToRem } from '@shared/utils/pxToRem'
+import React, { FC, useState } from 'react'
+import { useIntl } from 'react-intl'
 import { Item } from './CarrouselItem'
+import WhatsNewMobile, { DateItem, getCardLabel, getPlaceholder, SECTION_TITLE_MAX_LENGTH } from './WhatsNewMobile'
 
 const ITEM_TITLE_MAX_LENGTH = 55
 const DESCRIPTION_MAX_LENGTH = 220
@@ -62,7 +61,7 @@ const WhatsNew: FC<{ items: Item[]; title: string; backgroundColor: 'WHITE' | 'G
         <Flex gap={8}>
           <Box width={pxToRem(348)} flex="none">
             <Flex justifyContent="space-between" alignItems="center" mb={3}>
-              <Heading as="h3">{title.slice(0, SECTION_TITLE_MAX_LENGTH)}</Heading>
+              <Heading as="h2">{title.slice(0, SECTION_TITLE_MAX_LENGTH)}</Heading>
               {length > 1 ? (
                 <Flex zIndex={1} gap={4}>
                   <ButtonQuickAction

@@ -9,15 +9,15 @@ import {
   Text,
   useTheme,
 } from '@cap-collectif/ui'
-import React, { FC, useRef } from 'react'
-import Slider from 'react-slick'
-import { pxToRem } from '@shared/utils/pxToRem'
-import { useIntl } from 'react-intl'
-import Image from '@shared/ui/Image'
-import { Item } from './CarrouselItem'
 import { CarrouselElementType } from '@relay/CarrouselQuery.graphql'
-import { DefaultEventCover, DefaultPostCover, DefaultProjectCover, DefaultThemeCover } from './DefaultCovers'
+import Image from '@shared/ui/Image'
+import { pxToRem } from '@shared/utils/pxToRem'
 import moment from 'moment'
+import React, { FC, useRef } from 'react'
+import { useIntl } from 'react-intl'
+import Slider from 'react-slick'
+import { Item } from './CarrouselItem'
+import { DefaultEventCover, DefaultPostCover, DefaultProjectCover, DefaultThemeCover } from './DefaultCovers'
 
 export const SECTION_TITLE_MAX_LENGTH = 11
 const ITEM_TITLE_MAX_LENGTH = 45
@@ -112,7 +112,7 @@ const WhatsNewMobile: FC<{ items: Item[]; title: string }> = ({ items, title }) 
         },
       }}
     >
-      <Heading as="h3" mb={4} px={4}>
+      <Heading as="h2" mb={4} px={4}>
         {title?.slice(0, SECTION_TITLE_MAX_LENGTH)}
       </Heading>
       <Slider
