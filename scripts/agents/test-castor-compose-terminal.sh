@@ -2,7 +2,7 @@
 # Primarily an agent regression check for Castor terminal output; Docker is mocked.
 set -euo pipefail
 
-project_directory="$(cd "$(dirname "$0")/.." && pwd)"
+project_directory="$(cd "$(dirname "$0")/../.." && pwd)"
 castor_binary="$(command -v castor)"
 test_directory="$(mktemp -d)"
 trap 'rm -rf "$test_directory"' EXIT

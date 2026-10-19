@@ -1,5 +1,6 @@
+// Agent regression check for the Cypress feature flag lint rule; no services required.
 const { RuleTester } = require('eslint')
-const setupRule = require('../cypress/eslint-rules/feature-flags-setup')
+const setupRule = require('../../cypress/eslint-rules/feature-flags-setup')
 
 const tester = new RuleTester({ parserOptions: { ecmaVersion: 2020, sourceType: 'module' } })
 const setupImport = "import { setupFeatureFlags } from '../../../support/setupFeatureFlags';"

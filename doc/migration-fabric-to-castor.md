@@ -127,13 +127,13 @@ via l'option `--updateSnapshot` des commandes Symfony d'export.
 et ne contrôle plus PHP, Composer ou les extensions PHP sur l’hôte. Les erreurs
 sont agrégées afin qu’un outil absent ou Docker inaccessible n’empêche pas les
 autres contrôles. Les scénarios de régression utilisent uniquement des outils
-simulés et s’exécutent avec `bash scripts/test-castor-doctor.sh`.
+simulés et s’exécutent avec `bash scripts/agents/test-castor-doctor.sh`.
 
 Les commandes Compose locales transmettent le terminal à Docker lorsqu’il est
 disponible, pour conserver son affichage de progression natif. La CI et les
 sorties redirigées conservent le contexte d’exécution par défaut. Les scénarios
 de régression utilisent un faux Docker et s’exécutent avec
-`bash scripts/test-castor-compose-terminal.sh`.
+`bash scripts/agents/test-castor-compose-terminal.sh`.
 
 La configuration Compose retire les imports de cache `capco-application` et
 `capco_elasticsearch` du fichier de base : ces sources provoquaient des erreurs
@@ -145,7 +145,7 @@ avec `docker image save` puis chargées avec `docker image load`.
 Les commandes locales `toggle-enable` et `toggle-disable` exigent désormais le
 nom du flag en argument, sans sélectionner `public_api` par défaut. Les options
 des commandes CI sont désormais alignées sur cette syntaxe. La validation des arguments utilise un
-faux Docker : `bash scripts/test-castor-toggles.sh`.
+faux Docker : `bash scripts/agents/test-castor-toggles.sh`.
 
 La commande `local:app:composer`, alias `composer`, remplace
 `local:app:install-dependencies` et l’alias `vendors`. Sans argument, elle conserve
@@ -206,7 +206,7 @@ en local comme en CI ; ce flag est explicite et ne déclenche aucun prompt.
 `ci:qa:phpunit` accepte les mêmes options `--filter`, `--tests` et
 `--log-junit` que sa commande locale.
 Les contrats sont vérifiés avec un faux Docker par
-`bash scripts/test-castor-ci-workflows.sh`.
+`bash scripts/agents/test-castor-ci-workflows.sh`.
 
 #### Implémentation commune et nettoyage CI
 

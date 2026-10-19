@@ -105,7 +105,7 @@ et interdit les changements de flags dans les hooks des specs : ils appartiennen
 préconditions déclaratives ou aux actions d'un scénario.
 
 Les règles de préparation des flags ont des tests de régression rapides, exécutables
-avec `node scripts/test-cypress-feature-flags-lint.cjs` depuis la racine.
+avec `node scripts/agents/test-cypress-feature-flags-lint.cjs` depuis la racine.
 
 Une attente fixe exceptionnellement nécessaire peut être désactivée localement avec la directive
 ESLint `no-fixed-wait`. La directive doit être placée juste au-dessus de l'attente et expliquer la

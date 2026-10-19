@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Integration check against the real application container; no application data is changed.
+# Agent integration check for the PHPUnit runner in the application container; no application data is changed.
 set -euo pipefail
 
-project_directory="$(cd "$(dirname "$0")/.." && pwd)"
+project_directory="$(cd "$(dirname "$0")/../.." && pwd)"
 cd "$project_directory"
 test_directory="$(mktemp -d "$project_directory/var/phpunit-runner.XXXXXX")"
 trap 'rm -rf "$test_directory"' EXIT

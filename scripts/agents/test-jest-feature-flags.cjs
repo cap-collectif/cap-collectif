@@ -1,10 +1,11 @@
+// Agent integration check for Jest flag isolation; uses the running test API and Redis.
 const assert = require('node:assert/strict')
 const { spawnSync } = require('node:child_process')
 const fs = require('node:fs')
 const os = require('node:os')
 const path = require('node:path')
 
-const root = path.resolve(__dirname, '..')
+const root = path.resolve(__dirname, '../..')
 const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'capco-jest-flags-'))
 const resultFile = path.join(directory, 'results.json')
 const query = `

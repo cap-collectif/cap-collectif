@@ -70,7 +70,7 @@ dans `beforeAll`, car le reset avant le test les effacerait. Le nettoyage final
 est partagé ; il ne dépend pas d'une instruction placée après les assertions.
 Les tests de composants frontend continuent à utiliser leurs mocks.
 
-`node scripts/test-jest-feature-flags.cjs` vérifie ces hooks avec le vrai runner
+`node scripts/agents/test-jest-feature-flags.cjs` vérifie ces hooks avec le vrai runner
 Jest et l'API locale, dont un échec volontaire et une nouvelle tentative. La stack
 de test doit être démarrée et aucune autre suite ne doit utiliser ses flags.
 

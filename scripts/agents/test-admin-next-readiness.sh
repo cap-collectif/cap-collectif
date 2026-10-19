@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
+# Agent regression check for the CI readiness probe; HTTP responses are mocked.
 set -euo pipefail
 
-project_directory=$(cd "$(dirname "$0")/.." && pwd)
+project_directory=$(cd "$(dirname "$0")/../.." && pwd)
 work=$(mktemp -d)
 trap 'rm -rf "$work"' EXIT
 mkdir "$work/bin"

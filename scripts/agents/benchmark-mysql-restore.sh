@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Agent diagnostic comparing MySQL restore modes in a temporary database.
 # Run in the application container; only a temporary database is modified.
 set -euo pipefail
 cd /var/www

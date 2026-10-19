@@ -67,7 +67,7 @@ Les deux fichiers SQL sont produits et transmis par `prepare-test-data` ; un
 fichier manquant fait échouer le job sans repli silencieux sur une autre méthode.
 
 Pour comparer les deux méthodes sur le dump local, exécuter
-`docker exec -w /var/www capco_application_1 bash scripts/benchmark-mysql-restore.sh`.
+`docker exec -w /var/www capco_application_1 bash scripts/agents/benchmark-mysql-restore.sh`.
 Ce script utilise une base temporaire, compare les dumps après chaque restauration
 et vérifie les clés étrangères, les données binaires, les tables vides et les
 compteurs d'identifiants. Ses durées locales ne prédisent pas les durées CircleCI.

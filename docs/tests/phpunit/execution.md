@@ -69,7 +69,7 @@ nouveau fichier après une exécution réussie. En CI, le dossier de sortie doit
 inscriptible par l'utilisateur du conteneur applicatif, dont l'UID peut différer
 de celui qui a créé le dossier dans le checkout.
 
-Le script `bash scripts/test-castor-phpunit.sh` vérifie ces contrats contre le vrai
+Le script `bash scripts/agents/test-castor-phpunit.sh` vérifie ces contrats contre le vrai
 runner PHP dans le conteneur, avec des fixtures temporaires sans données métier.
 
 Avant revue : lancer le test ciblé et les tests concernés, vérifier qu'une

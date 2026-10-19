@@ -238,18 +238,20 @@ Install JavaScript and PHP dependencies, reset the database if needed, then
 run `local:app:generate-graphql` and `local:app:install-assets`. Create RabbitMQ
 queues separately on first installation.
 
-#### Castor regression scripts for agents
+#### Scripts for agents
 
-These scripts are primarily lightweight regression checks for coding agents
-working on Castor tasks. They use mocked external tools and temporary files;
-they do not replace validating workflows against real Docker services.
+Keep durable scripts used primarily by coding agents in [`scripts/agents/`](scripts/agents/README.md).
+Classify scripts by their intended use, not by whether an agent wrote them:
+shared team tools stay in `scripts/`, and operational CI helpers stay in `.circleci/`.
+Keep one-off investigation scripts outside the repository, in a temporary directory.
 
-- [`scripts/test-castor-ci-workflows.sh`](scripts/test-castor-ci-workflows.sh) checks CI and local task arguments, confirmation flags, GraphQL workflows, and infrastructure options.
-- [`scripts/test-castor-compose-terminal.sh`](scripts/test-castor-compose-terminal.sh) checks terminal-aware Docker Compose output and exit-code forwarding.
-- [`scripts/test-castor-doctor.sh`](scripts/test-castor-doctor.sh) checks `local:system:doctor` detection of missing tools, stopped Docker, and version mismatches.
-- [`scripts/test-castor-toggles.sh`](scripts/test-castor-toggles.sh) checks feature-toggle arguments and verifies that a missing toggle is rejected before Docker is called.
+Every new agent script must have a short English header describing its purpose and
+an entry in `scripts/agents/README.md` documenting its purpose, prerequisites,
+invocation, and side effects. Update references and repository-relative paths when
+moving a script. Do not describe all checks as mocked: some use real test services.
 
-Run them from the repository root with `bash <script-path>`.
+Run the documented commands from the repository root. These targeted checks
+complement the project's regular test suites and validation against real services.
 
 ### Symfony Console Commands
 ```bash
