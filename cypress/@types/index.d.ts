@@ -77,6 +77,7 @@ declare namespace Cypress {
     directLoginAs(username: LoginAsUsernames): Chainable<any>
     logout(): Chainable<any>
     directLogin(options: LoginOptions): Chainable<any>
+    setFeatureFlags(overrides: Record<string, boolean>): Chainable<null>
     enableFeatureFlag(flag: string): Chainable<any>
     disableFeatureFlag(flag: string): Chainable<any>
     dsSelectSetOption(selector: string, query: string): Chainable<any>

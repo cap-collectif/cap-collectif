@@ -1,13 +1,15 @@
 import { Base } from '~e2e-pages/index'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 // !often fails locally, needs investigation
 describe('Blog page', () => {
+  setupFeatureFlags({ blog: true })
+
   beforeEach(() => {
     cy.task('db:restore')
     cy.interceptGraphQLOperation({ operationName: 'PostsListQuery' })
     cy.interceptGraphQLOperation({ operationName: 'PostListSectionFiltersQuery' })
     cy.interceptGraphQLOperation({ operationName: 'ProjectListFieldFrontOfficeQuery' })
-    cy.task('enable:feature', 'blog')
   })
 
   it('User wants to see published posts', () => {
@@ -39,8 +41,9 @@ describe('Blog page', () => {
 })
 
 describe('Blog', () => {
+  setupFeatureFlags({ blog: true })
+
   before(() => {
-    cy.task('enable:feature', 'blog')
     Cypress.on('uncaught:exception', (err, runnable) => {
       // returning false here prevents Cypress from failing the test
       return false
@@ -48,12 +51,11 @@ describe('Blog', () => {
   })
   beforeEach(() => {
     cy.task('db:restore')
-    cy.task('enable:feature', 'blog')
   })
 
   describe('Anonymous wants to comment a blogpost', () => {
     it('should allow anonymous user to submit a comment', () => {
-      cy.task('disable:feature', 'moderation_comment')
+      cy.setFeatureFlags({ moderation_comment: false })
       Base.visit({ path: '/blog/post-fr-2', operationName: 'NavbarRightQuery' })
 
       cy.get('[name="body"]').should('be.visible')
@@ -74,7 +76,7 @@ describe('Blog', () => {
 
   describe('Anonymous wants to comment a blogpost with moderation enabled', () => {
     it('should show email confirmation message when moderation is enabled', () => {
-      cy.task('enable:feature', 'moderation_comment')
+      cy.setFeatureFlags({ moderation_comment: true })
 
       Base.visit({ path: '/blog/post-fr-2', operationName: 'NavbarRightQuery' })
 
@@ -93,7 +95,7 @@ describe('Blog', () => {
 
   describe('Logged in user wants to comment a blogpost', () => {
     it('should allow logged in user to submit a comment', () => {
-      cy.task('disable:feature', 'moderation_comment')
+      cy.setFeatureFlags({ moderation_comment: false })
       cy.directLoginAs('user')
       Base.visit({ path: '/blog/post-fr-2', operationName: 'NavBarMenuQuery' })
 

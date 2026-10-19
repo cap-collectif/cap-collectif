@@ -1,12 +1,16 @@
 import { AdminCollectStepPage } from '~e2e/pages'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 describe('Collect Step back office', () => {
+  setupFeatureFlags({
+    display_pictures_in_depository_proposals_list: true,
+    votes_min: true,
+    unstable__new_create_project: true,
+    helpscout_beacon: false,
+  })
+
   beforeEach(() => {
     cy.task('db:restore')
-    cy.task('enable:feature', 'display_pictures_in_depository_proposals_list')
-    cy.task('enable:feature', 'votes_min')
-    cy.task('enable:feature', 'unstable__new_create_project')
-    cy.task('disable:feature', 'helpscout_beacon')
     cy.directLoginAs('super_admin')
   })
 

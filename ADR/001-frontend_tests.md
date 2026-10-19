@@ -99,14 +99,10 @@ yarn workspace cypress lint
 
 Il couvre `support`, `plugins`, `pages`, `e2e` et les règles ESLint spécifiques à Cypress.
 Les règles personnalisées signalent les attentes fixes (`cy.wait(<nombre>)`), vérifient les statuts
-de tests et exigent un `db:restore` dans les fichiers marqués `reference`. Les attentes fixes et le
-nettoyage des feature toggles restent des warnings pour permettre la migration progressive des tests
-existants. Pour les suites qui utilisent `setupFeatureFlags`, la règle `feature-flags-setup`
-vérifie la déclaration des exceptions et interdit les activations/désactivations
-individuelles dans les hooks de préparation/nettoyage. Les changements de flags
-réalisés comme actions du scénario restent autorisés et le nettoyage déterministe
-est reconnu par la règle historique. Les suites nouvelles ou migrées doivent utiliser
-ce mécanisme ; les suites historiques restent soumises au warning existant.
+de tests et exigent un `db:restore` dans les fichiers marqués `reference`. Les attentes fixes
+restent des warnings. La règle `feature-flags-setup` vérifie les déclarations des exceptions
+et interdit les changements de flags dans les hooks des specs : ils appartiennent aux
+préconditions déclaratives ou aux actions d'un scénario.
 
 Les règles de préparation des flags ont des tests de régression rapides, exécutables
 avec `node scripts/test-cypress-feature-flags-lint.cjs` depuis la racine.
@@ -162,8 +158,12 @@ cy.task('disable:feature', 'captcha')
 cy.task('enable:feature', 'calendar')
 ```
 
-Les suites migrées utilisent `setupFeatureFlags` (dans
-`cypress/support/setupFeatureFlags.ts`) avant leurs autres hooks :
+Toutes les suites reçoivent automatiquement le preset `EnvironmentPresets::TEST`
+avant chaque test et chaque retry, puis le retrouvent après chaque test, y compris
+après un échec. Les hooks partagés de `cypress/support/index.ts` effectuent ces
+écritures Redis ; MySQL et Elasticsearch restent restaurés séparément.
+
+Déclarer les exceptions de suite avec `setupFeatureFlags` avant les autres hooks :
 
 ```ts
 import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
@@ -174,19 +174,22 @@ context('Calendar feature', () => {
 })
 ```
 
-Avant chaque test et chaque retry, un seul appel à `reset:feature-flags` applique
-le preset `EnvironmentPresets::TEST` puis les exceptions déclarées. Un hook `after`
-rétablit le preset sans exceptions pour protéger les suites historiques et le local,
-y compris après un échec d'assertion. Il ne faut plus activer ces flags dans un
-`before` : la préparation suivante les écraserait. Les sous-contextes héritent de
-la préparation de leur parent et ne doivent pas rappeler le helper. Pour des
-exceptions différentes, utiliser des contextes frères, chacun avec son helper.
+Les sous-contextes peuvent déclarer leurs propres exceptions. Ils héritent des
+flags de leurs parents, les complètent ou les remplacent, sans reset supplémentaire.
+Les exceptions d'un contexte frère ne sont pas héritées. Le helper enregistre cette
+configuration dans un hook `before` ; il ne modifie pas Redis à ce stade. Un seul
+reset combiné prépare ensuite chaque test, même dans les suites imbriquées.
 
-La migration est progressive : seuls les contextes qui appellent ce helper ont
-cette garantie. Pour une nouvelle suite, privilégier cette préparation déclarative ;
-les appels `enable:feature` / `disable:feature` restent disponibles lorsqu'un test
-exerce lui-même un changement de flag pendant son scénario. Le lint historique de
-nettoyage ne prouve pas l'isolation des anciennes suites.
+Pour modifier des flags au cours d'un scénario, utiliser
+`cy.setFeatureFlags({ reporting: true, captcha: false })`. Les appels successifs
+conservent les exceptions déclarées précédemment dans le scénario et dans sa
+suite. Regrouper les flags d'une même action dans un seul objet pour une écriture
+atomique. Cette configuration explicite est la référence : si une mutation de
+l'application modifie elle-même un flag, déclarer aussi sa valeur dans les overrides
+avant un nouvel appel à `cy.setFeatureFlags` qui doit la conserver.
+Les commandes de compatibilité `cy.enableFeatureFlag` / `cy.disableFeatureFlag`
+et les tâches unitaires utilisent également ce reset Redis, sans démarrer Symfony.
+Ne pas changer les flags dans les hooks de préparation ou de nettoyage des specs.
 
 Les tâches Castor `local:qa:reset-feature-flags` et `ci:qa:reset-feature-flags`
 acceptent `--overrides='{"calendar":true,"captcha":false}'`. Elles utilisent le

@@ -4,9 +4,6 @@ describe('Public token routes', () => {
   beforeEach(() => {
     cy.task('db:restore')
   })
-  afterEach(() => {
-    cy.task('disable:feature', 'project_trash')
-  })
 
   it('accepts a valid unsubscribe token and rejects an invalid one', () => {
     cy.visit('/actionToken?token=user5unsubscribeToken')
@@ -42,7 +39,7 @@ describe('Public token routes', () => {
   })
 
   it('displays project trash pages for participation and consultation projects', () => {
-    cy.task('enable:feature', 'project_trash')
+    cy.setFeatureFlags({ project_trash: true })
     cy.directLoginAs('admin')
     cy.visit('/projects/debat-sur-le-cannabis/trashed')
     cy.get('#main').should('contain', 'Un contenu digne de la corbeille')

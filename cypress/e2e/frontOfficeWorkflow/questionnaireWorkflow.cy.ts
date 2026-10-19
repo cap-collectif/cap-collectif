@@ -1,17 +1,18 @@
 import { QuestionnairePage, ParticipationWorkflowPage } from '~e2e/pages'
+import { setupFeatureFlags } from '../../support/setupFeatureFlags'
 
 // Reconciliation contracts are covered in PHPUnit; see user-tests-audit.md.
 
 // Each suite has one scenario; retries must also start with restored data.
 
 describe('Questionnaire participation contracts: should add / edit / delete a reply in a questionnaire with requirements as anonymous', () => {
+  setupFeatureFlags({ turnstile_captcha: true })
+
   beforeEach(() => {
     cy.task('db:restore')
-    cy.task('enable:feature', 'turnstile_captcha')
   })
 
   after(() => {
-    cy.task('disable:feature', 'turnstile_captcha')
     cy.task('db:restore')
   })
 
@@ -96,13 +97,13 @@ describe('Questionnaire participation contracts: should add / edit / delete a re
 })
 
 describe('Questionnaire participation contracts: should reply a questionnaire with requirements by logging in with email/password through the workflow', () => {
+  setupFeatureFlags({ turnstile_captcha: true })
+
   beforeEach(() => {
     cy.task('db:restore')
-    cy.task('enable:feature', 'turnstile_captcha')
   })
 
   after(() => {
-    cy.task('disable:feature', 'turnstile_captcha')
     cy.task('db:restore')
   })
 
@@ -167,13 +168,13 @@ describe('Questionnaire participation contracts: should reply a questionnaire wi
 })
 
 describe('Questionnaire participation contracts: should reconcile replies as participant when replying twice with the same email and multiple replies are allowed', () => {
+  setupFeatureFlags({ turnstile_captcha: true })
+
   beforeEach(() => {
     cy.task('db:restore')
-    cy.task('enable:feature', 'turnstile_captcha')
   })
 
   after(() => {
-    cy.task('disable:feature', 'turnstile_captcha')
     cy.task('db:restore')
   })
 

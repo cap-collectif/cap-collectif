@@ -29,15 +29,9 @@ describe('Proposal search and filters', () => {
   beforeEach(() => {
     cy.task('db:restore')
   })
-  afterEach(() => {
-    cy.task('disable:feature', 'districts')
-    cy.task('disable:feature', 'themes')
-    cy.task('disable:feature', 'user_type')
-  })
 
   it('initializes proposal filters from URL parameters', () => {
-    cy.task('enable:feature', 'user_type')
-    cy.task('enable:feature', 'districts')
+    cy.setFeatureFlags({ user_type: true, districts: true })
     cy.directLoginAs('admin')
     ProposalPage.visitCollectStepPage({
       project: 'budget-participatif-idf',
@@ -52,9 +46,7 @@ describe('Proposal search and filters', () => {
   })
 
   it('filters collect-step proposals by theme, status and contributor type', () => {
-    cy.task('enable:feature', 'themes')
-    cy.task('enable:feature', 'districts')
-    cy.task('enable:feature', 'user_type')
+    cy.setFeatureFlags({ themes: true, districts: true, user_type: true })
     ProposalPage.visitCollectStepPage(collectStep)
 
     proposalCards().should('have.length', 8)
@@ -196,7 +188,7 @@ describe('Proposal search and filters', () => {
   })
 
   it('combines proposal filters, search and sorting', () => {
-    cy.task('enable:feature', 'themes')
+    cy.setFeatureFlags({ themes: true })
     cy.directLoginAs('user')
     ProposalPage.visitCollectStepPage(collectStep)
 
@@ -213,7 +205,7 @@ describe('Proposal search and filters', () => {
   })
 
   it('filters and sorts selection-step proposals', () => {
-    cy.task('enable:feature', 'themes')
+    cy.setFeatureFlags({ themes: true })
     ProposalPage.visitSelectionStepPage({
       project: 'budget-participatif-rennes',
       step: 'selection',

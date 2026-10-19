@@ -12,7 +12,7 @@ describe('Homepage', () => {
   })
 
   it('should display limited projects and a "more projects" button', () => {
-    cy.task('enable:feature', 'themes')
+    cy.setFeatureFlags({ themes: true })
     Base.visitHomepage()
 
     cy.get('.cap-project-card').should('have.length', 4)
@@ -21,7 +21,7 @@ describe('Homepage', () => {
 
   it('should display links when features are enabled', () => {
     cy.directLoginAs('super_admin')
-    cy.task('disable:feature', 'developer_documentation')
+    cy.setFeatureFlags({ developer_documentation: false })
 
     Base.visit({
       path: '/admin/features/developer_documentation/switch',
@@ -35,7 +35,7 @@ describe('Homepage', () => {
 
   it("shouldn't display links when features are disabled", () => {
     cy.directLoginAs('super_admin')
-    cy.task('enable:feature', 'developer_documentation')
+    cy.setFeatureFlags({ developer_documentation: true })
 
     Base.visit({
       path: '/admin/features/developer_documentation/switch',

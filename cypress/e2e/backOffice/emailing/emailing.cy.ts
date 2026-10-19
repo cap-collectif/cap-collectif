@@ -1,10 +1,11 @@
 import { EmailingCampaignPage } from '~e2e-pages/index'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 describe('Emailing Campaign - Create Emailing BO', () => {
+  setupFeatureFlags({ emailing: true, emailing_parameters: true })
+
   beforeEach(() => {
     cy.task('db:restore')
-    cy.task('enable:feature', 'emailing')
-    cy.task('enable:feature', 'emailing_parameters')
     cy.directLoginAs('super_admin')
   })
   it('should super admin want to create a mailing campaign', () => {

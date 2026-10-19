@@ -1,4 +1,5 @@
 import { EventFormPage } from '../../../pages/index'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 const approvedEventId = 'RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWQ='
 const awaitingEventId = 'RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXdhaXRpbmc='
@@ -10,11 +11,10 @@ const eventJauge = 42
 const eventModerationReason = 'I am offended on peut plus rien dire rhalala'
 
 describe('Event Admin Page', () => {
+  setupFeatureFlags({ multilangue: true })
+
   beforeEach(() => {
     cy.task('db:restore')
-  })
-  beforeEach(() => {
-    cy.task('enable:feature', 'multilangue')
   })
   it('creates an event', () => {
     cy.directLoginAs('admin')
@@ -90,7 +90,7 @@ describe('Event Admin Page', () => {
   })
   it('can moderate an event as a simple admin', () => {
     cy.directLoginAs('admin')
-    cy.task('enable:feature', 'allow_users_to_propose_events')
+    cy.setFeatureFlags({ allow_users_to_propose_events: true })
     cy.interceptGraphQLOperation({ operationName: 'EventFormWrapperQuery' })
     cy.interceptGraphQLOperation({ operationName: 'ReviewEventMutation' })
     EventFormPage.visitEventWithId(awaitingEventId)
@@ -112,7 +112,7 @@ describe('Event Admin Page', () => {
   })
   it('cannot edit an already moderated event as a simple admin', () => {
     cy.directLoginAs('admin')
-    cy.task('enable:feature', 'allow_users_to_propose_events')
+    cy.setFeatureFlags({ allow_users_to_propose_events: true })
     cy.interceptGraphQLOperation({ operationName: 'EventFormWrapperQuery' })
     EventFormPage.visitEventWithId(approvedEventId)
     cy.wait('@EventFormWrapperQuery', { timeout: 20000 })
@@ -123,7 +123,7 @@ describe('Event Admin Page', () => {
   })
   it('can edit an already moderated event as a superAdmin', () => {
     cy.directLoginAs('super_admin')
-    cy.task('enable:feature', 'allow_users_to_propose_events')
+    cy.setFeatureFlags({ allow_users_to_propose_events: true })
     cy.interceptGraphQLOperation({ operationName: 'EventFormWrapperQuery' })
     EventFormPage.visitEventWithId(approvedEventId)
     cy.wait('@EventFormWrapperQuery', { timeout: 20000 })

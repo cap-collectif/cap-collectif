@@ -1,17 +1,18 @@
 import { ParticipationWorkflowPage, ProposalPage, ProposalVoteListPage } from '~e2e/pages'
+import { setupFeatureFlags } from '../../support/setupFeatureFlags'
 
 // Algorithmic vote matrices are covered in PHPUnit; see user-tests-audit.md.
 
 // Each suite has one scenario; retries must also start with restored data.
 
 describe('Selection vote participation contracts: as participant', () => {
+  setupFeatureFlags({ turnstile_captcha: true })
+
   beforeEach(() => {
     cy.task('db:restore')
-    cy.task('enable:feature', 'turnstile_captcha')
   })
 
   after(() => {
-    cy.task('disable:feature', 'turnstile_captcha')
     cy.task('db:restore')
   })
 
@@ -83,13 +84,13 @@ describe('Selection vote participation contracts: as participant', () => {
 })
 
 describe('Selection vote participation contracts: as logged in user through the workflow using login/password', () => {
+  setupFeatureFlags({ turnstile_captcha: true })
+
   beforeEach(() => {
     cy.task('db:restore')
-    cy.task('enable:feature', 'turnstile_captcha')
   })
 
   after(() => {
-    cy.task('disable:feature', 'turnstile_captcha')
     cy.task('db:restore')
   })
 
@@ -156,13 +157,13 @@ describe('Selection vote participation contracts: as logged in user through the 
 })
 
 describe('Selection vote participation contracts: merges participant and user ballots into four distinct votes', () => {
+  setupFeatureFlags({ turnstile_captcha: true })
+
   beforeEach(() => {
     cy.task('db:restore')
-    cy.task('enable:feature', 'turnstile_captcha')
   })
 
   after(() => {
-    cy.task('disable:feature', 'turnstile_captcha')
     cy.task('db:restore')
   })
 

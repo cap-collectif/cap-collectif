@@ -1,19 +1,14 @@
 import { ProposalPage } from '~e2e-pages/index'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 context('Proposal Page', () => {
+  setupFeatureFlags({ new_vote_step: false })
+
   beforeEach(() => {
     cy.task('db:restore')
-    cy.task('disable:feature', 'new_vote_step')
   })
 
   describe('Project Page FO', () => {
-    afterEach(() => {
-      cy.task('disable:feature', 'blog')
-      cy.task('disable:feature', 'captcha')
-      cy.task('disable:feature', 'districts')
-      cy.task('disable:feature', 'reporting')
-      cy.task('disable:feature', 'share_buttons')
-    })
     it('should see votes', () => {
       cy.directLoginAs('project_owner')
       ProposalPage.visitSelectionStepWithOpenedVoteAndDisplayed()
@@ -154,7 +149,7 @@ context('Proposal Page', () => {
       cy.contains('.comments__section', 'Commentaire modifie par Cypress').should('be.visible')
     })
     it('allows a user to report a proposal', () => {
-      cy.task('enable:feature', 'reporting')
+      cy.setFeatureFlags({ reporting: true })
       cy.directLoginAs('admin')
       cy.interceptGraphQLOperation({ operationName: 'ReportMutation' })
       ProposalPage.visitProposalPage()
@@ -167,7 +162,7 @@ context('Proposal Page', () => {
       cy.contains('.toasts-container--top div', 'alert.success.report.proposal').should('be.visible')
     })
     it('opens the share link modal for anonymous visitors', () => {
-      cy.task('enable:feature', 'share_buttons')
+      cy.setFeatureFlags({ share_buttons: true })
       cy.clearCookies()
       cy.clearLocalStorage()
       ProposalPage.visitProposalPage()
@@ -179,7 +174,7 @@ context('Proposal Page', () => {
     })
     it('should allow the author of a proposal to update it', () => {
       cy.interceptGraphQLOperation({ operationName: 'ProposalPageQuery' })
-      cy.task('enable:feature', 'districts')
+      cy.setFeatureFlags({ districts: true })
       cy.directLoginAs('user')
       cy.interceptGraphQLOperation({ operationName: 'ProposalPageQuery' })
       cy.interceptGraphQLOperation({ operationName: 'ChangeProposalContentMutation' })
@@ -220,7 +215,7 @@ context('Proposal Page', () => {
       cy.get('#proposal-form').should('exist')
     })
     it('allows an anonymous visitor to comment a proposal', () => {
-      cy.task('disable:feature', 'moderation_comment')
+      cy.setFeatureFlags({ moderation_comment: false })
       cy.clearCookies()
       cy.clearLocalStorage()
       ProposalPage.visitProposalPage()
@@ -236,7 +231,7 @@ context('Proposal Page', () => {
       cy.get('#CommentListViewPaginated').should('contain', 'Un commentaire Cypress')
     })
     it('allows a logged-in user to create a proposal with its required information', () => {
-      cy.task('enable:feature', 'districts')
+      cy.setFeatureFlags({ districts: true })
       cy.directLoginAs('user')
       cy.interceptGraphQLOperation({ operationName: 'CreateProposalMutation' })
       cy.intercept('POST', '**/files').as('uploadDocument')
@@ -271,7 +266,7 @@ context('Proposal Page', () => {
       cy.get('#proposal-page-tabs-pane-followers').should('contain', 'user')
     })
     it('shows a validation error when a required response is missing', () => {
-      cy.task('enable:feature', 'districts')
+      cy.setFeatureFlags({ districts: true })
       cy.directLoginAs('user')
       ProposalPage.visitCollectStepPage({
         project: 'budget-participatif-rennes',
@@ -312,6 +307,8 @@ context('Proposal Page', () => {
       cy.get('.proposal-preview').should('have.length', 7)
     })
     describe('proposal news', () => {
+      setupFeatureFlags({ blog: true })
+
       const proposalNewsPath = {
         project: 'budget-participatif-idf',
         step: 'collecte-des-projets-idf-privee',
@@ -335,7 +332,6 @@ context('Proposal Page', () => {
             return false
           }
         })
-        cy.task('enable:feature', 'blog')
       })
 
       it('allows an author to create news for their proposal', () => {
@@ -381,7 +377,7 @@ context('Proposal Page', () => {
       })
     })
     it('is possible to contact the author of a proposal', () => {
-      cy.task('enable:feature', 'captcha')
+      cy.setFeatureFlags({ captcha: true })
       cy.interceptGraphQLOperation({ operationName: 'ContactProposalAuthorMutation' })
       ProposalPage.visitContactableProposalPage()
       cy.get('#ProposalContactModal-show-button').click()
@@ -396,7 +392,7 @@ context('Proposal Page', () => {
     })
   })
   it('should be possible to see every private proposal as a member of an organization', () => {
-    cy.task('disable:feature', 'new_vote_step')
+    cy.setFeatureFlags({ new_vote_step: false })
     cy.directLoginAs('christophe')
     ProposalPage.visitCollectStepPage({
       project: 'budget-participatif-dorganisation',
@@ -410,7 +406,7 @@ context('Proposal Page', () => {
       .should('contain', 'Proposition de Valérie')
   })
   it('should be possible to see only my proposal as not a member of an organization', () => {
-    cy.task('disable:feature', 'new_vote_step')
+    cy.setFeatureFlags({ new_vote_step: false })
     cy.directLoginAs('user')
     ProposalPage.visitCollectStepPage({
       project: 'budget-participatif-dorganisation',

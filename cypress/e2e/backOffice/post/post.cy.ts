@@ -1,4 +1,5 @@
 import { PostFormPage } from '../../../pages/index'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 export const englishBody = 'I love cats!'
 
@@ -8,9 +9,8 @@ const postContent = 'Ouragan-Lion'
 const linkedProposal = 'Proposition non archivé'
 
 describe('CRUD', () => {
-  before(() => {
-    cy.task('enable:feature', 'multilangue')
-  })
+  setupFeatureFlags({ multilangue: true })
+
   beforeEach(() => {
     cy.task('db:restore')
   })

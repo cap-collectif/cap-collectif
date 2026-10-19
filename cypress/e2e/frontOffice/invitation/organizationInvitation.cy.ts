@@ -1,9 +1,9 @@
 import { Base } from '~e2e-pages/index'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 describe('Organization Invitation Redirects', () => {
-  before(() => {
-    cy.task('enable:feature', 'organizations')
-  })
+  setupFeatureFlags({ organizations: true })
+
   beforeEach(() => {
     cy.task('db:restore')
   })

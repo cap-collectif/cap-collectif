@@ -147,7 +147,7 @@ describe('Arguments - CRUD & Permissions', () => {
     })
 
     it('should report an argument', () => {
-      cy.task('enable:feature', 'reporting')
+      cy.setFeatureFlags({ reporting: true })
       OpinionPage.visitVersionPage()
 
       cy.get('.argument__btn--report').first().click({ force: true })

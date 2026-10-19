@@ -1,15 +1,11 @@
 import { Base } from '~e2e-pages/index'
+import { setupFeatureFlags } from '../../support/setupFeatureFlags'
 
 describe('Shield Mode', () => {
+  setupFeatureFlags({ shield_mode: true, registration: false })
+
   before(() => {
     cy.task('db:restore')
-    cy.task('enable:feature', 'shield_mode')
-    cy.task('disable:feature', 'registration')
-  })
-
-  after(() => {
-    cy.task('disable:feature', 'shield_mode')
-    cy.task('enable:feature', 'registration')
   })
 
   // -------------------- Anonymous user authentication --------------------
@@ -43,7 +39,7 @@ describe('Shield Mode', () => {
 
   // -------------------- Registration with shield enabled --------------------
   it('should see shield and registration button', () => {
-    cy.task('enable:feature', 'registration')
+    cy.setFeatureFlags({ registration: true })
     Base.visitHomepage({ operationName: 'ShieldPageQuery' })
 
     cy.get('#shield-mode').should('be.visible')

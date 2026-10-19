@@ -1,10 +1,12 @@
 import { AdminUserListPage, AdminUserPage } from '~e2e-pages/index'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 context('Check user profile as admin and super-admin', () => {
   describe('User edit profile as super-admin profile account', () => {
+    setupFeatureFlags({ profiles: true })
+
     beforeEach(() => {
       cy.task('db:restore')
-      cy.task('enable:feature', 'profiles')
       cy.directLoginAs('super_admin')
       AdminUserPage.visitProfile('userMaxime')
     })
@@ -73,9 +75,10 @@ context('Check user profile as admin and super-admin', () => {
   })
 
   describe('User edit profile as Admin profile account', () => {
+    setupFeatureFlags({ profiles: true })
+
     beforeEach(() => {
       cy.task('db:restore')
-      cy.task('enable:feature', 'profiles')
       cy.directLoginAs('admin')
     })
 

@@ -1,7 +1,7 @@
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 describe('Email confirmation', () => {
-  before(() => {
-    cy.task('enable:feature', 'registration')
-  })
+  setupFeatureFlags({ registration: true })
+
   beforeEach(() => {
     cy.task('db:restore')
   })

@@ -1,7 +1,9 @@
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 describe('Member settings back office', () => {
+  setupFeatureFlags({ members_list: true })
+
   beforeEach(() => {
     cy.task('db:restore')
-    cy.task('enable:feature', 'members_list')
   })
 
   it('views and edits member settings as admin', () => {
@@ -34,6 +36,8 @@ describe('Member settings back office', () => {
     cy.interceptGraphQLOperation({ operationName: 'UpdateMemberSettingMutation' })
     cy.get('[id$="-value"]').filter(':visible').clear().type('a'.repeat(161), { delay: 0 })
     cy.contains('button', 'global.save').filter(':visible').click()
-    cy.wait('@UpdateMemberSettingMutation').its('response.body.data.updateMemberSetting.errorCode').should('eq', 'INVALID_VALUE')
+    cy.wait('@UpdateMemberSettingMutation')
+      .its('response.body.data.updateMemberSetting.errorCode')
+      .should('eq', 'INVALID_VALUE')
   })
 })

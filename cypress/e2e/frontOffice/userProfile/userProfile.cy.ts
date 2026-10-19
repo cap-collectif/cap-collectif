@@ -1,8 +1,9 @@
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 describe('Anonymous wants to see the profile of a user', () => {
+  setupFeatureFlags({ profiles: true, multilangue: false })
+
   beforeEach(() => {
     cy.task('db:restore')
-    cy.task('enable:feature', 'profiles')
-    cy.task('disable:feature', 'multilangue')
 
     // TODO: investigate why when logged in as user, the #profile-source section is not displayed
     // cy.directLoginAs('user')

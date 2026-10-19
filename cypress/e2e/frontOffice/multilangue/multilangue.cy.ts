@@ -1,8 +1,11 @@
 import { Base, Multilangue } from '~e2e-pages/index'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 // todo: multilangue is currently broken. The tests can't properly be written until it's fixed
 // skipping all failing tests for now
 describe('Multilangue', () => {
+  setupFeatureFlags({ multilangue: true })
+
   const acceptCookiesIfBannerIsVisible = () => {
     cy.get('body').then($body => {
       if ($body.find('#cookie-consent').length) {
@@ -13,11 +16,10 @@ describe('Multilangue', () => {
 
   beforeEach(() => {
     cy.task('db:restore')
-    cy.task('enable:feature', 'multilangue')
   })
 
   it('throws 404 if user visits the english page while multilangue feature is not activated', () => {
-    cy.task('disable:feature', 'multilangue')
+    cy.setFeatureFlags({ multilangue: false })
     cy.visit('/en/')
     cy.contains('error.404.title').should('be.visible')
   })
@@ -25,7 +27,7 @@ describe('Multilangue', () => {
   // TODO - since refactor to nextjs, the behavior has changed and the test should have been failing all along
   // needs to be reworked when the multilangue projects page is fixed
   it('visits the english version of the platform', () => {
-    cy.task('enable:feature', 'multilangue')
+    cy.setFeatureFlags({ multilangue: true })
     cy.visit('/en/projects')
     cy.url().should('include', '/en/projects')
     cy.get('error.404.title').should('not.exist')
@@ -34,7 +36,7 @@ describe('Multilangue', () => {
 
   it.skip('visits the english version of the platform and keeps the language setting accross pages', () => {
     cy.interceptGraphQLOperation({ operationName: 'ProjectsListQuery' })
-    cy.task('enable:feature', 'multilangue')
+    cy.setFeatureFlags({ multilangue: true })
     cy.visit('/en')
     Multilangue.visitProjectsPage()
     cy.wait('@ProjectsListQuery')
@@ -44,7 +46,7 @@ describe('Multilangue', () => {
   })
 
   it.skip('visits the english version of the platform then do some admin stuff and keep language setting', () => {
-    cy.task('enable:feature', 'multilangue')
+    cy.setFeatureFlags({ multilangue: true })
     cy.directLoginAs('admin')
     cy.visit('/en')
     cy.visit('/admin')
@@ -53,20 +55,20 @@ describe('Multilangue', () => {
   })
 
   it.skip('visits the english version of the platform but "multilangue" is not activated', () => {
-    cy.task('disable:feature', 'multilangue')
+    cy.setFeatureFlags({ multilangue: false })
     cy.visit('/en/projects')
     cy.getCookie('locale').should('have.property', 'value', 'fr-FR')
   })
 
   it.skip('visits the english version of the platform with "multilangue" activated', () => {
-    cy.task('enable:feature', 'multilangue')
+    cy.setFeatureFlags({ multilangue: true })
     cy.visit('/en/projects')
     cy.url().should('include', '/en/projects')
     cy.getCookie('locale').should('have.property', 'value', 'en-GB')
   })
 
   it.skip('visits the english version of the platform with platform default set as "fr-FR"', () => {
-    cy.task('enable:feature', 'multilangue')
+    cy.setFeatureFlags({ multilangue: true })
     cy.setCookie('locale', 'fr-FR')
     cy.visit('/')
     cy.getCookie('locale').should('have.property', 'value', 'fr-FR')
@@ -81,7 +83,7 @@ describe('Multilangue', () => {
   })
 
   it.skip('visits the english version of the platform with platform default set as "en-GB"', () => {
-    cy.task('enable:feature', 'multilangue')
+    cy.setFeatureFlags({ multilangue: true })
     cy.setCookie('locale', 'en-GB')
     cy.visit('/')
     cy.getCookie('locale').should('have.property', 'value', 'en-GB')
@@ -155,7 +157,7 @@ describe('Multilangue', () => {
   })
 
   it('should allow a logged-in user to change the locale from the profile page', () => {
-    cy.task('enable:feature', 'profiles')
+    cy.setFeatureFlags({ profiles: true })
     Base.visitHomepage()
     cy.setCookie('hasFullConsent', 'true')
     cy.directLoginAs('user')

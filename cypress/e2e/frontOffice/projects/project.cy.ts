@@ -1,11 +1,9 @@
 import { Base } from '~e2e-pages/index'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 describe('Project', () => {
   describe('when filtering projects with theme page', () => {
-    beforeEach(() => {
-      cy.task('enable:feature', 'themes')
-      cy.task('enable:feature', 'projects_form')
-    })
+    setupFeatureFlags({ themes: true, projects_form: true })
 
     it('displays filtered project cards', () => {
       Base.visit({ path: '/themes/immobilier', operationName: 'ProjectsListQuery' })
@@ -18,9 +16,7 @@ describe('Project', () => {
   })
 
   describe('when viewing presentation step', () => {
-    beforeEach(() => {
-      cy.task('enable:feature', 'blog')
-    })
+    setupFeatureFlags({ blog: true })
 
     it('displays correct number of news items', () => {
       Base.visit({
@@ -32,9 +28,7 @@ describe('Project', () => {
   })
 
   describe('when viewing project posts menu', () => {
-    beforeEach(() => {
-      cy.task('enable:feature', 'blog')
-    })
+    setupFeatureFlags({ blog: true })
 
     it('displays correct number of posts', () => {
       Base.visit({
@@ -159,9 +153,8 @@ describe('Project', () => {
   })
 
   describe('when super admin accesses private projects', () => {
-    before(() => {
-      cy.task('enable:feature', 'projects_form')
-    })
+    setupFeatureFlags({ projects_form: true })
+
     beforeEach(() => {
       cy.directLoginAs('super_admin')
     })
@@ -222,7 +215,7 @@ describe('Project', () => {
       cy.directLoginAs('admin')
     })
     it('displays project and allows editing', () => {
-      cy.task('enable:feature', 'unstable__new_create_project')
+      cy.setFeatureFlags({ unstable__new_create_project: true })
       Base.visit({
         path: '/project/project-pour-la-creation-de-la-capcobeer-visible-par-admin-seulement/collect/collecte-des-propositions-pour-la-capcobeer',
         operationName: 'ProposalListViewRefetchQuery',
@@ -236,9 +229,7 @@ describe('Project', () => {
   })
 
   describe('when pierre accesses restricted project', () => {
-    before(() => {
-      cy.task('enable:feature', 'projects_form')
-    })
+    setupFeatureFlags({ projects_form: true })
 
     it('can view project and restricted access modal', () => {
       cy.directLoginAs('pierre')
@@ -264,9 +255,7 @@ describe('Project', () => {
   })
 
   describe('when viewing project trash', () => {
-    before(() => {
-      cy.task('enable:feature', 'project_trash')
-    })
+    setupFeatureFlags({ project_trash: true })
 
     it('displays trashed opinions', () => {
       cy.directLoginAs('admin')
@@ -279,9 +268,10 @@ describe('Project', () => {
   })
 
   describe('when admin deletes a proposal', () => {
+    setupFeatureFlags({ project_trash: true })
+
     beforeEach(() => {
       cy.task('db:restore')
-      cy.task('enable:feature', 'project_trash')
       cy.directLoginAs('admin')
     })
 
@@ -317,10 +307,11 @@ describe('Project', () => {
   })
 
   describe('when evaluating proposal analysis immediately', () => {
+    setupFeatureFlags({ analytics_page: true })
+
     beforeEach(() => {
       cy.task('db:restore')
       cy.directLoginAs('spyl')
-      cy.task('enable:feature', 'analytics_page')
     })
 
     it('allows decision and displays official answer', () => {

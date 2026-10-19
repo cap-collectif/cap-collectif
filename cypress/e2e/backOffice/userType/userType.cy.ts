@@ -1,7 +1,7 @@
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 describe('User profile types page', () => {
-  before(() => {
-    cy.task('enable:feature', 'user_type')
-  })
+  setupFeatureFlags({ user_type: true })
+
   beforeEach(() => {
     cy.task('db:restore')
   })

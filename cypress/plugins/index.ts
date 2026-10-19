@@ -24,18 +24,6 @@ const env = process.env.CI ? 'ci' : 'local'
 const castor = (group: string, task: string) => `castor ${env}:${group}:${task}`
 const confirm = ' --confirm'
 
-// `capco:toggle:enable/disable` picks its Redis namespace from the Symfony kernel env passed via
-// `--env`. Cypress always runs against `capco.test` (see `baseUrl` in cypress.config.ts), and
-// `infrastructure/services/local/nginx/nginx.conf` forces `$symfonyEnv test` for that host (only
-// `capco.dev` resolves to `dev`) — so every HTTP request Cypress triggers (page load, GraphQL
-// query/mutation) is actually served under the `test` Symfony env, both locally and in CI, which
-// resolves the `testfeature_toggle` Redis namespace (`config/packages/test/quandidate_toggle.yaml`).
-// Toggling `dev` locally (as this used to do) writes a key the running app never reads: the flag
-// silently never appears enabled to any HTTP request, even though `docker exec ... bin/console
-// capco:toggle:list` reports it as active (that command inherits the container's own default env,
-// `dev`, which is irrelevant to how nginx routes a `capco.test` request).
-const toggleEnvironment = 'test'
-
 const logRestoreTimings = (output: string) => {
   output
     .split(/\r?\n/)
@@ -93,6 +81,13 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
   for (const key of ['SYMFONY_OPENID_TEST_USERNAME', 'SYMFONY_OPENID_TEST_PASSWORD']) {
     const value = process.env[key] ?? testEnvironment[key] ?? localEnvironment[key] ?? defaultEnvironment[key]
     if (value) cypressEnvironment[key] = value
+  }
+
+  let featureFlagOverrides: Record<string, boolean> = {}
+  const prepareFeatureFlags = async (overrides: Record<string, boolean>) => {
+    await execFile('castor', [`${env}:qa:reset-feature-flags`, `--overrides=${JSON.stringify(overrides)}`])
+    featureFlagOverrides = { ...overrides }
+    return null
   }
 
   on('task', {
@@ -181,27 +176,17 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
     },
     'reset:feature-flags': async (overrides: Record<string, boolean> = {}) => {
       console.time('reset_feature_flags')
-      await execFile('castor', [`${env}:qa:reset-feature-flags`, `--overrides=${JSON.stringify(overrides)}`])
+      await prepareFeatureFlags(overrides)
       console.timeEnd('reset_feature_flags')
       return null
     },
+    'set:feature-flags': async (overrides: Record<string, boolean>) =>
+      prepareFeatureFlags({ ...featureFlagOverrides, ...overrides }),
     'enable:feature': async (name: string) => {
-      console.log(`Enabling feature flag "${name}"...`)
-      console.time('enable_feature')
-
-      await execFile('castor', [`${env}:app:toggle-enable`, name, `--environment=${toggleEnvironment}`])
-      console.log(`Successfully enabled "${name}"`)
-      console.timeEnd('enable_feature')
-      return Promise.resolve(null)
+      return prepareFeatureFlags({ ...featureFlagOverrides, [name]: true })
     },
     'disable:feature': async (name: string) => {
-      console.log(`Disabling feature flag "${name}"...`)
-      console.time('disable_feature')
-
-      await execFile('castor', [`${env}:app:toggle-disable`, name, `--environment=${toggleEnvironment}`])
-      console.log(`Successfully disabled "${name}"`)
-      console.timeEnd('enable_disable')
-      return Promise.resolve(null)
+      return prepareFeatureFlags({ ...featureFlagOverrides, [name]: false })
     },
     'run:sql': async (sql: string) => {
       console.log(`${castor('app', 'console')} --command-name=doctrine:query:sql --environment=test -- <redacted>`)

@@ -11,14 +11,8 @@ describe('User profile', () => {
     cy.directLoginAs('user')
   })
 
-  afterEach(() => {
-    cy.task('disable:feature', 'profiles')
-    cy.task('disable:feature', 'user_type')
-  })
-
   it('updates the public profile when profiles and user types are enabled', () => {
-    cy.task('enable:feature', 'profiles')
-    cy.task('enable:feature', 'user_type')
+    cy.setFeatureFlags({ profiles: true, user_type: true })
 
     visitProfile()
     cy.get('#profile-form-username').clear().type('user3')
@@ -34,7 +28,7 @@ describe('User profile', () => {
   })
 
   it('updates the username when profiles are disabled and validates a required username', () => {
-    cy.task('disable:feature', 'profiles')
+    cy.setFeatureFlags({ profiles: false })
 
     visitProfile()
     cy.get('#profile-form-username').clear().blur()
@@ -49,8 +43,7 @@ describe('User profile', () => {
   })
 
   it('updates the public profile when user types are disabled', () => {
-    cy.task('enable:feature', 'profiles')
-    cy.task('disable:feature', 'user_type')
+    cy.setFeatureFlags({ profiles: true, user_type: false })
 
     visitProfile()
     cy.get('#profile-form-userType').should('not.exist')

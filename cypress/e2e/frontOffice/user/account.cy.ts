@@ -3,13 +3,6 @@ describe('User account', () => {
     cy.task('db:restore')
   })
 
-  afterEach(() => {
-    cy.task('disable:feature', 'members_list')
-    cy.task('disable:feature', 'user_type')
-    cy.task('disable:feature', 'registration')
-    cy.task('disable:feature', 'profiles')
-  })
-
   it('requires a user without a username to complete their profile', () => {
     cy.interceptGraphQLOperation({ operationName: 'UpdateUsernameMutation' })
     cy.directLoginAs('no_name')
@@ -35,15 +28,14 @@ describe('User account', () => {
   })
 
   it('shows the members list when the feature is enabled', () => {
-    cy.task('enable:feature', 'members_list')
-    cy.task('enable:feature', 'user_type')
+    cy.setFeatureFlags({ members_list: true, user_type: true })
     cy.visit('/members')
 
     cy.get('.media--user-thumbnail').should('have.length', 16)
   })
 
   it('disables notifications from an email token', () => {
-    cy.task('enable:feature', 'profiles')
+    cy.setFeatureFlags({ profiles: true })
     cy.directLoginAs('user')
     cy.visit('/profile/notifications/disable/user-unsubscribe-token')
 
@@ -57,8 +49,7 @@ describe('User account', () => {
   })
 
   it('resets a confirmed account password', () => {
-    cy.task('enable:feature', 'registration')
-    cy.task('enable:feature', 'profiles')
+    cy.setFeatureFlags({ registration: true, profiles: true })
     cy.visit('/account/email_confirmation/check-my-email-token-with-more-characters-1')
 
     cy.url().should('include', '/resetting/reset/reset-my-password-token')

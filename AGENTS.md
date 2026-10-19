@@ -135,11 +135,12 @@ available. Do not copy their implementation into new tests, even when the test s
 
 ### Deterministic Cypress feature flags
 
-For new or migrated suites, call `setupFeatureFlags` from
-`cypress/support/setupFeatureFlags.ts` before other hooks. It applies the test
-preset plus explicit boolean overrides before each test/retry and restores the
-preset after the suite. Do not configure those flags in `before`, where the next
-reset would erase them. Migration is opt-in; legacy suites are not reset globally.
+All Cypress tests reset the test feature flag preset before each test/retry and
+after each test. Declare suite overrides with `setupFeatureFlags` from
+`cypress/support/setupFeatureFlags.ts`, before other hooks. Nested suites inherit
+parent overrides and may override individual flags without an extra reset.
+Use `cy.setFeatureFlags` for changes inside a scenario; it merges with the current
+explicit overrides and writes directly to Redis. Do not configure flags in hooks.
 See `ADR/001-frontend_tests.md` for the contract and the Castor tasks.
 
 ### Yarn Version

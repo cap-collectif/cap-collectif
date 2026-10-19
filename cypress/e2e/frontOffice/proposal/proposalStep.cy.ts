@@ -1,17 +1,15 @@
 import { ProposalStepPage } from '~e2e-pages/index'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 /**
  * @cypress-status reference
  * @cypress-reason Canonical example for authenticated visibility and filter tests synchronized with GraphQL queries.
  */
 context('Proposal Step Page', () => {
+  setupFeatureFlags({ new_vote_step: false })
+
   before(() => {
     cy.task('db:restore')
-    cy.task('disable:feature', 'new_vote_step')
-  })
-
-  after(() => {
-    cy.task('disable:feature', 'new_vote_step')
   })
 
   describe('Project Step Page FO', () => {

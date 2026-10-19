@@ -1,9 +1,6 @@
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 describe('Contact page', () => {
-  const disableFeatureForDev = (feature: string) =>
-    cy.exec(`castor local:app:toggle-disable ${feature} --environment=dev`, {
-      failOnNonZeroExit: true,
-      log: false,
-    })
+  setupFeatureFlags({ captcha: false, shield_mode: false })
 
   const getFirstContactForm = () => cy.get('form[id^="contact-form-"]').first()
 
@@ -18,10 +15,6 @@ describe('Contact page', () => {
 
   beforeEach(() => {
     cy.task('db:restore')
-    cy.task('disable:feature', 'captcha')
-    cy.task('disable:feature', 'shield_mode')
-    disableFeatureForDev('captcha')
-    disableFeatureForDev('shield_mode')
     cy.visit('/contact')
     cy.get('[id^="accordion-button"]', { timeout: 10000 })
   })

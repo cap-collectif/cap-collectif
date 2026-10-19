@@ -1,10 +1,11 @@
 import { AdminQuestionnaireStepPage } from '~e2e/pages'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 describe('Questionnaire Step back office', () => {
+  setupFeatureFlags({ unstable__new_create_project: true, helpscout_beacon: false })
+
   beforeEach(() => {
     cy.task('db:restore')
-    cy.task('enable:feature', 'unstable__new_create_project')
-    cy.task('disable:feature', 'helpscout_beacon')
     cy.directLoginAs('super_admin')
   })
 

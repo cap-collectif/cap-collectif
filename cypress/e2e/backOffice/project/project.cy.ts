@@ -1,11 +1,13 @@
 import { AdminProjectPage, Base } from '~e2e-pages/index'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 context('Project', () => {
   describe('Project BO', () => {
+    setupFeatureFlags({ unstable__new_create_project: false })
+
     beforeEach(() => {
       cy.task('db:restore')
       cy.directLoginAs('admin')
-      cy.task('disable:feature', 'unstable__new_create_project')
     })
 
     it('should enable secret ballot on collect', () => {
@@ -155,6 +157,8 @@ context('Project', () => {
     })
   })
   describe('Project access', () => {
+    setupFeatureFlags({ unstable__new_create_project: false })
+
     beforeEach(() => {
       cy.task('db:restore')
       cy.directLoginAs('super_admin')

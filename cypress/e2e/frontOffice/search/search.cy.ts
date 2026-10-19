@@ -1,14 +1,14 @@
 import { Base } from '~e2e-pages/index'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 describe('Search Feature', () => {
+  setupFeatureFlags({ search: true })
+
   const searchUrl = '/search'
   const resultCountSelector = '.search__results-nb'
   const searchInputSelector = 'input[type="text"]#search_term'
   const resultsListSelector = 'ul.search__results li'
 
-  before(() => {
-    cy.task('enable:feature', 'search')
-  })
   beforeEach(() => {
     cy.task('db:restore')
     Base.visit({ path: searchUrl, operationName: 'NavbarRightQuery' })

@@ -16,10 +16,6 @@ describe('Cookie settings back office', () => {
     cy.task('db:restore')
   })
 
-  after(() => {
-    cy.task('disable:feature', 'multilangue')
-  })
-
   it('redirects a non-admin account to 403 page', () => {
     cy.directLoginAs('project_owner')
     visitCookieSettingsPage()
@@ -28,7 +24,7 @@ describe('Cookie settings back office', () => {
   })
 
   it('edits the cookie list in several languages as admin', () => {
-    cy.task('enable:feature', 'multilangue')
+    cy.setFeatureFlags({ multilangue: true })
     cy.directLoginAs('admin')
     cy.interceptGraphQLOperation({ operationName: 'CookieSettingsFormQuery' })
     visitCookieSettingsPage()

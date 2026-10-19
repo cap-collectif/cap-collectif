@@ -1,10 +1,11 @@
 import { Base, EventPage } from '~e2e/pages'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 describe('Event Page - Event author want to export guests list', () => {
+  setupFeatureFlags({ calendar: true, export: true })
+
   beforeEach(() => {
     cy.task('db:restore')
-    cy.task('enable:feature', 'calendar')
-    cy.task('enable:feature', 'export')
     cy.task('run:command', 'capco:export:events:participants')
     cy.directLoginAs('user')
   })
@@ -62,9 +63,7 @@ describe('Event Page - Event author want to export guests list', () => {
 })
 
 describe('Events feature', () => {
-  before(() => {
-    cy.task('enable:feature', 'calendar')
-  })
+  setupFeatureFlags({ calendar: true })
 
   it('should see events list', () => {
     Base.visit({ path: '/events', operationName: 'EventRefetchRefetchQuery' })
@@ -72,7 +71,7 @@ describe('Events feature', () => {
   })
 
   it('should filter by projects and status', () => {
-    cy.task('enable:feature', 'projects_form')
+    cy.setFeatureFlags({ projects_form: true })
     Base.visit({ path: '/events', operationName: 'EventRefetchRefetchQuery' })
 
     cy.get('#event-button-filter').click({ force: true })
@@ -102,12 +101,12 @@ describe('Events feature', () => {
   })
 
   it('displays create button if feature enable and asks for login', () => {
-    cy.task('disable:feature', 'allow_users_to_propose_events')
+    cy.setFeatureFlags({ allow_users_to_propose_events: false })
     cy.interceptGraphQLOperation({ operationName: 'EventRefetchRefetchQuery' })
     Base.visit({ path: '/events', operationName: 'EventRefetchRefetchQuery' })
     cy.get('#btn-create-event').should('not.exist')
 
-    cy.task('enable:feature', 'allow_users_to_propose_events')
+    cy.setFeatureFlags({ allow_users_to_propose_events: true })
     Base.visit({ path: '/events', operationName: 'EventRefetchRefetchQuery' })
     cy.get('#btn-create-event').click({ force: true })
     cy.get('#login-popover').should('exist')
@@ -131,7 +130,7 @@ describe('Events feature', () => {
   })
 
   it('should not create event', () => {
-    cy.task('disable:feature', 'allow_users_to_propose_events')
+    cy.setFeatureFlags({ allow_users_to_propose_events: false })
     Base.visit({ path: '/events', operationName: 'EventRefetchRefetchQuery' })
     cy.contains('event-proposal').should('not.exist')
   })
@@ -151,9 +150,7 @@ describe('Events feature', () => {
 
   it('should create an event if logged', () => {
     cy.directLoginAs('user')
-    cy.task('enable:feature', 'themes')
-    cy.task('enable:feature', 'projects_form')
-    cy.task('enable:feature', 'allow_users_to_propose_events')
+    cy.setFeatureFlags({ themes: true, projects_form: true, allow_users_to_propose_events: true })
 
     Base.visit({ path: '/events', operationName: 'EventRefetchRefetchQuery' })
 

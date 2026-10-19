@@ -1,14 +1,16 @@
 import { Base, UserRegistration } from '~e2e-pages/index'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 context('Register as a user', () => {
   describe('User register with any features', () => {
-    before(() => {
-      cy.task('enable:feature', 'registration')
-      cy.task('enable:feature', 'user_type')
-      cy.task('enable:feature', 'zipcode_at_register')
-      cy.task('enable:feature', 'captcha')
-      cy.task('enable:feature', 'turnstile_captcha')
+    setupFeatureFlags({
+      registration: true,
+      user_type: true,
+      zipcode_at_register: true,
+      captcha: true,
+      turnstile_captcha: true,
     })
+
     beforeEach(() => {
       cy.task('db:restore')
     })
@@ -64,8 +66,7 @@ context('Register as a user', () => {
     })
 
     it('should register with consent to external & internal communication', () => {
-      cy.task('enable:feature', 'consent_external_communication')
-      cy.task('enable:feature', 'consent_internal_communication')
+      cy.setFeatureFlags({ consent_external_communication: true, consent_internal_communication: true })
 
       Base.visitHomepage()
       UserRegistration.clickRegistrationButton()

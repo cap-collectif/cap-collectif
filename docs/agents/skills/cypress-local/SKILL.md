@@ -23,7 +23,7 @@ Do not use Electron: it is not available in the local setup.
 ## Preconditions
 
 - Docker services and the local application must be running at `https://capco.test`.
-- `admin-next/.env.local` must contain the uncommented line `NEXT_PUBLIC_SYMFONY_ENV=test`.
+- The `capco.test` hostname selects Symfony `test`; no `NEXT_PUBLIC_SYMFONY_ENV` override is required.
 - Run `nvm use` from the repository root before launching Cypress, then verify `node --version` in that same shell.
 - Use Yarn through Corepack; do not rely on a globally installed Yarn version.
 
@@ -41,14 +41,17 @@ remain exceptional and justified according to the Cypress ADR.
 
 ## Feature flags
 
-- New or migrated suites declare their overrides with `setupFeatureFlags` from
+- Suites declare their overrides with `setupFeatureFlags` from
   `cypress/support/setupFeatureFlags.ts`, directly inside `describe`/`context`, before other hooks.
-- The helper applies the test preset and overrides before every test/retry in one task.
-  Its final cleanup restores the preset for legacy neighbours. Do not configure flags in
-  setup/cleanup hooks with individual enable/disable tasks in these suites.
-- Nested suites inherit their parent setup; use sibling suites for different overrides rather than resetting twice.
-- Migration is opt-in: do not assume legacy suites have deterministic flags. MySQL,
-  Elasticsearch and other Redis keys are outside this reset.
+- The shared support hooks apply the test preset and inherited overrides before every
+  test/retry in one task, then restore the preset after every test, including failures.
+  Do not configure flags in setup/cleanup hooks with individual enable/disable tasks.
+- Nested suites may declare their own overrides; their flags merge with their parent's
+  configuration without another Redis reset. Sibling overrides remain independent.
+- Use `cy.setFeatureFlags({ calendar: false })` for changes inside a scenario. Consecutive
+  calls preserve earlier explicit overrides. Single-flag compatibility commands also use Redis.
+- All suites receive the preset, even without `setupFeatureFlags`. MySQL, Elasticsearch
+  and other Redis keys are outside this reset.
 - The backend validates names and boolean values before an atomic write. An invalid override
   must fail preparation; do not silence this error.
 

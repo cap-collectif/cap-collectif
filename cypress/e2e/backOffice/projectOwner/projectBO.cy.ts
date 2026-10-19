@@ -1,10 +1,12 @@
 import { AdminProjectPage } from '~e2e-pages/index'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 context('Project Owner', () => {
   describe('Project BO', () => {
+    setupFeatureFlags({ unstable__new_create_project: false })
+
     beforeEach(() => {
       cy.task('db:restore')
-      cy.task('disable:feature', 'unstable__new_create_project')
       cy.directLoginAs('project_owner')
     })
     it('should allow a project admin to add his proposalform', () => {

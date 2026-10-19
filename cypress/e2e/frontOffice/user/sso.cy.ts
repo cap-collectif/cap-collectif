@@ -1,16 +1,13 @@
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 describe('SSO', () => {
+  setupFeatureFlags({ oauth2_switch_user: true, sso_by_pass_auth: true, login_openid: true })
+
   before(() => {
     cy.task('db:restore')
-    cy.task('enable:feature', 'oauth2_switch_user')
-    cy.task('enable:feature', 'sso_by_pass_auth')
-    cy.task('enable:feature', 'login_openid')
     cy.task('run:sql', 'UPDATE sso_configuration SET enabled = 1 WHERE id = "ssoOauth2"')
   })
 
   after(() => {
-    cy.task('disable:feature', 'oauth2_switch_user')
-    cy.task('disable:feature', 'sso_by_pass_auth')
-    cy.task('disable:feature', 'login_openid')
     cy.task('run:sql', 'UPDATE sso_configuration SET enabled = 0 WHERE id = "ssoOauth2"')
   })
 

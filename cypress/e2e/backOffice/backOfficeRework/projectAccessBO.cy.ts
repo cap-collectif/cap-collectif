@@ -1,4 +1,5 @@
 import { AdminGroupsPage } from '~e2e/pages'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 const PROJECT_GROUP_2_ID = 'UHJvamVjdDpwcm9qZWN0R3JvdXAy'
 
@@ -9,9 +10,10 @@ const openAccessAccordion = () => {
 }
 
 describe('Project access back office', () => {
+  setupFeatureFlags({ unstable__new_create_project: true })
+
   beforeEach(() => {
     cy.task('db:restore')
-    cy.task('enable:feature', 'unstable__new_create_project')
     cy.directLoginAs('super_admin')
   })
 
@@ -49,9 +51,7 @@ describe('Project access back office', () => {
     cy.get('#restrictedViewerGroups').should('contain', 'Agent de la ville')
 
     cy.get('#visibility_choice-PUBLIC').check({ force: true })
-    cy.wait('@UpdateNewProjectMutation')
-      .its('response.body.data.updateNewProject.errorCode')
-      .should('eq', null)
+    cy.wait('@UpdateNewProjectMutation').its('response.body.data.updateNewProject.errorCode').should('eq', null)
 
     cy.reload()
     cy.wait('@ProjectIdQuery')
@@ -63,9 +63,7 @@ describe('Project access back office', () => {
     cy.get('#visibility_choice-CUSTOM').check({ force: true })
     cy.openDSSelect('#restrictedViewerGroups', true)
     cy.contains('.cap-async-select__option', 'Utilisateurs').click({ force: true })
-    cy.wait('@UpdateNewProjectMutation')
-      .its('response.body.data.updateNewProject.errorCode')
-      .should('eq', null)
+    cy.wait('@UpdateNewProjectMutation').its('response.body.data.updateNewProject.errorCode').should('eq', null)
 
     cy.reload()
     cy.wait('@ProjectIdQuery')
@@ -88,9 +86,7 @@ describe('Project access back office', () => {
     cy.get('#visibility_choice-CUSTOM').should('be.checked')
     cy.get('#restrictedViewerGroups').should('contain', 'Agent de la ville')
 
-    cy.get('#restrictedViewerGroups')
-      .find('button[aria-label="Remove Agent de la ville"]')
-      .click({ force: true })
+    cy.get('#restrictedViewerGroups').find('button[aria-label="Remove Agent de la ville"]').click({ force: true })
 
     cy.wait('@UpdateNewProjectMutation')
       .its('response.body.data.updateNewProject.errorCode')

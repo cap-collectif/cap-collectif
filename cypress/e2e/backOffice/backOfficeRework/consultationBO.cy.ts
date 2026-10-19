@@ -1,9 +1,11 @@
 import { AdminConsultationPage } from '~e2e/pages'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 describe('Consultation back office', () => {
+  setupFeatureFlags({ unstable__new_create_project: true })
+
   beforeEach(() => {
     cy.task('db:restore')
-    cy.task('enable:feature', 'unstable__new_create_project')
     cy.directLoginAs('super_admin')
   })
 
@@ -29,7 +31,7 @@ describe('Consultation back office', () => {
   })
 
   it('should update the step with 2 consultations', () => {
-    cy.task('enable:feature', 'multi_consultations')
+    cy.setFeatureFlags({ multi_consultations: true })
     AdminConsultationPage.visitConsultationPage()
     AdminConsultationPage.getAppendConsultationButton().click()
     AdminConsultationPage.getConsultationList().should('have.length', 2)

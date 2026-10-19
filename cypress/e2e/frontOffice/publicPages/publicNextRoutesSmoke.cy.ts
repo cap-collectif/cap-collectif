@@ -1,9 +1,9 @@
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 describe('Public Next routes smoke test', () => {
+  setupFeatureFlags({ shield_mode: false, captcha: false, blog: true })
+
   beforeEach(() => {
     cy.task('db:restore')
-    cy.task('disable:feature', 'shield_mode')
-    cy.task('disable:feature', 'captcha')
-    cy.task('enable:feature', 'blog')
   })
 
   it('renders the contact page', () => {

@@ -1,12 +1,11 @@
 import { Base } from '~e2e-pages/index'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 describe('Newsletter', () => {
-  before(() => {
-    cy.task('enable:feature', 'newsletter')
-  })
+  setupFeatureFlags({ newsletter: true, turnstile_captcha: false })
+
   beforeEach(() => {
     cy.task('db:restore')
-    cy.task('disable:feature', 'turnstile_captcha')
     cy.interceptGraphQLOperation({ operationName: 'SubscribeNewsletterMutation' })
   })
 
@@ -16,7 +15,7 @@ describe('Newsletter', () => {
   })
 
   it('correctly handles subscribing, for non-subscribed and subscribed emails, without captcha', () => {
-    cy.task('disable:feature', 'captcha')
+    cy.setFeatureFlags({ captcha: false })
 
     // Subscribing with a non-subscribed email should work the first time
     Base.visitHomepage()
@@ -40,8 +39,7 @@ describe('Newsletter', () => {
   })
 
   it('User wants to subscribe to newsletter, with unchecked captcha', () => {
-    cy.task('enable:feature', 'captcha')
-    cy.task('enable:feature', 'turnstile_captcha')
+    cy.setFeatureFlags({ captcha: true, turnstile_captcha: true })
 
     Base.visitHomepage()
     cy.get('#newsletter_subscription_email').type('iwantsomenews2@gmail.com')
@@ -50,8 +48,7 @@ describe('Newsletter', () => {
   })
 
   it('User wants to subscribe to newsletter, with checked captcha', () => {
-    cy.task('enable:feature', 'captcha')
-    cy.task('enable:feature', 'turnstile_captcha')
+    cy.setFeatureFlags({ captcha: true, turnstile_captcha: true })
 
     Base.visitHomepage()
     cy.get('#newsletter_subscription_email').type('iwantsomenews2@gmail.com')

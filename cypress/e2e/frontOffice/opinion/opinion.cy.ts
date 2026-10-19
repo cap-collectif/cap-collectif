@@ -1,14 +1,13 @@
 import { OpinionPage } from '~e2e-pages/index'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 describe('Opinion Page Tests', () => {
   beforeEach(() => {
     cy.task('db:restore')
   })
   context('As an anonymous user', () => {
-    beforeEach(() => {
-      cy.task('enable:feature', 'share_buttons')
-      cy.task('disable:feature', 'shield_mode')
-    })
+    setupFeatureFlags({ share_buttons: true, shield_mode: false })
+
     it('should display all votes of an opinion', () => {
       OpinionPage.visitConsultationDetailsPage()
       OpinionPage.getShowAllOpinionVotes().click()
@@ -57,7 +56,7 @@ describe('Opinion Page Tests', () => {
     })
 
     it('should be able to sort project randomly', () => {
-      cy.task('enable:feature', 'projects_form')
+      cy.setFeatureFlags({ projects_form: true })
       cy.interceptGraphQLOperation({ operationName: 'OpinionListQuery' })
 
       OpinionPage.visitConsultationsPage({
@@ -185,7 +184,7 @@ describe('Opinion Page Tests', () => {
     })
 
     it('should report an opinion', () => {
-      cy.task('enable:feature', 'reporting')
+      cy.setFeatureFlags({ reporting: true })
       cy.interceptGraphQLOperation({ operationName: 'ArgumentListQuery' })
       OpinionPage.visitOpinionsPage({
         projectSlug: 'croissance-innovation-disruption',

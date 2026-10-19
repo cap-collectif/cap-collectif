@@ -6,10 +6,13 @@ const isFlagMutation = node => {
   if (node.callee.type !== 'MemberExpression' || node.callee.object.name !== 'cy') return false
   const method = node.callee.property.name
   return (
+    method === 'setFeatureFlags' ||
     method === 'enableFeatureFlag' ||
     method === 'disableFeatureFlag' ||
     (method === 'task' &&
-      ['enable:feature', 'disable:feature', 'reset:feature-flags'].includes(node.arguments[0]?.value))
+      ['enable:feature', 'disable:feature', 'reset:feature-flags', 'set:feature-flags'].includes(
+        node.arguments[0]?.value,
+      ))
   )
 }
 
@@ -51,12 +54,6 @@ module.exports = {
           })
           return
         }
-        if (ancestors.some(ancestor => ancestor !== suiteFunction && guardedSuites.has(ancestor))) {
-          context.report({
-            node,
-            message: 'Nested suites inherit their flag setup; use sibling suites for different overrides.',
-          })
-        }
         if (guardedSuites.has(suiteFunction)) {
           context.report({ node, message: 'Declare setupFeatureFlags only once per suite.' })
         }
@@ -89,11 +86,10 @@ module.exports = {
       },
       'Program:exit'() {
         mutations.forEach(({ node, ancestors }) => {
-          const guarded = ancestors.some(ancestor => guardedSuites.has(ancestor))
           const inHook = ancestors.some(
             ancestor => ancestor.type === 'CallExpression' && hookNames.has(callName(ancestor.callee)),
           )
-          if (guarded && inHook) {
+          if (inHook && /\.cy\.[jt]sx?$/.test(context.getFilename())) {
             context.report({
               node,
               message:

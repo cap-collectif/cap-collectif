@@ -1,22 +1,22 @@
 import { InvitationPage } from '~e2e-pages/index'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 describe('User invitation', () => {
+  setupFeatureFlags({
+    registration: true,
+    user_type: true,
+    zipcode_at_register: true,
+    captcha: true,
+    turnstile_captcha: true,
+    login_facebook: false,
+    login_saml: false,
+    login_cas: false,
+    login_openid: false,
+    login_franceconnect: false,
+  })
+
   beforeEach(() => {
     cy.task('db:restore')
-  })
-  beforeEach(() => {
-    // Enable features
-    cy.task('enable:feature', 'registration')
-    cy.task('enable:feature', 'user_type')
-    cy.task('enable:feature', 'zipcode_at_register')
-    cy.task('enable:feature', 'captcha')
-    cy.task('enable:feature', 'turnstile_captcha')
-    // Disable features
-    cy.task('disable:feature', 'login_facebook')
-    cy.task('disable:feature', 'login_saml')
-    cy.task('disable:feature', 'login_cas')
-    cy.task('disable:feature', 'login_openid')
-    cy.task('disable:feature', 'login_franceconnect')
   })
 
   it('An expired invitation should redirect to homepage', () => {
@@ -32,14 +32,14 @@ describe('User invitation', () => {
   })
 
   it('An invited user should be able to register even with shield mode', () => {
-    cy.task('enable:feature', 'shield_mode')
+    cy.setFeatureFlags({ shield_mode: true })
     cy.visit('/invitation?token=oniiiichaaan')
     InvitationPage.fillInvitationForm()
-    cy.task('disable:feature', 'shield_mode') // prevent impacting other tests
+    cy.setFeatureFlags({ shield_mode: false }) // prevent impacting other tests
   })
 
   it('An invited user should be able to register even when registration is disabled', () => {
-    cy.task('disable:feature', 'registration')
+    cy.setFeatureFlags({ registration: false })
     cy.visit('/invitation?token=oniiiichaaan')
     InvitationPage.fillInvitationForm()
   })

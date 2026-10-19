@@ -1,14 +1,12 @@
 import { Base, Login } from '~e2e-pages/index'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 describe('Login', () => {
+  setupFeatureFlags({ profiles: true })
+
   beforeEach(() => {
     cy.task('db:restore')
     cy.purgeEmails()
-    cy.task('enable:feature', 'profiles')
-  })
-
-  afterEach(() => {
-    cy.task('disable:feature', 'profiles')
   })
 
   it('should show a login button and no logout button if not connected', () => {
@@ -73,9 +71,7 @@ describe('Login', () => {
   })
 
   it('should show Turnstile CAPTCHA after 5 failed login attempts', () => {
-    cy.task('enable:feature', 'restrict_connection')
-    cy.task('enable:feature', 'captcha')
-    cy.task('enable:feature', 'turnstile_captcha')
+    cy.setFeatureFlags({ restrict_connection: true, captcha: true, turnstile_captcha: true })
 
     Base.visit({ path: '/legal', operationName: 'NavbarRightQuery' })
     Login.openLoginModal()
@@ -94,15 +90,11 @@ describe('Login', () => {
     Login.submitLogin()
     cy.contains('registration.constraints.captcha.invalid').should('be.visible')
 
-    cy.task('disable:feature', 'restrict_connection')
-    cy.task('disable:feature', 'captcha')
-    cy.task('disable:feature', 'turnstile_captcha')
+    cy.setFeatureFlags({ restrict_connection: false, captcha: false, turnstile_captcha: false })
   })
 
   it('should show Google reCAPTCHA after 5 failed login attempts', () => {
-    cy.task('enable:feature', 'restrict_connection')
-    cy.task('enable:feature', 'captcha')
-    cy.task('disable:feature', 'turnstile_captcha')
+    cy.setFeatureFlags({ restrict_connection: true, captcha: true, turnstile_captcha: false })
 
     Base.visit({ path: '/legal', operationName: 'NavbarRightQuery' })
 
@@ -127,8 +119,6 @@ describe('Login', () => {
     Login.submitLogin()
 
     cy.contains('registration.constraints.captcha.invalid').should('be.visible')
-    cy.task('disable:feature', 'restrict_connection')
-    cy.task('disable:feature', 'captcha')
-    cy.task('enable:feature', 'turnstile_captcha')
+    cy.setFeatureFlags({ restrict_connection: false, captcha: false, turnstile_captcha: true })
   })
 })

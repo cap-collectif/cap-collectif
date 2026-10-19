@@ -1,17 +1,15 @@
 import { Base } from '~e2e-pages/index'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 /**
  * @cypress-status reference
  * @cypress-reason Canonical example for read-only pages synchronized with a GraphQL query.
  */
 describe('Developer page', () => {
+  setupFeatureFlags({ developer_documentation: true })
+
   before(() => {
     cy.task('db:restore')
-    cy.task('enable:feature', 'developer_documentation')
-  })
-
-  after(() => {
-    cy.task('disable:feature', 'developer_documentation')
   })
 
   // ------------------ Developer page access as anonymous ------------------

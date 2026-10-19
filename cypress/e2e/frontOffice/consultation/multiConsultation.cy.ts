@@ -28,7 +28,7 @@ describe('Multi Consultation', () => {
   })
 
   it('should allow user to share the consultation when the feature is enabled', () => {
-    cy.task('enable:feature', 'share_buttons')
+    cy.setFeatureFlags({ share_buttons: true })
     Base.visit({
       path: `${basePath}/consultation/deuxieme-consultation`,
       operationName: 'OpinionListQuery',

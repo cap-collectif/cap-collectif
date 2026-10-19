@@ -1,4 +1,7 @@
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 describe('Privacy settings back office', () => {
+  setupFeatureFlags({ multilangue: true })
+
   const visitPrivacySettingsPage = () => {
     // as non-admin, the query is never sent and thus should not be waited for
     cy.visit('/admin-next/privacy-settings', { failOnStatusCode: false })
@@ -25,11 +28,6 @@ describe('Privacy settings back office', () => {
 
   before(() => {
     cy.task('db:restore')
-    cy.task('enable:feature', 'multilangue')
-  })
-
-  after(() => {
-    cy.task('disable:feature', 'multilangue')
   })
 
   it('redirects a non-admin account to 403 page', () => {
