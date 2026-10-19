@@ -19,13 +19,58 @@ docker exec -w /var/www capco_application_1 bin/phpunit --list-tests
 
 Les tests d'intégration nécessitent la stack et les données techniques de
 l'environnement `test`. Vérifier cet environnement avant toute écriture.
+Les tests HTTP nécessitent aussi les queues RabbitMQ : la CI les crée avec
+`castor ci:app:rabbitmq-queues` après la restauration des données.
 Ce guide conserve les emplacements et les runners actuels.
 
-[`phpunit.xml`](../../../phpunit.xml) découvre `tests/`, avec une suite dédiée à
-`tests/UnitTests/`. CircleCI répartit les fichiers `tests/**/*Test.php` et traite
-`MigrationCommandTest.php` séparément. Tout changement de chemin doit préserver
-ces deux modes de découverte et les rapports JUnit, selon
-[l'ADR CI](../../../ADR/001-continuous_integration.md).
+Les logs de test sont conservés dans `var/log/test.log` et les warnings dans
+`var/log/test-warning.log`. Ils ne sont pas écrits sur `stderr`, afin d'éviter
+de bloquer les tests PHPUnit exécutés dans des sous-processus isolés.
+
+[`phpunit.xml`](../../../phpunit.xml) conserve la suite locale `default` pour
+`tests/` et la suite `Unit Tests` pour `tests/UnitTests/`. CircleCI répartit les
+fichiers `tests/**/*Test.php` sur quatre exécuteurs selon les durées historiques
+par fichier. `MigrationCommandTest.php` reste exécuté séparément dans le job
+`migrations`. Un exécuteur sans sélection s'arrête avant de préparer sa stack.
+Les chemins fournis au répartiteur utilisent le préfixe `/var/www/`, comme les
+attributs `file` des rapports PHPUnit produits dans le conteneur.
+Les rapports JUnit de chaque exécuteur sont publiés comme résultats de tests et
+comme artefacts ; ils alimentent les prochaines répartitions.
+
+Tout changement de chemin doit préserver la découverte et les rapports JUnit,
+selon [l'ADR CI](../../../ADR/001-continuous_integration.md).
+
+Pour lancer l'ensemble des tests hors migrations :
+
+```bash
+castor local:qa:phpunit --log-junit=var/phpunit/junit.xml
+```
+
+Les tâches Castor locale et CI sélectionnent la suite `default` par défaut.
+`defaultTestSuite="default"` préserve aussi ce choix pour un appel direct à `bin/phpunit`.
+`--testsuite` permet de sélectionner une autre suite définie dans `phpunit.xml`.
+Pour cibler un fichier ou un dossier, utiliser
+`--tests=tests/Authentication/FranceConnect`.
+Pour reproduire une sélection de plusieurs fichiers comme en CI :
+
+```bash
+castor local:qa:phpunit --tests="tests/UnitTests/CronTimeIntervalTest.php tests/UnitTests/MenuItemUrlTest.php" --log-junit=var/phpunit/selection.xml
+```
+
+Une sélection vide est refusée. Avec plusieurs chemins, Castor génère une
+configuration temporaire à côté de `phpunit.xml` : les réglages sont conservés,
+mais les suites sont remplacées par la sélection explicite, qui prend le pas
+sur `--testsuite`. La configuration est supprimée même en cas d'échec. Cela évite
+les arguments positionnels multiples, dont PHPUnit 9 n'exécuterait que le premier.
+Le filtre `--filter` reste applicable aux tests sélectionnés.
+
+Avec `--log-junit`, le wrapper supprime l'ancien rapport et vérifie la présence du
+nouveau fichier après une exécution réussie. En CI, le dossier de sortie doit être
+inscriptible par l'utilisateur du conteneur applicatif, dont l'UID peut différer
+de celui qui a créé le dossier dans le checkout.
+
+Le script `bash scripts/test-castor-phpunit.sh` vérifie ces contrats contre le vrai
+runner PHP dans le conteneur, avec des fixtures temporaires sans données métier.
 
 Avant revue : lancer le test ciblé et les tests concernés, vérifier qu'une
 régression du comportement le fait échouer, puis vérifier qu'il passe seul et

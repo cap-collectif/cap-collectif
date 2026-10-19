@@ -159,7 +159,11 @@ final class OAuthCallbackTest extends OAuthWebTestCase
         self::assertSame('https://capco.test/', $this->browser->getResponse()->headers->get('Location'));
         $error = $this->browser->getRequest()->getSession()->get(\Symfony\Component\Security\Core\Security::AUTHENTICATION_ERROR);
         self::assertInstanceOf(\Symfony\Component\Security\Core\Exception\AuthenticationException::class, $error);
-        self::assertSame($message, $error->getMessage());
+        // Symfony restores the translator locale after handling the response.
+        $expectedMessage = str_starts_with($message, 'france-connect-')
+            ? self::getContainer()->get('translator.default')->trans($message, [], null, $this->browser->getRequest()->getLocale())
+            : $message;
+        self::assertSame($expectedMessage, $error->getMessage());
         $this->assertViewer(false);
         $account = $this->reload($id);
         $getter = 'get' . ucfirst($provider) . ('openid' === $provider ? '' : 'Id');
@@ -186,7 +190,7 @@ final class OAuthCallbackTest extends OAuthWebTestCase
     public static function callbackFailures(): iterable
     {
         foreach (['openid', 'facebook', 'franceconnect'] as $provider) {
-            yield $provider . ' refusal' => [$provider, 'denied', 'franceconnect' === $provider ? 'La connexion via FranceConnect a été refusée. Veuillez réessayer ou utiliser un autre mode de connexion.' : 'No oauth code in the request.', false];
+            yield $provider . ' refusal' => [$provider, 'denied', 'franceconnect' === $provider ? 'france-connect-access-denied' : 'No oauth code in the request.', false];
             yield $provider . ' invalid grant' => [$provider, 'invalid-token', 'OAuth error: "invalid_grant"', false];
             yield $provider . ' token endpoint unavailable' => [$provider, 'token-network', 'Error while sending HTTP request', false];
             yield $provider . ' userinfo endpoint unavailable' => [$provider, 'userinfo-network', 'Error while sending HTTP request', false];
@@ -195,12 +199,12 @@ final class OAuthCallbackTest extends OAuthWebTestCase
         yield 'OpenID ID token without access token' => ['openid', 'missing-access-token', 'Not a valid access token.', false];
         yield 'FranceConnect v2 malformed userinfo' => ['franceconnect', 'malformed-userinfo', 'FranceConnect token verification failed.', true];
         yield 'FranceConnect v2 userinfo unavailable' => ['franceconnect', 'userinfo-network', 'Error while retrieving information from FranceConnect.', true];
-        yield 'FranceConnect v2 foreign nonce' => ['franceconnect', 'bad-nonce', 'Erreur lors de la connexion à FranceConnect', true];
+        yield 'FranceConnect v2 foreign nonce' => ['franceconnect', 'bad-nonce', 'france-connect-connection-error', true];
         yield 'FranceConnect v2 invalid signature' => ['franceconnect', 'invalid-signature', 'FranceConnect signature verification failed.', true];
         yield 'FranceConnect v2 expired userinfo' => ['franceconnect', 'expired-userinfo', 'FranceConnect token expired.', true];
         yield 'FranceConnect foreign state' => ['franceconnect', 'bad-state', 'Given CSRF token is not valid.', false];
-        yield 'FranceConnect foreign nonce' => ['franceconnect', 'bad-nonce', 'Erreur lors de la connexion à FranceConnect', false];
-        yield 'FranceConnect expired state' => ['franceconnect', 'expired-state', 'Erreur lors de la connexion à FranceConnect', false];
+        yield 'FranceConnect foreign nonce' => ['franceconnect', 'bad-nonce', 'france-connect-connection-error', false];
+        yield 'FranceConnect expired state' => ['franceconnect', 'expired-state', 'france-connect-connection-error', false];
     }
 
     /** @return iterable<string, array{string, bool}> */

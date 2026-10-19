@@ -173,3 +173,6 @@ phpstan.neon
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+
+# Temporary selected PHPUnit suites created by Castor.
+/.phpunit-selected-*

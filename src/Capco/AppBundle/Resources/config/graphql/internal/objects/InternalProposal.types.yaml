@@ -76,7 +76,7 @@ InternalProposal:
                 type: 'Float'
             responses:
                 type: '[InternalResponse]!'
-                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalResponsesResolver", value, getUser(), context, serv("request_stack").getCurrentRequest().cookies.get("CapcoParticipant"))'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalResponsesResolver", value, getUser(), context, serv("request_stack").getCurrentRequest() ? serv("request_stack").getCurrentRequest().cookies.get("CapcoParticipant") : null)'
             media:
                 type: 'InternalMedia'
             theme:

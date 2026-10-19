@@ -20,7 +20,7 @@ describe('Opinion versions actions', () => {
   })
 
   it('should allow the author of a version to delete it', () => {
-    cy.loginAs('user')
+    cy.directLoginAs('user')
     OpinionPage.visitVersionPage()
 
     cy.isLoggedIn()
@@ -29,11 +29,13 @@ describe('Opinion versions actions', () => {
     cy.get('#opinion-delete').should('exist').click({ force: true })
 
     cy.interceptGraphQLOperation({ operationName: 'DeleteVersionMutation' })
+    cy.interceptGraphQLOperation({ operationName: 'NavBarMenuQuery', alias: 'SectionNavBarMenuQuery' })
     cy.get('#confirm-opinion-delete').should('exist').should('be.visible').click({ force: true })
     cy.wait('@DeleteVersionMutation', { timeout: 10000 })
     // The app redirects to the section page once the deletion succeeds,
     // wait for it so the next visit does not race with the redirect
     cy.url().should('not.include', '/versions/')
+    cy.wait('@SectionNavBarMenuQuery').its('response.body.data').should('be.an', 'object')
 
     OpinionPage.visitVersionPage('NavBarMenuQuery')
     cy.contains('error.404.title').should('be.visible')

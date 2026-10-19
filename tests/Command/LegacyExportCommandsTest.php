@@ -8,6 +8,8 @@ use Qandidate\Toggle\Context;
 use Qandidate\Toggle\ContextFactory;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
  * @internal
@@ -26,6 +28,7 @@ class LegacyExportCommandsTest extends DatabaseCommandTestCase
     private bool $exportInitialState;
     private bool $legacyUsersExportInitialState;
     private bool $multilangueInitialState;
+    private ?TokenInterface $previousToken = null;
 
     /** @var list<string> */
     private array $generatedFiles = [];
@@ -33,6 +36,14 @@ class LegacyExportCommandsTest extends DatabaseCommandTestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        // Legacy exports query administrative GraphQL fields, including disabled accounts.
+        $admin = $this->entityManager->getRepository(User::class)->find('userAdmin');
+        self::assertInstanceOf(User::class, $admin);
+        self::assertTrue($admin->isAdmin());
+        $tokenStorage = self::getContainer()->get('security.token_storage');
+        $this->previousToken = $tokenStorage->getToken();
+        $tokenStorage->setToken(new UsernamePasswordToken($admin, 'main', $admin->getRoles()));
 
         $featureManager = self::getContainer()->get(Manager::class);
         \assert($featureManager instanceof Manager);
@@ -60,6 +71,7 @@ class LegacyExportCommandsTest extends DatabaseCommandTestCase
 
     protected function tearDown(): void
     {
+        self::getContainer()->get('security.token_storage')->setToken($this->previousToken);
         $filesystem = new Filesystem();
         foreach ($this->generatedFiles as $generatedFile) {
             $filesystem->remove($generatedFile);

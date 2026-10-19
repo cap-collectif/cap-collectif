@@ -107,6 +107,11 @@ abstract class MailerSnapshotCommandTestCase extends DatabaseCommandTestCase
             'SNAPSHOT_TOKEN',
             $message->getBody()
         );
+        $body = preg_replace(
+            '#(?<=/profile/followings/)[^/?&"\'<\s]+#',
+            'SNAPSHOT_TOKEN',
+            (string) $body
+        );
 
         return (string) preg_replace('/[ \\t]+$/m', '', (string) $body);
     }

@@ -78,25 +78,113 @@ function phpspec(string $desc = 'false'): void
     application(sprintf('php -d memory_limit=-1 bin/phpspec describe %s', escapeshellarg($desc)));
 }
 
-function phpunit(string $filter = 'false', string $tests = 'false', string $logJunit = 'false'): void
+/**
+ * Build a selected suite next to phpunit.xml so its relative paths keep their meaning.
+ *
+ * @param list<string> $tests
+ */
+function selectedPhpunitConfigurationXml(array $tests): string
 {
-    $command = 'php -d memory_limit=-1 bin/phpunit --configuration=phpunit.xml --color --testdox';
-
-    if ('false' !== $filter) {
-        $command .= ' --filter=' . escapeshellarg($filter);
+    if ([] === $tests) {
+        throw new \InvalidArgumentException('The PHPUnit selection must not be empty.');
     }
 
-    if ('false' !== $tests) {
-        foreach (preg_split('/\s+/', trim($tests), -1, \PREG_SPLIT_NO_EMPTY) ?: [] as $test) {
-            $command .= ' ' . escapeshellarg($test);
+    $configuration = new \DOMDocument();
+    if (!$configuration->load('phpunit.xml')) {
+        throw new \RuntimeException('Unable to read phpunit.xml.');
+    }
+    $configuration->documentElement->setAttribute('defaultTestSuite', 'Selected tests');
+    $suites = $configuration->getElementsByTagName('testsuites')->item(0);
+    if (!$suites instanceof \DOMElement) {
+        throw new \RuntimeException('phpunit.xml must define testsuites.');
+    }
+    while ($suites->firstChild) {
+        $suites->removeChild($suites->firstChild);
+    }
+    $suite = $configuration->createElement('testsuite');
+    $suite->setAttribute('name', 'Selected tests');
+    $suites->appendChild($suite);
+    foreach (array_unique($tests) as $test) {
+        if (!is_file($test) && !is_dir($test)) {
+            throw new \InvalidArgumentException(sprintf('PHPUnit selection does not exist: %s.', $test));
+        }
+        $element = $configuration->createElement(is_dir($test) ? 'directory' : 'file');
+        $element->appendChild($configuration->createTextNode($test));
+        $suite->appendChild($element);
+    }
+
+    $xml = $configuration->saveXML();
+    if (false === $xml) {
+        throw new \RuntimeException('Unable to serialize the selected PHPUnit configuration.');
+    }
+
+    return $xml;
+}
+
+/** @param list<string> $tests */
+function selectedPhpunitConfiguration(array $tests): string
+{
+    // Castor's static runtime has no DOM extension; generate XML inside the PHP container.
+    $xml = capture([
+        'docker', 'exec', '-w', '/var/www', 'capco_application_1', 'php', '-r',
+        'require ".castor/shared/qa.php"; echo \\Capco\\Castor\\Qa\\selectedPhpunitConfigurationXml(json_decode($argv[1], true, 512, JSON_THROW_ON_ERROR));',
+        json_encode($tests, \JSON_THROW_ON_ERROR),
+    ]);
+    $path = tempnam(\dirname(__DIR__, 2), '.phpunit-selected-');
+    if (false === $path) {
+        throw new \RuntimeException('Unable to create the selected PHPUnit configuration.');
+    }
+
+    try {
+        if (false === file_put_contents($path, $xml) || !chmod($path, 0644)) {
+            throw new \RuntimeException('Unable to write the selected PHPUnit configuration.');
+        }
+    } catch (\Throwable $exception) {
+        unlink($path);
+
+        throw $exception;
+    }
+
+    return $path;
+}
+
+function phpunit(string $filter = 'false', string $tests = 'false', string $logJunit = 'false', string $testsuite = 'default'): void
+{
+    $selectedConfiguration = null;
+
+    try {
+        $selection = [];
+        if ('false' !== $tests) {
+            $selection = preg_split('/\s+/', trim($tests), -1, \PREG_SPLIT_NO_EMPTY) ?: [];
+            if ([] === $selection) {
+                throw new \InvalidArgumentException('The PHPUnit selection must not be empty.');
+            }
+            if (\count($selection) > 1) {
+                $selectedConfiguration = selectedPhpunitConfiguration($selection);
+            }
+        }
+        $configuration = null === $selectedConfiguration ? 'phpunit.xml' : escapeshellarg(basename($selectedConfiguration));
+        $command = 'php -d memory_limit=-1 bin/phpunit --configuration=' . $configuration . ' --color --testdox';
+        $command .= ' --testsuite=' . escapeshellarg(null === $selectedConfiguration ? $testsuite : 'Selected tests');
+        if ('false' !== $filter) {
+            $command .= ' --filter=' . escapeshellarg($filter);
+        }
+        if (1 === \count($selection)) {
+            $command .= ' ' . escapeshellarg($selection[0]);
+        }
+        if ('false' !== $logJunit) {
+            $command .= ' --log-junit=' . escapeshellarg($logJunit);
+            $command = 'mkdir -p -- ' . escapeshellarg(\dirname($logJunit))
+                . ' && rm -f -- ' . escapeshellarg($logJunit)
+                . ' && ' . $command . ' && test -s ' . escapeshellarg($logJunit);
+        }
+
+        application($command);
+    } finally {
+        if (null !== $selectedConfiguration) {
+            unlink($selectedConfiguration);
         }
     }
-
-    if ('false' !== $logJunit) {
-        $command .= ' --log-junit=' . escapeshellarg($logJunit);
-    }
-
-    application($command);
 }
 
 function saveEsSnapshot(): void

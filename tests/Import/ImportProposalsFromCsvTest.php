@@ -34,6 +34,10 @@ final class ImportProposalsFromCsvTest extends IdentityWebTestCase
         $media = (new \Capco\AppBundle\Entity\Media())->setName('Import CSV')->setProviderName('sonata.media.provider.file')->setProviderReference('test-import-' . bin2hex(random_bytes(8)) . '.csv');
         $this->em->persist($media);
         $this->em->flush();
+        $this->login($admin->getEmail());
+        if ('majority' === $type) {
+            $answer = self::getContainer()->get('translator')->getCatalogue($this->browser->getRequest()->getLocale())->get($answer, 'CapcoAppBundle');
+        }
         $headers = array_merge($form->getFieldsUsed(false), $form->getCustomFields(false));
         $values = array_fill_keys($headers, '');
         $title = 'CSV test proposal ' . bin2hex(random_bytes(8));
@@ -56,7 +60,6 @@ final class ImportProposalsFromCsvTest extends IdentityWebTestCase
                 fclose($handle);
             }
 
-            $this->login($admin->getEmail());
             $result = $this->graphql('mutation($input: AddProposalsFromCsvInput!) { addProposalsFromCsv(input: $input) { errorCode importableProposals badLines lineErrors { reason field } } }', ['input' => ['proposalFormId' => $form->getId(), 'csvToImport' => $media->getId(), 'dryRun' => true]])['addProposalsFromCsv'];
             self::assertNull($result['errorCode']);
             self::assertSame($accepted ? 1 : 0, $result['importableProposals'], json_encode($result, \JSON_THROW_ON_ERROR));
@@ -81,6 +84,6 @@ final class ImportProposalsFromCsvTest extends IdentityWebTestCase
         yield 'empty optional choice' => ['select', false, false, '', true];
         yield 'empty required choice' => ['select', true, false, '', false];
         yield 'known choice' => ['radio', true, false, 'Known choice', true];
-        yield 'valid majority judgement' => ['majority', false, false, 'Bien', true];
+        yield 'valid majority judgement' => ['majority', false, false, 'global-well', true];
     }
 }

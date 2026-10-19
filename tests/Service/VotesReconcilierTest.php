@@ -30,7 +30,7 @@ final class VotesReconcilierTest extends ParticipantWebTestCase
      * @param list<string>       $expected
      * @param array<string, int> $expectedPositions
      */
-    public function testVoteMergeContracts(string $stepType, string $targetType, ?int $min, ?int $max, ?float $budget, bool $ranking, array $targetProposals, array $sourceProposals, array $expected, array $expectedPositions, bool $retainsEmptySource): void
+    public function testVoteMergeContracts(string $stepType, string $targetType, ?int $min, ?int $max, ?float $budget, bool $ranking, array $targetProposals, array $sourceProposals, array $expected, array $expectedPositions): void
     {
         $step = $this->em->find('collect' === $stepType ? CollectStep::class : SelectionStep::class, 'collect' === $stepType ? 'collectstep1' : 'selectionstep1');
         self::assertTrue($step instanceof CollectStep || $step instanceof SelectionStep);
@@ -89,10 +89,7 @@ final class VotesReconcilierTest extends ParticipantWebTestCase
         self::assertSame('user' === $targetType ? 'USER_AUTHENTICATED' : 'PARTICIPANT_MERGED', $result['reconciliationMode']);
         $this->em->clear();
         $persistedSource = $this->em->find(Participant::class, $sourceId);
-        self::assertSame($retainsEmptySource ? $sourceId : null, $persistedSource?->getId());
-        if ($retainsEmptySource) {
-            self::assertCount(0, $persistedSource->getVotes());
-        }
+        self::assertNull($persistedSource);
         $repository = $this->em->getRepository($voteClass);
         /** @var list<ProposalCollectVote|ProposalSelectionVote> $survivors */
         $survivors = $repository->findBy(['id' => $voteIds]);
@@ -140,7 +137,7 @@ final class VotesReconcilierTest extends ParticipantWebTestCase
         self::assertSame($neighborVote->getProposal()->getId(), $retainedNeighborVote->getProposal()->getId());
     }
 
-    /** @return iterable<string, array{string, string, ?int, ?int, ?float, bool, list<string>, list<string>, list<string>, array<string, int>, bool}> */
+    /** @return iterable<string, array{string, string, ?int, ?int, ?float, bool, list<string>, list<string>, list<string>, array<string, int>}> */
     public static function voteMerges(): iterable
     {
         $cases = [
@@ -166,10 +163,7 @@ final class VotesReconcilierTest extends ParticipantWebTestCase
         foreach (['collect', 'selection'] as $step) {
             foreach (['user', 'participant'] as $target) {
                 foreach ($cases as $name => $case) {
-                    // Login can retain the empty source identity when the established ballot is full.
-                    $retainsEmptySource = 'user' === $target && \in_array($name, ['target already at maximum', 'both reach maximum'], true);
-                    $scenario = $retainsEmptySource ? 'CharacterizationGap login retains empty source at maximum (' . $name . ')' : $name;
-                    yield $step . '/' . $target . ': ' . $scenario => [$step, $target, $case[0], $case[1], $case[2], $case[3], $case[4], $case[5], $case[6], $case[7] ?? [], $retainsEmptySource];
+                    yield $step . '/' . $target . ': ' . $name => [$step, $target, $case[0], $case[1], $case[2], $case[3], $case[4], $case[5], $case[6], $case[7] ?? []];
                 }
             }
         }

@@ -71,6 +71,11 @@ for namespace in local ci; do
 
     run_castor "$namespace:qa:phpunit" --filter=MigrationCommandTest --tests=tests/Command --log-junit=results.xml
     grep -Fq -- "--filter='MigrationCommandTest' 'tests/Command' --log-junit='results.xml'" "$CASTOR_WORKFLOW_RECORD"
+    grep -Fq "test -s 'results.xml'" "$CASTOR_WORKFLOW_RECORD"
+    run_castor "$namespace:qa:phpunit" --log-junit=results.xml
+    grep -Fq -- "--configuration=phpunit.xml --color --testdox --testsuite='default' --log-junit='results.xml'" "$CASTOR_WORKFLOW_RECORD"
+    run_castor "$namespace:qa:phpunit" --testsuite="Unit Tests"
+    grep -Fq -- "--testsuite='Unit Tests'" "$CASTOR_WORKFLOW_RECORD"
 done
 
 CI_SHARED_TEST_DATA=1 run_castor ci:qa:restore-db --confirm

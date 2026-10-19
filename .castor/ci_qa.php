@@ -31,9 +31,9 @@ function saveDb(): void
 }
 
 #[AsTask(description: 'Run PHPUnit in CI.')]
-function phpunit(string $filter = 'false', string $tests = 'false', string $logJunit = 'false'): void
+function phpunit(string $filter = 'false', string $tests = 'false', string $logJunit = 'false', string $testsuite = 'default'): void
 {
-    sharedPhpunit(filter: $filter, tests: $tests, logJunit: $logJunit);
+    sharedPhpunit(filter: $filter, tests: $tests, logJunit: $logJunit, testsuite: $testsuite);
 }
 
 #[AsTask(description: 'Save the CI Elasticsearch test snapshot.')]

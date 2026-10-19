@@ -33,9 +33,9 @@ function phpspec(string $desc = 'false'): void
 }
 
 #[AsTask(description: 'Run PHPUnit in the application container.')]
-function phpunit(string $filter = 'false', string $tests = 'false', string $logJunit = 'false'): void
+function phpunit(string $filter = 'false', string $tests = 'false', string $logJunit = 'false', string $testsuite = 'default'): void
 {
-    Shared\phpunit($filter, $tests, $logJunit);
+    Shared\phpunit($filter, $tests, $logJunit, $testsuite);
 }
 
 #[AsTask(description: 'Save the local Elasticsearch test snapshot.')]

@@ -6,6 +6,7 @@ use Capco\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Tester\CommandTester;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
 trait CommandTestTrait
@@ -127,6 +128,7 @@ trait CommandTestTrait
 
     private function emptyOutputDirectory(string $outputDir = self::OUTPUT_DIRECTORY): void
     {
+        (new Filesystem())->mkdir($outputDir);
         $finder = new Finder();
         $finder->files()->in($outputDir);
 
