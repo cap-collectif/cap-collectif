@@ -26,8 +26,7 @@ const UpdateProfileAccountLocaleMutation = /* GraphQL */ `
 
 /**
  * @jest-status non-compliant
- * @jest-reason Changes backend feature flags without failure-safe restoration of their initial state; MySQL
- * and Elasticsearch resets do not restore Redis flags.
+ * @jest-reason Relies on response snapshots for part of the API contract; add explicit assertions for those scenarios.
  */
 describe('mutations.updateProfileAccountEmail', () => {
   it('should  update user email', async () => {
@@ -72,7 +71,7 @@ describe('mutations.updateProfileAccountEmail', () => {
   })
 
   it('should not update user email, cause bad email', async () => {
-    await global.enableFeatureFlag('restrict_registration_via_email_domain')
+    await global.resetFeatureFlags({ restrict_registration_via_email_domain: true })
     const updateEmail = await graphql(
       UpdateProfileAccountEmailMutation,
       {
@@ -84,7 +83,6 @@ describe('mutations.updateProfileAccountEmail', () => {
       'internal_user',
     )
     expect(updateEmail).toMatchSnapshot()
-    await global.resetFeatureFlags()
   })
 
   it('should update user is locale', async () => {

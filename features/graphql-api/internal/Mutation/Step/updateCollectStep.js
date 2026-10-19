@@ -126,7 +126,7 @@ const updateCollectStepWithVoteIconAndButtonLabelInput = {
  */
 describe('mutations.updateCollectStep', () => {
   beforeEach(async () => {
-    await global.enableFeatureFlag('vocal_contribution')
+    await global.resetFeatureFlags({ vocal_contribution: true })
   })
 
   it('admin should be able to edit collectStep step.', async () => {
@@ -169,11 +169,7 @@ const isVocalContributionEnabled = async id =>
 
 describe('mutations.updateCollectStep vocal contribution', () => {
   beforeEach(async () => {
-    await enableFeatureFlag('vocal_contribution')
-  })
-
-  afterEach(async () => {
-    await disableFeatureFlag('vocal_contribution')
+    await global.resetFeatureFlags({ vocal_contribution: true })
   })
 
   it('keeps a single collect step receiving the vocal contributions', async () => {
@@ -191,7 +187,7 @@ describe('mutations.updateCollectStep vocal contribution', () => {
   })
 
   it('refuses to enable the vocal contribution when the feature is disabled', async () => {
-    await disableFeatureFlag('vocal_contribution')
+    await global.resetFeatureFlags({ vocal_contribution: false })
 
     await expect(
       graphql(UpdateCollectStep, { input: { ...input, isVocalContributionEnabled: true } }, 'internal_admin'),
@@ -201,7 +197,7 @@ describe('mutations.updateCollectStep vocal contribution', () => {
 
   it('hides the vocal contribution step when the feature is disabled', async () => {
     await graphql(UpdateCollectStep, { input: { ...input, isVocalContributionEnabled: true } }, 'internal_admin')
-    await disableFeatureFlag('vocal_contribution')
+    await global.resetFeatureFlags({ vocal_contribution: false })
 
     const response = await graphql(VocalContributionStepQuery, {}, 'internal')
     expect(response.vocalContributionStep).toBeNull()

@@ -12,8 +12,6 @@ const util = require('util')
 const exec = util.promisify(require('child_process').exec)
 const execFile = util.promisify(require('child_process').execFile)
 
-const phpContainerName = 'capco_application_1'
-
 const env = process.env.CI ? 'ci' : 'local'
 
 const GraphQLClient = require('graphql-request').GraphQLClient
@@ -116,37 +114,24 @@ global.runSQL = async sql => {
   return stdout
 }
 
-global.enableFeatureFlag = async name => {
-  console.log(`Enabling feature flag "${name}"...`)
-  await exec(`docker exec ${phpContainerName} php features/graphql-api/feature-flag-toggler.php enable ${name}`)
-  console.log(`Successfully enabled "${name}"`)
+global.resetFeatureFlags = async (overrides = {}) => {
+  await execFile('castor', [`${env}:qa:reset-feature-flags`, `--overrides=${JSON.stringify(overrides)}`])
 }
 
-global.disableFeatureFlag = async name => {
-  console.log(`Disabling feature flag "${name}"...`)
-  await exec(
-    `docker exec ${phpContainerName} php features/graphql-api/feature-flag-toggler.php disable ${name}`
-  )
-  console.log(`Successfully disabled "${name}"`)
-}
+// Redis flags are shared by API requests and are not restored with MySQL or Elasticsearch.
+beforeEach(async () => {
+  await global.resetFeatureFlags()
+})
 
-global.resetFeatureFlags = async () => {
-  console.log(`Resetting feature flags...`)
-  await exec(`docker exec ${phpContainerName} php features/graphql-api/feature-flags-resetter.php`)
-  console.log(`Successfully reset feature flags`)
-}
+afterEach(async () => {
+  await global.resetFeatureFlags()
+})
 
 global.runSql = async sql => {
   console.log(`castor ${env}:app:console --command-name=doctrine:query:sql --environment=test -- <redacted>`)
-  await execFile('castor', [
-    `${env}:app:console`,
-    '--command-name=doctrine:query:sql',
-    '--environment=test',
-    '--',
-    sql,
-  ])
+  await execFile('castor', [`${env}:app:console`, '--command-name=doctrine:query:sql', '--environment=test', '--', sql])
   return Promise.resolve(null)
-};
+}
 
 global.graphql = (query, variables, client = 'anonymous') => {
   if (typeof client === 'object') {

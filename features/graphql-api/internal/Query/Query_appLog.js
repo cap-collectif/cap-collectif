@@ -28,8 +28,7 @@ const appLogQuery = /* GraphQL */ `
 `
 /**
  * @jest-status non-compliant
- * @jest-reason Changes backend feature flags without failure-safe restoration of their initial state; MySQL
- * and Elasticsearch resets do not restore Redis flags.
+ * @jest-reason Relies on response snapshots for part of the API contract; add explicit assertions for those scenarios.
  */
 describe('Query.appLog connection', () => {
   it('fetches app logs without arguments', async () => {
@@ -233,27 +232,20 @@ describe('Query.appLog connection', () => {
   })
 
   it('fetches app logs without organizations feature flag', async () => {
-    await global.disableFeatureFlag('organizations')
+    await global.resetFeatureFlags({ organizations: false })
 
     await expect(graphql(appLogQuery, {}, 'internal_super_admin')).resolves.toMatchSnapshot()
-
-    await global.resetFeatureFlags()
   })
 
   it('fetches app logs without project_admin feature flag', async () => {
-    await global.disableFeatureFlag('project_admin')
+    await global.resetFeatureFlags({ project_admin: false })
 
     await expect(graphql(appLogQuery, {}, 'internal_super_admin')).resolves.toMatchSnapshot()
-
-    await global.resetFeatureFlags()
   })
 
   it('fetches app logs without organizations and project_admin feature flags', async () => {
-    await global.disableFeatureFlag('organizations')
-    await global.disableFeatureFlag('project_admin')
+    await global.resetFeatureFlags({ organizations: false, project_admin: false })
 
     await expect(graphql(appLogQuery, {}, 'internal_super_admin')).resolves.toMatchSnapshot()
-
-    await global.resetFeatureFlags()
   })
 })

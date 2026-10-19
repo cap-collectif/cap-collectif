@@ -52,19 +52,11 @@ const input = {
 
 /**
  * @jest-status non-compliant
- * @jest-reason Feature flags are reset to test defaults rather than their initial state; outgoing messages are not isolated.
+ * @jest-reason Outgoing messages are not isolated.
  */
 describe('Internal|register mutation', () => {
-  beforeEach(async () => {
-    await global.resetFeatureFlags()
-  })
-
-  afterEach(async () => {
-    await global.resetFeatureFlags()
-  })
-
   it('registers a user when registration is enabled', async () => {
-    await global.enableFeatureFlag('registration')
+    await global.resetFeatureFlags({ registration: true })
 
     await expect(graphql(registrationMutation, { input }, 'internal')).resolves.toEqual({
       register: { user: { displayName: 'user2' }, errorsCode: null },
@@ -72,7 +64,7 @@ describe('Internal|register mutation', () => {
   })
 
   it('returns REGISTER_FEATURE_NOT_ENABLED when registration is disabled', async () => {
-    await global.disableFeatureFlag('registration')
+    await global.resetFeatureFlags({ registration: false })
 
     await expect(graphql(registrationErrorsMutation, { input }, 'internal')).resolves.toEqual({
       register: { errorsCode: ['REGISTER_FEATURE_NOT_ENABLED'] },
@@ -85,7 +77,7 @@ describe('Internal|register mutation', () => {
     ['plainPassword', '', 'PASSWORD_BLANK'],
     ['email', 'user2@yopmail.com', 'EMAIL_THROWABLE'],
   ])('returns %s validation errors', async (field, value, errorCode) => {
-    await global.enableFeatureFlag('registration')
+    await global.resetFeatureFlags({ registration: true })
 
     await expect(
       graphql(registrationErrorsMutation, { input: { ...input, [field]: value } }, 'internal'),
@@ -95,7 +87,7 @@ describe('Internal|register mutation', () => {
   })
 
   it('rejects extra registration fields when optional fields are disabled', async () => {
-    await global.enableFeatureFlag('registration')
+    await global.resetFeatureFlags({ registration: true })
 
     await expect(
       graphql(
@@ -107,9 +99,7 @@ describe('Internal|register mutation', () => {
   })
 
   it('registers a user with zipcode and type when their features are enabled', async () => {
-    await global.enableFeatureFlag('registration')
-    await global.enableFeatureFlag('user_type')
-    await global.enableFeatureFlag('zipcode_at_register')
+    await global.resetFeatureFlags({ registration: true, user_type: true, zipcode_at_register: true })
 
     await expect(
       graphql(
@@ -123,7 +113,7 @@ describe('Internal|register mutation', () => {
   })
 
   it('sanitizes a malicious username before persisting it', async () => {
-    await global.enableFeatureFlag('registration')
+    await global.resetFeatureFlags({ registration: true })
     const maliciousInput = {
       ...input,
       username: '<h1><a href=x></a>pwned</h1>',
@@ -142,7 +132,7 @@ describe('Internal|register mutation', () => {
   })
 
   it('adds a registered user to the invited group', async () => {
-    await global.enableFeatureFlag('registration')
+    await global.resetFeatureFlags({ registration: true })
 
     await expect(
       graphql(

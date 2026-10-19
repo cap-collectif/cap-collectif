@@ -49,6 +49,33 @@ Les helpers actuels fournissent une stratégie de restauration avant chaque test
   effets de la préparation et des requêtes avant de choisir ce helper ; une
   mutation ou une écriture dans ces index nécessite une isolation par scénario.
 
+### Feature flags Redis
+
+Les runners API Query et Mutation rétablissent automatiquement le preset `test`
+avant et après chaque test via `jest-setup.e2e.js`, y compris lors d'un échec
+ou d'une nouvelle tentative Jest. Le reset utilise la tâche Castor
+`local:qa:reset-feature-flags` (ou `ci:qa:reset-feature-flags`), qui valide les
+overrides puis prépare tous les flags en une écriture Redis atomique, sans
+démarrer Symfony.
+
+Déclarer les écarts au preset dans le test ou dans un `beforeEach` de sa suite :
+
+```js
+await global.resetFeatureFlags({ registration: true, user_type: false })
+```
+
+Chaque appel remplace la configuration précédente par le preset et les overrides
+fournis : regrouper les flags nécessaires dans le même objet. Ne pas les préparer
+dans `beforeAll`, car le reset avant le test les effacerait. Le nettoyage final
+est partagé ; il ne dépend pas d'une instruction placée après les assertions.
+Les tests de composants frontend continuent à utiliser leurs mocks.
+
+`node scripts/test-jest-feature-flags.cjs` vérifie ces hooks avec le vrai runner
+Jest et l'API locale, dont un échec volontaire et une nouvelle tentative. La stack
+de test doit être démarrée et aucune autre suite ne doit utiliser ses flags.
+
+### Autres ressources
+
 Une restauration avant le prochain test peut assurer son isolation, mais elle ne
 nettoie pas immédiatement les effets du dernier test exécuté. Prévoir un nettoyage
 final ou une restauration du socle lorsque ces effets peuvent affecter une autre
@@ -56,9 +83,10 @@ suite ou l'exécution suivante. Une autre stratégie par nettoyage ciblé est po
 si elle garantit le même niveau d'isolation ; ne pas cumuler des restaurations
 complètes et des nettoyages coûteux sans nécessité.
 
-MySQL et Elasticsearch ne couvrent pas toutes les ressources : restaurer l'état
-initial des flags et de la configuration, réinitialiser l'authentification et traiter
-les caches, fichiers et messages lorsque le scénario les modifie. Utiliser des
+MySQL et Elasticsearch ne couvrent pas toutes les ressources : les flags retrouvent
+le preset décrit ci-dessus ; restaurer les autres configurations modifiées,
+réinitialiser l'authentification et traiter les caches, fichiers et messages lorsque
+le scénario les modifie. Utiliser des
 identifiants et chemins uniques pour les ressources propres au test. Leur nettoyage
 doit être attendu et fonctionner même en cas d'échec.
 

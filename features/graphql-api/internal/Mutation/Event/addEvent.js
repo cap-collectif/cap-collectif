@@ -50,8 +50,7 @@ const AddEventsMutation = /* GraphQL */ `
 
 /**
  * @jest-status non-compliant
- * @jest-reason Changes backend feature flags without failure-safe restoration of their initial state; MySQL
- * and Elasticsearch resets do not restore Redis flags.
+ * @jest-reason Relies on response snapshots for part of the API contract; add explicit assertions for those scenarios.
  */
 describe('mutations.addEventMutation', () => {
   it('Admin wants to add an event with registration by external link', async () => {
@@ -95,7 +94,7 @@ describe('mutations.addEventMutation', () => {
   })
 
   it('User wants to add an event with custom code', async () => {
-    await global.enableFeatureFlag('allow_users_to_propose_events')
+    await global.resetFeatureFlags({ allow_users_to_propose_events: true })
 
     await expect(
       graphql(
@@ -119,11 +118,10 @@ describe('mutations.addEventMutation', () => {
         'internal_user',
       ),
     ).resolves.toMatchSnapshot()
-    await global.resetFeatureFlags()
   })
 
   it('User wants to add an event with bad date', async () => {
-    await global.enableFeatureFlag('allow_users_to_propose_events')
+    await global.resetFeatureFlags({ allow_users_to_propose_events: true })
 
     await expect(
       graphql(
@@ -147,11 +145,10 @@ describe('mutations.addEventMutation', () => {
         'internal_user',
       ),
     ).resolves.toMatchSnapshot()
-    await global.resetFeatureFlags()
   })
 
   it('User wants to add an event with 2 registration type', async () => {
-    await global.enableFeatureFlag('allow_users_to_propose_events')
+    await global.resetFeatureFlags({ allow_users_to_propose_events: true })
 
     await expect(
       graphql(
@@ -174,11 +171,10 @@ describe('mutations.addEventMutation', () => {
         'internal_user',
       ),
     ).resolves.toMatchSnapshot()
-    await global.resetFeatureFlags()
   })
 
   it('User wants to add an event', async () => {
-    await global.enableFeatureFlag('allow_users_to_propose_events')
+    await global.resetFeatureFlags({ allow_users_to_propose_events: true })
 
     await expect(
       graphql(
@@ -216,6 +212,5 @@ describe('mutations.addEventMutation', () => {
         },
       },
     })
-    await global.resetFeatureFlags()
   })
 })

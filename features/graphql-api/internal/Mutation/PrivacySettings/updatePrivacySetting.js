@@ -51,7 +51,7 @@ describe('Internal|updatePrivacySetting', () => {
   })
 
   it('stores the value under the platform default locale when multilangue is disabled', async () => {
-    await global.disableFeatureFlag('multilangue')
+    await global.resetFeatureFlags({ multilangue: false })
     const id = await getPrivacySettingId()
 
     await expect(
@@ -64,36 +64,32 @@ describe('Internal|updatePrivacySetting', () => {
   })
 
   it('creates, updates and removes the translation of another locale when multilangue is enabled', async () => {
-    await global.enableFeatureFlag('multilangue')
+    await global.resetFeatureFlags({ multilangue: true })
     const id = await getPrivacySettingId()
 
-    try {
-      const created = await updatePrivacySetting({
-        id,
-        isEnabled: true,
-        translations: [
-          { locale: 'FR_FR', value: '<p>Politique de confidentialité</p>' },
-          { locale: 'EN_GB', value: '<p>Privacy policy</p>' },
-        ],
-      })
-      expect(sortTranslations(created)).toMatchSnapshot('create')
+    const created = await updatePrivacySetting({
+      id,
+      isEnabled: true,
+      translations: [
+        { locale: 'FR_FR', value: '<p>Politique de confidentialité</p>' },
+        { locale: 'EN_GB', value: '<p>Privacy policy</p>' },
+      ],
+    })
+    expect(sortTranslations(created)).toMatchSnapshot('create')
 
-      const updated = await updatePrivacySetting({
-        id,
-        isEnabled: true,
-        translations: [{ locale: 'EN_GB', value: '<p>Privacy policy, edited</p>' }],
-      })
-      expect(sortTranslations(updated)).toMatchSnapshot('update')
+    const updated = await updatePrivacySetting({
+      id,
+      isEnabled: true,
+      translations: [{ locale: 'EN_GB', value: '<p>Privacy policy, edited</p>' }],
+    })
+    expect(sortTranslations(updated)).toMatchSnapshot('update')
 
-      const removed = await updatePrivacySetting({
-        id,
-        isEnabled: true,
-        translations: [{ locale: 'EN_GB', value: '' }],
-      })
-      expect(sortTranslations(removed)).toMatchSnapshot('remove')
-    } finally {
-      await global.disableFeatureFlag('multilangue')
-    }
+    const removed = await updatePrivacySetting({
+      id,
+      isEnabled: true,
+      translations: [{ locale: 'EN_GB', value: '' }],
+    })
+    expect(sortTranslations(removed)).toMatchSnapshot('remove')
   })
 
   it('denies the mutation as regular user', async () => {

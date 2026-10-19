@@ -33,8 +33,7 @@ const createProposalFromBackOffice = /* GraphQL */ `
 
 /**
  * @jest-status non-compliant
- * @jest-reason Changes backend feature flags without failure-safe restoration of their initial state; MySQL
- * and Elasticsearch resets do not restore Redis flags.
+ * @jest-reason Relies on response snapshots for part of the API contract; add explicit assertions for those scenarios.
  */
 describe('Internal|create proposal', () => {
   const input = {
@@ -94,8 +93,7 @@ describe('Internal|create proposal', () => {
   })
 
   it('creates a published proposal with its district', async () => {
-    await global.enableFeatureFlag('themes')
-    await global.enableFeatureFlag('districts')
+    await global.resetFeatureFlags({ themes: true, districts: true })
 
     const response = await graphql(
       `
@@ -174,8 +172,7 @@ describe('Internal|create proposal', () => {
     ['requires a category when the form requires one', { category: undefined }, 'global.no_category_when_mandatory'],
     ['requires an address when the form requires one', { address: undefined }, 'global.no_address_when_mandatory'],
   ])('%s', async (_label, overrides, expectedError) => {
-    await global.enableFeatureFlag('themes')
-    await global.enableFeatureFlag('districts')
+    await global.resetFeatureFlags({ themes: true, districts: true })
 
     await expect(
       graphql(createProposal, { input: { ...proposalForm1Input, ...overrides } }, 'internal_user'),

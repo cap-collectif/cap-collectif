@@ -43,8 +43,7 @@ const sortTranslations = response => {
 
 /**
  * @jest-status non-compliant
- * @jest-reason Changes backend feature flags without failure-safe restoration of their initial state; MySQL
- * and Elasticsearch resets do not restore Redis flags.
+ * @jest-reason Relies on response snapshots for part of the API contract; add explicit assertions for those scenarios.
  */
 describe('Internal|updateCookieSetting', () => {
   it('updates the value and isEnabled as super-admin', async () => {
@@ -56,7 +55,7 @@ describe('Internal|updateCookieSetting', () => {
   })
 
   it('stores the value under the platform default locale when multilangue is disabled', async () => {
-    await global.disableFeatureFlag('multilangue')
+    await global.resetFeatureFlags({ multilangue: false })
     const id = await getCookieSettingId()
 
     await expect(
@@ -69,36 +68,32 @@ describe('Internal|updateCookieSetting', () => {
   })
 
   it('creates, updates and removes the translation of another locale when multilangue is enabled', async () => {
-    await global.enableFeatureFlag('multilangue')
+    await global.resetFeatureFlags({ multilangue: true })
     const id = await getCookieSettingId()
 
-    try {
-      const created = await updateCookieSetting({
-        id,
-        isEnabled: true,
-        translations: [
-          { locale: 'FR_FR', value: '<p>Liste des cookies</p>' },
-          { locale: 'EN_GB', value: '<p>Cookie list</p>' },
-        ],
-      })
-      expect(sortTranslations(created)).toMatchSnapshot('create')
+    const created = await updateCookieSetting({
+      id,
+      isEnabled: true,
+      translations: [
+        { locale: 'FR_FR', value: '<p>Liste des cookies</p>' },
+        { locale: 'EN_GB', value: '<p>Cookie list</p>' },
+      ],
+    })
+    expect(sortTranslations(created)).toMatchSnapshot('create')
 
-      const updated = await updateCookieSetting({
-        id,
-        isEnabled: true,
-        translations: [{ locale: 'EN_GB', value: '<p>Cookie list, edited</p>' }],
-      })
-      expect(sortTranslations(updated)).toMatchSnapshot('update')
+    const updated = await updateCookieSetting({
+      id,
+      isEnabled: true,
+      translations: [{ locale: 'EN_GB', value: '<p>Cookie list, edited</p>' }],
+    })
+    expect(sortTranslations(updated)).toMatchSnapshot('update')
 
-      const removed = await updateCookieSetting({
-        id,
-        isEnabled: true,
-        translations: [{ locale: 'EN_GB', value: '' }],
-      })
-      expect(sortTranslations(removed)).toMatchSnapshot('remove')
-    } finally {
-      await global.disableFeatureFlag('multilangue')
-    }
+    const removed = await updateCookieSetting({
+      id,
+      isEnabled: true,
+      translations: [{ locale: 'EN_GB', value: '' }],
+    })
+    expect(sortTranslations(removed)).toMatchSnapshot('remove')
   })
 
   it('denies the mutation as regular user', async () => {

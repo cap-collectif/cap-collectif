@@ -26,8 +26,7 @@ const AddCommentMutation = /* GraphQL*/ `
 
 /**
  * @jest-status non-compliant
- * @jest-reason Changes backend feature flags without failure-safe restoration of their initial state; MySQL
- * and Elasticsearch resets do not restore Redis flags.
+ * @jest-reason Relies on response snapshots for part of the API contract; add explicit assertions for those scenarios.
  */
 describe('mutations.addCommentMutation', () => {
   it('User wants to add a comment on a proposal', async () => {
@@ -54,7 +53,7 @@ describe('mutations.addCommentMutation', () => {
   })
 
   it('User wants to comment when moderation is enabled', async () => {
-    await global.enableFeatureFlag('moderation_comment')
+    await global.resetFeatureFlags({ moderation_comment: true })
 
     await expect(
       graphql(
@@ -76,7 +75,6 @@ describe('mutations.addCommentMutation', () => {
         },
       },
     })
-    await global.resetFeatureFlags()
   })
 
   it('User wants to comment when moderation is disabled', async () => {
@@ -103,7 +101,7 @@ describe('mutations.addCommentMutation', () => {
   })
 
   it('Admin wants to comment', async () => {
-    await global.enableFeatureFlag('moderation_comment')
+    await global.resetFeatureFlags({ moderation_comment: true })
 
     await expect(
       graphql(
@@ -125,7 +123,6 @@ describe('mutations.addCommentMutation', () => {
         },
       },
     })
-    await global.resetFeatureFlags()
   })
 
   it('Anonymous wants to add a comment on a blog post', async () => {
@@ -154,7 +151,7 @@ describe('mutations.addCommentMutation', () => {
   })
 
   it('Anonymous wants to add a comment on a blog post when moderation is enabled', async () => {
-    await global.enableFeatureFlag('moderation_comment')
+    await global.resetFeatureFlags({ moderation_comment: true })
 
     await expect(
       graphql(
@@ -178,7 +175,6 @@ describe('mutations.addCommentMutation', () => {
         },
       },
     })
-    await global.resetFeatureFlags()
   })
 
   it('Anonymous wants to add an anwer to a comment', async () => {
