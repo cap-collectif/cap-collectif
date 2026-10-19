@@ -13,17 +13,6 @@ parameters:
     # see https://developers.google.com/recaptcha/docs/faq#id-like-to-run-automated-tests-with-recaptcha.-what-should-i-do
     env(SYMFONY_RECAPTCHA_PRIVATE_KEY): 6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe
 
-monolog:
-    handlers:
-        main:
-            type: stream
-            # PHPUnit reads subprocess stdout before stderr; keep warnings off that pipe.
-            path: '%kernel.logs_dir%/test-warning.log'
-            level: warning
-        file:
-            type: stream
-            path: '%kernel.logs_dir%/test.log'
-            level: debug
 services:
     _defaults:
         autowire: true

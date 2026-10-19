@@ -23,9 +23,13 @@ Les tests HTTP nécessitent aussi les queues RabbitMQ : la CI les crée avec
 `castor ci:app:rabbitmq-queues` après la restauration des données.
 Ce guide conserve les emplacements et les runners actuels.
 
-Les logs de test sont conservés dans `var/log/test.log` et les warnings dans
-`var/log/test-warning.log`. Ils ne sont pas écrits sur `stderr`, afin d'éviter
+Les logs de test, warnings et erreurs compris, sont conservés dans
+`var/log/test.log` par le seul handler `main` de `config/packages/test/monolog.yaml`.
+Ils ne sont pas écrits sur `stderr`, afin d'éviter
 de bloquer les tests PHPUnit exécutés dans des sous-processus isolés.
+Chaque exécuteur du job PHPUnit publie ce fichier compressé dans les artefacts
+CircleCI, sous `phpunit/logs/test.log.gz`, même si les tests échouent. Si la
+préparation échoue avant de produire un log, son absence n'ajoute pas d'échec.
 
 [`phpunit.xml`](../../../phpunit.xml) conserve la suite locale `default` pour
 `tests/` et la suite `Unit Tests` pour `tests/UnitTests/`. CircleCI répartit les
@@ -69,8 +73,15 @@ nouveau fichier après une exécution réussie. En CI, le dossier de sortie doit
 inscriptible par l'utilisateur du conteneur applicatif, dont l'UID peut différer
 de celui qui a créé le dossier dans le checkout.
 
-Le script `bash scripts/agents/test-castor-phpunit.sh` vérifie ces contrats contre le vrai
+Le script `bash .circleci/test-castor-phpunit.sh` vérifie ces contrats contre le vrai
 runner PHP dans le conteneur, avec des fixtures temporaires sans données métier.
+La CI l'exécute uniquement sur l'exécuteur PHPUnit numéro 0 après sa sélection de
+tests, en réutilisant sa stack déjà préparée. La phase
+`phpunit_runner_validation` en mesure le coût. Les rapports synthétiques sont
+temporaires et ne sont pas publiés parmi les résultats utilisés pour le découpage.
+Son répertoire temporaire `.phpunit-runner-*` est créé à la racine du checkout,
+accessible à CircleCI et monté dans le conteneur, puis supprimé en sortie.
+Il ne dépend pas des droits de `var/` restauré depuis le workspace.
 
 Avant revue : lancer le test ciblé et les tests concernés, vérifier qu'une
 régression du comportement le fait échouer, puis vérifier qu'il passe seul et

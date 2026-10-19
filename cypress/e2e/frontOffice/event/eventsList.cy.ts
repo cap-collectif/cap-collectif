@@ -1,7 +1,7 @@
 import { EventPage } from '~e2e/pages'
 import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
-context('Events list page as admin', () => {
+context('Events list filters as anonymous', () => {
   setupFeatureFlags({ themes: true, calendar: true })
 
   Cypress.on('uncaught:exception', err => {
@@ -15,11 +15,11 @@ context('Events list page as admin', () => {
     cy.task('db:restore')
   })
   beforeEach(() => {
-    cy.directLoginAs('admin')
     cy.interceptGraphQLOperation({ operationName: 'EventListPageQuery' })
     cy.interceptGraphQLOperation({ operationName: 'EventRefetchRefetchQuery' })
     cy.visit('/events')
     cy.wait('@EventListPageQuery').its('response.statusCode').should('eq', 200)
+    cy.isLoggedOut()
   })
   describe('within future events list', () => {
     it('should filter events by *title* and display correct results', () => {
@@ -69,13 +69,14 @@ context('Events list page as admin', () => {
   })
 })
 
-context('Events list page as anonymous', () => {
+context('Events linked to a step as anonymous', () => {
   setupFeatureFlags({ calendar: true })
 
   before(() => cy.task('db:restore'))
 
   it('anonymous user can see events linked to a specific step', () => {
     cy.visit('/project/budget-participatif-idf/collect/collecte-des-projets-idf-privee')
+    cy.isLoggedOut()
     EventPage.waitForEventPreviewsToAppear()
   })
 })

@@ -45,6 +45,14 @@ Chaque exécuteur transmet sa sélection à Castor avec `--tests`. Pour plusieur
 
 Ce parallélisme doit rester volontairement limité : chaque exécuteur démarre sa propre stack Docker et restaure les données de test. Ajouter des exécuteurs réduit le temps des tests, mais duplique ce coût de restauration, consomme davantage de crédits et occupe plus de capacité de parallélisme sans gain nécessairement proportionnel.
 
+L'exécuteur PHPUnit numéro 0 lance ensuite `.circleci/test-castor-phpunit.sh`
+pour vérifier le runner Castor avec des tests synthétiques : sélection de
+plusieurs fichiers, propagation d'un échec, rapports JUnit et nettoyage de la
+configuration temporaire. Cette vérification réutilise sa stack Docker et ses
+rapports temporaires ne sont pas publiés dans les durées historiques CircleCI.
+Les trois autres exécuteurs ne la répètent pas. La phase
+`phpunit_runner_validation` en mesure le coût.
+
 #### 4. Données de test communes aux exécuteurs
 
 **Décision** : Le job `prepare-test-data` réinitialise MySQL et Elasticsearch une seule fois par workflow. Il transmet par le workspace CircleCI le dump MySQL, l'instantané Elasticsearch, le pipeline d'ingestion `geoip` et les médias créés par les fixtures. Les jobs Cypress, GraphQL API et PHPUnit restaurent ces données dans leur propre stack Docker, puis reconstruisent le cache Symfony `test` pour générer les proxies Doctrine dans le conteneur. Les feature flags Redis sont réinitialisés dans chaque stack ; Cypress continue à restaurer les données avant chaque suite.

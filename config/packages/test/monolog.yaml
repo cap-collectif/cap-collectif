@@ -1,11 +1,7 @@
 monolog:
     handlers:
         main:
-            type: fingers_crossed
-            action_level: error
-            handler: nested
-            channels: ['!event']
-        nested:
             type: stream
+            # PHPUnit reads subprocess stdout before stderr; keep logs off that pipe.
             path: '%kernel.logs_dir%/%kernel.environment%.log'
             level: debug

@@ -176,3 +176,4 @@ phpstan.neon
 
 # Temporary selected PHPUnit suites created by Castor.
 /.phpunit-selected-*
+/.phpunit-runner-*
