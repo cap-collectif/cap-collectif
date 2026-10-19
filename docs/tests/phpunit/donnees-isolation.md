@@ -62,8 +62,9 @@ Choisir une stratégie adaptée aux stockages réellement utilisés :
   complexe, à condition de restaurer tous les stockages concernés dans un environnement
   réservé à cette exécution. Ne pas réinitialiser un stockage utilisé simultanément
   par d'autres tests.
-- Capturer puis restaurer la valeur initiale des feature flags et de la configuration,
-  plutôt que de les désactiver systématiquement. Les caches et les messages en attente
+- Pour les tests migrés, utiliser le preset et les overrides décrits plus bas.
+  Pour les autres tests, capturer puis restaurer la valeur initiale des feature flags
+  et de la configuration, plutôt que de les désactiver systématiquement. Les caches et les messages en attente
   doivent également être traités lorsqu'ils peuvent affecter le scénario suivant.
 
 La restauration CI d'un jeu initial par exécuteur ne remplace pas l'isolation
@@ -105,3 +106,49 @@ l'indexation applicative.
 ## Références
 
 - [Elasticsearch — visibilité après refresh](https://www.elastic.co/docs/reference/elasticsearch/rest-apis/refresh-parameter).
+
+## Feature flags Redis — migration pilote
+
+Les tests d’intégration qui implémentent `FeatureFlagsAwareTest` utilisent le
+preset `EnvironmentPresets::TEST`, comme Jest et Cypress. L’extension déclarée
+dans `phpunit.xml` prépare ce preset avant `setUp()` et le rétablit après
+`tearDown()`, y compris après une assertion échouée, une exception dans la
+préparation ou le nettoyage, ou un test ignoré. Elle fonctionne aussi avec
+`@runTestsInSeparateProcesses`. Elle ne touche pas les classes non migrées ni
+les tests unitaires qui simulent les flags.
+
+```php
+use Capco\Tests\FeatureFlags\FeatureFlagsAwareTest;
+use Capco\Tests\FeatureFlags\FeatureFlagsTrait;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+
+class ExampleTest extends KernelTestCase implements FeatureFlagsAwareTest
+{
+    use FeatureFlagsTrait;
+
+    public static function featureFlagOverrides(): array
+    {
+        return ['calendar' => false];
+    }
+}
+```
+
+Déclarer les préconditions communes dans `featureFlagOverrides()`. Une classe
+fille peut compléter celles de son parent avec `array_replace(parent::featureFlagOverrides(), [...])`.
+Pour modifier des flags pendant un scénario, utiliser
+`$this->setFeatureFlags(['shield_mode' => true])` : les appels successifs conservent
+les overrides explicites précédents et ceux de la classe. Ces changements sont
+oubliés à chaque nouvelle exécution du test.
+
+La préparation appelle directement `Capco\Tests\FeatureFlags\FeatureFlagsResetter`
+dans le processus PHPUnit, sans lancer de sous-processus ni démarrer Symfony.
+Le script CLI `features/graphql-api/feature-flags-resetter.php` utilisé par Jest
+et Cypress appelle la même classe. Le helper valide tous les overrides
+avant une écriture Redis atomique limitée au namespace `testfeature_toggle`.
+Ces préconditions n’émettent pas les événements métier des commandes Symfony ;
+un test de ces commandes continue à appeler la commande réellement testée.
+Ce reset ne remplace pas le nettoyage SQL, Elasticsearch ou des autres clés Redis.
+
+La migration pilote porte sur `FeatureToggleCommandTest`, `GraphQLControllerTest`
+et `RemindUserAccountConfirmationCommandTest`. Les autres tests conservent leur
+fonctionnement actuel jusqu’à leur migration explicite.

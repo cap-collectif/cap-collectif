@@ -4,6 +4,7 @@ namespace Capco\Tests\Command;
 
 use Capco\AppBundle\Toggle\EnvironmentPresets;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\Tests\FeatureFlags\FeatureFlagsResetter;
 use PHPUnit\Framework\TestCase;
 use Predis\Client;
 use Qandidate\Toggle\Toggle;
@@ -61,6 +62,48 @@ class TestFeatureFlagsResetterTest extends TestCase
         $this->runHelper('{"calendar":false,"shield_mode":true}')->mustRun();
         $this->assertPreset(['calendar' => false, 'shield_mode' => true]);
         self::assertSame('unchanged', $this->redis->get($this->unrelatedKey));
+    }
+
+    public function testDirectResetAndCliPersistIdenticalFlags(): void
+    {
+        $count = (new FeatureFlagsResetter())->reset(['calendar' => false, 'shield_mode' => true]);
+        self::assertSame(\count(Manager::$toggles), $count);
+        $this->assertPreset(['calendar' => false, 'shield_mode' => true]);
+        $directValues = $this->redis->mget(array_keys($this->initialValues));
+
+        $this->runHelper('{"calendar":false,"shield_mode":true}')->mustRun();
+
+        self::assertSame($directValues, $this->redis->mget(array_keys($this->initialValues)));
+        self::assertSame('unchanged', $this->redis->get($this->unrelatedKey));
+    }
+
+    /**
+     * @dataProvider invalidDirectOverrides
+     *
+     * @param array<string, mixed> $overrides
+     */
+    public function testInvalidDirectOverridesDoNotChangeAnyFlag(array $overrides): void
+    {
+        $resetter = new FeatureFlagsResetter();
+        $resetter->reset(['calendar' => false]);
+        $before = $this->redis->mget(array_keys($this->initialValues));
+
+        try {
+            $resetter->reset($overrides);
+            self::fail('Invalid feature flag overrides must be rejected.');
+        } catch (\InvalidArgumentException $exception) {
+            self::assertStringContainsString('Unknown feature flag or non-boolean value:', $exception->getMessage());
+        }
+
+        self::assertSame($before, $this->redis->mget(array_keys($this->initialValues)));
+        self::assertSame('unchanged', $this->redis->get($this->unrelatedKey));
+    }
+
+    /** @return iterable<string, array{array<string, mixed>}> */
+    public static function invalidDirectOverrides(): iterable
+    {
+        yield 'unknown flag after a valid override' => [['calendar' => true, 'unknown_test_flag' => false]];
+        yield 'non-boolean value after a valid override' => [['calendar' => true, 'shield_mode' => 'false']];
     }
 
     /** @dataProvider invalidOverrides */

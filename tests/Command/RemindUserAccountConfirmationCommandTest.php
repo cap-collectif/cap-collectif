@@ -5,11 +5,11 @@ namespace Capco\Tests\Command;
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Command\RemindUserAccountConfirmationCommand;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\Tests\FeatureFlags\FeatureFlagsAwareTest;
+use Capco\Tests\FeatureFlags\FeatureFlagsTrait;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Psr\Log\LoggerInterface;
-use Qandidate\Toggle\Context;
-use Qandidate\Toggle\ContextFactory;
 use Symfony\Component\Console\Tester\CommandTester;
 
 /**
@@ -19,11 +19,11 @@ use Symfony\Component\Console\Tester\CommandTester;
  * @phpunit-reason Checks reminder selection and repeated CLI execution with restored flags and transactional
  * scenario data.
  */
-class RemindUserAccountConfirmationCommandTest extends MailerSnapshotCommandTestCase
+class RemindUserAccountConfirmationCommandTest extends MailerSnapshotCommandTestCase implements FeatureFlagsAwareTest
 {
+    use FeatureFlagsTrait;
+
     private Manager $featureManager;
-    private Context $featureContext;
-    private bool $initialFeatureState;
 
     protected function setUp(): void
     {
@@ -32,22 +32,11 @@ class RemindUserAccountConfirmationCommandTest extends MailerSnapshotCommandTest
         $featureManager = self::getContainer()->get(Manager::class);
         \assert($featureManager instanceof Manager);
         $this->featureManager = $featureManager;
-
-        $contextFactory = self::getContainer()->get('qandidate.toggle.user_context_factory');
-        \assert($contextFactory instanceof ContextFactory);
-        $this->featureContext = $contextFactory->createContext();
-        $this->initialFeatureState = $this->isFeatureActive();
-        $this->featureManager->activate(Manager::remind_user_account_confirmation);
     }
 
-    protected function tearDown(): void
+    public static function featureFlagOverrides(): array
     {
-        $this->featureManager->set(
-            Manager::remind_user_account_confirmation,
-            $this->initialFeatureState
-        );
-
-        parent::tearDown();
+        return [Manager::remind_user_account_confirmation => true];
     }
 
     public function testRemindsEligibleUsersOnlyOnce(): void
@@ -131,14 +120,6 @@ class RemindUserAccountConfirmationCommandTest extends MailerSnapshotCommandTest
         sort($userIds);
 
         return $userIds;
-    }
-
-    private function isFeatureActive(): bool
-    {
-        return $this->featureManager
-            ->getToggleManager()
-            ->active(Manager::remind_user_account_confirmation, $this->featureContext)
-        ;
     }
 
     private function createRemindCommandTester(PublishedMessageCapture $publishedMessages): CommandTester

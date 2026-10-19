@@ -3,6 +3,8 @@
 namespace Capco\Tests\Command;
 
 use Capco\AppBundle\Toggle\Manager;
+use Capco\Tests\FeatureFlags\FeatureFlagsAwareTest;
+use Capco\Tests\FeatureFlags\FeatureFlagsTrait;
 use Qandidate\Toggle\Context;
 use Qandidate\Toggle\ContextFactory;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -14,13 +16,14 @@ use Symfony\Component\Console\Tester\CommandTester;
  * @coversNothing
  * @phpunit-status reference
  * @phpunit-reason Exercises CLI outcomes and flag state, including idempotence and refusals, with
- * failure-safe restoration of the initial flag.
+ * failure-safe restoration of the test feature flag preset.
  */
-class FeatureToggleCommandTest extends KernelTestCase
+class FeatureToggleCommandTest extends KernelTestCase implements FeatureFlagsAwareTest
 {
+    use FeatureFlagsTrait;
+
     private Manager $featureManager;
     private Context $context;
-    private bool $initialState;
 
     protected function setUp(): void
     {
@@ -33,21 +36,11 @@ class FeatureToggleCommandTest extends KernelTestCase
         $contextFactory = self::getContainer()->get('qandidate.toggle.user_context_factory');
         \assert($contextFactory instanceof ContextFactory);
         $this->context = $contextFactory->createContext();
-        $this->initialState = $this->isFeatureActive();
-    }
-
-    protected function tearDown(): void
-    {
-        $this->initialState
-            ? $this->featureManager->activate(Manager::zipcode_at_register)
-            : $this->featureManager->deactivate(Manager::zipcode_at_register);
-
-        parent::tearDown();
     }
 
     public function testDisableActiveFeature(): void
     {
-        $this->featureManager->activate(Manager::zipcode_at_register);
+        $this->setFeatureFlags([Manager::zipcode_at_register => true]);
 
         $commandTester = $this->executeCommand('capco:toggle:disable');
 
@@ -57,7 +50,7 @@ class FeatureToggleCommandTest extends KernelTestCase
 
     public function testEnableInactiveFeature(): void
     {
-        $this->featureManager->deactivate(Manager::zipcode_at_register);
+        $this->setFeatureFlags([Manager::zipcode_at_register => false]);
 
         $commandTester = $this->executeCommand('capco:toggle:enable');
 
@@ -67,7 +60,7 @@ class FeatureToggleCommandTest extends KernelTestCase
 
     public function testEnableActiveFeatureIsIdempotent(): void
     {
-        $this->featureManager->activate(Manager::zipcode_at_register);
+        $this->setFeatureFlags([Manager::zipcode_at_register => true]);
 
         $commandTester = $this->executeCommand('capco:toggle:enable');
 
@@ -78,7 +71,7 @@ class FeatureToggleCommandTest extends KernelTestCase
 
     public function testDisableInactiveFeatureIsIdempotent(): void
     {
-        $this->featureManager->deactivate(Manager::zipcode_at_register);
+        $this->setFeatureFlags([Manager::zipcode_at_register => false]);
 
         $commandTester = $this->executeCommand('capco:toggle:disable');
 

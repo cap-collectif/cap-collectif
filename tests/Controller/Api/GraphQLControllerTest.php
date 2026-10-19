@@ -3,6 +3,8 @@
 namespace Capco\Tests\Controller\Api;
 
 use Capco\AppBundle\Toggle\Manager;
+use Capco\Tests\FeatureFlags\FeatureFlagsAwareTest;
+use Capco\Tests\FeatureFlags\FeatureFlagsTrait;
 use GuzzleHttp\Client;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,30 +13,15 @@ use Symfony\Component\HttpFoundation\Request;
  * @internal
  * @coversNothing
  * @phpunit-status compliant
- * @phpunit-reason Checks actual HTTP statuses, response data and CORS headers and restores the public API
- * flag.
+ * @phpunit-reason Checks actual HTTP statuses, response data and CORS headers with isolated feature flags.
  */
-class GraphQLControllerTest extends KernelTestCase
+class GraphQLControllerTest extends KernelTestCase implements FeatureFlagsAwareTest
 {
-    private Manager $toggleManager;
-    private bool $publicApiWasActive;
+    use FeatureFlagsTrait;
 
-    protected function setUp(): void
+    public static function featureFlagOverrides(): array
     {
-        self::bootKernel();
-
-        $toggleManager = static::getContainer()->get(Manager::class);
-        \assert($toggleManager instanceof Manager);
-        $this->toggleManager = $toggleManager;
-        $this->publicApiWasActive = $this->toggleManager->isActive(Manager::public_api);
-        $this->toggleManager->activate(Manager::public_api);
-    }
-
-    protected function tearDown(): void
-    {
-        $this->toggleManager->set(Manager::public_api, $this->publicApiWasActive);
-
-        parent::tearDown();
+        return [Manager::public_api => true];
     }
 
     /**
