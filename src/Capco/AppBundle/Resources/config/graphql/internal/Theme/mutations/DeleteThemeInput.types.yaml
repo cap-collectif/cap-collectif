@@ -1,0 +1,8 @@
+DeleteThemeInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of deleteTheme mutation.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the theme to delete.'

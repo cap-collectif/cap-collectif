@@ -191,7 +191,17 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
               <SidebarAccordionItem id="contenus">
                 <SidebarButton icon={ICON_NAME.FOLDER_O} text="admin.group.content" isOpen={isOpen} />
                 <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
-                  {isAdmin && <SidebarLink text="admin.label.theme" href="/admin/capco/app/theme/list" />}
+                  {isAdmin && (
+                    // Sonata route retained during the Admin Next migration rollout. Remove it when the migration feature flag is removed.
+                    <SidebarLink
+                      text="admin.label.theme"
+                      href={
+                        features.unstable__sonata_migration_to_admin_next
+                          ? '/admin-next/themes'
+                          : '/admin/capco/app/theme/list'
+                      }
+                    />
+                  )}
                   {(isAdmin || isProjectAdmin || isOrganizationMember) && (
                     <SidebarLink text="admin.label.post" href="/admin-next/posts" />
                   )}
@@ -241,17 +251,11 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                   <SidebarLink text="global-typeface" href="/admin/font/list" />
                   <SidebarLink text="admin.label.settings.global" href="/admin/settings/settings.global/list" />
                   {isSuperAdmin ? (
-                    <SidebarLink
-                      text="admin.label.settings.performance"
-                      href="/admin-next/performance-settings"
-                    />
+                    <SidebarLink text="admin.label.settings.performance" href="/admin-next/performance-settings" />
                   ) : null}
                   <SidebarLink text="admin.label.settings.modules" href="/admin-next/features" />
                   {(!features.emailing || (features.emailing && !features.emailing_parameters)) && (
-                    <SidebarLink
-                      text="admin.label.settings.notifications"
-                      href="/admin-next/notification-settings"
-                    />
+                    <SidebarLink text="admin.label.settings.notifications" href="/admin-next/notification-settings" />
                   )}
                   <SidebarLink text="admin.label.settings.appearance" href="/admin-next/appearance-settings" />
                   <SidebarLink text="secured-participation" href="/admin-next/secured-participation" />

@@ -16,3 +16,9 @@ InternalThemeTranslation:
             teaser:
                 type: 'String'
                 description: 'The theme translation teaser.'
+            slug:
+                type: 'String'
+                description: 'The slug of the theme translation.'
+            metaDescription:
+                type: 'String'
+                description: 'The theme translation meta description.'

@@ -1,0 +1,7 @@
+ThemeConnection:
+    type: relay-connection
+    config:
+        nodeType: InternalTheme!
+        connectionFields:
+            totalCount:
+                type: Int!

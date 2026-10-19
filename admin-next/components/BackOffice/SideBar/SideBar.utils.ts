@@ -2,7 +2,9 @@ import { FeatureFlagType } from '@relay/useFeatureFlagQuery.graphql'
 import { FeatureFlags } from 'types'
 import sideBarItems from './SideBarItems.json'
 
-const SONATA_URL_BY_ADMIN_NEXT_URL: Record<string, string> = {}
+const SONATA_URL_BY_ADMIN_NEXT_URL: Record<string, string> = {
+  '/admin-next/themes': '/admin/capco/app/theme/list',
+}
 
 export const getSideBarItemsFiltered = (
   isAdmin: boolean,

@@ -1,0 +1,10 @@
+UpdateThemePayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            theme:
+                type: 'InternalTheme'
+                description: 'The updated theme.'
+            errorCode:
+                type: 'ThemeErrorCode'
+                description: 'The available errors if any.'

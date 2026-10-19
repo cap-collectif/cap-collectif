@@ -1,0 +1,20 @@
+CreateThemeTranslationInput:
+    type: input-object
+    config:
+        description: 'A theme translation.'
+        fields:
+            locale:
+                type: 'TranslationLocale!'
+                description: 'The locale of the translation.'
+            title:
+                type: 'String!'
+                description: 'The theme title.'
+            teaser:
+                type: 'String'
+                description: 'The theme subtitle.'
+            body:
+                type: 'String'
+                description: 'The theme description.'
+            metaDescription:
+                type: 'String'
+                description: 'The theme meta description.'

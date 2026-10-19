@@ -1064,6 +1064,27 @@ InternalMutation:
                     inputType: DeleteVideoInput
                     payloadType: DeleteVideoPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Video\\DeleteVideoMutation", args)'
+            createTheme:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CreateThemeInput
+                    payloadType: CreateThemePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Theme\\CreateThemeMutation", args)'
+            updateTheme:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateThemeInput
+                    payloadType: UpdateThemePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Theme\\UpdateThemeMutation", args)'
+            deleteTheme:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteThemeInput
+                    payloadType: DeleteThemePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Theme\\DeleteThemeMutation", args)'
             createNewsletterSubscription:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'

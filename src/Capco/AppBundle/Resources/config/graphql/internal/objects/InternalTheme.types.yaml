@@ -17,3 +17,41 @@ InternalTheme:
                 description: "The themes's related media."
                 resolve: '@=value.getMedia()'
                 type: 'InternalMedia'
+            isEnabled:
+                type: 'Boolean!'
+                description: 'Whether the theme is published.'
+                resolve: '@=value.getIsEnabled()'
+            position:
+                type: 'Int!'
+                description: 'The display position of the theme.'
+                resolve: '@=value.getPosition()'
+            status:
+                type: 'ThemeStatus'
+                description: 'The theme status, null for none.'
+                resolve: '@=value.getStatus()'
+            author:
+                type: 'InternalUser'
+                description: 'The theme author.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=value.getAuthor()'
+            customCode:
+                type: 'String'
+                description: 'Custom code inserted at the end of the theme page.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=value.getCustomCode()'
+            eventsCount:
+                type: 'Int!'
+                description: 'The number of events related to the theme.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Theme\\ThemeEventsCountResolver", value)'
+            postsCount:
+                type: 'Int!'
+                description: 'The number of posts related to the theme.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Theme\\ThemePostsCountResolver", value)'
+            createdAt:
+                type: 'DateTime!'
+                resolve: '@=value.getCreatedAt()'
+            updatedAt:
+                type: 'DateTime'
+                resolve: '@=value.getUpdatedAt()'

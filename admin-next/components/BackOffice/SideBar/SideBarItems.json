@@ -66,7 +66,8 @@
         "items": [
             {
                 "title": "admin.label.theme",
-                "href": "/admin/capco/app/theme/list",
+                "href": "/admin-next/themes",
+                "relatedHrefs": ["/admin-next/theme"],
                 "rolesRequired": ["admin"],
                 "featuresRequired": []
             },

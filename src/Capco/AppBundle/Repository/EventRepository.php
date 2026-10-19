@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\District\GlobalDistrict;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Enum\EventOrderField;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\UserBundle\Entity\User;
@@ -303,6 +304,18 @@ class EventRepository extends EntityRepository
         ;
 
         return new Paginator($query);
+    }
+
+    public function countByTheme(Theme $theme): int
+    {
+        return (int) $this->createQueryBuilder('e')
+            ->select('COUNT(e.id)')
+            ->innerJoin('e.themes', 't')
+            ->andWhere('t = :theme')
+            ->setParameter('theme', $theme)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
     }
 
     /**

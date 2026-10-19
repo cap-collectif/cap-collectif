@@ -1,0 +1,10 @@
+UpdateThemeInput:
+    type: relay-mutation-input
+    inherits:
+        - CreateThemeInput
+    config:
+        description: 'Input of updateTheme mutation.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the theme to update.'

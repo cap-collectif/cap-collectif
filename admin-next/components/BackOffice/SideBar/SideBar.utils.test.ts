@@ -56,6 +56,21 @@ describe('getSideBarItemsFiltered', () => {
     expect(getPrivacySettingsItem()?.href).toBe('/admin-next/privacy-settings')
   })
 
+  const getThemesItem = (featureFlags = defaultFeatureFlags) => {
+    const sideBarItems = getSideBarItemsFiltered(true, true, featureFlags, false, null, false)
+    return sideBarItems.find(item => item.id === 'content')?.items.find(item => item.title === 'admin.label.theme')
+  }
+
+  it('keeps the Sonata themes route while the migration is disabled', () => {
+    expect(getThemesItem()?.href).toBe('/admin/capco/app/theme/list')
+  })
+
+  it('uses the Admin Next themes route while the migration is enabled', () => {
+    expect(getThemesItem({ ...defaultFeatureFlags, unstable__sonata_migration_to_admin_next: true })?.href).toBe(
+      '/admin-next/themes',
+    )
+  })
+
   it('hides the Hub API Green item when its feature flag is disabled', () => {
     const sideBarItems = getSideBarItemsFiltered(
       true,

@@ -423,6 +423,18 @@ class PostRepository extends EntityRepository
         }
     }
 
+    public function countByTheme(Theme $theme): int
+    {
+        return (int) $this->createQueryBuilder('p')
+            ->select('COUNT(p.id)')
+            ->innerJoin('p.themes', 't')
+            ->andWhere('t = :theme')
+            ->setParameter('theme', $theme)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
     protected function getIsPublishedQueryBuilder(string $alias = 'p'): QueryBuilder
     {
         return $this->createQueryBuilder($alias)

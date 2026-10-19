@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Repository;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Theme;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
@@ -142,11 +143,57 @@ class ThemeRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
+    /**
+     * Back-office listing: published and unpublished themes alike.
+     */
+    public function getPaginated(?string $search = null, ?int $offset = null, ?int $limit = null): Paginator
+    {
+        $qb = $this->getPaginatedQueryBuilder($search)
+            ->addSelect('a')
+            ->leftJoin('t.author', 'a')
+            ->orderBy('t.position', 'ASC')
+            ->addOrderBy('t.id', 'ASC')
+        ;
+
+        if (null !== $offset) {
+            $qb->setFirstResult($offset);
+        }
+
+        if (null !== $limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        return new Paginator($qb);
+    }
+
+    public function countPaginated(?string $search = null): int
+    {
+        $qb = $this->getPaginatedQueryBuilder($search)->select('COUNT(DISTINCT t.id)');
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
     protected function getIsEnabledQueryBuilder()
     {
         return $this->createQueryBuilder('t')
             ->andWhere('t.isEnabled = :enabled')
             ->setParameter('enabled', true)
         ;
+    }
+
+    private function getPaginatedQueryBuilder(?string $search = null): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('t')
+            ->leftJoin('t.translations', 'translation')
+        ;
+
+        if (null !== $search && '' !== trim($search)) {
+            $qb
+                ->andWhere('translation.title LIKE :search')
+                ->setParameter('search', '%' . trim($search) . '%')
+            ;
+        }
+
+        return $qb;
     }
 }

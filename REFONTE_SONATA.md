@@ -35,6 +35,11 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
    des données personnelles) et l'appeler depuis Admin Next avec `downloadCSV()` (`@utils/download-csv`). Voir
    `NewsletterSubscriptionExportController.php`. `downloadCSV()` lit le nom de fichier par un simple
    `split('=')` sur `Content-Disposition` : garder un nom sans caractère qui forcerait des guillemets.
+   L'export générique Sonata (`/admin/capco/app/<entité>/export`) n'est appelé que depuis la liste Sonata : en mode
+   « avec feature flag », ne rien supprimer, il disparaîtra avec la classe Admin lors de la PR de nettoyage.
+   `getFeatures()` dans la classe Admin ne protège pas la page : `FeaturesCategoryResolver::isAdminEnabled()`
+   (fonction Twig `is_admin_enabled`) ne sert qu'à masquer les entrées du dashboard/menu Sonata. Ne pas en déduire
+   une condition `hasFeatureFlag()` à reproduire sur la page ou la query.
 2. **Identifier l'entité Doctrine** associée (`src/Capco/AppBundle/Entity/`) pour connaître les champs réels
    et savoir si l'entité est traduisible (présence d'une entité `*Translation` / `TranslatableTrait`) ou non.
 3. **Vérifier l'existant GraphQL** (`schema.internal.graphql` + `src/Capco/AppBundle/Resources/config/graphql/internal/`) :
@@ -67,6 +72,10 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
      `rolesRequired` et de celui de son groupe englobant (ex: le groupe "Utilisateurs" est `["admin"]`, donc
      `/admin-next/user-types` est protégée même si son propre `rolesRequired` est `[]`) — ça correspond à ce
      que le menu affiche réellement (un item n'est visible que si le groupe **et** l'item l'autorisent).
+     ⚠️ La correspondance se fait sur l'URL exacte : une page qui n'est pas elle-même une entrée du menu
+     (ex: le formulaire de création/édition `/admin-next/theme`, atteint depuis la liste `/admin-next/themes`)
+     n'hérite d'**aucun** rôle par défaut. Il faut l'ajouter dans `relatedHrefs` de l'item de menu
+     correspondant (`"relatedHrefs": ["/admin-next/theme"]`) pour qu'elle reçoive les mêmes restrictions.
      - `withPageAuthRequired` gère aussi, automatiquement, le cas où le viewer n'a pas (ou plus) accès à la
        page demandée — **rien à faire dans la page migrée**. Deux redirections possibles, chacune vers une
        page qui doit vivre sous `/admin-next/` et jamais à la racine (le reverse-proxy ne route que ces
@@ -77,6 +86,10 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
          publique (`/`).
        Voir `ADR/001-admin_next_authorization_errors.md` pour le détail et la justification de cette
        distinction.
+     - **Limite connue : la recherche se fait sur l'URL exacte.** Une page d'édition dédiée absente du menu
+       (`/admin-next/video`, `/admin-next/theme`, à côté de la liste `/admin-next/videos`, `/admin-next/themes`)
+       ne trouve aucune entrée et n'exige donc aucun rôle : un project admin voit le squelette de la page, seules
+       les queries/mutations (`access: hasRole('ROLE_ADMIN')`) le bloquent. Toujours protéger aussi le GraphQL.
    - L'endroit naturel pour une vraie restriction **côté GraphQL** (utile si la query/mutation n'est pas déjà
      couverte par le point précédent, ou si on veut protéger l'API elle-même) est le champ concerné
      (`access:` dans les yaml, ex: `access: "@=hasRole('ROLE_ADMIN')"` sur une mutation). **Mais avant
@@ -86,7 +99,11 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
      aussi le filtre public de la page `/projects`, accessible aux visiteurs non connectés) — les restreindre
      casserait cet usage légitime. En général la **mutation** (écriture) peut être restreinte sans risque,
      alors que la **query** (lecture) partagée doit souvent rester ouverte si la donnée est déjà publique
-     ailleurs.
+     ailleurs. Si la query existante est publique, ne liste que les éléments publiés ou n'est pas paginée (ex:
+     `themes(title)`, utilisée par les filtres publics et `ThemeListField`), créer une query admin dédiée plutôt
+     que la modifier (ex: `adminThemes(search, first, after): ThemeConnection!`, `access: hasRole('ROLE_ADMIN')`).
+     De même, les champs ajoutés à un type déjà exposé publiquement (auteur, code personnalisé, compteurs) portent
+     leur propre `access:`.
 5. **Repérer une page `admin-next/` déjà migrée avec une structure similaire** pour copier le pattern plutôt
    que d'en inventer un nouveau. Voir la section "Patterns de référence" ci-dessous pour choisir le bon
    template selon la forme de la donnée (liste plate vs paginée, avec/sans traductions, avec/sans couleur...).
@@ -135,7 +152,11 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
    - `frontend/js/components/Admin/Sidebar/Sidebar.utils.tsx` (`URL_MAP`) : ce fichier liste, par groupe de
      menu (`projets`, `reglages`, etc.), les préfixes d'URL permettant au menu legacy de savoir quel
      sous-menu ouvrir par défaut selon l'URL courante (`window.location.href.includes(val)`). Conserver les
-     deux préfixes pendant le rollout pour que le menu fonctionne sur Sonata comme sur Admin Next.
+     deux préfixes pendant le rollout pour que le menu fonctionne sur Sonata comme sur Admin Next. La
+     correspondance est une inclusion de sous-chaîne et la **dernière** clé qui correspond l'emporte : un préfixe
+     court comme `/admin-next/theme` (groupe `contenus`) correspond aussi à `/admin-next/theme-settings`, qui reste
+     dans `pages` uniquement parce que ce groupe est déclaré après. Vérifier ce genre de collision en ajoutant un
+     préfixe.
    - Ces deux fichiers `Sidebar.tsx`/`Sidebar.utils.tsx` ne pourront être supprimés que lorsque **toutes**
      les pages Sonata auront été migrées (ils sont partagés par toutes les pages Sonata restantes).
    - **Et ailleurs si besoin** : faire une recherche globale de l'ancienne URL Sonata (`grep -rn` sur tout le
@@ -170,6 +191,12 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
     de l'étape 4 fonctionne réellement (accès autorisé pour l'un, redirection/refus pour l'autre), pas
     seulement que la page s'affiche.
 13. **Tests Cypress et vérification des tests existants** :
+    - Pour le contrat GraphQL (create/update/delete, `errorCode`, accès refusé), écrire un test de la suite Jest API
+      (`features/graphql-api/internal/Mutation/<Feature>/`, `import '../../../_setupDB'`, relecture de l'effet par
+      une query) plutôt qu'un test PHPUnit qui appelle la mutation avec des mocks : c'est ce que recommande
+      `docs/tests/phpunit/frontieres.md`, et `tests/Mutation/VideoMutationTest.php` est marqué `non-compliant` pour
+      cette raison. Exemple : `features/graphql-api/internal/Mutation/Theme/manageTheme.js`. En local, le lancer
+      via `pipenv run yarn test-e2e-mutations <dossier>` : les helpers appellent `fab` directement.
     - Ne pas chercher à lire / modifier les variables d'environnement, demander à la développeuse aux commandes de modifier les éléments nécessaires.
     - Vérifier les tests **Cypress** qui couvrent la page Sonata migrée, rangés dans `cypress/e2e/backOffice/<feature>/`
       (convention de dossier par feature, ex: `cypress/e2e/backOffice/project/`).
@@ -317,6 +344,14 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
 - **Page d'édition dédiée avec `?id=` en query param** (plutôt qu'une modale) : voir le couple
   `pages/admin-next/geographical-area.tsx` (lecture via `node(id:)` + `useUrlState('id', '')`) et
   `components/BackOffice/GeographicalArea/GeographicalAreaForm.tsx`.
+- **Page dédiée création/édition avec accordéons à droite (layout de `/post`), multilangue inclus** :
+  `components/BackOffice/Themes/ThemeFormWrapper.tsx` (+ `ThemeForm.tsx`, `ThemeFormSide.tsx`) — colonne
+  principale à 70 % (titre, auteur, sous-titre, uploader d'image, `TextEditor`), accordéons à 30 % (« Publication »
+  avec `Switch` publié/position/statut, « Multilingue » avec `Select` de langue piloté hors formulaire, « Avancée »
+  avec méta-description/code personnalisé). Un champ par langue (`${locale}-title`...) est chargé au montage ; toutes
+  les langues sont envoyées, le back supprime la traduction d'une langue dont tous les champs sont vides (hors langue
+  par défaut) et laisse intactes les langues absentes de l'input. Liste associée : `ThemeList.tsx`,
+  sur le modèle de `VideoList.tsx`.
 - **Page "wrapper" standard** : toute page admin-next suit le même squelette —
   `Layout navTitle={...}` + `Suspense fallback={<Spinner .../>}` + `export const getServerSideProps = withPageAuthRequired`.
   Le rôle requis (le cas échéant) se règle dans `rolesRequired` de `SideBarItems.json`, pas dans le code de

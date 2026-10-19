@@ -16,6 +16,8 @@ export const URL_MAP = {
   contenus: [
     '/admin/capco/app/highlightedcontent/',
     '/admin/capco/app/theme/',
+    '/admin-next/themes',
+    '/admin-next/theme',
     '/admin/capco/app/post/',
     '/admin/capco/app/event/',
     '/admin-next/videos',

@@ -74,13 +74,17 @@ export const resolveViewerPageProps = async (req: GetServerSidePropsContext['req
 // A page's effective roles are the union of its own `rolesRequired` and its enclosing group's: a
 // group like "Réglages" is admin-only in the menu even though some of its pages don't carry that
 // restriction themselves, and the menu only ever shows such a page to viewers who satisfy both.
+//
+// Pages that aren't menu entries themselves (e.g. the create/edit form `/admin-next/theme` reached
+// from the `/admin-next/themes` list) are listed in their menu item's `relatedHrefs` and inherit its roles.
 const findRolesRequiredForPath = (pathname: string): string[] => {
   for (const group of sideBarItems) {
     if (group.href === pathname) {
       return group.rolesRequired ?? []
     }
     for (const item of group.items ?? []) {
-      if (item.href === pathname) {
+      const relatedHrefs: string[] = 'relatedHrefs' in item ? item.relatedHrefs : []
+      if (item.href === pathname || relatedHrefs.includes(pathname)) {
         return [...(group.rolesRequired ?? []), ...(item.rolesRequired ?? [])]
       }
     }

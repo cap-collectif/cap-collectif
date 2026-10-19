@@ -790,6 +790,25 @@ InternalQuery:
                     id:
                         type: 'ID!'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Video\\VideoResolver", args)'
+            adminThemes:
+                type: 'ThemeConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                description: 'List all themes, published or not, ordered by position.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                args:
+                    search:
+                        type: 'String'
+                        defaultValue: null
+                        description: 'Filter by title.'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Theme\\ThemeListResolver", args)'
+            theme:
+                type: 'InternalTheme'
+                description: 'Get a single theme by id.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                args:
+                    id:
+                        type: 'ID!'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Theme\\ThemeResolver", args)'
             newsletterSubscriptions:
                 type: 'NewsletterSubscriptionConnection!'
                 argsBuilder: 'Relay::ForwardConnection'

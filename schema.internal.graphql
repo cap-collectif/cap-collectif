@@ -4764,6 +4764,57 @@ type CreateSourceCategoryPayload {
   clientMutationId: String
 }
 
+input CreateThemeInput {
+  """The theme translations."""
+  translations: [CreateThemeTranslationInput!]!
+
+  """The id of the theme author."""
+  author: ID
+
+  """The id of the theme image."""
+  media: ID
+
+  """Whether the theme should be published."""
+  isEnabled: Boolean
+
+  """The display position of the theme."""
+  position: Int
+
+  """The theme status, null for none."""
+  status: ThemeStatus
+
+  """Custom code inserted at the end of the theme page."""
+  customCode: String
+  clientMutationId: String
+}
+
+type CreateThemePayload {
+  """The created theme."""
+  theme: Theme
+
+  """The available errors if any."""
+  errorCode: ThemeErrorCode
+  clientMutationId: String
+}
+
+"""A theme translation."""
+input CreateThemeTranslationInput {
+  """The locale of the translation."""
+  locale: TranslationLocale!
+
+  """The theme title."""
+  title: String!
+
+  """The theme subtitle."""
+  teaser: String
+
+  """The theme description."""
+  body: String
+
+  """The theme meta description."""
+  metaDescription: String
+}
+
 input CreateUserIdentificationCodeListInput {
   """Name of the list to create."""
   name: String!
@@ -6652,6 +6703,21 @@ input DeleteStepInput {
 type DeleteStepPayload {
   """The deleted step ID."""
   stepId: ID!
+  clientMutationId: String
+}
+
+input DeleteThemeInput {
+  """The id of the theme to delete."""
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteThemePayload {
+  """The deleted theme id."""
+  deletedThemeId: ID
+
+  """The available errors if any."""
+  errorCode: ThemeErrorCode
   clientMutationId: String
 }
 
@@ -9925,6 +9991,9 @@ type Mutation {
   createVideo(input: CreateVideoInput!): CreateVideoPayload
   updateVideo(input: UpdateVideoInput!): UpdateVideoPayload
   deleteVideo(input: DeleteVideoInput!): DeleteVideoPayload
+  createTheme(input: CreateThemeInput!): CreateThemePayload
+  updateTheme(input: UpdateThemeInput!): UpdateThemePayload
+  deleteTheme(input: DeleteThemeInput!): DeleteThemePayload
   createNewsletterSubscription(input: CreateNewsletterSubscriptionInput!): CreateNewsletterSubscriptionPayload
   updateNewsletterSubscription(input: UpdateNewsletterSubscriptionInput!): UpdateNewsletterSubscriptionPayload
   deleteNewsletterSubscription(input: DeleteNewsletterSubscriptionInput!): DeleteNewsletterSubscriptionPayload
@@ -15656,6 +15725,23 @@ type Query {
   """Get a single video by id."""
   video(id: ID!): Video
 
+  """List all themes, published or not, ordered by position."""
+  adminThemes(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Filter by title."""
+    search: String = null
+  ): ThemeConnection!
+
+  """Get a single theme by id."""
+  theme(id: ID!): Theme
+
   """List all newsletter subscriptions, ordered by email."""
   newsletterSubscriptions(
     """
@@ -19681,6 +19767,63 @@ type Theme implements UniformResourceLocatable {
 
   """The themes's related media."""
   media: Media
+
+  """Whether the theme is published."""
+  isEnabled: Boolean!
+
+  """The display position of the theme."""
+  position: Int!
+
+  """The theme status, null for none."""
+  status: ThemeStatus
+
+  """The theme author."""
+  author: User
+
+  """Custom code inserted at the end of the theme page."""
+  customCode: String
+
+  """The number of events related to the theme."""
+  eventsCount: Int!
+
+  """The number of posts related to the theme."""
+  postsCount: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""A connection to a list of items."""
+type ThemeConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [ThemeEdge]
+}
+
+"""An edge in a connection."""
+type ThemeEdge {
+  """The item at the end of the edge."""
+  node: Theme!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+"""The available errors for themes."""
+enum ThemeErrorCode {
+  NOT_FOUND
+  TITLE_REQUIRED
+  VALUE_TOO_LONG
+}
+
+"""The available statuses of a theme."""
+enum ThemeStatus {
+  CLOSED
+  OPENED
+  FUTURE
 }
 
 """A translation theme."""
@@ -19696,6 +19839,12 @@ type ThemeTranslation {
 
   """The theme translation teaser."""
   teaser: String
+
+  """The slug of the theme translation."""
+  slug: String
+
+  """The theme translation meta description."""
+  metaDescription: String
 }
 
 """A time range that contains start date and end date."""
@@ -22835,6 +22984,42 @@ input UpdateThemeImageInput {
 type UpdateThemeImagePayload {
   siteImage: SiteImage
   errorCode: UpdateThemeImageErrorCode
+  clientMutationId: String
+}
+
+input UpdateThemeInput {
+  """The theme translations."""
+  translations: [CreateThemeTranslationInput!]!
+
+  """The id of the theme author."""
+  author: ID
+
+  """The id of the theme image."""
+  media: ID
+
+  """Whether the theme should be published."""
+  isEnabled: Boolean
+
+  """The display position of the theme."""
+  position: Int
+
+  """The theme status, null for none."""
+  status: ThemeStatus
+
+  """Custom code inserted at the end of the theme page."""
+  customCode: String
+  clientMutationId: String
+
+  """The id of the theme to update."""
+  id: ID!
+}
+
+type UpdateThemePayload {
+  """The updated theme."""
+  theme: Theme
+
+  """The available errors if any."""
+  errorCode: ThemeErrorCode
   clientMutationId: String
 }
 

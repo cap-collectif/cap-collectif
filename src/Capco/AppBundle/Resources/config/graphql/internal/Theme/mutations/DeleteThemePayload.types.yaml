@@ -1,0 +1,10 @@
+DeleteThemePayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            deletedThemeId:
+                type: 'ID'
+                description: 'The deleted theme id.'
+            errorCode:
+                type: 'ThemeErrorCode'
+                description: 'The available errors if any.'

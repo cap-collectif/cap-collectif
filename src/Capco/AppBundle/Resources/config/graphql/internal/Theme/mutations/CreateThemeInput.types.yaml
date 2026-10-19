@@ -1,0 +1,26 @@
+CreateThemeInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of createTheme mutation.'
+        fields:
+            translations:
+                type: '[CreateThemeTranslationInput!]!'
+                description: 'The theme translations.'
+            author:
+                type: 'ID'
+                description: 'The id of the theme author.'
+            media:
+                type: 'ID'
+                description: 'The id of the theme image.'
+            isEnabled:
+                type: 'Boolean'
+                description: 'Whether the theme should be published.'
+            position:
+                type: 'Int'
+                description: 'The display position of the theme.'
+            status:
+                type: 'ThemeStatus'
+                description: 'The theme status, null for none.'
+            customCode:
+                type: 'String'
+                description: 'Custom code inserted at the end of the theme page.'

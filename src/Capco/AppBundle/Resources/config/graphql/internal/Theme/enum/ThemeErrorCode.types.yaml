@@ -1,0 +1,12 @@
+ThemeErrorCode:
+    type: enum
+    config:
+        name: ThemeErrorCode
+        description: 'The available errors for themes.'
+        values:
+            NOT_FOUND:
+                value: !php/const Capco\AppBundle\Enum\ThemeErrorCode::NOT_FOUND
+            TITLE_REQUIRED:
+                value: !php/const Capco\AppBundle\Enum\ThemeErrorCode::TITLE_REQUIRED
+            VALUE_TOO_LONG:
+                value: !php/const Capco\AppBundle\Enum\ThemeErrorCode::VALUE_TOO_LONG

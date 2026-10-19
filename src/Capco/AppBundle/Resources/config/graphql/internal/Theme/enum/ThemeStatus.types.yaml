@@ -1,0 +1,12 @@
+ThemeStatus:
+    type: enum
+    config:
+        name: ThemeStatus
+        description: 'The available statuses of a theme.'
+        values:
+            CLOSED:
+                value: !php/const Capco\AppBundle\Entity\Theme::STATUS_CLOSED
+            OPENED:
+                value: !php/const Capco\AppBundle\Entity\Theme::STATUS_OPENED
+            FUTURE:
+                value: !php/const Capco\AppBundle\Entity\Theme::STATUS_FUTURE
