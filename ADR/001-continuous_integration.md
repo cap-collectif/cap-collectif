@@ -57,6 +57,30 @@ Les médias des fixtures restent possédés par l'application (UID 1000) et sont
 
 Les logs Cypress affichent `restore_db` et `restore_es` pour la durée totale de chaque tâche. Les lignes `CI_RESTORE_TIMING` détaillent l'import MySQL dans le conteneur et les appels Elasticsearch (en millisecondes). L'écart avec les durées totales comprend notamment le démarrage de Castor et les opérations de la tâche hors de ces appels. Comparer ces durées sur le sous-job le plus lent avant de modifier la restauration.
 
+Les lignes `CI_TIMING` complètent ces mesures pendant la préparation des jobs.
+Elles indiquent le début et la fin d'une phase, le job (`job`), l'exécuteur
+(`node`), l'heure UTC (`at`), la durée en millisecondes (`duration_ms`) et le code
+de sortie (`exit_code`, présent à la fin). Les mesures vont sur la sortie
+d'erreur, sans y recopier les arguments des commandes ni modifier leur sortie
+standard ou leur code de retour. `.circleci/timing.sh` permet de chronométrer une
+commande ; `.circleci/test-data.sh` l'utilise aussi pour distinguer les phases
+successives, y compris la phase qui échoue.
+
+La génération des données distingue le reset de la base, les deux dumps MySQL,
+l'instantané Elasticsearch, l'export du pipeline et les permissions. La
+restauration distingue l'attente de chaque service, la création de la base et des
+indices de contrôle, les imports, les validations, le pipeline `geoip`, le
+nettoyage du cache Symfony et les flags. Les images Docker, leur démarrage, les
+queues RabbitMQ, l'installation Composer, les extensions PHP, Relay, les deux builds JavaScript, les
+dépendances Cypress et l'attente d'admin-next sont également chronométrés.
+`CI_BUILD_CACHE` indique si chaque build JavaScript a été exécuté ou si ses
+fichiers étaient déjà disponibles après restauration des caches. Les durées
+globales des étapes CircleCI restent la référence pour les transferts de caches
+et de workspaces ; les sous-phases sont incluses dans ces durées et ne doivent
+pas être additionnées à nouveau. Comparer le même job et le même exécuteur,
+notamment celui qui détermine la fin du workflow. Ces logs ne changent ni le
+parallélisme ni les clés de cache.
+
 MySQL est restauré avec son schéma au démarrage de chaque exécuteur. Les resets
 entre tests utilisent ensuite `var/db.restore.sql` : suppression des lignes et
 réimport dans une transaction, puis restauration des compteurs `AUTO_INCREMENT`
