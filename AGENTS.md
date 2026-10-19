@@ -133,6 +133,15 @@ Use this format in English:
 For `legacy`, `non-compliant`, or `obsolete` tests, explain the reason and add a migration ticket when
 available. Do not copy their implementation into new tests, even when the test still passes.
 
+### Deterministic Cypress feature flags
+
+For new or migrated suites, call `setupFeatureFlags` from
+`cypress/support/setupFeatureFlags.ts` before other hooks. It applies the test
+preset plus explicit boolean overrides before each test/retry and restores the
+preset after the suite. Do not configure those flags in `before`, where the next
+reset would erase them. Migration is opt-in; legacy suites are not reset globally.
+See `ADR/001-frontend_tests.md` for the contract and the Castor tasks.
+
 ### Yarn Version
 
 The package manager is Yarn 4.x (Berry), managed via [Corepack](https://nodejs.org/api/corepack.html) — the exact version is pinned in the `packageManager` field of `package.json`, not installed globally.

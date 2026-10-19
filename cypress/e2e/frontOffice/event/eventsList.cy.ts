@@ -1,6 +1,9 @@
 import { EventPage } from '~e2e/pages'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 context('Events list page as admin', () => {
+  setupFeatureFlags({ themes: true, calendar: true })
+
   Cypress.on('uncaught:exception', err => {
     // returning false here prevents Cypress from failing the test
     if (err.message.includes('Failed to fetch')) {
@@ -10,11 +13,9 @@ context('Events list page as admin', () => {
 
   before(() => {
     cy.task('db:restore')
-    cy.task('enable:feature', 'themes')
-    cy.task('enable:feature', 'calendar')
-    cy.directLoginAs('admin')
   })
   beforeEach(() => {
+    cy.directLoginAs('admin')
     cy.interceptGraphQLOperation({ operationName: 'EventListPageQuery' })
     cy.interceptGraphQLOperation({ operationName: 'EventRefetchRefetchQuery' })
     cy.visit('/events')
@@ -29,8 +30,6 @@ context('Events list page as admin', () => {
       EventPage.checkEventPreviewContains(/Event without\s*registrations/)
     })
     it('should filter events by *theme* and display correct results', () => {
-      cy.task('enable:feature', 'themes')
-
       EventPage.openFiltersMenu()
       EventPage.openSelectThemeDropdown()
       cy.get('.react-select__option').contains('Justice').click({ force: true })
@@ -55,8 +54,6 @@ context('Events list page as admin', () => {
       cy.get('.card__title').should('not.contain.text', /^evenementPasseSansDate.*/) // the text can be truncated so we're only trying to match the beginning
     })
     it('should filter archived events by *theme* and display correct results', () => {
-      cy.task('enable:feature', 'themes')
-
       EventPage.openFiltersMenu()
       EventPage.openSelectThemeDropdown()
       cy.get('.react-select__option').contains('Justice').click({ force: true })
@@ -73,10 +70,11 @@ context('Events list page as admin', () => {
 })
 
 context('Events list page as anonymous', () => {
+  setupFeatureFlags({ calendar: true })
+
   before(() => cy.task('db:restore'))
 
   it('anonymous user can see events linked to a specific step', () => {
-    cy.task('enable:feature', 'calendar')
     cy.visit('/project/budget-participatif-idf/collect/collecte-des-projets-idf-privee')
     EventPage.waitForEventPreviewsToAppear()
   })

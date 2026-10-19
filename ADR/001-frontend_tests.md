@@ -101,8 +101,15 @@ Il couvre `support`, `plugins`, `pages`, `e2e` et les règles ESLint spécifique
 Les règles personnalisées signalent les attentes fixes (`cy.wait(<nombre>)`), vérifient les statuts
 de tests et exigent un `db:restore` dans les fichiers marqués `reference`. Les attentes fixes et le
 nettoyage des feature toggles restent des warnings pour permettre la migration progressive des tests
-existants. Le nettoyage des feature toggles est toutefois obligatoire pour toute nouvelle suite et
-pour les tests marqués `reference`.
+existants. Pour les suites qui utilisent `setupFeatureFlags`, la règle `feature-flags-setup`
+vérifie la déclaration des exceptions et interdit les activations/désactivations
+individuelles dans les hooks de préparation/nettoyage. Les changements de flags
+réalisés comme actions du scénario restent autorisés et le nettoyage déterministe
+est reconnu par la règle historique. Les suites nouvelles ou migrées doivent utiliser
+ce mécanisme ; les suites historiques restent soumises au warning existant.
+
+Les règles de préparation des flags ont des tests de régression rapides, exécutables
+avec `node scripts/test-cypress-feature-flags-lint.cjs` depuis la racine.
 
 Une attente fixe exceptionnellement nécessaire peut être désactivée localement avec la directive
 ESLint `no-fixed-wait`. La directive doit être placée juste au-dessus de l'attente et expliquer la
@@ -139,7 +146,7 @@ Le `db:restore` est obligatoire avant chaque suite de tests afin d'assurer que c
 - Centraliser les fonctions support dans `cypress/support/` et utiliser celles déjà existantes.
 --> permet d'éviter de réinventer la roue lors d'interactions, et de rendre les tests plus courts et lisibles.
 
-- si on active un feature toggle au début de la suite de tests, le désactiver pour éviter des effets de bord sur d'autres tests.
+- Pour les suites migrées, préparer les feature flags avec le preset de test et les exceptions déclarées avant chaque tentative (voir ci-dessous). Pour les suites historiques, nettoyer les modifications de flags même en cas d’échec, sans désactiver systématiquement un flag actif par défaut.
 
 
 ## Documentation
@@ -152,8 +159,41 @@ https://www.cypress.io
 
 ```ts
 cy.task('disable:feature', 'captcha')
-cy.task('enaable:feature', 'calendar')
+cy.task('enable:feature', 'calendar')
 ```
+
+Les suites migrées utilisent `setupFeatureFlags` (dans
+`cypress/support/setupFeatureFlags.ts`) avant leurs autres hooks :
+
+```ts
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
+
+context('Calendar feature', () => {
+  setupFeatureFlags({ calendar: true, captcha: false })
+  // Register data setup hooks and tests here.
+})
+```
+
+Avant chaque test et chaque retry, un seul appel à `reset:feature-flags` applique
+le preset `EnvironmentPresets::TEST` puis les exceptions déclarées. Un hook `after`
+rétablit le preset sans exceptions pour protéger les suites historiques et le local,
+y compris après un échec d'assertion. Il ne faut plus activer ces flags dans un
+`before` : la préparation suivante les écraserait. Les sous-contextes héritent de
+la préparation de leur parent et ne doivent pas rappeler le helper. Pour des
+exceptions différentes, utiliser des contextes frères, chacun avec son helper.
+
+La migration est progressive : seuls les contextes qui appellent ce helper ont
+cette garantie. Pour une nouvelle suite, privilégier cette préparation déclarative ;
+les appels `enable:feature` / `disable:feature` restent disponibles lorsqu'un test
+exerce lui-même un changement de flag pendant son scénario. Le lint historique de
+nettoyage ne prouve pas l'isolation des anciennes suites.
+
+Les tâches Castor `local:qa:reset-feature-flags` et `ci:qa:reset-feature-flags`
+acceptent `--overrides='{"calendar":true,"captcha":false}'`. Elles utilisent le
+script rapide partagé avec les tests GraphQL, sans démarrer Symfony. Les noms et
+valeurs sont validés avant une écriture Redis atomique des seuls flags de test ;
+une erreur fait échouer la préparation. MySQL, Elasticsearch, les sessions, les
+caches et les flags des autres environnements ne sont pas modifiés.
 
 ### Connexion directe et sessions Cypress
 

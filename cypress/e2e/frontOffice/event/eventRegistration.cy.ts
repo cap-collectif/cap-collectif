@@ -1,4 +1,5 @@
 import { Base, Event } from '~e2e-pages/index'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 const eventUrl = `/events/event-with-registrations`
 const visitEventPage = () => {
@@ -12,15 +13,11 @@ const visitEventPage = () => {
  * @cypress-reason Canonical example for an anonymous form workflow with isolated data and feature setup.
  */
 context('Event registration as anonymous user', () => {
+  setupFeatureFlags({ calendar: true })
+
   beforeEach(() => {
     cy.task('db:restore')
-    cy.task('enable:feature', 'calendar')
     visitEventPage()
-  })
-
-  after(() => {
-    cy.task('db:restore')
-    cy.task('disable:feature', 'calendar')
   })
 
   it('allows anonymous user to register with visible name', () => {
@@ -49,15 +46,15 @@ context('Event registration as anonymous user', () => {
  * @cypress-reason Canonical example for a logged-in user workflow with explicit GraphQL synchronisation.
  */
 context('Event registration as logged in user', () => {
-  before(() => {
+  setupFeatureFlags({ calendar: true })
+
+  beforeEach(() => {
     cy.task('db:restore')
-    cy.task('enable:feature', 'calendar')
     cy.directLoginAs('user')
   })
 
   after(() => {
     cy.task('db:restore')
-    cy.task('disable:feature', 'calendar')
   })
 
   it('should allow logged in user to register with one click', () => {

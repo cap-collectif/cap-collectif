@@ -61,3 +61,9 @@ function regenerateTestData(bool $confirm = false): void
     Shared\saveDb();
     Shared\saveEsSnapshot();
 }
+
+#[AsTask(description: 'Reset test feature flags to the test preset with optional JSON overrides.')]
+function resetFeatureFlags(string $overrides = '{}'): void
+{
+    Shared\resetFeatureFlags($overrides);
+}

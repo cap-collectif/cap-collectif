@@ -47,3 +47,9 @@ function restoreEsSnapshot(bool $confirm = false): void
 {
     sharedRestoreEsSnapshot(confirm: $confirm, recoveryTask: 'ci:qa:save-es-snapshot');
 }
+
+#[AsTask(description: 'Reset test feature flags to the test preset with optional JSON overrides.')]
+function resetFeatureFlags(string $overrides = '{}'): void
+{
+    \Capco\Castor\Qa\resetFeatureFlags($overrides);
+}

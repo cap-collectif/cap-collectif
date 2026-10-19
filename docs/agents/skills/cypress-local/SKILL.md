@@ -32,12 +32,25 @@ Do not use Electron: it is not available in the local setup.
 - One spec: `yarn cy:run --browser chrome --spec e2e/<path>/<name>.cy.ts`.
 - Full E2E suite: `yarn cy:run --browser chrome`.
 - Interactive runner: `yarn cy:open --browser chrome`.
-- Cypress local hooks save/restore database and Elasticsearch state. Expect the run to take longer than the test itself and do not skip `db:restore` in a suite that changes data.
+- `db:restore` restores the local reference MySQL dump and Elasticsearch snapshot; Cypress does not overwrite them at startup. After changing the local database, prepare these references with `castor local:qa:regenerate-test-data --confirm` before running Cypress. Do not skip the data preparation required by a suite that changes data.
 
 When the page state depends on a GraphQL request, intercept the last required operation and wait
 for its alias before asserting the DOM. Do not replace this network synchronization with a fixed
 `cy.wait(number)`. Fixed waits for other needs, such as animations or captcha completion, must
 remain exceptional and justified according to the Cypress ADR.
+
+## Feature flags
+
+- New or migrated suites declare their overrides with `setupFeatureFlags` from
+  `cypress/support/setupFeatureFlags.ts`, directly inside `describe`/`context`, before other hooks.
+- The helper applies the test preset and overrides before every test/retry in one task.
+  Its final cleanup restores the preset for legacy neighbours. Do not configure flags in
+  setup/cleanup hooks with individual enable/disable tasks in these suites.
+- Nested suites inherit their parent setup; use sibling suites for different overrides rather than resetting twice.
+- Migration is opt-in: do not assume legacy suites have deterministic flags. MySQL,
+  Elasticsearch and other Redis keys are outside this reset.
+- The backend validates names and boolean values before an atomic write. An invalid override
+  must fail preparation; do not silence this error.
 
 ## Troubleshooting
 

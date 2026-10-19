@@ -2,12 +2,15 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
-      description: 'Warn when an enabled Cypress feature toggle is not disabled in the same file.',
+      description: 'Warn about unprotected legacy feature toggles; recognise deterministic suite setup.',
     },
     schema: [],
   },
   create(context) {
     const enabledFeatures = new Map()
+    const setupHelperNames = new Set()
+    const guardedFunctions = new Set()
+    const enabledAncestors = new Map()
     const disabledFeatures = new Set()
 
     const getFeatureTask = node => {
@@ -30,19 +33,33 @@ module.exports = {
     }
 
     return {
+      ImportDeclaration(node) {
+        if (!/\/support\/setupFeatureFlags$/.test(node.source.value)) return
+        node.specifiers.forEach(specifier => {
+          if (specifier.imported?.name === 'setupFeatureFlags') setupHelperNames.add(specifier.local.name)
+        })
+      },
       CallExpression(node) {
+        if (node.callee.type === 'Identifier' && setupHelperNames.has(node.callee.name)) {
+          const suiteFunction = node.parent?.parent?.parent
+          if (['ArrowFunctionExpression', 'FunctionExpression'].includes(suiteFunction?.type)) {
+            guardedFunctions.add(suiteFunction)
+          }
+        }
         const featureTask = getFeatureTask(node)
         if (!featureTask || typeof featureTask.feature !== 'string') return
 
         if (featureTask.taskName === 'enable:feature') {
           enabledFeatures.set(featureTask.feature, node)
+          enabledAncestors.set(node, context.getAncestors())
         } else {
           disabledFeatures.add(featureTask.feature)
         }
       },
       'Program:exit'() {
         enabledFeatures.forEach((node, feature) => {
-          if (!disabledFeatures.has(feature)) {
+          const hasDeterministicSetup = enabledAncestors.get(node).some(ancestor => guardedFunctions.has(ancestor))
+          if (!disabledFeatures.has(feature) && !hasDeterministicSetup) {
             context.report({
               node,
               message: `Feature toggle "${feature}" is enabled but not disabled in this file.`,

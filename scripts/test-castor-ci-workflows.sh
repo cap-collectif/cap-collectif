@@ -166,4 +166,10 @@ run_castor ci:infrastructures:up --force-recreate --no-cache --build-at-up
 grep -Fq 'infrastructure/environments/testing.yml build --no-cache' "$CASTOR_WORKFLOW_RECORD"
 grep -Fq 'infrastructure/environments/testing.yml up --remove-orphans -d --force-recreate' "$CASTOR_WORKFLOW_RECORD"
 
+for namespace in local ci; do
+    run_castor "$namespace:qa:reset-feature-flags" '--overrides={"calendar":false,"shield_mode":true}'
+    grep -Fq 'php features/graphql-api/feature-flags-resetter.php' "$CASTOR_WORKFLOW_RECORD"
+    grep -Fq '{"calendar":false,"shield_mode":true}' "$CASTOR_WORKFLOW_RECORD"
+done
+
 printf 'CI workflow checks passed; no real Docker command was executed.\n'

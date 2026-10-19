@@ -71,7 +71,8 @@
     "no-fixed-wait": "warn",
     "reference-requires-db-restore": "error",
     "valid-status": "error",
-    "feature-toggle-cleanup": "warn"
+    "feature-toggle-cleanup": "warn",
+    "feature-flags-setup": "error"
   },
   "overrides": []
 }

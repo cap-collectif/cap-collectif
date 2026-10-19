@@ -1,14 +1,11 @@
 #!/usr/bin/env php
 <?php
+
 /**
- * Fast helper to reset all feature flags to the TEST environment default state.
- * Avoids full Symfony boot for tests (~10ms vs ~800ms).
+ * Reset only the test feature flags, without booting Symfony.
+ * Optional JSON overrides are validated before any Redis write.
  */
 require_once __DIR__ . '/../../vendor/autoload.php';
-
-require_once __DIR__ . '/../../src/Capco/AppBundle/Toggle/Manager.php';
-
-require_once __DIR__ . '/../../src/Capco/AppBundle/Toggle/EnvironmentPresets.php';
 
 use Capco\AppBundle\Toggle\EnvironmentPresets;
 use Capco\AppBundle\Toggle\Manager;
@@ -16,28 +13,45 @@ use Predis\Client;
 use Qandidate\Toggle\Toggle;
 use Qandidate\Toggle\ToggleCollection\PredisCollection;
 
-$redisHost = getenv('SYMFONY_REDIS_HOST') ?: '127.0.0.1';
-$redisPort = getenv('SYMFONY_REDIS_PORT') ?: '6379';
-$redis = new Client(sprintf('tcp://%s:%s', $redisHost, $redisPort));
+try {
+    $overrides = json_decode($argv[1] ?? '{}', false, 512, \JSON_THROW_ON_ERROR);
+    if (!$overrides instanceof \stdClass) {
+        throw new \InvalidArgumentException('Feature flag overrides must be a JSON object.');
+    }
 
-$collection = new PredisCollection('testfeature_toggle', $redis);
+    $states = array_fill_keys(Manager::$toggles, false);
+    foreach (EnvironmentPresets::TEST as $flagName) {
+        $states[$flagName] = true;
+    }
+    foreach ($overrides as $flagName => $active) {
+        if (!array_key_exists($flagName, $states) || !is_bool($active)) {
+            throw new \InvalidArgumentException(sprintf('Unknown feature flag or non-boolean value: %s.', $flagName));
+        }
+        $states[$flagName] = $active;
+    }
 
-// Step 1: Deactivate ALL feature flags
-echo "Deactivating all feature flags...\n";
-foreach (Manager::$toggles as $flagName) {
-    $toggle = new Toggle($flagName, []);
-    $toggle->deactivate();
-    $collection->set($flagName, $toggle);
+    $redisHost = getenv('SYMFONY_REDIS_HOST') ?: '127.0.0.1';
+    $redisPort = getenv('SYMFONY_REDIS_PORT') ?: '6379';
+    $redis = new Client(sprintf('tcp://%s:%s', $redisHost, $redisPort));
+    $collection = new PredisCollection('testfeature_toggle', $redis);
+
+    $values = [];
+    foreach ($states as $flagName => $active) {
+        $toggle = new Toggle($flagName, []);
+        if ($active) {
+            $toggle->activate(Toggle::ALWAYS_ACTIVE);
+        } else {
+            $toggle->deactivate();
+        }
+        // Use Qandidate's persisted format, restricted to the test flag namespace.
+        $values[$collection->getNamespace() . '__TOGGLE__' . $flagName] = serialize($toggle);
+    }
+
+    // One atomic write: requests cannot observe the intermediate disabled preset.
+    $redis->mset($values);
+    echo sprintf("Success: %d test feature flags prepared.\n", count($states));
+} catch (\InvalidArgumentException|\JsonException $exception) {
+    fwrite(\STDERR, $exception->getMessage() . "\n");
+
+    exit(1);
 }
-
-// Step 2: Activate feature flags for TEST environment
-echo "Activating feature flags for TEST environment...\n";
-$testFlags = array_merge(EnvironmentPresets::COMMON, EnvironmentPresets::TEST);
-
-foreach ($testFlags as $flagName) {
-    $toggle = new Toggle($flagName, []);
-    $toggle->activate(Toggle::ALWAYS_ACTIVE);
-    $collection->set($flagName, $toggle);
-}
-
-echo sprintf("Success: %d flags activated for TEST environment\n", count($testFlags));

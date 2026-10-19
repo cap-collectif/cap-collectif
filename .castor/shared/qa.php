@@ -38,6 +38,11 @@ function elasticsearchCurl(string $method, string $path, ?array $data = null, bo
     throw new \RuntimeException(trim((string) ($process->getErrorOutput() ?: $process->getOutput())) ?: 'The Elasticsearch request failed.');
 }
 
+function resetFeatureFlags(string $overrides = '{}'): void
+{
+    application('php features/graphql-api/feature-flags-resetter.php ' . escapeshellarg($overrides));
+}
+
 function saveDb(): void
 {
     application('mysqldump --opt -h database -u root symfony > var/db.backup');

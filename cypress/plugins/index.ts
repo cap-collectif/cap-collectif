@@ -179,6 +179,12 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
 
       throw new Error(`Queue "${name}" did not finish processing within 30 seconds.`)
     },
+    'reset:feature-flags': async (overrides: Record<string, boolean> = {}) => {
+      console.time('reset_feature_flags')
+      await execFile('castor', [`${env}:qa:reset-feature-flags`, `--overrides=${JSON.stringify(overrides)}`])
+      console.timeEnd('reset_feature_flags')
+      return null
+    },
     'enable:feature': async (name: string) => {
       console.log(`Enabling feature flag "${name}"...`)
       console.time('enable_feature')

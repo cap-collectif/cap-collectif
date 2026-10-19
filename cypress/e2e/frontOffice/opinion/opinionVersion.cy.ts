@@ -1,6 +1,9 @@
 import { OpinionPage } from '~e2e-pages/index'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 describe('Opinion versions actions', () => {
+  setupFeatureFlags({ reporting: true })
+
   beforeEach(() => {
     cy.task('db:restore')
   })
@@ -72,7 +75,6 @@ describe('Opinion versions actions', () => {
     })
 
     it('should allow a non-author to report a version', () => {
-      cy.task('enable:feature', 'reporting')
       OpinionPage.visitVersionPage('NavBarMenuQuery')
 
       cy.get('button[id^="report-opinion"]').should('exist').click({ force: true })
