@@ -7,3 +7,5 @@ FooterLinks:
                 type: 'String!'
             url:
                 type: 'URI!'
+            isExternalLink:
+                type: 'Boolean!'

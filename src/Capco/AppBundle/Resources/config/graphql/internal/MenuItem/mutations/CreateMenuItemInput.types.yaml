@@ -1,0 +1,26 @@
+CreateMenuItemInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of createMenuItem mutation.'
+        fields:
+            translations:
+                type: '[MenuItemTranslationInput!]!'
+                description: 'The menu item translations, at least in the platform default locale.'
+            menu:
+                type: 'MenuItemMenu!'
+                description: 'The menu in which the item is displayed.'
+            position:
+                type: 'Int!'
+                description: 'The position of the item among its siblings.'
+            isEnabled:
+                type: 'Boolean!'
+                description: 'Whether the item is published.'
+            isExternalLink:
+                type: 'Boolean!'
+                description: 'Whether the link opens an external website. Forced to false without link.'
+            parent:
+                type: 'ID'
+                description: 'The id of the parent menu item.'
+            page:
+                type: 'ID'
+                description: 'The id of the custom page the item links to.'

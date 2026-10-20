@@ -1,0 +1,10 @@
+UpdateMenuItemInput:
+    type: relay-mutation-input
+    inherits:
+        - CreateMenuItemInput
+    config:
+        description: 'Input of updateMenuItem mutation.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the menu item to update.'

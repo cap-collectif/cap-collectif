@@ -1,0 +1,14 @@
+MenuItemTranslationInput:
+    type: input-object
+    config:
+        description: 'A menu item translation.'
+        fields:
+            locale:
+                type: 'TranslationLocale!'
+                description: 'The locale of the translation.'
+            title:
+                type: 'String!'
+                description: 'The menu item title. Required in the platform default locale; an empty title removes the translation of another locale.'
+            link:
+                type: 'String'
+                description: 'The menu item link. Ignored when a page is set or when the link of the item is locked.'

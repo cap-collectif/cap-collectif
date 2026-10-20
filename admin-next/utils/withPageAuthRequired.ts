@@ -83,7 +83,7 @@ const findRolesRequiredForPath = (pathname: string): string[] => {
       return group.rolesRequired ?? []
     }
     for (const item of group.items ?? []) {
-      const relatedHrefs: string[] = 'relatedHrefs' in item ? item.relatedHrefs : []
+      const relatedHrefs: string[] = 'relatedHrefs' in item ? item.relatedHrefs ?? [] : []
       if (item.href === pathname || relatedHrefs.includes(pathname)) {
         return [...(group.rolesRequired ?? []), ...(item.rolesRequired ?? [])]
       }

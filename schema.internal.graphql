@@ -4155,6 +4155,41 @@ type CreateMailingListPayload {
   clientMutationId: String
 }
 
+input CreateMenuItemInput {
+  """The menu item translations, at least in the platform default locale."""
+  translations: [MenuItemTranslationInput!]!
+
+  """The menu in which the item is displayed."""
+  menu: MenuItemMenu!
+
+  """The position of the item among its siblings."""
+  position: Int!
+
+  """Whether the item is published."""
+  isEnabled: Boolean!
+
+  """
+  Whether the link opens an external website. Forced to false without link.
+  """
+  isExternalLink: Boolean!
+
+  """The id of the parent menu item."""
+  parent: ID
+
+  """The id of the custom page the item links to."""
+  page: ID
+  clientMutationId: String
+}
+
+type CreateMenuItemPayload {
+  """The created menu item."""
+  menuItem: MenuItem
+
+  """The available errors if any."""
+  errorCode: MenuItemErrorCode
+  clientMutationId: String
+}
+
 input CreateNewsProjectTabInput {
   projectId: ID!
   title: String!
@@ -6381,6 +6416,21 @@ type DeleteMediatorPayload {
   clientMutationId: String
 }
 
+input DeleteMenuItemInput {
+  """The id of the menu item to delete."""
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteMenuItemPayload {
+  """The deleted menu item id."""
+  deletedMenuItemId: ID
+
+  """The available errors if any."""
+  errorCode: MenuItemErrorCode
+  clientMutationId: String
+}
+
 input DeleteNewsletterSubscriptionInput {
   """The id of the newsletter subscription to delete."""
   id: ID!
@@ -8069,6 +8119,7 @@ type FooterLegals {
 type FooterLinks {
   name: String!
   url: URI!
+  isExternalLink: Boolean!
 }
 
 """
@@ -9654,6 +9705,78 @@ type MenuItem implements Node {
 
   """The available translations for the menu item."""
   translations: [MenuItemTranslation!]!
+
+  """The menu in which the item is displayed."""
+  menu: MenuItemMenu!
+
+  """Whether the item is published."""
+  isEnabled: Boolean!
+
+  """
+  Whether the item can be deleted. Items created by default on every platform cannot.
+  """
+  isDeletable: Boolean!
+
+  """Whether the link of the item can be changed."""
+  isFullyModifiable: Boolean!
+
+  """Whether the link opens an external website."""
+  isExternalLink: Boolean!
+
+  """The parent menu item, if any."""
+  parent: MenuItem
+
+  """Whether the item holds sub menus, published or not."""
+  hasChildren: Boolean!
+
+  """The custom page the item links to, if any."""
+  page: Page
+
+  """The last update date."""
+  updatedAt: DateTime
+}
+
+"""A connection to a list of items."""
+type MenuItemConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [MenuItemEdge]
+}
+
+"""An edge in a connection."""
+type MenuItemEdge {
+  """The item at the end of the edge."""
+  node: MenuItem!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+"""The available errors for menu items."""
+enum MenuItemErrorCode {
+  NOT_FOUND
+  TITLE_REQUIRED
+  PARENT_NOT_FOUND
+
+  """
+  Only a header root item without link can hold sub menus, and a sub menu cannot hold sub menus.
+  """
+  INVALID_PARENT
+  PAGE_NOT_FOUND
+  NOT_DELETABLE
+}
+
+"""The menu in which a menu item is displayed."""
+enum MenuItemMenu {
+  """The main navigation bar."""
+  HEADER
+
+  """The footer."""
+  FOOTER
 }
 
 """Translation of a menu item."""
@@ -9666,6 +9789,22 @@ type MenuItemTranslation {
 
   """The link of the menu item."""
   link: URI
+}
+
+"""A menu item translation."""
+input MenuItemTranslationInput {
+  """The locale of the translation."""
+  locale: TranslationLocale!
+
+  """
+  The menu item title. Required in the platform default locale; an empty title removes the translation of another locale.
+  """
+  title: String!
+
+  """
+  The menu item link. Ignored when a page is set or when the link of the item is locked.
+  """
+  link: String
 }
 
 """A multiple choice question"""
@@ -9994,6 +10133,9 @@ type Mutation {
   createTheme(input: CreateThemeInput!): CreateThemePayload
   updateTheme(input: UpdateThemeInput!): UpdateThemePayload
   deleteTheme(input: DeleteThemeInput!): DeleteThemePayload
+  createMenuItem(input: CreateMenuItemInput!): CreateMenuItemPayload
+  updateMenuItem(input: UpdateMenuItemInput!): UpdateMenuItemPayload
+  deleteMenuItem(input: DeleteMenuItemInput!): DeleteMenuItemPayload
   createNewsletterSubscription(input: CreateNewsletterSubscriptionInput!): CreateNewsletterSubscriptionPayload
   updateNewsletterSubscription(input: UpdateNewsletterSubscriptionInput!): UpdateNewsletterSubscriptionPayload
   deleteNewsletterSubscription(input: DeleteNewsletterSubscriptionInput!): DeleteNewsletterSubscriptionPayload
@@ -11387,6 +11529,9 @@ type Page implements NodeSlug & UniformResourceLocatable {
     """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
   ): String
+
+  """Whether the page is published."""
+  isEnabled: Boolean!
   customCode: String
   translationBySlug(slug: String!): PageTranslation!
 }
@@ -15741,6 +15886,28 @@ type Query {
 
   """Get a single theme by id."""
   theme(id: ID!): Theme
+
+  """List the menu items whose associated features are enabled."""
+  adminMenuItems(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Filter by title."""
+    search: String = null
+  ): MenuItemConnection!
+
+  """Get a single menu item by id."""
+  menuItem(id: ID!): MenuItem
+
+  """
+  The menu items that can hold sub menus: header root items without link.
+  """
+  menuItemParents: [MenuItem!]!
 
   """List all newsletter subscriptions, ordered by email."""
   newsletterSubscriptions(
@@ -21398,6 +21565,44 @@ input UpdateMemberSettingTranslationInput {
   The value for this locale. An empty value removes the translation of this locale.
   """
   value: String!
+}
+
+input UpdateMenuItemInput {
+  """The menu item translations, at least in the platform default locale."""
+  translations: [MenuItemTranslationInput!]!
+
+  """The menu in which the item is displayed."""
+  menu: MenuItemMenu!
+
+  """The position of the item among its siblings."""
+  position: Int!
+
+  """Whether the item is published."""
+  isEnabled: Boolean!
+
+  """
+  Whether the link opens an external website. Forced to false without link.
+  """
+  isExternalLink: Boolean!
+
+  """The id of the parent menu item."""
+  parent: ID
+
+  """The id of the custom page the item links to."""
+  page: ID
+  clientMutationId: String
+
+  """The id of the menu item to update."""
+  id: ID!
+}
+
+type UpdateMenuItemPayload {
+  """The updated menu item."""
+  menuItem: MenuItem
+
+  """The available errors if any."""
+  errorCode: MenuItemErrorCode
+  clientMutationId: String
 }
 
 """Available errors for an `updateNewProject` mutation."""

@@ -54,6 +54,7 @@ class FooterRuntime implements RuntimeExtensionInterface
         $links = array_map(fn (MenuItem $menuItem) => [
             'name' => $this->resolveMenuItemTitle($menuItem, $locale),
             'url' => $this->menuItemResolver->getMenuUrl($menuItem, $request),
+            'isExternalLink' => $menuItem->isExternalLink(),
         ], $pages);
 
         return array_values(array_filter($links, fn (array $link): bool => '' !== trim((string) $link['name'])));

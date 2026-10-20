@@ -22,6 +22,7 @@ import { usePathname } from 'next/navigation'
 import React, { FC, ReactNode } from 'react'
 import { useIntl } from 'react-intl'
 import { FooterBrand } from './FooterBrand'
+import ExternalLinkIcon, { externalLinkProps, externalLinkStyle } from '@shared/ui/ExternalLinkIcon'
 
 const getIconName = (item: string): string => {
   return item === 'link-1' ? 'SHARE_LINK' : item ? item.toUpperCase() + '_COLORED' : null
@@ -188,7 +189,13 @@ export const Footer: FC<Props> = props => {
                 .filter(link => !!link)
                 .map(link => (
                   <li key={link.name}>
-                    <a href={link.url}>{link.name}</a>
+                    <a
+                      href={link.url}
+                      {...(link.isExternalLink ? { ...externalLinkProps, style: externalLinkStyle } : {})}
+                    >
+                      {link.name}
+                      {link.isExternalLink ? <ExternalLinkIcon /> : null}
+                    </a>
                   </li>
                 ))}
             {multilangue ? (

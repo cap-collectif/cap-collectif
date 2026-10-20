@@ -188,7 +188,8 @@
         "items": [
             {
                 "title": "admin.label.menu_item",
-                "href": "/admin/capco/app/menuitem/list",
+                "href": "/admin-next/menu-items",
+                "relatedHrefs": ["/admin-next/menu-item"],
                 "rolesRequired": [],
                 "featuresRequired": []
             },

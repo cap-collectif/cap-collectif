@@ -30,7 +30,7 @@ class FooterSocialNetworksResolver
     }
 
     /**
-     * @return array<array{name: string, url: string}>
+     * @return array<array{name: string, url: string, isExternalLink: bool}>
      */
     public function getFooterLinks(): array
     {
@@ -44,6 +44,7 @@ class FooterSocialNetworksResolver
         $links = array_map(fn (MenuItem $menuItem) => [
             'name' => $this->resolveMenuItemTitle($menuItem, $locale),
             'url' => $this->menuItemResolver->getMenuUrl($menuItem, $request),
+            'isExternalLink' => $menuItem->isExternalLink(),
         ], $pages);
 
         return array_values(array_filter($links, fn (array $link): bool => '' !== trim((string) $link['name'])));

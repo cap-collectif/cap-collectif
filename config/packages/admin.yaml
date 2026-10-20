@@ -18,19 +18,6 @@ services:
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
-    Capco\AdminBundle\Admin\MenuItemAdmin:
-        arguments: [~, Capco\AppBundle\Entity\MenuItem, Capco\AdminBundle\Controller\MenuItemController]
-        tags:
-            - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.parameters,
-                  label: admin.label.menu_item,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
-        calls:
-            - [setTranslationDomain, [CapcoAppBundle]]
-
     Capco\AdminBundle\Admin\OpinionAdmin:
         arguments:
             [

@@ -1,0 +1,8 @@
+DeleteMenuItemInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of deleteMenuItem mutation.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the menu item to delete.'

@@ -88,6 +88,7 @@ const NavBarContent = ({
             ref={handleItemWidth}
             title={link.title}
             href={link.href}
+            isExternalLink={link.isExternalLink}
             color={theme.textColor}
             bg={theme.subMenuBackground}
             hoverColor={theme.textHoverColor}

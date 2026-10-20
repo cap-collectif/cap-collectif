@@ -12,9 +12,11 @@ export const QUERY = graphql`
     menuItems {
       title
       href: link
+      isExternalLink
       children {
         title
         href: link
+        isExternalLink
       }
     }
     siteImage(keyname: "image.logo") {

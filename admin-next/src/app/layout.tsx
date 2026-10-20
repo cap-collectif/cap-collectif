@@ -78,9 +78,11 @@ export const layoutQuery = graphql`
     menuItems {
       title
       href: link
+      isExternalLink
       children {
         title
         href: link
+        isExternalLink
       }
     }
     footer {
@@ -92,6 +94,7 @@ export const layoutQuery = graphql`
       links {
         name
         url
+        isExternalLink
       }
       legals {
         cookies

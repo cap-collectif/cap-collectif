@@ -75,7 +75,9 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
      ⚠️ La correspondance se fait sur l'URL exacte : une page qui n'est pas elle-même une entrée du menu
      (ex: le formulaire de création/édition `/admin-next/theme`, atteint depuis la liste `/admin-next/themes`)
      n'hérite d'**aucun** rôle par défaut. Il faut l'ajouter dans `relatedHrefs` de l'item de menu
-     correspondant (`"relatedHrefs": ["/admin-next/theme"]`) pour qu'elle reçoive les mêmes restrictions.
+     correspondant (`"relatedHrefs": ["/admin-next/theme"]`) pour qu'elle reçoive les mêmes restrictions :
+     sinon aucun rôle n'est exigé côté serveur et un viewer au rôle insuffisant tombe sur des erreurs GraphQL
+     au lieu de la page 403.
      - `withPageAuthRequired` gère aussi, automatiquement, le cas où le viewer n'a pas (ou plus) accès à la
        page demandée — **rien à faire dans la page migrée**. Deux redirections possibles, chacune vers une
        page qui doit vivre sous `/admin-next/` et jamais à la racine (le reverse-proxy ne route que ces
@@ -343,7 +345,8 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
   color custom.
 - **Page d'édition dédiée avec `?id=` en query param** (plutôt qu'une modale) : voir le couple
   `pages/admin-next/geographical-area.tsx` (lecture via `node(id:)` + `useUrlState('id', '')`) et
-  `components/BackOffice/GeographicalArea/GeographicalAreaForm.tsx`.
+  `components/BackOffice/GeographicalArea/GeographicalAreaForm.tsx`. Déclarer la page d'édition dans le
+  `relatedHrefs` de l'item de menu de la liste (`SideBarItems.json`) pour qu'elle hérite de son rôle requis.
 - **Page dédiée création/édition avec accordéons à droite (layout de `/post`), multilangue inclus** :
   `components/BackOffice/Themes/ThemeFormWrapper.tsx` (+ `ThemeForm.tsx`, `ThemeFormSide.tsx`) — colonne
   principale à 70 % (titre, auteur, sous-titre, uploader d'image, `TextEditor`), accordéons à 30 % (« Publication »
@@ -405,6 +408,12 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
   `$repository->find($args->offsetGet('id'))`. C'est le pattern déjà utilisé par `ProjectType`
   (`UpdateProjectTypeMutation`) ; `Node`/`GlobalId` est réservé aux entités UUID (`HttpRedirect`, `UserType`,
   `GlobalDistrict`...).
+  Exception : si le type GraphQL existant de l'entité expose **déjà** `id` en `Relay::GlobalId` (ex: `MenuItem`,
+  consommé par la navbar du front-office), le garder tel quel et décoder l'id reçu dans les resolvers/mutations
+  avec `GlobalIdResolver::getDecodedId($id, true)` (accepte global id et id brut), sans l'ajouter à
+  `AVAILABLE_TYPES` : exposer un entier brut à la place changerait un contrat public et ferait collisionner
+  dans le store Relay des enregistrements de types différents ayant le même entier (warnings
+  « Expected __typename to be consistent » déjà visibles en console avec `SiteImage`/`SiteColor`/`ProjectType`).
 - **Liste avec CRUD complet mais peu volumineuse** (pas besoin de scroll infini) : l'exposer quand même comme
   une **Relay connection** (`argsBuilder: 'Relay::ForwardConnection'` côté yaml + `Paginator::auto($args,
   $totalCount)` côté resolver PHP, voir `HttpRedirectListResolver`/`QueryGlobalDistrictResolver`) plutôt
@@ -1347,6 +1356,20 @@ prop-drillé entre la liste et un ancêtre.
   validation native du navigateur bloque la soumission avant que `handleSubmit` n'appelle yup : l'utilisatrice
   voit une infobulle du navigateur dans la langue du navigateur (« Please include an '@'... »), jamais le
   message traduit du schéma (`global.constraints.email.invalid`).
+- **Formulaire validé par yup : ne pas mettre `mode: 'onChange'` sur `useForm` sans désactiver le bouton tant que
+  le formulaire est invalide.** `FormControl` (`@cap-collectif/form`) n'affiche l'erreur en mode `onChange` que si
+  le champ a été touché (`getTouchedState`) : soumettre un formulaire de création sans toucher au titre requis ne
+  montre alors aucun message, et rien ne se passe. Garder le mode par défaut (`onSubmit`, puis revalidation à la
+  saisie) ; `VideoFormWrapper.tsx` contourne le problème en désactivant le bouton (`disabled={!isValid}`), sans
+  expliquer pourquoi. Vu sur la page des rubriques de navigation.
+- **Page d'édition dédiée (`/admin-next/<entité>?id=`) absente de `SideBarItems.json`** : `withPageAuthRequired`
+  ne trouve aucun `rolesRequired` pour cette URL et n'applique que le contrôle générique (admin, project admin,
+  membre d'organisation ou médiateur). La restriction réelle repose alors sur l'`access:` des queries et
+  mutations GraphQL de la page (`hasRole('ROLE_ADMIN')`) : la vérifier, puisque c'est elle qui empêche un
+  project admin d'utiliser la page en saisissant l'URL.
+- **Navigateur headless : « The Json session is empty ! » dans les logs de `capco_nextjs_1` malgré une visite de
+  `/`** : la partie JSON de la session (le `viewer`) n'était pas encore écrite. Visiter une deuxième page Symfony
+  (ex: `/admin/capco/app/page/list`) avec `waitUntil: 'networkidle'` avant d'ouvrir la page admin-next.
 - **`Search` (`@cap-collectif/ui`) est un react-select** : son `placeholder` est un `<div>`, pas un attribut de
   l'`<input>`. Lui passer un `aria-label` explicite (accessibilité), et le cibler en test par
   `input[aria-label="..."]`, pas par placeholder.

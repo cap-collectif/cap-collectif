@@ -809,6 +809,30 @@ InternalQuery:
                     id:
                         type: 'ID!'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Theme\\ThemeResolver", args)'
+            adminMenuItems:
+                type: 'MenuItemConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                description: 'List the menu items whose associated features are enabled.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                args:
+                    search:
+                        type: 'String'
+                        defaultValue: null
+                        description: 'Filter by title.'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\MenuItem\\MenuItemListResolver", args)'
+            menuItem:
+                type: 'InternalMenuItem'
+                description: 'Get a single menu item by id.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                args:
+                    id:
+                        type: 'ID!'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\MenuItem\\MenuItemResolver", args)'
+            menuItemParents:
+                type: '[InternalMenuItem!]!'
+                description: 'The menu items that can hold sub menus: header root items without link.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\MenuItem\\MenuItemParentsResolver")'
             newsletterSubscriptions:
                 type: 'NewsletterSubscriptionConnection!'
                 argsBuilder: 'Relay::ForwardConnection'

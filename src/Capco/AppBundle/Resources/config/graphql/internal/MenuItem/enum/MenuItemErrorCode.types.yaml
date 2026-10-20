@@ -1,0 +1,19 @@
+MenuItemErrorCode:
+    type: enum
+    config:
+        name: MenuItemErrorCode
+        description: 'The available errors for menu items.'
+        values:
+            NOT_FOUND:
+                value: !php/const Capco\AppBundle\Enum\MenuItemErrorCode::NOT_FOUND
+            TITLE_REQUIRED:
+                value: !php/const Capco\AppBundle\Enum\MenuItemErrorCode::TITLE_REQUIRED
+            PARENT_NOT_FOUND:
+                value: !php/const Capco\AppBundle\Enum\MenuItemErrorCode::PARENT_NOT_FOUND
+            INVALID_PARENT:
+                value: !php/const Capco\AppBundle\Enum\MenuItemErrorCode::INVALID_PARENT
+                description: 'Only a header root item without link can hold sub menus, and a sub menu cannot hold sub menus.'
+            PAGE_NOT_FOUND:
+                value: !php/const Capco\AppBundle\Enum\MenuItemErrorCode::PAGE_NOT_FOUND
+            NOT_DELETABLE:
+                value: !php/const Capco\AppBundle\Enum\MenuItemErrorCode::NOT_DELETABLE

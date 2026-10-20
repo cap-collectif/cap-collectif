@@ -1,0 +1,10 @@
+CreateMenuItemPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            menuItem:
+                type: 'InternalMenuItem'
+                description: 'The created menu item.'
+            errorCode:
+                type: 'MenuItemErrorCode'
+                description: 'The available errors if any.'

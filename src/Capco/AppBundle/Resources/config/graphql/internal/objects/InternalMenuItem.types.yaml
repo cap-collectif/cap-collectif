@@ -30,3 +30,39 @@ InternalMenuItem:
             translations:
                 type: '[InternalMenuItemTranslation!]!'
                 description: 'The available translations for the menu item.'
+            menu:
+                type: 'MenuItemMenu!'
+                description: 'The menu in which the item is displayed.'
+                resolve: '@=value.getMenu()'
+            isEnabled:
+                type: 'Boolean!'
+                description: 'Whether the item is published.'
+                resolve: '@=value.getIsEnabled()'
+            isDeletable:
+                type: 'Boolean!'
+                description: 'Whether the item can be deleted. Items created by default on every platform cannot.'
+                resolve: '@=value.getIsDeletable()'
+            isFullyModifiable:
+                type: 'Boolean!'
+                description: 'Whether the link of the item can be changed.'
+                resolve: '@=value.getIsFullyModifiable()'
+            isExternalLink:
+                type: 'Boolean!'
+                description: 'Whether the link opens an external website.'
+                resolve: '@=value.isExternalLink()'
+            parent:
+                type: 'InternalMenuItem'
+                description: 'The parent menu item, if any.'
+                resolve: '@=value.getParent()'
+            hasChildren:
+                type: 'Boolean!'
+                description: 'Whether the item holds sub menus, published or not.'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\MenuItem\\MenuItemHasChildrenResolver", value)'
+            page:
+                type: 'InternalPage'
+                description: 'The custom page the item links to, if any.'
+                resolve: '@=value.getPage()'
+            updatedAt:
+                type: 'DateTime'
+                description: 'The last update date.'
+                resolve: '@=value.getUpdatedAt()'

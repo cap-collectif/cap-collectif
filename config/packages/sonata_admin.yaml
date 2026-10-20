@@ -55,7 +55,6 @@ sonata_admin:
                     - Capco\AdminBundle\Admin\UserAdmin
             admin.group.parameters:
                 items:
-                    - Capco\AdminBundle\Admin\MenuItemAdmin
                     - Capco\AdminBundle\Admin\GlobalDistrictAdmin
                     - Capco\AdminBundle\Admin\FontAdmin
             admin.group.pages:

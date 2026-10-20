@@ -1,0 +1,12 @@
+MenuItemMenu:
+    type: enum
+    config:
+        name: MenuItemMenu
+        description: 'The menu in which a menu item is displayed.'
+        values:
+            HEADER:
+                value: !php/const Capco\AppBundle\Entity\MenuItem::TYPE_HEADER
+                description: 'The main navigation bar.'
+            FOOTER:
+                value: !php/const Capco\AppBundle\Entity\MenuItem::TYPE_FOOTER
+                description: 'The footer.'

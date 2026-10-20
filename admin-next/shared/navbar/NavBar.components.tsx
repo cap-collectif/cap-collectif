@@ -5,6 +5,7 @@ import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { LinkProps, useNavBarContext } from './NavBar.context'
 import { unescapeHTML } from './NavBar.utils'
+import ExternalLinkIcon, { externalLinkProps, externalLinkStyle } from '@shared/ui/ExternalLinkIcon'
 
 const isCurrent = href => typeof window && (href === window?.location?.href || href === window?.location?.pathname)
 
@@ -48,7 +49,7 @@ export const NavBarMenu = React.forwardRef<
 
   const renderLinks = () =>
     links.map((link, idx) => {
-      const { href, title } = link
+      const { href, title, isExternalLink } = link
       const isCurrentPage = isCurrent(href)
       return (
         <Box
@@ -56,6 +57,8 @@ export const NavBarMenu = React.forwardRef<
           as={isMobile ? 'a' : MenuItem}
           display="block"
           href={href}
+          // Sub menu entries stay full width, so their hover background covers the whole row
+          {...(isExternalLink ? { ...externalLinkProps, style: { display: 'flex', alignItems: 'center' } } : {})}
           width={['100%', '100%', '320px']}
           bg={bg}
           color={color}
@@ -70,6 +73,7 @@ export const NavBarMenu = React.forwardRef<
           className={isCurrentPage ? 'currentPage' : undefined}
         >
           {title}
+          {isExternalLink ? <ExternalLinkIcon /> : null}
         </Box>
       )
     })
@@ -136,7 +140,7 @@ export const NavBarMenu = React.forwardRef<
 export const NavBarLink = React.forwardRef<
   HTMLElement,
   BoxProps & LinkProps & { isExtended?: boolean; hoverColor: string }
->(({ href, title, isExtended, color, hoverColor, bg, ...rest }, ref) => {
+>(({ href, title, isExtended, isExternalLink, color, hoverColor, bg, ...rest }, ref) => {
   const isCurrentPage = isCurrent(href)
   return (
     <Box
@@ -145,6 +149,7 @@ export const NavBarLink = React.forwardRef<
       className={`navLink${isCurrentPage ? ' currentPage' : ''}`}
       fontSize={CapUIFontSize.BodyLarge}
       href={href}
+      {...(isExternalLink ? { ...externalLinkProps, style: externalLinkStyle } : {})}
       px={2}
       py={[5, 5, isExtended ? 4 : 5]}
       color={color}
@@ -154,6 +159,7 @@ export const NavBarLink = React.forwardRef<
       {...rest}
     >
       {title}
+      {isExternalLink ? <ExternalLinkIcon /> : null}
     </Box>
   )
 })

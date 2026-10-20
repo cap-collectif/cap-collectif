@@ -1,0 +1,7 @@
+MenuItemConnection:
+    type: relay-connection
+    config:
+        nodeType: InternalMenuItem!
+        connectionFields:
+            totalCount:
+                type: Int!

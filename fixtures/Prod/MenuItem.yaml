@@ -101,3 +101,4 @@ Capco\AppBundle\Entity\MenuItem:
         position: 1
         parent: null
         menu: 2
+        isExternalLink: true

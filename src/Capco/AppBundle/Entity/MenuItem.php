@@ -51,6 +51,11 @@ class MenuItem implements EntityInterface, TranslatableInterface, \Stringable
     private bool $isFullyModifiable = true;
 
     /**
+     * @ORM\Column(name="is_external_link", type="boolean", options={"default": false})
+     */
+    private bool $isExternalLink = false;
+
+    /**
      * @var int
      * @Gedmo\SortablePosition
      * @ORM\Column(name="position", type="integer")
@@ -202,6 +207,18 @@ class MenuItem implements EntityInterface, TranslatableInterface, \Stringable
     public function getIsFullyModifiable()
     {
         return $this->isFullyModifiable;
+    }
+
+    public function isExternalLink(): bool
+    {
+        return $this->isExternalLink;
+    }
+
+    public function setIsExternalLink(bool $isExternalLink): self
+    {
+        $this->isExternalLink = $isExternalLink;
+
+        return $this;
     }
 
     /**

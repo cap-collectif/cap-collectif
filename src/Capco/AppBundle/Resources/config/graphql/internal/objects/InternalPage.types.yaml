@@ -35,6 +35,10 @@ InternalPage:
                 type: 'String'
                 argsBuilder: 'Translatable::Field'
                 resolve: '@=value.getMetaDescription(args["locale"])'
+            isEnabled:
+                type: 'Boolean!'
+                description: 'Whether the page is published.'
+                resolve: '@=value.getIsEnabled()'
             customCode:
                 type: 'String'
                 resolve: '@=value.getCustomCode()'

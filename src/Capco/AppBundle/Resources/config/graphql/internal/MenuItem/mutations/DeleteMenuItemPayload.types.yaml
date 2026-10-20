@@ -1,0 +1,10 @@
+DeleteMenuItemPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            deletedMenuItemId:
+                type: 'ID'
+                description: 'The deleted menu item id.'
+            errorCode:
+                type: 'MenuItemErrorCode'
+                description: 'The available errors if any.'

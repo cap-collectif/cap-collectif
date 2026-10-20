@@ -90,11 +90,6 @@ class MenuItemResolver
         return $cachedItem->get();
     }
 
-    public function hasEnabledFeatures(MenuItem $menuItem)
-    {
-        return $this->manager->containsEnabledFeature($menuItem->getAssociatedFeatures());
-    }
-
     /**
      * Get the URL from a menu item.
      */

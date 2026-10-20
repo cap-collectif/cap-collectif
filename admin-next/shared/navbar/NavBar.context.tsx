@@ -1,7 +1,12 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 
-export type LinkProps = { readonly title: string; readonly href: string; readonly showOnMobile?: boolean }
+export type LinkProps = {
+  readonly title: string
+  readonly href: string
+  readonly showOnMobile?: boolean
+  readonly isExternalLink?: boolean
+}
 
 export type NavBarContextProps = {
   breadCrumbItems?: LinkProps[]
