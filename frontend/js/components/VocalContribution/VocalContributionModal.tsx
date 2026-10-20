@@ -1,13 +1,13 @@
+import { Box, useTheme } from '@cap-collectif/ui'
+import CookieMonster from '@shared/utils/CookieMonster'
 import * as React from 'react'
 import { createPortal } from 'react-dom'
 import { useIntl } from 'react-intl'
 import { useSelector } from 'react-redux'
 import { fetchQuery, graphql, useRelayEnvironment } from 'react-relay'
-import { Box, useTheme } from '@cap-collectif/ui'
 import { buildToastUrl } from '~/components/ParticipationWorkflow/utils/buildToastUrl'
-import type { VocalContributionModalQuery } from '~relay/VocalContributionModalQuery.graphql'
 import type { GlobalState } from '~/types'
-import CookieMonster from '@shared/utils/CookieMonster'
+import type { VocalContributionModalQuery } from '~relay/VocalContributionModalQuery.graphql'
 import useVocalRecorder, {
   ALERT_BEFORE_END,
   MAX_DURATION,
@@ -16,14 +16,14 @@ import useVocalRecorder, {
   MicErrorKind,
   Recording,
 } from './useVocalRecorder'
-import VocalContributionPlayer, { PlayerHandle } from './VocalContributionPlayer'
-import VocalIcon from './VocalIcon'
+import { OPEN_HASH, TRIGGER_SELECTOR, formatClock } from './utils'
 import type { VocalIconName } from './VocalContribution.icons'
 import { TRAME_LINES, TRAME_VIEWBOX } from './VocalContribution.icons'
 import { getVocalContributionStyles } from './VocalContribution.style'
 import type { UploadConfig } from './vocalContributionApi'
 import { VocalContributionError, addVocalContribution, uploadVocalFile } from './vocalContributionApi'
-import { OPEN_HASH, TRIGGER_SELECTOR, formatClock } from './utils'
+import VocalContributionPlayer, { PlayerHandle } from './VocalContributionPlayer'
+import VocalIcon from './VocalIcon'
 
 const QUERY = graphql`
   query VocalContributionModalQuery {
@@ -49,7 +49,6 @@ const TIPS: Array<{ icon: VocalIconName; name: string }> = [
   { icon: 'mic', name: 'naturally' },
   { icon: 'shield', name: 'no-personal-data' },
   { icon: 'again', name: 'replay' },
-  { icon: 'pin', name: 'sector-or-region' },
 ]
 
 const getSubmitErrorKey = (error: unknown): string => {
@@ -433,7 +432,11 @@ const VocalContributionModal = ({ uploadConfig, onParticipationWorkflowRequired 
                     strokeDashoffset={(RING_CIRCUMFERENCE * (1 - elapsed / MAX_DURATION)).toFixed(1)}
                   />
                 </svg>
-                <div className="gcv__clock" role="timer" aria-label={intl.formatMessage({ id: 'front.vocal-contribution.rec.timer' })}>
+                <div
+                  className="gcv__clock"
+                  role="timer"
+                  aria-label={intl.formatMessage({ id: 'front.vocal-contribution.rec.timer' })}
+                >
                   <span className="gcv__time">{formatClock(elapsed)}</span>
                   <span className="gcv__max">
                     {intl.formatMessage({ id: 'front.vocal-contribution.rec.max' }, { max: formatClock(MAX_DURATION) })}
@@ -447,9 +450,12 @@ const VocalContributionModal = ({ uploadConfig, onParticipationWorkflowRequired 
                     {recorder.isPaused
                       ? intl.formatMessage({ id: 'front.vocal-contribution.rec.paused' })
                       : isLate
-                      ? intl.formatMessage({ id: 'front.vocal-contribution.rec.late' }, {
-                          remaining: formatClock(Math.ceil(MAX_DURATION - elapsed)),
-                        })
+                      ? intl.formatMessage(
+                          { id: 'front.vocal-contribution.rec.late' },
+                          {
+                            remaining: formatClock(Math.ceil(MAX_DURATION - elapsed)),
+                          },
+                        )
                       : intl.formatMessage({ id: 'front.vocal-contribution.rec.recording' })}
                   </span>
                 </p>
@@ -506,13 +512,20 @@ const VocalContributionModal = ({ uploadConfig, onParticipationWorkflowRequired 
               {recording.autoStopped && (
                 <p className="gcv__note">
                   <VocalIcon name="clock" size={22} />
-                  <span>{intl.formatMessage({ id: 'front.vocal-contribution.review.auto-stopped' }, { duration: maxDurationText })}</span>
+                  <span>
+                    {intl.formatMessage(
+                      { id: 'front.vocal-contribution.review.auto-stopped' },
+                      { duration: maxDurationText },
+                    )}
+                  </span>
                 </p>
               )}
               {isTooShort && (
                 <p className="gcv__note gcv__note--error">
                   <VocalIcon name="warn" size={22} />
-                  <span>{intl.formatMessage({ id: 'front.vocal-contribution.review.too-short' }, { seconds: MIN_DURATION })}</span>
+                  <span>
+                    {intl.formatMessage({ id: 'front.vocal-contribution.review.too-short' }, { seconds: MIN_DURATION })}
+                  </span>
                 </p>
               )}
               {submitError && (
@@ -574,7 +587,11 @@ const VocalContributionModal = ({ uploadConfig, onParticipationWorkflowRequired 
             />
           ),
           secondary: (
-            <ActionButton kind="quiet" label={intl.formatMessage({ id: 'front.vocal-contribution.redo.keep' })} onClick={() => show('review')} />
+            <ActionButton
+              kind="quiet"
+              label={intl.formatMessage({ id: 'front.vocal-contribution.redo.keep' })}
+              onClick={() => show('review')}
+            />
           ),
         }
       case 'quit': {
@@ -583,13 +600,17 @@ const VocalContributionModal = ({ uploadConfig, onParticipationWorkflowRequired 
           icon: 'warn',
           tone: 'warn',
           title: intl.formatMessage({ id: 'front.vocal-contribution.quit.title' }),
-          lede: `${wasRecording ? `${intl.formatMessage({ id: 'front.vocal-contribution.quit.paused' })} ` : ''}${intl.formatMessage({
+          lede: `${
+            wasRecording ? `${intl.formatMessage({ id: 'front.vocal-contribution.quit.paused' })} ` : ''
+          }${intl.formatMessage({
             id: 'front.vocal-contribution.quit.lede',
           })}`,
           primary: (
             <ActionButton
               kind="primary"
-              label={intl.formatMessage({ id: wasRecording ? 'front.vocal-contribution.quit.resume' : 'front.vocal-contribution.quit.back' })}
+              label={intl.formatMessage({
+                id: wasRecording ? 'front.vocal-contribution.quit.resume' : 'front.vocal-contribution.quit.back',
+              })}
               onClick={stay}
             />
           ),
@@ -629,7 +650,11 @@ const VocalContributionModal = ({ uploadConfig, onParticipationWorkflowRequired 
             />
           ) : null,
           secondary: (
-            <ActionButton kind={canRetry ? 'quiet' : 'primary'} label={intl.formatMessage({ id: 'global.close' })} onClick={close} />
+            <ActionButton
+              kind={canRetry ? 'quiet' : 'primary'}
+              label={intl.formatMessage({ id: 'global.close' })}
+              onClick={close}
+            />
           ),
         }
       }
@@ -707,7 +732,12 @@ const VocalContributionModal = ({ uploadConfig, onParticipationWorkflowRequired 
               <VocalIcon name="mic" size={18} />
               <span>{brand}</span>
             </p>
-            <button type="button" className="gcv__close" aria-label={intl.formatMessage({ id: 'global.close' })} onClick={requestClose}>
+            <button
+              type="button"
+              className="gcv__close"
+              aria-label={intl.formatMessage({ id: 'global.close' })}
+              onClick={requestClose}
+            >
               <VocalIcon name="x" size={26} />
             </button>
           </div>
