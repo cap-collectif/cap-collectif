@@ -1,0 +1,17 @@
+CreatePageInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of createPage mutation.'
+        fields:
+            translations:
+                type: '[CreatePageTranslationInput!]!'
+                description: 'The page translations.'
+            isEnabled:
+                type: 'Boolean'
+                description: 'Whether the page should be published.'
+            cover:
+                type: 'ID'
+                description: 'The id of the media used when the page is shared on social networks.'
+            customCode:
+                type: 'String'
+                description: 'The custom code inserted at the end of the page.'

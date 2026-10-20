@@ -1106,6 +1106,27 @@ InternalMutation:
                     inputType: DeleteMenuItemInput
                     payloadType: DeleteMenuItemPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\MenuItem\\DeleteMenuItemMutation", args)'
+            createPage:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CreatePageInput
+                    payloadType: CreatePagePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Page\\CreatePageMutation", args)'
+            updatePage:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdatePageInput
+                    payloadType: UpdatePagePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Page\\UpdatePageMutation", args)'
+            deletePage:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeletePageInput
+                    payloadType: DeletePagePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Page\\DeletePageMutation", args)'
             createNewsletterSubscription:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'

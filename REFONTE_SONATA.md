@@ -42,6 +42,11 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
    une condition `hasFeatureFlag()` à reproduire sur la page ou la query.
 2. **Identifier l'entité Doctrine** associée (`src/Capco/AppBundle/Entity/`) pour connaître les champs réels
    et savoir si l'entité est traduisible (présence d'une entité `*Translation` / `TranslatableTrait`) ou non.
+   **Vérifier aussi que chaque champ édité par Sonata est bien lu par le front public** : l'entité peut avoir
+   des champs proches (ex: `Page::cover` et `Page::media`). Sur les pages personnalisées, Sonata éditait
+   `cover` (image réseaux sociaux) mais la page publique Next.js lisait `media` depuis sa migration : l'image
+   saisie n'avait plus d'effet. Signaler ce genre d'écart à l'utilisateurice avant de choisir le champ à
+   éditer, plutôt que de reproduire un champ mort.
 3. **Vérifier l'existant GraphQL** (`schema.internal.graphql` + `src/Capco/AppBundle/Resources/config/graphql/internal/`) :
    - Le type GraphQL existe-t-il déjà ? Est-il exposé en connection paginée (`XConnection`) ou en simple liste (`[X!]!`) ?
    - Les mutations `create`/`update`/`delete` existent-elles déjà ? Si non, il faudra les créer en suivant le
@@ -347,6 +352,12 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
   `pages/admin-next/geographical-area.tsx` (lecture via `node(id:)` + `useUrlState('id', '')`) et
   `components/BackOffice/GeographicalArea/GeographicalAreaForm.tsx`. Déclarer la page d'édition dans le
   `relatedHrefs` de l'item de menu de la liste (`SideBarItems.json`) pour qu'elle hérite de son rôle requis.
+  - **Format « articles » (formulaire à 70 % + encart latéral en accordéon à 30 %), avec feature flag de
+    migration** : `pages/admin-next/custom-pages.tsx` / `custom-page.tsx` et
+    `components/BackOffice/CustomPages/` (pages personnalisées). Les deux pages ont le garde
+    `withFeatureFlagRequired`, pas seulement la liste. L'encart reprend la taille d'accordéon des articles
+    (`CapUIAccordionSize.md`, `PostFormSide.tsx`) ; un uploader dans un accordéon suit
+    `OrganizationConfigFormSide.tsx` (`UPLOADER_SIZE.SM`, `isFullWidth`, `FormGuideline` pour formats/poids).
 - **Page dédiée création/édition avec accordéons à droite (layout de `/post`), multilangue inclus** :
   `components/BackOffice/Themes/ThemeFormWrapper.tsx` (+ `ThemeForm.tsx`, `ThemeFormSide.tsx`) — colonne
   principale à 70 % (titre, auteur, sous-titre, uploader d'image, `TextEditor`), accordéons à 30 % (« Publication »
@@ -355,6 +366,8 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
   les langues sont envoyées, le back supprime la traduction d'une langue dont tous les champs sont vides (hors langue
   par défaut) et laisse intactes les langues absentes de l'input. Liste associée : `ThemeList.tsx`,
   sur le modèle de `VideoList.tsx`.
+- **Recherche remplaçant le bouton « Filtres » de Sonata** : le ou les champs recherchés dépendent du ticket
+  (titre, email, nom…). Ne pas supposer : demander lequel s'applique si le ticket ne le dit pas.
 - **Page "wrapper" standard** : toute page admin-next suit le même squelette —
   `Layout navTitle={...}` + `Suspense fallback={<Spinner .../>}` + `export const getServerSideProps = withPageAuthRequired`.
   Le rôle requis (le cas échéant) se règle dans `rolesRequired` de `SideBarItems.json`, pas dans le code de
@@ -1370,6 +1383,17 @@ prop-drillé entre la liste et un ancêtre.
 - **Navigateur headless : « The Json session is empty ! » dans les logs de `capco_nextjs_1` malgré une visite de
   `/`** : la partie JSON de la session (le `viewer`) n'était pas encore écrite. Visiter une deuxième page Symfony
   (ex: `/admin/capco/app/page/list`) avec `waitUntil: 'networkidle'` avant d'ouvrir la page admin-next.
+- **`TextEditor` (Jodit) ne revalide pas le formulaire** : il écrit sa valeur avec `setValue(name, value)`,
+  sans `shouldValidate`. Avec un schéma yup qui exige un contenu, `formState.isValid` reste donc à `false`
+  et un bouton `disabled={!isValid}` ne s'active jamais, même contenu saisi. Appeler
+  `trigger(\`${locale}-body\`)` dans un `useEffect` qui observe la valeur (`watch`), en sautant le premier
+  rendu pour ne pas afficher l'erreur à l'ouverture d'un formulaire vide. Voir `CustomPageForm.tsx`.
+  (`PostForm.tsx` contourne le problème autrement, avec un `isWYSIWYGContentEmpty` hors schéma.)
+- **Un champ hérité d'une interface GraphQL peut ne jamais avoir été résolu** : `InternalPage` héritait de
+  `UniformResourceLocatable` (`url: URI!`) sans resolver, et toute query de `url` levait « Cannot return null
+  for non-nullable field ». Un champ présent dans le schéma n'est pas forcément utilisable : le tester en
+  `curl` avant de l'utiliser, et ajouter le resolver manquant (ex: `PageUrlResolver`, sur le modèle de
+  `ThemeUrlResolver`).
 - **`Search` (`@cap-collectif/ui`) est un react-select** : son `placeholder` est un `<div>`, pas un attribut de
   l'`<input>`. Lui passer un `aria-label` explicite (accessibilité), et le cibler en test par
   `input[aria-label="..."]`, pas par placeholder.

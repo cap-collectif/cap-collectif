@@ -1,0 +1,17 @@
+CreatePageTranslationInput:
+    type: relay-mutation-input
+    config:
+        description: 'Creates a custom page translation.'
+        fields:
+            locale:
+                type: 'TranslationLocale!'
+                description: 'The locale of the translation.'
+            title:
+                type: 'String!'
+                description: 'The page title.'
+            body:
+                type: 'String'
+                description: 'The page content.'
+            metaDescription:
+                type: 'String'
+                description: 'The description used by search engines and social networks.'

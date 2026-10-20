@@ -4,6 +4,7 @@ import sideBarItems from './SideBarItems.json'
 
 const SONATA_URL_BY_ADMIN_NEXT_URL: Record<string, string> = {
   '/admin-next/themes': '/admin/capco/app/theme/list',
+  '/admin-next/custom-pages': '/admin/capco/app/page/list',
 }
 
 export const getSideBarItemsFiltered = (

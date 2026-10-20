@@ -1,0 +1,8 @@
+DeletePageInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of deletePage mutation.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the page to delete.'

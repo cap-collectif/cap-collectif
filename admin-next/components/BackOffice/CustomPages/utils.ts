@@ -1,0 +1,1 @@
+export const CONNECTION_NODES_PER_PAGE = 20

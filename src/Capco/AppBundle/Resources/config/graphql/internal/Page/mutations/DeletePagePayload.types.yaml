@@ -1,0 +1,10 @@
+DeletePagePayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            deletedPageId:
+                type: 'ID'
+                description: 'The deleted page id.'
+            errorCode:
+                type: 'PageErrorCode'
+                description: 'The available errors if any.'

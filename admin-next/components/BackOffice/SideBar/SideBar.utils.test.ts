@@ -71,6 +71,18 @@ describe('getSideBarItemsFiltered', () => {
     )
   })
 
+  it('switches the custom pages route with the migration flag', () => {
+    const getCustomPagesItem = (featureFlags = defaultFeatureFlags) =>
+      getSideBarItemsFiltered(true, true, featureFlags, false, null, false)
+        .find(item => item.id === 'content')
+        ?.items.find(item => item.title === 'admin.label.page')
+
+    expect(getCustomPagesItem()?.href).toBe('/admin/capco/app/page/list')
+    expect(getCustomPagesItem({ ...defaultFeatureFlags, unstable__sonata_migration_to_admin_next: true })?.href).toBe(
+      '/admin-next/custom-pages',
+    )
+  })
+
   it('hides the Hub API Green item when its feature flag is disabled', () => {
     const sideBarItems = getSideBarItemsFiltered(
       true,

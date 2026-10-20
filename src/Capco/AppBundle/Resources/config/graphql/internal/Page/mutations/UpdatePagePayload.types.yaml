@@ -1,0 +1,10 @@
+UpdatePagePayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            page:
+                type: 'InternalPage'
+                description: 'The updated page.'
+            errorCode:
+                type: 'PageErrorCode'
+                description: 'The available errors if any.'

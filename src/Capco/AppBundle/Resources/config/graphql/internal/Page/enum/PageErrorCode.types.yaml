@@ -1,0 +1,12 @@
+PageErrorCode:
+    type: enum
+    config:
+        name: PageErrorCode
+        description: 'The available errors for custom pages.'
+        values:
+            NOT_FOUND:
+                value: !php/const Capco\AppBundle\Enum\PageErrorCode::NOT_FOUND
+            TITLE_REQUIRED:
+                value: !php/const Capco\AppBundle\Enum\PageErrorCode::TITLE_REQUIRED
+            BODY_REQUIRED:
+                value: !php/const Capco\AppBundle\Enum\PageErrorCode::BODY_REQUIRED

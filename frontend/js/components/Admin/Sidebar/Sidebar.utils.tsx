@@ -22,7 +22,10 @@ export const URL_MAP = {
     '/admin/capco/app/event/',
     '/admin-next/videos',
     '/admin-next/video',
+    // migrated with feature flag, keep it until the flag is removed for this page
     '/admin/capco/app/page/',
+    '/admin-next/custom-pages',
+    '/admin-next/custom-page',
     '/admin/capco/media/media/',
   ],
   projets: [

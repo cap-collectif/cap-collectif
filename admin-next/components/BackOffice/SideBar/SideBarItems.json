@@ -91,7 +91,8 @@
             },
             {
                 "title": "admin.label.page",
-                "href": "/admin/capco/app/page/list",
+                "href": "/admin-next/custom-pages",
+                "relatedHrefs": ["/admin-next/custom-page"],
                 "rolesRequired": ["admin"],
                 "featuresRequired": []
             },

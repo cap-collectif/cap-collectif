@@ -833,6 +833,25 @@ InternalQuery:
                 description: 'The menu items that can hold sub menus: header root items without link.'
                 access: "@=hasRole('ROLE_ADMIN')"
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\MenuItem\\MenuItemParentsResolver")'
+            customPages:
+                type: 'PageConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                description: 'List all custom pages, ordered by title.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                args:
+                    search:
+                        type: 'String'
+                        defaultValue: null
+                        description: 'Filter by title.'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Page\\PageListResolver", args)'
+            customPage:
+                type: 'InternalPage'
+                description: 'Get a single custom page by id.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                args:
+                    id:
+                        type: 'ID!'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Page\\PageResolver", args)'
             newsletterSubscriptions:
                 type: 'NewsletterSubscriptionConnection!'
                 argsBuilder: 'Relay::ForwardConnection'

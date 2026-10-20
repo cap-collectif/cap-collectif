@@ -1,0 +1,13 @@
+UpdatePageInput:
+    type: relay-mutation-input
+    inherits:
+        - CreatePageInput
+    config:
+        description: 'Input of updatePage mutation.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the page to update.'
+            deletedTranslationLocales:
+                type: '[TranslationLocale!]'
+                description: 'The locales whose translation must be deleted. Translations missing from "translations" are otherwise kept.'

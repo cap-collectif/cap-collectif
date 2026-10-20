@@ -18,6 +18,9 @@ const METADATA_QUERY = graphql`
     }
     page: nodeSlug(entity: PAGE, slug: $pageSlug) {
       ... on Page {
+        cover {
+          url(format: "reference")
+        }
         media {
           url(format: "reference")
         }
@@ -123,11 +126,12 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   // When a page is accessed via a localized slug (e.g. /pages/faq-en), the slug translation is authoritative.
   const title = page.translationBySlug?.title || localizedTranslation?.title || page.title
   const metaDescription = page.translationBySlug?.metaDescription || localizedTranslation?.metaDescription
-  const { media } = page
+  // The back office edits `cover` as the social network image; `media` is only a fallback for older pages.
+  const socialNetworkImageUrl = page.cover?.url || page.media?.url
 
-  const openGraph = media?.url
+  const openGraph = socialNetworkImageUrl
     ? {
-        images: [media?.url],
+        images: [socialNetworkImageUrl],
       }
     : null
 

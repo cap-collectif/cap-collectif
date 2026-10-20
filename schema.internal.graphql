@@ -4380,6 +4380,45 @@ type CreateOrUpdateConsultationPayload {
   clientMutationId: String
 }
 
+input CreatePageInput {
+  """The page translations."""
+  translations: [CreatePageTranslationInput!]!
+
+  """Whether the page should be published."""
+  isEnabled: Boolean
+
+  """The id of the media used when the page is shared on social networks."""
+  cover: ID
+
+  """The custom code inserted at the end of the page."""
+  customCode: String
+  clientMutationId: String
+}
+
+type CreatePagePayload {
+  """The created page."""
+  page: Page
+
+  """The available errors if any."""
+  errorCode: PageErrorCode
+  clientMutationId: String
+}
+
+input CreatePageTranslationInput {
+  """The locale of the translation."""
+  locale: TranslationLocale!
+
+  """The page title."""
+  title: String!
+
+  """The page content."""
+  body: String
+
+  """The description used by search engines and social networks."""
+  metaDescription: String
+  clientMutationId: String
+}
+
 """Available errors on createPost mutation"""
 enum CreatePostErrorCode {
   """Submitted form is invalid"""
@@ -6521,6 +6560,21 @@ type DeleteOrganizationPayload {
 
   """Errors for deleteOrganization mutation."""
   errorCode: DeleteOrganizationErrorCode
+  clientMutationId: String
+}
+
+input DeletePageInput {
+  """The id of the page to delete."""
+  id: ID!
+  clientMutationId: String
+}
+
+type DeletePagePayload {
+  """The deleted page id."""
+  deletedPageId: ID
+
+  """The available errors if any."""
+  errorCode: PageErrorCode
   clientMutationId: String
 }
 
@@ -10136,6 +10190,9 @@ type Mutation {
   createMenuItem(input: CreateMenuItemInput!): CreateMenuItemPayload
   updateMenuItem(input: UpdateMenuItemInput!): UpdateMenuItemPayload
   deleteMenuItem(input: DeleteMenuItemInput!): DeleteMenuItemPayload
+  createPage(input: CreatePageInput!): CreatePagePayload
+  updatePage(input: UpdatePageInput!): UpdatePagePayload
+  deletePage(input: DeletePageInput!): DeletePagePayload
   createNewsletterSubscription(input: CreateNewsletterSubscriptionInput!): CreateNewsletterSubscriptionPayload
   updateNewsletterSubscription(input: UpdateNewsletterSubscriptionInput!): UpdateNewsletterSubscriptionPayload
   deleteNewsletterSubscription(input: DeleteNewsletterSubscriptionInput!): DeleteNewsletterSubscriptionPayload
@@ -11533,7 +11590,40 @@ type Page implements NodeSlug & UniformResourceLocatable {
   """Whether the page is published."""
   isEnabled: Boolean!
   customCode: String
+
+  """The date of the last update of the page."""
+  updatedAt: DateTime
+
+  """The menu items linking to the page."""
+  menuItems: [MenuItem!]!
   translationBySlug(slug: String!): PageTranslation!
+}
+
+"""A connection to a list of items."""
+type PageConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [PageEdge]
+}
+
+"""An edge in a connection."""
+type PageEdge {
+  """The item at the end of the edge."""
+  node: Page!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+"""The available errors for custom pages."""
+enum PageErrorCode {
+  NOT_FOUND
+  TITLE_REQUIRED
+  BODY_REQUIRED
 }
 
 """Information about pagination in a connection."""
@@ -15908,6 +15998,23 @@ type Query {
   The menu items that can hold sub menus: header root items without link.
   """
   menuItemParents: [MenuItem!]!
+
+  """List all custom pages, ordered by title."""
+  customPages(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Filter by title."""
+    search: String = null
+  ): PageConnection!
+
+  """Get a single custom page by id."""
+  customPage(id: ID!): Page
 
   """List all newsletter subscriptions, ordered by email."""
   newsletterSubscriptions(
@@ -22008,6 +22115,38 @@ input UpdateOtherStepInput {
 type UpdateOtherStepPayload {
   """The updated step."""
   step: OtherStep!
+  clientMutationId: String
+}
+
+input UpdatePageInput {
+  """The page translations."""
+  translations: [CreatePageTranslationInput!]!
+
+  """Whether the page should be published."""
+  isEnabled: Boolean
+
+  """The id of the media used when the page is shared on social networks."""
+  cover: ID
+
+  """The custom code inserted at the end of the page."""
+  customCode: String
+  clientMutationId: String
+
+  """The id of the page to update."""
+  id: ID!
+
+  """
+  The locales whose translation must be deleted. Translations missing from "translations" are otherwise kept.
+  """
+  deletedTranslationLocales: [TranslationLocale!]
+}
+
+type UpdatePagePayload {
+  """The updated page."""
+  page: Page
+
+  """The available errors if any."""
+  errorCode: PageErrorCode
   clientMutationId: String
 }
 

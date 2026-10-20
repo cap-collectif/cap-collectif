@@ -1,0 +1,7 @@
+PageConnection:
+    type: relay-connection
+    config:
+        nodeType: InternalPage!
+        connectionFields:
+            totalCount:
+                type: Int!

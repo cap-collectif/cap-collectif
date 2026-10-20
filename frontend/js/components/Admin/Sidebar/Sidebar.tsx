@@ -207,7 +207,17 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                   )}
                   {features.calendar && <SidebarLink text="admin.label.events" href="/admin-next/events" />}
                   {isAdmin && <SidebarLink text="admin.label.video" href="/admin-next/videos" />}
-                  {isAdmin && <SidebarLink text="admin.label.page" href="/admin/capco/app/page/list" />}
+                  {/* Sonata route retained during the Admin Next migration rollout. Remove it when the migration feature flag is removed. */}
+                  {isAdmin && (
+                    <SidebarLink
+                      text="admin.label.page"
+                      href={
+                        features.unstable__sonata_migration_to_admin_next
+                          ? '/admin-next/custom-pages'
+                          : '/admin/capco/app/page/list'
+                      }
+                    />
+                  )}
                   {isAdmin && <SidebarLink text="media" href="/admin-next/medias" />}
                 </SidebarAccordionPanel>
               </SidebarAccordionItem>

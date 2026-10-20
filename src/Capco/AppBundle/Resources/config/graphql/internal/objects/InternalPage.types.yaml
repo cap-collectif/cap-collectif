@@ -15,6 +15,8 @@ InternalPage:
                 builder: 'Relay::GlobalId'
                 builderConfig:
                     typeName: Page
+            url:
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Page\\PageUrlResolver", value)'
             title:
                 type: 'String'
                 argsBuilder: 'Translatable::Field'
@@ -42,6 +44,15 @@ InternalPage:
             customCode:
                 type: 'String'
                 resolve: '@=value.getCustomCode()'
+            updatedAt:
+                type: 'DateTime'
+                description: 'The date of the last update of the page.'
+                resolve: '@=value.getUpdatedAt()'
+            menuItems:
+                type: '[InternalMenuItem!]!'
+                description: 'The menu items linking to the page.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=value.getMenuItems().toArray()'
             translationBySlug:
                 type: 'InternalPageTranslation!'
                 args:
