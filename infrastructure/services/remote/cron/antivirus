@@ -120,6 +120,11 @@ update_cache() {
 }
 
 # === Main ===
+# On attend entre 1min et 60min pour lancer l'antivirus afin de ne pas saturer
+# la mémoire sur les instances mutualisées en lançant tout d'un coup
+RDOM=$(( (RANDOM % 60 + 1) * 60 ))
+sleep $RDOM
+
 clean_log_files
 
 start_freshclam
