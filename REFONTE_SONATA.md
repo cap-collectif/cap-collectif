@@ -16,6 +16,12 @@ Toutes les pages d'administration encore construites avec Sonata (`src/Capco/Adm
 Relay + `@cap-collectif/ui`). La migration se fait **page par page, une PR par page**, en réutilisant au
 maximum les patterns déjà en place dans `admin-next/` plutôt qu'en inventant de nouvelles conventions.
 
+Ce document couvre aussi les pages du back-office **déjà écrites en React mais pas en Next.js** : une route
+Symfony sous `/admin/...` rend un template Twig du layout Sonata qui monte un composant de
+`frontend/js/startup/` via `react_render_component`. Elles suivent la même méthodologie, le même feature flag et
+la même recette de nettoyage, avec les écarts décrits dans la section « Variante : page React legacy servie par
+Symfony ».
+
 ### Widgets flottants
 
 Lorsque le beacon Help Scout est activé, il occupe le coin inférieur droit. Pour une page avec un CTA
@@ -256,6 +262,197 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
       spécifique à la catégorie migrée (l'admin `SiteParameter`/`SiteColor`/`SiteImage` y est enregistré une
       seule fois pour toutes les catégories, sous `admin.group.parameters`, sans filtre par catégorie).
 
+## Variante : page React legacy servie par Symfony
+
+Pages dont le contenu est déjà un composant React (`frontend/js/`), mais rendu par une route Symfony dans le layout
+Sonata (`@CapcoAdmin/standard_layout.html.twig`). La méthodologie ci-dessus s'applique, y compris le choix du mode
+de livraison (étape 8), les deux menus (étape 9) et la recette de nettoyage ; seuls les points suivants changent.
+Exemple de référence : la page « Icône du site » (`/admin/favicon/list` → `/admin-next/favicon`,
+`components/BackOffice/SiteFavicon/SiteFaviconForm.tsx`).
+
+### Repérer les pages et écarter le code mort
+
+- Lister les templates qui montent un composant :
+  `grep -rlE "react_render_component" src/Capco/AdminBundle/Resources/views src/Capco/AppBundle/Resources/views | grep -i admin`.
+  Ignorer `standard_layout.html.twig` et les partials : ils montent des widgets (sidebar, boutons d'export,
+  toasts…) et non des pages, qui disparaîtront avec le layout Sonata.
+- **Vérifier que le template est réellement rendu** avant de le migrer : grep de son chemin
+  (`<Dossier>/<fichier>.html.twig`) dans `src/` et `config/` (`@Template`, `render`, `renderWithExtraParams`,
+  `setTemplate`, tableau `getTemplate`). Un template sans appelant, ou dont l'appel est commenté, est du code
+  mort : le signaler à l'utilisateurice pour une PR de suppression, ne pas le migrer.
+- Vérifier aussi qu'une page Admin Next équivalente n'existe pas déjà (`admin-next/pages/admin-next/`,
+  `SideBarItems.json`, resolvers `*AdminUrlResolver`) : la route Symfony peut survivre alors que les menus
+  pointent déjà vers Next. C'est alors une PR de nettoyage, pas une refonte.
+
+### Étapes 1 à 4 : ce qu'il faut lire à la place de la classe Admin
+
+1. **Le contrôleur Symfony** de la route (souvent un simple `AbstractController` avec `@Route`/`@Template`, sans
+   classe Admin Sonata) : URL exacte, paramètres et props passés au composant (`react_render_component(...,
+   {'props': ...})`), contrôles d'accès (`@Security`, `denyAccessUnlessGranted`, voter).
+2. **La chaîne de composants legacy** : `frontend/js/startup/<X>App.tsx` → composant(s) de
+   `frontend/js/components/Admin/<X>/` → mutations de `frontend/js/mutations/`. Y relever :
+   - les champs, textes d'aide et clés de traduction (les réutiliser telles quelles) ;
+   - **les contraintes de validation réellement appliquées**, qui viennent souvent des valeurs par défaut des
+     composants partagés et non du composant de la page. Exemple : un `Field type="image"` hérite de
+     `ReactBootstrapInput` (`accept={ALLOWED_IMAGE_MIMETYPES}`, soit png/gif/jpeg/webp, et `maxSize` de
+     25 Mo). Reproduire ces contraintes dans le `FieldInput type="uploader"` plutôt que de copier le
+     `format`/`maxSize` d'une autre page Admin Next ;
+   - les effets de bord du composant hors formulaire (manipulation du DOM, rechargement, redirection…). Les
+     lister à l'utilisateurice et décider ensemble s'ils ont un sens dans Admin Next. Exemple : le formulaire
+     legacy de l'icône du site réécrivait les `<link rel="icon">` de la page ; le layout Admin Next n'en rend
+     pas, l'effet a été abandonné.
+3. **Le GraphQL existe presque toujours déjà**, puisque le composant legacy le consomme : réutiliser les queries et
+   mutations telles quelles, sans toucher au backend. Vérifier leur `access:` (étape 4) et chercher les tests Jest
+   API existants (`features/graphql-api/internal/`) : ils couvrent déjà le contrat, inutile d'en écrire d'autres.
+4. **Le rôle requis** se lit comme pour Sonata dans `config/packages/security.yaml` (règle `^/admin` par défaut)
+   et dans le contrôleur.
+
+### Réécriture côté `admin-next/`
+
+- **Choisir le pattern d'après la forme de la donnée, pas d'après l'ancien écran.** Un seul objet de réglage
+  (ex: `siteFavicon`) devient un formulaire rendu directement dans la page (`Box bg="white"`), sur le modèle de
+  `SiteFavicon/SiteFaviconForm.tsx` ; une liste suit les patterns `Table`/modale ci-dessous. Le bouton
+  « Enregistrer » se place **à gauche**, sous le dernier champ (`<Flex mt={6}>` sans `justify`), comme demandé sur
+  la refonte de l'icône du site : ne pas reprendre l'alignement à droite de `PrivacySettingsForm.tsx`. Aligné à
+  gauche, il n'est pas masqué par le beacon Help Scout, donc pas de marge de 69 px.
+- **Relay** : `admin-next/` a son propre compilateur et ses propres artefacts (`admin-next/__generated__/`). Les
+  fragments legacy (`createFragmentContainer`, `QueryRenderer`) deviennent une query `useLazyLoadQuery` dans le
+  composant, ou des fragments `useFragment` si la page est découpée. Les mutations sont réécrites dans
+  `admin-next/mutations/` sur le modèle de `UpdateAppearanceImageMutation.ts` ; garder le même nom d'opération
+  que la mutation legacy est possible (compilateurs séparés) et simplifie la recherche au nettoyage. Pour un
+  uploader, demander les champs attendus par `UploaderValue` :
+  `media { id name size type: contentType url(format: "reference") }`.
+- **Formulaire** : `redux-form` + `AlertForm` deviennent React Hook Form + `successToast`/`mutationErrorToast`
+  (`@shared/utils/toasts`). `pristine` correspond à `!formState.isDirty` ; après une sauvegarde réussie, appeler
+  `reset(values)` pour que le formulaire redevienne « non modifié ». Ajouter un schéma yup dès qu'il y a une règle
+  de validation (voir la section yup ci-dessous).
+- **Une mutation de suppression séparée** (ex: `changeSiteFavicon` / `removeSiteFavicon`) se choisit dans le
+  `onSubmit` selon la valeur du champ, comme le faisait le composant legacy.
+- **Code partagé** : `@shared/...` est commun aux deux frontends (ex: `@shared/utils/acceptedFiles`), le
+  réutiliser plutôt que dupliquer les constantes.
+
+### Menus, feature flag et tests
+
+- Identiques aux étapes 8, 9 et 13. L'URL historique n'est pas une route Sonata au sens strict (ex:
+  `/admin/favicon/list`), elle va quand même dans `SONATA_URL_BY_ADMIN_NEXT_URL` et dans le `href`
+  conditionnel du menu legacy.
+- Les tests Jest et snapshots du composant legacy (`frontend/js/components/Admin/<X>/*-test.tsx`) restent en
+  place pendant le rollout : ils testent du code encore servi quand le flag est désactivé.
+- Chercher des specs Cypress existantes par l'URL et par les sélecteurs du composant legacy (ex:
+  `#site_favicon_save`) : beaucoup de ces pages n'en ont aucune. Pour une page de réglage rarement utilisée
+  (ex: l'icône du site, configurée en général une seule fois par plateforme), ne pas en créer : les tests des
+  menus et les tests Jest API existants suffisent.
+
+### Inventaire des pages React legacy et travail restant
+
+**Consigne de mise à jour** : chaque PR qui fait avancer une de ces pages (refonte, nettoyage, suppression de code
+mort) met à jour sa ligne **dans la même PR** : statut et travail restant. Une page dont le nettoyage est fusionné
+est retirée de la liste. Une page découverte en cours de route (template monté par une route encore active) y est
+ajoutée. Comme la doc est fusionnée avant le code, « refonte en cours » veut dire « une branche existe », pas
+« fusionnée » : vérifier sur `preprod` avant de se fier au statut.
+
+Statuts : **à refondre**, **refonte en cours** (branche ouverte), **en rollout** (fusionnée derrière le feature
+flag), **à nettoyer** (Admin Next déjà en place, route legacy encore présente), **code mort** (aucun appelant).
+
+#### Projets et contributions
+
+- **Onglets d'un projet : contributions, participants, contributeurs, analyse** — à refondre
+  - URL : `/admin/alpha/project/{id}/contributions…`, `/participants`, `/contributors`, `/analysis`
+  - Composant : `ProjectAdminApp` (`AlphaProject/create.html.twig`, `AlphaProjectController`)
+  - Reste : refonte complète. La configuration du projet est déjà sur `/admin-next/project/[projectId]`.
+- **Création d'une proposition depuis le back-office** — à refondre
+  - URL : `/admin/alpha/project/{id}/contributions/proposals/{stepId}/create`
+  - Composant : `ProposalAdminPageApp` (`AlphaProject/createProposal.html.twig`)
+  - Reste : refonte, à mener avec l'édition d'une proposition (même composant).
+- **Édition d'une proposition** — à refondre
+  - URL : `/admin/capco/app/proposal/{id}/edit`
+  - Composant : `ProposalAdminPageApp` (`Proposal/edit.html.twig`, `ProposalAdmin`)
+  - Reste : refonte. La liste des propositions est encore sur Sonata.
+- **Édition d'un formulaire de dépôt** — à refondre
+  - URL : `/admin/capco/app/proposalform/{id}/edit`
+  - Composant : `ProposalFormAdminPageApp` (`ProposalForm/edit.html.twig`, `ProposalFormAdmin`)
+  - Reste : refonte. On y accède depuis `/admin-next/forms`.
+- **Édition d'un questionnaire** — à refondre
+  - URL : `/admin/capco/app/questionnaire/{id}/edit`
+  - Composant : `QuestionnaireAdminPageApp` (`Questionnaire/edit.html.twig`, `QuestionnaireAdmin`)
+  - Reste : refonte. On y accède depuis `/admin-next/forms`.
+
+#### Utilisateurs
+
+- **Édition d'un utilisateur** — à refondre
+  - URL : `/admin/capco/user/user/{id}/edit`
+  - Composant : `UserAdminPageApp` (`User/edit.html.twig`, `UserController`)
+  - Reste : refonte. La liste des utilisateurs est encore sur Sonata.
+
+#### Emailing
+
+- **Édition d'une campagne** — à refondre (vérifier si la refonte en cours de la page des campagnes la couvre)
+  - Composant : `EmailingMailParameterPageApp` (`Emailing/emailingCampaignEdit.html.twig`)
+- **Paramètres d'emailing** — à refondre
+  - URL : `/admin/mailingParameters/list`
+  - Composant : `EmailingParametersPageApp` (`EmailingParametersController`)
+
+#### Pages et paramètres
+
+- **Icône du site** — à refondre
+  - URL : `/admin/favicon/list` → `/admin-next/favicon`
+  - Composant : `SiteFaviconAdminPageApp` (`SiteFaviconController`)
+  - Reste : fusion, validation, puis nettoyage.
+- **Contact** — à refondre
+  - URL : `/admin/contact/list`
+  - Composant : `ContactAdminPageApp` (`ContactController` de l'AdminBundle)
+- **Inscription** — à refondre
+  - URL : `/admin/settings/pages.registration/list`
+  - Composant : `RegistrationAdminApp` (`SettingsController`)
+- **Sections « projets » et « carte des projets » de la page d'accueil** — à refondre
+  - Composants : `HomePageProjectsSectionConfigurationApp`, `HomePageProjectsMapSectionConfigurationApp`
+    (`SectionController`)
+  - Les sections carrousel redirigent déjà vers Admin Next. La liste des sections est encore sur Sonata.
+- **Langues** — à refondre
+  - URL : `/admin/locale/list`
+  - Composant : `LocaleAdminPageApp` (`LocaleController`)
+- **Polices** — à refondre
+  - URL : `/admin/font/list`
+  - Composant : `FontAdminPageApp` (`FontController`)
+
+#### Déjà sur Admin Next, route legacy à nettoyer
+
+- **Création et édition d'article** — à nettoyer
+  - Routes : `/admin/capco/app/post/create`, `/admin/capco/app/post/{id}/edit`
+  - Code : `PostController` de l'AdminBundle, `Post/create.html.twig`, `Post/edit.html.twig`,
+    `AdminPostCreateFormApp`
+  - Remplacée par `/admin-next/post` (`PostAdminUrlResolver` y pointe déjà).
+- **Shield** — à nettoyer
+  - Route : `/admin/settings/pages.shield/list`
+  - Code : action `shield` de `SettingsController`, `Settings/shield.html.twig`, `AuthentificationAdminApp`
+  - Remplacée par `/admin-next/authentication`.
+
+#### Code mort
+
+Templates sans aucun appelant (ou appel commenté). Avant de supprimer un composant, vérifier qu'il n'est pas monté
+ailleurs.
+
+| Template | Composant |
+|---|---|
+| `AppBundle/Resources/views/MediaAdmin/list.html.twig` | `MediaAdminPageApp` |
+| `AdminBundle/Resources/views/Questionnaire/list.html.twig` | `AdminQuestionnaireListApp` |
+| `AdminBundle/Resources/views/ProjectDistrict/list.html.twig` | `GlobalDistrictAdminApp` |
+| `AdminBundle/Resources/views/Redirect/list.html.twig` | `RedirectIoAdminPageApp` |
+| `AdminBundle/Resources/views/Proposal/create.html.twig` | `ProjectAdminApp` (encore utilisé par `AlphaProject/create.html.twig`) |
+| `AdminBundle/Resources/views/Project/edit.html.twig` (appel commenté dans `ProjectAdmin`) | `ProjectExternalProjectAdminAppDeprecated` |
+| `AdminBundle/Resources/views/ProposalForm/list.html.twig` (déclaré dans `ProposalFormAdmin`, mais le menu pointe vers `/admin-next/forms`) | `AdminProposalFormListApp` |
+
+### Nettoyage (en plus de la recette ci-dessous)
+
+Pour une page React legacy, l'étape « Code Sonata » de la recette de nettoyage devient :
+
+- supprimer le contrôleur Symfony (ou seulement son action si le contrôleur en sert d'autres) et le template Twig ;
+- supprimer l'entrée `frontend/js/startup/<X>App.tsx` et son enregistrement dans `frontend/js/registrationAdmin.ts` ;
+- supprimer les composants, mutations, tests et snapshots legacy devenus orphelins, après un grep de chaque nom
+  sur `frontend/js/` (un composant peut être monté par plusieurs pages, ex: `ProjectAdminApp`) ;
+- relancer `yarn relay` à la racine pour retirer les artefacts générés correspondants ;
+- ne toucher ni au backend GraphQL ni aux tests Jest API, toujours utilisés par Admin Next.
+
 ## Recette : PR de nettoyage, sortie du rollout d'une ou plusieurs pages
 
 À appliquer uniquement aux pages dont la refonte a été validée. Plusieurs pages peuvent sortir dans la même PR.
@@ -301,6 +498,8 @@ Pour chaque page qui sort :
    - **Catégorie de `/admin/settings/{category}/list`** : retirer seulement la catégorie de
      `FeaturesCategoryResolver::$categories`, ce qui fait répondre 404 à l'ancienne URL. Ne pas toucher au
      contrôleur, au template ni à `SiteParameterAdmin`, partagés avec les autres catégories (voir l'étape 14).
+   - **Page React legacy servie par Symfony** : suivre « Nettoyage » dans la section « Variante : page React
+     legacy servie par Symfony ».
    - Ne pas toucher aux clés de traduction (`translations/` est généré) ni au backend GraphQL de la page.
 7. **Vérifier** : `git grep` de l'URL Sonata, du nom de la classe Admin et de la chaîne de catégorie (en dehors
    des fixtures, des migrations Doctrine et de ce fichier) ne doit plus rien renvoyer. Lancer ensuite
@@ -1432,6 +1631,10 @@ Ce document ne doit **pas** contenir de section de suivi par page migrée (type 
 détails") — cette information est déjà dans l'historique git (commits, PR) et devient vite obsolète ici.
 Seules les informations **génériques**, réutilisables pour n'importe quelle future migration, ont leur place
 dans ce fichier.
+
+Exception : l'inventaire des pages React legacy (section « Variante : page React legacy servie par Symfony »),
+qui sert à répartir le travail restant. Il n'est fiable que s'il est mis à jour dans chaque PR qui fait avancer
+une de ces pages, en suivant la consigne qui le précède.
 
 ## Mise à jour de ce fichier
 
