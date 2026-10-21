@@ -46,12 +46,7 @@ class ProposalAccessResolver implements QueryInterface
 
             // Author access with step restrictions
             if ($proposal->getAuthor() === $viewer) {
-                $step = $proposal->getStep();
-
-                return [
-                    'canEdit' => !$step->getPreventProposalEdit(),
-                    'canDelete' => !$step->getPreventProposalDelete(),
-                ];
+                return $this->resolveAuthorRestrictions($proposal);
             }
         }
 
@@ -74,9 +69,21 @@ class ProposalAccessResolver implements QueryInterface
 
         $hasWriteAccess = $participantIsAuthor || $isValidEmailToken;
 
+        return $hasWriteAccess
+            ? $this->resolveAuthorRestrictions($proposal)
+            : ['canEdit' => false, 'canDelete' => false];
+    }
+
+    /**
+     * @return array{canEdit: bool, canDelete: bool}
+     */
+    private function resolveAuthorRestrictions(Proposal $proposal): array
+    {
+        $step = $proposal->getStep();
+
         return [
-            'canEdit' => $hasWriteAccess,
-            'canDelete' => $hasWriteAccess,
+            'canEdit' => $proposal->isDraft() || !$step->getPreventProposalEdit(),
+            'canDelete' => $proposal->isDraft() || !$step->getPreventProposalDelete(),
         ];
     }
 }

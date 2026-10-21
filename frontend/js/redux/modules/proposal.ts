@@ -92,26 +92,26 @@ export type Proposal = {
   selections: Array<Selection>
   viewerCanSeeEvaluation: boolean
 } & Record<string, any>
-export type State = {
-  readonly currentVoteModal: Uuid | null | undefined
-  readonly currentDeletingVote: Uuid | null | undefined
-  readonly showCreateModal: boolean
-  readonly isCreatingFusion: boolean
-  readonly showDeleteModal: boolean
-  readonly isDeleting: boolean
-  readonly isVoting: boolean
-  readonly isLoading: boolean
-  readonly isEditing: boolean
-  readonly showEditModal: boolean
-  readonly order: string | null | undefined
-  readonly filters: Filters
-  readonly terms: string | null | undefined
-  readonly lastEditedStepId: Uuid | null | undefined
-  readonly lastEditedProposalId: Uuid | null | undefined
-  readonly lastNotifiedStepId: Uuid | null | undefined
-  readonly referer: string | null | undefined
-  readonly showDetailLikersModal: string | null | undefined
-}
+export type State = Readonly<{
+  currentVoteModal: Uuid | null | undefined
+  currentDeletingVote: Uuid | null | undefined
+  showCreateModal: boolean
+  isCreatingFusion: boolean
+  showDeleteModal: boolean
+  isDeleting: boolean
+  isVoting: boolean
+  isLoading: boolean
+  isEditing: boolean
+  showEditModal: boolean
+  order: string | null | undefined
+  filters: Filters
+  terms: string | null | undefined
+  lastEditedStepId: Uuid | null | undefined
+  lastEditedProposalId: Uuid | null | undefined
+  lastNotifiedStepId: Uuid | null | undefined
+  referer: string | null | undefined
+  showDetailLikersModal: string | null | undefined
+}>
 export const initialState: State = {
   lastEditedStepId: null,
   currentVoteModal: null,
@@ -185,6 +185,10 @@ export const openDetailLikersModal = (id: string): OpenDetailLikersModalAction =
 export const closeDetailLikersModal = (): CloseDetailLikersModalAction => ({
   type: 'proposal/CLOSE_DETAIL_LIKERS_MODAL',
 })
+type DeleteFailedAction = {
+  type: 'proposal/DELETE_FAILED'
+}
+
 type RequestDeleteAction = {
   type: 'proposal/DELETE_REQUEST'
 }
@@ -205,11 +209,11 @@ export const deleteProposal = (
   dispatch: Dispatch,
   intl: IntlShape,
   isAuthenticated: boolean,
-): void => {
+): Promise<void> => {
   dispatch(deleteRequest())
   const participantToken = CookieMonster.getParticipantCookie()
 
-  DeleteProposalMutation.commit({
+  return DeleteProposalMutation.commit({
     input: {
       proposalId,
       participantToken: isAuthenticated ? undefined : participantToken,
@@ -229,6 +233,7 @@ export const deleteProposal = (
       })
     })
     .catch(() => {
+      dispatch({ type: 'proposal/DELETE_FAILED' })
       oldToast({ content: intl.formatMessage({ id: 'global.failure' }), variant: 'warning' })
     })
 }
@@ -366,6 +371,7 @@ export type ProposalAction =
   | CloseVoteModalAction
   | CloseDeleteProposalModalAction
   | RequestDeleteAction
+  | DeleteFailedAction
   | OpenCreateFusionModalAction
   | CloseCreateFusionModalAction
   | OpenDetailLikersModalAction
@@ -432,6 +438,9 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
 
     case 'proposal/VOTE_FAILED':
       return { ...state, isVoting: false }
+
+    case 'proposal/DELETE_FAILED':
+      return { ...state, isDeleting: false }
 
     case 'proposal/DELETE_REQUEST':
       return { ...state, isDeleting: true }

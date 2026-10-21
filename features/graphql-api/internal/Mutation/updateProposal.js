@@ -1,4 +1,48 @@
 import '../../_setupDB'
+import '../../_setupES'
+import { restoreProposalTestState } from '../../_proposalAuthorRestrictions'
+import { GraphQLClient } from 'graphql-request'
+
+// Restore this suite's final scenario even when an assertion fails.
+afterAll(restoreProposalTestState)
+
+const ReadProposalAccess = /* GraphQL */ `
+  query ReadProposalAccess($id: ID!, $participantToken: String) {
+    node(id: $id) {
+      ... on Proposal {
+        id
+        title
+        body
+        draft
+        publicationStatus
+        access(participantToken: $participantToken) {
+          canEdit
+          canDelete
+        }
+      }
+    }
+  }
+`
+
+const DeleteRestrictedProposalMutation = /* GraphQL */ `
+  mutation DeleteRestrictedProposalMutation($input: DeleteProposalInput!) {
+    deleteProposal(input: $input) {
+      proposal {
+        id
+      }
+    }
+  }
+`
+
+const CreateDraftProposalMutation = /* GraphQL */ `
+  mutation CreateDraftProposalMutation($input: CreateProposalInput!) {
+    createProposal(input: $input) {
+      proposal {
+        id
+      }
+    }
+  }
+`
 
 const ChangeProposalContentMutation = /* GraphQL */ `
   mutation ChangeProposalContentMutation($input: ChangeProposalContentInput!) {
@@ -93,6 +137,25 @@ const ChangeProposalContentDraftMutation = /* GraphQL */ `
         draft
         published
         publicationStatus
+      }
+    }
+  }
+`
+
+const ChangeProposalContentDraftAccessMutation = /* GraphQL */ `
+  mutation ChangeProposalContentMutation($input: ChangeProposalContentInput!, $participantToken: String) {
+    changeProposalContent(input: $input) {
+      proposal {
+        id
+        title
+        body
+        draft
+        published
+        publicationStatus
+        access(participantToken: $participantToken) {
+          canEdit
+          canDelete
+        }
       }
     }
   }
@@ -618,74 +681,287 @@ const inputRevision = {
 }
 
 describe('mutations.changeProposalContentMutation', () => {
-  const notConfirmedUserClient = {
-    email: 'userNotConfirmedWithContributions@test.com',
-    password: 'userNotConfirmedWithContributions',
-  }
+  beforeEach(async () => {
+    await global.runSQL(
+      'UPDATE step SET prevent_proposal_edit = 0, prevent_proposal_delete = 0 WHERE id = "collectstep1"',
+    )
+    await global.resetFeatureFlags({ districts: true, themes: true, proposal_revisions: true })
+  })
+
   /**
    * @jest-status compliant
    * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
    * and identity.
    */
-  it('wants to edit a proposal without required response', async () => {
+  it('rejects missing required responses without changing the proposal', async () => {
+    const before = await graphql(ReadProposalAccess, { id: inputEditWithoutRes.id }, 'internal_user')
+    expect(before.node.id).toBe(inputEditWithoutRes.id)
     await expect(
       graphql(ChangeProposalContentMutation, { input: inputEditWithoutRes }, 'internal_user'),
     ).rejects.toThrowError('proposal.missing_required_responses')
+    const after = await graphql(ReadProposalAccess, { id: inputEditWithoutRes.id }, 'internal_user')
+    expect(after.node).toEqual(before.node)
   })
   /**
-   * @jest-status non-compliant
-   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   * @jest-status compliant
+   * @jest-reason Checks explicit mutation results and persisted proposal content with final backend restoration.
    */
-  it('should be notified if GraphQL user modify his proposal', async () => {
-    await expect(graphql(ChangeProposalContentMutation, { input: input }, 'internal_user')).resolves.toMatchSnapshot()
+  it('updates and persists the authenticated author proposal content', async () => {
+    const response = await graphql(ChangeProposalContentMutation, { input }, 'internal_user')
+    expect(response.changeProposalContent.proposal).toMatchObject({
+      id: input.id,
+      title: input.title,
+      body: input.body,
+      publicationStatus: 'PUBLISHED',
+    })
+    const persisted = await graphql(ReadProposalAccess, { id: input.id }, 'internal_user')
+    expect(persisted.node).toMatchObject({ title: input.title, body: input.body, publicationStatus: 'PUBLISHED' })
   })
   /**
-   * @jest-status non-compliant
-   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   * @jest-status compliant
+   * @jest-reason Checks explicit mutation results and persisted proposal content with final backend restoration.
    */
-  it('wants to edit his proposal as user', async () => {
-    await expect(
-      graphql(ChangeProposalContentMutation, { input: inputEdit }, 'internal_user'),
-    ).resolves.toMatchSnapshot()
-    await expect(
-      graphql(ChangeMoreProposalContentMutation, { input: inputEditMore }, 'internal_user'),
-    ).resolves.toMatchSnapshot()
+  it('updates the author proposal content and question responses', async () => {
+    const response = await graphql(ChangeProposalContentMutation, { input: inputEdit }, 'internal_user')
+    expect(response.changeProposalContent.proposal).toMatchObject({ title: inputEdit.title, body: inputEdit.body })
+
+    const more = await graphql(ChangeMoreProposalContentMutation, { input: inputEditMore }, 'internal_user')
+    expect(more.changeProposalContent.proposal).toMatchObject({
+      title: inputEditMore.title,
+      body: inputEditMore.body,
+      responses: expect.arrayContaining([
+        { question: { id: toGlobalId('Question', '1') }, value: 'New reponse-1' },
+        { question: { id: toGlobalId('Question', '3') }, value: 'New reponse-3' },
+        { question: { id: toGlobalId('Question', '11') }, medias: [{ id: 'media1' }, { id: 'media2' }] },
+      ]),
+    })
+    const persisted = await graphql(
+      ReadProposalAccess,
+      { id: response.changeProposalContent.proposal.id },
+      'internal_user',
+    )
+    expect(persisted.node).toMatchObject({ title: inputEditMore.title, body: inputEditMore.body })
   })
   /**
-   * @jest-status non-compliant
-   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   * @jest-status compliant
+   * @jest-reason Checks explicit mutation results and persisted proposal content with final backend restoration.
    */
-  it('wants to edit a proposal as super admin', async () => {
-    await expect(
-      graphql(ChangeProposalContentAsSuperAdminMutation, { input: inputSuperAdmin }, 'internal_super_admin'),
-    ).resolves.toMatchSnapshot()
+  it('allows a super administrator to update another author proposal', async () => {
+    const response = await graphql(
+      ChangeProposalContentAsSuperAdminMutation,
+      { input: inputSuperAdmin },
+      'internal_super_admin',
+    )
+    expect(response.changeProposalContent.proposal).toMatchObject({
+      title: inputSuperAdmin.title,
+      body: inputSuperAdmin.body,
+    })
+
+    expect(response.changeProposalContent.proposal).toMatchObject({
+      author: { _id: 'userAdmin' },
+      category: { id: 'pCategory2' },
+      estimation: 1000,
+    })
+    const persisted = await graphql(
+      ReadProposalAccess,
+      { id: response.changeProposalContent.proposal.id },
+      'internal_super_admin',
+    )
+    expect(persisted.node).toMatchObject({ title: inputSuperAdmin.title, body: inputSuperAdmin.body })
   })
   /**
-   * @jest-status non-compliant
-   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   * @jest-status compliant
+   * @jest-reason Checks explicit mutation results and persisted proposal content with final backend restoration.
    */
-  it('wants to update a and published a draft proposal as admin', async () => {
-    await expect(
-      graphql(ChangeProposalContentDraftMutation, { input: inputDraft }, 'internal_admin'),
-    ).resolves.toMatchSnapshot()
+  it('allows an administrator to update and publish a draft proposal', async () => {
+    const response = await graphql(ChangeProposalContentDraftMutation, { input: inputDraft }, 'internal_admin')
+    expect(response.changeProposalContent.proposal).toMatchObject({ title: inputDraft.title, body: inputDraft.body })
+
+    expect(response.changeProposalContent.proposal).toMatchObject({
+      draft: false,
+      published: true,
+      publicationStatus: 'PUBLISHED',
+    })
+    const persisted = await graphql(
+      ReadProposalAccess,
+      { id: response.changeProposalContent.proposal.id },
+      'internal_admin',
+    )
+    expect(persisted.node).toMatchObject({ title: inputDraft.title, body: inputDraft.body })
   })
   /**
-   * @jest-status non-compliant
-   * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+   * @jest-status compliant
+   * @jest-reason Checks explicit mutation results and persisted proposal content with final backend restoration.
    */
-  it('tries to update his proposal in revision as pierre', async () => {
-    await expect(
-      graphql(ChangeProposalContentRevisionMutation, { input: inputRevision }, 'internal_kiroule'),
-    ).resolves.toMatchSnapshot()
+  it('marks pending revisions as revised when the author updates the proposal', async () => {
+    const response = await graphql(ChangeProposalContentRevisionMutation, { input: inputRevision }, 'internal_kiroule')
+    expect(response.changeProposalContent.proposal).toMatchObject({
+      title: inputRevision.title,
+      body: inputRevision.body,
+    })
+
+    expect(response.changeProposalContent.proposal.revisions.edges.map(({ node }) => node.state)).toEqual([
+      'REVISED',
+      'REVISED',
+      'REVISED',
+      'REVISED',
+    ])
+    const persisted = await graphql(
+      ReadProposalAccess,
+      { id: response.changeProposalContent.proposal.id },
+      'internal_kiroule',
+    )
+    expect(persisted.node).toMatchObject({ title: inputRevision.title, body: inputRevision.body })
   })
 
   /**
-   * @jest-status non-compliant
-   * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
-   * the database helper runs only before each test.
+   * @jest-status compliant
+   * @jest-reason Checks real API permissions with explicit assertions and restores backend data and feature flags.
    */
-  it('should not be able to update a proposal when preventProposalEdit is enabled in the step', async () => {
+  it('allows saving and publishing a draft, then applies both author restrictions', async () => {
+    const createdDraft = await graphql(
+      CreateDraftProposalMutation,
+      { input: { proposalFormId: 'proposalForm1', draft: true, title: 'Initial draft title' } },
+      'internal_user',
+    )
+    await global.runSQL(
+      'UPDATE step SET prevent_proposal_edit = 1, prevent_proposal_delete = 1 WHERE id = "collectstep1"',
+    )
+    const draftInput = {
+      id: createdDraft.createProposal.proposal.id,
+      title: 'Updated draft title',
+      body: 'Updated draft body',
+      draft: true,
+    }
+    const savedDraft = await graphql(ChangeProposalContentDraftAccessMutation, { input: draftInput }, 'internal_user')
+    expect(savedDraft.changeProposalContent.proposal).toMatchObject({
+      title: draftInput.title,
+      body: draftInput.body,
+      draft: true,
+      publicationStatus: 'DRAFT',
+      access: { canEdit: true, canDelete: true },
+    })
+    const persistedDraft = await graphql(ReadProposalAccess, { id: draftInput.id }, 'internal_user')
+    expect(persistedDraft.node).toMatchObject({ title: 'Updated draft title', body: 'Updated draft body', draft: true })
+    const { author, ...publicationInput } = inputDraft
+    const publishedDraft = await graphql(
+      ChangeProposalContentDraftAccessMutation,
+      { input: { ...publicationInput, id: draftInput.id } },
+      'internal_user',
+    )
+    expect(publishedDraft.changeProposalContent.proposal).toMatchObject({
+      draft: false,
+      publicationStatus: 'PUBLISHED',
+      access: { canEdit: false, canDelete: false },
+    })
+    await expect(
+      graphql(ChangeProposalContentDraftAccessMutation, { input: draftInput }, 'internal_user'),
+    ).rejects.toThrow("Can't edit proposal")
+    await expect(
+      graphql(DeleteRestrictedProposalMutation, { input: { proposalId: draftInput.id } }, 'internal_user'),
+    ).rejects.toThrow("Can't delete proposal")
+    const persistedPublished = await graphql(ReadProposalAccess, { id: draftInput.id }, 'internal_user')
+    expect(persistedPublished.node).toMatchObject({
+      title: 'NewTitle',
+      body: 'NewBody',
+      draft: false,
+      publicationStatus: 'PUBLISHED',
+      access: { canEdit: false, canDelete: false },
+    })
+  })
+
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks real API permissions with explicit assertions and restores backend data and feature flags.
+   */
+  it.each(['participant', 'email'])('applies published proposal restrictions to a valid %s token', async identity => {
+    await global.runSQL('UPDATE proposal SET deleted_at = NULL, is_draft = 0 WHERE id = "proposal1"')
+    await global.runSQL(
+      'UPDATE step SET prevent_proposal_edit = 1, prevent_proposal_delete = 1 WHERE id = "collectstep1"',
+    )
+    const tokens =
+      identity === 'participant' ? { participantToken: btoa('fakeToken1') } : { emailToken: 'fakeEmailToken1' }
+    const before = await graphql(ReadProposalAccess, { id: toGlobalId('Proposal', 'proposal1') }, 'internal')
+    expect(before.node.id).toBe(toGlobalId('Proposal', 'proposal1'))
+    await expect(
+      graphql(
+        ChangeProposalContentDraftAccessMutation,
+        { input: { id: toGlobalId('Proposal', 'proposal1'), title: 'Forbidden edit', ...tokens } },
+        'internal',
+      ),
+    ).rejects.toThrow("Can't edit proposal")
+    const after = await graphql(ReadProposalAccess, { id: toGlobalId('Proposal', 'proposal1') }, 'internal')
+    expect(after.node).toEqual(before.node)
+  })
+
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks real API permissions with explicit assertions and restores backend data and feature flags.
+   */
+  it('allows a participant to save and publish a draft before applying restrictions', async () => {
+    await global.runSQL(
+      'UPDATE step SET prevent_proposal_edit = 1, prevent_proposal_delete = 1 WHERE id = "collectstep1"',
+    )
+    const client = new GraphQLClient('https://capco.test/graphql/internal', {
+      headers: { Cookie: 'CapcoParticipant=' + btoa('fakeToken1') },
+    })
+    const created = await client.request(CreateDraftProposalMutation, {
+      input: {
+        proposalFormId: 'proposalForm1',
+        draft: true,
+        title: 'Participant draft',
+        participantToken: btoa('fakeToken1'),
+      },
+    })
+    const id = created.createProposal.proposal.id
+    const saved = await client.request(ChangeProposalContentDraftAccessMutation, {
+      participantToken: btoa('fakeToken1'),
+      input: { id, title: 'Saved participant draft', draft: true, participantToken: btoa('fakeToken1') },
+    })
+    expect(saved.changeProposalContent.proposal).toMatchObject({
+      publicationStatus: 'DRAFT',
+      access: { canEdit: true, canDelete: true },
+    })
+    const persistedDraft = await client.request(ReadProposalAccess, { id, participantToken: btoa('fakeToken1') })
+    expect(persistedDraft.node).toMatchObject({ title: 'Saved participant draft', draft: true })
+    const { author, ...publicationInput } = inputDraft
+    const published = await client.request(ChangeProposalContentDraftAccessMutation, {
+      participantToken: btoa('fakeToken1'),
+      input: { ...publicationInput, id, participantToken: btoa('fakeToken1') },
+    })
+    expect(published.changeProposalContent.proposal).toMatchObject({
+      publicationStatus: 'PUBLISHED',
+      access: { canEdit: false, canDelete: false },
+    })
+    await expect(
+      client.request(ChangeProposalContentDraftAccessMutation, {
+        participantToken: btoa('fakeToken1'),
+        input: { id, title: 'Forbidden edit', participantToken: btoa('fakeToken1') },
+      }),
+    ).rejects.toThrow("Can't edit proposal")
+    await expect(
+      client.request(DeleteRestrictedProposalMutation, {
+        input: { proposalId: id, participantToken: btoa('fakeToken1') },
+      }),
+    ).rejects.toThrow("Can't delete proposal")
+    const persistedPublished = await client.request(ReadProposalAccess, { id, participantToken: btoa('fakeToken1') })
+    expect(persistedPublished.node).toMatchObject({
+      title: 'NewTitle',
+      body: 'NewBody',
+      draft: false,
+      publicationStatus: 'PUBLISHED',
+      access: { canEdit: false, canDelete: false },
+    })
+  })
+
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks real API permissions with explicit assertions and restores backend data and feature flags.
+   */
+  it('rejects a restricted author edit without changing the published proposal', async () => {
     await global.runSQL('UPDATE step SET prevent_proposal_edit = 1 WHERE id = "collectstep1"')
+    const before = await graphql(ReadProposalAccess, { id: inputEdit.id }, 'internal_user')
+    expect(before.node.id).toBe(inputEdit.id)
 
     await expect(
       graphql(
@@ -697,6 +973,7 @@ describe('mutations.changeProposalContentMutation', () => {
       ),
     ).rejects.toThrowError("Can't edit proposal")
 
-    await global.runSQL('UPDATE step SET prevent_proposal_edit = 0 WHERE id = "collectstep1"')
+    const after = await graphql(ReadProposalAccess, { id: inputEdit.id }, 'internal_user')
+    expect(after.node).toEqual(before.node)
   })
 })
