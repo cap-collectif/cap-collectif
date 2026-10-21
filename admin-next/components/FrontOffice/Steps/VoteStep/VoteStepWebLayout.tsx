@@ -125,6 +125,13 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey, customCode, 
 
   const [contributionId, setContributionId] = React.useState(null)
   const [showMapPlaceholder, setShowMapPlaceholder] = React.useState(true)
+  const [selectedProposalId, setSelectedProposalId] = React.useState<string | null>(null)
+
+  React.useEffect(() => {
+    const handler = (event: CustomEvent<string | null>) => setSelectedProposalId(event.detail)
+    window.addEventListener('proposal-selected', handler as EventListener)
+    return () => window.removeEventListener('proposal-selected', handler as EventListener)
+  }, [])
 
   const viewStep =
     step.__typename === 'CollectStep'
@@ -275,6 +282,8 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey, customCode, 
                     step={step}
                     templateColumns={getTemplateColumns(viewForm?.isMapViewEnabled && !isMobile && isMapShown !== 0)}
                     triggerRequirementModal={triggerRequirementModal}
+                    selectedId={selectedProposalId}
+                    onSelectedIdChange={setSelectedProposalId}
                   />
                 </React.Suspense>
               </Box>

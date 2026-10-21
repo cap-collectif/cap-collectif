@@ -435,7 +435,6 @@ const ProposalFormListField: React.FC<ProposalFormListFieldProps> = ({
           }
           onProposalFormSelect(selected)
         }}
-        // @ts-expect-error MAJ DS Props
         menuPortalTarget={undefined}
       />
     </FormControl>

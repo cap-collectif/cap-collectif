@@ -1,5 +1,6 @@
 import { Box, CapUIIcon, Card, CardContent, CardCover, CardCoverImage, CardCoverPlaceholder } from '@cap-collectif/ui'
-import { FC } from 'react'
+import L from 'leaflet'
+import { FC, useEffect, useRef } from 'react'
 import { graphql, useFragment } from 'react-relay'
 import { MobileProposalCard_proposal$key } from '@relay/MobileProposalCard_proposal.graphql'
 import convertIconToDs from '@shared/utils/convertIconToDs'
@@ -26,11 +27,15 @@ const FRAGMENT = graphql`
 
 type Props = {
   proposal: MobileProposalCard_proposal$key
-  onClose: () => void
 }
 
-const MobileProposalCard: FC<Props> = ({ proposal: proposalKey, onClose }) => {
+const MobileProposalCard: FC<Props> = ({ proposal: proposalKey }) => {
   const proposal = useFragment(FRAGMENT, proposalKey)
+  const cardRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (cardRef.current) L.DomEvent.disableClickPropagation(cardRef.current)
+  }, [])
 
   if (!proposal) return null
 
@@ -38,7 +43,7 @@ const MobileProposalCard: FC<Props> = ({ proposal: proposalKey, onClose }) => {
   const proposalCover = proposal.media?.url || proposal.category?.categoryImage?.image?.url
 
   return (
-    <Box position="absolute" left="0" bottom="md" width="100%" px="md" zIndex={9999} onClick={onClose}>
+    <Box ref={cardRef} position="absolute" left="0" bottom="md" width="100%" px="md" zIndex={9999}>
       <Card format="horizontal">
         <CardCover>
           {proposalCover ? (

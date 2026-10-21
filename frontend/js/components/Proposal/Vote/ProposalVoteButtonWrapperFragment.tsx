@@ -9,7 +9,6 @@ import type { ProposalVoteButtonWrapperFragment_proposal$key } from '~relay/Prop
 import type { ProposalVoteButtonWrapperFragment_step$key } from '~relay/ProposalVoteButtonWrapperFragment_step.graphql'
 import HoverObserver from '../../Utils/HoverObserver'
 import type { ProposalVoteButtonWrapperFragment_viewer$key } from '~relay/ProposalVoteButtonWrapperFragment_viewer.graphql'
-import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper'
 import VoteButtonUI from '~/components/VoteStep/VoteButtonUI'
 import {
   ProposalVoteButtonWrapperFragment_participant$key
@@ -65,7 +64,6 @@ const PROPOSAL_FRAGMENT = graphql`
     contributorVote(step: $stepId, token: $token) {
         completionStatus
     }
-    ...interpellationLabelHelper_proposal @relay(mask: false)
     ...ProposalVoteButton_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated, token: $token)
   }
 `
@@ -77,6 +75,7 @@ const STEP_FRAGMENT = graphql`
     votesLimit
     voteType
     budget
+    actionButtonLabel
     open
     viewerVotes(orderBy: { field: POSITION, direction: ASC }, token: $token) {
       totalCount
@@ -139,7 +138,7 @@ export const ProposalVoteButtonWrapperFragment = ({
   const step = useFragment(STEP_FRAGMENT, stepRef)
   const participant = useFragment(PARTICIPANT_FRAGMENT, participantRef)
 
-  const voteButtonLabel = isInterpellationContextFromProposal(proposal) ? 'global.support.for' : 'global.vote.for'
+  const voteButtonLabel = step?.actionButtonLabel === 'SUPPORT' ? 'global.support.for' : 'global.vote.for'
   const hasVoted = viewer ? proposal?.viewerVote?.completionStatus === 'COMPLETED' : proposal?.contributorVote?.completionStatus === 'COMPLETED'
 
   if (proposal && !step?.open && !usesNewUI) {

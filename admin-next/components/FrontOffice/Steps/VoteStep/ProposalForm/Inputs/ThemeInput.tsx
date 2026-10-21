@@ -33,6 +33,7 @@ const ThemeInput: React.FC<Props> = ({ control, themes, themeHelpText, themeMand
         name="theme"
         id="theme"
         placeholder={intl.formatMessage({ id: 'proposal.select.theme' })}
+        menuPortalTarget={null}
         options={themes.map((theme: Theme) => ({
           label: theme.title,
           value: theme.id,

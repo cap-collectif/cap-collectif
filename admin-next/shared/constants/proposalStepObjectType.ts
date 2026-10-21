@@ -13,6 +13,7 @@ export const proposalStepObjectTypeOptions = (intl: IntlShape) => [
 ]
 
 const proposalLikeObjectTypes = new Set(['PROPOSAL', 'PROJECT', 'MISSION', 'IDEA', 'REPORTING', 'TESTIMONY', 'PICTURE'])
+const feminineObjectTypes = new Set(['PROPOSAL', 'MISSION', 'IDEA', 'QUESTION', 'PICTURE'])
 
 const contributionObjectTypes = new Set([
   'PROPOSAL',
@@ -26,13 +27,13 @@ const contributionObjectTypes = new Set([
   'PICTURE',
 ])
 
-const feminineContributionObjectTypes = new Set(['PROPOSAL', 'MISSION', 'IDEA', 'QUESTION', 'PICTURE'])
-
 export const isProposalLikeObjectType = (objectType: string | null | undefined): boolean =>
   !!objectType && proposalLikeObjectTypes.has(objectType)
 
 export const getContributionObjectTypeTranslationKey = (objectType: string | null | undefined): string =>
   objectType && contributionObjectTypes.has(objectType) ? objectType.toLowerCase() : 'proposal'
 
-export const isFeminineContributionObjectType = (objectType: string | null | undefined): boolean =>
-  !!objectType && feminineContributionObjectTypes.has(objectType)
+export const isFeminineObjectType = (objectType: string | null | undefined): boolean =>
+  !!objectType && feminineObjectTypes.has(objectType)
+
+export const isFeminineContributionObjectType = isFeminineObjectType

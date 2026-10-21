@@ -13,7 +13,6 @@ import {
   Modal,
   Text,
 } from '@cap-collectif/ui'
-import { useDisclosure } from '@liinkiing/react-hooks'
 import useIsMobile from '@shared/hooks/useIsMobile'
 import { getContributionObjectTypeTranslationKey } from '@shared/constants/proposalStepObjectType'
 import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
@@ -242,12 +241,12 @@ const ProposalFormModal: React.FC<Props> = props => {
   const initialPosition = mode === 'create' ? props.initialPosition : null
   const intl = useIntl()
   const isMobile = useIsMobile()
-  const { onOpen, onClose: onDisclosureClose } = useDisclosure(false)
   const { viewerSession } = useAppContext()
   const canSaveDraft = !!viewerSession?.id
   const proposalForm = useFragment(PROPOSAL_FORM_FRAGMENT, proposalFormKey)
   const proposal = useFragment(PROPOSAL_FRAGMENT, mode === 'edit' ? props.proposal : null)
   const addressJsonRef = React.useRef<any>(null)
+  const createdProposalIdRef = React.useRef<string | null>(null)
   const [selectedAddress, setSelectedAddress] = React.useState<any>(null)
   const submitButtonRef = React.useRef<SubmitButtonType | null>(null)
   const participantToken = viewerSession ? undefined : CookieMonster.getParticipantCookie()
@@ -639,7 +638,6 @@ const ProposalFormModal: React.FC<Props> = props => {
             isAuthenticated: viewerSession != null,
           },
           stepId: props.stepId,
-          skipUpdater: shouldRefetchAnonymousPublishedProposal,
         })
 
         if (response.createProposal.userErrors?.length > 0) {
@@ -680,6 +678,17 @@ const ProposalFormModal: React.FC<Props> = props => {
               }),
               { fetchPolicy: 'network-only' },
             ).toPromise()
+          }
+
+          const selectCreatedProposal = () =>
+            window.dispatchEvent(new CustomEvent('proposal-selected', { detail: createProposal.proposalId?.id }))
+
+          if (!isDraft && createProposal.proposalId?.id) {
+            if (isMobile) {
+              createdProposalIdRef.current = createProposal.proposalId.id
+            } else {
+              requestAnimationFrame(selectCreatedProposal)
+            }
           }
 
           successToast(
@@ -747,7 +756,7 @@ const ProposalFormModal: React.FC<Props> = props => {
             <AddressInput
               control={control}
               addressHelpText={proposalForm.addressHelpText}
-              showLocateButton={mode === 'create'}
+              showLocateButton={mode === 'create' || proposal?.publicationStatus === 'DRAFT'}
               onAddressChange={address => {
                 addressJsonRef.current = address
                 setSelectedAddress(address)
@@ -880,9 +889,11 @@ const ProposalFormModal: React.FC<Props> = props => {
       <Modal
         show
         ariaLabel={intl.formatMessage({ id: 'global.edit' })}
-        size={CapUIModalSize.Xl}
+        size={isMobile ? CapUIModalSize.Fullscreen : CapUIModalSize.Xl}
+        alwaysOpenInPortal
         onClose={props.onClose}
         hideOnClickOutside={false}
+        fullSizeOnMobile
       >
         {renderFormContent()}
       </Modal>
@@ -890,13 +901,26 @@ const ProposalFormModal: React.FC<Props> = props => {
   }
 
   const handleMobileOpen = () => {
-    onOpen()
     props.onButtonClick?.()
   }
 
   const handleMobileClose = () => {
     resetProposalForm()
-    onDisclosureClose()
+    const createdProposalId = createdProposalIdRef.current
+    createdProposalIdRef.current = null
+
+    if (createdProposalId) {
+      const selectCreatedProposal = () => {
+        if (document.body.style.position === 'fixed') {
+          window.requestAnimationFrame(selectCreatedProposal)
+          return
+        }
+
+        window.dispatchEvent(new CustomEvent('proposal-selected', { detail: createdProposalId }))
+      }
+
+      window.requestAnimationFrame(selectCreatedProposal)
+    }
   }
 
   if (isMobile) {
@@ -911,10 +935,8 @@ const ProposalFormModal: React.FC<Props> = props => {
             disabled={props.disabled}
           >
             <Icon name={CapUIIcon.Add} size={CapUIIconSize.Md} />
-            <Box as="span" fontSize={CapUIFontSize.BodySmall} lineHeight={CapUILineHeight.S}>
-              {intl.formatMessage({
-                id: `front.contribution.${getContributionObjectTypeTranslationKey(proposalForm.objectType)}.add`,
-              })}
+            <Box as="span" fontSize={CapUIFontSize.BodySmall} lineHeight={CapUILineHeight.S} sx={{ whiteSpace: 'nowrap' }}>
+              {intl.formatMessage({ id: 'global.collect' })}
             </Box>
           </Button>
         }
@@ -928,7 +950,7 @@ const ProposalFormModal: React.FC<Props> = props => {
         hideOnClickOutside={false}
         zIndex={2001}
       >
-        {renderFormContent(handleMobileClose)}
+        {({ hide }) => renderFormContent(hide)}
       </Modal>
     )
   }
@@ -946,6 +968,7 @@ const ProposalFormModal: React.FC<Props> = props => {
         id: `front.contribution.${getContributionObjectTypeTranslationKey(proposalForm.objectType)}.submit`,
       })}
       size={CapUIModalSize.Xl}
+      alwaysOpenInPortal
       onClose={resetProposalForm}
       hideOnClickOutside={false}
     >

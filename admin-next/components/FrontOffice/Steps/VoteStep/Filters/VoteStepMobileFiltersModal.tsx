@@ -25,11 +25,18 @@ type Props = {
   proposalsCount: number
   isActive?: boolean
   onButtonClick?: () => void
+  onModalClose?: () => void
 }
 
-const VoteStepMobileFiltersModal: React.FC<Props> = ({ stepId, proposalsCount, isActive = false, onButtonClick }) => {
+const VoteStepMobileFiltersModal: React.FC<Props> = ({
+  stepId,
+  proposalsCount,
+  isActive = false,
+  onButtonClick,
+  onModalClose,
+}) => {
   const intl = useIntl()
-  const { filters, form } = useVoteStepFilters(stepId)
+  const { filters, defaultSort, form } = useVoteStepFilters(stepId)
   const objectType = getContributionObjectTypeTranslationKey(form?.objectType)
   const { isOpen, onOpen, onClose } = useDisclosure(false)
 
@@ -40,7 +47,7 @@ const VoteStepMobileFiltersModal: React.FC<Props> = ({ stepId, proposalsCount, i
 
   const [currentFilters, setFilters] = useQueryStates(
     {
-      sort: parseAsString.withDefault(DEFAULT_FILTERS.sort),
+      sort: parseAsString.withDefault(defaultSort),
       category: parseAsString.withDefault(DEFAULT_FILTERS.category),
       theme: parseAsString.withDefault(DEFAULT_FILTERS.theme),
       status: parseAsString.withDefault(DEFAULT_FILTERS.status),
@@ -65,6 +72,11 @@ const VoteStepMobileFiltersModal: React.FC<Props> = ({ stepId, proposalsCount, i
     onClose()
   }
 
+  const handleClose = () => {
+    onClose()
+    onModalClose?.()
+  }
+
   // Currently active filters determine which accordions are open by default
   const defaultAccordions = useMemo(() => getDefaultAccordions(currentFilters), [currentFilters])
 
@@ -79,11 +91,13 @@ const VoteStepMobileFiltersModal: React.FC<Props> = ({ stepId, proposalsCount, i
 
       <Modal
         show={isOpen}
-        onClose={onClose}
+        onClose={handleClose}
         size={CapUIModalSize.Fullscreen}
         height="100%"
         ariaLabel={intl.formatMessage({ id: `front.contribution.${objectType}.filter` })}
         fullSizeOnMobile
+        alwaysOpenInPortal
+        forceModalDialogToFalse
       >
         <Modal.Header>
           <Heading as="h4" color="blue.900">
@@ -91,7 +105,9 @@ const VoteStepMobileFiltersModal: React.FC<Props> = ({ stepId, proposalsCount, i
           </Heading>
         </Modal.Header>
         <Modal.Body spacing={5}>
-          <VoteStepSearchBar proposalsCount={proposalsCount} objectType={form?.objectType} />
+          <Box pt={2}>
+            <VoteStepSearchBar proposalsCount={proposalsCount} objectType={form?.objectType} />
+          </Box>
           <Box mt="md">
             <VoteStepFiltersAccordions
               filters={filters}

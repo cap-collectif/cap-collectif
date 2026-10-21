@@ -21,6 +21,7 @@ type Props = {
   step: VoteStepMobileVotesModal_proposalStep$key
   isActive?: boolean
   onButtonClick?: () => void
+  onClose?: () => void
 }
 
 const FRAGMENT = graphql`
@@ -45,7 +46,7 @@ const FRAGMENT = graphql`
   }
 `
 
-const VoteStepMobileVotesModal: FC<Props> = ({ step: stepKey, isActive = false, onButtonClick }) => {
+const VoteStepMobileVotesModal: FC<Props> = ({ step: stepKey, isActive = false, onButtonClick, onClose }) => {
   const intl = useIntl()
   const step = useFragment(FRAGMENT, stepKey)
   const isSupport = step.actionButtonLabel === 'SUPPORT'
@@ -53,6 +54,7 @@ const VoteStepMobileVotesModal: FC<Props> = ({ step: stepKey, isActive = false, 
   return (
     <Modal
       show={isActive}
+      onClose={onClose}
       disclosure={
         <Button
           variant={isActive ? 'primary' : 'tertiary'}
@@ -73,6 +75,7 @@ const VoteStepMobileVotesModal: FC<Props> = ({ step: stepKey, isActive = false, 
       fullSizeOnMobile
       hideCloseButton
       alwaysOpenInPortal
+      forceModalDialogToFalse
       hideOnClickOutside={false}
       zIndex={1999}
     >

@@ -200,7 +200,7 @@ export const ProposalCard: React.FC<Props> = ({
       >
         <CardTagList>
           <Flex justifyContent="space-between" align="center" width="100%">
-            <Flex align="center" gap="md">
+            <Flex align="center" gap="md" flexShrink={0}>
               {step.votable ? (
                 <VoteButton proposal={proposal} step={step} triggerRequirementModal={triggerRequirementModal} />
               ) : null}
@@ -217,16 +217,18 @@ export const ProposalCard: React.FC<Props> = ({
                   </Text>
                 </Tag>
               ) : (
-                <Tag variantColor="infoGray" transparent>
+                <Tag variantColor="infoGray" transparent flexShrink={0}>
                   <Icon name={CapUIIcon.BubbleO} />
                   <Text>{proposal.comments.totalCountWithAnswers}</Text>
                 </Tag>
               )}
             </Flex>
             {proposal?.author ? (
-              <Tag variantColor="infoGray" transparent>
-                <Icon name={CapUIIcon.UserO} />
-                <Text>{authorName}</Text>
+              <Tag variantColor="infoGray" transparent flex={1} minWidth={0} ml="md" tooltipLabel={authorName}>
+                <Icon name={CapUIIcon.UserO} flexShrink={0} />
+                <Text overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap">
+                  {authorName}
+                </Text>
               </Tag>
             ) : null}
           </Flex>

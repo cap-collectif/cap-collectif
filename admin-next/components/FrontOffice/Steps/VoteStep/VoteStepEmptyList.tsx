@@ -49,7 +49,6 @@ const VoteStepEmptyList: React.FC<Props> = ({ objectType }) => {
       gap="lg"
       position="relative"
       bottom="unset"
-      zIndex={1}
     >
       <Box textAlign="center" p="xs">
         <svg

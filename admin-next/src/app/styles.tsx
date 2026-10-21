@@ -184,8 +184,10 @@ export const LeafletStyles = createGlobalStyle`
 
     .proposal-address-pin svg:nth-child(2) {
       position: absolute;
-      top: 7px;
-      left: 12px;
+      top: 3px;
+      left: 10px;
+      height: 20px;
+      width: 20px;
       pointer-events: none;
     }
 

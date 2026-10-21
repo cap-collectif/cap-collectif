@@ -1,7 +1,7 @@
 import { Box, Button, CapUIIcon, Flex, Tag, useTheme } from '@cap-collectif/ui'
 import { VoteStepListActions_proposalStep$key } from '@relay/VoteStepListActions_proposalStep.graphql'
 import useWindowWidth from '@shared/hooks/useWindowWidth'
-import { isFeminineContributionObjectType } from '@shared/constants/proposalStepObjectType'
+import { isFeminineObjectType } from '@shared/constants/proposalStepObjectType'
 import { parseAsInteger, useQueryState } from 'nuqs'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
@@ -91,7 +91,7 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
     },
     {
       label: intl.formatMessage({
-        id: isFeminineContributionObjectType(step.form?.objectType)
+        id: isFeminineObjectType(step.form?.objectType)
           ? 'step.vote.list_actions.quick_filter.comments_f'
           : 'step.vote.list_actions.quick_filter.comments',
       }),
@@ -113,7 +113,7 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
   return (
     <Flex flexGrow={step.votable ? 1 : 0} flexShrink={0} justify="space-between" align="stretch" height={40} gap="xl">
       {width > 1024 && step.votable && (
-        <Flex gap={width >= 1200 ? 'md' : 'xs'}>
+        <Flex gap={width >= 1260 ? 'md' : 'xs'}>
           {quickFilterButtons.map((filter, index) => (
             <ListActionsQuickFilter key={`quick-filter-${index}`} quickFilterBtn={filter} step={step} />
           ))}
@@ -121,7 +121,7 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
       )}
 
       {hasBothViews && (
-        <Box>
+        <Flex direction="row">
           {listViewButtons().map(viewButton => (
             <Tag
               key={viewButton.id}
@@ -146,7 +146,7 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
               {width <= 1024 && step.votable && <Tag.Label>{viewButton.label}</Tag.Label>}
             </Tag>
           ))}
-        </Box>
+        </Flex>
       )}
 
       <VoteStepFiltersModal stepId={step.id} />

@@ -131,7 +131,6 @@ const ProjectConfigFormGeneral: React.FC<ProjectConfigFormGeneralProps> = ({
             {isAdmin ? (
               <FormControl name="authors" control={control}>
                 <FormLabel label={intl.formatMessage({ id: 'global.author' })} />
-                {/** @ts-expect-error MAJ DS Props */}
                 <UserListField name="authors" control={control} isMulti id="authors" menuPortalTarget={undefined} />
               </FormControl>
             ) : null}
@@ -160,7 +159,6 @@ const ProjectConfigFormGeneral: React.FC<ProjectConfigFormGeneralProps> = ({
                   id: 'admin.fields.menu_item.parent_empty',
                 })}
                 clearable
-                // @ts-expect-error : https://github.com/cap-collectif/form/issues/5
                 menuPortalTarget={undefined}
               />
             </FormControl>

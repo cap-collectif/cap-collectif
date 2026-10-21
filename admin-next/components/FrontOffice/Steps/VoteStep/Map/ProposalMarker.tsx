@@ -101,6 +101,9 @@ const ProposalMarkerComponent: FC<ProposalMarkerProps> = ({ proposal: proposalKe
       position={[proposal.address.lat, proposal.address.lng]}
       icon={markerIcon}
       eventHandlers={{
+        click: () => {
+          if (isMobile) window.dispatchEvent(new CustomEvent('proposal-selected', { detail: proposal.id }))
+        },
         popupopen: () => {
           markerRef.current?.getElement()?.classList.add('active')
           window.dispatchEvent(new CustomEvent('proposal-selected', { detail: proposal.id }))

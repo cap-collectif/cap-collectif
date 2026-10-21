@@ -104,6 +104,7 @@ const QuestionField: React.FC<Props> = ({ question, name, control, defaultLocale
             control={control}
             name={name}
             id={name}
+            menuPortalTarget={null}
             options={
               question.choices?.edges
                 ?.filter((edge): edge is { node: QuestionChoice } => edge?.node != null)

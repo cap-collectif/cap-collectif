@@ -11,7 +11,6 @@ import type {
 } from '~relay/ProposalVoteButton_proposal.graphql'
 import RemoveProposalVoteMutation from '../../../mutations/RemoveProposalVoteMutation'
 import RemoveProposalSmsVoteMutation from '../../../mutations/RemoveProposalSmsVoteMutation'
-import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper'
 import {
   CapUIModalSize,
   Modal,
@@ -91,6 +90,7 @@ const STEP_FRAGMENT = graphql`
   @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, token: { type: "String" }) {
     id
     votesRanking
+    actionButtonLabel
     votesMin
     votesLimit
     viewerVotes(orderBy: { field: POSITION, direction: ASC }, token: $token) {
@@ -113,6 +113,7 @@ const deleteVote = (
   proposal: ProposalVoteButton_proposal$data,
   isAuthenticated: boolean,
   intl: IntlShape,
+  isSupport: boolean,
 ) => {
   dispatchEvent(VoteStepEvent.AnimateCard, {
     proposalId: proposal.id,
@@ -132,7 +133,7 @@ const deleteVote = (
         toast({
           variant: 'success',
           content:
-            response.removeProposalVote && isInterpellationContextFromProposal(proposal)
+            response.removeProposalVote && isSupport
               ? intl.formatMessage({
                   id: 'support.delete_success',
                 })
@@ -178,7 +179,7 @@ const deleteVote = (
       toast({
         variant: 'success',
         content:
-          response.removeProposalSmsVote && isInterpellationContextFromProposal(proposal)
+          response.removeProposalSmsVote && isSupport
             ? intl.formatMessage({
                 id: 'support.delete_success',
               })
@@ -224,6 +225,7 @@ const ProposalVoteButton = ({
   const participantToken = CookieMonster.getParticipantCookie()
 
   const vote = isAuthenticated ? proposal.viewerVote : proposal.contributorVote
+  const isSupport = currentStep.actionButtonLabel === 'SUPPORT'
 
   const getButtonStyle = () => {
     if (hasVoted && isHovering) {
@@ -236,17 +238,15 @@ const ProposalVoteButton = ({
   const intl = useIntl()
 
   const getButtonText = () => {
-    const isInterpellation = isInterpellationContextFromProposal(proposal)
-
     if (hasVoted) {
-      if (isInterpellation) {
+      if (isSupport) {
         return isHovering ? 'cancel' : 'interpellation.support.supported'
       }
 
       return isHovering ? 'cancel' : 'voted'
     }
 
-    if (isInterpellation) {
+    if (isSupport) {
       return 'global.support.for'
     }
 
@@ -262,7 +262,7 @@ const ProposalVoteButton = ({
 
     if (hasVoted && currentStep) {
       setIsLoading(true)
-      await deleteVote(currentStep, proposal, isAuthenticated, intl)
+      await deleteVote(currentStep, proposal, isAuthenticated, intl, isSupport)
       setIsLoading(false)
       return
     }
@@ -323,7 +323,7 @@ const ProposalVoteButton = ({
           toast({
             variant: 'success',
             content: intl.formatMessage({
-              id: 'vote.add_success',
+              id: isSupport ? 'support.add_success' : 'vote.add_success',
             }),
           })
         }
@@ -387,7 +387,7 @@ const ProposalVoteButton = ({
           toast({
             variant: 'success',
             content: intl.formatMessage({
-              id: 'vote.add_success',
+              id: isSupport ? 'support.add_success' : 'vote.add_success',
             }),
           })
         }

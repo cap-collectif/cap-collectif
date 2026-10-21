@@ -1,6 +1,6 @@
 import { useVoteStepFilters_Query } from '@relay/useVoteStepFilters_Query.graphql'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
-import { isFeminineContributionObjectType } from '@shared/constants/proposalStepObjectType'
+import { isFeminineObjectType } from '@shared/constants/proposalStepObjectType'
 import { useIntl } from 'react-intl'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 
@@ -35,6 +35,8 @@ const QUERY = graphql`
     step: node(id: $stepId) {
       ... on ProposalStep {
         canDisplayBallot
+        actionButtonLabel
+        defaultSort
         votesRanking
         voteType
         statuses {
@@ -97,6 +99,7 @@ export type Filters = Record<FilterType, Filter>
 
 type ReturnType = {
   totalCount: number
+  defaultSort: string
   filters: Filters
   form: {
     objectType: string
@@ -131,7 +134,7 @@ export const useVoteStepFilters = (stepId: string): ReturnType => {
     const orderByPoints = step.votesRanking
     const orderByComments = form?.commentable
     const orderByCost = form?.costable
-    const filterPrefix = isFeminineContributionObjectType(form.objectType) ? 'global.filter_f' : 'global.filter'
+    const filterPrefix = isFeminineObjectType(form.objectType) ? 'global.filter_f' : 'global.filter'
     const options = [
       {
         id: 'random',
@@ -180,17 +183,19 @@ export const useVoteStepFilters = (stepId: string): ReturnType => {
     }
 
     if (orderByVotes && step.canDisplayBallot) {
+      const isSupport = step.actionButtonLabel === 'SUPPORT'
+      const supportFilterSuffix = isFeminineObjectType(form.objectType) ? '_f' : ''
       options.push(
         {
           id: 'votes',
           title: intl.formatMessage({
-            id: `${filterPrefix}_votes`,
+            id: isSupport ? `filter.most_supported${supportFilterSuffix}` : `${filterPrefix}_votes`,
           }),
         },
         {
           id: 'least-votes',
           title: intl.formatMessage({
-            id: `${filterPrefix}_least-votes`,
+            id: isSupport ? `filter.least_supported${supportFilterSuffix}` : `${filterPrefix}_least-votes`,
           }),
         },
       )
@@ -262,6 +267,7 @@ export const useVoteStepFilters = (stepId: string): ReturnType => {
   }
   return {
     totalCount: proposals?.totalCount ?? 0,
+    defaultSort: step.defaultSort?.toLowerCase() ?? DEFAULT_FILTERS.sort,
     filters,
     form,
   }

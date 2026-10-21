@@ -23,6 +23,7 @@ import {
 import VotesPopup from '@components/FrontOffice/Steps/VoteStep/VotesPopup/VotesPopup'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import useIsMobile from '@shared/hooks/useIsMobile'
+import { isWYSIWYGContentEmpty } from '@shared/utils/isWYSIWYGContentEmpty'
 import { useMatchMedia } from '@liinkiing/react-hooks'
 import { getContributionObjectTypeTranslationKey } from '@shared/constants/proposalStepObjectType'
 
@@ -214,8 +215,9 @@ const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
     isSupport
       ? `proposal.step.user.${descNamespace}.infos.desc.${supportDescKey ?? descKey}`
       : descKey === 'vote-more' || descKey === 'vote-others'
-        ? `front.contribution.${objectType}.votes.desc.${descKey}`
+      ? `front.contribution.${objectType}.votes.desc.${descKey}`
       : `proposal.step.user.votes.infos.desc.${descKey}`
+  const hasVotesHelpText = !isWYSIWYGContentEmpty(step.votesHelpText)
 
   // Remaining votes/budget toward the next milestone, used by `proposal-number` title
   const titleValue = (() => {
@@ -294,7 +296,7 @@ const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
           <VotesPopup step={step} />
         </Box>
       )}
-      {step.votesHelpText !== null && step.votesHelpText !== undefined && step.votesHelpText !== '' && (
+      {hasVotesHelpText && (
         <Box alignSelf="flex-start" position="absolute" top={isMobile ? '0px' : '9px'} right={isMobile ? '0px' : '7px'}>
           <Modal
             disclosure={

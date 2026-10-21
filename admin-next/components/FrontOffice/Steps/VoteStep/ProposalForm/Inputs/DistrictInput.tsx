@@ -29,6 +29,7 @@ const DistrictInput: React.FC<Props> = ({ control, districts, districtHelpText, 
         name="district"
         id="district"
         placeholder={intl.formatMessage({ id: 'proposal.select.district' })}
+        menuPortalTarget={null}
         options={districts.map((district: District) => ({
           label: district.name,
           value: district.id,

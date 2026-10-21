@@ -8302,6 +8302,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                         },
                         Object {
                           "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "actionButtonLabel",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
                           "args": Array [
                             Object {
                               "kind": "Literal",
@@ -8644,7 +8651,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "6444f37280808315ac335f2b9424ed09",
+          "cacheID": "c421eb34fb058860a1a5a708e94d13c8",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -10505,6 +10512,7 @@ fragment ProposalPageTabs_proposal on Proposal {
 fragment ProposalPageTabs_step on ProposalStep {
   __isProposalStep: __typename
   canDisplayBallot
+  actionButtonLabel
 }
 
 fragment ProposalPageVoteThreshold_proposal_2r3fA4 on Proposal {
@@ -10909,17 +10917,6 @@ fragment ProposalVoteButtonWrapperFragment_proposal_3IH2WL on Proposal {
     completionStatus
     id
   }
-  project {
-    type {
-      title
-      id
-    }
-    id
-  }
-  form {
-    objectType
-    id
-  }
   ...ProposalVoteButton_proposal_3IH2WL
 }
 
@@ -10929,6 +10926,7 @@ fragment ProposalVoteButtonWrapperFragment_step_477vzn on ProposalStep {
   votesLimit
   voteType
   budget
+  actionButtonLabel
   open
   viewerVotes(orderBy: {field: POSITION, direction: ASC}, token: $participantToken) {
     totalCount
@@ -10988,6 +10986,7 @@ fragment ProposalVoteButton_step_477vzn on ProposalStep {
   __isProposalStep: __typename
   id
   votesRanking
+  actionButtonLabel
   votesMin
   votesLimit
   viewerVotes(orderBy: {field: POSITION, direction: ASC}, token: $participantToken) {

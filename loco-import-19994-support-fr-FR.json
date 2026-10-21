@@ -1,4 +1,8 @@
 {
+  "step.vote.btn.action.support": "Soutenir",
+  "filter.most_supported_f": "Les plus soutenues",
+  "filter.least_supported": "Les moins soutenus",
+  "filter.least_supported_f": "Les moins soutenues",
   "proposal.step.user.supports.infos.title.proposals": "Soutenez des propositions",
   "proposal.step.user.supports.infos.title.proposal-number": "Soutenez {n, plural, one {{n} proposition} other {{n} propositions}}",
   "proposal.step.user.supports.infos.desc.threshold": "Aidez-les à atteindre {n, plural, one {{n} soutien} other {{n} soutiens}}",

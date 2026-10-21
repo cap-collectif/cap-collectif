@@ -14,25 +14,29 @@ type Props = {
   category?: { color?: string | null; icon?: string | null } | null
 }
 
+const coordinate = (value: number | (() => number)) => (typeof value === 'function' ? value() : value)
+
 const MapCenterUpdater = ({ address }: Pick<Props, 'address'>) => {
   const map = useMap()
 
   React.useEffect(() => {
-    map.setView([address.geometry.location.lat, address.geometry.location.lng])
+    map.setView([coordinate(address.geometry.location.lat), coordinate(address.geometry.location.lng)])
   }, [address, map])
 
   return null
 }
 
 const AddressMapPreview = ({ address, category }: Props) => {
+  const markerColor = category?.color || '#006CE0'
   const markerIcon = L.divIcon({
-    className: 'proposal-address-pin',
+    className: 'preview-icn proposal-address-pin',
     html: renderToString(
       <>
         <Icon
           name={category?.icon ? CapUIIcon.PinFull : CapUIIcon.Pin}
           size={CapUIIconSize.Xl}
-          color={category?.color || 'primary.base'}
+          color={markerColor}
+          style={{ color: markerColor, height: 40, width: 40 }}
         />
         {category?.icon && <Icon name={convertIconToDs(category.icon)} size={CapUIIconSize.Sm} color="white" />}
       </>,
@@ -41,7 +45,9 @@ const AddressMapPreview = ({ address, category }: Props) => {
     iconAnchor: [20, 40],
   })
 
-  const { lat, lng } = address.geometry.location
+  const { lat: rawLat, lng: rawLng } = address.geometry.location
+  const lat = coordinate(rawLat)
+  const lng = coordinate(rawLng)
 
   return (
     <Box height="200px" mb={3}>

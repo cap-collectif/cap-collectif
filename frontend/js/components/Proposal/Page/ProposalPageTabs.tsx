@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl'
 import { Nav, NavItem } from 'react-bootstrap'
 import styled from 'styled-components'
 import colors from '~/utils/colors'
-import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper'
 import type { ProposalPageTabs_proposal$key } from '~relay/ProposalPageTabs_proposal.graphql'
 import type { ProposalPageTabs_step$key } from '~relay/ProposalPageTabs_step.graphql'
 
@@ -17,6 +16,7 @@ type Props = {
 const STEP_FRAGMENT = graphql`
   fragment ProposalPageTabs_step on ProposalStep {
     canDisplayBallot
+    actionButtonLabel
   }
 `
 const PROPOSAL_FRAGMENT = graphql`
@@ -120,7 +120,7 @@ export const ProposalPageTabs = ({ proposal: proposalFragment, step: stepFragmen
   const totalVotesCount = votesCount + (proposal?.paperVotesTotalCount ?? 0)
   const showVotesTab = (totalVotesCount > 0 || proposal?.currentVotableStep !== null) && step?.canDisplayBallot
   const showFollowersTab = proposal?.project?.opinionCanBeFollowed
-  const voteTabLabel = step && isInterpellationContextFromProposal(proposal) ? 'global.support' : 'global.vote'
+  const voteTabLabel = step?.actionButtonLabel === 'SUPPORT' ? 'global.support' : 'global.vote'
   const hasOfficialAnswer = proposal?.news?.edges
     ?.filter(Boolean)
     .map(edge => edge.node)

@@ -83,11 +83,6 @@ const VoteStepMapMarkers: FC<Props> = ({ step: stepKey }) => {
     [proposals, selectedProposalId],
   )
 
-  const handleMobileCardClose = () => {
-    setSelectedProposalId(null)
-    window.dispatchEvent(new CustomEvent('proposal-selected', { detail: null }))
-  }
-
   if (!proposals?.length) return null
 
   return (
@@ -105,7 +100,7 @@ const VoteStepMapMarkers: FC<Props> = ({ step: stepKey }) => {
         ))}
       </MarkerClusterGroup>
       {isMobile && selectedProposal && (
-        <MobileProposalCard proposal={selectedProposal} onClose={handleMobileCardClose} />
+        <MobileProposalCard proposal={selectedProposal} />
       )}
     </>
   )

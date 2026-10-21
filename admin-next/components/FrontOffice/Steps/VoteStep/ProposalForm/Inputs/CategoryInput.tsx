@@ -28,6 +28,7 @@ const CategoryInput: React.FC<Props> = ({ control, categories, categoryHelpText 
         name="category"
         id="category"
         placeholder={intl.formatMessage({ id: 'proposal.select.category' })}
+        menuPortalTarget={null}
         options={categories.map((cat: Category) => ({
           label: cat.name,
           value: cat.id,

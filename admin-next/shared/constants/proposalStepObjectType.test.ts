@@ -1,6 +1,6 @@
 import {
   getContributionObjectTypeTranslationKey,
-  isFeminineContributionObjectType,
+  isFeminineObjectType,
   isProposalLikeObjectType,
 } from './proposalStepObjectType'
 
@@ -19,6 +19,17 @@ describe('isProposalLikeObjectType', () => {
   it.each(['OPINION', 'QUESTION', null, undefined])('does not map %s to proposal behavior', objectType => {
     expect(isProposalLikeObjectType(objectType)).toBe(false)
   })
+
+  it.each(['PROPOSAL', 'MISSION', 'IDEA', 'QUESTION', 'PICTURE'])('maps %s to feminine filters', objectType => {
+    expect(isFeminineObjectType(objectType)).toBe(true)
+  })
+
+  it.each(['PROJECT', 'OPINION', 'REPORTING', 'TESTIMONY', null, undefined])(
+    'does not map %s to feminine filters',
+    objectType => {
+      expect(isFeminineObjectType(objectType)).toBe(false)
+    },
+  )
 })
 
 describe('getContributionObjectTypeTranslationKey', () => {
@@ -41,15 +52,15 @@ describe('getContributionObjectTypeTranslationKey', () => {
   })
 })
 
-describe('isFeminineContributionObjectType', () => {
+describe('isFeminineObjectType', () => {
   it.each(['PROPOSAL', 'MISSION', 'IDEA', 'QUESTION', 'PICTURE'])('recognizes %s as feminine', objectType => {
-    expect(isFeminineContributionObjectType(objectType)).toBe(true)
+    expect(isFeminineObjectType(objectType)).toBe(true)
   })
 
   it.each(['PROJECT', 'OPINION', 'REPORTING', 'TESTIMONY', null, undefined])(
     'does not recognize %s as feminine',
     objectType => {
-      expect(isFeminineContributionObjectType(objectType)).toBe(false)
+      expect(isFeminineObjectType(objectType)).toBe(false)
     },
   )
 })

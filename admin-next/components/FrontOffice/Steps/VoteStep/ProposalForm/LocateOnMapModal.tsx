@@ -29,15 +29,18 @@ import { useIntl } from 'react-intl'
 const MAX_MAP_ZOOM = 18
 const DEFAULT_CENTER = { lat: 48.8586047, lng: 2.3137325 }
 
-const getMarkerIcon = (category: Props['category']) =>
-  L.divIcon({
-    className: 'proposal-address-pin',
+const getMarkerIcon = (category: Props['category']) => {
+  const markerColor = category?.color || '#006CE0'
+
+  return L.divIcon({
+    className: 'preview-icn proposal-address-pin',
     html: renderToString(
       <>
         <Icon
           name={category?.icon ? CapUIIcon.PinFull : CapUIIcon.Pin}
           size={CapUIIconSize.Xl}
-          color={category?.color || 'primary.base'}
+          color={markerColor}
+          style={{ color: markerColor, height: 40, width: 40 }}
         />
         {category?.icon && <Icon name={convertIconToDs(category.icon)} size={CapUIIconSize.Sm} color="white" />}
       </>,
@@ -45,6 +48,7 @@ const getMarkerIcon = (category: Props['category']) =>
     iconSize: [40, 40],
     iconAnchor: [20, 40],
   })
+}
 
 const getAddressFromLatLng = async (lat: number, lng: number): Promise<AddressComplete | null> => {
   try {
@@ -131,6 +135,9 @@ const LocateOnMapModal: React.FC<Props> = ({
 }) => {
   const intl = useIntl()
   const [selectedAddress, setSelectedAddress] = React.useState<AddressComplete | null>(initialAddress)
+  const [selectedPosition, setSelectedPosition] = React.useState<{ lat: number; lng: number } | null>(
+    initialAddress?.geometry.location || null,
+  )
   const [searchValue, setSearchValue] = React.useState<string>(initialAddress?.formatted_address || '')
   const [flyTarget, setFlyTarget] = React.useState<{ lat: number; lng: number } | null>(null)
   const [showDiscoverPane, setShowDiscoverPane] = React.useState(!initialAddress)
@@ -138,6 +145,7 @@ const LocateOnMapModal: React.FC<Props> = ({
   React.useEffect(() => {
     if (show) {
       setSelectedAddress(initialAddress)
+      setSelectedPosition(initialAddress?.geometry.location || null)
       setSearchValue(initialAddress?.formatted_address || '')
       setFlyTarget(null)
       setShowDiscoverPane(!initialAddress)
@@ -161,6 +169,7 @@ const LocateOnMapModal: React.FC<Props> = ({
 
   const handleMapClick = async (lat: number, lng: number) => {
     if (proposalInAZoneRequired && !isInZone({ lat, lng })) return
+    setSelectedPosition({ lat, lng })
     const addr = await getAddressFromLatLng(lat, lng)
     if (addr) {
       setSelectedAddress(addr)
@@ -182,6 +191,7 @@ const LocateOnMapModal: React.FC<Props> = ({
         } as unknown as AddressComplete
         if (proposalInAZoneRequired && !isInZone(addressComplete.geometry.location)) return
         setSelectedAddress(addressComplete)
+        setSelectedPosition(addressComplete.geometry.location)
         setSearchValue(addressComplete.formatted_address)
         setFlyTarget(addressComplete.geometry.location)
         setShowDiscoverPane(false)
@@ -199,12 +209,15 @@ const LocateOnMapModal: React.FC<Props> = ({
       ariaLabel={intl.formatMessage({ id: 'front.proposal.locate-on-map' })}
       size={CapUIModalSize.Xl}
       onClose={onClose}
+      alwaysOpenInPortal
+      fullSizeOnMobile
+      zIndex={2002}
     >
       <Modal.Header>
         <Heading>{intl.formatMessage({ id: 'front.proposal.locate-on-map' })}</Heading>
       </Modal.Header>
-      <Modal.Body p={0}>
-        <Box position="relative" height={['calc(100vh - 100px)', '550px']}>
+      <Modal.Body p={2}>
+        <Box position="relative" height={['70vh', '550px']} border="1px solid" borderColor="gray.200">
           <Box
             position="absolute"
             top="10px"
@@ -258,10 +271,12 @@ const LocateOnMapModal: React.FC<Props> = ({
                 handleClose={() => setShowDiscoverPane(false)}
               />
             )}
-            {selectedAddress && (
+            {selectedPosition && (
               <Marker
-                position={[selectedAddress.geometry.location.lat, selectedAddress.geometry.location.lng]}
+                key={`${selectedPosition.lat}-${selectedPosition.lng}`}
+                position={[selectedPosition.lat, selectedPosition.lng]}
                 icon={getMarkerIcon(category)}
+                zIndexOffset={1000}
               />
             )}
           </MapContainer>

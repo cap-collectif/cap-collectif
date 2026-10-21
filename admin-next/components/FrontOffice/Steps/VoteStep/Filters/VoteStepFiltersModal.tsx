@@ -14,14 +14,14 @@ type Props = {
 
 const VoteStepFiltersModal: React.FC<Props> = ({ stepId }) => {
   const intl = useIntl()
-  const { filters, totalCount, form } = useVoteStepFilters(stepId)
+  const { filters, totalCount, defaultSort, form } = useVoteStepFilters(stepId)
   const objectType = getContributionObjectTypeTranslationKey(form?.objectType)
 
   const { isOpen, onOpen, onClose } = useDisclosure(false)
 
   const [urlFilters, setFilters] = useQueryStates(
     {
-      sort: parseAsString.withDefault(DEFAULT_FILTERS.sort),
+      sort: parseAsString.withDefault(defaultSort),
       category: parseAsString.withDefault(DEFAULT_FILTERS.category),
       theme: parseAsString.withDefault(DEFAULT_FILTERS.theme),
       status: parseAsString.withDefault(DEFAULT_FILTERS.status),
@@ -58,7 +58,7 @@ const VoteStepFiltersModal: React.FC<Props> = ({ stepId }) => {
   }
 
   const handleReset = () => {
-    setFilters(filtersToUrlParams(DEFAULT_FILTERS))
+    setFilters(filtersToUrlParams({ ...DEFAULT_FILTERS, sort: defaultSort }))
     onClose()
   }
 
@@ -86,6 +86,7 @@ const VoteStepFiltersModal: React.FC<Props> = ({ stepId }) => {
         id="modal-section-contributors"
         ariaLabel={intl.formatMessage({ id: `front.contribution.${objectType}.filter` })}
         size={CapUIModalSize.Xl}
+        alwaysOpenInPortal
       >
         <Modal.Header>
           <Heading as="h4" color="blue.900">

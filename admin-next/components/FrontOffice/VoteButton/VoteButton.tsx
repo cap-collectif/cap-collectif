@@ -235,8 +235,9 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
       height="32px"
       leftIcon={voteIcon}
       disabled={hasReachedVotesLimit}
+      flexShrink={0}
     >
-      <Text fontWeight={CapUIFontWeight.Semibold}>
+      <Text fontWeight={CapUIFontWeight.Semibold} whiteSpace="nowrap">
         {step.canDisplayBallot ? (
           <>
             {displayedCount}

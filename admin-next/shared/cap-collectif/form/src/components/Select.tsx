@@ -20,6 +20,7 @@ export interface SelectProps {
   defaultOptions?: boolean
   clearable?: boolean
   role?: string
+  menuPortalTarget?: HTMLElement | null | boolean
 }
 
 export const Select: React.FC<SelectProps> = ({
@@ -30,9 +31,13 @@ export const Select: React.FC<SelectProps> = ({
   loadingMessage,
   value,
   clearable,
+  menuPortalTarget,
   ...rest
 }) => {
   const intl = useIntl()
+  const resolvedMenuPortalTarget =
+    typeof menuPortalTarget === 'boolean' ? (menuPortalTarget ? document.body : undefined) : menuPortalTarget
+  const menuPortalProps = resolvedMenuPortalTarget === undefined ? {} : { menuPortalTarget: resolvedMenuPortalTarget }
   if (loadOptions) {
     const loadOptionsDebounced = debounce(loadOptions, DEBOUNCE_MS, {
       leading: true,
@@ -41,6 +46,7 @@ export const Select: React.FC<SelectProps> = ({
     return (
       <AsyncSelect
         {...rest}
+        {...menuPortalProps}
         isClearable={clearable}
         value={value}
         loadOptions={loadOptionsDebounced}
@@ -58,6 +64,7 @@ export const Select: React.FC<SelectProps> = ({
   return (
     <CapSelect
       {...rest}
+      {...menuPortalProps}
       isClearable={clearable}
       options={options}
       noOptionsMessage={() => noOptionsMessage || intl.formatMessage({ id: 'result-not-found' })}

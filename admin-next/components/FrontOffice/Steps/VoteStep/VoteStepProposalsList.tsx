@@ -17,6 +17,8 @@ type Props = {
   step: VoteStepProposalsList_proposalStep$key
   templateColumns: TemplateColumns
   triggerRequirementModal: (id: string) => void
+  selectedId: string | null
+  onSelectedIdChange: (id: string | null) => void
 }
 
 const PROPOSALS_FRAGMENT = graphql`
@@ -78,7 +80,13 @@ const PROPOSALS_FRAGMENT = graphql`
   }
 `
 
-export const VoteStepProposalsList: React.FC<Props> = ({ step: stepKey, templateColumns, triggerRequirementModal }) => {
+export const VoteStepProposalsList: React.FC<Props> = ({
+  step: stepKey,
+  templateColumns,
+  triggerRequirementModal,
+  selectedId,
+  onSelectedIdChange,
+}) => {
   const { data, refetch } = usePaginationFragment(PROPOSALS_FRAGMENT, stepKey)
 
   const [latlngBounds] = useQueryState('latlngBounds')
@@ -94,8 +102,7 @@ export const VoteStepProposalsList: React.FC<Props> = ({ step: stepKey, template
 
   const itemRefs = React.useRef<{ [key: string]: HTMLDivElement | null }>({})
   const debounceTimerRef = React.useRef<NodeJS.Timeout | null>(null)
-
-  const [selectedId, setSelectedId] = React.useState<string | null>(null)
+  const hasMountedRef = React.useRef(false)
 
   const handlerMouseOver = (id: string, content: string | null) => {
     if (id === selectedId) return
@@ -123,26 +130,22 @@ export const VoteStepProposalsList: React.FC<Props> = ({ step: stepKey, template
   }, [latlngBounds, refetch])
 
   React.useEffect(() => {
-    const handler = (e: CustomEvent) => {
-      setSelectedId(e.detail)
-    }
-    window.addEventListener('proposal-selected', handler)
-    return () => window.removeEventListener('proposal-selected', handler)
-  }, [])
-
-  React.useEffect(() => {
     if (selectedId && itemRefs.current[selectedId]) {
       itemRefs.current[selectedId]?.scrollIntoView({
         behavior: 'smooth',
         block: 'center',
       })
     }
-  }, [selectedId])
+  }, [data.proposals.edges, selectedId])
 
   // Reset selection when map is hidden or list view changes
   React.useEffect(() => {
-    setSelectedId(null)
-  }, [isMapShown, listView])
+    if (!hasMountedRef.current) {
+      hasMountedRef.current = true
+      return
+    }
+    onSelectedIdChange(null)
+  }, [isMapShown, listView, onSelectedIdChange])
 
   const proposalsLength = data?.proposals?.edges?.length
 

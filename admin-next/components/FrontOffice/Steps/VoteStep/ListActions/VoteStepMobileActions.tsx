@@ -76,6 +76,7 @@ const StepVoteMobileActions: React.FC<Props> = ({ step: stepKey, onWorkflowTrigg
           proposalsCount={step.allProposals?.totalCount ?? 0}
           isActive={activeAction === 'search'}
           onButtonClick={() => handleActionClick('search')}
+          onModalClose={() => setActiveAction(null)}
         />
         {step.form && isCollectStep && (
           <ProposalFormModal
@@ -92,6 +93,7 @@ const StepVoteMobileActions: React.FC<Props> = ({ step: stepKey, onWorkflowTrigg
             step={step}
             isActive={activeAction === 'vote'}
             onButtonClick={() => handleActionClick('vote')}
+            onClose={() => setActiveAction(null)}
           />
         )}
         {viewForm?.isMapViewEnabled && (viewForm.isGridViewEnabled !== false || viewForm.isListViewEnabled !== false) && (
