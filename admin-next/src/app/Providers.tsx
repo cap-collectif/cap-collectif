@@ -57,6 +57,8 @@ const UIProviderWithTheme: FC<{ SSRData: layoutQuery$data; children: React.React
 
   const bodyFonts = `${bodyFont?.name},system-ui,sans-serif`
   const titleFonts = `${titleFont?.name},system-ui,sans-serif`
+  const heroBodyFonts = bodyFont?.familyName ?? bodyFonts
+  const heroTitleFonts = titleFont?.familyName ?? titleFonts
 
   const primary = generatePalette(siteColors.primaryColor)
   const resolvedCaptchaKey =
@@ -86,7 +88,13 @@ const UIProviderWithTheme: FC<{ SSRData: layoutQuery$data; children: React.React
         {customCode?.value ? <div id="custom-code" dangerouslySetInnerHTML={{ __html: customCode?.value }} /> : null}
         {executeAnalytics ? <div id="analytics-code" dangerouslySetInnerHTML={{ __html: analyticsScript }} /> : null}
         {executeAds ? <div id="ads-code" dangerouslySetInnerHTML={{ __html: adsScript }} /> : null}
-        <GlobalFrontOfficeStyles {...siteColors} bodyFonts={bodyFonts} titleFonts={titleFonts} />
+        <GlobalFrontOfficeStyles
+          {...siteColors}
+          bodyFonts={bodyFonts}
+          titleFonts={titleFonts}
+          heroBodyFonts={heroBodyFonts}
+          heroTitleFonts={heroTitleFonts}
+        />
         {cssForCustomFonts.length ? <style dangerouslySetInnerHTML={{ __html: cssForCustomFonts.join('\n') }} /> : null}
         {children}
       </LazyMotion>

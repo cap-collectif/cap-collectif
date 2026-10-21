@@ -13,6 +13,9 @@ InternalFont:
             name:
                 type: 'String!'
                 description: 'The font name'
+            familyName:
+                type: 'String!'
+                description: 'The CSS font family'
             file:
                 type: 'InternalMedia'
                 description: 'The associated font file'

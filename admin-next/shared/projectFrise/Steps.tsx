@@ -213,6 +213,7 @@ export const Steps: FC<StepsProps> = ({ children, modalTitle, currentStepIndex, 
           boxShadow="0px 10px 99px rgba(0, 0, 0, 0.302)"
           ariaLabel={modalTitle}
           scrollBehavior="inside"
+          zIndex={2001}
           disclosure={
             <StepArrowContainer>
               {cloneElement(activeStep, { url: null })}
@@ -261,6 +262,7 @@ export const Steps: FC<StepsProps> = ({ children, modalTitle, currentStepIndex, 
         boxShadow="0px 10px 99px rgba(0, 0, 0, 0.302)"
         ariaLabel={modalTitle}
         scrollBehavior="inside"
+        zIndex={2001}
         disclosure={
           <StepArrowContainer
             onClick={e => {

@@ -2,7 +2,9 @@ import { GlobalTheme } from '@shared/navbar/NavBar.utils'
 import { pxToRem } from '@shared/utils/pxToRem'
 import { createGlobalStyle, css } from 'styled-components'
 
-export const GlobalFrontOfficeStyles = createGlobalStyle<GlobalTheme & { bodyFonts: string; titleFonts: string }>`
+export const GlobalFrontOfficeStyles = createGlobalStyle<
+  GlobalTheme & { bodyFonts: string; titleFonts: string; heroBodyFonts: string; heroTitleFonts: string }
+>`
   ${({
     h1Color,
     h2Color,
@@ -14,6 +16,8 @@ export const GlobalFrontOfficeStyles = createGlobalStyle<GlobalTheme & { bodyFon
     footerBottomBackgroundColor,
     bodyFonts,
     titleFonts,
+    heroBodyFonts,
+    heroTitleFonts,
   }) => css`
     body {
       background-color: ${footerBottomBackgroundColor};
@@ -26,6 +30,12 @@ export const GlobalFrontOfficeStyles = createGlobalStyle<GlobalTheme & { bodyFon
     h5,
     h6 {
       font-family: ${titleFonts};
+    }
+    .voteStepProjectHero .platform__title {
+      font-family: ${heroTitleFonts} !important;
+    }
+    .voteStepProjectHero .platform__body {
+      font-family: ${heroBodyFonts} !important;
     }
     main {
       background-color: white;

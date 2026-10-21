@@ -8135,6 +8135,9 @@ type Font {
   """The font name"""
   name: String!
 
+  """The CSS font family"""
+  familyName: String!
+
   """The associated font file"""
   file: Media
 

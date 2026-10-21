@@ -129,6 +129,7 @@ export const mockedSSRData = {
   fonts: [
     {
       name: 'OpenSans',
+      familyName: 'OpenSans, Arial, sans-serif',
       useAsBody: true,
       useAsHeading: false,
       isCustom: false,
@@ -136,6 +137,7 @@ export const mockedSSRData = {
     },
     {
       name: 'IDF-font',
+      familyName: 'IDF-font, sans-serif',
       useAsBody: false,
       useAsHeading: true,
       isCustom: true,
@@ -207,6 +209,7 @@ export const mockedFooterData = {
   fonts: [
     {
       name: 'OpenSans',
+      familyName: 'OpenSans, Arial, sans-serif',
       useAsBody: true,
       useAsHeading: false,
       isCustom: false,
@@ -214,6 +217,7 @@ export const mockedFooterData = {
     },
     {
       name: 'IDF-font',
+      familyName: 'IDF-font, sans-serif',
       useAsBody: false,
       useAsHeading: true,
       isCustom: true,

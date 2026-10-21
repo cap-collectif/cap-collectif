@@ -35,6 +35,7 @@ import useIsMobile from '@shared/hooks/useIsMobile'
 import DefaultProjectImage from '@shared/sections/carrousel/DefaultProjectImage'
 import htmlDecode from '@shared/utils/htmlDecode'
 import VoteStepProjectHeroStats from './VoteStepProjectHeroStats'
+import VoteStepProjectHeroStepInfo from './VoteStepProjectHeroStepInfo'
 
 type Props = {
   step: VoteStepProjectHero_proposalStep$key
@@ -48,6 +49,11 @@ type RestrictedViewerGroup = NonNullable<
 const FRAGMENT = graphql`
   fragment VoteStepProjectHero_proposalStep on ProposalStep {
     id
+    state
+    timeRange {
+      startAt
+      endAt
+    }
     project {
       title
       url
@@ -664,132 +670,142 @@ const VoteStepProjectHero: React.FC<Props> = ({ step: stepKey }) => {
   }
 
   return (
-    <Box
-      backgroundColor="white"
-      as="header"
-      role="banner"
-      className="projectHeader"
-      maxWidth="100%"
-      paddingY={[0, 9]}
-      mb="md"
-      borderBottom="1px solid #e3e3e3"
-    >
-      <Box maxWidth={pxToRem(1280)} width="100%" margin="auto" px={[0, 'lg']}>
-        <Box
-          className="projectHeader__cover"
-          position="relative"
-          display="flex"
-          flexDirection={['column-reverse', 'row']}
-          flexWrap="nowrap"
-          width="100%"
-          justifyContent="center"
-        >
+    <>
+      <Box
+        backgroundColor="white"
+        as="header"
+        role="banner"
+        className="projectHeader voteStepProjectHero"
+        maxWidth="100%"
+        paddingY={[0, 9]}
+        mb="md"
+        borderBottom="1px solid #e3e3e3"
+      >
+        <Box maxWidth={pxToRem(1280)} width="100%" margin="auto" px={[0, 'lg']}>
           <Box
-            className="projectHeader__cover__content"
+            className="projectHeader__cover"
             position="relative"
             display="flex"
-            flexDirection="column"
-            minHeight={['auto', '270px']}
-            justifyContent="flex-start"
-            alignItems="flex-start"
-            paddingLeft={[4, 0]}
-            paddingRight={[4, 6]}
-            width={['100%', 'calc(100% - 405px)']}
+            flexDirection={['column-reverse', 'row']}
+            flexWrap="nowrap"
+            width="100%"
+            justifyContent="center"
           >
-            {renderAuthors()}
-
-            <Text
-              className="projectHeader__title platform__title"
-              width="100%"
-              as="h1"
-              mb={0}
-              fontSize={[CapUIFontSize.Headline, CapUIFontSize.DisplayMedium]}
-              lineHeight="initial"
-              fontWeight="semibold"
-              color="neutral-gray.900"
-              marginTop={2}
-              truncate={130}
+            <Box
+              className="projectHeader__cover__content"
+              position="relative"
+              display="flex"
+              flexDirection="column"
+              minHeight={['auto', '270px']}
+              justifyContent="flex-start"
+              alignItems="flex-start"
+              paddingLeft={[4, 0]}
+              paddingRight={[4, 6]}
+              width={['100%', 'calc(100% - 300px)']}
             >
-              {title}
-            </Text>
+              {renderAuthors()}
 
-            <VoteStepProjectHeroStats project={project} />
-
-            {project.districts?.edges?.length || project.themes?.length ? (
-              <Box
-                className="projectHeader__info"
-                display="flex"
-                flexDirection="row"
-                flexWrap="wrap"
+              <Text
+                className="projectHeader__title platform__title"
                 width="100%"
-                flexBasis="100%"
-                alignItems="flex-end"
-                marginTop={[0, 6]}
-                marginBottom={0}
-                maxHeight="24px"
-                justifyContent="flex-start"
-                as="ul"
-                p={0}
+                as="h1"
+                mb={0}
+                fontSize={[CapUIFontSize.Headline, CapUIFontSize.DisplayMedium]}
+                lineHeight="initial"
+                fontWeight="semibold"
+                color="neutral-gray.900"
+                marginTop={2}
+                truncate={130}
               >
-                {renderDistricts()}
-                {renderThemes()}
-              </Box>
-            ) : null}
+                {title}
+              </Text>
 
-            <ShareButtons url={project.url} title={title} />
-          </Box>
+              <VoteStepProjectHeroStats project={project} />
 
-          <Box
-            className="projectHeader__coverImage"
-            width={['100%', '405px']}
-            overflow="hidden"
-            minHeight="270px"
-            maxHeight="315px"
-            sx={{
-              filter: project.archived ? 'grayscale(1)' : null,
-              opacity: project.archived ? '50%' : null,
-            }}
-          >
-            {project.cover?.url ? (
-              <Box position="relative" width="100%" height="100%" minHeight="270px">
+              {project.districts?.edges?.length || project.themes?.length ? (
                 <Box
-                  as="img"
-                  {...getSrcSet(project.cover.url)}
-                  alt=""
-                  loading="eager"
-                  sizes="(max-width: 640px) 640px, 960px"
-                  width={['100%', '405px']}
+                  className="projectHeader__info"
+                  display="flex"
+                  flexDirection="row"
+                  flexWrap="wrap"
+                  width="100%"
+                  flexBasis="100%"
+                  alignItems="flex-end"
+                  marginTop={[0, 6]}
+                  marginBottom={0}
+                  maxHeight="24px"
+                  justifyContent="flex-start"
+                  as="ul"
+                  p={0}
+                >
+                  {renderDistricts()}
+                  {renderThemes()}
+                </Box>
+              ) : null}
+
+              <ShareButtons url={project.url} title={title} />
+            </Box>
+
+            <Box
+              className="projectHeader__coverImage"
+              width={['100%', '300px']}
+              overflow="hidden"
+              minHeight="270px"
+              maxHeight="315px"
+              sx={{
+                filter: project.archived ? 'grayscale(1)' : null,
+                opacity: project.archived ? '50%' : null,
+              }}
+            >
+              {project.cover?.url ? (
+                <Box position="relative" width="100%" height="100%" minHeight="270px">
+                  <Box
+                    as="img"
+                    {...getSrcSet(project.cover.url)}
+                    alt=""
+                    loading="eager"
+                    sizes="(max-width: 320px) 320px,
+                      (max-width: 640px) 640px,
+                      (max-width: 960px) 960px,
+                      (max-width: 1280px) 960px,
+                      (max-width: 2560px) 960px,"
+                    width={['100%', '300px']}
+                    minHeight="270px"
+                    borderRadius={[0, 'accordion']}
+                    style={{ objectFit: 'cover' }}
+                  />
+                  {renderVideoDisclosure()}
+                </Box>
+              ) : (
+                <Flex
+                  alignItems="center"
+                  justifyContent="center"
+                  width="100%"
                   minHeight="270px"
                   borderRadius={[0, 'accordion']}
-                  style={{ objectFit: 'cover' }}
-                />
-                {renderVideoDisclosure()}
-              </Box>
-            ) : (
-              <Flex
-                alignItems="center"
-                justifyContent="center"
-                width="100%"
-                minHeight="270px"
-                backgroundColor={primaryColor}
-                position="relative"
-              >
-                <DefaultProjectImage position="relative" top={0} left={0} />
-                {renderVideoDisclosure()}
-              </Flex>
-            )}
+                  backgroundColor={primaryColor}
+                  position="relative"
+                >
+                  <DefaultProjectImage />
+                  {renderVideoDisclosure()}
+                </Flex>
+              )}
+            </Box>
+            {renderRestrictedAccess()}
           </Box>
-          {renderRestrictedAccess()}
+          <ProjectStepTabs
+            project={project}
+            currentStepId={step.id}
+            mainColor={primaryColor}
+            marginBottom={[-8, -13]}
+            marginTop={3}
+          />
         </Box>
-        <ProjectStepTabs
-          project={project}
-          currentStepId={step.id}
-          mainColor={primaryColor}
-          marginBottom={[-8, -13]}
-          marginTop={3}
-        />
       </Box>
-    </Box>
+      <Box className="voteStepProjectHero" maxWidth={pxToRem(1280)} width="100%" margin="3rem auto 0" px={[4, 'lg']}>
+        <VoteStepProjectHeroStepInfo state={step.state} timeRange={step.timeRange} />
+      </Box>
+    </>
   )
 }
 

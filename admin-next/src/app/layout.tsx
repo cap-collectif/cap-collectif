@@ -15,6 +15,7 @@ import { layoutQuery$data } from '@relay/layoutQuery.graphql'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { getRequestLocale } from './server/request-locale'
 import { ssrGraphqlWithLocale } from './server/ssr-graphql-with-locale'
+import './fonts.css'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
@@ -31,6 +32,7 @@ export const layoutQuery = graphql`
     }
     fonts(splitFontsFromSameFile: true) {
       name
+      familyName
       useAsBody
       useAsHeading
       isCustom
