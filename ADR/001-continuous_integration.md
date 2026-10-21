@@ -205,6 +205,58 @@ la clé à partir des fichiers générés empêcherait sa réutilisation au run 
 cache, puis les transmet aux jobs de lint, de vérification TypeScript et de tests Jest par le
 workspace. Ces jobs ne relancent pas le compilateur Relay.
 
+#### Workflow QA à la demande
+
+Le workflow QA est déclenché à la demande lorsqu'une pull request reçoit le label `🔬 In test`.
+L'action GitHub transmet les paramètres `run_qa=true` et le numéro de la pull request à
+CircleCI, qui exécute alors uniquement `prepare` puis `build-qa-image`. Le workflow
+standard n'est pas exécuté dans ce cas.
+
+Le workflow QA est filtré sur les branches de pull request et ne peut pas être exécuté sur
+`preprod` ou `master`, afin de ne pas activer les étapes de déploiement incluses dans le job
+`build-production-image`.
+
+`build-qa-image` construit et pousse la même image applicative que le job de production, puis
+met à jour l'instance QA dans le dépôt `cluster`. Il ne contient pas les étapes de déploiement
+preprod/production ni la création de release Sentry. Les étapes communes de construction et de
+publication sont factorisées entre les deux jobs.
+
+`build-production-image` reste exécuté par le workflow `deploy` sur `preprod` et `master`, car
+ce job porte encore les étapes de déploiement correspondantes. Il n'est plus exécuté
+automatiquement pour chaque branche de pull request.
+
+`prepare` est conservé dans le workflow QA pour le moment : l'image Docker de production
+consomme notamment les artefacts générés par les builds JavaScript et `admin-next`. La création
+d'un `prepare-production` plus léger pourra être envisagée séparément après mesure des artefacts
+réellement nécessaires.
+
+Le secret GitHub `CIRCLECI_TOKEN` doit être configuré pour permettre à l'action de déclencher
+CircleCI.
+
+#### Profils CI manuels
+
+Le workflow `test-and-build` n'est plus exécuté automatiquement pour les pushes de branches de
+pull request. Les pipelines CircleCI déclenchés par le dépôt n'exécutent par défaut aucun profil
+de tests. Le workflow GitHub `Trigger CircleCI profile` permet de lancer manuellement un profil
+sur la branche sélectionnée :
+
+- `static` : analyse PHP, linters, vérification TypeScript, vérification GraphQL et couverture
+  des spécifications Cypress ;
+- `tests` : tests PHP, Jest, PHPUnit, migrations, GraphQL et Cypress, sans les contrôles statiques ;
+- `full` : workflow complet `test-and-build`.
+
+Le workflow `test-and-build` se termine par le job `test-and-build-gate`, un job `no-op` qui
+réussit uniquement lorsque tous les jobs de validation du workflow ont réussi. Ce job doit être
+configuré comme check obligatoire sur les pull requests vers `preprod` afin d'imposer l'exécution
+manuelle du profil `full` avant le merge.
+
+Le profil est transmis à CircleCI via le paramètre enum `ci_profile`. La valeur `none` est utilisée
+pour les pipelines déclenchés automatiquement par le dépôt et n'exécute aucun profil de tests.
+
+Les déploiements sur `preprod` et `master` restent automatiques dans le workflow CircleCI
+`deploy`, qui conserve uniquement `prepare` et `build-production-image`. Le workflow QA reste
+déclenché automatiquement par le label `🔬 In test` et les synchronisations correspondantes.
+
 ### Statut
 
 Validé
