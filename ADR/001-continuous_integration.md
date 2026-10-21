@@ -135,6 +135,16 @@ Voir `.circleci/check-cypress-spec-coverage.sh`. Si un nouveau dossier de premie
 
 **Raison** : Si le code a été mergé via PR avec une CI verte, ces vérifications sont redondantes sur master.
 
+#### Extensions PHP des exécuteurs CircleCI
+
+Les jobs `prepare` et `unit-php` installent APCu 5.1.28 et Redis 6.1.0 avec
+`.circleci/install-php-extensions.sh`. Le script utilise PIE 1.5.2, vérifie son
+SHA-256 et active les deux modules avec `docker-php-ext-enable` dans les images
+`cimg/php:8.1` et `cimg/php:8.1-node`. Ces versions sont alignées sur les images
+applicatives. Ce chemin ne dépend plus de `install-php-extensions`, Pickle ni
+des téléchargements PECL. L'installation échoue si les versions chargées ne
+correspondent pas aux versions attendues.
+
 #### Version de Node et Yarn
 
 Tous les jobs exécutant JavaScript sur l'exécuteur CircleCI utilisent

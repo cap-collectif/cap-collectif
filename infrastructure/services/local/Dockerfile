@@ -13,6 +13,8 @@ RUN apt-get update && \
         curl \
         imagemagick \
         libmagickwand-dev \
+        librabbitmq-dev \
+        unzip \
         locales \
         pkg-config \
         runit \
@@ -31,7 +33,6 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
     echo "deb https://packages.sury.org/php/ bookworm main" > /etc/apt/sources.list.d/php.list && \
     apt-get update && \
     apt-get install -y -qq \
-        php${PHP_VERSION}-apcu \
         php${PHP_VERSION}-cli \
         php${PHP_VERSION}-mbstring \
         php${PHP_VERSION}-common \
@@ -39,30 +40,29 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
         php${PHP_VERSION}-dev \
         php${PHP_VERSION}-fpm \
         php${PHP_VERSION}-gd \
-        php${PHP_VERSION}-imagick \
         php${PHP_VERSION}-intl \
         php${PHP_VERSION}-sqlite3 \
         php${PHP_VERSION}-mysql \
         php${PHP_VERSION}-opcache \
         php${PHP_VERSION}-xsl \
         php${PHP_VERSION}-zip \
-        php${PHP_VERSION}-amqp \
-        php${PHP_VERSION}-simplexml \
-        php-pear
+        php${PHP_VERSION}-simplexml
 
-# TODO This block needs to be removed after migrating to Symfony 6.4 and redis extension needs to be installed like the others above.
-# ( Bug in symfony Cache component with redis version > 6.0.3: https://github.com/symfony/symfony/pull/57885 )
-RUN pecl install redis-6.0.2
+# Pin PIE and extension versions so rebuilds do not silently upgrade them.
+RUN curl -fsSL --retry 3 https://github.com/php/pie/releases/download/1.5.2/pie.phar -o /usr/local/bin/pie \
+    && echo "fe70c59738cf56ec00a818cf9cb9593da171aac86f5f1f859995b8839dfd2cc7  /usr/local/bin/pie" | sha256sum -c - \
+    && chmod +x /usr/local/bin/pie
 
-RUN <<EOF
-echo "
-extension='redis.so'
-" >> /etc/php/${PHP_VERSION}/mods-available/redis.ini
-EOF
-
-RUN ln -s /etc/php/${PHP_VERSION}/mods-available/redis.ini /etc/php/${PHP_VERSION}/cli/conf.d/25-redis.ini \
-    && ln -s /etc/php/${PHP_VERSION}/mods-available/redis.ini /etc/php/${PHP_VERSION}/fpm/conf.d/25-redis.ini
-### end of block
+# Enable modules explicitly for both CLI and FPM through Debian's module registry.
+RUN set -eux; \
+    for package in apcu/apcu:5.1.28 php-amqp/php-amqp:2.2.0 imagick/imagick:3.8.1 phpredis/phpredis:6.1.0 xdebug/xdebug:3.5.3; do \
+        php${PHP_VERSION} /usr/local/bin/pie install --no-interaction --no-cache \
+            --with-php-config=/usr/bin/php-config${PHP_VERSION} --skip-enable-extension "$package"; \
+    done; \
+    for extension in apcu amqp imagick redis; do \
+        echo "extension=${extension}.so" > /etc/php/${PHP_VERSION}/mods-available/${extension}.ini; \
+    done; \
+    phpenmod -v ${PHP_VERSION} -s ALL apcu amqp imagick redis
 
 RUN <<EOF
 echo "
@@ -70,8 +70,6 @@ apc.enable_cli=1
 apc.enable=1
 " >> /etc/php/${PHP_VERSION}/mods-available/apcu.ini
 EOF
-
-RUN pecl install xdebug-3.1.0
 
 RUN <<EOF
 echo "

@@ -101,6 +101,14 @@ castor local:infrastructures:build
 castor local:infrastructures:up
 ```
 
+Les images applicatives locale et distante installent les extensions externes
+avec [PIE](https://github.com/php/pie), sans appel à PECL : APCu 5.1.28,
+AMQP 2.2.0, Imagick 3.8.1 et Redis 6.1.0, ainsi que Xdebug 3.5.3 en local.
+PIE 1.5.2 et les versions des extensions sont épinglés dans les deux Dockerfiles ;
+le téléchargement de PIE est vérifié par SHA-256. Les extensions fournies avec
+PHP (GD, Intl, PDO, etc.) restent installées via les paquets APT PHP 8.1.
+Les modules sont activés pour CLI et FPM dans `/etc/php/8.1/mods-available/`.
+
 MySQL et Elasticsearch stockent leurs données dans les volumes nommés
 `capco_database_data` et `capco_elasticsearch_data`. Ces volumes sont conservés
 lors d'une recréation des containers et après un arrêt avec `docker compose down`
