@@ -34,7 +34,6 @@ final class CapcoAppBundleMessagesTypes
 
     public const OPINION_CREATE = 'opinion.create';
     public const OPINION_TRASH = 'opinion.trash';
-    public const OPINION_DELETE = 'opinion.delete';
     public const OPINION_UPDATE = 'opinion.update';
 
     public const REPORT = 'report';

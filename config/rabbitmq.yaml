@@ -23,12 +23,6 @@
             bindings:
                 - exchange: capco_direct_exchange
                   routing_key: opinion_update
-        opinion_delete:
-            durable: true
-            retries: [25, 125, 625]
-            bindings:
-                - exchange: capco_direct_exchange
-                  routing_key: opinion_delete
         opinion_trash:
             durable: true
             retries: [25, 125, 625]

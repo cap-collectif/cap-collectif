@@ -19,9 +19,6 @@ swarrot:
         opinion.update:
             exchange: capco_direct_exchange
             routing_key: opinion_update
-        opinion.delete:
-            exchange: capco_direct_exchange
-            routing_key: opinion_delete
         opinion.trash:
             exchange: capco_direct_exchange
             routing_key: opinion_trash
@@ -235,23 +232,6 @@ swarrot:
                       retry_attempts: 3
                       retry_exchange: 'retry'
                       retry_routing_key_pattern: 'opinion_update_retry_%%attempt%%'
-        opinion_delete:
-            processor: Capco\AppBundle\Processor\Opinion\OpinionDeleteProcessor
-            middleware_stack:
-                - configurator: swarrot.processor.signal_handler
-                - configurator: swarrot.processor.max_execution_time
-                  extras:
-                      max_execution_time: 100
-                - configurator: swarrot.processor.max_messages
-                - configurator: swarrot.processor.doctrine_connection
-                - configurator: swarrot.processor.doctrine_object_manager
-                - configurator: swarrot.processor.exception_catcher
-                - configurator: swarrot.processor.ack
-                - configurator: swarrot.processor.retry
-                  extras:
-                      retry_attempts: 3
-                      retry_exchange: 'retry'
-                      retry_routing_key_pattern: 'opinion_delete_retry_%%attempt%%'
         opinion_trash:
             processor: Capco\AppBundle\Processor\Opinion\OpinionTrashProcessor
             middleware_stack:
