@@ -1431,27 +1431,27 @@ Object {
         },
         Object {
           "key": "2022-05-01T00:00:00.000+02:00",
-          "totalCount": 21,
+          "totalCount": 29,
         },
         Object {
           "key": "2022-06-01T00:00:00.000+02:00",
-          "totalCount": 23,
-        },
-        Object {
-          "key": "2022-07-01T00:00:00.000+02:00",
           "totalCount": 15,
         },
         Object {
-          "key": "2022-08-01T00:00:00.000+02:00",
-          "totalCount": 32,
-        },
-        Object {
-          "key": "2022-09-01T00:00:00.000+02:00",
+          "key": "2022-07-01T00:00:00.000+02:00",
           "totalCount": 22,
         },
         Object {
-          "key": "2022-10-01T00:00:00.000+02:00",
+          "key": "2022-08-01T00:00:00.000+02:00",
           "totalCount": 26,
+        },
+        Object {
+          "key": "2022-09-01T00:00:00.000+02:00",
+          "totalCount": 20,
+        },
+        Object {
+          "key": "2022-10-01T00:00:00.000+02:00",
+          "totalCount": 24,
         },
         Object {
           "key": "2022-11-01T00:00:00.000+01:00",
@@ -1459,7 +1459,7 @@ Object {
         },
         Object {
           "key": "2022-12-01T00:00:00.000+01:00",
-          "totalCount": 25,
+          "totalCount": 28,
         },
         Object {
           "key": "2023-01-01T00:00:00.000+01:00",
@@ -1467,15 +1467,15 @@ Object {
         },
         Object {
           "key": "2023-02-01T00:00:00.000+01:00",
-          "totalCount": 27,
+          "totalCount": 23,
         },
         Object {
           "key": "2023-03-01T00:00:00.000+01:00",
-          "totalCount": 26,
+          "totalCount": 33,
         },
         Object {
           "key": "2023-04-01T00:00:00.000+02:00",
-          "totalCount": 18,
+          "totalCount": 15,
         },
         Object {
           "key": "2023-05-01T00:00:00.000+02:00",
@@ -2495,33 +2495,33 @@ Object {
       "values": Array [
         Object {
           "category": Object {
-            "id": "pCategoryBp3Idf3",
+            "id": "pCategoryBp3Idf2",
           },
-          "totalCount": 68,
-        },
-        Object {
-          "category": Object {
-            "id": "pCategoryBp3Idf5",
-          },
-          "totalCount": 67,
-        },
-        Object {
-          "category": Object {
-            "id": "pCategoryBp3Idf1",
-          },
-          "totalCount": 62,
+          "totalCount": 69,
         },
         Object {
           "category": Object {
             "id": "pCategoryBp3Idf4",
           },
-          "totalCount": 57,
+          "totalCount": 62,
         },
         Object {
           "category": Object {
-            "id": "pCategoryBp3Idf2",
+            "id": "pCategoryBp3Idf1",
           },
-          "totalCount": 48,
+          "totalCount": 61,
+        },
+        Object {
+          "category": Object {
+            "id": "pCategoryBp3Idf5",
+          },
+          "totalCount": 59,
+        },
+        Object {
+          "category": Object {
+            "id": "pCategoryBp3Idf3",
+          },
+          "totalCount": 51,
         },
       ],
     },

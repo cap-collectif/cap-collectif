@@ -1173,7 +1173,8 @@ Capco\AppBundle\Entity\Proposal:
     proposalLocation{1..300}:
         id: 'proposalLocation<current()>'
         district: '@districtIdf<numberBetween(3,4)>'
-        address: '<generateAddress()>'
+        # Keep the location fixtures outside the bounding box used by the location query snapshot.
+        address: '<generateAddress([48.11, 48.70], [1.43, 3.50])>'
         title: '<sentence()>'
         body: '<paragraph(4)>'
         author: '@user5'
