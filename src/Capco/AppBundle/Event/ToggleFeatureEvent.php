@@ -11,8 +11,7 @@ class ToggleFeatureEvent extends Event
 
     public function __construct(
         private readonly Toggle $toggle
-    ) {
-    }
+    ) {}
 
     public function getToggle(): Toggle
     {

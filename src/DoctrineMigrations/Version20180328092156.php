@@ -59,9 +59,7 @@ class Version20180328092156 extends AbstractMigration
         $this->write('-> delete charte page');
     }
 
-    public function postDown(Schema $schema): void
-    {
-    }
+    public function postDown(Schema $schema): void {}
 
     public function down(Schema $schema): void
     {

@@ -11,6 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * SiteImage.
  *
  * @ORM\Table(name="site_color")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SiteColorRepository")
  */
 class SiteColor implements EntityInterface, \Stringable
@@ -33,14 +34,18 @@ class SiteColor implements EntityInterface, \Stringable
 
     /**
      * @var \DateTime
+     *
      * @Gedmo\Timestampable(on="create")
+     *
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
      * @var \DateTime
+     *
      * @Gedmo\Timestampable(on="change", field={"value"})
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -54,6 +59,7 @@ class SiteColor implements EntityInterface, \Stringable
 
     /**
      * @var int
+     *
      * @ORM\Column(name="position", type="integer")
      */
     private $position = 0;

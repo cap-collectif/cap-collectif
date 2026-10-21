@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 FROM debian:bookworm AS base
 
-ENV PHP_VERSION 8.1
+ENV PHP_VERSION 8.3
 
 # Install basic
 RUN apt-get update && \

@@ -28,7 +28,5 @@ final class Version20190426200000 extends AbstractMigration implements Container
         $this->container->get(Manager::class)->deactivate('disconnect_openid');
     }
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 }

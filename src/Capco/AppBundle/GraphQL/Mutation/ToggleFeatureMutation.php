@@ -17,8 +17,7 @@ class ToggleFeatureMutation implements MutationInterface
     public function __construct(
         private readonly Manager $toggleManager,
         private readonly FormFactoryInterface $formFactory
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args)
     {

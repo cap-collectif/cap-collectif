@@ -11,6 +11,7 @@ use Gedmo\Timestampable\Timestampable;
 
 /**
  * @ORM\Table(name="proposal_decision_maker")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalDecisionMakerRepository")
  */
 class ProposalDecisionMaker implements EntityInterface, Timestampable
@@ -19,20 +20,25 @@ class ProposalDecisionMaker implements EntityInterface, Timestampable
 
     /**
      * @ORM\Id()
+     *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(nullable=false, referencedColumnName="id", name="decision_maker_id")
      */
     private User $decisionMaker;
 
     /**
      * @ORM\Id()
+     *
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="decisionMaker")
+     *
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private Proposal $proposal;
 
     /**
      * @Gedmo\Timestampable(on="update")
+     *
      * @ORM\Column(type="datetime", name="updated_at")
      */
     private ?\DateTimeInterface $updatedAt = null;

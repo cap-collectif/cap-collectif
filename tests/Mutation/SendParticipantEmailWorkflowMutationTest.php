@@ -16,8 +16,11 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Invokes GraphQL mutations directly with mocked dependencies instead of verifying the HTTP
  * contract and persisted effects.
  */
@@ -104,7 +107,7 @@ class SendParticipantEmailWorkflowMutationTest extends TestCase
     }
 
     /**
-     * @return array{'questionnaire': Questionnaire&MockObject}
+     * @return array{'questionnaire': MockObject&Questionnaire}
      */
     private function setUpContribution(): array
     {

@@ -31,8 +31,7 @@ class UpdatePaperVoteMutation implements MutationInterface
         private readonly ProposalStepPaperVoteCounterRepository $repository,
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly AuthorizationCheckerInterface $authorizationChecker
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

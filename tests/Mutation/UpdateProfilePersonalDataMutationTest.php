@@ -7,9 +7,13 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises HTTP outcomes and real domain data with transactional cleanup; replaces only external boundaries.
  */
 final class UpdateProfilePersonalDataMutationTest extends IdentityWebTestCase
@@ -45,10 +49,15 @@ final class UpdateProfilePersonalDataMutationTest extends IdentityWebTestCase
     public static function identities(): iterable
     {
         yield 'admin self' => ['ROLE_ADMIN', true, true];
+
         yield 'super admin self' => ['ROLE_SUPER_ADMIN', true, true];
+
         yield 'super admin other' => ['ROLE_SUPER_ADMIN', false, true];
+
         yield 'admin other refused' => ['ROLE_ADMIN', false, false];
+
         yield 'user self' => ['ROLE_USER', true, true];
+
         yield 'user other refused' => ['ROLE_USER', false, false];
     }
 

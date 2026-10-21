@@ -62,6 +62,7 @@ class AddMediatorVotesMutation extends MediatorVotesMutation implements Mutation
 
         /** @var Mediator $mediator */
         $mediator = $this->getEntityByGlobalId($mediatorId, $viewer, Mediator::class);
+
         /** @var SelectionStep $step */
         $step = $this->getEntityByGlobalId($stepId, $viewer, SelectionStep::class);
 

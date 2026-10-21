@@ -23,11 +23,11 @@ class NewsletterSubscriptionExportController extends AbstractController
         private readonly EntityManagerInterface $entityManager,
         private readonly TranslatorInterface $translator,
         private readonly ActionLogger $actionLogger
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/export-newsletter-subscriptions", name="app_export_newsletter_subscriptions", options={"i18n" = false})
+     *
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function exportAction(): Response

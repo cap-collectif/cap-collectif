@@ -12,6 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="source_category")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SourceCategoryRepository")
  */
 class SourceCategory implements EntityInterface, TranslatableInterface, \Stringable
@@ -26,12 +27,14 @@ class SourceCategory implements EntityInterface, TranslatableInterface, \Stringa
 
     /**
      * @Gedmo\Timestampable(on="create")
+     *
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title"})
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;

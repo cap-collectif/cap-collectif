@@ -19,8 +19,7 @@ class GroupService
         private readonly UserGroupRepository $userGroupRepository,
         private readonly EntityManagerInterface $entityManager,
         private readonly LoggerInterface $logger,
-    ) {
-    }
+    ) {}
 
     /**
      * @param string[] $emails

@@ -5,7 +5,6 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Provider\MediaProvider;
 use Capco\AppBundle\Repository\MediaRepository;
-use InvalidArgumentException;
 use Liip\ImagineBundle\Binary\BinaryInterface;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Liip\ImagineBundle\Imagine\Data\DataManager;
@@ -23,8 +22,7 @@ class CropMediaMutation implements MutationInterface
         private readonly CacheManager $cacheManager,
         private readonly FilterManager $filterManager,
         private readonly DataManager $dataManager
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): array
     {
@@ -32,7 +30,7 @@ class CropMediaMutation implements MutationInterface
         $filters = $args->offsetGet('filters');
         $media = $this->mediaRepository->find($args->offsetGet('mediaId'));
         if (!$media) {
-            throw new InvalidArgumentException('This media does not exist.');
+            throw new \InvalidArgumentException('This media does not exist.');
         }
 
         $file = $this->mediaProvider->getOrGenerateReferenceFile($media);

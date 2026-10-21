@@ -24,8 +24,7 @@ class ModerationController extends Controller
         private readonly LoggerInterface $logger,
         private readonly TranslatorInterface $translator,
         private readonly Publisher $publisher
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/moderate/{token}/reason/{reason}", name="moderate_contribution", options={"i18n" = false})

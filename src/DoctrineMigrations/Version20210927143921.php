@@ -29,9 +29,7 @@ final class Version20210927143921 extends AbstractMigration implements Container
         return 'Add new siteParameter for HotJar';
     }
 
-    public function up(Schema $schema): void
-    {
-    }
+    public function up(Schema $schema): void {}
 
     public function postUp(Schema $schema): void
     {

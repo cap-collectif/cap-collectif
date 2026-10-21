@@ -34,7 +34,8 @@ class ProposalStepPaperVoteCounterRepository extends EntityRepository
         return $this->createQueryBuilder('pspvc')
             ->select('SUM(pspvc.totalCount)')
             ->getQuery()
-            ->getSingleScalarResult() ?? 0;
+            ->getSingleScalarResult() ?? 0
+        ;
     }
 
     private function createByProjectQueryBuilder(Project $project): QueryBuilder

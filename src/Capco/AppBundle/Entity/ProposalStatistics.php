@@ -9,12 +9,14 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="proposal_statistics")
+ *
  * @ORM\Entity(repositoryClass=ProposalStatisticsRepository::class)
  */
 class ProposalStatistics extends AbstractStatistics implements EntityInterface, IndexableInterface
 {
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="statistics", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     private ?Proposal $proposal = null;

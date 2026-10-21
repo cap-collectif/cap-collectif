@@ -12,7 +12,9 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Checks public domain rules with real entities and observable results, without framework interaction counts.
  */
 class DebateOpinionVoterTest extends AuthorizationTestCase
@@ -108,6 +110,7 @@ class DebateOpinionVoterTest extends AuthorizationTestCase
     public static function unrelatedViewers(): iterable
     {
         yield 'ordinary account cannot create or manage' => ['ROLE_USER', VoterInterface::ACCESS_DENIED];
+
         yield 'project administrator can create but cannot manage this opinion' => ['ROLE_PROJECT_ADMIN', VoterInterface::ACCESS_GRANTED];
     }
 }

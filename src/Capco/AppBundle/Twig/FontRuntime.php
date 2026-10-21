@@ -10,8 +10,7 @@ class FontRuntime implements RuntimeExtensionInterface
 {
     public function __construct(
         private readonly FontRepository $repository
-    ) {
-    }
+    ) {}
 
     public function getCurrentFont(): array
     {

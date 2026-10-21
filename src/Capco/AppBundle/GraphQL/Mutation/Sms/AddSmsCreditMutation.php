@@ -41,8 +41,7 @@ class AddSmsCreditMutation implements MutationInterface
         private readonly LoggerInterface $logger,
         private readonly ExternalServiceConfigurationRepository $externalServiceConfigurationRepository,
         private readonly Publisher $publisher
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

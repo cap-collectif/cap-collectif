@@ -11,9 +11,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class ProposalAccessResolver implements QueryInterface
 {
-    public function __construct(private readonly ParticipantHelper $participantHelper)
-    {
-    }
+    public function __construct(private readonly ParticipantHelper $participantHelper) {}
 
     /**
      * @return array{canEdit: bool, canDelete: bool}

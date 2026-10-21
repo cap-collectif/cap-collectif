@@ -13,8 +13,7 @@ class CommentListResolver implements QueryInterface
 {
     public function __construct(
         private readonly CommentRepository $repository
-    ) {
-    }
+    ) {}
 
     /**
      * @return Connection|Promise

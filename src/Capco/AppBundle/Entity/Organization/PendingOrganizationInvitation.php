@@ -15,12 +15,15 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Table(name="pending_organization_invitation",
  *  uniqueConstraints={
+ *
  *    @ORM\UniqueConstraint(
  *      name="token_unique",
  *      columns={"token"}
  *    )
  * })
+ *
  * @CapcoAssert\PendingOrganizationInvitation
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\Organization\PendingOrganizationInvitationRepository")
  */
 class PendingOrganizationInvitation implements EntityInterface, Expirable, Invitation
@@ -31,6 +34,7 @@ class PendingOrganizationInvitation implements EntityInterface, Expirable, Invit
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(name="user_id", nullable=true, referencedColumnName="id")
      */
     protected ?User $user = null;
@@ -47,6 +51,7 @@ class PendingOrganizationInvitation implements EntityInterface, Expirable, Invit
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Organization\Organization")
+     *
      * @ORM\JoinColumn(name="organization_id", nullable=false, referencedColumnName="id")
      */
     protected Organization $organization;
@@ -58,6 +63,7 @@ class PendingOrganizationInvitation implements EntityInterface, Expirable, Invit
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(name="creator_id", nullable=false, referencedColumnName="id")
      */
     protected User $creator;

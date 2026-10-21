@@ -23,6 +23,7 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  * @ORM\Table(
  *   name="votes",
  *   indexes={
+ *
  *        @Index(name="collectstep_voter_idx", columns={"voter_id", "collect_step_id"}),
  *        @Index(name="selectionstep_voter_idx", columns={"voter_id", "selection_step_id"}),
  *        @Index(name="proposal_selectionstep_idx", columns={"proposal_id", "selection_step_id"}),
@@ -31,6 +32,7 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  *        @Index(name="proposal_collectstep_published_idx", columns={"proposal_id", "collect_step_id", "published", "voteType"}),
  *   },
  *   uniqueConstraints={
+ *
  *        @UniqueConstraint(
  *            name="opinion_vote_unique",
  *            columns={"voter_id", "opinion_id"}
@@ -81,10 +83,15 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  *        ),
  *    }
  * )
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AbstractVoteRepository")
+ *
  * @ORM\HasLifecycleCallbacks()
+ *
  * @ORM\InheritanceType("SINGLE_TABLE")
+ *
  * @ORM\DiscriminatorColumn(name = "voteType", type = "string")
+ *
  * @ORM\DiscriminatorMap({
  *      "comment"                   = "CommentVote",
  *      "opinion"                   = "OpinionVote",
@@ -107,12 +114,14 @@ abstract class AbstractVote implements EntityInterface, Publishable, VoteContrib
 
     /**
      * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="votes")
+     *
      * @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
      */
     protected ?Participant $participant = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="votes")
+     *
      * @ORM\JoinColumn(name="voter_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $user;
@@ -124,6 +133,7 @@ abstract class AbstractVote implements EntityInterface, Publishable, VoteContrib
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Mediator", inversedBy="votes")
+     *
      * @ORM\JoinColumn(name="mediator_id", referencedColumnName="id")
      */
     private ?Mediator $mediator = null;

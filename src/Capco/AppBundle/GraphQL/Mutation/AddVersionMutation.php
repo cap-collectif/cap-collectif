@@ -29,8 +29,7 @@ class AddVersionMutation implements MutationInterface
         private OpinionRepository $opinionRepo,
         private RedisStorageHelper $redisStorage,
         private LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $viewer): array
     {

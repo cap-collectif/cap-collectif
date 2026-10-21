@@ -15,8 +15,7 @@ class QueryProposalFromSlugResolver implements QueryInterface
     public function __construct(
         private readonly ProposalRepository $repository,
         private readonly ParticipantHelper $participantHelper
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args, $viewer): ?Proposal
     {

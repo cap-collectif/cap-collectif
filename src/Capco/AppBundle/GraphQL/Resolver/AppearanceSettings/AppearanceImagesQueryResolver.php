@@ -7,9 +7,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class AppearanceImagesQueryResolver implements QueryInterface
 {
-    public function __construct(private readonly SiteImageRepository $repository)
-    {
-    }
+    public function __construct(private readonly SiteImageRepository $repository) {}
 
     /** @return array<int, object> */
     public function __invoke(): array

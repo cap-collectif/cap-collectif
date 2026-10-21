@@ -14,8 +14,7 @@ class PostAdminUrlResolver implements QueryInterface
     public function __construct(
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly RequestStack $requestStack
-    ) {
-    }
+    ) {}
 
     public function __invoke(Post $post): string
     {

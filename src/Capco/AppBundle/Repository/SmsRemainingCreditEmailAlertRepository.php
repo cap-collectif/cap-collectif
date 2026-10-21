@@ -11,6 +11,4 @@ use Doctrine\ORM\EntityRepository;
  * @method SmsRemainingCreditEmailAlert[]    findAll()
  * @method SmsRemainingCreditEmailAlert[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class SmsRemainingCreditEmailAlertRepository extends EntityRepository
-{
-}
+class SmsRemainingCreditEmailAlertRepository extends EntityRepository {}

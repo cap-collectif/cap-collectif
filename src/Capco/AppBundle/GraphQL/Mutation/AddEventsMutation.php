@@ -166,8 +166,7 @@ class AddEventsMutation extends AbstractEventMutation
                     }
 
                     foreach (
-                        $this->localeRepository->findEnabledLocalesCodes()
-                        as $availableLocale
+                        $this->localeRepository->findEnabledLocalesCodes() as $availableLocale
                     ) {
                         if (isset($eventInput['translations'][$availableLocale])) {
                             $translation = new EventTranslation();

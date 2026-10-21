@@ -12,6 +12,13 @@ final class ConnectionBuilder implements ConnectionBuilderInterface
     {
         $connectionBuilder = new ParentBuilder();
         $emptyConnection = $connectionBuilder->connectionFromArray([], new Argument([]));
+        if ($extraFields) {
+            $edges = $emptyConnection->getEdges();
+            $emptyConnection = new ExtraFieldsConnection(
+                \is_array($edges) ? $edges : iterator_to_array($edges, false),
+                $emptyConnection->getPageInfo()
+            );
+        }
         $emptyConnection->setTotalCount(0);
 
         foreach ($extraFields as $key => $value) {

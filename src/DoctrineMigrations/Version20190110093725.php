@@ -20,7 +20,5 @@ final class Version20190110093725 extends AbstractMigration
         $this->connection->delete('menu_item', ['link' => 'confidentialite']);
     }
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 }

@@ -28,8 +28,7 @@ class StepContributorResolver implements QueryInterface
         private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository,
         private readonly SelectionStepContributorSearch $selectionStepContributorSearch,
         private readonly QuestionnaireResultsAccessResolver $resultsAccess
-    ) {
-    }
+    ) {}
 
     public function __invoke(AbstractStep $step, Arg $args, ?User $viewer = null, ?\ArrayObject $context = null): ConnectionInterface
     {

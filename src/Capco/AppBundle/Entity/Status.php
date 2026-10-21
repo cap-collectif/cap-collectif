@@ -19,7 +19,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="status")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\StatusRepository")
+ *
  * @ORM\HasLifecycleCallbacks()
  */
 class Status implements EntityInterface, \Stringable
@@ -51,7 +53,9 @@ class Status implements EntityInterface, \Stringable
 
     /**
      * @var \DateTime
+     *
      * @Gedmo\Timestampable(on="change", field={"name"})
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     protected $updatedAt;
@@ -60,6 +64,7 @@ class Status implements EntityInterface, \Stringable
      * @var string
      *
      * @ORM\Column(name="name", type="string")
+     *
      * @Assert\NotBlank()
      */
     private $name;
@@ -69,7 +74,9 @@ class Status implements EntityInterface, \Stringable
      * This should have a conflict with the defaultStatus relation.
      *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep", inversedBy="statuses")
+     *
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=true)
+     *
      * @CapcoAssert\IsCollectOrSelectionStep()
      */
     private $step;

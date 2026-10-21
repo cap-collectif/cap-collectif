@@ -17,8 +17,7 @@ class FeatureChecker
         private readonly Oauth2SSOConfigurationRepository $oauth2SSOConfigurationRepository,
         private readonly FacebookSSOConfigurationRepository $facebookSSOConfigurationRepository,
         private readonly Manager $manager
-    ) {
-    }
+    ) {}
 
     public function isServiceEnabled(string $service): bool
     {

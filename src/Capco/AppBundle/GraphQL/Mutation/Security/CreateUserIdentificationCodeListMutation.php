@@ -19,8 +19,7 @@ class CreateUserIdentificationCodeListMutation implements MutationInterface
     public function __construct(
         private readonly EntityManagerInterface $em,
         private readonly UserIdentificationCodeRepository $codeRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

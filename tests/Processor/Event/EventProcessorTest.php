@@ -11,8 +11,11 @@ use Swarrot\Broker\Message;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status legacy
+ *
  * @phpunit-reason Exercises deprecated Swarrot processors directly; migrate the behavior to the HTTP or CLI
  * action and the supported message architecture.
  */
@@ -56,6 +59,7 @@ class EventProcessorTest extends MailerSnapshotCommandTestCase
             'event-needing-examination-new',
             'notifyAdminOfNewEvent.html',
         ];
+
         yield 'updated event for administrators' => [
             EventUpdateProcessor::class,
             ['eventId' => 'event5'],
@@ -63,6 +67,7 @@ class EventProcessorTest extends MailerSnapshotCommandTestCase
             'event-needing-examination-new',
             'notifyAdminOfEditedEvent.html',
         ];
+
         yield 'deleted event for administrators' => [
             EventDeleteProcessor::class,
             self::deletedEventPayload(),
@@ -70,6 +75,7 @@ class EventProcessorTest extends MailerSnapshotCommandTestCase
             'event-deleted-notification-new',
             'notifyAdminOfDeletedEvent.html',
         ];
+
         yield 'deleted event for participant' => [
             EventDeleteProcessor::class,
             self::deletedEventPayload(),
@@ -77,6 +83,7 @@ class EventProcessorTest extends MailerSnapshotCommandTestCase
             'event-canceled-notification-new',
             'notifyParticipantOfDeletedEvent.html',
         ];
+
         yield 'deleted event for registered participant' => [
             EventDeleteProcessor::class,
             self::deletedEventPayload(),
@@ -84,6 +91,7 @@ class EventProcessorTest extends MailerSnapshotCommandTestCase
             'event-canceled-notification-new',
             'notifyRegisteredParticipantOfDeletedEvent.html',
         ];
+
         yield 'approved event review' => [
             EventReviewProcessor::class,
             ['eventId' => 'eventCreateByAUserReviewApproved'],
@@ -91,6 +99,7 @@ class EventProcessorTest extends MailerSnapshotCommandTestCase
             'event-approved-new',
             'notifyUserReviewedEventApproved.html',
         ];
+
         yield 'approved English event review' => [
             EventReviewProcessor::class,
             ['eventId' => 'eventCreateByAUserReviewApprovedEn'],
@@ -98,6 +107,7 @@ class EventProcessorTest extends MailerSnapshotCommandTestCase
             'event-approved-new',
             'notifyUserReviewedEventApprovedEnglish.html',
         ];
+
         yield 'refused event review' => [
             EventReviewProcessor::class,
             ['eventId' => 'eventCreateByAUserReviewRefused'],
@@ -105,6 +115,7 @@ class EventProcessorTest extends MailerSnapshotCommandTestCase
             'event-refused-new',
             'notifyUserReviewedEventRefused.html',
         ];
+
         yield 'refused English event review' => [
             EventReviewProcessor::class,
             ['eventId' => 'eventCreateByAUserReviewRefusedEn'],

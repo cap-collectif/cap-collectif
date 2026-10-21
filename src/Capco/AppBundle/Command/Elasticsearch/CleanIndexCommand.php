@@ -108,7 +108,7 @@ class CleanIndexCommand extends Command
         if (self::ACTIONS['keep'] === $action) {
             $io->block('A TOTAL OF ' . $countIndices . $wordingIndices . ' were kept!', null, 'bg=' . $color);
             $io->block('INDEX LIVE: ' . $indices[0], 'KEEP', 'bg=green', ' ', true);
-            $countIndices = $countIndices - 1;
+            --$countIndices;
             unset($indices[0]);
         }
 

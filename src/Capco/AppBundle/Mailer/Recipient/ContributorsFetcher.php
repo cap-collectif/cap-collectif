@@ -11,13 +11,12 @@ class ContributorsFetcher
 {
     public function __construct(
         private readonly EntityManagerInterface $em,
-    ) {
-    }
+    ) {}
 
     /**
-     * @throws DBALException
-     *
      * @return array<int, array<string, ?string>>
+     *
+     * @throws DBALException
      */
     public function getRecipientDataFromRegistred(EmailingCampaign $emailingCampaign, ?int $limit = 1000): array
     {

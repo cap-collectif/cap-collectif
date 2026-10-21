@@ -18,8 +18,7 @@ class DeleteSmsOrderMutation implements MutationInterface
     public function __construct(
         private readonly EntityManagerInterface $em,
         private readonly GlobalIdResolver $globalIdResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

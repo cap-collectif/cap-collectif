@@ -17,8 +17,11 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Calls the resolver directly instead of proving the exposed GraphQL contract through HTTP.
  */
 class QueryUsersResolverTest extends TestCase
@@ -70,10 +73,11 @@ class QueryUsersResolverTest extends TestCase
         );
     }
 
-    /** @return iterable<string, array{bool, list<bool|null>}> */
+    /** @return iterable<string, array{bool, list<null|bool>}> */
     public static function privacyFilterAccessProvider(): iterable
     {
         yield 'anonymous' => [false, [false, false, null, null, null]];
+
         yield 'administrator' => [true, [true, true, false, true, true]];
     }
 }

@@ -22,8 +22,7 @@ class OrganizationController extends AbstractController
         private readonly EntityManagerInterface $em,
         private readonly LoggerInterface $logger,
         private readonly LoginManagerInterface $loginManager
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/invitation/organization/{token}", name="capco_app_organization_invitation", options={"i18n" = false})

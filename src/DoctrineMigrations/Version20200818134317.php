@@ -55,9 +55,7 @@ final class Version20200818134317 extends AbstractMigration implements Container
         }
     }
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 
     private function getDefaultLocale(): string
     {

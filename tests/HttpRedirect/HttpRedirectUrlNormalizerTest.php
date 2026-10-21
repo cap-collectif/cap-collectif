@@ -11,14 +11,17 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status reference
+ *
  * @phpunit-reason Exercises URL acceptance and canonicalization with real requests and restores the instance
  * environment variable.
  */
 class HttpRedirectUrlNormalizerTest extends TestCase
 {
-    private string|false $previousInstanceName;
+    private false|string $previousInstanceName;
 
     protected function setUp(): void
     {

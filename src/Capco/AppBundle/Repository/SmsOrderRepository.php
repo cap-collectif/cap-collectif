@@ -28,7 +28,8 @@ class SmsOrderRepository extends EntityRepository
         }
 
         return $qb
-            ->getQuery()->getResult();
+            ->getQuery()->getResult()
+        ;
     }
 
     public function countAll(?string $filter = null): int

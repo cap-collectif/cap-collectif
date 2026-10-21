@@ -12,8 +12,7 @@ class MediatorVotesResolver implements QueryInterface
 {
     public function __construct(
         private readonly ConnectionBuilderInterface $connectionBuilder
-    ) {
-    }
+    ) {}
 
     public function __invoke(Mediator $mediator, Argument $args): ConnectionInterface
     {

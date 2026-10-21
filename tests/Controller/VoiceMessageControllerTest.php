@@ -19,6 +19,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class VoiceMessageControllerTest extends TestCase
@@ -121,7 +122,9 @@ class VoiceMessageControllerTest extends TestCase
     public static function fileViewers(): \Generator
     {
         yield 'admin playback' => [true, false];
+
         yield 'admin download' => [true, true];
+
         yield 'non-admin denied' => [false, false];
     }
 }

@@ -66,12 +66,13 @@ class ProfileController extends Controller
         private readonly OrganizationRepository $organizationRepository,
         private readonly string $fireWall,
         private readonly string $projectDir
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/edit-profile", name="capco_profile_edit")
+     *
      * @Template("@CapcoUser/Profile/edit_profile.html.twig")
+     *
      * @Security("is_granted('ROLE_USER')")
      */
     public function editProfileAction()
@@ -81,6 +82,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/franceconnect/associate", name="capco_profile_franceconnect_associate", options={"i18n" = false})
+     *
      * @Security("is_granted('ROLE_USER')")
      */
     public function franceConnectAssociateAction(Request $request): RedirectResponse
@@ -110,6 +112,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/franceconnect/association-return", name="capco_profile_franceconnect_association_return", options={"i18n" = false})
+     *
      * @Security("is_granted('ROLE_USER')")
      */
     public function franceConnectAssociationReturnAction(Request $request): RedirectResponse
@@ -150,6 +153,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/download_archive", name="capco_profile_download_archive", options={"i18n" = false})
+     *
      * @Security("is_granted('ROLE_USER')")
      */
     public function downloadArchiveAction(Request $request)
@@ -210,6 +214,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/notifications/disable/{token}", name="capco_profile_notifications_disable", options={"i18n" = false})
+     *
      * @Security("is_granted('ROLE_USER')")
      */
     public function disableNotificationsAction(Request $request, string $token)
@@ -237,6 +242,7 @@ class ProfileController extends Controller
     /**
      * @Route("/", name="capco_user_profile_show", defaults={"_feature_flags" = "profiles"})
      * @Route("/{slug}", name="capco_user_profile_show_all", defaults={"_feature_flags" = "profiles"})
+     *
      * @Template("@CapcoUser/Profile/show.html.twig")
      */
     public function showAction(?string $slug = null)
@@ -272,6 +278,7 @@ class ProfileController extends Controller
     /**
      * @Route("/organization", name="capco_organization_profile_show", options={"i18n" = false})
      * @Route("/organization/{slug}", name="capco_organization_profile_show_all", options={"i18n" = false})
+     *
      * @Template("@CapcoUser/Organization/show.html.twig")
      */
     public function showOrganizationAction(?string $slug = null)
@@ -296,6 +303,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/{slug}/projects", name="capco_user_profile_show_projects", defaults={"_feature_flags" = "profiles"})
+     *
      * @Template("@CapcoUser/Profile/showUserProjects.html.twig")
      */
     public function showProjectsAction(User $user)
@@ -310,6 +318,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/{slug}/opinions", name="capco_user_profile_show_opinions", defaults={"_feature_flags" = "profiles"})
+     *
      * @Template("@CapcoUser/Profile/showUserOpinions.html.twig")
      *
      * @return array
@@ -326,6 +335,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/{slug}/versions", name="capco_user_profile_show_opinions_versions", defaults={"_feature_flags" = "profiles"})
+     *
      * @Template("@CapcoUser/Profile/showUserOpinionVersions.html.twig")
      */
     public function showOpinionVersionsAction(User $user)
@@ -337,6 +347,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/{slug}/proposals", name="capco_user_profile_show_proposals", defaults={"_feature_flags" = "profiles"})
+     *
      * @Template("@CapcoUser/Profile/showUserProposals.html.twig")
      */
     public function showProposalsAction(User $user)
@@ -351,6 +362,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/{slug}/replies", name="capco_user_profile_show_replies", defaults={"_feature_flags" = "profiles"})
+     *
      * @Template("@CapcoUser/Profile/showUserReplies.html.twig")
      */
     public function showRepliesAction(User $user)
@@ -367,6 +379,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/{slug}/arguments", name="capco_user_profile_show_arguments", defaults={"_feature_flags" = "profiles"})
+     *
      * @Template("@CapcoUser/Profile/showUserArguments.html.twig")
      */
     public function showArgumentsAction(User $user)
@@ -385,6 +398,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/{slug}/sources", name="capco_user_profile_show_sources", defaults={"_feature_flags" = "profiles"})
+     *
      * @Template("@CapcoUser/Profile/showUserSources.html.twig")
      */
     public function showSourcesAction(User $user)
@@ -402,6 +416,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/{slug}/comments", name="capco_user_profile_show_comments", defaults={"_feature_flags" = "profiles"})
+     *
      * @Template("@CapcoUser/Profile/showUserComments.html.twig")
      */
     public function showCommentsAction(User $user)
@@ -419,6 +434,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/{slug}/votes", name="capco_user_profile_show_votes", defaults={"_feature_flags" = "profiles"})
+     *
      * @Template("@CapcoUser/Profile/showUserVotes.html.twig")
      */
     public function showVotesAction(User $user)
@@ -433,6 +449,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/{slug}/events", name="capco_user_profile_show_events", defaults={"_feature_flags" = "profiles"})
+     *
      * @Template("@CapcoUser/Profile/showUserEvents.html.twig")
      */
     public function showEventsAction(User $user)
@@ -447,6 +464,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/delete-account/csrf-token", name="get_csrf_token", options={"i18n" = false})
+     *
      * @Security("is_granted('ROLE_USER')")
      */
     public function getCsrfToken(CsrfTokenManagerInterface $csrfTokenManager): JsonResponse
@@ -458,6 +476,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/deleteAccount/{type}", name="capco_profile_delete_account", options={"i18n" = false})
+     *
      * @Security("is_granted('ROLE_USER')")
      */
     public function deleteAccount(string $type, Request $request, CsrfTokenManagerInterface $csrfTokenManager): RedirectResponse

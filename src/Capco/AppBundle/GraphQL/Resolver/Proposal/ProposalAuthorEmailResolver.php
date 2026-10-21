@@ -17,8 +17,7 @@ class ProposalAuthorEmailResolver implements QueryInterface
     public function __construct(
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly Manager $manager
-    ) {
-    }
+    ) {}
 
     public function __invoke(Proposal $proposal): ?string
     {

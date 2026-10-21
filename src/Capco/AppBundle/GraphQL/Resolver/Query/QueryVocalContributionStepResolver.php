@@ -16,8 +16,7 @@ class QueryVocalContributionStepResolver implements QueryInterface
     public function __construct(
         private readonly CollectStepRepository $repository,
         private readonly Manager $manager
-    ) {
-    }
+    ) {}
 
     public function __invoke(mixed $viewer = null): ?CollectStep
     {

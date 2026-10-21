@@ -10,7 +10,6 @@ use Capco\AppBundle\Elasticsearch\AnalyticsTopContributors;
 use Capco\AppBundle\GraphQL\DataLoader\Query\QueryAnalyticsDataLoader;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Search\AnalyticsSearch;
-use DateTimeInterface;
 use Elastica\Multi\ResultSet;
 use GraphQL\Executor\Promise\Adapter\SyncPromiseAdapter;
 use GraphQL\Executor\Promise\Promise;
@@ -67,9 +66,9 @@ class QueryAnalyticsDataLoaderSpec extends ObjectBehavior
         $keys = [
             [
                 'startAt' => (new \DateTime('2022-02-23 10:55:30'))->format(
-                    DateTimeInterface::ATOM
+                    \DateTimeInterface::ATOM
                 ),
-                'endAt' => (new \DateTime('2022-10-31 23:59:00'))->format(DateTimeInterface::ATOM),
+                'endAt' => (new \DateTime('2022-10-31 23:59:00'))->format(\DateTimeInterface::ATOM),
                 'projectId' => null,
                 'requestedFields' => ['registrations', 'votes'],
                 'topContributorsCount' => 5,
@@ -120,9 +119,9 @@ class QueryAnalyticsDataLoaderSpec extends ObjectBehavior
         $keys = [
             [
                 'startAt' => (new \DateTime('2022-02-23 10:55:30'))->format(
-                    DateTimeInterface::ATOM
+                    \DateTimeInterface::ATOM
                 ),
-                'endAt' => (new \DateTime('2022-10-31 23:59:00'))->format(DateTimeInterface::ATOM),
+                'endAt' => (new \DateTime('2022-10-31 23:59:00'))->format(\DateTimeInterface::ATOM),
                 'projectId' => null,
                 'requestedFields' => ['visitors'],
                 'topContributorsCount' => 5,
@@ -171,9 +170,9 @@ class QueryAnalyticsDataLoaderSpec extends ObjectBehavior
         $keys = [
             [
                 'startAt' => (new \DateTime('2022-02-23 10:55:30'))->format(
-                    DateTimeInterface::ATOM
+                    \DateTimeInterface::ATOM
                 ),
-                'endAt' => (new \DateTime('2022-10-31 23:59:00'))->format(DateTimeInterface::ATOM),
+                'endAt' => (new \DateTime('2022-10-31 23:59:00'))->format(\DateTimeInterface::ATOM),
                 'projectId' => null,
                 'requestedFields' => ['visitors'],
                 'topContributorsCount' => 5,
@@ -225,9 +224,9 @@ class QueryAnalyticsDataLoaderSpec extends ObjectBehavior
         $keys = [
             [
                 'startAt' => (new \DateTime('2022-02-23 10:55:30'))->format(
-                    DateTimeInterface::ATOM
+                    \DateTimeInterface::ATOM
                 ),
-                'endAt' => (new \DateTime('2022-10-31 23:59:00'))->format(DateTimeInterface::ATOM),
+                'endAt' => (new \DateTime('2022-10-31 23:59:00'))->format(\DateTimeInterface::ATOM),
                 'projectId' => null,
                 'requestedFields' => ['trafficSources'],
                 'topContributorsCount' => 5,

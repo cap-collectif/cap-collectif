@@ -10,14 +10,18 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+ *
  * @ORM\Table(name="classification__category")
+ *
  * @ORM\HasLifecycleCallbacks
  */
 class Category implements EntityInterface, \Stringable
 {
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue
+     *
      * @ORM\Column(type="integer")
      */
     protected int $id;
@@ -64,18 +68,21 @@ class Category implements EntityInterface, \Stringable
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Category", inversedBy="children", cascade={"persist", "remove"})
+     *
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     protected ?Category $parent = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media")
+     *
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
      */
     protected ?Media $media = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Context")
+     *
      * @ORM\JoinColumn(name="context", referencedColumnName="id", nullable=true)
      */
     protected ?Context $context = null;

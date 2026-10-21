@@ -12,8 +12,7 @@ class UserInviteEmailMessageStatusCheckProcessor implements ProcessorInterface
     public function __construct(
         private readonly UserInviteEmailMessageRepository $repository,
         private readonly UserInviteEmailMessageNotifier $notifier
-    ) {
-    }
+    ) {}
 
     public function process(Message $message, array $options): bool
     {

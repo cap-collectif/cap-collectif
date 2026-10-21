@@ -63,8 +63,7 @@ class CreateProposalMutation implements MutationInterface
         protected readonly ParticipantRepository $participantRepository,
         protected readonly ProjectParticipantsTotalCountCacheHandler $participantsTotalCountCacheHandler,
         protected readonly TokenGeneratorInterface $tokenGenerator,
-    ) {
-    }
+    ) {}
 
     /**
      * @throws \JsonException

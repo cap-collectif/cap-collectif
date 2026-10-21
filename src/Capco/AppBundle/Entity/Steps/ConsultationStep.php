@@ -21,6 +21,7 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Consultation", mappedBy="step", cascade={"persist"})
+     *
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $consultations;

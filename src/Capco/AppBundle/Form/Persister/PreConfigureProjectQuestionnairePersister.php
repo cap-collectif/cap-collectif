@@ -23,8 +23,7 @@ class PreConfigureProjectQuestionnairePersister
         private readonly AbstractQuestionRepository $abstractQuestionRepository,
         private readonly CreateQuestionnaireMutation $createQuestionnaireMutation,
         private readonly UpdateQuestionnaireConfigurationMutation $updateQuestionnaireConfigurationMutation
-    ) {
-    }
+    ) {}
 
     public function addQuestionnaire(
         array $questionnairesInput,
@@ -102,6 +101,7 @@ class PreConfigureProjectQuestionnairePersister
 
         foreach ($questionsWithJumps as $questionsWithJump) {
             $title = $questionsWithJump['title'];
+
             /** * @var MultipleChoiceQuestion $question */
             $question = $this->abstractQuestionRepository->findOneByQuestionnaireAndTitle(
                 $questionnaire,

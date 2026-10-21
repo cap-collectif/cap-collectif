@@ -79,6 +79,7 @@ class UpdateAnonymousReplyMutation extends ReplyMutation implements MutationInte
         if (!$participant) {
             throw new UserError('Participant not found.');
         }
+
         /** * @var Reply $reply  */
         $reply = $this->globalIdResolver->resolve($replyId, $participant);
 

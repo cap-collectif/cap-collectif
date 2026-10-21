@@ -20,8 +20,7 @@ class UpdateCASSSOConfigurationMutation implements MutationInterface
     public function __construct(
         private readonly EntityManagerInterface $em,
         private readonly GlobalIdResolver $resolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {
@@ -56,7 +55,7 @@ class UpdateCASSSOConfigurationMutation implements MutationInterface
     private function getConfiguration(Argument $input, User $viewer): CASSSOConfiguration
     {
         $configuration = $this->resolver->resolve($input->offsetGet('id'), $viewer);
-        if (!($configuration instanceof CASSSOConfiguration)) {
+        if (!$configuration instanceof CASSSOConfiguration) {
             throw new UserError(self::CONFIGURATION_NOT_FOUND);
         }
 

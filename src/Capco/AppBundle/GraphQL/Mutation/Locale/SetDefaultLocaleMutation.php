@@ -17,15 +17,14 @@ class SetDefaultLocaleMutation implements MutationInterface
     public function __construct(
         private EntityManagerInterface $entityManager,
         private LocaleRepository $localeRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): array
     {
         $this->formatInput($args);
         $localeId = $args->offsetGet('id');
         $locale = $this->localeRepository->find($localeId);
-        if (!($locale instanceof Locale)) {
+        if (!$locale instanceof Locale) {
             throw new UserError("unknown locale : {$localeId}");
         }
         if (!$locale->isPublished()) {

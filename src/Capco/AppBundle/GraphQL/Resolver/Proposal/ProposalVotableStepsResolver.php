@@ -15,6 +15,7 @@ class ProposalVotableStepsResolver implements QueryInterface
         if ($collect && $collect->isVotable()) {
             $result[] = $collect;
         }
+
         /** @var Selection $selection */
         foreach ($proposal->getSelections() as $selection) {
             if ($selection->getStep()->isVotable()) {

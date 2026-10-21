@@ -19,8 +19,7 @@ class CommentListener
         private readonly EntityManagerInterface $em,
         private readonly TokenStorageInterface $tokenStorage,
         private readonly Manager $manager
-    ) {
-    }
+    ) {}
 
     public function postUpdate(LifecycleEventArgs $args): void
     {

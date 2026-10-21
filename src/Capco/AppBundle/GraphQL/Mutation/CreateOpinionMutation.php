@@ -47,8 +47,7 @@ class CreateOpinionMutation implements MutationInterface
         private readonly OpinionRepository $opinionRepository,
         private readonly Publisher $publisher,
         private readonly GlobalIdResolver $globalIdResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $viewer): array
     {

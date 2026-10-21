@@ -16,8 +16,7 @@ class ProjectTabTypeResolver implements QueryInterface
 {
     public function __construct(
         private readonly TypeResolver $typeResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(ProjectTab $projectTab): Type
     {

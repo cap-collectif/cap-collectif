@@ -44,8 +44,8 @@ final class Version20250310132930 extends AbstractMigration implements Container
             $participant = (new Participant())
                 ->setToken($token)
                 ->setEmail($anonReply['participant_email'])
-                ->setCreatedAt(new \Datetime($anonReply['created_at']))
-                ->setLastContributedAt(new \Datetime($anonReply['created_at']))
+                ->setCreatedAt(new \DateTime($anonReply['created_at']))
+                ->setLastContributedAt(new \DateTime($anonReply['created_at']))
             ;
             $tokens[] = $token;
             $this->em->persist($participant);
@@ -77,7 +77,5 @@ final class Version20250310132930 extends AbstractMigration implements Container
         $this->addSql('ALTER TABLE response DROP reply_anonymous_id');
     }
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 }

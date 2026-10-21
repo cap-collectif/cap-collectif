@@ -13,8 +13,7 @@ class ArgumentVotesResolver implements QueryInterface
 {
     public function __construct(
         private readonly VoteSearch $voteSearch
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $argument, ?Arg $args = null): ConnectionInterface
     {

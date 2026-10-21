@@ -32,8 +32,7 @@ class UpdateAnonymousProposalVotesMutation implements MutationInterface
         private readonly Indexer $indexer,
         private readonly ConnectionBuilder $connectionBuilder,
         private readonly ParticipantHelper $participantHelper
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input): array
     {

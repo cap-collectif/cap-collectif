@@ -25,8 +25,7 @@ class StarResponseMutation implements MutationInterface
         protected EntityManagerInterface $entityManager,
         protected GlobalIdResolver $globalIdResolver,
         protected Publisher $publisher
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $argument, User $viewer): array
     {
@@ -53,7 +52,7 @@ class StarResponseMutation implements MutationInterface
     protected function getResponse(Argument $argument, User $viewer): AbstractResponse
     {
         $response = $this->globalIdResolver->resolve($argument->offsetGet('responseId'), $viewer);
-        if (!($response instanceof AbstractResponse)) {
+        if (!$response instanceof AbstractResponse) {
             throw new UserError(self::RESPONSE_NOT_FOUND);
         }
 

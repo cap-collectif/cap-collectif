@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(
  *     name="anonymous_user_proposal_sms_vote"
  * )
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AnonymousUserProposalSmsVoteRepository")
  */
 class AnonymousUserProposalSmsVote implements EntityInterface
@@ -29,18 +30,21 @@ class AnonymousUserProposalSmsVote implements EntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal")
+     *
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private Proposal $proposal;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\SelectionStep")
+     *
      * @ORM\JoinColumn(name="selection_step_id", referencedColumnName="id", nullable=true)
      */
     private ?SelectionStep $selectionStep = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\CollectStep")
+     *
      * @ORM\JoinColumn(name="collect_step_id", referencedColumnName="id", nullable=true)
      */
     private ?CollectStep $collectStep = null;

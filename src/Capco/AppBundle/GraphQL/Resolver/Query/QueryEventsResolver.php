@@ -27,8 +27,7 @@ class QueryEventsResolver implements QueryInterface
         private LoggerInterface $logger,
         private QueryAnalyzer $queryAnalyzer,
         private readonly AuthorizationCheckerInterface $authorizationChecker
-    ) {
-    }
+    ) {}
 
     public function __invoke(
         Argument $args,

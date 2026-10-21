@@ -13,9 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
+ *
  * @ORM\Table(
  *  name="blog_post_translation",
  *  uniqueConstraints={
+ *
  *    @ORM\UniqueConstraint(
  *      name="translation_unique",
  *      columns={"translatable_id", "locale"}

@@ -15,8 +15,7 @@ class MediaExtension extends AbstractExtension
         private readonly string $routerRequestContextHost,
         private readonly MediaAccessResolver $mediaAccess,
         private ?string $assetsHost = null
-    ) {
-    }
+    ) {}
 
     public function getFunctions(): array
     {

@@ -18,6 +18,7 @@ use Gedmo\Timestampable\Timestampable;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AnalysisConfigurationRepository")
+ *
  * @ORM\Table(name="analysis_configuration")
  */
 class AnalysisConfiguration implements EntityInterface, Timestampable
@@ -29,18 +30,21 @@ class AnalysisConfiguration implements EntityInterface, Timestampable
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="analysisConfiguration")
+     *
      * @ORM\JoinColumn(nullable=false)
      */
     private ProposalForm $proposalForm;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Questionnaire", cascade={"persist"})
+     *
      * @ORM\JoinColumn(nullable=true, referencedColumnName="id")
      */
     private ?Questionnaire $evaluationForm = null;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep")
+     *
      * @ORM\JoinColumn(name="analysis_step", referencedColumnName="id", onDelete="SET NULL")
      */
     private ?AbstractStep $analysisStep = null;
@@ -57,12 +61,14 @@ class AnalysisConfiguration implements EntityInterface, Timestampable
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Status", cascade={"persist"})
+     *
      * @ORM\JoinColumn(nullable=true, name="favourable_status", onDelete="SET NULL")
      */
     private ?Status $favourableStatus = null;
 
     /**
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Status", cascade={"persist"})
+     *
      * @ORM\JoinTable(name="analysis_unfavourable_statuses",
      *      joinColumns={@ORM\JoinColumn(name="analysis_configuration_id", referencedColumnName="id", onDelete="CASCADE")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="status_id", referencedColumnName="id", onDelete="CASCADE")}
@@ -72,18 +78,21 @@ class AnalysisConfiguration implements EntityInterface, Timestampable
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\SelectionStep", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="selection_step", nullable=true, referencedColumnName="id", onDelete="SET NULL")
      */
     private ?SelectionStep $moveToSelectionStep = null;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Status", cascade={"persist"})
+     *
      * @ORM\JoinColumn(nullable=true, name="selection_step_status", onDelete="CASCADE")
      */
     private ?Status $selectionStepStatus = null;
 
     /**
      * @Gedmo\Timestampable(on="update")
+     *
      * @ORM\Column(type="datetime", name="updated_at")
      */
     private \DateTimeInterface $updatedAt;

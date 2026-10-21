@@ -31,8 +31,7 @@ class CreateMailingListMutation implements MutationInterface
         private readonly EntityManagerInterface $entityManager,
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly SettableOwnerResolver $settableOwnerResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

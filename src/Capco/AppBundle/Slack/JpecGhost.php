@@ -11,8 +11,7 @@ class JpecGhost extends AbstractSlackMessager
         private readonly ProjectAdminAlphaUrlResolver $projectAdminAlphaUrlResolver,
         private readonly ?string $hook,
         private readonly string $env
-    ) {
-    }
+    ) {}
 
     public function generateAndSendMessage(AnalysisConfigurationProcess $process)
     {

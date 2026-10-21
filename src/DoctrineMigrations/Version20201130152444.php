@@ -36,7 +36,7 @@ final class Version20201130152444 extends AbstractMigration implements Container
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        //create tables
+        // create tables
         $this->addSql(
             'CREATE TABLE official_response (
                 id CHAR(36) NOT NULL COMMENT \'(DC2Type:guid)\',
@@ -69,7 +69,7 @@ final class Version20201130152444 extends AbstractMigration implements Container
             'ALTER TABLE official_response_author ADD CONSTRAINT FK_7A80337A76ED395 FOREIGN KEY (user_id) REFERENCES fos_user (id) ON DELETE CASCADE'
         );
 
-        //add official response in proposal_decision (constraints are added in the postup).
+        // add official response in proposal_decision (constraints are added in the postup).
         $this->addSql(
             'ALTER TABLE proposal_decision ADD official_response_id CHAR(36) DEFAULT NULL COMMENT \'(DC2Type:guid)\''
         );
@@ -80,7 +80,7 @@ final class Version20201130152444 extends AbstractMigration implements Container
             '#CREATE UNIQUE INDEX UNIQ_65F782602E3F174A ON proposal_decision (official_response_id)'
         );
 
-        //proposaldecision.post is removed in Version20201203122444 postup.
+        // proposaldecision.post is removed in Version20201203122444 postup.
         $this->addSql('#ALTER TABLE proposal_decision DROP FOREIGN KEY FK_65F782604B89032C');
         $this->addSql('#DROP INDEX UNIQ_65F782604B89032C ON proposal_decision');
         $this->addSql('#ALTER TABLE proposal_decision DROP post_id');

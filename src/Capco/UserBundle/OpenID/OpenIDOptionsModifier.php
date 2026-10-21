@@ -16,8 +16,7 @@ class OpenIDOptionsModifier implements OptionsModifierInterface
         protected Oauth2SSOConfigurationRepository $oauthSsoConfigurationRepository,
         protected RedisCache $redisCache,
         protected Manager $toggleManager
-    ) {
-    }
+    ) {}
 
     public function modifyOptions(array $options, ResourceOwnerInterface $resourceOwner): array
     {

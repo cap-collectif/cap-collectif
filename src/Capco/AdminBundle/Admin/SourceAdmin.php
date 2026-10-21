@@ -159,7 +159,5 @@ class SourceAdmin extends AbstractAdmin
         ;
     }
 
-    protected function configureRoutes(RouteCollectionInterface $collection): void
-    {
-    }
+    protected function configureRoutes(RouteCollectionInterface $collection): void {}
 }

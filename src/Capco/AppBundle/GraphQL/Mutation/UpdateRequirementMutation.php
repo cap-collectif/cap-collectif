@@ -23,8 +23,7 @@ class UpdateRequirementMutation implements MutationInterface
         private readonly RequirementRepository $requirementRepository,
         private readonly UserRequirementRepository $userRequirementRepository,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $user): array
     {

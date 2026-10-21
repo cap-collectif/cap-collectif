@@ -19,8 +19,7 @@ class ImapClient
         private readonly string $login,
         private readonly string $password,
         private readonly int $port = 993,
-    ) {
-    }
+    ) {}
 
     public function getClient(): Client
     {

@@ -18,8 +18,7 @@ class LocalePrefixCanonicalRedirectSubscriber implements EventSubscriberInterfac
         private readonly Manager $toggleManager,
         private readonly LocaleRepository $localeRepository,
         private readonly LocalizedPathResolver $localizedPathResolver
-    ) {
-    }
+    ) {}
 
     public static function getSubscribedEvents(): array
     {

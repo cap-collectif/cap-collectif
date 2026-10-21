@@ -13,6 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * MenuItem.
  *
  * @ORM\Table(name="menu_item")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\MenuItemRepository")
  */
 class MenuItem implements EntityInterface, TranslatableInterface, \Stringable
@@ -29,8 +30,6 @@ class MenuItem implements EntityInterface, TranslatableInterface, \Stringable
     ];
 
     /**
-     * @var Page
-     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Page", inversedBy="MenuItems", cascade={"persist"})
      */
     private ?Page $Page = null;
@@ -57,7 +56,9 @@ class MenuItem implements EntityInterface, TranslatableInterface, \Stringable
 
     /**
      * @var int
+     *
      * @Gedmo\SortablePosition
+     *
      * @ORM\Column(name="position", type="integer")
      */
     private $position;
@@ -66,7 +67,9 @@ class MenuItem implements EntityInterface, TranslatableInterface, \Stringable
      * @var MenuItem
      *
      * @Gedmo\SortableGroup
+     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\MenuItem")
+     *
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $parent;
@@ -75,6 +78,7 @@ class MenuItem implements EntityInterface, TranslatableInterface, \Stringable
      * @var \DateTime
      *
      * @Gedmo\Timestampable(on="create")
+     *
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
@@ -83,18 +87,19 @@ class MenuItem implements EntityInterface, TranslatableInterface, \Stringable
      * @var \DateTime
      *
      * @Gedmo\Timestampable(on="change", field={"title", "link", "Page", "position", "parent", "menu"})
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
 
     /**
      * @var int
+     *
      * @ORM\Column(name="menu", type="integer")
      */
     private $menu;
 
     /**
-     * @var
      * @ORM\Column(name="associated_features", type="simple_array", nullable=true)
      */
     private $associatedFeatures;
@@ -253,10 +258,7 @@ class MenuItem implements EntityInterface, TranslatableInterface, \Stringable
         return $this->menu;
     }
 
-    /**
-     * @param $menu
-     */
-    public function setMenu($menu)
+    public function setMenu(mixed $menu)
     {
         $this->menu = $menu;
     }

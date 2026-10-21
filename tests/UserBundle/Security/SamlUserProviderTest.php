@@ -9,9 +9,13 @@ use Capco\UserBundle\Entity\User;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises SAML login through HTTP and reloads SQL effects; only the external SAML client is replaced.
  */
 final class SamlUserProviderTest extends SamlWebTestCase
@@ -133,7 +137,9 @@ final class SamlUserProviderTest extends SamlWebTestCase
     public static function accountStates(): iterable
     {
         yield 'new SAML account' => ['new'];
+
         yield 'local account with the same email' => ['email'];
+
         yield 'linked account with an updated email' => ['linked'];
     }
 
@@ -184,11 +190,17 @@ final class SamlUserProviderTest extends SamlWebTestCase
     public static function identityProviders(): iterable
     {
         yield 'development' => ['dev', 'email'];
+
         yield 'Grand Est' => ['grandest', 'email'];
+
         yield 'Lyon 1' => ['univ-lyon1', 'urn:oid:0.9.2342.19200300.100.1.3'];
+
         yield 'CD59' => ['cd59', 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
+
         yield 'April' => ['april', 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
+
         yield 'Clermont' => ['clermont', 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
+
         yield 'Sorbonne' => ['sorbonne', 'mail'];
     }
 }

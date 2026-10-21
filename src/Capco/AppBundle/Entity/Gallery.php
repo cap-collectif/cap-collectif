@@ -10,7 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+ *
  * @ORM\Table(name="media__gallery")
+ *
  * @ORM\HasLifecycleCallbacks
  */
 class Gallery implements EntityInterface
@@ -49,6 +51,7 @@ class Gallery implements EntityInterface
 
     /**
      * @var Collection<int, GalleryHasMedia>
+     *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\GalleryHasMedia", mappedBy="gallery")
      */
     private Collection $galleryHasMedias;

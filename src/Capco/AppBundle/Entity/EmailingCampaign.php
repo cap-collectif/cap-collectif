@@ -17,6 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=EmailingCampaignRepository::class)
+ *
  * @ORM\Table(name="emailing_campaign")
  */
 class EmailingCampaign implements EntityInterface, Ownerable, CreatableInterface
@@ -57,12 +58,14 @@ class EmailingCampaign implements EntityInterface, Ownerable, CreatableInterface
 
     /**
      * @ORM\ManyToOne(targetEntity=MailingList::class, inversedBy="emailingCampaigns")
+     *
      * @ORM\JoinColumn(nullable=true, name="mailing_list_id")
      */
     private ?MailingList $mailingList = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=Group::class, inversedBy="emailingCampaigns")
+     *
      * @ORM\JoinColumn(nullable=true, name="emailing_group")
      */
     private ?Group $emailingGroup = null;
@@ -74,6 +77,7 @@ class EmailingCampaign implements EntityInterface, Ownerable, CreatableInterface
 
     /**
      * @ORM\ManyToOne(targetEntity=Project::class, inversedBy="emailingCampaigns")
+     *
      * @ORM\JoinColumn(nullable=true, name="project_id")
      */
     private ?Project $project = null;

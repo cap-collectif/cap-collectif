@@ -12,8 +12,11 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Constrains internal search arguments and calls instead of testing project affiliations
  * through GraphQL HTTP.
  */

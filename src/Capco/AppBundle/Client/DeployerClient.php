@@ -8,8 +8,7 @@ class DeployerClient
         private readonly ?string $deployerBaseUrl,
         private readonly string $instanceName,
         private readonly string $token
-    ) {
-    }
+    ) {}
 
     public function updateCurrentDomain(string $customDomain): int
     {

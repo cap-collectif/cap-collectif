@@ -24,8 +24,7 @@ class AddCollectStepMutation implements MutationInterface
         private readonly TranslatorInterface $translator,
         private readonly EntityManagerInterface $em,
         private readonly Manager $toggleManager
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

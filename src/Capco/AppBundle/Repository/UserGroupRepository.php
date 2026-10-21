@@ -30,7 +30,7 @@ class UserGroupRepository extends EntityRepository
             ->groupBy('g.id')
             ->setFirstResult($offset)
             ->setMaxResults($limit)
-    ;
+        ;
 
         return $qb->getQuery()->getResult();
     }

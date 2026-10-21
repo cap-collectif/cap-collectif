@@ -16,9 +16,13 @@ use Symfony\Component\BrowserKit\Cookie;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises attachment authorization over HTTP with transactional fixtures, without reading uploaded files.
  */
 final class MediaResponseDownloadTest extends IdentityWebTestCase
@@ -99,17 +103,29 @@ final class MediaResponseDownloadTest extends IdentityWebTestCase
     public static function questionnaireViewers(): iterable
     {
         yield 'anonymous on legacy public question' => ['anonymous', false, false];
+
         yield 'anonymous on private question' => ['anonymous', true, false];
+
         yield 'unrelated signed-in user' => ['other user', false, false];
+
         yield 'author of a draft' => ['author', true, true];
+
         yield 'questionnaire manager' => ['manager', true, true];
+
         yield 'administrator' => ['administrator', true, true];
+
         yield 'participant owns reply' => ['participant', false, true];
+
         yield 'exact reply cookie' => ['reply cookie', true, true];
+
         yield 'cookie for another reply' => ['different reply cookie', false, false];
+
         yield 'invalid participant cannot fall back' => ['invalid participant with reply cookie', false, false];
+
         yield 'other participant overrides reply cookie' => ['other participant with reply cookie', false, false];
+
         yield 'signed-in outsider ignores participant cookie' => ['other user with participant cookie', false, false];
+
         yield 'signed-in author ignores invalid participant cookie' => ['author with invalid cookie', true, true];
     }
 
@@ -154,7 +170,9 @@ final class MediaResponseDownloadTest extends IdentityWebTestCase
     public static function proposalViewers(): iterable
     {
         yield 'public proposal attachment' => ['anonymous', false, true];
+
         yield 'private proposal attachment denied' => ['anonymous', true, false];
+
         yield 'private proposal attachment author' => ['author', true, true];
     }
 

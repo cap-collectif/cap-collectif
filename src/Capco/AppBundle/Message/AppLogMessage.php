@@ -11,8 +11,7 @@ class AppLogMessage
         private readonly ?string $entityType,
         private readonly ?string $entityId,
         private readonly ?string $ip
-    ) {
-    }
+    ) {}
 
     public function getUserId(): string
     {

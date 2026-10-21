@@ -10,8 +10,7 @@ final class ExportReadyEmailMessage
         private readonly ?string $username,
         private readonly ?string $userLocale,
         private readonly ?string $fileName,
-    ) {
-    }
+    ) {}
 
     public function getUserEmail(): string
     {

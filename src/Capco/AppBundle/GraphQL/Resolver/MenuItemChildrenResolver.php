@@ -10,8 +10,7 @@ class MenuItemChildrenResolver implements QueryInterface
 {
     public function __construct(
         private readonly MenuItemRepository $menuItemRepository
-    ) {
-    }
+    ) {}
 
     /**
      * @return array<MenuItem>

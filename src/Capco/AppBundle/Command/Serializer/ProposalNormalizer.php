@@ -63,6 +63,7 @@ class ProposalNormalizer extends BaseNormalizer implements NormalizerInterface
         $media = $object->getMedia();
         $author = $object->getAuthor();
         $statusName = $object->getStatus()?->getName();
+
         /** @var CollectStep|SelectionStep $step */
         $step = $context['step'];
 
@@ -91,7 +92,8 @@ class ProposalNormalizer extends BaseNormalizer implements NormalizerInterface
                 ->map(fn (ProposalStepPaperVoteCounter $paperVoteCounter) => [
                     'totalPaperCount' => $paperVoteCounter->getTotalCount(),
                     'totalPaperPointsCount' => $paperVoteCounter->getTotalPointsCount(),
-                ])->getValues();
+                ])->getValues()
+            ;
 
             $totalPaperCount = array_sum(array_column($paperVotes, 'totalPaperCount'));
             $totalPaperPointsCount = array_sum(array_column($paperVotes, 'totalPaperPointsCount'));

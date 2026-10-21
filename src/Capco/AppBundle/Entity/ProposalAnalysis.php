@@ -19,7 +19,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalAnalysisRepository")
+ *
  * @ORM\Table(name="proposal_analysis")
+ *
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="reply.missing_required_responses", formField="evaluationForm")
  */
 class ProposalAnalysis implements EntityInterface, Timestampable, \Stringable
@@ -30,12 +32,14 @@ class ProposalAnalysis implements EntityInterface, Timestampable, \Stringable
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="analyses")
+     *
      * @ORM\JoinColumn(nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
     private Proposal $proposal;
 
     /**
      * @ORM\Column(type="string", nullable=false)
+     *
      * @Assert\Choice(choices = {"IN_PROGRESS", "TOO_LATE", "FAVOURABLE", "UNFAVOURABLE", "NONE"})
      */
     private string $state = ProposalStatementState::IN_PROGRESS;
@@ -45,16 +49,18 @@ class ProposalAnalysis implements EntityInterface, Timestampable, \Stringable
      */
     private Collection $responses;
 
-    //TODO: Rename to analyst.
+    // TODO: Rename to analyst.
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(name="updated_by", nullable=true, referencedColumnName="id")
      */
     private ?User $updatedBy = null;
 
     /**
      * @Gedmo\Timestampable(on="update")
+     *
      * @ORM\Column(type="datetime", name="updated_at")
      */
     private $updatedAt;

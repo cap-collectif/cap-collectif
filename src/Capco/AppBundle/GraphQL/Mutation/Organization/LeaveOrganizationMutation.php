@@ -21,8 +21,7 @@ class LeaveOrganizationMutation implements MutationInterface
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly EntityManagerInterface $entityManager,
         private readonly OrganizationMemberRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $viewer): array
     {

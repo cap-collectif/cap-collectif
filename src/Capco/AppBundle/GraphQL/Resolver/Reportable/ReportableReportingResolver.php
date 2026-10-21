@@ -20,8 +20,7 @@ class ReportableReportingResolver implements QueryInterface
     public function __construct(
         private readonly ReportingRepository $repository,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Contribution $contribution, Argument $arguments): Connection
     {

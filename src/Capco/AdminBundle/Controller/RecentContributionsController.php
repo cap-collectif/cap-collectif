@@ -15,7 +15,9 @@ class RecentContributionsController extends Controller
 {
     /**
      * @Security("is_granted('ROLE_ADMIN')")
+     *
      * @Route("/admin/contributions", name="capco_admin_contributions_index")
+     *
      * @Template("@CapcoAdmin/RecentContributions/index.html.twig")
      */
     public function indexAction()
@@ -33,7 +35,9 @@ class RecentContributionsController extends Controller
 
     /**
      * @Security("is_granted('ROLE_ADMIN')")
+     *
      * @Route("/admin/contributions/{type}/{id}", name="capco_admin_contributions_show")
+     *
      * @Template("@CapcoAdmin/RecentContributions/show.html.twig")
      */
     public function showAction(mixed $type, mixed $id)
@@ -56,6 +60,7 @@ class RecentContributionsController extends Controller
 
     /**
      * @Security("is_granted('ROLE_ADMIN')")
+     *
      * @Route("/admin/contributions/{type}/{id}/validate", name="capco_admin_contributions_validate")
      */
     public function validateAction(mixed $type, mixed $id)
@@ -80,6 +85,7 @@ class RecentContributionsController extends Controller
 
     /**
      * @Security("is_granted('ROLE_ADMIN')")
+     *
      * @Route("/admin/contributions/{type}/{id}/unpublish", name="capco_admin_contributions_unpublish")
      */
     public function unpublishAction(Request $request, mixed $type, mixed $id)
@@ -122,6 +128,7 @@ class RecentContributionsController extends Controller
 
     /**
      * @Security("is_granted('ROLE_ADMIN')")
+     *
      * @Route("/admin/contributions/{type}/{id}/trash", name="capco_admin_contributions_trash")
      */
     public function trashAction(Request $request, mixed $type, mixed $id)

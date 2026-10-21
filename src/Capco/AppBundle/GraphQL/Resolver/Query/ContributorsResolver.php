@@ -13,8 +13,7 @@ class ContributorsResolver implements QueryInterface
 {
     public function __construct(
         private readonly UserRepository $userRepository
-    ) {
-    }
+    ) {}
 
     /**
      * @return Connection|Promise

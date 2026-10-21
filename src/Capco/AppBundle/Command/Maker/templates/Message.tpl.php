@@ -2,17 +2,19 @@
 
 namespace Capco\AppBundle\Mailer\Message<?php if (
     isset($command_entity_name)
-) { ?>\<?php echo $command_entity_name; } ?>;
+) { ?>\<?php echo $command_entity_name;
+} ?>;
 
 use Capco\AppBundle\Mailer\Message\<?php echo $command_message_type; ?>;<?php echo \PHP_EOL; ?>
 <?php if (
     isset($command_related_entity_fqcn)
-) { ?>use <?php echo $command_related_entity_fqcn; ?>;<?php echo \PHP_EOL; } ?>
+) { ?>use <?php echo $command_related_entity_fqcn; ?>;<?php echo \PHP_EOL;
+} ?>
 <?php echo \PHP_EOL; ?>
 final class <?php echo $command_class_name; ?> extends <?php
  echo $command_message_type;
- echo \PHP_EOL;
- ?>
+echo \PHP_EOL;
+?>
 {
     public static function create(
 <?php if (isset($command_entity_name, $command_related_entity_fqcn)) { ?>
@@ -39,9 +41,9 @@ final class <?php echo $command_class_name; ?> extends <?php
         $<?php echo $subject_var; ?>,<?php echo \PHP_EOL; ?>
 <?php } else { ?>
         $<?php
-        echo $subject_var;
-        echo \PHP_EOL;
-        ?>
+       echo $subject_var;
+            echo \PHP_EOL;
+            ?>
 <?php } ?>
 <?php } ?>
 <?php } ?>
@@ -55,8 +57,8 @@ final class <?php echo $command_class_name; ?> extends <?php
 <?php } else { ?>
             '{<?php echo $subject_var; ?>}' => $<?php
 echo $subject_var;
-echo \PHP_EOL;
-?>
+                echo \PHP_EOL;
+                ?>
 <?php } ?>
 <?php } ?>
 <?php } ?>
@@ -69,9 +71,9 @@ echo \PHP_EOL;
         $<?php echo $template_var; ?>,<?php echo \PHP_EOL; ?>
 <?php } else { ?>
         $<?php
-        echo $template_var;
-        echo \PHP_EOL;
-        ?>
+                        echo $template_var;
+            echo \PHP_EOL;
+            ?>
 <?php } ?>
 <?php } ?>
 <?php } ?>
@@ -82,19 +84,19 @@ echo \PHP_EOL;
 <?php foreach ($command_template_vars as $template_var) { ?>
 <?php if (next($command_template_vars)) { ?>
             '<?php
-            if (!$command_is_twig_template) { ?>{<?php }
-            echo $template_var;
-            if (!$command_is_twig_template) { ?>}<?php }
-            ?>' => $<?php echo $template_var; ?>,<?php echo \PHP_EOL; ?>
+                if (!$command_is_twig_template) { ?>{<?php }
+                echo $template_var;
+    if (!$command_is_twig_template) { ?>}<?php }
+    ?>' => $<?php echo $template_var; ?>,<?php echo \PHP_EOL; ?>
 <?php } else { ?>
             '<?php
-            if (!$command_is_twig_template) { ?>{<?php }
-            echo $template_var;
-            if (!$command_is_twig_template) { ?>}<?php }
-            ?>' => $<?php
+    if (!$command_is_twig_template) { ?>{<?php }
+    echo $template_var;
+        if (!$command_is_twig_template) { ?>}<?php }
+        ?>' => $<?php
 echo $template_var;
-echo \PHP_EOL;
-?>
+        echo \PHP_EOL;
+        ?>
 <?php } ?>
 <?php } ?>
 <?php } ?>

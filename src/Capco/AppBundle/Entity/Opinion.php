@@ -30,12 +30,17 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="opinion", indexes={
+ *
  *     @ORM\Index(name="idx_enabled", columns={"id", "published"}),
  *     @ORM\Index(name="idx_author", columns={"id", "author_id"})
  * })
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionRepository")
+ *
  * @ORM\HasLifecycleCallbacks()
+ *
  * @CapcoAssert\AppendicesCorrespondToOpinionType()
+ *
  * @CapcoAssert\HasAuthor()
  */
 class Opinion implements EntityInterface, OpinionContributionInterface, DisplayableInBOInterface, ExportableContributionInterface, \Stringable
@@ -66,6 +71,7 @@ class Opinion implements EntityInterface, OpinionContributionInterface, Displaya
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "body", "appendices"})
+     *
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     protected $updatedAt;
@@ -77,18 +83,21 @@ class Opinion implements EntityInterface, OpinionContributionInterface, Displaya
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="opinions")
+     *
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     protected ?User $author = null;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Source", mappedBy="opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
+     *
      * @ORM\OrderBy({"updatedAt" = "DESC"})
      */
     protected $sources;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Argument", mappedBy="opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
+     *
      * @ORM\OrderBy({"updatedAt" = "DESC"})
      */
     protected $arguments;
@@ -115,19 +124,23 @@ class Opinion implements EntityInterface, OpinionContributionInterface, Displaya
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionType", inversedBy="Opinions", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="opinion_type_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     private $OpinionType;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Consultation", inversedBy="opinions", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="consultation_id", referencedColumnName="id")
+     *
      * @Assert\NotNull()
      */
     private $consultation;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionVersion", mappedBy="parent", cascade={"persist", "remove"}, orphanRemoval=true)
+     *
      * @ORM\OrderBy({"updatedAt" = "DESC"})
      */
     private $versions;

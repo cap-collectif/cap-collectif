@@ -16,6 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=UserInviteRepository::class)
+ *
  * @ORM\Table(name="user_invite")
  */
 class UserInvite implements EntityInterface, Expirable, Invitation
@@ -46,6 +47,7 @@ class UserInvite implements EntityInterface, Expirable, Invitation
 
     /**
      * @ORM\ManyToMany(targetEntity=Group::class, inversedBy="userInvites")
+     *
      * @ORM\JoinTable(name="user_invite_groups",
      *  joinColumns={@ORM\JoinColumn(name="user_invite_id", referencedColumnName="id", onDelete="CASCADE")},
      *  inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id", onDelete="CASCADE")}
@@ -70,6 +72,7 @@ class UserInvite implements EntityInterface, Expirable, Invitation
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Organization\Organization")
+     *
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private ?Organization $organization = null;

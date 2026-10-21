@@ -14,12 +14,8 @@ class DynamicRelationSubscriber implements EventSubscriber
 {
     public function __construct(
         private readonly array $traits
-    ) {
-    }
+    ) {}
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSubscribedEvents(): array
     {
         return ['loadClassMetadata'];

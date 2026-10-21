@@ -9,8 +9,11 @@ use Symfony\Component\Finder\Finder;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Uses shared export paths without failure-safe final cleanup; fixture changes, where used,
  * are restored only after successful assertions.
  */
@@ -80,8 +83,10 @@ class ExportCollectAndSelectionVotesCommandTest extends KernelTestCase
         }
 
         $doctrine = self::getContainer()->get('doctrine');
+
         /** @var array<int, CollectStep> $collectSteps */
         $collectSteps = $doctrine->getRepository(CollectStep::class)->findWithVotes();
+
         /** @var array<int, SelectionStep> $selectionSteps */
         $selectionSteps = $doctrine->getRepository(SelectionStep::class)->findWithVotes();
 

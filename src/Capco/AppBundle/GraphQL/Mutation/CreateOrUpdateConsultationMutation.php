@@ -36,8 +36,7 @@ class CreateOrUpdateConsultationMutation implements MutationInterface
         private readonly OpinionTypeRepository $opinionTypeRepository,
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly ActionLogger $actionLogger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

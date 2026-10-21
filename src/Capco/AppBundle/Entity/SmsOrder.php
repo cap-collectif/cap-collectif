@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="sms_order")
+ *
  * @ORM\Entity(repositoryClass=SmsOrderRepository::class)
  */
 class SmsOrder implements EntityInterface

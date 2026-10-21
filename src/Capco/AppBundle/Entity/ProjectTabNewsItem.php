@@ -11,9 +11,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity()
+ *
  * @ORM\Table(
  *     name="project_tab_news_item",
  *     uniqueConstraints={
+ *
  *         @ORM\UniqueConstraint(name="project_tab_news_item_unique", columns={"project_tab_id", "post_id"})
  *     }
  * )
@@ -25,15 +27,20 @@ class ProjectTabNewsItem implements EntityInterface
 
     /**
      * @Gedmo\SortableGroup
+     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProjectTabNews", inversedBy="newsItems", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="project_tab_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     *
      * @Assert\NotNull()
      */
     private ?ProjectTabNews $projectTab = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Post", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="post_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     *
      * @Assert\NotNull()
      */
     private ?Post $post = null;

@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="logic_jump")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\LogicJumpRepository")
  */
 class LogicJump implements EntityInterface
@@ -21,18 +22,21 @@ class LogicJump implements EntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion", inversedBy="jumps")
+     *
      * @ORM\JoinColumn(nullable=false)
      */
     protected $origin;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion", cascade={"persist"})
+     *
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
     protected $destination;
 
     /**
      * @ORM\OneToMany(targetEntity="AbstractLogicJumpCondition", mappedBy="jump", cascade={"persist", "remove"}, orphanRemoval=true)
+     *
      * @ORM\OrderBy({"position" = "ASC"})
      */
     protected $conditions;

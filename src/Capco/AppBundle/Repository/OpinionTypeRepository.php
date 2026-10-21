@@ -78,11 +78,9 @@ class OpinionTypeRepository extends EntityRepository
     /**
      * Get all opinionTypes with opinions for user.
      *
-     * @param $user
-     *
      * @return array
      */
-    public function getByUser($user)
+    public function getByUser(mixed $user)
     {
         $qb = $this->createQueryBuilder('ot')
             ->addSelect('o', 's', 'pas', 'p', 'oc')
@@ -106,11 +104,9 @@ class OpinionTypeRepository extends EntityRepository
     /**
      * Count all opinionTypes with opinions for user.
      *
-     * @param $user
-     *
      * @return array
      */
-    public function countByUser($user): int
+    public function countByUser(mixed $user): int
     {
         $qb = $this->createQueryBuilder('ot')
             ->addSelect('o', 's', 'cas', 'p', 'oc')
@@ -135,12 +131,9 @@ class OpinionTypeRepository extends EntityRepository
     /**
      * Get all opinionTypes with opinions count for consultation step.
      *
-     * @param $step
-     * @param $allowedTypes
-     *
      * @return array
      */
-    public function getAllowedTypesWithOpinionCount(ConsultationStep $step, $allowedTypes)
+    public function getAllowedTypesWithOpinionCount(ConsultationStep $step, mixed $allowedTypes)
     {
         $qb = $this->createQueryBuilder('ot')
             ->select(

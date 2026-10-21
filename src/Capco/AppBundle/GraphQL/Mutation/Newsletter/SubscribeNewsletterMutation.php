@@ -41,8 +41,7 @@ class SubscribeNewsletterMutation implements MutationInterface
         private readonly UserRepository $userRepository,
         private readonly RateLimiter $rateLimiter,
         private readonly SendInBluePublisher $sendInBluePublisher
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): array
     {

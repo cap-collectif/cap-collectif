@@ -15,8 +15,7 @@ class ProposalAssessmentNormalizer implements NormalizerInterface, SerializerAwa
 
     public function __construct(
         private readonly ObjectNormalizer $normalizer
-    ) {
-    }
+    ) {}
 
     public function hasCacheableSupportsMethod(): bool
     {

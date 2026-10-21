@@ -10,8 +10,7 @@ class ProposalPostsCountResolver implements QueryInterface
 {
     public function __construct(
         private readonly PostRepository $postRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Proposal $proposal): int
     {

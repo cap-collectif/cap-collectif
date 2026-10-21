@@ -6,9 +6,13 @@ use Capco\Tests\IdentityWebTestCase;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises HTTP outcomes and real domain data with transactional cleanup; replaces only external boundaries.
  */
 final class UpdateProfilePasswordMutationTest extends IdentityWebTestCase
@@ -37,7 +41,9 @@ final class UpdateProfilePasswordMutationTest extends IdentityWebTestCase
     public static function passwords(): iterable
     {
         yield 'valid change' => [self::PASSWORD, 'Changed456!', true];
+
         yield 'wrong current password' => ['wrong', 'Changed456!', false];
+
         yield 'weak new password' => [self::PASSWORD, 'weak', false];
     }
 }

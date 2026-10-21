@@ -16,8 +16,7 @@ class GlobalDistrictNotificationProcessor implements ProcessorInterface
         private readonly GlobalDistrictRepository $globalDistrictRepository,
         private readonly ProjectRepository $projectRepository,
         private readonly GlobalDistrictFollowerNotifier $notifier
-    ) {
-    }
+    ) {}
 
     public function process(Message $message, array $options): bool
     {

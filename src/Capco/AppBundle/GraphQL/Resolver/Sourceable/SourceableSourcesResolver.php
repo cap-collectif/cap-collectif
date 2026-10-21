@@ -13,8 +13,7 @@ class SourceableSourcesResolver implements QueryInterface
 {
     public function __construct(
         private readonly SourceRepository $sourceRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Sourceable $sourceable, Argument $args): Connection
     {

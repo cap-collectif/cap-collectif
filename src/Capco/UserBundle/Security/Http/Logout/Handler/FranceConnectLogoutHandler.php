@@ -24,8 +24,7 @@ class FranceConnectLogoutHandler implements LogoutHandlerInterface
         private readonly ResourceOwnerInterface $resourceOwner,
         private readonly TokenStorageInterface $tokenStorage,
         private readonly RouterInterface $router
-    ) {
-    }
+    ) {}
 
     public function handle(
         RedirectResponseWithRequestInterface $responseWithRequest

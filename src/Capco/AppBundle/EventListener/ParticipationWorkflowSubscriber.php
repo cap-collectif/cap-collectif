@@ -33,8 +33,7 @@ class ParticipationWorkflowSubscriber implements EventSubscriberInterface
         private readonly VocalContributionReconcilier $vocalContributionReconcilier,
         private readonly VocalContributionRepository $vocalContributionRepository,
         private readonly ParticipantPhoneVerificationSmsRepository $participantPhoneVerificationSmsRepository
-    ) {
-    }
+    ) {}
 
     public static function getSubscribedEvents(): array
     {

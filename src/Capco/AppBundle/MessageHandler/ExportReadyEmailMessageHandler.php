@@ -24,8 +24,7 @@ class ExportReadyEmailMessageHandler
         private readonly SenderEmailResolver $senderEmailResolver,
         private readonly RouterInterface $router,
         private readonly LoggerInterface $logger,
-    ) {
-    }
+    ) {}
 
     public function __invoke(ExportReadyEmailMessage $message): void
     {

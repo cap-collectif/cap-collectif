@@ -28,8 +28,7 @@ class OpinionNormalizer implements NormalizerInterface, SerializerAwareInterface
         private readonly Manager $toggleManager,
         private readonly VoteSearch $voteSearch,
         private readonly ArgumentRepository $argumentRepository
-    ) {
-    }
+    ) {}
 
     public function hasCacheableSupportsMethod(): bool
     {

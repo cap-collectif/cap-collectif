@@ -12,8 +12,7 @@ class ThemeListResolver implements QueryInterface
 {
     public function __construct(
         private readonly ThemeRepository $themeRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): Connection
     {

@@ -12,11 +12,13 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(
  *  name="menu_item_translation",
  *  uniqueConstraints={
+ *
  *    @ORM\UniqueConstraint(
  *      name="translation_unique",
  *      columns={"translatable_id", "locale"}
  *    )
  * })
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\MenuItemTranslationRepository")
  */
 class MenuItemTranslation implements EntityInterface, TranslationInterface

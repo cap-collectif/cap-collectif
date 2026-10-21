@@ -19,8 +19,7 @@ class CasAuthenticationExceptionListener
     public function __construct(
         protected LoggerInterface $logger,
         private readonly Environment $templating
-    ) {
-    }
+    ) {}
 
     /**
      * @throws LoaderError

@@ -3,20 +3,14 @@
 namespace Capco\AppBundle\Mailer\Transport;
 
 use Mandrill;
-use Swift_Attachment;
-use Swift_Events_EventDispatcher;
-use Swift_Events_EventListener;
-use Swift_Events_SendEvent;
 use Swift_Mime_SimpleMessage;
-use Swift_MimePart;
-use Swift_Transport;
 
 /**
  * Copied from https://github.com/AccordGroup/MandrillSwiftMailer.
  *
  * Updated to add `return_path_domain` support
  */
-class MandrillTransport implements Swift_Transport
+class MandrillTransport implements \Swift_Transport
 {
     protected ?string $apiKey;
     protected ?bool $async;
@@ -25,7 +19,7 @@ class MandrillTransport implements Swift_Transport
     private ?string $lastSentMessageId = null;
 
     public function __construct(
-        protected Swift_Events_EventDispatcher $dispatcher
+        protected \Swift_Events_EventDispatcher $dispatcher
     ) {
         $this->apiKey = null;
         $this->async = null;
@@ -43,16 +37,12 @@ class MandrillTransport implements Swift_Transport
     /**
      * Not used.
      */
-    public function start()
-    {
-    }
+    public function start() {}
 
     /**
      * Not used.
      */
-    public function stop()
-    {
-    }
+    public function stop() {}
 
     /**
      * Not used.
@@ -126,9 +116,9 @@ class MandrillTransport implements Swift_Transport
      * @param null $failedRecipients
      */
     public function send(
-        Swift_Mime_SimpleMessage $message,
+        \Swift_Mime_SimpleMessage $message,
         &$failedRecipients = null,
-        ?Swift_Events_SendEvent $event = null
+        ?\Swift_Events_SendEvent $event = null
     ): int {
         $this->resultApi = null;
         $sendCount = 0;
@@ -151,9 +141,9 @@ class MandrillTransport implements Swift_Transport
 
         if ($event) {
             if ($sendCount > 0) {
-                $event->setResult(Swift_Events_SendEvent::RESULT_SUCCESS);
+                $event->setResult(\Swift_Events_SendEvent::RESULT_SUCCESS);
             } else {
-                $event->setResult(Swift_Events_SendEvent::RESULT_FAILED);
+                $event->setResult(\Swift_Events_SendEvent::RESULT_FAILED);
             }
 
             $this->dispatcher->dispatchEvent($event, 'sendPerformed');
@@ -162,7 +152,7 @@ class MandrillTransport implements Swift_Transport
         return $sendCount;
     }
 
-    public function registerPlugin(Swift_Events_EventListener $plugin)
+    public function registerPlugin(\Swift_Events_EventListener $plugin)
     {
         $this->dispatcher->bindEventListener($plugin);
     }
@@ -170,11 +160,11 @@ class MandrillTransport implements Swift_Transport
     /**
      * https://mandrillapp.com/api/docs/messages.php.html#method-send.
      *
-     * @throws \Swift_SwiftException
-     *
      * @return array Mandrill Send Message
+     *
+     * @throws \Swift_SwiftException
      */
-    public function getMandrillMessage(Swift_Mime_SimpleMessage $message)
+    public function getMandrillMessage(\Swift_Mime_SimpleMessage $message)
     {
         $contentType = $this->getMessagePrimaryContentType($message);
 
@@ -241,14 +231,14 @@ class MandrillTransport implements Swift_Transport
                     'name' => $child->getId(),
                     'content' => base64_encode($child->getBody()),
                 ];
-            } elseif ($child instanceof Swift_Attachment && !($child instanceof \Swift_Image)) {
+            } elseif ($child instanceof \Swift_Attachment && !($child instanceof \Swift_Image)) {
                 $attachments[] = [
                     'type' => $child->getContentType(),
                     'name' => $child->getFilename(),
                     'content' => base64_encode($child->getBody()),
                 ];
             } elseif (
-                $child instanceof Swift_MimePart
+                $child instanceof \Swift_MimePart
                 && $this->supportsContentType($child->getContentType())
             ) {
                 if ('text/html' == $child->getContentType()) {
@@ -414,9 +404,9 @@ class MandrillTransport implements Swift_Transport
     }
 
     /**
-     * @throws \Swift_TransportException
+     * @return \Mandrill
      *
-     * @return Mandrill
+     * @throws \Swift_TransportException
      */
     protected function createMandrill()
     {
@@ -424,7 +414,7 @@ class MandrillTransport implements Swift_Transport
             throw new \Swift_TransportException('Cannot create instance of \Mandrill while API key is NULL');
         }
 
-        return new Mandrill($this->apiKey);
+        return new \Mandrill($this->apiKey);
     }
 
     /**
@@ -448,7 +438,7 @@ class MandrillTransport implements Swift_Transport
     /**
      * @return string
      */
-    protected function getMessagePrimaryContentType(Swift_Mime_SimpleMessage $message)
+    protected function getMessagePrimaryContentType(\Swift_Mime_SimpleMessage $message)
     {
         $contentType = $message->getContentType();
 

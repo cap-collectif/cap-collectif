@@ -14,9 +14,7 @@ use Symfony\Component\Security\Core\Security;
 
 class MediaAccessExtension extends AbstractTypeExtension
 {
-    public function __construct(private readonly MediaAccessResolver $access, private readonly Security $security)
-    {
-    }
+    public function __construct(private readonly MediaAccessResolver $access, private readonly Security $security) {}
 
     public static function getExtendedTypes(): iterable
     {

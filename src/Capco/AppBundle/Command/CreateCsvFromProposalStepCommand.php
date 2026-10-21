@@ -191,7 +191,7 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         'proposal_id' => 'id',
         'proposal_reference' => 'reference',
         'proposal_title' => 'title',
-        //Only published votes apparently
+        // Only published votes apparently
         'proposal_votes_totalCount' => '',
         'proposal_votes_digitalCount' => 'allVotes.totalCount',
         'proposal_votes_paperCount' => 'paperVotesTotalCount',
@@ -227,7 +227,7 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
     ];
 
     protected const COLUMN_MAPPING_EXCEPT_PROPOSAL_HEADER = [
-        //votes
+        // votes
         'proposal_votes_id' => 'vote.id',
         'proposal_votes_ranking' => 'vote.ranking',
         'proposal_votes_createdAt' => 'vote.createdAt',
@@ -241,7 +241,7 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         'proposal_votes_author_isPhoneConfirmed' => 'vote.author.phoneConfirmed',
         'proposal_votes_author_userType_id' => 'vote.author.userType.id',
         'proposal_votes_author_userType_name' => 'vote.author.userType.name',
-        //comments
+        // comments
         'proposal_comments_id' => 'comment.id',
         'proposal_comments_body' => 'comment.body',
         'proposal_comments_createdAt' => 'comment.createdAt',
@@ -255,7 +255,7 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         'proposal_comments_author_email' => 'comment.author.email',
         'proposal_comments_pinned' => 'comment.pinned',
         'proposal_comments_publicationStatus' => 'comment.publicationStatus',
-        //comment vote
+        // comment vote
         'proposal_comments_vote_id' => 'comment_vote.id',
         'proposal_comments_vote_createdAt' => 'comment_vote.createdAt',
         'proposal_comments_vote_publishedAt' => 'comment_vote.publishedAt',
@@ -264,7 +264,7 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         'proposal_comments_vote_author_isEmailConfirmed' => 'comment_vote.author.isEmailConfirmed',
         'proposal_comments_vote_author_userType_id' => 'comment_vote.author.userType.id',
         'proposal_comments_vote_author_userType_name' => 'comment_vote.author.userType.name',
-        //news
+        // news
         'proposal_news_id' => 'new.id',
         'proposal_news_title' => 'new.title',
         'proposal_news_themes' => 'new.relatedContent',
@@ -281,7 +281,7 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         'proposal_news_authors_isEmailConfirmed' => 'new.authors.isEmailConfirmed',
         'proposal_news_authors_userType_id' => 'new.authors.userType.id',
         'proposal_news_authors_userType_name' => 'new.authors.userType.name',
-        //news comment
+        // news comment
         'proposal_news_comments_id' => 'news_comment.id',
         'proposal_news_comments_body' => 'news_comment.body',
         'proposal_news_comments_parent' => 'news_comment.parent',
@@ -296,7 +296,7 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         'proposal_news_comments_author_email' => 'news_comment.author.email',
         'proposal_news_comments_pinned' => 'news_comment.pinned',
         'proposal_news_comments_publicationStatus' => 'news_comment.publicationStatus',
-        //news comment vote
+        // news comment vote
         'proposal_news_comments_vote_id' => 'news_comment_vote.id',
         'proposal_news_comments_vote_createdAt' => 'news_comment_vote.createdAt',
         'proposal_news_comments_vote_publishedAt' => 'news_comment_vote.publishedAt',
@@ -305,7 +305,7 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         'proposal_news_comments_vote_author_isEmailConfirmed' => 'news_comment_vote.author.isEmailConfirmed',
         'proposal_news_comments_vote_author_userType_id' => 'news_comment_vote.author.userType.id',
         'proposal_news_comments_vote_author_userType_name' => 'news_comment_vote.author.userType.name',
-        //news comments reportings
+        // news comments reportings
         'proposal_news_comments_reportings_id' => 'news_comment_reporting.id',
         'proposal_news_comments_reportings_createdAt' => 'news_comment_reporting.createdAt',
         'proposal_news_comments_reportings_author_id' => 'news_comment_reporting.author.id',
@@ -313,7 +313,7 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         'proposal_news_comments_reportings_author_isEmailConfirmed' => 'news_comment_reporting.author.isEmailConfirmed',
         'proposal_news_comments_reportings_author_userType_id' => 'news_comment_reporting.author.userType.id',
         'proposal_news_comments_reportings_author_userType_name' => 'news_comment_reporting.author.userType.name',
-        //reporting
+        // reporting
         'proposal_reportings_id' => 'reporting.id',
         'proposal_reportings_body' => 'reporting.bodyText',
         'proposal_reportings_createdAt' => 'reporting.createdAt',
@@ -326,6 +326,7 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
     protected $writer;
     protected $infoResolver;
     protected $currentData;
+
     /** @var CollectStep */
     protected $currentStep;
     protected $headersMap = [];
@@ -356,8 +357,6 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
     }
 
     /**
-     * @param $input
-     * @param $output
      * @param mixed $repository
      */
     public function loopOverSteps(
@@ -1215,6 +1214,7 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
                 ->filter(fn (AbstractQuestion $question) => AbstractQuestion::QUESTION_TYPE_SECTION !== $question->getType())
                 ->toArray()
             ;
+
             /** @var AbstractQuestion $question */
             $questionNumber = 0;
             foreach ($evaluationFormAsArray as $question) {

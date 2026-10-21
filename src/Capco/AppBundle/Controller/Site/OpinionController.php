@@ -22,15 +22,13 @@ class OpinionController extends Controller
     public function __construct(
         private readonly LoggerInterface $logger,
         private readonly OpinionTypeRepository $repository
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}/{consultationSlug}/types/{opinionTypeSlug}", name="app_project_show_opinions", requirements={"opinionTypeSlug" = ".+", "consultationSlug" = ".+"})
      * @Route("/project/{projectSlug}/consultation/{stepSlug}/{consultationSlug}/types/{opinionTypeSlug}", name="app_project_show_opinions_2", requirements={"opinionTypeSlug" = ".+", "consultationSlug" = ".+"})
      *
      * Legacy URLs :
-     *
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}", name="legacy_app_project_show_opinions1", requirements={"opinionTypeSlug" = ".+"}, options={"i18n" = false})
      * @Route("/project/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}", name="legacy_app_project_show_opinions_2", requirements={"opinionTypeSlug" = ".+"}, options={"i18n" = false})
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}/types/{opinionTypeSlug}/page/{page}", name="legacy_app_project_show_opinions", requirements={"page" = "\d+", "opinionTypeSlug" = ".+"}, defaults={"page" = 1}, options={"i18n" = false})
@@ -53,6 +51,7 @@ class OpinionController extends Controller
      *    "repository_method"="findOneBySlugs",
      *    "map_method_signature"=true
      * })
+     *
      * @Template("@CapcoApp/Consultation/SectionPage.html.twig")
      */
     public function sectionPageAction(

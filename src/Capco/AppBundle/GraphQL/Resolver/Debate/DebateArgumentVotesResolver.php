@@ -15,8 +15,7 @@ class DebateArgumentVotesResolver implements QueryInterface
 
     public function __construct(
         private readonly VoteSearch $voteSearch
-    ) {
-    }
+    ) {}
 
     public function __invoke(
         DebateArgumentInterface $debateArgument,

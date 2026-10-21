@@ -35,8 +35,7 @@ class UpdateProjectSlugMutation implements MutationInterface
         private readonly HubDocumentsStepGuard $hubDocumentsStepGuard,
         private readonly ProjectUrlResolver $projectUrlResolver,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

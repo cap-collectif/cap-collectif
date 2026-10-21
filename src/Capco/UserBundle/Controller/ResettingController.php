@@ -41,8 +41,7 @@ class ResettingController extends AbstractController
         private readonly TranslatorInterface $translator,
         private readonly Environment $twig,
         private readonly LoginManagerInterface $loginManager,
-    ) {
-    }
+    ) {}
 
     public function requestAction(): Response
     {
@@ -119,6 +118,7 @@ class ResettingController extends AbstractController
 
             return (new Response())->setContent($render);
         }
+
         /** @var User $user */
         $user = $this->userManager->findUserByEmail($email);
 

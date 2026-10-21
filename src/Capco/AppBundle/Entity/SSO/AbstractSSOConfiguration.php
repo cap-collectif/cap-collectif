@@ -10,9 +10,13 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="sso_configuration")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AbstractSSOConfigurationRepository")
+ *
  * @ORM\InheritanceType("SINGLE_TABLE")
+ *
  * @ORM\DiscriminatorColumn(name="ssoType", type="enum_sso_type")
+ *
  * @ORM\DiscriminatorMap({
  *      "oauth2"           = "Oauth2SSOConfiguration",
  *      "franceconnect"    = "FranceConnectSSOConfiguration",

@@ -13,6 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="event_review")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\EventReviewRepository")
  */
 class EventReview implements EntityInterface, CreatableInterface
@@ -27,6 +28,7 @@ class EventReview implements EntityInterface, CreatableInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(name="reviewer_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private $reviewer;
@@ -43,6 +45,7 @@ class EventReview implements EntityInterface, CreatableInterface
 
     /**
      * @Gedmo\Timestampable(on="update")
+     *
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;

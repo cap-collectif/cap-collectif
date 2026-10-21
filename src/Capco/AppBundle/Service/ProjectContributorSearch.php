@@ -24,8 +24,7 @@ class ProjectContributorSearch
         private readonly UserRepository $userRepository,
         private readonly ParticipantRepository $participantRepository,
         private readonly AuthorizationCheckerInterface $authorizationChecker,
-    ) {
-    }
+    ) {}
 
     /**
      * Reuses ElasticsearchPaginatedResult because ProjectContributorResolver still paginates

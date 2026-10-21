@@ -14,7 +14,9 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Checks public domain rules with real entities and observable results, without framework interaction counts.
  */
 class EventVoterTest extends AuthorizationTestCase
@@ -47,7 +49,9 @@ class EventVoterTest extends AuthorizationTestCase
     public static function reviewVisibility(): iterable
     {
         yield 'approved event' => [\Capco\AppBundle\DBAL\Enum\EventReviewStatusType::APPROVED, VoterInterface::ACCESS_GRANTED];
+
         yield 'awaiting review' => [\Capco\AppBundle\DBAL\Enum\EventReviewStatusType::AWAITING, VoterInterface::ACCESS_DENIED];
+
         yield 'refused event' => [\Capco\AppBundle\DBAL\Enum\EventReviewStatusType::REFUSED, VoterInterface::ACCESS_DENIED];
     }
 
@@ -99,6 +103,7 @@ class EventVoterTest extends AuthorizationTestCase
     public static function eventCreationFlags(): iterable
     {
         yield 'event creation enabled' => [true, VoterInterface::ACCESS_GRANTED];
+
         yield 'event creation disabled' => [false, VoterInterface::ACCESS_DENIED];
     }
 
@@ -164,7 +169,7 @@ class EventVoterTest extends AuthorizationTestCase
         $voter = new EventVoter($this->createStub(Manager::class));
         $token = $this->createStub(TokenInterface::class);
         self::assertSame(VoterInterface::ACCESS_ABSTAIN, $voter->vote($token, new User(), [EventVoter::CREATE]));
-        self::assertSame(VoterInterface::ACCESS_ABSTAIN, $voter->vote($token, (new Event()), ['unknown']));
+        self::assertSame(VoterInterface::ACCESS_ABSTAIN, $voter->vote($token, new Event(), ['unknown']));
     }
 
     private function token(mixed $user): TokenInterface

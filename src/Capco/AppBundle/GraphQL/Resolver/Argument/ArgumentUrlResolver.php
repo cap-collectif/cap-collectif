@@ -14,8 +14,7 @@ class ArgumentUrlResolver implements QueryInterface
     public function __construct(
         private readonly OpinionUrlResolver $opinionUrlResolver,
         private readonly OpinionVersionUrlResolver $opinionVersionUrlResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $argument): string
     {

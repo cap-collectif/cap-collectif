@@ -17,8 +17,7 @@ class QueryUserTypesResolver implements QueryInterface
     public function __construct(
         private readonly UserTypeRepository $userTypeRepository,
         private readonly LoggerInterface $logger,
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): ConnectionInterface|Promise
     {

@@ -12,8 +12,11 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Checks reminder selection and repeated CLI execution with restored flags and transactional
  * scenario data.
  */

@@ -22,6 +22,7 @@ class UpdateUserAccountMutation extends BaseUpdateProfile
 
         if ($viewer->isAdmin() && isset($arguments[self::USER_ID])) {
             $userId = GlobalId::fromGlobalId($arguments[self::USER_ID])['id'];
+
             /** @var User $user */
             $user = $this->userRepository->find($userId);
         }

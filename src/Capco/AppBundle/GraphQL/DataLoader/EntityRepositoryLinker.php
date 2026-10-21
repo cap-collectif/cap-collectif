@@ -10,8 +10,7 @@ class EntityRepositoryLinker
         private string $type,
         private EntityRepository $repository,
         private array $entities
-    ) {
-    }
+    ) {}
 
     public function getType(): string
     {

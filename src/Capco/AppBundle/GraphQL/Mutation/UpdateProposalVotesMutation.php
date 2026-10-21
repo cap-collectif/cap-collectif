@@ -37,8 +37,7 @@ class UpdateProposalVotesMutation implements MutationInterface
         private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler,
         private readonly Indexer $indexer,
         private readonly ConnectionBuilderInterface $connectionBuilder
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

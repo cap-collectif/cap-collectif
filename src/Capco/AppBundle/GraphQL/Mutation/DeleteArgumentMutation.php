@@ -21,14 +21,14 @@ class DeleteArgumentMutation implements MutationInterface
         private EntityManagerInterface $em,
         private ArgumentRepository $argumentRepo,
         private RedisStorageHelper $redisStorage
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $user): array
     {
         $this->formatInput($input);
         $argumentGlobalId = $input->offsetGet('argumentId');
         $argumentId = GlobalId::fromGlobalId($argumentGlobalId)['id'];
+
         /** @var Argument $argument */
         $argument = $this->argumentRepo->find($argumentId);
 

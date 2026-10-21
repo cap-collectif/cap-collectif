@@ -8,9 +8,11 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\HubMetadataRepository")
+ *
  * @ORM\Table(
  *     name="hub_metadata",
  *     uniqueConstraints={
+ *
  *         @ORM\UniqueConstraint(name="hub_metadata_step_unique", columns={"step_id"}),
  *         @ORM\UniqueConstraint(name="hub_metadata_project_unique", columns={"project_id"})
  *     }
@@ -22,12 +24,14 @@ class HubMetadata
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep", inversedBy="hubMetadata")
+     *
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     private ?AbstractStep $step = null;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Project")
+     *
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     private ?Project $project = null;

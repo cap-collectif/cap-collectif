@@ -9,9 +9,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class PostOrderedThemesResolver implements QueryInterface
 {
-    public function __construct(private readonly GraphQLLocaleResolver $localeResolver)
-    {
-    }
+    public function __construct(private readonly GraphQLLocaleResolver $localeResolver) {}
 
     /**
      * @return Theme[]

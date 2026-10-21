@@ -18,7 +18,7 @@ class MailerServicePass implements CompilerPassInterface
         if (
             'prod' === $container->getParameter('kernel.environment')
             && true != getenv('SYMFONY_PRODUCTION_SMTP_MAILER')
-           ) {
+        ) {
             $transportDefinition = $container->getDefinition('swiftmailer.mailer.transport.api');
             $transportDefinition->addMethodCall('setMandrillApiKey', [
                 $container->getParameter('mandrill_api_key'),

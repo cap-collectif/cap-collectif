@@ -29,7 +29,7 @@ class CollectStepRepository extends AbstractStepRepository
         $qb->setMaxResults($limit);
         $qb->setFirstResult($offset);
 
-        return new Paginator($qb, ($fetchJoin = true));
+        return new Paginator($qb, $fetchJoin = true);
     }
 
     public function getCollectStepsForProject(Project $project): array

@@ -13,8 +13,7 @@ class RemoveSiteFaviconMutation implements MutationInterface
         private readonly SiteImageRepository $siteImageRepository,
         private readonly SiteFaviconProcessor $siteFaviconProcessor,
         private readonly EntityManagerInterface $em
-    ) {
-    }
+    ) {}
 
     public function __invoke(): array
     {

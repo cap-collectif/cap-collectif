@@ -17,11 +17,11 @@ class GroupController extends AbstractController
     public function __construct(
         private readonly KernelInterface $kernel,
         private readonly UserGroupsFilePathResolver $userGroupsFilePathResolver
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/export-user-groups", name="app_user_groups_export")
+     *
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function exportAction(Request $request): Response

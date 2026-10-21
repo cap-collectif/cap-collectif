@@ -14,7 +14,9 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Checks public domain rules with real entities and observable results, without framework interaction counts.
  */
 class QuestionnaireVoterTest extends AuthorizationTestCase
@@ -35,7 +37,7 @@ class QuestionnaireVoterTest extends AuthorizationTestCase
         $admin->addRole('ROLE_ADMIN');
         $voter = new QuestionnaireVoter();
         foreach ([QuestionnaireVoter::CREATE, QuestionnaireVoter::VIEW, QuestionnaireVoter::EDIT, QuestionnaireVoter::DELETE, QuestionnaireVoter::EXPORT] as $attribute) {
-            self::assertSame(VoterInterface::ACCESS_GRANTED, $voter->vote($this->token($admin), (new Questionnaire()), [$attribute]));
+            self::assertSame(VoterInterface::ACCESS_GRANTED, $voter->vote($this->token($admin), new Questionnaire(), [$attribute]));
         }
     }
 
@@ -99,7 +101,7 @@ class QuestionnaireVoterTest extends AuthorizationTestCase
         $voter = new QuestionnaireVoter();
         $token = $this->token(new User());
         self::assertSame(VoterInterface::ACCESS_ABSTAIN, $voter->vote($token, new Project(), [QuestionnaireVoter::DELETE]));
-        self::assertSame(VoterInterface::ACCESS_ABSTAIN, $voter->vote($token, (new Questionnaire()), ['unknown']));
+        self::assertSame(VoterInterface::ACCESS_ABSTAIN, $voter->vote($token, new Questionnaire(), ['unknown']));
     }
 
     private function token(mixed $user): TokenInterface

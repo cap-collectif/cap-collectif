@@ -12,8 +12,7 @@ class InternalProjectAuthorsResolver implements QueryInterface
     public function __construct(
         private readonly UserRepository $userRepository,
         protected OrganizationRepository $organizationRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Project $project): array
     {

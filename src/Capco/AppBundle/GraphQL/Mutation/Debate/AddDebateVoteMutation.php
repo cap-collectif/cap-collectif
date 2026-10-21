@@ -32,8 +32,7 @@ class AddDebateVoteMutation implements MutationInterface
         private readonly DebateVoteRepository $repository,
         private readonly Indexer $indexer,
         private readonly RequestGuesserInterface $requestGuesser
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $viewer): array
     {

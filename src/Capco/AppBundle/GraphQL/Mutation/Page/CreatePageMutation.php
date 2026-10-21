@@ -19,11 +19,10 @@ class CreatePageMutation implements MutationInterface
         private readonly EntityManagerInterface $em,
         private readonly MediaRepository $mediaRepository,
         private readonly LocaleRepository $localeRepository
-    ) {
-    }
+    ) {}
 
     /**
-     * @return array{page: Page|null, errorCode: string|null}
+     * @return array{page: null|Page, errorCode: null|string}
      */
     public function __invoke(Argument $input): array
     {

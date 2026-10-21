@@ -21,8 +21,7 @@ class UnTrashMutation implements MutationInterface
     public function __construct(
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly EntityManagerInterface $em
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $viewer): array
     {
@@ -43,7 +42,7 @@ class UnTrashMutation implements MutationInterface
     private function getTrashable(Arg $input, User $viewer): Trashable
     {
         $trashable = $this->globalIdResolver->resolve($input->offsetGet('id'), $viewer);
-        if (!($trashable instanceof Trashable)) {
+        if (!$trashable instanceof Trashable) {
             throw new UserError(self::TRASHABLE_NOT_FOUND);
         }
 

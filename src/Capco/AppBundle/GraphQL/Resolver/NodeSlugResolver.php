@@ -14,8 +14,7 @@ class NodeSlugResolver implements QueryInterface
 {
     public function __construct(
         private readonly EntityManagerInterface $em
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $argument): ?SluggableInterface
     {

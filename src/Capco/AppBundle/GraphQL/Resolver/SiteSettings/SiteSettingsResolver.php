@@ -13,8 +13,7 @@ class SiteSettingsResolver implements QueryInterface
 
     public function __construct(
         private readonly SiteSettingsRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(): SiteSettings
     {

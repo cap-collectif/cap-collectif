@@ -4,6 +4,4 @@ namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-class ProposalStatisticsRepository extends EntityRepository
-{
-}
+class ProposalStatisticsRepository extends EntityRepository {}

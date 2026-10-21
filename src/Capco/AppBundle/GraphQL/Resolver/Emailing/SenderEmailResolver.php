@@ -10,8 +10,7 @@ class SenderEmailResolver implements QueryInterface
 {
     public function __construct(
         private readonly SenderEmailRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(?User $viewer = null): array
     {

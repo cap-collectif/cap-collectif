@@ -6,9 +6,13 @@ use Capco\Tests\OAuthLogoutWebTestCase;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises HTTP outcomes and real domain data with transactional cleanup; replaces only external boundaries.
  */
 final class OpenIDLogoutHandlerTest extends OAuthLogoutWebTestCase
@@ -32,7 +36,9 @@ final class OpenIDLogoutHandlerTest extends OAuthLogoutWebTestCase
     public static function destinations(): iterable
     {
         yield 'configured destination' => ['https://capco.test/projects', false, 'https://capco.test/projects'];
+
         yield 'homepage fallback' => [null, false, 'https://capco.test/'];
+
         yield 'switch account callback' => ['https://capco.test/projects', true, 'https://capco.test//login/openid?_destination=https://capco.test/'];
     }
 }

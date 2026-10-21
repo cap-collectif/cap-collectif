@@ -25,8 +25,7 @@ class ParametersRuntime implements RuntimeExtensionInterface
         protected SiteColorResolver $siteColorResolver,
         protected RequestStack $requestStack,
         protected LocaleRepository $localeRepository
-    ) {
-    }
+    ) {}
 
     public function getIsFeatureEnabled($flag): bool
     {

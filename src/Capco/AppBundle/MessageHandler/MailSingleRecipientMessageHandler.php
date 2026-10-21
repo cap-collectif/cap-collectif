@@ -11,8 +11,7 @@ class MailSingleRecipientMessageHandler
 {
     public function __construct(
         readonly MailChimpClient $mailChimpClient,
-    ) {
-    }
+    ) {}
 
     public function __invoke(MailSingleRecipientMessage $message): void
     {

@@ -15,8 +15,7 @@ class OwnerEventsResolver implements QueryInterface
     public function __construct(
         private readonly EventRepository $repository,
         private readonly EntityManagerInterface $em
-    ) {
-    }
+    ) {}
 
     public function __invoke(Owner $owner, Argument $args): ConnectionInterface
     {

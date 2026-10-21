@@ -26,10 +26,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="source", indexes={
+ *
  *     @ORM\Index(name="idx_author", columns={"id", "author_id"})
  * })
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SourceRepository")
+ *
  * @ORM\HasLifecycleCallbacks()
+ *
  * @CapcoAssert\HasAuthor()
  */
 class Source implements EntityInterface, Contribution, Trashable, VotableInterface, Publishable, ReportableInterface, ExportableContributionInterface, \Stringable
@@ -53,43 +57,51 @@ class Source implements EntityInterface, Contribution, Trashable, VotableInterfa
 
     /**
      * @ORM\Column(name="title", type="string", length=100)
+     *
      * @Assert\NotBlank()
      */
     private $title;
 
     /**
      * @Gedmo\Slug(fields={"title"}, updatable=false)
+     *
      * @ORM\Column(length=255)
      */
     private $slug;
 
     /**
      * @ORM\Column(name="link", type="text", length=255, nullable=true)
+     *
      * @Assert\NotBlank(groups={"link"})
+     *
      * @Assert\Url(groups={"link"})
      */
     private $link;
 
     /**
      * @Gedmo\Timestampable(on="create")
+     *
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "link", "body", "author", "opinion", "category", "media", "type"})
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="sources")
+     *
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
     private ?User $author = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="sources", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
     private $opinion;
@@ -97,20 +109,25 @@ class Source implements EntityInterface, Contribution, Trashable, VotableInterfa
     // ONE OF opinion or opinionVersion : should be in separate classes TODO
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionVersion", inversedBy="sources", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="opinion_version_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $opinionVersion;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\SourceCategory", inversedBy="sources", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="source_category_id", referencedColumnName="id", nullable=false)
      */
     private $category;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media", fetch="LAZY", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     *
      * @Assert\NotBlank(groups={"file"})
+     *
      * @Assert\Valid()
      */
     private $media;

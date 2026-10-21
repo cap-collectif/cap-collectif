@@ -195,7 +195,8 @@ class ProposalRepository extends EntityRepository
             ->setParameter('id', $proposal->getId())
             ->setParameter('user', $user)
             ->getQuery()
-            ->getSingleScalarResult() > 0;
+            ->getSingleScalarResult() > 0
+        ;
     }
 
     public function isViewerAnEvaluerOfAProposalOnForm(ProposalForm $form, User $user): bool
@@ -209,7 +210,8 @@ class ProposalRepository extends EntityRepository
             ->setParameter('form', $form)
             ->setParameter('user', $user)
             ->getQuery()
-            ->getSingleScalarResult() > 0;
+            ->getSingleScalarResult() > 0
+        ;
     }
 
     public function getUnpublishedByFormAndAuthor(ProposalForm $form, User $author): array
@@ -1015,6 +1017,8 @@ class ProposalRepository extends EntityRepository
         } elseif ($step instanceof CollectStep) {
             $qb->innerJoin('p.proposalForm', 'pf')
                 ->where('pf.step = :step')
+                ->orderBy('p.reference', 'ASC')
+                ->addOrderBy('p.id', 'ASC')
             ;
         }
 

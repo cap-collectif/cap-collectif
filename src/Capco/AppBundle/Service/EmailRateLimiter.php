@@ -14,8 +14,7 @@ class EmailRateLimiter
         private readonly RedisCache $redis,
         private readonly LoggerInterface $logger,
         private readonly KernelInterface $kernel
-    ) {
-    }
+    ) {}
 
     public function rateLimit(string $cacheKey, int $expiresAfterInSeconds = RedisCache::ONE_MINUTE): void
     {

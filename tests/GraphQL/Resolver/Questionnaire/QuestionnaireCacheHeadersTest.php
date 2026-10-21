@@ -13,9 +13,13 @@ use Symfony\Component\BrowserKit\Cookie;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises actual HTTP headers for private replies accessed with the legacy participant cookie.
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
  */
 final class QuestionnaireCacheHeadersTest extends IdentityWebTestCase

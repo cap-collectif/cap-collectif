@@ -15,6 +15,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *     name="http_redirect",
  *     uniqueConstraints={@ORM\UniqueConstraint(name="uniq_http_redirect_source", columns={"source_url"})}
  * )
+ *
  * @ORM\Entity(repositoryClass=HttpRedirectRepository::class)
  */
 class HttpRedirect implements EntityInterface
@@ -23,6 +24,7 @@ class HttpRedirect implements EntityInterface
 
     /**
      * @Gedmo\Timestampable(on="create")
+     *
      * @ORM\Column(name="created_at", type="datetime")
      */
     private ?\DateTimeInterface $createdAt = null;
@@ -49,6 +51,7 @@ class HttpRedirect implements EntityInterface
 
     /**
      * @Gedmo\Timestampable(on="update")
+     *
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private ?\DateTimeInterface $updatedAt = null;

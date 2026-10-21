@@ -33,8 +33,7 @@ class ContributionValidator
         private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository,
         private readonly EntityManagerInterface $em,
         private readonly UserRepository $userRepository
-    ) {
-    }
+    ) {}
 
     public function validatePhoneReusability(ContributorInterface $contributor, ContributionInterface $contribution, AbstractStep $step): void
     {

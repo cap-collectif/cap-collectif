@@ -182,7 +182,7 @@ class ContactProposalAuthorMutationSpec extends ObjectBehavior
     }
 
     /**
-     * @return Collaborator&Argument
+     * @return Argument&Collaborator
      */
     private function mockArguments(Argument $argument)
     {

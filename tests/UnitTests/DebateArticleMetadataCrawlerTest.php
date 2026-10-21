@@ -10,8 +10,11 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Requires exact response-accessor call counts, coupling metadata results to HTTP client
  * implementation details.
  */

@@ -27,8 +27,7 @@ class UpdateConsultationStepMutation implements MutationInterface
         private readonly EntityManagerInterface $em,
         private readonly LoggerInterface $logger,
         private readonly AuthorizationCheckerInterface $authorizationChecker
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

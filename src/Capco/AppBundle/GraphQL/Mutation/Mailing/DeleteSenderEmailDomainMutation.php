@@ -22,8 +22,7 @@ class DeleteSenderEmailDomainMutation implements MutationInterface
         private readonly EntityManagerInterface $entityManager,
         private readonly SenderEmailDomainRepository $senderEmailDomainRepository,
         private readonly SenderEmailRepository $senderEmailRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input)
     {

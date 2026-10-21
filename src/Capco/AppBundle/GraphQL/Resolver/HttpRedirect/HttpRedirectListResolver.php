@@ -12,8 +12,7 @@ class HttpRedirectListResolver implements QueryInterface
 {
     public function __construct(
         private readonly HttpRedirectRepository $httpRedirectRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): Connection
     {

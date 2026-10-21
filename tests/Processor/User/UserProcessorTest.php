@@ -10,8 +10,11 @@ use Swarrot\Broker\Message;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status legacy
+ *
  * @phpunit-reason Exercises deprecated Swarrot processors directly; migrate the behavior to the HTTP or CLI
  * action and the supported message architecture.
  */
@@ -50,24 +53,28 @@ class UserProcessorTest extends MailerSnapshotCommandTestCase
             'email.notification.password.change.subject',
             'confirmPasswordChange.html',
         ];
+
         yield 'password change with locale' => [
             UserPasswordProcessor::class,
             'user522',
             'email.notification.password.change.subject',
             'confirmPasswordChangeEnglish.html',
         ];
+
         yield 'email change without locale' => [
             UserEmailProcessor::class,
             'user515',
             'email.notification.email.change.subject',
             'confirmEmailChange.html',
         ];
+
         yield 'email change with locale' => [
             UserEmailProcessor::class,
             'user522',
             'email.notification.email.change.subject',
             'confirmEmailChangeEnglish.html',
         ];
+
         yield 'email confirmation reminder' => [
             UserEmailReminderProcessor::class,
             'user522',

@@ -11,8 +11,7 @@ class ResolvedHttpRedirection
         private readonly string $destinationUrl,
         private readonly string $duration,
         private readonly string $redirectType
-    ) {
-    }
+    ) {}
 
     public function getDestinationUrl(): string
     {

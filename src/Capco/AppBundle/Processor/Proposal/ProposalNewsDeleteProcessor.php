@@ -14,8 +14,7 @@ class ProposalNewsDeleteProcessor implements ProcessorInterface
         private readonly LoggerInterface $logger,
         private readonly PostRepository $posRepository,
         private readonly ProposalNewsNotifier $notifier
-    ) {
-    }
+    ) {}
 
     public function process(Message $message, array $options): bool
     {

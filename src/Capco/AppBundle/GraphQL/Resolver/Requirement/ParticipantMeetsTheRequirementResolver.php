@@ -17,8 +17,7 @@ class ParticipantMeetsTheRequirementResolver implements QueryInterface
         private RequirementViewerValueResolver $resolver,
         private ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver,
         private ParticipantHelper $participantHelper
-    ) {
-    }
+    ) {}
 
     public function __invoke(Requirement $requirement, Argument $args): bool
     {

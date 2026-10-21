@@ -18,7 +18,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
-use stdClass;
 use Symfony\Component\Cache\CacheItem;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -28,8 +27,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Exercises the OAuth resource owner with mocked framework internals instead of an
  * authentication request.
  */
@@ -38,16 +40,17 @@ final class FranceConnectResourceOwnerTest extends TestCase
     private HttpMethodsClientInterface|MockObject $httpClientMock;
     private HttpUtils|MockObject $httpUtilsMock;
     private FranceConnectOptionsModifier|MockObject $optionsModifierMock;
-    private RequestDataStorageInterface|MockObject $storageMock;
-    private RequestStack|MockObject $requestStackMock;
-    private RedisCache|MockObject $redisCacheMock;
+    private MockObject|RequestDataStorageInterface $storageMock;
+    private MockObject|RequestStack $requestStackMock;
+    private MockObject|RedisCache $redisCacheMock;
     private FeatureChecker|MockObject $featureCheckerMock;
-    private TranslatorInterface|MockObject $translatorMock;
+    private MockObject|TranslatorInterface $translatorMock;
     private LoggerInterface|MockObject $loggerMock;
     private FranceConnectResourceOwner $franceConnectResourceOwner;
     private FranceConnectSSOConfigurationRepository|MockObject $repositoryMock;
-    private SessionInterface|MockObject $sessionMock;
+    private MockObject|SessionInterface $sessionMock;
     private Jwt|MockObject $jwtMock;
+
     /**
      * @var array<string, mixed>
      */
@@ -157,7 +160,7 @@ final class FranceConnectResourceOwnerTest extends TestCase
 
         $this->jwtMock->expects($this->once())
             ->method('decode')
-            ->willReturn(new stdClass())
+            ->willReturn(new \stdClass())
         ;
 
         $userInformation = $this->franceConnectResourceOwner->getUserInformation(['access_token' => 'mocked_access_token']);

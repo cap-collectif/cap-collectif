@@ -12,8 +12,7 @@ class AnalyticsTopContributors
 
     public function __construct(
         private readonly UserRepository $repository
-    ) {
-    }
+    ) {}
 
     public function getContributors(): iterable
     {

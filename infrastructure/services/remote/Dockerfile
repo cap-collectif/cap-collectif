@@ -1,6 +1,6 @@
 FROM debian:bookworm
 
-ENV PHP_VERSION 8.1
+ENV PHP_VERSION 8.3
 
 LABEL maintainer "Cap collectif <tech@cap-collectif.com>"
 
@@ -43,7 +43,7 @@ RUN set -x \
 
 ENV LANG C.UTF-8
 
-# Install php8.1
+# Install php8.3
 RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
     echo "deb https://packages.sury.org/php/ bookworm main" > /etc/apt/sources.list.d/php.list && \

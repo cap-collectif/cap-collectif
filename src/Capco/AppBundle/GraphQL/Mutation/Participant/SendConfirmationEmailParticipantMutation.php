@@ -13,11 +13,10 @@ class SendConfirmationEmailParticipantMutation implements MutationInterface
 
     public function __construct(
         private ConfirmationParticipationParticipantEmailSender $confirmationParticipationParticipantEmailSender
-    ) {
-    }
+    ) {}
 
     /**
-     * @return array{'errorCode': string|null}
+     * @return array{'errorCode': null|string}
      */
     public function __invoke(Argument $argument): array
     {

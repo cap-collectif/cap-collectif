@@ -10,8 +10,7 @@ class ProjectPaperVoteTotalCountResolver implements QueryInterface
 {
     public function __construct(
         private readonly ProposalStepPaperVoteCounterRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Project $project)
     {

@@ -16,8 +16,7 @@ class SiteImageRuntime implements RuntimeExtensionInterface
         private readonly SiteImageRepository $repository,
         private readonly ContainerInterface $container,
         private readonly MediaProvider $mediaProvider
-    ) {
-    }
+    ) {}
 
     public function getAppLogoUrl(): ?string
     {

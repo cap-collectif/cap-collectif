@@ -24,8 +24,7 @@ class MediasController extends AbstractController
         private readonly MediaExtension $mediaExtension,
         private readonly \Capco\AppBundle\Antivirus\AntivirusScanner $antivirusScanner,
         private readonly VocalContributionUploadService $vocalContributionUploadService
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/voice-messages", name="upload_voice_message", methods={"POST"}, options={"i18n" = false})

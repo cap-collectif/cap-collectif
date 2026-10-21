@@ -11,7 +11,9 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Checks public domain rules with real entities and observable results, without framework interaction counts.
  */
 class UserIsGrantedResolverTest extends TestCase

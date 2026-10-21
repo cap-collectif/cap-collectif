@@ -24,8 +24,7 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
         private readonly TokenStorageInterface $tokenStorage,
         private readonly RouterInterface $router,
         private readonly KernelInterface $kernel
-    ) {
-    }
+    ) {}
 
     public function onLogoutSuccess(Request $request): RedirectResponse
     {

@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\EmailDomainRepository")
+ *
  * @ORM\Table(name="email_domain")
  */
 class EmailDomain implements EntityInterface
@@ -21,6 +22,7 @@ class EmailDomain implements EntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\RegistrationForm", inversedBy="domains", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="registration_form_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
     protected $registrationForm;

@@ -33,8 +33,7 @@ class ProposalActivitiesResolver extends ActivitiesResolver
         protected LoggerInterface $logger,
         protected RouterInterface $router,
         private readonly ProposalCurrentVotableStepDataLoader $proposalCurrentVotableStepDataLoader
-    ) {
-    }
+    ) {}
 
     public function getFollowedByUserId(): array
     {

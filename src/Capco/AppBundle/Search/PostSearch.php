@@ -68,7 +68,7 @@ class PostSearch extends Search
         $sortField = match ($field) {
             PostOrderField::UPDATED_AT => PostOrderField::SORT_FIELD[PostOrderField::UPDATED_AT],
             PostOrderField::CREATED_AT => PostOrderField::SORT_FIELD[PostOrderField::CREATED_AT],
-            default => throw new \RuntimeException("Unknown order: ${$field}"),
+            default => throw new \RuntimeException("Unknown order: {$field}"),
         };
 
         return [$sortField => ['order' => $direction], 'id' => new \stdClass()];

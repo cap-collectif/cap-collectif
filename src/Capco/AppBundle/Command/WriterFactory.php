@@ -13,9 +13,9 @@ use Box\Spout\Writer\XLSX\Writer as XLSXWriter;
 class WriterFactory
 {
     /**
-     * @throws UnsupportedTypeException
-     *
      * @return null|CsvWriter|OdsWriter|XlsxWriter
+     *
+     * @throws UnsupportedTypeException
      */
     public static function create(string $writerType, string $delimiter = ';'): WriterInterface
     {

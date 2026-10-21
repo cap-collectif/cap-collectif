@@ -12,8 +12,7 @@ class ProposalStepSplitViewService
 {
     public function __construct(
         private readonly EntityManagerInterface $em
-    ) {
-    }
+    ) {}
 
     /**
      * @param CollectStep|SelectionStep                                     $step
@@ -52,7 +51,6 @@ class ProposalStepSplitViewService
             || (
                 null !== $data['voteThreshold']
                 && ($data['voteThreshold'] > 0)
-            )
-        ;
+            );
     }
 }

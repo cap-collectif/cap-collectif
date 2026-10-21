@@ -9,14 +9,18 @@ trait BlameableTrait
 {
     /**
      * @Gedmo\Blameable(on="create")
+     *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(name="created_by", referencedColumnName="id")
      */
     protected $createdBy;
 
     /**
      * @Gedmo\Blameable(on="update")
+     *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(name="updated_by", referencedColumnName="id")
      */
     protected $updatedBy;

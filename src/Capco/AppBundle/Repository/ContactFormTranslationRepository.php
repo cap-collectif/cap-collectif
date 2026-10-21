@@ -11,6 +11,4 @@ use Doctrine\ORM\EntityRepository;
  * @method ContactFormTranslation[]    findAll()
  * @method ContactFormTranslation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ContactFormTranslationRepository extends EntityRepository
-{
-}
+class ContactFormTranslationRepository extends EntityRepository {}

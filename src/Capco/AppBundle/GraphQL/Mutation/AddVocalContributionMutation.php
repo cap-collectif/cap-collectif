@@ -28,8 +28,7 @@ class AddVocalContributionMutation implements MutationInterface
         private readonly CollectStepRepository $collectStepRepository,
         private readonly ParticipantIsMeetingRequirementsResolver $participantIsMeetingRequirementsResolver,
         private readonly ViewerIsMeetingRequirementsResolver $viewerIsMeetingRequirementsResolver
-    ) {
-    }
+    ) {}
 
     /**
      * @return array{contributionId: string, shouldTriggerParticipationWorkflow: bool, shouldTriggerConsentInternalCommunication: bool, completionStatus: string, participantToken: ?string}

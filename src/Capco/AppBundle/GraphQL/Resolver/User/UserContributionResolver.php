@@ -19,8 +19,7 @@ class UserContributionResolver implements ContainerAwareInterface, QueryInterfac
 
     public function __construct(
         private readonly ContributionSearch $contributionSearch
-    ) {
-    }
+    ) {}
 
     public function __invoke(
         User $user,

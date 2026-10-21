@@ -11,8 +11,7 @@ class AdminAwaitingEventResolver implements QueryInterface
 {
     public function __construct(
         private readonly EventRepository $eventRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(User $viewer): int
     {

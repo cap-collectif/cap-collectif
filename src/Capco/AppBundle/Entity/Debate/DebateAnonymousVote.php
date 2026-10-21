@@ -19,6 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=DebateAnonymousVoteRepository::class)
+ *
  * @ORM\Table(name="debate_anonymous_vote")
  */
 class DebateAnonymousVote implements EntityInterface, IndexableInterface, AnonymousParticipationInterface
@@ -33,6 +34,7 @@ class DebateAnonymousVote implements EntityInterface, IndexableInterface, Anonym
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Debate\Debate")
+     *
      * @ORM\JoinColumn(name="debate_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private Debate $debate;

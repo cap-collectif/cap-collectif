@@ -13,8 +13,7 @@ class ViewerFollowOpinionResolver implements QueryInterface
 
     public function __construct(
         private UserRepository $userRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Opinion $opinion, $viewer): bool
     {

@@ -26,11 +26,10 @@ class UpdateThemeMutation implements MutationInterface
         private readonly MediaRepository $mediaRepository,
         private readonly LocaleRepository $localeRepository,
         private readonly Indexer $indexer
-    ) {
-    }
+    ) {}
 
     /**
-     * @return array{theme?: Theme|null, errorCode?: string|null}
+     * @return array{theme?: null|Theme, errorCode?: null|string}
      */
     public function __invoke(Argument $input): array
     {

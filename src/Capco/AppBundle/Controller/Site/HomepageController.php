@@ -23,8 +23,7 @@ class HomepageController extends Controller
         private readonly SectionResolver $sectionResolver,
         private readonly TranslatorInterface $translator,
         private readonly Encryptor $encryptor
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/", name="app_homepage")

@@ -11,6 +11,4 @@ use Doctrine\ORM\EntityRepository;
  * @method MultipleChoiceQuestionLogicJumpCondition[]    findAll()
  * @method MultipleChoiceQuestionLogicJumpCondition[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class MultipleChoiceQuestionLogicJumpConditionRepository extends EntityRepository
-{
-}
+class MultipleChoiceQuestionLogicJumpConditionRepository extends EntityRepository {}

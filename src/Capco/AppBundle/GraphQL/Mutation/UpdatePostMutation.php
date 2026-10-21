@@ -29,8 +29,7 @@ class UpdatePostMutation implements MutationInterface
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly PostAuthorFactory $postAuthorFactory,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

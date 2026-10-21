@@ -12,7 +12,9 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Checks public domain rules with real entities and observable results, without framework interaction counts.
  */
 class DebateArgumentVoterTest extends AuthorizationTestCase
@@ -26,7 +28,7 @@ class DebateArgumentVoterTest extends AuthorizationTestCase
 
         self::assertSame(VoterInterface::ACCESS_DENIED, $voter->vote($token, $argument, [DebateArgumentVoter::UPDATE]));
         self::assertSame(VoterInterface::ACCESS_DENIED, $voter->vote($token, $argument, [DebateArgumentVoter::DELETE]));
-        self::assertSame(VoterInterface::ACCESS_DENIED, $voter->vote($token, (new DebateAnonymousArgument(new Debate())), [DebateArgumentVoter::PARTICIPATE]));
+        self::assertSame(VoterInterface::ACCESS_DENIED, $voter->vote($token, new DebateAnonymousArgument(new Debate()), [DebateArgumentVoter::PARTICIPATE]));
     }
 
     public function testAuthorCanUpdateAndDeleteTheirArgument(): void
@@ -76,6 +78,7 @@ class DebateArgumentVoterTest extends AuthorizationTestCase
     public static function participationRoles(): iterable
     {
         yield 'ordinary participant' => ['ROLE_USER'];
+
         yield 'administrator participant' => ['ROLE_ADMIN'];
     }
 
@@ -97,7 +100,9 @@ class DebateArgumentVoterTest extends AuthorizationTestCase
     public static function otherAuthors(): iterable
     {
         yield 'ordinary account' => ['ROLE_USER', VoterInterface::ACCESS_DENIED];
+
         yield 'project administrator' => ['ROLE_PROJECT_ADMIN', VoterInterface::ACCESS_DENIED];
+
         yield 'global administrator' => ['ROLE_ADMIN', VoterInterface::ACCESS_GRANTED];
     }
 

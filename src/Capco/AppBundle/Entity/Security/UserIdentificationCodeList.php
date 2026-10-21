@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="user_identification_code_list")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\Security\UserIdentificationCodeListRepository")
  */
 class UserIdentificationCodeList implements EntityInterface, Ownerable

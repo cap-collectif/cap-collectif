@@ -1207,12 +1207,12 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2022-07-05 14:55:00'))>
         publishedAt: $createdAt
         undraftAt: $createdAt
-        district: '@districtIdf<numberBetween(3,4)>'
-        address: '<generateAddress()>'
-        reference: <randomNumber(6, true)>
+        district: '@districtIdf4'
+        address: '<generateAddress([48.14329, 48.14329], [2.52663, 2.52663])>'
+        reference: 972474
         updatedAt: $createdAt
-        theme: '@theme<numberBetween(1,4)>'
-        category: '@pCategoryBp3Idf<numberBetween(1,5)>'
+        theme: '@theme4'
+        category: '@pCategoryBp3Idf1'
     proposalArchivingStepArchived:
         id: proposalArchivingStepArchived
         title: Proposition archivé
@@ -1222,7 +1222,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
         publishedAt: $createdAt
         undraftAt: $createdAt
-        reference: <randomNumber(6, true)>
+        reference: 343021
         updatedAt: $createdAt
         isArchived: true
     proposalArchivingStepNotArchived:
@@ -1234,7 +1234,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
         publishedAt: $createdAt
         undraftAt: $createdAt
-        reference: <randomNumber(6, true)>
+        reference: 135679
         updatedAt: $createdAt
         isArchived: false
     proposalUserNotOrgaMember:
@@ -1246,10 +1246,10 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2022-07-05 14:55:00'))>
         publishedAt: $createdAt
         undraftAt: $createdAt
-        reference: <randomNumber(6, true)>
+        reference: 540496
         updatedAt: $createdAt
-        theme: '@theme<numberBetween(1,4)>'
-        category: '@pCategoryBp3Idf<numberBetween(1,5)>'
+        theme: '@theme3'
+        category: '@pCategoryBp3Idf3'
     proposalWorkflowVoteA:
         id: proposalWorkflowVoteA
         title: Proposition A
@@ -1259,7 +1259,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
         publishedAt: $createdAt
         undraftAt: $createdAt
-        reference: <randomNumber(6, true)>
+        reference: 430724
         updatedAt: $createdAt
     proposalWorkflowVoteB:
         id: proposalWorkflowVoteB
@@ -1270,7 +1270,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
         publishedAt: $createdAt
         undraftAt: $createdAt
-        reference: <randomNumber(6, true)>
+        reference: 203477
         updatedAt: $createdAt
     proposalWorkflowVoteC:
         id: proposalWorkflowVoteC
@@ -1281,7 +1281,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
         publishedAt: $createdAt
         undraftAt: $createdAt
-        reference: <randomNumber(6, true)>
+        reference: 345827
         updatedAt: $createdAt
     proposalWorkflowVoteD:
         id: proposalWorkflowVoteD
@@ -1292,7 +1292,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
         publishedAt: $createdAt
         undraftAt: $createdAt
-        reference: <randomNumber(6, true)>
+        reference: 576794
         updatedAt: $createdAt
     proposalWorkflowVoteE:
         id: proposalWorkflowVoteE
@@ -1303,7 +1303,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
         publishedAt: $createdAt
         undraftAt: $createdAt
-        reference: <randomNumber(6, true)>
+        reference: 972474
         updatedAt: $createdAt
     proposalWorkflowVoteF:
         id: proposalWorkflowVoteF
@@ -1314,7 +1314,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
         publishedAt: $createdAt
         undraftAt: $createdAt
-        reference: <randomNumber(6, true)>
+        reference: 993829
         updatedAt: $createdAt
     proposalWorkflowVote2-A:
         id: proposalWorkflowVote2-A
@@ -1325,7 +1325,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
         publishedAt: $createdAt
         undraftAt: $createdAt
-        reference: <randomNumber(6, true)>
+        reference: 430750
         updatedAt: $createdAt
     proposalWorkflowVote2-B:
         id: proposalWorkflowVote2-B
@@ -1336,7 +1336,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
         publishedAt: $createdAt
         undraftAt: $createdAt
-        reference: <randomNumber(6, true)>
+        reference: 479830
         updatedAt: $createdAt
     proposalWorkflowVote2-C:
         id: proposalWorkflowVote2-C
@@ -1347,7 +1347,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
         publishedAt: $createdAt
         undraftAt: $createdAt
-        reference: <randomNumber(6, true)>
+        reference: 442567
         updatedAt: $createdAt
     proposalWorkflowVote2-D:
         id: proposalWorkflowVote2-D
@@ -1358,7 +1358,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
         publishedAt: $createdAt
         undraftAt: $createdAt
-        reference: <randomNumber(6, true)>
+        reference: 291821
         updatedAt: $createdAt
     proposalWorkflowCollectVoteA:
         id: proposalWorkflowCollectVoteA
@@ -1369,7 +1369,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
         publishedAt: $createdAt
         undraftAt: $createdAt
-        reference: <randomNumber(6, true)>
+        reference: 430724
         updatedAt: $createdAt
     proposalWorkflowCollectVoteB:
         id: proposalWorkflowCollectVoteB
@@ -1380,7 +1380,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
         publishedAt: $createdAt
         undraftAt: $createdAt
-        reference: <randomNumber(6, true)>
+        reference: 203477
         updatedAt: $createdAt
     proposalWorkflowCollectVoteC:
         id: proposalWorkflowCollectVoteC
@@ -1391,7 +1391,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
         publishedAt: $createdAt
         undraftAt: $createdAt
-        reference: <randomNumber(6, true)>
+        reference: 345827
         updatedAt: $createdAt
     proposalWorkflowCollectVoteD:
         id: proposalWorkflowCollectVoteD
@@ -1402,7 +1402,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
         publishedAt: $createdAt
         undraftAt: $createdAt
-        reference: <randomNumber(6, true)>
+        reference: 685785
         updatedAt: $createdAt
     proposalWorkflowCollectVoteE:
         id: proposalWorkflowCollectVoteE
@@ -1413,7 +1413,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
         publishedAt: $createdAt
         undraftAt: $createdAt
-        reference: <randomNumber(6, true)>
+        reference: 635256
         updatedAt: $createdAt
     proposalWorkflowCollectVoteF:
         id: proposalWorkflowCollectVoteF
@@ -1424,7 +1424,7 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
         publishedAt: $createdAt
         undraftAt: $createdAt
-        reference: <randomNumber(6, true)>
+        reference: 126510
         updatedAt: $createdAt
     proposalEmailingCollectVote1:
         id: proposalEmailingCollectVote1

@@ -64,8 +64,7 @@ class AddProposalSmsVoteMutation implements MutationInterface
         private readonly Indexer $indexer,
         private readonly ParticipantRepository $participantRepository,
         private readonly ProjectParticipantsTotalCountCacheHandler $participantsTotalCountCacheHandler,
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input): array
     {

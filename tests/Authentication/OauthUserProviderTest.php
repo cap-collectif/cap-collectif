@@ -15,9 +15,13 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises provider claims and account association through HTTP with real persistence and provider transport stubs.
  */
 final class OauthUserProviderTest extends OAuthWebTestCase
@@ -58,8 +62,11 @@ final class OauthUserProviderTest extends OAuthWebTestCase
     public static function openidEmailClaims(): iterable
     {
         yield 'standard email' => ['instance' => 'dev', 'claim' => 'email', 'usesClaim' => true];
+
         yield 'Red Hat mail fallback' => ['instance' => 'dev', 'claim' => 'mail', 'usesClaim' => true];
+
         yield 'CATP other email fallback' => ['instance' => 'catp', 'claim' => 'other email', 'usesClaim' => true];
+
         yield 'other email ignored outside CATP' => ['instance' => 'dev', 'claim' => 'other email', 'usesClaim' => false];
     }
 
@@ -109,6 +116,7 @@ final class OauthUserProviderTest extends OAuthWebTestCase
     public static function openidTokenClaims(): iterable
     {
         yield 'standard access token' => ['instance' => 'dev', 'expectedToken' => 'access_token'];
+
         yield 'CATP ID token priority' => ['instance' => 'catp', 'expectedToken' => 'id_token'];
     }
 
@@ -137,6 +145,7 @@ final class OauthUserProviderTest extends OAuthWebTestCase
     public static function openidRefreshPolicies(): iterable
     {
         yield 'standard profile preserved' => ['instance' => 'dev', 'refreshes' => false];
+
         yield 'CATP email refreshed' => ['instance' => 'catp', 'refreshes' => true];
     }
 
@@ -205,7 +214,9 @@ final class OauthUserProviderTest extends OAuthWebTestCase
     public static function openidAssociations(): iterable
     {
         yield 'CATP other email lookup' => ['instance' => 'catp', 'claim' => 'other email', 'usesIdToken' => false];
+
         yield 'CATP ID token association' => ['instance' => 'catp', 'claim' => 'subject', 'usesIdToken' => true];
+
         yield 'standard subject fallback' => ['instance' => 'dev', 'claim' => 'sub', 'usesIdToken' => false];
     }
 
@@ -247,7 +258,9 @@ final class OauthUserProviderTest extends OAuthWebTestCase
     public static function franceConnectMappings(): iterable
     {
         yield 'generated display name' => [false, null];
+
         yield 'preferred username' => [false, 'toto_fc_username'];
+
         yield 'local profile and disabled birthday claim preserved' => [true, 'toto_fc_username'];
     }
 
@@ -309,7 +322,9 @@ final class OauthUserProviderTest extends OAuthWebTestCase
 
     /**
      * @dataProvider publicFranceConnectMappings
+     *
      * @phpunit-status non-compliant
+     *
      * @phpunit-reason Uses a kernel to obtain the real authentication service for its public mapping rule; no persistence is claimed.
      */
     public function testPublicFranceConnectMappingPreservesLocalValuesAndGeneratesTheDisplayName(bool $existing, bool $preferredUsername): void
@@ -336,12 +351,15 @@ final class OauthUserProviderTest extends OAuthWebTestCase
     public static function publicFranceConnectMappings(): iterable
     {
         yield 'generated display name' => [false, false];
+
         yield 'preferred username' => [false, true];
+
         yield 'local email, display name and birthday preserved' => [true, true];
     }
 
     /**
      * @phpunit-status non-compliant
+     *
      * @phpunit-reason Characterizes a malformed response rejected before the HTTP callback; invokes the public provider directly with real persistence.
      */
     public function testMalformedFranceConnectResponseWithoutTokenOrSubjectStillCreatesAnAccount(): void

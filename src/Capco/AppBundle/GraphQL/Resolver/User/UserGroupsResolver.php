@@ -16,10 +16,9 @@ class UserGroupsResolver implements QueryInterface
     public function __construct(
         protected UserGroupRepository $userGroupRepo,
         protected GroupRepository $groupRepo
-    ) {
-    }
+    ) {}
 
-    public function __invoke(User $user, ?Argument $args = null): int|Promise|Connection
+    public function __invoke(User $user, ?Argument $args = null): Connection|int|Promise
     {
         $paginator = new Paginator(fn () => $this->groupRepo->getGroupsByUser($user));
 

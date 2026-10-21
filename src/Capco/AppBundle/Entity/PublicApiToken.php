@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\PublicApiTokenRepository")
+ *
  * @ORM\Table(name="public_api_token")
  */
 class PublicApiToken implements EntityInterface
@@ -24,6 +25,7 @@ class PublicApiToken implements EntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     protected $user;

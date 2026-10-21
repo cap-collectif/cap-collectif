@@ -40,7 +40,5 @@ final class Version20200302163542 extends AbstractMigration implements Container
         $job->mustRun();
     }
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 }

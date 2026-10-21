@@ -59,8 +59,7 @@ class ProjectStepPersister
         private readonly ProjectAbstractStepRepository $pasRepository,
         private readonly FormFactoryInterface $formFactory,
         private readonly GlobalIdResolver $globalIdResolver
-    ) {
-    }
+    ) {}
 
     public function persist(Project $project, array $steps, User $viewer): void
     {
@@ -97,6 +96,7 @@ class ProjectStepPersister
 
                 throw GraphQLException::fromFormErrors($form);
             }
+
             /** @var AbstractStep $stepFromData */
             $stepFromData = $form->getData();
             if ($stepFromData instanceof ConsultationStep) {

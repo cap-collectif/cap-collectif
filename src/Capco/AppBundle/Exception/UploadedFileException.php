@@ -2,6 +2,4 @@
 
 namespace Capco\AppBundle\Exception;
 
-class UploadedFileException extends \Exception
-{
-}
+class UploadedFileException extends \Exception {}

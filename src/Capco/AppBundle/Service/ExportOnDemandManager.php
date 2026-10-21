@@ -17,8 +17,7 @@ final class ExportOnDemandManager
         private readonly KernelInterface $kernel,
         private readonly MessageBusInterface $bus,
         private readonly LoggerInterface $logger,
-    ) {
-    }
+    ) {}
 
     public function ensureExportAvailable(ExportOnDemandRequest $request): ExportOnDemandAvailability
     {

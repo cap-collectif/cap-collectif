@@ -14,8 +14,7 @@ class SSOConfigurationQueryResolver implements QueryInterface
     public function __construct(
         protected AbstractSSOConfigurationRepository $ssoConfigurationRepository,
         protected LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $args): Connection
     {
@@ -33,7 +32,7 @@ class SSOConfigurationQueryResolver implements QueryInterface
                         ->findSsoByType($limit, $offset, $sso)
                         ->getIterator()
                         ->getArrayCopy()
-                    ;
+                ;
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
 

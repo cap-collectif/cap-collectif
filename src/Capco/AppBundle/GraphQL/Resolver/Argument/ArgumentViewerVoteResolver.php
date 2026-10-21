@@ -14,8 +14,7 @@ class ArgumentViewerVoteResolver implements QueryInterface
 
     public function __construct(
         private ArgumentVoteRepository $argumentVoteRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $argument, $viewer): ?ArgumentVote
     {

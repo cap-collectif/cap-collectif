@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="proposal_assessment")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalAssessmentRepository")
  */
 class ProposalAssessment implements EntityInterface, Timestampable
@@ -23,6 +24,7 @@ class ProposalAssessment implements EntityInterface, Timestampable
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="assessment")
+     *
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private Proposal $proposal;
@@ -31,18 +33,21 @@ class ProposalAssessment implements EntityInterface, Timestampable
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(name="updated_by", nullable=true, referencedColumnName="id")
      */
     private ?User $updatedBy = null;
 
     /**
      * @ORM\Column(type="string", nullable=false)
+     *
      * @Assert\Choice(choices = {"IN_PROGRESS", "FAVOURABLE", "UNFAVOURABLE", "TOO_LATE"})
      */
     private string $state = ProposalStatementState::IN_PROGRESS;
 
     /**
      * @Gedmo\Timestampable(on="update")
+     *
      * @ORM\Column(type="datetime", name="updated_at")
      */
     private $updatedAt;

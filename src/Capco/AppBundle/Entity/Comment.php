@@ -31,7 +31,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CommentRepository")
+ *
  * @ORM\Table(name="comment", indexes={
+ *
  *    @ORM\Index(name="proposal_comment_idx", columns={"id", "proposal_id"}),
  *    @ORM\Index(name="event_comment_idx", columns={"id", "event_id"}),
  *    @ORM\Index(name="parent_comment_idx", columns={"id", "parent_id"}),
@@ -40,15 +42,20 @@ use Symfony\Component\Validator\Constraints as Assert;
  *    @ORM\Index(name="comment_idx_published_id_id", columns={"id", "author_id", "published"}),
  *    @ORM\Index(name="comment_idx_published_trashed_at_proposal_id_object_type_id", columns={"published","trashed_at","proposal_id","objectType","id"})
  * })
+ *
  * @ORM\HasLifecycleCallbacks()
+ *
  * @ORM\InheritanceType("SINGLE_TABLE")
+ *
  * @ORM\DiscriminatorColumn(name = "objectType", type = "string")
+ *
  * @ORM\DiscriminatorMap({
  *      "event"    = "EventComment",
  *      "post"     = "PostComment",
  *      "proposal" = "ProposalComment",
  *      "proposal_analysis" = "ProposalAnalysisComment"
  * })
+ *
  * @CapcoAssert\CommentHasAuthor
  */
 abstract class Comment implements EntityInterface, Publishable, Trashable, Contribution, VotableInterface, CommentableInterface, ReportableInterface, \Stringable
@@ -70,19 +77,23 @@ abstract class Comment implements EntityInterface, Publishable, Trashable, Contr
 
     /**
      * @var \DateTime
+     *
      * @Gedmo\Timestampable(on="change", field={"body"})
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     protected $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="comments")
+     *
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     protected ?User $author = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Comment", inversedBy="answers")
+     *
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     protected $parent;
@@ -93,22 +104,20 @@ abstract class Comment implements EntityInterface, Publishable, Trashable, Contr
     protected $answers;
 
     /**
-     * @var
-     *
      * @ORM\Column(name="author_name", type="string", nullable=true)
      */
     protected $authorName;
 
     /**
-     * @var
-     *
      * @ORM\Column(name="author_email", type="string", nullable=true)
+     *
      * @Assert\Email(message="comment.create.invalid_email_error")
      */
     protected $authorEmail;
 
     /**
      * @ORM\Column(name="author_ip", type="string", nullable=true)
+     *
      * @Assert\Ip(version="all")
      */
     protected $authorIp;

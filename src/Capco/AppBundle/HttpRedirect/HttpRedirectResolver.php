@@ -17,8 +17,7 @@ class HttpRedirectResolver
         private readonly HttpRedirectRepository $httpRedirectRepository,
         private readonly RedisCache $httpRedirectCache,
         private readonly SameRequestCache $sameRequestCache
-    ) {
-    }
+    ) {}
 
     public function resolve(Request $request): ?ResolvedHttpRedirection
     {

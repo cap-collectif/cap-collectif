@@ -15,8 +15,7 @@ class OrderedCollectionType extends CollectionType
 {
     public function __construct(
         private readonly PropertyAccessorInterface $propertyAccessor
-    ) {
-    }
+    ) {}
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -74,8 +73,7 @@ class OrderedCollectionType extends CollectionType
                     }
                 }
                 foreach (
-                    Diff::fromCollectionsWithId($collectionInDb, $userCollection)
-                    as $itemToDelete
+                    Diff::fromCollectionsWithId($collectionInDb, $userCollection) as $itemToDelete
                 ) {
                     $items = $this->propertyAccessor->getValue($parent, $field);
                     $this->propertyAccessor->setValue(

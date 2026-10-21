@@ -11,8 +11,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Calls the controller directly and asserts publication instead of exercising the moderation
  * HTTP boundary.
  */
@@ -20,8 +23,11 @@ class ModerationControllerTest extends KernelTestCase
 {
     /**
      * @param array<string, string> $payload
+     *
      * @dataProvider moderatedContributions
+     *
      * @runInSeparateProcess
+     *
      * @preserveGlobalState disabled
      */
     public function testPublishesTheTrashMessage(string $token, string $reason, string $queue, array $payload): void

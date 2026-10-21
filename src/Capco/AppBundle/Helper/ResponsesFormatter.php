@@ -12,8 +12,7 @@ class ResponsesFormatter
 {
     public function __construct(
         protected AbstractQuestionRepository $questionRepo
-    ) {
-    }
+    ) {}
 
     public function format(array $responses): array
     {

@@ -26,8 +26,7 @@ class FooterSocialNetworksResolver
         protected MenuItemResolver $menuItemResolver,
         protected RequestStack $requestStack,
         private readonly GraphQLLocaleResolver $localeResolver
-    ) {
-    }
+    ) {}
 
     /**
      * @return array<array{name: string, url: string, isExternalLink: bool}>

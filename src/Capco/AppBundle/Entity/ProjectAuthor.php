@@ -18,7 +18,9 @@ use Doctrine\ORM\Mapping as ORM;
  * Ex: When a user or organization has been added as author.
  *
  * @ORM\Table(name="project_author")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProjectAuthorRepository")
+ *
  * @CapcoAssert\HasAuthor()
  */
 class ProjectAuthor implements EntityInterface, Authorable, Author
@@ -28,18 +30,21 @@ class ProjectAuthor implements EntityInterface, Authorable, Author
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Organization\Organization")
+     *
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     protected ?Organization $organization = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private ?User $user = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Project", inversedBy="authors", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     private Project $project;

@@ -20,8 +20,7 @@ class ProposalFormUpdateType extends AbstractType
 {
     public function __construct(
         protected Manager $toggleManager
-    ) {
-    }
+    ) {}
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

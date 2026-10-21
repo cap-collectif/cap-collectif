@@ -8,9 +8,13 @@ use Gaufrette\File;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises HTTP outcomes and real domain data with transactional cleanup; replaces only external boundaries.
  */
 final class MagicLinkAuthenticatorTest extends IdentityWebTestCase
@@ -70,10 +74,15 @@ final class MagicLinkAuthenticatorTest extends IdentityWebTestCase
     public static function tokens(): iterable
     {
         yield 'valid link' => ['valid', 'https://capco.test/themes', 'https://capco.test/themes'];
+
         yield 'expired' => ['expired', 'https://capco.test/themes', null];
+
         yield 'unknown account' => ['unknown', 'https://capco.test/themes', null];
+
         yield 'forged email with unchanged signature' => ['tampered', 'https://capco.test/themes', null];
+
         yield 'malformed token' => ['malformed', 'https://capco.test/themes', null];
+
         yield 'script in redirect' => ['valid', 'https://capco.test/<script>alert("xss")</script>', 'https://capco.test/'];
     }
 }

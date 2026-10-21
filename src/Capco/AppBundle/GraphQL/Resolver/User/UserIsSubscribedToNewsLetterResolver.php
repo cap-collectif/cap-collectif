@@ -11,8 +11,7 @@ class UserIsSubscribedToNewsLetterResolver implements QueryInterface
 {
     public function __construct(
         protected NewsletterSubscriptionRepository $newLetterRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(User $user): bool
     {

@@ -13,8 +13,7 @@ class ProposalFormProposalsResolver implements QueryInterface
 {
     public function __construct(
         private readonly ProposalFormProposalsDataLoader $dataLoader
-    ) {
-    }
+    ) {}
 
     public function __invoke(ProposalForm $form, Arg $args, $viewer, RequestStack $request): Promise
     {

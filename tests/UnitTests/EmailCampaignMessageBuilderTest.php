@@ -12,6 +12,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 final class EmailCampaignMessageBuilderTest extends TestCase

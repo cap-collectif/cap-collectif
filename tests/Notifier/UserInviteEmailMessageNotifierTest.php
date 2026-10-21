@@ -20,7 +20,9 @@ use Symfony\Component\Routing\RouterInterface;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Checks provider status mapping on a real message through the public API; does not claim SQL persistence.
  */
 class UserInviteEmailMessageNotifierTest extends TestCase
@@ -48,11 +50,17 @@ class UserInviteEmailMessageNotifierTest extends TestCase
     public static function deliveredStatuses(): iterable
     {
         yield 'Mailjet sent' => ['mailjet', MailjetClient::STATUS_SENT, false, UserInviteEmailMessage::SENT, '456'];
+
         yield 'Mailjet opened' => ['mailjet', MailjetClient::STATUS_OPENED, false, UserInviteEmailMessage::SENT, '789'];
+
         yield 'Mailjet clicked' => ['mailjet', MailjetClient::STATUS_CLICKED, false, UserInviteEmailMessage::SENT, '901'];
+
         yield 'Mailjet bounced' => ['mailjet', 'bounced', true, UserInviteEmailMessage::SEND_FAILURE, '123'];
+
         yield 'Mandrill sent' => ['mandrill', MandrillClient::STATUS_SENT, false, UserInviteEmailMessage::SENT, '456'];
+
         yield 'Mandrill different message' => ['mandrill', MandrillClient::STATUS_SENT, false, UserInviteEmailMessage::SENT, 'another-message'];
+
         yield 'Mandrill failed' => ['mandrill', 'failed', true, UserInviteEmailMessage::SEND_FAILURE, '789'];
     }
 
@@ -83,6 +91,7 @@ class UserInviteEmailMessageNotifierTest extends TestCase
     public static function queuedProviders(): iterable
     {
         yield 'Mailjet queued' => ['mailjet', '456'];
+
         yield 'Mandrill queued' => ['mandrill', 'queued-message'];
     }
 

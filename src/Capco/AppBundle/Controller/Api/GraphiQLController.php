@@ -14,8 +14,7 @@ final class GraphiQLController
         private readonly TwigEnvironment $twig,
         private readonly GraphiQLViewConfig $viewConfig,
         private readonly GraphiQLControllerEndpoint $graphQLEndpoint
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/graphiql", name="graphiql_endpoint", defaults={"_feature_flags" = "public_api"}, options={"i18n" = false})

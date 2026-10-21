@@ -17,8 +17,7 @@ class DeleteSourceCategoryMutation implements MutationInterface
     public function __construct(
         private readonly SourceCategoryRepository $repository,
         private readonly EntityManagerInterface $em
-    ) {
-    }
+    ) {}
 
     /**
      * @return array<string, string>

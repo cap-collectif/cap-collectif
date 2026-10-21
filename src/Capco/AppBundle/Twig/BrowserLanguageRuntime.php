@@ -16,8 +16,7 @@ class BrowserLanguageRuntime implements RuntimeExtensionInterface
         protected Manager $toggleManager,
         protected PublishedLocalesDataloader $localeDataloader,
         protected DefaultLocaleCodeDataloader $defaultLocaleCodeDataloader
-    ) {
-    }
+    ) {}
 
     public function getBrowserLanguage(Request $request, $viewer = null): string
     {

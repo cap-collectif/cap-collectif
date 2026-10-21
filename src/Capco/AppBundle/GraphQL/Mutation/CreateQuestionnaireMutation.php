@@ -29,8 +29,7 @@ class CreateQuestionnaireMutation implements MutationInterface
         private readonly SettableOwnerResolver $settableOwnerResolver,
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly ActionLogger $actionLogger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer, bool $toLogUserAction = true): array
     {

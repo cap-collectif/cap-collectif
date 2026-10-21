@@ -12,8 +12,7 @@ class SocialNetworkListResolver implements QueryInterface
 {
     public function __construct(
         private readonly SocialNetworkRepository $socialNetworkRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): Connection
     {

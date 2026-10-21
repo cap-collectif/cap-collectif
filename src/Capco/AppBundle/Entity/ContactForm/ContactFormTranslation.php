@@ -13,9 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ContactFormTranslationRepository")
  * @ORM\Entity()
+ *
  * @ORM\Table(
  *  name="contact_form_translation",
  *  uniqueConstraints={
+ *
  *    @ORM\UniqueConstraint(
  *      name="translation_unique",
  *      columns={"translatable_id", "locale"}

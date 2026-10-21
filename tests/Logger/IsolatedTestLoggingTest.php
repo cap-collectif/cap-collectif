@@ -6,10 +6,15 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises real warning output in an isolated PHPUnit process and verifies bounded log persistence.
  */
 final class IsolatedTestLoggingTest extends KernelTestCase

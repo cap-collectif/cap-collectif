@@ -17,6 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="section")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SectionRepository")
  */
 class Section implements EntityInterface, TranslatableInterface, \Stringable
@@ -102,19 +103,23 @@ class Section implements EntityInterface, TranslatableInterface, \Stringable
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep")
+     *
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
      */
     protected ?AbstractStep $step = null;
 
     /**
      * @ORM\Column(name="type", type="string", length=255)
+     *
      * @Assert\NotBlank()
      */
     private string $type = 'custom';
 
     /**
      * @Gedmo\SortablePosition
+     *
      * @ORM\Column(name="position", type="integer")
+     *
      * @Assert\NotNull()
      */
     private int $position;
@@ -126,6 +131,7 @@ class Section implements EntityInterface, TranslatableInterface, \Stringable
 
     /**
      * @ORM\Column(name="enabled", type="boolean", nullable=false, options={"default" = false})
+     *
      * @Assert\NotNull()
      */
     private bool $enabled = false;
@@ -147,6 +153,7 @@ class Section implements EntityInterface, TranslatableInterface, \Stringable
 
     /**
      * @ORM\Column(name="display_mode", type="string", options={"default":"MOST_RECENT"})
+     *
      * @Assert\Choice(choices = {"MOST_RECENT", "CUSTOM"})
      * Used when type = 'projects', set how the projects are displayed in the section
      */
@@ -154,12 +161,14 @@ class Section implements EntityInterface, TranslatableInterface, \Stringable
 
     /**
      * @Gedmo\Timestampable(on="create")
+     *
      * @ORM\Column(name="created_at", type="datetime")
      */
     private ?\DateTime $createdAt = null;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "position"})
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private ?\DateTime $updatedAt = null;
@@ -431,7 +440,7 @@ class Section implements EntityInterface, TranslatableInterface, \Stringable
     }
 
     /**
-     *  @return Collection<int, SectionCarrouselElement>
+     * @return Collection<int, SectionCarrouselElement>
      */
     public function getSectionCarrouselElements(): Collection
     {

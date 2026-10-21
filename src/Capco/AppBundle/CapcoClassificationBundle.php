@@ -23,9 +23,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class CapcoClassificationBundle extends Bundle
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getParent(): string
     {
         return 'SonataAppBundle';

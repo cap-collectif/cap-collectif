@@ -35,8 +35,7 @@ class AssignAnalystsToProposalsMutation implements MutationInterface
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly ProposalAnalysisRepository $proposalAnalysisRepository,
         private readonly Publisher $publisher
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, $viewer): array
     {
@@ -125,6 +124,7 @@ class AssignAnalystsToProposalsMutation implements MutationInterface
     private static function getNewAssignationsForAnalyst(array $proposals, User $analyst): array
     {
         $newAssignations = [];
+
         /** @var Proposal $proposal */
         foreach ($proposals as $proposal) {
             if (!$proposal->getAnalysts()->contains($analyst)) {

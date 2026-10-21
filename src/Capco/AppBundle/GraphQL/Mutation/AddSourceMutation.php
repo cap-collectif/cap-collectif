@@ -35,8 +35,7 @@ class AddSourceMutation implements MutationInterface
         private readonly RedisStorageHelper $redisStorage,
         private readonly LoggerInterface $logger,
         private readonly StepRequirementsResolver $stepRequirementsResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $viewer): array
     {

@@ -178,6 +178,7 @@ class UpdateProposalFormMutation extends AbstractProposalFormMutation
     ): array {
         if (isset($arguments['categories'])) {
             $proposalCategories = $proposalForm->getCategories();
+
             /** @var ProposalCategory $proposalCategory */
             foreach ($proposalCategories as $proposalCategory) {
                 foreach ($arguments['categories'] as &$category) {

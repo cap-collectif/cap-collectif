@@ -10,8 +10,7 @@ class PublishedLocalesDataloader
 
     public function __construct(
         private readonly LocaleRepository $localeRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke($viewer = null): array
     {

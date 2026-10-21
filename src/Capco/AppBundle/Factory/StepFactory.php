@@ -28,8 +28,7 @@ class StepFactory
     public function __construct(
         private readonly TranslatorInterface $translator,
         private readonly string $locale
-    ) {
-    }
+    ) {}
 
     public function createCollectStep(): CollectStep
     {

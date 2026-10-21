@@ -26,8 +26,7 @@ class DeleteMediatorMutation implements MutationInterface
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly Manager $manager,
         private readonly Indexer $indexer
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

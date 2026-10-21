@@ -137,7 +137,7 @@ class ProposalStatusDataLoader extends BatchDataLoader
             if ($step instanceof SelectionStep) {
                 return self::resolveSelectionStep($step, $proposal);
             }
-            if (!($step instanceof CollectStep)) {
+            if (!$step instanceof CollectStep) {
                 $this->logger->error(
                     __METHOD__ .
                         'step ' .

@@ -13,8 +13,7 @@ class ParticipantConsentInternalCommunicationEmailProcessor implements Processor
     public function __construct(
         private readonly ParticipantConsentInternalCommunicationEmailNotifier $notifier,
         private readonly RouterInterface $router
-    ) {
-    }
+    ) {}
 
     public function process(Message $message, array $options): bool
     {

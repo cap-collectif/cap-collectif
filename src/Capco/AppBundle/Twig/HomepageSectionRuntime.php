@@ -29,8 +29,7 @@ class HomepageSectionRuntime implements RuntimeExtensionInterface
         private readonly SerializerInterface $serializer,
         private readonly Environment $twig,
         private readonly TokenStorageInterface $tokenStorage
-    ) {
-    }
+    ) {}
 
     public function getHighlightedContent(?Section $section = null): string
     {

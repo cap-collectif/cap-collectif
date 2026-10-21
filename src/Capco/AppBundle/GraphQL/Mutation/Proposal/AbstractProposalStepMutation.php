@@ -25,7 +25,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 abstract class AbstractProposalStepMutation
 {
-    //restrictions
+    // restrictions
     protected ?Project $project = null;
     protected ?AbstractStep $step = null;
 
@@ -37,8 +37,7 @@ abstract class AbstractProposalStepMutation
         private readonly Publisher $publisher,
         private readonly Indexer $indexer,
         protected AuthorizationCheckerInterface $authorizationChecker
-    ) {
-    }
+    ) {}
 
     public function isGranted(array $stepsIds, ?User $viewer, string $accessType): bool
     {

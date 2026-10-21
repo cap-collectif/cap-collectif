@@ -61,11 +61,11 @@ class User extends AbstractUser implements EntityInterface, ProjectOwner, Equata
     protected $id;
     protected ?string $slug = null;
 
-    //personal
+    // personal
     protected ?Media $media = null;
     protected ?string $birthPlace = null;
 
-    //participations
+    // participations
     protected Collection $opinions;
     protected Collection $opinionVersions;
     protected Collection $comments;
@@ -76,18 +76,18 @@ class User extends AbstractUser implements EntityInterface, ProjectOwner, Equata
     protected Collection $proposals;
     protected Collection $replies;
 
-    //counters
+    // counters
     protected int $opinionVersionsCount = 0;
     protected int $argumentVotesCount = 0;
     protected int $proposalVotesCount = 0;
     protected int $opinionVersionVotesCount = 0;
     protected int $sourceVotesCount = 0;
 
-    //account rights
+    // account rights
     protected bool $locked = false;
     protected ?UserType $userType = null;
     protected bool $vip = false;
-    //account security
+    // account security
     protected ?string $newEmailToConfirm = null;
     protected ?string $newEmailConfirmationToken = null;
     protected ?\DateTime $emailConfirmationSentAt = null;
@@ -97,7 +97,7 @@ class User extends AbstractUser implements EntityInterface, ProjectOwner, Equata
     protected ?\DateTime $deletedAccountAt = null;
     protected bool $remindedAccountConfirmationAfter24Hours = false;
 
-    //notifications
+    // notifications
     protected Collection $followingContributions;
     protected UserNotificationsConfiguration $notificationsConfiguration;
     protected bool $consentExternalCommunication = false;
@@ -113,6 +113,7 @@ class User extends AbstractUser implements EntityInterface, ProjectOwner, Equata
     private Collection $userGroups;
     private ?string $resetPasswordToken = null;
     private ?UserIdentificationCode $userIdentificationCode = null;
+
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalSupervisor", mappedBy="supervisor")
      */
@@ -135,11 +136,11 @@ class User extends AbstractUser implements EntityInterface, ProjectOwner, Equata
 
     private bool $consentPrivacyPolicy = false;
 
-    private ?\Datetime $anonymizationReminderEmailSentAt = null;
+    private ?\DateTime $anonymizationReminderEmailSentAt = null;
 
     private ?string $anonymizationReminderEmailToken = null;
 
-    private ?\Datetime $anonymizedAt = null;
+    private ?\DateTime $anonymizedAt = null;
 
     public function __construct()
     {
@@ -1313,12 +1314,12 @@ class User extends AbstractUser implements EntityInterface, ProjectOwner, Equata
         return $this->isOrganizationMember() || $this->hasRole(UserRole::ROLE_PROJECT_ADMIN) || $this->hasRole(UserRole::ROLE_ADMIN);
     }
 
-    public function getAnonymizationReminderEmailSentAt(): ?\Datetime
+    public function getAnonymizationReminderEmailSentAt(): ?\DateTime
     {
         return $this->anonymizationReminderEmailSentAt;
     }
 
-    public function setAnonymizationReminderEmailSentAt(?\Datetime $anonymizationReminderEmailSentAt): self
+    public function setAnonymizationReminderEmailSentAt(?\DateTime $anonymizationReminderEmailSentAt): self
     {
         $this->anonymizationReminderEmailSentAt = $anonymizationReminderEmailSentAt;
 
@@ -1337,12 +1338,12 @@ class User extends AbstractUser implements EntityInterface, ProjectOwner, Equata
         return $this;
     }
 
-    public function getAnonymizedAt(): ?\Datetime
+    public function getAnonymizedAt(): ?\DateTime
     {
         return $this->anonymizedAt;
     }
 
-    public function setAnonymizedAt(?\Datetime $anonymizedAt): self
+    public function setAnonymizedAt(?\DateTime $anonymizedAt): self
     {
         $this->anonymizedAt = $anonymizedAt;
 

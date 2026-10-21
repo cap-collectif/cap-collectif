@@ -27,8 +27,7 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
         private ProposalStepPaperVoteCounterRepository $proposalStepPaperVoteCounterRepository,
         private CommentableCommentsDataLoader $commentableCommentsDataLoader,
         private ProposalResponsesResolver $proposalResponsesResolver
-    ) {
-    }
+    ) {}
 
     public function hasCacheableSupportsMethod(): bool
     {
@@ -52,8 +51,7 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
                 $object,
                 null,
                 new \ArrayObject(['disable_acl' => false])
-            )
-            as $publicResponse
+            ) as $publicResponse
         ) {
             if (
                 !($publicResponse instanceof MediaResponse)

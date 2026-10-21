@@ -59,7 +59,7 @@ class ReportingAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $list): void
     {
-        //$this->setTemplate(
+        // $this->setTemplate(
         $list
             ->addIdentifier('object', null, [
                 'label' => 'global.contribution',

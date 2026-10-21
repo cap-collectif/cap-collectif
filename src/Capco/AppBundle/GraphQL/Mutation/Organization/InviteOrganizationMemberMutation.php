@@ -43,8 +43,7 @@ class InviteOrganizationMemberMutation implements MutationInterface
         private readonly SiteParameterResolver $siteParameter,
         private readonly Publisher $publisher,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

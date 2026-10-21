@@ -20,11 +20,10 @@ class SendParticipantEmailWorkflowMutation implements MutationInterface
         private UserRepository $userRepository,
         private MagicLinkEmailSender $magicLinkEmailSender,
         private ConfirmationParticipationParticipantEmailSender $confirmationParticipationParticipantEmailSender
-    ) {
-    }
+    ) {}
 
     /**
-     * @return array{'errorCode': string|null, 'redirectUrl'?: string|null}
+     * @return array{'errorCode': null|string, 'redirectUrl'?: null|string}
      */
     public function __invoke(Argument $argument): array
     {
@@ -50,7 +49,7 @@ class SendParticipantEmailWorkflowMutation implements MutationInterface
     }
 
     /**
-     * @return array{'errorCode': string|null, 'redirectUrl': string|null}
+     * @return array{'errorCode': null|string, 'redirectUrl': null|string}
      */
     private function sendMagicLink(string $emailType, string $email, string $redirectUrl): array
     {
@@ -61,7 +60,7 @@ class SendParticipantEmailWorkflowMutation implements MutationInterface
     }
 
     /**
-     * @return array{'errorCode': string|null, 'redirectUrl': string|null}
+     * @return array{'errorCode': null|string, 'redirectUrl': null|string}
      */
     private function sendParticipantConfirmationEmail(string $email, string $participantToken, string $redirectUrl): array
     {

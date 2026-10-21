@@ -30,8 +30,7 @@ class OrganizationNormalizer implements NormalizerInterface, SerializerAwareInte
         private readonly ObjectNormalizer $normalizer,
         private readonly Manager $manager,
         private readonly ContributionSearch $contributionSearch
-    ) {
-    }
+    ) {}
 
     public function hasCacheableSupportsMethod(): bool
     {

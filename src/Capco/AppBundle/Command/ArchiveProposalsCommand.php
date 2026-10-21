@@ -41,6 +41,7 @@ class ArchiveProposalsCommand extends Command
             $proposals = $this->proposalRepository->findArchivableByStep($step, $voteThreshold);
 
             $count = 0;
+
             /** * @var Proposal $proposal  */
             foreach ($proposals as $proposal) {
                 $dateLimit = $this->getProposalArchivedDateLimit($proposal);

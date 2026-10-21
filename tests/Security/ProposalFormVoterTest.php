@@ -14,7 +14,9 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Checks public domain rules with real entities and observable results, without framework interaction counts.
  */
 class ProposalFormVoterTest extends AuthorizationTestCase
@@ -25,7 +27,7 @@ class ProposalFormVoterTest extends AuthorizationTestCase
     {
         $voter = new ProposalFormVoter();
         foreach ([...self::ACTIONS, ProposalFormVoter::CREATE, ProposalFormVoter::DELETE] as $action) {
-            self::assertSame(VoterInterface::ACCESS_DENIED, $voter->vote($this->token('anon.'), (new ProposalForm()), [$action]));
+            self::assertSame(VoterInterface::ACCESS_DENIED, $voter->vote($this->token('anon.'), new ProposalForm(), [$action]));
         }
     }
 
@@ -35,7 +37,7 @@ class ProposalFormVoterTest extends AuthorizationTestCase
         $admin->addRole('ROLE_ADMIN');
         $voter = new ProposalFormVoter();
         foreach ([...self::ACTIONS, ProposalFormVoter::CREATE, ProposalFormVoter::DELETE] as $action) {
-            self::assertSame(VoterInterface::ACCESS_GRANTED, $voter->vote($this->token($admin), (new ProposalForm()), [$action]));
+            self::assertSame(VoterInterface::ACCESS_GRANTED, $voter->vote($this->token($admin), new ProposalForm(), [$action]));
         }
     }
 
@@ -95,7 +97,7 @@ class ProposalFormVoterTest extends AuthorizationTestCase
     {
         $voter = new ProposalFormVoter();
         $token = $this->token(new User());
-        self::assertSame(VoterInterface::ACCESS_ABSTAIN, $voter->vote($token, (new ProposalForm()), ['unknown']));
+        self::assertSame(VoterInterface::ACCESS_ABSTAIN, $voter->vote($token, new ProposalForm(), ['unknown']));
         self::assertSame(VoterInterface::ACCESS_ABSTAIN, $voter->vote($token, new Proposal(), [ProposalFormVoter::EDIT]));
     }
 

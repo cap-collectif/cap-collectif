@@ -17,15 +17,18 @@ use Symfony\Component\Validator\Validation;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Invokes GraphQL mutations directly with mocked dependencies instead of verifying the HTTP
  * contract and persisted effects.
  */
 class NewsletterSubscriptionMutationTest extends TestCase
 {
-    private MockObject & EntityManagerInterface $entityManager;
-    private MockObject & NewsletterSubscriptionRepository $repository;
+    private EntityManagerInterface&MockObject $entityManager;
+    private MockObject&NewsletterSubscriptionRepository $repository;
 
     protected function setUp(): void
     {

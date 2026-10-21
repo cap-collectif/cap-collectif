@@ -13,6 +13,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class AnonymousArgumentNormalizerTest extends TestCase
@@ -34,7 +35,9 @@ class AnonymousArgumentNormalizerTest extends TestCase
      * @dataProvider normalizationDataProvider
      *
      * @throws ExceptionInterface
+     *
      * @phpunit-status non-compliant
+     *
      * @phpunit-reason Uses loose array equality for the serialized export contract instead of asserting the
      * expected values and types precisely.
      */
@@ -53,6 +56,7 @@ class AnonymousArgumentNormalizerTest extends TestCase
 
     /**
      * @phpunit-status compliant
+     *
      * @phpunit-reason Checks the normalizer public result with real per-test domain objects and controlled
      * service responses.
      */

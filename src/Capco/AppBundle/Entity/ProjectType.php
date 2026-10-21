@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Project Type.
  *
  * @ORM\Table(name="project_type")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProjectTypeRepository")
  */
 class ProjectType implements EntityInterface, \Stringable

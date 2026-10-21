@@ -403,6 +403,7 @@ class CapcoCollectEmailProposalsCommand extends Command
 
         // handle attachments
         $questions = $proposalForm->getRealQuestions();
+
         /** * @var AbstractQuestion $question */
         foreach ($questions as $question) {
             if ($question instanceof MediaQuestion && !$medias->isEmpty()) {

@@ -43,6 +43,7 @@ class ProposalNewsNormalizer extends BaseNormalizer implements NormalizerInterfa
         /** @var Post $object */
         $postAuthors = $object->getAuthors();
         $authorsValues = [];
+
         /** @var PostAuthor $postAuthor */
         foreach ($postAuthors as $postAuthor) {
             $author = $postAuthor->getAuthor();

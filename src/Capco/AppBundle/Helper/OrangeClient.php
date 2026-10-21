@@ -27,8 +27,7 @@ class OrangeClient
         private readonly string $clientSecret,
         private readonly TranslatorInterface $translator,
         private readonly SiteParameterResolver $siteParams
-    ) {
-    }
+    ) {}
 
     /**
      * @return array<string, array<string, string>|int>

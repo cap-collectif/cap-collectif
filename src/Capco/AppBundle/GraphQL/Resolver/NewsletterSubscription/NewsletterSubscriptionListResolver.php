@@ -12,8 +12,7 @@ class NewsletterSubscriptionListResolver implements QueryInterface
 {
     public function __construct(
         private readonly NewsletterSubscriptionRepository $newsletterSubscriptionRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): Connection
     {

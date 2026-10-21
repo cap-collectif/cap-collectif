@@ -10,8 +10,7 @@ class DistrictsForLocalisationResolver implements QueryInterface
 {
     public function __construct(
         private readonly ProposalFormRepository $proposalFormRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(string $proposalFormId, float $latitude, float $longitude): array
     {

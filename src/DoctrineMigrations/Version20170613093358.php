@@ -17,9 +17,7 @@ class Version20170613093358 extends AbstractMigration implements ContainerAwareI
         $this->container = $container;
     }
 
-    public function up(Schema $schema): void
-    {
-    }
+    public function up(Schema $schema): void {}
 
     public function postUp(Schema $schema): void
     {
@@ -27,7 +25,5 @@ class Version20170613093358 extends AbstractMigration implements ContainerAwareI
         $toggleManager->activate('captcha');
     }
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 }

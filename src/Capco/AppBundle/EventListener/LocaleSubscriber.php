@@ -17,8 +17,7 @@ class LocaleSubscriber implements EventSubscriberInterface
         private readonly SiteParameterResolver $siteParameters,
         private readonly Manager $toggleManager,
         private readonly RequestLocaleResolver $requestLocaleResolver
-    ) {
-    }
+    ) {}
 
     public function onKernelRequest(RequestEvent $event)
     {

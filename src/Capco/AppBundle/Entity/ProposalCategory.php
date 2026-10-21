@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="proposal_category")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalCategoryRepository")
  */
 class ProposalCategory implements EntityInterface, \Stringable
@@ -21,6 +22,7 @@ class ProposalCategory implements EntityInterface, \Stringable
 
     /**
      * @Gedmo\Timestampable(on="change", field={"name"})
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     protected $updatedAt;
@@ -32,6 +34,7 @@ class ProposalCategory implements EntityInterface, \Stringable
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="categories", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="form_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     private $form;
@@ -47,20 +50,25 @@ class ProposalCategory implements EntityInterface, \Stringable
 
     /**
      * @var CategoryImage
+     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\CategoryImage", fetch="LAZY", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="category_media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     *
      * @Assert\Valid()
      */
     private $categoryImage;
 
     /**
      * @ORM\Column(name="color", type="string", length=7)
+     *
      * @CapcoAssert\ValidProposalCategoryColor()
      */
     private string $color;
 
     /**
      * @ORM\Column(name="icon", type="string", length=100, nullable=true)
+     *
      * @CapcoAssert\ValidProposalCategoryIcon()
      */
     private ?string $icon = null;

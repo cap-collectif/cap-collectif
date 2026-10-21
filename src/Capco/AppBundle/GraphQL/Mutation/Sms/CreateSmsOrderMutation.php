@@ -19,8 +19,7 @@ class CreateSmsOrderMutation implements MutationInterface
         private readonly EntityManagerInterface $em,
         private readonly SmsOrderRepository $smsOrderRepository,
         private readonly Publisher $publisher
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input): array
     {

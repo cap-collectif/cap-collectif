@@ -25,9 +25,9 @@ class MailingListUserRepository extends EntityRepository
     }
 
     /**
-     * @throws Exception
-     *
      * @return array<int, array<string, ?string>>
+     *
+     * @throws Exception
      */
     public function getRecipientDataByMailingList(
         EmailingCampaign $emailingCampaign,

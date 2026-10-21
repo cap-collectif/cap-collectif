@@ -23,6 +23,7 @@ class MultipleChoiceQuestion extends AbstractQuestion implements EntityInterface
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\QuestionChoice", mappedBy="question", cascade={"remove", "persist"}, orphanRemoval=true, fetch="EAGER")
+     *
      * @ORM\OrderBy({"position" = "ASC"})
      */
     protected $choices;

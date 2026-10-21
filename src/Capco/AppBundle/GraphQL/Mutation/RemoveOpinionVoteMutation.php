@@ -29,8 +29,7 @@ class RemoveOpinionVoteMutation implements MutationInterface
         private OpinionVersionRepository $versionRepo,
         private RedisStorageHelper $redisStorageHelper,
         private StepRequirementsResolver $stepRequirementsResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

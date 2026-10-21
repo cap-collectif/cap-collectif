@@ -15,6 +15,7 @@ trait VoteTypeTrait
 
     /**
      * @Assert\Choice(choices={0,1,2})
+     *
      * @ORM\Column(name="vote_type", type="integer")
      */
     private $voteType = VoteType::DISABLED;
@@ -26,12 +27,14 @@ trait VoteTypeTrait
 
     /**
      * @ORM\Column(name="votes_limit", type="integer", nullable=true)
+     *
      * @Assert\Length(min=1)
      */
     private $votesLimit;
 
     /**
      * @ORM\Column(name="votes_min", type="integer", nullable=true)
+     *
      * @Assert\Length(min=1)
      */
     private $votesMin;

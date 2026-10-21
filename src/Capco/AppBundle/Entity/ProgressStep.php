@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="progress_step")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProgressStepRepository")
  */
 class ProgressStep implements EntityInterface
@@ -31,6 +32,7 @@ class ProgressStep implements EntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="progressSteps", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $proposal;

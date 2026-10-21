@@ -11,8 +11,7 @@ class SectionUrlResolver implements QueryInterface
 {
     public function __construct(
         private readonly RouterInterface $router
-    ) {
-    }
+    ) {}
 
     public function __invoke(OpinionType $type): string
     {

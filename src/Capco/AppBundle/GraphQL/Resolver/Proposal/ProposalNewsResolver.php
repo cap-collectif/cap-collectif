@@ -15,8 +15,7 @@ class ProposalNewsResolver implements QueryInterface
     public function __construct(
         private readonly PostRepository $repository,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Proposal $proposal, Argument $args): Connection
     {

@@ -14,13 +14,16 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Calls the subscriber directly instead of triggering its effect through HTTP or CLI.
  */
 class OpenIdCallbackTargetPathSubscriberTest extends TestCase
 {
-    private MockObject & HttpKernelInterface $kernel;
+    private HttpKernelInterface&MockObject $kernel;
     private OpenIdCallbackTargetPathSubscriber $subscriber;
 
     protected function setUp(): void

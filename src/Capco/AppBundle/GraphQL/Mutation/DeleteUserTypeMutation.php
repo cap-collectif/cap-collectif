@@ -18,14 +18,13 @@ class DeleteUserTypeMutation implements MutationInterface
     public function __construct(
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly UserTypeRepository $userTypeRepository
-    ) {
-    }
+    ) {}
 
     /**
+     * @return string[]
+     *
      * @throws ORMException
      * @throws OptimisticLockException
-     *
-     * @return string[]
      */
     public function __invoke(string $globalId, User $viewer): array
     {

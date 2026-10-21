@@ -40,24 +40,24 @@ class CasHandler
         if ('dev' === $this->environment || 'test' === $this->environment) {
             // THIS SETTING IS NOT RECOMMENDED FOR PRODUCTION.
             // VALIDATING THE CAS SERVER IS CRUCIAL TO THE SECURITY OF THE CAS PROTOCOL!
-            phpCAS::setNoCasServerValidation();
+            \phpCAS::setNoCasServerValidation();
         } else {
             // Set the certificate of the CAS server CA and if the CN should be properly verified, Example: certificate path (/path/to/vtca_cachain.pem)
-            phpCAS::setCasServerCACert($this->getConfiguration()->getCasCertificateFile());
+            \phpCAS::setCasServerCACert($this->getConfiguration()->getCasCertificateFile());
         }
 
         // Check CAS authentication
-        $auth = phpCAS::checkAuthentication();
+        $auth = \phpCAS::checkAuthentication();
         if (!$auth) {
             // Force CAS authentication
-            phpCAS::forceAuthentication();
+            \phpCAS::forceAuthentication();
         }
 
         // Get returned attributes by CAS server, not used as specified at time of code writing !
         // $attributes = phpCAS::getAttributes();
 
         // Put returned login in session for reuse in authentication process
-        $this->session->set('cas_login', phpCAS::getUser());
+        $this->session->set('cas_login', \phpCAS::getUser());
 
         // Redirect to given destination
         return $this->redirect($destination);
@@ -75,7 +75,7 @@ class CasHandler
         $this->session->clear();
 
         // Logout from CAS server, disconnect user from CAS server and redirect to given destination
-        phpCAS::logoutWithRedirectService($destination);
+        \phpCAS::logoutWithRedirectService($destination);
     }
 
     protected function redirect(string $url, int $status = 302): Response
@@ -87,19 +87,19 @@ class CasHandler
     {
         if ('dev' === $this->environment) {
             // Enable debugging for dev environment only
-            phpCAS::setLogger($this->logger);
+            \phpCAS::setLogger($this->logger);
             // Enable verbose error messages. Disable it in production!
-            phpCAS::setVerbose(true);
+            \phpCAS::setVerbose(true);
         }
     }
 
     private function initializeClient(): void
     {
-        if (!phpCAS::isInitialized()) {
+        if (!\phpCAS::isInitialized()) {
             $serverURL = $this->getServerUrlParts();
 
             // Initialize phpCAS
-            phpCAS::client(
+            \phpCAS::client(
                 $this->getVersion(),
                 $serverURL['host'],
                 (int) $serverURL['port'],

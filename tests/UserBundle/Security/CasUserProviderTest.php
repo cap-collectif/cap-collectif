@@ -7,9 +7,13 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises HTTP outcomes and real domain data with transactional cleanup; replaces only external boundaries.
  */
 final class CasUserProviderTest extends IdentityWebTestCase
@@ -92,6 +96,7 @@ final class CasUserProviderTest extends IdentityWebTestCase
     public static function accountStates(): iterable
     {
         yield 'new CAS account' => [false];
+
         yield 'existing account with updated profile' => [true];
     }
 
@@ -128,6 +133,7 @@ final class CasUserProviderTest extends IdentityWebTestCase
     public static function disabledCasConfigurations(): iterable
     {
         yield 'feature disabled' => [true, false];
+
         yield 'configuration disabled' => [false, true];
     }
 }

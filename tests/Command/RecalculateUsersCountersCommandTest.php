@@ -14,7 +14,9 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason The real CLI command verifies counters in the retained SQL schema and queue consumption with rolled-back SQL and a scenario-owned Redis namespace; Elasticsearch is excluded.
  */
 final class RecalculateUsersCountersCommandTest extends DatabaseCommandTestCase

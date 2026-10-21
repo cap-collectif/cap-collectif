@@ -436,10 +436,10 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
                 );
                 $this->exportProposalNews(variants: $variants, proposal: $proposal, step: $step, proposalData: $proposalFullData);
 
+                ++$proposalCount;
                 if (($proposalCount % self::BATCH_SIZE) === 0) {
                     $this->em->clear();
                 }
-                ++$proposalCount;
 
                 $memoryUsage = $this->getFormattedMemoryUsage();
                 $style->writeln(sprintf('Total Proposals Processed: %d (memory used: %s)', $proposalCount, $memoryUsage));
@@ -798,7 +798,7 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
     private function getSteps(InputInterface $input): array
     {
         if ($input->getOption('stepId')) {
-            /** * @var ProposalStepInterface|null $step  */
+            /** * @var null|ProposalStepInterface $step  */
             $step = $this->abstractStepRepository->find($input->getOption('stepId'));
             if (!$step instanceof ProposalStepInterface) {
                 throw new \InvalidArgumentException(sprintf('Step "%s" should implements ProposalStepInterface.', $input->getOption('stepId')));

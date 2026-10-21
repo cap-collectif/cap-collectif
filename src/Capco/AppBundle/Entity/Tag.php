@@ -8,19 +8,24 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Doctrine\ORM\EntityRepository")
+ *
  * @ORM\Table(
  *     name="classification__tag",
  *     uniqueConstraints={
+ *
  *         @ORM\UniqueConstraint(name="tag_context", columns={"slug", "context"})
  *     }
  * )
+ *
  * @ORM\HasLifecycleCallbacks
  */
 class Tag implements EntityInterface, \Stringable
 {
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
      * @ORM\Column(type="integer")
      */
     protected int $id;
@@ -52,6 +57,7 @@ class Tag implements EntityInterface, \Stringable
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Context")
+     *
      * @ORM\JoinColumn(name="context", referencedColumnName="id", nullable=true)
      */
     protected ?Context $context = null;

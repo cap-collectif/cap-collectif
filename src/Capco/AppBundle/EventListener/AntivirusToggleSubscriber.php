@@ -15,8 +15,7 @@ class AntivirusToggleSubscriber implements EventSubscriberInterface
     public function __construct(
         private readonly ClamdManager $clamdManager,
         private readonly string $environment
-    ) {
-    }
+    ) {}
 
     public static function getSubscribedEvents(): array
     {

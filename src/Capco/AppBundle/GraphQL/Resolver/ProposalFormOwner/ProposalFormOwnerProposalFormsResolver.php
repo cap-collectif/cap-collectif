@@ -15,8 +15,7 @@ class ProposalFormOwnerProposalFormsResolver implements QueryInterface
 {
     public function __construct(
         private readonly ProposalFormRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args, User $viewer): ConnectionInterface
     {

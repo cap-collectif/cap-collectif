@@ -54,7 +54,7 @@ class MandrillClient
 
     public function createSenderDomain(SenderEmailDomain $domain): SenderEmailDomain
     {
-        //when already existing, mandrill api send back the existing domain
+        // when already existing, mandrill api send back the existing domain
         $mandrillDomain = self::senderEmailDomainFromData(
             json_decode(
                 $this->post('senders/add-domain', [

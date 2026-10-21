@@ -11,8 +11,7 @@ class UserIsGrantedResolver
     public function __construct(
         protected TokenStorageInterface $tokenStorage,
         protected LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     /**
      * @description

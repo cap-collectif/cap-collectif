@@ -14,13 +14,9 @@ final class Version20211124152431 extends AbstractMigration
         return 'section_translation title not null';
     }
 
-    public function up(Schema $schema): void
-    {
-    }
+    public function up(Schema $schema): void {}
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 
     public function postUp(Schema $schema): void
     {

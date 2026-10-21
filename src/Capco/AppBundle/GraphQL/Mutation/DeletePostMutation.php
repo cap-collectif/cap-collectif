@@ -19,8 +19,7 @@ class DeletePostMutation implements MutationInterface
         private readonly EntityManagerInterface $em,
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly AuthorizationCheckerInterface $authorizationChecker
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

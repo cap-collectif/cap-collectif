@@ -6,9 +6,13 @@ use Capco\Tests\ResponseVisibilityWebTestCase;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises HTTP outcomes and real domain data with transactional cleanup; replaces only external boundaries.
  */
 final class ReplyResponsesResolverTest extends ResponseVisibilityWebTestCase
@@ -44,8 +48,11 @@ final class ReplyResponsesResolverTest extends ResponseVisibilityWebTestCase
     public static function viewers(): iterable
     {
         yield 'anonymous' => ['anonymous', []];
+
         yield 'unrelated account' => ['other', []];
+
         yield 'author' => ['author', ['Answer public', 'Answer private']];
+
         yield 'administrator' => ['admin', ['Answer public', 'Answer private', 'Answer hidden']];
     }
 }

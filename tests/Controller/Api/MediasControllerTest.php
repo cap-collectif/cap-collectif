@@ -13,8 +13,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Calls the controller action directly instead of uploading the malicious file through HTTP.
  */
 class MediasControllerTest extends KernelTestCase
@@ -59,6 +62,7 @@ class MediasControllerTest extends KernelTestCase
     public static function maliciousHtmlFiles(): \Generator
     {
         yield 'file without HTML extension' => ['stored_xss'];
+
         yield 'HTML file' => ['stored_xss.html'];
     }
 }

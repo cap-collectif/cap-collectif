@@ -7,18 +7,21 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="user_identification_code")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\Security\UserIdentificationCodeRepository")
  */
 class UserIdentificationCode implements EntityInterface
 {
     /**
      * @ORM\Id
+     *
      * @ORM\Column(name="identification_code", type="string", unique=true, nullable=false)
      */
     private string $identificationCode;
 
     /**
      * @ORM\ManyToOne(targetEntity="UserIdentificationCodeList", inversedBy="codes")
+     *
      * @ORM\JoinColumn(name="list_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     private ?UserIdentificationCodeList $list = null;

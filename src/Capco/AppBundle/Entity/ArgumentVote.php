@@ -7,14 +7,14 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ArgumentVoteRepository")
+ *
  * @ORM\HasLifecycleCallbacks()
  */
 class ArgumentVote extends AbstractVote
 {
     /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Argument", inversedBy="votes", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="argument_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $argument;
@@ -28,11 +28,9 @@ class ArgumentVote extends AbstractVote
     }
 
     /**
-     * @param $argument
-     *
      * @return $this
      */
-    public function setArgument($argument): self
+    public function setArgument(mixed $argument): self
     {
         $this->argument = $argument;
         $argument->addVote($this);

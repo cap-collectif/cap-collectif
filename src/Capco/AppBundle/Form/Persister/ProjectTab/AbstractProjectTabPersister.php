@@ -39,8 +39,7 @@ abstract class AbstractProjectTabPersister
         protected readonly EntityManagerInterface $em,
         protected readonly GlobalIdResolver $globalIdResolver,
         protected readonly SluggerInterface $slugger
-    ) {
-    }
+    ) {}
 
     protected function getProject(string $projectId, User $viewer): ?Project
     {

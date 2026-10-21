@@ -9,8 +9,7 @@ class ParticipantContributionCounter
 {
     public function __construct(
         private readonly EntityManagerInterface $em
-    ) {
-    }
+    ) {}
 
     /**
      * @return array{byProject: array<array{count: int, project: array{id: string}}>, byStep: array<array{count: int, step: array{id: string}}>, total: int}

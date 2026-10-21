@@ -27,7 +27,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="blog_post")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\PostRepository")
+ *
  * @ORM\HasLifecycleCallbacks()
  */
 class Post implements EntityInterface, CommentableInterface, IndexableInterface, Ownerable, TranslatableInterface, CreatableInterface, \Stringable, ExportableContributionInterface
@@ -58,30 +60,35 @@ class Post implements EntityInterface, CommentableInterface, IndexableInterface,
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "body", "abstract"})
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private \DateTime $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private ?Media $media = null;
 
     /**
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="posts", cascade={"persist"})
+     *
      * @ORM\JoinTable(name="theme_post")
      */
     private Collection $themes;
 
     /**
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Project", inversedBy="posts", cascade={"persist"})
+     *
      * @ORM\JoinTable(name="project_post")
      */
     private Collection $projects;
 
     /**
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Proposal", cascade={"persist"})
+     *
      * @ORM\JoinTable(name="proposal_post")
      */
     private Collection $proposals;
@@ -276,6 +283,7 @@ class Post implements EntityInterface, CommentableInterface, IndexableInterface,
         if (!$author) {
             return false;
         }
+
         /** @var PostAuthor $postAuthor */
         foreach ($this->authors as $postAuthor) {
             if ($postAuthor->getAuthor() === $author) {

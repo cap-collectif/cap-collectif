@@ -65,6 +65,7 @@ class SiteParameterRepository extends EntityRepository
             ->getQuery()
             ->useQueryCache(true)
             ->enableResultCache(60, self::getValueCacheKey($locale, $keyname))
-            ->getSingleResult()['value'];
+            ->getSingleResult()['value']
+        ;
     }
 }

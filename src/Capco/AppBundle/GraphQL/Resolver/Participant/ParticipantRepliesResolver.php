@@ -23,8 +23,7 @@ class ParticipantRepliesResolver implements QueryInterface
         private readonly ReplyRepository $replyRepository,
         private readonly QuestionnaireResultsAccessResolver $resultsAccess,
         private readonly EntityManagerInterface $entityManager
-    ) {
-    }
+    ) {}
 
     public function __invoke(Participant $participant, ?User $viewer, ?Argument $args = null, ?\ArrayObject $context = null): ConnectionInterface|Promise
     {
@@ -32,7 +31,8 @@ class ParticipantRepliesResolver implements QueryInterface
         $this->protectArguments($args);
 
         $query = $this->replyRepository->createQueryBuilder('reply')
-            ->andWhere('reply.participant = :contributor')->setParameter('contributor', $participant);
+            ->andWhere('reply.participant = :contributor')->setParameter('contributor', $participant)
+        ;
         $this->resultsAccess->restrictReplyQuery($query, 'reply', $viewer, $context);
         $filters = $this->entityManager->getFilters();
         $wasEnabled = $filters->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME);

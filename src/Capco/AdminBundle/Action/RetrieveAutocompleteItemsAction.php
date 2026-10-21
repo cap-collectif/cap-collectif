@@ -28,16 +28,15 @@ final class RetrieveAutocompleteItemsAction
     public function __construct(
         private readonly Pool $pool,
         private readonly UserSearch $userSearch
-    ) {
-    }
+    ) {}
 
     /**
      * Retrieve list of items for autocomplete form field.
      *
+     * @return JsonResponse
+     *
      * @throws \RuntimeException
      * @throws AccessDeniedException
-     *
-     * @return JsonResponse
      */
     public function __invoke(Request $request)
     {
@@ -159,7 +158,7 @@ final class RetrieveAutocompleteItemsAction
                 // multiple properties
                 foreach ($property as $prop) {
                     if (!$datagrid->hasFilter($prop)) {
-                        throw new \RuntimeException(sprintf('To retrieve autocomplete items,' . ' you should add filter "%s" to "%s" in configureDatagridFilters() method.', $prop, $targetAdmin::class));
+                        throw new \RuntimeException(sprintf('To retrieve autocomplete items, you should add filter "%s" to "%s" in configureDatagridFilters() method.', $prop, $targetAdmin::class));
                     }
 
                     $filter = $datagrid->getFilter($prop);
@@ -169,7 +168,7 @@ final class RetrieveAutocompleteItemsAction
                 }
             } else {
                 if (!$datagrid->hasFilter($property)) {
-                    throw new \RuntimeException(sprintf('To retrieve autocomplete items,' . ' you should add filter "%s" to "%s" in configureDatagridFilters() method.', $property, $targetAdmin::class));
+                    throw new \RuntimeException(sprintf('To retrieve autocomplete items, you should add filter "%s" to "%s" in configureDatagridFilters() method.', $property, $targetAdmin::class));
                 }
 
                 $datagrid->setValue(
@@ -220,9 +219,9 @@ final class RetrieveAutocompleteItemsAction
      *
      * @param string $field
      *
-     * @throws \RuntimeException
-     *
      * @return \Sonata\AdminBundle\Admin\FieldDescriptionInterface
+     *
+     * @throws \RuntimeException
      */
     private function retrieveFilterFieldDescription(AdminInterface $admin, $field)
     {
@@ -246,9 +245,9 @@ final class RetrieveAutocompleteItemsAction
      *
      * @param string $field
      *
-     * @throws \RuntimeException
-     *
      * @return \Sonata\AdminBundle\Admin\FieldDescriptionInterface
+     *
+     * @throws \RuntimeException
      */
     private function retrieveFormFieldDescription(AdminInterface $admin, $field)
     {

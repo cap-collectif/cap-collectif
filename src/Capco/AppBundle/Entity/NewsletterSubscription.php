@@ -13,7 +13,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * NewsletterSubscription.
  *
  * @ORM\Table(name="newsletter_subscription")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\NewsletterSubscriptionRepository")
+ *
  * @UniqueEntity(
  *     fields={"email"},
  *     message="newsletter.already_subscribed"
@@ -25,14 +27,18 @@ class NewsletterSubscription implements EntityInterface, \Stringable
 
     /**
      * @ORM\Column(name="email", type="string", length=255, unique=true, nullable=false)
+     *
      * @Assert\NotBlank()
+     *
      * @Assert\NotNull()
+     *
      * @Assert\Email()
      */
     private string $email;
 
     /**
      * @Gedmo\Timestampable(on="create")
+     *
      * @ORM\Column(name="created_at", type="datetime")
      */
     private \DateTime $createdAt;

@@ -15,8 +15,7 @@ class StepAccessResolver
     public function __construct(
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly HubDocumentsStepGuard $hubDocumentsStepGuard
-    ) {
-    }
+    ) {}
 
     public function canEdit(AbstractStep $step, ?User $viewer = null): bool
     {

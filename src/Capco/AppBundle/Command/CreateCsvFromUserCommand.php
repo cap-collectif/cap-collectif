@@ -398,7 +398,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         $writer->addRow(WriterEntityFactory::createRowFromArray($header));
 
         $rows = [];
-        //we need to handle indepth arrays who are not mapped
+        // we need to handle indepth arrays who are not mapped
 
         if ($contributions = Arr::path($data, 'data.node.contributions.edges')) {
             if ('proposals' === $type) {
@@ -581,7 +581,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
     {
         $infoResolver = new InfoResolver();
 
-        $header = match ($type) {
+        return match ($type) {
             'proposals' => self::PROPOSAL_EXPORT_PATHS,
             'connections' => self::CONNECTIONS_EXPORT_PATHS,
             'comments' => array_keys(self::COMMENTS_EXPORT_PATHS),
@@ -612,8 +612,6 @@ class CreateCsvFromUserCommand extends BaseExportCommand
                 )
             ),
         };
-
-        return $header;
     }
 
     protected function getFilename(): string

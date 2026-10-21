@@ -21,11 +21,11 @@ class DeveloperController extends Controller
 {
     public function __construct(
         private readonly TypeResolver $typeResolver
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/developer/explorer", name="app_developer_explorer", defaults={"_feature_flags" = "developer_documentation"}, options={"i18n" = false})
+     *
      * @Template("@CapcoApp/Developer/explorer.html.twig")
      */
     public function explorerAction(Request $request)
@@ -51,6 +51,7 @@ class DeveloperController extends Controller
 
     /**
      * @Route("/developer/guides", name="app_developer_guides", defaults={"_feature_flags" = "developer_documentation"}, options={"i18n" = false})
+     *
      * @Template("@CapcoApp/Developer/guides.html.twig")
      */
     public function guidesAction(Request $request)
@@ -62,6 +63,7 @@ class DeveloperController extends Controller
      * @Route("/developer", name="app_developer", defaults={"_feature_flags" = "developer_documentation"}, options={"i18n" = false})
      * @Route("/developer/{category}", name="app_developer_category", requirements={"category" = "query|previews|breaking_changes|mutation|object|interface|enum|union|input_object|scalar"}, defaults={"_feature_flags" = "developer_documentation"}, options={"i18n" = false})
      * @Route("/developer/{category}/{type}", name="app_developer_category_type", requirements={"category" = "mutation|object|interface|enum|union|input_object|scalar"}, defaults={"_feature_flags" = "developer_documentation"}, options={"i18n" = false})
+     *
      * @Template("@CapcoApp/Developer/index.html.twig")
      *
      * @param null|mixed $category

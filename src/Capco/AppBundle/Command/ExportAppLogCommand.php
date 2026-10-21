@@ -19,6 +19,7 @@ class ExportAppLogCommand extends BaseExportCommand
     final public const EXPORT_FOLDER = 'app_logs/';
 
     private const CAPCO_EXPORT_APP_LOG = 'capco:export:app-logs';
+
     /** @phpstan-ignore-next-line */
     private readonly string $projectRootDir;
 

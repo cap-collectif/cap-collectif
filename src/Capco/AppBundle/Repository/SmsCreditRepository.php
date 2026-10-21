@@ -18,21 +18,24 @@ class SmsCreditRepository extends EntityRepository
         return $this->createQueryBuilder('s')
             ->setFirstResult($offset)
             ->setMaxResults($limit)
-            ->getQuery()->getResult();
+            ->getQuery()->getResult()
+        ;
     }
 
     public function countAll(): int
     {
         return (int) $this->createQueryBuilder('s')
             ->select('count(s.id)')
-            ->getQuery()->getSingleScalarResult();
+            ->getQuery()->getSingleScalarResult()
+        ;
     }
 
     public function sumAll(): int
     {
         return (int) $this->createQueryBuilder('s')
             ->select('sum(s.amount)')
-            ->getQuery()->getSingleScalarResult();
+            ->getQuery()->getSingleScalarResult()
+        ;
     }
 
     public function findMostRecent(): ?SmsCredit

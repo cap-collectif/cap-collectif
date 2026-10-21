@@ -10,10 +10,8 @@ class Sanitizer
 {
     /**
      * Escapes reserved characters in a string.
-     *
-     * @param $query
      */
-    public static function escape($query, ?array $exclude = null): string
+    public static function escape(mixed $query, ?array $exclude = null): string
     {
         self::ensureString($query);
 

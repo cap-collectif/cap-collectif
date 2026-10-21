@@ -170,7 +170,7 @@ class MailerService extends MailerFactory
         MessageRecipient $recipient
     ): void {
         $swiftMessage->setTo([$recipient->getEmailAddress() => $recipient->getFullName()]);
-        $this->mailer->send($swiftMessage, $this->failedRecipients); //todo not translated if not twig
+        $this->mailer->send($swiftMessage, $this->failedRecipients); // todo not translated if not twig
         // See https://github.com/mustafaileri/swiftmailer/commit/d289295235488cdc79473260e04e3dabd2dac3ef
         if ($this->mailer->getTransport()->isStarted()) {
             $this->mailer->getTransport()->stop();

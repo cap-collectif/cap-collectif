@@ -16,8 +16,7 @@ class SessionListener implements EventSubscriberInterface
 
     public function __construct(
         private readonly SessionInterface $session
-    ) {
-    }
+    ) {}
 
     public function onKernelResponse(ResponseEvent $event): void
     {

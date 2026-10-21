@@ -10,8 +10,7 @@ class EmailDoesNotBelongToUserValidator extends ConstraintValidator
 {
     public function __construct(
         private readonly UserManagerInterface $userManager
-    ) {
-    }
+    ) {}
 
     public function validate($value, Constraint $constraint)
     {

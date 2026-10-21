@@ -14,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * This entity represents an execution of an AnalysisConfiguration.
  *
  * @ORM\Entity(repositoryClass=AnalysisConfigurationProcessRepository::class)
+ *
  * @ORM\Table(name="analysis_configuration_process")
  */
 class AnalysisConfigurationProcess implements EntityInterface
@@ -23,6 +24,7 @@ class AnalysisConfigurationProcess implements EntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity=AnalysisConfiguration::class, inversedBy="processes")
+     *
      * @ORM\JoinColumn(nullable=false)
      */
     private AnalysisConfiguration $analysisConfiguration;

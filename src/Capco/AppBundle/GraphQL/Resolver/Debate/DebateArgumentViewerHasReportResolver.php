@@ -13,8 +13,7 @@ class DebateArgumentViewerHasReportResolver implements QueryInterface
 
     public function __construct(
         private readonly ReportingRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(DebateArgument $debateArgument, $viewer): bool
     {

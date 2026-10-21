@@ -25,7 +25,6 @@ use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Psr\Log\LoggerInterface;
@@ -101,7 +100,7 @@ class AnonymizeAccountByEmailMutation extends BaseAccountAnonymizationMutation
             $this->anonymizeAccount($user);
             $this->em->refresh($user);
             $this->em->flush();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->logger->error($e->getMessage(), ['context' => 'anonymize_user_account_by_email']);
 
             throw new UserError("An error occurred during the user's anonymization");

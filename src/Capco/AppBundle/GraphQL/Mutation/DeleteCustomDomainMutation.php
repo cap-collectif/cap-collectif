@@ -20,8 +20,7 @@ class DeleteCustomDomainMutation implements MutationInterface
         private readonly EntityManagerInterface $em,
         private readonly SiteSettingsRepository $siteSettingsRepository,
         private readonly DeployerClient $deployerClient
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input): array
     {

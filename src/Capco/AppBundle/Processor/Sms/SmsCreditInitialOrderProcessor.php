@@ -12,8 +12,7 @@ class SmsCreditInitialOrderProcessor implements ProcessorInterface
     public function __construct(
         private readonly SmsOrderRepository $smsOrderRepository,
         private readonly SmsNotifier $notifier
-    ) {
-    }
+    ) {}
 
     public function process(Message $message, array $options): bool
     {

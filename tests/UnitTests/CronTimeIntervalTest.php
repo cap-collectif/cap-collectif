@@ -8,8 +8,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Returns the expected duration from the translator mock without checking the calculated
  * remaining-minute parameter.
  */

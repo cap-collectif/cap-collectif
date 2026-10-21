@@ -12,8 +12,7 @@ class DidNotAlreadyVoteValidator extends ConstraintValidator
 {
     public function __construct(
         private readonly EntityManagerInterface $entityManager
-    ) {
-    }
+    ) {}
 
     public function validate($object, Constraint $constraint)
     {

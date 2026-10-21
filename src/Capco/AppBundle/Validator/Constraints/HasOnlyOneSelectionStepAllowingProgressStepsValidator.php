@@ -47,6 +47,7 @@ class HasOnlyOneSelectionStepAllowingProgressStepsValidator extends ConstraintVa
         return $steps->count() > 0
             && $steps
                 ->filter(fn (?AbstractStep $step) => $step && $step->isSelectionStep() && $step->isAllowingProgressSteps())
-                ->count() > 1;
+                ->count() > 1
+        ;
     }
 }

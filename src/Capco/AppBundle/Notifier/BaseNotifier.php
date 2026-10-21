@@ -20,8 +20,7 @@ abstract class BaseNotifier
         protected SiteParameterResolver $siteParams,
         protected RouterInterface $router,
         protected LocaleResolver $localeResolver
-    ) {
-    }
+    ) {}
 
     protected function getBaseUrl(): ?string
     {

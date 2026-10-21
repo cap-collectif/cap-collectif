@@ -20,8 +20,7 @@ class MailingListUsersConnection implements QueryInterface
         private readonly UserRepository $userRepository,
         private readonly ParticipantRepository $participantRepository,
         private readonly GraphQLRequestedFields $graphQLRequestedFields,
-    ) {
-    }
+    ) {}
 
     public function __invoke($mailingList, ResolveInfo $info, Argument $argument): Connection
     {

@@ -20,8 +20,7 @@ class DeleteUserReplyMutation implements MutationInterface
         private readonly Publisher $publisher,
         private readonly Indexer $indexer,
         private readonly GlobalIdResolver $globalIdResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(string $id, User $viewer): array
     {

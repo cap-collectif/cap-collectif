@@ -41,7 +41,5 @@ final class Version20180810135032 extends AbstractMigration
         $this->addSql('ALTER TABLE fos_user DROP expired, DROP expires_at');
     }
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 }

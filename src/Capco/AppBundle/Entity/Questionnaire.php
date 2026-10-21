@@ -28,6 +28,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="questionnaire")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\QuestionnaireRepository")
  */
 class Questionnaire implements EntityInterface, DisplayableInBOInterface, QuestionnableForm, Ownerable, CreatableInterface, QuestionsInterface, \Stringable
@@ -41,7 +42,9 @@ class Questionnaire implements EntityInterface, DisplayableInBOInterface, Questi
 
     /**
      * @var \DateTime
+     *
      * @Gedmo\Timestampable(on="change", field={"title", "body"})
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     protected $updatedAt;
@@ -55,6 +58,7 @@ class Questionnaire implements EntityInterface, DisplayableInBOInterface, Questi
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\QuestionnaireStep", inversedBy="questionnaire", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $step;
@@ -68,43 +72,51 @@ class Questionnaire implements EntityInterface, DisplayableInBOInterface, Questi
 
     /**
      * @Assert\Valid
+     *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion", mappedBy="questionnaire", cascade={"remove","persist"}, orphanRemoval=true)
+     *
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $questions;
 
     /**
      * @var string
+     *
      * @ORM\Column(name="theme_help_text", type="string", length=255, nullable=true)
      */
     private $themeHelpText;
 
     /**
      * @var string
+     *
      * @ORM\Column(name="district_help_text", type="string", length=255, nullable=true)
      */
     private $districtHelpText;
 
     /**
      * @var string
+     *
      * @ORM\Column(name="type", type="string", length=255, nullable=false, options={"default" = "QUESTIONNAIRE"})
      */
     private $type = QuestionnaireType::QUESTIONNAIRE;
 
     /**
      * @var bool
+     *
      * @ORM\Column(name="multiple_replies_allowed", type="boolean", nullable=true)
      */
     private $multipleRepliesAllowed = false;
 
     /**
      * @var bool
+     *
      * @ORM\Column(name="anonymous_allowed", type="boolean", nullable=false)
      */
     private $anonymousAllowed = false;
 
     /**
      * @var bool
+     *
      * @ORM\Column(name="acknowledge_replies", type="boolean", nullable=false)
      */
     private $acknowledgeReplies = true;
@@ -116,6 +128,7 @@ class Questionnaire implements EntityInterface, DisplayableInBOInterface, Questi
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\NotificationsConfiguration\QuestionnaireNotificationConfiguration", cascade={"persist", "remove"}, inversedBy="questionnaire")
+     *
      * @ORM\JoinColumn(name="notification_configuration_id", referencedColumnName="id", nullable=false)
      */
     private QuestionnaireNotificationConfiguration $notificationsConfiguration;
@@ -188,6 +201,7 @@ class Questionnaire implements EntityInterface, DisplayableInBOInterface, Questi
     public function getRealQuestions(): Collection
     {
         $questions = new ArrayCollection();
+
         /** @var QuestionnaireAbstractQuestion $qaq */
         foreach ($this->questions as $qaq) {
             $questions->add($qaq->getQuestion());
@@ -262,8 +276,6 @@ class Questionnaire implements EntityInterface, DisplayableInBOInterface, Questi
     }
 
     /**
-     * @param QuestionnaireStep $step
-     *
      * @return $this
      */
     public function setStep(?QuestionnaireStep $step = null)

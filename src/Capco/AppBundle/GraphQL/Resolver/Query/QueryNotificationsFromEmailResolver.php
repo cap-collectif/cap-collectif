@@ -11,8 +11,7 @@ class QueryNotificationsFromEmailResolver implements QueryInterface
     public function __construct(
         private readonly SiteParameterRepository $repository,
         private readonly GraphQLLocaleResolver $localeResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(): ?string
     {

@@ -36,13 +36,20 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="event", indexes={
+ *
  *     @ORM\Index(name="idx_enabled", columns={"id", "is_enabled"})
  * })
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\EventRepository")
+ *
  * @ORM\HasLifecycleCallbacks()
+ *
  * @CapcoAssert\EndAfterStart()
+ *
  * @CapcoAssert\HasValidAddress()
+ *
  * @CapcoAssert\CheckRegister()
+ *
  * @CapcoAssert\HasAuthor()
  */
 class Event implements EntityInterface, CommentableInterface, IndexableInterface, DisplayableInBOInterface, TimeRangeable, Authorable, TranslatableInterface, Ownerable, CreatableInterface, \Stringable
@@ -62,12 +69,14 @@ class Event implements EntityInterface, CommentableInterface, IndexableInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     protected ?User $author = null;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"startAt", "endAt", "zipCode", "address", "nbAddress", "media", "Theme"})
+     *
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private ?\DateTimeInterface $updatedAt = null;
@@ -124,25 +133,30 @@ class Event implements EntityInterface, CommentableInterface, IndexableInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media", fetch="LAZY", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     *
      * @Assert\Valid()
      */
     private ?Media $media = null;
 
     /**
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="events", cascade={"persist"})
+     *
      * @ORM\JoinTable(name="theme_event")
      */
     private Collection $themes;
 
     /**
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Project", inversedBy="events", cascade={"persist"})
+     *
      * @ORM\JoinTable(name="project_event")
      */
     private Collection $projects;
 
     /**
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep", inversedBy="events", cascade={"persist"})
+     *
      * @ORM\JoinTable(name="event_step")
      */
     private ?Collection $steps = null;
@@ -182,8 +196,8 @@ class Event implements EntityInterface, CommentableInterface, IndexableInterface
     private ?bool $newAddressIsSimilar = null;
 
     /**
-     * @var EventReview
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\EventReview", fetch="EAGER", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="review_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private ?EventReview $review = null;
@@ -205,12 +219,14 @@ class Event implements EntityInterface, CommentableInterface, IndexableInterface
 
     /**
      * @ORM\Column(name="max_registrations", type="integer", nullable=true)
+     *
      * @Assert\Positive
      */
     private ?int $maxRegistrations = null;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\District\EventDistrictPositioner", mappedBy="event", cascade={"persist", "remove"})
+     *
      * @ORM\JoinColumn(name="event_district_positioner_id", referencedColumnName="id", nullable=true)
      */
     private ?Collection $eventDistrictPositioners = null;
@@ -659,7 +675,7 @@ class Event implements EntityInterface, CommentableInterface, IndexableInterface
 
         foreach ($this as $key => $value) {
             if (!\in_array($key, $dontShouldBeNull)) {
-                $this->{$key} = null; //set to null instead of unsetting
+                $this->{$key} = null; // set to null instead of unsetting
             }
         }
 

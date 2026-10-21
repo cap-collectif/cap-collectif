@@ -24,8 +24,7 @@ class AddUsersToGroupFromEmailMutation implements MutationInterface
         protected UserGroupRepository $userGroupRepository,
         protected GlobalIdResolver $globalIdResolver,
         private readonly GroupService $groupService
-    ) {
-    }
+    ) {}
 
     public function __invoke(array $emails, bool $dryRun, string $groupId, User $viewer): array
     {

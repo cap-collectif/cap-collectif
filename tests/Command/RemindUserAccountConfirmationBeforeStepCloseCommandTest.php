@@ -6,8 +6,11 @@ use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Checks CLI reminder output and captured outgoing messages with transactional scenario data.
  */
 class RemindUserAccountConfirmationBeforeStepCloseCommandTest extends MailerSnapshotCommandTestCase

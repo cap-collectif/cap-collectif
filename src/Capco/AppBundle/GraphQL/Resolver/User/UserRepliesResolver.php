@@ -22,8 +22,7 @@ class UserRepliesResolver implements QueryInterface
         private readonly ReplyRepository $replyRepository,
         private readonly QuestionnaireResultsAccessResolver $resultsAccess,
         private readonly EntityManagerInterface $entityManager
-    ) {
-    }
+    ) {}
 
     public function __invoke(?User $viewer, User $user, ?Argument $args = null, ?\ArrayObject $context = null): ConnectionInterface|Promise
     {
@@ -32,7 +31,8 @@ class UserRepliesResolver implements QueryInterface
 
         $authorized = $this->replyRepository->createQueryBuilder('authorizedReply')
             ->select('authorizedReply.id')
-            ->andWhere('authorizedReply.author = :contributor')->setParameter('contributor', $user);
+            ->andWhere('authorizedReply.author = :contributor')->setParameter('contributor', $user)
+        ;
         $this->resultsAccess->restrictReplyQuery($authorized, 'authorizedReply', $viewer, $context);
         $query = $this->replyRepository->getProfileVisibleByAuthorQueryBuilder($viewer, $user)
             ->orWhere('reply.id IN (' . $authorized->getDQL() . ')')

@@ -15,13 +15,13 @@ class ProposalNewsUpdateProcessor implements ProcessorInterface
         private readonly LoggerInterface $logger,
         private readonly PostRepository $posRepository,
         private readonly ProposalNewsNotifier $notifier
-    ) {
-    }
+    ) {}
 
     public function process(Message $message, array $options): bool
     {
         $json = json_decode((string) $message->getBody(), true);
         $id = $json['proposalNewsId'];
+
         /** @var Post $post */
         $post = $this->posRepository->find($id);
         if (!$post) {

@@ -29,8 +29,7 @@ class UpdateCustomDomainMutation implements MutationInterface
         private readonly LoggerInterface $logger,
         private readonly DeployerClient $deployerClient,
         private readonly ValidatorInterface $validator
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $user): array
     {

@@ -27,8 +27,7 @@ class UpdateCharterSettingMutation implements MutationInterface
         private readonly EntityManagerInterface $entityManager,
         private readonly UpdateSiteParameterMutation $cacheInvalidator,
         private readonly Manager $toggleManager
-    ) {
-    }
+    ) {}
 
     /**
      * @return array{siteParameter?: SiteParameter, errorCode?: string}

@@ -15,7 +15,9 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises public limiter rules with isolated in-memory doubles and one real Redis expiration contract.
  */
 final class AccountRateLimiterTest extends KernelTestCase

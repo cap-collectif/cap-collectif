@@ -38,8 +38,7 @@ class UpdateOtherStepMutation implements MutationInterface
         private readonly ProjectUrlResolver $projectUrlResolver,
         private readonly HubDocumentsStepGuard $hubDocumentsStepGuard,
         private readonly StepAccessResolver $stepAccessResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

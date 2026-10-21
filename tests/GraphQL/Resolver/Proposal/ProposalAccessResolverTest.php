@@ -17,8 +17,11 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Checks public access rules with real domain entities and explicit expected permissions.
+ *
  * @covers \Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalAccessResolver
  */
 class ProposalAccessResolverTest extends TestCase
@@ -123,8 +126,11 @@ class ProposalAccessResolverTest extends TestCase
     public function provideAdministrativeAccess(): iterable
     {
         yield 'super-admin' => ['super-admin', true, true];
+
         yield 'admin editing another author' => ['admin', true, false];
+
         yield 'admin editing own proposal' => ['admin-author', false, false];
+
         yield 'organization owner' => ['organization-owner', true, false];
     }
 

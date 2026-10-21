@@ -76,6 +76,7 @@ class CreateResponsesFromCsvCommand extends Command
 
                 return 1;
             }
+
             /** @var Questionnaire $questionnaire */
             $questionnaire = $this->getContainer()
                 ->get(QuestionnaireRepository::class)
@@ -107,6 +108,7 @@ class CreateResponsesFromCsvCommand extends Command
                 $reply->setPrivate($row['private']);
                 $em->persist($reply);
             }
+
             /** @var AbstractQuestion $question */
             $question = $this->getContainer()
                 ->get(AbstractQuestionRepository::class)

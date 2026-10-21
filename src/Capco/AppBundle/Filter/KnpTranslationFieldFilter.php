@@ -13,7 +13,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 class KnpTranslationFieldFilter extends Filter
 {
     /**
-     * {@inheritdoc}
+     * @param mixed $alias
+     * @param mixed $field
+     * @param mixed $data
      */
     public function filter(ProxyQueryInterface $queryBuilder, $alias, $field, $data): void
     {
@@ -66,9 +68,6 @@ class KnpTranslationFieldFilter extends Filter
         $this->setActive(true);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDefaultOptions(): array
     {
         return [
@@ -78,9 +77,6 @@ class KnpTranslationFieldFilter extends Filter
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRenderSettings(): array
     {
         return [
@@ -96,7 +92,7 @@ class KnpTranslationFieldFilter extends Filter
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $data
      */
     protected function association(ProxyQueryInterface $queryBuilder, $data): array
     {

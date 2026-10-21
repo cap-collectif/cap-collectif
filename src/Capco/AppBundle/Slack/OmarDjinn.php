@@ -9,8 +9,7 @@ class OmarDjinn extends AbstractSlackMessager
     public function __construct(
         private readonly ?string $hook,
         private readonly string $instanceName
-    ) {
-    }
+    ) {}
 
     public function sendBefore(EmailingCampaign $emailingCampaign): void
     {

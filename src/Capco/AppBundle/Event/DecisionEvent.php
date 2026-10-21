@@ -13,8 +13,7 @@ class DecisionEvent extends Event
         private readonly Proposal $proposal,
         private readonly ProposalDecision $decision,
         private readonly AnalysisConfiguration $analysisConfig
-    ) {
-    }
+    ) {}
 
     public function getDecision(): ProposalDecision
     {

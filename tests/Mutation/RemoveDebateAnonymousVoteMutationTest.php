@@ -7,9 +7,13 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises HTTP outcomes and real domain data with transactional cleanup; replaces only external boundaries.
  */
 final class RemoveDebateAnonymousVoteMutationTest extends IdentityWebTestCase
@@ -51,10 +55,15 @@ final class RemoveDebateAnonymousVoteMutationTest extends IdentityWebTestCase
     public static function removals(): iterable
     {
         yield 'vote only' => ['vote', null];
+
         yield 'vote and associated argument' => ['with argument', null];
+
         yield 'missing debate' => ['missing', 'UNKNOWN_DEBATE'];
+
         yield 'not voted' => ['not voted', 'NOT_VOTED'];
+
         yield 'invalid hash' => ['invalid', 'INVALID_HASH'];
+
         yield 'closed debate' => ['closed', 'CLOSED_DEBATE'];
     }
 }

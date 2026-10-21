@@ -20,8 +20,7 @@ class RequirementIsCollectedByFranceConnectResolver implements QueryInterface
     public function __construct(
         private readonly Manager $manager,
         private readonly FranceConnectAllowedDataResolver $franceConnectAllowedDataResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Requirement $requirement): bool
     {

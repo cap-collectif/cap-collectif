@@ -29,8 +29,7 @@ abstract class AbstractEventMutation implements MutationInterface
         protected Publisher $publisher,
         protected AuthorizationCheckerInterface $authorizationChecker,
         protected TranslatorInterface $translator
-    ) {
-    }
+    ) {}
 
     /**
      * @param array{'districts'?: array<int>} $arguments
@@ -50,7 +49,7 @@ abstract class AbstractEventMutation implements MutationInterface
     protected function getEvent(string $globalId, User $viewer): Event
     {
         $event = $this->globalIdResolver->resolve($globalId, $viewer);
-        if (!($event instanceof Event)) {
+        if (!$event instanceof Event) {
             throw new UserError('No event matching id.');
         }
 

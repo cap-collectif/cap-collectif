@@ -11,13 +11,16 @@ use Symfony\Component\HttpClient\Response\MockResponse;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 final class OnePasswordClientTest extends TestCase
 {
     /**
      * @dataProvider invalidConfigurationProvider
+     *
      * @phpunit-status compliant
+     *
      * @phpunit-reason Checks public credential results and errors with isolated HTTP responses at the
      * external-service boundary.
      */
@@ -50,6 +53,7 @@ final class OnePasswordClientTest extends TestCase
 
     /**
      * @phpunit-status compliant
+     *
      * @phpunit-reason Checks public credential results and errors with isolated HTTP responses at the
      * external-service boundary.
      */
@@ -65,6 +69,7 @@ final class OnePasswordClientTest extends TestCase
 
     /**
      * @phpunit-status non-compliant
+     *
      * @phpunit-reason Asserts the HTTP client buffer implementation option in addition to the public
      * credentials and outgoing request contract.
      */
@@ -99,6 +104,7 @@ final class OnePasswordClientTest extends TestCase
 
     /**
      * @phpunit-status compliant
+     *
      * @phpunit-reason Checks public credential results and errors with isolated HTTP responses at the
      * external-service boundary.
      */
@@ -116,6 +122,7 @@ final class OnePasswordClientTest extends TestCase
 
     /**
      * @phpunit-status compliant
+     *
      * @phpunit-reason Checks public credential results and errors with isolated HTTP responses at the
      * external-service boundary.
      */
@@ -139,6 +146,7 @@ final class OnePasswordClientTest extends TestCase
 
     /**
      * @phpunit-status compliant
+     *
      * @phpunit-reason Checks public credential results and errors with isolated HTTP responses at the
      * external-service boundary.
      */
@@ -156,6 +164,7 @@ final class OnePasswordClientTest extends TestCase
 
     /**
      * @phpunit-status compliant
+     *
      * @phpunit-reason Checks public credential results and errors with isolated HTTP responses at the
      * external-service boundary.
      */
@@ -174,6 +183,7 @@ final class OnePasswordClientTest extends TestCase
 
     /**
      * @phpunit-status compliant
+     *
      * @phpunit-reason Checks public credential results and errors with isolated HTTP responses at the
      * external-service boundary.
      */
@@ -192,6 +202,7 @@ final class OnePasswordClientTest extends TestCase
 
     /**
      * @phpunit-status compliant
+     *
      * @phpunit-reason Checks public credential results and errors with isolated HTTP responses at the
      * external-service boundary.
      */
@@ -211,6 +222,7 @@ final class OnePasswordClientTest extends TestCase
 
     /**
      * @phpunit-status compliant
+     *
      * @phpunit-reason Checks public credential results and errors with isolated HTTP responses at the
      * external-service boundary.
      */

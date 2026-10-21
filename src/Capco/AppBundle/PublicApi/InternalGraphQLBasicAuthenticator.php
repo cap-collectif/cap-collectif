@@ -19,8 +19,7 @@ final class InternalGraphQLBasicAuthenticator extends AbstractGuardAuthenticator
     public function __construct(
         private readonly OnePasswordClient $onePasswordClient,
         private readonly string $instanceName
-    ) {
-    }
+    ) {}
 
     public function supports(Request $request): bool
     {

@@ -11,6 +11,7 @@ use Gedmo\Timestampable\Timestampable;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalAnalystRepository")
+ *
  * @ORM\Table(name="proposal_analyst")
  */
 class ProposalAnalyst implements EntityInterface, Timestampable
@@ -19,12 +20,14 @@ class ProposalAnalyst implements EntityInterface, Timestampable
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(name="assigned_by", nullable=true)
      */
     private ?User $assignedBy = null;
 
     /**
      * @Gedmo\Timestampable(on="update")
+     *
      * @ORM\Column(type="datetime", name="updated_at")
      */
     private $updatedAt;
@@ -32,18 +35,21 @@ class ProposalAnalyst implements EntityInterface, Timestampable
     public function __construct(
         /**
          * @ORM\Id()
+         *
          * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="proposalAnalysts")
+         *
          * @ORM\JoinColumn(nullable=false, referencedColumnName="id", name="proposal_id", onDelete="CASCADE")
          */
         private Proposal $proposal,
         /**
          * @ORM\Id()
+         *
          * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+         *
          * @ORM\JoinColumn(nullable=false, referencedColumnName="id", name="analyst_id")
          */
         private User $analyst
-    ) {
-    }
+    ) {}
 
     public function getProposal(): Proposal
     {

@@ -43,8 +43,7 @@ class PreConfigureProjectMutation implements MutationInterface
         private readonly ProjectTypeRepository $projectTypeRepository,
         private readonly Indexer $indexer,
         private readonly ActionLogger $actionLogger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

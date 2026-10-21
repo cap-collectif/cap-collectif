@@ -10,8 +10,7 @@ class IsEmailAlreadyTakenResolver implements QueryInterface
 {
     public function __construct(
         private readonly UserRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): bool
     {

@@ -149,7 +149,7 @@ class LocaleRepository extends EntityRepository
 
             return \is_string($result) ? $result : null;
         } catch (NonUniqueResultException) {
-            //todo handle request for en-AUS while we have en-US and en-GB
+            // todo handle request for en-AUS while we have en-US and en-GB
         }
 
         return null;

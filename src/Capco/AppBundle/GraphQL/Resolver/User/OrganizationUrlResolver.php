@@ -14,8 +14,7 @@ class OrganizationUrlResolver implements QueryInterface
     public function __construct(
         protected RouterInterface $router,
         private readonly GraphQLLocaleResolver $localeResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Author $user): string
     {

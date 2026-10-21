@@ -18,11 +18,10 @@ class UpdateNewsletterSubscriptionMutation implements MutationInterface
         private readonly EntityManagerInterface $entityManager,
         private readonly NewsletterSubscriptionRepository $newsletterSubscriptionRepository,
         private readonly NewsletterSubscriptionEmailValidator $emailValidator
-    ) {
-    }
+    ) {}
 
     /**
-     * @return array{newsletterSubscription: NewsletterSubscription|null, errorCode: string|null}
+     * @return array{newsletterSubscription: null|NewsletterSubscription, errorCode: null|string}
      */
     public function __invoke(Argument $input): array
     {

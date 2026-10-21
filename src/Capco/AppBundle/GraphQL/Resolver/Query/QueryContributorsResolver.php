@@ -14,8 +14,7 @@ class QueryContributorsResolver implements QueryInterface
 
     public function __construct(
         private readonly UserSearch $userSearch,
-    ) {
-    }
+    ) {}
 
     public function __invoke(?Arg $args = null): ConnectionInterface
     {

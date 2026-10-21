@@ -148,6 +148,7 @@ class ImportProposalsFromCsvCommand extends Command
         $progress->start();
 
         $loop = 1;
+
         /** @var Row $row */
         foreach ($rows as $row) {
             $row = $row->toArray();
@@ -359,10 +360,12 @@ class ImportProposalsFromCsvCommand extends Command
         $reader->setFieldDelimiter($this->delimiter ?? ';');
 
         $reader->open($this->filePath);
+
         /** @var Sheet $sheet */
         foreach ($reader->getSheetIterator() as $sheet) {
             /** @var RowIterator $rows */
             $rows = $sheet->getRowIterator();
+
             /** @var Row $row */
             foreach ($rows as $row) {
                 $a = $row->toArray();

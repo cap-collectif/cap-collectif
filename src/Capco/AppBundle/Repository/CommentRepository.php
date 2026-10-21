@@ -128,7 +128,7 @@ class CommentRepository extends EntityRepository
             ->setParameter('comment', $comment)
             ->getQuery()
             ->getOneOrNullResult()
-            ;
+        ;
     }
 
     public function countAllByAuthor(User $user): int
@@ -139,7 +139,7 @@ class CommentRepository extends EntityRepository
             ->setParameter('author', $user)
             ->getQuery()
             ->getSingleScalarResult()
-            ;
+        ;
     }
 
     public function findAllByAuthor(User $user): array

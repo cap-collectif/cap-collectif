@@ -7,14 +7,18 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Doctrine\ORM\EntityRepository")
+ *
  * @ORM\Table(name="classification__context")
+ *
  * @ORM\HasLifecycleCallbacks
  */
 class Context implements EntityInterface, \Stringable
 {
     /**
      * @ORM\Id
+     *
      * @ORM\Column(type="string", name="id")
+     *
      * @ORM\GeneratedValue(strategy="NONE")
      */
     protected string $id;

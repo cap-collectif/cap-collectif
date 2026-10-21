@@ -17,8 +17,7 @@ class ProjectAuthorsResolver implements QueryInterface
         private readonly ProjectRepository $projectRepository,
         private readonly OrganizationRepository $organizationRepository,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args, ?User $user): array
     {

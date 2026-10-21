@@ -23,8 +23,7 @@ class FollowProposalMutation implements MutationInterface
         private readonly ProposalViewerIsFollowingDataLoader $viewerFollowDataLoader,
         private readonly ProposalViewerFollowingConfigurationDataLoader $viewerFollowingConfigDataLoader,
         private readonly GlobalIdResolver $globalIdResolver
-    ) {
-    }
+    ) {}
 
     /**
      * @throws UserError

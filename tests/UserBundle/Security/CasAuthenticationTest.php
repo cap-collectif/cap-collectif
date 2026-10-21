@@ -15,9 +15,13 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises CAS entry and authorization through HTTP; replaces the external CAS and CAPEB gateways only.
  */
 final class CasAuthenticationTest extends IdentityWebTestCase
@@ -126,6 +130,7 @@ final class CasAuthenticationTest extends IdentityWebTestCase
     public static function disabledCasEntries(): iterable
     {
         yield 'feature disabled' => [false, true, 404];
+
         yield 'configuration disabled' => [true, false, 302];
     }
 
@@ -186,7 +191,9 @@ final class CasAuthenticationTest extends IdentityWebTestCase
     public static function capebRoles(): iterable
     {
         yield 'authorized collaborator' => ['collaborator'];
+
         yield 'authorized elected representative' => ['elected'];
+
         yield 'refused external authorization' => [null];
     }
 

@@ -20,12 +20,12 @@ class ThemeController extends Controller
 {
     public function __construct(
         private readonly TranslatorInterface $translator
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/themes/{page}", name="app_theme", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flags" = "themes"} )
      * @Route("/themes/search/{term}/{page}", name="app_theme_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flags" = "themes"} )
+     *
      * @Template("@CapcoApp/Theme/index.html.twig")
      *
      * @param null|mixed $term
@@ -71,7 +71,7 @@ class ThemeController extends Controller
             $term
         );
 
-        //Avoid division by 0 in nbPage calculation
+        // Avoid division by 0 in nbPage calculation
         $nbPage = 1;
         if (null !== $pagination && 0 > $pagination && 0 !== \count($themes)) {
             $nbPage = ceil(\count($themes) / $pagination);
@@ -87,7 +87,9 @@ class ThemeController extends Controller
 
     /**
      * @Route("/themes/{slug}", name="app_theme_show", defaults={"_feature_flags" = "themes"}, options={"i18n" = false})
+     *
      * @Entity("theme", class="CapcoAppBundle:Theme", options={"mapping": {"slug": "slug"}, "repository_method" = "getOneBySlug", "map_method_signature" = true})
+     *
      * @Template("@CapcoApp/Theme/show.html.twig")
      */
     public function showAction(Theme $theme)

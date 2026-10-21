@@ -37,7 +37,8 @@ class PendingOrganizationInvitationRepository extends EntityRepository
             ->where('p.organization = :organization')
             ->setParameter('organization', $organization)
             ->getQuery()
-            ->getSingleScalarResult() ?? 0;
+            ->getSingleScalarResult() ?? 0
+        ;
     }
 
     public function countByEmail(string $email): int
@@ -47,7 +48,8 @@ class PendingOrganizationInvitationRepository extends EntityRepository
             ->where('p.email = :email')
             ->setParameter('email', $email)
             ->getQuery()
-            ->getSingleScalarResult() ?? 0;
+            ->getSingleScalarResult() ?? 0
+        ;
     }
 
     public function findOneByEmailOrUserAndOrganization(

@@ -17,12 +17,12 @@ class AddQuestionnaireStepMutation implements MutationInterface
     public function __construct(
         private readonly AddStepService $addStepService,
         private readonly EntityManagerInterface $em
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {
         $this->formatInput($input);
+
         /** * @var QuestionnaireStep $step  */
         ['step' => $step] = $this->addStepService->addStep($input, $viewer, 'QUESTIONNAIRE');
         $questionnaire = $step->getQuestionnaire();

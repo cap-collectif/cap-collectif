@@ -10,8 +10,7 @@ class CommentShowUrlResolver implements QueryInterface
 {
     public function __construct(
         private readonly UrlResolver $urlResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Comment $comment): string
     {

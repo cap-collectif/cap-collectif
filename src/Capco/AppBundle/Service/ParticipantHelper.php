@@ -14,8 +14,7 @@ class ParticipantHelper
         private readonly ParticipantRepository $participantRepository,
         private readonly TokenGeneratorInterface $tokenGenerator,
         private readonly EntityManagerInterface $em
-    ) {
-    }
+    ) {}
 
     public function getParticipantByToken(?string $token = null): ?Participant
     {

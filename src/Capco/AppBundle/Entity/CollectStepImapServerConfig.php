@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="collect_step_imap_server_config")
+ *
  * @ORM\Entity(repositoryClass=CollectStepImapServerConfigRepository::class)
  */
 class CollectStepImapServerConfig
@@ -37,6 +38,7 @@ class CollectStepImapServerConfig
 
     /**
      * @ORM\OneToOne(targetEntity=CollectStep::class, inversedBy="collectStepImapServerConfig", cascade={"persist", "remove"})
+     *
      * @ORM\JoinColumn(name="collect_step_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private CollectStep $collectStep;

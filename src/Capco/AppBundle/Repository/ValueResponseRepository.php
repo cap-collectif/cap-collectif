@@ -147,6 +147,6 @@ class ValueResponseRepository extends EntityRepository
                 ->setParameter('emptyValueOne', '{"labels":[],"other":null}')
                 ->setParameter('emptyValueTwo', '{"labels":[null],"other":null}')
                 ->setParameter('emptyValueTree', 'null')
-            ;
+        ;
     }
 }

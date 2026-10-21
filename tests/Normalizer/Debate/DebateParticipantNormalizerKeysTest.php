@@ -13,8 +13,11 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Derives the expected export keys from another normalizer, so both can regress together.
  */
 class DebateParticipantNormalizerKeysTest extends KernelTestCase

@@ -33,11 +33,10 @@ class MagicLinkEmailSender
         private readonly EmailRateLimiter $emailRateLimiter,
         private readonly KernelInterface $kernel,
         private readonly ParticipationCookieManager $participationCookieManager
-    ) {
-    }
+    ) {}
 
     /**
-     * @return array{'errorCode': string|null, 'confirmationUrl': string|null}
+     * @return array{'errorCode': null|string, 'confirmationUrl': null|string}
      */
     public function send(string $email, string $redirectUrl, ?string $variant = self::DEFAULT): array
     {

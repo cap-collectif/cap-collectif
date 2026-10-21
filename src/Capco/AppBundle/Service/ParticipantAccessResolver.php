@@ -9,8 +9,7 @@ class ParticipantAccessResolver
     public function __construct(
         private readonly ParticipantHelper $participantHelper,
         private readonly CapcoAnonReplyDecoder $capcoAnonReplyDecoder
-    ) {
-    }
+    ) {}
 
     public function canViewReplyFromCookie(Reply $reply, ?string $cookie): bool
     {

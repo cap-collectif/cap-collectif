@@ -15,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Association between project and steps.
  *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProjectAbstractStepRepository")
+ *
  * @ORM\Table(name="project_abstractstep")
  */
 class ProjectAbstractStep implements EntityInterface, \Stringable
@@ -24,15 +25,20 @@ class ProjectAbstractStep implements EntityInterface, \Stringable
 
     /**
      * @Gedmo\SortableGroup
+     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Project", inversedBy="steps", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     *
      * @Assert\NotNull()
      */
     protected $project;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep", inversedBy="projectAbstractStep", cascade={"persist", "remove"})
+     *
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     *
      * @Assert\NotNull()
      */
     protected $step;
@@ -41,6 +47,7 @@ class ProjectAbstractStep implements EntityInterface, \Stringable
     {
         if ($this->id) {
             $this->id = null;
+
             /** @var AbstractStep $clonedStep */
             $clonedStep = clone $this->step;
             $clonedStep->setProjectAbstractStep($this);

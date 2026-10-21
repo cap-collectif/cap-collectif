@@ -33,11 +33,10 @@ class ValidatePhoneReusabilityMutation implements MutationInterface
         private readonly ParticipantPhoneVerificationSmsRepository $participantPhoneVerificationSmsRepository,
         private readonly UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository,
         private readonly EntityManagerInterface $em,
-    ) {
-    }
+    ) {}
 
     /**
-     * @return array{'errorCode': string|null}
+     * @return array{'errorCode': null|string}
      */
     public function __invoke(Argument $input, ?User $viewer = null): array
     {

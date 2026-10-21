@@ -33,8 +33,7 @@ class AssignSupervisorToProposalsMutation implements MutationInterface
         private readonly ProposalSupervisorRepository $proposalSupervisorRepository,
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly Publisher $publisher
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $viewer): array
     {
@@ -76,6 +75,7 @@ class AssignSupervisorToProposalsMutation implements MutationInterface
     private function revokeSupervisorToProposals(array $proposals, Arg $input): array
     {
         $this->proposalSupervisorRepository->deleteByProposalIds($proposals);
+
         /** @var Proposal $proposal */
         foreach ($proposals as $proposal) {
             $proposal->removeSupervisor();

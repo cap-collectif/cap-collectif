@@ -17,8 +17,7 @@ class UserContributionsCountResolver implements QueryInterface
         protected UserRepliesResolver $userRepliesResolver,
         protected UserSourcesResolver $userSourcesResolver,
         private readonly UserVotesResolver $userVotesResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(User $user, ?User $viewer = null): int
     {

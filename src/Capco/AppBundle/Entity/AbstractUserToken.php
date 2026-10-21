@@ -11,6 +11,7 @@ abstract class AbstractUserToken
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      * @ORM\Id
      */
     protected string $token;
@@ -21,11 +22,12 @@ abstract class AbstractUserToken
     protected ?\DateTime $consumptionDate = null;
 
     public function __construct(
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    protected User $user,
+        /**
+         * @ORM\ManyToOne(targetEntity=User::class)
+         *
+         * @ORM\JoinColumn(nullable=false)
+         */
+        protected User $user,
         ?string $token = null
     ) {
         $this->token = $token ?? self::generateToken();

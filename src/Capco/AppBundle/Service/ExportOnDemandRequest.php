@@ -13,9 +13,8 @@ final class ExportOnDemandRequest
         private readonly string $filePath,
         private readonly string $downloadUrl,
         private readonly User $user,
-        private readonly string|null $fileName = null,
-    ) {
-    }
+        private readonly null|string $fileName = null,
+    ) {}
 
     public function getCommandName(): string
     {

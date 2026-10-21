@@ -14,8 +14,7 @@ class ProjectsMediatorResolver implements QueryInterface
     public function __construct(
         private readonly ProjectRepository $projectRepository,
         private readonly ConnectionBuilderInterface $connectionBuilder
-    ) {
-    }
+    ) {}
 
     public function __invoke(User $user, Argument $args): ConnectionInterface
     {

@@ -17,8 +17,7 @@ class UserPostsResolver implements QueryInterface
     public function __construct(
         private readonly LoggerInterface $logger,
         private readonly PostSearch $postSearch
-    ) {
-    }
+    ) {}
 
     public function __invoke(Author $author, ?Argument $args = null): ConnectionInterface
     {

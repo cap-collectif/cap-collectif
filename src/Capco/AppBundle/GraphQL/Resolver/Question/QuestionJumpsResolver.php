@@ -12,8 +12,7 @@ class QuestionJumpsResolver implements QueryInterface
 {
     public function __construct(
         private readonly QuestionJumpsDataLoader $dataLoader
-    ) {
-    }
+    ) {}
 
     public function __invoke(AbstractQuestion $question, Arg $args): Promise
     {

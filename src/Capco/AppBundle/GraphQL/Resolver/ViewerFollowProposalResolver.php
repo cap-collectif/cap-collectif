@@ -16,8 +16,7 @@ class ViewerFollowProposalResolver implements QueryInterface
     public function __construct(
         private readonly LoggerInterface $logger,
         private readonly ProposalViewerIsFollowingDataLoader $proposalviewerFollowDataLoader
-    ) {
-    }
+    ) {}
 
     public function __invoke(Proposal $proposal, $viewer): Promise
     {

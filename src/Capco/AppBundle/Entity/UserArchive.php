@@ -10,7 +10,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="user_archive")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\UserArchiveRepository")
+ *
  * @ORM\HasLifecycleCallbacks()
  */
 class UserArchive implements EntityInterface
@@ -19,6 +21,7 @@ class UserArchive implements EntityInterface
 
     /**
      * @Gedmo\Timestampable(on="create")
+     *
      * @ORM\Column(name="requested_at",type="datetime", nullable=false)
      */
     protected $requestedAt;
@@ -40,6 +43,7 @@ class UserArchive implements EntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="archives")
+     *
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      */
     protected $user;

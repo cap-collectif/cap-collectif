@@ -2,6 +2,4 @@
 
 namespace Capco\AppBundle\Entity;
 
-class AbstractProposalVote extends AbstractVote
-{
-}
+class AbstractProposalVote extends AbstractVote {}

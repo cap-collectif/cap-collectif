@@ -102,7 +102,7 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $redirectUri
      *
      * @throws InvalidArgumentException
      */
@@ -230,7 +230,7 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $csrfToken
      */
     public function isCsrfTokenValid($csrfToken): bool
     {
@@ -244,23 +244,21 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
         }
 
         try {
-            return null !== $this->storage->fetch($this, urldecode($csrfToken), 'csrf_state');
+            return null !== $this->storage->fetch($this, urldecode((string) $csrfToken), 'csrf_state');
         } catch (\InvalidArgumentException) {
             throw new AuthenticationException('Given CSRF token is not valid.');
         }
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param array<string, string> $accessToken
      * @param array<string, mixed>  $extraParameters
+     *
+     * @return PathUserResponse|UserResponseInterface
      *
      * @throws ClientExceptionInterface
      * @throws RedirectionExceptionInterface
      * @throws ServerExceptionInterface
-     *
-     * @return PathUserResponse|UserResponseInterface
      */
     public function getUserInformation(array $accessToken, array $extraParameters = [])
     {
@@ -313,9 +311,6 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
         return $response;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function handles(HttpRequest $request)
     {
         return $request->query->has('code') || $request->query->has('error');
@@ -342,9 +337,6 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);

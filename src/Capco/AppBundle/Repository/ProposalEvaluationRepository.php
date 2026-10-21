@@ -7,6 +7,4 @@ use Doctrine\ORM\EntityRepository;
 /**
  * @deprecated this is our legacy evaluation tool
  */
-class ProposalEvaluationRepository extends EntityRepository
-{
-}
+class ProposalEvaluationRepository extends EntityRepository {}

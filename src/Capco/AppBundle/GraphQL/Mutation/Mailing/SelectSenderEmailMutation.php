@@ -20,8 +20,7 @@ class SelectSenderEmailMutation implements MutationInterface
     public function __construct(
         private readonly EntityManagerInterface $em,
         private readonly SenderEmailRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input)
     {

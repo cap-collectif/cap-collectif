@@ -18,8 +18,7 @@ class RequirementViewerValueResolver implements QueryInterface
     public function __construct(
         private readonly UserRequirementRepository $userRequirementsRepo,
         private readonly ParticipantRequirementRepository $participantRequirementRepo
-    ) {
-    }
+    ) {}
 
     /**
      * Returns a string, a GoogleMapsAddress or a bool.

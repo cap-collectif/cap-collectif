@@ -14,8 +14,7 @@ class PreConfigureProjectProposalFormPersister
         private readonly CreateProposalFormMutation $createProposalFormMutation,
         private readonly UpdateProposalFormMutation $updateProposalFormMutation,
         private readonly UpdateProposalFormNotificationsConfiguration $updateProposalFormNotificationsConfigurationMutation
-    ) {
-    }
+    ) {}
 
     public function addProposalForm(array $proposalFormsInput, string $ownerId, User $viewer, bool $toLogUserAction = true): array
     {

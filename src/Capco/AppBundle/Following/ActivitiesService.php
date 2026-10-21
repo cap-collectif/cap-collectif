@@ -4,9 +4,7 @@ namespace Capco\AppBundle\Following;
 
 class ActivitiesService
 {
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     public function mergeFollowedActivities(
         array $followedActivitiesLeft,

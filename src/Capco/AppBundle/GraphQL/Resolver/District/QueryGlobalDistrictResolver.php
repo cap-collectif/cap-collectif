@@ -14,8 +14,7 @@ class QueryGlobalDistrictResolver implements QueryInterface
     public function __construct(
         protected GlobalDistrictRepository $globalDistrictRepository,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): ConnectionInterface
     {

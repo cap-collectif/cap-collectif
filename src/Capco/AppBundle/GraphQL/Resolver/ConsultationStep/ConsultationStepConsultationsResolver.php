@@ -13,8 +13,7 @@ class ConsultationStepConsultationsResolver implements QueryInterface
 {
     public function __construct(
         private readonly ConsultationRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(ConsultationStep $step, Argument $args): Connection
     {

@@ -12,13 +12,17 @@ use Symfony\Component\Process\Process;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Runs the real PHPUnit lifecycle against Redis, including deliberate failures and isolated processes.
  */
 final class FeatureFlagsLifecycleTest extends TestCase
 {
     private Client $redis;
+
     /** @var array<string, null|string> */
     private array $initialValues = [];
     private string $fixture;
@@ -85,11 +89,17 @@ final class FeatureFlagsLifecycleTest extends TestCase
     public static function outcomes(): iterable
     {
         yield 'success and repeated execution' => ['success', false, true];
+
         yield 'assertion failure' => ['assertion failure', false, false];
+
         yield 'setup failure' => ['setup failure', false, false];
+
         yield 'teardown failure' => ['teardown failure', false, false];
+
         yield 'skip in setup' => ['skip', false, true];
+
         yield 'isolated success' => ['success', true, true];
+
         yield 'isolated failure' => ['assertion failure', true, false];
     }
 

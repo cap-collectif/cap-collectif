@@ -11,6 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * SocialNetwork.
  *
  * @ORM\Table(name="social_network")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SocialNetworkRepository")
  */
 class SocialNetwork implements EntityInterface, \Stringable
@@ -49,6 +50,7 @@ class SocialNetwork implements EntityInterface, \Stringable
      * @var \DateTime
      *
      * @Gedmo\Timestampable(on="create")
+     *
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
@@ -57,14 +59,14 @@ class SocialNetwork implements EntityInterface, \Stringable
      * @var \DateTime
      *
      * @Gedmo\Timestampable(on="change", field={"title", "link", "position", "media"})
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
 
     /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $media;

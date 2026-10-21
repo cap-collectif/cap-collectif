@@ -9,8 +9,7 @@ class SenderEmailDomainResolver implements QueryInterface
 {
     public function __construct(
         private readonly SenderEmailDomainsManager $manager
-    ) {
-    }
+    ) {}
 
     public function __invoke(): array
     {

@@ -17,8 +17,7 @@ class UpdateProjectTypeMutation implements MutationInterface
     public function __construct(
         private readonly ProjectTypeRepository $repository,
         private readonly EntityManagerInterface $em
-    ) {
-    }
+    ) {}
 
     /**
      * @return array<string, ProjectType>

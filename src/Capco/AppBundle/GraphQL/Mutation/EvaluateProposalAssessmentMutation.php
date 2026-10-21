@@ -32,8 +32,7 @@ class EvaluateProposalAssessmentMutation implements MutationInterface
         private readonly EntityManagerInterface $entityManager,
         private readonly LoggerInterface $logger,
         private readonly Publisher $publisher
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args, $viewer): array
     {
@@ -49,6 +48,7 @@ class EvaluateProposalAssessmentMutation implements MutationInterface
         ];
 
         $proposalId = GlobalId::fromGlobalId($proposalId)['id'];
+
         /** @var Proposal $proposal */
         $proposal = $this->proposalRepository->find($proposalId);
         if (!$proposal) {

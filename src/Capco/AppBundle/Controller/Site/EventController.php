@@ -32,11 +32,11 @@ class EventController extends Controller
         private readonly TranslatorInterface $tranlator,
         private readonly SessionInterface $session,
         private readonly string $projectDir
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/events", name="app_event", defaults={"_feature_flags" = "calendar"} )
+     *
      * @Template("@CapcoApp/Event/index.html.twig")
      */
     public function indexAction(Request $request)
@@ -60,6 +60,7 @@ class EventController extends Controller
 
     /**
      * @Route("/events/download", name="app_events_download", options={"i18n" = false})
+     *
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function downloadAction(Request $request)
@@ -90,6 +91,7 @@ class EventController extends Controller
 
     /**
      * @Route("/events/{slug}", name="app_event_show", defaults={"_feature_flags" = "calendar"})
+     *
      * @Template("@CapcoApp/Event/show.html.twig")
      */
     public function showAction(Request $request, mixed $slug)

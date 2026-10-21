@@ -493,7 +493,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
         return $qb
             ->getQuery()
             ->getResult()
-            ;
+        ;
     }
 
     public function countByParticipant(
@@ -507,7 +507,8 @@ class ProposalSelectionVoteRepository extends EntityRepository
         return $qb
             ->select('COUNT(v.id)')
             ->getQuery()
-            ->getSingleScalarResult() ?? 0;
+            ->getSingleScalarResult() ?? 0
+        ;
     }
 
     /** @return array<int, string> */
@@ -576,6 +577,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
         $data = [];
         $data['votesBySteps'] = [];
         $data['pointsBySteps'] = [];
+
         /** @var ProposalSelectionVote $result */
         foreach ($results as $result) {
             $pointsAvailable = [];
@@ -680,7 +682,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
         return (int) $qb
             ->getQuery()
             ->getSingleScalarResult()
-            ;
+        ;
     }
 
     public function countDistinctPhonePublishedSelectionVoteByStep(SelectionStep $step): int
@@ -701,7 +703,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->setParameter('step', $step)
             ->getQuery()
             ->getSingleScalarResult()
-            ;
+        ;
     }
 
     public function countAll(): int
@@ -839,7 +841,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ])
             ->getQuery()
             ->getResult()
-            ;
+        ;
     }
 
     /**

@@ -11,7 +11,9 @@ use Symfony\Component\Security\Core\Security;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Tests the public session serialization format without asserting Redis locking calls.
  */
 class SessionWithJsonHandlerTest extends TestCase
@@ -73,26 +75,31 @@ class SessionWithJsonHandlerTest extends TestCase
             'isAdminOrganization' => false, 'isOrganizationMember' => false,
             'isMediator' => false, 'organization' => null,
         ]];
+
         yield 'project administrator' => [['ROLE_PROJECT_ADMIN'], null, [
             'isAdmin' => false, 'isSuperAdmin' => false, 'isProjectAdmin' => true,
             'isAdminOrganization' => false, 'isOrganizationMember' => false,
             'isMediator' => false, 'organization' => null,
         ]];
+
         yield 'global administrator' => [['ROLE_ADMIN'], null, [
             'isAdmin' => true, 'isSuperAdmin' => false, 'isProjectAdmin' => true,
             'isAdminOrganization' => false, 'isOrganizationMember' => false,
             'isMediator' => false, 'organization' => null,
         ]];
+
         yield 'organization member' => [['ROLE_USER'], 'user', [
             'isAdmin' => false, 'isSuperAdmin' => false, 'isProjectAdmin' => false,
             'isAdminOrganization' => false, 'isOrganizationMember' => true,
             'isMediator' => false, 'organization' => 'T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbi1pZA==',
         ]];
+
         yield 'organization administrator' => [['ROLE_USER'], 'admin', [
             'isAdmin' => false, 'isSuperAdmin' => false, 'isProjectAdmin' => false,
             'isAdminOrganization' => true, 'isOrganizationMember' => true,
             'isMediator' => false, 'organization' => 'T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbi1pZA==',
         ]];
+
         yield 'super administrator and mediator in an organization' => [['ROLE_SUPER_ADMIN', 'ROLE_MEDIATOR'], 'admin', [
             'isAdmin' => true, 'isSuperAdmin' => true, 'isProjectAdmin' => true,
             'isAdminOrganization' => true, 'isOrganizationMember' => true,
@@ -122,7 +129,9 @@ class SessionWithJsonHandlerTest extends TestCase
     public static function storedSessions(): iterable
     {
         yield 'inactive viewer' => ['serialized-session' . SessionWithJsonHandler::SEPARATOR . '{"last_user_activity":0}', ''];
+
         yield 'legacy session' => ['legacy-session', 'legacy-session'];
+
         yield 'empty session' => ['', ''];
     }
 

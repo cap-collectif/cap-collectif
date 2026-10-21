@@ -21,11 +21,10 @@ class CreateThemeMutation implements MutationInterface
         private readonly UserRepository $userRepository,
         private readonly MediaRepository $mediaRepository,
         private readonly LocaleRepository $localeRepository
-    ) {
-    }
+    ) {}
 
     /**
-     * @return array{theme?: Theme|null, errorCode?: string|null}
+     * @return array{theme?: null|Theme, errorCode?: null|string}
      */
     public function __invoke(Argument $input): array
     {

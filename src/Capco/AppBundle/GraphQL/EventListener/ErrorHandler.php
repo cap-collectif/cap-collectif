@@ -13,8 +13,7 @@ final class ErrorHandler
         private readonly LoggerInterface $logger,
         private readonly GraphQLErrorHandler $errorHandler,
         private readonly bool $throwException = false
-    ) {
-    }
+    ) {}
 
     public function onPostExecutor(ExecutorResultEvent $executorResultEvent)
     {

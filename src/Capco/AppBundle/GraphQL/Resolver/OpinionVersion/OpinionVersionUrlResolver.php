@@ -14,17 +14,19 @@ class OpinionVersionUrlResolver implements QueryInterface
 {
     public function __construct(
         private readonly RouterInterface $router
-    ) {
-    }
+    ) {}
 
     public function __invoke(OpinionVersion $version): string
     {
         /** @var OpinionVersion $opinion */
         $opinion = $version->getParent();
+
         /** @var OpinionType $opinionType */
         $opinionType = $opinion->getOpinionType();
+
         /** @var AbstractStep $step */
         $step = $opinion->getStep();
+
         /** @var Project $project */
         $project = $step->getProject();
 

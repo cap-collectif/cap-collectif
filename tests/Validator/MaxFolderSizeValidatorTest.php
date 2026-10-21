@@ -16,8 +16,11 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Mocks the Finder and validator context graph instead of verifying project validation with
  * real files and violations.
  */

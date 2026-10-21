@@ -12,6 +12,7 @@ trait AuthorableTrait
 {
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Organization\Organization")
+     *
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     protected ?Organization $organization = null;
@@ -26,7 +27,7 @@ trait AuthorableTrait
         return $this->getAuthor() === $viewer;
     }
 
-    public function setAuthor(Author|ContributorInterface|null $author): self
+    public function setAuthor(null|Author|ContributorInterface $author): self
     {
         if ($author instanceof User) {
             $this->organization = null;

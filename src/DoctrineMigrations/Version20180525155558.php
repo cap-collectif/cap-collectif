@@ -13,7 +13,5 @@ class Version20180525155558 extends AbstractMigration
         $this->addSql('ALTER TABLE votes ADD position INT DEFAULT NULL');
     }
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 }

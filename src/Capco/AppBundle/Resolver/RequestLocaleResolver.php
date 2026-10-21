@@ -14,8 +14,7 @@ class RequestLocaleResolver
     public function __construct(
         private readonly LocaleRepository $localeRepository,
         private readonly Manager $toggleManager
-    ) {
-    }
+    ) {}
 
     public function resolve(Request $request): string
     {

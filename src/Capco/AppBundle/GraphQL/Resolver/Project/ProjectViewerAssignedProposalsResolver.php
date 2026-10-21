@@ -17,8 +17,7 @@ class ProjectViewerAssignedProposalsResolver implements QueryInterface
 
     public function __construct(
         private readonly ProposalSearch $proposalSearch
-    ) {
-    }
+    ) {}
 
     public function __invoke(Project $project, Arg $args, $viewer): ConnectionInterface
     {

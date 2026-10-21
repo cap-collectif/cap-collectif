@@ -34,8 +34,7 @@ class ProjectPersister
         private readonly ProjectRepository $repository,
         private readonly SettableOwnerResolver $settableOwnerResolver,
         private readonly Publisher $publisher
-    ) {
-    }
+    ) {}
 
     public function persist(Argument $input, User $viewer, ?bool $editMode = false): Project
     {

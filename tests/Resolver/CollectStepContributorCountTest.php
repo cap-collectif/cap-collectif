@@ -22,8 +22,11 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises the count helper and shared cache with real visibility rules; stubs only Elasticsearch.
  */
 class CollectStepContributorCountTest extends KernelTestCase

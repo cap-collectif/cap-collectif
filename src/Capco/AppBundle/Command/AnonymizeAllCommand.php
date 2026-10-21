@@ -56,12 +56,15 @@ class AnonymizeAllCommand extends Command
 
     /** @var null|resource */
     private $successLogHandle;
+
     /** @var null|resource */
     private $errorLogHandle;
     private ?string $successLogPath = null;
     private ?string $errorLogPath = null;
+
     /** @var string[] */
     private array $successLogBuffer = [];
+
     /** @var string[] */
     private array $errorLogBuffer = [];
 

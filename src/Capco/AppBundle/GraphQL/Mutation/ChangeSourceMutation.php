@@ -26,13 +26,13 @@ class ChangeSourceMutation implements MutationInterface
         private readonly FormFactoryInterface $formFactory,
         private readonly SourceRepository $sourceRepo,
         private readonly Indexer $indexer
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $viewer): array
     {
         $this->formatInput($input);
         $sourceId = GlobalId::fromGlobalId($input->offsetGet('sourceId'))['id'];
+
         /** @var Source $source */
         $source = $this->sourceRepo->find($sourceId);
 

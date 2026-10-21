@@ -11,9 +11,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class CustomCodeVersionsConnectionResolver implements QueryInterface
 {
-    public function __construct(private readonly CustomCodeVersioningService $customCodeVersioning)
-    {
-    }
+    public function __construct(private readonly CustomCodeVersioningService $customCodeVersioning) {}
 
     /**
      * @param array<string, mixed> $customCode

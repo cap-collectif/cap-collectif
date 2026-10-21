@@ -16,8 +16,7 @@ class CollectStepProposalCountResolver implements QueryInterface
         private readonly PromiseAdapterInterface $adapter,
         private readonly ProposalFormProposalsDataLoader $dataLoader,
         private readonly ProposalRepository $proposalRepo
-    ) {
-    }
+    ) {}
 
     public function __invoke(CollectStep $step): int
     {

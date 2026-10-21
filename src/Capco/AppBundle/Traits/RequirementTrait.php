@@ -10,6 +10,7 @@ trait RequirementTrait
 {
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Requirement", mappedBy="step", cascade={"persist", "remove"}, orphanRemoval=true)
+     *
      * @ORM\OrderBy({"position" = "ASC"})
      */
     protected Collection $requirements;

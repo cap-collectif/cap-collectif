@@ -9,6 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionVoteRepository")
+ *
  * @ORM\HasLifecycleCallbacks()
  */
 class OpinionVote extends AbstractVote implements ExportableContributionInterface
@@ -49,6 +50,7 @@ class OpinionVote extends AbstractVote implements ExportableContributionInterfac
 
     /**
      * @Gedmo\Timestampable(on="update", field={"value"})
+     *
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     protected $updatedAt;
@@ -60,6 +62,7 @@ class OpinionVote extends AbstractVote implements ExportableContributionInterfac
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="votes", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $opinion;

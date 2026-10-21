@@ -41,8 +41,7 @@ class ConfigureAnalysisMutation implements MutationInterface
         private EntityManagerInterface $entityManager,
         private readonly LoggerInterface $logger,
         private readonly AuthorizationCheckerInterface $authorizationChecker
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args, $viewer): array
     {
@@ -125,6 +124,7 @@ class ConfigureAnalysisMutation implements MutationInterface
 
             if ($selectionStepStatusId && $moveToSelectionStep) {
                 $selectionStepStatuses = $moveToSelectionStep->getStatuses();
+
                 /** @var Status $selectionStepStatus */
                 foreach ($selectionStepStatuses as $selectionStepStatus) {
                     if ($selectionStepStatus->getId() === $selectionStepStatusId) {

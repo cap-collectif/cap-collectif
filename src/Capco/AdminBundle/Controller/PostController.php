@@ -17,11 +17,11 @@ class PostController extends AbstractController
 {
     public function __construct(
         private readonly TranslatorInterface $translator
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/admin/capco/app/post/create", name="capco_admin_create_post")
+     *
      * @Security("is_granted('ROLE_USER')")
      */
     public function createAction(Request $request): Response
@@ -43,7 +43,9 @@ class PostController extends AbstractController
 
     /**
      * @Route("/admin/capco/app/post/{postId}/edit", name="capco_admin_edit_post")
+     *
      * @Entity("post", class="CapcoAppBundle:Post", options={"mapping" = {"postId": "id"}, "repository_method"= "find", "map_method_signature" = true})
+     *
      * @Security("is_granted('ROLE_USER')")
      */
     public function editAction(?Post $post): Response

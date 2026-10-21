@@ -15,8 +15,7 @@ class QuestionChoiceNormalizer implements NormalizerInterface, SerializerAwareIn
 
     public function __construct(
         private readonly ObjectNormalizer $normalizer
-    ) {
-    }
+    ) {}
 
     public function hasCacheableSupportsMethod(): bool
     {
@@ -24,7 +23,8 @@ class QuestionChoiceNormalizer implements NormalizerInterface, SerializerAwareIn
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed      $object
+     * @param null|mixed $format
      */
     public function normalize($object, $format = null, array $context = [])
     {
@@ -35,7 +35,8 @@ class QuestionChoiceNormalizer implements NormalizerInterface, SerializerAwareIn
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed      $data
+     * @param null|mixed $format
      */
     public function supportsNormalization($data, $format = null)
     {

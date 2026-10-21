@@ -7,9 +7,7 @@ use Capco\UserBundle\Entity\User;
 
 class AccountConfirmationSender
 {
-    public function __construct(private readonly FOSNotifier $notifier)
-    {
-    }
+    public function __construct(private readonly FOSNotifier $notifier) {}
 
     public function sendIfNeeded(User $user): void
     {

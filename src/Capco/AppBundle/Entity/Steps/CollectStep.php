@@ -26,7 +26,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="collect_step")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CollectStepRepository")
+ *
  * @CapcoAssert\VoteMin
  */
 class CollectStep extends AbstractStep implements SluggableInterface, ParticipativeStepInterface, VotableStepInterface, DefaultStatusInterface, ProposalStepInterface
@@ -75,6 +77,7 @@ class CollectStep extends AbstractStep implements SluggableInterface, Participat
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Status", cascade={"persist", "remove"})
+     *
      * @ORM\JoinColumn(name="default_status_id", nullable=true, onDelete="SET NULL")
      */
     private ?Status $defaultStatus = null;
@@ -86,12 +89,14 @@ class CollectStep extends AbstractStep implements SluggableInterface, Participat
 
     /**
      * @ORM\Column(name="default_sort", type="string", nullable=false)
+     *
      * @Assert\Choice(choices={"old","last","votes","least-votes","comments","random", "cheap", "expensive"})
      */
     private string $defaultSort = ProposalSort::RANDOM;
 
     /**
      * @var Collection<int, ProposalCollectVote>
+     *
      * @ORM\OneToMany(targetEntity=ProposalCollectVote::class, mappedBy="collectStep")
      */
     private Collection $collectVotes;

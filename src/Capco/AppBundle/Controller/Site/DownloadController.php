@@ -34,11 +34,11 @@ class DownloadController extends Controller
         private readonly QuestionnaireResultsAccessResolver $questionnaireResultsAccessResolver,
         private readonly ParticipantAuthentication $participantAuthentication,
         private readonly MediaAccessResolver $mediaAccess
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/download/{responseId}/media/{mediaId}", name="app_media_response_download", options={"i18n" = false})
+     *
      * @Entity("mediaResponse", options={"mapping": {"responseId": "id"}})
      * @Entity("media", options={"mapping": {"mediaId": "id"}})
      */
@@ -93,6 +93,7 @@ class DownloadController extends Controller
 
     /**
      * @Route("/identificationCodesList/download/cap-collectif-codes-{listId}.csv", name="app_identification_codes_list_download", options={"i18n" = false})
+     *
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function downloadIdentificationCodesListAction(string $listId): Response

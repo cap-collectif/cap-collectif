@@ -28,8 +28,7 @@ class UnfollowOpinionMutation implements MutationInterface
         private OpinionRepository $opinionRepository,
         private OpinionVersionRepository $versionRepository,
         private FollowerRepository $followerRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args, User $user): array
     {

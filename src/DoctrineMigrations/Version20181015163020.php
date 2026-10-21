@@ -22,7 +22,5 @@ class Version20181015163020 extends AbstractMigration implements ContainerAwareI
         $this->container->get(Manager::class)->deactivate('display_map');
     }
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 }

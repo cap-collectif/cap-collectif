@@ -10,8 +10,7 @@ class CheckExternalLinkValidator extends ConstraintValidator
 {
     public function __construct(
         private readonly RouterInterface $router
-    ) {
-    }
+    ) {}
 
     public function validate($value, Constraint $constraint)
     {

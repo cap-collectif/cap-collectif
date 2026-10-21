@@ -11,8 +11,7 @@ class ConsultationUrlResolver implements QueryInterface
 {
     public function __construct(
         protected RouterInterface $router
-    ) {
-    }
+    ) {}
 
     public function __invoke(Consultation $consultation): string
     {

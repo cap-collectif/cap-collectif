@@ -7,9 +7,13 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises HTTP outcomes and real domain data with transactional cleanup; replaces only external boundaries.
  */
 final class UserIdentityResolversTest extends ResponseVisibilityWebTestCase
@@ -52,7 +56,9 @@ final class UserIdentityResolversTest extends ResponseVisibilityWebTestCase
     public static function responseViewers(): iterable
     {
         yield 'anonymous viewer' => ['anonymous', ['Visibility public']];
+
         yield 'unrelated account' => ['other', ['Visibility public']];
+
         yield 'author sees private but not hidden answers' => ['author', ['Visibility public', 'Visibility private']];
     }
 
@@ -142,7 +148,9 @@ final class UserIdentityResolversTest extends ResponseVisibilityWebTestCase
     public static function postQueries(): iterable
     {
         yield 'search and ascending order' => ['(first: 100, affiliations: [OWNER], query: "matching", orderBy: {field: UPDATED_AT, direction: ASC})', ['Earlier matching article', 'Later matching article'], 2, false];
+
         yield 'default descending order and pagination' => ['(first: 1, affiliations: [OWNER])', ['Later matching article'], 3, true];
+
         yield 'no matching post' => ['(first: 100, affiliations: [OWNER], query: "absentword")', [], 0, false];
     }
 }

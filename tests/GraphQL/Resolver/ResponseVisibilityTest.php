@@ -12,7 +12,9 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Checks the public response visibility policy with real entities and explicit ACL context.
  */
 final class ResponseVisibilityTest extends TestCase
@@ -34,7 +36,9 @@ final class ResponseVisibilityTest extends TestCase
     public static function visibilityContexts(): iterable
     {
         yield 'ordinary anonymous context' => [false, true];
+
         yield 'privileged internal context' => [true, true];
+
         yield 'missing author' => [false, false];
     }
 }

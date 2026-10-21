@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="mediator_participant_step")
+ *
  * @ORM\Entity(repositoryClass=MediatorParticipantStepRepository::class)
  */
 class MediatorParticipantStep implements EntityInterface
@@ -18,18 +19,21 @@ class MediatorParticipantStep implements EntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity=Mediator::class, inversedBy="mediatorParticipantSteps")
+     *
      * @ORM\JoinColumn(nullable=false)
      */
     private Mediator $mediator;
 
     /**
      * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="mediatorParticipantSteps")
+     *
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private Participant $participant;
 
     /**
      * @ORM\ManyToOne(targetEntity=SelectionStep::class, inversedBy="mediatorParticipantSteps")
+     *
      * @ORM\JoinColumn(nullable=false)
      */
     private SelectionStep $step;

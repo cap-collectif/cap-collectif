@@ -45,8 +45,7 @@ class RemoveProposalSmsVoteMutation implements MutationInterface
         private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler,
         private readonly ParticipantRepository $participantRepository,
         private readonly ProjectParticipantsTotalCountCacheHandler $participantsTotalCountCacheHandler,
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input): array
     {

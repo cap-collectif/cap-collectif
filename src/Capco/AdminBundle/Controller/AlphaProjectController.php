@@ -15,6 +15,7 @@ class AlphaProjectController extends CRUDController
     {
         /** @var Project $project */
         $project = $this->admin->getSubject();
+
         /** @var ProjectAbstractStep $pStep */
         foreach ($project->getSteps() as $pStep) {
             $step = $pStep->getStep();
@@ -114,6 +115,7 @@ class AlphaProjectController extends CRUDController
     public function editDebateAction(string $slug)
     {
         $this->throwIfNoAccess();
+
         /** @var Project $project */
         $project = $this->admin->getSubject();
         $matching = $project

@@ -10,8 +10,7 @@ class HasDistrictIfMandatoryValidator extends ConstraintValidator
 {
     public function __construct(
         private readonly Manager $toggleManager
-    ) {
-    }
+    ) {}
 
     public function validate($object, Constraint $constraint)
     {

@@ -38,13 +38,16 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(
  *     name="proposal_form",
  *     uniqueConstraints={
+ *
  *        @UniqueConstraint(
  *            name="reference_unique",
  *            columns={"reference"}
  *        )
  *    }
  * )
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalFormRepository")
+ *
  * @UniqueEntity(
  *   fields={"reference"},
  *   message="proposal_form.reference.not_unique"
@@ -64,6 +67,7 @@ class ProposalForm implements EntityInterface, DisplayableInBOInterface, Questio
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "description"})
+     *
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     protected ?\DateTime $updatedAt = null;
@@ -95,6 +99,7 @@ class ProposalForm implements EntityInterface, DisplayableInBOInterface, Questio
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\CollectStep", inversedBy="proposalForm", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private ?CollectStep $step = null;
@@ -116,19 +121,23 @@ class ProposalForm implements EntityInterface, DisplayableInBOInterface, Questio
 
     /**
      * @Assert\Valid
+     *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion", mappedBy="proposalForm", cascade={"persist", "remove"}, orphanRemoval=true)
+     *
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private Collection $questions;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalCategory", mappedBy="form", cascade={"persist"}, orphanRemoval=true)
+     *
      * @ORM\OrderBy({"name" = "ASC"})
      */
     private Collection $categories;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\District\ProposalDistrict", mappedBy="form", cascade={"persist"}, orphanRemoval=true)
+     *
      * @ORM\OrderBy({"id" = "ASC"})
      */
     private Collection $districts;
@@ -210,6 +219,7 @@ class ProposalForm implements EntityInterface, DisplayableInBOInterface, Questio
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration", cascade={"persist", "remove"}, inversedBy="proposalForm")
+     *
      * @ORM\JoinColumn(name="notification_configuration_id", referencedColumnName="id", nullable=false)
      */
     private ProposalFormNotificationConfiguration $notificationsConfiguration;
@@ -231,6 +241,7 @@ class ProposalForm implements EntityInterface, DisplayableInBOInterface, Questio
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Questionnaire", inversedBy="proposalForm", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="evaluation_form_id", nullable=true)
      */
     private ?Questionnaire $evaluationForm = null;
@@ -272,6 +283,7 @@ class ProposalForm implements EntityInterface, DisplayableInBOInterface, Questio
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\AnalysisConfiguration", mappedBy="proposalForm", cascade={"persist", "remove"})
+     *
      * @ORM\JoinColumn(nullable=true, name="analysis_configuration", onDelete="SET NULL")
      */
     private ?AnalysisConfiguration $analysisConfiguration = null;
@@ -1075,6 +1087,7 @@ class ProposalForm implements EntityInterface, DisplayableInBOInterface, Questio
     public function getCustomFields(bool $isCliModel): array
     {
         $fields = [];
+
         /** @var AbstractQuestion $question */
         foreach ($this->getRealQuestions() as $question) {
             if (
@@ -1106,6 +1119,7 @@ class ProposalForm implements EntityInterface, DisplayableInBOInterface, Questio
         bool $isCliModel = false
     ): array {
         $fields = [];
+
         /** @var AbstractQuestion $question */
         foreach ($questions as $question) {
             if (
@@ -1204,7 +1218,7 @@ class ProposalForm implements EntityInterface, DisplayableInBOInterface, Questio
         $toCloneQuestions = $this->questions;
         foreach ($toCloneQuestions as $question) {
             $clonedQuestion = $this->getCloneQuestionReference($cloneReferences, $question);
-            if (($aq = $question->getQuestion()) && !empty(($questionJumps = $aq->getJumps()))) {
+            if (($aq = $question->getQuestion()) && !empty($questionJumps = $aq->getJumps())) {
                 $clonedQuestionAq = $clonedQuestion->getQuestion();
 
                 if (
@@ -1263,6 +1277,7 @@ class ProposalForm implements EntityInterface, DisplayableInBOInterface, Questio
                         }
                         $clonedJumps->add($clonedJump);
                     }
+
                     /** @var AbstractLogicJumpCondition $condition */
                     foreach ($jump->getConditions() as $condition) {
                         $clonedCondition = clone $condition;

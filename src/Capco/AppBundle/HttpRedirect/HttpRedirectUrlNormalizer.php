@@ -12,8 +12,7 @@ class HttpRedirectUrlNormalizer
         private readonly SiteSettingsRepository $siteSettingsRepository,
         private readonly string $routerRequestContextHost,
         private readonly RequestStack $requestStack
-    ) {
-    }
+    ) {}
 
     public function normalizeSourceUrl(string $sourceUrl): string
     {

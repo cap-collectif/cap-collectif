@@ -20,21 +20,24 @@ use Symfony\Component\Security\Http\HttpUtils;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Partially mocks the resource owner under test, including its HTTP request and option
  * methods.
  */
 final class OpenIDResourceOwnerTest extends TestCase
 {
-    private ClientInterface & MockObject $httpClientMock;
-    private HttpUtils & MockObject $httpUtilsMock;
-    private OptionsModifierInterface & MockObject $optionsModifierMock;
-    private RequestDataStorageInterface & MockObject $storageMock;
-    private FeatureChecker & MockObject $featureCheckerMock;
-    private LoggerInterface & MockObject $loggerMock;
+    private ClientInterface&MockObject $httpClientMock;
+    private HttpUtils&MockObject $httpUtilsMock;
+    private MockObject&OptionsModifierInterface $optionsModifierMock;
+    private MockObject&RequestDataStorageInterface $storageMock;
+    private FeatureChecker&MockObject $featureCheckerMock;
+    private LoggerInterface&MockObject $loggerMock;
     private OpenIDResourceOwner $openIDResourceOwner;
-    private string|false $previousInstanceName;
+    private false|string $previousInstanceName;
 
     /**
      * @var array<string, mixed>

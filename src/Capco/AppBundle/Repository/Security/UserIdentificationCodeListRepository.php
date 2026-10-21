@@ -11,6 +11,4 @@ use Doctrine\ORM\EntityRepository;
  * @method UserIdentificationCodeList[]    findAll()
  * @method UserIdentificationCodeList[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UserIdentificationCodeListRepository extends EntityRepository
-{
-}
+class UserIdentificationCodeListRepository extends EntityRepository {}

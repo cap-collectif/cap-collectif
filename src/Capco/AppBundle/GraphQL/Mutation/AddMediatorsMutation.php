@@ -33,8 +33,7 @@ class AddMediatorsMutation implements MutationInterface
         private readonly ConnectionBuilderInterface $connectionBuilder,
         private readonly Manager $manager,
         private readonly Indexer $indexer
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

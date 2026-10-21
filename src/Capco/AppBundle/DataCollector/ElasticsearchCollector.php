@@ -11,8 +11,7 @@ class ElasticsearchCollector extends DataCollector
 {
     public function __construct(
         private readonly ElasticsearchLogger $logger
-    ) {
-    }
+    ) {}
 
     /**
      * Collects data for the given Request and Response.
@@ -20,7 +19,7 @@ class ElasticsearchCollector extends DataCollector
     public function collect(
         Request $request,
         Response $response,
-        \Exception|\Throwable|null $exception = null
+        null|\Exception|\Throwable $exception = null
     ): void {
         $this->data['queries_count'] = $this->logger->getQueriesCount();
         $this->data['queries'] = $this->logger->getQueries();

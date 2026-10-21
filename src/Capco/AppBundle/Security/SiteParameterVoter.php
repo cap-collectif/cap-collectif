@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 /**
  * @template TAttribute of string
  * @template TSubject of SiteParameter
+ *
  * @extends Voter<TAttribute, TSubject>
  */
 class SiteParameterVoter extends Voter

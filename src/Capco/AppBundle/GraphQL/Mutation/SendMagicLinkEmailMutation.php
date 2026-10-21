@@ -13,11 +13,10 @@ class SendMagicLinkEmailMutation implements MutationInterface
 
     public function __construct(
         private MagicLinkEmailSender $magicLinkEmailSender
-    ) {
-    }
+    ) {}
 
     /**
-     * @return array{'errorCode': string|null, 'confirmationUrl': string|null}
+     * @return array{'errorCode': null|string, 'confirmationUrl': null|string}
      */
     public function __invoke(Argument $input): array
     {

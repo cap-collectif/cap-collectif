@@ -12,8 +12,7 @@ class UserEmailProcessor implements ProcessorInterface
     public function __construct(
         private readonly UserRepository $repository,
         private readonly UserNotifier $notifier
-    ) {
-    }
+    ) {}
 
     public function process(Message $message, array $options): bool
     {

@@ -35,8 +35,7 @@ class QueryProjectsResolver implements QueryInterface
         private readonly ActionLogger $actionLogger,
         private readonly QueryAnalyzer $queryAnalyzer,
         private readonly LocaleRepository $localeRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(
         Argument $args,

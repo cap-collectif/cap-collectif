@@ -55,6 +55,7 @@ class ProjectController extends \Sonata\AdminBundle\Controller\CRUDController
 
         $homePageUrl = $router->generate('app_homepage', [], RouterInterface::ABSOLUTE_URL);
         $redirectUrl = $homePageUrl . 'admin-next/projects';
+
         // If these methods return a Response, the process is interrupted and the response will be returned as is by the controller
         return new RedirectResponse($redirectUrl);
     }

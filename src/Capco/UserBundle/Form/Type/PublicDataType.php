@@ -18,8 +18,7 @@ class PublicDataType extends AbstractType
 {
     public function __construct(
         private readonly Manager $toggleManager
-    ) {
-    }
+    ) {}
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -54,9 +53,6 @@ class PublicDataType extends AbstractType
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

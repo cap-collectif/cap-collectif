@@ -13,8 +13,7 @@ class OrganizationsResolver implements QueryInterface
 {
     public function __construct(
         private readonly OrganizationRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(User $viewer, Argument $input): ConnectionInterface
     {

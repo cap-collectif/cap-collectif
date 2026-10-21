@@ -29,8 +29,11 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Invokes GraphQL mutations directly with mocked dependencies instead of verifying the HTTP
  * contract and persisted effects.
  */
@@ -74,8 +77,11 @@ class UpdateCollectStepMutationTest extends TestCase
     public static function hubDateUpdateCases(): iterable
     {
         yield 'public consultation with changed dates' => ['public-consultation', true, 1];
+
         yield 'public inquiry with changed dates' => ['public-inquiry', true, 1];
+
         yield 'other project type with changed dates' => ['other', true, 0];
+
         yield 'public consultation with unchanged dates' => ['public-consultation', false, 0];
     }
 
@@ -163,7 +169,9 @@ class UpdateCollectStepMutationTest extends TestCase
     public static function vocalContributionActivationCases(): iterable
     {
         yield 'activation with the feature disabled' => [false, false, true];
+
         yield 'activation with the feature enabled' => [true, false, false];
+
         yield 'already enabled step with the feature disabled' => [false, true, false];
     }
 

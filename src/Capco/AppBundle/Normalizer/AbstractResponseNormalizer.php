@@ -17,8 +17,7 @@ class AbstractResponseNormalizer implements NormalizerInterface, SerializerAware
 
     public function __construct(
         private readonly ObjectNormalizer $normalizer
-    ) {
-    }
+    ) {}
 
     public function hasCacheableSupportsMethod(): bool
     {
@@ -26,12 +25,13 @@ class AbstractResponseNormalizer implements NormalizerInterface, SerializerAware
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed      $object
+     * @param null|mixed $format
      */
     public function normalize($object, $format = null, array $context = [])
     {
         $data = $this->normalizer->normalize($object, $format, $context);
-        if (!($object instanceof MediaResponse)) {
+        if (!$object instanceof MediaResponse) {
             if (\is_string($responseValue = $object->getValue())) {
                 // We do not need HTML tags in ES.
                 $data['textValue'] = strip_tags($responseValue);
@@ -48,7 +48,8 @@ class AbstractResponseNormalizer implements NormalizerInterface, SerializerAware
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed      $data
+     * @param null|mixed $format
      */
     public function supportsNormalization($data, $format = null): bool
     {

@@ -9,7 +9,9 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Checks public domain rules with real entities and observable results, without framework interaction counts.
  */
 class UserTest extends TestCase
@@ -62,6 +64,7 @@ class UserTest extends TestCase
     public static function canonicalIdentities(): iterable
     {
         yield 'email with surrounding spaces' => [' MiXeD@gmail.com ', ' mixed@gmail.com '];
+
         yield 'username with surrounding spaces' => [' MiXeD Username ', ' mixed username '];
     }
 

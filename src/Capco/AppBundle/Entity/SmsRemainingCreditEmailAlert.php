@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="sms_remaining_credit_email_alert")
+ *
  * @ORM\Entity(repositoryClass=SmsOrderRepository::class)
  */
 class SmsRemainingCreditEmailAlert implements EntityInterface
@@ -24,6 +25,7 @@ class SmsRemainingCreditEmailAlert implements EntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity=SmsCredit::class)
+     *
      * @ORM\JoinColumn(nullable=false, referencedColumnName="id", name="sms_credit_id")
      */
     private SmsCredit $smsCredit;

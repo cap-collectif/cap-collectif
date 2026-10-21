@@ -13,8 +13,10 @@ class EmailingParametersController extends AbstractController
 {
     /**
      * @Security("is_granted('ROLE_ADMIN')")
+     *
      * @Route("/admin/mailingParameters", name="admin_capco_mailing_parameters")
      * @Route("/admin/mailingParameters/list", name="admin_capco_mailing_parameters_deprecated")
+     *
      * @Template("@CapcoAdmin/Emailing/emailingParameters.html.twig")
      */
     public function listAction()

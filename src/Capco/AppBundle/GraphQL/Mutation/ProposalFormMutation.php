@@ -18,8 +18,7 @@ class ProposalFormMutation
         private readonly EntityManagerInterface $em,
         private readonly ProposalFormRepository $proposalFormRepository,
         private readonly QuestionnaireRepository $questionnaireRepository
-    ) {
-    }
+    ) {}
 
     public function setEvaluationForm(Argument $input): array
     {

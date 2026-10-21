@@ -17,8 +17,7 @@ class QuestionParticipantsResolver implements QueryInterface
     public function __construct(
         private readonly ResponseSearch $responseSearch,
         private readonly QuestionnaireResultsAccessResolver $resultsAccess
-    ) {
-    }
+    ) {}
 
     public function __invoke(AbstractQuestion $question, Arg $args, ?User $viewer = null, ?\ArrayObject $context = null): ConnectionInterface
     {

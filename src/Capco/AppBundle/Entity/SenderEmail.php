@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=SenderEmailRepository::class)
+ *
  * @ORM\Table(name="sender_email", uniqueConstraints={@ORM\UniqueConstraint(columns={"locale", "domain"})})
  */
 class SenderEmail implements EntityInterface

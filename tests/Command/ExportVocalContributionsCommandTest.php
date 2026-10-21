@@ -18,6 +18,7 @@ use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * @internal
+ *
  * @covers \Capco\AppBundle\Command\ExportVocalContributionsCommand
  */
 class ExportVocalContributionsCommandTest extends TestCase
@@ -65,6 +66,7 @@ class ExportVocalContributionsCommandTest extends TestCase
             ->method('toIterable')
             ->willReturn((static function () use ($withEmail, $withoutEmail): iterable {
                 yield $withEmail;
+
                 yield $withoutEmail;
             })())
         ;

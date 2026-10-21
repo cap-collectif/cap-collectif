@@ -15,8 +15,7 @@ class ProjectOwnerProjectsResolver implements QueryInterface
 {
     public function __construct(
         private readonly ProjectSearch $projectSearch
-    ) {
-    }
+    ) {}
 
     public function __invoke(User $user, ?Argument $args = null): ConnectionInterface
     {

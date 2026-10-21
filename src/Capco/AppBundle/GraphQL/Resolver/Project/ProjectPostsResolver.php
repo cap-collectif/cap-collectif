@@ -13,8 +13,7 @@ class ProjectPostsResolver implements QueryInterface
 {
     public function __construct(
         private readonly PostRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Project $project, ?Argument $args = null): ConnectionInterface
     {

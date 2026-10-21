@@ -17,8 +17,7 @@ class CancelUserInvitationsMutation implements MutationInterface
     public function __construct(
         private readonly EntityManagerInterface $em,
         private readonly UserInviteRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): array
     {

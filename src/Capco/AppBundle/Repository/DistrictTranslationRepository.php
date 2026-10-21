@@ -11,6 +11,4 @@ use Doctrine\ORM\EntityRepository;
  * @method DistrictTranslation[]    findAll()
  * @method DistrictTranslation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class DistrictTranslationRepository extends EntityRepository
-{
-}
+class DistrictTranslationRepository extends EntityRepository {}

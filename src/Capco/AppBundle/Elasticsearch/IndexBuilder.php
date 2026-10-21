@@ -24,8 +24,7 @@ class IndexBuilder
         protected Client $client,
         private readonly Cluster $cluster,
         protected string $indexName
-    ) {
-    }
+    ) {}
 
     /**
      * Return a new Index fully configured.

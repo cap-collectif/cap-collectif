@@ -14,8 +14,7 @@ class ProjectTypesResolver implements QueryInterface
         private readonly ProjectTypeRepository $projectTypeRepository,
         private readonly ProjectRepository $projectRepository,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args, $viewer = null): array
     {

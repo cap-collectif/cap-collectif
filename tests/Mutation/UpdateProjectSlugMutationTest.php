@@ -21,6 +21,7 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class UpdateProjectSlugMutationTest extends TestCase

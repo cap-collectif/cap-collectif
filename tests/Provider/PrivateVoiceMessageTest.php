@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class PrivateVoiceMessageTest extends TestCase

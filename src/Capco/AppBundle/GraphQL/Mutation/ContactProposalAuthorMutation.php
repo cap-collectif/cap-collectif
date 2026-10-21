@@ -28,8 +28,7 @@ class ContactProposalAuthorMutation implements MutationInterface
         private readonly CaptchaChecker $captchaChecker,
         private readonly EmailValidator $emailValidator,
         private readonly RequestGuesserInterface $requestGuesser
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $argument): array
     {
@@ -92,7 +91,7 @@ class ContactProposalAuthorMutation implements MutationInterface
                     'email' => $senderEmail,
                 ],
                 'senderMessage' => $message,
-                //'copyToAdmin' => true, @todo uncomment when viewer can consent to this copy.
+                // 'copyToAdmin' => true, @todo uncomment when viewer can consent to this copy.
             ],
             $proposal->getAuthor()
         );

@@ -89,8 +89,7 @@ class ExportController extends Controller
         private readonly string $exportDir,
         private readonly string $locale,
         private readonly ActionLogger $actionLogger,
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/export-event-participants/{eventId}", name="app_export_event_participants", options={"i18n" = false})
@@ -227,7 +226,9 @@ class ExportController extends Controller
 
     /**
      * @Route("/export-my-event-participants/{eventId}", name="app_export_my_event_participants", options={"i18n" = false})
+     *
      * @Entity("event", options={"mapping": {"eventId": "id"}})
+     *
      * @Security("is_granted('ROLE_USER')")
      */
     public function downloadMyEventParticipantsAction(Request $request, Event $event): Response
@@ -250,14 +251,16 @@ class ExportController extends Controller
         }
 
         $response = $this->file($filePath, $fileName);
-        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+        $response->headers->set('Content-Type', 'text/csv; charset=utf-8');
 
         return $response;
     }
 
     /**
      * @Route("/export-project-contributors/{projectId}", name="app_export_project_contributors", options={"i18n" = false})
+     *
      * @Entity("project", options={"mapping": {"projectId": "id"}})
+     *
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function downloadProjectContributorsAction(Request $request, Project $project)
@@ -277,7 +280,7 @@ class ExportController extends Controller
         }
 
         $response = $this->file($filePath, $fileName);
-        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+        $response->headers->set('Content-Type', 'text/csv; charset=utf-8');
 
         $this->actionLogger->logExport($this->getUser(), sprintf('participants du projet %s', $project->getTitle()));
 
@@ -286,6 +289,7 @@ class ExportController extends Controller
 
     /**
      * @Route("/export-step-contributors/{stepId}", name="app_export_step_contributors", options={"i18n" = false})
+     *
      * @Security("is_granted('ROLE_USER')")
      */
     public function downloadStepContributorsAction(Request $request, mixed $stepId): Response
@@ -324,7 +328,7 @@ class ExportController extends Controller
             }
 
             $response = $this->file($filePath);
-            $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+            $response->headers->set('Content-Type', 'text/csv; charset=utf-8');
             $this->logStepParticipantsExport($step);
 
             return $response;
@@ -358,13 +362,14 @@ class ExportController extends Controller
         $this->logStepParticipantsExport($step);
 
         $response = $this->file($filePath, $fileName);
-        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+        $response->headers->set('Content-Type', 'text/csv; charset=utf-8');
 
         return $response;
     }
 
     /**
      * @Route("/download-app-logs", name="app_export_app_logs", options={"i18n" = false})
+     *
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function downloadAppLog(Request $request): Response
@@ -388,7 +393,7 @@ class ExportController extends Controller
         $this->actionLogger->logExport($this->getUser(), 'logs applicatifs');
 
         $response = $this->file($filePath, $fileName);
-        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+        $response->headers->set('Content-Type', 'text/csv; charset=utf-8');
 
         return $response;
     }
@@ -404,6 +409,7 @@ class ExportController extends Controller
 
         $proposalFormId = $step->getProposalFormId();
         $proposalForm = $step->getProposalForm();
+
         /** * @var User $viewer  */
         $viewer = $this->getUser();
 
@@ -447,7 +453,7 @@ class ExportController extends Controller
             return $this->redirect($request->headers->get('referer'));
         }
         $response = $this->file($filePath, $filename);
-        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+        $response->headers->set('Content-Type', 'text/csv; charset=utf-8');
 
         return $response;
     }
@@ -533,6 +539,7 @@ class ExportController extends Controller
 
     /**
      * @Route("/export-project-mediators-proposals-votes/{projectId}", name="app_export_project_mediators_proposals_votes", options={"i18n" = false})
+     *
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function downloadProjectMediatorsProposalsVotesAction(string $projectId): BinaryFileResponse
@@ -549,13 +556,14 @@ class ExportController extends Controller
         $fileName = CreateCsvFromProjectMediatorsProposalsVotesCommand::getFilename($project->getSlug());
 
         $response = $this->file($this->exportDir . $fileName, $fileName);
-        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+        $response->headers->set('Content-Type', 'text/csv; charset=utf-8');
 
         return $response;
     }
 
     /**
      * @Route("/questionnaires/{questionnaireId}/download", name="app_questionnaire_download", options={"i18n" = false})
+     *
      * @Entity("questionnaire", class="CapcoAppBundle:Questionnaire", options={"mapping": {"questionnaireId": "id"}})
      */
     public function downloadQuestionnaireAction(Request $request, Questionnaire $questionnaire): Response
@@ -573,7 +581,7 @@ class ExportController extends Controller
 
         try {
             $response = $this->file($filePath);
-            $response->headers->set('Content-Type', 'application/vnd.ms-excel' . '; charset=utf-8');
+            $response->headers->set('Content-Type', 'application/vnd.ms-excel; charset=utf-8');
 
             return $response;
         } catch (FileNotFoundException) {
@@ -590,6 +598,7 @@ class ExportController extends Controller
 
     /**
      * @Route("/projects/{projectSlug}/step/{stepSlug}/download", name="app_project_download", options={"i18n" = false})
+     *
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @Entity("step", class="CapcoAppBundle:Steps\AbstractStep", options={
      *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
@@ -613,7 +622,7 @@ class ExportController extends Controller
             }
 
             $response = $this->file($filePath);
-            $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+            $response->headers->set('Content-Type', 'text/csv; charset=utf-8');
             $this->logStepContributionsExport($request, $step);
 
             return $response;
@@ -636,7 +645,7 @@ class ExportController extends Controller
         }
 
         $response = $this->file($filePath);
-        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+        $response->headers->set('Content-Type', 'text/csv; charset=utf-8');
         $this->logStepContributionsExport($request, $step);
 
         return $response;
@@ -644,6 +653,7 @@ class ExportController extends Controller
 
     /**
      * @Route("/export-voice-messages", name="app_export_voice_messages", methods={"GET"}, options={"i18n" = false})
+     *
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function downloadVoiceMessagesAction(Request $request, Manager $toggleManager): Response

@@ -19,8 +19,7 @@ class LogEntryNormalizer implements NormalizerInterface, SerializerAwareInterfac
         private UrlGeneratorInterface $router,
         private readonly ObjectNormalizer $normalizer,
         private LogManager $logManager
-    ) {
-    }
+    ) {}
 
     public function hasCacheableSupportsMethod(): bool
     {

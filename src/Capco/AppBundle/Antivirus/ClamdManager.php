@@ -10,8 +10,7 @@ class ClamdManager
 {
     public function __construct(
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function start(): bool
     {

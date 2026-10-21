@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="category_image")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CategoryImageRepository")
  */
 class CategoryImage implements EntityInterface
@@ -20,13 +21,16 @@ class CategoryImage implements EntityInterface
 
     /**
      * @Gedmo\Timestampable(on="change", field={"name"})
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     protected $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media", fetch="LAZY", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     *
      * @Assert\Valid()
      */
     private $image;

@@ -23,8 +23,7 @@ class UpdateVotesVisibilityMutation implements MutationInterface
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         private readonly ParticipantHelper $participantHelper
-    ) {
-    }
+    ) {}
 
     /**
      * @return array<string, array<int, object>>

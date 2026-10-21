@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="requirement")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\RequirementRepository")
  */
 class Requirement implements EntityInterface
@@ -70,6 +71,7 @@ class Requirement implements EntityInterface
 
     /**
      * @ORM\Column(name="type", type="string")
+     *
      * @Assert\NotNull()
      */
     private ?string $type = self::CHECKBOX;
@@ -81,6 +83,7 @@ class Requirement implements EntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep", inversedBy="requirements")
+     *
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=false)
      */
     private AbstractStep $step;

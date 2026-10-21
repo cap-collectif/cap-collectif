@@ -471,8 +471,7 @@ class UserSearch extends Search
             $resultSet->getTotalHits() +
             $questionnaireAnonymousRepliesCount +
             $proposalSmsAnonymousVotesCount +
-            $paperVotesCount
-        ;
+            $paperVotesCount;
 
         return [
             'results' => $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet),

@@ -15,8 +15,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Table(name="blog_post_authors")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\PostAuthorRepository")
+ *
  * @CapcoAssert\HasAuthor()
+ *
  * @UniqueEntity(
  *     fields={"author", "post"},
  *     errorPath="author",
@@ -35,12 +38,14 @@ class PostAuthor implements EntityInterface, Authorable
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private ?User $author = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Post", inversedBy="authors", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="post_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     private Post $post;

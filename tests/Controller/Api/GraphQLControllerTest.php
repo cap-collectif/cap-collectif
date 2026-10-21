@@ -11,8 +11,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Checks actual HTTP statuses, response data and CORS headers with isolated feature flags.
  */
 class GraphQLControllerTest extends KernelTestCase implements FeatureFlagsAwareTest
@@ -77,6 +80,7 @@ class GraphQLControllerTest extends KernelTestCase implements FeatureFlagsAwareT
     public static function graphQlEndpoints(): \Generator
     {
         yield 'public API' => ['/graphql', '*'];
+
         yield 'internal API' => ['/graphql/internal', 'https://capco.dev'];
     }
 

@@ -20,8 +20,7 @@ class QuestionResponsesResolver implements QueryInterface
         private readonly ResponseSearch $responseSearch,
         private readonly LoggerInterface $logger,
         private readonly QuestionnaireResultsAccessResolver $resultsAccess
-    ) {
-    }
+    ) {}
 
     public function __invoke(AbstractQuestion $question, Arg $args, $viewer, ?\ArrayObject $context = null)
     {

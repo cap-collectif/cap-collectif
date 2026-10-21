@@ -40,8 +40,7 @@ class QuestionnaireResultsAccessResolver implements QueryInterface
         private readonly CapcoAnonReplyDecoder $cookieDecoder,
         private readonly ParticipantAuthentication $participantAuthentication,
         private readonly ProposalViewerIsAnEvaluerResolver $legacyAnalystAccess
-    ) {
-    }
+    ) {}
 
     public function canViewResults(?Questionnaire $questionnaire, ?\ArrayObject $context = null): bool
     {

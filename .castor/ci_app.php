@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Ci\App;
 
+use Castor\Attribute\AsArgsAfterOptionEnd;
+use Castor\Attribute\AsArgument;
+use Castor\Attribute\AsTask;
+
 use function Capco\Castor\App\console as sharedCmd;
 use function Capco\Castor\App\dumpGraphqlSchemas as sharedDumpGraphqlSchemas;
 use function Capco\Castor\App\generateGraphql as sharedGenerateGraphql;
@@ -12,16 +16,14 @@ use function Capco\Castor\App\startConsumers as sharedStartConsumers;
 use function Capco\Castor\App\swarrotConsume as sharedSwarrotConsume;
 use function Capco\Castor\App\toggleDisable as sharedToggleDisable;
 use function Capco\Castor\App\toggleEnable as sharedToggleEnable;
-use Castor\Attribute\AsArgsAfterOptionEnd;
-use Castor\Attribute\AsArgument;
-use Castor\Attribute\AsTask;
 
 /** @param list<string> $arguments */
 #[AsTask(description: 'Run a Symfony command in CI.')]
 function console(
     string $commandName = '',
     string $environment = 'test',
-    #[AsArgsAfterOptionEnd] array $arguments = [],
+    #[AsArgsAfterOptionEnd]
+    array $arguments = [],
 ): void {
     sharedCmd($commandName, $environment, $arguments);
 }

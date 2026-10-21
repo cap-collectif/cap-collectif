@@ -2,6 +2,4 @@
 
 namespace Capco\AppBundle\Exception;
 
-class RecentlySentException extends \Exception
-{
-}
+class RecentlySentException extends \Exception {}

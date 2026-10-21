@@ -42,8 +42,7 @@ class VocalContributionUploadService
         private readonly VocalContributionDurationResolver $durationResolver,
         private readonly CollectStepRepository $collectStepRepository,
         private readonly string $mediaSizeLimit
-    ) {
-    }
+    ) {}
 
     public function upload(
         UploadedFile $file,

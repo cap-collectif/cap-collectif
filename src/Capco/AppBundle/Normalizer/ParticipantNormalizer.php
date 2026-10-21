@@ -15,8 +15,7 @@ class ParticipantNormalizer implements NormalizerInterface, SerializerAwareInter
 
     public function __construct(
         private readonly ParticipantContributionCounter $contributionCounter
-    ) {
-    }
+    ) {}
 
     public function hasCacheableSupportsMethod(): bool
     {

@@ -11,7 +11,9 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Checks public domain rules with real entities and observable results, without framework interaction counts.
  */
 class ProposalAnalysisCommentVoterTest extends AuthorizationTestCase
@@ -58,9 +60,13 @@ class ProposalAnalysisCommentVoterTest extends AuthorizationTestCase
     public static function concernedViewers(): iterable
     {
         yield 'analyst who wrote the analysis' => ['analyst', VoterInterface::ACCESS_GRANTED];
+
         yield 'assigned supervisor' => ['supervisor', VoterInterface::ACCESS_GRANTED];
+
         yield 'assigned decision maker' => ['decision maker', VoterInterface::ACCESS_GRANTED];
+
         yield 'unrelated account' => ['other', VoterInterface::ACCESS_DENIED];
+
         yield 'analyst assigned without writing this analysis' => ['assigned without analysis', VoterInterface::ACCESS_DENIED];
     }
 }

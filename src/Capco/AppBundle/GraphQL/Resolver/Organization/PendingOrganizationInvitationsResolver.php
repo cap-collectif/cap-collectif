@@ -13,8 +13,7 @@ class PendingOrganizationInvitationsResolver implements QueryInterface
 {
     public function __construct(
         private readonly PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(
         Organization $organization,

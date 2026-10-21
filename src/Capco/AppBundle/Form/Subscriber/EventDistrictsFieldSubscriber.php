@@ -17,12 +17,8 @@ class EventDistrictsFieldSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         private readonly EventDistrictsPersister $persister
-    ) {
-    }
+    ) {}
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [FormEvents::SUBMIT => 'onSubmit'];
@@ -31,6 +27,7 @@ class EventDistrictsFieldSubscriber implements EventSubscriberInterface
     public function onSubmit(FormEvent $event)
     {
         $form = $event->getForm();
+
         /** @var Event $event */
         $event = $event->getData();
 

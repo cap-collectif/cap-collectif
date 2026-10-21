@@ -40,9 +40,9 @@ class UpdateUserReplyMutation extends ReplyMutation implements MutationInterface
         $reply = $this->getReply($input->offsetGet('replyId'), $viewer);
         $wasDraft = $reply->isDraft();
 
-//        if (!$this->canReusePhone($reply, null, $viewer)) {
-//            return ['errorCode' => ValidatePhoneReusabilityMutation::PHONE_ALREADY_USED];
-//        }
+        //        if (!$this->canReusePhone($reply, null, $viewer)) {
+        //            return ['errorCode' => ValidatePhoneReusabilityMutation::PHONE_ALREADY_USED];
+        //        }
 
         $reply = $this->updateReply($reply, $input, $wasDraft);
         $this->em->flush();

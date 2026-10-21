@@ -14,8 +14,7 @@ class ProjectAdminAlphaUrlResolver implements QueryInterface
     public function __construct(
         protected RouterInterface $router,
         private readonly Manager $manager
-    ) {
-    }
+    ) {}
 
     public function __invoke(Project $project): string
     {

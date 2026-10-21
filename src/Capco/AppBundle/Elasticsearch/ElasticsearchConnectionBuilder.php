@@ -129,7 +129,7 @@ class ElasticsearchConnectionBuilder
             $cursor = ElasticsearchPaginator::encodeCursor($cursors[$index]);
             if ($this->edgeCallback) {
                 $edge = ($this->edgeCallback)($cursor, $value, $index);
-                if (!($edge instanceof EdgeInterface)) {
+                if (!$edge instanceof EdgeInterface) {
                     throw new \InvalidArgumentException('The $edgeCallback of the ConnectionBuilder must return an instance of EdgeInterface');
                 }
             } else {
@@ -145,7 +145,7 @@ class ElasticsearchConnectionBuilder
     {
         if ($this->connectionCallback) {
             $connection = ($this->connectionCallback)($edges, $pageInfo);
-            if (!($connection instanceof ConnectionInterface)) {
+            if (!$connection instanceof ConnectionInterface) {
                 throw new \InvalidArgumentException('The $connectionCallback of the ConnectionBuilder must return an instance of ConnectionInterface');
             }
 

@@ -20,7 +20,5 @@ final class Version20180726142832 extends AbstractMigration
         $this->addSql('ALTER TABLE comment DROP validated');
     }
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 }

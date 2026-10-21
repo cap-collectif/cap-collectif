@@ -34,7 +34,5 @@ final class Version20260729120000 extends AbstractMigration implements Container
             SQL);
     }
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 }

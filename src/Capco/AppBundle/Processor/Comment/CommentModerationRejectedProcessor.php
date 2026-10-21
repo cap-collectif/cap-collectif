@@ -12,8 +12,7 @@ class CommentModerationRejectedProcessor implements ProcessorInterface
     public function __construct(
         private readonly CommentNotifier $notifier,
         private readonly CommentRepository $commentRepository
-    ) {
-    }
+    ) {}
 
     public function process(Message $message, array $options): bool
     {

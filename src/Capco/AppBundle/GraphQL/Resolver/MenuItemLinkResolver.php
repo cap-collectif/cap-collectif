@@ -13,8 +13,7 @@ class MenuItemLinkResolver implements QueryInterface
     public function __construct(
         private readonly MenuItemUrlGenerator $urlGenerator,
         private readonly GraphQLLocaleResolver $localeResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(
         MenuItem $item,

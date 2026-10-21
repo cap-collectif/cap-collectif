@@ -23,8 +23,7 @@ class UpdateUserTypeMutation implements MutationInterface
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly EntityManagerInterface $em,
         private readonly FormFactoryInterface $formFactory
-    ) {
-    }
+    ) {}
 
     /**
      * @return array<string, UserType>

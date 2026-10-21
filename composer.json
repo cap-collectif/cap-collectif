@@ -25,7 +25,7 @@
         "bjeavons/zxcvbn-php": "^1.0",
         "box/spout": "^3.1",
         "caxy/htmldiff-bundle": "~0.1.2",
-        "cocur/slugify": "~4.4.0",
+        "cocur/slugify": "^4.7",
         "doctrine/annotations": "^1.12",
         "doctrine/cache": "^1.10",
         "doctrine/common": "3.1.*",
@@ -137,7 +137,7 @@
     },
     "require-dev": {
         "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
-        "friendsofphp/php-cs-fixer": "^3",
+        "friendsofphp/php-cs-fixer": "^3.40",
         "icanhazstring/composer-unused": "^0.8.9",
         "phpcompatibility/php-compatibility": "^9.3",
         "phpspec/phpspec": "^7.0",
@@ -148,6 +148,8 @@
         "phpunit/phpunit": "^9.0",
         "pyrech/composer-changelogs": "^1.5",
         "rector/rector": "^1.2.0",
+        "symfony/browser-kit": "5.4.*",
+        "symfony/css-selector": "5.4.*",
         "symfony/debug-bundle": "5.4.*",
         "symfony/maker-bundle": "^1.39",
         "symfony/stopwatch": "5.4.*",
@@ -164,7 +166,7 @@
         },
         "bin-dir": "bin",
         "platform": {
-            "php": "8.1"
+            "php": "8.3"
         },
         "preferred-install": {
             "*": "dist"

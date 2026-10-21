@@ -18,7 +18,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="reporting")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ReportingRepository")
+ *
  * @ORM\HasLifecycleCallbacks()
  */
 class Reporting implements EntityInterface, CreatableInterface, ExportableContributionInterface, \Stringable
@@ -29,66 +31,77 @@ class Reporting implements EntityInterface, CreatableInterface, ExportableContri
 
     /**
      * @ORM\Column(name="status", type="integer")
+     *
      * @Assert\NotNull()
      */
     private $status;
 
     /**
      * @Gedmo\Timestampable(on="create")
+     *
      * @ORM\Column(name="created_at", type="datetime")
      */
     private ?\DateTime $createdAt = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(name="reporter_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private ?User $Reporter = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="Reports")
+     *
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private ?Opinion $Opinion = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Source", inversedBy="reports")
+     *
      * @ORM\JoinColumn(name="source_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private ?Source $Source = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Argument", inversedBy="Reports")
+     *
      * @ORM\JoinColumn(name="argument_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private ?Argument $Argument = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionVersion", inversedBy="reports")
+     *
      * @ORM\JoinColumn(name="opinion_version_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private ?OpinionVersion $opinionVersion = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Comment", inversedBy="Reports")
+     *
      * @ORM\JoinColumn(name="comment_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private ?Comment $Comment = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="reports")
+     *
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private ?Proposal $proposal = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Debate\DebateArgument", inversedBy="reports")
+     *
      * @ORM\JoinColumn(name="debate_argument_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private ?DebateArgument $debateArgument = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Debate\DebateAnonymousArgument", inversedBy="reports")
+     *
      * @ORM\JoinColumn(name="debate_anonymous_argument_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private ?DebateAnonymousArgument $debateAnonymousArgument = null;

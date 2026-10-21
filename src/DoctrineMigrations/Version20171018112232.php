@@ -23,7 +23,5 @@ class Version20171018112232 extends AbstractMigration
         ]);
     }
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 }

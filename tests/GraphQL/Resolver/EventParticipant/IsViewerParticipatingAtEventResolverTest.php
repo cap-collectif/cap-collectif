@@ -7,9 +7,13 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises HTTP outcomes and real domain data with transactional cleanup; replaces only external boundaries.
  */
 final class IsViewerParticipatingAtEventResolverTest extends IdentityWebTestCase
@@ -34,6 +38,7 @@ final class IsViewerParticipatingAtEventResolverTest extends IdentityWebTestCase
     public static function registrationStates(): iterable
     {
         yield 'registered viewer' => [true];
+
         yield 'only another account is registered' => [false];
     }
 }

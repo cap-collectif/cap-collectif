@@ -25,7 +25,7 @@ final class ContactNotifier extends BaseNotifier
             'senderEmail' => $senderEmail,
         ];
         $recipient = new User();
-        $recipient->setEmail($recipientEmail); //todo set locale
+        $recipient->setEmail($recipientEmail); // todo set locale
         $this->mailer->createAndSendMessage(
             ContactMessage::class,
             $message,

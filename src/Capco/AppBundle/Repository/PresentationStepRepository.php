@@ -5,6 +5,4 @@ namespace Capco\AppBundle\Repository;
 /**
  * PresentationStepRepository.
  */
-class PresentationStepRepository extends AbstractStepRepository
-{
-}
+class PresentationStepRepository extends AbstractStepRepository {}

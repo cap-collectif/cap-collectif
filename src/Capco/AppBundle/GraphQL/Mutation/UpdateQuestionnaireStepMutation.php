@@ -30,8 +30,7 @@ class UpdateQuestionnaireStepMutation implements MutationInterface
         private readonly FormFactoryInterface $formFactory,
         private readonly LoggerInterface $logger,
         private readonly ActionLogger $actionLogger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

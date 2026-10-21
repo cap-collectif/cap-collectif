@@ -9,12 +9,14 @@ use Doctrine\ORM\Mapping as ORM;
  * SourceVote.
  *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SourceVoteRepository")
+ *
  * @ORM\HasLifecycleCallbacks()
  */
 class SourceVote extends AbstractVote
 {
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Source", inversedBy="votes", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="source_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $source;

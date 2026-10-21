@@ -25,8 +25,7 @@ class UpdateQuestionnaireNotificationConfiguration implements MutationInterface
         private readonly EntityManagerInterface $em,
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $arguments, User $viewer): array
     {

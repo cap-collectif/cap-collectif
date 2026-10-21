@@ -52,6 +52,7 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
         ExportHeaders::EXPORT_PARTICIPANT_PROFILE_URL,
         ExportHeaders::EXPORT_PARTICIPANT_IDENTIFICATION_CODE,
     ];
+
     /**
      * @var WriterInterface
      */
@@ -124,8 +125,10 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
 
             $totalCount = Arr::path($project, 'data.contributors.totalCount');
             $progress = new ProgressBar($output, (int) $totalCount);
+
             /** @var list<array{id: string, __typename?: ?string}> $userContributors */
             $userContributors = [];
+
             /** @var list<array{id: string, __typename?: ?string}> $participantContributors */
             $participantContributors = [];
 

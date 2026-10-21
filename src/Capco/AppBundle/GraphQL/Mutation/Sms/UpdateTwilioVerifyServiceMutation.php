@@ -20,8 +20,7 @@ class UpdateTwilioVerifyServiceMutation implements MutationInterface
         private readonly TwilioClient $twilioClient,
         private readonly EntityManagerInterface $em,
         private readonly ExternalServiceConfigurationRepository $externalServiceConfigurationRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input): array
     {

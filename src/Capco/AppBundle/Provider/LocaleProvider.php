@@ -17,8 +17,7 @@ final class LocaleProvider implements LocaleProviderInterface
         private readonly RequestStack $requestStack,
         private readonly ParameterBagInterface $parameterBag,
         private readonly ?TranslatorInterface $translator
-    ) {
-    }
+    ) {}
 
     public function provideCurrentLocale(): ?string
     {
@@ -52,7 +51,7 @@ final class LocaleProvider implements LocaleProviderInterface
             }
 
             return (string) $this->parameterBag->get('kernel.default_locale');
-        } catch (ParameterNotFoundException|InvalidArgumentException) {
+        } catch (InvalidArgumentException|ParameterNotFoundException) {
             return null;
         }
     }

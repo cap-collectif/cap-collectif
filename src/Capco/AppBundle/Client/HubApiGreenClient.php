@@ -17,8 +17,7 @@ class HubApiGreenClient
         private readonly string $hubApiGreenUrl,
         private readonly OnePasswordClient $onePasswordClient,
         private readonly string $instanceName
-    ) {
-    }
+    ) {}
 
     public function associateFolder(OtherStep $step, HubMetadata $metadata, string $consultationUrl): void
     {

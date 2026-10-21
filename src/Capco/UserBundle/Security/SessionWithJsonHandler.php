@@ -29,6 +29,7 @@ class SessionWithJsonHandler extends RedisSessionHandler
     private readonly string $lockKeyPrefix;
     private readonly \Redis $redis;
     private int $retryDelay = 10000;
+
     /** @var array<string, string> */
     private array $lockTokens = [];
 

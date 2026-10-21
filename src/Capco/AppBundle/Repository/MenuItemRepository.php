@@ -182,7 +182,8 @@ class MenuItemRepository extends EntityRepository
             ->where('mi.parent = :menuItem')
             ->setParameter('menuItem', $menuItem)
             ->getQuery()
-            ->getSingleScalarResult() > 0;
+            ->getSingleScalarResult() > 0
+        ;
     }
 
     /**

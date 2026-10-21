@@ -8,9 +8,13 @@ use Capco\UserBundle\Entity\User;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises account contracts through HTTP with fresh database reads, transactional cleanup and external boundary doubles.
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
  */
 final class PasswordTest extends AccountWebTestCase
@@ -53,6 +57,7 @@ final class PasswordTest extends AccountWebTestCase
     public static function invalidPasswordChanges(): iterable
     {
         yield 'wrong current password' => ['wrong', self::NEW_PASSWORD];
+
         yield 'invalid new password' => [self::PASSWORD, 'weak'];
     }
 
@@ -138,6 +143,7 @@ final class PasswordTest extends AccountWebTestCase
     public static function rejectedResets(): iterable
     {
         yield 'unknown token' => [true, self::NEW_PASSWORD, 'The user with "confirmation token" does not exist for value "unknown-token"'];
+
         yield 'invalid password' => [false, 'weak', 'Form not valid.'];
     }
 

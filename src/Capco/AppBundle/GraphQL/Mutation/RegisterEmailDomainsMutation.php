@@ -20,8 +20,7 @@ class RegisterEmailDomainsMutation implements MutationInterface
         private readonly FormFactoryInterface $formFactory,
         private readonly RegistrationFormRepository $registrationFormRepository,
         private readonly EntityManagerInterface $em
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $viewer): array
     {

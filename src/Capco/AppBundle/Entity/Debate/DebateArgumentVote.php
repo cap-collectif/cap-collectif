@@ -14,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * A like on an argument in a debate.
  *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\Debate\DebateArgumentVoteRepository")
+ *
  * @ORM\HasLifecycleCallbacks()
  */
 class DebateArgumentVote extends AbstractVote implements EntityInterface
@@ -23,6 +24,7 @@ class DebateArgumentVote extends AbstractVote implements EntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Debate\DebateArgument", inversedBy="votes")
+     *
      * @ORM\JoinColumn(name="debate_argument_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private DebateArgument $debateArgument;

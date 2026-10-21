@@ -36,8 +36,11 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status legacy
+ *
  * @phpunit-reason Exercises deprecated Swarrot processors directly; migrate the behavior to the HTTP or CLI
  * action and the supported message architecture.
  */
@@ -66,10 +69,15 @@ class ProposalProcessorTest extends MailerSnapshotCommandTestCase
     public static function createScenarios(): iterable
     {
         yield 'published proposal notification' => ['proposal1'];
+
         yield 'proposal without acknowledgement configuration' => ['proposal22'];
+
         yield 'published draft notification' => ['proposal103'];
+
         yield 'published draft with acknowledgement configuration' => ['proposal104'];
+
         yield 'proposal participation acknowledgement' => ['proposal1'];
+
         yield 'configured proposal notification recipient' => ['proposalProjectWithOwner'];
     }
 
@@ -98,7 +106,9 @@ class ProposalProcessorTest extends MailerSnapshotCommandTestCase
     public static function updateScenarios(): iterable
     {
         yield 'admin and author notifications' => ['proposal10'];
+
         yield 'update without acknowledgement configuration' => ['proposal22'];
+
         yield 'assigned analyst notifications' => ['proposal110'];
     }
 
@@ -143,6 +153,7 @@ class ProposalProcessorTest extends MailerSnapshotCommandTestCase
     public static function deleteScenarios(): iterable
     {
         yield 'admin notification' => ['proposal12', ['proposalId' => 'proposal12'], null];
+
         yield 'decision maker notification' => [
             'deletedProposal1',
             ['proposalId' => 'deletedProposal1', 'decisionMakerId' => 'userDecisionMaker'],
@@ -174,6 +185,7 @@ class ProposalProcessorTest extends MailerSnapshotCommandTestCase
     public static function statusScenarios(): iterable
     {
         yield 'French author' => ['proposal2'];
+
         yield 'English author' => ['proposal108'];
     }
 
@@ -222,8 +234,11 @@ class ProposalProcessorTest extends MailerSnapshotCommandTestCase
     public static function assignmentScenarios(): iterable
     {
         yield 'analyst assignment' => [ProposalAssignationProcessor::class, ['proposal110'], 'admin.global.evaluers'];
+
         yield 'supervisor assignment' => [ProposalAssignationProcessor::class, ['proposal110', 'proposal111'], 'tag.filter.opinion'];
+
         yield 'decision maker assignment' => [ProposalAssignationProcessor::class, ['proposal110'], 'tag.filter.decision'];
+
         yield 'assignment revocation' => [ProposalRevokeProcessor::class, ['proposal110', 'proposal111'], ''];
     }
 
@@ -256,6 +271,7 @@ class ProposalProcessorTest extends MailerSnapshotCommandTestCase
     public static function analysisScenarios(): iterable
     {
         yield 'assessment publication' => [ProposalAnalyseProcessor::TYPE_ASSESSMENT, 'onAssessmentPublication'];
+
         yield 'decision publication' => [ProposalAnalyseProcessor::TYPE_DECISION, 'onDecisionPublication'];
     }
 
@@ -303,6 +319,7 @@ class ProposalProcessorTest extends MailerSnapshotCommandTestCase
             ProposalRevisionProcessor::class,
             ['proposalRevisionId' => 'proposalRevision2', 'proposalId' => 'proposalIdf1'],
         ];
+
         yield 'revision completed' => [
             ProposalRevisionReviseProcessor::class,
             ['proposalRevisionId' => 'proposalRevision2', 'proposalId' => 'proposalIdf1', 'date' => 'now'],
@@ -349,7 +366,9 @@ class ProposalProcessorTest extends MailerSnapshotCommandTestCase
     public static function newsScenarios(): iterable
     {
         yield 'news created' => [ProposalNewsCreateProcessor::class, ['proposalNewsId' => 'post18']];
+
         yield 'news updated' => [ProposalNewsUpdateProcessor::class, ['proposalNewsId' => 'post18']];
+
         yield 'news deleted' => [
             ProposalNewsDeleteProcessor::class,
             [
@@ -405,6 +424,7 @@ class ProposalProcessorTest extends MailerSnapshotCommandTestCase
     public static function statusSnapshotScenarios(): iterable
     {
         yield 'French author' => ['proposal2', 'user@test.com', 'notifyProposal_AuthorStatusChange.html'];
+
         yield 'English author' => ['proposal108', 'john.smith@england.uk', 'notifyProposal_AuthorStatusChangeEnglish.html'];
     }
 
@@ -438,8 +458,11 @@ class ProposalProcessorTest extends MailerSnapshotCommandTestCase
     public static function assignmentSnapshotScenarios(): iterable
     {
         yield 'analyst' => [ProposalAssignationProcessor::class, ['proposal110'], 'admin.global.evaluers', 'notifyAnalyst_NewAnalyst.html'];
+
         yield 'supervisor' => [ProposalAssignationProcessor::class, ['proposal110', 'proposal111'], 'tag.filter.opinion', 'notifyAnalyst_NewSupervisor.html'];
+
         yield 'decision maker' => [ProposalAssignationProcessor::class, ['proposal110'], 'tag.filter.decision', 'notifyAnalyst_NewDecisionMaker.html'];
+
         yield 'revocation' => [ProposalRevokeProcessor::class, ['proposal110', 'proposal111'], '', 'notifyAnalyst_RevokeAnalyst.html'];
     }
 

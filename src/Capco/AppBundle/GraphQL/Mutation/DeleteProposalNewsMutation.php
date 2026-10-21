@@ -31,8 +31,7 @@ class DeleteProposalNewsMutation implements MutationInterface
         private readonly Publisher $publisher,
         private readonly ProposalUrlResolver $proposalUrlResolver,
         private readonly RequestStack $requestStack
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $viewer): array
     {

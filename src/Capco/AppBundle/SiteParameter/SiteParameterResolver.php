@@ -18,8 +18,7 @@ class SiteParameterResolver
         private readonly EntityManagerInterface $entityManager,
         private readonly RequestStack $requestStack,
         private readonly RedisCache $cache
-    ) {
-    }
+    ) {}
 
     public function getValue(string $key, ?string $locale = null, ?string $defaultValue = null)
     {

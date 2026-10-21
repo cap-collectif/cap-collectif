@@ -19,8 +19,7 @@ class DeleteOfficialResponseMutation implements MutationInterface
     public function __construct(
         private readonly GlobalIdResolver $resolver,
         private readonly EntityManagerInterface $em
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $user): array
     {

@@ -11,8 +11,7 @@ class SectionContributionsCountResolver implements QueryInterface
 {
     public function __construct(
         private readonly OpinionRepository $opinionRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(OpinionType $type, ?User $viewer): int
     {

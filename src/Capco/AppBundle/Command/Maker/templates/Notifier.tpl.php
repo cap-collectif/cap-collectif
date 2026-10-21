@@ -8,8 +8,8 @@ use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 
 final class <?php echo $command_class_name; ?> extends <?php
  echo $command_notifier_type;
- echo \PHP_EOL;
- ?>
+echo \PHP_EOL;
+?>
 {
     public function __construct(MailerService $mailer, SiteParameterResolver $siteParams, UserResolver $userResolver)
     {

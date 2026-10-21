@@ -21,8 +21,7 @@ class CaptchaChecker
         private readonly string $captchetatValidateUrl,
         private readonly string $environment,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     /**
      * @see https://developers.cloudflare.com/turnstile/get-started/server-side-validation/

@@ -18,8 +18,7 @@ class DeleteFooterSocialNetworkMutation implements MutationInterface
     public function __construct(
         private readonly FooterSocialNetworkRepository $footerSocialNetworkRepository,
         private readonly EntityManagerInterface $entityManager
-    ) {
-    }
+    ) {}
 
     /**
      * @return array<string, string>

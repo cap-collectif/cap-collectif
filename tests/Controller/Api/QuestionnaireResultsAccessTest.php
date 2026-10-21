@@ -14,10 +14,15 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises GraphQL over HTTP; observes hydration only for the explicit performance regression.
  */
 class QuestionnaireResultsAccessTest extends WebTestCase
@@ -182,8 +187,11 @@ class QuestionnaireResultsAccessTest extends WebTestCase
     public static function visibleStepFilters(): iterable
     {
         yield 'restricted collect step' => ['collectstep1', 'CollectStep', 'userWelcomattic', 'userTheo'];
+
         yield 'restricted consultation step' => ['cstep1', 'ConsultationStep', 'user5', 'userTheo'];
+
         yield 'manager collect step' => ['collectstep1', 'CollectStep', 'userWelcomattic', 'userAdmin'];
+
         yield 'manager consultation step' => ['cstep1', 'ConsultationStep', 'user5', 'userAdmin'];
     }
 
@@ -241,20 +249,35 @@ class QuestionnaireResultsAccessTest extends WebTestCase
     public static function resultManagers(): \Generator
     {
         yield 'project owner differs from questionnaire owner' => [true, 'userTheo', null, 'userTheo', true];
+
         yield 'questionnaire owner cannot override project owner' => [true, 'userTheo', null, 'user5', false];
+
         yield 'project organization admin' => [true, null, 'organization2', 'valerieMassonDelmotte', true];
+
         yield 'project organization ordinary member' => [true, null, 'organization2', 'ChristopheCassou', true];
+
         yield 'project member of multiple organizations' => [true, null, 'organization2', 'userMultipleOrganizations', true];
+
         yield 'other project organization' => [true, null, 'organization2', 'userMickael', false];
+
         yield 'project user owner overrides organization' => [true, 'userTheo', 'organization2', 'ChristopheCassou', false];
+
         yield 'project user owner retains access' => [true, 'userTheo', 'organization2', 'userTheo', true];
+
         yield 'ownerless project never falls back to questionnaire owner' => [true, null, null, 'user5', false];
+
         yield 'standalone owner' => [false, 'userTheo', null, 'userTheo', true];
+
         yield 'standalone non-owner' => [false, 'userTheo', null, 'user5', false];
+
         yield 'standalone organization admin' => [false, null, 'organization2', 'valerieMassonDelmotte', true];
+
         yield 'standalone organization ordinary member' => [false, null, 'organization2', 'ChristopheCassou', true];
+
         yield 'other standalone organization' => [false, null, 'organization2', 'userMickael', false];
+
         yield 'standalone user owner overrides organization' => [false, 'userTheo', 'organization2', 'ChristopheCassou', false];
+
         yield 'standalone user owner retains access' => [false, 'userTheo', 'organization2', 'userTheo', true];
     }
 

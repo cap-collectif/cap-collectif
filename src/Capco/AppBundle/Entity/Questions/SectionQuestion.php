@@ -12,6 +12,7 @@ class SectionQuestion extends AbstractQuestion implements EntityInterface
 {
     /**
      * @var int
+     *
      * @ORM\Column(name="level", type="integer", nullable=false)
      */
     protected $level;

@@ -27,8 +27,7 @@ class DeleteStepMutation implements MutationInterface
         private readonly EntityManagerInterface $em,
         private readonly ActionLogger $actionLogger,
         private readonly StepAccessResolver $stepAccessResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

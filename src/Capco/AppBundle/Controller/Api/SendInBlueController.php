@@ -21,8 +21,7 @@ class SendInBlueController extends AbstractController
         private readonly EntityManagerInterface $entityManager,
         private readonly string $sendInBlueSecret,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     /**
      * configure web hook in https://my.sendinblue.com/advanced/webhook.

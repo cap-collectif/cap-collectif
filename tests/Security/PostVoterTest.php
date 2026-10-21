@@ -13,7 +13,9 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Checks public domain rules with real entities and observable results, without framework interaction counts.
  */
 class PostVoterTest extends AuthorizationTestCase
@@ -109,6 +111,7 @@ class PostVoterTest extends AuthorizationTestCase
     public static function ownershipContexts(): iterable
     {
         yield 'post owner' => [false];
+
         yield 'associated project owner' => [true];
     }
 
@@ -131,6 +134,6 @@ class PostVoterTest extends AuthorizationTestCase
         $token = $this->createStub(TokenInterface::class);
         $voter = new PostVoter();
         self::assertSame(VoterInterface::ACCESS_ABSTAIN, $voter->vote($token, new User(), [PostVoter::CREATE]));
-        self::assertSame(VoterInterface::ACCESS_ABSTAIN, $voter->vote($token, (new Post()), ['unknown']));
+        self::assertSame(VoterInterface::ACCESS_ABSTAIN, $voter->vote($token, new Post(), ['unknown']));
     }
 }

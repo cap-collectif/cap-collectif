@@ -22,8 +22,7 @@ class FranceConnectOptionsModifier implements OptionsModifierInterface
         protected RedisCache $redisCache,
         protected Manager $toggleManager,
         protected SessionInterface $session
-    ) {
-    }
+    ) {}
 
     public function getAllowedData(): array
     {

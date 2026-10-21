@@ -13,7 +13,7 @@ class ContributionCompletionStatusFilter extends SQLFilter
 
     /**
      * @param ClassMetadata<ContributionInterface> $targetEntity
-     * @param $targetTableAlias
+     * @param mixed                                $targetTableAlias
      */
     public function addFilterConstraint(ClassMetadata $targetEntity, $targetTableAlias): string
     {

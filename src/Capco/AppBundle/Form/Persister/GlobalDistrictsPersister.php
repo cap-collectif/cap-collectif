@@ -16,8 +16,7 @@ class GlobalDistrictsPersister
         private readonly ProjectDistrictPositionerRepository $districtPositionerRepository,
         private readonly GlobalDistrictRepository $globalDistrictRepository,
         private readonly EntityManagerInterface $em
-    ) {
-    }
+    ) {}
 
     public function persist(array $districtsIds, Project $project): void
     {

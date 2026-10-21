@@ -22,7 +22,7 @@ class AnalysisConfigurationRepository extends EntityRepository
         $from->modify('-2 hours');
         $qb = $this->createQueryBuilder('c');
         $qb = $qb
-            //We considered all analysis not processed which have an effectiveDate already passed
+            // We considered all analysis not processed which have an effectiveDate already passed
             ->andWhere($qb->expr()->between('c.effectiveDate', ':from', ':to'))
             ->andWhere('c.effectiveDateProcessed = 0')
             ->andWhere('c.proposalForm IS NOT NULL')

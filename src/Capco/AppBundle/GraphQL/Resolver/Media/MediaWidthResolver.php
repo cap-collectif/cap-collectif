@@ -12,8 +12,7 @@ class MediaWidthResolver implements QueryInterface
     public function __construct(
         private readonly EntityManagerInterface $em,
         private readonly MediaSizeRetriever $mediaSizeRetriever
-    ) {
-    }
+    ) {}
 
     public function __invoke(Media $media): ?int
     {

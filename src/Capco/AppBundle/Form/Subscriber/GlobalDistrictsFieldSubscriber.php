@@ -17,12 +17,8 @@ class GlobalDistrictsFieldSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         private readonly GlobalDistrictsPersister $persister
-    ) {
-    }
+    ) {}
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [FormEvents::SUBMIT => 'onSubmit'];
@@ -31,8 +27,10 @@ class GlobalDistrictsFieldSubscriber implements EventSubscriberInterface
     public function onSubmit(FormEvent $event)
     {
         $form = $event->getForm();
+
         /** @var Project $project */
         $project = $event->getData();
+
         /** @var array<string> $districtIds */
         $districtIds = $form
             ->get('districts')

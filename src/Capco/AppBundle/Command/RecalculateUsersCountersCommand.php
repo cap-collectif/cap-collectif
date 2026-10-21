@@ -24,6 +24,7 @@ class RecalculateUsersCountersCommand extends Command
     private const REDIS_KEY = 'recalculate_user_counters';
 
     private bool $force = false;
+
     /** @var string[] */
     private array $ids = [];
 

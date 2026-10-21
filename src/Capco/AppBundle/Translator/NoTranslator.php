@@ -10,8 +10,7 @@ class NoTranslator implements TranslatorInterface, TranslatorBagInterface, Local
 {
     public function __construct(
         private readonly TranslatorInterface $translator
-    ) {
-    }
+    ) {}
 
     public function trans($id, array $parameters = [], $domain = null, $locale = null)
     {

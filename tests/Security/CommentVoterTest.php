@@ -10,7 +10,9 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Checks public domain rules with real entities and observable results, without framework interaction counts.
  */
 class CommentVoterTest extends AuthorizationTestCase
@@ -20,7 +22,7 @@ class CommentVoterTest extends AuthorizationTestCase
         $token = $this->createStub(TokenInterface::class);
         $token->method('getUser')->willReturn('anon.');
 
-        self::assertSame(VoterInterface::ACCESS_DENIED, (new CommentVoter())->vote($token, (new \Capco\AppBundle\Entity\ProposalComment()), [CommentVoter::DELETE]));
+        self::assertSame(VoterInterface::ACCESS_DENIED, (new CommentVoter())->vote($token, new \Capco\AppBundle\Entity\ProposalComment(), [CommentVoter::DELETE]));
     }
 
     public function testNonAuthorCannotDeleteComment(): void

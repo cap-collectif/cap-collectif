@@ -4,8 +4,11 @@ namespace Capco\Tests\Command;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Checks CLI outcomes and captured recipient and subject contracts; email snapshots
  * complement explicit assertions.
  */

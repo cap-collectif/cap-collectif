@@ -12,6 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="appendix_type")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AppendixRepository")
  */
 class AppendixType implements EntityInterface, \Stringable
@@ -22,7 +23,9 @@ class AppendixType implements EntityInterface, \Stringable
 
     /**
      * @var \DateTime
+     *
      * @Gedmo\Timestampable(on="change", field={"helpText", "title"})
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     protected $updatedAt;

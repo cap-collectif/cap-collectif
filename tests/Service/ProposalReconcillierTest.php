@@ -18,8 +18,11 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Mocks domain objects and persistence calls instead of observing the resulting contribution
  * ownership.
  */
@@ -31,6 +34,7 @@ class ProposalReconcillierTest extends TestCase
     private User $viewer;
     private Proposal $proposal;
     private CollectStep $collectStep;
+
     /** @var array<int, Requirement> */
     private array $requirements = [];
 

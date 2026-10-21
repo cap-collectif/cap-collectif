@@ -19,8 +19,7 @@ class CaptchetatProxyController extends AbstractController
         private readonly string $captchetatApiUrl,
         private readonly LoggerInterface $logger,
         private readonly CaptchaChecker $captchaChecker,
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/captchetat-proxy", name="captchetat_proxy", options={"i18n" = false}, methods={"GET", "POST"})

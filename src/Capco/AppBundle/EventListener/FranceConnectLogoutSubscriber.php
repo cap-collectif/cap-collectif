@@ -13,8 +13,7 @@ class FranceConnectLogoutSubscriber implements EventSubscriberInterface
     public function __construct(
         private readonly FranceConnectLogoutHandler $franceConnectLogoutHandler,
         private readonly Manager $toggleManager
-    ) {
-    }
+    ) {}
 
     public static function getSubscribedEvents(): array
     {

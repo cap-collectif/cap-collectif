@@ -17,8 +17,7 @@ class UserInvitationsAvailabilitySearchQueryResolver implements QueryInterface
         private readonly ConnectionBuilderInterface $builder,
         private readonly UserRepository $userRepository,
         private readonly UserInviteRepository $userInviteRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): ConnectionInterface
     {

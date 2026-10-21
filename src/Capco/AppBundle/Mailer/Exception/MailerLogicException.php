@@ -2,6 +2,4 @@
 
 namespace Capco\AppBundle\Mailer\Exception;
 
-class MailerLogicException extends \LogicException
-{
-}
+class MailerLogicException extends \LogicException {}

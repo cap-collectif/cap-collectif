@@ -33,8 +33,7 @@ class UpdateProjectMutation implements MutationInterface
         private readonly ProjectRepository $projectRepository,
         private readonly GlobalDistrictsPersister $districtsPersister,
         private readonly ActionLogger $actionLogger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

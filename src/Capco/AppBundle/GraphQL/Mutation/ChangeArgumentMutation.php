@@ -32,8 +32,7 @@ class ChangeArgumentMutation implements MutationInterface
         private readonly RedisStorageHelper $redisStorage,
         private readonly Publisher $publisher,
         private readonly Indexer $indexer
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $user): array
     {

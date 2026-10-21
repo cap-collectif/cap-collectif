@@ -13,6 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="opinion_appendices")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionAppendixRepository")
  */
 class OpinionAppendix implements EntityInterface, ExportableContributionInterface, \Stringable
@@ -24,7 +25,9 @@ class OpinionAppendix implements EntityInterface, ExportableContributionInterfac
 
     /**
      * @var \DateTime
+     *
      * @Gedmo\Timestampable(on="change", field={"body", "appendixType"})
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     protected $updatedAt;
@@ -36,12 +39,14 @@ class OpinionAppendix implements EntityInterface, ExportableContributionInterfac
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\AppendixType", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="appendix_type_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     private AppendixType $appendixType;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="appendices", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     private $opinion;

@@ -11,8 +11,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="user_connection", indexes={
+ *
  *      @ORM\Index(name="idx_email_success_datetime", columns={"email", "success", "datetime"}),
  * })
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\UserConnectionRepository")
  */
 class UserConnection implements EntityInterface
@@ -22,6 +24,7 @@ class UserConnection implements EntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $user;
@@ -33,6 +36,7 @@ class UserConnection implements EntityInterface
 
     /**
      * @Gedmo\Timestampable(on="create")
+     *
      * @ORM\Column(name="datetime", type="datetime")
      */
     private $datetime;

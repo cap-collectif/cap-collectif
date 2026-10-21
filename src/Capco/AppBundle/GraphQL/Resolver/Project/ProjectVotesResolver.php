@@ -22,8 +22,7 @@ class ProjectVotesResolver implements QueryInterface
         private readonly StepVotesCountResolver $stepVotesCountResolver,
         private readonly VoteSearch $voteSearch,
         protected PromiseAdapterInterface $adapter,
-    ) {
-    }
+    ) {}
 
     public function __invoke(Project $project, ?Arg $args = null): ConnectionInterface
     {

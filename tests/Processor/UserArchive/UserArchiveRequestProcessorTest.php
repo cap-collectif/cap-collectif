@@ -12,8 +12,11 @@ use Symfony\Component\Finder\Finder;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status legacy
+ *
  * @phpunit-reason Exercises deprecated Swarrot processors directly; migrate the behavior to the HTTP or CLI
  * action and the supported message architecture.
  */
@@ -33,7 +36,9 @@ class UserArchiveRequestProcessorTest extends KernelTestCase
 
     /**
      * @dataProvider userArchives
+     *
      * @runInSeparateProcess
+     *
      * @preserveGlobalState disabled
      */
     public function testGeneratesTheExpectedPersonalDataArchive(string $archiveId, string $snapshot): void
@@ -93,6 +98,7 @@ class UserArchiveRequestProcessorTest extends KernelTestCase
     public static function userArchives(): \Generator
     {
         yield 'user1' => ['userArchive1', 'user1'];
+
         yield 'user5' => ['userArchive3', 'user5'];
     }
 

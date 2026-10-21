@@ -17,8 +17,7 @@ class OrangeSmsProvider implements SmsProviderInterface
         private readonly LoggerInterface $logger,
         private readonly ClientInterface $redis,
         private readonly int $redisExpirationTime,
-    ) {
-    }
+    ) {}
 
     public function sendVerificationSms(string $phone): ?string
     {

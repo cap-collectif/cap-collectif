@@ -9,8 +9,7 @@ class ExportProposalVoteFullDataTransformer
 {
     public function __construct(
         private readonly TranslatorInterface $translator,
-    ) {
-    }
+    ) {}
 
     /**
      * @param array<string, mixed> $proposal

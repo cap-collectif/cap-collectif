@@ -13,8 +13,7 @@ class UserIdentificationCodeListResolver implements QueryInterface
 {
     public function __construct(
         private readonly UserIdentificationCodeListRepository $repo
-    ) {
-    }
+    ) {}
 
     public function __invoke(User $user, Argument $args): ConnectionInterface
     {

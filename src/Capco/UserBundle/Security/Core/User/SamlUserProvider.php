@@ -13,8 +13,7 @@ class SamlUserProvider implements UserProviderInterface
     public function __construct(
         private readonly UserManager $userManager,
         private readonly GroupMutation $groupMutation
-    ) {
-    }
+    ) {}
 
     public function loadUserByUsername($id)
     {

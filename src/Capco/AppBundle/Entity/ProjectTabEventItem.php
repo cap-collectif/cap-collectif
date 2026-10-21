@@ -11,9 +11,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity()
+ *
  * @ORM\Table(
  *     name="project_tab_event_item",
  *     uniqueConstraints={
+ *
  *         @ORM\UniqueConstraint(name="project_tab_event_item_unique", columns={"project_tab_id", "event_id"})
  *     }
  * )
@@ -25,15 +27,20 @@ class ProjectTabEventItem implements EntityInterface
 
     /**
      * @Gedmo\SortableGroup
+     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProjectTabEvents", inversedBy="eventItems", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="project_tab_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     *
      * @Assert\NotNull()
      */
     private ?ProjectTabEvents $projectTab = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Event", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="event_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     *
      * @Assert\NotNull()
      */
     private ?Event $event = null;

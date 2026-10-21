@@ -8,9 +8,13 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="highlighted_content")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\HighlightedContentRepository")
+ *
  * @ORM\InheritanceType("SINGLE_TABLE")
+ *
  * @ORM\DiscriminatorColumn(name = "object_type", type = "string")
+ *
  * @ORM\DiscriminatorMap({
  *  "post"    = "HighlightedPost",
  *  "theme"   = "HighlightedTheme",
@@ -43,7 +47,7 @@ abstract class HighlightedContent implements EntityInterface
         return $this->position;
     }
 
-    //To delete when we'll upgrade symfony to 4.1+ because discriminator map not working with serialization atm
+    // To delete when we'll upgrade symfony to 4.1+ because discriminator map not working with serialization atm
     public function getCurrentObjectType()
     {
         if ($this instanceof HighlightedPost) {

@@ -18,8 +18,7 @@ class DeleteMenuItemMutation implements MutationInterface
     public function __construct(
         private readonly EntityManagerInterface $em,
         private readonly MenuItemRepository $menuItemRepository
-    ) {
-    }
+    ) {}
 
     /**
      * @return array{deletedMenuItemId: ?string, errorCode: ?string}

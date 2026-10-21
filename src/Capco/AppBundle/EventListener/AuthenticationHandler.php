@@ -18,8 +18,7 @@ class AuthenticationHandler implements AuthenticationFailureHandlerInterface
         private readonly UserConnectionRepository $userConnectionRepository,
         private readonly LoggerInterface $logger,
         private readonly RequestGuesserInterface $requestGuesser
-    ) {
-    }
+    ) {}
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {

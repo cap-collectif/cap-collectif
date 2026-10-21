@@ -15,8 +15,7 @@ class AppLogResolver implements QueryInterface
 {
     public function __construct(
         private readonly AppLogRepository $appLogRepository,
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args, User $viewer): Connection|Promise
     {

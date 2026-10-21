@@ -20,8 +20,11 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Mocks domain objects and persistence calls instead of observing the resulting reply
  * ownership.
  */
@@ -154,7 +157,7 @@ class ReplyReconcilierTest extends TestCase
                 return [$reply];
             }
 
-            if ((isset($criteria['author']) && $criteria['author'] === $this->viewer)) {
+            if (isset($criteria['author']) && $criteria['author'] === $this->viewer) {
                 return [$reply];
             }
 
@@ -187,7 +190,7 @@ class ReplyReconcilierTest extends TestCase
                 return [$reply];
             }
 
-            if ((isset($criteria['author']) && $criteria['author'] === $this->viewer)) {
+            if (isset($criteria['author']) && $criteria['author'] === $this->viewer) {
                 return [$reply];
             }
 

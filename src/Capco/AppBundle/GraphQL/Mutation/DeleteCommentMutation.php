@@ -25,8 +25,7 @@ class DeleteCommentMutation implements MutationInterface
         private readonly CommentableCommentsDataLoader $commentableCommentsDataLoader,
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly GlobalIdResolver $globalIdResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $viewer): array
     {

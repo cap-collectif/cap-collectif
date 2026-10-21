@@ -12,6 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * FooterSocialNetwork.
  *
  * @ORM\Table(name="footer_social_network")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\FooterSocialNetworkRepository")
  */
 class FooterSocialNetwork implements EntityInterface, \Stringable
@@ -61,6 +62,7 @@ class FooterSocialNetwork implements EntityInterface, \Stringable
      * @var \DateTime
      *
      * @Gedmo\Timestampable(on="create")
+     *
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
@@ -69,6 +71,7 @@ class FooterSocialNetwork implements EntityInterface, \Stringable
      * @var \DateTime
      *
      * @Gedmo\Timestampable(on="change", field={"title", "link", "style", "position"})
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;

@@ -19,8 +19,7 @@ class OpinionViewerVersionsUnpublishedResolver implements QueryInterface
         private OpinionVersionRepository $versionRepository,
         private LoggerInterface $logger,
         private readonly ConnectionBuilderInterface $builder
-    ) {
-    }
+    ) {}
 
     public function __invoke(Opinion $opinion, Argument $args, $viewer): Connection
     {

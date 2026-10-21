@@ -311,9 +311,7 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
         $this->connection->executeQuery("DELETE FROM votes WHERE voteType='idea'");
     }
 
-    public function postDown(Schema $schema): void
-    {
-    }
+    public function postDown(Schema $schema): void {}
 
     public function up(Schema $schema): void
     {

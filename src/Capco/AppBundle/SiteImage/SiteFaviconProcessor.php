@@ -91,8 +91,7 @@ class SiteFaviconProcessor
         private readonly SiteParameterResolver $siteResolver,
         private readonly Filesystem $filesystem,
         private readonly string $webDir = ''
-    ) {
-    }
+    ) {}
 
     public function process(SiteImage $siteFavicon): void
     {
@@ -162,8 +161,7 @@ class SiteFaviconProcessor
                 'favicon_96' => '2.0',
                 'favicon_144' => '3.0',
                 'favicon_192' => '4.0',
-            ]
-            as $filter => $density
+            ] as $filter => $density
         ) {
             $path = $siteFavicons[$filter];
             $size = $this->getSizeFromFilter($filter);

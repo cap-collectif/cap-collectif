@@ -6,9 +6,13 @@ use Capco\Tests\IdentityWebTestCase;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises HTTP outcomes and real domain data with transactional cleanup; replaces only external boundaries.
  */
 final class ImportProposalsFromCsvTest extends IdentityWebTestCase
@@ -80,10 +84,15 @@ final class ImportProposalsFromCsvTest extends IdentityWebTestCase
     public static function choiceResponses(): iterable
     {
         yield 'unknown choice' => ['radio', true, false, 'Unknown choice', false];
+
         yield 'free answer enabled' => ['radio', true, true, 'Unknown choice', true];
+
         yield 'empty optional choice' => ['select', false, false, '', true];
+
         yield 'empty required choice' => ['select', true, false, '', false];
+
         yield 'known choice' => ['radio', true, false, 'Known choice', true];
+
         yield 'valid majority judgement' => ['majority', false, false, 'global-well', true];
     }
 }

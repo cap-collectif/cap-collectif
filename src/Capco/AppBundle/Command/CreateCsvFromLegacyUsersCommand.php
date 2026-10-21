@@ -156,12 +156,10 @@ class CreateCsvFromLegacyUsersCommand extends BaseExportCommand
     }
 
     /**
-     * @param $user
-     *
      * @throws \Box\Spout\Common\Exception\IOException
      * @throws \Box\Spout\Writer\Exception\WriterNotOpenedException
      */
-    private function addUserRow($user): void
+    private function addUserRow(mixed $user): void
     {
         $row = [];
         foreach ($this->userHeaderMap as $path => $columnName) {

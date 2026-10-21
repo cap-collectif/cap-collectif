@@ -14,7 +14,9 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Checks public domain rules with real entities and observable results, without framework interaction counts.
  */
 class ProposalAnalysisRelatedVoterTest extends AuthorizationTestCase
@@ -34,7 +36,7 @@ class ProposalAnalysisRelatedVoterTest extends AuthorizationTestCase
         $admin = (new User());
         $admin->addRole('ROLE_ADMIN');
         $proposal = (new Proposal());
-        $this->attachProposalToProject($proposal, (new Project()));
+        $this->attachProposalToProject($proposal, new Project());
         $voter = new ProposalAnalysisRelatedVoter();
         foreach ([ProposalAnalysisRelatedVoter::VIEW, ProposalAnalysisRelatedVoter::REVISE] as $attribute) {
             self::assertSame(VoterInterface::ACCESS_GRANTED, $voter->vote($this->token($admin), $proposal, [$attribute]));
@@ -75,8 +77,11 @@ class ProposalAnalysisRelatedVoterTest extends AuthorizationTestCase
     public static function assignments(): iterable
     {
         yield 'assigned decision maker' => ['decisionMaker', VoterInterface::ACCESS_GRANTED];
+
         yield 'assigned supervisor' => ['supervisor', VoterInterface::ACCESS_GRANTED];
+
         yield 'assigned analyst' => ['analyst', VoterInterface::ACCESS_GRANTED];
+
         yield 'unassigned viewer' => ['none', VoterInterface::ACCESS_DENIED];
     }
 
@@ -109,7 +114,9 @@ class ProposalAnalysisRelatedVoterTest extends AuthorizationTestCase
     public static function evaluationRights(): iterable
     {
         yield 'assigned supervisor with pending decision' => [true, ProposalStatementState::IN_PROGRESS, VoterInterface::ACCESS_GRANTED];
+
         yield 'unassigned viewer with pending decision' => [false, ProposalStatementState::IN_PROGRESS, VoterInterface::ACCESS_DENIED];
+
         yield 'assigned supervisor with completed decision' => [true, ProposalStatementState::DONE, VoterInterface::ACCESS_DENIED];
     }
 
@@ -146,10 +153,15 @@ class ProposalAnalysisRelatedVoterTest extends AuthorizationTestCase
     public static function assignmentRights(): iterable
     {
         yield 'global administrator' => ['admin', [VoterInterface::ACCESS_GRANTED, VoterInterface::ACCESS_GRANTED, VoterInterface::ACCESS_GRANTED]];
+
         yield 'project owner' => ['owner', [VoterInterface::ACCESS_GRANTED, VoterInterface::ACCESS_GRANTED, VoterInterface::ACCESS_GRANTED]];
+
         yield 'assigned decision maker' => ['decisionMaker', [VoterInterface::ACCESS_GRANTED, VoterInterface::ACCESS_GRANTED, VoterInterface::ACCESS_DENIED]];
+
         yield 'assigned supervisor' => ['supervisor', [VoterInterface::ACCESS_DENIED, VoterInterface::ACCESS_GRANTED, VoterInterface::ACCESS_DENIED]];
+
         yield 'assigned analyst' => ['analyst', [VoterInterface::ACCESS_DENIED, VoterInterface::ACCESS_GRANTED, VoterInterface::ACCESS_DENIED]];
+
         yield 'unassigned viewer' => ['none', [VoterInterface::ACCESS_DENIED, VoterInterface::ACCESS_DENIED, VoterInterface::ACCESS_DENIED]];
     }
 
@@ -158,7 +170,7 @@ class ProposalAnalysisRelatedVoterTest extends AuthorizationTestCase
         $voter = new ProposalAnalysisRelatedVoter();
         $token = $this->token(new User());
         self::assertSame(VoterInterface::ACCESS_ABSTAIN, $voter->vote($token, new ProposalForm(), [ProposalAnalysisRelatedVoter::VIEW]));
-        self::assertSame(VoterInterface::ACCESS_ABSTAIN, $voter->vote($token, (new Proposal()), ['unknown']));
+        self::assertSame(VoterInterface::ACCESS_ABSTAIN, $voter->vote($token, new Proposal(), ['unknown']));
     }
 
     private function token(mixed $user): TokenInterface

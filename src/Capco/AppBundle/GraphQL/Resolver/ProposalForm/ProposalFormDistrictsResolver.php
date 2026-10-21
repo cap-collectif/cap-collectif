@@ -8,9 +8,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class ProposalFormDistrictsResolver implements QueryInterface
 {
-    public function __construct(private readonly GraphQLLocaleResolver $localeResolver)
-    {
-    }
+    public function __construct(private readonly GraphQLLocaleResolver $localeResolver) {}
 
     public function __invoke(ProposalForm $form, ?string $order): array
     {

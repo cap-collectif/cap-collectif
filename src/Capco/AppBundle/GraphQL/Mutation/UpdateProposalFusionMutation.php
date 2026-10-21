@@ -19,8 +19,7 @@ class UpdateProposalFusionMutation implements MutationInterface
         private EntityManagerInterface $em,
         private FormFactoryInterface $formFactory,
         private GlobalIdResolver $globalIdResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, $user): array
     {

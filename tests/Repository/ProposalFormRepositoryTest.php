@@ -11,12 +11,14 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class ProposalFormRepositoryTest extends TestCase
 {
     /**
      * @phpunit-status non-compliant
+     *
      * @phpunit-reason Calls the Doctrine repository directly and constrains SQL and connection calls instead
      * of asserting a domain effect through HTTP or CLI.
      */
@@ -43,6 +45,7 @@ class ProposalFormRepositoryTest extends TestCase
 
     /**
      * @phpunit-status non-compliant
+     *
      * @phpunit-reason Calls the Doctrine repository directly and constrains SQL and connection calls instead
      * of asserting a domain effect through HTTP or CLI.
      */
@@ -61,6 +64,7 @@ class ProposalFormRepositoryTest extends TestCase
 
     /**
      * @phpunit-status non-compliant
+     *
      * @phpunit-reason Calls the Doctrine repository directly and constrains SQL and connection calls instead
      * of asserting a domain effect through HTTP or CLI.
      */
@@ -85,6 +89,7 @@ class ProposalFormRepositoryTest extends TestCase
 
     /**
      * @phpunit-status compliant
+     *
      * @phpunit-reason Checks proposal-reference allocation on a real new domain entity without invoking the
      * repository.
      */
@@ -98,6 +103,7 @@ class ProposalFormRepositoryTest extends TestCase
 
     /**
      * @phpunit-status compliant
+     *
      * @phpunit-reason Checks proposal-reference allocation on a real new domain entity without invoking the
      * repository.
      */

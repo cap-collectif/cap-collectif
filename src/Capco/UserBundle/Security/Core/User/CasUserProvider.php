@@ -21,8 +21,7 @@ class CasUserProvider implements UserProviderInterface
         private readonly GroupMutation $groupMutation,
         private readonly CapebUserFilter $capebUserFilter,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     /**
      * @param string $casId

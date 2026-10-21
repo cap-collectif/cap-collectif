@@ -21,13 +21,9 @@ final class Version20240502090053 extends AbstractMigration implements Container
         return 'add need help menu item';
     }
 
-    public function up(Schema $schema): void
-    {
-    }
+    public function up(Schema $schema): void {}
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 
     public function postUp(Schema $schema): void
     {

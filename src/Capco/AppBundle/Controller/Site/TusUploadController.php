@@ -26,8 +26,7 @@ class TusUploadController extends AbstractController
 {
     public function __construct(
         private readonly int $tusMediaSizeLimit
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/tus-upload/", name="tus_upload_post", options={"i18n" = false}, methods={"PATCH", "HEAD", "POST"})

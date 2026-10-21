@@ -46,8 +46,7 @@ class CustomCodeVersioningService
         private readonly SiteParameterRepository $siteParameterRepository,
         private readonly UpdateSiteParameterMutation $updateSiteParameterMutation,
         private readonly ValidatorInterface $validator
-    ) {
-    }
+    ) {}
 
     /**
      * @return array<int, array<string, mixed>>

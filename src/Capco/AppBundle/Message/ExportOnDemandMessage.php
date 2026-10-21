@@ -17,8 +17,7 @@ final class ExportOnDemandMessage
         private readonly ?string $username,
         private readonly ?string $userLocale,
         private readonly ?string $fileName,
-    ) {
-    }
+    ) {}
 
     public function getCommandName(): string
     {

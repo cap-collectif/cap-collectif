@@ -36,8 +36,7 @@ class UpdateProposalNewsMutation implements MutationInterface
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly LoggerInterface $logger,
         private readonly Publisher $publisher
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $viewer): array
     {
@@ -46,11 +45,13 @@ class UpdateProposalNewsMutation implements MutationInterface
         try {
             $proposalPost = $this->getPost($input, $viewer);
             $proposalPost = $this->updateProposalNews($input, $proposalPost);
+
             /** @var Proposal $firstProposal */
             $firstProposal = $proposalPost->getProposals()->first();
             if (!$firstProposal) {
                 throw new UserError(self::PROPOSAL_NOT_FOUND);
             }
+
             /** @var ProposalFormNotificationConfiguration $config */
             $config = $firstProposal
                 ->getProposalForm()
@@ -100,6 +101,7 @@ class UpdateProposalNewsMutation implements MutationInterface
         LocaleUtils::indexTranslations($values);
 
         $translations = $proposalPost->getTranslations();
+
         /** @var PostTranslation $translation */
         foreach ($translations as $translation) {
             if (isset($values['translations'][$translation->getLocale()]['title'])) {

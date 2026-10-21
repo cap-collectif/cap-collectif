@@ -22,8 +22,7 @@ class CreateUserMutation implements MutationInterface
         private EntityManagerInterface $em,
         private FormFactoryInterface $formFactory,
         private LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input): array
     {

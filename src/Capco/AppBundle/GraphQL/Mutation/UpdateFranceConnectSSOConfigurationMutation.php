@@ -21,8 +21,7 @@ class UpdateFranceConnectSSOConfigurationMutation implements MutationInterface
         private readonly EntityManagerInterface $em,
         private readonly FormFactoryInterface $formFactory,
         private readonly AbstractSSOConfigurationRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input): array
     {

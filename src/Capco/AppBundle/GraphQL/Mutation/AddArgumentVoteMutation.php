@@ -31,8 +31,7 @@ class AddArgumentVoteMutation implements MutationInterface
         private readonly RedisStorageHelper $redisStorageHelper,
         private readonly StepRequirementsResolver $stepRequirementsResolver,
         private readonly Indexer $indexer
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

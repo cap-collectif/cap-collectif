@@ -20,8 +20,7 @@ class DebateArgumentController extends AbstractController
 {
     public function __construct(
         private readonly DebateUrlResolver $debateUrlResolver
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/publishDebateArgument", name="capco_app_debate_publish_argument", options={"i18n" = false})
@@ -36,6 +35,7 @@ class DebateArgumentController extends AbstractController
         TranslatorInterface $translator
     ): RedirectResponse {
         $token = $request->get('token') ?? '';
+
         /** @var DebateAnonymousArgument $argument */
         $argument = $repository->findOneByToken($token);
         if (null === $argument) {
@@ -74,7 +74,7 @@ class DebateArgumentController extends AbstractController
             $translator->trans('argument.published.confirmation', [], 'CapcoAppBundle')
         );
 
-        //we check an attribute in session to create it, to avoid cache on queries after the redirect.
+        // we check an attribute in session to create it, to avoid cache on queries after the redirect.
         $session->get('nothing');
 
         return $this->redirectToDebate($argument);

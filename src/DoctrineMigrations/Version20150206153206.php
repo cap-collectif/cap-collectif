@@ -19,9 +19,7 @@ class Version20150206153206 extends AbstractMigration implements ContainerAwareI
         $this->container = $container;
     }
 
-    public function up(Schema $schema): void
-    {
-    }
+    public function up(Schema $schema): void {}
 
     public function postUp(Schema $schema): void
     {
@@ -42,9 +40,7 @@ class Version20150206153206 extends AbstractMigration implements ContainerAwareI
         }
     }
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 
     public function postDown(Schema $schema): void
     {

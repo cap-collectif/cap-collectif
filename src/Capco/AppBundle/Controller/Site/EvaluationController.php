@@ -13,8 +13,10 @@ class EvaluationController extends Controller
 {
     /**
      * @Security("is_granted('ROLE_USER')")
+     *
      * @Route("/evaluations/project/{projectSlug}", name="user_analysis_project")
      * @Route("/evaluations", name="user_evaluations")
+     *
      * @Template("@CapcoApp/Evaluation/index.html.twig")
      */
     public function indexAction(Request $request)

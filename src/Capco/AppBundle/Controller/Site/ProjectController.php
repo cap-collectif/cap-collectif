@@ -50,8 +50,7 @@ class ProjectController extends Controller
         private readonly string $exportDir,
         private readonly DebateArgumentRepository $debateArgumentRepository,
         private readonly AuthorizationCheckerInterface $authorizationChecker
-    ) {
-    }
+    ) {}
 
     /**
      * @Template("@CapcoApp/Project/lastProjects.html.twig")
@@ -75,7 +74,9 @@ class ProjectController extends Controller
 
     /**
      * @Route("/projects/{projectSlug}/votes", name="app_project_show_user_votes")
+     *
      * @Entity("project", options={"mapping": {"projectSlug": "slug"}})
+     *
      * @Template("@CapcoApp/Project/show_user_votes.html.twig")
      */
     public function showUserVotesAction(Project $project)
@@ -86,7 +87,9 @@ class ProjectController extends Controller
     /**
      * @Route("/projects/{projectSlug}/trashed", name="app_project_show_trashed", defaults={"_feature_flags" = "project_trash"} )
      * @Route("/consultations/{projectSlug}/trashed", name="app_consultation_show_trashed", defaults={"_feature_flags" = "project_trash"} )
+     *
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
+     *
      * @Template("@CapcoApp/Project/show_trashed.html.twig")
      */
     public function showTrashedAction(Project $project)
@@ -121,6 +124,7 @@ class ProjectController extends Controller
      *
      * @Route("/projects/{projectSlug}/events", name="app_project_show_events", defaults={"_feature_flags" = "calendar"})
      * @Route("/consultations/{projectSlug}/events", name="app_consultation_show_events", defaults={"_feature_flags" = "calendar"})
+     *
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      */
     public function showEventsAction(Project $project)
@@ -135,7 +139,9 @@ class ProjectController extends Controller
     /**
      * @Route("/projects/{projectSlug}/posts/{page}", name="app_project_show_posts", requirements={"page" = "\d+"}, defaults={"_feature_flags" = "blog", "page" = 1} )
      * @Route("/consultations/{projectSlug}/posts/{page}", name="app_consultation_show_posts", requirements={"page" = "\d+"}, defaults={"_feature_flags" = "blog", "page" = 1} )
+     *
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
+     *
      * @Template("@CapcoApp/Project/show_posts.html.twig")
      */
     public function showPostsAction(Project $project, mixed $page)
@@ -151,7 +157,7 @@ class ProjectController extends Controller
             $this->getUser()
         );
 
-        //Avoid division by 0 in nbPage calculation
+        // Avoid division by 0 in nbPage calculation
         $nbPage = 1;
         if (null !== $pagination && 0 !== $pagination) {
             $nbPage = ceil(\count($posts) / $pagination);
@@ -170,7 +176,9 @@ class ProjectController extends Controller
      * @Route("/projects/{projectSlug}/participants/{page}", name="app_project_show_contributors", requirements={"page" = "\d+"}, defaults={"page" = 1}, options={"i18n" = true})
      * @Route("/consultations/{projectSlug}/participants/{page}", name="app_consultation_show_contributors",
      *    requirements={"page" = "\d+"}, defaults={"page" = 1}, options={"i18n" = true})
+     *
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
+     *
      * @Template("@CapcoApp/Project/show_contributors.html.twig")
      */
     public function showContributorsAction(Project $project, mixed $page)
@@ -184,7 +192,7 @@ class ProjectController extends Controller
             $page
         );
 
-        //Avoid division by 0 in nbPage calculation
+        // Avoid division by 0 in nbPage calculation
         $nbPage = 1;
         if (null !== $pagination && 0 !== $pagination) {
             $nbPage = ceil(\count($contributors) / $pagination);
@@ -205,6 +213,7 @@ class ProjectController extends Controller
 
     /**
      * @Route("/projects", name="app_project", options={"i18n" = true})
+     *
      * @Template("@CapcoApp/Project/index.html.twig")
      */
     public function indexAction(): Response
@@ -216,6 +225,7 @@ class ProjectController extends Controller
 
     /**
      * @Route("/projects/archived", name="app_project_archived", options={"i18n" = true})
+     *
      * @Template("@CapcoApp/Project/index.html.twig")
      */
     public function indexArchivedAction(Request $request)
@@ -242,6 +252,7 @@ class ProjectController extends Controller
 
     /**
      * @Route("/admin/capco/app/project/{projectId}/preview", name="capco_admin_project_preview", options={"i18n" = false})
+     *
      * @Entity("project", options={"mapping": {"projectId": "id"}})
      */
     public function previewAction(Request $request, Project $project): Response
@@ -251,6 +262,7 @@ class ProjectController extends Controller
 
     /**
      * @Route("/projects/{projectSlug}/analysis/download", name="app_project_analysis_download", options={"i18n" = false})
+     *
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      */
     public function downloadProjectAnalysisAction(Request $request, Project $project)
@@ -292,6 +304,7 @@ class ProjectController extends Controller
 
     /**
      * @Route("/projects/{projectSlug}/decisions/download", name="app_project_decisions_download", options={"i18n" = false})
+     *
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      */
     public function downloadProjectDecisionAction(Request $request, Project $project)

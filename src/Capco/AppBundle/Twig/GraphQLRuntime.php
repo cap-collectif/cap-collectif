@@ -21,8 +21,7 @@ class GraphQLRuntime implements RuntimeExtensionInterface
         private readonly QuestionnaireRepository $questionnaireRepo,
         private readonly ConsultationRepository $consultationRepository,
         private readonly ProjectRepository $projectRepo
-    ) {
-    }
+    ) {}
 
     public function getOffsetToCursor(int $key): string
     {

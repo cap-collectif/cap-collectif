@@ -26,8 +26,7 @@ class ReportMutation implements MutationInterface
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly EntityManagerInterface $em,
         private readonly Publisher $publisher
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $viewer): array
     {
@@ -50,7 +49,7 @@ class ReportMutation implements MutationInterface
     private function getReportable(Arg $input, User $viewer): ReportableInterface
     {
         $reportable = $this->globalIdResolver->resolve($input->offsetGet('reportableId'), $viewer);
-        if (!($reportable instanceof ReportableInterface)) {
+        if (!$reportable instanceof ReportableInterface) {
             throw new UserError(self::REPORTABLE_NOT_FOUND);
         }
 

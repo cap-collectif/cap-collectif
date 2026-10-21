@@ -30,11 +30,7 @@ final class Version20190930164116 extends AbstractMigration
         $this->write('-> Added ' . $siteCustomCode['keyname'] . ' custom code pages.registration');
     }
 
-    public function up(Schema $schema): void
-    {
-    }
+    public function up(Schema $schema): void {}
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 }

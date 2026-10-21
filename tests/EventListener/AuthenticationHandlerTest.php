@@ -7,9 +7,13 @@ use Capco\Tests\IdentityWebTestCase;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises HTTP outcomes and real domain data with transactional cleanup; replaces only external boundaries.
  */
 final class AuthenticationHandlerTest extends IdentityWebTestCase

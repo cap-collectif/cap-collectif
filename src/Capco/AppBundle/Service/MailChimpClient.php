@@ -8,8 +8,7 @@ class MailChimpClient
 {
     public function __construct(
         private readonly string $mandrillApiKey
-    ) {
-    }
+    ) {}
 
     public function sendSingleMessage(
         string $senderEmail,

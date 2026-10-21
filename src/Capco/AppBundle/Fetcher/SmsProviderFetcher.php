@@ -15,8 +15,7 @@ class SmsProviderFetcher
         private readonly TwilioSmsProvider $twilioSmsProvider,
         private readonly OrangeSmsProvider $orangeSmsProvider,
         private readonly string $smsProvider
-    ) {
-    }
+    ) {}
 
     public function fetch(): SmsProviderInterface
     {

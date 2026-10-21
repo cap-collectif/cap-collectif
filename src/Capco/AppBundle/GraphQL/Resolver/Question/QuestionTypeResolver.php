@@ -16,8 +16,7 @@ class QuestionTypeResolver implements QueryInterface
 {
     public function __construct(
         private readonly TypeResolver $typeResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(AbstractQuestion $question): Type
     {

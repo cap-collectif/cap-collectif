@@ -51,13 +51,11 @@ class QuestionnaireRepository extends EntityRepository
     }
 
     /**
-     * @param $id
+     * @return mixed
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
-     *
-     * @return mixed
      */
-    public function getOne($id)
+    public function getOne(mixed $id)
     {
         $qb = $this->createQueryBuilder('q')
             ->addSelect('q', 'qaq', 'qt')

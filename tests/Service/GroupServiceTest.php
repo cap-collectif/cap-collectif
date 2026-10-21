@@ -15,8 +15,11 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Mocks persistence and domain interactions instead of reloading the resulting group
  * membership.
  */

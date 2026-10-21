@@ -11,7 +11,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 abstract class ParticipantWebTestCase extends AccountWebTestCase
 {
-    /** @var SmsProviderInterface&\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \PHPUnit\Framework\MockObject\MockObject&SmsProviderInterface */
     protected SmsProviderInterface $provider;
 
     protected function setUp(): void

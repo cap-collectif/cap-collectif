@@ -10,8 +10,7 @@ class AvailableLocalesQueryResolver implements QueryInterface
 {
     public function __construct(
         protected LocaleRepository $localeRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args, $viewer): array
     {

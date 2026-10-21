@@ -2,6 +2,4 @@
 
 namespace Capco\Capco\Facade;
 
-interface EntityInterface
-{
-}
+interface EntityInterface {}

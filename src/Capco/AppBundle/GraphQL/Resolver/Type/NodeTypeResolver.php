@@ -77,8 +77,7 @@ class NodeTypeResolver implements QueryInterface
         private readonly ReplyTypeResolver $replyTypeResolver,
         private readonly DistrictTypeResolver $districtTypeResolver,
         private readonly ContributorTypeResolver $contributorTypeResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke($node): Type
     {

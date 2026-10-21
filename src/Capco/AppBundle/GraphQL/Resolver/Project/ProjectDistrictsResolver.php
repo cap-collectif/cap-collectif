@@ -13,8 +13,7 @@ class ProjectDistrictsResolver implements QueryInterface
 {
     public function __construct(
         private readonly ProjectDistrictPositionerRepository $positionerRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Project $project, Argument $args): ConnectionInterface
     {

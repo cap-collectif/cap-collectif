@@ -9,9 +9,6 @@ use Doctrine\ORM\Events;
 
 class LocalizedEntityUpdateSubscriber implements EventSubscriber
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getSubscribedEvents()
     {
         return [Events::postUpdate];

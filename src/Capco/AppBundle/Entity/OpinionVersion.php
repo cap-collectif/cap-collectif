@@ -29,10 +29,14 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="opinion_version", indexes={
+ *
  *     @ORM\Index(name="idx_author", columns={"id", "author_id"})
  * })
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionVersionRepository")
+ *
  * @ORM\HasLifecycleCallbacks()
+ *
  * @CapcoAssert\HasAuthor()
  */
 class OpinionVersion implements EntityInterface, OpinionContributionInterface, HasDiffInterface, ExportableContributionInterface, \Stringable
@@ -53,6 +57,7 @@ class OpinionVersion implements EntityInterface, OpinionContributionInterface, H
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="opinionVersions")
+     *
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     protected ?User $author = null;
@@ -74,6 +79,7 @@ class OpinionVersion implements EntityInterface, OpinionContributionInterface, H
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "body", "comment"})
+     *
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     protected $updatedAt;
@@ -90,6 +96,7 @@ class OpinionVersion implements EntityInterface, OpinionContributionInterface, H
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="versions", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $parent;
@@ -218,8 +225,6 @@ class OpinionVersion implements EntityInterface, OpinionContributionInterface, H
     }
 
     /**
-     * @param $argument
-     *
      * @return $this
      */
     public function addArgument(Argument $argument)

@@ -9,13 +9,9 @@ use Doctrine\Migrations\AbstractMigration;
 
 class Version20190215115957 extends AbstractMigration
 {
-    public function up(Schema $schema): void
-    {
-    }
+    public function up(Schema $schema): void {}
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 
     public function postUp(Schema $schema): void
     {
@@ -32,7 +28,5 @@ class Version20190215115957 extends AbstractMigration
         ]);
     }
 
-    public function postDown(Schema $schema): void
-    {
-    }
+    public function postDown(Schema $schema): void {}
 }

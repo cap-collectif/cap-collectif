@@ -13,8 +13,7 @@ class CasCertificateContentResolver implements QueryInterface
          * @var SplFileInfo the SplFileInfo service
          */
         protected SplFileInfo $splFileInfo
-    ) {
-    }
+    ) {}
 
     public function __invoke(CASSSOConfiguration $configuration): string
     {

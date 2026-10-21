@@ -11,8 +11,7 @@ class CommentBodyResolver implements QueryInterface
 {
     public function __construct(
         private readonly TranslatorInterface $translator
-    ) {
-    }
+    ) {}
 
     public function __invoke(Comment $comment): string
     {

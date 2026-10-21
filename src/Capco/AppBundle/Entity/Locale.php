@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="locale")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\LocaleRepository")
  */
 class Locale implements EntityInterface, \Stringable

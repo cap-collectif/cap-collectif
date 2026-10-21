@@ -25,8 +25,7 @@ class DeleteParticipantMutation implements MutationInterface
         private GlobalIdResolver $globalIdResolver,
         private MediatorParticipantStepRepository $mediatorParticipantStepRepository,
         private ParticipantHelper $participantHelper
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

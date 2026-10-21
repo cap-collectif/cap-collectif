@@ -22,8 +22,7 @@ class UserNotificationsConfigurationMutation implements MutationInterface
         private readonly LoggerInterface $logger,
         private readonly FormFactoryInterface $formFactory,
         private readonly SendInBluePublisher $sendInBluePublisher
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args, User $user): array
     {

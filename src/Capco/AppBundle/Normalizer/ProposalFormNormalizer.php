@@ -15,8 +15,7 @@ class ProposalFormNormalizer implements NormalizerInterface, SerializerAwareInte
 
     public function __construct(
         private readonly ObjectNormalizer $normalizer
-    ) {
-    }
+    ) {}
 
     public function hasCacheableSupportsMethod(): bool
     {

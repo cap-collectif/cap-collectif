@@ -7,6 +7,7 @@ use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
+use Capco\AppBundle\GraphQL\ExtraFieldsConnection;
 use Capco\AppBundle\Search\VoteSearch;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Psr\Log\LoggerInterface;
@@ -14,6 +15,8 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 class ProposalVotesDataLoader extends BatchDataLoader
 {
+    public bool $useElasticsearch = true;
+
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
         RedisTagCache $cache,
@@ -91,6 +94,12 @@ class ProposalVotesDataLoader extends BatchDataLoader
                 $paginator = new ElasticsearchPaginator(static fn (?string $cursor, int $limit) => $paginatedResults[$index]);
                 $connections[$i] = $paginator->auto($key['args']);
                 if (isset($paginatedResults[$index], $paginatedResults[$index]->totalPointsCount)) {
+                    $edges = $connections[$i]->getEdges();
+                    $connections[$i] = new ExtraFieldsConnection(
+                        \is_array($edges) ? $edges : iterator_to_array($edges, false),
+                        $connections[$i]->getPageInfo()
+                    );
+                    $connections[$i]->setTotalCount($paginatedResults[$index]->getTotalCount());
                     $connections[$i]->{'totalPointsCount'} =
                         $paginatedResults[$index]->totalPointsCount;
                 }

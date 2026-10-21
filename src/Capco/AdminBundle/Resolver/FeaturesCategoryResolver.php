@@ -69,8 +69,7 @@ class FeaturesCategoryResolver
     public function __construct(
         protected Manager $manager,
         protected AuthorizationCheckerInterface $authorizationChecker
-    ) {
-    }
+    ) {}
 
     public function isCategoryEnabled(string $category): bool
     {

@@ -24,8 +24,7 @@ class TranslatableAdminExtension extends AbstractAdminExtension
     public function __construct(
         protected Manager $toggleManager,
         protected LocaleRepository $localeRepository
-    ) {
-    }
+    ) {}
 
     public function getEnabledTranslationLocales(): array
     {
@@ -119,7 +118,7 @@ class TranslatableAdminExtension extends AbstractAdminExtension
     private static function checkMethodMergeNewTranslation($object): void
     {
         if (!method_exists($object, 'mergeNewTranslations')) {
-            throw new \InvalidArgumentException(sprintf('The object passed to "%s()" method MUST be properly configured using' . ' "knplabs/doctrine-behaviors" in order to have a "mergeNewTranslations" method.', __METHOD__));
+            throw new \InvalidArgumentException(sprintf('The object passed to "%s()" method MUST be properly configured using "knplabs/doctrine-behaviors" in order to have a "mergeNewTranslations" method.', __METHOD__));
         }
     }
 }

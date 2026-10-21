@@ -19,6 +19,7 @@ use Symfony\Component\Uid\Uuid;
 
 /**
  * @ORM\Table(name="participant")
+ *
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
  */
 class Participant implements EntityInterface, ContributorInterface, IndexableInterface, \Stringable, Author
@@ -75,7 +76,7 @@ class Participant implements EntityInterface, ContributorInterface, IndexableInt
     /**
      * @ORM\Column(name="anonymized_at", type="datetime", nullable=true)
      */
-    private ?\Datetime $anonymizedAt = null;
+    private ?\DateTime $anonymizedAt = null;
 
     /**
      * @ORM\Column(name="username", type="string", length=255, nullable=true)
@@ -89,12 +90,14 @@ class Participant implements EntityInterface, ContributorInterface, IndexableInt
 
     /**
      * @var Collection<int, AbstractVote>
+     *
      * @ORM\OneToMany(targetEntity=AbstractVote::class, mappedBy="participant", cascade={"persist", "remove"})
      */
     private Collection $votes;
 
     /**
      * @var Collection<int, ParticipantPhoneVerificationSms>
+     *
      * @ORM\OneToMany(targetEntity=ParticipantPhoneVerificationSms::class, mappedBy="participant")
      */
     private Collection $participantPhoneVerificationSms;
@@ -106,6 +109,7 @@ class Participant implements EntityInterface, ContributorInterface, IndexableInt
 
     /**
      * @ORM\OneToOne(targetEntity=UserIdentificationCode::class)
+     *
      * @ORM\JoinColumn(name="user_identification_code", referencedColumnName="identification_code", onDelete="SET NULL")
      */
     private ?UserIdentificationCode $userIdentificationCode = null;
@@ -132,6 +136,7 @@ class Participant implements EntityInterface, ContributorInterface, IndexableInt
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private ?Media $media = null;
@@ -143,6 +148,7 @@ class Participant implements EntityInterface, ContributorInterface, IndexableInt
 
     /**
      * @var Collection<int, Proposal>
+     *
      * @ORM\OneToMany(targetEntity=Proposal::class, mappedBy="participant", cascade={"persist"})
      */
     private Collection $proposals;
@@ -150,7 +156,7 @@ class Participant implements EntityInterface, ContributorInterface, IndexableInt
     /**
      * @ORM\Column(name="last_contributed_at", type="datetime", nullable=true)
      */
-    private ?\Datetime $lastContributedAt = null;
+    private ?\DateTime $lastContributedAt = null;
 
     /**
      * @ORM\OneToMany (targetEntity=EmailingCampaignUser::class, mappedBy="participant")
@@ -554,12 +560,12 @@ class Participant implements EntityInterface, ContributorInterface, IndexableInt
         return $this;
     }
 
-    public function getLastContributedAt(): ?\Datetime
+    public function getLastContributedAt(): ?\DateTime
     {
         return $this->lastContributedAt;
     }
 
-    public function setLastContributedAt(?\Datetime $lastContributedAt): self
+    public function setLastContributedAt(?\DateTime $lastContributedAt): self
     {
         $this->lastContributedAt = $lastContributedAt;
 

@@ -12,8 +12,7 @@ class ProposalStatusResolver implements QueryInterface
 {
     public function __construct(
         private readonly ProposalStatusDataLoader $dataLoader
-    ) {
-    }
+    ) {}
 
     public function __invoke(
         Proposal $proposal,

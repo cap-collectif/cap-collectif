@@ -15,8 +15,7 @@ class StepVoter extends AbstractOwnerableVoter
 
     public function __construct(
         private readonly Security $security
-    ) {
-    }
+    ) {}
 
     public static function view(AbstractStep $step, ?User $viewer = null): bool
     {

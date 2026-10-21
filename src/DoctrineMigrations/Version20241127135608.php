@@ -22,7 +22,5 @@ final class Version20241127135608 extends AbstractMigration
         $this->addSql("UPDATE media__media set provider_name = REPLACE(provider_name, 'MediaBundle', 'AppBundle') WHERE provider_name LIKE '%MediaBundle%'");
     }
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 }

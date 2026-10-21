@@ -17,6 +17,7 @@ class MediaResponse extends AbstractResponse implements EntityInterface
      *  targetEntity="Capco\AppBundle\Entity\Media",
      *  orphanRemoval=false
      * )
+     *
      * @ORM\JoinTable(
      *   name="responses_medias",
      *   joinColumns={@ORM\JoinColumn(name="response_id", referencedColumnName="id", onDelete="CASCADE")},

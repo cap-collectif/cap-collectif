@@ -10,8 +10,7 @@ class PasswordComplexityScoreResolver implements QueryInterface
 {
     public function __construct(
         private readonly Zxcvbn $zxcvbn
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): int
     {

@@ -26,8 +26,7 @@ class DeleteProjectMutation implements MutationInterface
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly Indexer $indexer,
         private readonly ActionLogger $actionLogger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

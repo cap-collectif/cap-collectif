@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Ci\Qa;
 
+use Castor\Attribute\AsTask;
+
 use function Capco\Castor\Qa\phpunit as sharedPhpunit;
 use function Capco\Castor\Qa\purgeRabbitmq as sharedPurgeRabbitmq;
 use function Capco\Castor\Qa\restoreDb as sharedRestoreDb;
 use function Capco\Castor\Qa\restoreEsSnapshot as sharedRestoreEsSnapshot;
 use function Capco\Castor\Qa\saveDb as sharedSaveDb;
 use function Capco\Castor\Qa\saveEsSnapshot as sharedSaveEsSnapshot;
-use Castor\Attribute\AsTask;
 
 #[AsTask(description: 'Purge the Elasticsearch RabbitMQ queue in CI.')]
 function purgeRabbitmq(bool $confirm = false): void

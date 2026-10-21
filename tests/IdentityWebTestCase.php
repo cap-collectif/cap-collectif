@@ -24,15 +24,20 @@ abstract class IdentityWebTestCase extends WebTestCase implements FeatureFlagsAw
     protected const PASSWORD = 'Account123!';
     protected KernelBrowser $browser;
     protected EntityManagerInterface $em;
+
     /** @var MailerService&\PHPUnit\Framework\MockObject\MockObject */
     protected MailerService $mailer;
+
     /** @var list<array{type: string, body: array<string, mixed>}> */
     protected array $messages = [];
+
     /** @var array<string, true> */
     private array $sessionIds = [];
+
     /** @var list<string> */
     private array $createdAccountIds = [];
     private ?Indexer $searchIndexer = null;
+
     /** @var list<array{class-string, string}> */
     private array $indexedEntities = [];
     private ?string $backchannelEnv = null;

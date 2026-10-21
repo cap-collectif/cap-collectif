@@ -20,8 +20,7 @@ class SelectionStepContributorSearch
         private readonly Connection $connection,
         private readonly UserRepository $userRepository,
         private readonly ParticipantRepository $participantRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Reuses ElasticsearchPaginatedResult because StepContributorResolver still paginates
@@ -34,6 +33,7 @@ class SelectionStepContributorSearch
     ): ElasticsearchPaginatedResult {
         $offset = $this->getOffset($cursor);
         $queryLimit = 0 === $limit ? 1 : $limit;
+
         /** @var array<int, array{contributor_type: ?string, contributor_id: ?string, total_count: int|string}> $rows */
         $rows = $this->connection->fetchAllAssociative(
             <<<'SQL'

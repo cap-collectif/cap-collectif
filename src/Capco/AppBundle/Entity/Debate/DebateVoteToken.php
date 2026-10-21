@@ -13,23 +13,26 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  * @ORM\Table(
  *     name="debate_vote_token",
  *     uniqueConstraints={
+ *
  *        @UniqueConstraint(
  *            name="debate_vote_token_unique",
  *            columns={"debate_id", "user_id"}
  *        )
  *     }
  * )
+ *
  * @ORM\Entity(repositoryClass=DebateVoteTokenRepository::class)
  */
 class DebateVoteToken extends AbstractUserToken implements EntityInterface
 {
     public function __construct(
         User $user,
-    /**
-     * @ORM\ManyToOne(targetEntity=Debate::class)
-     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
-     */
-    private Debate $debate,
+        /**
+         * @ORM\ManyToOne(targetEntity=Debate::class)
+         *
+         * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+         */
+        private Debate $debate,
         ?string $token
     ) {
         parent::__construct($user, $token);

@@ -42,8 +42,7 @@ class UpdateCollectStepMutation implements MutationInterface
         private readonly HubDocumentsStepGuard $hubDocumentsStepGuard,
         private readonly Manager $toggleManager,
         private readonly CollectStepRepository $collectStepRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

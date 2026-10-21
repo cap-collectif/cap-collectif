@@ -15,8 +15,7 @@ class MenuItemsResolver implements QueryInterface
         private readonly MenuItemRepository $menuItemRepository,
         private readonly Manager $manager,
         private readonly GraphQLLocaleResolver $localeResolver
-    ) {
-    }
+    ) {}
 
     /**
      * @return MenuItem[]

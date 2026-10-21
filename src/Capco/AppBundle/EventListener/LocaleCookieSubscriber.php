@@ -16,8 +16,7 @@ class LocaleCookieSubscriber implements EventSubscriberInterface
     public function __construct(
         private readonly Manager $toggleManager,
         private readonly LocaleRepository $localeRepository
-    ) {
-    }
+    ) {}
 
     public static function getSubscribedEvents(): array
     {

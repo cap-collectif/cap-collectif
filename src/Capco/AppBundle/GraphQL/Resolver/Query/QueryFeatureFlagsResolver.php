@@ -9,8 +9,7 @@ class QueryFeatureFlagsResolver implements QueryInterface
 {
     public function __construct(
         private readonly Manager $toggleManager
-    ) {
-    }
+    ) {}
 
     public function __invoke(): array
     {

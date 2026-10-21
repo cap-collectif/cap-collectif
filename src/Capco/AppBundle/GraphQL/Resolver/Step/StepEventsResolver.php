@@ -15,8 +15,7 @@ class StepEventsResolver implements QueryInterface
     public function __construct(
         private readonly ConnectionBuilderInterface $builder,
         private readonly EventRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(AbstractStep $step, Arg $input): Connection
     {

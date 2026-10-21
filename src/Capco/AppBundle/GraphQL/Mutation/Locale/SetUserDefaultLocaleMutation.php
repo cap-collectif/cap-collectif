@@ -20,8 +20,7 @@ class SetUserDefaultLocaleMutation implements MutationInterface
         private readonly EntityManagerInterface $entityManager,
         private readonly UserRepository $userRepository,
         private readonly LocaleRepository $localeRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args, User $viewer): array
     {

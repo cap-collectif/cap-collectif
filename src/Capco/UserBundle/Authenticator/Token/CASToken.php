@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 class CASToken extends AbstractToken
 {
     /**
-     * @param $user
+     * @param mixed $user
      */
     public function __construct($user, array $roles = [])
     {

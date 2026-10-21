@@ -23,8 +23,7 @@ class DebateExporter
         protected EntityManagerInterface $entityManager,
         private readonly SerializerInterface $serializer,
         private readonly Filesystem $fileSystem
-    ) {
-    }
+    ) {}
 
     public function initializeStyle(SymfonyStyle $style): void
     {

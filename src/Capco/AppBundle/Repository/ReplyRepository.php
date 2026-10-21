@@ -56,7 +56,7 @@ class ReplyRepository extends EntityRepository
             ->setParameter('participant', $participant)
             ->getQuery()
             ->getResult()
-            ;
+        ;
     }
 
     public function countByParticipant(Participant $participant): int
@@ -66,7 +66,8 @@ class ReplyRepository extends EntityRepository
             ->where('r.participant = :participant')
             ->setParameter('participant', $participant)
             ->getQuery()
-            ->getSingleScalarResult() ?? 0;
+            ->getSingleScalarResult() ?? 0
+        ;
     }
 
     public function countForQuestionnaire(
@@ -397,10 +398,10 @@ class ReplyRepository extends EntityRepository
     }
 
     /**
+     * @return float|int|mixed|string
+     *
      * @throws NoResultException
      * @throws NonUniqueResultException
-     *
-     * @return float|int|mixed|string
      */
     public function hasNewAnonymousReplies(Questionnaire $questionnaire, \DateTime $oldestUpdateDate): mixed
     {
@@ -432,7 +433,7 @@ class ReplyRepository extends EntityRepository
             ->andWhere('qb.questionnaire = :questionnaire')
             ->setParameter('email', $email)
             ->setParameter('questionnaire', $questionnaire)
-            ;
+        ;
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }

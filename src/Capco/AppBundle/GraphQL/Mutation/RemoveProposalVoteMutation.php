@@ -45,8 +45,7 @@ class RemoveProposalVoteMutation implements MutationInterface
         private readonly Indexer $indexer,
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly UserRepository $userRepository,
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $user): array
     {

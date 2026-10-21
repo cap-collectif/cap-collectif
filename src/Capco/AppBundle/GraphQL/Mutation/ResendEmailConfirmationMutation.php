@@ -22,8 +22,7 @@ class ResendEmailConfirmationMutation implements MutationInterface
         private readonly LoggerInterface $logger,
         private readonly FOSNotifier $notifier,
         private readonly Publisher $publisher
-    ) {
-    }
+    ) {}
 
     public function __invoke($user): array
     {

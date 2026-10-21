@@ -11,8 +11,7 @@ class ParticipantConfirmNewEmailUrlResolver implements ResolverInterface
 {
     public function __construct(
         private readonly RouterInterface $router
-    ) {
-    }
+    ) {}
 
     public function __invoke(Participant $participant, string $redirectUrl, string $participationCookies): ?string
     {

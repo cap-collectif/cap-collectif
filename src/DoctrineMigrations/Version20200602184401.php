@@ -32,9 +32,7 @@ final class Version20200602184401 extends AbstractMigration implements Container
         return '';
     }
 
-    public function up(Schema $schema): void
-    {
-    }
+    public function up(Schema $schema): void {}
 
     public function postUp(Schema $schema): void
     {
@@ -52,9 +50,7 @@ final class Version20200602184401 extends AbstractMigration implements Container
         }
     }
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 
     public function setContainer(?ContainerInterface $container = null)
     {

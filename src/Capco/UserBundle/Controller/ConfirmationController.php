@@ -34,6 +34,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ConfirmationController extends Controller
 {
+    public bool $login = true;
+
     public function __construct(
         private readonly UserManager $userManager,
         private readonly LoginManagerInterface $loginManager,

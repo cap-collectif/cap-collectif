@@ -10,7 +10,9 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Vocal contribution ownership and initial status are domain rules.
  */
 final class VocalContributionTest extends TestCase

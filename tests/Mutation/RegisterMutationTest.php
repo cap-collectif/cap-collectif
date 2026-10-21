@@ -12,9 +12,13 @@ use Capco\UserBundle\Entity\User;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises HTTP outcomes and real domain data with transactional cleanup; replaces only external boundaries.
  */
 final class RegisterMutationTest extends IdentityWebTestCase

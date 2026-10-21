@@ -33,8 +33,7 @@ abstract class Search
 
     public function __construct(
         protected Index $index
-    ) {
-    }
+    ) {}
 
     public static function generateSeed(?RequestStack $requestStack = null, $viewer = null)
     {
@@ -140,7 +139,7 @@ abstract class Search
     {
         $bool = $query->getQuery();
 
-        if (!($bool instanceof Query\BoolQuery)) {
+        if (!$bool instanceof Query\BoolQuery) {
             $bool = new Query\BoolQuery();
             $bool->addMust($query->getQuery());
         }
@@ -153,7 +152,7 @@ abstract class Search
     {
         $bool = $query->getQuery();
 
-        if (!($bool instanceof Query\BoolQuery)) {
+        if (!$bool instanceof Query\BoolQuery) {
             $bool = new Query\BoolQuery();
             $bool->addMust($query->getQuery());
         }

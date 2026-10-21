@@ -8,9 +8,13 @@ use Capco\UserBundle\Entity\User;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises account contracts through HTTP with fresh database reads, transactional cleanup and external boundary doubles.
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
  */
 final class RegistrationTest extends AccountWebTestCase
@@ -79,8 +83,11 @@ final class RegistrationTest extends AccountWebTestCase
     public static function invalidRegistrationInputs(): iterable
     {
         yield 'empty username' => ['username', '', ['USERNAME_BLANK']];
+
         yield 'invalid email' => ['email', 'invalid-address', ['EMAIL_THROWABLE']];
+
         yield 'empty password' => ['plainPassword', '', ['PASSWORD_BLANK']];
+
         yield 'short password' => ['plainPassword', 'Aa1', []];
     }
 
@@ -103,7 +110,9 @@ final class RegistrationTest extends AccountWebTestCase
     public static function incompletePasswords(): iterable
     {
         yield 'missing digit' => ['PasswordOnly'];
+
         yield 'missing uppercase' => ['password123'];
+
         yield 'missing lowercase' => ['PASSWORD123'];
     }
 

@@ -33,13 +33,12 @@ class UpdateSelectionStepMutation implements MutationInterface
         private readonly LoggerInterface $logger,
         private readonly ProposalStepSplitViewService $proposalStepSplitViewService,
         private readonly ActionLogger $actionLogger
-    ) {
-    }
+    ) {}
 
     /**
-     * @throws GraphQLException
-     *
      * @return array<string, bool|SelectionStep>
+     *
+     * @throws GraphQLException
      */
     public function __invoke(Argument $input, User $viewer): array
     {

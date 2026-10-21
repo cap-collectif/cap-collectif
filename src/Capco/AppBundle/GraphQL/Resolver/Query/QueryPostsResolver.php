@@ -20,8 +20,7 @@ class QueryPostsResolver implements QueryInterface
     public function __construct(
         private readonly PostRepository $postRepository,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): ConnectionInterface|Promise
     {
@@ -40,7 +39,7 @@ class QueryPostsResolver implements QueryInterface
 
         try {
             $total = $this->postRepository->countPublicPosts($themeId, $projectId);
-        } catch (NoResultException|NonUniqueResultException $e) {
+        } catch (NonUniqueResultException|NoResultException $e) {
             $this->logger->error($e->getMessage());
             $total = 0;
         }

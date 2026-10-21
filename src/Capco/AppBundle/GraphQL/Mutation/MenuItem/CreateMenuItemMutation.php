@@ -16,8 +16,7 @@ class CreateMenuItemMutation implements MutationInterface
     public function __construct(
         private readonly EntityManagerInterface $em,
         private readonly MenuItemInputApplier $inputApplier
-    ) {
-    }
+    ) {}
 
     /**
      * @return array{menuItem: ?MenuItem, errorCode: ?string}

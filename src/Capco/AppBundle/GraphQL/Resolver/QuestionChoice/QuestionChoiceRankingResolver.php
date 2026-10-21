@@ -13,8 +13,7 @@ class QuestionChoiceRankingResolver implements QueryInterface
     public function __construct(
         private readonly AbstractResponseRepository $responseRepository,
         private readonly QuestionnaireResultsAccessResolver $resultsAccess
-    ) {
-    }
+    ) {}
 
     public function __invoke(QuestionChoice $questionChoice, ?User $viewer = null, ?\ArrayObject $context = null): ?array
     {

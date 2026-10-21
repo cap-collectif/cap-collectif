@@ -9,8 +9,7 @@ class TypeResolver
 {
     public function __construct(
         private readonly OverblogTypeResolver $typeResolver
-    ) {
-    }
+    ) {}
 
     // TODO make a PR to add this method to overblog/GraphQLBundle
     public function getCurrentSchemaName(): string

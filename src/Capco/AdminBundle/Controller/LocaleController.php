@@ -10,6 +10,7 @@ class LocaleController extends AbstractController
 {
     /**
      * @Route("admin/locale/list", name="capco_admin_locale_list_list", defaults={"_feature_flags" = "multilangue"})
+     *
      * @Template("@CapcoAdmin/Locale/list.html.twig")
      */
     public function listAction()

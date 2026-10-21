@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
+ *
  * @ORM\Table(name="project_tab_events")
  */
 class ProjectTabEvents extends ProjectTab
@@ -20,6 +21,7 @@ class ProjectTabEvents extends ProjectTab
      *     cascade={"persist", "remove"},
      *     orphanRemoval=true
      * )
+     *
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private Collection $eventItems;

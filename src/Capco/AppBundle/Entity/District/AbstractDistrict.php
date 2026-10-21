@@ -15,9 +15,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="district")
+ *
  * @ORM\Entity
+ *
  * @ORM\InheritanceType("SINGLE_TABLE")
+ *
  * @ORM\DiscriminatorColumn(name = "district_type", type = "string")
+ *
  * @ORM\DiscriminatorMap({
  *      "proposal"        = "ProposalDistrict",
  *      "global"         = "GlobalDistrict"
@@ -46,18 +50,21 @@ abstract class AbstractDistrict implements EntityInterface, IndexableInterface, 
 
     /**
      * @Gedmo\Timestampable(on="change", field={"name"})
+     *
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private ?\DateTimeInterface $updatedAt = null;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Styles\BorderStyle", fetch="LAZY", cascade={"persist", "remove"})
+     *
      * @ORM\JoinColumn(name="border_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private ?BorderStyle $border = null;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Styles\BackgroundStyle", fetch="LAZY", cascade={"persist", "remove"})
+     *
      * @ORM\JoinColumn(name="background_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private ?BackgroundStyle $background = null;

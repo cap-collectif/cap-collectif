@@ -18,8 +18,7 @@ class QueryHomePageSectionsResolver implements QueryInterface
     public function __construct(
         private readonly SectionRepository $sectionRepository,
         private readonly Manager $toggleManager,
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): ConnectionInterface|Promise
     {

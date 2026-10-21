@@ -6,6 +6,7 @@ trait VersionableTrait
 {
     /**
      * @ORM\Version()
+     *
      * @ORM\Column(name="version", type="integer")
      */
     protected $version = 1;

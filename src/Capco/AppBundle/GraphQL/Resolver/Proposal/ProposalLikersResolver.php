@@ -10,8 +10,7 @@ class ProposalLikersResolver implements QueryInterface
 {
     public function __construct(
         private readonly ProposalLikersDataLoader $proposalLikersDataLoader
-    ) {
-    }
+    ) {}
 
     public function __invoke(Proposal $proposal)
     {

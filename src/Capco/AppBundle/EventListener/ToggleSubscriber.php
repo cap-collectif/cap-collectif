@@ -17,8 +17,7 @@ class ToggleSubscriber implements EventSubscriberInterface
         private readonly EntityManagerInterface $em,
         private readonly AbstractSSOConfigurationRepository $SSOConfigurationRepository,
         private readonly SectionRepository $sectionRepository
-    ) {
-    }
+    ) {}
 
     public static function getSubscribedEvents(): array
     {

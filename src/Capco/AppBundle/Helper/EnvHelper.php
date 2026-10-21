@@ -2,8 +2,6 @@
 
 namespace Capco\AppBundle\Helper;
 
-use Closure;
-
 /**
  * Class EnvHelper.
  *
@@ -21,7 +19,7 @@ class EnvHelper
         $value = getenv($key);
 
         if (false === $value) {
-            return $value instanceof Closure ? $value() : $value;
+            return $value instanceof \Closure ? $value() : $value;
         }
 
         switch (strtolower($value)) {

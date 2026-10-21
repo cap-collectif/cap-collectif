@@ -11,6 +11,7 @@ trait ColorableTrait
      * @var string
      *
      * @ORM\Column(name="color", type="string", length=255)
+     *
      * @Assert\NotBlank()
      */
     protected $color;

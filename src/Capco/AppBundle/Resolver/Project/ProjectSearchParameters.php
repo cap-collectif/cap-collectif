@@ -11,8 +11,7 @@ class ProjectSearchParameters
         private ?string $type = null,
         private string $orderBy = 'date',
         private ?string $theme = null
-    ) {
-    }
+    ) {}
 
     public function setTerm(?string $term = null): self
     {

@@ -15,12 +15,12 @@ class ProposalUpdateStatusProcessor implements ProcessorInterface
         private readonly ProposalRepository $proposalRepository,
         private readonly ProposalNotifier $notifier,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function process(Message $message, array $options): bool
     {
         $json = json_decode((string) $message->getBody(), true);
+
         /** @var Proposal $proposal */
         $proposal = $this->proposalRepository->find($json['proposalId']);
 

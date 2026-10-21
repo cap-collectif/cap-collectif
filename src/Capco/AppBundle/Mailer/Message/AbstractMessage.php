@@ -122,7 +122,7 @@ abstract class AbstractMessage
 
     public function getReplyTo()
     {
-        //: ?string
+        // : ?string
         return $this->replyTo;
     }
 
@@ -132,7 +132,7 @@ abstract class AbstractMessage
         ?string $recipientName = null,
         array $vars = []
     ) {
-        //: void
+        // : void
         $key = mb_strtolower($recipientEmail);
 
         $this->recipients[$key] = new MessageRecipient(
@@ -148,13 +148,13 @@ abstract class AbstractMessage
         return array_values($this->recipients);
     }
 
-    final public function getRecipient($key /*:?MessageRecipient*/)
+    final public function getRecipient($key /* :?MessageRecipient */)
     {
         if (!\is_int($key) && !\is_string($key)) {
             throw new \InvalidArgumentException('Recipient key must be an integer index or valid email address string.');
         }
 
-        if (\is_string($key) && isset($this->recipients[($key = mb_strtolower($key))])) {
+        if (\is_string($key) && isset($this->recipients[$key = mb_strtolower($key)])) {
             return $this->recipients[$key];
         }
 

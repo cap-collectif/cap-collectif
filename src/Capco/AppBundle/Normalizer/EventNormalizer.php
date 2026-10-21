@@ -19,8 +19,7 @@ class EventNormalizer implements NormalizerInterface, SerializerAwareInterface, 
         private UrlGeneratorInterface $router,
         private readonly ObjectNormalizer $normalizer,
         private MediaExtension $mediaExtension
-    ) {
-    }
+    ) {}
 
     public function hasCacheableSupportsMethod(): bool
     {

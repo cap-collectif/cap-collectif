@@ -27,7 +27,5 @@ final class Version20190210203518 extends AbstractMigration implements Container
         $this->container->get(Manager::class)->activate('consent_internal_communication');
     }
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 }

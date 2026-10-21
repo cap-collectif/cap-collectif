@@ -16,17 +16,20 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Invokes GraphQL mutations directly with mocked dependencies instead of verifying the HTTP
  * contract and persisted effects.
  */
 class CreateHttpRedirectMutationTest extends TestCase
 {
-    private MockObject & EntityManagerInterface $entityManager;
-    private MockObject & HttpRedirectRepository $httpRedirectRepository;
-    private MockObject & HttpRedirectUrlNormalizer $urlNormalizer;
-    private MockObject & HttpRedirectCacheInvalidator $cacheInvalidator;
+    private EntityManagerInterface&MockObject $entityManager;
+    private HttpRedirectRepository&MockObject $httpRedirectRepository;
+    private HttpRedirectUrlNormalizer&MockObject $urlNormalizer;
+    private HttpRedirectCacheInvalidator&MockObject $cacheInvalidator;
     private CreateHttpRedirectMutation $mutation;
 
     protected function setUp(): void

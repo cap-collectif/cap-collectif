@@ -17,8 +17,7 @@ class ProposalViewerVoteResolver implements QueryInterface
     public function __construct(
         private ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader,
         private LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Proposal $proposal, Arg $args, $viewer): Promise
     {

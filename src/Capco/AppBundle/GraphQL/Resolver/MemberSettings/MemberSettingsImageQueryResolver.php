@@ -8,9 +8,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class MemberSettingsImageQueryResolver implements QueryInterface
 {
-    public function __construct(private readonly SiteImageRepository $repository)
-    {
-    }
+    public function __construct(private readonly SiteImageRepository $repository) {}
 
     /**
      * @return SiteImage[]

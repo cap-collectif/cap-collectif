@@ -16,8 +16,7 @@ class CollectStepProposalResolver implements QueryInterface
 
     public function __construct(
         private readonly ProposalFormProposalsDataLoader $dataLoader
-    ) {
-    }
+    ) {}
 
     public function __invoke(
         CollectStep $collectStep,
@@ -25,7 +24,7 @@ class CollectStepProposalResolver implements QueryInterface
         $viewer,
         RequestStack $request
     ) {
-        /*: Promise or Connection */ $this->protectArguments($args);
+        /* : Promise or Connection */ $this->protectArguments($args);
         $form = $collectStep->getProposalForm();
 
         if (!$form) {

@@ -10,8 +10,7 @@ class DebateUrlResolver implements QueryInterface
 {
     public function __construct(
         private readonly UrlResolver $urlResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Debate $debate): string
     {

@@ -25,7 +25,5 @@ final class Version20180803144753 extends AbstractMigration
         $this->addSql('ALTER TABLE comment DROP is_trashed');
     }
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 }

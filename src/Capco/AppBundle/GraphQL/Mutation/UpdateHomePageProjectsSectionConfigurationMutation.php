@@ -25,12 +25,12 @@ class UpdateHomePageProjectsSectionConfigurationMutation implements MutationInte
         private readonly SectionRepository $sectionRepository,
         private readonly FormFactoryInterface $formFactory,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): array
     {
         $this->formatInput($args);
+
         /**
          * @var Section $section
          */

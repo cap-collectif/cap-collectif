@@ -21,8 +21,7 @@ class ProposalVoteExporter
         private readonly TranslatorInterface $translator,
         private readonly ExportProposalVoteFullDataTransformer $exportProposalVoteFullDataTransformer,
         private readonly ExportProposalVoteGroupedDataTransformer $exportProposalVoteGroupedDataTransformer,
-    ) {
-    }
+    ) {}
 
     /**
      * @param array<string, array{handle: resource, headers: array<string>}>                                                  $variants
@@ -81,7 +80,7 @@ class ProposalVoteExporter
      * @param array<string, array{handle: resource, headers: array<string>}> $variants
      * @param array<string, mixed>                                           $proposalData
      *
-     * @return array<string, array{proposalData: array<string, mixed>|null, translatedKeys: array<string, string>|null}>
+     * @return array<string, array{proposalData: null|array<string, mixed>, translatedKeys: null|array<string, string>}>
      */
     private function prepareVariantData(
         array $variants,

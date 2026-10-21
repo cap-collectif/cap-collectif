@@ -9,25 +9,30 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="section_project")
+ *
  * @ORM\Entity(repositoryClass=SectionProjectRepository::class)
  */
 class SectionProject implements EntityInterface
 {
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue
+     *
      * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Section::class, inversedBy="sectionProjects")
+     *
      * @ORM\JoinColumn(nullable=false)
      */
     private ?Section $section = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=Project::class)
+     *
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private Project $project;

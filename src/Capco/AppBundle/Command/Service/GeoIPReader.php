@@ -8,8 +8,7 @@ class GeoIPReader
 {
     public function __construct(
         private readonly CloudflareElasticClient $cloudflareElasticClient
-    ) {
-    }
+    ) {}
 
     /**
      * @param string[] $sources

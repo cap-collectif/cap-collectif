@@ -81,9 +81,9 @@ class FontRepository extends EntityRepository
     }
 
     /**
-     * @throws NonUniqueResultException
-     *
      * @return Font[]
+     *
+     * @throws NonUniqueResultException
      */
     public function getActiveHeadingFonts(): iterable
     {
@@ -97,9 +97,9 @@ class FontRepository extends EntityRepository
     }
 
     /**
-     * @throws NonUniqueResultException
-     *
      * @return Font[]
+     *
+     * @throws NonUniqueResultException
      */
     public function getActiveBodyFonts(): iterable
     {

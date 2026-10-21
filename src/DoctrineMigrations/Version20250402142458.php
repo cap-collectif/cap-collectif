@@ -19,7 +19,5 @@ final class Version20250402142458 extends AbstractMigration
         $this->addSql('UPDATE consultation SET owner_id = null WHERE organizationOwner_id IS NOT NULL');
     }
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 }

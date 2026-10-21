@@ -45,14 +45,13 @@ class AbstractDebateArgumentMutation
         protected TokenGeneratorInterface $tokenGenerator,
         protected DebateNotifier $debateNotifier,
         protected RequestGuesserInterface $requestGuesser
-    ) {
-    }
+    ) {}
 
     protected function getDebateFromInput(Arg $input, ?User $viewer): Debate
     {
         $this->formatInput($input);
         $debate = $this->globalIdResolver->resolve($input->offsetGet('debate'), $viewer);
-        if (!($debate instanceof Debate)) {
+        if (!$debate instanceof Debate) {
             throw new UserError(self::UNKNOWN_DEBATE);
         }
 
@@ -62,7 +61,7 @@ class AbstractDebateArgumentMutation
     protected function getArgument(Arg $input, User $viewer): DebateArgument
     {
         $debateArgument = $this->globalIdResolver->resolve($input->offsetGet('id'), $viewer);
-        if (!($debateArgument instanceof DebateArgument)) {
+        if (!$debateArgument instanceof DebateArgument) {
             throw new UserError(self::UNKNOWN_DEBATE_ARGUMENT);
         }
 

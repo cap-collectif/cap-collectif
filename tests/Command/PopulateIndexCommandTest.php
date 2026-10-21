@@ -11,8 +11,11 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Changes Elasticsearch contents without restoring their initial state in teardown.
  */
 class PopulateIndexCommandTest extends KernelTestCase implements FeatureFlagsAwareTest

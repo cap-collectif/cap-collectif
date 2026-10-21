@@ -21,6 +21,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class AddVocalContributionMutationTest extends TestCase

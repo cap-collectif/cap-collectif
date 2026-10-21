@@ -4,6 +4,4 @@ namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-class MediaQuestionRepository extends EntityRepository
-{
-}
+class MediaQuestionRepository extends EntityRepository {}

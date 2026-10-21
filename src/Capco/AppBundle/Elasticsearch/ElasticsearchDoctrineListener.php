@@ -53,8 +53,7 @@ class ElasticsearchDoctrineListener implements EventSubscriber
         private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository,
         private readonly OpinionRepository $opinionRepository,
         private readonly EntityChangeSetResolver $changeSetResolver
-    ) {
-    }
+    ) {}
 
     public function getSubscribedEvents(): array
     {
@@ -155,6 +154,7 @@ class ElasticsearchDoctrineListener implements EventSubscriber
                 $selectionVotes = $this->proposalSelectionVoteRepository
                     ->getVotesForProposal($entity, self::BULK_SIZE, $offset)
                 ;
+
                 /** @var AbstractVote $vote */
                 foreach ($selectionVotes as $vote) {
                     $this->process($vote, false);
@@ -168,6 +168,7 @@ class ElasticsearchDoctrineListener implements EventSubscriber
                 $collectVotes = $this->proposalCollectVoteRepository
                     ->getVotesForProposal($entity, self::BULK_SIZE, $offset)
                 ;
+
                 /** @var AbstractVote $vote */
                 foreach ($collectVotes as $vote) {
                     $this->process($vote, false);
@@ -199,6 +200,7 @@ class ElasticsearchDoctrineListener implements EventSubscriber
                 $offset = 0;
                 do {
                     $proposals = $this->proposalRepository->getProposalsByProject($entity->getId(), self::BULK_SIZE, $offset);
+
                     /** @var Proposal $proposal */
                     foreach ($proposals as $proposal) {
                         $this->process($proposal, false);
@@ -209,6 +211,7 @@ class ElasticsearchDoctrineListener implements EventSubscriber
                 $offset = 0;
                 do {
                     $opinions = $this->opinionRepository->getOpinionsByProject($entity->getId(), self::BULK_SIZE, $offset);
+
                     /** @var Opinion $opinion */
                     foreach ($opinions as $opinion) {
                         $this->process($opinion, false);

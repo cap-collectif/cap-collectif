@@ -22,13 +22,12 @@ class HandleProposalFormCategoryImageMutation implements MutationInterface
         private EntityManagerInterface $em,
         private MediaRepository $mediaRepository,
         private CategoryImageRepository $categoryImageRepository
-    ) {
-    }
+    ) {}
 
     /**
-     * @throws \Exception
+     * @return array{'categoryImage': null|CategoryImage, 'deletedCategoryImageId': null|string}
      *
-     * @return array{'categoryImage': CategoryImage | null, 'deletedCategoryImageId': string | null}
+     * @throws \Exception
      */
     public function __invoke(Argument $input, User $viewer): array
     {

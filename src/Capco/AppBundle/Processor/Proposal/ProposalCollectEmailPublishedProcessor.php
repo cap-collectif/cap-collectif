@@ -12,8 +12,7 @@ class ProposalCollectEmailPublishedProcessor implements ProcessorInterface
     public function __construct(
         private readonly ProposalCollectEmailPublishedNotifier $notifier,
         private readonly ProposalRepository $proposalRepository,
-    ) {
-    }
+    ) {}
 
     public function process(Message $message, array $options): bool
     {

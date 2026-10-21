@@ -17,6 +17,7 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class VoiceMessageControllerTest extends TestCase
@@ -70,8 +71,11 @@ class VoiceMessageControllerTest extends TestCase
     public static function uploadCases(): \Generator
     {
         yield ['csrf', 403];
+
         yield ['missing-file', 400];
+
         yield ['success', 201];
+
         yield ['success-with-participant', 201];
     }
 }

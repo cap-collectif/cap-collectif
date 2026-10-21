@@ -13,6 +13,7 @@ class HighlightedPost extends HighlightedContent implements \Stringable
 {
     /**
      * @ORM\OneToOne(targetEntity="Post")
+     *
      * @ORM\JoinColumn(name="post_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $post;

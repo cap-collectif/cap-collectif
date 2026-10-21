@@ -11,8 +11,7 @@ class SAMLLogoutHandler implements LogoutHandlerInterface
     public function __construct(
         private readonly Manager $toggleManager,
         private ?Simple $samlClient = null
-    ) {
-    }
+    ) {}
 
     public function handle(
         RedirectResponseWithRequestInterface $responseWithRequest

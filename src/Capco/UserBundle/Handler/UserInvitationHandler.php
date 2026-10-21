@@ -19,8 +19,7 @@ class UserInvitationHandler
         private readonly Manager $manager,
         private readonly EntityManagerInterface $em,
         private readonly SendInBluePublisher $sendInBluePublisher
-    ) {
-    }
+    ) {}
 
     public function handleUserOrganizationInvite(User $user): void
     {

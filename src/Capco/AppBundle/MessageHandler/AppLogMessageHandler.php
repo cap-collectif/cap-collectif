@@ -14,8 +14,7 @@ class AppLogMessageHandler
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
         private readonly UserRepository $userRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(AppLogMessage $message): void
     {

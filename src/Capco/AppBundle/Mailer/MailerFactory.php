@@ -21,8 +21,7 @@ class MailerFactory
         protected SiteParameterResolver $siteParams,
         protected RouterInterface $router,
         protected SenderEmailResolver $senderEmailResolver
-    ) {
-    }
+    ) {}
 
     public function createMessage(
         string $type,
@@ -104,7 +103,7 @@ class MailerFactory
         string $email,
         array $params
     ): void {
-        $footer = \constant("{$type}::FOOTER"); //twig or trad key
+        $footer = \constant("{$type}::FOOTER"); // twig or trad key
         $footerVars = \call_user_func(
             "{$type}::getMyFooterVars",
             $email,

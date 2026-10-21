@@ -412,7 +412,7 @@ class OpinionVersionRepository extends EntityRepository
         ?int $limit = null,
         int $page = 1
     ): array|Paginator {
-        /*: array|Paginator*/ $qb = $this->getIsEnabledQueryBuilder('ov')
+        /* : array|Paginator */ $qb = $this->getIsEnabledQueryBuilder('ov')
             ->addSelect('o', 'ot', 's', 'aut', 'm', 'oc')
             ->leftJoin('ov.parent', 'o')
             ->leftJoin('o.OpinionType', 'ot')

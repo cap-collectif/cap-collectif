@@ -13,8 +13,7 @@ class OwnerProposalFormResolver implements QueryInterface
 {
     public function __construct(
         private readonly ProposalFormRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Owner $owner, Argument $args): ConnectionInterface
     {

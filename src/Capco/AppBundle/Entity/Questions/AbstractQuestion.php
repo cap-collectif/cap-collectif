@@ -16,9 +16,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="question")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AbstractQuestionRepository")
+ *
  * @ORM\InheritanceType("SINGLE_TABLE")
+ *
  * @ORM\DiscriminatorColumn(name = "question_type", type = "string")
+ *
  * @ORM\DiscriminatorMap({
  *      "simple"          = "SimpleQuestion",
  *      "multiple_choice" = "MultipleChoiceQuestion",
@@ -67,9 +71,10 @@ abstract class AbstractQuestion implements DisplayableInBOInterface, \Stringable
 
     public static $questionTypesLabels = [];
 
-    //field used to the position assignation
+    // field used to the position assignation
     /**
      * @ORM\Column(name="temporary_id", type="guid", nullable=true)
+     *
      * @ORM\GeneratedValue(strategy="UUID")
      */
     public ?string $temporaryId = null;
@@ -93,18 +98,21 @@ abstract class AbstractQuestion implements DisplayableInBOInterface, \Stringable
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\LogicJump", mappedBy="origin", orphanRemoval=true, cascade={"persist", "remove"})
+     *
      * @ORM\OrderBy({"position" = "ASC"})
      */
     protected $jumps;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="always_jump_destination_question_id", nullable=true, onDelete="SET NULL")
      */
     protected $alwaysJumpDestinationQuestion;
 
     /**
      * @Assert\NotNull()
+     *
      * @ORM\Column(name="type", nullable=false)
      */
     protected $type;

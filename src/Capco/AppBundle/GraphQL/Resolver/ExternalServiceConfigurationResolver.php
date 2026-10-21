@@ -14,8 +14,7 @@ class ExternalServiceConfigurationResolver implements QueryInterface
 
     public function __construct(
         private readonly ExternalServiceConfigurationRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input): ExternalServiceConfiguration
     {

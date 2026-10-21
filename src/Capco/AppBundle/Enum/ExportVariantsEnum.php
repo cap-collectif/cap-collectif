@@ -2,7 +2,8 @@
 
 namespace Capco\AppBundle\Enum;
 
-enum ExportVariantsEnum: string {
+enum ExportVariantsEnum: string
+{
     case FULL = 'full';
 
     case SIMPLIFIED = 'simplified';

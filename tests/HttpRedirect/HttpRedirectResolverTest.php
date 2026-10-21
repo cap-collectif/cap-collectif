@@ -15,8 +15,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Constrains repository lookup counts to prove caching instead of asserting only the resolved
  * redirect contract.
  */

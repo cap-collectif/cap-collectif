@@ -16,8 +16,7 @@ class MultilangueRouteListener
         private readonly Manager $manager,
         private readonly LocaleRepository $localeRepository,
         private readonly Environment $templating
-    ) {
-    }
+    ) {}
 
     public function onKernelRequest(RequestEvent $event)
     {

@@ -13,8 +13,7 @@ class ViewerCanSeeProposalAnalysisResolver
 
     public function __construct(
         private readonly AuthorizationCheckerInterface $authorizationChecker
-    ) {
-    }
+    ) {}
 
     public function isGranted($viewer, Proposal $proposal, ?\ArrayObject $context = null): bool
     {

@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=MailingListUserRepository::class)
+ *
  * @ORM\Table(name="mailing_list_user")
  */
 class MailingListUser
@@ -18,18 +19,21 @@ class MailingListUser
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\MailingList", inversedBy="mailingListUsers")
+     *
      * @ORM\JoinColumn(name="mailing_list_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private MailingList $mailingList;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private ?User $user = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Participant")
+     *
      * @ORM\JoinColumn(name="participant_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private ?Participant $participant = null;

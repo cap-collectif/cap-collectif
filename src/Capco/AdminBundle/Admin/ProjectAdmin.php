@@ -154,8 +154,8 @@ final class ProjectAdmin extends CapcoAdmin
 
     protected function configure(): void
     {
-        //$this->setTemplate('list', '@CapcoAdmin/Project/list.html.twig');
-        //$this->setTemplate('edit', '@CapcoAdmin/Project/edit.html.twig');
+        // $this->setTemplate('list', '@CapcoAdmin/Project/list.html.twig');
+        // $this->setTemplate('edit', '@CapcoAdmin/Project/edit.html.twig');
         parent::configure();
     }
 
@@ -183,7 +183,7 @@ final class ProjectAdmin extends CapcoAdmin
 
     protected function configureListFields(ListMapper $list): void
     {
-        //$this->setTemplate(
+        // $this->setTemplate(
         $list->addIdentifier('title', null, [
             'label' => 'global.title',
             'template' => '@CapcoAdmin/Project/title_list_field.html.twig',

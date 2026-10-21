@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="user_phone_verification_sms")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\UserPhoneVerificationSmsRepository")
  */
 class UserPhoneVerificationSms extends AbstractPhoneVerificationSms implements EntityInterface

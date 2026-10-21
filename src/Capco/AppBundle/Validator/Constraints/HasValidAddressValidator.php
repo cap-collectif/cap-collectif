@@ -13,8 +13,7 @@ class HasValidAddressValidator extends ConstraintValidator
     public function __construct(
         private readonly GoogleMaps $geocoder,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function validate($object, Constraint $constraint): bool
     {

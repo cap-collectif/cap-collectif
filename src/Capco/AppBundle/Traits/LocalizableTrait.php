@@ -9,7 +9,9 @@ trait LocalizableTrait
 {
     /**
      * @var Locale
+     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Locale")
+     *
      * @ORM\JoinColumn(name="locale", referencedColumnName="id", nullable=true)
      */
     private $locale;

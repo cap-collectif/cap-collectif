@@ -119,9 +119,9 @@ class StepContributionsDataLoader extends BatchDataLoader
         } elseif ($step instanceof CollectStep) {
             $totalCount += $this->proposalCountResolver->__invoke($step);
         // We do not account votes as a contribution, maybe this will change
-            // $totalCount += $this->proposalCollectVoteRepository->countPublishedCollectVoteByStep(
-            //     $step
-            // );
+        // $totalCount += $this->proposalCollectVoteRepository->countPublishedCollectVoteByStep(
+        //     $step
+        // );
         } elseif ($step instanceof QuestionnaireStep && $step->getQuestionnaire()?->canDisplay()) {
             $totalCount += $this->replySearch
                 ->getRepliesByStep($step->getId(), ['published' => true, 'draft' => false], 0, null)

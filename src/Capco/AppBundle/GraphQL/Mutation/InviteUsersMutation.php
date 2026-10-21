@@ -33,8 +33,7 @@ class InviteUsersMutation implements MutationInterface
         private readonly UserRepository $userRepository,
         private readonly GroupRepository $groupRepository,
         private readonly Manager $manager
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): array
     {

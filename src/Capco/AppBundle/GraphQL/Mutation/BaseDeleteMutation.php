@@ -12,8 +12,7 @@ abstract class BaseDeleteMutation implements MutationInterface
     public function __construct(
         protected EntityManagerInterface $em,
         protected MediaProvider $mediaProvider
-    ) {
-    }
+    ) {}
 
     public function removeMedia(Media $media): void
     {

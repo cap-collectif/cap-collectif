@@ -26,11 +26,9 @@ class SectionController extends PositionableController
     }
 
     /**
-     * @param $allEntitiesSelected
-     *
      * @return bool|string
      */
-    public function batchActionDeleteIsRelevant(array $selectedIds, $allEntitiesSelected)
+    public function batchActionDeleteIsRelevant(array $selectedIds, mixed $allEntitiesSelected)
     {
         foreach ($selectedIds as $id) {
             $item = $this->container->get(SectionRepository::class)->find($id);

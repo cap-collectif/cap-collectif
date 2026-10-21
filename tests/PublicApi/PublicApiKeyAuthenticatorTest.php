@@ -12,7 +12,9 @@ use Symfony\Component\HttpFoundation\Request;
  * @internal
  *
  * @coversNothing
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Checks credential extraction and supported request paths with real requests; this does not
  * prove end-to-end authentication.
  */
@@ -35,11 +37,17 @@ class PublicApiKeyAuthenticatorTest extends TestCase
     public static function credentialsProvider(): iterable
     {
         yield 'Bearer scheme' => ['Bearer Api-Key', 'Api-Key'];
+
         yield 'lowercase scheme' => ['bearer Api-Key', 'Api-Key'];
+
         yield 'uppercase scheme' => ['BEARER Api-Key', 'Api-Key'];
+
         yield 'mixed case scheme' => ['bEaReR Api-Key', 'Api-Key'];
+
         yield 'Basic credentials are not API keys' => ['Basic dXNlcjpwYXNzd29yZA==', 'Basic dXNlcjpwYXNzd29yZA=='];
+
         yield 'empty token' => ['Bearer ', ''];
+
         yield 'only strip the prefix' => ['Bearer invalid Bearer token', 'invalid Bearer token'];
     }
 

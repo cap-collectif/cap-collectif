@@ -20,8 +20,7 @@ class ParticipantIsMeetingRequirementsResolver implements QueryInterface
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Participant $participant, Argument $args, ?User $viewer = null): bool
     {

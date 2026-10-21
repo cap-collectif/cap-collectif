@@ -16,6 +16,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="official_response")
+ *
  * @ORM\Entity(repositoryClass=OfficialResponseRepository::class)
  */
 class OfficialResponse implements EntityInterface, \Stringable
@@ -37,18 +38,21 @@ class OfficialResponse implements EntityInterface, \Stringable
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "body"})
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private \DateTime $updatedAt;
 
     /**
      * @ORM\OneToOne(targetEntity=Proposal::class, inversedBy="officialResponse")
+     *
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private Proposal $proposal;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OfficialResponseAuthor", cascade={"persist", "remove"}, mappedBy="officialResponse", orphanRemoval=true)
+     *
      * @ORM\JoinTable(name="official_response_author",
      *      joinColumns={@ORM\JoinColumn(name="official_response_id", referencedColumnName="id", onDelete="CASCADE")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")}
@@ -102,6 +106,7 @@ class OfficialResponse implements EntityInterface, \Stringable
         if (!$author) {
             return false;
         }
+
         /** @var OfficialResponseAuthor $officialResponseAuthor */
         foreach ($this->authors as $officialResponseAuthor) {
             if ($officialResponseAuthor->getAuthor() === $author) {

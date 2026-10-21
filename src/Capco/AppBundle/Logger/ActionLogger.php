@@ -21,11 +21,10 @@ class ActionLogger
         private readonly RequestGuesser $requestGuesser,
         private readonly LoggerInterface $logger,
         private readonly RequestStack $requestStack,
-    ) {
-    }
+    ) {}
 
     public function logGraphQLMutation(
-        User|Organization|null $user,
+        null|Organization|User $user,
         string $actionType,
         ?string $description = null,
         ?string $entityType = null,
@@ -41,7 +40,7 @@ class ActionLogger
     }
 
     public function logGraphQLQuery(
-        User|Organization|null $user,
+        null|Organization|User $user,
         Argument $args,
         string $actionType,
         ?string $description = null,
@@ -65,7 +64,7 @@ class ActionLogger
     }
 
     public function logExport(
-        User|Organization $user,
+        Organization|User $user,
         string $description
     ): bool {
         return $this->log(
@@ -76,7 +75,7 @@ class ActionLogger
     }
 
     public function log(
-        User|Organization|null $user,
+        null|Organization|User $user,
         string $actionType,
         string $description,
         ?string $entityType = null,

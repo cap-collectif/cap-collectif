@@ -373,13 +373,11 @@ class CRUDController extends AbstractSonataCrudController
     }
 
     /**
-     * @param $conditions
-     *
      * @return JsonResponse
      *                      Method from Sonata Admin HelperController used to fetch items in autocompletion.
      *                      Extended to allow additional conditions in query
      */
-    protected function retrieveAutocompleteItems(Request $request, $conditions = [])
+    protected function retrieveAutocompleteItems(Request $request, mixed $conditions = [])
     {
         $pool = $this->get('sonata.admin.pool');
         $admin = $pool->getInstance($request->get('admin_code'));

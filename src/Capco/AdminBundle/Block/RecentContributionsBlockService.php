@@ -31,9 +31,6 @@ class RecentContributionsBlockService extends AbstractBlockService
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function execute(
         BlockContextInterface $blockContext,
         ?Response $response = null
@@ -55,9 +52,6 @@ class RecentContributionsBlockService extends AbstractBlockService
         return 'recent_contributions';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureSettings(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -67,7 +61,5 @@ class RecentContributionsBlockService extends AbstractBlockService
         ]);
     }
 
-    public function validateBlock(ErrorElement $errorElement, BlockInterface $block)
-    {
-    }
+    public function validateBlock(ErrorElement $errorElement, BlockInterface $block) {}
 }

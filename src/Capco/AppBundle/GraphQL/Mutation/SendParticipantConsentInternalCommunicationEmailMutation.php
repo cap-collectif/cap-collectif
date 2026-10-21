@@ -26,13 +26,12 @@ class SendParticipantConsentInternalCommunicationEmailMutation implements Mutati
         private readonly ParticipantHelper $participantHelper,
         private readonly ParticipationCookieManager $participationCookieManager,
         private readonly EmailRateLimiter $emailRateLimiter
-    ) {
-    }
+    ) {}
 
     /**
-     * @throws ParticipantNotFoundException
-     *
      * @return array{'participant': Participant}
+     *
+     * @throws ParticipantNotFoundException
      */
     public function __invoke(Argument $input): array
     {

@@ -13,8 +13,7 @@ class DebateArticlesResolver implements QueryInterface
 {
     public function __construct(
         private readonly DebateArticleRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Debate $debate, Argument $args): ConnectionInterface
     {

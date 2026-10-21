@@ -29,8 +29,7 @@ abstract class AbstractEmailingCampaignMutation implements MutationInterface
         protected GlobalIdResolver $resolver,
         protected EntityManagerInterface $entityManager,
         protected AuthorizationCheckerInterface $authorizationChecker
-    ) {
-    }
+    ) {}
 
     protected function findCampaignFromGlobalId(string $globalId, User $viewer): ?EmailingCampaign
     {

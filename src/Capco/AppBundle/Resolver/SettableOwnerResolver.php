@@ -14,8 +14,7 @@ class SettableOwnerResolver
 
     public function __construct(
         private readonly GlobalIdResolver $resolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(?string $ownerId, User $viewer): Owner
     {

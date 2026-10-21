@@ -14,9 +14,11 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
 /**
  * @ORM\Table(name="organization_member",
  *   uniqueConstraints={
+ *
  *      @UniqueConstraint(name="member_unique_organization",columns={"user_id", "organization_id"}),
  *    }
  *  )
+ *
  * @ORM\Entity(repositoryClass=OrganizationMemberRepository::class)
  */
 class OrganizationMember implements EntityInterface
@@ -26,12 +28,14 @@ class OrganizationMember implements EntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Organization\Organization", inversedBy="members")
+     *
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     private Organization $organization;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="memberOfOrganizations")
+     *
      * @ORM\JoinColumn(name="user_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
     private User $user;

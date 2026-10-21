@@ -16,8 +16,7 @@ class ProjectProposalsResolver implements QueryInterface
     public function __construct(
         protected ProjectProposalsDataLoader $dataLoader,
         protected PromiseAdapterInterface $promiseAdapter
-    ) {
-    }
+    ) {}
 
     public function __invoke(Project $project, ?Arg $args = null, $viewer = null): Promise
     {
@@ -45,6 +44,7 @@ class ProjectProposalsResolver implements QueryInterface
 
         // We can consider nullable viewer for a reusable cache key.
         $viewer = null;
+
         // Null visibility will avoid private proposals
         return $this->dataLoader->load(compact('args', 'project', 'viewer'));
     }

@@ -42,8 +42,7 @@ class ProjectContributorResolver implements QueryInterface
         private readonly ProjectParticipantsTotalCountCacheHandler $projectParticipantsTotalCountCacheHandler,
         private readonly DebateAnonymousVoteRepository $debateAnonymousVoteRepository,
         private readonly QuestionnaireResultsAccessResolver $resultsAccess,
-    ) {
-    }
+    ) {}
 
     public function __invoke(Project $project, ?ResolveInfo $info = null, ?Arg $args = null, ?User $viewer = null, ?\ArrayObject $context = null): ConnectionInterface
     {

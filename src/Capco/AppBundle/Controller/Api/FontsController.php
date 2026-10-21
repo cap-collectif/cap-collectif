@@ -48,11 +48,11 @@ class FontsController extends AbstractController
         private readonly FontRepository $fontRepository,
         private readonly MediaUrlResolver $mediaUrlResolver,
         private readonly EntityManagerInterface $em
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/upload/fonts", name="upload_fonts", options={"i18n" = false})
+     *
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function postFontAction(Request $request): JsonResponse

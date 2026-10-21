@@ -14,8 +14,7 @@ class ExportProposalVoteGroupedDataTransformer
         private readonly TranslatorInterface $translator,
         private readonly CsvDataFormatter $csvDataFormatter,
         private readonly UserUrlResolver $userUrlResolver,
-    ) {
-    }
+    ) {}
 
     /**
      * @param array<string, mixed> $proposal

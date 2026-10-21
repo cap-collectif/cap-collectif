@@ -16,11 +16,10 @@ class CreateFooterSocialNetworkMutation implements MutationInterface
     public function __construct(
         private readonly FooterSocialNetworkRepository $footerSocialNetworkRepository,
         private readonly EntityManagerInterface $entityManager
-    ) {
-    }
+    ) {}
 
     /**
-     * @return array{footerSocialNetwork: FooterSocialNetwork|null, errorCode: string|null}
+     * @return array{footerSocialNetwork: null|FooterSocialNetwork, errorCode: null|string}
      */
     public function __invoke(Argument $input): array
     {

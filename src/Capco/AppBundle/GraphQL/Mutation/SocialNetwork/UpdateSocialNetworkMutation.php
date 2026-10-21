@@ -20,11 +20,10 @@ class UpdateSocialNetworkMutation implements MutationInterface
         private readonly EntityManagerInterface $entityManager,
         private readonly SocialNetworkRepository $socialNetworkRepository,
         private readonly MediaRepository $mediaRepository
-    ) {
-    }
+    ) {}
 
     /**
-     * @return array{socialNetwork?: SocialNetwork|null, errorCode?: string|null}
+     * @return array{socialNetwork?: null|SocialNetwork, errorCode?: null|string}
      */
     public function __invoke(Argument $input): array
     {

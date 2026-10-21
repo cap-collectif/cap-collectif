@@ -2,7 +2,6 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
-use ArrayIterator;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Project;
@@ -206,7 +205,7 @@ class AddProposalSmsVoteMutationSpec extends ObjectBehavior
             ->willReturn($proposal)
         ;
 
-        $participant->setLastContributedAt(Argument::type(\Datetime::class));
+        $participant->setLastContributedAt(Argument::type(\DateTime::class));
 
         $violationList->rewind()->shouldBeCalled();
         $violationList->valid()->willReturn(false);
@@ -483,7 +482,7 @@ class AddProposalSmsVoteMutationSpec extends ObjectBehavior
         ProposalForm $proposalForm,
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         Paginator $paginator,
-        ArrayIterator $arrayIterator,
+        \ArrayIterator $arrayIterator,
         ParticipantHelper $participantHelper,
         Participant $participant
     ) {

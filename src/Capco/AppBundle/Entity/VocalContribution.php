@@ -13,12 +13,15 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="vocal_contribution", indexes={
+ *
  *     @ORM\Index(name="idx_vocal_status_created", columns={"completion_status", "created_at"}),
  *     @ORM\Index(name="idx_vocal_user", columns={"user_id"}),
  *     @ORM\Index(name="idx_vocal_participant", columns={"participant_id"})
  * }, uniqueConstraints={
+ *
  *     @ORM\UniqueConstraint(name="uniq_vocal_media", columns={"media_id"})
  * })
+ *
  * @ORM\Entity(repositoryClass=VocalContributionRepository::class)
  */
 class VocalContribution implements EntityInterface
@@ -28,24 +31,28 @@ class VocalContribution implements EntityInterface
 
     /**
      * @Gedmo\Timestampable(on="create")
+     *
      * @ORM\Column(name="created_at", type="datetime")
      */
     private ?\DateTimeInterface $createdAt = null;
 
     /**
      * @ORM\OneToOne(targetEntity=Media::class)
+     *
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=false, onDelete="RESTRICT")
      */
     private Media $media;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private ?User $user = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=Participant::class)
+     *
      * @ORM\JoinColumn(name="participant_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private ?Participant $participant = null;

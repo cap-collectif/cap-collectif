@@ -56,8 +56,7 @@ class RegisterMutation implements MutationInterface
         private readonly EntityManagerInterface $em,
         private readonly RateLimiter $rateLimiter,
         private readonly RequestGuesserInterface $requestGuesser
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): array
     {

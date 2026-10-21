@@ -42,6 +42,7 @@ return RectorConfig::configure()
         ],
     ])
     ->withSets([
+        SetList::PHP_83,
         SetList::PHP_81,
         SetList::PHP_80,
         SetList::PHP_74,

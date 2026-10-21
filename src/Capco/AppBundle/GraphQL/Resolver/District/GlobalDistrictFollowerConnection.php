@@ -17,8 +17,7 @@ class GlobalDistrictFollowerConnection implements QueryInterface
         private readonly UserRepository $userRepository,
         private readonly LoggerInterface $logger,
         private readonly FollowerRepository $followerRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(GlobalDistrict $globalDistrict, Arg $args): Connection
     {

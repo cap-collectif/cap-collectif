@@ -20,8 +20,7 @@ abstract class AbstractProjectTabMutation
         protected readonly EntityManagerInterface $em,
         protected readonly GlobalIdResolver $globalIdResolver,
         protected readonly AuthorizationCheckerInterface $authorizationChecker
-    ) {
-    }
+    ) {}
 
     protected function getProject(string $projectId, ?User $viewer = null): ?Project
     {

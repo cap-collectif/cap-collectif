@@ -10,13 +10,16 @@ trait SluggableUpdatableTitleTrait
 {
     /**
      * @ORM\Column(name="title", type="string", length=255, nullable=false)
+     *
      * @Assert\NotBlank()
+     *
      * @Assert\Length(max=255)
      */
     protected $title;
 
     /**
      * @Gedmo\Slug(fields={"title"}, updatable=true, unique=true)
+     *
      * @ORM\Column(length=255)
      */
     protected $slug;

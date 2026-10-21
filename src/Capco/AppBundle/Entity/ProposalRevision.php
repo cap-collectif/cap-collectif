@@ -17,7 +17,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="proposal_revision")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalRevisionRepository")
+ *
  * @CapcoAssert\HasAuthor()
  */
 class ProposalRevision implements EntityInterface, Authorable
@@ -29,6 +31,7 @@ class ProposalRevision implements EntityInterface, Authorable
 
     /**
      * @ORM\Column(name="reason", type="text")
+     *
      * @Assert\NotNull()
      */
     private string $reason;
@@ -40,18 +43,21 @@ class ProposalRevision implements EntityInterface, Authorable
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private ?User $author = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="revisions")
+     *
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private Proposal $proposal;
 
     /**
      * @ORM\Column(name="expires_at", type="datetime")
+     *
      * @Assert\NotNull()
      */
     private \DateTimeInterface $expiresAt;

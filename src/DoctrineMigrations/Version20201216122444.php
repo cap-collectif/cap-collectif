@@ -21,20 +21,14 @@ final class Version20201216122444 extends AbstractMigration implements Container
         $this->manager = $this->container->get(Manager::class);
     }
 
-    public function up(Schema $schema): void
-    {
-    }
+    public function up(Schema $schema): void {}
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 
     public function postUp(Schema $schema): void
     {
         $this->manager->getToggleManager()->remove('user_invitations');
     }
 
-    public function postDown(Schema $schema): void
-    {
-    }
+    public function postDown(Schema $schema): void {}
 }

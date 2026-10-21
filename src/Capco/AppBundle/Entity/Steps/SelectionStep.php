@@ -29,6 +29,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SelectionStepRepository")
+ *
  * @CapcoAssert\VoteMin
  */
 class SelectionStep extends AbstractStep implements ParticipativeStepInterface, VotableStepInterface, DefaultStatusInterface, ProposalStepInterface
@@ -84,6 +85,7 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface, 
 
     /**
      * @var Collection<int, Selection>
+     *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Selection", mappedBy="selectionStep", cascade={"persist"}, orphanRemoval=true)
      */
     private Collection $selections;
@@ -95,12 +97,14 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface, 
 
     /**
      * @ORM\Column(name="default_sort", type="string", nullable=false)
+     *
      * @Assert\Choice(choices={"old","last","votes","least-votes","comments","random", "cheap", "expensive"})
      */
     private string $defaultSort = ProposalSort::RANDOM;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Status")
+     *
      * @ORM\JoinColumn(name="default_status_id", nullable=true, onDelete="SET NULL")
      */
     private ?Status $defaultStatus = null;
@@ -117,6 +121,7 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface, 
 
     /**
      * @var Collection<int, ProposalSelectionVote>
+     *
      * @ORM\OneToMany(targetEntity=ProposalSelectionVote::class, mappedBy="selectionStep")
      */
     private Collection $selectionVotes;

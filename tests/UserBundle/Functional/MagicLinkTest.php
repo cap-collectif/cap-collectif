@@ -11,9 +11,13 @@ use Gaufrette\File;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises account contracts through HTTP with fresh database reads, transactional cleanup and external boundary doubles.
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
  */
 final class MagicLinkTest extends AccountWebTestCase
@@ -126,7 +130,9 @@ final class MagicLinkTest extends AccountWebTestCase
     public static function invalidTokens(): iterable
     {
         yield 'expired' => ['expired'];
+
         yield 'invalid signature' => ['signature'];
+
         yield 'unknown account' => ['unknown'];
     }
 
@@ -155,8 +161,11 @@ final class MagicLinkTest extends AccountWebTestCase
     public static function accountStates(): iterable
     {
         yield 'disabled' => ['disabled'];
+
         yield 'locked' => ['locked'];
+
         yield 'unconfirmed' => ['unconfirmed'];
+
         yield 'deleted marker' => ['deleted'];
     }
 

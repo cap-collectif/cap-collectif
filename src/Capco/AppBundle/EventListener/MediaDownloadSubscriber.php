@@ -21,8 +21,7 @@ class MediaDownloadSubscriber implements EventSubscriberInterface
         private readonly MediaAccessResolver $access,
         private readonly ParticipantAuthentication $participantAuthentication,
         private readonly Security $security
-    ) {
-    }
+    ) {}
 
     public static function getSubscribedEvents(): array
     {

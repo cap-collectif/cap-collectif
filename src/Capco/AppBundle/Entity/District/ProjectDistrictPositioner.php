@@ -11,9 +11,11 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProjectDistrictPositionerRepository")
+ *
  * @ORM\Table(
  *  name="project_district_positioner",
  *  uniqueConstraints={
+ *
  *     @ORM\UniqueConstraint(
  *        name="project_district_position_unique",
  *        columns={"project_id", "district_id", "position"}

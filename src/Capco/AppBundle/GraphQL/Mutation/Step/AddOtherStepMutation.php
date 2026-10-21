@@ -14,8 +14,7 @@ class AddOtherStepMutation implements MutationInterface
 
     public function __construct(
         private readonly AddStepService $addStepService
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

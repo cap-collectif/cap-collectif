@@ -31,18 +31,20 @@ class CommentController extends Controller
         private readonly EntityManagerInterface $em,
         private readonly SessionInterface $session,
         private readonly Manager $manager
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/comments/{commentId}/edit", name="app_comment_edit")
+     *
      * @Template("@CapcoApp/Comment/update.html.twig")
+     *
      * @Entity("comment", class="CapcoAppBundle:Comment", options={"mapping" = {"commentId": "id"}, "repository_method"= "find", "map_method_signature" = true})
+     *
      * @Security("is_granted('ROLE_USER')")
      *
-     * @throws ProjectAccessDeniedException
-     *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @throws ProjectAccessDeniedException
      */
     public function updateCommentAction(Request $request, Comment $comment)
     {
@@ -91,13 +93,16 @@ class CommentController extends Controller
 
     /**
      * @Route("/comments/{commentId}/delete", name="app_comment_delete")
+     *
      * @Entity("comment", options={"mapping": {"commentId" : "id"}})
+     *
      * @Template("@CapcoApp/Comment/delete.html.twig")
+     *
      * @Security("is_granted('ROLE_USER')")
      *
-     * @throws ProjectAccessDeniedException
-     *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @throws ProjectAccessDeniedException
      */
     public function deleteCommentAction(Request $request, Comment $comment)
     {
@@ -112,7 +117,7 @@ class CommentController extends Controller
             throw new ProjectAccessDeniedException($this->translator->trans('comment.error.not_author', [], 'CapcoAppBundle'));
         }
 
-        //Champ CSRF
+        // Champ CSRF
         $form = $this->createFormBuilder()->getForm();
 
         if ('POST' === $request->getMethod()) {

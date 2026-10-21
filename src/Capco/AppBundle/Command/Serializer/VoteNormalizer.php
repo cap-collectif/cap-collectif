@@ -32,6 +32,7 @@ class VoteNormalizer extends BaseNormalizer implements NormalizerInterface
         $variant = BaseNormalizer::getVariantFromContext($context);
         $isFullExport = ExportVariantsEnum::isFull($variant);
         $author = null;
+
         /** @var DebateAnonymousVote|DebateVote $object */
         if ($object instanceof DebateVote) {
             $author = $object->getUser();

@@ -2,6 +2,4 @@
 
 namespace Capco\AppBundle\Command\Service\ExportInterface;
 
-interface ExportableDebateContributionInterface extends ExportableContributionInterface
-{
-}
+interface ExportableDebateContributionInterface extends ExportableContributionInterface {}

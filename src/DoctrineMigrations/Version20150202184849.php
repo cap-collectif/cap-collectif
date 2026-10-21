@@ -19,17 +19,11 @@ class Version20150202184849 extends AbstractMigration implements ContainerAwareI
         $this->container = $container;
     }
 
-    public function up(Schema $schema): void
-    {
-    }
+    public function up(Schema $schema): void {}
 
-    public function postUp(Schema $schema): void
-    {
-    }
+    public function postUp(Schema $schema): void {}
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 
     public function postDown(Schema $schema): void
     {

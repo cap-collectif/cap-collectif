@@ -18,6 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     name="debate",
  *     uniqueConstraints={}
  * )
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\DebateRepository")
  */
 class Debate implements EntityInterface
@@ -41,6 +42,7 @@ class Debate implements EntityInterface
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\DebateStep", inversedBy="debate", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     private $step;

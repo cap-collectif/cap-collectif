@@ -15,8 +15,7 @@ class OpinionUrlResolver implements QueryInterface
         private readonly ConsultationStepRepository $consultationStepRepository,
         private readonly RouterInterface $router,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Opinion $contribution): string
     {

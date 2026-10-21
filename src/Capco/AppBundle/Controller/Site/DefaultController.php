@@ -81,6 +81,7 @@ class DefaultController extends AbstractController
 
     /**
      * @Route("/cookies-page", name="app_cookies")
+     *
      * @Template("@CapcoApp/Default/cookies.html.twig")
      */
     public function cookiesAction(
@@ -102,6 +103,7 @@ class DefaultController extends AbstractController
 
     /**
      * @Route("/privacy", name="app_privacy")
+     *
      * @Template("@CapcoApp/Default/privacyPolicy.html.twig")
      */
     public function privacyPolicyAction(
@@ -125,6 +127,7 @@ class DefaultController extends AbstractController
 
     /**
      * @Route("/legal", name="app_legal")
+     *
      * @Template("@CapcoApp/Default/legalMentions.html.twig")
      */
     public function legalMentionsAction(

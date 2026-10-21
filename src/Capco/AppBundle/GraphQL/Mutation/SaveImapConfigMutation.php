@@ -34,13 +34,12 @@ class SaveImapConfigMutation implements MutationInterface
         private readonly FormFactoryInterface $formFactory,
         private readonly EntityManagerInterface $em,
         private readonly AuthorizationCheckerInterface $authorizationChecker
-    ) {
-    }
+    ) {}
 
     /**
-     * @throws \Exception
+     * @return array{errorCode: null|int|string, imapConfig?: null|object}
      *
-     * @return array{errorCode: int|string|null, imapConfig?: object|null}
+     * @throws \Exception
      */
     public function __invoke(string $serverUrl, string $folder, string $email, string $password, string $stepId, ?string $id): array
     {

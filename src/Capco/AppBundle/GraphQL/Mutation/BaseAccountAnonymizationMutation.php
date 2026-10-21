@@ -173,15 +173,13 @@ abstract class BaseAccountAnonymizationMutation extends BaseDeleteMutation
             && $proposal->getStep()->canContribute($user)
         ) {
             foreach (
-                $this->proposalEvaluationRepository->findBy(['proposal' => $proposal->getId()])
-                as $evaluation
+                $this->proposalEvaluationRepository->findBy(['proposal' => $proposal->getId()]) as $evaluation
             ) {
                 $this->em->remove($evaluation);
             }
 
             foreach (
-                $this->abstractResponseRepository->findBy(['proposal' => $proposal->getId()])
-                as $response
+                $this->abstractResponseRepository->findBy(['proposal' => $proposal->getId()]) as $response
             ) {
                 $this->em->remove($response);
             }
@@ -239,6 +237,7 @@ abstract class BaseAccountAnonymizationMutation extends BaseDeleteMutation
     {
         $valueResponses = $this->valueResponseRepository->findBy(['proposal' => $proposal]);
         $mediaResponses = $this->mediaResponseRepository->findBy(['proposal' => $proposal]);
+
         /** @var Reply $reply */
         foreach ($valueResponses as $reply) {
             $reply->setValue($deletedBodyText);

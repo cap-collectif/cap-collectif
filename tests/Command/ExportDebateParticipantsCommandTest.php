@@ -6,8 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Uses shared export paths without failure-safe final cleanup; fixture changes, where used,
  * are restored only after successful assertions.
  */

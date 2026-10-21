@@ -39,8 +39,7 @@ class AnalyseProposalAnalysisMutation implements MutationInterface
         private readonly EntityManagerInterface $entityManager,
         private readonly FormFactoryInterface $formFactory,
         private readonly Publisher $publisher
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args, $viewer)
     {
@@ -54,6 +53,7 @@ class AnalyseProposalAnalysisMutation implements MutationInterface
         ];
 
         $proposalId = GlobalId::fromGlobalId($proposalId)['id'];
+
         /** @var Proposal $proposal */
         $proposal = $this->proposalRepository->find($proposalId);
         if (!$proposal) {

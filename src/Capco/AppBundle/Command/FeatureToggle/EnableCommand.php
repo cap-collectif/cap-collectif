@@ -171,7 +171,7 @@ class EnableCommand extends Command
     private function activateSpecificFeatures(string $fileName, OutputInterface $output, SymfonyStyle $style): int
     {
         if (!str_ends_with($fileName, '.json')) {
-            $fileName = $fileName . '.json';
+            $fileName .= '.json';
         }
 
         $fs = new Filesystem();

@@ -13,8 +13,7 @@ class EventDistrictsResolver implements QueryInterface
 {
     public function __construct(
         private readonly GlobalDistrictRepository $globalDistrictRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(
         Event $event,

@@ -9,7 +9,9 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Checks public domain rules with real entities and observable results, without framework interaction counts.
  */
 class DebateAnonymousParticipationHashEncoderTest extends TestCase

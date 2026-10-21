@@ -10,8 +10,7 @@ class HasUnlistedEmailValidator extends ConstraintValidator
 {
     public function __construct(
         private readonly EntityManagerInterface $entityManager
-    ) {
-    }
+    ) {}
 
     public function validate($value, Constraint $constraint)
     {

@@ -14,8 +14,7 @@ class DebateViewerUnpublishedArgumentResolver implements QueryInterface
 
     public function __construct(
         private readonly DebateArgumentRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Debate $debate, $viewer): ?DebateArgument
     {

@@ -18,8 +18,7 @@ class ProjectSearchType extends AbstractType
 {
     public function __construct(
         private readonly Manager $toggleManager
-    ) {
-    }
+    ) {}
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

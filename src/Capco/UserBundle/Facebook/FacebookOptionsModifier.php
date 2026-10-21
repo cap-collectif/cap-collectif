@@ -16,8 +16,7 @@ class FacebookOptionsModifier implements OptionsModifierInterface
         protected FacebookSSOConfigurationRepository $repository,
         protected RedisCache $redisCache,
         protected Manager $toggleManager
-    ) {
-    }
+    ) {}
 
     public function modifyOptions(array $options, ResourceOwnerInterface $resourceOwner): array
     {

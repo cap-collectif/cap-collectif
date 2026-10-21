@@ -42,8 +42,7 @@ class MagicLinkController extends AbstractController
         private readonly ProposalReconcillier $proposalReconcillier,
         private readonly VocalContributionReconcilier $vocalContributionReconcilier,
         private readonly ParticipantPhoneVerificationSmsRepository $participantPhoneVerificationSmsRepository
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/magic-link/{token}", name="capco_magic_link", methods={"GET"}, options={"i18n" = false})

@@ -39,12 +39,13 @@ class SettingsController extends Controller
         private readonly SiteColorRepository $siteColorRepository,
         private readonly Manager $manager,
         private readonly TranslatorInterface $translator
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/admin/settings/pages.registration/list", name="capco_admin_settings_registration")
+     *
      * @Template("@CapcoAdmin/Settings/registration.html.twig")
+     *
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function registrationAction(Request $request): array
@@ -59,7 +60,9 @@ class SettingsController extends Controller
 
     /**
      * @Route("/admin/settings/pages.shield/list", name="capco_admin_settings_shield")
+     *
      * @Template("@CapcoAdmin/Settings/shield.html.twig")
+     *
      * @Security("is_granted('ROLE_ADMIN')")
      *
      * @deprecated Replace by our NextJs router so this is not used anymore
@@ -76,6 +79,7 @@ class SettingsController extends Controller
 
     /**
      * @Route("/admin/settings/{category}/list", name="capco_admin_settings")
+     *
      * @Template("@CapcoAdmin/Settings/list.html.twig")
      */
     public function listAction(Request $request, mixed $category)
@@ -119,6 +123,7 @@ class SettingsController extends Controller
 
     /**
      * @Route("/admin/features/{toggle}/switch", name="capco_admin_feature_switch")
+     *
      * @Template()
      *
      * TODO this is a security breach (GET request), delete me when we rebuild features page.

@@ -162,8 +162,7 @@ class GlobalIdResolver
         private readonly RequestStack $requestStack,
         private readonly ParticipantHelper $participantHelper,
         private readonly QuestionnaireResultsAccessResolver $resultsAccess
-    ) {
-    }
+    ) {}
 
     public function resolve(string $uuidOrGlobalId, $userOrAnon = null, ?\ArrayObject $context = null)
     {

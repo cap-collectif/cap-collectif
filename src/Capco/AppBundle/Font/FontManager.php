@@ -13,8 +13,7 @@ class FontManager
         private readonly FontRepository $repository,
         private readonly EntityManagerInterface $em,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function deleteFont(Font $toDelete): void
     {

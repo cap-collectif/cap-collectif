@@ -12,8 +12,7 @@ class EventParticipantConnectionEdgeRegisteredAnonymouslyResolver implements Que
 {
     public function __construct(
         private readonly EventRegistrationRepository $eventRegistrationRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Edge $edge): bool
     {

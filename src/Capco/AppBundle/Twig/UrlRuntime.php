@@ -31,6 +31,7 @@ class UrlRuntime implements RuntimeExtensionInterface
         if (!$string) {
             return '';
         }
+
         // We replace `pattern` by italic format (<i>pattern</i>)
         return preg_replace('/(`(.*?)`)/', '<i>\\2</i>', $string);
     }

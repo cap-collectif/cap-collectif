@@ -13,12 +13,10 @@ class CommitCustomCodeVersionMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly CustomCodeVersioningService $customCodeVersioning)
-    {
-    }
+    public function __construct(private readonly CustomCodeVersioningService $customCodeVersioning) {}
 
     /**
-     * @return array{errorCode?: string|null, customCode?: array<string, mixed>|null, version?: array<string, mixed>|null}
+     * @return array{errorCode?: null|string, customCode?: null|array<string, mixed>, version?: null|array<string, mixed>}
      */
     public function __invoke(Argument $input, ?User $viewer = null): array
     {

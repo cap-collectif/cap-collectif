@@ -53,8 +53,7 @@ class CreateProjectMutation implements MutationInterface
         private readonly Indexer $indexer,
         private readonly ActionLogger $actionLogger,
         private readonly SluggerInterface $slugger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

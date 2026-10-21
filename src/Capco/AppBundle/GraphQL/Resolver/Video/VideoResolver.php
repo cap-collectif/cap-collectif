@@ -11,8 +11,7 @@ class VideoResolver implements QueryInterface
 {
     public function __construct(
         private readonly VideoRepository $videoRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): ?Video
     {

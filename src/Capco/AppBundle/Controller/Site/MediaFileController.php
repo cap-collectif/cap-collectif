@@ -8,9 +8,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class MediaFileController extends AbstractController
 {
-    public function __construct(private readonly string $projectDir)
-    {
-    }
+    public function __construct(private readonly string $projectDir) {}
 
     public function __invoke(string $path): BinaryFileResponse
     {

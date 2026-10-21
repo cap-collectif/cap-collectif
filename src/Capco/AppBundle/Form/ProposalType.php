@@ -24,8 +24,7 @@ class ProposalType extends AbstractType
 {
     public function __construct(
         protected Manager $toggleManager
-    ) {
-    }
+    ) {}
 
     /**
      * @param FormBuilderInterface<Proposal> $builder
@@ -36,6 +35,7 @@ class ProposalType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $isDraft = $builder->getData()->isDraft();
+
         /** @var ?ProposalForm $form */
         $form = $options['proposalForm'];
         if (!$form) {

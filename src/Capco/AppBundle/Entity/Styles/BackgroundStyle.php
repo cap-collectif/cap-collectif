@@ -7,6 +7,4 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  */
-class BackgroundStyle extends AbstractStyle
-{
-}
+class BackgroundStyle extends AbstractStyle {}

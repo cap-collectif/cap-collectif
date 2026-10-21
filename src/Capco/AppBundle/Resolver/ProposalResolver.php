@@ -47,6 +47,7 @@ class ProposalResolver
     {
         $proposalFollowers = $proposal->getFollowers();
         $followers = [];
+
         /** @var Follower $follower */
         foreach ($proposalFollowers as $key => $follower) {
             $userFollower = $follower->getUser();

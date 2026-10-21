@@ -19,8 +19,7 @@ class TokenManager
         private readonly ActionTokenRepository $repository,
         private readonly LoggerInterface $logger,
         private readonly RequestGuesserInterface $requestGuesser
-    ) {
-    }
+    ) {}
 
     public function consumeVoteToken(DebateVoteToken $voteToken, string $value): DebateVote
     {

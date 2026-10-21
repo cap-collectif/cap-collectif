@@ -23,8 +23,7 @@ class OpenIDLogoutHandler implements LogoutHandlerInterface
         private readonly AbstractSSOConfigurationRepository $repository,
         private readonly EntityManagerInterface $em,
         private readonly string $instanceName
-    ) {
-    }
+    ) {}
 
     public function handle(
         RedirectResponseWithRequestInterface $responseWithRequest

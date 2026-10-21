@@ -20,8 +20,7 @@ class StepRequirementsResolver implements QueryInterface
         private readonly RequirementRepository $repository,
         private readonly ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver,
         private readonly ConnectionBuilderInterface $builder
-    ) {
-    }
+    ) {}
 
     public function __invoke(
         AbstractStep $step,

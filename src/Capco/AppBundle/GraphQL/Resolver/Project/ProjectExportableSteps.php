@@ -13,8 +13,7 @@ class ProjectExportableSteps implements QueryInterface
     public function __construct(
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly ProjectRepository $projectRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Project $project): array
     {

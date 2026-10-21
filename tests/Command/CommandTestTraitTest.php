@@ -7,8 +7,11 @@ use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Checks export directory preparation and cleanup with an isolated temporary directory.
  */
 final class CommandTestTraitTest extends KernelTestCase

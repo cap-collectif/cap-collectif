@@ -16,8 +16,7 @@ class EventDistrictsPersister
         private readonly EventDistrictPositionerRepository $districtPositionerRepository,
         private readonly GlobalDistrictRepository $globalDistrictRepository,
         private readonly EntityManagerInterface $em
-    ) {
-    }
+    ) {}
 
     public function persist(array $districtsIds, Event $event)
     {

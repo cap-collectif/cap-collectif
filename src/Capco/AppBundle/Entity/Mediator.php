@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="mediator")
+ *
  * @ORM\Entity(repositoryClass=MediatorRepository::class)
  */
 class Mediator implements EntityInterface
@@ -21,12 +22,14 @@ class Mediator implements EntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="mediators")
+     *
      * @ORM\JoinColumn(nullable=false, name="user_id", referencedColumnName="id")
      */
     private User $user;
 
     /**
      * @ORM\ManyToOne(targetEntity=AbstractStep::class, inversedBy="mediators")
+     *
      * @ORM\JoinColumn(nullable=false, name="step_id", referencedColumnName="id")
      */
     private AbstractStep $step;

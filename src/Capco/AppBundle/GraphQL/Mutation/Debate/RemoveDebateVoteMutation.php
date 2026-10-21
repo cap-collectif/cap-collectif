@@ -34,8 +34,7 @@ class RemoveDebateVoteMutation implements MutationInterface
         private readonly DebateVoteRepository $voteRepository,
         private readonly DebateArgumentRepository $argumentRepository,
         private readonly Indexer $indexer
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $viewer): array
     {

@@ -23,11 +23,10 @@ class UpdateHttpRedirectMutation implements MutationInterface
         private readonly HttpRedirectRepository $httpRedirectRepository,
         private readonly HttpRedirectUrlNormalizer $urlNormalizer,
         private readonly HttpRedirectCacheInvalidator $httpRedirectCacheInvalidator
-    ) {
-    }
+    ) {}
 
     /**
-     * @return array{redirect?: HttpRedirect|null, errorCode?: string|null}
+     * @return array{redirect?: null|HttpRedirect, errorCode?: null|string}
      */
     public function __invoke(Argument $input): array
     {

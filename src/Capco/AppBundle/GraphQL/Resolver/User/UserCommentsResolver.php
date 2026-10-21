@@ -14,8 +14,7 @@ class UserCommentsResolver implements QueryInterface
 {
     public function __construct(
         private readonly CommentSearch $commentSearch
-    ) {
-    }
+    ) {}
 
     public function __invoke(
         $viewer,

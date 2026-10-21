@@ -14,7 +14,9 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Vocal reconciliation preserves the contribution data while transferring ownership.
  */
 final class VocalContributionReconcilierTest extends TestCase

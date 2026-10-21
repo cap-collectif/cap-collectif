@@ -235,7 +235,7 @@ class ProposalNotifier extends BaseNotifier
                 ),
                 'date' => $date,
                 'timezone' => $this->siteParams->getValue('global.timezone'),
-                'locale' => $this->siteParams->getDefaultLocale(), //todo replace by author locale
+                'locale' => $this->siteParams->getDefaultLocale(), // todo replace by author locale
             ],
             $proposal->getAuthor()
         );

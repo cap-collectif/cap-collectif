@@ -38,8 +38,7 @@ class AskProposalRevisionMutation implements MutationInterface
         private readonly LoggerInterface $logger,
         private readonly Publisher $publisher,
         private readonly Indexer $indexer
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $viewer): array
     {
@@ -47,6 +46,7 @@ class AskProposalRevisionMutation implements MutationInterface
         $this->preventNullableViewer($viewer);
 
         $proposalId = $input->offsetGet('proposalId');
+
         /** @var Proposal $proposal */
         $proposal = $this->globalIdResolver->resolve($proposalId, $viewer);
 

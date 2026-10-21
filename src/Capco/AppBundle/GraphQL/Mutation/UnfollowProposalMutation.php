@@ -26,8 +26,7 @@ class UnfollowProposalMutation implements MutationInterface
         private readonly ProposalViewerIsFollowingDataLoader $viewerFollowDataLoader,
         private readonly ProposalViewerFollowingConfigurationDataLoader $viewerFollowingConfigDataLoader,
         private readonly GlobalIdResolver $globalIdResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args, User $user): array
     {

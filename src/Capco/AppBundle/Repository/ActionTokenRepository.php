@@ -37,9 +37,9 @@ class ActionTokenRepository extends EntityRepository
     /**
      * @param EmailCampaignRecipient[] $users
      *
-     * @throws DBALException
-     *
      * @return array<int|string, array<string, bool|string>>
+     *
+     * @throws DBALException
      */
     public function getUnsubscribeTokensFromRecipients(array $users): array
     {

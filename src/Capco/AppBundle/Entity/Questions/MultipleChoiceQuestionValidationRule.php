@@ -21,20 +21,20 @@ final class MultipleChoiceQuestionValidationRule
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     *
      * @Assert\Choice(choices={"min", "max", "equal"})
      */
     private $type;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     *
      * @Assert\Range(min=1)
      */
     private $number;
 
     // Private constructor to ensure objects immutability
-    private function __construct()
-    {
-    }
+    private function __construct() {}
 
     public static function create(?string $type = null, ?int $number = null): self
     {

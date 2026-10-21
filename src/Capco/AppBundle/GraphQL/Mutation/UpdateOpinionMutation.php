@@ -30,8 +30,7 @@ class UpdateOpinionMutation implements MutationInterface
         private readonly EntityManagerInterface $em,
         private readonly OpinionRepository $opinionRepository,
         private readonly Publisher $publisher
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $viewer): array
     {

@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Ci\Infrastructures;
 
+use Castor\Attribute\AsTask;
+
 use function Capco\Castor\Infrastructures\build as sharedBuild;
 use function Capco\Castor\Infrastructures\up as sharedUp;
-use Castor\Attribute\AsTask;
 
 #[AsTask(description: 'Build CI Docker services.')]
 function build(bool $noCache = false): void

@@ -409,7 +409,7 @@ class ExportConsultationGroupedCommand extends BaseExportCommand
      *
      * @return array<string, mixed>
      */
-    private function setOpinionVoteData(array $opinionArray, OpinionVote|OpinionVersionVote $contribution): array
+    private function setOpinionVoteData(array $opinionArray, OpinionVersionVote|OpinionVote $contribution): array
     {
         $voteTypesLabels = $contribution instanceof OpinionVersionVote
             ? OpinionVersionVote::$voteTypesLabels
@@ -478,6 +478,7 @@ class ExportConsultationGroupedCommand extends BaseExportCommand
         );
 
         $contributions = [[$opinion], $opinionVotes, $opinionArguments];
+
         /** @var array<Argument|Opinion|OpinionVersion|OpinionVersionVote|OpinionVote> $allContributions */
         $allContributions = [$opinion, ...$opinionVotes, ...$opinionArguments];
         foreach ($opinionVersions as $opinionVersion) {

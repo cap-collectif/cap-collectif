@@ -3,6 +3,4 @@
 namespace Capco\AdminBundle\Admin;
 
 // Class SelectionStepAdmin.
-class SelectionStepAdmin extends StepAdmin
-{
-}
+class SelectionStepAdmin extends StepAdmin {}

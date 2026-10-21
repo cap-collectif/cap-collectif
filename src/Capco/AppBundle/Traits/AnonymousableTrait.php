@@ -9,6 +9,7 @@ trait AnonymousableTrait
 {
     /**
      * @ORM\Column(name="ip_address", type="string", nullable=true)
+     *
      * @Assert\Ip(version="all")
      */
     protected $ipAddress;
@@ -20,6 +21,7 @@ trait AnonymousableTrait
 
     /**
      * @ORM\Column(name="email", type="string", length=255, nullable=true)
+     *
      * @Assert\Email()
      */
     private $email;

@@ -12,6 +12,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  * @method null|Media findOneBy(array $criteria, array $orderBy = null)
  * @method Media[]    findAll()
  * @method Media[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
  * @extends EntityRepository<Media>
  */
 class MediaRepository extends EntityRepository

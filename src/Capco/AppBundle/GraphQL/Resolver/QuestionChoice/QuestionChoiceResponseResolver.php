@@ -19,8 +19,7 @@ class QuestionChoiceResponseResolver implements QueryInterface
         private readonly ResponseSearch $responseSearch,
         private readonly LoggerInterface $logger,
         private readonly QuestionnaireResultsAccessResolver $resultsAccess
-    ) {
-    }
+    ) {}
 
     public function __invoke(QuestionChoice $questionChoice, Arg $args, ?User $viewer = null, ?\ArrayObject $context = null): ConnectionInterface
     {

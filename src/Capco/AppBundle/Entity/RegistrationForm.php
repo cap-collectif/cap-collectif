@@ -14,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="registration_form")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\RegistrationFormRepository")
  */
 class RegistrationForm implements EntityInterface, QuestionnableForm, TranslatableInterface
@@ -23,6 +24,7 @@ class RegistrationForm implements EntityInterface, QuestionnableForm, Translatab
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion", mappedBy="registrationForm", cascade={"persist", "remove"}, orphanRemoval=true)
+     *
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $questions;

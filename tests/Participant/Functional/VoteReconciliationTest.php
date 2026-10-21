@@ -17,9 +17,13 @@ use Capco\UserBundle\Entity\User;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason HTTP reconciliation verifies persisted ballots and replay; indexation is replaced at its external boundary.
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
  */
 final class VoteReconciliationTest extends ParticipantWebTestCase
@@ -42,6 +46,7 @@ final class VoteReconciliationTest extends ParticipantWebTestCase
         $step = $this->em->find($step::class, $step->getId());
         $target = $this->em->find($target::class, $targetId);
         self::assertNull($this->em->find(Participant::class, $sourceId));
+
         /** @var ProposalCollectVoteRepository|ProposalSelectionVoteRepository $repository */
         $repository = $this->em->getRepository($votes[0]::class);
         $criteria = ['collect' === $type ? 'collectStep' : 'selectionStep' => $step];
@@ -53,6 +58,7 @@ final class VoteReconciliationTest extends ParticipantWebTestCase
         foreach ($proposals as $index => $proposal) {
             self::assertSame($titles[$index], $this->em->find(Proposal::class, $proposal->getId())->getTitle());
         }
+
         /** @var list<ProposalCollectVote|ProposalSelectionVote> $persistedVotes */
         $persistedVotes = $repository->findBy($targetCriteria);
         $actualProposals = array_map(static fn (AbstractVote $vote) => $vote->getProposal()->getId(), $persistedVotes);
@@ -76,6 +82,7 @@ final class VoteReconciliationTest extends ParticipantWebTestCase
             self::assertSame('PHONE_ALREADY_CONFIRMED', $replay['data']['verifyParticipantPhoneNumber']['errorCode']);
         }
         $this->em->clear();
+
         /** @var list<ProposalCollectVote|ProposalSelectionVote> $replayedVotes */
         $replayedVotes = $repository->findBy($targetCriteria);
         $replayedIds = array_map(static fn (AbstractVote $vote) => $vote->getId(), $replayedVotes);
@@ -99,6 +106,7 @@ final class VoteReconciliationTest extends ParticipantWebTestCase
         self::assertSame('Internal server Error', $result['errors'][0]['message']);
         self::assertNull($result['data']['verifyParticipantPhoneNumber']);
         $this->em->clear();
+
         /** @var ProposalCollectVoteRepository|ProposalSelectionVoteRepository $repository */
         $repository = $this->em->getRepository($votes[0]::class);
         // The workflow reports failure after deleting the duplicate; it does not roll back SQL.
@@ -119,6 +127,7 @@ final class VoteReconciliationTest extends ParticipantWebTestCase
     {
         foreach (['collect', 'selection'] as $type) {
             yield $type . ' to user' => [$type, true];
+
             yield $type . ' to participant' => [$type, false];
         }
     }
@@ -135,7 +144,7 @@ final class VoteReconciliationTest extends ParticipantWebTestCase
         return $indexer;
     }
 
-    /** @return array{CollectStep|SelectionStep, Participant, User|Participant, list<ProposalCollectVote|ProposalSelectionVote>, list<Proposal>} */
+    /** @return array{CollectStep|SelectionStep, Participant, Participant|User, list<ProposalCollectVote|ProposalSelectionVote>, list<Proposal>} */
     private function ballots(string $type, bool $toUser): array
     {
         $email = $this->uniqueEmail();
@@ -153,6 +162,7 @@ final class VoteReconciliationTest extends ParticipantWebTestCase
             $step->removeRequirement($requirement);
         }
         $step->addRequirement((new Requirement())->setType(Requirement::EMAIL_VERIFIED)->setPosition(0));
+
         /** @var list<Proposal> $proposals */
         $proposals = $this->em->getRepository(Proposal::class)->findBy(['id' => ['proposal1', 'proposal2', 'proposal3']], ['id' => 'ASC']);
         self::assertCount(3, $proposals);

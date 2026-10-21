@@ -10,8 +10,7 @@ class EventIsCompleteAndRegistrationPossibleResolver implements QueryInterface
 {
     public function __construct(
         protected EventHelper $helper
-    ) {
-    }
+    ) {}
 
     public function __invoke(Event $event): bool
     {

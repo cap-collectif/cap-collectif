@@ -17,8 +17,11 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Invokes GraphQL mutations directly with mocked dependencies instead of verifying the HTTP
  * contract and persisted effects.
  */
@@ -26,12 +29,12 @@ class UpdatePrivacySettingMutationTest extends TestCase
 {
     private const DEFAULT_LOCALE = 'fr-FR';
 
-    private SiteParameterRepository & MockObject $repository;
-    private LocaleRepository & MockObject $localeRepository;
-    private EntityManagerInterface & MockObject $entityManager;
-    private ObjectRepository & MockObject $translationRepository;
-    private UpdateSiteParameterMutation & MockObject $cacheInvalidator;
-    private Manager & MockObject $toggleManager;
+    private MockObject&SiteParameterRepository $repository;
+    private LocaleRepository&MockObject $localeRepository;
+    private EntityManagerInterface&MockObject $entityManager;
+    private MockObject&ObjectRepository $translationRepository;
+    private MockObject&UpdateSiteParameterMutation $cacheInvalidator;
+    private Manager&MockObject $toggleManager;
 
     protected function setUp(): void
     {
@@ -152,8 +155,11 @@ class UpdatePrivacySettingMutationTest extends TestCase
     public static function emptiedValueProvider(): iterable
     {
         yield 'blank string' => ['   '];
+
         yield 'cleared rich text editor' => ['<p><br></p>'];
+
         yield 'cleared rich text editor with self-closing br' => ['<p><br /></p>'];
+
         yield 'non-breaking space entity' => ['&nbsp;'];
     }
 

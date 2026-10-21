@@ -13,8 +13,7 @@ class UserResponsesResolver implements QueryInterface
 
     public function __construct(
         private readonly ConnectionBuilderInterface $builder
-    ) {
-    }
+    ) {}
 
     public function __invoke(User $user, $viewer, \ArrayObject $context)
     {

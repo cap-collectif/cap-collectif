@@ -30,9 +30,6 @@ class IsSocialNetworkUrl extends Constraint
         return 'social_network';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRequiredOptions()
     {
         return ['social_network'];

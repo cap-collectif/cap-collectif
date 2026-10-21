@@ -21,8 +21,7 @@ class UpdateHomePageProjectsMapSectionConfigurationMutation implements MutationI
         private readonly EntityManagerInterface $em,
         private readonly SectionRepository $sectionRepository,
         private readonly FormFactoryInterface $formFactory
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): array
     {

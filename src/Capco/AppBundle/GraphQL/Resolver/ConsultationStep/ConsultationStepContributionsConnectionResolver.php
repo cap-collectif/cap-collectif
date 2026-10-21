@@ -23,8 +23,7 @@ class ConsultationStepContributionsConnectionResolver implements QueryInterface
         private readonly SourceRepository $sourceRepository,
         private readonly ArgumentRepository $argumentRepository,
         private readonly OpinionVersionRepository $opinionVersionRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(
         ConsultationStep $consultationStep,

@@ -8,7 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+ *
  * @ORM\Table(name="media__gallery_media")
+ *
  * @ORM\HasLifecycleCallbacks
  */
 class GalleryHasMedia implements EntityInterface, \Stringable
@@ -28,7 +30,7 @@ class GalleryHasMedia implements EntityInterface, \Stringable
     /**
      * @ORM\Column(name="updated_at", type="datetime")
      */
-    private \Datetime $updatedAt;
+    private \DateTime $updatedAt;
 
     /**
      * @ORM\Column(name="created_at", type="datetime")
@@ -37,12 +39,14 @@ class GalleryHasMedia implements EntityInterface, \Stringable
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Gallery", inversedBy="galleryHasMedias")
+     *
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private Gallery $gallery;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media", inversedBy="galleryHasMedias")
+     *
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private Media $media;
@@ -93,12 +97,12 @@ class GalleryHasMedia implements EntityInterface, \Stringable
         return $this;
     }
 
-    public function getUpdatedAt(): \Datetime
+    public function getUpdatedAt(): \DateTime
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\Datetime $updatedAt): self
+    public function setUpdatedAt(\DateTime $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 

@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="opinion_modals")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionModalRepository")
  */
 class OpinionModal implements EntityInterface, HasDiffInterface
@@ -39,6 +40,7 @@ class OpinionModal implements EntityInterface, HasDiffInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="modals", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     private $opinion;

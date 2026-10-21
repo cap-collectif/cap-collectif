@@ -8,7 +8,9 @@ trait UuidTrait
 {
     /**
      * @ORM\Column(name="id", type="guid")
+     *
      * @ORM\Id
+     *
      * @ORM\GeneratedValue(strategy="UUID")
      */
     protected ?string $id = null;

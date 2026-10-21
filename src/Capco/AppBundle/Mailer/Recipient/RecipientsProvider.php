@@ -18,13 +18,12 @@ class RecipientsProvider
         private readonly ContributorsFetcher $contributorsFetcher,
         private readonly UserRepository $userRepository,
         private readonly MailingListUserRepository $mailingListUserRepository,
-    ) {
-    }
+    ) {}
 
     /**
-     * @throws DBALException
-     *
      * @return EmailCampaignRecipient[]
+     *
+     * @throws DBALException
      */
     public function getRecipients(
         EmailingCampaign $emailingCampaign,

@@ -12,7 +12,6 @@ use Capco\AppBundle\Repository\UserGroupRepository;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use Gedmo\Sluggable\SluggableListener;
 use Psr\Log\LoggerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -20,6 +19,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class UserAnonymizer
 {
     final public const CANNOT_DELETE_USER_PROFILE_IMAGE = 'Cannot delete user profile image !';
+
     /** @var array<string, array<int, object>> */
     private array $sluggableListeners = [];
 
@@ -33,8 +33,7 @@ class UserAnonymizer
         private readonly MediaRepository $mediaRepository,
         private readonly MailingListUserRepository $mailingListUserRepository,
         private readonly TranslatorInterface $translator
-    ) {
-    }
+    ) {}
 
     public function anonymize(User $user): void
     {
@@ -103,7 +102,7 @@ class UserAnonymizer
                 } catch (\Exception $e) {
                     $this->logger->error(__METHOD__ . ' : ' . $e->getMessage());
 
-                    throw new Exception(self::CANNOT_DELETE_USER_PROFILE_IMAGE);
+                    throw new \Exception(self::CANNOT_DELETE_USER_PROFILE_IMAGE);
                 }
             }
 

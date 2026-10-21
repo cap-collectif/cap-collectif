@@ -32,8 +32,7 @@ class AssignDecisionMakerToProposalsMutation implements MutationInterface
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly ProposalDecisionMakerRepository $proposalDecisionMakerRepository,
         private readonly Publisher $publisher
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $viewer): array
     {
@@ -82,6 +81,7 @@ class AssignDecisionMakerToProposalsMutation implements MutationInterface
     private function revokeDecisionMakerToProposals(array $proposals, Arg $input): array
     {
         $this->proposalDecisionMakerRepository->deleteByProposals($proposals);
+
         /** @var Proposal $proposal */
         foreach ($proposals as $proposal) {
             $proposal->removeDecisionMaker();

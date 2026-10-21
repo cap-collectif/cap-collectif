@@ -11,8 +11,7 @@ class LocaleSwitcherListener
 {
     public function __construct(
         private readonly Manager $toggleManager
-    ) {
-    }
+    ) {}
 
     public function onBlock(BlockEvent $event, $eventName)
     {

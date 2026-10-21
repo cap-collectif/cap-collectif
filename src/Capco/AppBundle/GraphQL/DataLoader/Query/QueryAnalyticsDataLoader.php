@@ -22,7 +22,6 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Search\AnalyticsSearch;
-use DateTimeInterface;
 use GraphQL\Error\UserError;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
@@ -72,7 +71,7 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
         $filters = $keys[0];
         [$start, $end, $projectId, $requestedFields, $topContributorsCount] = [
             new \DateTime($filters['startAt']),
-            (new \DateTime($filters['endAt'])),
+            new \DateTime($filters['endAt']),
             GlobalId::fromGlobalId($filters['projectId'])['id'],
             $filters['requestedFields'],
             $filters['topContributorsCount'],
@@ -204,8 +203,8 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
     protected function serializeKey($key): array
     {
         return [
-            'startAt' => (new \DateTime($key['startAt']))->format(DateTimeInterface::ATOM),
-            'endAt' => (new \DateTime($key['endAt']))->format(DateTimeInterface::ATOM),
+            'startAt' => (new \DateTime($key['startAt']))->format(\DateTimeInterface::ATOM),
+            'endAt' => (new \DateTime($key['endAt']))->format(\DateTimeInterface::ATOM),
             'projectId' => $key['projectId'],
             'requestedFields' => $key['requestedFields'],
             'topContributorsCount' => $key['topContributorsCount'],

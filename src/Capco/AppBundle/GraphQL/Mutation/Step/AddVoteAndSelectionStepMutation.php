@@ -18,12 +18,12 @@ class AddVoteAndSelectionStepMutation implements MutationInterface
     public function __construct(
         private readonly AddStepService $addStepService,
         private readonly EntityManagerInterface $em
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {
         $this->formatInput($input);
+
         /** * @var SelectionStep $step  */
         ['step' => $step] = $this->addStepService->addStep($input, $viewer, 'VOTE_AND_SELECTION');
 

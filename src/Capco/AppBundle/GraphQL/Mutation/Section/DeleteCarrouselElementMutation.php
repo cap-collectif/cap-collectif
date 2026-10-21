@@ -17,8 +17,7 @@ class DeleteCarrouselElementMutation implements MutationInterface
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
         private readonly GlobalIdResolver $globalIdResolver
-    ) {
-    }
+    ) {}
 
     /**
      * @return array<string, string>

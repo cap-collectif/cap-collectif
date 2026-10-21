@@ -50,8 +50,10 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         if (!$this->isValidReply($reply)) {
             return;
         }
+
         /** @var Questionnaire $questionnaire */
         $questionnaire = $reply->getQuestionnaire();
+
         /** @var QuestionnaireStep $questionnaireStep */
         $questionnaireStep = $questionnaire->getStep();
         if (!$reply->getPublishedAt()) {
@@ -147,6 +149,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
 
         /** @var Questionnaire $questionnaire */
         $questionnaire = $reply->getQuestionnaire();
+
         /** @var QuestionnaireStep $questionnaireStep */
         $questionnaireStep = $questionnaire->getStep();
 

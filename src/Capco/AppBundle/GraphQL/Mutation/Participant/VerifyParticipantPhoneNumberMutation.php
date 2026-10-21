@@ -57,7 +57,7 @@ class VerifyParticipantPhoneNumberMutation implements MutationInterface
     }
 
     /**
-     * @return array{'errorCode': string|null, 'participant': Participant|null, 'reconciliationMode': string}
+     * @return array{'errorCode': null|string, 'participant': null|Participant, 'reconciliationMode': string}
      */
     public function __invoke(Argument $input): array
     {

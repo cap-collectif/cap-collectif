@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=MailingListRepository::class)
+ *
  * @ORM\Table(name="mailing_list")
  */
 class MailingList implements EntityInterface, Ownerable, CreatableInterface
@@ -30,12 +31,14 @@ class MailingList implements EntityInterface, Ownerable, CreatableInterface
 
     /**
      * @var Collection<int, MailingListUser>
+     *
      * @ORM\OneToMany(targetEntity=MailingListUser::class, mappedBy="mailingList", cascade={"persist", "remove"})
      */
     private Collection $mailingListUsers;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Project")
+     *
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private ?Project $project;

@@ -25,8 +25,7 @@ class UnfollowGlobalDistrictMutation implements MutationInterface
         private readonly GlobalDistrictRepository $globalDistrictRepository,
         private readonly EntityManagerInterface $entityManager,
         private readonly FollowerRepository $followerRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $viewer): array
     {

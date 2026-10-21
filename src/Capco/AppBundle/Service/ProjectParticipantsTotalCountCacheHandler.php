@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Service;
 
 use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Entity\Project;
-use InvalidArgumentException;
 use Psr\Cache\CacheItemInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
@@ -15,8 +14,7 @@ class ProjectParticipantsTotalCountCacheHandler
     public function __construct(
         private readonly RedisCache $cache,
         private readonly KernelInterface $kernel
-    ) {
-    }
+    ) {}
 
     public function incrementTotalCount(Project $project, ?callable $conditionCallBack = null): void
     {
@@ -43,7 +41,7 @@ class ProjectParticipantsTotalCountCacheHandler
         if (null !== $conditionCallBack) {
             $result = $conditionCallBack($cachedTotalCount);
             if (!\is_bool($result)) {
-                throw new InvalidArgumentException('Callback must return a boolean.');
+                throw new \InvalidArgumentException('Callback must return a boolean.');
             }
             $condition = $result;
         }

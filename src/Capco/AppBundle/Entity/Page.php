@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="page")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\PageRepository")
  */
 class Page implements EntityInterface, SluggableInterface, TranslatableInterface, \Stringable
@@ -27,6 +28,7 @@ class Page implements EntityInterface, SluggableInterface, TranslatableInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="cover_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $cover;
@@ -48,6 +50,7 @@ class Page implements EntityInterface, SluggableInterface, TranslatableInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $media;

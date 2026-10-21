@@ -254,6 +254,8 @@ sur la branche sélectionnée :
   des spécifications Cypress ;
 - `tests` : tests PHP, Jest, PHPUnit, migrations, GraphQL et Cypress, sans les contrôles statiques ;
 - `full` : workflow complet `test-and-build`.
+- `build-prod` : préparation puis construction de l’image via `build-production-image`, sans
+  exécuter les autres jobs de validation ; ce profil est disponible pour les branches de pull request.
 
 Le workflow `test-and-build` se termine par le job `test-and-build-gate`, un job `no-op` qui
 réussit uniquement lorsque tous les jobs de validation du workflow ont réussi. Ce job doit être

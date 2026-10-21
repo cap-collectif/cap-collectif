@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
-use ArrayObject;
 use Capco\AppBundle\Repository\SourceRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -24,7 +23,7 @@ class UserSourcesResolver implements QueryInterface
         $viewer,
         User $user,
         ?Argument $args = null,
-        ?ArrayObject $context = null
+        ?\ArrayObject $context = null
     ): Connection {
         if (!$args) {
             $args = new Argument(['first' => 0]);

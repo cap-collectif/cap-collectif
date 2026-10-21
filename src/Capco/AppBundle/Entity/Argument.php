@@ -23,9 +23,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="argument", indexes={
+ *
  *     @ORM\Index(name="idx_author", columns={"id", "author_id"})
  * })
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ArgumentRepository")
+ *
  * @ORM\HasLifecycleCallbacks()
  */
 class Argument implements EntityInterface, Contribution, VotableInterface, Publishable, ReportableInterface, ExportableContributionInterface, \Stringable
@@ -57,30 +60,35 @@ class Argument implements EntityInterface, Contribution, VotableInterface, Publi
 
     /**
      * @Gedmo\Timestampable(on="create")
+     *
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"body"})
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
 
     /**
      * @ORM\Column(name="type", type="integer")
+     *
      * @Assert\Choice(choices={0, 1})
      */
     private $type = 1;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="arguments")
+     *
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private $author;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="arguments", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $opinion;
@@ -88,6 +96,7 @@ class Argument implements EntityInterface, Contribution, VotableInterface, Publi
     // ONE OF opinion or opinionVersion : should be in separate classes TODO
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionVersion", inversedBy="arguments", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="opinion_version_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $opinionVersion;
@@ -329,7 +338,7 @@ class Argument implements EntityInterface, Contribution, VotableInterface, Publi
         return $this->isPublished() && $this->getProject() && $this->getProject()->isIndexable();
     }
 
-    //type cannot be used as field name in ES
+    // type cannot be used as field name in ES
     public function getVoteType(): int
     {
         return $this->getType();

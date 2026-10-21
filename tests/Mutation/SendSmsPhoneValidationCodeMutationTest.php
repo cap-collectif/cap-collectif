@@ -6,9 +6,13 @@ use Capco\Tests\IdentityWebTestCase;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises HTTP outcomes and real domain data with transactional cleanup; replaces only external boundaries.
  */
 final class SendSmsPhoneValidationCodeMutationTest extends IdentityWebTestCase
@@ -52,11 +56,17 @@ final class SendSmsPhoneValidationCodeMutationTest extends IdentityWebTestCase
     public static function outcomes(): iterable
     {
         yield 'first SMS despite another accounts recent attempts' => ['sent', 0, true, null];
+
         yield 'one recent attempt still allows a retry' => ['sent', 1, true, null];
+
         yield 'old attempts do not prevent a retry' => ['sent', 2, false, null];
+
         yield 'already confirmed' => ['confirmed', 0, true, 'PHONE_ALREADY_CONFIRMED'];
+
         yield 'two recent attempts reach the retry limit' => ['limited', 2, true, 'RETRY_LIMIT_REACHED'];
+
         yield 'provider server error' => ['provider', 0, true, 'SERVER_ERROR'];
+
         yield 'invalid phone' => ['provider', 0, true, 'INVALID_NUMBER'];
     }
 

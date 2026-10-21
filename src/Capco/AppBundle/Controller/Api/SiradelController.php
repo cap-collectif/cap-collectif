@@ -22,8 +22,7 @@ class SiradelController extends AbstractController
         private readonly UserIsGrantedResolver $isGrantedResolver,
         private readonly RouterInterface $router,
         private readonly UserRepository $userRepository
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/webcomponenturls", name="web_component_urls", options={"i18n" = false})

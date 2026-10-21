@@ -15,8 +15,7 @@ class StatusNormalizer implements NormalizerInterface, SerializerAwareInterface,
 
     public function __construct(
         private readonly ObjectNormalizer $normalizer
-    ) {
-    }
+    ) {}
 
     public function hasCacheableSupportsMethod(): bool
     {

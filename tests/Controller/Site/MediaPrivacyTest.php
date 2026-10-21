@@ -22,14 +22,19 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises media reuse, delivery and upload over HTTP using synthetic files and transactional data.
  */
 final class MediaPrivacyTest extends IdentityWebTestCase
 {
     private const PNG = 'iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAAEElEQVR4nGP4z8AARAwQCgAf7gP9i18U1AAAAABJRU5ErkJggg==';
+
     /** @var list<string> */
     private array $files = [];
 
@@ -74,6 +79,7 @@ final class MediaPrivacyTest extends IdentityWebTestCase
     public static function profileMutations(): iterable
     {
         yield 'public profile' => ['updateProfilePublicData', 'UpdateProfilePublicDataInput'];
+
         yield 'personal profile' => ['updateProfilePersonalData', 'UpdateProfilePersonalDataInput'];
     }
 
@@ -156,6 +162,7 @@ final class MediaPrivacyTest extends IdentityWebTestCase
     public static function shieldModes(): iterable
     {
         yield 'without shield' => [false];
+
         yield 'with shield' => [true];
     }
 
@@ -250,8 +257,11 @@ final class MediaPrivacyTest extends IdentityWebTestCase
     public static function analysisAttachments(): iterable
     {
         yield 'new analysis attachment' => ['analysis', false];
+
         yield 'legacy analysis attachment' => ['analysis', true];
+
         yield 'question becomes hidden' => ['hidden', false];
+
         yield 'legacy hidden attachment' => ['hidden', true];
     }
 
@@ -364,7 +374,9 @@ final class MediaPrivacyTest extends IdentityWebTestCase
     public static function privateAttachmentRemovalModes(): iterable
     {
         yield 'removed in a later flush' => ['later'];
+
         yield 'replaced during the privacy change' => ['replace'];
+
         yield 'cleared during the privacy change' => ['clear'];
     }
 

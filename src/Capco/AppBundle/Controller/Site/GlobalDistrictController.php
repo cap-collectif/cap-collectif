@@ -11,6 +11,7 @@ class GlobalDistrictController extends Controller
 {
     /**
      * @Route("/project-district/{slug}", name="app_project_district_show", options={"i18n" = false})
+     *
      * @Template("@CapcoApp/GlobalDistrict/show.html.twig")
      */
     public function showAction(string $slug): Response

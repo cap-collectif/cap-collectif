@@ -62,18 +62,19 @@ class AddProposalsFromCsvMutation implements MutationInterface
         private readonly EntityManagerInterface $em,
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly AuthorizationCheckerInterface $authorizationChecker
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $viewer): array
     {
         $this->formatInput($input);
+
         /** @var Media $media */
         $media = $this->mediaRepository->find($input->offsetGet('csvToImport'));
         $this->importProposalsFromCsv->setFilePath(
             '/public/media/default/0001/01/' . $media->getProviderReference()
         );
         $this->importProposalsFromCsv->setDelimiter($input->offsetGet('delimiter'));
+
         /** @var ProposalForm $proposalForm */
         $proposalForm = $this->proposalFormRepository->find($input->offsetGet('proposalFormId'));
         $viewerIsNotProjectOwner =

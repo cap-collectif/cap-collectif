@@ -23,8 +23,7 @@ class RequirementsController extends Controller
         private readonly ContributionValidator $contributionValidator,
         private readonly StepUrlResolver $stepUrlResolver,
         private readonly ParticipantHelper $participantHelper
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/requirements/step/{stepId}/contribution/{contributionId}", name="requirements", options={"i18n" = false})

@@ -19,8 +19,7 @@ class OpinionTypeNormalizer implements NormalizerInterface, SerializerAwareInter
         private UrlGeneratorInterface $router,
         private readonly ObjectNormalizer $normalizer,
         private OpinionTypesResolver $resolver
-    ) {
-    }
+    ) {}
 
     public function hasCacheableSupportsMethod(): bool
     {

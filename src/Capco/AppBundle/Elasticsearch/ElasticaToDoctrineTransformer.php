@@ -56,6 +56,7 @@ class ElasticaToDoctrineTransformer
     public function transform(array $elasticaObjects): array
     {
         $objects = $ids = $toFetchByType = [];
+
         /** @var Result $elasticaObject */
         foreach ($elasticaObjects as $elasticaObject) {
             [$type, $id] = explode(':', $elasticaObject->getId());

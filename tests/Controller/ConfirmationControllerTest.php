@@ -13,8 +13,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Calls the confirmation action directly instead of observing the confirmation HTTP response
  * and persisted effects.
  */

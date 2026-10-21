@@ -24,7 +24,5 @@ final class Version20251002101752 extends AbstractMigration
         $this->addSql("INSERT IGNORE INTO section_translation (id, translatable_id, title, teaser, body, locale) VALUES (UUID(), 'sectionCarrousel', 'En-tête défilante', null, null, 'fr-FR')");
     }
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 }

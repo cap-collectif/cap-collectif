@@ -30,8 +30,7 @@ class AlphaProjectFormType extends AbstractType
 {
     public function __construct(
         private readonly GlobalDistrictsPersister $persister
-    ) {
-    }
+    ) {}
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -121,9 +120,6 @@ class AlphaProjectFormType extends AbstractType
         });
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

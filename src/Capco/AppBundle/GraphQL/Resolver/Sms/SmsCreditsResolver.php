@@ -15,8 +15,7 @@ class SmsCreditsResolver implements QueryInterface
 
     public function __construct(
         private readonly SmsCreditRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): ConnectionInterface
     {

@@ -25,8 +25,7 @@ class DeleteConsultationMutation implements MutationInterface
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly ActionLogger $actionLogger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

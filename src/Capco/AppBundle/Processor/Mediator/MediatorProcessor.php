@@ -14,8 +14,7 @@ class MediatorProcessor implements ProcessorInterface
         private readonly MediatorNotifier $notifier,
         private readonly MediatorRepository $mediatorRepository,
         private readonly ParticipantRepository $participantRepository
-    ) {
-    }
+    ) {}
 
     public function process(Message $message, array $options): bool
     {

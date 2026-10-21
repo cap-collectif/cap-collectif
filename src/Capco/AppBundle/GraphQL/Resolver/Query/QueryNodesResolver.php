@@ -12,8 +12,7 @@ class QueryNodesResolver implements QueryInterface
     public function __construct(
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly QueryAnalyzer $queryAnalyzer
-    ) {
-    }
+    ) {}
 
     public function __invoke(
         array $ids,

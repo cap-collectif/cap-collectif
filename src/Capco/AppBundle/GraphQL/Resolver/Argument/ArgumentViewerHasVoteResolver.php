@@ -12,8 +12,7 @@ class ArgumentViewerHasVoteResolver implements QueryInterface
 
     public function __construct(
         private ArgumentViewerVoteResolver $resolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $argument, $viewer): bool
     {

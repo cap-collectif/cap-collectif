@@ -13,8 +13,7 @@ class GroupPendingInvitationsResolver implements QueryInterface
 {
     public function __construct(
         private readonly UserInviteRepository $userInviteRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Group $group, Argument $args): ConnectionInterface
     {

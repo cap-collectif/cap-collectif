@@ -32,6 +32,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class OauthUserProvider implements OAuthAwareUserProviderInterface
 {
     private bool $isNewUser = false;
+
     /**
      * @var array<string, string>
      */
@@ -70,7 +71,7 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
         $email = $this->isCatpInstance()
             ? ($this->getCatpEmailFromResponse($response) ?: $response->getUsername())
             : ($response->getEmail() ?: $response->getUsername());
-        //on connect - get the access token and the user ID
+        // on connect - get the access token and the user ID
         $service = $response->getResourceOwner()->getName();
         $setter = 'set' . ucfirst($service);
         $setterId = 'openid' === $service ? $setter : $setter . 'Id';
@@ -108,14 +109,14 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
             }
         }
 
-        //we "disconnect" previously connected users
+        // we "disconnect" previously connected users
         if (null !== ($previousUser = $this->findUser($response, $email))) {
             $previousUser->{$setterId}(null);
             $previousUser->{$setterToken}(null);
             $this->userManager->updateUser($previousUser);
         }
 
-        //we connect current user
+        // we connect current user
         $user->{$setterId}($response->getUsername());
         $user->{$setterToken}($accessToken);
         if ('franceconnect' === $service && $user instanceof User) {
@@ -229,7 +230,7 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
                 case 'token_not_found_or_expired':
                     $message = $this->translator->trans(
                         'france-connect-expired-token',
-                        ['n' => ($response->getExpiresIn())],
+                        ['n' => $response->getExpiresIn()],
                         'CapcoAppBundle'
                     );
 

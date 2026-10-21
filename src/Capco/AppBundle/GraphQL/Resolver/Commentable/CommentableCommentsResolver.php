@@ -11,8 +11,7 @@ class CommentableCommentsResolver implements QueryInterface
 {
     public function __construct(
         private readonly CommentableCommentsDataLoader $commentableCommentsDataLoader
-    ) {
-    }
+    ) {}
 
     public function __invoke(CommentableInterface $commentable, Argument $args, $viewer)
     {

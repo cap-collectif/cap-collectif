@@ -9,8 +9,7 @@ class BasicAuthLogoutHandler implements LogoutHandlerInterface
 {
     public function __construct(
         private readonly RouterInterface $router
-    ) {
-    }
+    ) {}
 
     public function handle(
         RedirectResponseWithRequestInterface $responseWithRequest

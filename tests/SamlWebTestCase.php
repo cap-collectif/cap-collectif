@@ -13,7 +13,8 @@ use SimpleSAML\Auth\Simple;
 abstract class SamlWebTestCase extends IdentityWebTestCase
 {
     protected ?string $samlIdentifier = null;
-    /** @var array<string, array{process: string|false, env: ?string, server: ?string}> */
+
+    /** @var array<string, array{process: false|string, env: ?string, server: ?string}> */
     private array $samlEnvironment = [];
 
     protected function setUp(): void

@@ -11,8 +11,7 @@ class TwilioSmsProvider implements SmsProviderInterface
 {
     public function __construct(
         private readonly TwilioClient $twilioClient
-    ) {
-    }
+    ) {}
 
     public function sendVerificationSms(string $phone): ?string
     {

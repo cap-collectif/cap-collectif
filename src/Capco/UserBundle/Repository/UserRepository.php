@@ -35,7 +35,6 @@ use Doctrine\ORM\Query\ResultSetMappingBuilder;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Psr\Log\LoggerInterface;
-use ReflectionClass;
 
 /**
  * @method null|User find($id, $lockMode = null, $lockVersion = null)
@@ -191,9 +190,9 @@ class UserRepository extends EntityRepository
     }
 
     /**
-     * @throws Exception
-     *
      * @return array<int, array<string, ?string>>
+     *
+     * @throws Exception
      */
     public function getRecipientDataByGroup(EmailingCampaign $emailingCampaign, ?int $limit = 1000): array
     {
@@ -1170,7 +1169,8 @@ class UserRepository extends EntityRepository
 
             case 'FOLLOWED_AT':
                 $qb->addOrderBy('f.followedAt', $direction);
-            // no break
+
+                // no break
             default:
                 $qb->addOrderBy('u.username', $direction);
 
@@ -1727,7 +1727,7 @@ class UserRepository extends EntityRepository
         /**
          * This can be improved when php enums are implemented.
          */
-        $allRoles = new ReflectionClass(UserRole::class);
+        $allRoles = new \ReflectionClass(UserRole::class);
         $roles = $allRoles->getConstants();
 
         $qb->select('u');

@@ -56,19 +56,28 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="proposal", uniqueConstraints={
+ *
  *    @ORM\UniqueConstraint(columns={ "proposal_form_id", "reference"}),
  * }, indexes={
+ *
  *     @ORM\Index(name="idx_author", columns={"id", "author_id"}),
  *     @ORM\Index(name="idx_slug", columns={"id", "slug", "deleted_at"}),
  *     @ORM\Index(name="idx_proposalform_published", columns={"id", "is_draft", "trashed_at", "published", "proposal_form_id", "deleted_at"}),
  *     @ORM\Index(name="idx_proposal_published", columns={"id", "published", "deleted_at", "is_draft", "trashed_at"}),
  * })
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalRepository")
+ *
  * @ORM\HasLifecycleCallbacks()
+ *
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="proposal.missing_required_responses", formField="proposalForm")
+ *
  * @CapcoAssert\HasDistrictIfMandatory()
+ *
  * @CapcoAssert\HasThemeIfMandatory()
+ *
  * @CapcoAssert\HasCategoryIfMandatory()
+ *
  * @CapcoAssert\HasAddressIfMandatory()
  */
 class Proposal implements EntityInterface, Publishable, Contribution, CommentableInterface, SelfLinkableInterface, SoftDeleteable, DisplayableInBOInterface, DraftableInterface, ReportableInterface, ContributionInterface, ExportableContributionInterface, \Stringable
@@ -98,31 +107,37 @@ class Proposal implements EntityInterface, Publishable, Contribution, Commentabl
 
     /**
      * @Gedmo\Slug(fields={"title"}, updatable=false, unique=true)
+     *
      * @ORM\Column(length=255, nullable=false, unique=true)
      */
     protected $slug;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "body"})
+     *
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     protected $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="proposals")
+     *
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     protected ?User $author = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(name="update_author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     protected ?User $updateAuthor = null;
 
     /**
      * @Assert\NotNull()
+     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="proposals")
+     *
      * @ORM\JoinColumn(name="proposal_form_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     protected ProposalForm $proposalForm;
@@ -134,12 +149,14 @@ class Proposal implements EntityInterface, Publishable, Contribution, Commentabl
 
     /**
      * @ORM\ManyToMany(targetEntity="Capco\UserBundle\Entity\User", cascade={"persist"})
+     *
      * @ORM\JoinTable(name="user_favorite_proposal")
      */
     protected Collection $likers;
 
     /**
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Group", inversedBy="evaluating", cascade={"persist"})
+     *
      * @ORM\JoinTable(name="user_evaluatin_proposal")
      */
     protected Collection $evaluers;
@@ -156,24 +173,28 @@ class Proposal implements EntityInterface, Publishable, Contribution, Commentabl
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="proposals", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="theme_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private ?Theme $theme = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\District\ProposalDistrict", inversedBy="proposals", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="district_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private ?ProposalDistrict $district = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Status", cascade={"persist"}, inversedBy="proposals")
+     *
      * @ORM\JoinColumn(name="status_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private ?Status $status = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalCategory", cascade={"persist"}, inversedBy="proposals")
+     *
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private ?ProposalCategory $category = null;
@@ -209,7 +230,9 @@ class Proposal implements EntityInterface, Publishable, Contribution, Commentabl
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media", fetch="LAZY", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     *
      * @Assert\Valid()
      */
     private ?Media $media = null;
@@ -353,6 +376,7 @@ class Proposal implements EntityInterface, Publishable, Contribution, Commentabl
 
     /**
      * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="proposals")
+     *
      * @ORM\JoinColumn(nullable=true)
      */
     private ?Participant $participant = null;
@@ -995,6 +1019,7 @@ class Proposal implements EntityInterface, Publishable, Contribution, Commentabl
     public function getSelectionSteps(): array
     {
         $steps = [];
+
         /** @var Selection $selection */
         foreach ($this->selections as $selection) {
             $steps[] = $selection->getSelectionStep();
@@ -1167,7 +1192,7 @@ class Proposal implements EntityInterface, Publishable, Contribution, Commentabl
                 ->getSteps()
                 ->exists(fn ($key, $step) => $step->getStep()->isSelectionStep()
                     && $step->getStep()->isAllowingProgressSteps())
-            ;
+        ;
     }
 
     public function getMedia(): ?Media

@@ -10,9 +10,7 @@ class ProjectVisibilityStub
     protected $visibility;
     protected $authors;
 
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     public function getVisibility(): ?int
     {

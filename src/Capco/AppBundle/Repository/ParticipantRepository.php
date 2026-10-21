@@ -64,13 +64,13 @@ class ParticipantRepository extends EntityRepository
         return $qb
             ->getQuery()
             ->getResult()
-            ;
+        ;
     }
 
     public function countWithFilters(
         ?bool $consentInternalCommunication = null,
         ?bool $emailConfirmed = true,
-    ): bool|float|int|string|null {
+    ): null|bool|float|int|string {
         $qb = $this->createQueryBuilder('p')
             ->select('COUNT(p.id)')
         ;

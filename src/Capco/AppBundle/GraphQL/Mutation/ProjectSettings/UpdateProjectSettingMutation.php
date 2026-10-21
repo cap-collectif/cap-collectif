@@ -25,8 +25,7 @@ class UpdateProjectSettingMutation implements MutationInterface
         private readonly EntityManagerInterface $entityManager,
         private readonly UpdateSiteParameterMutation $updateSiteParameterMutation,
         private readonly ValidatorInterface $validator
-    ) {
-    }
+    ) {}
 
     /**
      * @return array{siteParameter?: SiteParameter, errorCode?: string}

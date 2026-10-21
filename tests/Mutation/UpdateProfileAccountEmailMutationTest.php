@@ -8,9 +8,13 @@ use Capco\Tests\IdentityWebTestCase;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises HTTP outcomes and real domain data with transactional cleanup; replaces only external boundaries.
  */
 final class UpdateProfileAccountEmailMutationTest extends IdentityWebTestCase
@@ -46,8 +50,11 @@ final class UpdateProfileAccountEmailMutationTest extends IdentityWebTestCase
     public static function emailChanges(): iterable
     {
         yield 'accepted' => ['valid', null];
+
         yield 'wrong password' => ['password', 'SPECIFY_PASSWORD'];
+
         yield 'used email' => ['used', 'ALREADY_USED_EMAIL'];
+
         yield 'unlisted domain' => ['domain', 'UNAUTHORIZED_EMAIL_DOMAIN'];
     }
 

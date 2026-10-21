@@ -7,9 +7,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class AppearanceColorsQueryResolver implements QueryInterface
 {
-    public function __construct(private readonly SiteColorRepository $repository)
-    {
-    }
+    public function __construct(private readonly SiteColorRepository $repository) {}
 
     /** @return array<int, object> */
     public function __invoke(): array

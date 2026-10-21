@@ -13,8 +13,7 @@ class ReplyMutation
 
     public function __construct(
         private readonly ValidatePhoneReusabilityMutation $validatePhoneReusabilityMutation
-    ) {
-    }
+    ) {}
 
     public function canReusePhone(Reply $reply, ?string $participantToken = null, ?User $viewer = null): bool
     {

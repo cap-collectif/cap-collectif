@@ -9,8 +9,7 @@ class QuerySiteColorsResolver implements QueryInterface
 {
     public function __construct(
         private readonly SiteColorRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(): array
     {

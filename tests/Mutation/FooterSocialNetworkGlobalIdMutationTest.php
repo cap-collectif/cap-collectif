@@ -16,15 +16,18 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Invokes GraphQL mutations directly with mocked dependencies instead of verifying the HTTP
  * contract and persisted effects.
  */
 class FooterSocialNetworkGlobalIdMutationTest extends TestCase
 {
-    private MockObject & EntityManagerInterface $entityManager;
-    private MockObject & FooterSocialNetworkRepository $footerSocialNetworkRepository;
+    private EntityManagerInterface&MockObject $entityManager;
+    private FooterSocialNetworkRepository&MockObject $footerSocialNetworkRepository;
 
     protected function setUp(): void
     {

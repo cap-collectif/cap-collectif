@@ -225,9 +225,9 @@ class SluggableListener extends Base
      * Get an event adapter to handle event specific
      * methods.
      *
-     * @throws \Gedmo\Exception\InvalidArgumentException - if event is not recognized
-     *
      * @return \Gedmo\Mapping\Event\AdapterInterface
+     *
+     * @throws \Gedmo\Exception\InvalidArgumentException - if event is not recognized
      */
     protected function getEventAdapter(EventArgs $args)
     {
@@ -353,6 +353,7 @@ class SluggableListener extends Base
                 }
                 // add suffix/prefix
                 $slug = $options['prefix'] . $slug . $options['suffix'];
+
                 // Step 3: stylize the slug
                 switch ($options['style']) {
                     case 'camel':
@@ -431,7 +432,6 @@ class SluggableListener extends Base
      * @param object $object
      * @param string $preferredSlug
      * @param bool   $recursing
-     * @param array  $config[$slugField]
      *
      * @return string - unique slug
      */
@@ -440,7 +440,7 @@ class SluggableListener extends Base
         $object,
         $preferredSlug,
         $recursing = false,
-        $config = []
+        mixed $config = []
     ) {
         $om = $ea->getObjectManager();
         $meta = $om->getClassMetadata($object::class);
@@ -452,7 +452,7 @@ class SluggableListener extends Base
         }
 
         // collect similar persisted slugs during this flush
-        if (isset($this->persisted[($class = $ea->getRootObjectClass($meta))])) {
+        if (isset($this->persisted[$class = $ea->getRootObjectClass($meta)])) {
             foreach ($this->persisted[$class] as $obj) {
                 if (
                     false !== $base
@@ -564,9 +564,9 @@ class SluggableListener extends Base
     /**
      * Retrieves a FilterCollection instance from the given ObjectManager.
      *
-     * @throws \Gedmo\Exception\InvalidArgumentException
-     *
      * @return mixed
+     *
+     * @throws \Gedmo\Exception\InvalidArgumentException
      */
     private function getFilterCollectionFromObjectManager(ObjectManager $om)
     {

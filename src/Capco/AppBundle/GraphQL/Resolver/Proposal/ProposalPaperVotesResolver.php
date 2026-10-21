@@ -16,8 +16,7 @@ class ProposalPaperVotesResolver implements QueryInterface
 {
     public function __construct(
         private readonly GlobalIdResolver $globalIdResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Proposal $proposal, Argument $args, ?User $viewer = null): Collection
     {

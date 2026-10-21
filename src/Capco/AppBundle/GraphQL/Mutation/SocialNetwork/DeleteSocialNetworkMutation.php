@@ -17,11 +17,10 @@ class DeleteSocialNetworkMutation implements MutationInterface
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
         private readonly SocialNetworkRepository $socialNetworkRepository
-    ) {
-    }
+    ) {}
 
     /**
-     * @return array{deletedSocialNetworkId?: string|null, errorCode?: string|null}
+     * @return array{deletedSocialNetworkId?: null|string, errorCode?: null|string}
      */
     public function __invoke(Argument $input): array
     {

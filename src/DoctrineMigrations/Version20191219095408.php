@@ -80,7 +80,5 @@ final class Version20191219095408 extends AbstractMigration implements Container
         }
     }
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 }

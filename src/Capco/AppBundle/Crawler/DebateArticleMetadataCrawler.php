@@ -13,9 +13,7 @@ class DebateArticleMetadataCrawler
     private const MAX_REDIRECTS = 5;
     private const USER_AGENT = 'CapcoMetadataCrawler/1.0';
 
-    public function __construct(private readonly HttpClientInterface $httpClient)
-    {
-    }
+    public function __construct(private readonly HttpClientInterface $httpClient) {}
 
     public function completeArticle(DebateArticle $debateArticle): DebateArticle
     {

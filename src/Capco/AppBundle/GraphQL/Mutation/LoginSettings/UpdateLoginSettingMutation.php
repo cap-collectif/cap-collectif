@@ -27,8 +27,7 @@ class UpdateLoginSettingMutation implements MutationInterface
         private readonly EntityManagerInterface $entityManager,
         private readonly UpdateSiteParameterMutation $updateSiteParameterMutation,
         private readonly Manager $toggleManager
-    ) {
-    }
+    ) {}
 
     /**
      * @return array{siteParameter?: SiteParameter, errorCode?: string}

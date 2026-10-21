@@ -22,7 +22,5 @@ final class Version20240611123730 extends AbstractMigration
         $this->addSql("INSERT INTO site_color (keyname, is_enabled, created_at, updated_at, value, position, category) VALUES ('color.sub.menu.background', 1, NOW(), NOW(), '#ebebeb', 1, 'settings.appearance')");
     }
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 }

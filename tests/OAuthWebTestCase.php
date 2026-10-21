@@ -26,16 +26,18 @@ abstract class OAuthWebTestCase extends IdentityWebTestCase
 {
     protected const JWT_NOW = 1791280800;
     protected string $providerSubject;
+
     /** @var list<string> */
     protected array $unlinkedProviderEmails = [];
     protected ?RedisCache $providerCache = null;
     protected bool $franceConnectV2 = false;
     protected string $signingKey = '';
+
     /** @var array<string, array<string, mixed>|string> */
     protected array $providerResponses = [];
     protected ?string $transportFailurePath = null;
     private ?int $originalJwtTimestamp = null;
-    private string|false $originalInstance = false;
+    private false|string $originalInstance = false;
     private ?string $originalInstanceEnv = null;
     private ?string $originalInstanceServer = null;
     private ?string $originalCacheNamespaceEnv = null;

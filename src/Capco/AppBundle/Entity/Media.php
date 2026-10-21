@@ -12,7 +12,9 @@ use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\MediaRepository")
+ *
  * @ORM\Table(name="media__media")
+ *
  * @ORM\HasLifecycleCallbacks
  */
 class Media implements EntityInterface, \Stringable
@@ -53,6 +55,7 @@ class Media implements EntityInterface, \Stringable
 
     /**
      * @var null|array<mixed>
+     *
      * @ORM\Column(type="json", name="provider_metadata", nullable=true)
      */
     private ?array $providerMetadata = [];
@@ -129,12 +132,14 @@ class Media implements EntityInterface, \Stringable
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Category")
+     *
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
     private ?Category $category = null;
 
     /**
      * @var Collection<int, GalleryHasMedia>
+     *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\GalleryHasMedia", mappedBy="media")
      */
     private Collection $galleryHasMedias;

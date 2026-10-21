@@ -18,8 +18,7 @@ class OpinionVersionFollowersConnection implements QueryInterface
     public function __construct(
         private UserRepository $userRepository,
         private LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(OpinionVersion $opinion, Arg $args): ?ConnectionInterface
     {

@@ -21,8 +21,7 @@ class ConsultationStepUserHasVoteResolver implements QueryInterface
         private readonly SourceVoteRepository $sourceVoteRepo,
         private readonly OpinionVersionVoteRepository $versionVoteRepo,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(ConsultationStep $step, Argument $args): bool
     {

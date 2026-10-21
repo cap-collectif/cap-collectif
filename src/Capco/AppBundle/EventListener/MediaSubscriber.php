@@ -15,8 +15,7 @@ class MediaSubscriber implements EventSubscriberInterface
     public function __construct(
         private readonly MediaManager $mediaManager,
         private readonly MediaAccessResolver $mediaAccess
-    ) {
-    }
+    ) {}
 
     public function getSubscribedEvents(): array
     {

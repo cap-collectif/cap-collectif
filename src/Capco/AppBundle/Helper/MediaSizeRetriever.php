@@ -9,8 +9,7 @@ class MediaSizeRetriever
 {
     public function __construct(
         private readonly MediaProvider $mediaProvider
-    ) {
-    }
+    ) {}
 
     /**
      * @return null|array{'height': int, 'width': int}|null[]

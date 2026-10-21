@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="site_settings")
+ *
  * @ORM\Entity(repositoryClass=SiteSettingsRepository::class)
  */
 class SiteSettings implements EntityInterface
@@ -26,6 +27,7 @@ class SiteSettings implements EntityInterface
 
     /**
      * @ORM\Column(type="string", name="status", options={"default" = "IDLE"})
+     *
      * @Assert\Choice(choices = {"IDLE", "PENDING", "ACTIVE"})
      */
     private string $status = SiteSettingsStatus::IDLE;

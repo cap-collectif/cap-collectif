@@ -12,8 +12,7 @@ class ArgumentTrashProcessor implements ProcessorInterface
     public function __construct(
         private readonly ArgumentRepository $argumentRepository,
         private readonly ArgumentNotifier $argumentNotifier
-    ) {
-    }
+    ) {}
 
     public function process(Message $message, array $options): bool
     {

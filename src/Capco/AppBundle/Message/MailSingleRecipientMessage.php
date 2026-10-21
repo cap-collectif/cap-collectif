@@ -9,8 +9,7 @@ class MailSingleRecipientMessage
         private readonly string $recipientEmail,
         private readonly string $subject,
         private readonly string $htmlContent,
-    ) {
-    }
+    ) {}
 
     public function getSenderEmail(): string
     {

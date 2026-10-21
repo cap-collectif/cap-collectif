@@ -15,6 +15,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="question_choice")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\QuestionChoiceRepository")
  */
 class QuestionChoice implements EntityInterface, IndexableInterface, \Stringable
@@ -31,25 +32,30 @@ class QuestionChoice implements EntityInterface, IndexableInterface, \Stringable
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="image_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $image;
 
     /**
      * @Gedmo\SortableGroup
+     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion", inversedBy="choices")
+     *
      * @ORM\JoinColumn(name="question_id", referencedColumnName="id", nullable=false)
      */
     private $question;
 
     /**
      * @CapcoAssert\CheckColor
+     *
      * @ORM\Column(name="color", type="string", length=7, nullable=true)
      */
     private $color;
 
     /**
      * @ORM\Column(name="temporary_id", type="string", nullable=true, length=255)
+     *
      * @ORM\GeneratedValue(strategy="UUID")
      */
     private ?string $temporaryId = null;
@@ -84,8 +90,6 @@ class QuestionChoice implements EntityInterface, IndexableInterface, \Stringable
     }
 
     /**
-     * @param AbstractQuestion $question
-     *
      * @return $this
      */
     public function setQuestion(?AbstractQuestion $question): self
@@ -95,9 +99,6 @@ class QuestionChoice implements EntityInterface, IndexableInterface, \Stringable
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): ?string
     {
         return $this->description;
@@ -139,25 +140,16 @@ class QuestionChoice implements EntityInterface, IndexableInterface, \Stringable
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isIndexable(): bool
     {
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getElasticsearchTypeName(): string
     {
         return 'questionChoice';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getElasticsearchSerializationGroups(): array
     {
         return ['ElasticsearchQuestionChoice', 'ElasticsearchQuestionChoiceNestedQuestion'];

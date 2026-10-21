@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=EmailingCampaignUserRepository::class)
+ *
  * @ORM\Table(name="emailing_campaign_user")
  */
 class EmailingCampaignUser implements EntityInterface
@@ -20,18 +21,21 @@ class EmailingCampaignUser implements EntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity=EmailingCampaign::class, inversedBy="emailingCampaignUsers")
+     *
      * @ORM\JoinColumn(nullable=false, name="emailing_campaign_id")
      */
     private EmailingCampaign $emailingCampaign;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="emailingCampaignUsers")
+     *
      * @ORM\JoinColumn(nullable=true, name="user_id")
      */
     private ?User $user = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="emailingCampaignUsers")
+     *
      * @ORM\JoinColumn(nullable=true, name="participant_id")
      */
     private ?Participant $participant = null;

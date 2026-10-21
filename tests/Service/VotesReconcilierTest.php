@@ -15,9 +15,13 @@ use Capco\UserBundle\Entity\User;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason HTTP reconciliation verifies persisted ballots, ownership, limits and ranking inside rolled-back SQL transactions.
  */
 final class VotesReconcilierTest extends ParticipantWebTestCase
@@ -91,6 +95,7 @@ final class VotesReconcilierTest extends ParticipantWebTestCase
         $persistedSource = $this->em->find(Participant::class, $sourceId);
         self::assertNull($persistedSource);
         $repository = $this->em->getRepository($voteClass);
+
         /** @var list<ProposalCollectVote|ProposalSelectionVote> $survivors */
         $survivors = $repository->findBy(['id' => $voteIds]);
         $actual = array_map(static fn (AbstractVote $vote) => $labels[$vote->getProposal()->getId()], $survivors);
@@ -123,6 +128,7 @@ final class VotesReconcilierTest extends ParticipantWebTestCase
             self::assertSame('PHONE_ALREADY_CONFIRMED', $this->confirmPhone($source)['errorCode']);
         }
         $this->em->clear();
+
         /** @var list<ProposalCollectVote|ProposalSelectionVote> $replayedVotes */
         $replayedVotes = $repository->findBy(['id' => $voteIds]);
         $afterReplay = array_map(static fn (AbstractVote $vote) => [$vote->getId(), $vote->getPosition()], $replayedVotes);
@@ -210,7 +216,9 @@ final class VotesReconcilierTest extends ParticipantWebTestCase
     public static function stepGates(): iterable
     {
         yield 'closed' => [true, true];
+
         yield 'conflicting email' => [false, false];
+
         yield 'matching email' => [false, true];
     }
 }

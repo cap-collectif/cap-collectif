@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
-use ArrayObject;
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
@@ -26,7 +25,7 @@ class ProposalAdminUrlResolver implements QueryInterface
     public function __invoke(
         Proposal $proposal,
         ?User $viewer = null,
-        ?ArrayObject $context = null
+        ?\ArrayObject $context = null
     ): ?string {
         $isAuthorized = $this->isAdminOrAuthorized($context, $viewer);
 

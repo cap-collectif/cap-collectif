@@ -11,8 +11,7 @@ class DestinationJumpsResolver implements QueryInterface
 {
     public function __construct(
         private readonly LogicJumpRepository $logicJumpRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(AbstractQuestion $question, Arg $args)
     {

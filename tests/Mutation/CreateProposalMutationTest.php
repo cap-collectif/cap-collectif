@@ -33,8 +33,11 @@ use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Invokes GraphQL mutations directly with mocked dependencies instead of verifying the HTTP
  * contract and persisted effects.
  */
@@ -88,7 +91,7 @@ class CreateProposalMutationTest extends TestCase
         $viewerIsMeetingRequirementsResolver = $this->createMock(ViewerIsMeetingRequirementsResolver::class);
         $viewerIsMeetingRequirementsResolver->method('__invoke')->willReturn(true);
 
-        $mutation = new class($this->createMock(LoggerInterface::class), $this->createMock(GlobalIdResolver::class), $em, $this->createMock(FormFactoryInterface::class), $this->createMock(ProposalFormRepository::class), $this->createMock(RedisStorageHelper::class), $this->createMock(ProposalFormProposalsDataLoader::class), $this->createMock(Indexer::class), $this->createMock(Manager::class), $this->createMock(ResponsesFormatter::class), $proposalRepository, $publisher, $this->createMock(ParticipantIsMeetingRequirementsResolver::class), $viewerIsMeetingRequirementsResolver, $this->createMock(ParticipantHelper::class), $this->createMock(ParticipantRepository::class), $this->createMock(ProjectParticipantsTotalCountCacheHandler::class), $this->createMock(TokenGeneratorInterface::class), ) extends CreateProposalMutation {
+        $mutation = new class($this->createMock(LoggerInterface::class), $this->createMock(GlobalIdResolver::class), $em, $this->createMock(FormFactoryInterface::class), $this->createMock(ProposalFormRepository::class), $this->createMock(RedisStorageHelper::class), $this->createMock(ProposalFormProposalsDataLoader::class), $this->createMock(Indexer::class), $this->createMock(Manager::class), $this->createMock(ResponsesFormatter::class), $proposalRepository, $publisher, $this->createMock(ParticipantIsMeetingRequirementsResolver::class), $viewerIsMeetingRequirementsResolver, $this->createMock(ParticipantHelper::class), $this->createMock(ParticipantRepository::class), $this->createMock(ProjectParticipantsTotalCountCacheHandler::class), $this->createMock(TokenGeneratorInterface::class)) extends CreateProposalMutation {
             public ProposalForm $proposalForm;
             public Proposal $proposal;
 

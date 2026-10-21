@@ -15,8 +15,7 @@ class ProjectCommentsResolver implements QueryInterface
     public function __construct(
         private readonly ProposalCommentRepository $proposalCommentRepository,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Project $project, Argument $args): Connection
     {

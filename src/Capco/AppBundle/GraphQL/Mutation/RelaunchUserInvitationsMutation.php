@@ -22,8 +22,7 @@ class RelaunchUserInvitationsMutation implements MutationInterface
         private readonly TokenGeneratorInterface $tokenGenerator,
         private readonly UserInviteRepository $userInviteRepository,
         private readonly EntityManagerInterface $entityManager
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): array
     {

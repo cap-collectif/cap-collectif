@@ -24,8 +24,7 @@ class EmailCampaignRecipient
         private bool $createTokenInDatabase = false,
         private ?EmailingCampaignUserStatus $statusToSave = null,
         // end
-    ) {
-    }
+    ) {}
 
     public function getEmail(): string
     {

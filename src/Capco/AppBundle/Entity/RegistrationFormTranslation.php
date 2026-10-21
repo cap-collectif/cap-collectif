@@ -10,9 +10,11 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
+ *
  * @ORM\Table(
  *   name="registration_form_translation",
  *   uniqueConstraints= {
+ *
  *     @ORM\UniqueConstraint(
  *       name="translation_unique",
  *       columns={"translatable_id", "locale"}

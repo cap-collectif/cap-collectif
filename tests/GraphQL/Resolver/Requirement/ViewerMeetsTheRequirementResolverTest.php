@@ -7,9 +7,13 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises HTTP outcomes and real domain data with transactional cleanup; replaces only external boundaries.
  */
 final class ViewerMeetsTheRequirementResolverTest extends IdentityWebTestCase
@@ -30,8 +34,11 @@ final class ViewerMeetsTheRequirementResolverTest extends IdentityWebTestCase
     public static function profileValues(): iterable
     {
         yield 'filled firstname' => ['FIRSTNAME', 'setFirstname', 'John', true];
+
         yield 'missing firstname' => ['FIRSTNAME', 'setFirstname', null, false];
+
         yield 'filled birth date' => ['DATE_OF_BIRTH', 'setDateOfBirth', '2000-01-01', true];
+
         yield 'missing birth date' => ['DATE_OF_BIRTH', 'setDateOfBirth', null, false];
     }
 

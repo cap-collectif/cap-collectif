@@ -18,8 +18,7 @@ class RateLimiter
         private readonly RedisCache $cache,
         private readonly LoggerInterface $logger,
         private readonly KernelInterface $kernel,
-    ) {
-    }
+    ) {}
 
     public function setLimit(int $limit): self
     {
@@ -50,6 +49,7 @@ class RateLimiter
             $cachedItem = $this->cache->getItem($cacheKey);
         } catch (InvalidArgumentException $e) {
             $this->logger->warning('Rate limiter cache exception: ' . $e->getMessage());
+
             // In case of problem with cache system, we do not block the underlying functionality.
             return true;
         }

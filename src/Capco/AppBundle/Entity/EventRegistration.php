@@ -17,9 +17,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class EventRegistration.
  *
  * @CapcoAssert\HasUnlistedEmail()
+ *
  * @CapcoAssert\HasAnonymousOrUser()
+ *
  * @CapcoAssert\EmailDoesNotBelongToUser(message="event_registration.create.email_belongs_to_user")
+ *
  * @ORM\Table(name="event_registration")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\EventRegistrationRepository")
  */
 class EventRegistration implements EntityInterface
@@ -31,31 +35,38 @@ class EventRegistration implements EntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private $user;
 
     /**
      * @var \DateTime
+     *
      * @Gedmo\Timestampable(on="create")
+     *
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
      * @var \DateTime
+     *
      * @Gedmo\Timestampable(on="change", field={"confirmed"})
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
 
     public function __construct(
-    /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Event", inversedBy="registrations", cascade={"persist"})
-     * @ORM\JoinColumn(name="event_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
-     * @Assert\NotNull()
-     */
-    private ?Event $event = null
+        /**
+         * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Event", inversedBy="registrations", cascade={"persist"})
+         *
+         * @ORM\JoinColumn(name="event_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
+         *
+         * @Assert\NotNull()
+         */
+        private ?Event $event = null
     ) {
         $this->updatedAt = new \DateTime();
         $this->confirmed = false;

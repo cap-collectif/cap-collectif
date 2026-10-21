@@ -15,8 +15,8 @@ abstract class AbstractAdminMessage extends AbstractMessage
     ) {
         parent::__construct(
             $recipientEmail,
-            null, //default locale
-            null, //no name for admin
+            null, // default locale
+            null, // no name for admin
             $subject,
             $subjectVars,
             $template,

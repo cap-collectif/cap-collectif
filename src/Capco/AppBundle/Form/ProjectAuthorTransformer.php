@@ -18,8 +18,7 @@ class ProjectAuthorTransformer
         private readonly EntityManagerInterface $em,
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly ProjectAuthorRepository $projectAuthorRepository
-    ) {
-    }
+    ) {}
 
     public function setProject(Project $project): self
     {

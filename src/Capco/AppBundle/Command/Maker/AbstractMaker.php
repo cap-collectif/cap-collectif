@@ -4,8 +4,6 @@ namespace Capco\AppBundle\Command\Maker;
 
 use Capco\AppBundle\Command\Maker\Exception\NullableException;
 use Capco\AppBundle\Utils\Text;
-use ReflectionClass;
-use RuntimeException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -113,7 +111,8 @@ abstract class AbstractMaker extends Command
         $this->sourcePath =
             $this->getContainer()
                 ->get('kernel')
-                ->getProjectDir() . '/src';
+                ->getProjectDir() . '/src'
+        ;
         $this->finder = new Finder();
         $defaultDirectories = ['src/Capco/AppBundle/Entity', 'src/Capco/UserBundle/Entity'];
         $directories = array_merge($this->getDirectories(), $defaultDirectories);
@@ -124,8 +123,7 @@ abstract class AbstractMaker extends Command
                 ->depth($this->getDirectoryDepth())
                 ->in($directories)
                 ->exclude($this->getExcludedDirectories())
-                ->sortByName()
-            as $file
+                ->sortByName() as $file
         ) {
             $this->fqcns[] = NamespaceResolver::getFullQualifiedClassName($file->getRealPath());
         }
@@ -138,7 +136,7 @@ abstract class AbstractMaker extends Command
         OutputInterface $output,
         string $questionLabel,
         bool $nullable = false
-    ): ?ReflectionClass {
+    ): ?\ReflectionClass {
         $questionLabel .= $nullable ? ' <info>[nullable]</info>' : '';
         $entity = $this->askSimpleQuestion($input, $output, $questionLabel, null, null, $nullable);
         if ($entity) {
@@ -149,10 +147,10 @@ abstract class AbstractMaker extends Command
                 }
             }
             if (!$found) {
-                throw new RuntimeException('The given entity was not found in the application');
+                throw new \RuntimeException('The given entity was not found in the application');
             }
             if (\count($found) > 1) {
-                return new ReflectionClass(
+                return new \ReflectionClass(
                     $this->askChoiceQuestion(
                         $input,
                         $output,
@@ -165,7 +163,7 @@ abstract class AbstractMaker extends Command
             }
             $output->writeln("using <info>{$found[0]}</info>");
 
-            return new ReflectionClass($found[0]);
+            return new \ReflectionClass($found[0]);
         }
 
         return null;

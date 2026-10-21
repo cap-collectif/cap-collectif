@@ -19,8 +19,7 @@ class FranceConnectSSOConfigurationFormType extends AbstractType
 {
     public function __construct(
         private readonly RequestStack $requestStack
-    ) {
-    }
+    ) {}
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

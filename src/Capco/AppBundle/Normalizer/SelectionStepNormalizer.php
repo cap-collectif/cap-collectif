@@ -21,8 +21,7 @@ class SelectionStepNormalizer implements NormalizerInterface, SerializerAwareInt
         private readonly ObjectNormalizer $normalizer,
         private StepVotesCountDataLoader $votesCountDataLoader,
         private readonly UserSearch $userSearch
-    ) {
-    }
+    ) {}
 
     public function hasCacheableSupportsMethod(): bool
     {

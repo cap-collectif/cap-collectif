@@ -32,8 +32,7 @@ class ReviewEventMutation implements MutationInterface
         private Indexer $indexer,
         private Publisher $publisher,
         private AuthorizationCheckerInterface $authorizationChecker
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $reviewer): array
     {

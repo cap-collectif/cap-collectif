@@ -11,6 +11,4 @@ use Doctrine\ORM\EntityRepository;
  * @method ThemeTranslation[]    findAll()
  * @method ThemeTranslation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ThemeTranslationRepository extends EntityRepository
-{
-}
+class ThemeTranslationRepository extends EntityRepository {}

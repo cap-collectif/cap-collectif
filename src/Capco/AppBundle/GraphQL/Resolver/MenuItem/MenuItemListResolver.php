@@ -15,8 +15,7 @@ class MenuItemListResolver implements QueryInterface
     public function __construct(
         private readonly MenuItemRepository $menuItemRepository,
         private readonly Manager $toggleManager
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): Connection
     {

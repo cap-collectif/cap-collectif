@@ -24,8 +24,7 @@ class UpdateOfficialResponseMutation implements MutationInterface
         private readonly GlobalIdResolver $resolver,
         private readonly EntityManagerInterface $em,
         private readonly AuthorizationCheckerInterface $authorizationChecker
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $user): array
     {
@@ -89,7 +88,7 @@ class UpdateOfficialResponseMutation implements MutationInterface
 
         if (!$officialResponse->isPublished() && $input->offsetGet('publishedAt')) {
             $publishedAt = $input->offsetGet('publishedAt');
-            if (!($publishedAt instanceof \DateTime)) {
+            if (!$publishedAt instanceof \DateTime) {
                 try {
                     $publishedAt = new \DateTime($publishedAt);
                 } catch (\Exception) {

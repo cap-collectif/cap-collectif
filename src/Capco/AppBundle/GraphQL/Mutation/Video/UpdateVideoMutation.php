@@ -24,11 +24,10 @@ class UpdateVideoMutation implements MutationInterface
         private readonly UserRepository $userRepository,
         private readonly MediaRepository $mediaRepository,
         private readonly LocaleRepository $localeRepository
-    ) {
-    }
+    ) {}
 
     /**
-     * @return array{video?: Video|null, errorCode?: string|null}
+     * @return array{video?: null|Video, errorCode?: null|string}
      */
     public function __invoke(Argument $input): array
     {

@@ -85,6 +85,8 @@ class DebateRepository extends EntityRepository
             ->orderBy('a.id', 'ASC')
             ->setFirstResult($anonymousArgumentsOffset)
             ->setMaxResults($maxResults)
+            ->orderBy('au.id', 'ASC')
+            ->addOrderBy('a.id', 'ASC')
         ;
 
         $arguments = $qbDebateArgument->getQuery()->getResult();
@@ -97,6 +99,7 @@ class DebateRepository extends EntityRepository
             ->orderBy('daa.id', 'ASC')
             ->setFirstResult($anonymousArgumentsOffset)
             ->setMaxResults($maxResults)
+            ->orderBy('daa.id', 'ASC')
         ;
 
         $anonymousArguments = $qbDebateAnonymousArgument->getQuery()->getResult();

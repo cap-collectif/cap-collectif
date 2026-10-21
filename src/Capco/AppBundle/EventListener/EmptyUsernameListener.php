@@ -12,8 +12,7 @@ class EmptyUsernameListener
     public function __construct(
         protected TokenStorageInterface $tokenStorage,
         protected Environment $templating
-    ) {
-    }
+    ) {}
 
     public function onKernelRequest(RequestEvent $event)
     {

@@ -24,12 +24,16 @@ abstract class AccountWebTestCase extends WebTestCase implements FeatureFlagsAwa
     protected const PASSWORD = 'Account123!';
     protected KernelBrowser $browser;
     protected EntityManagerInterface $em;
+
     /** @var MailerService&\PHPUnit\Framework\MockObject\MockObject */
     protected MailerService $mailer;
+
     /** @var list<array{type: string, body: array<string, mixed>}> */
     protected array $messages = [];
+
     /** @var array<string, true> */
     private array $sessionIds = [];
+
     /** @var array<string, list<\Monolog\Handler\HandlerInterface>> */
     private array $logHandlers = [];
     private ?string $backchannelEnv = null;

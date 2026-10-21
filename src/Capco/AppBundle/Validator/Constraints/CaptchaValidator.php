@@ -15,8 +15,7 @@ class CaptchaValidator extends ConstraintValidator
         protected Manager $toggle,
         protected CaptchaChecker $captchaChecker,
         protected bool $enabled = true
-    ) {
-    }
+    ) {}
 
     public function validate($value, Constraint $constraint)
     {

@@ -5,8 +5,6 @@ namespace Capco\AppBundle\Mailer\Transport;
 use Capco\AppBundle\Entity\ExternalServiceConfiguration;
 use Capco\AppBundle\Repository\ExternalServiceConfigurationRepository;
 use Psr\Log\LoggerInterface;
-use Swift_Events_EventListener;
-use Swift_Mime_SimpleMessage;
 
 class Transport implements \Swift_Transport
 {
@@ -16,8 +14,7 @@ class Transport implements \Swift_Transport
         private readonly \Swift_Events_EventDispatcher $dispatcher,
         private readonly ExternalServiceConfigurationRepository $externalServiceConfigurationRepository,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     /**
      * Not used.
@@ -30,16 +27,12 @@ class Transport implements \Swift_Transport
     /**
      * Not used.
      */
-    public function start()
-    {
-    }
+    public function start() {}
 
     /**
      * Not used.
      */
-    public function stop()
-    {
-    }
+    public function stop() {}
 
     /**
      * Not used.
@@ -49,9 +42,9 @@ class Transport implements \Swift_Transport
         return true;
     }
 
-    public function send(Swift_Mime_SimpleMessage $message, &$failedRecipients = null)
+    public function send(\Swift_Mime_SimpleMessage $message, &$failedRecipients = null)
     {
-        //is it used ?
+        // is it used ?
         if ($event = $this->dispatcher->createSendEvent($this, $message)) {
             $this->dispatcher->dispatchEvent($event, 'beforeSendPerformed');
             if ($event->bubbleCancelled()) {
@@ -62,7 +55,7 @@ class Transport implements \Swift_Transport
         return $this->getTransport()->send($message, $failedRecipients, $event);
     }
 
-    public function registerPlugin(Swift_Events_EventListener $plugin)
+    public function registerPlugin(\Swift_Events_EventListener $plugin)
     {
         $this->mandrillTransport->registerPlugin($plugin);
     }

@@ -15,7 +15,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Idea.
  *
  * @ORM\Table(name="video")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\VideoRepository")
+ *
  * @ORM\HasLifecycleCallbacks()
  */
 class Video implements EntityInterface, DisplayableInBOInterface, TranslatableInterface, \Stringable
@@ -32,6 +34,7 @@ class Video implements EntityInterface, DisplayableInBOInterface, TranslatableIn
      * @var \DateTime
      *
      * @Gedmo\Timestampable(on="create")
+     *
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
@@ -40,6 +43,7 @@ class Video implements EntityInterface, DisplayableInBOInterface, TranslatableIn
      * @var \DateTime
      *
      * @Gedmo\Timestampable(on="change", field={"title", "body", "author", "media", "link"})
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -53,21 +57,23 @@ class Video implements EntityInterface, DisplayableInBOInterface, TranslatableIn
 
     /**
      * @ORM\Column(name="video", type="string")
+     *
      * @Assert\NotBlank()
      */
     private $link;
 
     /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private $author;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media", fetch="LAZY", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     *
      * @Assert\Valid()
      */
     private $media;

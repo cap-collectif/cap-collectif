@@ -23,6 +23,7 @@ use Symfony\Component\Validator\Validation;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 final class MenuItemUrlTest extends TestCase

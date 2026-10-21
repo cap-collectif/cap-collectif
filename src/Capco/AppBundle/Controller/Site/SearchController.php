@@ -15,6 +15,7 @@ class SearchController extends Controller
 {
     /**
      * @Route("/search", name="app_search", defaults={"_feature_flags" = "search"}, options={"i18n" = false})
+     *
      * @Template("@CapcoApp/Default/search.html.twig")
      */
     public function searchAction(Request $request)
@@ -62,6 +63,7 @@ class SearchController extends Controller
                     --$searchResults['count'];
                 }
             }
+
             /** @var Project $project */
             if (
                 $searchResult->getTransformed() instanceof Project

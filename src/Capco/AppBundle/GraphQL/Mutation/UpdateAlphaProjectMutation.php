@@ -23,8 +23,7 @@ class UpdateAlphaProjectMutation implements MutationInterface
         private readonly ProjectPersister $persister,
         private readonly ProjectRepository $projectRepository,
         private readonly AuthorizationCheckerInterface $authorizationChecker
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

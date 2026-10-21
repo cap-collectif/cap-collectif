@@ -19,6 +19,7 @@ class SitemapsController extends Controller
 {
     /**
      * @Route("/sitemap.{_format}", name="app_sitemap", requirements={"_format" = "xml"}, options={"i18n" = false})
+     *
      * @Template("@CapcoApp/Sitemaps/sitemap.xml.twig")
      */
     public function sitemapAction(): array
@@ -60,8 +61,7 @@ class SitemapsController extends Controller
 
         // Pages
         foreach (
-            $em->getRepository('CapcoAppBundle:Page')->findBy(['isEnabled' => true])
-            as $page
+            $em->getRepository('CapcoAppBundle:Page')->findBy(['isEnabled' => true]) as $page
         ) {
             foreach ($page->getTranslations() as $translation) {
                 $urls[] = [
@@ -144,6 +144,7 @@ class SitemapsController extends Controller
                 'changefreq' => 'daily',
                 'priority' => '1.0',
             ];
+
             /** @var Event $event */
             foreach ($this->get(EventRepository::class)->findBy(['enabled' => true]) as $event) {
                 if ($event->getSlug()) {
@@ -176,6 +177,7 @@ class SitemapsController extends Controller
 
         $stepUrlResolver = $this->get(StepUrlResolver::class);
         $stepRepository = $this->get(AbstractStepRepository::class);
+
         /** @var AbstractStep $step */
         foreach ($stepRepository->findBy(['isEnabled' => true]) as $step) {
             if ($step->getProject() && $step->getProject()->isPublic()) {

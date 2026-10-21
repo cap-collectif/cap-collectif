@@ -36,8 +36,7 @@ final class DashboardAction
         private readonly Environment $twig,
         private readonly TokenStorageInterface $tokenStorage,
         private readonly RouterInterface $router
-    ) {
-    }
+    ) {}
 
     public function __invoke(Request $request): Response
     {

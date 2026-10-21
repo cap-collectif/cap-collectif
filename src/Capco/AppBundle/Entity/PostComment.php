@@ -13,7 +13,9 @@ class PostComment extends Comment implements ExportableContributionInterface
 {
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Post", inversedBy="comments")
+     *
      * @ORM\JoinColumn(name="post_id", referencedColumnName="id", onDelete="CASCADE")
+     *
      * @Assert\NotNull()
      */
     private $post;

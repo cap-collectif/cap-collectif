@@ -22,8 +22,7 @@ class UpdateGlobalDistrictMutation implements MutationInterface
         protected FormFactoryInterface $formFactory,
         protected LoggerInterface $logger,
         protected GlobalIdResolver $globalIdResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, $viewer): array
     {

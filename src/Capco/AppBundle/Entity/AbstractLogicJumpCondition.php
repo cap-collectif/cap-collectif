@@ -10,9 +10,13 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="logic_jump_condition")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AbstractLogicJumpConditionRepository")
+ *
  * @ORM\InheritanceType("SINGLE_TABLE")
+ *
  * @ORM\DiscriminatorColumn(name = "condition_type", type = "string")
+ *
  * @ORM\DiscriminatorMap({
  *      "multiple_choice" = "MultipleChoiceQuestionLogicJumpCondition",
  * })
@@ -29,12 +33,14 @@ abstract class AbstractLogicJumpCondition implements EntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion")
+     *
      * @ORM\JoinColumn(nullable=false)
      */
     protected $question;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\LogicJump", inversedBy="conditions")
+     *
      * @ORM\JoinColumn(nullable=false)
      */
     protected $jump;

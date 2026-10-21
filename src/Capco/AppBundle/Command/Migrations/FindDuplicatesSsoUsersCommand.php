@@ -34,15 +34,13 @@ class FindDuplicatesSsoUsersCommand extends Command
 
     public function findSameUsers(string $sso, string $ssoId): array
     {
-        $users = match ($sso) {
+        return match ($sso) {
             'france_connect' => $this->userRepository->findSameFranceConnectId($ssoId),
             'facebook' => $this->userRepository->findSameFacebookId($ssoId),
             'twitter' => $this->userRepository->findSameTwitterId($ssoId),
             'openId' => $this->userRepository->findSameOpenId($ssoId),
             default => $this->userRepository->findSameFranceConnectId($ssoId),
         };
-
-        return $users;
     }
 
     protected function configure()

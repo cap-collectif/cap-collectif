@@ -14,8 +14,7 @@ class ContributionManager
     public function __construct(
         private readonly Indexer $indexer,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function publishContributions(User $user): bool
     {

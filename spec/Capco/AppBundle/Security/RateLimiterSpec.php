@@ -116,13 +116,7 @@ class RateLimiterSpec extends ObjectBehavior
         $this->canDoAction('someAction', '123456')->shouldBe(true);
     }
 
-    /**
-     * @param $existingCachedValue
-     * @param $newCachedValue
-     * @param $cachedItem
-     * @param $cache
-     */
-    private function prepareMocks($existingCachedValue, $newCachedValue, $cachedItem, $cache): void
+    private function prepareMocks(mixed $existingCachedValue, mixed $newCachedValue, mixed $cachedItem, mixed $cache): void
     {
         $cachedItem->get()->willReturn($existingCachedValue);
         $cachedItem->isHit()->willReturn(null !== $existingCachedValue);

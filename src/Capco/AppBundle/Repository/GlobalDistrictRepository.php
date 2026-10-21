@@ -61,7 +61,7 @@ class GlobalDistrictRepository extends EntityRepository implements SluggableRepo
     // TODO remove me when project page is in React
     public function findAllOrderedByPosition(string $projectId): array
     {
-        //Get all districts already associated with the project first
+        // Get all districts already associated with the project first
         $in = $this->createQueryBuilder('d')
             ->innerJoin('d.projectDistrictPositioners', 'positioner')
             ->where('positioner.project = :projectId')
@@ -71,7 +71,7 @@ class GlobalDistrictRepository extends EntityRepository implements SluggableRepo
             ->getQuery()
             ->getResult()
         ;
-        //Get districts not linked to the project (There are projects already appearing in $in)
+        // Get districts not linked to the project (There are projects already appearing in $in)
         $out = $this->createQueryBuilder('d')
             ->leftJoin('d.projectDistrictPositioners', 'positioner')
             ->where('positioner.project != :projectId OR positioner IS NULL')

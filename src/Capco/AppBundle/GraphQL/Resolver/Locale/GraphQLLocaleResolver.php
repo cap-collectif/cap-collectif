@@ -18,8 +18,7 @@ class GraphQLLocaleResolver
     public function __construct(
         private readonly LocaleRepository $localeRepository,
         private readonly RequestStack $requestStack
-    ) {
-    }
+    ) {}
 
     public function resolve(mixed $args = null): string
     {

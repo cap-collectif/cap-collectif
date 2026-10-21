@@ -22,8 +22,7 @@ class ProposalContributorVoteResolver implements QueryInterface
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly EntityManagerInterface $em,
         private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Proposal $proposal, Arg $args, ?User $viewer = null): ?AbstractVote
     {

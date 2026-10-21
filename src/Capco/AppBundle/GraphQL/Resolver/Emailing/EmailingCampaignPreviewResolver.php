@@ -16,8 +16,7 @@ class EmailingCampaignPreviewResolver implements QueryInterface
         private readonly SiteParameterResolver $siteParams,
         private readonly RouterInterface $router,
         private readonly Environment $twig
-    ) {
-    }
+    ) {}
 
     /**
      * @todo set user_locale to localize the campaign

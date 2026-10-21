@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="external_service_configuration")
+ *
  * @ORM\Entity(repositoryClass=ExternalServiceConfigurationRepository::class)
  */
 class ExternalServiceConfiguration implements EntityInterface
@@ -34,6 +35,7 @@ class ExternalServiceConfiguration implements EntityInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      * @ORM\Id
      */
     private string $type;

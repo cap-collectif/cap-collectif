@@ -25,8 +25,7 @@ abstract class BaseUpdateProfile implements MutationInterface
         protected FormFactoryInterface $formFactory,
         protected LoggerInterface $logger,
         protected UserRepository $userRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer)
     {

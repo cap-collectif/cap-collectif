@@ -17,8 +17,7 @@ class MediaUrlResolver implements QueryInterface
         private readonly string $routerRequestContextHost,
         private readonly MediaAccessResolver $mediaAccess,
         private ?string $assetsHost = null
-    ) {
-    }
+    ) {}
 
     public function __invoke(Media $media, ?Arg $args = null, ?\ArrayObject $context = null): string
     {

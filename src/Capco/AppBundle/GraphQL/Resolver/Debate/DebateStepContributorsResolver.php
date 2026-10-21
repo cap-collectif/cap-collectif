@@ -12,8 +12,7 @@ class DebateStepContributorsResolver implements QueryInterface
     public function __construct(
         private readonly DebateAnonymousVoteRepository $debateAnonymousVoteRepository,
         private readonly UserRepository $userRepository
-    ) {
-    }
+    ) {}
 
     /**
      * @return array{key: string, totalCount: int}

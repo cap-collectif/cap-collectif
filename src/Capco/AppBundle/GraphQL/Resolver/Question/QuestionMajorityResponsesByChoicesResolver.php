@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Question;
 
-use ArrayObject;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireResultsAccessResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
@@ -17,13 +16,12 @@ class QuestionMajorityResponsesByChoicesResolver implements QueryInterface
     public function __construct(
         protected ValueResponseRepository $valueResponseRepository,
         private readonly QuestionnaireResultsAccessResolver $resultsAccess
-    ) {
-    }
+    ) {}
 
     public function __invoke(
         SimpleQuestion $question,
         ?User $viewer,
-        ?ArrayObject $context = null
+        ?\ArrayObject $context = null
     ): array {
         return $this->resultsAccess->canViewResults($question->getQuestionnaire(), $context)
             ? $this->valueResponseRepository->countByValue($question->getId())

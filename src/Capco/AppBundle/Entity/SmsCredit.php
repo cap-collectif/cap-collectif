@@ -11,9 +11,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Table(name="sms_credit")
+ *
  * @UniqueEntity(
  *   fields={"smsOrder"}
  * )
+ *
  * @ORM\Entity(repositoryClass=SmsCreditRepository::class)
  */
 class SmsCredit implements EntityInterface
@@ -30,6 +32,7 @@ class SmsCredit implements EntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity=SmsOrder::class)
+     *
      * @ORM\JoinColumn(nullable=false, referencedColumnName="id", name="sms_order_id", unique=true)
      */
     private SmsOrder $smsOrder;

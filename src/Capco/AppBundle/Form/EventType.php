@@ -24,8 +24,7 @@ class EventType extends AbstractType
 {
     public function __construct(
         private readonly EventDistrictsPersister $eventDistrictsPersister
-    ) {
-    }
+    ) {}
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

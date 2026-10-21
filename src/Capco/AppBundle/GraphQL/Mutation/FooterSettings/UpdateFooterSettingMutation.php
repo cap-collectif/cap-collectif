@@ -29,8 +29,7 @@ class UpdateFooterSettingMutation implements MutationInterface
         private readonly EntityManagerInterface $entityManager,
         private readonly UpdateSiteParameterMutation $updateSiteParameterMutation,
         private readonly Manager $toggleManager
-    ) {
-    }
+    ) {}
 
     /** @return array{siteParameter?: SiteParameter, errorCode?: string} */
     public function __invoke(Argument $input): array

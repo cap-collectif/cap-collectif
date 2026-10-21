@@ -20,7 +20,8 @@ function clearCache(string $environment = 'dev'): void
 function console(
     string $commandName = '',
     string $environment = 'dev',
-    #[AsArgsAfterOptionEnd] array $arguments = [],
+    #[AsArgsAfterOptionEnd]
+    array $arguments = [],
 ): void {
     Shared\console($commandName, $environment, $arguments);
 }

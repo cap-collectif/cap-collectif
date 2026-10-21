@@ -17,8 +17,7 @@ class ProjectAllowedGroupsResolver implements QueryInterface
         private readonly UserRepository $userRepository,
         private readonly GroupRepository $groupRepository,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Project $project, Argument $args): Connection
     {

@@ -28,8 +28,7 @@ class QueryVotesResolver implements QueryInterface
         private readonly VoteSearch $voteSearch,
         protected PromiseAdapterInterface $adapter,
         private readonly ProposalStepPaperVoteCounterRepository $proposalStepPaperVoteCounterRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): Connection
     {

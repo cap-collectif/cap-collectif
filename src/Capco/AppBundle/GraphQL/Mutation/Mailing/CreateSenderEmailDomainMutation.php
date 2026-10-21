@@ -18,8 +18,7 @@ class CreateSenderEmailDomainMutation implements MutationInterface
     public function __construct(
         private readonly EntityManagerInterface $em,
         private readonly SenderEmailDomainsManager $manager
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input): array
     {

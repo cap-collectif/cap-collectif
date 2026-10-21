@@ -25,8 +25,7 @@ class ViewerNotApprovedByModeratorCommentsResolver implements QueryInterface
         private readonly ProposalCommentRepository $proposalCommentRepository,
         private readonly EventCommentRepository $eventCommentRepository,
         private readonly PostCommentRepository $postCommentRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(
         CommentableInterface $commentable,

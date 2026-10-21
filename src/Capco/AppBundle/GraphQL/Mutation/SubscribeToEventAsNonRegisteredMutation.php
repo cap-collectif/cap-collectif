@@ -23,14 +23,14 @@ class SubscribeToEventAsNonRegisteredMutation implements MutationInterface
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly EntityManagerInterface $entityManager,
         private readonly RequestGuesserInterface $requestGuesser
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, $viewer): array
     {
         $this->formatInput($input);
         $eventId = $input->offsetGet('eventId');
         $isPrivate = $input->offsetGet('private') ?? false;
+
         /** @var Event $event */
         $event = $this->globalIdResolver->resolve($eventId, $viewer);
         if (!$event) {

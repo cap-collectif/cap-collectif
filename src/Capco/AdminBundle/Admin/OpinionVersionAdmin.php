@@ -196,9 +196,7 @@ class OpinionVersionAdmin extends AbstractAdmin
         $collection->clearExcept(['list', 'create', 'edit', 'delete', 'show']);
     }
 
-    protected function configureShowFields(ShowMapper $show): void
-    {
-    }
+    protected function configureShowFields(ShowMapper $show): void {}
 
     protected function configure(): void
     {

@@ -11,8 +11,7 @@ class ModerationTokenListener
 
     public function __construct(
         private readonly TokenGeneratorInterface $tokenGenerator
-    ) {
-    }
+    ) {}
 
     public function preFlush(PreFlushEventArgs $args)
     {

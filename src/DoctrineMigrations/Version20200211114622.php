@@ -32,9 +32,7 @@ final class Version20200211114622 extends AbstractMigration implements Container
         return 'Add new siteParameter for event map';
     }
 
-    public function up(Schema $schema): void
-    {
-    }
+    public function up(Schema $schema): void {}
 
     public function postUp(Schema $schema): void
     {

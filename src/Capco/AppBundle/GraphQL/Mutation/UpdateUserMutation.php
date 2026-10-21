@@ -24,11 +24,10 @@ class UpdateUserMutation implements MutationInterface
         private readonly FormFactoryInterface $formFactory,
         private readonly Manager $toggleManager,
         private readonly GlobalIdResolver $globalIdResolver
-    ) {
-    }
+    ) {}
 
     /**
-     * @return array{'user': User|null, 'validationErrors': non-empty-string|false|null}
+     * @return array{'user': null|User, 'validationErrors': null|false|non-empty-string}
      */
     public function __invoke(Argument $input, User $viewer): array
     {

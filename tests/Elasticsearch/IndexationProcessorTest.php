@@ -10,8 +10,11 @@ use Swarrot\Broker\Message;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status legacy
+ *
  * @phpunit-reason Exercises deprecated Swarrot processors directly; migrate the behavior to the HTTP or CLI
  * action and the supported message architecture.
  */
@@ -36,6 +39,7 @@ class IndexationProcessorTest extends TestCase
     public static function validMessages(): \Generator
     {
         yield 'proposal' => [\Capco\AppBundle\Entity\Proposal::class, 'proposal1'];
+
         yield 'opinion' => [\Capco\AppBundle\Entity\Opinion::class, 'opinion1'];
     }
 }

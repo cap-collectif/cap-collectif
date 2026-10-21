@@ -10,10 +10,15 @@ use Symfony\Component\BrowserKit\Cookie;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Verifies reply-page access through HTTP using read-only fixtures.
  */
 class QuestionnaireReplyAccessTest extends WebTestCase
@@ -69,15 +74,25 @@ class QuestionnaireReplyAccessTest extends WebTestCase
     public static function credentials(): \Generator
     {
         yield 'participant owner needs no reply cookie' => ['fakeToken1', false, null, 'replyAnonymous1', true];
+
         yield 'participant owner can read a draft' => ['fakeToken1', false, null, 'replyAnonymousDraft', true];
+
         yield 'no credentials grant nothing' => [null, false, null, 'replyAnonymous1', false];
+
         yield 'different participant is denied' => ['fakeToken2', false, null, 'replyAnonymous1', false];
+
         yield 'exact reply cookie remains supported' => [null, true, null, 'replyAnonymous1', true];
+
         yield 'reply cookie cannot authorize another reply' => [null, true, null, 'replyAnonymous1bis', false];
+
         yield 'different participant overrides reply cookie' => ['fakeToken2', true, null, 'replyAnonymous1', false];
+
         yield 'invalid participant never falls back' => ['invalid', true, null, 'replyAnonymous1', false];
+
         yield 'signed-in non-owner ignores participant cookies' => ['fakeToken1', true, 'user10', 'replyAnonymous1', false];
+
         yield 'signed-in author ignores invalid participant cookie' => ['invalid', false, 'user10', 'replyQuestionnaireAnonDraft', true];
+
         yield 'manager uses the shared reply policy' => [null, false, 'userTheo', 'replyAnonQuestionnaireAnonPOwner', true];
     }
 }

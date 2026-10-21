@@ -24,8 +24,7 @@ class DeleteOrganizationInvitationMutation implements MutationInterface
         private readonly EntityManagerInterface $em,
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly UserInviteRepository $userInviteRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

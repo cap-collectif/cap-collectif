@@ -14,8 +14,7 @@ class DebateArticleListener
     public function __construct(
         private readonly MessageBusInterface $messageBus,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function postPersist(DebateArticle $entity, LifecycleEventArgs $args): void
     {

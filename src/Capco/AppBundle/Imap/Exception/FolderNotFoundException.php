@@ -2,8 +2,4 @@
 
 namespace Capco\AppBundle\Imap\Exception;
 
-use Exception;
-
-final class FolderNotFoundException extends Exception
-{
-}
+final class FolderNotFoundException extends \Exception {}

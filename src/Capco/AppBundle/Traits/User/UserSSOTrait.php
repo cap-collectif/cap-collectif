@@ -10,24 +10,24 @@ trait UserSSOTrait
     use FranceConnectUserTrait;
     use UserSSOOpenIdTrait;
 
-    //saml
+    // saml
     protected ?string $samlId = null;
 
-    //CAS
+    // CAS
     protected ?string $casId = null;
 
-    //facebook
+    // facebook
     protected ?string $facebook_id = null;
     protected ?string $facebook_access_token = null;
     protected ?string $facebookUrl = null;
 
-    //twitter
+    // twitter
     protected ?string $twitter_id = null;
     protected ?string $twitter_access_token = null;
     protected ?string $twitterUrl = null;
     protected ?string $instagramUrl = null;
 
-    //linkedin
+    // linkedin
     protected ?string $linkedInUrl = null;
 
     protected ?\DateTime $credentialsExpireAt = null;

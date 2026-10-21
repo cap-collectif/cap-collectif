@@ -17,8 +17,7 @@ class OtherQuestionChoiceResponseResolver implements QueryInterface
     public function __construct(
         private readonly ResponseSearch $responseSearch,
         private readonly QuestionnaireResultsAccessResolver $resultsAccess
-    ) {
-    }
+    ) {}
 
     public function __invoke(MultipleChoiceQuestion $question, Arg $args, ?User $viewer = null, ?\ArrayObject $context = null): ConnectionInterface
     {

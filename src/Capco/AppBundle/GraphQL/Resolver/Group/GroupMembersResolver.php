@@ -14,8 +14,7 @@ class GroupMembersResolver implements QueryInterface
 {
     public function __construct(
         private readonly GroupRepository $groupRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Group $group, Argument $args): ConnectionInterface|Promise
     {

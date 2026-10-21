@@ -13,8 +13,7 @@ class AnalyticsMostUsedProposalCategories
 
     public function __construct(
         private readonly ProposalCategoryRepository $repository
-    ) {
-    }
+    ) {}
 
     public function getTotalCount(): int
     {

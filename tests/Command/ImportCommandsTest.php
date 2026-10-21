@@ -10,8 +10,11 @@ use Capco\UserBundle\Entity\User;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises import CLI output and reloaded domain data with per-test input files and
  * transactional SQL cleanup.
  */

@@ -33,11 +33,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="reply", indexes={
+ *
  *     @ORM\Index(name="idx_author", columns={"id", "author_id"}),
  *     @ORM\Index(name="idx_questionnaire_published", columns={"id", "questionnaire_id", "published", "is_draft", "publishedAt"}),
  *     @ORM\Index(name="idx_author_draft", columns={"id", "questionnaire_id", "author_id", "private", "is_draft"})
  * })
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ReplyRepository")
+ *
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="reply.missing_required_responses", formField="questionnaire")
  */
 class Reply implements EntityInterface, Publishable, DraftableInterface, Contribution, VoteContribution, ContributionInterface, ExportableContributionInterface
@@ -54,12 +57,14 @@ class Reply implements EntityInterface, Publishable, DraftableInterface, Contrib
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="replies")
+     *
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     protected ?User $author = null;
 
     /**
      * @var Collection<int, AbstractResponse>
+     *
      * @ORM\OneToMany(
      *  targetEntity="Capco\AppBundle\Entity\Responses\AbstractResponse",
      *  mappedBy="reply",
@@ -71,19 +76,23 @@ class Reply implements EntityInterface, Publishable, DraftableInterface, Contrib
 
     /**
      * @Assert\NotNull()
+     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questionnaire", inversedBy="replies")
+     *
      * @ORM\JoinColumn(name="questionnaire_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private Questionnaire $questionnaire;
 
     /**
      * @Gedmo\Timestampable(on="update")
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private \DateTimeInterface $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="replies", cascade={"persist"})
+     *
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private ?Participant $participant = null;
@@ -212,7 +221,8 @@ class Reply implements EntityInterface, Publishable, DraftableInterface, Contrib
             && $this->getQuestionnaire()
                 ->getStep()
                 ->getProject()
-                ->getOwner() === $viewer;
+                ->getOwner() === $viewer
+        ;
     }
 
     public function isIndexable(): bool

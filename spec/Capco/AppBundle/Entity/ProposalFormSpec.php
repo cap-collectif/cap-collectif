@@ -18,6 +18,7 @@ use Prophecy\Prophet;
 /**
  * @template TKey
  * @template TValue
+ *
  * @template-extends ObjectBehavior<TKey,TValue>
  */
 class ProposalFormSpec extends ObjectBehavior

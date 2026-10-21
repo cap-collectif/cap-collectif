@@ -21,7 +21,9 @@ class StepController extends CRUDController
      * Used for autocompletion of proposals in StepAdmin.
      *
      * @Security("is_granted('ROLE_ADMIN')")
+     *
      * @Route("/admin/project/{projectId}/proposals_autocomplete", name="capco_admin_proposals_autocomplete")
+     *
      * @Entity("project", options={"mapping": {"projectId": "id"}})
      */
     public function retrieveProposalsAutocompleteItemsAction(Request $request, Project $project)

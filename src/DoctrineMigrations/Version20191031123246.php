@@ -24,11 +24,7 @@ final class Version20191031123246 extends AbstractMigration implements Container
         $this->generator = new UuidGenerator();
     }
 
-    public function up(Schema $schema): void
-    {
-    }
+    public function up(Schema $schema): void {}
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 }

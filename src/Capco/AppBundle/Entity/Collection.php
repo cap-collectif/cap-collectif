@@ -8,19 +8,24 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Doctrine\ORM\EntityRepository")
+ *
  * @ORM\Table(
  *     name="classification__collection",
  *     uniqueConstraints={
+ *
  *         @ORM\UniqueConstraint(name="tag_collection", columns={"slug", "context"})
  *     }
  * )
+ *
  * @ORM\HasLifecycleCallbacks
  */
 class Collection implements EntityInterface, \Stringable
 {
     /**
      * @ORM\Id
+     *
      * @ORM\GeneratedValue
+     *
      * @ORM\Column(type="integer")
      */
     protected int $id;
@@ -57,12 +62,14 @@ class Collection implements EntityInterface, \Stringable
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media")
+     *
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected ?Media $media = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Context")
+     *
      * @ORM\JoinColumn(name="context", referencedColumnName="id")
      */
     protected ?Context $context = null;

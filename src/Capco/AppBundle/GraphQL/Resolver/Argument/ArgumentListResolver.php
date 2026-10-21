@@ -13,8 +13,7 @@ class ArgumentListResolver implements QueryInterface
 {
     public function __construct(
         private readonly ArgumentRepository $repository
-    ) {
-    }
+    ) {}
 
     /**
      * @return Connection|Promise

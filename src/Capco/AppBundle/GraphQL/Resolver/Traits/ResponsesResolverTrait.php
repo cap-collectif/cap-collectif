@@ -24,10 +24,12 @@ trait ResponsesResolverTrait
      * @var AbstractQuestionRepository
      */
     private $abstractQuestionRepository;
+
     /**
      * @var AbstractResponseRepository
      */
     private $abstractResponseRepository;
+
     /**
      * @var TokenGenerator
      */
@@ -117,7 +119,7 @@ trait ResponsesResolverTrait
     private function handleQuestionResponses(
         AbstractQuestion $question,
         Collection $responses,
-        Proposal|Reply|ProposalEvaluation $parent
+        Proposal|ProposalEvaluation|Reply $parent
     ): void {
         $found = false;
         foreach ($responses as $response) {

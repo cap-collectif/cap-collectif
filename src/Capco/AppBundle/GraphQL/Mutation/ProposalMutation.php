@@ -39,7 +39,6 @@ use Capco\AppBundle\Service\ParticipantHelper;
 use Capco\AppBundle\Service\ProjectParticipantsTotalCountCacheHandler;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
-use DateTime;
 use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -124,6 +123,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
     {
         $this->formatInput($input);
         $values = $input->getArrayCopy();
+
         /** @var Proposal $proposal */
         $proposal = $this->globalIdResolver->resolve($values['proposalId'], $user);
         unset($values['proposalId']); // This only useful to retrieve the proposal
@@ -182,6 +182,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
     {
         $this->formatInput($input);
         $values = $input->getArrayCopy();
+
         /** @var Proposal $proposal */
         $proposal = $this->globalIdResolver->resolve($values['proposalId'], $user);
         if (!$proposal) {
@@ -228,7 +229,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
             new Message(
                 json_encode([
                     'proposalId' => $proposal->getId(),
-                    'date' => new DateTime(),
+                    'date' => new \DateTime(),
                 ], \JSON_THROW_ON_ERROR)
             )
         );
@@ -250,6 +251,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
     ): array {
         $proposalId = GlobalIdResolver::getDecodedId($proposalId);
         $stepId = GlobalIdResolver::getDecodedId($stepId);
+
         /** @var Selection $selection */
         $selection = $this->container->get(SelectionRepository::class)->findOneBy([
             'proposal' => \is_array($proposalId) ? $proposalId['id'] : $proposalId,
@@ -279,7 +281,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
             new Message(
                 json_encode([
                     'proposalId' => $proposal->getId(),
-                    'date' => new DateTime(),
+                    'date' => new \DateTime(),
                 ])
             )
         );
@@ -361,7 +363,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
             new Message(
                 json_encode([
                     'proposalId' => $proposal->getId(),
-                    'date' => new DateTime(),
+                    'date' => new \DateTime(),
                 ])
             )
         );
@@ -382,6 +384,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
             // If user is an admin, we allow to retrieve deleted proposal
             $this->em->getFilters()->disable('softdeleted');
         }
+
         /** @var Proposal $proposal */
         $proposal = $this->globalIdResolver->resolve($values['proposalId'], $user);
         if (!$proposal) {
@@ -403,7 +406,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
                 $wasDraft = $proposal->isDraft();
 
                 $proposal
-                    ->setPublishedAt(new DateTime())
+                    ->setPublishedAt(new \DateTime())
                     ->setDraft(false)
                     ->setTrashedStatus(null)
                     ->setDeletedAt(null)
@@ -433,7 +436,6 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
                     ->setTrashedStatus(null)
                     ->setDeletedAt(null)
                     ->setIsArchived(false)
-
                 ;
 
                 break;
@@ -610,7 +612,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
             $proposal->setContributor($authorEntity);
         }
 
-        $now = new DateTime();
+        $now = new \DateTime();
         if ($viewer === $author) {
             $proposal->setUpdatedAt($now);
 
@@ -764,7 +766,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
                 $draft = $values['draft'];
                 if (!$draft) {
                     if ($author && $author->isEmailConfirmed()) {
-                        $proposal->setPublishedAt(new DateTime());
+                        $proposal->setPublishedAt(new \DateTime());
                     }
                     $proposal->setDraft(false);
                 }

@@ -10,8 +10,7 @@ class GoogleMapsAddress
         protected float $lat,
         protected float $lng,
         protected ?string $formatted
-    ) {
-    }
+    ) {}
 
     public static function fromApi(string $response): ?self
     {

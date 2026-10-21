@@ -20,8 +20,7 @@ class CasAuthenticator extends AbstractGuardAuthenticator
         protected LoggerInterface $logger,
         protected CasHandler $casHandler,
         private readonly CasUserProvider $casUserProvider
-    ) {
-    }
+    ) {}
 
     public function supports(Request $request): bool
     {

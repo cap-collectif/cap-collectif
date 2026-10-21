@@ -9,8 +9,7 @@ class GlobalConfigurationTimeZoneDetector implements TimezoneDetectorInterface
 {
     public function __construct(
         protected SiteParameterResolver $resolver
-    ) {
-    }
+    ) {}
 
     public function getTimezone(): string
     {

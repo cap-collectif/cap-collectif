@@ -10,8 +10,7 @@ final class RedirectResponseWithRequest implements RedirectResponseWithRequestIn
     public function __construct(
         private Request $request,
         private RedirectResponse $response
-    ) {
-    }
+    ) {}
 
     public function getRequest(): Request
     {

@@ -13,8 +13,7 @@ class SenderEmailResolver
     public function __construct(
         private readonly SiteParameterResolver $siteParams,
         private readonly SenderEmailRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(): string
     {

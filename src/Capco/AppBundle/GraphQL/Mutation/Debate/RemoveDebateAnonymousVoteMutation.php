@@ -40,8 +40,7 @@ class RemoveDebateAnonymousVoteMutation implements MutationInterface
         private readonly DebateAnonymousParticipationHashEncoder $encoder,
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly Indexer $indexer
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input): array
     {

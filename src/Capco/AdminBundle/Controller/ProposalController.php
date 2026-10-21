@@ -16,10 +16,12 @@ class ProposalController extends CRUDController
 {
     /**
      * @Security("is_granted('ROLE_ADMIN')")
+     *
      * @Route("/admin/capco/app/proposal/{proposalId}/download/followers/{_format}",
      *     requirements={
      *         "_format": "csv|xlsx",
      *     }, name="capco_admin_proposal_download_followers", options={"i18n" = false})
+     *
      * @Entity("proposal", options={"mapping": {"proposalId": "id"}})
      */
     public function downloadFollowerOfProposalAction(

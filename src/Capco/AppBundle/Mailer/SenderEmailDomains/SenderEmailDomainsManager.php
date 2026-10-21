@@ -15,8 +15,7 @@ class SenderEmailDomainsManager
         private readonly EntityManagerInterface $em,
         private readonly MailjetClient $mailjetClient,
         private readonly MandrillClient $mandrillClient
-    ) {
-    }
+    ) {}
 
     public function getSenderEmailDomains(): array
     {

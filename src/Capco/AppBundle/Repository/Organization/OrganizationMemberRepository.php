@@ -39,6 +39,7 @@ class OrganizationMemberRepository extends EntityRepository
             ->where('o.organization = :organization')
             ->setParameter('organization', $organization)
             ->getQuery()
-            ->getSingleScalarResult() ?? 0;
+            ->getSingleScalarResult() ?? 0
+        ;
     }
 }

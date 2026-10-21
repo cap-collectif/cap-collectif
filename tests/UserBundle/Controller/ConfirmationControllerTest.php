@@ -10,9 +10,13 @@ use Capco\Tests\IdentityWebTestCase;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises HTTP outcomes and real domain data with transactional cleanup; replaces only external boundaries.
  */
 final class ConfirmationControllerTest extends IdentityWebTestCase
@@ -68,6 +72,7 @@ final class ConfirmationControllerTest extends IdentityWebTestCase
     public static function accountConfirmationPaths(): iterable
     {
         yield 'initial email confirmation' => ['/account/email_confirmation/' . str_repeat('a', 43)];
+
         yield 'pending email confirms an unconfirmed account' => ['/account/new_email_confirmation/pending'];
     }
 
@@ -92,6 +97,7 @@ final class ConfirmationControllerTest extends IdentityWebTestCase
     public static function unknownConfirmationUrls(): iterable
     {
         yield 'unknown account token' => ['/account/email_confirmation/' . str_repeat('b', 43)];
+
         yield 'unknown pending email token' => ['/account/new_email_confirmation/missing'];
     }
 

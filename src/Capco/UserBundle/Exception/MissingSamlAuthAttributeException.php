@@ -2,6 +2,4 @@
 
 namespace Capco\Capco\UserBundle\Exception;
 
-class MissingSamlAuthAttributeException extends \Exception
-{
-}
+class MissingSamlAuthAttributeException extends \Exception {}

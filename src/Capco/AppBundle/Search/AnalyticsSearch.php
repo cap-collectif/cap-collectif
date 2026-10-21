@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Search;
 
 use Capco\AdminBundle\Timezone\GlobalConfigurationTimeZoneDetector;
-use DateTimeInterface;
 use Elastica\Aggregation\Cardinality;
 use Elastica\Aggregation\DateHistogram;
 use Elastica\Aggregation\Terms;
@@ -35,12 +34,11 @@ class AnalyticsSearch
         private readonly Index $index,
         private readonly LoggerInterface $logger,
         private readonly GlobalConfigurationTimeZoneDetector $timezoneDetector
-    ) {
-    }
+    ) {}
 
     public function getInternalAnalyticsResultSet(
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         int $topContributorsCount,
         array $requestedFields,
         ?string $projectId = null
@@ -89,79 +87,79 @@ class AnalyticsSearch
     }
 
     public function getAnonymousContributorsResultSet(
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         ?string $projectId = null
     ): ResultSet {
         return $this->createAnonymousContributorsQuery($start, $end, $projectId)->search();
     }
 
     public function getUserRegistrationsResultSet(
-        DateTimeInterface $start,
-        DateTimeInterface $end
+        \DateTimeInterface $start,
+        \DateTimeInterface $end
     ): ResultSet {
         return $this->createUserRegistrationsQuery($start, $end)->search();
     }
 
     public function getVotesResultSet(
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         ?string $projectId = null
     ): ResultSet {
         return $this->createVotesQuery($start, $end, $projectId)->search();
     }
 
     public function getCommentsResultSet(
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         ?string $projectId = null
     ): ResultSet {
         return $this->createCommentsQuery($start, $end, $projectId)->search();
     }
 
     public function getContributionsResultSet(
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         ?string $projectId = null
     ): ResultSet {
         return $this->createContributionsQuery($start, $end, $projectId)->search();
     }
 
     public function getFollowersResultSet(
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         ?string $projectId = null
     ): ResultSet {
         return $this->createFollowersQuery($start, $end, $projectId)->search();
     }
 
     public function getMostActiveContributorsResultSet(
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         ?string $projectId = null
     ): ResultSet {
         return $this->createTopContributorsQuery($start, $end, $projectId)->search();
     }
 
     public function getMostUsedProposalCategoriesResultSet(
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         ?string $projectId = null
     ): ResultSet {
         return $this->createMostUsedProposalCategoriesQuery($start, $end, $projectId)->search();
     }
 
     public function getParticipantsResultSet(
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         ?string $projectId = null
     ): ResultSet {
         return $this->createContributorsQuery($start, $end, $projectId)->search();
     }
 
     public function createAnonymousContributorsQuery(
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         ?string $projectId = null
     ): \Elastica\Search {
         // the object should either be debateAnonymousVote or an anonymous reply
@@ -178,8 +176,8 @@ class AnalyticsSearch
             ->addFilter($objectTypeBoolQuery)
             ->addFilter(
                 new Range('createdAt', [
-                    'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lt' => $end->format(DateTimeInterface::ATOM),
+                    'gte' => $start->format(\DateTimeInterface::ATOM),
+                    'lt' => $end->format(\DateTimeInterface::ATOM),
                 ])
             )
             ->addFilter(new Query\Term(['published' => true]))
@@ -202,7 +200,7 @@ class AnalyticsSearch
         return $this->index->createSearch($query);
     }
 
-    public function addDateHistogram(string $name, string $field, DateTimeInterface $start, DateTimeInterface $end): DateHistogram
+    public function addDateHistogram(string $name, string $field, \DateTimeInterface $start, \DateTimeInterface $end): DateHistogram
     {
         return (new DateHistogram(
             $name,
@@ -224,16 +222,16 @@ class AnalyticsSearch
     }
 
     private function createUserRegistrationsQuery(
-        DateTimeInterface $start,
-        DateTimeInterface $end
+        \DateTimeInterface $start,
+        \DateTimeInterface $end
     ): \Elastica\Search {
         $boolQuery = new BoolQuery();
         $boolQuery
             ->addFilter(new Query\Terms('objectType', ['user']))
             ->addFilter(
                 new Range('createdAt', [
-                    'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lt' => $end->format(DateTimeInterface::ATOM),
+                    'gte' => $start->format(\DateTimeInterface::ATOM),
+                    'lt' => $end->format(\DateTimeInterface::ATOM),
                 ])
             )
             ->addFilter(new Query\Term(['enabled' => true]))
@@ -250,8 +248,8 @@ class AnalyticsSearch
     }
 
     private function createVotesQuery(
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         ?string $projectId = null
     ): \Elastica\Search {
         $boolQuery = new BoolQuery();
@@ -259,8 +257,8 @@ class AnalyticsSearch
             ->addFilter(new Query\Terms('objectType', ['vote', 'debateAnonymousVote']))
             ->addFilter(
                 new Range('createdAt', [
-                    'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lt' => $end->format(DateTimeInterface::ATOM),
+                    'gte' => $start->format(\DateTimeInterface::ATOM),
+                    'lt' => $end->format(\DateTimeInterface::ATOM),
                 ])
             )
             ->addFilter(new Query\Term(['published' => true]))
@@ -286,8 +284,8 @@ class AnalyticsSearch
     }
 
     private function createCommentsQuery(
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         ?string $projectId = null
     ): \Elastica\Search {
         $boolQuery = new BoolQuery();
@@ -295,8 +293,8 @@ class AnalyticsSearch
             ->addFilter(new Query\Terms('objectType', ['comment']))
             ->addFilter(
                 new Range('createdAt', [
-                    'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lt' => $end->format(DateTimeInterface::ATOM),
+                    'gte' => $start->format(\DateTimeInterface::ATOM),
+                    'lt' => $end->format(\DateTimeInterface::ATOM),
                 ])
             )
             ->addFilter(new Query\Term(['published' => true]))
@@ -331,8 +329,8 @@ class AnalyticsSearch
     }
 
     private function createContributionsQuery(
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         ?string $projectId = null
     ): \Elastica\Search {
         // Does not include comments, since the comments are separately computed
@@ -357,15 +355,15 @@ class AnalyticsSearch
     }
 
     private function createFollowersQuery(
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         ?string $projectId = null
     ): \Elastica\Search {
         $boolQuery = new BoolQuery();
         $boolQuery->addFilter(new Query\Term(['objectType' => 'follower']))->addFilter(
             new Range('followedAt', [
-                'gte' => $start->format(DateTimeInterface::ATOM),
-                'lt' => $end->format(DateTimeInterface::ATOM),
+                'gte' => $start->format(\DateTimeInterface::ATOM),
+                'lt' => $end->format(\DateTimeInterface::ATOM),
             ])
         );
 
@@ -389,16 +387,16 @@ class AnalyticsSearch
     }
 
     private function createTopContributorsQuery(
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         int $topContributorsCount,
         ?string $projectId = null
     ): \Elastica\Search {
         $boolQuery = new BoolQuery();
         $boolQuery->addFilter(new Query\Term(['published' => true]))->addFilter(
             new Range('createdAt', [
-                'gte' => $start->format(DateTimeInterface::ATOM),
-                'lt' => $end->format(DateTimeInterface::ATOM),
+                'gte' => $start->format(\DateTimeInterface::ATOM),
+                'lt' => $end->format(\DateTimeInterface::ATOM),
             ])
         );
         if ($projectId) {
@@ -430,8 +428,8 @@ class AnalyticsSearch
     private function createAggregatedQuery(
         array $objectTypes,
         string $aggregationName,
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         ?string $projectId = null,
         string $aggregatedField = 'createdAt'
     ): \Elastica\Search {
@@ -440,8 +438,8 @@ class AnalyticsSearch
             ->addFilter(new Query\Terms('objectType', $objectTypes))
             ->addFilter(
                 new Range($aggregatedField, [
-                    'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lt' => $end->format(DateTimeInterface::ATOM),
+                    'gte' => $start->format(\DateTimeInterface::ATOM),
+                    'lt' => $end->format(\DateTimeInterface::ATOM),
                 ])
             )
             ->addFilter(new Query\Term(['published' => true]))
@@ -462,8 +460,8 @@ class AnalyticsSearch
     }
 
     private function createMostUsedProposalCategoriesQuery(
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         ?string $projectId = null
     ): \Elastica\Search {
         $boolQuery = new Query\BoolQuery();
@@ -471,8 +469,8 @@ class AnalyticsSearch
             ->addFilter(new Query\Term(['objectType' => 'proposal']))
             ->addFilter(
                 new Range('createdAt', [
-                    'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lt' => $end->format(DateTimeInterface::ATOM),
+                    'gte' => $start->format(\DateTimeInterface::ATOM),
+                    'lt' => $end->format(\DateTimeInterface::ATOM),
                 ])
             )
             ->addFilter(new Query\Term(['published' => true]))
@@ -498,16 +496,16 @@ class AnalyticsSearch
     }
 
     private function createContributorsQuery(
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         ?string $projectId = null
     ): \Elastica\Search {
         $boolQuery = new Query\BoolQuery();
         $boolQuery
             ->addFilter(
                 new Range('createdAt', [
-                    'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lt' => $end->format(DateTimeInterface::ATOM),
+                    'gte' => $start->format(\DateTimeInterface::ATOM),
+                    'lt' => $end->format(\DateTimeInterface::ATOM),
                 ])
             )
             ->addFilter(new Query\Term(['published' => true]))
@@ -584,8 +582,8 @@ class AnalyticsSearch
      * It avoid getting too much data on a low pitch.
      */
     private function getDateHistogramInterval(
-        DateTimeInterface $start,
-        DateTimeInterface $end
+        \DateTimeInterface $start,
+        \DateTimeInterface $end
     ): string {
         $daysDiff = $start->diff($end)->days;
         $dateHistogramInterval = 'day';

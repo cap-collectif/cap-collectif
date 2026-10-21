@@ -10,8 +10,7 @@ class AppLogUserRoleResolver implements QueryInterface
 {
     public function __construct(
         private readonly Manager $toggleManager,
-    ) {
-    }
+    ) {}
 
     /**
      * @return string[]

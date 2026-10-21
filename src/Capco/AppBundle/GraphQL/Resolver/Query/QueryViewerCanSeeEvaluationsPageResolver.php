@@ -18,8 +18,7 @@ class QueryViewerCanSeeEvaluationsPageResolver implements QueryInterface
         private ProposalAnalystRepository $analystRepo,
         private ProposalSupervisorRepository $supervisorRepo,
         private ProposalDecisionMakerRepository $decisionMakerRepo
-    ) {
-    }
+    ) {}
 
     /**
      * A user that can access "Evaluations page" is a user that is assigned to at least

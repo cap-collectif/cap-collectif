@@ -52,8 +52,7 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface, C
         private readonly ObjectNormalizer $normalizer,
         private Manager $manager,
         private ContributionSearch $contributionSearch
-    ) {
-    }
+    ) {}
 
     public function hasCacheableSupportsMethod(): bool
     {
@@ -128,8 +127,7 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface, C
         $data['total' . ucfirst($aggregatePrefix) . 'Count'] = $results->getTotalHits();
 
         foreach (
-            $results->getAggregation($aggregatePrefix . 'ByProject')['buckets']
-            as $projectResults
+            $results->getAggregation($aggregatePrefix . 'ByProject')['buckets'] as $projectResults
         ) {
             $resultsCountByProject[] = [
                 'count' => $projectResults['doc_count'],
@@ -146,8 +144,7 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface, C
                         && !empty($stepResults[$aggregatePrefix . 'ByConsultation']['buckets'])
                     ) {
                         foreach (
-                            $stepResults[$aggregatePrefix . 'ByConsultation']['buckets']
-                            as $consultationResults
+                            $stepResults[$aggregatePrefix . 'ByConsultation']['buckets'] as $consultationResults
                         ) {
                             $resultsCountByConsultation[] = [
                                 'count' => $consultationResults['doc_count'],

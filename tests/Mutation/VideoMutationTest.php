@@ -22,18 +22,21 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Invokes GraphQL mutations directly with mocked dependencies instead of verifying the HTTP
  * contract and persisted effects.
  */
 class VideoMutationTest extends TestCase
 {
-    private MockObject & EntityManagerInterface $entityManager;
-    private MockObject & LocaleRepository $localeRepository;
-    private MockObject & MediaRepository $mediaRepository;
-    private MockObject & UserRepository $userRepository;
-    private MockObject & VideoRepository $videoRepository;
+    private EntityManagerInterface&MockObject $entityManager;
+    private LocaleRepository&MockObject $localeRepository;
+    private MediaRepository&MockObject $mediaRepository;
+    private MockObject&UserRepository $userRepository;
+    private MockObject&VideoRepository $videoRepository;
 
     protected function setUp(): void
     {

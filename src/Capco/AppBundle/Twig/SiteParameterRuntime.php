@@ -16,14 +16,14 @@ class SiteParameterRuntime implements RuntimeExtensionInterface
         protected SiteParameterResolver $resolver,
         protected RedisCache $cache,
         protected RequestStack $requestStack
-    ) {
-    }
+    ) {}
 
     public function getSiteParameterValue(string $key)
     {
         $request = $this->requestStack->getCurrentRequest();
         $defaultLocale = $this->resolver->getDefaultLocale();
         $locale = $request ? $request->getLocale() : $defaultLocale;
+
         /** @var CacheItemInterface $cachedItem */
         $cachedItem = $this->cache->getItem(self::getCacheKey($key, $locale));
         // sometimes, the cache failed, the item is hited but value is null. So, in this case we force to get the value

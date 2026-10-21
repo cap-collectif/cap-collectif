@@ -11,8 +11,7 @@ class ReplyUrlResolver implements QueryInterface
 {
     public function __construct(
         private readonly UrlResolver $urlResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Reply $reply): string
     {

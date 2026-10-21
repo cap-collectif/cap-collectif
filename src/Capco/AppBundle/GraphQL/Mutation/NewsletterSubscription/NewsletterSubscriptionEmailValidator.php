@@ -14,8 +14,7 @@ class NewsletterSubscriptionEmailValidator
     public function __construct(
         private readonly ValidatorInterface $validator,
         private readonly NewsletterSubscriptionRepository $newsletterSubscriptionRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Same rules as the NewsletterSubscription entity constraints (NotBlank, Email, UniqueEntity on email).

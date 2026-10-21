@@ -18,13 +18,9 @@ final class Version20210913100651 extends AbstractMigration
         return 'fix send_name as not translatable';
     }
 
-    public function up(Schema $schema): void
-    {
-    }
+    public function up(Schema $schema): void {}
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 
     public function postUp(Schema $schema): void
     {

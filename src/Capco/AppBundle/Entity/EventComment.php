@@ -12,7 +12,9 @@ class EventComment extends Comment
 {
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Event", inversedBy="comments", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="event_id", referencedColumnName="id", onDelete="CASCADE")
+     *
      * @Assert\NotNull()
      */
     private $Event;

@@ -8,9 +8,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class AuthCacheSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private readonly TokenStorageInterface $tokenStorage)
-    {
-    }
+    public function __construct(private readonly TokenStorageInterface $tokenStorage) {}
 
     public static function getSubscribedEvents(): array
     {

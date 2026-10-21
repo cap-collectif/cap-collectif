@@ -24,8 +24,7 @@ class DecisionSubscriber implements EventSubscriberInterface
         private readonly SelectionRepository $selectionRepository,
         private readonly EntityManagerInterface $entityManager,
         private readonly Indexer $indexer
-    ) {
-    }
+    ) {}
 
     public static function getSubscribedEvents(): array
     {

@@ -28,8 +28,7 @@ class SiteParameterCacheSubscriber implements EventSubscriber
         private readonly RedisCache $cache,
         private readonly EntityManagerInterface $entityManager,
         private readonly SiteParameterResolver $siteParameterResolver
-    ) {
-    }
+    ) {}
 
     public function getSubscribedEvents(): array
     {

@@ -12,8 +12,7 @@ class WidgetController extends Controller
 {
     public function __construct(
         private readonly GlobalIdResolver $globalIdResolver
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/widget_debate/{debateId}", name="widget_debate", options={"i18n" = false})

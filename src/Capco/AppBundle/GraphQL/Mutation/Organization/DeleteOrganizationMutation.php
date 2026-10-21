@@ -33,8 +33,7 @@ class DeleteOrganizationMutation implements MutationInterface
         private readonly OrganizationRepository $organizationRepository,
         private readonly PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository,
         private readonly UserInviteRepository $userInviteRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $viewer): array
     {

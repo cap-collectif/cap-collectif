@@ -204,7 +204,7 @@ class CreateCsvFromConsultationStepCommand extends BaseExportCommand
 
     protected const COLUMN_MAPPING = [
         'type' => '',
-        //contrib
+        // contrib
         'contributions_id' => 'id',
         'contributions_author_id' => 'author.id',
         'contributions_author_type_name' => 'author.userType.name',
@@ -229,16 +229,16 @@ class CreateCsvFromConsultationStepCommand extends BaseExportCommand
         'contributions_argumentsCountAgainst' => 'argumentsAgainst.totalCount',
         'contributions_sourcesCount' => 'sources.totalCount',
         'contributions_versionsCount' => 'versions.totalCount',
-        //context_elements
+        // context_elements
         'contributions_context_element_title' => 'appendix.appendixType.title',
         'contributions_context_element_bodyText' => 'appendix.bodyText',
-        //vote
+        // vote
         'contributions_votes_id' => 'vote.id',
         'contributions_votes_related_id' => 'contribution.id',
         'contributions_votes_author_id' => 'vote.author.id',
         'contributions_votes_value' => 'vote.value',
         'contributions_votes_createdAt' => 'vote.createdAt',
-        //argument
+        // argument
         'contributions_arguments_related_id' => 'argument.related.id',
         'contributions_arguments_related_kind' => 'argument.related.kind',
         'contributions_arguments_id' => 'argument.id',
@@ -254,7 +254,7 @@ class CreateCsvFromConsultationStepCommand extends BaseExportCommand
         'contributions_arguments_trashedAt' => 'argument.trashedAt',
         'contributions_arguments_trashedReason' => 'argument.trashedReason',
         'contributions_arguments_votesCount' => 'argument.votes.totalCount',
-        //reportings
+        // reportings
         'contributions_reportings_related_id' => 'reporting.related.id',
         'contributions_reportings_related_kind' => 'reporting.related.kind',
         'contributions_reportings_id' => 'reporting.id',
@@ -262,7 +262,7 @@ class CreateCsvFromConsultationStepCommand extends BaseExportCommand
         'contributions_reportings_type' => 'reporting.type',
         'contributions_reportings_body' => 'reporting.body',
         'contributions_reportings_createdAt' => 'reporting.createdAt',
-        //sources
+        // sources
         'contributions_sources_id' => 'source.id',
         'contributions_sources_related_id' => 'source.related.id',
         'contributions_sources_related_kind' => 'source.related.kind',
@@ -276,7 +276,7 @@ class CreateCsvFromConsultationStepCommand extends BaseExportCommand
         'contributions_sources_updatedAt' => 'source.updatedAt',
         'contributions_sources_published' => 'source.published',
         'contributions_sources_votesCount' => 'source.votes.totalCount',
-        //version
+        // version
         'contribution_versions_id' => 'version.id',
         'contribution_versions_author_id' => 'version.author.id',
         'contribution_versions_title' => 'version.title',
@@ -1032,7 +1032,7 @@ class CreateCsvFromConsultationStepCommand extends BaseExportCommand
                     // Get relative path for "module" using convention "${type}." but still customizable to prevent
                     // a contribution from having path beginning like this as well
                     $arr = explode('.', substr($columnName, \strlen($submodulePath)));
-                //In this case, we want to refer to the contribution link to the submodule
+                // In this case, we want to refer to the contribution link to the submodule
                 } elseif ($this->isSubdataBlocColumn($columnName, 'contribution.')) {
                     $arr = explode('.', substr($columnName, \strlen('contribution.')));
                     $this->recurviselySearchValue($arr, $contribution, $row);

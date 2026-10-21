@@ -22,7 +22,5 @@ class Version20180427094720 extends AbstractMigration implements ContainerAwareI
         $this->container->get(Manager::class)->activate('indexation');
     }
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 }

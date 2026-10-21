@@ -14,8 +14,8 @@ use Box\Spout\Reader\SheetInterface;
  */
 class SpoutHelper
 {
-    private array $rawHeadersArray = []; //Local array to hold the Raw Headers for performance
-    private array $formattedHeadersArray = []; //Row number where the header col is located in the file
+    private array $rawHeadersArray = []; // Local array to hold the Raw Headers for performance
+    private array $formattedHeadersArray = []; // Row number where the header col is located in the file
 
     /**
      * Initialize on a per sheet basis
@@ -27,7 +27,7 @@ class SpoutHelper
     ) {
         $this->flushHeaders();
 
-        $this->getFormattedHeaders($sheet); //Since this also calls the getRawHeaders, we will have both the arrays set at once
+        $this->getFormattedHeaders($sheet); // Since this also calls the getRawHeaders, we will have both the arrays set at once
     }
 
     /**
@@ -64,8 +64,8 @@ class SpoutHelper
             // Now format them
             foreach ($this->formattedHeadersArray as $key => $value) {
                 if (is_a($value, 'DateTime')) {
-                    //Somehow instanceOf does not work well with DateTime, hence using is_a -- ?
-                    $this->formattedHeadersArray[$key] = $value->format('Y-m-d'); //Since the dates in headers are avilable as DateTime Objects
+                    // Somehow instanceOf does not work well with DateTime, hence using is_a -- ?
+                    $this->formattedHeadersArray[$key] = $value->format('Y-m-d'); // Since the dates in headers are avilable as DateTime Objects
                 } elseif ($formatted) {
                     $this->formattedHeadersArray[$key] = strtolower(
                         str_replace(' ', '_', trim((string) $value))
@@ -116,7 +116,7 @@ class SpoutHelper
         $colCountDiff = $headerColCount - $rowColCount;
 
         if ($colCountDiff > 0) {
-            //Pad the rowArray with empty values
+            // Pad the rowArray with empty values
             $rowArray = array_pad($rowArray, $headerColCount, '');
         }
 

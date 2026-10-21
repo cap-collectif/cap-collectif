@@ -2,9 +2,7 @@
 
 namespace Capco\AppBundle\Exception;
 
-use Exception;
-
-class ContributorAlreadyUsedPhoneException extends Exception
+class ContributorAlreadyUsedPhoneException extends \Exception
 {
     public function __construct()
     {

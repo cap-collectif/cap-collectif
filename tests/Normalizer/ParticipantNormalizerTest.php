@@ -15,6 +15,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class ParticipantNormalizerTest extends TestCase
@@ -43,7 +44,9 @@ class ParticipantNormalizerTest extends TestCase
      * @param array<string, null|string> $expectedResult
      *
      * @throws ExceptionInterface
+     *
      * @phpunit-status non-compliant
+     *
      * @phpunit-reason Uses loose array equality for the serialized export contract instead of asserting the
      * expected values and types precisely.
      */
@@ -76,6 +79,7 @@ class ParticipantNormalizerTest extends TestCase
 
     /**
      * @phpunit-status compliant
+     *
      * @phpunit-reason Checks the normalizer public result with real per-test domain objects and controlled
      * service responses.
      */

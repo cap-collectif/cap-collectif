@@ -38,8 +38,7 @@ class AddProposalNewsMutation implements MutationInterface
         private readonly LocaleRepository $localeRepository,
         private readonly Publisher $publisher,
         private readonly PostUrlResolver $urlResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $viewer): array
     {

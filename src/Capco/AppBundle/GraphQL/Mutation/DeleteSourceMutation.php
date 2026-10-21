@@ -22,8 +22,7 @@ class DeleteSourceMutation implements MutationInterface
         private SourceRepository $sourceRepo,
         private RedisStorageHelper $redisStorage,
         private StepRequirementsResolver $stepRequirementsResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $viewer): array
     {

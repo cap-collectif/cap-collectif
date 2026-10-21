@@ -67,9 +67,6 @@ class FacebookResourceOwner extends GenericOAuth2ResourceOwner
         parent::__construct($hwiHttpClient, $httpUtils, $options, $name, $hwiStorage);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUserInformation(array $accessToken, array $extraParameters = []): UserResponseInterface
     {
         if ($this->options['appsecret_proof']) {
@@ -82,7 +79,7 @@ class FacebookResourceOwner extends GenericOAuth2ResourceOwner
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $redirectUri
      */
     public function getAuthorizationUrl($redirectUri, array $extraParameters = []): string
     {
@@ -105,7 +102,7 @@ class FacebookResourceOwner extends GenericOAuth2ResourceOwner
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $redirectUri
      */
     public function getAccessToken(Request $request, $redirectUri, array $extraParameters = []): array
     {
@@ -124,7 +121,7 @@ class FacebookResourceOwner extends GenericOAuth2ResourceOwner
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $token
      */
     public function revokeToken($token): bool
     {
@@ -138,9 +135,6 @@ class FacebookResourceOwner extends GenericOAuth2ResourceOwner
         return 200 === $response->getStatusCode();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);

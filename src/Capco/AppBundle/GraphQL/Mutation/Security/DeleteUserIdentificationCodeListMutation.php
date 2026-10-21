@@ -20,8 +20,7 @@ class DeleteUserIdentificationCodeListMutation implements MutationInterface
     public function __construct(
         private readonly EntityManagerInterface $em,
         private readonly UserIdentificationCodeListRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input): array
     {

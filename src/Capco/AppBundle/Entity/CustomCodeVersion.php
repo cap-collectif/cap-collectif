@@ -8,7 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=CustomCodeVersionRepository::class)
+ *
  * @ORM\Table(name="custom_code_version", indexes={
+ *
  *     @ORM\Index(name="custom_code_version_keyname_created_at_idx", columns={"keyname", "created_at"})
  * })
  */
@@ -67,6 +69,7 @@ class CustomCodeVersion
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\CustomCodeVersion")
+     *
      * @ORM\JoinColumn(name="restored_from_version_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private ?self $restoredFromVersion = null;

@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\OpinionModal;
 use Capco\AppBundle\Helper\ConvertCsvToArray;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
-use InvalidArgumentException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -56,7 +55,7 @@ class ImportConsultationModalsCommand extends Command
             ->findOneBySlug($input->getArgument('step'))
         ;
         if (!\is_object($step)) {
-            throw new InvalidArgumentException('Unknown step with slug ' . $input->getArgument('step'), 1);
+            throw new \InvalidArgumentException('Unknown step with slug ' . $input->getArgument('step'), 1);
         }
 
         $modals = $this->getModals($input->getArgument('filePath'));
@@ -70,7 +69,7 @@ class ImportConsultationModalsCommand extends Command
             ;
 
             if (!\is_object($opinion)) {
-                throw new InvalidArgumentException('Unknown title: ' . $row['opinion'], 1);
+                throw new \InvalidArgumentException('Unknown title: ' . $row['opinion'], 1);
             }
 
             $modal = new OpinionModal();

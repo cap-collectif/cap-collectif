@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     name="proposal_step_paper_vote_counter",
  *     uniqueConstraints={@ORM\UniqueConstraint(columns={"step_id", "proposal_id"})}
  *     )
+ *
  * @ORM\Entity(repositoryClass=ProposalStepPaperVoteCounterRepository::class)
  */
 class ProposalStepPaperVoteCounter implements EntityInterface, ExportableContributionInterface
@@ -23,14 +24,18 @@ class ProposalStepPaperVoteCounter implements EntityInterface, ExportableContrib
 
     /**
      * @ORM\Id
+     *
      * @ORM\ManyToOne(targetEntity=Proposal::class, inversedBy="paperVotes")
+     *
      * @ORM\JoinColumn(nullable=false)
      */
     private Proposal $proposal;
 
     /**
      * @ORM\Id
+     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep", inversedBy="proposalStepPaperVoteCounters")
+     *
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=false)
      */
     private AbstractStep $step;

@@ -14,8 +14,7 @@ class MailjetTransport implements \Swift_Transport
 
     public function __construct(
         protected \Swift_Events_EventDispatcher $dispatcher
-    ) {
-    }
+    ) {}
 
     /**
      * Not used.
@@ -28,16 +27,12 @@ class MailjetTransport implements \Swift_Transport
     /**
      * Not used.
      */
-    public function start()
-    {
-    }
+    public function start() {}
 
     /**
      * Not used.
      */
-    public function stop()
-    {
-    }
+    public function stop() {}
 
     /**
      * Not used.

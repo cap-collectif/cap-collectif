@@ -9,6 +9,4 @@ use Doctrine\ORM\EntityRepository;
  * @method null|SimpleQuestion findOneBy(array $criteria, array $orderBy = null)
  * @method null|SimpleQuestion find($id, $lockMode = null, $lockVersion = null)
  */
-class SimpleQuestionRepository extends EntityRepository
-{
-}
+class SimpleQuestionRepository extends EntityRepository {}

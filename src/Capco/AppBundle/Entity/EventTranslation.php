@@ -15,9 +15,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\EventTranslationRepository")
+ *
  * @ORM\Table(
  *  name="event_translation",
  *  uniqueConstraints={
+ *
  *    @ORM\UniqueConstraint(
  *      name="translation_unique",
  *      columns={"translatable_id", "locale"}
@@ -34,12 +36,14 @@ class EventTranslation implements EntityInterface, TranslationInterface, \String
 
     /**
      * @Gedmo\Slug(fields={"title"}, updatable=false, unique=true)
+     *
      * @ORM\Column(length=255, nullable=false, unique=true)
      */
     protected $slug;
 
     /**
      * @ORM\Column(name="link", type="string", length=255, nullable=true)
+     *
      * @Assert\Url()
      */
     private $link;

@@ -35,8 +35,7 @@ class AddOpinionVoteMutation implements MutationInterface
         private OpinionVersionRepository $versionRepo,
         private OpinionVersionVoteRepository $versionVoteRepo,
         private StepRequirementsResolver $stepRequirementsResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

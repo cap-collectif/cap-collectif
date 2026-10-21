@@ -11,6 +11,7 @@ trait TimestampableTrait
 
     /**
      * @Gedmo\Timestampable(on="create")
+     *
      * @ORM\Column(name="created_at", type="datetime")
      */
     protected ?\DateTimeInterface $createdAt = null;

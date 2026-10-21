@@ -33,8 +33,7 @@ class GroupMutation implements MutationInterface
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly EmailingCampaignRepository $emailingCampaignRepository,
         private readonly GroupService $groupService
-    ) {
-    }
+    ) {}
 
     /**
      * @param string[] $emails

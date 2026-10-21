@@ -294,9 +294,11 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $proposal->getAuthor()->willReturn($author);
         $proposal->getComments()->willReturn(new ArrayCollection());
         $proposalSelectionVoteRepository->getVotesForProposal($proposal, 200, 0)
-            ->willReturn([])->shouldBeCalledOnce();
+            ->willReturn([])->shouldBeCalledOnce()
+        ;
         $proposalCollectVoteRepository->getVotesForProposal($proposal, 200, 0)
-            ->willReturn([])->shouldBeCalledOnce();
+            ->willReturn([])->shouldBeCalledOnce()
+        ;
 
         $author->getId()->willReturn('user1');
 

@@ -14,8 +14,7 @@ class CarrouselElementConfigurationResolver implements QueryInterface
 {
     public function __construct(
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     /**
      * @return ConnectionInterface|Promise

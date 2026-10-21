@@ -15,8 +15,7 @@ class DeleteMediaAdminMutation implements MutationInterface
     public function __construct(
         protected MediaRepository $mediaRepository,
         protected MediaManager $mediaManager
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input): array
     {

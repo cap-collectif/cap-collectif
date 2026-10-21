@@ -40,7 +40,5 @@ final class Version20260708170000 extends AbstractMigration
         $this->addSql($sql);
     }
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 }

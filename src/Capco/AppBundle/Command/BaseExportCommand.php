@@ -29,7 +29,7 @@ abstract class BaseExportCommand extends Command
         bool $projectAdmin = false,
         ExportVariantsEnum $variant = ExportVariantsEnum::FULL
     ): string {
-        //If filename is too long (> 255) it will cause an error since it includes path, we check for 230 characters
+        // If filename is too long (> 255) it will cause an error since it includes path, we check for 230 characters
         if (\strlen($filename) >= 230) {
             $filename = md5($filename);
         }

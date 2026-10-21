@@ -19,11 +19,10 @@ class DeleteHttpRedirectMutation implements MutationInterface
         private readonly EntityManagerInterface $entityManager,
         private readonly HttpRedirectRepository $httpRedirectRepository,
         private readonly HttpRedirectCacheInvalidator $httpRedirectCacheInvalidator
-    ) {
-    }
+    ) {}
 
     /**
-     * @return array{deletedRedirectId?: string|null, errorCode?: string|null}
+     * @return array{deletedRedirectId?: null|string, errorCode?: null|string}
      */
     public function __invoke(Argument $input): array
     {

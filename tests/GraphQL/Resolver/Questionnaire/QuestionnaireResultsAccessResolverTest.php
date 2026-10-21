@@ -17,8 +17,11 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises fail-closed identity checks and missing credentials using real domain objects.
  */
 class QuestionnaireResultsAccessResolverTest extends TestCase

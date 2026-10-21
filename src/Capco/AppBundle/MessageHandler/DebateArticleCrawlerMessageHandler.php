@@ -15,8 +15,7 @@ class DebateArticleCrawlerMessageHandler
         private readonly EntityManagerInterface $entityManager,
         private readonly DebateArticleRepository $repository,
         private readonly DebateArticleMetadataCrawler $metadataCrawler
-    ) {
-    }
+    ) {}
 
     public function __invoke(DebateArticleCrawlerMessage $message): void
     {

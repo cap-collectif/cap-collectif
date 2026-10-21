@@ -9,8 +9,7 @@ class FranceConnectAllowedDataResolver implements QueryInterface
 {
     public function __construct(
         private readonly FranceConnectSSOConfigurationRepository $configurationRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(): array
     {

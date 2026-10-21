@@ -18,8 +18,8 @@ use Doctrine\ORM\NoResultException;
 class AppLogRepository extends EntityRepository
 {
     /**
-     * @param array{field: string|null, direction: string|null}              $direction
-     * @param null|array{startedAt: \DateTime|null, endedAt: \DateTime|null} $dateRange
+     * @param array{field: null|string, direction: null|string}              $direction
+     * @param null|array{startedAt: null|\DateTime, endedAt: null|\DateTime} $dateRange
      *
      * @return object[]
      */
@@ -144,7 +144,7 @@ class AppLogRepository extends EntityRepository
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult()
-            ;
+        ;
     }
 
     public function getOldestLogDate(): \DateTime

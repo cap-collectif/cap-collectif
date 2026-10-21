@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
-use ArrayObject;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\UserConnectionRepository;
 use Capco\UserBundle\Entity\User;
@@ -22,7 +21,7 @@ class UserConnectionResolver implements QueryInterface
         $this->userConnectionRepository = $connectionRepository;
     }
 
-    public function __invoke(User $user, Argument $args, $viewer, ?ArrayObject $context)
+    public function __invoke(User $user, Argument $args, $viewer, ?\ArrayObject $context)
     {
         $userId = $user->getId();
         $email = $args->offsetGet('email');

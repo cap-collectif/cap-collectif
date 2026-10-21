@@ -11,6 +11,4 @@ use Doctrine\ORM\EntityRepository;
  * @method OfficialResponseAuthor[]    findAll()
  * @method OfficialResponseAuthor[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class OfficialResponseAuthorRepository extends EntityRepository
-{
-}
+class OfficialResponseAuthorRepository extends EntityRepository {}

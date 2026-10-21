@@ -13,8 +13,7 @@ class ThemeUrlResolver implements QueryInterface
     public function __construct(
         private readonly RouterInterface $router,
         private readonly GraphQLLocaleResolver $localeResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Theme $theme): string
     {

@@ -12,14 +12,19 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProjectTabRepository")
+ *
  * @ORM\Table(
  *     name="project_tab",
  *     uniqueConstraints={
+ *
  *         @ORM\UniqueConstraint(name="project_tab_project_slug_unique", columns={"project_id", "slug"})
  *     }
  * )
+ *
  * @ORM\InheritanceType("JOINED")
+ *
  * @ORM\DiscriminatorColumn(name="type", type="string")
+ *
  * @ORM\DiscriminatorMap({
  *     ProjectTabType::PRESENTATION = "Capco\AppBundle\Entity\ProjectTabPresentation",
  *     ProjectTabType::NEWS = "Capco\AppBundle\Entity\ProjectTabNews",
@@ -34,14 +39,18 @@ abstract class ProjectTab implements EntityInterface, \Stringable
 
     /**
      * @ORM\Column(name="title", type="string", length=255, nullable=false)
+     *
      * @Assert\NotBlank()
+     *
      * @Assert\NotNull()
      */
     protected string $title;
 
     /**
      * @ORM\Column(name="slug", type="string", length=255, nullable=false)
+     *
      * @Assert\NotBlank()
+     *
      * @Assert\NotNull()
      */
     protected string $slug;
@@ -53,14 +62,18 @@ abstract class ProjectTab implements EntityInterface, \Stringable
 
     /**
      * @Gedmo\Timestampable(on="create")
+     *
      * @ORM\Column(name="created_at", type="datetime")
      */
     protected ?\DateTimeInterface $createdAt = null;
 
     /**
      * @Gedmo\SortableGroup
+     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Project", inversedBy="tabs", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     *
      * @Assert\NotNull()
      */
     protected ?Project $project = null;

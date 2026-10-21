@@ -13,8 +13,7 @@ class LegalSettingsQueryResolver implements QueryInterface
     public function __construct(
         private readonly SiteParameterRepository $repository,
         private readonly EntityManagerInterface $entityManager
-    ) {
-    }
+    ) {}
 
     /**
      * @return SiteParameter[]

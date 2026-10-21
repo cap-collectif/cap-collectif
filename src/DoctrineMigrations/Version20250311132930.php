@@ -45,7 +45,5 @@ final class Version20250311132930 extends AbstractMigration
         $this->addSql('drop index participant__index__phone on participant');
     }
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 }

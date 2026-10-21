@@ -26,8 +26,7 @@ class DeleteAnonymousReplyMutation implements MutationInterface
         private Publisher $publisher,
         private GlobalIdResolver $globalIdResolver,
         private ParticipantAuthentication $participantAuthentication,
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): array
     {
@@ -87,6 +86,7 @@ class DeleteAnonymousReplyMutation implements MutationInterface
         if (!$participant) {
             throw new UserError('Participant not found.');
         }
+
         /** * @var Reply $reply  */
         $reply = $this->globalIdResolver->resolve($replyId, $participant);
 

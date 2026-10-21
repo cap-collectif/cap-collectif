@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
  * @method FacebookSSOConfiguration[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) */
 class FacebookSSOConfigurationRepository extends EntityRepository
 {
-    //one and only one configuration is expected
+    // one and only one configuration is expected
     public function get(): ?FacebookSSOConfiguration
     {
         return $this->findOneBy([]);

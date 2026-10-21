@@ -19,8 +19,7 @@ class DistrictMutation implements MutationInterface
         private readonly EntityManagerInterface $entityManager,
         private readonly FormFactoryInterface $formFactory,
         private readonly GlobalIdResolver $globalIdResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, $viewer): array
     {

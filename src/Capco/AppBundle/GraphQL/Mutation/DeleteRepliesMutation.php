@@ -25,8 +25,7 @@ class DeleteRepliesMutation implements MutationInterface
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly Indexer $indexer,
         private readonly LoggerInterface $logger,
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args, User $viewer): array
     {

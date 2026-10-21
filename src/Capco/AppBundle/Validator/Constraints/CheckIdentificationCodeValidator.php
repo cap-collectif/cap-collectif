@@ -10,8 +10,7 @@ class CheckIdentificationCodeValidator extends ConstraintValidator
 {
     public function __construct(
         private readonly UserIdentificationCodeRepository $codeRepository
-    ) {
-    }
+    ) {}
 
     public function validate($userIdentificationCode, Constraint $constraint)
     {

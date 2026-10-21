@@ -20,8 +20,7 @@ class OpinionViewerVoteResolver implements QueryInterface
         private OpinionVoteRepository $opinionVoteRepository,
         private OpinionVersionVoteRepository $versionVoteRepository,
         private LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(OpinionContributionInterface $contribution, $viewer): ?AbstractVote
     {

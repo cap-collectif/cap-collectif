@@ -34,8 +34,7 @@ final class SynchronizeHubApiGreenMediaMutation implements MutationInterface
         private readonly EntityManagerInterface $entityManager,
         private readonly string $hubApiGreenS3Bucket,
         private readonly string $hubApiGreenS3PublicUrl
-    ) {
-    }
+    ) {}
 
     /**
      * @return array{stepId: ?string, aiotCode: ?string, folderNumber: ?string, synchronizedAt: ?\DateTime, errorCode: ?string}
@@ -208,7 +207,7 @@ final class SynchronizeHubApiGreenMediaMutation implements MutationInterface
         return null;
     }
 
-    private function normalizeDate(string|\DateTimeInterface $date): string
+    private function normalizeDate(\DateTimeInterface|string $date): string
     {
         return $date instanceof \DateTimeInterface ? $date->format('Y-m-d H:i:s') : $date;
     }

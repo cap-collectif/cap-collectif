@@ -11,8 +11,7 @@ class LocalizedPathResolver
     public function __construct(
         private readonly LocaleResolver $localeResolver,
         private readonly LocaleRepository $localeRepository
-    ) {
-    }
+    ) {}
 
     public function getCanonicalPathForLocale(string $path, string $localeCode): string
     {

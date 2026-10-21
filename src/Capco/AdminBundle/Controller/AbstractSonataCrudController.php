@@ -28,8 +28,7 @@ class AbstractSonataCrudController extends \Sonata\AdminBundle\Controller\CRUDCo
     public function __construct(
         protected BreadcrumbsBuilderInterface $breadcrumbsBuilder,
         protected Pool $pool
-    ) {
-    }
+    ) {}
 
     protected function addRenderExtraParams(array $parameters = []): array
     {

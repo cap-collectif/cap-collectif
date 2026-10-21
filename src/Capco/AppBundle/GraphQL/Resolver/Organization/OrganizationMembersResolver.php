@@ -15,8 +15,7 @@ class OrganizationMembersResolver implements QueryInterface
     public function __construct(
         private readonly OrganizationAdminAccessResolver $organizationAdminAccessResolver,
         private readonly OrganizationMemberRepository $memberRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(
         Organization $organization,

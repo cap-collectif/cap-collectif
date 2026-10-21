@@ -15,8 +15,11 @@ use Swarrot\Broker\Message;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status legacy
+ *
  * @phpunit-reason Exercises deprecated Swarrot processors directly; migrate the behavior to the HTTP or CLI
  * action and the supported message architecture.
  */
@@ -47,9 +50,13 @@ class CommentProcessorTest extends MailerSnapshotCommandTestCase
     public static function delegationScenarios(): iterable
     {
         yield 'create named author' => [CommentCreateProcessor::class, 'onCreate', 'proposalComment1'];
+
         yield 'create anonymous author' => [CommentCreateProcessor::class, 'onCreate', 'proposalComment6'];
+
         yield 'update named author' => [CommentUpdateProcessor::class, 'onUpdate', 'proposalComment1'];
+
         yield 'update anonymous author' => [CommentUpdateProcessor::class, 'onUpdate', 'proposalComment6'];
+
         yield 'anonymous email confirmation' => [CommentConfirmAnonymousEmailProcessor::class, 'onConfirmAnonymousEmail', 'proposalCommentConfirmationToken'];
     }
 
@@ -84,6 +91,7 @@ class CommentProcessorTest extends MailerSnapshotCommandTestCase
             'stepSlug' => 'collecte-des-propositions',
             'proposalSlug' => 'ravalement-de-la-facade-de-la-bibliotheque-municipale',
         ]];
+
         yield 'named author without configured notification email' => [[
             'username' => 'Suzanne Favot',
             'notifying' => true,
@@ -97,6 +105,7 @@ class CommentProcessorTest extends MailerSnapshotCommandTestCase
             'stepSlug' => 'collecte-des-propositions',
             'proposalSlug' => 'ravalement-de-la-facade-de-la-bibliotheque-municipale',
         ]];
+
         yield 'anonymous author' => [[
             'username' => 'Suzanne Favot',
             'notifying' => true,
@@ -144,24 +153,28 @@ class CommentProcessorTest extends MailerSnapshotCommandTestCase
             'notification.comment.create.subject',
             'notification.comment.create.body',
         ];
+
         yield 'create anonymous author' => [
             CommentCreateProcessor::class,
             'proposalComment6',
             'notification.comment.create.subject',
             'notification.comment.create.anonymous.body',
         ];
+
         yield 'update named author' => [
             CommentUpdateProcessor::class,
             'proposalComment1',
             'notification.comment.update.subject',
             'notification.comment.update.body',
         ];
+
         yield 'update anonymous author' => [
             CommentUpdateProcessor::class,
             'proposalComment6',
             'notification.email.anonymous.comment.update.subject',
             'notification.email.anonymous.comment.update.body',
         ];
+
         yield 'anonymous email confirmation' => [
             CommentConfirmAnonymousEmailProcessor::class,
             'proposalCommentConfirmationToken',
@@ -191,7 +204,7 @@ class CommentProcessorTest extends MailerSnapshotCommandTestCase
         self::assertStringContainsString($body, $message->getBody());
     }
 
-    /** @return iterable<string, array{array<string, mixed>, string, string, string|null}> */
+    /** @return iterable<string, array{array<string, mixed>, string, string, null|string}> */
     public static function deleteEmailScenarios(): iterable
     {
         $basePayload = [
@@ -215,6 +228,7 @@ class CommentProcessorTest extends MailerSnapshotCommandTestCase
             'notification.comment.delete.body',
             'sfavot@cap-collectif.com',
         ];
+
         yield 'named author without configured notification email' => [
             $basePayload + [
                 'anonymous' => false,
@@ -224,6 +238,7 @@ class CommentProcessorTest extends MailerSnapshotCommandTestCase
             'notification.comment.delete.body',
             null,
         ];
+
         yield 'anonymous author' => [
             $basePayload + [
                 'anonymous' => true,

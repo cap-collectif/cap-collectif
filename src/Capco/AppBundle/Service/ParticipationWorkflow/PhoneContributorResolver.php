@@ -13,8 +13,7 @@ class PhoneContributorResolver
     public function __construct(
         private readonly UserRepository $userRepository,
         private readonly ParticipantRepository $participantRepository
-    ) {
-    }
+    ) {}
 
     public function findConfirmedUserByPhone(ContributorInterface $contributor): ?User
     {

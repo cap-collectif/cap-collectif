@@ -20,7 +20,7 @@ class UpdateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
 {
     use MutationTrait;
 
-    //when we set the sendAt date, it must be in more than 5mn to be sure the cron can pass.
+    // when we set the sendAt date, it must be in more than 5mn to be sure the cron can pass.
     final public const SEND_AT_SECURITY = 5 * 60;
 
     public function __construct(

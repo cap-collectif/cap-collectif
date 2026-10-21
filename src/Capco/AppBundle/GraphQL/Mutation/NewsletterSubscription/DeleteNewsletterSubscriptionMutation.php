@@ -17,11 +17,10 @@ class DeleteNewsletterSubscriptionMutation implements MutationInterface
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
         private readonly NewsletterSubscriptionRepository $newsletterSubscriptionRepository
-    ) {
-    }
+    ) {}
 
     /**
-     * @return array{deletedNewsletterSubscriptionId: string|null, errorCode: string|null}
+     * @return array{deletedNewsletterSubscriptionId: null|string, errorCode: null|string}
      */
     public function __invoke(Argument $input): array
     {

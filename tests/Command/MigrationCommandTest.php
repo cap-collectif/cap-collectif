@@ -9,8 +9,11 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Drops and rebuilds the configured database without local isolation or restoration; keep
  * this dedicated CI check separate from ordinary test runs.
  */

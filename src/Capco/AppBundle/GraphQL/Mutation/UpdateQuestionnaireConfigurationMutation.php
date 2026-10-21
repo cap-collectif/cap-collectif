@@ -77,7 +77,7 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
         $oldChoices = null;
         unset($arguments['questionnaireId'], $arguments['isLogged']);
 
-        $questionnaire->setUpdatedAt(new \Datetime());
+        $questionnaire->setUpdatedAt(new \DateTime());
 
         $form = $this->formFactory->create(
             QuestionnaireConfigurationUpdateType::class,

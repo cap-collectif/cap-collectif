@@ -22,6 +22,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @internal
+ *
  * @covers \Capco\AppBundle\Service\VocalContributionUploadService
  */
 class VocalContributionUploadServiceTest extends TestCase

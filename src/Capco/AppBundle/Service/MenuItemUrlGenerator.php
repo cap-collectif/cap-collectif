@@ -12,8 +12,7 @@ class MenuItemUrlGenerator
     public function __construct(
         private readonly RouterInterface $router,
         private readonly ValidatorInterface $validator
-    ) {
-    }
+    ) {}
 
     public function generate(MenuItem $item, string $locale): string
     {

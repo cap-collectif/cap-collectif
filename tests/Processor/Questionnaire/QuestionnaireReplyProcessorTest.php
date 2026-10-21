@@ -12,8 +12,11 @@ use Swarrot\Broker\Message;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status legacy
+ *
  * @phpunit-reason Exercises deprecated Swarrot processors directly; migrate the behavior to the HTTP or CLI
  * action and the supported message architecture.
  */
@@ -44,7 +47,9 @@ class QuestionnaireReplyProcessorTest extends MailerSnapshotCommandTestCase
     public static function entityScenarios(): iterable
     {
         yield 'created reply' => [QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE, 'onCreate', 'reply1'];
+
         yield 'updated reply' => [QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_UPDATE_STATE, 'onUpdate', 'reply1'];
+
         yield 'published draft reply' => [QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE, 'onCreate', 'reply9'];
     }
 
@@ -107,21 +112,25 @@ class QuestionnaireReplyProcessorTest extends MailerSnapshotCommandTestCase
             'email.notification.questionnaire.reply.subject.create',
             'notifyQuestionnaireReply_create.html',
         ];
+
         yield 'questionnaire reply creation acknowledgement' => [
             ['replyId' => 'reply1', 'state' => 'create'],
             'reply.notify.user.create',
             'notifyUserQuestionnaireReply_create.html',
         ];
+
         yield 'questionnaire reply update for admin' => [
             ['replyId' => 'reply1', 'state' => 'update'],
             'email.notification.questionnaire.reply.subject.update',
             'notifyQuestionnaireReply_update.html',
         ];
+
         yield 'questionnaire reply update acknowledgement' => [
             ['replyId' => 'reply1', 'state' => 'update'],
             'reply.notify.user.update',
             'notifyUserQuestionnaireReply_update.html',
         ];
+
         yield 'questionnaire reply deletion' => [
             [
                 'reply' => [
@@ -138,6 +147,7 @@ class QuestionnaireReplyProcessorTest extends MailerSnapshotCommandTestCase
             'email.notification.questionnaire.reply.subject.delete',
             'notifyQuestionnaireReply_delete.html',
         ];
+
         yield 'published questionnaire draft acknowledgement' => [
             ['replyId' => 'reply9', 'state' => 'create'],
             'reply.notify.user.create',

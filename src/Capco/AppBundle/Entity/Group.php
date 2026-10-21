@@ -17,6 +17,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="user_group")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\GroupRepository")
  */
 class Group implements EntityInterface, \Stringable, ViewerPermissionInterface
@@ -29,6 +30,7 @@ class Group implements EntityInterface, \Stringable, ViewerPermissionInterface
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "description"})
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     protected ?\DateTimeInterface $updatedAt;

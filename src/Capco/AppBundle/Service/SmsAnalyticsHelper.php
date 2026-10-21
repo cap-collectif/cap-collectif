@@ -15,8 +15,7 @@ class SmsAnalyticsHelper
         private readonly UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository,
         private readonly AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository,
         private readonly ParticipantPhoneVerificationSmsRepository $participantPhoneVerificationSmsRepository
-    ) {
-    }
+    ) {}
 
     public function getTotalCredits(): int
     {

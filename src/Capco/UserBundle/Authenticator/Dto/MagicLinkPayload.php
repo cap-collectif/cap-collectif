@@ -16,8 +16,7 @@ class MagicLinkPayload
         private readonly string $redirect,
         private readonly \DateTimeInterface $createdAt = new \DateTimeImmutable(
         )
-    ) {
-    }
+    ) {}
 
     public static function createFromPayload(
         object $payload

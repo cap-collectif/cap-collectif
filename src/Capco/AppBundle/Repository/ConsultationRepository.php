@@ -125,7 +125,7 @@ class ConsultationRepository extends EntityRepository
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult()
-            ;
+        ;
     }
 
     public function countByOwner(Owner $owner, array $options): int
@@ -134,7 +134,7 @@ class ConsultationRepository extends EntityRepository
             ->select('count(p.id)')
             ->getQuery()
             ->getSingleScalarResult()
-            ;
+        ;
     }
 
     private function getByOwnerQueryBuilder(Owner $owner, array $options): QueryBuilder

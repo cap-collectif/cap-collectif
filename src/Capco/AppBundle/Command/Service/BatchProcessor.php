@@ -13,8 +13,7 @@ class BatchProcessor
 {
     public function __construct(
         private readonly EntityManagerInterface $entityManager
-    ) {
-    }
+    ) {}
 
     /**
      * @param array<string, Opinion|Proposal|User> $parameters

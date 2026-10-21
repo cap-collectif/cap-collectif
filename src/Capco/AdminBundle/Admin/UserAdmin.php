@@ -42,7 +42,7 @@ class UserAdmin extends CapcoAdmin
 
     protected function configureListFields(ListMapper $list): void
     {
-        //$this->setTemplate(
+        // $this->setTemplate(
         $list
             ->addIdentifier('username', null, [
                 'label' => 'global.fullname',

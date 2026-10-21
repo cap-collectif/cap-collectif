@@ -25,8 +25,7 @@ class DeleteQuestionnaireMutation implements MutationInterface
         private readonly AnalysisConfigurationRepository $analysisConfigurationRepository,
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly ActionLogger $actionLogger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

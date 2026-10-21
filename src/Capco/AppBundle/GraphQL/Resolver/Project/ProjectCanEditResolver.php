@@ -12,8 +12,7 @@ class ProjectCanEditResolver implements QueryInterface
 {
     public function __construct(
         private readonly AuthorizationCheckerInterface $authorizationChecker
-    ) {
-    }
+    ) {}
 
     public function __invoke(Project $project, ?User $viewer = null): bool
     {

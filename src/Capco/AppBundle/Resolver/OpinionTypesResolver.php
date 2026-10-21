@@ -16,8 +16,7 @@ class OpinionTypesResolver
         private readonly OpinionTypeRepository $opinionTypeRepo,
         private readonly OpinionRepository $opinionRepo,
         private readonly RouterInterface $router
-    ) {
-    }
+    ) {}
 
     public function findByStepAndSlug(ConsultationStep $step, string $slug): OpinionType
     {

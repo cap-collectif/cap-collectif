@@ -16,8 +16,7 @@ class ContributionsReconcilier
 {
     public function __construct(
         protected EntityManagerInterface $em
-    ) {
-    }
+    ) {}
 
     public function updateParticipantInfos(Participant $existingParticipant, Participant $newParticipant): void
     {
@@ -73,8 +72,7 @@ class ContributionsReconcilier
     {
         return $participant->getEmail() === $contributorTarget->getEmail()
             && $participant->isEmailConfirmed()
-            && $contributorTarget->isEmailConfirmed()
-        ;
+            && $contributorTarget->isEmailConfirmed();
     }
 
     private function isSameConfirmedPhone(Participant $participant, ContributorInterface $contributorTarget): bool
@@ -84,7 +82,6 @@ class ContributionsReconcilier
         return null !== $participantPhone
             && $participantPhone === $contributorTarget->getPhone()
             && $participant->isPhoneConfirmed()
-            && $contributorTarget->isPhoneConfirmed()
-        ;
+            && $contributorTarget->isPhoneConfirmed();
     }
 }

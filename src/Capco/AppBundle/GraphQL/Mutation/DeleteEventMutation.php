@@ -42,6 +42,7 @@ class DeleteEventMutation extends BaseDeleteMutation
     {
         $this->formatInput($input);
         $id = $input->offsetGet('eventId');
+
         /** @var Event $event */
         $event = $this->globalIdResolver->resolve($id, $viewer);
 

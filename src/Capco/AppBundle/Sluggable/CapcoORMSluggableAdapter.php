@@ -92,7 +92,9 @@ class CapcoORMSluggableAdapter extends BaseAdapterORM implements SluggableAdapte
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $object
+     * @param mixed $target
+     * @param mixed $replacement
      */
     public function replaceRelative($object, array $config, $target, $replacement)
     {
@@ -105,7 +107,7 @@ class CapcoORMSluggableAdapter extends BaseAdapterORM implements SluggableAdapte
                     ->expr()
                     ->concat(
                         $qb->expr()->literal($replacement),
-                        $qb->expr()->substring('rec.' . $config['slug'], mb_strlen($target))
+                        $qb->expr()->substring('rec.' . $config['slug'], mb_strlen((string) $target))
                     )
             )
             ->where(
@@ -119,7 +121,9 @@ class CapcoORMSluggableAdapter extends BaseAdapterORM implements SluggableAdapte
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $object
+     * @param mixed $target
+     * @param mixed $replacement
      */
     public function replaceInverseRelative($object, array $config, $target, $replacement)
     {
@@ -134,7 +138,7 @@ class CapcoORMSluggableAdapter extends BaseAdapterORM implements SluggableAdapte
                         $qb->expr()->literal($target),
                         $qb
                             ->expr()
-                            ->substring('rec.' . $config['slug'], mb_strlen($replacement) + 1)
+                            ->substring('rec.' . $config['slug'], mb_strlen((string) $replacement) + 1)
                     )
             )
             ->where(

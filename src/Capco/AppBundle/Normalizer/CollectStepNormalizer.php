@@ -23,8 +23,7 @@ class CollectStepNormalizer implements NormalizerInterface, SerializerAwareInter
         private CollectStepContributorCountResolver $collectStepContributorCountResolver,
         private PromiseAdapterInterface $adapter,
         private LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function hasCacheableSupportsMethod(): bool
     {

@@ -20,8 +20,7 @@ class DeleteOpinionMutation implements MutationInterface
         private EntityManagerInterface $em,
         private OpinionRepository $opinionRepo,
         private RedisStorageHelper $redisStorage
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $user): array
     {

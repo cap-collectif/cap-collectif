@@ -4,12 +4,13 @@ namespace Capco\AppBundle\Elasticsearch;
 
 class ElasticsearchPaginatedResult
 {
+    public int $totalPointsCount = 0;
+
     public function __construct(
         private array $entities,
         private array $cursors,
         private ?int $totalCount = 0
-    ) {
-    }
+    ) {}
 
     public function getEntities(): array
     {

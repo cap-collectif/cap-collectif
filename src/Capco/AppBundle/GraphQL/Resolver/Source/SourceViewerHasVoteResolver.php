@@ -12,8 +12,7 @@ class SourceViewerHasVoteResolver implements QueryInterface
 
     public function __construct(
         private SourceViewerVoteResolver $resolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Source $source, $viewer): bool
     {

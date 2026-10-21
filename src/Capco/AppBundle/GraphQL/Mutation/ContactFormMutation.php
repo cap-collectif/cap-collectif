@@ -32,8 +32,7 @@ class ContactFormMutation implements MutationInterface
         private readonly FormFactoryInterface $formFactory,
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly LocaleRepository $localeRepository
-    ) {
-    }
+    ) {}
 
     public function send(Argument $input, ?User $viewer): array
     {

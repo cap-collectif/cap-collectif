@@ -25,13 +25,13 @@ class ChangeVersionMutation implements MutationInterface
         private FormFactoryInterface $formFactory,
         private OpinionVersionRepository $versionRepo,
         private RedisStorageHelper $redisStorage
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $user): array
     {
         $this->formatInput($input);
         $versionId = GlobalId::fromGlobalId($input->offsetGet('versionId'))['id'];
+
         /** @var OpinionVersion $version */
         $version = $this->versionRepo->find($versionId);
 

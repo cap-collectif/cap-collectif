@@ -28,8 +28,7 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
         private readonly StepResolver $stepResolver,
         private readonly ContributionResolver $contributionResolver,
         private readonly EventRepository $eventRepository
-    ) {
-    }
+    ) {}
 
     public function hasCacheableSupportsMethod(): bool
     {
@@ -40,6 +39,7 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
     {
         $groups =
             isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
+
         /** @var Project $object */
         $data = $this->normalizer->normalize($object, $format, $context);
 
@@ -51,6 +51,7 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
             $data['restrictedGroupIds'] = $this->getProjectGroupIds($object);
             $data['eventCount'] = $this->eventRepository->countByProject($object->getId());
             $data['authors'] = [];
+
             /** @var ProjectAuthor $projectAuthor */
             foreach ($object->getAuthors() as $projectAuthor) {
                 $data['authors'][] = $this->normalizer->normalize(

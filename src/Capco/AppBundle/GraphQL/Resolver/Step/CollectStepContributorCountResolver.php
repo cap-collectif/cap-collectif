@@ -18,8 +18,7 @@ class CollectStepContributorCountResolver implements QueryInterface
         private readonly CollectStepContributorCountDataLoader $collectStepCountContributorDataLoader,
         private readonly TokenStorageInterface $tokenStorage,
         private readonly PromiseAdapterInterface $adapter
-    ) {
-    }
+    ) {}
 
     public function __invoke(CollectStep $collectStep): Promise
     {

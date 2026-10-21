@@ -10,8 +10,7 @@ class QueryCategoryImagesResolver implements QueryInterface
 {
     public function __construct(
         private readonly CategoryImageRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $args): array
     {

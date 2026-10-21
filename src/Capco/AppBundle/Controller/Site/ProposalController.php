@@ -34,11 +34,11 @@ class ProposalController extends Controller
         private readonly TranslatorInterface $translator,
         private readonly EntityManagerInterface $em,
         private readonly ParticipantHelper $participantHelper,
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/project/{projectSlug}/collect/{stepSlug}/proposals/{proposalSlug}", name="app_project_show_proposal", options={"i18n" = false})
+     *
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
      * @Entity("step", class="CapcoAppBundle:Steps\CollectStep", options={
      *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
@@ -46,6 +46,7 @@ class ProposalController extends Controller
      *    "map_method_signature"=true
      * })
      * @Entity("proposal", class="CapcoAppBundle:Proposal", options={"mapping" = {"proposalSlug": "slug"}, "repository_method"= "getOneBySlug", "map_method_signature" = true})
+     *
      * @Template("@CapcoApp/Proposal/show.html.twig")
      */
     public function showProposalAction(

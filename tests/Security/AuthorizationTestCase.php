@@ -17,6 +17,7 @@ abstract class AuthorizationTestCase extends TestCase
     public static function organizationDeletionRoles(): iterable
     {
         yield 'ordinary member who created the resource' => [\Capco\AppBundle\DBAL\Enum\OrganizationMemberRoleType::USER];
+
         yield 'organization administrator who did not create the resource' => [\Capco\AppBundle\DBAL\Enum\OrganizationMemberRoleType::ADMIN];
     }
 
@@ -24,6 +25,7 @@ abstract class AuthorizationTestCase extends TestCase
     public static function unprivilegedViewers(): iterable
     {
         yield 'anonymous viewer' => [false];
+
         yield 'ordinary account' => [true];
     }
 

@@ -32,8 +32,7 @@ class RemoveSsoConnectionMutation implements MutationInterface
         private readonly FranceConnectLogoutHandler $franceConnectLogoutHandler,
         private readonly RouterInterface $router,
         private readonly AccountConfirmationSender $accountConfirmationSender
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer, RequestStack $requests): array
     {

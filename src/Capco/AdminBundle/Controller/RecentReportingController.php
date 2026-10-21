@@ -18,12 +18,13 @@ class RecentReportingController extends Controller
         private readonly BreadcrumbsBuilderInterface $breadcrumbsBuilder,
         private readonly Pool $pool,
         private readonly ReportingAdmin $admin
-    ) {
-    }
+    ) {}
 
     /**
      * @Security("is_granted('ROLE_ADMIN')")
+     *
      * @Route("/admin/reporting", name="admin_capco_app_reporting_index")
+     *
      * @Template("@CapcoAdmin/RecentReporting/index.html.twig")
      */
     public function indexAction()

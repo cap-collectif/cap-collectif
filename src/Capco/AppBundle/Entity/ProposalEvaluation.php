@@ -16,6 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @deprecated this is our legacy evaluation tool
  *
  * @ORM\Table(name="proposal_evaluation")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalEvaluationRepository")
  */
 class ProposalEvaluation implements EntityInterface
@@ -27,6 +28,7 @@ class ProposalEvaluation implements EntityInterface
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="proposalEvaluation")
+     *
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     protected Proposal $proposal;

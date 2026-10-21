@@ -16,14 +16,18 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class ExportControllerTest extends WebTestCase
 {
     /**
      * @runInSeparateProcess
+     *
      * @preserveGlobalState disabled
+     *
      * @phpunit-status non-compliant
+     *
      * @phpunit-reason Creates and deletes shared export files without failure-safe restoration of their
      * initial contents.
      */
@@ -40,8 +44,11 @@ class ExportControllerTest extends WebTestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @preserveGlobalState disabled
+     *
      * @phpunit-status non-compliant
+     *
      * @phpunit-reason Creates and deletes shared export files without failure-safe restoration of their
      * initial contents.
      */
@@ -93,8 +100,11 @@ class ExportControllerTest extends WebTestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @preserveGlobalState disabled
+     *
      * @phpunit-status non-compliant
+     *
      * @phpunit-reason Creates and deletes shared export files without failure-safe restoration of their
      * initial contents.
      */
@@ -122,8 +132,11 @@ class ExportControllerTest extends WebTestCase
 
     /**
      * @runInSeparateProcess
+     *
      * @preserveGlobalState disabled
+     *
      * @phpunit-status non-compliant
+     *
      * @phpunit-reason Disables HTTP exception handling and expects an internal access-denied exception
      * instead of asserting the HTTP refusal.
      */

@@ -18,8 +18,7 @@ class ProjectEmailableContributorsResolver implements QueryInterface
 
     public function __construct(
         private readonly ProjectRecipientsFetcher $projectRecipientsFetcher,
-    ) {
-    }
+    ) {}
 
     /**
      * @throws NonUniqueResultException

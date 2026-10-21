@@ -82,7 +82,7 @@ class ReplyAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $list): void
     {
-        //$this->setTemplate(
+        // $this->setTemplate(
         $list
             ->addIdentifier('id', null, ['label' => 'admin.fields.reply.id'])
             ->add('author', ModelType::class, [

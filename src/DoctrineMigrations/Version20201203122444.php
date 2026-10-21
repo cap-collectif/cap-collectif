@@ -37,7 +37,7 @@ final class Version20201203122444 extends AbstractMigration implements Container
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        //schema changes are made in Version20201130152444
+        // schema changes are made in Version20201130152444
     }
 
     public function down(Schema $schema): void
@@ -47,7 +47,7 @@ final class Version20201203122444 extends AbstractMigration implements Container
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        //schema changes are made in Version20201130152444
+        // schema changes are made in Version20201130152444
     }
 
     /**
@@ -55,10 +55,10 @@ final class Version20201203122444 extends AbstractMigration implements Container
      */
     public function postUp(Schema $schema): void
     {
-        //create responses
+        // create responses
         $officialResponsesDataInPosts = $this->getOfficialResponsesDataInPosts();
 
-        //remove doublons
+        // remove doublons
         $filtered = [];
         foreach ($officialResponsesDataInPosts as $datum) {
             if ($datum['proposal_id']) {
@@ -70,7 +70,7 @@ final class Version20201203122444 extends AbstractMigration implements Container
             $this->createOfficialResponseFromPostData($data);
         }
 
-        //add constraints
+        // add constraints
         $this->connection->exec(
             'ALTER TABLE proposal_decision ADD CONSTRAINT FK_65F782602E3F174A FOREIGN KEY (official_response_id) REFERENCES official_response (id)'
         );
@@ -78,14 +78,14 @@ final class Version20201203122444 extends AbstractMigration implements Container
             'CREATE UNIQUE INDEX UNIQ_65F782602E3F174A ON proposal_decision (official_response_id)'
         );
 
-        //remove proposaldecision.post
+        // remove proposaldecision.post
         $this->connection->exec(
             'ALTER TABLE proposal_decision DROP FOREIGN KEY FK_65F782604B89032C'
         );
         $this->connection->exec('DROP INDEX UNIQ_65F782604B89032C ON proposal_decision');
         $this->connection->exec('ALTER TABLE proposal_decision DROP post_id');
 
-        //remove posts that were official responses
+        // remove posts that were official responses
         foreach ($officialResponsesDataInPosts as $data) {
             $this->removeDataFromPosts($data);
         }
@@ -96,7 +96,7 @@ final class Version20201203122444 extends AbstractMigration implements Container
      */
     public function postDown(Schema $schema): void
     {
-        //recreate posts that were official responses
+        // recreate posts that were official responses
         $officialResponsesData = $this->getOfficialResponsesData();
         foreach ($officialResponsesData as $key => $officialResponseData) {
             $officialResponsesData[$key]['id'] = $this->createPostFromOfficialResponseData(
@@ -104,14 +104,14 @@ final class Version20201203122444 extends AbstractMigration implements Container
             );
         }
 
-        //remove new tables
+        // remove new tables
         $this->connection->exec('DROP TABLE official_response');
         $this->connection->exec('DROP TABLE official_response_author');
         $this->connection->exec(
             'ALTER TABLE proposal_decision CHANGE official_response_id post_id CHAR(36) NOT NULL COMMENT \'(DC2Type:guid)\''
         );
 
-        //restore posts in official responses
+        // restore posts in official responses
         foreach ($officialResponsesData as $officialResponseData) {
             if ($officialResponseData['proposal_decision_id']) {
                 $this->addPostInProposalDecision(
@@ -121,7 +121,7 @@ final class Version20201203122444 extends AbstractMigration implements Container
             }
         }
 
-        //restore constraints
+        // restore constraints
         $this->connection->exec(
             'ALTER TABLE proposal_decision ADD CONSTRAINT FK_65F782604B89032C FOREIGN KEY (post_id) REFERENCES blog_post (id)'
         );

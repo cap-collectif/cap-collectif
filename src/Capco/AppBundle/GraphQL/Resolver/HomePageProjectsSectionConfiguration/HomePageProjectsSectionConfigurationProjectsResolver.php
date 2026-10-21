@@ -15,8 +15,7 @@ class HomePageProjectsSectionConfigurationProjectsResolver implements QueryInter
     public function __construct(
         private readonly ProjectRepository $projectRepository,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Section $section): ConnectionInterface
     {

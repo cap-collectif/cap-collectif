@@ -13,8 +13,7 @@ class ReportProcessor implements ProcessorInterface
     public function __construct(
         private readonly ReportNotifier $notifier,
         private readonly ReportingRepository $repository
-    ) {
-    }
+    ) {}
 
     public function process(Message $message, array $options): bool
     {

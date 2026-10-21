@@ -6,9 +6,13 @@ use Capco\Tests\IdentityWebTestCase;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises HTTP outcomes and real domain data with transactional cleanup; replaces only external boundaries.
  */
 final class EmptyUsernameListenerTest extends IdentityWebTestCase
@@ -49,6 +53,7 @@ final class EmptyUsernameListenerTest extends IdentityWebTestCase
     public static function ordinaryPageViewers(): iterable
     {
         yield 'anonymous viewer is redirected to login' => [false, 302];
+
         yield 'named viewer can edit their profile' => [true, 200];
     }
 }

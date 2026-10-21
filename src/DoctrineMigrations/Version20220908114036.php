@@ -27,13 +27,9 @@ final class Version20220908114036 extends AbstractMigration implements Container
         return 'add section projectsMap';
     }
 
-    public function up(Schema $schema): void
-    {
-    }
+    public function up(Schema $schema): void {}
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 
     public function postUp(Schema $schema): void
     {

@@ -18,8 +18,7 @@ class MediaManager
         private readonly MediaRepository $mediaRepository,
         private readonly LoggerInterface $logger,
         private readonly Filesystem $filesystem,
-    ) {
-    }
+    ) {}
 
     public function removeWithFileIfFileExists(Media $media): void
     {

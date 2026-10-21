@@ -48,11 +48,7 @@ class PositionableResolver
         return $objects;
     }
 
-    /**
-     * @param $reference
-     * @param $relPos
-     */
-    public function getObjectToSwitch($reference, $relPos)
+    public function getObjectToSwitch(mixed $reference, mixed $relPos)
     {
         $objects = $this->getDisplayableOrdered();
         foreach ($objects as $index => $object) {
@@ -63,11 +59,9 @@ class PositionableResolver
     }
 
     /**
-     * @param $object
-     *
      * @return bool
      */
-    public function isFirst($object)
+    public function isFirst(mixed $object)
     {
         $objects = $this->getDisplayableOrdered();
         if (\count($objects) > 0) {
@@ -78,11 +72,9 @@ class PositionableResolver
     }
 
     /**
-     * @param $object
-     *
      * @return bool
      */
-    public function isLast($object)
+    public function isLast(mixed $object)
     {
         $objects = $this->getDisplayableOrdered();
         if (\count($objects) > 0) {

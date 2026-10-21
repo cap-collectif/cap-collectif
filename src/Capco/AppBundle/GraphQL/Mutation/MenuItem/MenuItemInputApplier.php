@@ -22,8 +22,7 @@ class MenuItemInputApplier
         private readonly MenuItemRepository $menuItemRepository,
         private readonly PageRepository $pageRepository,
         private readonly LocaleRepository $localeRepository
-    ) {
-    }
+    ) {}
 
     /**
      * @throws UserError with a MenuItemErrorCode as message

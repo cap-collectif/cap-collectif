@@ -27,8 +27,7 @@ class CreateProposalFusionMutation implements MutationInterface
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly LoggerInterface $logger,
         private readonly Indexer $indexer
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $author): array
     {

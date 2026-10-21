@@ -2,7 +2,6 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Resolver\Debate;
 
-use ArrayIterator;
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateArticle;
 use Capco\AppBundle\GraphQL\Resolver\Debate\DebateArticlesResolver;
@@ -52,7 +51,7 @@ class DebateArticlesResolverSpec extends ObjectBehavior
             ->willReturn(2)
             ->shouldBeCalled()
         ;
-        $paginator->getIterator()->willReturn(new ArrayIterator([$a, $b]));
+        $paginator->getIterator()->willReturn(new \ArrayIterator([$a, $b]));
         $this->__invoke($debate, $args)->shouldReturnConnection();
     }
 }

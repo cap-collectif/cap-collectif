@@ -13,7 +13,6 @@ use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Doctrine\Persistence\ObjectManager;
-use ReflectionClass;
 
 final class TranslatableEventSubscriber implements EventSubscriberInterface
 {
@@ -41,7 +40,7 @@ final class TranslatableEventSubscriber implements EventSubscriberInterface
     public function loadClassMetadata(LoadClassMetadataEventArgs $loadClassMetadataEventArgs): void
     {
         $classMetadata = $loadClassMetadataEventArgs->getClassMetadata();
-        if (!$classMetadata->reflClass instanceof ReflectionClass) {
+        if (!$classMetadata->reflClass instanceof \ReflectionClass) {
             // Class has not yet been fully built, ignore this event
             return;
         }
@@ -80,7 +79,7 @@ final class TranslatableEventSubscriber implements EventSubscriberInterface
     /**
      * Convert string FETCH mode to required string.
      */
-    private function convertFetchString(string|int $fetchMode): int
+    private function convertFetchString(int|string $fetchMode): int
     {
         if (\is_int($fetchMode)) {
             return $fetchMode;

@@ -10,6 +10,7 @@ trait ForAgainstTrait
 {
     /**
      * @ORM\Column(name="type", type="string", columnDefinition="ENUM('FOR', 'AGAINST')", nullable=true)
+     *
      * @Assert\Choice(choices=ForOrAgainstType::ALL)
      */
     private string $type = ForOrAgainstType::FOR;

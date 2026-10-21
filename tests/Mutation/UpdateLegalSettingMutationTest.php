@@ -17,16 +17,17 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class UpdateLegalSettingMutationTest extends TestCase
 {
-    private SiteParameterRepository & MockObject $repository;
-    private LocaleRepository & MockObject $localeRepository;
-    private EntityManagerInterface & MockObject $entityManager;
-    private ObjectRepository & MockObject $translationRepository;
-    private UpdateSiteParameterMutation & MockObject $cacheInvalidator;
-    private Manager & MockObject $toggleManager;
+    private MockObject&SiteParameterRepository $repository;
+    private LocaleRepository&MockObject $localeRepository;
+    private EntityManagerInterface&MockObject $entityManager;
+    private MockObject&ObjectRepository $translationRepository;
+    private MockObject&UpdateSiteParameterMutation $cacheInvalidator;
+    private Manager&MockObject $toggleManager;
 
     protected function setUp(): void
     {

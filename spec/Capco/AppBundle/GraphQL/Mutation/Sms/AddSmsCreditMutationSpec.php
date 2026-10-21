@@ -72,7 +72,6 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
         FormInterface $form,
         TwilioClient $twilioClient,
         SiteParameterResolver $siteParameterResolver,
-        AccountInstance $subAccount,
         ExternalServiceConfigurationRepository $externalServiceConfigurationRepository
     ) {
         $smsOrderId = 'smsOrderId';
@@ -129,14 +128,18 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
             ->shouldBeCalledTimes(2)
             ->willReturn($organizationName)
         ;
+        $subAccount = new class() extends AccountInstance {
+            public string $sid = 'XXXX';
+            public string $authToken = 'XXXX';
+
+            public function __construct() {}
+        };
+
         $twilioClient
             ->createSubAccount($organizationName)
             ->shouldBeCalledOnce()
             ->willReturn($subAccount)
         ;
-
-        $subAccount->sid = 'XXXX';
-        $subAccount->authToken = 'XXXX';
 
         $response = [
             'statusCode' => 201,

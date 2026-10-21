@@ -15,6 +15,7 @@ trait ContributionOriginTrait
 
     /**
      * @ORM\Column(name="external_origin", type="string", columnDefinition="ENUM('MAIL', 'WIDGET')", nullable=true)
+     *
      * @Assert\Choice(choices=ContributionOrigin::ALL_EXTERNAL)
      */
     protected ?string $externalOrigin = null;

@@ -4,9 +4,7 @@ namespace Capco\AppBundle\Message;
 
 class DebateArticleCrawlerMessage
 {
-    public function __construct(private readonly string $debateArticleId)
-    {
-    }
+    public function __construct(private readonly string $debateArticleId) {}
 
     public function getDebateArticleId(): string
     {

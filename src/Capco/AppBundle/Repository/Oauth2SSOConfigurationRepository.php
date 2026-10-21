@@ -10,6 +10,4 @@ use Doctrine\ORM\EntityRepository;
  * @method null|Oauth2SSOConfiguration findOneBy(array $criteria, array $orderBy = null)
  * @method Oauth2SSOConfiguration[]    findAll()
  * @method Oauth2SSOConfiguration[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) */
-class Oauth2SSOConfigurationRepository extends EntityRepository
-{
-}
+class Oauth2SSOConfigurationRepository extends EntityRepository {}

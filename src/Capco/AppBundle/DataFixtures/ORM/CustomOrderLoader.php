@@ -11,14 +11,13 @@ use Nelmio\Alice\IsAServiceTrait;
 /**
  * @final
  */
-/*final*/ class CustomOrderLoader implements LoaderInterface
+/* final */ class CustomOrderLoader implements LoaderInterface
 {
     use IsAServiceTrait;
 
     public function __construct(
         private readonly LoaderInterface $decoratedLoader
-    ) {
-    }
+    ) {}
 
     /**
      * Pre process, persist and post process each object loaded.

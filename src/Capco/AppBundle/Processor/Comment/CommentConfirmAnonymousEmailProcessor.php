@@ -12,8 +12,7 @@ class CommentConfirmAnonymousEmailProcessor implements ProcessorInterface
     public function __construct(
         private readonly CommentRepository $commentRepository,
         private readonly CommentNotifier $notifier
-    ) {
-    }
+    ) {}
 
     public function process(Message $message, array $options): bool
     {

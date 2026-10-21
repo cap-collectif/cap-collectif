@@ -25,8 +25,7 @@ class LocaleController extends AbstractController
         private readonly SetUserDefaultLocaleMutation $userDefaultLocaleMutation,
         private readonly TranslatorInterface $translator,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/api/change-locale/{localeCode}", name="change_locale", defaults={"_feature_flags" = "multilangue"})

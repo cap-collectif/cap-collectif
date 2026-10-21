@@ -21,6 +21,7 @@ class ProposalDistrict extends AbstractDistrict implements EntityInterface, Slug
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="districts")
+     *
      * @ORM\JoinColumn(name="form_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private ?ProposalForm $form = null;

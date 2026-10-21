@@ -169,8 +169,7 @@ class GenerateCSVFromProposalFormCommand extends BaseExportCommand
             $example = array_merge($example, [$status->getName()]);
         }
         foreach (
-            $proposalForm->getFieldsType($proposalForm->getRealQuestions(), $next, $isCliModel)
-            as $field => $type
+            $proposalForm->getFieldsType($proposalForm->getRealQuestions(), $next, $isCliModel) as $field => $type
         ) {
             $example = array_merge($example, [$type]);
         }

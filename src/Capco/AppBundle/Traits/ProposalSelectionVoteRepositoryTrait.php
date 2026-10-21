@@ -45,6 +45,7 @@ trait ProposalSelectionVoteRepositoryTrait
         $data = [];
         $data['votesBySteps'] = [];
         $data['pointsBySteps'] = [];
+
         /** @var ProposalSelectionVote $result */
         foreach ($results as $result) {
             $pointsAvailable = [];

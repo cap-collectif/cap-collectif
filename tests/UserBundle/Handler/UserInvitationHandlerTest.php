@@ -6,9 +6,13 @@ use Capco\Tests\IdentityWebTestCase;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises HTTP outcomes and real domain data with transactional cleanup; replaces only external boundaries.
  */
 final class UserInvitationHandlerTest extends IdentityWebTestCase
@@ -50,10 +54,15 @@ final class UserInvitationHandlerTest extends IdentityWebTestCase
     public static function invitations(): iterable
     {
         yield 'regular' => ['regular', false, ['ROLE_USER'], true];
+
         yield 'administrator' => ['admin', false, ['ROLE_USER', 'ROLE_ADMIN'], true];
+
         yield 'project administrator enabled' => ['project admin', true, ['ROLE_USER', 'ROLE_PROJECT_ADMIN'], true];
+
         yield 'project administrator disabled' => ['project admin', false, ['ROLE_USER'], true];
+
         yield 'without invitation' => ['none', false, ['ROLE_USER'], false];
+
         yield 'expired invitation' => ['expired', false, ['ROLE_USER'], false];
     }
 }

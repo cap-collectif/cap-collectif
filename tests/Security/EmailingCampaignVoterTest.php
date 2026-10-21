@@ -13,7 +13,9 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Checks public domain rules with real entities and observable results, without framework interaction counts.
  */
 class EmailingCampaignVoterTest extends AuthorizationTestCase
@@ -104,7 +106,7 @@ class EmailingCampaignVoterTest extends AuthorizationTestCase
     {
         $voter = new EmailingCampaignVoter();
         $token = $this->token(new User());
-        self::assertSame(VoterInterface::ACCESS_ABSTAIN, $voter->vote($token, (new EmailingCampaign()), ['unknown']));
+        self::assertSame(VoterInterface::ACCESS_ABSTAIN, $voter->vote($token, new EmailingCampaign(), ['unknown']));
         self::assertSame(VoterInterface::ACCESS_ABSTAIN, $voter->vote($token, new User(), [EmailingCampaignVoter::CREATE]));
     }
 

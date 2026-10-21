@@ -29,8 +29,7 @@ class MediatorVotesMutation
         private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository,
         private readonly UpdateParticipantRequirementMutation $updateParticipantRequirementMutation,
         private readonly EntityManagerInterface $entityManager,
-    ) {
-    }
+    ) {}
 
     /**
      * @param array<Proposal> $proposals

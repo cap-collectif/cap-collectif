@@ -2,6 +2,4 @@
 
 namespace Capco\UserBundle\Authenticator\Exception;
 
-class InvalidTokenException extends \Exception
-{
-}
+class InvalidTokenException extends \Exception {}

@@ -19,8 +19,7 @@ class PostNormalizer implements NormalizerInterface, SerializerAwareInterface, C
         private readonly UrlGeneratorInterface $router,
         private readonly ObjectNormalizer $normalizer,
         private readonly MediaExtension $mediaExtension
-    ) {
-    }
+    ) {}
 
     public function hasCacheableSupportsMethod(): bool
     {

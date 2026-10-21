@@ -11,7 +11,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\UserInviteEmailMessageRepository")
+ *
  * @ORM\EntityListeners({"Capco\AppBundle\EventListener\UserInviteEmailMessageListener"})
+ *
  * @ORM\Table(name="user_invite_email_message")
  */
 class UserInviteEmailMessage implements EntityInterface
@@ -34,6 +36,7 @@ class UserInviteEmailMessage implements EntityInterface
 
     /**
      * @Gedmo\Timestampable(on="create")
+     *
      * @ORM\Column(name="created_at", type="datetime")
      */
     private \DateTimeInterface $createdAt;
@@ -51,11 +54,11 @@ class UserInviteEmailMessage implements EntityInterface
     public function __construct(
         /**
          * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\UserInvite", inversedBy="emailMessages", cascade={"persist"})
+         *
          * @ORM\JoinColumn(name="invitation_id", referencedColumnName="id", onDelete="CASCADE")
          */
         private UserInvite $invitation
-    ) {
-    }
+    ) {}
 
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {

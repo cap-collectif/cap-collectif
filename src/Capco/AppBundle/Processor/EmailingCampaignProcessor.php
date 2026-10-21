@@ -13,8 +13,7 @@ class EmailingCampaignProcessor implements ProcessorInterface
     public function __construct(
         private readonly EmailingCampaignSender $sender,
         private readonly EmailingCampaignRepository $repository
-    ) {
-    }
+    ) {}
 
     public function process(Message $message, array $options): bool
     {

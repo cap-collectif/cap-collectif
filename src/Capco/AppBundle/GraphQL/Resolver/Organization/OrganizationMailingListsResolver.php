@@ -13,8 +13,7 @@ class OrganizationMailingListsResolver implements QueryInterface
 {
     public function __construct(
         private readonly MailingListRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(
         Organization $organization,

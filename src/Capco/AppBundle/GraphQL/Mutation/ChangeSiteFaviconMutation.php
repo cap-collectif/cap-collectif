@@ -20,8 +20,7 @@ class ChangeSiteFaviconMutation implements MutationInterface
         private SiteFaviconProcessor $siteFaviconProcessor,
         private EntityManagerInterface $em,
         private MediaRepository $mediaRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input): array
     {

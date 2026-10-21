@@ -15,8 +15,7 @@ class OrganizationPostsResolver implements QueryInterface
 {
     public function __construct(
         private readonly PostRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Organization $organization, Argument $argument): ConnectionInterface
     {

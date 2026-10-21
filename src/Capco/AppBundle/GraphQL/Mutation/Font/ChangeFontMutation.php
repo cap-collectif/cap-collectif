@@ -17,8 +17,7 @@ class ChangeFontMutation implements MutationInterface
     public function __construct(
         private FontManager $manager,
         private FontRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): iterable
     {

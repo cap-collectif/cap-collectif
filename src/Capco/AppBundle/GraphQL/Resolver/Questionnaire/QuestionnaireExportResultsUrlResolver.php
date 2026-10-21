@@ -15,8 +15,7 @@ class QuestionnaireExportResultsUrlResolver implements QueryInterface
     public function __construct(
         private readonly string $projectDir,
         private readonly RouterInterface $router
-    ) {
-    }
+    ) {}
 
     public function __invoke(Questionnaire $questionnaire): string
     {

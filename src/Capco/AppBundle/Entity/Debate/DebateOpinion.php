@@ -21,9 +21,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Opinion of experts on a debate.
  *
  * @ORM\Table(name="debate_opinion", indexes={
+ *
  *     @ORM\Index(name="idx_author", columns={"id", "author_id"})
  * })
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\DebateOpinionRepository")
+ *
  * @CapcoAssert\HasAuthor
  */
 class DebateOpinion implements EntityInterface, Authorable
@@ -39,18 +42,21 @@ class DebateOpinion implements EntityInterface, Authorable
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
     protected ?User $author = null;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"body"})
+     *
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Debate\Debate", inversedBy="opinions")
+     *
      * @ORM\JoinColumn(name="debate_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     private ?Debate $debate = null;

@@ -38,8 +38,7 @@ class RevokeAnalystsToProposalsMutation implements MutationInterface
         private readonly ProposalAnalysisRepository $proposalAnalysisRepository,
         private readonly LoggerInterface $logger,
         private readonly Publisher $publisher
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, $viewer): array
     {

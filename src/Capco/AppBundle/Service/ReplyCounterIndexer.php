@@ -12,8 +12,7 @@ class ReplyCounterIndexer
 {
     public function __construct(
         private readonly Indexer $indexer
-    ) {
-    }
+    ) {}
 
     public function syncIndex(Reply $reply): void
     {

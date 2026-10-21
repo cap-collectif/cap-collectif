@@ -18,8 +18,7 @@ class ProposalRevisionProcessor implements ProcessorInterface
         private readonly ProposalRevisionRepository $proposalRevisionRepository,
         private readonly ProposalRevisionNotifier $notifier,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function process(Message $message, array $options): bool
     {

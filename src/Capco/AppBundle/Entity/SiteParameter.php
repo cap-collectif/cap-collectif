@@ -12,7 +12,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="site_parameter")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SiteParameterRepository")
+ *
  * @CapcoAdminAssert\LessThanIfMetaDescription(max="160", message="argument.metadescription.max_length")
  */
 class SiteParameter implements EntityInterface, TranslatableInterface, \Stringable
@@ -91,14 +93,18 @@ class SiteParameter implements EntityInterface, TranslatableInterface, \Stringab
 
     /**
      * @var \DateTime
+     *
      * @Gedmo\Timestampable(on="create")
+     *
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
      * @var \DateTime
+     *
      * @Gedmo\Timestampable(on="change", field={"value"})
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;

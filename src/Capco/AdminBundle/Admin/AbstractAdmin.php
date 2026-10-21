@@ -241,6 +241,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
 
     /**
      * @var AdminExtensionInterface[]
+     *
      * @phpstan-var array<AdminExtensionInterface<T>>
      */
     private $extensions = [];
@@ -259,6 +260,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
      * The subclasses supported by the admin class.
      *
      * @var string[]
+     *
      * @phpstan-var array<string, class-string<T>>
      */
     private $subClasses = [];
@@ -441,9 +443,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
         }
     }
 
-    public function preBatchAction(string $actionName, ProxyQueryInterface $query, array &$idx, bool $allElements = false): void
-    {
-    }
+    public function preBatchAction(string $actionName, ProxyQueryInterface $query, array &$idx, bool $allElements = false): void {}
 
     final public function getDefaultFilterParameters(): array
     {
@@ -605,7 +605,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
                 preg_match(self::CLASS_REGEX, (string) $this->class, $matches);
 
                 if (!$matches) {
-                    throw new \LogicException(sprintf('Cannot automatically determine base route name,' . ' please define a default `baseRouteName` value for the admin class `%s`', static::class));
+                    throw new \LogicException(sprintf('Cannot automatically determine base route name, please define a default `baseRouteName` value for the admin class `%s`', static::class));
                 }
                 $baseRouteName = $this->urlize($matches[5]);
             }
@@ -621,7 +621,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
             preg_match(self::CLASS_REGEX, (string) $this->class, $matches);
 
             if (!$matches) {
-                throw new \LogicException(sprintf('Cannot automatically determine base route name,' . ' please define a default `baseRouteName` value for the admin class `%s`', static::class));
+                throw new \LogicException(sprintf('Cannot automatically determine base route name, please define a default `baseRouteName` value for the admin class `%s`', static::class));
             }
 
             $this->cachedBaseRouteName = sprintf(
@@ -1631,7 +1631,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
         $access = $this->getAccess();
 
         if (!\array_key_exists($action, $access)) {
-            throw new \InvalidArgumentException(sprintf('Action "%s" could not be found in access mapping.' . ' Please make sure your action is defined into your admin class accessMapping property.', $action));
+            throw new \InvalidArgumentException(sprintf('Action "%s" could not be found in access mapping. Please make sure your action is defined into your admin class accessMapping property.', $action));
         }
 
         if (!\is_array($access[$action])) {
@@ -1806,9 +1806,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
     /**
      * Hook to run after initialization.
      */
-    protected function configure(): void
-    {
-    }
+    protected function configure(): void {}
 
     /**
      * @phpstan-return T
@@ -1821,65 +1819,47 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
     /**
      * @phpstan-param T $object
      */
-    protected function alterNewInstance(object $object): void
-    {
-    }
+    protected function alterNewInstance(object $object): void {}
 
     /**
      * @phpstan-param T $object
      */
-    protected function alterObject(object $object): void
-    {
-    }
+    protected function alterObject(object $object): void {}
 
     /**
      * @phpstan-param T $object
      */
-    protected function preValidate(object $object): void
-    {
-    }
+    protected function preValidate(object $object): void {}
 
     /**
      * @phpstan-param T $object
      */
-    protected function preUpdate(object $object): void
-    {
-    }
+    protected function preUpdate(object $object): void {}
 
     /**
      * @phpstan-param T $object
      */
-    protected function postUpdate(object $object): void
-    {
-    }
+    protected function postUpdate(object $object): void {}
 
     /**
      * @phpstan-param T $object
      */
-    protected function prePersist(object $object): void
-    {
-    }
+    protected function prePersist(object $object): void {}
 
     /**
      * @phpstan-param T $object
      */
-    protected function postPersist(object $object): void
-    {
-    }
+    protected function postPersist(object $object): void {}
 
     /**
      * @phpstan-param T $object
      */
-    protected function preRemove(object $object): void
-    {
-    }
+    protected function preRemove(object $object): void {}
 
     /**
      * @phpstan-param T $object
      */
-    protected function postRemove(object $object): void
-    {
-    }
+    protected function postRemove(object $object): void {}
 
     /**
      * @return array<string, mixed>
@@ -1982,34 +1962,24 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
     /**
      * @phpstan-param FormMapper<T> $form
      */
-    protected function configureFormFields(FormMapper $form): void
-    {
-    }
+    protected function configureFormFields(FormMapper $form): void {}
 
     /**
      * @phpstan-param ListMapper<T> $list
      */
-    protected function configureListFields(ListMapper $list): void
-    {
-    }
+    protected function configureListFields(ListMapper $list): void {}
 
     /**
      * @phpstan-param DatagridMapper<T> $filter
      */
-    protected function configureDatagridFilters(DatagridMapper $filter): void
-    {
-    }
+    protected function configureDatagridFilters(DatagridMapper $filter): void {}
 
     /**
      * @phpstan-param ShowMapper<T> $show
      */
-    protected function configureShowFields(ShowMapper $show): void
-    {
-    }
+    protected function configureShowFields(ShowMapper $show): void {}
 
-    protected function configureRoutes(RouteCollectionInterface $collection): void
-    {
-    }
+    protected function configureRoutes(RouteCollectionInterface $collection): void {}
 
     /**
      * @param array<string, array<string, mixed>> $buttonList
@@ -2050,9 +2020,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
      *
      * @phpstan-param AdminInterface<object>|null $childAdmin
      */
-    protected function configureTabMenu(ItemInterface $menu, string $action, ?AdminInterface $childAdmin = null): void
-    {
-    }
+    protected function configureTabMenu(ItemInterface $menu, string $action, ?AdminInterface $childAdmin = null): void {}
 
     /**
      * Gets the subclass corresponding to the given name.
@@ -2119,18 +2087,14 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
      *
      * @param array<string, array<string, mixed>> $filterValues
      */
-    protected function configureDefaultFilterValues(array &$filterValues): void
-    {
-    }
+    protected function configureDefaultFilterValues(array &$filterValues): void {}
 
     /**
      * Configures a list of form options.
      *
      * @param array<string, mixed> $formOptions
      */
-    protected function configureFormOptions(array &$formOptions): void
-    {
-    }
+    protected function configureFormOptions(array &$formOptions): void {}
 
     /**
      * Configures a list of default sort values.
@@ -2140,6 +2104,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
      *   $sortValues[DatagridInterface::SORT_ORDER] = 'DESC'
      *
      * @param array<string, int|string> $sortValues
+     *
      * @phpstan-param array{
      *     _page?: int,
      *     _per_page?: int,
@@ -2147,9 +2112,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
      *     _sort_order?: string
      * } $sortValues
      */
-    protected function configureDefaultSortValues(array &$sortValues): void
-    {
-    }
+    protected function configureDefaultSortValues(array &$sortValues): void {}
 
     /**
      * Set the parent object, if any, to the provided object.

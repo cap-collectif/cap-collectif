@@ -13,13 +13,17 @@ use Symfony\Component\Process\Process;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises the real helper CLI and Redis state, restoring the flags after each test.
  */
 class TestFeatureFlagsResetterTest extends TestCase
 {
     private Client $redis;
+
     /** @var array<string, null|string> */
     private array $initialValues = [];
     private string $unrelatedKey;
@@ -103,6 +107,7 @@ class TestFeatureFlagsResetterTest extends TestCase
     public static function invalidDirectOverrides(): iterable
     {
         yield 'unknown flag after a valid override' => [['calendar' => true, 'unknown_test_flag' => false]];
+
         yield 'non-boolean value after a valid override' => [['calendar' => true, 'shield_mode' => 'false']];
     }
 
@@ -120,8 +125,11 @@ class TestFeatureFlagsResetterTest extends TestCase
     public static function invalidOverrides(): iterable
     {
         yield 'malformed JSON' => ['{'];
+
         yield 'array instead of object' => ['[]'];
+
         yield 'unknown flag after a valid override' => ['{"calendar":true,"unknown_test_flag":false}'];
+
         yield 'non-boolean value' => ['{"calendar":"false"}'];
     }
 

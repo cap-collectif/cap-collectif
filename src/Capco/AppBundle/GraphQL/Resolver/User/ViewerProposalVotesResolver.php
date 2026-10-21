@@ -12,8 +12,7 @@ class ViewerProposalVotesResolver implements QueryInterface
 {
     public function __construct(
         private readonly ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader
-    ) {
-    }
+    ) {}
 
     public function __invoke(User $user, Argument $args): Promise
     {

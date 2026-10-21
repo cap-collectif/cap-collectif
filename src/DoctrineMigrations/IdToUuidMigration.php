@@ -14,10 +14,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class IdToUuidMigration extends AbstractMigration implements ContainerAwareInterface
 {
     protected EntityManagerInterface $em;
+
     /** @var array<int|string, mixed> */
     protected array $idToUuidMap = [];
     protected UuidGenerator $generator;
     protected AbstractSchemaManager $schemaManager;
+
     /** @var array{table: string, key: string, tmpKey: string, nullable: bool, name: string, primaryKey: string[], onDelete?: string}[] */
     protected array $fks;
     protected string $table;
@@ -30,9 +32,7 @@ class IdToUuidMigration extends AbstractMigration implements ContainerAwareInter
         $this->generator = new UuidGenerator();
     }
 
-    public function up(Schema $schema): void
-    {
-    }
+    public function up(Schema $schema): void {}
 
     public function migrate(string $tableName, string $uuidColumnName = '__uuid__'): void
     {
@@ -48,9 +48,7 @@ class IdToUuidMigration extends AbstractMigration implements ContainerAwareInter
         $this->write('Successfully migrated ' . $tableName . '.id to UUIDs!');
     }
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 
     private function isForeignKeyNullable(Table $table, string $key): bool
     {

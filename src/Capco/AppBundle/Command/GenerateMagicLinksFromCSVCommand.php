@@ -13,7 +13,6 @@ use Capco\UserBundle\Repository\UserRepository;
 use Capco\UserBundle\Security\Core\User\UserEmailProvider;
 use Doctrine\ORM\EntityManagerInterface;
 use Firebase\JWT\JWT;
-use SplFileObject;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -128,9 +127,9 @@ class GenerateMagicLinksFromCSVCommand extends Command
         ;
     }
 
-    private function readFile(string $filePath): SplFileObject
+    private function readFile(string $filePath): \SplFileObject
     {
-        $file = new SplFileObject($this->absoluteFilePath);
+        $file = new \SplFileObject($this->absoluteFilePath);
         $file->setFlags(\SplFileObject::READ_CSV);
         $file->setCsvControl(',');
 
@@ -139,7 +138,7 @@ class GenerateMagicLinksFromCSVCommand extends Command
         return $file;
     }
 
-    private function getNewUsersCount(SplFileObject $file): int
+    private function getNewUsersCount(\SplFileObject $file): int
     {
         $header = false;
         $count = 0;

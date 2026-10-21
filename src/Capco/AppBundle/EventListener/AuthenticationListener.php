@@ -21,8 +21,7 @@ class AuthenticationListener implements EventSubscriberInterface
         private readonly RequestGuesserInterface $requestGuesser,
         private readonly OpenIDBackchannel $openIDBackchannel,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function onAuthenticationFailure(AuthenticationFailureEvent $event): void
     {

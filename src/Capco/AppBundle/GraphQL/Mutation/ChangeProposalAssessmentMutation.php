@@ -32,8 +32,7 @@ class ChangeProposalAssessmentMutation implements MutationInterface
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly LoggerInterface $logger,
         private readonly Publisher $publisher
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args, $viewer): array
     {

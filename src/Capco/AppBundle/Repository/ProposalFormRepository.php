@@ -13,13 +13,11 @@ use Doctrine\ORM\QueryBuilder;
 class ProposalFormRepository extends EntityRepository
 {
     /**
-     * @param $id
+     * @return mixed
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
-     *
-     * @return mixed
      */
-    public function getOne($id)
+    public function getOne(mixed $id)
     {
         $qb = $this->createQueryBuilder('pf')
             ->addSelect('pf', 'p', 'q')

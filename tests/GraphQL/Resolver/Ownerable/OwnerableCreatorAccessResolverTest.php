@@ -12,7 +12,9 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Checks public domain rules with real entities and observable results, without framework interaction counts.
  */
 final class OwnerableCreatorAccessResolverTest extends TestCase
@@ -41,11 +43,17 @@ final class OwnerableCreatorAccessResolverTest extends TestCase
     public static function viewers(): iterable
     {
         yield 'anonymous' => ['anonymous', false];
+
         yield 'administrator' => ['admin', true];
+
         yield 'creator' => ['creator', true];
+
         yield 'organization administrator' => ['organization admin', true];
+
         yield 'ordinary organization member' => ['organization member', false];
+
         yield 'unrelated user' => ['other', false];
+
         yield 'owner without creator rights' => ['user owner', false];
     }
 }

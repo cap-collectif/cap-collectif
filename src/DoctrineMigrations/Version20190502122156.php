@@ -96,7 +96,5 @@ class Version20190502122156 extends AbstractMigration implements ContainerAwareI
         // this down() migration is auto-generated, please modify it to your needs
     }
 
-    public function postDown(Schema $schema): void
-    {
-    }
+    public function postDown(Schema $schema): void {}
 }

@@ -18,8 +18,7 @@ class DebateArgumentNormalizer implements NormalizerInterface, SerializerAwareIn
     public function __construct(
         private readonly ObjectNormalizer $normalizer,
         private readonly VoteSearch $voteSearch
-    ) {
-    }
+    ) {}
 
     public function normalize($object, $format = null, array $context = [])
     {

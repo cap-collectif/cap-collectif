@@ -8,8 +8,7 @@ class EntityChangeSetResolver
 {
     public function __construct(
         private readonly EntityManagerInterface $em
-    ) {
-    }
+    ) {}
 
     public function getEntityChangeSet(object $entity): array
     {

@@ -7,9 +7,13 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises HTTP outcomes and real domain data with transactional cleanup; replaces only external boundaries.
  */
 final class AddCommentMutationTest extends IdentityWebTestCase
@@ -72,7 +76,9 @@ final class AddCommentMutationTest extends IdentityWebTestCase
     public static function authenticatedCommenters(): iterable
     {
         yield 'ordinary account without moderation' => ['ROLE_USER', false, 'APPROVED'];
+
         yield 'ordinary account awaiting moderation' => ['ROLE_USER', true, 'PENDING'];
+
         yield 'administrator bypasses moderation' => ['ROLE_ADMIN', true, 'APPROVED'];
     }
 
@@ -80,8 +86,11 @@ final class AddCommentMutationTest extends IdentityWebTestCase
     public static function commentStates(): iterable
     {
         yield 'accepted anonymous comment' => ['open', null];
+
         yield 'missing target' => ['missing', 'Commentable not found.'];
+
         yield 'comments disabled' => ['disabled', "Can't add a comment to a not commentable."];
+
         yield 'new comments closed' => ['closed', "Comment's are not longer accepted"];
     }
 }

@@ -9,8 +9,7 @@ class LocalesQueryResolver implements QueryInterface
 {
     public function __construct(
         protected LocaleRepository $localeRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke($viewer): array
     {

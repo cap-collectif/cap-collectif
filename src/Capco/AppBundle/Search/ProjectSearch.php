@@ -160,7 +160,8 @@ class ProjectSearch extends Search
         $this->addObjectTypeFilter($query, $this->type);
         $query->setTrackTotalHits(true);
         $resultSet = $this->index->search($query, $this->projectRepo->count([]));
-        $totalCount = array_sum(
+
+        return array_sum(
             array_map(static function (Result $result) {
                 if (ProjectVisibilityMode::VISIBILITY_PUBLIC === $result->getData()['visibility']) {
                     return $result->getData()['contributionsCount'];
@@ -169,8 +170,6 @@ class ProjectSearch extends Search
                 return 0;
             }, $resultSet->getResults())
         );
-
-        return $totalCount;
     }
 
     private function getProjectSort(array $orderBy): array

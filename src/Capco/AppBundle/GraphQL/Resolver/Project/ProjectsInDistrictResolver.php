@@ -13,8 +13,7 @@ class ProjectsInDistrictResolver implements QueryInterface
 {
     public function __construct(
         private readonly ProjectRepository $projectRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(
         GlobalDistrict $district,

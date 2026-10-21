@@ -9,12 +9,14 @@ use Symfony\Component\Routing\RouterInterface;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class UserUrlResolverTest extends TestCase
 {
     /**
      * @phpunit-status compliant
+     *
      * @phpunit-reason Checks the public empty-slug result without HTTP, persistence or domain entity mocks.
      */
     public function testGetBySlugReturnsNullForEmptySlug(): void
@@ -29,6 +31,7 @@ class UserUrlResolverTest extends TestCase
 
     /**
      * @phpunit-status non-compliant
+     *
      * @phpunit-reason Calls the resolver directly instead of proving the exposed GraphQL contract through
      * HTTP.
      */

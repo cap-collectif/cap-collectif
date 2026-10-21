@@ -19,7 +19,7 @@ trait PhoneVerification
             ->setParameter('status', PhoneVerificationSmsInterface::APPROVED)
             ->getQuery()
             ->getSingleScalarResult()
-            ;
+        ;
     }
 
     /**

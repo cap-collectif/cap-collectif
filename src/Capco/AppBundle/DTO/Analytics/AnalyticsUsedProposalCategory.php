@@ -9,8 +9,7 @@ class AnalyticsUsedProposalCategory
     public function __construct(
         private readonly ProposalCategory $category,
         private readonly int $totalCount
-    ) {
-    }
+    ) {}
 
     public function getTotalCount(): int
     {

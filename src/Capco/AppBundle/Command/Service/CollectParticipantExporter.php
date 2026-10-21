@@ -61,7 +61,7 @@ class CollectParticipantExporter extends ParticipantExporter
         $isFullExport = ExportVariantsEnum::isFull($variant);
 
         if (!$isFullExport) {
-            $data = array_filter($data, function (User|Participant $participant) {
+            $data = array_filter($data, function (Participant|User $participant) {
                 foreach ($participant->getVotes() as $vote) {
                     $step = $vote->getStep();
 

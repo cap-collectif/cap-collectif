@@ -20,8 +20,7 @@ class DeleteVersionMutation implements MutationInterface
         private EntityManagerInterface $em,
         private OpinionVersionRepository $versionRepo,
         private RedisStorageHelper $redisStorage
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $user): array
     {

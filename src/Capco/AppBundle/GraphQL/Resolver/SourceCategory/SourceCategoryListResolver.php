@@ -12,8 +12,7 @@ class SourceCategoryListResolver implements QueryInterface
 {
     public function __construct(
         private readonly SourceCategoryRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): Connection
     {

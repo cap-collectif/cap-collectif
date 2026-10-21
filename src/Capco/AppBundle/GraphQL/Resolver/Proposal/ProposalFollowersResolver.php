@@ -15,8 +15,7 @@ class ProposalFollowersResolver implements QueryInterface
     public function __construct(
         private readonly UserRepository $userRepository,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Proposal $proposal, Arg $args): Connection
     {

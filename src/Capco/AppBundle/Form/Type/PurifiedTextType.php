@@ -12,8 +12,7 @@ class PurifiedTextType extends AbstractType
 {
     public function __construct(
         private readonly StripTagsTransformer $stripTagsTransformer
-    ) {
-    }
+    ) {}
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

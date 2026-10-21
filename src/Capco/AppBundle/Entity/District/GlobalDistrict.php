@@ -39,6 +39,7 @@ class GlobalDistrict extends AbstractDistrict implements EntityInterface, Slugga
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private ?Media $media = null;

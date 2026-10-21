@@ -22,8 +22,7 @@ class FontProcessor
 
     public function __construct(
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function processArchive(UploadedFile $archive): array
     {

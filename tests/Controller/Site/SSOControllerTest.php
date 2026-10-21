@@ -14,8 +14,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Checks the private Symfony security session target-path key rather than proving the
  * destination through the HTTP login flow.
  */
@@ -61,6 +64,7 @@ final class SSOControllerTest extends WebTestCase implements FeatureFlagsAwareTe
 
     /**
      * @runInSeparateProcess
+     *
      * @preserveGlobalState disabled
      */
     public function testOpenidLoginRedirectsToTheConfiguredProviderAndPreservesDestination(): void

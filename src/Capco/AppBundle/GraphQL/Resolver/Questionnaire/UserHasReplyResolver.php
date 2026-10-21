@@ -17,8 +17,7 @@ class UserHasReplyResolver implements QueryInterface
         private readonly UserRepository $userRepository,
         private readonly LoggerInterface $logger,
         private readonly QuestionnaireResultsAccessResolver $resultsAccess
-    ) {
-    }
+    ) {}
 
     public function __invoke(Questionnaire $questionnaire, Argument $args, ?User $viewer = null, ?\ArrayObject $context = null): bool
     {

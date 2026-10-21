@@ -37,8 +37,7 @@ class TokenController extends AbstractController
         private readonly LoggerInterface $logger,
         private readonly TranslatorInterface $translator,
         private readonly TokenManager $tokenManager
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/voteByToken", name="capco_app_debate_vote_by_token", options={"i18n" = false})
@@ -148,6 +147,7 @@ class TokenController extends AbstractController
         Request $request
     ): RedirectResponse {
         $token = $request->get('token') ?? '';
+
         /** @var DebateAnonymousArgument $argument */
         $argument = $repository->findOneByToken($token);
         if (null === $argument) {
@@ -275,7 +275,7 @@ class TokenController extends AbstractController
 
     private static function isTokenConsumed(AbstractUserToken $token): bool
     {
-        //unsubscribe token can be reused
+        // unsubscribe token can be reused
         if ($token instanceof ActionToken && ActionToken::UNSUBSCRIBE === $token->getAction()) {
             return false;
         }

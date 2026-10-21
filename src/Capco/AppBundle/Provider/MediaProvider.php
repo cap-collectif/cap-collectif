@@ -16,8 +16,7 @@ class MediaProvider
         protected Filesystem $filesystem,
         protected CacheManager $cacheManager,
         private readonly string $projectDir
-    ) {
-    }
+    ) {}
 
     public function generatePublicUrl(Media $media, string $format): string
     {

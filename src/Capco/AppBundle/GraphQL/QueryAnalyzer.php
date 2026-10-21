@@ -13,8 +13,7 @@ class QueryAnalyzer
         private readonly Indexer $indexer,
         private readonly TypeResolver $typeResolver,
         private readonly Manager $toggleManager
-    ) {
-    }
+    ) {}
 
     /**
      * This add data to our ElasticSearch index for API usage monitoring.

@@ -37,8 +37,7 @@ class CreatePostMutation implements MutationInterface
         private readonly PostAuthorFactory $postAuthorFactory,
         private readonly Indexer $indexer,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

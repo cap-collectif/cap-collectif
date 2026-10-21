@@ -4,8 +4,11 @@ namespace Capco\Tests\Command;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Checks command outcomes and captured outbound emails with isolated SQL effects and explicit
  * invitation inputs.
  */

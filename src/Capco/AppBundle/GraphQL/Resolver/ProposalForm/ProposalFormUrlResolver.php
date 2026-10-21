@@ -10,8 +10,7 @@ class ProposalFormUrlResolver implements QueryInterface
 {
     public function __construct(
         private readonly RouterInterface $router
-    ) {
-    }
+    ) {}
 
     public function __invoke(ProposalForm $proposalForm): string
     {

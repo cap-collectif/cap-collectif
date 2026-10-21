@@ -34,8 +34,7 @@ class AddDebateAnonymousVoteMutation implements MutationInterface
         private readonly TokenGeneratorInterface $tokenGenerator,
         private readonly Indexer $indexer,
         private readonly RequestGuesserInterface $requestGuesser
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input): array
     {

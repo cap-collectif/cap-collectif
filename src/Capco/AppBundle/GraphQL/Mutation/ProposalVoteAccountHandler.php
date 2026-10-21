@@ -30,10 +30,9 @@ class ProposalVoteAccountHandler
         private readonly ParticipantIsMeetingRequirementsResolver $participantIsMeetingRequirementsResolver,
         private readonly EntityManagerInterface $em,
         private readonly Indexer $indexer
-    ) {
-    }
+    ) {}
 
-    //Use this method after validation but before effective creation or deletion
+    // Use this method after validation but before effective creation or deletion
     public function checkIfUserVotesAreStillAccounted(
         AbstractStep $step,
         AbstractVote $vote,
@@ -50,13 +49,13 @@ class ProposalVoteAccountHandler
 
                 return true;
             }
-            //Check if user has voted at least VotesMin times
+            // Check if user has voted at least VotesMin times
             $userVotes = $this->getUserVotesFromSpecificClass($step, $user);
-            //-1 or +1 corresponds to the vote being removed or added
+            // -1 or +1 corresponds to the vote being removed or added
             $isAccounted = $votesMin <= \count($userVotes) + ($isAddingVote ? 1 : -1);
             foreach ($userVotes as $userVote) {
                 $userVote->setIsAccounted($isAccounted);
-//                $this->indexer->index(Proposal::class, $userVote->getProposal()->getId());
+                //                $this->indexer->index(Proposal::class, $userVote->getProposal()->getId());
                 $this->indexer->index(AbstractVote::class, $userVote->getId());
             }
             $vote->setIsAccounted($isAccounted);

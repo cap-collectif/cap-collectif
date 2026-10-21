@@ -8,6 +8,4 @@ use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\Model\ReportableInterface;
 use Capco\AppBundle\Model\Sourceable;
 
-interface OpinionContributionInterface extends Sourceable, Argumentable, Contribution, Publishable, VotableInterface, ReportableInterface
-{
-}
+interface OpinionContributionInterface extends Sourceable, Argumentable, Contribution, Publishable, VotableInterface, ReportableInterface {}

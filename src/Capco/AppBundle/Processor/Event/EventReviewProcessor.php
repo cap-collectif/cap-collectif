@@ -15,13 +15,13 @@ class EventReviewProcessor implements ProcessorInterface
         private readonly EventRepository $eventRepository,
         private readonly EventNotifier $notifier,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function process(Message $message, array $options): bool
     {
         $json = json_decode((string) $message->getBody(), true);
         $id = $json['eventId'];
+
         /** @var Event $event */
         $event = $this->eventRepository->find($id);
 

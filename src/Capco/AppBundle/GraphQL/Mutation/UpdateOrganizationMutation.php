@@ -30,8 +30,7 @@ class UpdateOrganizationMutation implements MutationInterface
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly SluggerInterface $slugger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

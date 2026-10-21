@@ -49,8 +49,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Project.
  *
  * @ORM\Table(name="project")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProjectRepository")
+ *
  * @ORM\HasLifecycleCallbacks()
+ *
  * @CapcoAssert\HasUserGroupIdVisibilityGroup()
  */
 class Project implements EntityInterface, IndexableInterface, TimeRangeable, Ownerable, CreatableInterface, SluggableInterface, \Stringable
@@ -104,7 +107,9 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255, nullable=false)
+     *
      * @Assert\NotBlank()
+     *
      * @Assert\NotNull()
      */
     private $title;
@@ -118,6 +123,7 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
      * It's not updatable to avoid 404s.
      *
      * @Gedmo\Slug(fields={"title"}, updatable=false, unique=true)
+     *
      * @ORM\Column(length=255, nullable=false, unique=true)
      */
     private $slug;
@@ -126,21 +132,27 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
      * @var \DateTime
      *
      * @ORM\Column(name="published_at", type="datetime", nullable=false)
+     *
      * @Assert\NotNull()
+     *
      * @Assert\Type("\DateTimeInterface")
      */
     private $publishedAt;
 
     /**
      * @var \DateTime
+     *
      * @Gedmo\Timestampable(on="create")
+     *
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
      * @var \DateTime
+     *
      * @Gedmo\Timestampable(on="change", field={"title", "authors", "themes", "steps", "media"})
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -151,15 +163,17 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
     private $authors;
 
     /**
-     * @var
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="projects", cascade={"persist"})
+     *
      * @ORM\JoinTable(name="theme_project")
      */
     private $themes;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Steps\ProjectAbstractStep", mappedBy="project",  cascade={"persist", "remove"}, orphanRemoval = true)
+     *
      * @ORM\OrderBy({"position" = "ASC"})
+     *
      * @CapcoAssert\HasOnlyOneSelectionStepAllowingProgressSteps()
      */
     private $steps;
@@ -175,19 +189,18 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
     private $video;
 
     /**
-     * @var
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Event", mappedBy="projects", cascade={"persist"})
      */
     private $events;
 
     /**
-     * @var
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Post", mappedBy="projects", cascade={"persist"})
      */
     private $posts;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProjectTab", mappedBy="project", cascade={"persist", "remove"}, orphanRemoval=true)
+     *
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private Collection $tabs;
@@ -215,6 +228,7 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProjectType", inversedBy="projects")
+     *
      * @ORM\JoinColumn(name="project_type_id", referencedColumnName="id", nullable=true)
      */
     private $projectType;
@@ -231,12 +245,14 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
 
     /**
      * @ORM\JoinTable(name="restricted_viewer_groups")
+     *
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Group", inversedBy="projectsVisibleByTheGroup", cascade={"persist"})
      */
     private $restrictedViewerGroups;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\District\ProjectDistrictPositioner", mappedBy="project", cascade={"persist", "remove"})
+     *
      * @ORM\JoinColumn(name="project_district_positioner_id", referencedColumnName="id", nullable=true)
      */
     private $projectDistrictPositioners;
@@ -253,6 +269,7 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
 
     /**
      * @ORM\Column(name="cover_filter_opacity_percent", type="integer", nullable=false)
+     *
      * @Assert\Range(
      *     min = 0,
      *     max = 100,
@@ -376,11 +393,9 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
     }
 
     /**
-     * @param $slug
-     *
      * @return $this
      */
-    public function setSlug($slug)
+    public function setSlug(mixed $slug)
     {
         $this->slug = $slug;
 
@@ -500,8 +515,6 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
     /**
      * Add theme.
      *
-     * @param \Capco\AppBundle\Entity\Theme $theme
-     *
      * @return Project
      */
     public function addTheme(Theme $theme)
@@ -516,8 +529,6 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
 
     /**
      * Remove theme.
-     *
-     * @param \Capco\AppBundle\Entity\Theme $theme
      *
      * @return $this
      */
@@ -784,6 +795,7 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
     public function getStartAt(): ?\DateTime
     {
         $startAt = null;
+
         /** * @var ProjectAbstractStep $step  */
         foreach ($this->steps as $step) {
             if (!$startAt) {
@@ -802,6 +814,7 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
     public function getEndAt(): ?\DateTime
     {
         $endAt = null;
+
         /** * @var ProjectAbstractStep $step  */
         foreach ($this->steps as $step) {
             if (!$endAt) {
@@ -914,6 +927,7 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
                     if (PresentationStep::TYPE === $step->getType()) {
                         continue;
                     }
+
                     /** @var AbstractStep $step */
                     if ($step->isClosed()) {
                         return self::$openingStatuses['future_with_finished_steps'];
@@ -1390,6 +1404,7 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
             return [];
         }
         $analysts = [];
+
         /** @var Proposal $proposal */
         foreach ($proposalForm->getProposals() as $proposal) {
             $analysts += $proposal->getAnalysts()->toArray();
@@ -1413,6 +1428,7 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
             return [];
         }
         $supervisors = [];
+
         /** @var Proposal $proposal */
         foreach ($proposalForm->getProposals() as $proposal) {
             $supervisors[] = $proposal->getSupervisor();
@@ -1436,6 +1452,7 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
             return [];
         }
         $decisionMakers = [];
+
         /** @var Proposal $proposal */
         foreach ($proposalForm->getProposals() as $proposal) {
             $decisionMakers[] = $proposal->getDecisionMaker();
@@ -1459,6 +1476,7 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
             return [];
         }
         $decisionMakers = [];
+
         /** @var Proposal $proposal */
         foreach ($proposalForm->getProposals() as $proposal) {
             if ($proposal->getCategory()) {

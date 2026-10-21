@@ -4,7 +4,6 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\GraphQL\Resolver\Locale\GraphQLLocaleResolver;
 use Capco\AppBundle\Model\TranslatableInterface;
-use Closure;
 use GraphQL\Type\Definition\ResolveInfo;
 
 class LocaleAwareFieldResolver
@@ -16,9 +15,7 @@ class LocaleAwareFieldResolver
      */
     private array $methodSupportsLocaleCache = [];
 
-    public function __construct(private readonly GraphQLLocaleResolver $graphqlLocaleResolver)
-    {
-    }
+    public function __construct(private readonly GraphQLLocaleResolver $graphqlLocaleResolver) {}
 
     /**
      * @return null|mixed
@@ -30,7 +27,7 @@ class LocaleAwareFieldResolver
         if (\is_array($parentValue) && \array_key_exists($fieldName, $parentValue)) {
             $value = $parentValue[$fieldName];
 
-            return $value instanceof Closure ? $value($parentValue, $args, $context, $info) : $value;
+            return $value instanceof \Closure ? $value($parentValue, $args, $context, $info) : $value;
         }
 
         if (!\is_object($parentValue)) {

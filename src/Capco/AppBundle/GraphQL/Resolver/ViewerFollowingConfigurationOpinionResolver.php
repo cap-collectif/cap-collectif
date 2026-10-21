@@ -13,8 +13,7 @@ class ViewerFollowingConfigurationOpinionResolver implements QueryInterface
     public function __construct(
         private readonly FollowerRepository $followerRepository,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Opinion $opinion, User $viewer): ?string
     {

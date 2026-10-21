@@ -18,8 +18,7 @@ class QuestionTagCloudResolver implements QueryInterface
         private readonly ResponseSearch $responseSearch,
         private readonly RedisCache $cache,
         private readonly QuestionnaireResultsAccessResolver $resultsAccess
-    ) {
-    }
+    ) {}
 
     public function __invoke(AbstractQuestion $question, Argument $args, ?User $viewer = null, ?\ArrayObject $context = null): array
     {

@@ -14,9 +14,13 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalSelectionVoteRepository")
+ *
  * @ORM\HasLifecycleCallbacks()
+ *
  * @CapcoAssert\HasAnonymousOrUser()
+ *
  * @CapcoAssert\EmailDoesNotBelongToUser(message="proposal.vote.email_belongs_to_user")
+ *
  * @CapcoAssert\HasEnoughCreditsToVote()
  */
 class ProposalSelectionVote extends AbstractProposalVote implements ExportableContributionInterface
@@ -32,12 +36,14 @@ class ProposalSelectionVote extends AbstractProposalVote implements ExportableCo
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="selectionVotes", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private Proposal $proposal;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\SelectionStep", inversedBy="selectionVotes", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="selection_step_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private SelectionStep $selectionStep;

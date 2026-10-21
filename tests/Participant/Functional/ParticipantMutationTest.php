@@ -14,9 +14,13 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason HTTP mutations verify persisted identity effects, authorization and sessions with controlled SMS delivery.
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
  */
 final class ParticipantMutationTest extends ParticipantWebTestCase
@@ -241,8 +245,11 @@ final class ParticipantMutationTest extends ParticipantWebTestCase
     public static function deletionAccess(): iterable
     {
         yield 'linked owner' => ['owner', true, true];
+
         yield 'unlinked owner' => ['owner', false, false];
+
         yield 'other user' => ['other', true, false];
+
         yield 'CharacterizationGap anonymous' => ['anonymous', true, false];
     }
 

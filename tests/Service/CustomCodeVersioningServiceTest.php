@@ -19,8 +19,11 @@ use Symfony\Component\Validator\Validation;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason The shared service factory asserts Doctrine transaction depth and cache-invalidation call
  * counts instead of only versioning results.
  */
@@ -76,6 +79,7 @@ class CustomCodeVersioningServiceTest extends KernelTestCase
 
     /**
      * @dataProvider operations
+     *
      * @requires extension pcntl
      * @requires extension posix
      */
@@ -107,9 +111,7 @@ class CustomCodeVersioningServiceTest extends KernelTestCase
                     private bool $signaled = false;
 
                     /** @param resource $socket */
-                    public function __construct(private $socket)
-                    {
-                    }
+                    public function __construct(private $socket) {}
 
                     public function startQuery($sql, ?array $params = null, ?array $types = null): void
                     {
@@ -120,9 +122,7 @@ class CustomCodeVersioningServiceTest extends KernelTestCase
                         }
                     }
 
-                    public function stopQuery(): void
-                    {
-                    }
+                    public function stopQuery(): void {}
                 });
                 $this->writeVersion($this->service(false), $operation, null, '<script>concurrent</script>');
                 fwrite($socket, "SUCCESS\n");
@@ -207,6 +207,7 @@ class CustomCodeVersioningServiceTest extends KernelTestCase
     public static function operations(): \Generator
     {
         yield 'commit' => ['commit'];
+
         yield 'restore' => ['restore'];
     }
 

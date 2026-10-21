@@ -8,9 +8,13 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises HTTP outcomes and real domain data with transactional cleanup; replaces only external boundaries.
  */
 final class VerifyUserPhoneNumberMutationTest extends IdentityWebTestCase
@@ -61,9 +65,13 @@ final class VerifyUserPhoneNumberMutationTest extends IdentityWebTestCase
     public static function outcomes(): iterable
     {
         yield 'verified' => ['verified', null];
+
         yield 'already confirmed' => ['confirmed', 'PHONE_ALREADY_CONFIRMED'];
+
         yield 'invalid code' => ['provider', 'CODE_NOT_VALID'];
+
         yield 'expired code' => ['provider', 'CODE_EXPIRED'];
+
         yield 'phone belongs to another account' => ['collision', 'PHONE_ALREADY_USED_BY_ANOTHER_USER'];
     }
 

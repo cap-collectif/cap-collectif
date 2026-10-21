@@ -14,8 +14,7 @@ class UserInviteNewInvitationProcessor implements ProcessorInterface
     public function __construct(
         private readonly UserInviteEmailMessageRepository $emailMessageRepository,
         private readonly UserInviteEmailMessageNotifier $notifier
-    ) {
-    }
+    ) {}
 
     public function process(Message $message, array $options): bool
     {

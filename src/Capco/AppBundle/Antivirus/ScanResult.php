@@ -15,8 +15,7 @@ class ScanResult
         private readonly string $status,
         private readonly null|string $virusName = null,
         private readonly null|string $errorMessage = null
-    ) {
-    }
+    ) {}
 
     public static function clean(): self
     {

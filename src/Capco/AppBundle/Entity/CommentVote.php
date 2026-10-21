@@ -7,12 +7,14 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CommentVoteRepository")
+ *
  * @ORM\HasLifecycleCallbacks()
  */
 class CommentVote extends AbstractVote implements ExportableContributionInterface
 {
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Comment", inversedBy="votes", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="comment_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $comment;

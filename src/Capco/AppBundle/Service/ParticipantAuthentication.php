@@ -17,8 +17,7 @@ class ParticipantAuthentication
         private readonly ParticipantHelper $participantHelper,
         private readonly RequestStack $requestStack,
         private readonly TokenStorageInterface $tokenStorage
-    ) {
-    }
+    ) {}
 
     public function authenticate(Request $request): void
     {

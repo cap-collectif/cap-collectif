@@ -20,13 +20,13 @@ class UnsubscribeToEventAsRegisteredMutation implements MutationInterface
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly EntityManagerInterface $entityManager,
         private readonly EventRegistrationRepository $eventRegistrationRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $viewer): array
     {
         $this->formatInput($input);
         $eventId = $input->offsetGet('eventId');
+
         /** @var Event $event */
         $event = $this->globalIdResolver->resolve($eventId, $viewer);
         $registration = null;

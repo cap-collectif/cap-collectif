@@ -15,8 +15,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Table(name="official_response_author")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OfficialResponseAuthorRepository")
+ *
  * @CapcoAssert\HasAuthor()
+ *
  * @UniqueEntity(
  *     fields={"author", "officialResponse"},
  *     errorPath="author",
@@ -35,12 +38,14 @@ class OfficialResponseAuthor implements EntityInterface, Authorable
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private ?User $author = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OfficialResponse", inversedBy="authors", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="official_response_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     private OfficialResponse $officialResponse;

@@ -20,8 +20,7 @@ class UpdateMenuItemMutation implements MutationInterface
         private readonly EntityManagerInterface $em,
         private readonly MenuItemRepository $menuItemRepository,
         private readonly MenuItemInputApplier $inputApplier
-    ) {
-    }
+    ) {}
 
     /**
      * @return array{menuItem: ?MenuItem, errorCode: ?string}

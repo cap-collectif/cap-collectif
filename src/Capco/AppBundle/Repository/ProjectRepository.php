@@ -329,7 +329,7 @@ class ProjectRepository extends EntityRepository implements SluggableRepositoryI
             $qb->setFirstResult($offset);
         }
 
-        $results = new Paginator($qb, ($fetchJoin = true));
+        $results = new Paginator($qb, $fetchJoin = true);
         $projects = [];
         foreach ($results as $project) {
             $projects[] = $project;

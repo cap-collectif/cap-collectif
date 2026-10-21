@@ -191,8 +191,7 @@ class CloneStepService
                 $clonedAnalysisConfiguration->setMoveToSelectionStep($clonedSelectionStep);
             }
             foreach (
-                $proposalAnalysisConfiguration->getUnfavourableStatuses()
-                as $unfavourableStatus
+                $proposalAnalysisConfiguration->getUnfavourableStatuses() as $unfavourableStatus
             ) {
                 $clonedUnfavourableStatus = $this->getOrCloneStatus(
                     $unfavourableStatus,

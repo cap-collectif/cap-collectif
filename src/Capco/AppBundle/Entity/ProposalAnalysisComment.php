@@ -11,6 +11,7 @@ class ProposalAnalysisComment extends Comment
 {
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalAnalysis", inversedBy="comments")
+     *
      * @ORM\JoinColumn(name="proposal_analysis", referencedColumnName="id", onDelete="CASCADE")
      */
     private ProposalAnalysis $proposalAnalysis;

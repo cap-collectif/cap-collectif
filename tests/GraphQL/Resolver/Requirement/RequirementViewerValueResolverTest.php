@@ -7,9 +7,13 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises HTTP outcomes and real domain data with transactional cleanup; replaces only external boundaries.
  */
 final class RequirementViewerValueResolverTest extends IdentityWebTestCase
@@ -31,12 +35,19 @@ final class RequirementViewerValueResolverTest extends IdentityWebTestCase
     public static function scalarRequirementValues(): iterable
     {
         yield 'firstname' => ['FIRSTNAME', 'setFirstname', 'FirstnameRequirement { profileValue: viewerValue }', 'John', 'John'];
+
         yield 'missing firstname' => ['FIRSTNAME', 'setFirstname', 'FirstnameRequirement { profileValue: viewerValue }', null, null];
+
         yield 'lastname' => ['LASTNAME', 'setLastname', 'LastnameRequirement { profileValue: viewerValue }', 'Doe', 'Doe'];
+
         yield 'missing lastname' => ['LASTNAME', 'setLastname', 'LastnameRequirement { profileValue: viewerValue }', null, null];
+
         yield 'phone' => ['PHONE', 'setPhone', 'PhoneRequirement { profileValue: viewerValue }', '+33628353289', '+33628353289'];
+
         yield 'missing phone' => ['PHONE', 'setPhone', 'PhoneRequirement { profileValue: viewerValue }', null, null];
+
         yield 'birth date' => ['DATE_OF_BIRTH', 'setDateOfBirth', 'DateOfBirthRequirement { profileValue: viewerDateOfBirth }', '2000-01-01 00:00:00', '2000-01-01 00:00:00'];
+
         yield 'missing birth date' => ['DATE_OF_BIRTH', 'setDateOfBirth', 'DateOfBirthRequirement { profileValue: viewerDateOfBirth }', null, null];
     }
 
@@ -63,7 +74,9 @@ final class RequirementViewerValueResolverTest extends IdentityWebTestCase
     public static function checkboxValues(): iterable
     {
         yield 'viewer accepted this requirement' => [true, true];
+
         yield 'viewer explicitly declined this requirement' => [false, false];
+
         yield 'only another user or another requirement accepted' => [null, false];
     }
 

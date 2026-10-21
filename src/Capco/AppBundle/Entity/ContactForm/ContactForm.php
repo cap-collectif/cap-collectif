@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="contact_form")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ContactFormRepository")
  */
 class ContactForm implements EntityInterface, TranslatableInterface

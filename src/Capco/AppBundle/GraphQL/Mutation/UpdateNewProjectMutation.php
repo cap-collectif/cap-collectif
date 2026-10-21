@@ -52,8 +52,7 @@ class UpdateNewProjectMutation implements MutationInterface
         private readonly ProjectAbstractStepRepository $projectAbstractStepRepository,
         private readonly TranslatorInterface $translator,
         private readonly ActionLogger $actionLogger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

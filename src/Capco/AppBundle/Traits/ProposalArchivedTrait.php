@@ -16,6 +16,7 @@ trait ProposalArchivedTrait
 
     /**
      * @ORM\Column(name="proposal_archived_unit_time", type="string", nullable=false, options={"default" : "MONTHS"})
+     *
      * @Assert\Choice(choices={"DAYS", "MONTHS"})
      */
     private string $proposalArchivedUnitTime = ProposalArchivedUnitTime::MONTHS;

@@ -19,8 +19,7 @@ final class UpdateFollowProposalMutation implements MutationInterface
         private readonly EntityManagerInterface $em,
         private readonly FollowerRepository $followerRepository,
         private readonly GlobalIdResolver $globalIdResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(string $proposalId, string $notifiedOf, User $user): array
     {

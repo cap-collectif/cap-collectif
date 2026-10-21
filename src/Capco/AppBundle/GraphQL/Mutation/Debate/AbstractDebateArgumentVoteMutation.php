@@ -29,8 +29,7 @@ abstract class AbstractDebateArgumentVoteMutation
         protected DebateArgumentVoteRepository $repository,
         protected DebateAnonymousArgumentVoteRepository $anonymousRepository,
         protected Indexer $indexer
-    ) {
-    }
+    ) {}
 
     protected function getDebateArgument(Arg $input, User $viewer): DebateArgumentInterface
     {

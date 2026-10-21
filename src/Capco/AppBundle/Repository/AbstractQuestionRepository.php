@@ -52,7 +52,7 @@ class AbstractQuestionRepository extends EntityRepository
             ->andWhere('aq.title = :title')
             ->setParameter('questionnaire', $questionnaire)
             ->setParameter('title', $questionTitle)
-            ;
+        ;
 
         return $qb->getQuery()->getSingleResult();
     }
@@ -65,7 +65,7 @@ class AbstractQuestionRepository extends EntityRepository
         $qb = $this->findWithJumpsOrWithAlwaysJumpDestinationQueryBuilder()
             ->andWhere('qaq.questionnaire = :questionnaire')
             ->setParameter('questionnaire', $questionnaire)
-            ;
+        ;
 
         return $qb->getQuery()->getResult();
     }

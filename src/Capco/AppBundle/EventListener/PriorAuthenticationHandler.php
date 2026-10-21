@@ -19,8 +19,7 @@ class PriorAuthenticationHandler
         private readonly Manager $toggleManager,
         private readonly LoggerInterface $logger,
         private readonly CaptchaChecker $captchaChecker
-    ) {
-    }
+    ) {}
 
     public function onKernelRequest(RequestEvent $event): void
     {

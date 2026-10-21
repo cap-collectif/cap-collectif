@@ -18,11 +18,10 @@ class DeletePageMutation implements MutationInterface
     public function __construct(
         private readonly EntityManagerInterface $em,
         private readonly PageRepository $pageRepository
-    ) {
-    }
+    ) {}
 
     /**
-     * @return array{deletedPageId: string|null, errorCode: string|null}
+     * @return array{deletedPageId: null|string, errorCode: null|string}
      */
     public function __invoke(Argument $input): array
     {

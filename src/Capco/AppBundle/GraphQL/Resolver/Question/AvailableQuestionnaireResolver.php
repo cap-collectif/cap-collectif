@@ -10,8 +10,7 @@ class AvailableQuestionnaireResolver implements QueryInterface
 {
     public function __construct(
         private readonly QuestionnaireRepository $questionnaireRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): array
     {

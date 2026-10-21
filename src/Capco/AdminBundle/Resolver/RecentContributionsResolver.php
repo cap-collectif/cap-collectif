@@ -19,7 +19,7 @@ class RecentContributionsResolver
 
     public function getEntityByTypeAndId($type, $id)
     {
-        $result = match ($type) {
+        return match ($type) {
             'argument' => $this->em->getRepository('CapcoAppBundle:Argument')->find($id),
             'opinion' => $this->em->getRepository('CapcoAppBundle:Opinion')->find($id),
             'version' => $this->em->getRepository('CapcoAppBundle:OpinionVersion')->find($id),
@@ -27,8 +27,6 @@ class RecentContributionsResolver
             'comment' => $this->em->getRepository('CapcoAppBundle:Comment')->find($id),
             default => throw new NotFoundHttpException('Contribution not found for type ' . $type . ' and id ' . $id),
         };
-
-        return $result;
     }
 
     public function getContributionByTypeAndId($type, $id)

@@ -12,8 +12,7 @@ class GroupListResolver implements QueryInterface
 {
     public function __construct(
         private readonly GroupRepository $groupRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): Connection
     {

@@ -14,8 +14,7 @@ class DebateViewerVoteResolver implements QueryInterface
 
     public function __construct(
         private readonly DebateVoteRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Debate $debate, $viewer): ?DebateVote
     {

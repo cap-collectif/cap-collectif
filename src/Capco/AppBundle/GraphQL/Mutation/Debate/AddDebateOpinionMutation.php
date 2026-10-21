@@ -29,8 +29,7 @@ class AddDebateOpinionMutation implements MutationInterface
         private readonly LoggerInterface $logger,
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly AuthorizationCheckerInterface $authorizationChecker
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input): array
     {

@@ -23,14 +23,15 @@ class UpdateFollowOpinionMutation implements MutationInterface
         private readonly OpinionRepository $opinionRepository,
         private readonly OpinionVersionRepository $versionRepository,
         private readonly FollowerRepository $followerRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(string $opinionId, string $notifiedOf, User $user): array
     {
         $opinionGlobalId = GlobalId::fromGlobalId($opinionId)['id'];
+
         /** @var Opinion $opinion */
         $opinion = $this->opinionRepository->find($opinionGlobalId);
+
         /** @var OpinionVersion $version */
         $version = $this->versionRepository->find($opinionGlobalId);
 

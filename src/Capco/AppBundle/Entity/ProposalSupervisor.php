@@ -11,6 +11,7 @@ use Gedmo\Timestampable\Timestampable;
 
 /**
  * @ORM\Table(name="proposal_supervisor")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalSupervisorRepository")
  */
 class ProposalSupervisor implements EntityInterface, Timestampable
@@ -19,26 +20,32 @@ class ProposalSupervisor implements EntityInterface, Timestampable
 
     /**
      * @ORM\Id()
+     *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="supervisedProposals")
+     *
      * @ORM\JoinColumn(nullable=false, referencedColumnName="id")
      */
     private User $supervisor;
 
     /**
      * @ORM\Id()
+     *
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="supervisor")
+     *
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private Proposal $proposal;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(name="assigned_by",  referencedColumnName="id", nullable=true)
      */
     private User $assignedBy;
 
     /**
      * @Gedmo\Timestampable(on="update")
+     *
      * @ORM\Column(type="datetime", name="updated_at")
      */
     private ?\DateTimeInterface $updatedAt = null;

@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=AppLogRepository::class)
+ *
  * @ORM\Table(name="app_logs")
  */
 class AppLog
@@ -47,6 +48,7 @@ class AppLog
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private User $user;

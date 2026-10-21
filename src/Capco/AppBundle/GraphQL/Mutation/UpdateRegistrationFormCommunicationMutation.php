@@ -16,8 +16,7 @@ class UpdateRegistrationFormCommunicationMutation implements MutationInterface
     public function __construct(
         private readonly EntityManagerInterface $em,
         private readonly RegistrationFormRepository $registrationFormRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input): array
     {

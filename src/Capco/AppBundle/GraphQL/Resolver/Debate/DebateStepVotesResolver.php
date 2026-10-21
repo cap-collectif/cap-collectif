@@ -16,8 +16,7 @@ class DebateStepVotesResolver implements QueryInterface
         private readonly DebateAnonymousVoteRepository $debateAnonymousVoteRepository,
         private readonly DebateAnonymousArgumentVoteRepository $debateAnonymousArgumentVoteRepository,
         private readonly DebateArgumentVoteRepository $debateArgumentVoteRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * @return array{key: string, totalCount: int}

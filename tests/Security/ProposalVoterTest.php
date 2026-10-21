@@ -12,7 +12,9 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Checks public domain rules with real entities and observable results, without framework interaction counts.
  */
 class ProposalVoterTest extends AuthorizationTestCase
@@ -21,8 +23,8 @@ class ProposalVoterTest extends AuthorizationTestCase
     {
         $token = $this->createStub(TokenInterface::class);
         $voter = new ProposalVoter();
-        self::assertSame(VoterInterface::ACCESS_ABSTAIN, $voter->vote($token, (new Proposal()), ['wrongAttribute']));
-        self::assertSame(VoterInterface::ACCESS_ABSTAIN, $voter->vote($token, (new ProposalForm()), [ProposalVoter::CHANGE_CONTENT]));
+        self::assertSame(VoterInterface::ACCESS_ABSTAIN, $voter->vote($token, new Proposal(), ['wrongAttribute']));
+        self::assertSame(VoterInterface::ACCESS_ABSTAIN, $voter->vote($token, new ProposalForm(), [ProposalVoter::CHANGE_CONTENT]));
     }
 
     public function testAnonymousCannotChangeContentOrStatus(): void
@@ -58,6 +60,7 @@ class ProposalVoterTest extends AuthorizationTestCase
     public static function projectManagers(): iterable
     {
         yield 'global administrator' => [true];
+
         yield 'project owner' => [false];
     }
 

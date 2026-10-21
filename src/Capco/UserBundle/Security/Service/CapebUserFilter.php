@@ -66,7 +66,7 @@ class CapebUserFilter
             $this->logger->error('Cas user "' . $username . '" has not authorized role : ' . $userRole);
 
             return null;
-        } catch (TransportException|ClientExceptionInterface|RedirectionExceptionInterface|ServerExceptionInterface|ClientException $exception) {
+        } catch (ClientException|ClientExceptionInterface|RedirectionExceptionInterface|ServerExceptionInterface|TransportException $exception) {
             $this->logger->error('Cas user "' . $username . '" api request failed');
             $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
 

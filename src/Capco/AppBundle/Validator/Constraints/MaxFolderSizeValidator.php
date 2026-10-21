@@ -18,8 +18,7 @@ class MaxFolderSizeValidator extends ConstraintValidator
         private readonly string $projectDir,
         private readonly Finder $finder,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function validate(mixed $value, Constraint $constraint): void
     {

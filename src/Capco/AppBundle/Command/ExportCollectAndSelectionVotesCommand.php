@@ -216,7 +216,7 @@ class ExportCollectAndSelectionVotesCommand extends BaseExportCommand
     }
 
     /**
-     * @return iterable< ProposalSelectionVote|ProposalCollectVote >
+     * @return iterable< ProposalCollectVote|ProposalSelectionVote >
      */
     private function getVotes(AbstractStep $step): iterable
     {

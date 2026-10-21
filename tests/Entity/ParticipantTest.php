@@ -11,7 +11,9 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Public identity and contributor rules use real domain objects without infrastructure.
  */
 final class ParticipantTest extends TestCase

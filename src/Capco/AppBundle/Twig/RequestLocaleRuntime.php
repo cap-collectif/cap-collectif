@@ -10,8 +10,7 @@ class RequestLocaleRuntime implements RuntimeExtensionInterface
 {
     public function __construct(
         private readonly LocaleResolver $localeResolver
-    ) {
-    }
+    ) {}
 
     public function getRequestLocale(?Request $request = null): ?string
     {

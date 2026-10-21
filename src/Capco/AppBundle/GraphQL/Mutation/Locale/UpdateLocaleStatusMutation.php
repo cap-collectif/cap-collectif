@@ -19,8 +19,7 @@ class UpdateLocaleStatusMutation implements MutationInterface
     public function __construct(
         private EntityManagerInterface $entityManager,
         private LocaleRepository $localeRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): array
     {
@@ -50,7 +49,7 @@ class UpdateLocaleStatusMutation implements MutationInterface
     private function getLocaleFromInput(array $localeInput): Locale
     {
         $locale = $this->localeRepository->find($localeInput['id']);
-        if (!($locale instanceof Locale)) {
+        if (!$locale instanceof Locale) {
             throw new UserError('unknown locale : ' . $localeInput['id']);
         }
 

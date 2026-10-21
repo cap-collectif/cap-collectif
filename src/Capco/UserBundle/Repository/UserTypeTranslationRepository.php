@@ -11,6 +11,4 @@ use Doctrine\ORM\EntityRepository;
  * @method UserTypeTranslation[]    findAll()
  * @method UserTypeTranslation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UserTypeTranslationRepository extends EntityRepository
-{
-}
+class UserTypeTranslationRepository extends EntityRepository {}

@@ -17,8 +17,7 @@ class ProjectContributionResolver implements QueryInterface
     public function __construct(
         protected ContributionSearch $contributionSearch,
         private readonly RedisCache $cache
-    ) {
-    }
+    ) {}
 
     public function __invoke(Project $project, ?Argument $args = null, mixed $viewer = null, ?\ArrayObject $context = null): ConnectionInterface
     {

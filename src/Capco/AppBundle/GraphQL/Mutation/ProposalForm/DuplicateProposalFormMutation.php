@@ -74,7 +74,7 @@ class DuplicateProposalFormMutation extends AbstractProposalFormMutation
 
     private function cloneProposalForm(ProposalForm $model): ProposalForm
     {
-        //proposalForm:__clone is overridden and will do all the job
+        // proposalForm:__clone is overridden and will do all the job
         return clone $model;
     }
 

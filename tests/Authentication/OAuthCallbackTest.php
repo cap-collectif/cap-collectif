@@ -10,9 +10,13 @@ use Capco\UserBundle\FranceConnect\FranceConnectOptionsModifier;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises real OAuth resource owners and account persistence through HTTP with a fixed provider transport.
  */
 final class OAuthCallbackTest extends OAuthWebTestCase
@@ -180,9 +184,12 @@ final class OAuthCallbackTest extends OAuthWebTestCase
     {
         foreach (['openid', 'facebook', 'franceconnect'] as $provider) {
             yield $provider . ' email collision' => [$provider, false, false];
+
             yield $provider . ' linked account with a changed local email' => [$provider, true, false];
         }
+
         yield 'FranceConnect v2 email collision' => ['franceconnect', false, true];
+
         yield 'FranceConnect v2 linked account with changed email' => ['franceconnect', true, true];
     }
 
@@ -191,19 +198,32 @@ final class OAuthCallbackTest extends OAuthWebTestCase
     {
         foreach (['openid', 'facebook', 'franceconnect'] as $provider) {
             yield $provider . ' refusal' => [$provider, 'denied', 'franceconnect' === $provider ? 'france-connect-access-denied' : 'No oauth code in the request.', false];
+
             yield $provider . ' invalid grant' => [$provider, 'invalid-token', 'OAuth error: "invalid_grant"', false];
+
             yield $provider . ' token endpoint unavailable' => [$provider, 'token-network', 'Error while sending HTTP request', false];
+
             yield $provider . ' userinfo endpoint unavailable' => [$provider, 'userinfo-network', 'Error while sending HTTP request', false];
+
             yield $provider . ' missing authorization code' => [$provider, 'missing-code', 'No oauth code in the request.', false];
         }
+
         yield 'OpenID ID token without access token' => ['openid', 'missing-access-token', 'Not a valid access token.', false];
+
         yield 'FranceConnect v2 malformed userinfo' => ['franceconnect', 'malformed-userinfo', 'FranceConnect token verification failed.', true];
+
         yield 'FranceConnect v2 userinfo unavailable' => ['franceconnect', 'userinfo-network', 'Error while retrieving information from FranceConnect.', true];
+
         yield 'FranceConnect v2 foreign nonce' => ['franceconnect', 'bad-nonce', 'france-connect-connection-error', true];
+
         yield 'FranceConnect v2 invalid signature' => ['franceconnect', 'invalid-signature', 'FranceConnect signature verification failed.', true];
+
         yield 'FranceConnect v2 expired userinfo' => ['franceconnect', 'expired-userinfo', 'FranceConnect token expired.', true];
+
         yield 'FranceConnect foreign state' => ['franceconnect', 'bad-state', 'Given CSRF token is not valid.', false];
+
         yield 'FranceConnect foreign nonce' => ['franceconnect', 'bad-nonce', 'france-connect-connection-error', false];
+
         yield 'FranceConnect expired state' => ['franceconnect', 'expired-state', 'france-connect-connection-error', false];
     }
 
@@ -211,8 +231,11 @@ final class OAuthCallbackTest extends OAuthWebTestCase
     public static function providers(): iterable
     {
         yield 'OpenID' => ['openid', false];
+
         yield 'Facebook' => ['facebook', false];
+
         yield 'FranceConnect v1' => ['franceconnect', false];
+
         yield 'FranceConnect v2' => ['franceconnect', true];
     }
 }

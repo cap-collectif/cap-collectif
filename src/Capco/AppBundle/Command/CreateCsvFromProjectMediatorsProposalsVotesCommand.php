@@ -82,6 +82,7 @@ class CreateCsvFromProjectMediatorsProposalsVotesCommand extends BaseExportComma
         }
 
         $projectId = $input->getArgument('projectId');
+
         /** @var Project $project */
         $project = $this->projectRepository->find(['id' => $projectId]);
         $projectMediatorsProposalsVotes = $this->selectionStepRepository->findProjectMediatorsProposalsVotes($projectId);

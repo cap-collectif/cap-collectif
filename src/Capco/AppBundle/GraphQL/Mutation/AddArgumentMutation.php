@@ -42,8 +42,7 @@ class AddArgumentMutation implements MutationInterface
         private readonly ArgumentRepository $argumentRepo,
         private readonly LoggerInterface $logger,
         private readonly StepRequirementsResolver $stepRequirementsResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $input, User $author): array
     {

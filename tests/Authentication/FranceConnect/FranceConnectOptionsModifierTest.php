@@ -16,17 +16,20 @@ use Symfony\Contracts\Cache\ItemInterface;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Replaces domain SSO configuration with a mock graph instead of real scenario objects.
  */
 final class FranceConnectOptionsModifierTest extends TestCase
 {
     private FranceConnectOptionsModifier $franceConnectOptionsModifier;
     private FranceConnectSSOConfigurationRepository|MockObject $repositoryMock;
-    private RedisCache|MockObject $redisCacheMock;
+    private MockObject|RedisCache $redisCacheMock;
     private Manager|MockObject $toggleManagerMock;
-    private SessionInterface|MockObject $sessionMock;
+    private MockObject|SessionInterface $sessionMock;
     private FranceConnectResourceOwner|MockObject $resourceOwnerMock;
     private ItemInterface|MockObject $fcTokensMock;
     private ItemInterface|MockObject $ssoConfigurationMock;

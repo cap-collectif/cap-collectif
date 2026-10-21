@@ -17,7 +17,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Answer.
  *
  * @ORM\Table(name="answer")
+ *
  * @ORM\Entity()
+ *
  * @CapcoAssert\HasAuthor()
  */
 class Answer implements EntityInterface, Authorable, \Stringable
@@ -29,12 +31,14 @@ class Answer implements EntityInterface, Authorable, \Stringable
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
     protected ?User $author = null;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "body"})
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     protected \DateTime $updatedAt;

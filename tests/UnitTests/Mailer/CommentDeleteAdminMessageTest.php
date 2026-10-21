@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class CommentDeleteAdminMessageTest extends TestCase

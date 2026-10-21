@@ -22,8 +22,7 @@ class OpenIDBackchannel
         private readonly string $env,
         private readonly string $backChannelSecret,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Request $request, string $token): JsonResponse
     {

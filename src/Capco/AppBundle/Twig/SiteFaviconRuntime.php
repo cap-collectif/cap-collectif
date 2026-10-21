@@ -13,8 +13,7 @@ class SiteFaviconRuntime implements RuntimeExtensionInterface
         protected ContainerInterface $container,
         private readonly SiteImageRepository $repository,
         private readonly MediaProvider $provider
-    ) {
-    }
+    ) {}
 
     public function getSiteFavicons(): ?array
     {
@@ -52,8 +51,7 @@ class SiteFaviconRuntime implements RuntimeExtensionInterface
                 'favicon_180',
                 'favicon_192',
                 'favicon_310',
-            ]
-            as $filter
+            ] as $filter
         ) {
             $siteFavicon[$filter] = $this->provider->generatePublicUrl($mediaFavicon, $filter);
         }

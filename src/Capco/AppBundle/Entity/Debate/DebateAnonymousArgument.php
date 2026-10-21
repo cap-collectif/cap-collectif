@@ -32,6 +32,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=DebateAnonymousArgumentRepository::class)
+ *
  * @ORM\Table(name="debate_anonymous_argument")
  */
 class DebateAnonymousArgument implements EntityInterface, DebateArgumentInterface, AnonymousParticipationInterface, ExportableDebateContributionInterface
@@ -57,6 +58,7 @@ class DebateAnonymousArgument implements EntityInterface, DebateArgumentInterfac
 
     /**
      * @Gedmo\Timestampable(on="change", field={"body"})
+     *
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private ?\DateTime $updatedAt = null;
@@ -68,6 +70,7 @@ class DebateAnonymousArgument implements EntityInterface, DebateArgumentInterfac
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Debate\Debate", inversedBy="anonymousArguments")
+     *
      * @ORM\JoinColumn(name="debate_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     private Debate $debate;
@@ -79,6 +82,7 @@ class DebateAnonymousArgument implements EntityInterface, DebateArgumentInterfac
 
     /**
      * @ORM\Column(name="email", type="string", length=255, nullable=false)
+     *
      * @Assert\Email()
      */
     private string $email;

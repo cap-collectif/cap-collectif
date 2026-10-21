@@ -9,8 +9,7 @@ class MessageRecipient
         private ?string $locale = null,
         private ?string $fullName = null,
         private array $vars = []
-    ) {
-    }
+    ) {}
 
     public function getEmailAddress(): string
     {

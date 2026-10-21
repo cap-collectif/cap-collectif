@@ -64,8 +64,7 @@ class ValidateContributionMutation implements MutationInterface
         private readonly Publisher $publisher,
         private readonly CollectStepRepository $collectStepRepository,
         private readonly Manager $toggleManager,
-    ) {
-    }
+    ) {}
 
     /**
      * @return array{'redirectUrl': string, 'errorCode'?: null|string}

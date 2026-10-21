@@ -6,8 +6,7 @@ class UsersFilePathResolver
 {
     public function __construct(
         private readonly string $exportDirectory
-    ) {
-    }
+    ) {}
 
     public function getExportPath(): string
     {

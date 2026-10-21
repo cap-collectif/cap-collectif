@@ -22,8 +22,7 @@ class PreConfigureProjectProjectPersister
         private readonly ProposalFormRepository $proposalFormRepository,
         private readonly QuestionnaireRepository $questionnaireRepository,
         private readonly EntityManagerInterface $em
-    ) {
-    }
+    ) {}
 
     public function updateProject(array $projectInput, User $viewer, Project $project, array $proposalFormTitleToIdMap, array $questionnaireTitleToIdMap): Project
     {

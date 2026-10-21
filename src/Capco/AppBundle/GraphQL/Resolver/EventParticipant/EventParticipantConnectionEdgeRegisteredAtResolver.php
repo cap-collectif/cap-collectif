@@ -12,8 +12,7 @@ class EventParticipantConnectionEdgeRegisteredAtResolver implements QueryInterfa
 {
     public function __construct(
         private readonly EventRegistrationRepository $eventRegistrationRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Edge $edge): ?\DateTime
     {

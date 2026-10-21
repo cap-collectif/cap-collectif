@@ -19,8 +19,7 @@ class QuestionnaireAdminRepliesResolver implements QueryInterface
         private readonly ReplySearch $replySearch,
         private readonly LoggerInterface $logger,
         private readonly QuestionnaireResultsAccessResolver $resultsAccess
-    ) {
-    }
+    ) {}
 
     public function __invoke(
         Questionnaire $questionnaire,

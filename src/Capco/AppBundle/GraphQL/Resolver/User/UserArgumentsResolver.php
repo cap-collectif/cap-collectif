@@ -20,8 +20,7 @@ class UserArgumentsResolver implements QueryInterface
         private UserArgumentsDataLoader $userArgumentsDataLoader,
         private ArgumentRepository $argumentRepository,
         private PromiseAdapterInterface $promiseAdapter
-    ) {
-    }
+    ) {}
 
     public function __invoke(
         ?User $viewer,

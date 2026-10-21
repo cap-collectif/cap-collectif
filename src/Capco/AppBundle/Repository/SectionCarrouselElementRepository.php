@@ -13,6 +13,4 @@ use Doctrine\ORM\EntityRepository;
  *
  * @extends EntityRepository<SectionCarrouselElement>
  */
-class SectionCarrouselElementRepository extends EntityRepository
-{
-}
+class SectionCarrouselElementRepository extends EntityRepository {}

@@ -60,8 +60,10 @@ class ImportProposalsFromCsv
     private array $createdProposals = [];
     private int $importableProposals = 0;
     private array $badData = [];
+
     /** @var list<array{line: int, reason: string, field: ?string, expected: ?string, actual: ?string, duplicateOfLine: ?int}> */
     private array $lineErrors = [];
+
     /** @var array<int, int> */
     private array $duplicateOfLines = [];
     private array $mandatoryMissing = [];
@@ -83,8 +85,7 @@ class ImportProposalsFromCsv
         private readonly TranslatorInterface $translator,
         private readonly ?string $projectDir,
         private readonly SocialNetworksUrlSanitizer $socialNetworksUrlSanitizer
-    ) {
-    }
+    ) {}
 
     public function setProposalForm(ProposalForm $proposalForm): void
     {
@@ -117,6 +118,7 @@ class ImportProposalsFromCsv
             array_merge($this->proposalForm->getFieldsUsed($isCli), $this->customFields)
         );
         $reader = $this->getRecords();
+
         /** @var \Box\Spout\Reader\CSV\RowIterator $rows */
         $rows = $reader
             ->getSheetIterator()
@@ -308,11 +310,11 @@ class ImportProposalsFromCsv
     {
         $rowWithHeaderKeys = [];
         foreach ($reader->getSheetIterator() as $sheet) {
-            //Initialize SpoutHelper with the current Sheet and       the row number which contains the header
+            // Initialize SpoutHelper with the current Sheet and       the row number which contains the header
             $spoutHelper = new SpoutHelper($sheet, 1);
 
             foreach ($sheet->getRowIterator() as $key => $row) {
-                //Get the indexed array with col name as key and col val as value`
+                // Get the indexed array with col name as key and col val as value`
                 $rowWithHeaderKeys[] = $spoutHelper->rowWithFormattedHeaders($row->toArray());
             }
         }
@@ -364,6 +366,7 @@ class ImportProposalsFromCsv
     {
         $duplicateLinesToBeSkipped = [];
         $proposals = [];
+
         /** @var Row $row */
         foreach ($rows as $key => $row) {
             ++$key;

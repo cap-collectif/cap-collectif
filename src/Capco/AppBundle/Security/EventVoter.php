@@ -18,8 +18,7 @@ class EventVoter extends AbstractOwnerableVoter
 
     public function __construct(
         private readonly Manager $manager
-    ) {
-    }
+    ) {}
 
     protected function supports($attribute, $subject)
     {

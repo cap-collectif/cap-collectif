@@ -6,14 +6,12 @@ namespace Capco\AppBundle\Utils;
 final class Arr
 {
     /**
-     * @param $array
-     * @param $path
      * @param null $default
      * @param null $delimiter
      *
      * @return mixed
      */
-    public static function path($array, $path, $default = null, $delimiter = null)
+    public static function path(mixed $array, mixed $path, $default = null, $delimiter = null)
     {
         if (!\is_array($array)) {
             // This is not an array!
@@ -69,6 +67,7 @@ final class Arr
                     // Found the values requested
                     return $values;
                 }
+
                 // Unable to dig deeper
                 break;
             } else {
@@ -76,6 +75,7 @@ final class Arr
                 break;
             }
         } while ($keys);
+
         // Unable to find the value requested
         return $default;
     }

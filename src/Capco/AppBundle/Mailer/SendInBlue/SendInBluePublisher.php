@@ -10,8 +10,7 @@ class SendInBluePublisher
 {
     public function __construct(
         private readonly Publisher $publisher
-    ) {
-    }
+    ) {}
 
     /**
      * @param array<string, array<string, mixed>|string> $args

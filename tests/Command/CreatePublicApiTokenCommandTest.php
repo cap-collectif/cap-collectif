@@ -10,6 +10,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class CreatePublicApiTokenCommandTest extends KernelTestCase
@@ -43,6 +44,7 @@ class CreatePublicApiTokenCommandTest extends KernelTestCase
 
     /**
      * @phpunit-status non-compliant
+     *
      * @phpunit-reason Creates persisted API tokens without rolling back or deleting the tokens after the
      * scenario.
      */
@@ -71,6 +73,7 @@ class CreatePublicApiTokenCommandTest extends KernelTestCase
 
     /**
      * @phpunit-status non-compliant
+     *
      * @phpunit-reason Creates persisted API tokens without rolling back or deleting the tokens after the
      * scenario.
      */
@@ -89,6 +92,7 @@ class CreatePublicApiTokenCommandTest extends KernelTestCase
 
     /**
      * @phpunit-status compliant
+     *
      * @phpunit-reason Checks the real CLI refusal and exit code for an absent user without creating a token.
      */
     public function testCreateTokenForNonExistingUserFails(): void

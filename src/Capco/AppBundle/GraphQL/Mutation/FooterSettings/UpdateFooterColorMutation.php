@@ -18,8 +18,7 @@ class UpdateFooterColorMutation implements MutationInterface
     public function __construct(
         private readonly SiteColorRepository $repository,
         private readonly EntityManagerInterface $entityManager
-    ) {
-    }
+    ) {}
 
     /** @return array{siteColor?: SiteColor, errorCode?: string} */
     public function __invoke(Argument $input): array

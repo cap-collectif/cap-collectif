@@ -50,6 +50,7 @@ class CreateCsvFromEventsCommand extends BaseExportCommand
         'meta_description',
         'custom_code',
     ];
+
     /**
      * @var WriterInterface
      */

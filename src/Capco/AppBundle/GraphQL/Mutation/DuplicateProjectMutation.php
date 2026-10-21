@@ -21,8 +21,7 @@ class DuplicateProjectMutation implements MutationInterface
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly CloneStepService $cloneStepService
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer)
     {

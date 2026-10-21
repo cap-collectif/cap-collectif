@@ -45,8 +45,7 @@ class EmailingCampaignSender
         private readonly MailjetClientV2 $mailjetClient,
         private readonly ActionTokenRepository $actionTokenRepository,
         private readonly MessageBuilder $messageBuilder,
-    ) {
-    }
+    ) {}
 
     /**
      * @throws SyntaxError

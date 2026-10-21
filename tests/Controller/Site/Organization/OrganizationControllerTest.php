@@ -9,9 +9,13 @@ use Capco\Tests\IdentityWebTestCase;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises HTTP outcomes and real domain data with transactional cleanup; replaces only external boundaries.
  */
 final class OrganizationControllerTest extends IdentityWebTestCase
@@ -65,10 +69,15 @@ final class OrganizationControllerTest extends IdentityWebTestCase
     public static function invitationViewers(): iterable
     {
         yield 'connected invitee joins as member' => ['invitee', 'user', true, true];
+
         yield 'connected invitee joins as administrator' => ['invitee', 'admin', true, true];
+
         yield 'anonymous invitee is logged in as member' => ['anonymous', 'user', true, true];
+
         yield 'anonymous invitee is logged in as administrator' => ['anonymous', 'admin', true, true];
+
         yield 'other account refused' => ['other', 'admin', true, false];
+
         yield 'unknown token refused' => ['anonymous', 'user', false, false];
     }
 }

@@ -16,6 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="theme")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ThemeRepository")
  */
 class Theme implements EntityInterface, IndexableInterface, TranslatableInterface, \Stringable
@@ -50,6 +51,7 @@ class Theme implements EntityInterface, IndexableInterface, TranslatableInterfac
 
     /**
      * @ORM\Column(name="position", type="integer")
+     *
      * @Assert\NotNull()
      */
     private $position;
@@ -61,12 +63,14 @@ class Theme implements EntityInterface, IndexableInterface, TranslatableInterfac
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+     *
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
      */
     private $author;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "teaser", "position", "status", "body", "media"})
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -87,20 +91,21 @@ class Theme implements EntityInterface, IndexableInterface, TranslatableInterfac
 
     /**
      * @var ArrayCollection
+     *
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Event", mappedBy="themes", cascade={"persist"})
      */
     private $events;
 
     /**
      * @var ArrayCollection
+     *
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Post", mappedBy="themes", cascade={"persist"})
      */
     private $posts;
 
     /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $media;

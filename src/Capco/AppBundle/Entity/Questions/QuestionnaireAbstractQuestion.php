@@ -16,9 +16,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Association between questionnaire and questions.
  *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository")
+ *
  * @ORM\Table(
  *  name="questionnaire_abstractquestion",
  *  uniqueConstraints={
+ *
  *     @ORM\UniqueConstraint(
  *        name="questionnaire_position_unique",
  *        columns={"questionnaire_id", "position"}
@@ -41,27 +43,34 @@ class QuestionnaireAbstractQuestion implements EntityInterface, \Stringable
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questionnaire", inversedBy="questions", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="questionnaire_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
     protected $questionnaire;
 
     /**
      * @Gedmo\SortableGroup
+     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="questions", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="proposal_form_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
     protected $proposalForm;
 
     /**
      * @Gedmo\SortableGroup
+     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\RegistrationForm", inversedBy="questions", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="registration_form_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
     protected $registrationForm;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion", inversedBy="questionnaireAbstractQuestion", cascade={"remove", "persist"})
+     *
      * @ORM\JoinColumn(name="question_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     *
      * @Assert\NotNull()
      */
     protected $question;

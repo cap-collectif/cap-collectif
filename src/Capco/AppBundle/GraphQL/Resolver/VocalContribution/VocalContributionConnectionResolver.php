@@ -12,9 +12,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class VocalContributionConnectionResolver implements QueryInterface
 {
-    public function __construct(private readonly VocalContributionRepository $repository)
-    {
-    }
+    public function __construct(private readonly VocalContributionRepository $repository) {}
 
     public function __invoke(Argument $args, ?User $viewer = null): ConnectionInterface|Promise
     {

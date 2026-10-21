@@ -16,8 +16,7 @@ class PreConfigureProjectAnalysisFormPersister
         private readonly ConfigureAnalysisMutation $configureAnalysisMutation,
         private readonly AbstractStepRepository $abstractStepRepository,
         private readonly StatusRepository $statusRepository
-    ) {
-    }
+    ) {}
 
     public function configureAnalysisForm(array $input, User $viewer, Project $project, array $proposalFormTitleToIdMap, array $questionnaireTitleToIdMap)
     {

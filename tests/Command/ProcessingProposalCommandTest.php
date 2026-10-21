@@ -7,8 +7,11 @@ use Capco\AppBundle\Entity\AnalysisConfigurationProcess;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Reads the preloaded configuration after the command instead of reloading it to prove the
  * processed flag was persisted.
  */

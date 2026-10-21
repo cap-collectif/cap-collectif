@@ -8,9 +8,13 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises HTTP outcomes and real domain data with transactional cleanup; replaces only external boundaries.
  */
 final class DeleteAccountMutationTest extends IdentityWebTestCase
@@ -72,8 +76,11 @@ final class DeleteAccountMutationTest extends IdentityWebTestCase
     public static function refusedDeletions(): iterable
     {
         yield 'super administrator is protected from anonymization' => [false, 'SOFT'];
+
         yield 'super administrator is protected from content erasure' => [false, 'HARD'];
+
         yield 'missing account for anonymization' => [true, 'SOFT'];
+
         yield 'missing account for content erasure' => [true, 'HARD'];
     }
 
@@ -140,6 +147,7 @@ final class DeleteAccountMutationTest extends IdentityWebTestCase
     public static function anonymizationTypes(): iterable
     {
         yield 'account anonymization' => ['SOFT'];
+
         yield 'account anonymization with content erasure' => ['HARD'];
     }
 }

@@ -76,9 +76,9 @@ abstract class BatchDataLoader extends DataLoader
      *
      * @param mixed $key An array of parameters (e.g ["proposal" => $proposal, "step" => $step, "includeUnpublished" => false]) or a keyName
      *
-     * @throws \Psr\Cache\InvalidArgumentException
-     *
      * @return Promise
+     *
+     * @throws \Psr\Cache\InvalidArgumentException
      *
      * @see DataLoader
      */

@@ -23,10 +23,9 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
     final public const LOGIC_JUMP_OPERATOR_NOT_SUPPORTED = 'Logic jump operator not implemented.';
     protected $formRepo;
 
-    public function __construct(RegistrationFormRepository $formRepo, LoggerInterface $logger)
+    public function __construct(RegistrationFormRepository $formRepo, protected LoggerInterface $logger)
     {
         $this->formRepo = $formRepo;
-        $this->logger = $logger;
     }
 
     public function validate($object, Constraint $constraint)

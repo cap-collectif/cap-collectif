@@ -22,11 +22,10 @@ class UpdateParticipantMutation implements MutationInterface
         private EntityManagerInterface $em,
         private FormFactoryInterface $formFactory,
         private ParticipantHelper $participantHelper
-    ) {
-    }
+    ) {}
 
     /**
-     * @return array{participant: Capco\AppBundle\Entity\Participant|null, validationErrors: non-empty-string|false}
+     * @return array{participant: null|Capco\AppBundle\Entity\Participant, validationErrors: false|non-empty-string}
      */
     public function __invoke(Argument $input, ?\ArrayObject $context = null): array
     {

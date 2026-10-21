@@ -12,8 +12,7 @@ class FooterSettingsQueryResolver implements QueryInterface
     public function __construct(
         private readonly SiteParameterRepository $repository,
         private readonly EntityManagerInterface $entityManager
-    ) {
-    }
+    ) {}
 
     /** @return array<int, object> */
     public function __invoke(): array

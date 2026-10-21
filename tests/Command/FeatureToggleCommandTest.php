@@ -13,8 +13,11 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status reference
+ *
  * @phpunit-reason Exercises CLI outcomes and flag state, including idempotence and refusals, with
  * failure-safe restoration of the test feature flag preset.
  */
@@ -100,6 +103,7 @@ class FeatureToggleCommandTest extends KernelTestCase implements FeatureFlagsAwa
     public function toggleCommands(): iterable
     {
         yield 'enable' => ['capco:toggle:enable'];
+
         yield 'disable' => ['capco:toggle:disable'];
     }
 

@@ -13,8 +13,7 @@ class UserSearchQueryResolver implements QueryInterface
     public function __construct(
         private readonly UserSearch $userSearch,
         private readonly ParticipantRepository $participantRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): array
     {

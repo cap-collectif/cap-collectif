@@ -13,8 +13,11 @@ use Swarrot\Broker\Message;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status legacy
+ *
  * @phpunit-reason Exercises deprecated Swarrot processors directly; migrate the behavior to the HTTP or CLI
  * action and the supported message architecture.
  */
@@ -47,10 +50,15 @@ class OpinionProcessorTest extends MailerSnapshotCommandTestCase
     public static function delegationScenarios(): iterable
     {
         yield 'creation with moderation enabled' => [OpinionCreateProcessor::class, 'onCreation', 'opinion60'];
+
         yield 'creation with moderation disabled' => [OpinionCreateProcessor::class, 'onCreation', 'opinion1'];
+
         yield 'update with moderation enabled' => [OpinionUpdateProcessor::class, 'onUpdate', 'opinion60'];
+
         yield 'update with moderation disabled' => [OpinionUpdateProcessor::class, 'onUpdate', 'opinion1'];
+
         yield 'trash French author' => [OpinionTrashProcessor::class, 'onTrash', 'opinion63'];
+
         yield 'trash English author' => [OpinionTrashProcessor::class, 'onTrash', 'opinion226'];
     }
 
@@ -92,6 +100,7 @@ class OpinionProcessorTest extends MailerSnapshotCommandTestCase
             'notification-subject-new-proposal',
             'createOnpinionModeration.html',
         ];
+
         yield 'updated opinion moderation' => [
             OpinionUpdateProcessor::class,
             'opinion60',
@@ -99,6 +108,7 @@ class OpinionProcessorTest extends MailerSnapshotCommandTestCase
             'notification-subject-modified-proposal',
             'updateOnpinionModeration.html',
         ];
+
         yield 'trashed English opinion' => [
             OpinionTrashProcessor::class,
             'opinion226',
@@ -125,6 +135,7 @@ class OpinionProcessorTest extends MailerSnapshotCommandTestCase
     public static function disabledModerationScenarios(): iterable
     {
         yield 'opinion creation' => [OpinionCreateProcessor::class, 'opinion1'];
+
         yield 'opinion update' => [OpinionUpdateProcessor::class, 'opinion1'];
     }
 

@@ -8,9 +8,13 @@ use Capco\AppBundle\Anonymizer\UserAnonymizer;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises account contracts through HTTP with fresh database reads, transactional cleanup and external boundary doubles.
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
  */
 final class LocalAuthenticationTest extends AccountWebTestCase
@@ -45,8 +49,11 @@ final class LocalAuthenticationTest extends AccountWebTestCase
     public static function accountStates(): iterable
     {
         yield 'confirmed' => ['confirmed', true, 200, true];
+
         yield 'unconfirmed' => ['unconfirmed', false, 200, false];
+
         yield 'deleted marker' => ['deleted', true, 200, false];
+
         yield 'anonymized' => ['anonymized', false, 401, false];
     }
 
@@ -67,6 +74,7 @@ final class LocalAuthenticationTest extends AccountWebTestCase
     public static function inactiveStates(): iterable
     {
         yield 'disabled' => ['disabled'];
+
         yield 'locked' => ['locked'];
     }
 
@@ -103,11 +111,17 @@ final class LocalAuthenticationTest extends AccountWebTestCase
     public static function administrativeRoles(): iterable
     {
         yield 'default account roles' => [[], 403];
+
         yield 'ordinary account' => [['ROLE_USER'], 403];
+
         yield 'mediator' => [['ROLE_MEDIATOR'], 403];
+
         yield 'project administrator' => [['ROLE_PROJECT_ADMIN'], 403];
+
         yield 'administrator' => [['ROLE_ADMIN'], 301];
+
         yield 'duplicate administrator roles' => [['ROLE_ADMIN', 'ROLE_ADMIN', 'ROLE_USER'], 301];
+
         yield 'super administrator inherits administration' => [['ROLE_SUPER_ADMIN'], 301];
     }
 

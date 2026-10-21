@@ -20,8 +20,7 @@ class MessageBuilder
     public function __construct(
         private readonly TranslatorInterface $translator,
         private readonly UrlGeneratorInterface $router,
-    ) {
-    }
+    ) {}
 
     // We ignore missingType.iterableValue because the messages structure depends on the MailJet API
     // @phpstan-ignore missingType.iterableValue

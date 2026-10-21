@@ -20,8 +20,7 @@ class FooterSocialNetworkCacheSubscriber implements EventSubscriber
     public function __construct(
         private readonly RedisCache $cache,
         private readonly EntityManagerInterface $entityManager
-    ) {
-    }
+    ) {}
 
     public function getSubscribedEvents(): array
     {

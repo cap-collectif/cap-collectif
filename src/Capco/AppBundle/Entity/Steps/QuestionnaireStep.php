@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class QuestionnaireStep.
  *
  * @ORM\Table(name="questionnaire_step")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\QuestionnaireStepRepository")
  */
 class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterface
@@ -28,6 +29,7 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
 
     /**
      * @ORM\Column(type="string", columnDefinition="ENUM('none', 'sms')")
+     *
      * @Assert\Choice(choices = {"none", "sms"})
      */
     private $verification = 'none';
@@ -131,7 +133,7 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
         return true;
     }
 
-    //used in twig to add googlemaps js file
+    // used in twig to add googlemaps js file
     public function useAddressOrMap(): bool
     {
         return true;

@@ -82,9 +82,7 @@ class QuestionnaireAdmin extends CapcoAdmin
     }
 
     // Fields to be shown on create/edit forms
-    protected function configureFormFields(FormMapper $form): void
-    {
-    }
+    protected function configureFormFields(FormMapper $form): void {}
 
     // Fields to be shown on filter forms
     protected function configureDatagridFilters(DatagridMapper $filter): void

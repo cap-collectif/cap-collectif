@@ -17,8 +17,7 @@ class DebateArgumentViewerHasVoteResolver implements QueryInterface
     public function __construct(
         private readonly DebateArgumentVoteRepository $debateArgumentVoteRepository,
         private readonly DebateAnonymousArgumentVoteRepository $debateAnonymousArgumentVoteRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(DebateArgumentInterface $debateArgument, $viewer): bool
     {

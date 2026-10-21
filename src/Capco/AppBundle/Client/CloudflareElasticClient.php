@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Client;
 use Capco\AdminBundle\Timezone\GlobalConfigurationTimeZoneDetector;
 use Capco\AppBundle\Elasticsearch\Client;
 use Capco\AppBundle\Enum\PlatformAnalyticsTrafficSourceType;
-use DateTimeInterface;
 use Elastica\Aggregation\Cardinality;
 use Elastica\Aggregation\DateHistogram;
 use Elastica\Aggregation\Terms;
@@ -53,8 +52,8 @@ class CloudflareElasticClient
     }
 
     public function getTrafficSourcesAnalyticsResultSet(
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         ?string $projectSlug = null
     ): ?ResultSet {
         $multisearchQuery = new Search($this->esClient);
@@ -98,8 +97,8 @@ class CloudflareElasticClient
     }
 
     public function getExternalAnalyticsSearches(
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         ?string $projectSlug,
         array $requestedFields
     ): array {
@@ -127,8 +126,8 @@ class CloudflareElasticClient
     }
 
     public function getExternalAnalyticsResultSet(
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         ?string $projectSlug,
         array $requestedFields
     ): ?ResultSet {
@@ -160,8 +159,8 @@ class CloudflareElasticClient
      * so that we can use it later.
      */
     public function canUseClientIpField(
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         ?string $projectSlug
     ): bool {
         $useragentFieldSearchQuery = new Search($this->esClient);
@@ -173,12 +172,12 @@ class CloudflareElasticClient
             ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]))
             ->addFilter(
                 new Range('edgeEndTimestamp', [
-                    'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lt' => $end->format(DateTimeInterface::ATOM),
+                    'gte' => $start->format(\DateTimeInterface::ATOM),
+                    'lt' => $end->format(\DateTimeInterface::ATOM),
                 ])
             )
             ->addMustNot(
-                (new Query\Exists('clientIP'))
+                new Query\Exists('clientIP')
             )
         ;
 
@@ -220,8 +219,8 @@ class CloudflareElasticClient
     }
 
     private function createUniqueVisitorsQuery(
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         ?string $projectSlug = null
     ): \Elastica\Search {
         $boolQuery = new Query\BoolQuery();
@@ -234,8 +233,8 @@ class CloudflareElasticClient
             )
             ->addFilter(
                 new Range('edgeEndTimestamp', [
-                    'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lt' => $end->format(DateTimeInterface::ATOM),
+                    'gte' => $start->format(\DateTimeInterface::ATOM),
+                    'lt' => $end->format(\DateTimeInterface::ATOM),
                 ])
             )
         ;
@@ -281,8 +280,8 @@ class CloudflareElasticClient
     }
 
     private function createPageViewsQuery(
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         ?string $projectSlug = null
     ): \Elastica\Search {
         $boolQuery = new Query\BoolQuery();
@@ -295,8 +294,8 @@ class CloudflareElasticClient
             )
             ->addFilter(
                 new Range('edgeEndTimestamp', [
-                    'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lt' => $end->format(DateTimeInterface::ATOM),
+                    'gte' => $start->format(\DateTimeInterface::ATOM),
+                    'lt' => $end->format(\DateTimeInterface::ATOM),
                 ])
             )
         ;
@@ -324,16 +323,16 @@ class CloudflareElasticClient
     }
 
     private function createMostVisitedPagesQuery(
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         ?string $projectSlug = null
     ): \Elastica\Search {
         $boolQuery = new Query\BoolQuery();
         $boolQuery
             ->addFilter(
                 new Range('edgeEndTimestamp', [
-                    'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lt' => $end->format(DateTimeInterface::ATOM),
+                    'gte' => $start->format(\DateTimeInterface::ATOM),
+                    'lt' => $end->format(\DateTimeInterface::ATOM),
                 ])
             )
             ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]))
@@ -355,8 +354,8 @@ class CloudflareElasticClient
     }
 
     private function createSearchEngineEntriesQuery(
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         ?string $projectSlug = null
     ): \Elastica\Search {
         $boolQuery = new Query\BoolQuery();
@@ -376,8 +375,8 @@ class CloudflareElasticClient
             )
             ->addFilter(
                 new Range('edgeEndTimestamp', [
-                    'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lt' => $end->format(DateTimeInterface::ATOM),
+                    'gte' => $start->format(\DateTimeInterface::ATOM),
+                    'lt' => $end->format(\DateTimeInterface::ATOM),
                 ])
             )
             ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]))
@@ -396,16 +395,16 @@ class CloudflareElasticClient
     }
 
     private function createSocialNetworksEntriesQuery(
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         ?string $projectSlug = null
     ): \Elastica\Search {
         $boolQuery = new Query\BoolQuery();
         $boolQuery
             ->addFilter(
                 new Range('edgeEndTimestamp', [
-                    'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lt' => $end->format(DateTimeInterface::ATOM),
+                    'gte' => $start->format(\DateTimeInterface::ATOM),
+                    'lt' => $end->format(\DateTimeInterface::ATOM),
                 ])
             )
             ->addFilter(new Query\Term(['socialNetworkReferer' => true]))
@@ -419,16 +418,16 @@ class CloudflareElasticClient
     }
 
     private function createDirectEntriesQuery(
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         ?string $projectSlug = null
     ): \Elastica\Search {
         $boolQuery = new Query\BoolQuery();
         $boolQuery
             ->addFilter(
                 new Range('edgeEndTimestamp', [
-                    'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lt' => $end->format(DateTimeInterface::ATOM),
+                    'gte' => $start->format(\DateTimeInterface::ATOM),
+                    'lt' => $end->format(\DateTimeInterface::ATOM),
                 ])
             )
             ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]))
@@ -443,16 +442,16 @@ class CloudflareElasticClient
     }
 
     private function createExternalEntriesQuery(
-        DateTimeInterface $start,
-        DateTimeInterface $end,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
         ?string $projectSlug = null
     ): \Elastica\Search {
         $boolQuery = new Query\BoolQuery();
         $boolQuery
             ->addFilter(
                 new Range('edgeEndTimestamp', [
-                    'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lt' => $end->format(DateTimeInterface::ATOM),
+                    'gte' => $start->format(\DateTimeInterface::ATOM),
+                    'lt' => $end->format(\DateTimeInterface::ATOM),
                 ])
             )
             ->addFilter(new Query\Exists('clientRequestReferer'))
@@ -514,8 +513,8 @@ class CloudflareElasticClient
      * It avoid getting too much data on a low pitch.
      */
     private function getDateHistogramInterval(
-        DateTimeInterface $start,
-        DateTimeInterface $end
+        \DateTimeInterface $start,
+        \DateTimeInterface $end
     ): string {
         $daysDiff = $start->diff($end)->days;
         $dateHistogramInterval = 'day';

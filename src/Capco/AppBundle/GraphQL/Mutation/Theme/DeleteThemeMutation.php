@@ -17,13 +17,12 @@ class DeleteThemeMutation implements MutationInterface
     public function __construct(
         private readonly EntityManagerInterface $em,
         private readonly ThemeRepository $themeRepository
-    ) {
-    }
+    ) {}
 
     /**
      * The Elasticsearch document is removed by ElasticsearchDoctrineListener on preRemove.
      *
-     * @return array{deletedThemeId?: string|null, errorCode?: string|null}
+     * @return array{deletedThemeId?: null|string, errorCode?: null|string}
      */
     public function __invoke(Argument $input): array
     {

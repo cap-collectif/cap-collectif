@@ -30,6 +30,7 @@ class ElasticsearchPaginator
         $limit = $args['last'] ?? null;
         $before = $args['before'] ?? null;
         $cursor = $before;
+
         /** @var ElasticsearchPaginatedResult $results */
         $results = \call_user_func($this->fetcher, $cursor, $limit ? $limit + 1 : $limit);
 
@@ -55,6 +56,7 @@ class ElasticsearchPaginator
         $limit = $args['first'] ?? null;
         $after = $args['after'] ?? null;
         $cursor = $after;
+
         /** @var ElasticsearchPaginatedResult $results */
         $results = \call_user_func($this->fetcher, $cursor, $limit ? $limit + 1 : $limit);
 

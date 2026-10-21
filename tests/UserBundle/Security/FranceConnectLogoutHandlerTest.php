@@ -6,9 +6,13 @@ use Capco\Tests\OAuthLogoutWebTestCase;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises HTTP outcomes and real domain data with transactional cleanup; replaces only external boundaries.
  */
 final class FranceConnectLogoutHandlerTest extends OAuthLogoutWebTestCase
@@ -42,7 +46,9 @@ final class FranceConnectLogoutHandlerTest extends OAuthLogoutWebTestCase
     public static function logoutModes(): iterable
     {
         yield 'provider token' => [true, false];
+
         yield 'disabled' => [false, false];
+
         yield 'stored credentials' => [true, true];
     }
 }

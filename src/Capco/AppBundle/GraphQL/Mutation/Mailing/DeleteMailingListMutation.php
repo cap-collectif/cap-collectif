@@ -25,8 +25,7 @@ class DeleteMailingListMutation implements MutationInterface
         private readonly EntityManagerInterface $entityManager,
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

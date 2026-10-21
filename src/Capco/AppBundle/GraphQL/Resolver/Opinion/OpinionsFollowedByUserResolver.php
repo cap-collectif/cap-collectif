@@ -15,8 +15,7 @@ class OpinionsFollowedByUserResolver implements QueryInterface
     public function __construct(
         private readonly OpinionRepository $opinionRepository,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(User $user, Arg $args): Connection
     {

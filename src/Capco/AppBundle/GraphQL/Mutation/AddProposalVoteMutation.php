@@ -60,8 +60,7 @@ class AddProposalVoteMutation implements MutationInterface
         private readonly ContributionValidator $contributionValidator,
         private readonly Indexer $indexer,
         private readonly UserRepository $userRepository,
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $user): array
     {

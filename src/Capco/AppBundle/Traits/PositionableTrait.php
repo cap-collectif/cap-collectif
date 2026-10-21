@@ -9,6 +9,7 @@ trait PositionableTrait
 {
     /**
      * @Gedmo\SortablePosition
+     *
      * @ORM\Column(name="position", type="integer")
      */
     private ?int $position = null;

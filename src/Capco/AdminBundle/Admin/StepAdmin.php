@@ -93,7 +93,7 @@ class StepAdmin extends CapcoAdmin
 
     protected function configure(): void
     {
-        //$this->setTemplate('edit', '@CapcoAdmin/Step/edit.html.twig');
+        // $this->setTemplate('edit', '@CapcoAdmin/Step/edit.html.twig');
         parent::configure();
     }
 
@@ -176,6 +176,7 @@ class StepAdmin extends CapcoAdmin
                         ->get('consultations')
                         ->getNormData()
                     ;
+
                     /** @var ConsultationStep $step */
                     $step = $event->getData();
                     $position = 1;
@@ -186,6 +187,7 @@ class StepAdmin extends CapcoAdmin
                             ->filter(static fn (Consultation $c) => $c->getId() === $normalizedConsultation->getId())
                             ->first()
                         ;
+
                         /** @var Consultation $consultation */
                         if ($consultation) {
                             $consultation->setPosition($position);

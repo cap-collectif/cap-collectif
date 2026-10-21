@@ -745,13 +745,13 @@ class RepairIDFProposalsFromCsvCommand extends Command
      * }> $rows
      * @param array<string, int> $headerIndexes
      *
-     * @throws \JsonException
-     *
      * @return array{
      *     proposals: list<Proposal>,
      *     updatedProposalCount: int,
      *     partialReasonsByProposalReference: array<string, list<string>>
      * }
+     *
+     * @throws \JsonException
      */
     private function processBatch(array $rows, array $headerIndexes, bool $apply): array
     {
@@ -932,9 +932,9 @@ class RepairIDFProposalsFromCsvCommand extends Command
      * @param list<null|string>            $row
      * @param array<string, int>           $headerIndexes
      *
-     * @throws \JsonException
-     *
      * @return list<string>
+     *
+     * @throws \JsonException
      */
     private function updateProposalFromCsv(
         Proposal $proposal,

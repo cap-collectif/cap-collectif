@@ -33,8 +33,7 @@ class UpdateShieldAdminFormMutation implements MutationInterface
         private readonly SiteParameterRepository $siteParameterRepository,
         private readonly Manager $toggleManager,
         private readonly UpdateSiteParameterMutation $updateSiteParameterMutation
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input): array
     {
@@ -140,6 +139,7 @@ class UpdateShieldAdminFormMutation implements MutationInterface
             throw new UserError('Media not found!');
         }
         $mediaId = $input->offsetGet('mediaId');
+
         /** * @var Media $media | null  */
         $media = $mediaId ? $this->mediaRepository->find($mediaId) : null;
         $siteImage->setMedia($media);

@@ -17,8 +17,7 @@ class AntivirusScanner
     public function __construct(
         private readonly LoggerInterface $logger,
         private readonly Manager $toggleManager
-    ) {
-    }
+    ) {}
 
     /**
      * Scan a file for viruses using clamd.

@@ -17,8 +17,7 @@ class SourceableViewerSourcesUnpublishedResolver implements QueryInterface
     public function __construct(
         private SourceRepository $sourceRepository,
         private readonly ConnectionBuilderInterface $builder
-    ) {
-    }
+    ) {}
 
     public function __invoke(Sourceable $sourceable, Argument $args, $viewer): ConnectionInterface
     {

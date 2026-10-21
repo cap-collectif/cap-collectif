@@ -13,8 +13,7 @@ class FooterResolver implements QueryInterface
         private readonly RouterInterface $router,
         private readonly FooterSocialNetworksResolver $footerSocialNetworksResolver,
         private readonly SiteParameterResolver $siteParameterResolver,
-    ) {
-    }
+    ) {}
 
     /**
      * @return array{'socialNetworks': mixed, 'links': mixed, 'legals': mixed, 'cookiesPath': string, 'privacyPath': string, 'legalPath': string}

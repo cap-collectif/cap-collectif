@@ -16,8 +16,7 @@ class QueryUserInvitationsResolver implements QueryInterface
 
     public function __construct(
         private readonly UserInviteRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args, ResolveInfo $info): ConnectionInterface
     {

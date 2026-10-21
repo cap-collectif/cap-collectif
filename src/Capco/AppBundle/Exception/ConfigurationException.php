@@ -2,6 +2,4 @@
 
 namespace Capco\AppBundle\Exception;
 
-class ConfigurationException extends \Exception
-{
-}
+class ConfigurationException extends \Exception {}

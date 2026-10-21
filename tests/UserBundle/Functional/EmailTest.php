@@ -6,9 +6,13 @@ namespace Capco\Tests\UserBundle\Functional;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises account contracts through HTTP with fresh database reads, transactional cleanup and external boundary doubles.
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
  */
 final class EmailTest extends AccountWebTestCase
@@ -93,6 +97,7 @@ final class EmailTest extends AccountWebTestCase
     public static function rejectedChanges(): iterable
     {
         yield 'wrong password' => [false, 'wrong', 'SPECIFY_PASSWORD'];
+
         yield 'email belongs to another account' => [true, self::PASSWORD, 'ALREADY_USED_EMAIL'];
     }
 

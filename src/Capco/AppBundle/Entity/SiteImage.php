@@ -11,6 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * SiteImage.
  *
  * @ORM\Table(name="site_image")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SiteImageRepository")
  */
 class SiteImage implements EntityInterface, \Stringable
@@ -29,18 +30,21 @@ class SiteImage implements EntityInterface, \Stringable
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="Media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $media;
 
     /**
      * @Gedmo\Timestampable(on="create")
+     *
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"media"})
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;

@@ -7,9 +7,13 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Verifies notification dispatch at the broker boundary; API behavior is covered by Jest.
  */
 final class UpdateUserReplyMutationTest extends IdentityWebTestCase
@@ -38,8 +42,11 @@ final class UpdateUserReplyMutationTest extends IdentityWebTestCase
     public static function notificationScenarios(): iterable
     {
         yield 'publish draft' => ['valid', true];
+
         yield 'missing reply' => ['missing', false];
+
         yield 'another author' => ['other', false];
+
         yield 'required answers missing' => ['invalid', false];
     }
 }

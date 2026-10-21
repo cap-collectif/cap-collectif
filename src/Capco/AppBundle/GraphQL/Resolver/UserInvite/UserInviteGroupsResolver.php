@@ -15,8 +15,7 @@ class UserInviteGroupsResolver implements QueryInterface
     public function __construct(
         private readonly GroupRepository $groupRepository,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(UserInvite $userInvite): ConnectionInterface
     {

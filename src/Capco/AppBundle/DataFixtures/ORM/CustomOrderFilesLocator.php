@@ -14,8 +14,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
     public function __construct(
         private readonly FixtureLocatorInterface $decoratedFixtureLocator,
         private readonly string $fixturesDir
-    ) {
-    }
+    ) {}
 
     /**
      * Re-order the files found by the decorated finder.

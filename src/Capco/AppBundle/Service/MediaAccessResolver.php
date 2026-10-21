@@ -16,8 +16,7 @@ class MediaAccessResolver
     public function __construct(
         private readonly MediaResponseRepository $responseRepository,
         private readonly QuestionnaireResultsAccessResolver $replyAccess
-    ) {
-    }
+    ) {}
 
     public function canView(Media $media, ?User $viewer = null, ?\ArrayObject $context = null, ?ResolveInfo $info = null): bool
     {

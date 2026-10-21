@@ -27,8 +27,7 @@ class MediaProcessor implements ProcessorInterface
         private readonly FilterService $filterService,
         private readonly MediaProvider $mediaProvider,
         private readonly string $projectDir
-    ) {
-    }
+    ) {}
 
     public function preProcess(string $id, $object): void
     {
@@ -59,7 +58,7 @@ class MediaProcessor implements ProcessorInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $object
      */
     public function postProcess(string $id, $object): void
     {

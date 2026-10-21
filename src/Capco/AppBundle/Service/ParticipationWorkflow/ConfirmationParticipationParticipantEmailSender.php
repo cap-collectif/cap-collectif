@@ -30,11 +30,10 @@ class ConfirmationParticipationParticipantEmailSender implements MutationInterfa
         private readonly ParticipantConfirmNewEmailUrlResolver $participantConfirmNewEmailUrlResolver,
         private readonly KernelInterface $kernel,
         private readonly ParticipationCookieManager $participationCookieManager
-    ) {
-    }
+    ) {}
 
     /**
-     * @return array{'errorCode': string|null}
+     * @return array{'errorCode': null|string}
      */
     public function send(string $token, string $email, string $redirectUrl): array
     {

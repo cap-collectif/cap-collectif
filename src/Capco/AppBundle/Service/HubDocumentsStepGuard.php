@@ -14,9 +14,7 @@ class HubDocumentsStepGuard
         'public-consultation',
     ];
 
-    public function __construct(private readonly Manager $toggleManager)
-    {
-    }
+    public function __construct(private readonly Manager $toggleManager) {}
 
     public function isProtectedDocumentsStep(AbstractStep $step): bool
     {

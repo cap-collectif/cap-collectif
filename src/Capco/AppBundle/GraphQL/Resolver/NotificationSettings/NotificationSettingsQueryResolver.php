@@ -8,9 +8,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class NotificationSettingsQueryResolver implements QueryInterface
 {
-    public function __construct(private readonly SiteParameterRepository $repository)
-    {
-    }
+    public function __construct(private readonly SiteParameterRepository $repository) {}
 
     /**
      * @return SiteParameter[]

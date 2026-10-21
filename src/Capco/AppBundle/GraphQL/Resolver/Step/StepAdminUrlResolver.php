@@ -30,8 +30,7 @@ class StepAdminUrlResolver implements QueryInterface
 
     public function __construct(
         private readonly RouterInterface $router
-    ) {
-    }
+    ) {}
 
     public function __invoke(AbstractStep $step, Argument $args): string
     {

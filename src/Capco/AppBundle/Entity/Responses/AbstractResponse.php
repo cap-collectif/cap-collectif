@@ -24,6 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(
  *   name="response",
  *   uniqueConstraints={
+ *
  *        @ORM\UniqueConstraint(
  *            name="proposal_response_unique",
  *            columns={"proposal_id", "question_id"}
@@ -34,11 +35,17 @@ use Symfony\Component\Validator\Constraints as Assert;
  *        )
  *    }
  * )
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AbstractResponseRepository")
+ *
  * @ORM\HasLifecycleCallbacks()
+ *
  * @CapcoAssert\HasRequiredNumberOfChoices()
+ *
  * @ORM\InheritanceType("SINGLE_TABLE")
+ *
  * @ORM\DiscriminatorColumn(name = "response_type", type = "string")
+ *
  * @ORM\DiscriminatorMap({
  *      "value"  = "ValueResponse",
  *      "media"  = "MediaResponse",
@@ -58,52 +65,61 @@ abstract class AbstractResponse implements EntityInterface, IndexableInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="responses", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private ?Proposal $proposal = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="responses", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private ?User $user = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Participant", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="participant_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private ?Participant $participant = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Reply", inversedBy="responses", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="reply_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private ?Reply $reply = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalEvaluation", inversedBy="responses", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="evaluation_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private ?ProposalEvaluation $proposalEvaluation = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalAnalysis", inversedBy="responses", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="analysis_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     private ?ProposalAnalysis $analysis = null;
 
     /**
      * @Assert\NotNull()
+     *
      * @ORM\ManyToOne(
      *   targetEntity="Capco\AppBundle\Entity\Questions\AbstractQuestion",
      *   inversedBy="responses"
      * )
+     *
      * @ORM\JoinColumn(name="question_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     private AbstractQuestion $question;
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="starredResponses")
+     *
      * @ORM\JoinTable(name="response_stars",
      *      joinColumns={@ORM\JoinColumn(name="response_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}

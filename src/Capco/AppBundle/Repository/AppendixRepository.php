@@ -7,6 +7,4 @@ use Doctrine\ORM\EntityRepository;
 /**
  * AppendixRepository.
  */
-class AppendixRepository extends EntityRepository
-{
-}
+class AppendixRepository extends EntityRepository {}

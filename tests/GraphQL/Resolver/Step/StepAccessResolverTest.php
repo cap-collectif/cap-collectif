@@ -15,6 +15,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * @internal
+ *
  * @covers \Capco\AppBundle\GraphQL\Resolver\Step\StepAccessResolver
  */
 class StepAccessResolverTest extends TestCase

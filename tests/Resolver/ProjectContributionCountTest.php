@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class ProjectContributionCountTest extends KernelTestCase

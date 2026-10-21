@@ -92,7 +92,7 @@ class Version20150910154228 extends AbstractMigration
                 }
             }
             if (null === $typeFound) {
-                $title = 'Défaut' . ' ' . $countNew;
+                $title = 'Défaut ' . $countNew;
                 $this->connection->insert('consultation_type', ['title' => $title]);
                 $typeFound = $this->connection->lastInsertId();
                 ++$countNew;

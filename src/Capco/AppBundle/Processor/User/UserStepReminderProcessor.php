@@ -10,8 +10,7 @@ class UserStepReminderProcessor implements ProcessorInterface
 {
     public function __construct(
         private readonly UserNotifier $notifier
-    ) {
-    }
+    ) {}
 
     public function process(Message $message, array $options): bool
     {

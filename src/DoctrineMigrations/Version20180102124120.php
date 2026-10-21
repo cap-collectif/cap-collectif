@@ -7,9 +7,7 @@ use Doctrine\Migrations\AbstractMigration;
 
 class Version20180102124120 extends AbstractMigration
 {
-    public function up(Schema $schema): void
-    {
-    }
+    public function up(Schema $schema): void {}
 
     public function down(Schema $schema): void
     {

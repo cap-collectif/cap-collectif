@@ -12,8 +12,7 @@ class SSOController extends AbstractController
 {
     public function __construct(
         private readonly OpenIDBackchannel $openIDBackchannel
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/openid/backchannel/{token}", name="openid_back_channel", options={"i18n" = false}, methods={"POST"}, defaults={"_feature_flags" = "login_openid"})

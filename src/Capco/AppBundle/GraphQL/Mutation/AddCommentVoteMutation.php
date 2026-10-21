@@ -29,8 +29,7 @@ class AddCommentVoteMutation implements MutationInterface
         private readonly CommentVoteRepository $commentVoteRepo,
         private readonly RedisStorageHelper $redisStorageHelper,
         private readonly Indexer $indexer
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

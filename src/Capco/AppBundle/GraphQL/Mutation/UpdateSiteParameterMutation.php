@@ -30,8 +30,7 @@ class UpdateSiteParameterMutation implements MutationInterface
         private readonly EntityManagerInterface $entityManager,
         private readonly RedisCache $cache,
         protected RequestStack $requestStack
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input): array
     {

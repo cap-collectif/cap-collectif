@@ -51,6 +51,6 @@ class MediatorNotifier extends BaseNotifier
             ->getStep()
             ->getProject()
             ->getTitle()
-            ;
+        ;
     }
 }

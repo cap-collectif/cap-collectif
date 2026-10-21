@@ -14,7 +14,9 @@ class ProposalComment extends Comment implements ExportableContributionInterface
 {
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="comments", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE")
+     *
      * @Assert\NotNull()
      */
     private $proposal;
@@ -41,7 +43,7 @@ class ProposalComment extends Comment implements ExportableContributionInterface
                 && $this->getProposal()
                     ->getProposalForm()
                     ->isCommentable()
-                ;
+            ;
         } catch (EntityNotFoundException) {
             return false;
         }

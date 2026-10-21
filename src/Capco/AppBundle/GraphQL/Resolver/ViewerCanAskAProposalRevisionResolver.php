@@ -16,8 +16,7 @@ class ViewerCanAskAProposalRevisionResolver implements QueryInterface
         private readonly AuthorizationCheckerInterface $authorizationChecker,
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly Manager $manager
-    ) {
-    }
+    ) {}
 
     public function isGranted($viewer, $proposalId): bool
     {

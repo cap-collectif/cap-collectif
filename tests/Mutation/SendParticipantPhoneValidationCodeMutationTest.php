@@ -9,9 +9,13 @@ use Capco\Tests\Participant\Functional\ParticipantWebTestCase;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason HTTP SMS outcomes assert persisted requests and refusal effects with a controlled external provider.
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
  */
 final class SendParticipantPhoneValidationCodeMutationTest extends ParticipantWebTestCase
@@ -56,12 +60,19 @@ final class SendParticipantPhoneValidationCodeMutationTest extends ParticipantWe
     public static function sends(): iterable
     {
         yield 'already confirmed' => [true, 0, 'prod', null, 'PHONE_ALREADY_CONFIRMED', false];
+
         yield 'retry boundary' => [false, 2, 'prod', null, 'RETRY_LIMIT_REACHED', false];
+
         yield 'retry exceeded' => [false, 3, 'prod', null, 'RETRY_LIMIT_REACHED', false];
+
         yield 'first send' => [false, 0, 'prod', null, null, true];
+
         yield 'one retry allowed' => [false, 1, 'prod', null, null, true];
+
         yield 'invalid number' => [false, 0, 'prod', 'INVALID_NUMBER', 'INVALID_NUMBER', true];
+
         yield 'provider failure' => [false, 0, 'prod', 'SERVER_ERROR', 'SERVER_ERROR', true];
+
         yield 'test environment bypass' => [false, 0, 'test', null, null, false];
     }
 }

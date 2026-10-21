@@ -82,13 +82,14 @@ class EventSearch extends Search
                     $dateBoolQuery = new Query\BoolQuery();
                     $endDateIsNullQuery = new Query\BoolQuery();
                     $dateBoolQuery->addShould(new Query\Range('endAt', ['lt' => 'now/d']));
-                    $endDateIsNullQuery->addMustNot(new Query\Exists('endAt'));
+                    $endDateIsNullQuery->addMustNot(new Exists('endAt'));
                     $dateBoolQuery->addShould($endDateIsNullQuery);
                     $boolQuery->addFilter($dateBoolQuery);
                     $boolQuery->addMust(new Query\Range('startAt', ['lt' => 'now/d']));
 
                     break;
-                // FUTURE and current
+
+                    // FUTURE and current
                 case true:
                     $dateBoolQuery = new Query\BoolQuery();
                     $dateBoolQuery->addShould(new Query\Range('startAt', ['gte' => 'now/d']));
@@ -96,7 +97,8 @@ class EventSearch extends Search
                     $boolQuery->addFilter($dateBoolQuery);
 
                     break;
-                // FUTURE and PASSED (null case)
+
+                    // FUTURE and PASSED (null case)
                 default:
                     break;
             }
@@ -182,7 +184,7 @@ class EventSearch extends Search
                 'endAt' => ['order' => $orderBy['direction']],
                 'createdAt' => ['order' => $orderBy['direction']],
             ],
-            default => throw new \RuntimeException("Unknown order: ${$orderBy['field']}"),
+            default => throw new \RuntimeException("Unknown order: {$orderBy['field']}"),
         };
     }
 

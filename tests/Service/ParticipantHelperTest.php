@@ -12,7 +12,9 @@ use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Public token resolution uses repository and token-generator stubs with explicit identity outcomes.
  */
 final class ParticipantHelperTest extends TestCase
@@ -35,6 +37,7 @@ final class ParticipantHelperTest extends TestCase
     public static function existingTokens(): iterable
     {
         yield 'raw' => ['existing-token'];
+
         yield 'encoded' => [base64_encode('existing-token')];
     }
 
@@ -53,7 +56,9 @@ final class ParticipantHelperTest extends TestCase
     public static function missingTokens(): iterable
     {
         yield 'absent' => [null];
+
         yield 'empty' => [''];
+
         yield 'unknown' => ['missing-token'];
     }
 

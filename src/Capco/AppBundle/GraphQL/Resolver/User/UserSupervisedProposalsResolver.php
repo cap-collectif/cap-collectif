@@ -19,8 +19,7 @@ class UserSupervisedProposalsResolver implements QueryInterface
     public function __construct(
         private ProposalSupervisorRepository $proposalSupervisorRepository,
         private LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke($viewer, Argument $args): ConnectionInterface
     {

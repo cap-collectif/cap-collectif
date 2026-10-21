@@ -15,8 +15,7 @@ class SmsOrdersResolver implements QueryInterface
 
     public function __construct(
         private readonly SmsOrderRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): ConnectionInterface
     {

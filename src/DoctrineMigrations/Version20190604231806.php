@@ -27,6 +27,7 @@ final class Version20190604231806 extends AbstractMigration
     public function postUp(Schema $schema): void
     {
         $table = 'fos_user';
+
         /** @var User[] $users */
         $users = $this->connection->fetchAllAssociative(
             "SELECT id, website FROM {$table} WHERE website IS NOT NULL"

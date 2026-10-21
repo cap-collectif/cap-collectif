@@ -11,8 +11,7 @@ class ProposalProgressStepsResolver implements QueryInterface
 {
     public function __construct(
         private readonly ProposalProgressStepDataLoader $proposalProgressStepDataLoader
-    ) {
-    }
+    ) {}
 
     public function __invoke(Proposal $proposal): Promise
     {

@@ -11,10 +11,9 @@ class ContributorAvatarUrlResolver implements QueryInterface
 {
     public function __construct(
         private readonly MediaUrlResolver $urlResolver
-    ) {
-    }
+    ) {}
 
-    public function __invoke(ContributorInterface|Author $contributor): ?string
+    public function __invoke(Author|ContributorInterface $contributor): ?string
     {
         $media = $contributor->getMedia();
         if (!$media) {

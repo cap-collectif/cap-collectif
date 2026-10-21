@@ -27,8 +27,7 @@ class ParticipantExporter
         protected EntityManagerInterface $entityManager,
         protected SerializerInterface $serializer,
         protected readonly Filesystem $fileSystem
-    ) {
-    }
+    ) {}
 
     public function initializeStyle(SymfonyStyle $style): void
     {

@@ -36,16 +36,20 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(
  *     name="debate_argument",
  *     indexes={
+ *
  *       @Index(name="idx_author", columns={"id", "author_id"})
  *     },
  *     uniqueConstraints={
+ *
  *        @UniqueConstraint(
  *            name="argument_debate_unique",
  *            columns={"debate_id", "author_id"}
  *        )
  *     }
  * )
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\DebateArgumentRepository")
+ *
  * @CapcoAssert\HasAuthor()
  */
 class DebateArgument implements EntityInterface, DebateArgumentInterface, Publishable, ExportableDebateContributionInterface, \Stringable
@@ -66,12 +70,14 @@ class DebateArgument implements EntityInterface, DebateArgumentInterface, Publis
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="debateArguments")
+     *
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
     protected ?User $author = null;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"body"})
+     *
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private ?\DateTime $updatedAt = null;
@@ -83,6 +89,7 @@ class DebateArgument implements EntityInterface, DebateArgumentInterface, Publis
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Debate\Debate", inversedBy="arguments")
+     *
      * @ORM\JoinColumn(name="debate_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     private Debate $debate;

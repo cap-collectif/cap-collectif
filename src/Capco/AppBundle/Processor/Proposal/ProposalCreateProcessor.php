@@ -14,8 +14,7 @@ class ProposalCreateProcessor implements ProcessorInterface
         private readonly ProposalRepository $proposalRepository,
         private readonly ProposalNotifier $notifier,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function process(Message $message, array $options): bool
     {

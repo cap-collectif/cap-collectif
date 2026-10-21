@@ -253,7 +253,7 @@ class ProposalCollectVoteRepository extends EntityRepository
         return $qb
             ->getQuery()
             ->getResult()
-            ;
+        ;
     }
 
     public function getUserVotesGroupedByStepIds(array $collectStepsIds, ?User $user = null): array
@@ -484,6 +484,7 @@ class ProposalCollectVoteRepository extends EntityRepository
         ;
 
         $pointsOnStep = 0;
+
         /** @var ProposalCollectVote $result */
         foreach ($results as $result) {
             $pointsAvailable = [];
@@ -547,7 +548,7 @@ class ProposalCollectVoteRepository extends EntityRepository
             ->setParameter('step', $step)
             ->getQuery()
             ->getSingleScalarResult()
-            ;
+        ;
     }
 
     public function countAll(): int
@@ -633,7 +634,7 @@ class ProposalCollectVoteRepository extends EntityRepository
             ])
             ->getQuery()
             ->getResult()
-            ;
+        ;
     }
 
     /**
@@ -872,6 +873,6 @@ class ProposalCollectVoteRepository extends EntityRepository
             ->andWhere('v.isAccounted = 1')
             ->andWhere('v.published = 1')
             ->setParameter('step', $step)
-            ;
+        ;
     }
 }

@@ -52,8 +52,7 @@ class SocialNetworksUrlSanitizer
     private function replaceAccents(string $value): string
     {
         return \Transliterator::create('NFD; [:Nonspacing Mark:] Remove; NFC')
-            ->transliterate($value) ?: ''
-        ;
+            ->transliterate($value) ?: '';
     }
 
     private function replaceTypos(string $value): string

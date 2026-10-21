@@ -17,8 +17,7 @@ class ArgumentableViewerArgumentsUnpublishedResolver implements QueryInterface
     public function __construct(
         private ArgumentRepository $argumentRepository,
         private readonly ConnectionBuilderInterface $builder
-    ) {
-    }
+    ) {}
 
     public function __invoke(
         Argumentable $argumentable,

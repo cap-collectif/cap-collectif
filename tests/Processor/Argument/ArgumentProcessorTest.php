@@ -13,8 +13,11 @@ use Swarrot\Broker\Message;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status legacy
+ *
  * @phpunit-reason Exercises deprecated Swarrot processors directly; migrate the behavior to the HTTP or CLI
  * action and the supported message architecture.
  */
@@ -47,10 +50,15 @@ class ArgumentProcessorTest extends MailerSnapshotCommandTestCase
     public static function delegationScenarios(): iterable
     {
         yield 'creation with moderation enabled' => [ArgumentCreateProcessor::class, 'onCreation', 'argument206'];
+
         yield 'creation with moderation disabled' => [ArgumentCreateProcessor::class, 'onCreation', 'argument1'];
+
         yield 'update with moderation enabled' => [ArgumentUpdateProcessor::class, 'onUpdate', 'argument207'];
+
         yield 'update with moderation disabled' => [ArgumentUpdateProcessor::class, 'onUpdate', 'argument1'];
+
         yield 'trash without locale' => [ArgumentTrashProcessor::class, 'onTrash', 'argument208'];
+
         yield 'trash with locale' => [ArgumentTrashProcessor::class, 'onTrash', 'argument268'];
     }
 
@@ -92,6 +100,7 @@ class ArgumentProcessorTest extends MailerSnapshotCommandTestCase
             'notification-subject-new-argument',
             'createArgumentModeration.html',
         ];
+
         yield 'updated argument moderation' => [
             ArgumentUpdateProcessor::class,
             'argument207',
@@ -99,6 +108,7 @@ class ArgumentProcessorTest extends MailerSnapshotCommandTestCase
             'notification-subject-modified-argument',
             'updateArgumentModeration.html',
         ];
+
         yield 'trashed English argument' => [
             ArgumentTrashProcessor::class,
             'argument268',
@@ -125,6 +135,7 @@ class ArgumentProcessorTest extends MailerSnapshotCommandTestCase
     public static function disabledModerationScenarios(): iterable
     {
         yield 'argument creation' => [ArgumentCreateProcessor::class, 'argument1'];
+
         yield 'argument update' => [ArgumentUpdateProcessor::class, 'argument1'];
     }
 

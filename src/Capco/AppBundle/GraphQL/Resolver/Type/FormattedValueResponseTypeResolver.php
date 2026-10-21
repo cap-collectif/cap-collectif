@@ -13,8 +13,7 @@ class FormattedValueResponseTypeResolver implements QueryInterface
 {
     public function __construct(
         private readonly TranslatorInterface $translator
-    ) {
-    }
+    ) {}
 
     public function __invoke(ValueResponse $response): ?string
     {

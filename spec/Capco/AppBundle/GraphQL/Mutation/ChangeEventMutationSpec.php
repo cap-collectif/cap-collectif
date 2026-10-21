@@ -12,7 +12,6 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Security\EventVoter;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
-use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
@@ -190,7 +189,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $arguments->getArrayCopy()->willReturn($values);
         $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
         $event->getId()->willReturn('event1');
-        $event->setStartAt(new DateTime('2050-02-03 10:00:00'))->willReturn($event);
+        $event->setStartAt(new \DateTime('2050-02-03 10:00:00'))->willReturn($event);
 
         $globalIdResolver->resolve($values['author'], $viewer)->willReturn($newAuthor);
         $event->getAuthor()->willReturn(null);
@@ -284,7 +283,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
 
         $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
         $event->getId()->willReturn('event1');
-        $event->setStartAt(new DateTime('2050-02-03 10:00:00'))->willReturn($event);
+        $event->setStartAt(new \DateTime('2050-02-03 10:00:00'))->willReturn($event);
         $event->getAuthor()->willReturn($viewer);
         $event->setAuthor($viewer)->willReturn($event);
 
@@ -361,7 +360,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $arguments->getArrayCopy()->willReturn($values);
         $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
         $event->getId()->willReturn('event1');
-        $event->setStartAt(new DateTime('2050-02-03 10:00:00'))->willReturn($event);
+        $event->setStartAt(new \DateTime('2050-02-03 10:00:00'))->willReturn($event);
         $event->getAuthor()->willReturn($viewer);
         $event->setAuthor($viewer)->willReturn($event);
         $formFactory->create(EventType::class, $event)->willReturn($form);

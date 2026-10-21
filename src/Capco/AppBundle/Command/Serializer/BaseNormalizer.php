@@ -343,8 +343,7 @@ abstract class BaseNormalizer
 
     public function __construct(
         protected TranslatorInterface $translator
-    ) {
-    }
+    ) {}
 
     /**
      * @param array<mixed, mixed> $context

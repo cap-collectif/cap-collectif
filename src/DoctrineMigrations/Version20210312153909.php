@@ -23,19 +23,16 @@ final class Version20210312153909 extends AbstractMigration implements Container
         $this->container = $container;
     }
 
-    public function up(Schema $schema): void
-    {
-    }
+    public function up(Schema $schema): void {}
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 
     public function postUp(Schema $schema): void
     {
         if ('prod' !== $this->container->getParameter('kernel.environment')) {
             return;
         }
+
         /** @var EntityManagerInterface $em */
         $em = $this->container->get('doctrine.orm.entity_manager');
         $query = $em->createQuery(

@@ -10,9 +10,13 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="style")
+ *
  * @ORM\Entity
+ *
  * @ORM\InheritanceType("SINGLE_TABLE")
+ *
  * @ORM\DiscriminatorColumn(name = "style_type", type = "string")
+ *
  * @ORM\DiscriminatorMap({
  *      "border"      = "BorderStyle",
  *      "background"  = "BackgroundStyle",

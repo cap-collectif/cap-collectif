@@ -17,14 +17,12 @@ use Doctrine\ORM\Query\ResultSetMapping;
  */
 class ProjectRecipientsFetcher
 {
-    public function __construct(private readonly EntityManagerInterface $em)
-    {
-    }
+    public function __construct(private readonly EntityManagerInterface $em) {}
 
     /**
-     * @throws Exception
-     *
      * @return array<int, array<string, ?string>>
+     *
+     * @throws Exception
      */
     public function getRecipientDataByProject(
         Project $project,
@@ -54,9 +52,9 @@ class ProjectRecipientsFetcher
     }
 
     /**
-     * @throws Exception
-     *
      * @return array<int, array<string, ?string>>
+     *
+     * @throws Exception
      */
     public function getRecipientsByEmailingCampaign(
         EmailingCampaign $emailingCampaign,

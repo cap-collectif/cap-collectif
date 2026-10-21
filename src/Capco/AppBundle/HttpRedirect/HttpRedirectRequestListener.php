@@ -9,8 +9,7 @@ class HttpRedirectRequestListener
 {
     public function __construct(
         private readonly HttpRedirectResolver $httpRedirectResolver
-    ) {
-    }
+    ) {}
 
     public function onKernelRequest(RequestEvent $event): void
     {

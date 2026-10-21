@@ -20,8 +20,7 @@ class DebateAlternateArgumentsResolver implements QueryInterface
 
     public function __construct(
         private readonly DebateSearch $debateSearch
-    ) {
-    }
+    ) {}
 
     public function __invoke(Debate $debate, Argument $args, ?User $viewer): ConnectionInterface
     {

@@ -20,8 +20,7 @@ class OpinionVersionsResolver implements QueryInterface
 
     public function __construct(
         private readonly VersionSearch $versionSearch
-    ) {
-    }
+    ) {}
 
     public function __invoke(
         Opinion $opinion,

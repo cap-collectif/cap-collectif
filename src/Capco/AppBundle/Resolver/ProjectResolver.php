@@ -14,8 +14,7 @@ class ProjectResolver
         protected ProjectRepository $projectRepository,
         protected RouterInterface $router,
         protected RequestStack $requestStack
-    ) {
-    }
+    ) {}
 
     public function resolveAdminEditUrl(Project $project, bool $absolute = true): string
     {

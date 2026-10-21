@@ -13,8 +13,7 @@ class SectionContributionRelayResolver implements QueryInterface
 {
     public function __construct(
         private readonly OpinionSearch $opinionSearch
-    ) {
-    }
+    ) {}
 
     public function __invoke(OpinionType $section, Arg $args, $viewer): ConnectionInterface
     {

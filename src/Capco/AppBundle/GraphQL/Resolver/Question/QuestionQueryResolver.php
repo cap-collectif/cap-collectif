@@ -11,8 +11,7 @@ class QuestionQueryResolver implements QueryInterface
 {
     public function __construct(
         private readonly AbstractQuestionRepository $abstractQuestionRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): AbstractQuestion
     {

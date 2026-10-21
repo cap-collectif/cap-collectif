@@ -21,8 +21,7 @@ class QuestionnaireViewerRepliesResolver implements QueryInterface
         private ReplyRepository $replyRepo,
         private LoggerInterface $logger,
         private EntityManagerInterface $em
-    ) {
-    }
+    ) {}
 
     public function __invoke(
         Questionnaire $questionnaire,

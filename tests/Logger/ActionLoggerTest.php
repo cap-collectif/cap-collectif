@@ -19,15 +19,16 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class ActionLoggerTest extends TestCase
 {
-    private MockObject & MessageBusInterface $messageBus;
+    private MessageBusInterface&MockObject $messageBus;
     private RequestGuesser $requestGuesser;
     private RequestStack $requestStack;
     private Request $request;
-    private MockObject & LoggerInterface $logger;
+    private LoggerInterface&MockObject $logger;
 
     protected function setUp(): void
     {
@@ -45,6 +46,7 @@ class ActionLoggerTest extends TestCase
 
     /**
      * @phpunit-status non-compliant
+     *
      * @phpunit-reason The success cases check only the dispatched message class, and the error provider
      * ignores its user and request inputs.
      */
@@ -86,7 +88,9 @@ class ActionLoggerTest extends TestCase
 
     /**
      * @dataProvider logGraphQLQueryWithErrorProvider
+     *
      * @phpunit-status non-compliant
+     *
      * @phpunit-reason The success cases check only the dispatched message class, and the error provider
      * ignores its user and request inputs.
      */
@@ -135,6 +139,7 @@ class ActionLoggerTest extends TestCase
 
     /**
      * @phpunit-status non-compliant
+     *
      * @phpunit-reason The success cases check only the dispatched message class, and the error provider
      * ignores its user and request inputs.
      */
@@ -174,6 +179,7 @@ class ActionLoggerTest extends TestCase
 
     /**
      * @phpunit-status non-compliant
+     *
      * @phpunit-reason The success cases check only the dispatched message class, and the error provider
      * ignores its user and request inputs.
      */
@@ -213,6 +219,7 @@ class ActionLoggerTest extends TestCase
 
     /**
      * @phpunit-status compliant
+     *
      * @phpunit-reason Checks the outbound error-log contract and absence of dispatched messages with real
      * per-test domain data.
      */

@@ -32,9 +32,7 @@ final class Version20200330085715 extends AbstractMigration implements Container
         return 'Add new siteParameter for redirectionIO';
     }
 
-    public function up(Schema $schema): void
-    {
-    }
+    public function up(Schema $schema): void {}
 
     public function postUp(Schema $schema): void
     {

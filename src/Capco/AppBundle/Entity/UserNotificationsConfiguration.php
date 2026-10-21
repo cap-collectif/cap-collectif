@@ -9,7 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="user_notifications_configuration")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\UserNotificationsConfigurationRepository")
+ *
  * @ORM\EntityListeners({"Capco\UserBundle\Listener\UserNotificationsListener"})
  */
 class UserNotificationsConfiguration implements EntityInterface
@@ -18,18 +20,21 @@ class UserNotificationsConfiguration implements EntityInterface
 
     /**
      * @var string
+     *
      * @ORM\Column(name="unsubscribe_token", type="string", length=255, nullable=false, unique=true)
      */
     private $unsubscribeToken;
 
     /**
      * @var bool
+     *
      * @ORM\Column(name="on_proposal_comment_mail", type="boolean", options={"default": true})
      */
     private $onProposalCommentMail = true;
 
     /**
      * @var User
+     *
      * @ORM\OneToOne(targetEntity="Capco\UserBundle\Entity\User", mappedBy="notificationsConfiguration")
      */
     private $user;
@@ -81,9 +86,6 @@ class UserNotificationsConfiguration implements EntityInterface
         return $this->user;
     }
 
-    /**
-     * @return UserNotificationsConfiguration
-     */
     public function setUser(User $user): self
     {
         $this->user = $user;

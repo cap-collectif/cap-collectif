@@ -22,7 +22,9 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Public reconciliation rules use real contributions and assert ownership and retained content.
  */
 final class ContributionsReconcilierTest extends TestCase

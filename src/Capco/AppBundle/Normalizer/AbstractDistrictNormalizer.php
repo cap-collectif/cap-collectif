@@ -15,8 +15,7 @@ class AbstractDistrictNormalizer implements NormalizerInterface, SerializerAware
 
     public function __construct(
         private readonly ObjectNormalizer $normalizer
-    ) {
-    }
+    ) {}
 
     public function hasCacheableSupportsMethod(): bool
     {

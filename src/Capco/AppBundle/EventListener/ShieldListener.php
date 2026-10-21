@@ -53,13 +53,13 @@ class ShieldListener
         'fos_user_resetting_send_email',
         'fos_user_resetting_check_email',
 
-        //vote by mail
+        // vote by mail
         'capco_app_debate_vote_by_token',
 
-        //unsubscribe
+        // unsubscribe
         'capco_app_action_token',
 
-        //health check
+        // health check
         'health_check',
     ];
 
@@ -67,8 +67,7 @@ class ShieldListener
         protected Manager $manager,
         protected TokenStorageInterface $tokenStorage,
         protected Environment $templating
-    ) {
-    }
+    ) {}
 
     public function onKernelRequest(RequestEvent $event)
     {

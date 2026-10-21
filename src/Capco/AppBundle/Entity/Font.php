@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\FontRepository")
+ *
  * @ORM\Table(name="font")
  */
 class Font implements EntityInterface
@@ -65,6 +66,7 @@ class Font implements EntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media", cascade={"remove"})
+     *
      * @ORM\JoinColumn(nullable=true)
      */
     private $file;

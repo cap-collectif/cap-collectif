@@ -2,6 +2,4 @@
 
 namespace Capco\AppBundle\Mailer\Exception;
 
-class MailerExternalServiceException extends \RuntimeException
-{
-}
+class MailerExternalServiceException extends \RuntimeException {}

@@ -22,9 +22,9 @@ final class Version20190902120511 extends AbstractMigration
 
         if (
             empty(
-                ($franceConnect = $this->connection->fetchAllAssociative(
+                $franceConnect = $this->connection->fetchAllAssociative(
                     "SELECT sc.id, sc.environment FROM sso_configuration AS sc WHERE sc.id = 'franceConnect'"
-                ))
+                )
             )
         ) {
             $this->addSql("

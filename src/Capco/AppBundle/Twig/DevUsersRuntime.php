@@ -15,8 +15,7 @@ class DevUsersRuntime implements RuntimeExtensionInterface
         private readonly string $projectDir,
         private readonly string $environment,
         private readonly RequestStack $requestStack
-    ) {
-    }
+    ) {}
 
     public function isQaEnvironment(): bool
     {

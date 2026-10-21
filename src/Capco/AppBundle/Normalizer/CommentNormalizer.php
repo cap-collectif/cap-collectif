@@ -22,8 +22,7 @@ class CommentNormalizer implements NormalizerInterface, SerializerAwareInterface
         private RouterInterface $router,
         private readonly TokenStorageInterface $tokenStorage,
         private readonly ObjectNormalizer $normalizer
-    ) {
-    }
+    ) {}
 
     public function hasCacheableSupportsMethod(): bool
     {

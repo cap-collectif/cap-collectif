@@ -14,8 +14,7 @@ class PageListResolver implements QueryInterface
     public function __construct(
         private readonly PageRepository $pageRepository,
         private readonly LocaleRepository $localeRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): Connection
     {

@@ -10,8 +10,7 @@ class ProjectLabelMetaRuntime implements RuntimeExtensionInterface
 {
     public function __construct(
         private readonly Translator $translator
-    ) {
-    }
+    ) {}
 
     public function getProjectTypeMetaLabel(
         AbstractStep $currentStep,

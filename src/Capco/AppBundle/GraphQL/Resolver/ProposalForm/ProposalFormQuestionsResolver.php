@@ -12,8 +12,7 @@ class ProposalFormQuestionsResolver implements QueryInterface
 {
     public function __construct(
         private readonly AbstractQuestionRepository $repository
-    ) {
-    }
+    ) {}
 
     public function __invoke(ProposalForm $form, Argument $args): iterable
     {

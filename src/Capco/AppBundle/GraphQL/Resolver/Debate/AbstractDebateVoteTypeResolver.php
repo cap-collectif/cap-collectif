@@ -13,8 +13,7 @@ class AbstractDebateVoteTypeResolver implements QueryInterface
 {
     public function __construct(
         private readonly TypeResolver $typeResolver
-    ) {
-    }
+    ) {}
 
     /**
      * @param DebateAnonymousVote|DebateVote $vote

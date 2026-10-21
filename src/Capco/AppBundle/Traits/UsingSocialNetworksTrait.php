@@ -138,6 +138,7 @@ trait UsingSocialNetworksTrait
             if (empty($row[$socialNetwork])) {
                 continue;
             }
+
             /** @var ConstraintViolationListInterface $isValid */
             $isValid = $validator->validate(
                 $row[$socialNetwork],

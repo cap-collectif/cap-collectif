@@ -4,8 +4,11 @@ namespace Capco\Tests\Command;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Writes and deletes a fixed temporary export filename without preserving a pre-existing file
  * at that path.
  */
@@ -49,10 +52,12 @@ class GenerateCSVFromProposalFormCommandTest extends DatabaseCommandTestCase
             'proposalformIdfBP3',
             'Budget_Participatif_IdF_3-Collecte_des_projets_Idf_BRP_3_vierge.csv',
         ];
+
         yield 'Rennes proposal form' => [
             'proposalForm1',
             'Budget_Participatif_Rennes-Collecte_des_propositions_vierge.csv',
         ];
+
         yield 'Cafetier proposal form' => [
             'proposalformCafetier',
             'Sauvons_nos_cafes-Soutenons_nos_bistros_et_cafes_dans_cette_periode_difficile_vierge.csv',

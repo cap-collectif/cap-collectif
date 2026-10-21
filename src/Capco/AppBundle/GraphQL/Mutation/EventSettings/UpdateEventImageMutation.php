@@ -21,8 +21,7 @@ class UpdateEventImageMutation implements MutationInterface
         private readonly SiteImageRepository $repository,
         private readonly MediaRepository $mediaRepository,
         private readonly EntityManagerInterface $entityManager
-    ) {
-    }
+    ) {}
 
     /**
      * @return array{siteImage?: SiteImage, errorCode?: string}

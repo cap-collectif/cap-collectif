@@ -16,7 +16,7 @@ use Doctrine\ORM\Query\ResultSetMapping;
  */
 class ConsultationStepRepository extends AbstractStepRepository
 {
-    //fix error where a step is not bind to a project
+    // fix error where a step is not bind to a project
     public function getAllStepsWithAProject()
     {
         $qb = $this->getIsEnabledQueryBuilder()

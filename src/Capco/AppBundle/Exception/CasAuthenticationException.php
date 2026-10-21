@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Exception;
 
-use Exception;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
@@ -16,7 +15,7 @@ class CasAuthenticationException extends HttpException
     public function __construct(
         protected string $errorCas,
         $message = null,
-        ?Exception $previous = null,
+        ?\Exception $previous = null,
         array $headers = [],
         int $code = 0
     ) {

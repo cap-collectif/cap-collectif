@@ -23,8 +23,7 @@ class SamlAuthenticator extends AbstractGuardAuthenticator
         protected string $samlIdp,
         protected LoggerInterface $logger,
         private readonly SamlUserProvider $samlUserProvider
-    ) {
-    }
+    ) {}
 
     public function supports(Request $request): bool
     {

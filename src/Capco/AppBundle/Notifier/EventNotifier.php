@@ -68,6 +68,7 @@ class EventNotifier extends BaseNotifier
         if ($filters->isEnabled('softdeleted')) {
             $filters->disable('softdeleted');
         }
+
         /** @var Event $event */
         $event = $this->eventRepository->find($event['eventId']);
         if (!$event) {

@@ -14,6 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @covers \Capco\AppBundle\GraphQL\Mutation\CharterSettings\UpdateCharterSettingMutation
  */
 class UpdateCharterSettingMutationTest extends TestCase

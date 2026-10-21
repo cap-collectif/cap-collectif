@@ -47,7 +47,7 @@ class MailjetClient
     {
         $mailjetDomain = $this->getSenderEmailDomain($domain->getValue());
 
-        //if domain already exists on mailjet
+        // if domain already exists on mailjet
         if ($mailjetDomain) {
             $domain->setSpfValidation($mailjetDomain->getSpfValidation());
             $domain->setDkimValidation($mailjetDomain->getDkimValidation());

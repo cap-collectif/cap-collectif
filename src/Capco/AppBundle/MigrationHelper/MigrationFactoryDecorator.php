@@ -14,8 +14,7 @@ class MigrationFactoryDecorator implements MigrationFactory
     public function __construct(
         private readonly MigrationFactory $migrationFactory,
         private readonly ContainerInterface $container
-    ) {
-    }
+    ) {}
 
     public function createVersion(string $migrationClassName): AbstractMigration
     {

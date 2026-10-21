@@ -22,8 +22,7 @@ class MediaManager
         private readonly MediaProvider $mediaProvider,
         private readonly ValidatorInterface $validator,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function createFileFromUploadedFile(
         UploadedFile $file,

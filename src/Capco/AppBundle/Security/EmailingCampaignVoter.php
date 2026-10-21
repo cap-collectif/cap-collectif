@@ -33,7 +33,7 @@ class EmailingCampaignVoter extends AbstractOwnerableVoter
     {
         $viewer = $token->getUser();
 
-        if (!($viewer instanceof User)) {
+        if (!$viewer instanceof User) {
             return false;
         }
 

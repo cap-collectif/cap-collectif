@@ -9,8 +9,7 @@ class UserNotificationsListener
 {
     public function __construct(
         private readonly TokenGeneratorInterface $tokenGenerator
-    ) {
-    }
+    ) {}
 
     public function prePersist(UserNotificationsConfiguration $userNotificationsConfiguration)
     {

@@ -30,8 +30,7 @@ class UpdateQuestionnaireParametersMutation implements MutationInterface
         private readonly LoggerInterface $logger,
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly AuthorizationCheckerInterface $authorizationChecker
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input): array
     {
@@ -39,6 +38,7 @@ class UpdateQuestionnaireParametersMutation implements MutationInterface
         $arguments = $input->getArrayCopy();
 
         $questionnaireId = GlobalId::fromGlobalId($arguments['questionnaireId'])['id'];
+
         /** @var Questionnaire $questionnaire */
         $questionnaire = $this->questionnaireRepository->find($questionnaireId);
 

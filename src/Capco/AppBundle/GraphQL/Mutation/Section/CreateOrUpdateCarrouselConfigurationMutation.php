@@ -29,8 +29,7 @@ class CreateOrUpdateCarrouselConfigurationMutation implements MutationInterface
         private readonly SectionRepository $sectionRepository,
         private readonly FormFactoryInterface $formFactory,
         private readonly GlobalIdResolver $globalIdResolver
-    ) {
-    }
+    ) {}
 
     /**
      * @return array<string, null|Section|string>
@@ -39,6 +38,7 @@ class CreateOrUpdateCarrouselConfigurationMutation implements MutationInterface
     {
         $this->formatInput($args);
         $arguments = $args->getArrayCopy();
+
         /**
          * @var Section $sectionCarrousel
          */

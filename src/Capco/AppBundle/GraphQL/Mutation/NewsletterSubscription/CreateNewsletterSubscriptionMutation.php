@@ -15,11 +15,10 @@ class CreateNewsletterSubscriptionMutation implements MutationInterface
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
         private readonly NewsletterSubscriptionEmailValidator $emailValidator
-    ) {
-    }
+    ) {}
 
     /**
-     * @return array{newsletterSubscription: NewsletterSubscription|null, errorCode: string|null}
+     * @return array{newsletterSubscription: null|NewsletterSubscription, errorCode: null|string}
      */
     public function __invoke(Argument $input): array
     {

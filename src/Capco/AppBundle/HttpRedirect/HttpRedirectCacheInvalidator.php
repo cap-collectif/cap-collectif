@@ -10,8 +10,7 @@ class HttpRedirectCacheInvalidator
     public function __construct(
         private readonly RedisCache $httpRedirectCache,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function invalidateAll(): void
     {

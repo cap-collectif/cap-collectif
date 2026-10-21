@@ -13,8 +13,7 @@ class AnalyticsTrafficSources
          * @var AnalyticsTrafficSource[]|iterable
          */
         private readonly iterable $sources
-    ) {
-    }
+    ) {}
 
     public static function fromEs(ResultSet $multiSet): self
     {

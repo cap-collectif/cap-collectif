@@ -22,7 +22,5 @@ final class Version20260519093844 extends AbstractMigration
         $this->addSql('UPDATE fos_user set consent_privacy_policy = 1');
     }
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 }

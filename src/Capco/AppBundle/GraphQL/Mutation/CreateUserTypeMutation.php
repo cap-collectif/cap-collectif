@@ -19,8 +19,7 @@ class CreateUserTypeMutation implements MutationInterface
     public function __construct(
         private readonly EntityManagerInterface $em,
         private readonly FormFactoryInterface $formFactory
-    ) {
-    }
+    ) {}
 
     /**
      * @return array<string, UserType>

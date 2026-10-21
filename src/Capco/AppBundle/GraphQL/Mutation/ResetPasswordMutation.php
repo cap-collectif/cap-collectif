@@ -29,8 +29,7 @@ class ResetPasswordMutation implements MutationInterface
         private readonly TranslatorInterface $translator,
         private readonly LoggerInterface $logger,
         private readonly string $firewallName
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): array
     {

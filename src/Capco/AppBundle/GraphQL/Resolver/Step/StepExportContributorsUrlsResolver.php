@@ -11,9 +11,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class StepExportContributorsUrlsResolver implements QueryInterface
 {
-    public function __construct(private readonly RouterInterface $router)
-    {
-    }
+    public function __construct(private readonly RouterInterface $router) {}
 
     /**
      * @return array<int, array{variant: string, url: string}>

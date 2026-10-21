@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use ArrayObject;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
@@ -30,8 +29,7 @@ class DeleteProposalMutation implements MutationInterface
         private readonly ProposalFormProposalsDataLoader $dataloader,
         private readonly ProposalAccessResolver $proposalAccessResolver,
         private readonly GlobalIdResolver $globalIdResolver,
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $arguments, ?User $user = null): array
     {
@@ -39,7 +37,7 @@ class DeleteProposalMutation implements MutationInterface
 
         $proposalId = $arguments->offsetGet('proposalId');
         $participantToken = $arguments->offsetGet('participantToken');
-        $proposal = $this->globalIdResolver->resolve($proposalId, $user, new ArrayObject(['disable_acl' => true]));
+        $proposal = $this->globalIdResolver->resolve($proposalId, $user, new \ArrayObject(['disable_acl' => true]));
         if (!$proposal instanceof Proposal) {
             throw new UserError(sprintf('Unknown proposal with id "%s"', $proposalId));
         }

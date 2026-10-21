@@ -16,8 +16,7 @@ class CommentSubscriber implements EventSubscriberInterface
 
     public function __construct(
         private readonly Publisher $publisher
-    ) {
-    }
+    ) {}
 
     public static function getSubscribedEvents(): array
     {

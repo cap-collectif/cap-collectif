@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="section_carrousel_element")
+ *
  * @ORM\Entity(repositoryClass=SectionCarrouselElementRepository::class)
  */
 class SectionCarrouselElement implements EntityInterface
@@ -25,6 +26,7 @@ class SectionCarrouselElement implements EntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity=Section::class, inversedBy="sectionCarrouselElements")
+     *
      * @ORM\JoinColumn(nullable=false)
      */
     private Section $section;
@@ -51,6 +53,7 @@ class SectionCarrouselElement implements EntityInterface
 
     /**
      * @ORM\Column(name="redirect_link", type="string")
+     *
      * @Assert\Url()
      */
     private string $redirectLink;
@@ -62,6 +65,7 @@ class SectionCarrouselElement implements EntityInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="image_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private ?Media $image = null;

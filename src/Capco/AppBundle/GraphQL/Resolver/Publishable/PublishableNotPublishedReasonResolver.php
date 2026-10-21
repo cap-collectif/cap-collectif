@@ -18,6 +18,7 @@ class PublishableNotPublishedReasonResolver implements QueryInterface
         ) {
             return null;
         }
+
         /** @var User $author */
         $author = $publishable->getAuthor();
         if (!$author) {

@@ -6,9 +6,13 @@ use Capco\Tests\ResponseVisibilityWebTestCase;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises HTTP outcomes and real domain data with transactional cleanup; replaces only external boundaries.
  */
 final class ProposalResponsesResolverTest extends ResponseVisibilityWebTestCase
@@ -46,9 +50,13 @@ final class ProposalResponsesResolverTest extends ResponseVisibilityWebTestCase
     public static function viewers(): iterable
     {
         yield 'anonymous' => ['anonymous', ['Answer public']];
+
         yield 'unrelated account' => ['other', ['Answer public']];
+
         yield 'author' => ['author', ['Answer public', 'Answer private']];
+
         yield 'assigned analyst' => ['analyst', ['Answer public', 'Answer private', 'Answer hidden']];
+
         yield 'administrator' => ['admin', ['Answer public', 'Answer private', 'Answer hidden']];
     }
 
@@ -89,8 +97,11 @@ final class ProposalResponsesResolverTest extends ResponseVisibilityWebTestCase
     public static function participantTokens(): iterable
     {
         yield 'author token' => ['author', ['Answer public', 'Answer private']];
+
         yield 'another participant' => ['other', ['Answer public']];
+
         yield 'invalid token' => ['invalid', []];
+
         yield 'missing token' => ['missing', ['Answer public']];
     }
 }

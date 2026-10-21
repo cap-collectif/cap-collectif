@@ -20,8 +20,7 @@ class OpinionVersionNormalizer implements NormalizerInterface, SerializerAwareIn
         private readonly ObjectNormalizer $normalizer,
         private readonly VoteSearch $voteSearch,
         private readonly ArgumentRepository $argumentRepository
-    ) {
-    }
+    ) {}
 
     public function hasCacheableSupportsMethod(): bool
     {

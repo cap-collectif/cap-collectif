@@ -14,8 +14,7 @@ class ConsultationsQueryResolver implements QueryInterface
 {
     public function __construct(
         private readonly ConsultationRepository $consultationRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $args)
     {
@@ -51,7 +50,7 @@ class ConsultationsQueryResolver implements QueryInterface
                 ->findPaginated($orderByField, $orderByDirection, $offset, $limit, $query)
                 ->getIterator()
                 ->getArrayCopy()
-                ;
+            ;
         });
 
         return $paginator->auto($args, $totalCount);

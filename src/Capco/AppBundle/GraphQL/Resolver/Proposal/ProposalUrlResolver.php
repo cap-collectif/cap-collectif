@@ -12,8 +12,7 @@ class ProposalUrlResolver implements QueryInterface
 {
     public function __construct(
         protected RouterInterface $router
-    ) {
-    }
+    ) {}
 
     public function __invoke(Proposal $proposal, ?RequestStack $requestStack = null, ?string $emailToken = null): string
     {

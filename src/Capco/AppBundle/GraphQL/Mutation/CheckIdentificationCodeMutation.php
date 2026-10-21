@@ -26,8 +26,7 @@ class CheckIdentificationCodeMutation implements MutationInterface
         private readonly ValidatorInterface $validator,
         private readonly RateLimiter $rateLimiter,
         private readonly UserIdentificationCodeRepository $userIdentificationCodeRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $user): array
     {

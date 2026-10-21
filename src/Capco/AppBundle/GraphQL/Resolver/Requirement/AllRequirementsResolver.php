@@ -25,8 +25,7 @@ class AllRequirementsResolver implements QueryInterface
         private readonly Manager $manager,
         private readonly AbstractSSOConfigurationRepository $abstractSSOConfigurationRepository,
         private readonly TokenGenerator $tokenGenerator
-    ) {
-    }
+    ) {}
 
     public function __invoke(
         AbstractStep $step,

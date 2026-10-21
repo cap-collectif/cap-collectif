@@ -42,8 +42,7 @@ class UpdateContactPageMutation implements MutationInterface
         private readonly SiteImageRepository $imageRepository,
         private readonly SiteParameterResolver $resolver,
         private readonly string $locale
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args): array
     {
@@ -79,6 +78,7 @@ class UpdateContactPageMutation implements MutationInterface
 
             $this->cache->delete($cacheKey);
             $data = $this->resolver->getValue($dbKey, $this->locale);
+
             /** @var CacheItemInterface $cachedItem */
             $cachedItem = $this->cache->getItem(
                 SiteParameterRuntime::getCacheKey($dbKey, $this->locale)

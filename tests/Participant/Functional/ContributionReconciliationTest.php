@@ -14,9 +14,13 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason HTTP login and phone reconciliation verify reloaded contributions and answers with SQL isolation.
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
  */
 final class ContributionReconciliationTest extends ParticipantWebTestCase
@@ -97,6 +101,7 @@ final class ContributionReconciliationTest extends ParticipantWebTestCase
             yield ($toUser ? 'user' : 'participant') . ': matching email' => [$toUser, true, false];
             if ($toUser) {
                 yield 'user: conflict' => [true, false, false];
+
                 yield 'user: closed' => [true, true, true];
             }
         }

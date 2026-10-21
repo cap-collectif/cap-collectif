@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 
 trait ProposalCollectVoteRepositoryTrait
 {
-    /** @return int */
     public function countPublishedCollectVoteByStep(
         CollectStep $step,
         bool $onlyAccounted,
@@ -20,7 +19,7 @@ trait ProposalCollectVoteRepositoryTrait
             ->andWhere('proposal.trashedAt IS NULL')
             ->andWhere('proposal.published = 1')
             ->setParameter('step', $step)
-    ;
+        ;
 
         if ($onlyAccounted) {
             $qb->andWhere('pv.isAccounted = 1');

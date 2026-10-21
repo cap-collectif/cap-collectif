@@ -38,7 +38,7 @@ trait QuestionPersisterTrait
             $questionsOrderedByIdInDb[] = $question->getId();
         }
 
-        //we stock the order sent to apply it after
+        // we stock the order sent to apply it after
         $questionsOrderedById = [];
         // We need an array of questions ids from arguments
         $argumentsQuestionsId = [];
@@ -49,7 +49,7 @@ trait QuestionPersisterTrait
             $dataQuestion['question']['temporaryId'] = $temporaryId;
             $questionsOrderedById[] = $temporaryId;
 
-            //we are updating a question
+            // we are updating a question
             if (isset($dataQuestion['question']['id'])) {
                 // decode GraphQL id to id
                 $dataQuestion['question']['id'] = GlobalId::fromGlobalId(
@@ -100,7 +100,7 @@ trait QuestionPersisterTrait
                     array_search($b['question']['id'], $questionsOrderedByIdInDb, false);
             }
 
-            //@todo respect the user order, for now we just put new items at the end
+            // @todo respect the user order, for now we just put new items at the end
             return isset($a['question']['id']) ? -1 : 1;
         });
 
@@ -387,6 +387,7 @@ trait QuestionPersisterTrait
             $questionnableId
         );
         $choices = [];
+
         /** @var MultipleChoiceQuestion $question */
         foreach ($updatedMultipleChoiceQuestions as $question) {
             foreach ($question->getChoices() as $choice) {

@@ -14,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * A like on an anonymous argument in a debate.
  *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentVoteRepository")
+ *
  * @ORM\HasLifecycleCallbacks()
  */
 class DebateAnonymousArgumentVote extends AbstractVote implements EntityInterface
@@ -23,6 +24,7 @@ class DebateAnonymousArgumentVote extends AbstractVote implements EntityInterfac
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Debate\DebateAnonymousArgument", inversedBy="votes")
+     *
      * @ORM\JoinColumn(name="debate_anonymous_argument_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private DebateAnonymousArgument $debateAnonymousArgument;

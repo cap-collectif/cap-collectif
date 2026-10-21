@@ -7,8 +7,11 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Checks flag changes through the real Symfony manager after its cached value has been read.
  */
 final class FeatureFlagsCacheTest extends KernelTestCase implements FeatureFlagsAwareTest

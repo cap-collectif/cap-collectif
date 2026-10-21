@@ -13,7 +13,9 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 /**
  * @internal
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Checks public domain rules with real entities and observable results, without framework interaction counts.
  */
 class MailingListVoterTest extends AuthorizationTestCase
@@ -75,9 +77,13 @@ class MailingListVoterTest extends AuthorizationTestCase
     public static function organizationMemberships(): iterable
     {
         yield 'ordinary member without creator rights' => [OrganizationMemberRoleType::USER, false, true, VoterInterface::ACCESS_DENIED];
+
         yield 'creator of a deletable list' => [OrganizationMemberRoleType::USER, true, true, VoterInterface::ACCESS_GRANTED];
+
         yield 'creator of a protected list' => [OrganizationMemberRoleType::USER, true, false, VoterInterface::ACCESS_DENIED];
+
         yield 'administrator of a deletable list' => [OrganizationMemberRoleType::ADMIN, false, true, VoterInterface::ACCESS_GRANTED];
+
         yield 'administrator of a protected list' => [OrganizationMemberRoleType::ADMIN, false, false, VoterInterface::ACCESS_DENIED];
     }
 
@@ -96,7 +102,9 @@ class MailingListVoterTest extends AuthorizationTestCase
     public static function mailingListCreators(): iterable
     {
         yield 'administrator' => ['ROLE_ADMIN', false];
+
         yield 'project administrator' => ['ROLE_PROJECT_ADMIN', false];
+
         yield 'organization member' => ['ROLE_USER', true];
     }
 
@@ -104,7 +112,7 @@ class MailingListVoterTest extends AuthorizationTestCase
     {
         $voter = new MailingListVoter();
         $token = $this->token(new User());
-        self::assertSame(VoterInterface::ACCESS_ABSTAIN, $voter->vote($token, (new MailingList()), ['unknown']));
+        self::assertSame(VoterInterface::ACCESS_ABSTAIN, $voter->vote($token, new MailingList(), ['unknown']));
         self::assertSame(VoterInterface::ACCESS_ABSTAIN, $voter->vote($token, new User(), [MailingListVoter::VIEW]));
     }
 

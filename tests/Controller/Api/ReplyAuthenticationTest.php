@@ -10,10 +10,15 @@ use Symfony\Component\BrowserKit\Cookie;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Verifies reply authentication through GraphQL HTTP requests with SQL rollback.
  */
 class ReplyAuthenticationTest extends WebTestCase
@@ -132,10 +137,15 @@ class ReplyAuthenticationTest extends WebTestCase
     public static function credentials(): \Generator
     {
         yield 'sibling token alone grants nothing' => [null, false, false, 200, false];
+
         yield 'exact reply cookie remains supported' => [null, true, false, 200, true];
+
         yield 'different participant overrides reply cookie' => ['fakeToken2', true, false, 200, false];
+
         yield 'invalid participant never falls back to reply cookie' => ['invalid', true, false, 401, false];
+
         yield 'signed-in user ignores valid participant cookies' => ['fakeToken1', true, true, 200, false];
+
         yield 'signed-in user ignores invalid participant cookies' => ['invalid', true, true, 200, false];
     }
 }

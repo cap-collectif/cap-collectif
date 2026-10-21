@@ -15,8 +15,7 @@ class StepContributionsResolver implements QueryInterface
     public function __construct(
         private readonly StepContributionsDataLoader $dataLoader,
         private readonly PromiseAdapterInterface $promiseAdapter
-    ) {
-    }
+    ) {}
 
     public function __invoke(AbstractStep $step, Argument $args): Promise
     {

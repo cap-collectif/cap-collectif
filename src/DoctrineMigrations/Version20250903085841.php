@@ -22,7 +22,5 @@ final class Version20250903085841 extends AbstractMigration
         $this->addSql("DELETE requirement FROM requirement JOIN step s ON s.id = requirement.step_id AND requirement.type = 'CONSENT_PRIVACY_POLICY' WHERE s.step_type NOT IN ('selection', 'collect', 'questionnaire')");
     }
 
-    public function down(Schema $schema): void
-    {
-    }
+    public function down(Schema $schema): void {}
 }

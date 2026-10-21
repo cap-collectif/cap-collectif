@@ -25,8 +25,7 @@ class MagicLinkAuthenticator
         private readonly UserEmailProvider $userProvider,
         private readonly ConfigFileSystem $filesystem,
         private readonly int $tokenLifetimeInMinutes = self::DEFAULT_TOKEN_LIFETIME_IN_MINUTES
-    ) {
-    }
+    ) {}
 
     /**
      * @throws InvalidTokenException

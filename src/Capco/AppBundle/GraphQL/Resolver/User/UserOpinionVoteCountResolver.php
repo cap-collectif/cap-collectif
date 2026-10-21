@@ -10,8 +10,7 @@ class UserOpinionVoteCountResolver implements QueryInterface
 {
     public function __construct(
         private readonly OpinionVoteRepository $opinionVoteRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke($viewer, User $user): int
     {

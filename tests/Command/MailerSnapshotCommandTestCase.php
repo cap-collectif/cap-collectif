@@ -137,9 +137,7 @@ final class EmailCaptureListener implements \Swift_Events_SendListener
         $this->messages[] = clone $event->getMessage();
     }
 
-    public function sendPerformed(\Swift_Events_SendEvent $event): void
-    {
-    }
+    public function sendPerformed(\Swift_Events_SendEvent $event): void {}
 
     public function getMessageForRecipient(string $recipient): \Swift_Mime_SimpleMessage
     {

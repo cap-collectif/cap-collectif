@@ -18,6 +18,7 @@ class ContributionExporter
 {
     final public const CSV_DELIMITER = ';';
     protected SymfonyStyle $style;
+
     /**
      * @var array<string, null|bool|ExportVariantsEnum|string>
      */
@@ -29,8 +30,7 @@ class ContributionExporter
         protected SerializerInterface $serializer,
         protected readonly Filesystem $fileSystem,
         private readonly AbstractFilePathResolver $filePathResolverContributions
-    ) {
-    }
+    ) {}
 
     public function initializeStyle(SymfonyStyle $style): void
     {
@@ -76,8 +76,8 @@ class ContributionExporter
     {
         $path = match ($variant) {
             ExportVariantsEnum::SIMPLIFIED => $this->filePathResolverContributions->getSimplifiedExportPath($step),
-          ExportVariantsEnum::FULL => $this->filePathResolverContributions->getFullExportPath($step),
-          ExportVariantsEnum::GROUPED => $this->filePathResolverContributions->getGroupedExportPath($step),
+            ExportVariantsEnum::FULL => $this->filePathResolverContributions->getFullExportPath($step),
+            ExportVariantsEnum::GROUPED => $this->filePathResolverContributions->getGroupedExportPath($step),
         };
 
         $this->context = [

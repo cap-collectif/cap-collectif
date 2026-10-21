@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Local\System;
 
 use Castor\Attribute\AsTask;
+use Symfony\Component\Process\ExecutableFinder;
+
 use function Castor\context;
 use function Castor\io;
 use function Castor\run;
-use Symfony\Component\Process\ExecutableFinder;
 
 #[AsTask(description: 'Check local prerequisites, pinned tool versions and Docker availability; report all failures before exiting.', aliases: ['doctor'])]
 function doctor(): void

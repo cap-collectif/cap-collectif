@@ -11,8 +11,7 @@ class UserConfirmNewEmailUrlResolver implements QueryInterface
 {
     public function __construct(
         private readonly RouterInterface $router
-    ) {
-    }
+    ) {}
 
     public function __invoke(User $user): ?string
     {

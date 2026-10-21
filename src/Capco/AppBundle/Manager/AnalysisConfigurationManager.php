@@ -27,8 +27,7 @@ class AnalysisConfigurationManager
         private readonly EventDispatcherInterface $eventDispatcher,
         private readonly Publisher $publisher,
         private readonly JpecGhost $jpecGhost
-    ) {
-    }
+    ) {}
 
     public function processAnalysisConfiguration(
         AnalysisConfiguration $config,

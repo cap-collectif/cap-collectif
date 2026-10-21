@@ -12,8 +12,7 @@ class PublicApiKeyUserProvider implements UserProviderInterface
 {
     public function __construct(
         private readonly UserRepository $userRepository
-    ) {
-    }
+    ) {}
 
     public function loadUserByUsername($apiKey)
     {

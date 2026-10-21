@@ -32,12 +32,12 @@ class UserController extends AbstractController
         private readonly RouterInterface $router,
         private readonly LoggerInterface $logger,
         private readonly TranslatorInterface $translator
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/invitation", name="capco_app_user_invitation", options={"i18n" = false})
      * @Route("/invitation/", name="capco_app_user_invitation_trailing_slash", options={"i18n" = false})
+     *
      * @Template("@CapcoApp/User/invitation.html.twig")
      */
     public function invitation(Request $request)

@@ -49,10 +49,9 @@ class AddCommentMutation implements MutationInterface
         private readonly RequestGuesserInterface $requestGuesser,
         private readonly Manager $manager,
         private readonly TokenGeneratorInterface $tokenGenerator
-    ) {
-    }
+    ) {}
 
-    public function __invoke(Arg $input, /*User|string*/ $viewer): array
+    public function __invoke(Arg $input, /* User|string */ $viewer): array
     {
         $this->formatInput($input);
         $commentableGlobalId = $input->offsetGet('commentableId');

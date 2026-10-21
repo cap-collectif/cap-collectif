@@ -11,9 +11,13 @@ use SimpleSAML\Session;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Observes local logout over HTTP and the external IdP logout destination using a transient SimpleSAML session.
  */
 final class SAMLLogoutHandlerTest extends SamlWebTestCase
@@ -58,6 +62,7 @@ final class SAMLLogoutHandlerTest extends SamlWebTestCase
     public static function featureStates(): iterable
     {
         yield 'SAML enabled' => [true];
+
         yield 'SAML disabled' => [false];
     }
 }

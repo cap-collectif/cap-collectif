@@ -2,7 +2,6 @@
 
 namespace Capco\Tests\Mutation;
 
-use ArrayObject;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Proposal;
@@ -23,20 +22,23 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @phpunit-status non-compliant
+ *
  * @phpunit-reason Invokes GraphQL mutations directly with mocked dependencies instead of verifying the HTTP
  * contract and persisted effects.
  */
 class DeleteProposalMutationTest extends TestCase
 {
-    private MockObject & EntityManagerInterface $em;
-    private MockObject & RedisStorageHelper $redisHelper;
-    private MockObject & Publisher $publisher;
-    private MockObject & Indexer $indexer;
-    private MockObject & ProposalFormProposalsDataLoader $dataloader;
-    private MockObject & GlobalIdResolver $globalIdResolver;
-    private MockObject & ProposalAccessResolver $proposalAccessResolver;
+    private EntityManagerInterface&MockObject $em;
+    private MockObject&RedisStorageHelper $redisHelper;
+    private MockObject&Publisher $publisher;
+    private Indexer&MockObject $indexer;
+    private MockObject&ProposalFormProposalsDataLoader $dataloader;
+    private GlobalIdResolver&MockObject $globalIdResolver;
+    private MockObject&ProposalAccessResolver $proposalAccessResolver;
 
     private DeleteProposalMutation $deleteProposalMutation;
 
@@ -89,7 +91,7 @@ class DeleteProposalMutationTest extends TestCase
 
         $this->globalIdResolver
             ->method('resolve')
-            ->with($proposalId, $user, self::callback(fn (ArrayObject $options) => true === $options['disable_acl']))
+            ->with($proposalId, $user, self::callback(fn (\ArrayObject $options) => true === $options['disable_acl']))
             ->willReturn($proposal)
         ;
 
@@ -145,7 +147,7 @@ class DeleteProposalMutationTest extends TestCase
 
         $this->globalIdResolver
             ->method('resolve')
-            ->with($proposalId, $user, self::callback(fn (ArrayObject $options) => true === $options['disable_acl']))
+            ->with($proposalId, $user, self::callback(fn (\ArrayObject $options) => true === $options['disable_acl']))
             ->willReturn($proposal)
         ;
 
@@ -201,7 +203,7 @@ class DeleteProposalMutationTest extends TestCase
 
         $this->globalIdResolver
             ->method('resolve')
-            ->with($proposalId, $user, self::callback(fn (ArrayObject $options) => true === $options['disable_acl']))
+            ->with($proposalId, $user, self::callback(fn (\ArrayObject $options) => true === $options['disable_acl']))
             ->willReturn($proposal)
         ;
 

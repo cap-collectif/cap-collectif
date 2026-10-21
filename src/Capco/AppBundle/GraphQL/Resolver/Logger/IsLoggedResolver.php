@@ -13,8 +13,7 @@ class IsLoggedResolver implements QueryInterface
 {
     public function __construct(
         private readonly ActionLogger $actionLogger
-    ) {
-    }
+    ) {}
 
     /**
      * @return array{actionType: LogActionType, description: string}

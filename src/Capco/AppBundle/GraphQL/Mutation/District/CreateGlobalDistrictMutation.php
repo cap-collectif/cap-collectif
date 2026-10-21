@@ -23,8 +23,7 @@ class CreateGlobalDistrictMutation implements MutationInterface
         protected LoggerInterface $logger,
         protected EntityManagerInterface $em,
         protected FormFactoryInterface $formFactory
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input): array
     {

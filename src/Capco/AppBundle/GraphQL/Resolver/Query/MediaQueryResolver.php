@@ -14,8 +14,7 @@ class MediaQueryResolver implements QueryInterface
     public function __construct(
         private readonly MediaRepository $mediaRepository,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function __invoke(Arg $args): ConnectionInterface
     {

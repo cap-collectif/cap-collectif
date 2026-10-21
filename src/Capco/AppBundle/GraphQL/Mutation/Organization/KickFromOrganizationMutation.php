@@ -25,8 +25,7 @@ class KickFromOrganizationMutation implements MutationInterface
         private readonly GlobalIdResolver $resolver,
         private readonly EntityManagerInterface $manager,
         private readonly AuthorizationCheckerInterface $authorizationChecker
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input, User $viewer): array
     {

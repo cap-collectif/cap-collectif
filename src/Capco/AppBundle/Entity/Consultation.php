@@ -24,6 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(
  *     name="consultation"
  * )
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ConsultationRepository")
  */
 class Consultation implements EntityInterface, IndexableInterface, Ownerable, CreatableInterface, \Stringable
@@ -37,18 +38,21 @@ class Consultation implements EntityInterface, IndexableInterface, Ownerable, Cr
 
     /**
      * @ORM\Column(name="title", type="string", length=100)
+     *
      * @Assert\NotNull()
      */
     private string $title;
 
     /**
      * @Gedmo\Slug(fields={"title"}, updatable=false, unique=true)
+     *
      * @ORM\Column(length=255)
      */
     private string $slug;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="illustration_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private ?Media $illustration = null;
@@ -60,31 +64,37 @@ class Consultation implements EntityInterface, IndexableInterface, Ownerable, Cr
 
     /**
      * @ORM\Column(name="opinion_count_shown_by_section", type="integer")
+     *
      * @Assert\Range(max=20,min=1)
      */
     private int $opinionCountShownBySection = 10;
 
     /**
      * @Gedmo\Timestampable(on="create")
+     *
      * @ORM\Column(name="created_at", type="datetime")
      */
     private \DateTime $createdAt;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "opinionTypes"})
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private \DateTime $updatedAt;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionType", mappedBy="consultation", cascade={"persist", "remove"}, orphanRemoval=true)
+     *
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private Collection $opinionTypes;
 
     /**
      * @Gedmo\SortableGroup
+     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\ConsultationStep", inversedBy="consultations", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private ?ConsultationStep $step = null;
@@ -111,6 +121,7 @@ class Consultation implements EntityInterface, IndexableInterface, Ownerable, Cr
 
     /**
      * @Gedmo\SortablePosition
+     *
      * @ORM\Column(name="position", type="integer")
      */
     private int $position = 1;
@@ -340,11 +351,9 @@ class Consultation implements EntityInterface, IndexableInterface, Ownerable, Cr
     }
 
     /**
-     * @param $opinionTypes
-     *
      * @return $this
      */
-    public function setOpinionTypes($opinionTypes)
+    public function setOpinionTypes(mixed $opinionTypes)
     {
         $this->opinionTypes = $opinionTypes;
 
@@ -352,11 +361,9 @@ class Consultation implements EntityInterface, IndexableInterface, Ownerable, Cr
     }
 
     /**
-     * @param $opinionType
-     *
      * @return $this
      */
-    public function addOpinionType($opinionType)
+    public function addOpinionType(mixed $opinionType)
     {
         if (!$this->opinionTypes->contains($opinionType)) {
             $this->opinionTypes[] = $opinionType;
@@ -368,11 +375,9 @@ class Consultation implements EntityInterface, IndexableInterface, Ownerable, Cr
     }
 
     /**
-     * @param $opinionType
-     *
      * @return $this
      */
-    public function removeOpinionType($opinionType)
+    public function removeOpinionType(mixed $opinionType)
     {
         $this->opinionTypes->removeElement($opinionType);
 

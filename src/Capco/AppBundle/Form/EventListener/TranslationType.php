@@ -10,8 +10,7 @@ class TranslationType extends AbstractType
 {
     public function __construct(
         private readonly TranslationTypeSubscriber $subscriber
-    ) {
-    }
+    ) {}
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

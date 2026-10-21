@@ -51,8 +51,7 @@ class ChangeProposalDecisionMutation implements MutationInterface
         private readonly EventDispatcherInterface $eventDispatcher,
         private readonly Publisher $publisher,
         private readonly GlobalIdResolver $globalIdResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $args, $viewer, RequestStack $request): array
     {

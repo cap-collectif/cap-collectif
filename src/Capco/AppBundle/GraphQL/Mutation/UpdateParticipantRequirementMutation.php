@@ -24,8 +24,7 @@ class UpdateParticipantRequirementMutation implements MutationInterface
         private LoggerInterface $logger,
         private GlobalIdResolver $globalIdResolver,
         private ParticipantHelper $participantHelper
-    ) {
-    }
+    ) {}
 
     public function __invoke(Argument $input): array
     {

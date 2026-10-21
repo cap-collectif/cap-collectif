@@ -7,14 +7,13 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\QueryBuilder;
-use Exception;
 
 trait ContributionRepositoryTrait
 {
     /**
-     * @throws Exception
-     *
      * @return array<int, object>
+     *
+     * @throws \Exception
      */
     public function findCreatedSinceIntervalByAuthor(
         ContributorInterface $author,

@@ -12,12 +12,14 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  * @ORM\Table(
  *     name="action_token",
  *     uniqueConstraints={
+ *
  *        @UniqueConstraint(
  *            name="action_token_unique",
  *            columns={"action", "user_id"}
  *        )
  *     }
  * )
+ *
  * @ORM\Entity(repositoryClass=ActionTokenRepository::class)
  */
 class ActionToken extends AbstractUserToken implements EntityInterface

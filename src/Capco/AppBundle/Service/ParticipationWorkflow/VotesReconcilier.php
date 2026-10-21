@@ -105,14 +105,15 @@ class VotesReconcilier extends ContributionsReconcilier
                 $this->em->flush();
 
                 return;
-            /*
-             * min = 2
-             * max = 4
-             * user => A B
-             * participant => C D
-             * result => A B C D
-             * Sum of both unique votes are within the max, so we can add the votes to the user
-             */
+
+                /*
+                 * min = 2
+                 * max = 4
+                 * user => A B
+                 * participant => C D
+                 * result => A B C D
+                 * Sum of both unique votes are within the max, so we can add the votes to the user
+                 */
             case $votesMinEnabled && $votesLimitEnabled && $targetContributorHasReachedVotesMin && !$targetContributorHasReachedVotesLimit && $participantHasReachedVoteMin && !$participantHasReachedVotesLimit:
                 ['uniqueVotes' => $uniqueVotes, 'duplicateVotes' => $duplicateVotes] = $this->getUniqueAndDuplicateVotes($targetContributorVotes, $participantVotes);
 
@@ -180,26 +181,28 @@ class VotesReconcilier extends ContributionsReconcilier
                 $this->em->flush();
 
                 return;
-            /*
-             * max = 3
-             * user => A B C
-             * participant => D
-             * result => A B C
-             */
+
+                /*
+                 * max = 3
+                 * user => A B C
+                 * participant => D
+                 * result => A B C
+                 */
             case $targetContributorHasReachedVotesLimit:
                 foreach ($participantVotes as $vote) {
                     $this->em->remove($vote);
                 }
 
                 return;
-            /*
-             * votesRanking = true
-             * min = 2
-             * max = 3
-             * user => A(5pts)
-             * participant => C(5pts) D(4pts)
-             * result => C(5pts) D(4pts)
-             */
+
+                /*
+                 * votesRanking = true
+                 * min = 2
+                 * max = 3
+                 * user => A(5pts)
+                 * participant => C(5pts) D(4pts)
+                 * result => C(5pts) D(4pts)
+                 */
             case !$targetContributorHasReachedVotesMin && $participantHasReachedVoteMin && $votesRanking:
                 foreach ($participantVotes as $participantVote) {
                     $participantVote->setContributor($contributorTarget);
@@ -257,7 +260,7 @@ class VotesReconcilier extends ContributionsReconcilier
      * @param array< ProposalCollectVote|ProposalSelectionVote > $targetContributorVotes
      * @param array< ProposalCollectVote|ProposalSelectionVote > $participantVotes
      *
-     * @return array{'uniqueVotes': array<ProposalSelectionVote | ProposalCollectVote>, 'duplicateVotes': array<ProposalSelectionVote | ProposalCollectVote>}
+     * @return array{'uniqueVotes': array<ProposalCollectVote|ProposalSelectionVote>, 'duplicateVotes': array<ProposalCollectVote|ProposalSelectionVote>}
      */
     private function getUniqueAndDuplicateVotes(array $targetContributorVotes, array $participantVotes): array
     {

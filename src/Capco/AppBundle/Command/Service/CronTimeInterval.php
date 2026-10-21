@@ -8,8 +8,7 @@ class CronTimeInterval
 {
     public function __construct(
         private readonly TranslatorInterface $translator
-    ) {
-    }
+    ) {}
 
     public function getRemainingCronExecutionTime(int $cronTriggerMinute = 0, string $datetime = 'now'): string
     {

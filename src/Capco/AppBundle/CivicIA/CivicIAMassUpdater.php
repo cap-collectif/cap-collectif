@@ -20,8 +20,7 @@ class CivicIAMassUpdater
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly EntityManagerInterface $entityManager,
         private readonly Indexer $indexer
-    ) {
-    }
+    ) {}
 
     public function __invoke(string $json, User $viewer): array
     {

@@ -28,7 +28,8 @@ class MediaResponseRepository extends EntityRepository
                 ->addSelect('reply')->leftJoin('r.reply', 'reply')
                 ->innerJoin('r.medias', 'm')
                 ->where('m = :media')->setParameter('media', $media)
-                ->getQuery()->getResult();
+                ->getQuery()->getResult()
+            ;
         } finally {
             if ($wasEnabled) {
                 $filters->enable(ContributionCompletionStatusFilter::FILTER_NAME);
@@ -115,6 +116,6 @@ class MediaResponseRepository extends EntityRepository
                 ->andWhere('(reply.draft = false')
                 ->leftJoin('r.medias', 'media')
                 ->andWhere('media.id IS NOT NULL)')
-            ;
+        ;
     }
 }

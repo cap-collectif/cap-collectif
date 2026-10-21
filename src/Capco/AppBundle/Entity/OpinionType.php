@@ -12,6 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="opinion_type")
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionTypeRepository")
  */
 class OpinionType implements EntityInterface, \Stringable
@@ -50,12 +51,14 @@ class OpinionType implements EntityInterface, \Stringable
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionTypeAppendixType", mappedBy="opinionType",  orphanRemoval=true, cascade={"persist", "remove"})
+     *
      * @ORM\OrderBy({"position" = "ASC"})
      */
     protected $appendixTypes;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionType", inversedBy="children", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     protected $parent;
@@ -67,6 +70,7 @@ class OpinionType implements EntityInterface, \Stringable
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Consultation", inversedBy="opinionTypes", cascade={"persist"})
+     *
      * @ORM\JoinColumn(name="consultation_id", nullable=false, onDelete="CASCADE")
      */
     protected $consultation;
@@ -83,11 +87,14 @@ class OpinionType implements EntityInterface, \Stringable
 
     /**
      * @Gedmo\Slug(handlers={
+     *
      *  @Gedmo\SlugHandler(class="Gedmo\Sluggable\Handler\TreeSlugHandler", options={
+     *
      *      @Gedmo\SlugHandlerOption(name="parentRelationField", value="parent"),
      *      @Gedmo\SlugHandlerOption(name="separator", value="/")
      *  })
      * }, fields={"title", "subtitle"}, unique=false)
+     *
      * @ORM\Column(length=255)
      */
     private $slug;
@@ -114,14 +121,18 @@ class OpinionType implements EntityInterface, \Stringable
 
     /**
      * @var \DateTime
+     *
      * @Gedmo\Timestampable(on="create")
+     *
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
      * @var \DateTime
+     *
      * @Gedmo\Timestampable(on="change", field={"title", "subtitle", "position", "voteWidgetType", "color"})
+     *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -391,8 +402,6 @@ class OpinionType implements EntityInterface, \Stringable
     }
 
     /**
-     * @param \Capco\AppBundle\Entity\Opinion $opinion
-     *
      * @return $this
      */
     public function addOpinion(Opinion $opinion)
@@ -405,8 +414,6 @@ class OpinionType implements EntityInterface, \Stringable
     }
 
     /**
-     * @param \Capco\AppBundle\Entity\Opinion $opinion
-     *
      * @return $this
      */
     public function removeOpinion(Opinion $opinion)

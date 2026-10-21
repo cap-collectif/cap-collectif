@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
-use ArrayObject;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Type\Definition\ResolveInfo;
@@ -16,14 +15,13 @@ class UserProposalsResolver implements QueryInterface
 {
     public function __construct(
         private readonly ProposalRepository $proposalRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(
         $viewer,
         User $user,
         ?Argument $args = null,
-        ?ArrayObject $context = null,
+        ?\ArrayObject $context = null,
         ?ResolveInfo $resolveInfo = null
     ): Connection {
         if (!$args) {

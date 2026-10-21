@@ -9,9 +9,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class CustomCodeVersionQueryResolver implements QueryInterface
 {
-    public function __construct(private readonly CustomCodeVersioningService $customCodeVersioning)
-    {
-    }
+    public function __construct(private readonly CustomCodeVersioningService $customCodeVersioning) {}
 
     /**
      * @return null|array<string, mixed>

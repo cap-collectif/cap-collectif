@@ -20,7 +20,8 @@ class ProposalAnalysisRelatedVoter extends AbstractOwnerableVoter
     final public const ASSIGN_DECISION_MAKER = 'ASSIGN_DECISION_MAKER';
 
     /**
-     * {@inheritdoc}
+     * @param mixed $attribute
+     * @param mixed $subject
      */
     protected function supports($attribute, $subject): bool
     {
@@ -41,7 +42,8 @@ class ProposalAnalysisRelatedVoter extends AbstractOwnerableVoter
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $attribute
+     * @param mixed $subject
      */
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
     {

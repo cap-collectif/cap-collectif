@@ -9,8 +9,7 @@ final class RequestGuesser implements RequestGuesserInterface
 {
     public function __construct(
         private readonly RequestStack $requestStack
-    ) {
-    }
+    ) {}
 
     public function getClientIp(): ?string
     {
@@ -26,9 +25,6 @@ final class RequestGuesser implements RequestGuesserInterface
         return $request ? self::getUserAgentFromRequest($request) : null;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getJsonContent(): ?array
     {
         $request = $this->getCurrentRequest();

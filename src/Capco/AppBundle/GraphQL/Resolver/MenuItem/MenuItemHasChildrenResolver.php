@@ -10,8 +10,7 @@ class MenuItemHasChildrenResolver implements QueryInterface
 {
     public function __construct(
         private readonly MenuItemRepository $menuItemRepository
-    ) {
-    }
+    ) {}
 
     public function __invoke(MenuItem $menuItem): bool
     {

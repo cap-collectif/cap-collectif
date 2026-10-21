@@ -16,8 +16,7 @@ class ConsentInternalCommunicationController extends Controller
         private readonly ParticipantHelper $participantHelper,
         private readonly EntityManagerInterface $em,
         private readonly TranslatorInterface $translator
-    ) {
-    }
+    ) {}
 
     /**
      * @Route("/consent-internal-communication/{email}/{token}", name="participant_consent_internal_communication", options={"i18n" = false})

@@ -27,8 +27,7 @@ class AuthorableTypeResolver implements QueryInterface
         private readonly TypeResolver $typeResolver,
         private readonly ReplyTypeResolver $replyTypeResolver,
         private readonly VoteTypeResolver $voteTypeResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke($data)
     {

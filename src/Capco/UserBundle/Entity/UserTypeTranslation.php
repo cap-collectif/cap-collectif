@@ -10,9 +10,11 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\UserBundle\Repository\UserTypeTranslationRepository")
+ *
  * @ORM\Table(
  *  name="user_type_translation",
  *  uniqueConstraints={
+ *
  *    @ORM\UniqueConstraint(
  *      name="translation_unique",
  *      columns={"translatable_id", "locale"}

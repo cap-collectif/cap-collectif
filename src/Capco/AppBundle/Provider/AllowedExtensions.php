@@ -23,7 +23,7 @@ interface AllowedExtensions
         'application/msword', // .doc
         'text/rtf', // .doc
         'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // .docx
-        'application/zip', //.docx
+        'application/zip', // .docx
         'application/vnd.ms-excel', // .xls
         'application/vnd.msexcel', // .xls
         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // .xlsx

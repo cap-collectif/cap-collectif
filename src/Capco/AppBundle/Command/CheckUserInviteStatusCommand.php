@@ -52,6 +52,7 @@ class CheckUserInviteStatusCommand extends Command
         ) {
             throw new InvalidOptionException('The given status does not match anny existing UserInvite status.');
         }
+
         /** @var UserInvite[] $invitations */
         $invitations = $this->inviteRepository->getNotExpiredInvitationsByStatus($optionStatus);
         $output->writeln('<info>' . \count($invitations) . ' invitations to re-publish.</info>');
@@ -59,6 +60,7 @@ class CheckUserInviteStatusCommand extends Command
             $output->writeln(
                 '<info>Re-publishing invitation with id : ' . $invitation->getId() . '</info>'
             );
+
             /** @var UserInviteEmailMessage $lastEmailMessage */
             $lastEmailMessage = $invitation->getEmailMessages()->last();
             $usedProviderClass = $lastEmailMessage->getMailjetId()

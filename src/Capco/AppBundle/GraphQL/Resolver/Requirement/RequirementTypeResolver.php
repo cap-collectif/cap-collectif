@@ -12,8 +12,7 @@ class RequirementTypeResolver implements QueryInterface
 {
     public function __construct(
         private readonly TypeResolver $typeResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Requirement $requirement): Type
     {

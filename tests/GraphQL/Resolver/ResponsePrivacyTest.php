@@ -19,9 +19,13 @@ use Symfony\Component\BrowserKit\Cookie;
 
 /**
  * @internal
+ *
  * @runTestsInSeparateProcesses
+ *
  * @preserveGlobalState disabled
+ *
  * @phpunit-status compliant
+ *
  * @phpunit-reason Exercises raw and global response IDs over HTTP for anonymous, owner, analyst and administrator identities.
  */
 final class ResponsePrivacyTest extends IdentityWebTestCase
@@ -98,10 +102,14 @@ final class ResponsePrivacyTest extends IdentityWebTestCase
     {
         foreach (['proposal', 'profile', 'evaluation'] as $source) {
             yield $source . ' private' => [$source, true, false];
+
             yield $source . ' hidden' => [$source, false, true];
+
             yield $source . ' public' => [$source, false, false];
         }
+
         yield 'analysis with a public question' => ['analysis', false, false];
+
         yield 'orphan' => ['orphan', false, false];
     }
 

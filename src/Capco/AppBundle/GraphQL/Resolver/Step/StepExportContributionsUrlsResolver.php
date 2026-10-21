@@ -10,28 +10,26 @@ use Symfony\Component\Routing\RouterInterface;
 
 class StepExportContributionsUrlsResolver implements QueryInterface
 {
-    public function __construct(private readonly RouterInterface $router)
-    {
-    }
+    public function __construct(private readonly RouterInterface $router) {}
 
     /**
      * @return array<int, array{variant: string, url: string}>
      */
     public function __invoke(AbstractStep $step): array
     {
-//        if ($step->isDebateStep() && $step->getDebate()) {
-//            return $this->router->generate(
-//                'app_debate_download',
-//                [
-//                    'debateId' => GlobalId::toGlobalId(
-//                        $step->getType(),
-//                        $step->getDebate()->getId()
-//                    ),
-//                    'type' => 'arguments',
-//                ],
-//                UrlGeneratorInterface::ABSOLUTE_URL
-//            );
-//        }
+        //        if ($step->isDebateStep() && $step->getDebate()) {
+        //            return $this->router->generate(
+        //                'app_debate_download',
+        //                [
+        //                    'debateId' => GlobalId::toGlobalId(
+        //                        $step->getType(),
+        //                        $step->getDebate()->getId()
+        //                    ),
+        //                    'type' => 'arguments',
+        //                ],
+        //                UrlGeneratorInterface::ABSOLUTE_URL
+        //            );
+        //        }
 
         $routeName = 'app_project_download';
         $parameters = [

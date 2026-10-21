@@ -13,7 +13,9 @@ trait TitleTrait
 {
     /**
      * @Doctrine\ORM\Mapping\Column(name="title", type="string", length=255, nullable=false)
+     *
      * @Symfony\Component\Validator\Constraints\NotBlank()
+     *
      * @Symfony\Component\Validator\Constraints\Length(max=255)
      */
     protected $title;

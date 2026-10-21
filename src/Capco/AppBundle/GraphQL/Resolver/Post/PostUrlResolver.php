@@ -15,8 +15,7 @@ class PostUrlResolver implements QueryInterface
         private readonly RouterInterface $router,
         private readonly LoggerInterface $logger,
         private readonly GraphQLLocaleResolver $localeResolver
-    ) {
-    }
+    ) {}
 
     public function __invoke(Post $post): string
     {

@@ -157,6 +157,7 @@ class AbstractVoteRepository extends EntityRepository
 
         $votes = $qb->getQuery()->execute();
         $publicVotes = [];
+
         /** @var AbstractVote $vote */
         foreach ($votes as $vote) {
             try {
@@ -275,7 +276,8 @@ class AbstractVoteRepository extends EntityRepository
         return $this->getEntityManager()
             ->getConnection()
             ->executeQuery($sql)
-            ->fetchAll()[0]['result'];
+            ->fetchAll()[0]['result']
+        ;
     }
 
     protected function getQueryBuilder()

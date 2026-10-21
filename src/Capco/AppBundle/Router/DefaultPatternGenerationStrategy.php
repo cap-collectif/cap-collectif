@@ -26,12 +26,11 @@ class DefaultPatternGenerationStrategy implements PatternGenerationStrategyInter
         private readonly array $locales,
         private $cacheDir,
         private $translationDomain = 'routes',
-        //Not really a locale but the locale prefix, not used with our strategy (prefix all)
+        // Not really a locale but the locale prefix, not used with our strategy (prefix all)
         private $defaultLocale = 'fr'
-    ) {
-    }
+    ) {}
 
-    //Method to authorize having a locale different from prefix in url
+    // Method to authorize having a locale different from prefix in url
     public static function getLocalePrefix(string $locale)
     {
         return substr($locale, 0, strpos($locale, '-'));
@@ -66,9 +65,6 @@ class DefaultPatternGenerationStrategy implements PatternGenerationStrategyInter
         return $patterns;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addResources(RouteCollection $i18nCollection)
     {
         foreach ($this->locales as $locale) {

@@ -14,8 +14,7 @@ class LocaleLanguageRuntime implements RuntimeExtensionInterface
         protected TranslatorInterface $translator,
         protected PublishedLocalesDataloader $localesDataloader,
         protected Manager $manager
-    ) {
-    }
+    ) {}
 
     public function getLocaleMap($viewer = null): array
     {

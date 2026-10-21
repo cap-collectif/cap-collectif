@@ -2,6 +2,4 @@
 
 namespace Capco\AppBundle\Repository;
 
-class ProgressStepRepository extends AbstractStepRepository
-{
-}
+class ProgressStepRepository extends AbstractStepRepository {}

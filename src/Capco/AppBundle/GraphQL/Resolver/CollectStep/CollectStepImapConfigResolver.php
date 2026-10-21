@@ -11,8 +11,7 @@ class CollectStepImapConfigResolver implements QueryInterface
 {
     public function __construct(
         private readonly AuthorizationCheckerInterface $authorizationChecker
-    ) {
-    }
+    ) {}
 
     /**
      * @return array{
