@@ -1,0 +1,3 @@
+framework:
+    mailer:
+        dsn: '%env(SYMFONY_MAILER_URL)%'

@@ -16,6 +16,20 @@
 <php>
     <env name="KERNEL_CLASS" value="App\Kernel"/>
 
+    <!-- ###+ symfony/mailer ### -->
+    <env name="SYMFONY_MAILER_URL" value="null://null" force="true"/>
+    <!-- ###- symfony/mailer ### -->
+
+    <!-- ###+ symfony/mailchimp-mailer ### -->
+    <!-- MAILER_DSN=mandrill://KEY@default -->
+    <!-- MAILER_DSN=mandrill+smtp://USERNAME:PASSWORD@default -->
+    <!-- ###- symfony/mailchimp-mailer ### -->
+
+    <!-- ###+ symfony/mailjet-mailer ### -->
+    <!-- MAILER_DSN=mailjet+api://PUBLIC_KEY:PRIVATE_KEY@api.mailjet.com -->
+    <!-- MAILER_DSN=mailjet+smtp://PUBLIC_KEY:PRIVATE_KEY@in-v3.mailjet.com -->
+    <!-- ###- symfony/mailjet-mailer ### -->
+
     <!-- ###+ symfony/messenger ### -->
     <!-- Choose one of the transports below -->
     <!-- MESSENGER_TRANSPORT_DSN=amqp://guest:guest@localhost:5672/%2f/messages -->
