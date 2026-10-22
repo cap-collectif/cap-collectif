@@ -17,7 +17,8 @@ const DescriptionInput: React.FC<Props> = ({ descriptionMandatory, descriptionHe
       <TextEditor
         label={intl.formatMessage({ id: 'proposal.body' })}
         name="body"
-        id="body"
+        id="proposal_body"
+        labelId="label-proposal_body"
         placeholder={intl.formatMessage({ id: 'admin.content.start-writing' })}
         required={descriptionMandatory}
         noModalAdvancedEditor
@@ -26,7 +27,7 @@ const DescriptionInput: React.FC<Props> = ({ descriptionMandatory, descriptionHe
         selectedLanguage={defaultLocale}
       />
       {descriptionHelpText && (
-        <Text color="text.tertiary" fontSize="sm" mt={1}>
+        <Text id="proposal_body-help" color="text.tertiary" fontSize="sm" mt={1}>
           {descriptionHelpText}
         </Text>
       )}

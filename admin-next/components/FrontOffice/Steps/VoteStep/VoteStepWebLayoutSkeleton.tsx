@@ -10,10 +10,10 @@ export const VoteStepWebLayoutSkeleton: React.FC<{ hasMapView: boolean }> = ({ h
       <Skeleton.Text width="100%" height={pxToRem(40)} mb="xl" py="lg" />
       <Box>
         <Flex justifyContent="space-between" gap="lg">
-          <Box flex="2 1 0">
+          <Box id="proposals-list-skeleton" flex="2 1 0">
             <ProjectsListPlaceholder count={10} templateColumns="repeat(2, 1fr)" />
           </Box>
-          {hasMapView ? <Skeleton.Text width="100%" height="100vh" flex="1 1 0" /> : null}
+          {hasMapView ? <Skeleton.Text id="map-skeleton" width="100%" height="100vh" flex="1 1 0" /> : null}
         </Flex>
       </Box>
     </Box>

@@ -153,7 +153,7 @@ export const VoteStepProposalsList: React.FC<Props> = ({
     listView === 'grid' ? [templateColumns.base, templateColumns.tablet, templateColumns.desktop] : '1fr'
 
   return proposalsLength ? (
-    <Grid templateColumns={gridTemplateColumns} gap="lg" justifyItems="stretch">
+    <Grid id="proposals-list" templateColumns={gridTemplateColumns} gap="lg" justifyItems="stretch">
       {data.proposals.edges.map(({ node }) => (
         <Box
           key={node.id}

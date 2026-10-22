@@ -27,6 +27,7 @@ const getButtonStyles = ({ isSelected, hasColor, color, showDisabledStyle = fals
 }
 
 const ButtonChoices: React.FC<ButtonChoicesProps> = ({
+  id,
   name,
   control,
   choices,
@@ -43,7 +44,7 @@ const ButtonChoices: React.FC<ButtonChoicesProps> = ({
   const hasSelection = !!field.value
 
   return (
-    <Flex gap={groupedResponsesEnabled ? 0 : 2} wrap="wrap">
+    <Flex id={id} gap={groupedResponsesEnabled ? 0 : 2} wrap="wrap">
       {choices.map((choice, index) => {
         const isSelected = field.value === choice.id
         const hasColor = !!choice.color && !responseColorsDisabled
@@ -62,6 +63,7 @@ const ButtonChoices: React.FC<ButtonChoicesProps> = ({
         return (
           <Box
             key={choice.id}
+            id={`${id}_choice-${choice.id}`}
             as="button"
             type="button"
             onClick={() => handleSelect(choice.id)}

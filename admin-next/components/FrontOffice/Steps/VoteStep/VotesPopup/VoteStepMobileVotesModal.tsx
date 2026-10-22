@@ -57,6 +57,7 @@ const VoteStepMobileVotesModal: FC<Props> = ({ step: stepKey, isActive = false, 
       onClose={onClose}
       disclosure={
         <Button
+          id="change-to-votes-view"
           variant={isActive ? 'primary' : 'tertiary'}
           flexDirection="column"
           flex="1 0 0"

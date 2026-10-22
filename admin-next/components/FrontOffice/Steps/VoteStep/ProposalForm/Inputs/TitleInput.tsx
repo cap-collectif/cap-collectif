@@ -22,11 +22,15 @@ const TitleInput: React.FC<Props> = ({ control, objectType, titleHelpText }) => 
   }
 
   return (
-    <FormControl name="title" control={control}>
-      <FormLabel htmlFor="title" label={intl.formatMessage({ id: getTitleLabel() })} />
-      <FieldInput type="text" control={control} name="title" id="title" />
+    <FormControl errorId="proposal_title-error" name="title" control={control}>
+      <FormLabel
+        id="label-proposal_title"
+        htmlFor="proposal_title"
+        label={intl.formatMessage({ id: getTitleLabel() })}
+      />
+      <FieldInput type="text" control={control} name="title" id="proposal_title" />
       {titleHelpText && (
-        <Text color="text.tertiary" fontSize="sm" mt={1}>
+        <Text id="proposal_title-help" color="text.tertiary" fontSize="sm" mt={1}>
           {titleHelpText}
         </Text>
       )}

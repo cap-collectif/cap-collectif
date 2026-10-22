@@ -39,6 +39,7 @@ const VoteStepEmptyList: React.FC<Props> = ({ objectType }) => {
 
   return (
     <Flex
+      id="empty-list"
       p="md"
       mx={[4, 0]}
       bg="white"

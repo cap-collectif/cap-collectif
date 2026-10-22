@@ -14,11 +14,15 @@ const SummaryInput: React.FC<Props> = ({ control, summaryHelpText }) => {
   const intl = useIntl()
 
   return (
-    <FormControl name="summary" control={control}>
-      <FormLabel htmlFor="summary" label={intl.formatMessage({ id: 'global.summary' })} />
-      <FieldInput type="textarea" control={control} name="summary" id="summary" maxLength={140} />
+    <FormControl errorId="global.summary-error" name="summary" control={control}>
+      <FormLabel
+        id="label-global.summary"
+        htmlFor="global.summary"
+        label={intl.formatMessage({ id: 'global.summary' })}
+      />
+      <FieldInput type="textarea" control={control} name="summary" id="global.summary" maxLength={140} />
       {summaryHelpText && (
-        <Text color="text.tertiary" fontSize="sm" mt={1}>
+        <Text id="global.summary-help" color="text.tertiary" fontSize="sm" mt={1}>
           {summaryHelpText}
         </Text>
       )}

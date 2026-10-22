@@ -67,6 +67,7 @@ export type ButtonChoice = {
 }
 
 export type ButtonChoicesProps = {
+  id: string
   name: string
   control: Control<any>
   choices: ButtonChoice[]
@@ -99,6 +100,8 @@ export type ValidationRule = {
 }
 
 export type MultipleChoiceQuestionProps = {
+  id: string
+  questionId: string
   name: string
   // Using Control<any> because the field name is dynamic (e.g., "responses.0.value")
   // and TypeScript cannot infer the exact path at compile time

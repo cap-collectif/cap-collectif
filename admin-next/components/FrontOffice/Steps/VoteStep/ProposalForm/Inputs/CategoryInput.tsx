@@ -20,13 +20,17 @@ const CategoryInput: React.FC<Props> = ({ control, categories, categoryHelpText 
   const intl = useIntl()
 
   return (
-    <FormControl name="category" control={control}>
-      <FormLabel htmlFor="category" label={intl.formatMessage({ id: 'global.category' })} />
+    <FormControl errorId="global.category-error" name="category" control={control}>
+      <FormLabel
+        id="label-global.category"
+        htmlFor="global.category"
+        label={intl.formatMessage({ id: 'global.category' })}
+      />
       <FieldInput
         type="select"
         control={control}
         name="category"
-        id="category"
+        id="global.category"
         placeholder={intl.formatMessage({ id: 'proposal.select.category' })}
         menuPortalTarget={null}
         options={categories.map((cat: Category) => ({
@@ -35,7 +39,7 @@ const CategoryInput: React.FC<Props> = ({ control, categories, categoryHelpText 
         }))}
       />
       {categoryHelpText && (
-        <Text color="text.tertiary" fontSize="sm" mt={1}>
+        <Text id="global.category-help" color="text.tertiary" fontSize="sm" mt={1}>
           {categoryHelpText}
         </Text>
       )}

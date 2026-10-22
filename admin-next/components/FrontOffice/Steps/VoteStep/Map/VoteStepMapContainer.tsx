@@ -13,7 +13,7 @@ import { parseAsInteger, useQueryState } from 'nuqs'
 import MapCustomEvents from './VoteStepMapCustomEvents'
 import ProposalMapDiscoverPane from '@components/FrontOffice/Leaflet/ProposalMapDiscoverPane'
 
-export const mapId = 'cap-vote-step-map'
+export const mapId = 'map'
 export const MAX_MAP_ZOOM = 18
 
 const FRAGMENT = graphql`

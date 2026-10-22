@@ -723,7 +723,7 @@ const ProposalFormModal: React.FC<Props> = props => {
         </Heading>
       </Modal.Header>
       <Modal.Body pt={4}>
-        <Flex as="form" direction="column" gap={4}>
+        <Flex as="form" id="proposal-form" direction="column" gap={4}>
           <TitleInput
             control={control}
             objectType={proposalForm.objectType}
@@ -802,6 +802,7 @@ const ProposalFormModal: React.FC<Props> = props => {
               <QuestionField
                 key={question.id}
                 question={question}
+                id={`proposal-form-responses${idx}`}
                 name={`responses.${idx}.value`}
                 control={control}
                 defaultLocale={defaultLocale}
@@ -829,6 +830,7 @@ const ProposalFormModal: React.FC<Props> = props => {
                 variantSize="big"
                 variant="secondary"
                 isLoading={isSubmitting && submitButtonRef.current === 'save-as-draft'}
+                id="confirm-proposal-create-as-draft"
                 onClick={() => {
                   submitButtonRef.current = 'save-as-draft'
                   handleSaveAsDraft(hide)
@@ -844,6 +846,7 @@ const ProposalFormModal: React.FC<Props> = props => {
               variant="primary"
               width={['100%', 'auto']}
               isLoading={isSubmitting && submitButtonRef.current === 'publish'}
+              id="confirm-proposal-create"
               onClick={() => {
                 submitButtonRef.current = 'publish'
                 handlePublish(hide)
@@ -929,6 +932,7 @@ const ProposalFormModal: React.FC<Props> = props => {
         disclosure={
           <Button
             variant={'tertiary'}
+            id="add-proposal"
             flexDirection="column"
             flex="1 0 0"
             onClick={handleMobileOpen}
@@ -958,7 +962,7 @@ const ProposalFormModal: React.FC<Props> = props => {
   return (
     <Modal
       disclosure={
-        <Button disabled={props.disabled} flex="none" variant="primary" leftIcon={CapUIIcon.Add}>
+        <Button id="add-proposal" disabled={props.disabled} flex="none" variant="primary" leftIcon={CapUIIcon.Add}>
           {intl.formatMessage({
             id: `front.contribution.${getContributionObjectTypeTranslationKey(proposalForm.objectType)}.submit`,
           })}

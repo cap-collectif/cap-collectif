@@ -145,7 +145,7 @@ export const ProposalCard: React.FC<Props> = ({
 
   return (
     <Card
-      id={`cap-proposal-card-${id}`}
+      id={`proposal-${id}`}
       format={listView === 'grid' ? 'vertical' : 'horizontal'}
       hasButton={step?.votable}
       minWidth="unset"

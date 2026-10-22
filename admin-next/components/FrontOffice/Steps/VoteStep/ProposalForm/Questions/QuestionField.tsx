@@ -41,21 +41,22 @@ type Question = {
 
 type Props = {
   question: Question
+  id: string
   name: string
   control: Control<any>
   defaultLocale: string
 }
 
-const QuestionField: React.FC<Props> = ({ question, name, control, defaultLocale }) => {
+const QuestionField: React.FC<Props> = ({ question, id, name, control, defaultLocale }) => {
   const { type, title, helpText, description } = question
   const intl = useIntl()
 
   const renderQuestionLabel = () => (
     <>
-      <FormLabel htmlFor={name} label={title}>
+      <FormLabel id={type === 'select' ? `label-select-${id}` : `label-${id}`} htmlFor={id} label={title}>
         {question.required && <Text color="red.700">{intl.formatMessage({ id: 'global.mandatory' })}</Text>}
       </FormLabel>
-      {helpText && <FormGuideline>{helpText}</FormGuideline>}
+      {helpText && <FormGuideline id={type === 'select' ? undefined : `${id}-help`}>{helpText}</FormGuideline>}
       {description && !isWYSIWYGContentEmpty(description) && (
         <Text color="text.tertiary" fontSize="sm" mb={2} dangerouslySetInnerHTML={{ __html: description }} />
       )}
@@ -65,22 +66,42 @@ const QuestionField: React.FC<Props> = ({ question, name, control, defaultLocale
   switch (type) {
     case 'text':
       return (
-        <FormControl key={question.id} name={name} control={control} isRequired={question.required}>
+        <FormControl
+          key={question.id}
+          errorId={`${id}-error`}
+          name={name}
+          control={control}
+          isRequired={question.required}
+        >
           {renderQuestionLabel()}
-          <FieldInput type="text" control={control} name={name} id={name} variantSize={CapInputSize.Md} />
+          <FieldInput type="text" control={control} name={name} id={id} variantSize={CapInputSize.Md} />
         </FormControl>
       )
     case 'textarea':
       return (
-        <FormControl key={question.id} name={name} control={control} isRequired={question.required}>
+        <FormControl
+          key={question.id}
+          errorId={`${id}-error`}
+          name={name}
+          control={control}
+          isRequired={question.required}
+        >
           {renderQuestionLabel()}
-          <FieldInput type="textarea" control={control} name={name} id={name} rows={4} />
+          <FieldInput type="textarea" control={control} name={name} id={id} rows={4} />
         </FormControl>
       )
     case 'editor':
       return (
-        <FormControl key={question.id} name={name} control={control} isRequired={question.required}>
+        <FormControl
+          key={question.id}
+          errorId={`${id}-error`}
+          name={name}
+          control={control}
+          isRequired={question.required}
+        >
           <TextEditor
+            id={id}
+            labelId={`label-${id}`}
             label={title}
             name={name}
             required={question.required}
@@ -89,7 +110,7 @@ const QuestionField: React.FC<Props> = ({ question, name, control, defaultLocale
             platformLanguage={defaultLocale}
             selectedLanguage={defaultLocale}
           />
-          {helpText && <FormGuideline>{helpText}</FormGuideline>}
+          {helpText && <FormGuideline id={`${id}-help`}>{helpText}</FormGuideline>}
           {description && !isWYSIWYGContentEmpty(description) && (
             <Text color="text.tertiary" fontSize="sm" mb={2} dangerouslySetInnerHTML={{ __html: description }} />
           )}
@@ -103,7 +124,7 @@ const QuestionField: React.FC<Props> = ({ question, name, control, defaultLocale
             type="select"
             control={control}
             name={name}
-            id={name}
+            id={id}
             menuPortalTarget={null}
             options={
               question.choices?.edges
@@ -128,9 +149,17 @@ const QuestionField: React.FC<Props> = ({ question, name, control, defaultLocale
           })) || []
 
       return (
-        <FormControl key={question.id} name={name} control={control} isRequired={question.required}>
+        <FormControl
+          key={question.id}
+          errorId={`${id}-error`}
+          name={name}
+          control={control}
+          isRequired={question.required}
+        >
           {renderQuestionLabel()}
           <MultipleChoiceQuestion
+            id={id}
+            questionId={question.id}
             name={name}
             control={control}
             choices={choices}
@@ -141,9 +170,16 @@ const QuestionField: React.FC<Props> = ({ question, name, control, defaultLocale
     }
     case 'button':
       return (
-        <FormControl key={question.id} name={name} control={control} isRequired={question.required}>
+        <FormControl
+          key={question.id}
+          errorId={`${id}-error`}
+          name={name}
+          control={control}
+          isRequired={question.required}
+        >
           {renderQuestionLabel()}
           <ButtonChoices
+            id={id}
             name={name}
             control={control}
             choices={
@@ -173,9 +209,17 @@ const QuestionField: React.FC<Props> = ({ question, name, control, defaultLocale
           })) || []
 
       return (
-        <FormControl key={question.id} name={name} control={control} isRequired={question.required}>
+        <FormControl
+          key={question.id}
+          errorId={`${id}-error`}
+          name={name}
+          control={control}
+          isRequired={question.required}
+        >
           {renderQuestionLabel()}
           <MultipleChoiceQuestion
+            id={id}
+            questionId={question.id}
             name={name}
             control={control}
             choices={choices}
@@ -188,7 +232,14 @@ const QuestionField: React.FC<Props> = ({ question, name, control, defaultLocale
     }
     case 'ranking':
       return (
-        <FormControl key={question.id} name={name} control={control} isRequired={question.required}>
+        <FormControl
+          id={id}
+          key={question.id}
+          errorId={`${id}-error`}
+          name={name}
+          control={control}
+          isRequired={question.required}
+        >
           {renderQuestionLabel()}
           <RankingChoices
             name={name}
@@ -207,13 +258,19 @@ const QuestionField: React.FC<Props> = ({ question, name, control, defaultLocale
       )
     case 'number':
       return (
-        <FormControl key={question.id} name={name} control={control} isRequired={question.required}>
+        <FormControl
+          key={question.id}
+          errorId={`${id}-error`}
+          name={name}
+          control={control}
+          isRequired={question.required}
+        >
           {renderQuestionLabel()}
           <FieldInput
             type="number"
             control={control}
             name={name}
-            id={name}
+            id={id}
             min={question.isRangeBetween ? question.rangeMin ?? undefined : undefined}
             max={question.isRangeBetween ? question.rangeMax ?? undefined : undefined}
           />
@@ -221,14 +278,20 @@ const QuestionField: React.FC<Props> = ({ question, name, control, defaultLocale
       )
     case 'medias':
       return (
-        <FormControl key={question.id} name={name} control={control} isRequired={question.required}>
+        <FormControl
+          key={question.id}
+          errorId={`${id}-error`}
+          name={name}
+          control={control}
+          isRequired={question.required}
+        >
           {renderQuestionLabel()}
           <FieldInput
             isFullWidth
             type="uploader"
             control={control}
             name={name}
-            id={name}
+            id={id}
             format=".jpg,.jpeg,.png,.pdf,.doc,.docx"
             multiple
             maxFiles={5}
@@ -241,13 +304,19 @@ const QuestionField: React.FC<Props> = ({ question, name, control, defaultLocale
       )
     case 'siret':
       return (
-        <FormControl key={question.id} name={name} control={control} isRequired={question.required}>
+        <FormControl
+          key={question.id}
+          errorId={`${id}-error`}
+          name={name}
+          control={control}
+          isRequired={question.required}
+        >
           {renderQuestionLabel()}
           <FieldInput
             type="text"
             control={control}
             name={name}
-            id={name}
+            id={id}
             placeholder="12345678901234"
             maxLength={14}
             variantSize={CapInputSize.Md}
@@ -256,13 +325,19 @@ const QuestionField: React.FC<Props> = ({ question, name, control, defaultLocale
       )
     case 'rna':
       return (
-        <FormControl key={question.id} name={name} control={control} isRequired={question.required}>
+        <FormControl
+          key={question.id}
+          errorId={`${id}-error`}
+          name={name}
+          control={control}
+          isRequired={question.required}
+        >
           {renderQuestionLabel()}
           <FieldInput
             type="text"
             control={control}
             name={name}
-            id={name}
+            id={id}
             placeholder="W123456789"
             maxLength={10}
             variantSize={CapInputSize.Md}
@@ -271,7 +346,14 @@ const QuestionField: React.FC<Props> = ({ question, name, control, defaultLocale
       )
     case 'majority':
       return (
-        <FormControl key={question.id} name={name} control={control} isRequired={question.required}>
+        <FormControl
+          id={id}
+          key={question.id}
+          errorId={`${id}-error`}
+          name={name}
+          control={control}
+          isRequired={question.required}
+        >
           {renderQuestionLabel()}
           <Controller
             name={name as any}

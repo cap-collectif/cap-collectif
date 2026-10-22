@@ -279,6 +279,7 @@ const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
           )}
           {!isMobile && (
             <Button
+              id="change-to-votes-view"
               variantSize="small"
               variant="tertiary"
               marginTop="xxs"

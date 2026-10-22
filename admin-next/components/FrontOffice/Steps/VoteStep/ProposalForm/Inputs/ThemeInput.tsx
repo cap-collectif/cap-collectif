@@ -25,13 +25,13 @@ const ThemeInput: React.FC<Props> = ({ control, themes, themeHelpText, themeMand
     : `${intl.formatMessage({ id: 'global.theme' })} (${intl.formatMessage({ id: 'global.optional' })})`
 
   return (
-    <FormControl name="theme" control={control}>
-      <FormLabel htmlFor="theme" label={label} />
+    <FormControl errorId="global.theme-error" name="theme" control={control}>
+      <FormLabel id="label-global.theme" htmlFor="global.theme" label={label} />
       <FieldInput
         type="select"
         control={control}
         name="theme"
-        id="theme"
+        id="global.theme"
         placeholder={intl.formatMessage({ id: 'proposal.select.theme' })}
         menuPortalTarget={null}
         options={themes.map((theme: Theme) => ({
@@ -40,7 +40,7 @@ const ThemeInput: React.FC<Props> = ({ control, themes, themeHelpText, themeMand
         }))}
       />
       {themeHelpText && (
-        <Text color="text.tertiary" fontSize="sm" mt={1}>
+        <Text id="global.theme-help" color="text.tertiary" fontSize="sm" mt={1}>
           {themeHelpText}
         </Text>
       )}

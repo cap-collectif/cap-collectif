@@ -15,8 +15,12 @@ const IllustrationInput: React.FC<Props> = ({ control, illustrationHelpText }) =
   const intl = useIntl()
 
   return (
-    <FormControl name="media" control={control}>
-      <FormLabel htmlFor="media" label={intl.formatMessage({ id: 'proposal.media' })}>
+    <FormControl errorId="proposal_media-error" name="media" control={control}>
+      <FormLabel
+        id="label-proposal_media"
+        htmlFor="proposal_media"
+        label={intl.formatMessage({ id: 'proposal.media' })}
+      >
         <Text fontSize={CapUIFontSize.BodySmall} color="text.tertiary" lineHeight={1}>
           {intl.formatMessage({ id: 'global.optional' })}
         </Text>
@@ -30,7 +34,7 @@ const IllustrationInput: React.FC<Props> = ({ control, illustrationHelpText }) =
         type="uploader"
         control={control}
         name="media"
-        id="media"
+        id="proposal_media"
         format=".jpg,.jpeg,.png"
         maxFiles={1}
         maxSize={4000000}
@@ -39,7 +43,7 @@ const IllustrationInput: React.FC<Props> = ({ control, illustrationHelpText }) =
         uploadURI={UPLOAD_PATH}
       />
       {illustrationHelpText && (
-        <Text color="text.tertiary" fontSize="sm" mt={1}>
+        <Text id="proposal_media-help" color="text.tertiary" fontSize="sm" mt={1}>
           {illustrationHelpText}
         </Text>
       )}

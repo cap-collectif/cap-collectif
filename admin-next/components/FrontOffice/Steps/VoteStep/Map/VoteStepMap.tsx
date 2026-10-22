@@ -43,7 +43,7 @@ type Props = {
   onWorkflowTrigger?: (contributionId: string) => void
 }
 
-const backOnCardId = 'cap-back-on-card'
+const backOnCardId = 'back-on-card-anchor'
 
 export const VoteStepMap: FC<Props> = ({
   showMapPlaceholder,

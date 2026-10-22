@@ -12,6 +12,8 @@ import { getValidationMessageId } from '../utils'
  * Radio and Checkbox questions
  */
 const MultipleChoiceQuestion: React.FC<MultipleChoiceQuestionProps> = ({
+  id,
+  questionId,
   name,
   control,
   choices,
@@ -68,7 +70,7 @@ const MultipleChoiceQuestion: React.FC<MultipleChoiceQuestionProps> = ({
   }, [validationRule, isMultiple, intl])
 
   return (
-    <Flex direction="column" gap={groupHasImages ? 4 : 1}>
+    <Flex id={id} direction="column" gap={groupHasImages ? 4 : 1}>
       {validationHint && (
         <Text color="gray.600" fontSize="sm" fontStyle="italic">
           {validationHint}
@@ -82,6 +84,7 @@ const MultipleChoiceQuestion: React.FC<MultipleChoiceQuestionProps> = ({
         return (
           <Flex
             key={choice.id}
+            id={isOther ? `reply-${questionId}_choice-other` : undefined}
             direction="column"
             alignItems={optionHasImage ? 'center' : 'flex-start'}
             gap={2}
@@ -106,7 +109,7 @@ const MultipleChoiceQuestion: React.FC<MultipleChoiceQuestionProps> = ({
             )}
             <Flex align="center" gap={2}>
               <ChoiceGroupQuestion
-                id={isOther ? `${name}-other` : `${name}-${choice.id}`}
+                id={isOther ? `reply-${questionId}_choice-other--check` : `${id}_choice-${choice.id}`}
                 name={name}
                 checked={selected}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -120,7 +123,7 @@ const MultipleChoiceQuestion: React.FC<MultipleChoiceQuestionProps> = ({
               {isOther && (
                 <FieldInput
                   type="text"
-                  id={`${name}-other-value`}
+                  id={`reply-${questionId}_choice-other--field`}
                   name={`${name}-other-value`}
                   control={control}
                   disabled={!selected}

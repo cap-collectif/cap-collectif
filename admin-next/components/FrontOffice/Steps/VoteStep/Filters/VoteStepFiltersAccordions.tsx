@@ -29,7 +29,7 @@ const VoteStepFiltersAccordions: React.FC<Props> = ({
 
   return (
     <Accordion defaultAccordion={defaultAccordions} allowMultiple color="white">
-      <Accordion.Item id="filter_by">
+      <Accordion.Item id="sort">
         <Accordion.Button p={0}>
           <Text fontWeight={CapUIFontWeight.Normal} fontSize={CapUIFontSize.BodyRegular} lineHeight={CapUILineHeight.M}>
             {intl.formatMessage({ id: 'sort-by' })}
@@ -40,7 +40,7 @@ const VoteStepFiltersAccordions: React.FC<Props> = ({
             {filters.sort.options.map(option => (
               <Flex alignItems="center" key={option.id}>
                 <Radio
-                  id={`sort-${option.id}`}
+                  id={option.id}
                   name="sort"
                   value={option.id}
                   checked={currentFilters.sort === option.id}
@@ -55,7 +55,7 @@ const VoteStepFiltersAccordions: React.FC<Props> = ({
       </Accordion.Item>
 
       {filters.category.isEnabled && filters.category.options.length > 0 ? (
-        <Accordion.Item id="categories">
+        <Accordion.Item id="category">
           <Accordion.Button p={0} pb={1}>
             <Text
               fontWeight={CapUIFontWeight.Normal}
@@ -69,7 +69,7 @@ const VoteStepFiltersAccordions: React.FC<Props> = ({
             <RadioGroup pt={2}>
               {filters.category.options.map(category => (
                 <Radio
-                  id={`category-${category.id}`}
+                  id={category.id === 'ALL' ? 'category-all' : category.id}
                   key={`category-${category.id}`}
                   name="category"
                   value={category.id}
@@ -85,7 +85,7 @@ const VoteStepFiltersAccordions: React.FC<Props> = ({
       ) : null}
 
       {filters.theme.isEnabled && filters.theme.options.length > 0 ? (
-        <Accordion.Item id="themes">
+        <Accordion.Item id="theme">
           <Accordion.Button p={0} pb={1}>
             <Text
               fontWeight={CapUIFontWeight.Normal}
@@ -100,7 +100,7 @@ const VoteStepFiltersAccordions: React.FC<Props> = ({
               {[
                 ...filters.theme.options.map(theme => (
                   <Radio
-                    id={`theme-${theme.id}`}
+                    id={theme.id === 'ALL' ? 'theme-all' : theme.id}
                     key={theme.id}
                     name="theme"
                     value={theme.id}
@@ -127,7 +127,7 @@ const VoteStepFiltersAccordions: React.FC<Props> = ({
       ) : null}
 
       {filters.status.isEnabled && filters.status.options.length > 0 && (
-        <Accordion.Item id="statuses">
+        <Accordion.Item id="status">
           <Accordion.Button p={0} pb={1}>
             <Text
               fontWeight={CapUIFontWeight.Normal}
@@ -143,7 +143,7 @@ const VoteStepFiltersAccordions: React.FC<Props> = ({
               {filters.status.options.map(statusItem => (
                 <Radio
                   key={statusItem.id}
-                  id={`status-${statusItem.id}`}
+                  id={statusItem.id === 'ALL' ? 'status-all' : statusItem.id}
                   name="status"
                   value={statusItem.id}
                   checked={currentFilters.status === statusItem.id}
@@ -157,7 +157,7 @@ const VoteStepFiltersAccordions: React.FC<Props> = ({
         </Accordion.Item>
       )}
 
-      <Accordion.Item id="contributors">
+      <Accordion.Item id="userType">
         <Accordion.Button p={0} pb={1}>
           <Text fontWeight={CapUIFontWeight.Normal} fontSize={CapUIFontSize.BodyRegular} lineHeight={CapUILineHeight.M}>
             {intl.formatMessage({ id: 'global.contributors' })}
@@ -168,7 +168,7 @@ const VoteStepFiltersAccordions: React.FC<Props> = ({
             {filters.userType.options.map(userType => (
               <Radio
                 key={userType.id}
-                id={`contributor-${userType.id}`}
+                id={userType.id === 'ALL' ? 'userType-all' : userType.id}
                 name="contributors"
                 value={userType.id}
                 checked={currentFilters.userType === userType.id}

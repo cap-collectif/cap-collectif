@@ -66,7 +66,7 @@ export const getActiveFiltersCount = (urlFilters: {
 
 /**
  * Get accordion IDs that should be open by default based on active filters
- * Always includes 'filter_by', plus any accordion with an active filter
+ * Always includes 'sort', plus any accordion with an active filter
  */
 export const getDefaultAccordions = (urlFilters: {
   category: string | null
@@ -74,14 +74,14 @@ export const getDefaultAccordions = (urlFilters: {
   status: string | null
   userType: string
 }): string[] => {
-  const accordions: string[] = ['filter_by'] // filter_by must always be open by default
+  const accordions: string[] = ['sort'] // sort must always be open by default
 
   // Map filter keys to their corresponding accordion IDs
   const filterToAccordionMap: Record<string, string> = {
-    category: 'categories',
-    theme: 'themes',
-    status: 'statuses',
-    userType: 'contributors',
+    category: 'category',
+    theme: 'theme',
+    status: 'status',
+    userType: 'userType',
   }
 
   // Check each filter and open its accordion if it's currently amongst active filters

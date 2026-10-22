@@ -37,7 +37,7 @@ export const Uploader = forwardRef<HTMLInputElement, UploaderProps>(
     }
 
     return (
-      <>
+      <div id={props.id}>
         <CapUploader
           ref={ref}
           wording={wordingUploader}
@@ -118,7 +118,7 @@ export const Uploader = forwardRef<HTMLInputElement, UploaderProps>(
             }}
           />
         )}
-      </>
+      </div>
     )
   },
 )

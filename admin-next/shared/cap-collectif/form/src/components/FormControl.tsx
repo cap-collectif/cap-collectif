@@ -14,6 +14,7 @@ import { useIntl } from 'react-intl'
 export interface FormControlProps extends CapFormControlProps {
   name: string
   control: Control<any>
+  errorId?: string
   children?: React.ReactNode
 }
 
@@ -34,6 +35,7 @@ export const FormControl: FC<FormControlProps> = ({
   variantSize = CapInputSize.Sm,
   sx,
   isRequired,
+  errorId,
   ...props
 }) => {
   const intl = useIntl()
@@ -55,7 +57,7 @@ export const FormControl: FC<FormControlProps> = ({
 
   const isInvalid = invalid && (mode === 'onChange' ? getTouchedState(touchedFields, name) : true)
 
-  const errorFieldId = `${name}-error`
+  const errorFieldId = errorId ?? `${name}-error`
 
   const inputComponent = React.Children.toArray(children).find(child => child?.type?.displayName === 'FieldInput')
   const inputId = inputComponent?.props?.id

@@ -188,7 +188,7 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey, customCode, 
       : null
 
   return (
-    <Box backgroundColor="neutral-gray.50">
+    <Box id={`vote-step-page-${step.id}`} backgroundColor="neutral-gray.50">
       {restrictedAccessAlert ? (
         <Box
           position="relative"
@@ -266,7 +266,7 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey, customCode, 
               <Box flex="2 1 0">
                 <React.Suspense
                   fallback={
-                    <Box width="100%">
+                    <Box id="proposals-list-skeleton" width="100%">
                       <ProjectsListPlaceholder
                         count={10}
                         templateColumns={(() => {

@@ -70,14 +70,18 @@ const AddressInput: React.FC<Props> = ({
 
   return (
     <>
-      <FormControl name="address" control={control} mb={showLocateButton ? 1 : 4}>
-        <FormLabel label={intl.formatMessage({ id: 'proposal_form.address' })} htmlFor="address" />
+      <FormControl errorId="proposal_address-error" name="address" control={control} mb={showLocateButton ? 1 : 4}>
+        <FormLabel
+          id="label-proposal_address"
+          label={intl.formatMessage({ id: 'proposal_form.address' })}
+          htmlFor="proposal_address"
+        />
         {isLoaded ? (
           <FieldInput
             type="address"
             control={control}
             name="address"
-            id="address"
+            id="proposal_address"
             placeholder={intl.formatMessage({ id: 'proposal_form.address' })}
             getAddress={onAddressChange}
             width="100%"
@@ -91,7 +95,7 @@ const AddressInput: React.FC<Props> = ({
           </Flex>
         )}
         {addressHelpText && (
-          <Text color="text.tertiary" fontSize="sm" mt={1}>
+          <Text id="proposal_address-help" color="text.tertiary" fontSize="sm" mt={1}>
             {addressHelpText}
           </Text>
         )}

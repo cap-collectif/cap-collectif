@@ -21,13 +21,17 @@ const DistrictInput: React.FC<Props> = ({ control, districts, districtHelpText, 
   const intl = useIntl()
 
   return (
-    <FormControl name="district" control={control} isRequired={districtMandatory}>
-      <FormLabel htmlFor="district" label={intl.formatMessage({ id: 'proposal.district' })} />
+    <FormControl errorId="proposal_district-error" name="district" control={control} isRequired={districtMandatory}>
+      <FormLabel
+        id="label-proposal_district"
+        htmlFor="proposal_district"
+        label={intl.formatMessage({ id: 'proposal.district' })}
+      />
       <FieldInput
         type="select"
         control={control}
         name="district"
-        id="district"
+        id="proposal_district"
         placeholder={intl.formatMessage({ id: 'proposal.select.district' })}
         menuPortalTarget={null}
         options={districts.map((district: District) => ({
@@ -36,7 +40,7 @@ const DistrictInput: React.FC<Props> = ({ control, districts, districtHelpText, 
         }))}
       />
       {districtHelpText && (
-        <Text color="text.tertiary" fontSize="sm" mt={1}>
+        <Text id="proposal_district-help" color="text.tertiary" fontSize="sm" mt={1}>
           {districtHelpText}
         </Text>
       )}

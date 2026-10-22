@@ -17,6 +17,7 @@ import Jodit from './Jodit'
 import { Controller, useFormContext } from 'react-hook-form'
 
 export type TextEditorProps = FlexProps & {
+  labelId?: string
   label: string
   name: string
   placeholder?: string
@@ -37,6 +38,7 @@ export type TextEditorProps = FlexProps & {
 
 const TextEditor: React.FC<TextEditorProps> = ({
   label,
+  labelId,
   name,
   placeholder,
   required = false,
@@ -69,7 +71,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
     <Flex direction="column" mb={4} {...rest}>
       {noModalAdvancedEditor && (
         <>
-          <FormLabel htmlFor={name} label={label}>
+          <FormLabel id={labelId} htmlFor={name} label={label}>
             {required ? null : (
               <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                 {intl.formatMessage({ id: 'global.optional' })}

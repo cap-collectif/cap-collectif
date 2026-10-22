@@ -229,6 +229,7 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
 
   const buttonContent = (
     <Button
+      id={`proposal-vote-btn-${proposal.id}`}
       onClick={onClick}
       variant={proposal.viewerHasVote ? 'primary' : 'secondary'}
       aria-label={intl.formatMessage({ id: proposal.viewerHasVote ? 'global.delete' : 'global.add' })}

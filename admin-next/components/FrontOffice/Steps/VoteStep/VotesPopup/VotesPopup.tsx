@@ -42,7 +42,7 @@ const VotesPopup: FC<Props> = ({ step: stepKey }) => {
       : `front.contribution.${getContributionObjectTypeTranslationKey(step.form?.objectType)}.empty-vote`
 
   return (
-    <Flex width="100%" justifyContent="flex-start" flexDirection="column" gap="md">
+    <Flex id="votes-list" width="100%" justifyContent="flex-start" flexDirection="column" gap="md">
       {/* We must spread because the relay proxy does not support the sort method */}
       {step.viewerVotes.edges.length > 0 ? (
         [...step.viewerVotes.edges]

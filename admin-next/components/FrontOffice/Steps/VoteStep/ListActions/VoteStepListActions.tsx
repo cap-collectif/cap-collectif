@@ -111,7 +111,15 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
   ]
 
   return (
-    <Flex flexGrow={step.votable ? 1 : 0} flexShrink={0} justify="space-between" align="stretch" height={40} gap="xl">
+    <Flex
+      id="view-change-panel"
+      flexGrow={step.votable ? 1 : 0}
+      flexShrink={0}
+      justify="space-between"
+      align="stretch"
+      height={40}
+      gap="xl"
+    >
       {width > 1024 && step.votable && (
         <Flex gap={width >= 1260 ? 'md' : 'xs'}>
           {quickFilterButtons.map((filter, index) => (
@@ -125,6 +133,7 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
           {listViewButtons().map(viewButton => (
             <Tag
               key={viewButton.id}
+              id={viewButton.id === 'list' ? 'change-to-list-view' : undefined}
               variantColor="info"
               variantSize="medium"
               color={listView !== viewButton.id ? colors.infoMessage.text.infoGray : undefined}
@@ -153,6 +162,7 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
 
       {hasMapView && (hasGridView || hasListView) ? (
         <Button
+          id="change-to-map-view"
           height="100%"
           variant="tertiary"
           variantColor="hierarchy"
