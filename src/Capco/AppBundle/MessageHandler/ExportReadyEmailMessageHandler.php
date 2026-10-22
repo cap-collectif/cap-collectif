@@ -8,7 +8,11 @@ use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use GuzzleHttp\Psr7\Query;
 use GuzzleHttp\Psr7\Uri;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
@@ -17,7 +21,7 @@ use Twig\Environment;
 class ExportReadyEmailMessageHandler
 {
     public function __construct(
-        private readonly \Swift_Mailer $mailer,
+        private readonly MailerInterface $mailer,
         private readonly Environment $twig,
         private readonly TranslatorInterface $translator,
         private readonly SiteParameterResolver $siteParameterResolver,
@@ -47,21 +51,22 @@ class ExportReadyEmailMessageHandler
         ]);
 
         $senderEmail = ($this->senderEmailResolver)();
-        $swiftMessage = new \Swift_Message();
-        $swiftMessage
-            ->setSubject($subject)
-            ->setFrom([$senderEmail => $siteName])
-            ->setTo([$message->getUserEmail() => $message->getUserEmail()])
-            ->setBody($htmlContent, 'text/html')
+        $email = (new Email())
+            ->subject($subject)
+            ->from(new Address($senderEmail, (string) $siteName))
+            ->to(new Address($message->getUserEmail(), $message->getUserEmail()))
+            ->html($htmlContent)
         ;
 
-        $failedRecipients = [];
-        $this->mailer->send($swiftMessage, $failedRecipients);
-
-        if (!empty($failedRecipients)) {
+        try {
+            $this->mailer->send($email);
+        } catch (TransportExceptionInterface $exception) {
             $this->logger->warning('Export ready email failed for recipients', [
-                'recipients' => $failedRecipients,
+                'recipients' => [$message->getUserEmail()],
+                'exception' => $exception,
             ]);
+
+            throw $exception;
         }
     }
 
