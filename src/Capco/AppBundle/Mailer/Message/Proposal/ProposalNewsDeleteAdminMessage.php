@@ -20,6 +20,7 @@ final class ProposalNewsDeleteAdminMessage extends AbstractAdminMessage
             'titleTrad' => 'notification.proposal_activity.delete.subject',
             'postURL' => null,
             'baseUrl' => $params['baseURL'],
+            'siteName' => $params['siteName'],
         ];
     }
 

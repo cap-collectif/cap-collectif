@@ -24,6 +24,7 @@ final class ProposalNewsUpdateAdminMessage extends AbstractAdminMessage
             ),
             'proposalName' => self::escape($proposal->getTitle()),
             'baseUrl' => $params['baseURL'],
+            'siteName' => $params['siteName'],
             'postURL' => $params['postURL'],
             'projectName' => self::escape(
                 $proposal

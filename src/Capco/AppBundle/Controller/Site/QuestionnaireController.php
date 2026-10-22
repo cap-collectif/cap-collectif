@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Repository\ReplyRepository;
+use Capco\AppBundle\Repository\ParticipantRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,22 +17,22 @@ class QuestionnaireController extends AbstractController
      * @Route("/confirmAnonymousEmail", name="capco_app_questionnaire_confirm_anonymous_email", options={"i18n" = false})
      */
     public function confirmAnonymousEmail(
-        ReplyRepository $repository,
+        ParticipantRepository $repository,
         EntityManagerInterface $entityManager,
         LoggerInterface $logger,
         TranslatorInterface $translator,
         Request $request
     ): RedirectResponse {
         $token = $request->get('token') ?? '';
-        $reply = $repository->findOneByToken($token);
-        if (null === $reply) {
+        $participant = $repository->findOneBy(['confirmationToken' => $token]);
+        if (null === $participant) {
             $logger->info("invalid token {$token} used to confirm anonymous email");
             $this->addFlash('danger', $translator->trans('invalid-token', [], 'CapcoAppBundle'));
 
             return $this->redirectToRoute('app_homepage');
         }
 
-        if ($reply->isEmailConfirmed()) {
+        if ($participant->isEmailConfirmed()) {
             $this->addFlash(
                 'danger',
                 $translator->trans('email.published.already', [], 'CapcoAppBundle')
@@ -41,7 +41,7 @@ class QuestionnaireController extends AbstractController
             return $this->redirectToRoute('app_homepage');
         }
 
-        $reply->confirmEmail();
+        $participant->setConfirmationToken(null);
         $entityManager->flush();
         $this->addFlash(
             'success',

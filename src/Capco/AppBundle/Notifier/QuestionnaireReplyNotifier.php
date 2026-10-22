@@ -323,7 +323,8 @@ class QuestionnaireReplyNotifier extends BaseNotifier
 
     private function confirmAnonymousEmail(Reply $replyAnonymous): void
     {
-        if ($replyAnonymous->getParticipantEmail()) {
+        $participant = $replyAnonymous->getParticipant();
+        if ($participant && !$participant->isEmailConfirmed() && $participant->getConfirmationToken()) {
             $this->mailer->createAndSendMessage(
                 QuestionnaireReplyAnonymousCreateConfirmMessage::class,
                 $replyAnonymous,
@@ -333,16 +334,16 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     ),
                     'baseUrl' => $this->router->generate(
                         'app_homepage',
-                        ['token' => $replyAnonymous->getToken()],
+                        ['token' => $participant->getConfirmationToken()],
                         UrlGeneratorInterface::ABSOLUTE_URL
                     ),
                     'subscribeUrl' => $this->router->generate(
                         'capco_app_questionnaire_confirm_anonymous_email',
-                        ['token' => $replyAnonymous->getToken()],
+                        ['token' => $participant->getConfirmationToken()],
                         UrlGeneratorInterface::ABSOLUTE_URL
                     ),
                 ],
-                (new User())->setEmail($replyAnonymous->getParticipantEmail())
+                (new User())->setEmail($participant->getEmail())
             );
         }
     }
