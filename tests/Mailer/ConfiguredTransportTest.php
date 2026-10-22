@@ -24,6 +24,10 @@ use Symfony\Component\Mime\RawMessage;
  * @internal
  *
  * @coversNothing
+ *
+ * @phpunit-status compliant
+ *
+ * @phpunit-reason Checks selected outbound transports, provider failures and delivery identifiers through the public transport API.
  */
 class ConfiguredTransportTest extends TestCase
 {
@@ -34,9 +38,8 @@ class ConfiguredTransportTest extends TestCase
         string $expectedTransport,
         ?string $expectedError
     ): void {
-        $repository = $this->createMock(ExternalServiceConfigurationRepository::class);
-        $repository->expects('smtp' === $expectedTransport ? self::never() : self::once())
-            ->method('findOneBy')
+        $repository = $this->createStub(ExternalServiceConfigurationRepository::class);
+        $repository->method('findOneBy')
             ->with(['type' => ExternalServiceConfiguration::TYPE_MAILER])
             ->willReturn(null === $provider ? null : (new ExternalServiceConfiguration())->setValue($provider))
         ;
@@ -44,13 +47,11 @@ class ConfiguredTransportTest extends TestCase
         $smtpTransport->expects('smtp' === $expectedTransport ? self::once() : self::never())->method('send');
         $apiTransport = $this->createMock(TransportInterface::class);
         $apiTransport->expects('smtp' === $expectedTransport ? self::never() : self::once())->method('send');
-        $factory = $this->createMock(TransportFactoryInterface::class);
-        $factory->expects('smtp' === $expectedTransport ? self::never() : self::once())
-            ->method('supports')
+        $factory = $this->createStub(TransportFactoryInterface::class);
+        $factory->method('supports')
             ->willReturnCallback(static fn (Dsn $dsn): bool => 'recording' === $dsn->getScheme())
         ;
-        $factory->expects('smtp' === $expectedTransport ? self::never() : self::once())
-            ->method('create')
+        $factory->method('create')
             ->willReturnCallback(static function (Dsn $dsn) use ($expectedTransport, $apiTransport): TransportInterface {
                 self::assertSame($expectedTransport, $dsn->getHost());
 
@@ -90,13 +91,13 @@ class ConfiguredTransportTest extends TestCase
 
     public function testProviderChangesAreAppliedBetweenMessages(): void
     {
-        $repository = $this->createMock(ExternalServiceConfigurationRepository::class);
+        $repository = $this->createStub(ExternalServiceConfigurationRepository::class);
         $repository->method('findOneBy')->willReturnOnConsecutiveCalls(
             (new ExternalServiceConfiguration())->setValue('mailjet'),
             (new ExternalServiceConfiguration())->setValue('mandrill')
         );
         $sentThrough = [];
-        $factory = $this->createMock(TransportFactoryInterface::class);
+        $factory = $this->createStub(TransportFactoryInterface::class);
         $factory->method('supports')->willReturn(true);
         $factory->method('create')->willReturnCallback(function (Dsn $dsn) use (&$sentThrough): TransportInterface {
             $transport = $this->createMock(TransportInterface::class);
@@ -115,9 +116,9 @@ class ConfiguredTransportTest extends TestCase
 
     public function testProviderFailureDoesNotSwitchToAnotherProvider(): void
     {
-        $repository = $this->createMock(ExternalServiceConfigurationRepository::class);
+        $repository = $this->createStub(ExternalServiceConfigurationRepository::class);
         $repository->method('findOneBy')->willReturn((new ExternalServiceConfiguration())->setValue('mailjet'));
-        $factory = $this->createMock(TransportFactoryInterface::class);
+        $factory = $this->createStub(TransportFactoryInterface::class);
         $factory->method('supports')->willReturn(true);
         $factory->method('create')->willReturnCallback(function (Dsn $dsn): TransportInterface {
             $transport = $this->createMock(TransportInterface::class);
@@ -138,9 +139,9 @@ class ConfiguredTransportTest extends TestCase
 
     public function testRecordsTheSelectedProviderMessageId(): void
     {
-        $repository = $this->createMock(ExternalServiceConfigurationRepository::class);
+        $repository = $this->createStub(ExternalServiceConfigurationRepository::class);
         $repository->method('findOneBy')->willReturn((new ExternalServiceConfiguration())->setValue('mailjet'));
-        $factory = $this->createMock(TransportFactoryInterface::class);
+        $factory = $this->createStub(TransportFactoryInterface::class);
         $factory->method('supports')->willReturn(true);
         $factory->method('create')->willReturnCallback(function (): TransportInterface {
             $transport = $this->createMock(TransportInterface::class);

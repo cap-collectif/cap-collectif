@@ -2,60 +2,20 @@
 
 namespace Capco\Tests\Command;
 
-use Capco\AppBundle\Mailer\MailerService;
-use Capco\AppBundle\Mailer\SenderEmailResolver;
-use Capco\AppBundle\Manager\TokenManager;
-use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
-use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\Mailer\Event\MessageEvent;
-use Symfony\Component\Mailer\Mailer;
-use Symfony\Component\Mailer\Transport\NullTransport;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
-use Symfony\Component\Routing\RouterInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
-use Twig\Environment;
 
 abstract class MailerSnapshotCommandTestCase extends DatabaseCommandTestCase
 {
+    use \Capco\Tests\Mailer\EmailCaptureTrait;
+
     protected const EMAIL_SNAPSHOT_DIRECTORY = __DIR__ . '/../../__snapshots__/emails';
 
-    protected function captureEmails(): EmailCaptureListener
+    public static function featureFlagOverrides(): array
     {
-        $capture = new EmailCaptureListener();
-        $dispatcher = new EventDispatcher();
-        $dispatcher->addListener(MessageEvent::class, $capture->onMessage(...));
-        $mailer = new Mailer(new NullTransport($dispatcher));
-
-        $container = self::getContainer();
-        $twig = $container->get(Environment::class);
-        \assert($twig instanceof Environment);
-        $translator = $container->get(TranslatorInterface::class);
-        \assert($translator instanceof TranslatorInterface);
-        $siteParameterResolver = $container->get(SiteParameterResolver::class);
-        \assert($siteParameterResolver instanceof SiteParameterResolver);
-        $router = $container->get(RouterInterface::class);
-        \assert($router instanceof RouterInterface);
-        $senderEmailResolver = $container->get(SenderEmailResolver::class);
-        \assert($senderEmailResolver instanceof SenderEmailResolver);
-        $tokenManager = $container->get(TokenManager::class);
-        \assert($tokenManager instanceof TokenManager);
-        $container->set(
-            MailerService::class,
-            new MailerService(
-                $mailer,
-                $twig,
-                $translator,
-                $siteParameterResolver,
-                $router,
-                $senderEmailResolver,
-                $tokenManager
-            )
-        );
-
-        return $capture;
+        return ['multilangue' => true];
     }
 
     protected function capturePublishedMessages(): PublishedMessageCapture
@@ -87,10 +47,14 @@ abstract class MailerSnapshotCommandTestCase extends DatabaseCommandTestCase
         Email $message,
         string $snapshotFilename
     ): void {
+        self::assertNotEmpty($message->getTo());
+        self::assertNotEmpty($message->getFrom());
+        self::assertNotEmpty($message->getSubject());
+        self::assertNotEmpty($message->getHtmlBody());
         $snapshot = file_get_contents(static::EMAIL_SNAPSHOT_DIRECTORY . '/' . $snapshotFilename);
 
         self::assertIsString($snapshot);
-        self::assertSame($snapshot, $this->getSnapshotBody($message));
+        self::assertSame($this->normalizeSnapshotBody($snapshot), $this->getSnapshotBody($message));
     }
 
     protected function updateEmailSnapshot(
@@ -118,7 +82,7 @@ abstract class MailerSnapshotCommandTestCase extends DatabaseCommandTestCase
             (string) $body
         );
 
-        return (string) preg_replace('/[ \\t]+$/m', '', (string) $body);
+        return $this->normalizeSnapshotBody((string) $body);
     }
 
     protected function assertEmailMetadata(
@@ -130,44 +94,10 @@ abstract class MailerSnapshotCommandTestCase extends DatabaseCommandTestCase
         self::assertContains('assistance@cap-collectif.com', array_map(static fn (Address $address): string => $address->getAddress(), $message->getFrom()));
         self::assertStringContainsString($subject, $message->getSubject());
     }
-}
 
-final class EmailCaptureListener
-{
-    /** @var list<Email> */
-    public array $messages = [];
-
-    public function onMessage(MessageEvent $event): void
+    private function normalizeSnapshotBody(string $body): string
     {
-        $message = $event->getMessage();
-        if (!$message instanceof Email) {
-            throw new \RuntimeException('Expected an email message.');
-        }
-
-        $this->messages[] = clone $message;
-    }
-
-    public function getMessageForRecipient(string $recipient): Email
-    {
-        foreach ($this->messages as $message) {
-            $recipients = array_map(static fn (Address $address): string => $address->getAddress(), $message->getTo());
-            if (\in_array($recipient, $recipients, true)) {
-                return $message;
-            }
-        }
-
-        throw new \RuntimeException(sprintf('No email was captured for %s.', $recipient));
-    }
-
-    public function getMessageWithSubject(string $subject): Email
-    {
-        foreach ($this->messages as $message) {
-            if (str_contains((string) $message->getSubject(), $subject)) {
-                return $message;
-            }
-        }
-
-        throw new \RuntimeException(sprintf('No email was captured with subject %s.', $subject));
+        return (string) preg_replace('/[ \\t]+$/m', '', $body);
     }
 }
 

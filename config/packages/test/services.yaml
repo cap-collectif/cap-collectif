@@ -26,6 +26,18 @@ services:
         arguments:
             $smsProvider: '%sms_provider%'
 
+    # Replace only captcha verification in HTTP email tests; keep the real mutation.
+    Capco\AppBundle\Security\CaptchaChecker:
+        public: true
+        arguments:
+            $turnstilePrivateKey: '%turnstile_private_key%'
+            $recaptchaPrivateKey: '%recaptcha_private_key%'
+            $captchetatClientId: '%captchetat_client_id%'
+            $captchetatClientSecret: '%captchetat_client_secret%'
+            $captchetatTokenUrl: '%captchetat_token_url%'
+            $captchetatValidateUrl: '%captchetat_validate_url%'
+            $environment: '%kernel.environment%'
+
     # Separate preparation indexer: HTTP tests disable application indexation.
     test.identity_search_indexer:
         class: Capco\AppBundle\Elasticsearch\Indexer

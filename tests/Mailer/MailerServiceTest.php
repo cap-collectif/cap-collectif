@@ -20,6 +20,10 @@ use Twig\Environment;
  * @internal
  *
  * @coversNothing
+ *
+ * @phpunit-status compliant
+ *
+ * @phpunit-reason Checks localized outbound emails and recipient isolation with real messages and a mailer boundary double.
  */
 class MailerServiceTest extends TestCase
 {
@@ -35,7 +39,7 @@ class MailerServiceTest extends TestCase
                 $sentEmails[] = clone $message;
             })
         ;
-        $translator = $this->createMock(TranslatorInterface::class);
+        $translator = $this->createStub(TranslatorInterface::class);
         $translator
             ->method('trans')
             ->willReturnCallback(static fn (
@@ -52,12 +56,12 @@ class MailerServiceTest extends TestCase
 
         $mailerService = new MailerService(
             $mailer,
-            $this->createMock(Environment::class),
+            $this->createStub(Environment::class),
             $translator,
-            $this->createMock(SiteParameterResolver::class),
-            $this->createMock(RouterInterface::class),
-            $this->createMock(SenderEmailResolver::class),
-            $this->createMock(TokenManager::class)
+            $this->createStub(SiteParameterResolver::class),
+            $this->createStub(RouterInterface::class),
+            $this->createStub(SenderEmailResolver::class),
+            $this->createStub(TokenManager::class)
         );
 
         self::assertTrue($mailerService->sendMessage($message));

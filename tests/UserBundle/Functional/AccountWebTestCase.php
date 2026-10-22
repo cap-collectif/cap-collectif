@@ -70,8 +70,7 @@ abstract class AccountWebTestCase extends WebTestCase implements FeatureFlagsAwa
         $listener = $container->get(ElasticsearchDoctrineListener::class);
         $this->em->getEventManager()->removeEventListener($listener->getSubscribedEvents(), $listener);
         $container->set(Indexer::class, $this->createIndexer());
-        $this->mailer = $this->createMock(MailerService::class);
-        $container->set(MailerService::class, $this->mailer);
+        $this->configureMailer();
         $publisher = $this->createStub(Publisher::class);
         $publisher->method('publish')->willReturnCallback(function (string $type, Message $message): void {
             $this->messages[] = ['type' => $type, 'body' => json_decode((string) $message->getBody(), true, 512, \JSON_THROW_ON_ERROR)];
@@ -125,6 +124,12 @@ abstract class AccountWebTestCase extends WebTestCase implements FeatureFlagsAwa
     public static function featureFlagOverrides(): array
     {
         return ['registration' => true, 'restrict_registration_via_email_domain' => false, 'login_cas' => false, 'login_saml' => false, 'shield_mode' => false];
+    }
+
+    protected function configureMailer(): void
+    {
+        $this->mailer = $this->createMock(MailerService::class);
+        self::getContainer()->set(MailerService::class, $this->mailer);
     }
 
     protected function createIndexer(): Indexer

@@ -20,6 +20,10 @@ use Twig\Environment;
  * @internal
  *
  * @coversNothing
+ *
+ * @phpunit-status compliant
+ *
+ * @phpunit-reason Checks outbound export email metadata and transport failure propagation without asserting internal call counts.
  */
 class ExportReadyEmailMessageHandlerTest extends TestCase
 {
@@ -44,9 +48,8 @@ class ExportReadyEmailMessageHandlerTest extends TestCase
                 self::assertSame('<p>Export ready</p>', $email->getHtmlBody());
             })
         ;
-        $twig = $this->createMock(Environment::class);
+        $twig = $this->createStub(Environment::class);
         $twig
-            ->expects(self::once())
             ->method('render')
             ->with('@CapcoMail/exportReadyEmail.html.twig', [
                 'downloadUrl' => 'https://example.com/export.csv?token=abc&fromEmail=true',
@@ -58,9 +61,8 @@ class ExportReadyEmailMessageHandlerTest extends TestCase
             ])
             ->willReturn('<p>Export ready</p>')
         ;
-        $translator = $this->createMock(TranslatorInterface::class);
+        $translator = $this->createStub(TranslatorInterface::class);
         $translator
-            ->expects(self::once())
             ->method('trans')
             ->with(
                 'export.email.subject',
@@ -70,18 +72,16 @@ class ExportReadyEmailMessageHandlerTest extends TestCase
             )
             ->willReturn('Export ready')
         ;
-        $siteParameterResolver = $this->createMock(SiteParameterResolver::class);
+        $siteParameterResolver = $this->createStub(SiteParameterResolver::class);
         $siteParameterResolver
-            ->expects(self::once())
             ->method('getValue')
             ->with('global.site.fullname')
             ->willReturn('Cap Collectif')
         ;
-        $senderEmailResolver = $this->createMock(SenderEmailResolver::class);
+        $senderEmailResolver = $this->createStub(SenderEmailResolver::class);
         $senderEmailResolver->method('__invoke')->willReturn('sender@example.com');
-        $router = $this->createMock(RouterInterface::class);
+        $router = $this->createStub(RouterInterface::class);
         $router
-            ->expects(self::once())
             ->method('generate')
             ->with('app_homepage', ['_locale' => 'en-GB'], RouterInterface::ABSOLUTE_URL)
             ->willReturn('https://example.com/')
@@ -112,15 +112,15 @@ class ExportReadyEmailMessageHandlerTest extends TestCase
         $exception = new TransportException('Provider unavailable');
         $mailer = $this->createMock(MailerInterface::class);
         $mailer->expects(self::once())->method('send')->willThrowException($exception);
-        $twig = $this->createMock(Environment::class);
+        $twig = $this->createStub(Environment::class);
         $twig->method('render')->willReturn('<p>Export ready</p>');
-        $translator = $this->createMock(TranslatorInterface::class);
+        $translator = $this->createStub(TranslatorInterface::class);
         $translator->method('trans')->willReturn('Export ready');
-        $siteParameterResolver = $this->createMock(SiteParameterResolver::class);
+        $siteParameterResolver = $this->createStub(SiteParameterResolver::class);
         $siteParameterResolver->method('getValue')->willReturn('Cap Collectif');
-        $senderEmailResolver = $this->createMock(SenderEmailResolver::class);
+        $senderEmailResolver = $this->createStub(SenderEmailResolver::class);
         $senderEmailResolver->method('__invoke')->willReturn('sender@example.com');
-        $router = $this->createMock(RouterInterface::class);
+        $router = $this->createStub(RouterInterface::class);
         $router->method('generate')->willReturn('https://example.com/');
         $logger = $this->createMock(LoggerInterface::class);
         $logger

@@ -47,6 +47,17 @@ traiter les messages de manière contrôlée ou attendre un résultat observable
 une borne explicite. N'ajouter un mécanisme d'injection en production que s'il est
 nécessaire à la conception, pas uniquement pour satisfaire un mock.
 
+## Vérifier les emails sortants
+
+Pour vérifier les destinataires, les en-têtes et le contenu rendu, utiliser
+`EmailCaptureTrait` avec les vrais services de composition et un transport Symfony
+`NullTransport` en mémoire. Le trait remplace `MailerService` avant son utilisation
+et renvoie les messages capturés ; il ne valide pas la livraison par un fournisseur.
+`EmailWebTestCase` l'installe dans le socle HTTP transactionnel `AccountWebTestCase`,
+et `MailerSnapshotCommandTestCase` le partage avec les tests CLI. Ce dernier déclare
+explicitement le flag `multilangue` : les snapshots conservent les différences de
+langue et d'URL. Seuls les tokens générés et les espaces de fin de ligne sont normalisés.
+
 ## Exemple d'un test unitaire
 
 Cet exemple utilise une classe présente dans le dépôt. Le traducteur est un stub

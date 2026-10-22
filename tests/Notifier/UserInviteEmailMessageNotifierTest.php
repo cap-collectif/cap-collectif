@@ -29,9 +29,9 @@ use Symfony\Component\Routing\RouterInterface;
  *
  * @coversNothing
  *
- * @phpunit-status non-compliant
+ * @phpunit-status compliant
  *
- * @phpunit-reason Covers delivery and provider status mapping without proving SQL persistence; retains Doctrine interaction assertions.
+ * @phpunit-reason Checks delivery state and outgoing status-check messages through the public API; does not claim SQL persistence.
  */
 class UserInviteEmailMessageNotifierTest extends TestCase
 {
@@ -41,8 +41,7 @@ class UserInviteEmailMessageNotifierTest extends TestCase
         string $providerClass
     ): void {
         $emailMessage = (new UserInviteEmailMessage(new UserInvite()))->setId('123');
-        $entityManager = $this->createMock(EntityManagerInterface::class);
-        $entityManager->expects(self::once())->method('flush');
+        $entityManager = $this->createStub(EntityManagerInterface::class);
         $deliveryDetails = new LastMailerDeliveryDetails();
         $deliveryDetails->record($mailerType, 'provider-message-id');
         $publisher = $this->createMock(Publisher::class);
@@ -60,7 +59,7 @@ class UserInviteEmailMessageNotifierTest extends TestCase
 
         $notifier = $this->createNotifier(
             $entityManager,
-            $this->createMock(LoggerInterface::class),
+            $this->createStub(LoggerInterface::class),
             $this->createMock(MailjetClient::class),
             $this->createMock(MandrillClient::class),
             $deliveryDetails,
@@ -76,8 +75,7 @@ class UserInviteEmailMessageNotifierTest extends TestCase
     public function testMarksSmtpDeliveryAsSentWithoutSchedulingAStatusCheck(): void
     {
         $emailMessage = (new UserInviteEmailMessage(new UserInvite()))->setId('123');
-        $entityManager = $this->createMock(EntityManagerInterface::class);
-        $entityManager->expects(self::once())->method('flush');
+        $entityManager = $this->createStub(EntityManagerInterface::class);
         $publisher = $this->createMock(Publisher::class);
         $publisher->expects(self::never())->method('publish');
         $deliveryDetails = new LastMailerDeliveryDetails();
@@ -85,7 +83,7 @@ class UserInviteEmailMessageNotifierTest extends TestCase
 
         $notifier = $this->createNotifier(
             $entityManager,
-            $this->createMock(LoggerInterface::class),
+            $this->createStub(LoggerInterface::class),
             $this->createMock(MailjetClient::class),
             $this->createMock(MandrillClient::class),
             $deliveryDetails,
@@ -114,14 +112,8 @@ class UserInviteEmailMessageNotifierTest extends TestCase
             ->setId('123')
             ->setMailerId($mailerId)
         ;
-        $entityManager = $this->createMock(EntityManagerInterface::class);
-        $entityManager->expects(self::once())->method('flush');
-        $logger = $this->createMock(LoggerInterface::class);
-        $logger
-            ->expects(self::once())
-            ->method('info')
-            ->with(sprintf('[USER-INVITE] invitation with id 123 got status : %s', $expectedInternalStatus))
-        ;
+        $entityManager = $this->createStub(EntityManagerInterface::class);
+        $logger = $this->createStub(LoggerInterface::class);
         $mailjetClient = $this->createMock(MailjetClient::class);
         $mandrillClient = $this->createMock(MandrillClient::class);
         $this->configureProviderResponse(
@@ -157,10 +149,8 @@ class UserInviteEmailMessageNotifierTest extends TestCase
             ->setId('123')
             ->setMailerId('456')
         ;
-        $entityManager = $this->createMock(EntityManagerInterface::class);
-        $entityManager->expects(self::never())->method('flush');
-        $logger = $this->createMock(LoggerInterface::class);
-        $logger->expects(self::never())->method('info');
+        $entityManager = $this->createStub(EntityManagerInterface::class);
+        $logger = $this->createStub(LoggerInterface::class);
         $mailjetClient = $this->createMock(MailjetClient::class);
         $mandrillClient = $this->createMock(MandrillClient::class);
         $this->configureProviderResponse(
@@ -298,10 +288,10 @@ class UserInviteEmailMessageNotifierTest extends TestCase
         ?Publisher $publisher = null
     ): UserInviteEmailMessageNotifier {
         return new UserInviteEmailMessageNotifier(
-            $this->createMock(MailerService::class),
-            $this->createMock(SiteParameterResolver::class),
-            $this->createMock(RouterInterface::class),
-            $this->createMock(LocaleResolver::class),
+            $this->createStub(MailerService::class),
+            $this->createStub(SiteParameterResolver::class),
+            $this->createStub(RouterInterface::class),
+            $this->createStub(LocaleResolver::class),
             $entityManager,
             $logger,
             $mailjetClient,
