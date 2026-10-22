@@ -59,25 +59,6 @@ class SettingsController extends Controller
     }
 
     /**
-     * @Route("/admin/settings/pages.shield/list", name="capco_admin_settings_shield")
-     *
-     * @Template("@CapcoAdmin/Settings/shield.html.twig")
-     *
-     * @Security("is_granted('ROLE_ADMIN')")
-     *
-     * @deprecated Replace by our NextJs router so this is not used anymore
-     */
-    public function shieldAction()
-    {
-        return [
-            'breadcrumbs_builder' => $this->breadcrumbsBuilder,
-            'admin_pool' => $this->pool,
-            'action' => 'list',
-            'admin' => $this->siteParameterAdmin,
-        ];
-    }
-
-    /**
      * @Route("/admin/settings/{category}/list", name="capco_admin_settings")
      *
      * @Template("@CapcoAdmin/Settings/list.html.twig")

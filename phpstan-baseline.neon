@@ -366,76 +366,6 @@ parameters:
 			path: src/Capco/AdminBundle/Admin/PageAdmin.php
 
 		-
-			message: "#^Call to an undefined method Capco\\\\AdminBundle\\\\Admin\\\\PostAdmin\\:\\:getContainer\\(\\)\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/PostAdmin.php
-
-		-
-			message: "#^Call to an undefined static method Sonata\\\\AdminBundle\\\\Admin\\\\AbstractAdmin\\<object\\>\\:\\:getTemplate\\(\\)\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/PostAdmin.php
-
-		-
-			message: "#^Class Sonata\\\\MediaBundle\\\\Form\\\\Type\\\\MediaType not found\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/PostAdmin.php
-
-		-
-			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\PostAdmin\\:\\:getFeatures\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/PostAdmin.php
-
-		-
-			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\PostAdmin\\:\\:getObjectMetadata\\(\\) should return Sonata\\\\AdminBundle\\\\Object\\\\MetadataInterface but returns Sonata\\\\BlockBundle\\\\Meta\\\\Metadata\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/PostAdmin.php
-
-		-
-			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\PostAdmin\\:\\:getTemplate\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/PostAdmin.php
-
-		-
-			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\PostAdmin\\:\\:getTemplate\\(\\) has parameter \\$name with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/PostAdmin.php
-
-		-
-			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\PostAdmin\\:\\:onPostPersist\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/PostAdmin.php
-
-		-
-			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\PostAdmin\\:\\:onPostPersist\\(\\) has parameter \\$object with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/PostAdmin.php
-
-		-
-			message: "#^PHPDoc tag @var above a method has no effect\\.$#"
-			count: 2
-			path: src/Capco/AdminBundle/Admin/PostAdmin.php
-
-		-
-			message: "#^PHPDoc tag @var does not specify variable name\\.$#"
-			count: 2
-			path: src/Capco/AdminBundle/Admin/PostAdmin.php
-
-		-
-			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/PostAdmin.php
-
-		-
-			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\PostAdmin\\:\\:\\$datagridValues has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/PostAdmin.php
-
-		-
-			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\PostAdmin\\:\\:\\$tokenStorage is never read, only written\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/PostAdmin.php
-
-		-
 			message: "#^If condition is always true\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/ProjectAbstractStepAdmin.php
@@ -1007,11 +937,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AdminBundle\\\\Controller\\\\SettingsController\\:\\:registrationAction\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Controller/SettingsController.php
-
-		-
-			message: "#^Method Capco\\\\AdminBundle\\\\Controller\\\\SettingsController\\:\\:shieldAction\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Controller/SettingsController.php
 

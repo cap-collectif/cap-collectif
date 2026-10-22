@@ -39,7 +39,6 @@ sonata_admin:
             admin.group.content:
                 items:
                     - Capco\AdminBundle\Admin\ThemeAdmin
-                    - Capco\AdminBundle\Admin\PostAdmin
                     - Capco\AdminBundle\Admin\EventAdmin
                     - Capco\AdminBundle\Admin\PageAdmin
                     - Capco\AdminBundle\Admin\MediaAdmin

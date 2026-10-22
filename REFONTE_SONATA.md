@@ -428,18 +428,6 @@ flag), **à nettoyer** (Admin Next déjà en place, route legacy encore présent
   - URL : `/admin/font/list`
   - Composant : `FontAdminPageApp` (`FontController`)
 
-#### Déjà sur Admin Next, route legacy à nettoyer
-
-- **Création et édition d'article** — à nettoyer
-  - Routes : `/admin/capco/app/post/create`, `/admin/capco/app/post/{id}/edit`
-  - Code : `PostController` de l'AdminBundle, `Post/create.html.twig`, `Post/edit.html.twig`,
-    `AdminPostCreateFormApp`
-  - Remplacée par `/admin-next/post` (`PostAdminUrlResolver` y pointe déjà).
-- **Shield** — à nettoyer
-  - Route : `/admin/settings/pages.shield/list`
-  - Code : action `shield` de `SettingsController`, `Settings/shield.html.twig`, `AuthentificationAdminApp`
-  - Remplacée par `/admin-next/authentication`.
-
 #### Code mort
 
 Templates sans aucun appelant (ou appel commenté). Avant de supprimer un composant, vérifier qu'il n'est pas monté
@@ -460,6 +448,10 @@ ailleurs.
 Pour une page React legacy, l'étape « Code Sonata » de la recette de nettoyage devient :
 
 - supprimer le contrôleur Symfony (ou seulement son action si le contrôleur en sert d'autres) et le template Twig ;
+- vérifier avec `bin/console debug:router` qu'aucune route plus générique ne prend le relais sur le même chemin
+  (route Sonata d'une Admin, déclarée après, ou `/admin/settings/{category}/list`) : la supprimer aussi, selon
+  l'étape 6 de la recette de nettoyage (Admin d'entité ou catégorie de réglages). Si le contrôleur supprimé est le
+  `baseControllerName` d'une Admin, cette Admin doit partir avec lui ;
 - supprimer l'entrée `frontend/js/startup/<X>App.tsx` et son enregistrement dans `frontend/js/registrationAdmin.ts` ;
 - supprimer les composants, mutations, tests et snapshots legacy devenus orphelins, après un grep de chaque nom
   sur `frontend/js/` (un composant peut être monté par plusieurs pages, ex: `ProjectAdminApp`) ;

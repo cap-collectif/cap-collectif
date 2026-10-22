@@ -18,7 +18,6 @@ export const URL_MAP = {
     '/admin/capco/app/theme/',
     '/admin-next/themes',
     '/admin-next/theme',
-    '/admin/capco/app/post/',
     '/admin/capco/app/event/',
     '/admin-next/videos',
     '/admin-next/video',
@@ -80,7 +79,6 @@ export const URL_MAP = {
     '/admin-next/legal-settings',
     '/admin-next/privacy-settings',
     '/admin-next/charter-settings',
-    '/admin/settings/pages.shield/',
   ],
   emailing: [
     '/admin/mailingCampaign/',
