@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle;
 
-use Capco\AppBundle\DependencyInjection\Compiler\MailerServicePass;
 use Capco\AppBundle\DependencyInjection\Compiler\SimpleSAMLServicePass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -22,6 +21,5 @@ class CapcoAppBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $container->addCompilerPass(new SimpleSAMLServicePass());
-        $container->addCompilerPass(new MailerServicePass());
     }
 }

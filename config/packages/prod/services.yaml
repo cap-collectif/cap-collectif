@@ -7,8 +7,6 @@ framework:
         collect: false
     http_client:
         scoped_clients: ~
-swiftmailer:
-    default_mailer: mandrill
 
 services:
     BGalati\MonologSentryHandler\SentryHandler:

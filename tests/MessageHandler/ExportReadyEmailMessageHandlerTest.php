@@ -18,6 +18,7 @@ use Twig\Environment;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class ExportReadyEmailMessageHandlerTest extends TestCase
