@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Notifier;
 use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalAnalysis;
-use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalAdminUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
@@ -22,8 +21,6 @@ use Capco\AppBundle\Mailer\Message\Proposal\ProposalAknowledgeUpdateMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalCreateAdminMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalDeleteAdminMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalOfficialAnswerMessage;
-use Capco\AppBundle\Mailer\Message\Proposal\ProposalStatusChangeInCollectMessage;
-use Capco\AppBundle\Mailer\Message\Proposal\ProposalStatusChangeInSelectionMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalStatusChangeMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalUpdateAdminMessage;
 use Capco\AppBundle\Resolver\LocaleResolver;
@@ -249,42 +246,6 @@ class ProposalNotifier extends BaseNotifier
             ['post' => $post],
             $proposal->getAuthor()
         );
-    }
-
-    public function onStatusChangeInCollect(Proposal $proposal)
-    {
-        $this->mailer->createAndSendMessage(
-            ProposalStatusChangeInCollectMessage::class,
-            $proposal,
-            [],
-            $proposal->getAuthor()
-        );
-        foreach ($proposal->getChildConnections() as $child) {
-            $this->mailer->createAndSendMessage(
-                ProposalStatusChangeInCollectMessage::class,
-                $proposal,
-                [],
-                $child->getAuthor()
-            );
-        }
-    }
-
-    public function onStatusChangeInSelection(Selection $selection)
-    {
-        $this->mailer->createAndSendMessage(
-            ProposalStatusChangeInSelectionMessage::class,
-            $selection,
-            [],
-            $selection->getProposal()->getAuthor()
-        );
-        foreach ($selection->getProposal()->getChildConnections() as $child) {
-            $this->mailer->createAndSendMessage(
-                ProposalStatusChangeInSelectionMessage::class,
-                $selection,
-                [],
-                $child->getAuthor()
-            );
-        }
     }
 
     public function onAnalysisPublication(

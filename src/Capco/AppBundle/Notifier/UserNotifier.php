@@ -8,7 +8,6 @@ use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\User\UserAccountConfirmationParticipationMessage;
 use Capco\AppBundle\Mailer\Message\User\UserAccountConfirmationReminderMessage;
 use Capco\AppBundle\Mailer\Message\User\UserAccountConfirmationStepReminderMessage;
-use Capco\AppBundle\Mailer\Message\User\UserAdminConfirmationMessage;
 use Capco\AppBundle\Mailer\Message\User\UserConfirmEmailChangedMessage;
 use Capco\AppBundle\Mailer\Message\User\UserNewEmailConfirmationMessage;
 use Capco\AppBundle\Mailer\Message\User\UserNewPasswordConfirmationMessage;
@@ -30,30 +29,6 @@ final class UserNotifier extends BaseNotifier
         LocaleResolver $localeResolver
     ) {
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
-    }
-
-    public function adminConfirmation(User $user): void
-    {
-        if (empty($user->getEmail())) {
-            $this->logger->error(__METHOD__ . ' user email can not be empty');
-
-            return;
-        }
-        if (null === $user->getConfirmationToken()) {
-            $this->logger->error(__METHOD__ . ' user must have confirmation token');
-
-            return;
-        }
-        $this->mailer->createAndSendMessage(
-            UserAdminConfirmationMessage::class,
-            $user,
-            [
-                'confirmationURL' => $this->userRegistrationConfirmationUrlResolver->__invoke(
-                    $user
-                ),
-            ],
-            $user
-        );
     }
 
     public function newEmailConfirmation(User $user): void

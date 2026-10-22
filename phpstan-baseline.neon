@@ -21911,26 +21911,6 @@ parameters:
 			path: src/Capco/AppBundle/Mailer/Message/Participant/ParticipantConfirmEmailMessage.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Project\\\\ProjectCreateMessage\\:\\:getMySubjectVars\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Mailer/Message/Project/ProjectCreateMessage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Project\\\\ProjectCreateMessage\\:\\:getMySubjectVars\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Mailer/Message/Project/ProjectCreateMessage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Project\\\\ProjectCreateMessage\\:\\:getMyTemplateVars\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Mailer/Message/Project/ProjectCreateMessage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Project\\\\ProjectCreateMessage\\:\\:getMyTemplateVars\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Mailer/Message/Project/ProjectCreateMessage.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Proposal\\\\Analysis\\\\AnalysisPublicationMessage\\:\\:getMySubjectVars\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Mailer/Message/Proposal/Analysis/AnalysisPublicationMessage.php
@@ -22476,46 +22456,6 @@ parameters:
 			path: src/Capco/AppBundle/Mailer/Message/Proposal/ProposalRevisionRevisedMessage.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Proposal\\\\ProposalStatusChangeInCollectMessage\\:\\:getMySubjectVars\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Mailer/Message/Proposal/ProposalStatusChangeInCollectMessage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Proposal\\\\ProposalStatusChangeInCollectMessage\\:\\:getMySubjectVars\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Mailer/Message/Proposal/ProposalStatusChangeInCollectMessage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Proposal\\\\ProposalStatusChangeInCollectMessage\\:\\:getMyTemplateVars\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Mailer/Message/Proposal/ProposalStatusChangeInCollectMessage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Proposal\\\\ProposalStatusChangeInCollectMessage\\:\\:getMyTemplateVars\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Mailer/Message/Proposal/ProposalStatusChangeInCollectMessage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Proposal\\\\ProposalStatusChangeInSelectionMessage\\:\\:getMySubjectVars\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Mailer/Message/Proposal/ProposalStatusChangeInSelectionMessage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Proposal\\\\ProposalStatusChangeInSelectionMessage\\:\\:getMySubjectVars\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Mailer/Message/Proposal/ProposalStatusChangeInSelectionMessage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Proposal\\\\ProposalStatusChangeInSelectionMessage\\:\\:getMyTemplateVars\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Mailer/Message/Proposal/ProposalStatusChangeInSelectionMessage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Proposal\\\\ProposalStatusChangeInSelectionMessage\\:\\:getMyTemplateVars\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Mailer/Message/Proposal/ProposalStatusChangeInSelectionMessage.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Proposal\\\\ProposalStatusChangeMessage\\:\\:getFooterVars\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Mailer/Message/Proposal/ProposalStatusChangeMessage.php
@@ -23024,26 +22964,6 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\User\\\\UserAccountConfirmationStepReminderMessage\\:\\:mockData\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Mailer/Message/User/UserAccountConfirmationStepReminderMessage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\User\\\\UserAdminConfirmationMessage\\:\\:getMySubjectVars\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Mailer/Message/User/UserAdminConfirmationMessage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\User\\\\UserAdminConfirmationMessage\\:\\:getMySubjectVars\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Mailer/Message/User/UserAdminConfirmationMessage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\User\\\\UserAdminConfirmationMessage\\:\\:getMyTemplateVars\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Mailer/Message/User/UserAdminConfirmationMessage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\User\\\\UserAdminConfirmationMessage\\:\\:getMyTemplateVars\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Mailer/Message/User/UserAdminConfirmationMessage.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\User\\\\UserConfirmEmailChangedMessage\\:\\:getMySubjectVars\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
@@ -24156,11 +24076,6 @@ parameters:
 			path: src/Capco/AppBundle/Notifier/OpinionNotifier.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Notifier\\\\ProjectNotifier\\:\\:onCreate\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Notifier/ProjectNotifier.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Notifier\\\\ProposalAnalysisCommentNotifier\\:\\:onCreate\\(\\) has parameter \\$emailsRecipients with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Notifier/ProposalAnalysisCommentNotifier.php
@@ -24202,16 +24117,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Notifier\\\\ProposalNotifier\\:\\:onOfficialAnswer\\(\\) has parameter \\$post with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Notifier/ProposalNotifier.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Notifier\\\\ProposalNotifier\\:\\:onStatusChangeInCollect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Notifier/ProposalNotifier.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Notifier\\\\ProposalNotifier\\:\\:onStatusChangeInSelection\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Notifier/ProposalNotifier.php
 
