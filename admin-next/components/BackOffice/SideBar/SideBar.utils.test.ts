@@ -83,6 +83,23 @@ describe('getSideBarItemsFiltered', () => {
     )
   })
 
+  const getEmailingItem = (title: string, featureFlags = { ...defaultFeatureFlags, emailing: true }) => {
+    const sideBarItems = getSideBarItemsFiltered(true, true, featureFlags, false, null, false)
+    return sideBarItems.find(item => item.id === 'emailing')?.items.find(item => item.title === title)
+  }
+
+  it('keeps the Sonata emailing routes while the migration is disabled', () => {
+    expect(getEmailingItem('admin-menu-campaign-list')?.href).toBe('/admin/mailingCampaign/list')
+    expect(getEmailingItem('admin-menu-emailing-list')?.href).toBe('/admin/mailingList/list')
+  })
+
+  it('uses the Admin Next emailing routes while the migration is enabled', () => {
+    const featureFlags = { ...defaultFeatureFlags, emailing: true, unstable__sonata_migration_to_admin_next: true }
+
+    expect(getEmailingItem('admin-menu-campaign-list', featureFlags)?.href).toBe('/admin-next/emailing-campaigns')
+    expect(getEmailingItem('admin-menu-emailing-list', featureFlags)?.href).toBe('/admin-next/mailing-lists')
+  })
+
   it('hides the Hub API Green item when its feature flag is disabled', () => {
     const sideBarItems = getSideBarItemsFiltered(
       true,

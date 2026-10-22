@@ -84,7 +84,9 @@ export const URL_MAP = {
   ],
   emailing: [
     '/admin/mailingCampaign/',
+    '/admin-next/emailing-campaign',
     '/admin/mailingList/',
+    '/admin-next/mailing-lists',
     '/admin/mailingParameters/list',
     '/admin-next/newsletter-subscriptions',
   ],

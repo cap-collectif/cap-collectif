@@ -164,6 +164,43 @@ describe('<Sidebar />', () => {
     expect(wrapper.find('a[href$="/admin-next/custom-pages"]')).toHaveLength(1)
   })
 
+  it('keeps the Sonata emailing links while the migration is disabled', () => {
+    const wrapper = render(
+      <MockProviders
+        store={{
+          default: {
+            features: { ...features, emailing: true },
+          },
+          user: {
+            user: userAdmin,
+          },
+        }}
+      >
+        <Sidebar appVersion="2020.07.07-xsinjdic" defaultAccordeon="emailing" />
+      </MockProviders>,
+    )
+    expect(wrapper.find('a[href$="/admin/mailingCampaign/list"]')).toHaveLength(1)
+    expect(wrapper.find('a[href$="/admin/mailingList/list"]')).toHaveLength(1)
+  })
+  it('links to Admin Next emailing pages while the migration is enabled', () => {
+    const wrapper = render(
+      <MockProviders
+        store={{
+          default: {
+            features: { ...features, emailing: true, unstable__sonata_migration_to_admin_next: true },
+          },
+          user: {
+            user: userAdmin,
+          },
+        }}
+      >
+        <Sidebar appVersion="2020.07.07-xsinjdic" defaultAccordeon="emailing" />
+      </MockProviders>,
+    )
+    expect(wrapper.find('a[href$="/admin-next/emailing-campaigns"]')).toHaveLength(1)
+    expect(wrapper.find('a[href$="/admin-next/mailing-lists"]')).toHaveLength(1)
+  })
+
   it('renders when the user is a project admin and not an admin', () => {
     const wrapper = render(
       <MockProviders

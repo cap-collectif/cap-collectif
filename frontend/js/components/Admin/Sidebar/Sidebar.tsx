@@ -304,8 +304,23 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
               <SidebarAccordionItem id="emailing">
                 <SidebarButton icon={ICON_NAME.ENVELOPE_O} text="admin.group.emailing" isOpen={isOpen} />
                 <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
-                  <SidebarLink text="admin-menu-campaign-list" href="/admin/mailingCampaign/list" />
-                  <SidebarLink text="admin-menu-emailing-list" href="/admin/mailingList/list" />
+                  {/* Sonata routes retained during the Admin Next migration rollout. Remove them when the migration feature flag is removed. */}
+                  <SidebarLink
+                    text="admin-menu-campaign-list"
+                    href={
+                      features.unstable__sonata_migration_to_admin_next
+                        ? '/admin-next/emailing-campaigns'
+                        : '/admin/mailingCampaign/list'
+                    }
+                  />
+                  <SidebarLink
+                    text="admin-menu-emailing-list"
+                    href={
+                      features.unstable__sonata_migration_to_admin_next
+                        ? '/admin-next/mailing-lists'
+                        : '/admin/mailingList/list'
+                    }
+                  />
                   {features.emailing_parameters && isAdmin ? (
                     <SidebarLink text="admin-menu-parameters" href="/admin/mailingParameters/list" />
                   ) : null}

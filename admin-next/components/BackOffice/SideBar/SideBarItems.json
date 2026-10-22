@@ -400,13 +400,14 @@
         "items": [
             {
                 "title": "admin-menu-campaign-list",
-                "href": "/admin/mailingCampaign/list",
+                "href": "/admin-next/emailing-campaigns",
+                "relatedHrefs": ["/admin-next/emailing-campaign"],
                 "rolesRequired": [],
                 "featuresRequired": []
             },
             {
                 "title": "admin-menu-emailing-list",
-                "href": "/admin/mailingList/list",
+                "href": "/admin-next/mailing-lists",
                 "rolesRequired": [],
                 "featuresRequired": []
             },

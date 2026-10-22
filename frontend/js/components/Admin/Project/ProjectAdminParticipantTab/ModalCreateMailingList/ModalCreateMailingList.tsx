@@ -30,13 +30,20 @@ type Props = ReduxFormFormProps & {
   project: ModalCreateMailingList_project
   viewer: ModalCreateMailingList_viewer
   mailingListName: string
+  isAdminNextEmailingEnabled: boolean
   dispatch: Dispatch
 }
 type Values = {
   mailingListName: string
 }
 
-const createEmailingCampaign = (mailingListId: string, intl: IntlShape) => {
+// Sonata routes retained during the Admin Next migration rollout. Remove them when the migration feature flag is removed.
+const getEmailingCampaignUrl = (id: string, isAdminNextEmailingEnabled: boolean) =>
+  isAdminNextEmailingEnabled ? `/admin-next/emailing-campaign?id=${id}` : `/admin/mailingCampaign/edit/${id}`
+const getMailingListsUrl = (isAdminNextEmailingEnabled: boolean) =>
+  isAdminNextEmailingEnabled ? '/admin-next/mailing-lists' : '/admin/mailingList/list'
+
+const createEmailingCampaign = (mailingListId: string, intl: IntlShape, isAdminNextEmailingEnabled: boolean) => {
   return CreateEmailingCampaignMutation.commit({
     input: {
       mailingList: mailingListId,
@@ -46,7 +53,9 @@ const createEmailingCampaign = (mailingListId: string, intl: IntlShape) => {
       if (response.createEmailingCampaign?.error) return mutationErrorToast(intl)
 
       if (response.createEmailingCampaign?.emailingCampaign?.id) {
-        window.location.replace(`/admin/mailingCampaign/edit/${response.createEmailingCampaign.emailingCampaign.id}`)
+        window.location.replace(
+          getEmailingCampaignUrl(response.createEmailingCampaign.emailingCampaign.id, isAdminNextEmailingEnabled),
+        )
       }
     })
     .catch(() => {
@@ -62,6 +71,7 @@ const createMailingList = (
   organizationId: string | null | undefined,
   withRedirection: boolean,
   intl: IntlShape,
+  isAdminNextEmailingEnabled: boolean,
 ) => {
   return CreateMailingListMutation.commit({
     input: {
@@ -77,7 +87,7 @@ const createMailingList = (
       if (response.createMailingList?.error) return mutationErrorToast(intl)
 
       if (withRedirection && response.createMailingList?.mailingList) {
-        createEmailingCampaign(response.createMailingList.mailingList.id, intl)
+        createEmailingCampaign(response.createMailingList.mailingList.id, intl, isAdminNextEmailingEnabled)
       }
       return toast({
         content: `${intl.formatMessage(
@@ -85,7 +95,7 @@ const createMailingList = (
           {
             name: response.createMailingList?.mailingList?.name,
           },
-        )}<br/><a href="/admin/mailingList/list">
+        )}<br/><a href="${getMailingListsUrl(isAdminNextEmailingEnabled)}">
           ${intl.formatMessage({ id: 'action_show' })}
         </a>`,
         variant: 'success',
@@ -97,10 +107,19 @@ const createMailingList = (
 }
 
 const onSubmit = (values: Values, dispatch: Dispatch, props: Props) => {
-  const { project, onClose, members, viewer, intl } = props
+  const { project, onClose, members, viewer, intl, isAdminNextEmailingEnabled } = props
   const { mailingListName } = values
   const organization = viewer?.organizations?.[0]
-  createMailingList(project.id, members, mailingListName, onClose, organization?.id, true, intl)
+  createMailingList(
+    project.id,
+    members,
+    mailingListName,
+    onClose,
+    organization?.id,
+    true,
+    intl,
+    isAdminNextEmailingEnabled,
+  )
 }
 
 const ModalCreateMailingList = ({
@@ -113,6 +132,7 @@ const ModalCreateMailingList = ({
   mailingListName,
   pristine,
   viewer,
+  isAdminNextEmailingEnabled,
 }: Props) => {
   const intl = useIntl()
   const organization = viewer?.organizations?.[0]
@@ -200,7 +220,16 @@ const ModalCreateMailingList = ({
         <ButtonSave
           type="button"
           onClick={() =>
-            createMailingList(project.id, members, mailingListName, onClose, organization?.id, false, intl)
+            createMailingList(
+              project.id,
+              members,
+              mailingListName,
+              onClose,
+              organization?.id,
+              false,
+              intl,
+              isAdminNextEmailingEnabled,
+            )
           }
           disabled={pristine}
         >
@@ -230,6 +259,7 @@ const selectorForm = formValueSelector(formName)
 
 const mapStateToProps = (state: GlobalState) => ({
   mailingListName: selectorForm(state, 'mailingListName') || '',
+  isAdminNextEmailingEnabled: !!state.default.features.unstable__sonata_migration_to_admin_next,
 })
 
 const ModalCreateMailingListConnected = connect(mapStateToProps)(form)

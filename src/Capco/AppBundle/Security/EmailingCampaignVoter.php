@@ -16,6 +16,15 @@ class EmailingCampaignVoter extends AbstractOwnerableVoter
     final public const TEST = 'test';
     final public const CANCEL = 'cancel';
 
+    /**
+     * Same rule as the VIEW attribute, for callers that resolve a campaign without going through the security
+     * token (e.g. the GraphQL `node` field).
+     */
+    public static function viewerCanView(EmailingCampaign $emailingCampaign, ?User $viewer): bool
+    {
+        return $viewer instanceof User && self::canView($emailingCampaign, $viewer);
+    }
+
     protected function supports($attribute, $subject): bool
     {
         return \in_array($attribute, [

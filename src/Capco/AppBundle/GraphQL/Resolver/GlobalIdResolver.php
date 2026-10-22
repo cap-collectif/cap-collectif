@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Interfaces\ViewerPermissionInterface;
 use Capco\AppBundle\Entity\Participant;
@@ -43,6 +44,7 @@ use Capco\AppBundle\Repository\SectionCarrouselElementRepository;
 use Capco\AppBundle\Repository\SourceRepository;
 use Capco\AppBundle\Repository\UserGroupRepository;
 use Capco\AppBundle\Repository\ValueResponseRepository;
+use Capco\AppBundle\Security\EmailingCampaignVoter;
 use Capco\AppBundle\Service\ParticipantHelper;
 use Capco\AppBundle\Service\ParticipationWorkflow\ParticipationCookieManager;
 use Capco\Manager\RepositoryManager;
@@ -380,6 +382,10 @@ class GlobalIdResolver
 
         if ($node instanceof ViewerPermissionInterface) {
             return $node->viewerCanSee($user);
+        }
+
+        if ($node instanceof EmailingCampaign) {
+            return EmailingCampaignVoter::viewerCanView($node, $user);
         }
 
         return true;

@@ -103,6 +103,15 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
        (`/admin-next/video`, `/admin-next/theme`, à côté de la liste `/admin-next/videos`, `/admin-next/themes`)
        ne trouve aucune entrée et n'exige donc aucun rôle : un project admin voit le squelette de la page, seules
        les queries/mutations (`access: hasRole('ROLE_ADMIN')`) le bloquent. Toujours protéger aussi le GraphQL.
+   - **Contrôle d'accès par objet fait dans le contrôleur Sonata** : certaines pages (ex: édition d'une campagne
+     d'emailing, `EmailingCampaignController`) vérifient un voter sur l'objet (`EmailingCampaignVoter::VIEW`) avant
+     de rendre un composant React. Ce contrôle disparaît avec le contrôleur : vérifier que la query utilisée par la
+     page Admin Next le refait. `node(id:)` (`GlobalIdResolver::viewerCanSee`) renvoie par défaut **n'importe quel**
+     objet à n'importe quel viewer, sauf pour les entités traitées explicitement (`canDisplay`,
+     `ViewerPermissionInterface`). Pour une entité `Ownerable`, exposer la règle du voter en méthode statique
+     publique et l'appeler dans `viewerCanSee` (voir `EmailingCampaignVoter::viewerCanView`) plutôt que de la
+     dupliquer, puis couvrir le refus par un test Jest API (`node` à `null` pour un viewer non autorisé). La page
+     affiche alors son message « page introuvable » pour un objet inconnu comme pour un objet interdit.
    - L'endroit naturel pour une vraie restriction **côté GraphQL** (utile si la query/mutation n'est pas déjà
      couverte par le point précédent, ou si on veut protéger l'API elle-même) est le champ concerné
      (`access:` dans les yaml, ex: `access: "@=hasRole('ROLE_ADMIN')"` sur une mutation). **Mais avant
@@ -146,6 +155,10 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
      est activé, ils doivent pointer vers la route Admin Next ;
    - protéger également l'accès direct à la route Admin Next avec ce feature flag : masquer ou rediriger un
      lien de menu seul ne protège pas une URL saisie manuellement ;
+   - si la page dépend aussi d'un feature flag fonctionnel (ex: `emailing`), le vérifier côté serveur en plus du
+     flag de migration : `featuresRequired` dans `SideBarItems.json` ne fait que masquer l'entrée du menu.
+     `withFeatureFlagRequired` ne gère qu'un flag ; composer les deux dans un `getServerSideProps` dédié à la
+     feature (voir `withEmailingPageRequired` dans `components/BackOffice/Emailing/utils.ts`).
    - utiliser le même feature flag pour toutes les pages déjà migrées, afin d'activer progressivement la
      refonte sans multiplier les règles d'accès temporaires. Les pages non encore migrées restent naturellement
      sur Sonata.
@@ -1596,6 +1609,23 @@ prop-drillé entre la liste et un ancêtre.
 - **`Search` (`@cap-collectif/ui`) est un react-select** : son `placeholder` est un `<div>`, pas un attribut de
   l'`<input>`. Lui passer un `aria-label` explicite (accessibilité), et le cibler en test par
   `input[aria-label="..."]`, pas par placeholder.
+
+- **`Select` à options groupées (`[{ label, options: [...] }]`)** : `FieldInput type="select"` (et le `Select`
+  de `@cap-collectif/form`) ne retrouve la valeur sélectionnée que dans une liste plate (`options.find(...)`) : avec
+  des groupes, le champ s'affiche vide après chargement. Utiliser un `Controller` de react-hook-form autour du
+  `Select` de `@cap-collectif/ui`, en cherchant la valeur dans les options aplaties, à l'intérieur d'un `FormControl`
+  pour garder le libellé et le message d'erreur. Voir `EmailingCampaignParameters.tsx`.
+- **`FieldInput type="radio"` avec `choices`** : la valeur du champ est `{ labels: ['VALEUR'] }`, pas la chaîne
+  seule. Initialiser `defaultValues` et lire la valeur (`watch`, yup `.when`) sous cette forme.
+- **Formulaire de page qui ouvre une modale contenant son propre `<form>`** (ex: envoi d'un e-mail de test) : ne
+  pas rendre la page elle-même dans un `<form>` (`Flex as="form"`). La modale est rendue dans un portail, mais
+  l'événement `submit` remonte l'arbre React jusqu'au formulaire parent. Déclencher les actions de la page avec
+  `onClick={() => handleSubmit(...)()}`.
+- **Validation différente selon le bouton** (ex: « Enregistrer le brouillon » n'exige que le titre, « Envoyer »
+  exige un e-mail complet) : un seul schéma yup avec `.when('$isSending', ...)`, et un objet de contexte passé à
+  `useForm({ context })` puis modifié juste avant chaque `handleSubmit`. Voir `EmailingCampaignFormWrapper.tsx`.
+- **Aperçu HTML rendu par le serveur** (ex: e-mail d'une campagne) : l'afficher dans une `iframe` avec `srcDoc` et
+  `sandbox=""` plutôt qu'avec `dangerouslySetInnerHTML`, pour isoler ses styles et bloquer ses scripts.
 
 ## Validation yup : toujours un schéma, et un champ texte requis n'est pas juste `.required()`
 
