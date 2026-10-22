@@ -10,6 +10,10 @@ use Capco\AppBundle\Mailer\Message\MessageRecipient;
 use Capco\AppBundle\Manager\TokenManager;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Entity\User;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -17,10 +21,8 @@ use Twig\Environment;
 
 class MailerService extends MailerFactory
 {
-    protected array $failedRecipients;
-
     public function __construct(
-        protected \Swift_Mailer $mailer,
+        protected MailerInterface $mailer,
         protected Environment $templating,
         TranslatorInterface $translator,
         SiteParameterResolver $siteParams,
@@ -29,7 +31,6 @@ class MailerService extends MailerFactory
         protected TokenManager $tokenManager
     ) {
         parent::__construct($translator, $siteParams, $router, $senderEmailResolver);
-        $this->failedRecipients = [];
     }
 
     public function createAndSendMessage(
@@ -40,7 +41,7 @@ class MailerService extends MailerFactory
         ?string $recipientEmail = null,
         ?string $replyTo = null
     ): bool {
-        if ($recipient && $recipient->getId() && $recipient instanceof User) {
+        if ($recipient instanceof User && $recipient->getId()) {
             $params['unsubscribeUrl'] = $this->getUnsubscribeUrl($recipient);
         }
         $params['locale'] =
@@ -62,31 +63,20 @@ class MailerService extends MailerFactory
 
     public function sendMessage(AbstractMessage $message): bool
     {
-        $delivered = true;
         $this->configureMessage($message);
-        $swiftMessage = self::generateEmptySwiftMessage($message);
+        $mailerMessage = self::generateEmptyMessage($message);
         $localizedParts = [];
         foreach ($message->getRecipients() as $recipient) {
             $locale = $recipient->getLocale() ?: $this->siteParams->getDefaultLocale();
             $this->cacheLocalizedPartsIfNotYet($localizedParts, $message, $locale);
-            $swiftMessage
-                ->setSubject($localizedParts[$locale]['subject'])
-                ->setBody($localizedParts[$locale]['body'])
+            $mailerMessage
+                ->subject($localizedParts[$locale]['subject'])
+                ->html($localizedParts[$locale]['body'])
             ;
-            $this->sendSwiftMessageToRecipient($swiftMessage, $recipient);
+            $this->sendMessageToRecipient($mailerMessage, $recipient);
         }
 
-        return $delivered;
-    }
-
-    public function getFailedRecipients(): array
-    {
-        return $this->failedRecipients;
-    }
-
-    public function getMailerTransport(): \Swift_Transport
-    {
-        return $this->mailer->getTransport();
+        return true;
     }
 
     private function configureMessage(AbstractMessage $message): AbstractMessage
@@ -98,25 +88,26 @@ class MailerService extends MailerFactory
         return $message;
     }
 
-    private static function generateEmptySwiftMessage(AbstractMessage $message): \Swift_Message
+    private static function generateEmptyMessage(AbstractMessage $message): Email
     {
-        $swiftMessage = new \Swift_Message();
-        $swiftMessage->setContentType('text/html')->setFrom([
-            $message->getSenderEmail() => $message->getSenderName(),
-        ]);
+        $email = (new Email())
+            ->html('')
+            ->from(new Address($message->getSenderEmail(), $message->getSenderName() ?? ''))
+        ;
 
         if (!empty($message->getBcc())) {
-            $swiftMessage->setBcc($message->getBcc());
-        }
-        if (!empty($message->getCC())) {
-            $swiftMessage->setCc($message->getCC());
-        }
-        if (!empty($message->getReplyTo())) {
-            // We don't want to keep name.
-            $swiftMessage->setReplyTo([$message->getReplyTo() => null]);
+            $email->bcc(...$message->getBcc());
         }
 
-        return $swiftMessage;
+        if (!empty($message->getCC())) {
+            $email->cc(...$message->getCC());
+        }
+
+        if (!empty($message->getReplyTo())) {
+            $email->replyTo($message->getReplyTo());
+        }
+
+        return $email;
     }
 
     private function generateLocalizedSubjectFromMessage(
@@ -165,16 +156,15 @@ class MailerService extends MailerFactory
         return $body;
     }
 
-    private function sendSwiftMessageToRecipient(
-        \Swift_Message $swiftMessage,
+    /**
+     * @throws TransportExceptionInterface
+     */
+    private function sendMessageToRecipient(
+        Email $email,
         MessageRecipient $recipient
     ): void {
-        $swiftMessage->setTo([$recipient->getEmailAddress() => $recipient->getFullName()]);
-        $this->mailer->send($swiftMessage, $this->failedRecipients); // todo not translated if not twig
-        // See https://github.com/mustafaileri/swiftmailer/commit/d289295235488cdc79473260e04e3dabd2dac3ef
-        if ($this->mailer->getTransport()->isStarted()) {
-            $this->mailer->getTransport()->stop();
-        }
+        $email->to(new Address($recipient->getEmailAddress(), $recipient->getFullName() ?? ''));
+        $this->mailer->send($email);
     }
 
     private function cacheLocalizedPartsIfNotYet(

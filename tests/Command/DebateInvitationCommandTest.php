@@ -34,7 +34,7 @@ class DebateInvitationCommandTest extends MailerSnapshotCommandTestCase
             'maxime.pouessel@cap-collectif.com',
             'email-debate-launch-subject'
         );
-        self::assertStringContainsString('debate-mail-lancement', $message->getBody());
+        self::assertStringContainsString('debate-mail-lancement', (string) $message->getHtmlBody());
         $this->assertEmailMatchesSnapshot($message, 'email_debate_test.html');
     }
 
@@ -53,7 +53,7 @@ class DebateInvitationCommandTest extends MailerSnapshotCommandTestCase
 
         $message = $emails->getMessageForRecipient('user@test.com');
         $this->assertEmailMetadata($message, 'user@test.com', 'email-debate-launch-subject');
-        self::assertStringContainsString('debate-mail-lancement', $message->getBody());
+        self::assertStringContainsString('debate-mail-lancement', (string) $message->getHtmlBody());
         $this->assertEmailMatchesSnapshot($message, 'email_debate_launch.html');
     }
 
@@ -73,7 +73,7 @@ class DebateInvitationCommandTest extends MailerSnapshotCommandTestCase
 
         $message = $emails->getMessageForRecipient('user@test.com');
         $this->assertEmailMetadata($message, 'user@test.com', 'email-debate-reminder-subject');
-        self::assertStringContainsString('debate-mail-relance', $message->getBody());
+        self::assertStringContainsString('debate-mail-relance', (string) $message->getHtmlBody());
         $this->assertEmailMatchesSnapshot($message, 'email_debate_reminder.html');
     }
 

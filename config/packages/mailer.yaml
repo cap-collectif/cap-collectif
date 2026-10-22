@@ -1,3 +1,24 @@
 framework:
     mailer:
         dsn: '%env(SYMFONY_MAILER_URL)%'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+    Capco\AppBundle\Mailer\MailerService: ~
+    Capco\AppBundle\Mailer\Transport\LastMailerDeliveryDetails: ~
+
+when@prod:
+    services:
+        Capco\AppBundle\Mailer\Transport\ConfiguredTransport:
+            decorates: mailer.transports
+            autowire: true
+            arguments:
+                $smtpTransport: '@Capco\AppBundle\Mailer\Transport\ConfiguredTransport.inner'
+                $transportFactory: '@mailer.transport_factory'
+                $productionSmtpMailer: '%env(bool:SYMFONY_PRODUCTION_SMTP_MAILER)%'
+                $apiDsns:
+                    mandrill: '%env(MAILER_DSN_MANDRILL)%'
+                    mailjet: '%env(MAILER_DSN_MAILJET)%'

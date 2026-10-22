@@ -8,6 +8,12 @@ use Capco\AppBundle\Manager\TokenManager;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\Mailer\Event\MessageEvent;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\Transport\NullTransport;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
@@ -19,10 +25,9 @@ abstract class MailerSnapshotCommandTestCase extends DatabaseCommandTestCase
     protected function captureEmails(): EmailCaptureListener
     {
         $capture = new EmailCaptureListener();
-        $mailer = new \Swift_Mailer(
-            new \Swift_Transport_NullTransport(new \Swift_Events_SimpleEventDispatcher())
-        );
-        $mailer->registerPlugin($capture);
+        $dispatcher = new EventDispatcher();
+        $dispatcher->addListener(MessageEvent::class, $capture->onMessage(...));
+        $mailer = new Mailer(new NullTransport($dispatcher));
 
         $container = self::getContainer();
         $twig = $container->get(Environment::class);
@@ -79,7 +84,7 @@ abstract class MailerSnapshotCommandTestCase extends DatabaseCommandTestCase
     }
 
     protected function assertEmailMatchesSnapshot(
-        \Swift_Mime_SimpleMessage $message,
+        Email $message,
         string $snapshotFilename
     ): void {
         $snapshot = file_get_contents(static::EMAIL_SNAPSHOT_DIRECTORY . '/' . $snapshotFilename);
@@ -89,7 +94,7 @@ abstract class MailerSnapshotCommandTestCase extends DatabaseCommandTestCase
     }
 
     protected function updateEmailSnapshot(
-        \Swift_Mime_SimpleMessage $message,
+        Email $message,
         string $snapshotFilename
     ): void {
         $written = file_put_contents(
@@ -100,12 +105,12 @@ abstract class MailerSnapshotCommandTestCase extends DatabaseCommandTestCase
         self::assertIsInt($written);
     }
 
-    protected function getSnapshotBody(\Swift_Mime_SimpleMessage $message): string
+    protected function getSnapshotBody(Email $message): string
     {
         $body = preg_replace(
             '#(?<=actionToken\?token=)[^&"\'<\s]+#',
             'SNAPSHOT_TOKEN',
-            $message->getBody()
+            (string) $message->getHtmlBody()
         );
         $body = preg_replace(
             '#(?<=/profile/followings/)[^/?&"\'<\s]+#',
@@ -117,32 +122,36 @@ abstract class MailerSnapshotCommandTestCase extends DatabaseCommandTestCase
     }
 
     protected function assertEmailMetadata(
-        \Swift_Mime_SimpleMessage $message,
+        Email $message,
         string $recipient,
         string $subject
     ): void {
-        self::assertArrayHasKey($recipient, (array) $message->getTo());
-        self::assertArrayHasKey('assistance@cap-collectif.com', (array) $message->getFrom());
+        self::assertContains($recipient, array_map(static fn (Address $address): string => $address->getAddress(), $message->getTo()));
+        self::assertContains('assistance@cap-collectif.com', array_map(static fn (Address $address): string => $address->getAddress(), $message->getFrom()));
         self::assertStringContainsString($subject, $message->getSubject());
     }
 }
 
-final class EmailCaptureListener implements \Swift_Events_SendListener
+final class EmailCaptureListener
 {
-    /** @var list<\Swift_Mime_SimpleMessage> */
+    /** @var list<Email> */
     public array $messages = [];
 
-    public function beforeSendPerformed(\Swift_Events_SendEvent $event): void
+    public function onMessage(MessageEvent $event): void
     {
-        $this->messages[] = clone $event->getMessage();
+        $message = $event->getMessage();
+        if (!$message instanceof Email) {
+            throw new \RuntimeException('Expected an email message.');
+        }
+
+        $this->messages[] = clone $message;
     }
 
-    public function sendPerformed(\Swift_Events_SendEvent $event): void {}
-
-    public function getMessageForRecipient(string $recipient): \Swift_Mime_SimpleMessage
+    public function getMessageForRecipient(string $recipient): Email
     {
         foreach ($this->messages as $message) {
-            if (\array_key_exists($recipient, (array) $message->getTo())) {
+            $recipients = array_map(static fn (Address $address): string => $address->getAddress(), $message->getTo());
+            if (\in_array($recipient, $recipients, true)) {
                 return $message;
             }
         }
@@ -150,7 +159,7 @@ final class EmailCaptureListener implements \Swift_Events_SendListener
         throw new \RuntimeException(sprintf('No email was captured for %s.', $recipient));
     }
 
-    public function getMessageWithSubject(string $subject): \Swift_Mime_SimpleMessage
+    public function getMessageWithSubject(string $subject): Email
     {
         foreach ($this->messages as $message) {
             if (str_contains((string) $message->getSubject(), $subject)) {

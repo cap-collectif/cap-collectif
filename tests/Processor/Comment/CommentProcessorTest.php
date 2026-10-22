@@ -12,6 +12,7 @@ use Capco\AppBundle\Repository\CommentRepository;
 use Capco\Tests\Command\EmailCaptureListener;
 use Capco\Tests\Command\MailerSnapshotCommandTestCase;
 use Swarrot\Broker\Message;
+use Symfony\Component\Mime\Email;
 
 /**
  * @internal
@@ -140,7 +141,7 @@ class CommentProcessorTest extends MailerSnapshotCommandTestCase
 
         $message = $this->getMessageWithSubject($emails, $subject);
         if ('' !== $body) {
-            self::assertStringContainsString($body, $message->getBody());
+            self::assertStringContainsString($body, (string) $message->getHtmlBody());
         }
     }
 
@@ -201,7 +202,7 @@ class CommentProcessorTest extends MailerSnapshotCommandTestCase
             ? $emails->getMessageForRecipient($recipient)
             : $this->getMessageWithSubject($emails, $subject);
         self::assertStringContainsString($subject, (string) $message->getSubject());
-        self::assertStringContainsString($body, $message->getBody());
+        self::assertStringContainsString($body, (string) $message->getHtmlBody());
     }
 
     /** @return iterable<string, array{array<string, mixed>, string, string, null|string}> */
@@ -262,7 +263,7 @@ class CommentProcessorTest extends MailerSnapshotCommandTestCase
         return $processor;
     }
 
-    private function getMessageWithSubject(EmailCaptureListener $emails, string $subject): \Swift_Mime_SimpleMessage
+    private function getMessageWithSubject(EmailCaptureListener $emails, string $subject): Email
     {
         foreach ($emails->messages as $message) {
             if (str_contains((string) $message->getSubject(), $subject)) {

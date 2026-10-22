@@ -3,10 +3,9 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
+use Capco\AppBundle\DBAL\Enum\MailerType;
 use Capco\AppBundle\Entity\UserInvite;
 use Capco\AppBundle\Entity\UserInviteEmailMessage;
-use Capco\AppBundle\Mailer\Transport\MailjetTransport;
-use Capco\AppBundle\Mailer\Transport\MandrillTransport;
 use Capco\AppBundle\Repository\UserInviteRepository;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
@@ -15,6 +14,8 @@ use Symfony\Component\Console\Exception\InvalidOptionException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Mailer\Bridge\Mailchimp\Transport\MandrillApiTransport;
+use Symfony\Component\Mailer\Bridge\Mailjet\Transport\MailjetApiTransport;
 
 class CheckUserInviteStatusCommand extends Command
 {
@@ -63,16 +64,16 @@ class CheckUserInviteStatusCommand extends Command
 
             /** @var UserInviteEmailMessage $lastEmailMessage */
             $lastEmailMessage = $invitation->getEmailMessages()->last();
-            $usedProviderClass = $lastEmailMessage->getMailjetId()
-                ? MailjetTransport::class
-                : MandrillTransport::class;
+            $usedProviderClass = MailerType::MAILJET === $lastEmailMessage->getMailerType()
+                ? MailjetApiTransport::class
+                : MandrillApiTransport::class;
             $this->publisher->publish(
                 CapcoAppBundleMessagesTypes::USER_INVITE_CHECK,
                 new Message(
                     json_encode([
                         'id' => $lastEmailMessage->getId(),
                         'provider' => $usedProviderClass,
-                    ])
+                    ], \JSON_THROW_ON_ERROR)
                 )
             );
         }

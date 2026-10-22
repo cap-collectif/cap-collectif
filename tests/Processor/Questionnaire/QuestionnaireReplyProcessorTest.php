@@ -9,6 +9,7 @@ use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\Tests\Command\EmailCaptureListener;
 use Capco\Tests\Command\MailerSnapshotCommandTestCase;
 use Swarrot\Broker\Message;
+use Symfony\Component\Mime\Email;
 
 /**
  * @internal
@@ -166,7 +167,7 @@ class QuestionnaireReplyProcessorTest extends MailerSnapshotCommandTestCase
         return $processor;
     }
 
-    private function getMessageWithSubject(EmailCaptureListener $emails, string $subject): \Swift_Mime_SimpleMessage
+    private function getMessageWithSubject(EmailCaptureListener $emails, string $subject): Email
     {
         foreach ($emails->messages as $message) {
             if (str_contains((string) $message->getSubject(), $subject)) {

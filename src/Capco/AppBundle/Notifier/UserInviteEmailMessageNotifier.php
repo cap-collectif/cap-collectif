@@ -11,16 +11,16 @@ use Capco\AppBundle\Mailer\Message\UserInvite\UserInviteNewInvitation;
 use Capco\AppBundle\Mailer\Message\UserInvite\UserInviteNewInvitationByOrganization;
 use Capco\AppBundle\Mailer\SenderEmailDomains\MailjetClient;
 use Capco\AppBundle\Mailer\SenderEmailDomains\MandrillClient;
-use Capco\AppBundle\Mailer\Transport\MailjetTransport;
-use Capco\AppBundle\Mailer\Transport\MandrillTransport;
+use Capco\AppBundle\Mailer\Transport\LastMailerDeliveryDetails;
 use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Entity\User;
-use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
+use Symfony\Component\Mailer\Bridge\Mailchimp\Transport\MandrillApiTransport;
+use Symfony\Component\Mailer\Bridge\Mailjet\Transport\MailjetApiTransport;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -31,11 +31,12 @@ final class UserInviteEmailMessageNotifier extends BaseNotifier
         SiteParameterResolver $siteParams,
         RouterInterface $router,
         LocaleResolver $localeResolver,
-        private readonly Publisher $publisher,
         private readonly EntityManagerInterface $entityManager,
         private readonly LoggerInterface $logger,
         private readonly MailjetClient $mailjetClient,
-        private readonly MandrillClient $mandrillClient
+        private readonly MandrillClient $mandrillClient,
+        private readonly LastMailerDeliveryDetails $deliveryDetails,
+        private readonly Publisher $publisher,
     ) {
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
     }
@@ -46,11 +47,11 @@ final class UserInviteEmailMessageNotifier extends BaseNotifier
     ): bool {
         $inviteStatus = null;
         if (
-            MailjetTransport::class === $providerClass
+            MailjetApiTransport::class === $providerClass
             && ($inviteMailjetId = $emailMessage->getMailerId())
         ) {
             $response = $this->mailjetClient->get('message/' . $inviteMailjetId);
-            $responseBody = json_decode($response->getBody()->getContents(), true);
+            $responseBody = json_decode($response->getBody()->getContents(), true, 512, \JSON_THROW_ON_ERROR);
             $messageStatus = $responseBody['Data'][0]['Status'];
             if (MailjetClient::STATUS_QUEUED === $messageStatus) {
                 throw new UserInviteMessageQueuedException(UserInviteMessageQueuedException::MESSAGE_DEFAULT_QUEUED);
@@ -77,7 +78,7 @@ final class UserInviteEmailMessageNotifier extends BaseNotifier
         }
 
         if (
-            MandrillTransport::class === $providerClass
+            MandrillApiTransport::class === $providerClass
             && ($inviteMandrillId = $emailMessage->getMailerId())
         ) {
             $response = $this->mandrillClient->post('messages/info', ['id' => $inviteMandrillId]);
@@ -157,11 +158,11 @@ final class UserInviteEmailMessageNotifier extends BaseNotifier
 
     public function deliver(UserInviteEmailMessage $emailMessage, bool $delivered): bool
     {
-        $mailerType = $this->getMailerType();
+        $mailerType = $this->deliveryDetails->getMailerType();
+        $messageId = $this->deliveryDetails->getMessageId();
+        $tracksProviderStatus = $messageId && \in_array($mailerType, [MailerType::MAILJET, MailerType::MANDRILL], true);
         $emailMessage->setMailerType($mailerType);
-        $messageId = $this->getLastMessageId();
-
-        if ($messageId) {
+        if ($tracksProviderStatus) {
             $emailMessage->setMailerId($messageId);
         } else {
             $emailMessage->setInternalStatus(UserInviteEmailMessage::SENT);
@@ -169,72 +170,19 @@ final class UserInviteEmailMessageNotifier extends BaseNotifier
 
         $this->entityManager->flush();
 
-        if ($messageId) {
+        if ($tracksProviderStatus) {
+            $providerClass = MailerType::MAILJET === $mailerType
+                ? MailjetApiTransport::class
+                : MandrillApiTransport::class;
             $this->publisher->publish(
                 CapcoAppBundleMessagesTypes::USER_INVITE_CHECK,
-                new Message(
-                    json_encode([
-                        'id' => $emailMessage->getId(),
-                        'provider' => ClassUtils::getClass($this->getMailerTransport()),
-                    ])
-                )
+                new Message(json_encode([
+                    'id' => $emailMessage->getId(),
+                    'provider' => $providerClass,
+                ], \JSON_THROW_ON_ERROR))
             );
         }
 
         return $delivered;
-    }
-
-    private function getMailerTransport()
-    {
-        $mailerTransport = $this->mailer->getMailerTransport();
-
-        if (!$mailerTransport) {
-            return null;
-        }
-
-        if (method_exists(ClassUtils::getClass($mailerTransport), 'getTransport')) {
-            return $mailerTransport->getTransport();
-        }
-
-        return null;
-    }
-
-    private function getLastMessageId(): ?string
-    {
-        $transport = $this->getMailerTransport();
-
-        if (!$transport) {
-            $this->logger->error('The current transport instance is null.');
-
-            return null;
-        }
-
-        if (method_exists(ClassUtils::getClass($transport), 'getLastMessageId')) {
-            return $transport->getLastMessageId();
-        }
-
-        $this->logger->error(
-            'The current transport instance does not implement `getLastMessageId` method.'
-        );
-
-        return null;
-    }
-
-    private function getMailerType(): string
-    {
-        $transport = $this->getMailerTransport();
-
-        if (!$transport) {
-            return MailerType::SMTP;
-        }
-
-        if ($transport instanceof MailjetTransport) {
-            return MailerType::MAILJET;
-        }
-        if ($transport instanceof MandrillTransport) {
-            return MailerType::MANDRILL;
-        }
-
-        return MailerType::SMTP;
     }
 }

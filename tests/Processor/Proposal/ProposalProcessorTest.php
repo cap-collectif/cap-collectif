@@ -33,6 +33,7 @@ use Doctrine\ORM\Query\FilterCollection;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Mime\Email;
 
 /**
  * @internal
@@ -532,7 +533,7 @@ class ProposalProcessorTest extends MailerSnapshotCommandTestCase
         return $processor;
     }
 
-    private function assertSnapshot(\Swift_Mime_SimpleMessage $message, string $snapshot): void
+    private function assertSnapshot(Email $message, string $snapshot): void
     {
         if ('1' === getenv('UPDATE_EMAIL_SNAPSHOTS')) {
             $this->updateEmailSnapshot($message, $snapshot);
