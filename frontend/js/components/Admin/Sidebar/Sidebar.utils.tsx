@@ -52,7 +52,9 @@ export const URL_MAP = {
     '/admin-next/custom-code',
     '/admin/map/',
     '/admin/redirect/',
+    // migrated with feature flag, keep it until the flag is removed for this page
     '/admin/favicon/',
+    '/admin-next/favicon',
     '/admin/font/',
     '/admin/settings/settings.global/',
     '/admin-next/performance-settings',

@@ -201,6 +201,29 @@ describe('<Sidebar />', () => {
     expect(wrapper.find('a[href$="/admin-next/mailing-lists"]')).toHaveLength(1)
   })
 
+  it('links to the Sonata favicon page while the migration is disabled', () => {
+    const wrapper = render(
+      <MockProviders store={{ default: { features }, user: { user: userAdmin } }}>
+        <Sidebar appVersion="2020.07.07-xsinjdic" defaultAccordeon="reglages" />
+      </MockProviders>,
+    )
+    expect(wrapper.find('a[href$="/admin/favicon/list"]')).toHaveLength(1)
+  })
+
+  it('links to the Admin Next favicon page while the migration is enabled', () => {
+    const wrapper = render(
+      <MockProviders
+        store={{
+          default: { features: { ...features, unstable__sonata_migration_to_admin_next: true } },
+          user: { user: userAdmin },
+        }}
+      >
+        <Sidebar appVersion="2020.07.07-xsinjdic" defaultAccordeon="reglages" />
+      </MockProviders>,
+    )
+    expect(wrapper.find('a[href$="/admin-next/favicon"]')).toHaveLength(1)
+  })
+
   it('renders when the user is a project admin and not an admin', () => {
     const wrapper = render(
       <MockProviders

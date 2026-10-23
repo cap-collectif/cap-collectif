@@ -232,7 +232,7 @@
             },
             {
                 "title": "website-icon",
-                "href": "/admin/favicon/list",
+                "href": "/admin-next/favicon",
                 "rolesRequired": [],
                 "featuresRequired": []
             },

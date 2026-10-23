@@ -100,6 +100,18 @@ describe('getSideBarItemsFiltered', () => {
     expect(getEmailingItem('admin-menu-emailing-list', featureFlags)?.href).toBe('/admin-next/mailing-lists')
   })
 
+  it('switches the favicon route with the migration flag', () => {
+    const getFaviconItem = (featureFlags = defaultFeatureFlags) =>
+      getSideBarItemsFiltered(true, true, featureFlags, false, null, false)
+        .find(item => item.id === 'settings')
+        ?.items.find(item => item.title === 'website-icon')
+
+    expect(getFaviconItem()?.href).toBe('/admin/favicon/list')
+    expect(getFaviconItem({ ...defaultFeatureFlags, unstable__sonata_migration_to_admin_next: true })?.href).toBe(
+      '/admin-next/favicon',
+    )
+  })
+
   it('hides the Hub API Green item when its feature flag is disabled', () => {
     const sideBarItems = getSideBarItemsFiltered(
       true,
