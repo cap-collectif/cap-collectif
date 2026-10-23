@@ -40,6 +40,7 @@ const OtherStep = /* GraphQL */ `
   query OtherStep($id: ID!) {
     node(id: $id) {
       ... on OtherStep {
+        canDelete
         hubMetadata {
           enabled
           aiotCode
