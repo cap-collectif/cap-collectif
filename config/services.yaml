@@ -8,7 +8,6 @@ parameters:
     jms_i18n_routing.pattern_generation_strategy.class: Capco\AppBundle\Router\DefaultPatternGenerationStrategy
     locales: ['en-GB', 'fr-FR', 'es-ES', 'de-DE', 'nl-NL', 'sv-SE', 'eu-EU', 'oc-OC', 'ur-IN']
     jms_serializer.serialized_name_annotation_strategy.class: Capco\AppBundle\Utils\IdenticalUnlessSpecifiedPropertyNamingStrategy
-    disable_mail_delivery: false
     #
     # Variables set by env values :
     #
@@ -154,7 +153,6 @@ parameters:
     env(SYMFONY_ROUTER__REQUEST_CONTEXT__HOST): 'capco.dev'
     env(SYMFONY_ROUTER__REQUEST_CONTEXT__SCHEME): 'https'
     env(SYMFONY_ASSETS_VERSION): 'v1'
-    env(SYMFONY_DISABLE_MAIL_DELIVERY): 'false'
     env(SYMFONY_RABBITMQ_HOST): '127.0.0.1'
     env(SYMFONY_RABBITMQ_PORT): '5672'
     env(SYMFONY_RABBITMQ_NODENAME): 'rabbit'
@@ -162,6 +160,7 @@ parameters:
     env(SYMFONY_INSTANCE_DEFAULT_ADMIN_PASSWORD): 'admin'
     env(SYMFONY_REMEMBER_SECRET): 'secretRemember'
     env(SYMFONY_INSTANCE_REMEMBER_SECRET): 'secretRemember'
+    env(SYMFONY_SECRET): 'secretRemember'
     env(SYMFONY_MAGICLINKS_DURATION_IN_MINUTES): '5'
     # Turnstile testing tokens that forces an interactive challenge (same as Google Recaptcha)
     # see https://developers.cloudflare.com/turnstile/frequently-asked-questions/
