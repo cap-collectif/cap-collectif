@@ -30,6 +30,7 @@ const UpdateOtherStep = /* GraphQL */ `
           folderNumber
           contactEmail
         }
+        canDelete
       }
     }
   }
@@ -165,6 +166,7 @@ describe.each(['public-inquiry', 'public-consultation'])('protected documents st
           folderNumber: 'T0603151600',
           contactEmail: 'contact@example.com',
         },
+        canDelete: true,
       },
     })
   })
