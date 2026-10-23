@@ -16,11 +16,15 @@ class PageRepository extends EntityRepository implements SluggableRepositoryInte
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * Only published pages are reachable by their slug, whatever the viewer's role, like articles.
+     */
     public function getBySlug(string $slug): ?Page
     {
         $qb = $this->createQueryBuilder('p')
             ->leftJoin('p.translations', 'pt')
             ->andWhere('pt.slug = :slug')
+            ->andWhere('p.isEnabled = true')
             ->setParameter('slug', $slug)
         ;
 

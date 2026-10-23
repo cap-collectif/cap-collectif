@@ -41,6 +41,16 @@ const CustomPagesQuery = /* GraphQL */ `
   }
 `
 
+// Query used by the public page (admin-next/src/app/pages/[slug]/page.tsx).
+const PageBySlugQuery = /* GraphQL */ `
+  query PageBySlugQuery($slug: String!) {
+    nodeSlug(entity: PAGE, slug: $slug) {
+      __typename
+      slug
+    }
+  }
+`
+
 const CreatePageMutation = /* GraphQL */ `
   mutation CreatePageMutation($input: CreatePageInput!) {
     createPage(input: $input) {
@@ -136,6 +146,28 @@ describe('Internal|custom pages', () => {
     const { createPage } = await graphql(CreatePageMutation, { input: { translations } }, 'internal_admin')
 
     expect(createPage).toEqual({ page: null, errorCode })
+  })
+
+  it('makes an unpublished page unreachable by its slug, even for an admin', async () => {
+    await expect(graphql(PageBySlugQuery, { slug: 'faq' }, 'internal')).resolves.toEqual({
+      nodeSlug: { __typename: 'Page', slug: 'faq' },
+    })
+
+    const { updatePage } = await graphql(
+      UpdatePageMutation,
+      {
+        input: {
+          id: FAQ_PAGE_ID,
+          isEnabled: false,
+          translations: [{ locale: 'FR_FR', title: 'FAQ FR', body: '<p>Contenu</p>' }],
+        },
+      },
+      'internal_admin',
+    )
+    expect(updatePage.errorCode).toBeNull()
+
+    await expect(graphql(PageBySlugQuery, { slug: 'faq' }, 'internal')).rejects.toThrowError('Entity not found.')
+    await expect(graphql(PageBySlugQuery, { slug: 'faq' }, 'internal_admin')).rejects.toThrowError('Entity not found.')
   })
 
   it('updates a page and removes its cover', async () => {
