@@ -60,7 +60,7 @@ describe('Internal|Query.homePageSections', () => {
 
   it('fetches home page sections with pagination (next page)', async () => {
     const firstPage = await graphql(HomePageSectionsQuery, { enabled: null, first: 3 }, 'internal_admin')
-    const endCursor = firstPage.homePageSections.pageInfo.endCursor
+    const { endCursor } = firstPage.homePageSections.pageInfo
 
     await expect(
       graphql(HomePageSectionsQuery, { enabled: null, first: 3, after: endCursor }, 'internal_admin'),
@@ -79,30 +79,55 @@ describe('Internal|Query.homePageSections', () => {
       ),
     ).resolves.toMatchSnapshot()
   })
+})
 
-  it('fetches home page sections ordered by created date DESC', async () => {
-    await expect(
-      graphql(
-        HomePageSectionsQuery,
-        {
-          enabled: null,
-          orderBy: { field: 'CREATED_AT', direction: 'DESC' },
-        },
-        'internal_admin',
-      ),
-    ).resolves.toMatchSnapshot()
+/**
+ * @jest-status compliant
+ * @jest-reason Exercises date ordering through the real API with controlled dates and database restoration.
+ */
+describe('Internal|Query.homePageSections date ordering', () => {
+  require('../../_setupDB')
+
+  // Restore the shared fixture baseline even when the last assertion fails.
+  afterAll(async () => {
+    const execFile = require('util').promisify(require('child_process').execFile)
+    await execFile('castor', [`${process.env.CI ? 'ci' : 'local'}:qa:restore-db`, '--confirm'])
   })
 
-  it('fetches home page sections ordered by updated date ASC', async () => {
-    await expect(
-      graphql(
-        HomePageSectionsQuery,
-        {
-          enabled: null,
-          orderBy: { field: 'UPDATED_AT', direction: 'ASC' },
-        },
-        'internal_admin',
-      ),
-    ).resolves.toMatchSnapshot()
+  beforeEach(async () => {
+    // These four Section.yaml fixtures have no feature dependencies. Keep the
+    // date groups different from position order and reverse them for updatedAt.
+    await runSql('UPDATE section SET enabled = 0')
+    await runSql(`
+      UPDATE section
+      SET enabled = 1,
+          created_at = CASE id
+            WHEN 'sectionIntro' THEN '2020-01-03 00:00:00'
+            WHEN 'sectionCustomDisabled' THEN '2020-01-01 00:00:00'
+            ELSE '2020-01-02 00:00:00'
+          END,
+          updated_at = CASE id
+            WHEN 'sectionIntro' THEN '2020-02-01 00:00:00'
+            WHEN 'sectionCustomDisabled' THEN '2020-02-03 00:00:00'
+            ELSE '2020-02-02 00:00:00'
+          END
+      WHERE id IN ('sectionIntro', 'sectionVideos', 'sectionCustomEnabled', 'sectionCustomDisabled')
+    `)
+  })
+
+  it.each([
+    ['CREATED_AT', 'ASC', ['sectionCustomDisabled', 'sectionCustomEnabled', 'sectionVideos', 'sectionIntro']],
+    ['CREATED_AT', 'DESC', ['sectionIntro', 'sectionCustomEnabled', 'sectionVideos', 'sectionCustomDisabled']],
+    ['UPDATED_AT', 'ASC', ['sectionIntro', 'sectionCustomEnabled', 'sectionVideos', 'sectionCustomDisabled']],
+    ['UPDATED_AT', 'DESC', ['sectionCustomDisabled', 'sectionCustomEnabled', 'sectionVideos', 'sectionIntro']],
+  ])('orders by %s %s and breaks date ties by ascending ID', async (field, direction, expectedIds) => {
+    const { homePageSections } = await graphql(
+      HomePageSectionsQuery,
+      { enabled: true, orderBy: { field, direction } },
+      'internal_admin',
+    )
+
+    expect(homePageSections.totalCount).toBe(4)
+    expect(homePageSections.edges.map(({ node }) => node.id)).toEqual(expectedIds)
   })
 })

@@ -15,6 +15,14 @@ See `docs/agents/domain.md`.
 
 - `docs/agents/skills/cypress-local/SKILL.md`: launch and troubleshoot local Cypress E2E tests with the project's configured Node version and Chrome.
 
+### CircleCI investigations
+
+Try the installed `circleci` CLI before browser access or unauthenticated API calls
+when investigating pipelines, jobs, test failures, or artifacts. Check its help
+and authentication first; a browser login failure does not mean CLI access is
+unavailable. See [the CircleCI agent guide](docs/agents/circleci.md) for commands,
+parallel execution logs, and sandbox troubleshooting.
+
 ## Rules for AI Assistants
 
 1. **Comments in English**: Always write code comments in English, regardless of the conversation language.
