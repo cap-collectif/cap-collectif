@@ -234,9 +234,9 @@ met à jour l'instance QA dans le dépôt `cluster`. Il ne contient pas les éta
 preprod/production ni la création de release Sentry. Les étapes communes de construction et de
 publication sont factorisées entre les deux jobs.
 
-`build-production-image` reste exécuté par le workflow `deploy` sur `preprod` et `master`, car
-ce job porte encore les étapes de déploiement correspondantes. Il n'est plus exécuté
-automatiquement pour chaque branche de pull request.
+`build-production-image` est exécuté par le workflow automatique de `preprod` et par le workflow
+`deploy` de `master`, car ce job porte encore les étapes de déploiement correspondantes. Il
+n'est pas exécuté automatiquement pour chaque branche de pull request.
 
 `prepare` est conservé dans le workflow QA pour le moment : l'image Docker de production
 consomme notamment les artefacts générés par les builds JavaScript et `admin-next`. La création
@@ -246,12 +246,12 @@ réellement nécessaires.
 Le secret GitHub `CIRCLECI_TOKEN` doit être configuré pour permettre à l'action de déclencher
 CircleCI.
 
-#### Profils CI manuels
+#### Workflows CI déclenchés par labels
 
 Le workflow `test-and-build` n'est plus exécuté automatiquement pour les pushes de branches de
 pull request. Les pipelines CircleCI déclenchés par le dépôt n'exécutent par défaut aucun profil
-de tests. Le workflow GitHub `Trigger CircleCI profile` permet de lancer manuellement un profil
-sur la branche sélectionnée :
+de tests. Le workflow GitHub `Trigger CircleCI workflows` déclenche les workflows correspondant
+aux labels présents sur une pull request du même repository :
 
 - `static` : analyse PHP, linters, vérification TypeScript, vérification GraphQL et couverture
   des spécifications Cypress ;
@@ -259,6 +259,26 @@ sur la branche sélectionnée :
 - `full` : workflow complet `test-and-build`.
 - `build-prod` : préparation puis construction de l’image via `build-production-image`, sans
   exécuter les autres jobs de validation ; ce profil est disponible pour les branches de pull request.
+- `🔬 In test` : workflow `qa`, qui construit et déploie l’image sur l’instance QA.
+
+Le workflow est déclenché dans les cas suivants :
+
+- à l'ajout d'un label, le workflow correspondant est déclenché et les workflows déjà actifs
+  correspondant aux autres labels sont conservés ;
+- au retrait d'un label, le workflow correspondant est annulé ;
+- à la synchronisation d'une pull request, les workflows correspondant à tous les labels
+  présents sont annulés puis relancés, y compris le workflow QA pour `🔬 In test` ;
+- manuellement avec `workflow_dispatch`, en choisissant un profil à exécuter (`static`, `tests`,
+  `full` ou `build-prod`).
+
+Les événements du même pull request sont traités séquentiellement avec une file d'attente GitHub.
+Chaque exécution recharge les labels courants et les exécutions supersédées sont ignorées afin
+qu'un ajout ou retrait rapide de plusieurs labels ne déclenche pas de workflows obsolètes ou en
+double.
+
+L'ouverture ou la réouverture d'une pull request ne déclenche aucun workflow. Si aucun label géré
+n'est présent, aucun workflow n'est lancé. Les événements de pull request sont limités aux PR du
+même repository ; ils ne doivent pas exécuter du code provenant d'un repository fork.
 
 Le workflow `test-and-build` se termine par le job `test-and-build-gate`, un job `no-op` qui
 réussit uniquement lorsque tous les jobs de validation du workflow ont réussi. Ce job doit être
@@ -266,11 +286,22 @@ configuré comme check obligatoire sur les pull requests vers `preprod` afin d'i
 manuelle du profil `full` avant le merge.
 
 Le profil est transmis à CircleCI via le paramètre enum `ci_profile`. La valeur `none` est utilisée
-pour les pipelines déclenchés automatiquement par le dépôt et n'exécute aucun profil de tests.
+pour les pipelines déclenchés automatiquement par le dépôt et n'exécute aucun profil de tests
+sur les branches de pull request.
 
-Les déploiements sur `preprod` et `master` restent automatiques dans le workflow CircleCI
-`deploy`, qui conserve uniquement `prepare` et `build-production-image`. Le workflow QA reste
-déclenché automatiquement par le label `🔬 In test` et les synchronisations correspondantes.
+Sur `preprod`, la valeur `none` déclenche le workflow complet de validation et de construction,
+qui comprend notamment `build-production-image`. Sur `master`, le workflow automatique `deploy`
+reste limité à `prepare` et `build-production-image`. Le workflow QA reste indépendant des
+profils `static`, `tests`, `full` et `build-prod`, mais il est recalculé par le même mécanisme
+de labels et de synchronisation lorsqu'il porte le label `🔬 In test`.
+
+La mise en pause de l'instance QA est exécutée dans `Trigger CircleCI workflows`, après
+l'annulation réussie du workflow `qa` lors du retrait de `🔬 In test`, afin d'éviter une course
+entre CircleCI et la mise à jour du dépôt `cluster`.
+
+Les lectures et annulations de workflows CircleCI sont réessayées en cas d'erreur transitoire.
+Si une lecture ou une annulation échoue encore après les tentatives prévues, aucun nouveau workflow
+n'est déclenché et le job GitHub échoue afin d'éviter une exécution concurrente non maîtrisée.
 
 ### Statut
 

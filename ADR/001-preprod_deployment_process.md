@@ -90,6 +90,9 @@ Seules certaines personnes peuvent forcer le push sur preprod. Cette liste peut 
 
 - une fois mergé, aller sur la branche preprod et vérifier qu'une ci tourne bien sur la branche
 
+Le détail des workflows CircleCI automatiques et des profils déclenchés par les labels est
+documenté dans [l'ADR Continuous Integration](./001-continuous_integration.md).
+
 ![Check pr ci](./assets/check_pr_ci.png)
 
 - une fois la recette validée, il faut activer le github action pour merger le code de preprod dans master en allant dans l'onglet `Actions`
