@@ -115,9 +115,12 @@ suites déjà lancées.
 
 #### Disponibilité d'Admin Next avant Cypress
 
-Avant les tests Cypress backoffice, la CI attend une réponse HTTP 2xx ou 3xx d'Admin Next
-via le proxy `capco.test`. Le service lance son build en arrière-plan ; démarrer
-Docker ne garantit pas que Next.js écoute déjà sur son port. La vérification
+Avant tous les jobs Cypress (backoffice et frontoffice), la CI attend une réponse
+HTTP 2xx ou 3xx d'Admin Next via le proxy `capco.test`. Le même serveur Next.js rend
+aussi des pages front office (`/projects`, `/blog`, `/contact`, pages CMS…) que Symfony
+délègue via une réponse 418 interceptée par nginx. Le service lance son build en
+arrière-plan ; démarrer Docker ne garantit pas que Next.js écoute déjà sur son port,
+et nginx renvoie alors un 502. La vérification
 est limitée à cinq minutes et fait échouer la préparation si les erreurs réseau
 ou 5xx persistent, plutôt que de les ignorer dans les scénarios navigateur.
 
