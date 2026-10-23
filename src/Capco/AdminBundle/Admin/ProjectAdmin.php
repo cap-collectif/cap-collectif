@@ -155,7 +155,6 @@ final class ProjectAdmin extends CapcoAdmin
     protected function configure(): void
     {
         // $this->setTemplate('list', '@CapcoAdmin/Project/list.html.twig');
-        // $this->setTemplate('edit', '@CapcoAdmin/Project/edit.html.twig');
         parent::configure();
     }
 

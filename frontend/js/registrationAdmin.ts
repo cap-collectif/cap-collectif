@@ -10,9 +10,7 @@ import ProposalAdminPageApp from '~/startup/ProposalAdminPageApp'
 import UserAdminPageApp from '~/startup/UserAdminPageApp'
 import LocaleAdminPageApp from '~/startup/LocaleAdminPageApp'
 import ProjectAdminApp from '~/startup/ProjectAdminApp'
-import GlobalDistrictAdminApp from '~/startup/GlobalDistrictAdminApp'
 import EventAdminEditPageApp from '~/startup/EventAdminEditPageApp'
-import ProjectExternalProjectAdminAppDeprecated from '~/startup/ProjectExternalProjectAdminAppDeprecated'
 import FontAdminPageApp from '~/startup/FontAdminPageApp'
 import appStore from '~/stores/AppStore'
 import ProposalCreateFusionButtonApp from '~/startup/ProposalCreateFusionButtonApp'
@@ -43,9 +41,7 @@ ReactOnRails.register({
   ProposalCreateFusionButtonApp,
   LocaleAdminPageApp,
   ProjectAdminApp,
-  GlobalDistrictAdminApp,
   EventAdminEditPageApp,
-  ProjectExternalProjectAdminAppDeprecated,
   FontAdminPageApp,
   LanguageButtonApp,
   HomePageProjectsSectionConfigurationApp,

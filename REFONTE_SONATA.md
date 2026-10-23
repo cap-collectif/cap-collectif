@@ -428,20 +428,15 @@ flag), **à nettoyer** (Admin Next déjà en place, route legacy encore présent
   - URL : `/admin/font/list`
   - Composant : `FontAdminPageApp` (`FontController`)
 
-#### Code mort
+#### Déjà sur Admin Next, route legacy à nettoyer
 
-Templates sans aucun appelant (ou appel commenté). Avant de supprimer un composant, vérifier qu'il n'est pas monté
-ailleurs.
-
-| Template | Composant |
-|---|---|
-| `AppBundle/Resources/views/MediaAdmin/list.html.twig` | `MediaAdminPageApp` |
-| `AdminBundle/Resources/views/Questionnaire/list.html.twig` | `AdminQuestionnaireListApp` |
-| `AdminBundle/Resources/views/ProjectDistrict/list.html.twig` | `GlobalDistrictAdminApp` |
-| `AdminBundle/Resources/views/Redirect/list.html.twig` | `RedirectIoAdminPageApp` |
-| `AdminBundle/Resources/views/Proposal/create.html.twig` | `ProjectAdminApp` (encore utilisé par `AlphaProject/create.html.twig`) |
-| `AdminBundle/Resources/views/Project/edit.html.twig` (appel commenté dans `ProjectAdmin`) | `ProjectExternalProjectAdminAppDeprecated` |
-| `AdminBundle/Resources/views/ProposalForm/list.html.twig` (déclaré dans `ProposalFormAdmin`, mais le menu pointe vers `/admin-next/forms`) | `AdminProposalFormListApp` |
+- **Liste des formulaires de dépôt** — à nettoyer
+  - Route : `/admin/capco/app/proposalform/list` (encore active : `ProposalFormAdmin` garde la route `list`, le
+    menu Sonata et la redirection après suppression y mènent, et un test Cypress la visite)
+  - Code : template `list` déclaré dans `ProposalFormAdmin`, `ProposalForm/list.html.twig`. Le composant
+    `AdminProposalFormListApp` n'est plus enregistré : la page s'affiche vide.
+  - Remplacée par `/admin-next/forms` (lien de la sidebar). Supprimer le template seul ferait réapparaître la
+    liste Sonata par défaut : rediriger la route vers Admin Next.
 
 ### Nettoyage (en plus de la recette ci-dessous)
 
