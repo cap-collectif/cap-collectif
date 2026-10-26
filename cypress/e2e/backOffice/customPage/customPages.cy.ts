@@ -43,10 +43,15 @@ describe('Custom pages back office', () => {
     fillVisibleField('FR_FR-title', title)
     cy.get('.jodit-wysiwyg').filter(':visible').type('Cypress content', { delay: 0 })
     cy.interceptGraphQLOperation({ operationName: 'CreatePageMutation' })
+    cy.interceptGraphQLOperation({ operationName: 'CustomPageFormWrapperQuery' })
     clickVisibleButton('btn_create')
     // GraphQL answers 200 even on failure, so assert on the payload rather than the HTTP status.
     cy.wait('@CreatePageMutation').its('response.body.data.createPage.errorCode').should('eq', null)
 
+    // The creation form already has this title; wait for the edit form before modifying it.
+    cy.wait('@CustomPageFormWrapperQuery')
+    cy.location('pathname').should('eq', '/admin-next/custom-page')
+    cy.location('search').should('contain', 'id=')
     cy.get('#FR_FR-title').filter(':visible').should('have.value', title)
     fillVisibleField('FR_FR-title', updatedTitle)
     cy.get('.cap-switch__slider').click()
