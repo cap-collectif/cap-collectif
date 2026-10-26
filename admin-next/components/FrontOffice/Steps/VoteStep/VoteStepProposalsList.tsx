@@ -6,6 +6,7 @@ import ProposalCard from '@components/FrontOffice/ProposalCard/ProposalCard'
 import VoteStepEmptyList from './VoteStepEmptyList'
 import { useQueryState } from 'nuqs'
 import { exportLatLngBounds } from '@utils/leaflet'
+import ProjectsListPlaceholder from '@shared/projectCard/ProjectsListSkeleton'
 
 type TemplateColumns = {
   base: string
@@ -52,6 +53,7 @@ const PROPOSALS_FRAGMENT = graphql`
     form {
       objectType
     }
+    defaultSort
     proposals(
       first: $count
       after: $cursor
@@ -72,6 +74,10 @@ const PROPOSALS_FRAGMENT = graphql`
       edges {
         node {
           id
+          votes(stepId: $stepId, first: 0) {
+            totalCount
+            totalPointsCount
+          }
           ...ProposalCard_proposal @arguments(isAuthenticated: $isAuthenticated)
         }
       }
@@ -90,6 +96,7 @@ export const VoteStepProposalsList: React.FC<Props> = ({
   const { data, refetch } = usePaginationFragment(PROPOSALS_FRAGMENT, stepKey)
 
   const [latlngBounds] = useQueryState('latlngBounds')
+  const [sort] = useQueryState('sort')
   const mainView =
     data.__typename === 'CollectStep'
       ? data.mainView
@@ -136,7 +143,7 @@ export const VoteStepProposalsList: React.FC<Props> = ({
         block: 'center',
       })
     }
-  }, [data.proposals.edges, selectedId])
+  }, [data.proposals?.edges, selectedId])
 
   // Reset selection when map is hidden or list view changes
   React.useEffect(() => {
@@ -148,13 +155,30 @@ export const VoteStepProposalsList: React.FC<Props> = ({
   }, [isMapShown, listView, onSelectedIdChange])
 
   const proposalsLength = data?.proposals?.edges?.length
+  const currentSort = sort ?? (data.defaultSort === 'LEAST_VOTE' ? 'least-votes' : data.defaultSort?.toLowerCase())
+  const sortedEdges = React.useMemo(() => {
+    const edges = data.proposals?.edges ?? []
+    if (!['votes', 'least-votes', 'points', 'least-points'].includes(currentSort ?? '')) return edges
+
+    const isPointsSort = currentSort?.includes('points')
+    const isAscending = currentSort?.startsWith('least')
+    return [...edges].sort((first, second) => {
+      const firstCount = isPointsSort ? first.node.votes?.totalPointsCount ?? 0 : first.node.votes?.totalCount ?? 0
+      const secondCount = isPointsSort ? second.node.votes?.totalPointsCount ?? 0 : second.node.votes?.totalCount ?? 0
+      return (firstCount - secondCount) * (isAscending ? 1 : -1)
+    })
+  }, [currentSort, data.proposals?.edges])
 
   const gridTemplateColumns =
     listView === 'grid' ? [templateColumns.base, templateColumns.tablet, templateColumns.desktop] : '1fr'
 
+  if (!data.proposals) {
+    return <ProjectsListPlaceholder count={10} templateColumns={gridTemplateColumns} mt={0} />
+  }
+
   return proposalsLength ? (
     <Grid id="proposals-list" templateColumns={gridTemplateColumns} gap="lg" justifyItems="stretch">
-      {data.proposals.edges.map(({ node }) => (
+      {sortedEdges.map(({ node }) => (
         <Box
           key={node.id}
           ref={el => {

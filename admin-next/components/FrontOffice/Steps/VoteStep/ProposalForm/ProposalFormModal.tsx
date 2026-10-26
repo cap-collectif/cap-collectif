@@ -95,6 +95,7 @@ const PROPOSAL_FORM_FRAGMENT = graphql`
     usingIllustration
     illustrationHelpText
     titleHelpText
+    suggestingSimilarProposals
     usingWebPage
     usingFacebook
     usingTwitter
@@ -728,6 +729,8 @@ const ProposalFormModal: React.FC<Props> = props => {
             control={control}
             objectType={proposalForm.objectType}
             titleHelpText={proposalForm.titleHelpText}
+            proposalFormId={proposalForm.id}
+            suggestingSimilarProposals={proposalForm.suggestingSimilarProposals}
           />
 
           {proposalForm.usingSummary && (

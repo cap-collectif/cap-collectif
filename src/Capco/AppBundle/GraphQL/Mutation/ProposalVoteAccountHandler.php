@@ -6,13 +6,13 @@ use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Mediator;
 use Capco\AppBundle\Entity\Participant;
-use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ProposalStepInterface;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\Participant\ParticipantIsMeetingRequirementsResolver;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
@@ -28,6 +28,7 @@ class ProposalVoteAccountHandler
         private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository,
         private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         private readonly ParticipantIsMeetingRequirementsResolver $participantIsMeetingRequirementsResolver,
+        private readonly ProposalVotesDataLoader $proposalVotesDataLoader,
         private readonly EntityManagerInterface $em,
         private readonly Indexer $indexer
     ) {}
@@ -55,7 +56,7 @@ class ProposalVoteAccountHandler
             $isAccounted = $votesMin <= \count($userVotes) + ($isAddingVote ? 1 : -1);
             foreach ($userVotes as $userVote) {
                 $userVote->setIsAccounted($isAccounted);
-                //                $this->indexer->index(Proposal::class, $userVote->getProposal()->getId());
+                $this->proposalVotesDataLoader->invalidate($userVote->getProposal());
                 $this->indexer->index(AbstractVote::class, $userVote->getId());
             }
             $vote->setIsAccounted($isAccounted);
@@ -84,6 +85,7 @@ class ProposalVoteAccountHandler
 
         foreach ($existingVotes as $existingVote) {
             $existingVote->setIsAccounted($isAccounted);
+            $this->proposalVotesDataLoader->invalidate($existingVote->getProposal());
             $this->indexer->index(AbstractVote::class, $existingVote->getId());
         }
 

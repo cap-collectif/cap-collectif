@@ -20,4 +20,19 @@ export const VoteStepWebLayoutSkeleton: React.FC<{ hasMapView: boolean }> = ({ h
   </Box>
 )
 
+export const VoteStepProjectHeroSkeleton: React.FC = () => (
+  <Box backgroundColor="white" borderBottom="1px solid #e3e3e3" mb="md">
+    <Box maxWidth={pxToRem(1280)} width="100%" margin="auto" py={9} px={[4, 6]}>
+      <Flex gap="lg" flexDirection={['column-reverse', 'row']}>
+        <Box flex="1">
+          <Skeleton.Text width="35%" height={pxToRem(24)} mb="md" />
+          <Skeleton.Text width="80%" height={pxToRem(50)} mb="lg" />
+          <Skeleton.Text width="60%" height={pxToRem(24)} />
+        </Box>
+        <Skeleton.Text width={['100%', pxToRem(405)]} height={pxToRem(270)} />
+      </Flex>
+    </Box>
+  </Box>
+)
+
 export default VoteStepWebLayoutSkeleton

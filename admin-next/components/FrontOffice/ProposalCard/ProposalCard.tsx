@@ -15,6 +15,7 @@ import {
   Icon,
   Tag,
   Text,
+  Tooltip,
 } from '@cap-collectif/ui'
 import { VoteButton } from '@components/FrontOffice/VoteButton/VoteButton'
 import { ProposalCard_proposal$key } from '@relay/ProposalCard_proposal.graphql'
@@ -24,6 +25,7 @@ import stripHTML from '@shared/utils/stripHTML'
 import { getProposalAuthorDisplayName } from '@utils/proposalAuthor'
 import { parseAsInteger, useQueryState } from 'nuqs'
 import * as React from 'react'
+import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
 
 type Props = BoxProps & {
@@ -61,9 +63,10 @@ const PROPOSAL_FRAGMENT = graphql`
       username
       displayName
     }
-    viewerVote(step: $stepId) {
-      ranking
+    votes(stepId: $stepId, first: 0) {
+      totalPointsCount
     }
+    paperVotesTotalPointsCount(stepId: $stepId)
     status(step: $stepId) {
       name
       color
@@ -122,6 +125,7 @@ export const ProposalCard: React.FC<Props> = ({
 }) => {
   const proposal = useFragment(PROPOSAL_FRAGMENT, proposalKey)
   const step = useFragment(STEP_FRAGMENT, stepFragment)
+  const intl = useIntl()
   const authorName = getProposalAuthorDisplayName(proposal.author)
   const { id, title, url, media, summary, body, category, form, status } = proposal
   const summaryOrBodyExcerpt = stripHTML((summary ?? body ?? '') as string) || ''
@@ -129,7 +133,6 @@ export const ProposalCard: React.FC<Props> = ({
   const proposalCover = media?.url || category?.categoryImage?.image?.url
   const proposalIcon = category?.icon ? convertIconToDs(category?.icon) : undefined
   const proposalColor = category?.color || undefined
-  const maxPoints = step.votesLimit !== null ? step.votesLimit : step.votesMin
 
   const mainView =
     step.__typename === 'CollectStep'
@@ -142,6 +145,26 @@ export const ProposalCard: React.FC<Props> = ({
   const [isMapShown] = useQueryState('map_shown', parseAsInteger)
 
   const descriptionLineClamp = isMapShown !== 0 ? 3 : 4
+  const numericPointsCount = proposal.votes?.totalPointsCount ?? 0
+  const paperPointsCount = proposal.paperVotesTotalPointsCount ?? 0
+  const pointsTooltip =
+    numericPointsCount + paperPointsCount > 0 ? (
+      <>
+        {intl.formatMessage({ id: 'numeric-points-count' }, { num: numericPointsCount })}
+        {paperPointsCount > 0 && (
+          <>
+            <br />
+            {intl.formatMessage({ id: 'paper-points-count' }, { num: paperPointsCount })}
+          </>
+        )}
+      </>
+    ) : null
+  const pointsTag = (
+    <Tag variantColor="infoGray" transparent>
+      <Icon name={CapUIIcon.Trophy} />
+      <Text>{numericPointsCount + paperPointsCount}</Text>
+    </Tag>
+  )
 
   return (
     <Card
@@ -209,13 +232,12 @@ export const ProposalCard: React.FC<Props> = ({
                   <Icon name={CapUIIcon.Budget} />
                   <Text>{proposal.estimation}€</Text>
                 </Tag>
-              ) : step.votesRanking && proposal.viewerVote?.ranking !== null ? (
-                <Tag variantColor="infoGray" transparent>
-                  <Icon name={CapUIIcon.Trophy} />
-                  <Text>
-                    {proposal.viewerVote?.ranking !== undefined ? maxPoints - proposal.viewerVote?.ranking : 0}
-                  </Text>
-                </Tag>
+              ) : step.votesRanking ? (
+                pointsTooltip ? (
+                  <Tooltip label={pointsTooltip}>{pointsTag}</Tooltip>
+                ) : (
+                  pointsTag
+                )
               ) : (
                 <Tag variantColor="infoGray" transparent flexShrink={0}>
                   <Icon name={CapUIIcon.BubbleO} />

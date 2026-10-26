@@ -43,6 +43,7 @@ import { ensureGlobalId } from '@shared/utils/fromGlobalId'
 type Props = {
   stepId: string
   contributionId: string
+  returnUrl?: string
 }
 
 export type FormValues = {
@@ -173,7 +174,7 @@ const getParticipantToken = (): string | null => {
   return encodedToken ? window.atob(encodedToken) : null
 }
 
-const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId }) => {
+const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId, returnUrl }) => {
   const { viewerSession } = useAppContext()
   const isAuthenticated = !!viewerSession?.id
   const participantToken = getParticipantToken()
@@ -344,6 +345,7 @@ const ParticipationWorkflowModal: React.FC<Props> = ({ stepId, contributionId })
         requirementsUrl,
         contributionId: contributionGlobalId,
         contributionTypeName,
+        returnUrl,
         captchaError,
         setCaptchaError,
         captchaStepIndex,

@@ -1,7 +1,8 @@
 import { graphql } from 'react-relay'
 import { environment } from 'utils/relay-environement'
 import commitMutation from './commitMutation'
-import { GraphQLTaggedNode } from 'relay-runtime'
+import { commitLocalUpdate, GraphQLTaggedNode } from 'relay-runtime'
+import { applyOptimisticVoteAddition } from './proposalVoteOptimistic'
 import type {
   AddProposalVoteMutation,
   AddProposalVoteMutation$data,
@@ -9,64 +10,12 @@ import type {
 } from '@relay/AddProposalVoteMutation.graphql'
 
 const mutation = graphql`
-  mutation AddProposalVoteMutation($input: AddProposalVoteInput!, $stepId: ID!) {
+  mutation AddProposalVoteMutation($input: AddProposalVoteInput!) {
     addProposalVote(input: $input) {
       errorCode
       vote {
         id
-        step {
-          id
-          votesMin
-          votesLimit
-          budget
-          open
-          viewerVotes {
-            totalCount
-            creditsLeft
-            edges {
-              node {
-                id
-                ranking
-                proposal {
-                  id
-                  title
-                }
-              }
-            }
-          }
-          requirements {
-            viewerMeetsTheRequirements
-          }
-          proposals {
-            edges {
-              node {
-                id
-                estimation
-                viewerHasVote(step: $stepId)
-                viewerVote(step: $stepId) {
-                  id
-                  completionStatus
-                }
-                votes {
-                  totalCount
-                }
-              }
-            }
-          }
-        }
         completionStatus
-        proposal {
-          id
-          estimation
-          viewerHasVote(step: $stepId)
-          viewerVote(step: $stepId) {
-            id
-            completionStatus
-          }
-          votes {
-            totalCount
-          }
-        }
       }
     }
   }
@@ -76,16 +25,28 @@ type Variables = AddProposalVoteMutation$variables & {
   stepId: string
 }
 
-const commit = (variables: Variables, isAuthenticated = true): Promise<AddProposalVoteMutation$data> =>
-  commitMutation<AddProposalVoteMutation>(environment, {
+const commit = (variables: Variables, isAuthenticated = true): Promise<AddProposalVoteMutation$data> => {
+  const input = { ...variables.input, anonymously: !isAuthenticated }
+
+  return commitMutation<AddProposalVoteMutation>(environment, {
     mutation,
     variables: {
-      ...variables,
-      input: {
-        ...variables.input,
-        anonymously: !isAuthenticated,
-      },
+      input,
+    },
+    optimisticUpdater: store => applyOptimisticVoteAddition(store, input),
+    onCompleted: (data, errors) => {
+      const vote = data?.addProposalVote?.vote
+      if (
+        errors ||
+        data?.addProposalVote?.errorCode ||
+        !vote ||
+        vote.completionStatus !== 'COMPLETED'
+      ) {
+        return
+      }
+      commitLocalUpdate(environment, store => applyOptimisticVoteAddition(store, { ...input, voteId: vote.id }))
     },
   })
+}
 
 export default { commit }

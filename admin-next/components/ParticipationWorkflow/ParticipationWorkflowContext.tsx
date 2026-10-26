@@ -14,6 +14,7 @@ type Props = {
     stepId: string
     contributionId: string
     contributionTypeName: string
+    returnUrl?: string
     captchaError: string | null
     setCaptchaError: (captchaError: string | null) => void
     captchaStepIndex: number | null
@@ -33,6 +34,7 @@ type Context = {
   stepId: string
   contributionId: string
   contributionTypeName: string
+  returnUrl?: string
   captchaError: string | null
   setCaptchaError: (captchaError: string | null) => void
   captchaStepIndex: number | null

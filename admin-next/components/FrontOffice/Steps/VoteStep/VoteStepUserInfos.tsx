@@ -26,6 +26,7 @@ import useIsMobile from '@shared/hooks/useIsMobile'
 import { isWYSIWYGContentEmpty } from '@shared/utils/isWYSIWYGContentEmpty'
 import { useMatchMedia } from '@liinkiing/react-hooks'
 import { getContributionObjectTypeTranslationKey } from '@shared/constants/proposalStepObjectType'
+import { getTitleValue } from './VoteStepUserInfos.utils'
 
 export type StepUserVotesType =
   | 'minMaxRanking'
@@ -110,7 +111,7 @@ const VOTE_TYPE_CONFIG: Record<StepUserVotesType, VoteTypeConfig> = {
     buttonKey: 'votes',
     showCircularProgress: true,
     getTitleKey: (e, v) => (e ? 'ended' : v ? 'validated' : 'proposal-number'),
-    getDescKey: (e, v) => (e ? 'thanks' : v ? 'vote-others' : 'default'),
+    getDescKey: (e, v) => (e ? 'thanks' : v ? 'vote-more' : 'default'),
   },
   maxRanking: {
     buttonKey: 'ranking',
@@ -220,11 +221,7 @@ const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
   const hasVotesHelpText = !isWYSIWYGContentEmpty(step.votesHelpText)
 
   // Remaining votes/budget toward the next milestone, used by `proposal-number` title
-  const titleValue = (() => {
-    if (type === 'min' || (type === 'minMaxRanking' && !isValidated)) return (step.votesMin ?? 0) - voteProgress
-    if (type === 'max' || type === 'maxRanking' || type === 'budgetMinMax') return (step.votesLimit ?? 0) - voteProgress
-    return undefined
-  })()
+  const titleValue = getTitleValue(type, isValidated, step.votesMin, step.votesLimit, voteProgress)
 
   // n value passed to the description translation
   const descriptionValue = (() => {

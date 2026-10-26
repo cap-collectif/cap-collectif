@@ -112,15 +112,6 @@ const ProposalMarkerComponent: FC<ProposalMarkerProps> = ({ proposal: proposalKe
           markerRef.current?.getElement()?.classList.remove('active')
           window.dispatchEvent(new CustomEvent('proposal-selected', { detail: null }))
         },
-        mouseover: () => {
-          markerRef.current?.getElement()?.classList.add('active')
-          window.dispatchEvent(new CustomEvent('proposal-selected', { detail: proposal.id }))
-        },
-        mouseout: () => {
-          if (markerRef.current?.getPopup()?.isOpen()) return
-          markerRef.current?.getElement()?.classList.remove('active')
-          window.dispatchEvent(new CustomEvent('proposal-selected', { detail: null }))
-        },
       }}
     >
       {!isMobile && (

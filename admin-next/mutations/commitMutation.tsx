@@ -8,6 +8,7 @@ function commitMutation<TOperation extends MutationParameters = MutationParamete
     relayCommitMutation<TOperation>(environment, {
       ...config,
       onCompleted: (response, errors) => {
+        config.onCompleted?.(response, errors)
         if (errors) {
           return reject(errors[0])
         }

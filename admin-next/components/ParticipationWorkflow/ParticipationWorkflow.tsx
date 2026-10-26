@@ -8,15 +8,16 @@ import ParticipationWorkflowModal from './ParticipationWorkflowModal'
 type Props = {
   stepId: string
   contributionId: string
+  returnUrl?: string
 }
 
 export const CONTRIBUTION_ID_URL_PARAM = 'contributionId'
 
-const ParticipationWorkflow: React.FC<Props> = ({ stepId, contributionId }) => {
+const ParticipationWorkflow: React.FC<Props> = ({ stepId, contributionId, returnUrl }) => {
   return createPortal(
     <Box width="100%" height="100vh" position="absolute" top={0} left={0}>
       <Suspense fallback={<ModalSkeleton />}>
-        <ParticipationWorkflowModal stepId={stepId} contributionId={contributionId} />
+        <ParticipationWorkflowModal stepId={stepId} contributionId={contributionId} returnUrl={returnUrl} />
       </Suspense>
     </Box>,
     document.body,

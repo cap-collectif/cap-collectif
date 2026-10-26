@@ -3,6 +3,7 @@ import { VotesPopupCardRanking_vote$key } from '@relay/VotesPopupCardRanking_vot
 import { VotesPopupCardRanking_step$key } from '@relay/VotesPopupCardRanking_step.graphql'
 import { FC } from 'react'
 import { graphql, useFragment, useMutation } from 'react-relay'
+import { areVotesAccounted, getRankingPointsDelta } from '@mutations/proposalVoteOptimistic'
 
 interface Props {
   vote: VotesPopupCardRanking_vote$key
@@ -23,12 +24,15 @@ const STEP_FRAGMENT = graphql`
     id
     votesLimit
     votesMin
-    viewerVotes {
+    rankedViewerVotes: viewerVotes(orderBy: { field: POSITION, direction: ASC }) {
       edges {
         node {
           id
           anonymous
           ranking
+          proposal {
+            id
+          }
         }
       }
     }
@@ -36,10 +40,25 @@ const STEP_FRAGMENT = graphql`
 `
 
 const UPDATE_VOTES_MUTATION = graphql`
-  mutation VotesPopupCardRankingUpdateVotesMutation($input: UpdateProposalVotesInput!) {
+  mutation VotesPopupCardRankingUpdateVotesMutation($input: UpdateProposalVotesInput!, $stepId: ID!) {
     updateProposalVotes(input: $input) {
       step {
         ...VotesPopup_proposalStep
+        rankedViewerVotes: viewerVotes(orderBy: { field: POSITION, direction: ASC }) {
+          totalCount
+          edges {
+            node {
+              id
+              ranking
+              proposal {
+                id
+                votes(stepId: $stepId, first: 0) {
+                  totalPointsCount
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -69,13 +88,13 @@ const VotesPopupCardRanking: FC<Props> = ({ vote: voteKey, step: stepKey }) => {
 
   const handleUpdate = (delta: number) => {
     const newRanking = vote.ranking + delta
-    if (newRanking < 0 || newRanking > step.viewerVotes.edges.length - 1) return
+    if (newRanking < 0 || newRanking > step.rankedViewerVotes.edges.length - 1) return
     handleUpdateRanking(vote.id, delta)
   }
 
   const handleUpdateRanking = (voteId: string, delta: number) => {
     // Make a copy of the votes removing the references and readonly
-    let updatedVotes = structuredClone(step.viewerVotes.edges)
+    let updatedVotes = structuredClone(step.rankedViewerVotes.edges)
     updatedVotes = updateVoteRanking(updatedVotes, voteId, delta)
     const normalisedVotes = updatedVotes.map(edge => ({ id: edge.node.id, anonymous: edge.node.anonymous }))
 
@@ -85,16 +104,22 @@ const VotesPopupCardRanking: FC<Props> = ({ vote: voteKey, step: stepKey }) => {
           step: step.id,
           votes: normalisedVotes,
         },
+        stepId: step.id,
       },
       optimisticUpdater: store => {
         const stepRecord = store.get(step.id)
         if (!stepRecord) return
 
-        const connection = stepRecord.getLinkedRecord('viewerVotes')
+        const connection = stepRecord.getLinkedRecord('viewerVotes', {
+          orderBy: { field: 'POSITION', direction: 'ASC' },
+        })
         if (!connection) return
 
         const existingEdges = connection.getLinkedRecords('edges')
         if (!existingEdges) return
+
+        const currentVotesCount = Number(connection.getValue('totalCount') ?? 0)
+        if (!areVotesAccounted(currentVotesCount, step.votesMin)) return
 
         const edgesById = new Map(
           existingEdges.map(edgeRecord => [edgeRecord.getLinkedRecord('node')?.getValue('id'), edgeRecord]),
@@ -104,7 +129,20 @@ const VotesPopupCardRanking: FC<Props> = ({ vote: voteKey, step: stepKey }) => {
 
         reorderedEdges.forEach((edgeRecord, index) => {
           const nodeRecord = edgeRecord.getLinkedRecord('node')
-          if (nodeRecord) nodeRecord.setValue(index, 'ranking')
+          if (!nodeRecord) return
+
+          const previousRanking = Number(nodeRecord.getValue('ranking') ?? 0)
+          nodeRecord.setValue(index, 'ranking')
+
+          const proposal = nodeRecord.getLinkedRecord('proposal')
+          const votes = proposal?.getLinkedRecord('votes', { first: 0, stepId: step.id })
+          if (!votes) return
+
+          votes.setValue(
+            Number(votes.getValue('totalPointsCount') ?? 0) +
+              getRankingPointsDelta(previousRanking, index, step.votesLimit),
+            'totalPointsCount',
+          )
         })
 
         connection.setLinkedRecords(reorderedEdges, 'edges')
@@ -127,9 +165,9 @@ const VotesPopupCardRanking: FC<Props> = ({ vote: voteKey, step: stepKey }) => {
       <Box
         as="button"
         onClick={() => handleUpdate(1)}
-        opacity={isLoading || vote.ranking == step.viewerVotes.edges.length - 1 ? 0.3 : 1}
-        disabled={isLoading || vote.ranking == step.viewerVotes.edges.length - 1}
-        sx={{ cursor: isLoading || vote.ranking == step.viewerVotes.edges.length - 1 ? 'default' : 'pointer' }}
+        opacity={isLoading || vote.ranking == step.rankedViewerVotes.edges.length - 1 ? 0.3 : 1}
+        disabled={isLoading || vote.ranking == step.rankedViewerVotes.edges.length - 1}
+        sx={{ cursor: isLoading || vote.ranking == step.rankedViewerVotes.edges.length - 1 ? 'default' : 'pointer' }}
       >
         <Icon name={CapUIIcon.ArrowDownO} />
       </Box>

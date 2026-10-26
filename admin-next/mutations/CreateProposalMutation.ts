@@ -48,10 +48,12 @@ const mutation = graphql`
           completionStatus
         }
         viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
-        votes {
+        votes(stepId: $stepId, first: 0) {
           totalCount
+          totalPointsCount
         }
-        paperVotesTotalCount
+        paperVotesTotalCount(stepId: $stepId)
+        paperVotesTotalPointsCount(stepId: $stepId)
         estimation
         form {
           usingIllustration

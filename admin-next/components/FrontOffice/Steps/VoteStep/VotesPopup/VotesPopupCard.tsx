@@ -10,13 +10,16 @@ import {
   Icon,
   useTheme,
 } from '@cap-collectif/ui'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import VotesPopupCardRanking from './VotesPopupCardRanking'
 import { graphql, useFragment } from 'react-relay'
 import { VotesPopupCard_proposalStep$key } from '@relay/VotesPopupCard_proposalStep.graphql'
 import { VotesPopupCard_proposalVote$key } from '@relay/VotesPopupCard_proposalVote.graphql'
 import RemoveProposalVoteMutation from '@mutations/RemoveProposalVoteMutation'
+import RemoveProposalSmsVoteMutation from '@mutations/RemoveProposalSmsVoteMutation'
 import convertIconToDs from '@shared/utils/convertIconToDs'
+import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
+import CookieMonster from '@shared/utils/CookieMonster'
 
 interface Props {
   step: VotesPopupCard_proposalStep$key
@@ -31,9 +34,6 @@ const VOTE_FRAGMENT = graphql`
       id
       title
       estimation
-      votes {
-        totalCount
-      }
       media {
         url
       }
@@ -59,21 +59,14 @@ const STEP_FRAGMENT = graphql`
     ...VotesPopupCardRanking_step
     votesRanking
     votesMin
-    viewerVotes {
-      totalCount
-      creditsLeft
-      edges {
-        node {
-          id
-        }
-      }
-    }
   }
 `
 
 const VotesPopupCard: FC<Props> = ({ step: stepKey, vote: voteKey }) => {
   const vote = useFragment(VOTE_FRAGMENT, voteKey)
   const step = useFragment(STEP_FRAGMENT, stepKey)
+  const { viewerSession } = useAppContext()
+  const [isLoading, setIsLoading] = useState(false)
 
   const { colors } = useTheme()
 
@@ -82,26 +75,42 @@ const VotesPopupCard: FC<Props> = ({ step: stepKey, vote: voteKey }) => {
   const proposalIcon = proposal.category?.icon ? convertIconToDs(proposal.category.icon) : undefined
   const proposalColor = proposal.category?.color || undefined
 
-  const removeVote = () => {
-    RemoveProposalVoteMutation.commit(
-      {
-        input: {
-          proposalId: vote.proposal.id,
+  const removeVote = async () => {
+    if (isLoading) return
+
+    setIsLoading(true)
+    try {
+      if (viewerSession) {
+        await RemoveProposalVoteMutation.commit(
+          {
+            input: {
+              proposalId: vote.proposal.id,
+              stepId: step.id,
+            },
+            stepId: step.id,
+          },
+          {
+            proposalId: vote.proposal.id,
+            stepId: step.id,
+            voteId: vote.id,
+          },
+          false,
+        )
+      } else {
+        await RemoveProposalSmsVoteMutation.commit({
+          input: {
+            proposalId: vote.proposal.id,
+            stepId: step.id,
+            token: CookieMonster.getParticipantCookie(),
+          },
           stepId: step.id,
-        },
-        stepId: step.id,
-      },
-      {
-        proposalId: vote.proposal.id,
-        stepId: step.id,
-        voteId: vote.id,
-        currentVotesCount: vote.proposal.votes?.totalCount ?? 0,
-        currentViewerVotesCount: step.viewerVotes?.totalCount ?? 0,
-        currentCreditsLeft: step.viewerVotes?.creditsLeft ?? null,
-        proposalEstimation: vote.proposal.estimation ?? null,
-        votesMin: step.votesMin ?? null,
-      },
-    )
+        }, false)
+      }
+    } catch {
+      // The optimistic Relay update is automatically reverted on failure.
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -136,6 +145,8 @@ const VotesPopupCard: FC<Props> = ({ step: stepKey, vote: voteKey }) => {
         variant="tertiary"
         variantColor="hierarchy"
         onClick={removeVote}
+        disabled={isLoading}
+        isLoading={isLoading}
         sx={{ '&:hover': { color: colors.danger.base + '!important' } }}
       >
         <Icon name={CapUIIcon.TrashO} />

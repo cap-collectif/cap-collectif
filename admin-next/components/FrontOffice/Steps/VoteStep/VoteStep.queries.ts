@@ -56,6 +56,16 @@ export const VOTE_STEP_QUERY = graphql`
   }
 `
 
+export const VOTE_STEP_HERO_QUERY = graphql`
+  query VoteStepHeroQuery($stepId: ID!) {
+    step: node(id: $stepId) {
+      ... on ProposalStep {
+        ...VoteStepHeroSection_proposalStep
+      }
+    }
+  }
+`
+
 export const VOTE_STEP_POST_CREATE_REFRESH_QUERY = graphql`
   query VoteStepPostCreateRefreshQuery(
     $term: String

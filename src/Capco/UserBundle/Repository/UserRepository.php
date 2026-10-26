@@ -1782,6 +1782,8 @@ class UserRepository extends EntityRepository
                 )
             )
             ->andWhere('user.confirmationToken IS NULL')
+            ->orderBy('user.createdAt', 'ASC')
+            ->addOrderBy('user.id', 'ASC')
             ->setParameter('collectStep', $step)
             ->setFirstResult($offset)
             ->setMaxResults($limit)

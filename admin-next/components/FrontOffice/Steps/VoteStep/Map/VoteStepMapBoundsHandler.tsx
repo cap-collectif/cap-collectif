@@ -21,7 +21,7 @@ const VoteStepMapBoundsHandler: FC<Props> = ({ markers }) => {
       if (validMarkers.length > 0) {
         const bounds = validMarkers.map(m => [m.address!.lat!, m.address!.lng!] as [number, number])
         isProgrammaticMove.current = true
-        map.fitBounds(bounds, { padding: [50, 50] })
+        map.fitBounds(bounds, { padding: [25, 25] })
         isInitialFitBounds.current = true
       }
     }

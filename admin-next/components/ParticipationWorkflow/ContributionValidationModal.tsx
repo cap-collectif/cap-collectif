@@ -20,7 +20,7 @@ const ContributionValidationModal: React.FC<Props> = ({ contributionId }) => {
   const intl = useIntl()
   const token = CookieMonster.getParticipantCookie()
   const { commit } = useValidateContributionMutation()
-  const { contributionTypeName } = useParticipationWorkflow()
+  const { contributionTypeName, returnUrl } = useParticipationWorkflow()
   const { totalSteps, currentStep, goToNextStep } = useMultiStepModal()
 
   const hasNextStep = totalSteps > currentStep + 1
@@ -82,7 +82,7 @@ const ContributionValidationModal: React.FC<Props> = ({ contributionId }) => {
           return
         }
 
-        window.location.href = buildToastUrl(response?.validateContribution?.redirectUrl, {
+        window.location.href = buildToastUrl(returnUrl ?? response?.validateContribution?.redirectUrl, {
           variant: 'success',
           message: successTranslationKey,
         })
@@ -91,7 +91,7 @@ const ContributionValidationModal: React.FC<Props> = ({ contributionId }) => {
         return mutationErrorToast(intl)
       },
     })
-  }, [commit, intl, contributionId, token, currentStep, successTranslationKey, hasNextStep, goToNextStep])
+  }, [commit, intl, contributionId, token, currentStep, successTranslationKey, hasNextStep, goToNextStep, returnUrl])
 
   return (
     <ModalLayout

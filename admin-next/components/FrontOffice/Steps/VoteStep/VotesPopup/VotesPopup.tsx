@@ -14,11 +14,24 @@ const FRAGMENT = graphql`
   fragment VotesPopup_proposalStep on ProposalStep {
     id
     actionButtonLabel
+    votesRanking
     form {
       objectType
     }
     ...VotesPopupCard_proposalStep
-    viewerVotes {
+    defaultViewerVotes: viewerVotes {
+      edges {
+        node {
+          id
+          ranking
+          proposal {
+            id
+          }
+          ...VotesPopupCard_proposalVote
+        }
+      }
+    }
+    rankedViewerVotes: viewerVotes(orderBy: { field: POSITION, direction: ASC }) {
       edges {
         node {
           id
@@ -40,12 +53,13 @@ const VotesPopup: FC<Props> = ({ step: stepKey }) => {
     step.actionButtonLabel === 'SUPPORT'
       ? 'front.proposal.empty-support'
       : `front.contribution.${getContributionObjectTypeTranslationKey(step.form?.objectType)}.empty-vote`
+  const viewerVotes = step.votesRanking ? step.rankedViewerVotes : step.defaultViewerVotes
 
   return (
     <Flex id="votes-list" width="100%" justifyContent="flex-start" flexDirection="column" gap="md">
       {/* We must spread because the relay proxy does not support the sort method */}
-      {step.viewerVotes.edges.length > 0 ? (
-        [...step.viewerVotes.edges]
+      {viewerVotes.edges.length > 0 ? (
+        [...viewerVotes.edges]
           .sort((a, b) => a.node.ranking - b.node.ranking)
           .map(edge => <VotesPopupCard key={edge.node.id} step={step} vote={edge.node} />)
       ) : (
