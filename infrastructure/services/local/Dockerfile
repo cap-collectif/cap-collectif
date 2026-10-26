@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM debian:bookworm AS base
+FROM debian:bookworm-slim AS base
 
 ENV PHP_VERSION 8.3
 
