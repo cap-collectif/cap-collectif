@@ -64,8 +64,8 @@ class RegisterMutation implements MutationInterface
         $this->rateLimiter->setLimit(3);
 
         if (
-            false ===
-            $this->rateLimiter->canDoAction(
+            false
+            === $this->rateLimiter->canDoAction(
                 self::RATE_LIMITER_ACTION,
                 $this->requestGuesser->getClientIp()
             )

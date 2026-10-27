@@ -132,7 +132,7 @@ function selectedPhpunitConfiguration(array $tests): string
     // Castor's static runtime has no DOM extension; generate XML inside the PHP container.
     $xml = capture([
         'docker', 'exec', '-w', '/var/www', 'capco_application_1', 'php', '-r',
-        'require ".castor/shared/qa.php"; echo \\Capco\\Castor\\Qa\\selectedPhpunitConfigurationXml(json_decode($argv[1], true, 512, JSON_THROW_ON_ERROR));',
+        'require ".castor/shared/qa.php"; echo \Capco\Castor\Qa\selectedPhpunitConfigurationXml(json_decode($argv[1], true, 512, JSON_THROW_ON_ERROR));',
         json_encode($tests, \JSON_THROW_ON_ERROR),
     ]);
     $path = tempnam(\dirname(__DIR__, 2), '.phpunit-selected-');

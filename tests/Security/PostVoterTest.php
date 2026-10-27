@@ -6,6 +6,7 @@ use Capco\AppBundle\DBAL\Enum\OrganizationMemberRoleType;
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\Organization\OrganizationMember;
 use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Security\PostVoter;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -94,7 +95,7 @@ class PostVoterTest extends AuthorizationTestCase
         $post = new Post();
         if ($throughProject) {
             $post->setOwner(new User());
-            $post->addProject((new \Capco\AppBundle\Entity\Project())->setOwner($viewer));
+            $post->addProject((new Project())->setOwner($viewer));
         } else {
             $post->setOwner($viewer);
         }

@@ -128,11 +128,11 @@ class DeveloperController extends Controller
             $alias = (string) $aliases[0];
             $solutionName = (string) $solution->name;
 
-            $existsInPublicSchema =
-                isset($publicSchemaTypeNames[$solutionName])
+            $existsInPublicSchema
+                = isset($publicSchemaTypeNames[$solutionName])
                 || isset($publicSchemaTypeNames[$alias]);
-            $existsInPreviewSchema =
-                isset($previewSchemaTypeNames[$solutionName])
+            $existsInPreviewSchema
+                = isset($previewSchemaTypeNames[$solutionName])
                 || isset($previewSchemaTypeNames[$alias]);
             $existsOnlyInPreviewSchema = $existsInPreviewSchema && !$existsInPublicSchema;
 

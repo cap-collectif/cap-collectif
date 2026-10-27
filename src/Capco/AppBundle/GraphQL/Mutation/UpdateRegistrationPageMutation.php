@@ -34,8 +34,8 @@ class UpdateRegistrationPageMutation implements MutationInterface
         }
 
         $this->cache->deleteItem(
-            SiteParameterRuntime::CACHE_KEY .
-                SiteParameterRepository::REGISTRATION_PAGE_CODE_KEYNAME
+            SiteParameterRuntime::CACHE_KEY
+                . SiteParameterRepository::REGISTRATION_PAGE_CODE_KEYNAME
         );
 
         return ['customcode' => $codeParameter->getValue()];

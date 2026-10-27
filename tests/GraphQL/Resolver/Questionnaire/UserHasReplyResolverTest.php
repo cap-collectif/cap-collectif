@@ -2,6 +2,8 @@
 
 namespace Capco\Tests\GraphQL\Resolver\Questionnaire;
 
+use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Entity\Reply;
 use Capco\Tests\IdentityWebTestCase;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
@@ -22,12 +24,12 @@ final class UserHasReplyResolverTest extends IdentityWebTestCase
     public function testTheEmailLookupFindsOnlyRepliesInTheRequestedQuestionnaire(string $replyLocation, bool $exists, bool $expected, string $viewer): void
     {
         $user = $this->account();
-        $questionnaire = $this->em->getRepository(\Capco\AppBundle\Entity\Questionnaire::class)->findOneBy([]);
+        $questionnaire = $this->em->getRepository(Questionnaire::class)->findOneBy([]);
         self::assertNotNull($questionnaire);
         if ('none' !== $replyLocation) {
-            $replyQuestionnaire = 'requested' === $replyLocation ? $questionnaire : (new \Capco\AppBundle\Entity\Questionnaire())->setTitle('Unrelated questionnaire');
+            $replyQuestionnaire = 'requested' === $replyLocation ? $questionnaire : (new Questionnaire())->setTitle('Unrelated questionnaire');
             $this->em->persist($replyQuestionnaire);
-            $reply = (new \Capco\AppBundle\Entity\Reply())->setAuthor($user)->setQuestionnaire($replyQuestionnaire)->setDraft(false);
+            $reply = (new Reply())->setAuthor($user)->setQuestionnaire($replyQuestionnaire)->setDraft(false);
             $this->em->persist($reply);
             $this->em->flush();
         }

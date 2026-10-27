@@ -108,8 +108,8 @@ class PreConfigureProjectQuestionnairePersister
                 $title
             );
 
-            $alwaysJumpDestinationQuestionString =
-                $questionsWithJump['alwaysJumpDestinationQuestion'];
+            $alwaysJumpDestinationQuestionString
+                = $questionsWithJump['alwaysJumpDestinationQuestion'];
             if ($alwaysJumpDestinationQuestionString) {
                 $alwaysJumpDestinationQuestion = $this->abstractQuestionRepository->findOneByQuestionnaireAndTitle(
                     $questionnaire,

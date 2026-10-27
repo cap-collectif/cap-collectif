@@ -3,6 +3,7 @@
 namespace Capco\Tests\Mutation;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalForm;
 use Capco\Tests\IdentityWebTestCase;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
@@ -27,7 +28,7 @@ final class DeleteAccountMutationTest extends IdentityWebTestCase
         $neighbor = $this->account();
         $neighborId = $neighbor->getId();
         $neighborEmail = $neighbor->getEmail();
-        $proposal = (new Proposal())->setProposalForm($this->em->getRepository(\Capco\AppBundle\Entity\ProposalForm::class)->findOneBy([]))->setAuthor($user)->setTitle('Associated content')->setBody('Retained body');
+        $proposal = (new Proposal())->setProposalForm($this->em->getRepository(ProposalForm::class)->findOneBy([]))->setAuthor($user)->setTitle('Associated content')->setBody('Retained body');
         $this->em->persist($proposal);
         $this->em->flush();
         $proposalId = $proposal->getId();
@@ -93,10 +94,10 @@ final class DeleteAccountMutationTest extends IdentityWebTestCase
         $target = $this->account()->addRole('ROLE_SUPER_ADMIN');
         $targetId = $target->getId();
         $targetEmail = $target->getEmail();
-        $openForm = $this->em->find(\Capco\AppBundle\Entity\ProposalForm::class, 'proposalForm1');
+        $openForm = $this->em->find(ProposalForm::class, 'proposalForm1');
         self::assertNotNull($openForm);
         $openForm->getStep()->setTimeless(true)->setIsEnabled(true);
-        $retainedForm = (new \Capco\AppBundle\Entity\ProposalForm())->setTitle('Retained contribution structure');
+        $retainedForm = (new ProposalForm())->setTitle('Retained contribution structure');
         $this->em->persist($retainedForm);
         $removable = (new Proposal())->setProposalForm($openForm)->setAuthor($target)->setTitle('Removable content')->setBody('Removable body');
         $retained = (new Proposal())->setProposalForm($retainedForm)->setAuthor($target)->setTitle('Retained structure')->setBody('Retained personal content');

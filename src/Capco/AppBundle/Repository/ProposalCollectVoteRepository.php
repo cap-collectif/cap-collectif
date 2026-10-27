@@ -845,11 +845,11 @@ class ProposalCollectVoteRepository extends EntityRepository
                         $pointsAvailable[$result['position']]
                     )
                 ) {
-                    $data['pointsBySteps'][$result['stepId']] +=
-                        $pointsAvailable[$result['position']];
+                    $data['pointsBySteps'][$result['stepId']]
+                        += $pointsAvailable[$result['position']];
                 } elseif (isset($pointsAvailable[$result['position']])) {
-                    $data['pointsBySteps'][$result['stepId']] =
-                        $pointsAvailable[$result['position']];
+                    $data['pointsBySteps'][$result['stepId']]
+                        = $pointsAvailable[$result['position']];
                 }
             }
         }

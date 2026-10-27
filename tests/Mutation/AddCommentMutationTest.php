@@ -2,6 +2,9 @@
 
 namespace Capco\Tests\Mutation;
 
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalComment;
+use Capco\AppBundle\Entity\ProposalForm;
 use Capco\Tests\IdentityWebTestCase;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
@@ -21,9 +24,9 @@ final class AddCommentMutationTest extends IdentityWebTestCase
     /** @dataProvider commentStates */
     public function testAnonymousCommentsArePersistedOnlyWhenTheTargetAcceptsThem(string $kind, ?string $error): void
     {
-        $form = $this->em->getRepository(\Capco\AppBundle\Entity\ProposalForm::class)->findOneBy([]);
+        $form = $this->em->getRepository(ProposalForm::class)->findOneBy([]);
         $form->setCommentable('closed' !== $kind);
-        $proposal = (new \Capco\AppBundle\Entity\Proposal())->setProposalForm($form)->setAuthor($this->account())->setTitle('Comment target')->setBody('Public content')->setDraft(false)->setPublishedAt(new \DateTime('2020-01-01'))->setCommentable('disabled' !== $kind);
+        $proposal = (new Proposal())->setProposalForm($form)->setAuthor($this->account())->setTitle('Comment target')->setBody('Public content')->setDraft(false)->setPublishedAt(new \DateTime('2020-01-01'))->setCommentable('disabled' !== $kind);
         $this->em->persist($proposal);
         $this->em->flush();
         $id = $proposal->getId();
@@ -32,7 +35,7 @@ final class AddCommentMutationTest extends IdentityWebTestCase
         $result = $this->graphql('mutation($input: AddCommentInput!) { addComment(input: $input) { userErrors { message } commentEdge { node { id } } } }', ['input' => ['commentableId' => $targetId, 'body' => 'An anonymous comment', 'authorName' => 'Anonymous author', 'authorEmail' => 'author@gmail.com']])['addComment'];
         self::assertSame(null === $error ? [] : [['message' => $error]], $result['userErrors']);
         $this->em->clear();
-        $comments = $this->em->getRepository(\Capco\AppBundle\Entity\ProposalComment::class)->findBy(['proposal' => $id]);
+        $comments = $this->em->getRepository(ProposalComment::class)->findBy(['proposal' => $id]);
         self::assertCount(null === $error ? 1 : 0, $comments);
         if (null === $error) {
             self::assertSame('An anonymous comment', $comments[0]->getBody());
@@ -45,14 +48,26 @@ final class AddCommentMutationTest extends IdentityWebTestCase
         }
     }
 
+    /** @return iterable<string, array{string, ?string}> */
+    public static function commentStates(): iterable
+    {
+        yield 'accepted anonymous comment' => ['open', null];
+
+        yield 'missing target' => ['missing', 'Commentable not found.'];
+
+        yield 'comments disabled' => ['disabled', "Can't add a comment to a not commentable."];
+
+        yield 'new comments closed' => ['closed', "Comment's are not longer accepted"];
+    }
+
     /** @dataProvider authenticatedCommenters */
     public function testAuthenticatedCommentsKeepTheirAuthorAndModerationStatus(string $role, bool $moderated, string $status): void
     {
         $viewer = $this->account()->addRole($role);
         $viewerId = $viewer->getId();
-        $form = $this->em->getRepository(\Capco\AppBundle\Entity\ProposalForm::class)->findOneBy([]);
+        $form = $this->em->getRepository(ProposalForm::class)->findOneBy([]);
         $form->setCommentable(true);
-        $proposal = (new \Capco\AppBundle\Entity\Proposal())->setProposalForm($form)->setAuthor($this->account())->setTitle('Authenticated comment target')->setBody('Public content')->setDraft(false)->setPublishedAt(new \DateTime('2020-01-01'))->setCommentable(true);
+        $proposal = (new Proposal())->setProposalForm($form)->setAuthor($this->account())->setTitle('Authenticated comment target')->setBody('Public content')->setDraft(false)->setPublishedAt(new \DateTime('2020-01-01'))->setCommentable(true);
         $this->em->persist($proposal);
         $this->em->flush();
         $proposalId = $proposal->getId();
@@ -63,7 +78,7 @@ final class AddCommentMutationTest extends IdentityWebTestCase
 
         self::assertSame([], $result['userErrors']);
         $this->em->clear();
-        $comments = $this->em->getRepository(\Capco\AppBundle\Entity\ProposalComment::class)->findBy(['proposal' => $proposalId]);
+        $comments = $this->em->getRepository(ProposalComment::class)->findBy(['proposal' => $proposalId]);
         self::assertCount(1, $comments);
         self::assertSame('An authenticated comment', $comments[0]->getBody());
         self::assertSame($viewerId, $comments[0]->getAuthor()->getId());
@@ -80,17 +95,5 @@ final class AddCommentMutationTest extends IdentityWebTestCase
         yield 'ordinary account awaiting moderation' => ['ROLE_USER', true, 'PENDING'];
 
         yield 'administrator bypasses moderation' => ['ROLE_ADMIN', true, 'APPROVED'];
-    }
-
-    /** @return iterable<string, array{string, ?string}> */
-    public static function commentStates(): iterable
-    {
-        yield 'accepted anonymous comment' => ['open', null];
-
-        yield 'missing target' => ['missing', 'Commentable not found.'];
-
-        yield 'comments disabled' => ['disabled', "Can't add a comment to a not commentable."];
-
-        yield 'new comments closed' => ['closed', "Comment's are not longer accepted"];
     }
 }

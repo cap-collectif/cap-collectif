@@ -3,6 +3,7 @@
 namespace Capco\Tests\UserBundle\Security;
 
 use Capco\Tests\OAuthLogoutWebTestCase;
+use Capco\UserBundle\Security\Http\Logout\Handler\FranceConnectLogoutHandler;
 
 /**
  * @internal
@@ -26,8 +27,8 @@ final class FranceConnectLogoutHandlerTest extends OAuthLogoutWebTestCase
             $user = $this->account();
             $this->browser->loginUser($user);
             $session = self::getContainer()->get('session');
-            $session->set(\Capco\UserBundle\Security\Http\Logout\Handler\FranceConnectLogoutHandler::SESSION_LOGOUT_REQUIRED_KEY, true);
-            $session->set(\Capco\UserBundle\Security\Http\Logout\Handler\FranceConnectLogoutHandler::SESSION_ID_TOKEN_KEY, 'stored-token');
+            $session->set(FranceConnectLogoutHandler::SESSION_LOGOUT_REQUIRED_KEY, true);
+            $session->set(FranceConnectLogoutHandler::SESSION_ID_TOKEN_KEY, 'stored-token');
             $session->save();
         }
         $this->browser->request('GET', '/logout', [], [], ['HTTP_REFERER' => '/']);

@@ -52,13 +52,13 @@ final class Version20200602184400 extends AbstractMigration implements Container
 
     private function generateInsertSql(string $locale): string
     {
-        return 'INSERT INTO site_parameter ' .
-            '(id, value, keyname, is_enabled, is_social_network_description, position, type, category)' .
-            " VALUES ('" .
-            $this->generateUuid() .
-            "', '" .
-            $locale .
-            "', 'global.locale', 1, 0, 1, '9', 'settings.global')";
+        return 'INSERT INTO site_parameter '
+            . '(id, value, keyname, is_enabled, is_social_network_description, position, type, category)'
+            . " VALUES ('"
+            . $this->generateUuid()
+            . "', '"
+            . $locale
+            . "', 'global.locale', 1, 0, 1, '9', 'settings.global')";
     }
 
     private function generateUuid(): string

@@ -4,10 +4,13 @@ namespace Capco\Tests\Notifier;
 
 use Capco\AppBundle\Entity\Organization\PendingOrganizationInvitation;
 use Capco\AppBundle\Entity\Participant;
+use Capco\AppBundle\Entity\UserInviteEmailMessage;
 use Capco\AppBundle\Notifier\FOSNotifier;
 use Capco\AppBundle\Notifier\MagicLinkNotifier;
 use Capco\AppBundle\Notifier\Organization\OrganizationMemberNotifier;
 use Capco\AppBundle\Notifier\Participant\ParticipantNotifier;
+use Capco\AppBundle\Notifier\ParticipantConsentInternalCommunicationEmailNotifier;
+use Capco\AppBundle\Notifier\UserInviteEmailMessageNotifier;
 use Capco\AppBundle\Notifier\UserNotifier;
 use Capco\Tests\Command\MailerSnapshotCommandTestCase;
 use Capco\UserBundle\Entity\User;
@@ -132,8 +135,8 @@ class AccountAndParticipationEmailTest extends MailerSnapshotCommandTestCase
     public function testUserInvitationContainsAcceptanceLink(string $messageId, string $recipient, string $token): void
     {
         $emails = $this->captureEmails();
-        $notifier = self::getContainer()->get(\Capco\AppBundle\Notifier\UserInviteEmailMessageNotifier::class);
-        $invitationMessage = $this->entity(\Capco\AppBundle\Entity\UserInviteEmailMessage::class, $messageId);
+        $notifier = self::getContainer()->get(UserInviteEmailMessageNotifier::class);
+        $invitationMessage = $this->entity(UserInviteEmailMessage::class, $messageId);
 
         if ('remEmailMessage' === $messageId) {
             $notifier->onNewInvitation($invitationMessage);
@@ -197,7 +200,7 @@ class AccountAndParticipationEmailTest extends MailerSnapshotCommandTestCase
     public function testConsentNotificationContainsTheActionLink(bool $consent, string $linkFragment): void
     {
         $emails = $this->captureEmails();
-        $notifier = self::getContainer()->get(\Capco\AppBundle\Notifier\ParticipantConsentInternalCommunicationEmailNotifier::class);
+        $notifier = self::getContainer()->get(ParticipantConsentInternalCommunicationEmailNotifier::class);
 
         if ($consent) {
             $notifier->sendRegisterEmail('participant@example.com', 'https://capco.dev/?participationCookies=cookie-value');

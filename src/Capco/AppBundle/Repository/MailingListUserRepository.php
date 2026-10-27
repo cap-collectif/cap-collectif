@@ -33,8 +33,8 @@ class MailingListUserRepository extends EntityRepository
         EmailingCampaign $emailingCampaign,
         ?int $limit = 1000
     ): array {
-        $userSQL =
-            'SELECT
+        $userSQL
+            = 'SELECT
                 u.id AS id,
                 u.username AS username,
                 u.email AS email,
@@ -50,8 +50,8 @@ class MailingListUserRepository extends EntityRepository
               AND u.consent_internal_communication = 1
               AND ecu.id IS NULL';
 
-        $participantSQL =
-            'SELECT
+        $participantSQL
+            = 'SELECT
                 p.id AS id,
                 p.username AS username,
                 p.email AS email,

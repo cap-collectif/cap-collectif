@@ -96,8 +96,8 @@ trait QuestionPersisterTrait
         // we must reorder arguments datas to match database order (used in the symfony form)
         usort($arguments['questions'], static function ($a, $b) use ($questionsOrderedByIdInDb) {
             if (isset($a['question']['id'], $b['question']['id'])) {
-                return array_search($a['question']['id'], $questionsOrderedByIdInDb, false) <=>
-                    array_search($b['question']['id'], $questionsOrderedByIdInDb, false);
+                return array_search($a['question']['id'], $questionsOrderedByIdInDb, false)
+                    <=> array_search($b['question']['id'], $questionsOrderedByIdInDb, false);
             }
 
             // @todo respect the user order, for now we just put new items at the end
@@ -159,8 +159,8 @@ trait QuestionPersisterTrait
                         $argumentsJumpConditionsIds = array_map(static fn (array $condition) => $condition['id'] ?? null, $realArgumentQuestion['jumps'][$jumpPosition]['conditions']);
                         foreach ($jump->getConditions() as $conditionPosition => $condition) {
                             if (
-                                false ===
-                                \in_array($condition->getId(), $argumentsJumpConditionsIds, true)
+                                false
+                                === \in_array($condition->getId(), $argumentsJumpConditionsIds, true)
                             ) {
                                 $deletedJumpCondition = [
                                     'id' => $condition->getId(),
@@ -239,10 +239,10 @@ trait QuestionPersisterTrait
             $form->submit($arguments, false);
         } catch (\RuntimeException $exception) {
             $this->logger->error(
-                __METHOD__ .
-                    ' : ' .
-                    $exception->getMessage() .
-                    var_export($form->getExtraData(), true)
+                __METHOD__
+                    . ' : '
+                    . $exception->getMessage()
+                    . var_export($form->getExtraData(), true)
             );
         }
 
@@ -251,14 +251,14 @@ trait QuestionPersisterTrait
 
         // We make sure a question position by questionnaire is unique
         if ('questionnaire' === $type) {
-            $delta =
-                $this->questionRepo->getCurrentMaxPositionForQuestionnaire($entity->getId()) + 1;
+            $delta
+                = $this->questionRepo->getCurrentMaxPositionForQuestionnaire($entity->getId()) + 1;
         } elseif ('proposal' === $type) {
-            $delta =
-                $this->questionRepo->getCurrentMaxPositionForProposalForm($entity->getId()) + 1;
+            $delta
+                = $this->questionRepo->getCurrentMaxPositionForProposalForm($entity->getId()) + 1;
         } else {
-            $delta =
-                $this->questionRepo->getCurrentMaxPositionForRegistrationForm($entity->getId()) + 1;
+            $delta
+                = $this->questionRepo->getCurrentMaxPositionForRegistrationForm($entity->getId()) + 1;
         }
 
         $this->persistQuestions(

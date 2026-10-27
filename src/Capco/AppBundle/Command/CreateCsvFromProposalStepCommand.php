@@ -580,11 +580,11 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
                 );
 
                 $output->writeln(
-                    "<info>No proposal found for step '" .
-                        $step->getTitle() .
-                        "' in project '" .
-                        $step->getProject()->getTitle() .
-                        "'</info>"
+                    "<info>No proposal found for step '"
+                        . $step->getTitle()
+                        . "' in project '"
+                        . $step->getProject()->getTitle()
+                        . "'</info>"
                 );
             }
 
@@ -642,8 +642,8 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         } elseif ('proposal_votes_totalCount' === $columnName) {
             $row[] = $proposal[self::PAPER_VOTES_TOTAL_COUNT_FROM_REPOSITORY] + $proposal['allVotes']['totalCount'];
         } elseif ('proposal_votes_totalPointsCount' === $columnName) {
-            $row[] =
-                $proposal['paperVotesTotalPointsCount'] + $proposal['allVotes']['totalPointsCount'];
+            $row[]
+                = $proposal['paperVotesTotalPointsCount'] + $proposal['allVotes']['totalPointsCount'];
         } else {
             $val = $proposal;
             foreach ($arr as $a) {
@@ -668,9 +668,9 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         if ($totalCount > 0) {
             $progress = new ProgressBar($output, (int) $totalCount);
             $output->writeln(
-                "<info>Importing {$totalCount} reportings for proposal " .
-                    $proposal['title'] .
-                    '</info>'
+                "<info>Importing {$totalCount} reportings for proposal "
+                    . $proposal['title']
+                    . '</info>'
             );
 
             $this->connectionTraversor->traverse(
@@ -726,9 +726,9 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
             $progress = new ProgressBar($output, (int) $totalCount);
 
             $output->writeln(
-                "<info>Importing {$totalCount} comments for proposal " .
-                    $proposal['title'] .
-                    '</info>'
+                "<info>Importing {$totalCount} comments for proposal "
+                    . $proposal['title']
+                    . '</info>'
             );
             $this->connectionTraversor->traverse(
                 $proposal,
@@ -855,8 +855,8 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
 
     protected function addProposalVotesRow(array $vote, array $proposal): void
     {
-        $type =
-            'ProposalVote' === $vote['__typename'] ? 'proposalVote' : 'proposalAnonymousVote';
+        $type
+            = 'ProposalVote' === $vote['__typename'] ? 'proposalVote' : 'proposalAnonymousVote';
         $this->addDataBlock($type, 'vote', $vote, $proposal);
     }
 

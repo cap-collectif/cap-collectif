@@ -43,7 +43,7 @@ class UserContributionResolver implements ContainerAwareInterface, QueryInterfac
         $order = ContributionSearch::findOrderFromFieldAndDirection($field, $direction);
         $seed = Search::generateSeed($request, $viewer);
 
-        $paginator = new ElasticSearchPaginator(fn (?string $cursor, int $limit) => $this->contributionSearch->getUserContributions(
+        $paginator = new ElasticsearchPaginator(fn (?string $cursor, int $limit) => $this->contributionSearch->getUserContributions(
             $user,
             $limit,
             $order,

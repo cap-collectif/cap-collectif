@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * SectionRepository.
@@ -46,7 +47,7 @@ class SectionRepository extends EntityRepository implements PositionableReposito
     }
 
     /**
-     * @return \Doctrine\ORM\QueryBuilder
+     * @return QueryBuilder
      */
     protected function getIsEnabledQueryBuilder()
     {

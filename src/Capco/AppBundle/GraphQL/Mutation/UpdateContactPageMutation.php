@@ -52,8 +52,8 @@ class UpdateContactPageMutation implements MutationInterface
         foreach (self::CONTACT_PARAMETERS as $graphqlKey => $dbKey) {
             if ($args->offsetExists($graphqlKey)) {
                 $parameter = $this->getParameter($dbKey);
-                $return[$graphqlKey] =
-                    self::CONTACT_PAGE_PICTO_KEYNAME === $dbKey
+                $return[$graphqlKey]
+                    = self::CONTACT_PAGE_PICTO_KEYNAME === $dbKey
                         ? $this->updateImageValue(
                             $parameter,
                             (string) $args->offsetGet($graphqlKey)
@@ -172,8 +172,8 @@ class UpdateContactPageMutation implements MutationInterface
 
     private function getParameter(string $keyname)
     {
-        $repo =
-            self::CONTACT_PAGE_PICTO_KEYNAME === $keyname
+        $repo
+            = self::CONTACT_PAGE_PICTO_KEYNAME === $keyname
                 ? $this->imageRepository
                 : $this->siteParameterRepository;
 

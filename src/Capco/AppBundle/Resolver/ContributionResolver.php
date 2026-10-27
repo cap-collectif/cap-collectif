@@ -66,53 +66,53 @@ class ContributionResolver
         $contributors = [];
 
         foreach ($sourcesContributors as $sourcesContributor) {
-            $contributors[$sourcesContributor['id']]['sources'] =
-                $sourcesContributor['sources_count'];
+            $contributors[$sourcesContributor['id']]['sources']
+                = $sourcesContributor['sources_count'];
         }
 
         foreach ($argumentsContributors as $argumentsContributor) {
-            $contributors[$argumentsContributor['id']]['arguments'] =
-                $argumentsContributor['arguments_count'];
+            $contributors[$argumentsContributor['id']]['arguments']
+                = $argumentsContributor['arguments_count'];
         }
 
         foreach ($proposalsContributors as $proposalsContributor) {
-            $contributors[$proposalsContributor['id']]['proposals'] =
-                $proposalsContributor['proposals_count'];
+            $contributors[$proposalsContributor['id']]['proposals']
+                = $proposalsContributor['proposals_count'];
         }
 
         foreach ($repliesContributors as $repliesContributor) {
-            $contributors[$repliesContributor['id']]['replies'] =
-                $repliesContributor['replies_count'];
+            $contributors[$repliesContributor['id']]['replies']
+                = $repliesContributor['replies_count'];
         }
 
         foreach ($versionsContributors as $versionContributor) {
-            $contributors[$versionContributor['id']]['versions'] =
-                $versionContributor['versions_count'];
+            $contributors[$versionContributor['id']]['versions']
+                = $versionContributor['versions_count'];
         }
 
         foreach ($opinionsVoters as $opinionsVoter) {
-            $contributors[$opinionsVoter['id']]['opinions_votes'] =
-                $opinionsVoter['opinions_votes_count'];
+            $contributors[$opinionsVoter['id']]['opinions_votes']
+                = $opinionsVoter['opinions_votes_count'];
         }
 
         foreach ($versionsVoters as $versionVoter) {
-            $contributors[$versionVoter['id']]['versions_votes'] =
-                $versionVoter['versions_votes_count'];
+            $contributors[$versionVoter['id']]['versions_votes']
+                = $versionVoter['versions_votes_count'];
         }
 
         foreach ($argumentsVoters as $argumentsVoter) {
-            $contributors[$argumentsVoter['id']]['arguments_votes'] =
-                $argumentsVoter['arguments_votes_count'];
+            $contributors[$argumentsVoter['id']]['arguments_votes']
+                = $argumentsVoter['arguments_votes_count'];
         }
 
         foreach ($sourcesVoters as $sourcesVoter) {
-            $contributors[$sourcesVoter['id']]['sources_votes'] =
-                $sourcesVoter['sources_votes_count'];
+            $contributors[$sourcesVoter['id']]['sources_votes']
+                = $sourcesVoter['sources_votes_count'];
         }
 
         foreach ($proposalsVoters as $proposalsVoter) {
-            $contributors[$proposalsVoter['id']]['proposals_votes'] =
-                $proposalsVoter['proposals_votes_count'];
+            $contributors[$proposalsVoter['id']]['proposals_votes']
+                = $proposalsVoter['proposals_votes_count'];
         }
 
         foreach ($contributors as &$contributor) {
@@ -182,54 +182,54 @@ class ContributionResolver
             $sourcesVoters = $this->repository->findConsultationStepSourceVotersWithCount($step);
             // Fill array
             foreach ($sourcesContributors as $sourcesContributor) {
-                $contributors[$sourcesContributor['id']]['sources'] =
-                    $sourcesContributor['sources_count'];
+                $contributors[$sourcesContributor['id']]['sources']
+                    = $sourcesContributor['sources_count'];
             }
             foreach ($argumentsContributors as $argumentsContributor) {
-                $contributors[$argumentsContributor['id']]['arguments'] =
-                    $argumentsContributor['arguments_count'];
+                $contributors[$argumentsContributor['id']]['arguments']
+                    = $argumentsContributor['arguments_count'];
             }
             foreach ($versionsContributors as $versionContributor) {
-                $contributors[$versionContributor['id']]['versions'] =
-                    $versionContributor['versions_count'];
+                $contributors[$versionContributor['id']]['versions']
+                    = $versionContributor['versions_count'];
             }
             foreach ($opinionsVoters as $opinionsVoter) {
-                $contributors[$opinionsVoter['id']]['opinions_votes'] =
-                    $opinionsVoter['opinions_votes_count'];
+                $contributors[$opinionsVoter['id']]['opinions_votes']
+                    = $opinionsVoter['opinions_votes_count'];
             }
             foreach ($versionsVoters as $versionVoter) {
-                $contributors[$versionVoter['id']]['versions_votes'] =
-                    $versionVoter['versions_votes_count'];
+                $contributors[$versionVoter['id']]['versions_votes']
+                    = $versionVoter['versions_votes_count'];
             }
             foreach ($argumentsVoters as $argumentsVoter) {
-                $contributors[$argumentsVoter['id']]['arguments_votes'] =
-                    $argumentsVoter['arguments_votes_count'];
+                $contributors[$argumentsVoter['id']]['arguments_votes']
+                    = $argumentsVoter['arguments_votes_count'];
             }
             foreach ($sourcesVoters as $sourcesVoter) {
-                $contributors[$sourcesVoter['id']]['sources_votes'] =
-                    $sourcesVoter['sources_votes_count'];
+                $contributors[$sourcesVoter['id']]['sources_votes']
+                    = $sourcesVoter['sources_votes_count'];
             }
         } elseif ($step instanceof CollectStep) {
             $proposalsContributors = $this->repository->findCollectStepProposalContributorsWithCount(
                 $step
             );
             foreach ($proposalsContributors as $proposalsContributor) {
-                $contributors[$proposalsContributor['id']]['proposals'] =
-                    $proposalsContributor['proposals_count'];
+                $contributors[$proposalsContributor['id']]['proposals']
+                    = $proposalsContributor['proposals_count'];
             }
         } elseif ($step instanceof QuestionnaireStep) {
             $repliesContributors = $this->repository->findQuestionnaireStepReplyContributorsWithCount(
                 $step
             );
             foreach ($repliesContributors as $repliesContributor) {
-                $contributors[$repliesContributor['id']]['replies'] =
-                    $repliesContributor['replies_count'];
+                $contributors[$repliesContributor['id']]['replies']
+                    = $repliesContributor['replies_count'];
             }
         } elseif ($step instanceof SelectionStep) {
             $proposalsVoters = $this->repository->findSelectionStepProposalVotersWithCount($step);
             foreach ($proposalsVoters as $proposalsVoter) {
-                $contributors[$proposalsVoter['id']]['proposals_votes'] =
-                    $proposalsVoter['proposals_votes_count'];
+                $contributors[$proposalsVoter['id']]['proposals_votes']
+                    = $proposalsVoter['proposals_votes_count'];
             }
         }
 

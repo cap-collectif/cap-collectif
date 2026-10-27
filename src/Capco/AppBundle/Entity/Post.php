@@ -202,8 +202,8 @@ class Post implements EntityInterface, CommentableInterface, IndexableInterface,
             return Text::htmlToString($this->getAbstract($locale, $fallbackToDefault));
         }
 
-        $abstract =
-            \strlen((string) $this->getBodyText($locale, $fallbackToDefault)) > 300
+        $abstract
+            = \strlen((string) $this->getBodyText($locale, $fallbackToDefault)) > 300
                 ? substr((string) $this->getBodyText($locale, $fallbackToDefault), 0, 300) . ' [&hellip;]'
                 : $this->getBodyText($locale, $fallbackToDefault);
 

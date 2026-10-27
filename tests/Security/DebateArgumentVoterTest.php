@@ -5,6 +5,7 @@ namespace Capco\Tests\Security;
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Security\DebateArgumentVoter;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -67,7 +68,7 @@ class DebateArgumentVoterTest extends AuthorizationTestCase
         $token = $this->createStub(TokenInterface::class);
         $token->method('getUser')->willReturn($user);
         $voter = new DebateArgumentVoter();
-        $this->attachDebateToProject($debate, new \Capco\AppBundle\Entity\Project());
+        $this->attachDebateToProject($debate, new Project());
 
         self::assertSame(VoterInterface::ACCESS_GRANTED, $voter->vote($token, $argument, [DebateArgumentVoter::PARTICIPATE]));
         $debate->getStep()->setTimeless(false)->setEndAt(new \DateTime('2000-01-01'));

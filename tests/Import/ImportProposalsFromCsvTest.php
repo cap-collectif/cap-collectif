@@ -2,6 +2,13 @@
 
 namespace Capco\Tests\Import;
 
+use Capco\AppBundle\Entity\Media;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\QuestionChoice;
+use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
+use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
+use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\Tests\IdentityWebTestCase;
 
 /**
@@ -21,21 +28,21 @@ final class ImportProposalsFromCsvTest extends IdentityWebTestCase
     public function testCsvValidationAcceptsOnlyAllowedCustomAnswers(string $type, bool $required, bool $other, string $answer, bool $accepted): void
     {
         $admin = $this->account()->addRole('ROLE_ADMIN');
-        $form = $this->em->find(\Capco\AppBundle\Entity\ProposalForm::class, 'proposalForm1');
+        $form = $this->em->find(ProposalForm::class, 'proposalForm1');
         self::assertNotNull($form);
         foreach ($form->getRealQuestions() as $existing) {
             $existing->setRequired(false);
         }
-        $question = 'majority' === $type ? new \Capco\AppBundle\Entity\Questions\SimpleQuestion() : new \Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion();
+        $question = 'majority' === $type ? new SimpleQuestion() : new MultipleChoiceQuestion();
         $question->setType('majority' === $type ? 'majority' : $type)->setTitle('Import choice')->setRequired($required);
-        if ($question instanceof \Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion) {
+        if ($question instanceof MultipleChoiceQuestion) {
             $question->setOtherAllowed($other);
-            $question->addChoice((new \Capco\AppBundle\Entity\QuestionChoice())->setTitle('Known choice')->setPosition(0));
+            $question->addChoice((new QuestionChoice())->setTitle('Known choice')->setPosition(0));
         }
-        $association = (new \Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion())->setProposalForm($form)->setQuestion($question)->setPosition(100);
+        $association = (new QuestionnaireAbstractQuestion())->setProposalForm($form)->setQuestion($question)->setPosition(100);
         $form->addQuestion($association);
         $this->em->persist($association);
-        $media = (new \Capco\AppBundle\Entity\Media())->setName('Import CSV')->setProviderName('sonata.media.provider.file')->setProviderReference('test-import-' . bin2hex(random_bytes(8)) . '.csv');
+        $media = (new Media())->setName('Import CSV')->setProviderName('sonata.media.provider.file')->setProviderReference('test-import-' . bin2hex(random_bytes(8)) . '.csv');
         $this->em->persist($media);
         $this->em->flush();
         $this->login($admin->getEmail());
@@ -72,7 +79,7 @@ final class ImportProposalsFromCsvTest extends IdentityWebTestCase
                 self::assertContains(['reason' => 'INVALID_CUSTOM_FIELD', 'field' => 'Import choice'], $result['lineErrors']);
             }
             $this->em->clear();
-            self::assertNull($this->em->getRepository(\Capco\AppBundle\Entity\Proposal::class)->findOneBy(['title' => $title]));
+            self::assertNull($this->em->getRepository(Proposal::class)->findOneBy(['title' => $title]));
         } finally {
             if (file_exists($path)) {
                 unlink($path);

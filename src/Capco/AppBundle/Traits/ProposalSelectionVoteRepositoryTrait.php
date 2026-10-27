@@ -61,11 +61,11 @@ trait ProposalSelectionVoteRepositoryTrait
                         $pointsAvailable[$result['position']]
                     )
                 ) {
-                    $data['pointsBySteps'][$result['stepId']] +=
-                        $pointsAvailable[$result['position']];
+                    $data['pointsBySteps'][$result['stepId']]
+                        += $pointsAvailable[$result['position']];
                 } elseif (isset($pointsAvailable[$result['position']])) {
-                    $data['pointsBySteps'][$result['stepId']] =
-                        $pointsAvailable[$result['position']];
+                    $data['pointsBySteps'][$result['stepId']]
+                        = $pointsAvailable[$result['position']];
                 }
             }
         }

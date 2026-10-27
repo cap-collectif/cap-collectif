@@ -44,9 +44,9 @@ class UpdateProposalFormNotificationsConfiguration extends AbstractProposalFormM
 
         if (!$form->isValid()) {
             $this->logger->error(
-                static::class .
-                    ' updateNotificationsConfiguration: ' .
-                    (string) $form->getErrors(true, false)
+                static::class
+                    . ' updateNotificationsConfiguration: '
+                    . (string) $form->getErrors(true, false)
             );
 
             throw new UserError('Can\'t change the notification config!');

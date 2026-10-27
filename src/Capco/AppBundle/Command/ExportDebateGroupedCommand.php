@@ -169,9 +169,9 @@ class ExportDebateGroupedCommand extends BaseExportCommand
 
             $progressBar = $style->createProgressBar($loopTotal);
             $progressBar->setFormat(
-                "\n%current%/%max% processed argument(s)  [%bar%] %percent%%" .
-                "\n\nTotal Arguments Processed: %total_processed%" .
-                "\nMemory Used: %memory_used%\n"
+                "\n%current%/%max% processed argument(s)  [%bar%] %percent%%"
+                . "\n\nTotal Arguments Processed: %total_processed%"
+                . "\nMemory Used: %memory_used%\n"
             );
             $progressBar->setMessage('processed argument(s) ');
             $progressBar->setOverwrite(false);

@@ -4,6 +4,7 @@ namespace Capco\Tests\UserBundle\Authenticator;
 
 use Capco\AppBundle\FileSystem\ConfigFileSystem;
 use Capco\Tests\IdentityWebTestCase;
+use Firebase\JWT\JWT;
 use Gaufrette\File;
 
 /**
@@ -51,7 +52,7 @@ final class MagicLinkAuthenticatorTest extends IdentityWebTestCase
             'createdAt' => (new \DateTimeImmutable('expired' === $kind ? '2000-01-01' : 'now'))->format('Y-m-d H:i:s'),
             'redirect' => $redirect,
         ];
-        $token = \Firebase\JWT\JWT::encode($claims, $this->privateKey, 'RS256');
+        $token = JWT::encode($claims, $this->privateKey, 'RS256');
         if ('tampered' === $kind) {
             [$header, , $signature] = explode('.', $token);
             $claims['email'] = $user->getEmail();

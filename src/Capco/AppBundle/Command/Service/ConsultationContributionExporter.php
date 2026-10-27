@@ -76,9 +76,9 @@ class ConsultationContributionExporter extends ContributionExporter
     ): void {
         $progressBar = $this->style->createProgressBar(\count($opinions));
         $progressBar->setFormat(
-            "\n%current%/%max% processed proposal(s)  [%bar%] %percent%%" .
-            "\n\nTotal Contributions Processed: %total_processed% contributions" .
-            "\nMemory Used: %memory_used%\n"
+            "\n%current%/%max% processed proposal(s)  [%bar%] %percent%%"
+            . "\n\nTotal Contributions Processed: %total_processed% contributions"
+            . "\nMemory Used: %memory_used%\n"
         );
         $progressBar->setMessage('processed proposal(s) ');
         $progressBar->setOverwrite(false);

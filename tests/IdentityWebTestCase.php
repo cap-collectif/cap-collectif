@@ -7,15 +7,24 @@ namespace Capco\Tests;
 use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Mailer\MailerService;
+use Capco\AppBundle\Repository\RegistrationFormRepository;
 use Capco\Tests\FeatureFlags\FeatureFlagsAwareTest;
 use Capco\Tests\FeatureFlags\FeatureFlagsTrait;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Security\SessionWithJsonHandler;
 use Doctrine\ORM\EntityManagerInterface;
+use Monolog\Logger;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use PHPUnit\Framework\MockObject\MockObject;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 abstract class IdentityWebTestCase extends WebTestCase implements FeatureFlagsAwareTest
 {
@@ -25,7 +34,7 @@ abstract class IdentityWebTestCase extends WebTestCase implements FeatureFlagsAw
     protected KernelBrowser $browser;
     protected EntityManagerInterface $em;
 
-    /** @var MailerService&\PHPUnit\Framework\MockObject\MockObject */
+    /** @var MailerService&MockObject */
     protected MailerService $mailer;
 
     /** @var list<array{type: string, body: array<string, mixed>}> */
@@ -58,9 +67,9 @@ abstract class IdentityWebTestCase extends WebTestCase implements FeatureFlagsAw
         $this->browser->disableReboot();
         $container = self::getContainer();
         // Expected authentication failures must not write to subprocess stderr.
-        $container->get('monolog.handler.main')->setLevel(\Monolog\Logger::EMERGENCY);
+        $container->get('monolog.handler.main')->setLevel(Logger::EMERGENCY);
         self::assertSame('test', $container->getParameter('kernel.environment'));
-        $container->get('event_dispatcher')->addListener(\Symfony\Component\HttpKernel\KernelEvents::RESPONSE, function (\Symfony\Component\HttpKernel\Event\ResponseEvent $event): void {
+        $container->get('event_dispatcher')->addListener(KernelEvents::RESPONSE, function (ResponseEvent $event): void {
             $request = $event->getRequest();
             if ($request->hasSession() && '' !== ($id = $request->getSession()->getId())) {
                 $this->sessionIds[$id] = true;
@@ -106,7 +115,7 @@ abstract class IdentityWebTestCase extends WebTestCase implements FeatureFlagsAw
                     // Preparation can save a session before the first HTTP response,
                     // including when an assertion fails immediately after loginUser().
                     if (isset($this->browser)) {
-                        /** @var \Symfony\Component\HttpFoundation\Session\SessionInterface $session */
+                        /** @var SessionInterface $session */
                         $session = self::getContainer()->get('session');
                         if ('' !== $session->getId()) {
                             $this->sessionIds[$session->getId()] = true;
@@ -118,7 +127,7 @@ abstract class IdentityWebTestCase extends WebTestCase implements FeatureFlagsAw
                         }
                     }
                     if ($this->sessionIds) {
-                        $handler = self::getContainer()->get(\Capco\UserBundle\Security\SessionWithJsonHandler::class);
+                        $handler = self::getContainer()->get(SessionWithJsonHandler::class);
                         foreach (array_keys($this->sessionIds) as $id) {
                             $handler->destroy($id);
                         }
@@ -189,7 +198,7 @@ abstract class IdentityWebTestCase extends WebTestCase implements FeatureFlagsAw
     {
         $container = self::getContainer();
         $kernel = $container->get('kernel');
-        $providerKernel = $this->createStub(\Symfony\Component\HttpKernel\KernelInterface::class);
+        $providerKernel = $this->createStub(KernelInterface::class);
         $providerKernel->method('getEnvironment')->willReturn('prod');
         $container->set('kernel', $providerKernel);
 
@@ -202,7 +211,7 @@ abstract class IdentityWebTestCase extends WebTestCase implements FeatureFlagsAw
 
     protected function configureRegistrationQuestions(): void
     {
-        $form = self::getContainer()->get(\Capco\AppBundle\Repository\RegistrationFormRepository::class)->findCurrent();
+        $form = self::getContainer()->get(RegistrationFormRepository::class)->findCurrent();
         self::assertNotNull($form);
         foreach ($form->getQuestionsArray() as $association) {
             $association->getQuestion()->setRequired(false);
@@ -307,7 +316,7 @@ abstract class IdentityWebTestCase extends WebTestCase implements FeatureFlagsAw
             self::assertArrayHasKey('data', $response, json_encode($response, \JSON_THROW_ON_ERROR));
             self::assertNotNull($response['data']['viewer']);
             if (null !== $userId) {
-                self::assertSame(\Overblog\GraphQLBundle\Relay\Node\GlobalId::toGlobalId('User', $userId), $response['data']['viewer']['id']);
+                self::assertSame(GlobalId::toGlobalId('User', $userId), $response['data']['viewer']['id']);
             }
         } else {
             self::assertEmpty($response['data']['viewer'] ?? null);

@@ -39,12 +39,12 @@ class MenuItemResolver
 
         $request = $this->requestStack->getCurrentRequest();
         $cachedItem = $this->cache->getItem(
-            self::MENU_CACHE_KEY .
-                '-' .
-                $menu .
-                '-' .
-                preg_replace('/[^A-Za-z0-9\-]/', '', (string) $currentUrl) .
-                ($request ? $request->getLocale() : '')
+            self::MENU_CACHE_KEY
+                . '-'
+                . $menu
+                . '-'
+                . preg_replace('/[^A-Za-z0-9\-]/', '', (string) $currentUrl)
+                . ($request ? $request->getLocale() : '')
         );
 
         if (!$cachedItem->isHit()) {

@@ -80,6 +80,15 @@ class VoiceMessageControllerTest extends TestCase
         }
     }
 
+    public static function fileViewers(): \Generator
+    {
+        yield 'admin playback' => [true, false];
+
+        yield 'admin download' => [true, true];
+
+        yield 'non-admin denied' => [false, false];
+    }
+
     public function testPrivateFileAcceptsVocalContributionGlobalId(): void
     {
         $authorization = $this->createStub(AuthorizationCheckerInterface::class);
@@ -117,14 +126,5 @@ class VoiceMessageControllerTest extends TestCase
         } finally {
             unlink($path);
         }
-    }
-
-    public static function fileViewers(): \Generator
-    {
-        yield 'admin playback' => [true, false];
-
-        yield 'admin download' => [true, true];
-
-        yield 'non-admin denied' => [false, false];
     }
 }

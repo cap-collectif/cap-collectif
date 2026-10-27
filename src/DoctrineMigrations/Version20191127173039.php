@@ -44,7 +44,7 @@ final class Version20191127173039 extends AbstractLocaleMigration
 
     private function getPreviousConfDefaultCode(): string
     {
-        return $this->connection->executeQuery(self::GET_DEFAULT_SQL)->fetch(\PDO::FETCH_COLUMN) ??
-            'fr-FR';
+        return $this->connection->executeQuery(self::GET_DEFAULT_SQL)->fetch(\PDO::FETCH_COLUMN)
+            ?? 'fr-FR';
     }
 }

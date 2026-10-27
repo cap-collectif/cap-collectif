@@ -2,7 +2,12 @@
 
 namespace Capco\Tests\GraphQL\Resolver\Proposal;
 
+use Capco\AppBundle\Entity\Participant;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalAnalyst;
 use Capco\Tests\ResponseVisibilityWebTestCase;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Symfony\Component\BrowserKit\Cookie;
 
 /**
  * @internal
@@ -26,7 +31,7 @@ final class ProposalResponsesResolverTest extends ResponseVisibilityWebTestCase
     {
         $author = $this->account();
         $contribution = $this->contribution('Proposal', $author);
-        self::assertInstanceOf(\Capco\AppBundle\Entity\Proposal::class, $contribution);
+        self::assertInstanceOf(Proposal::class, $contribution);
         if ('author' === $kind) {
             $this->login($author->getEmail());
         } elseif ('admin' === $kind) {
@@ -35,7 +40,7 @@ final class ProposalResponsesResolverTest extends ResponseVisibilityWebTestCase
             $this->login($admin->getEmail());
         } elseif ('analyst' === $kind) {
             $analyst = $this->account();
-            $assignment = new \Capco\AppBundle\Entity\ProposalAnalyst($contribution, $analyst);
+            $assignment = new ProposalAnalyst($contribution, $analyst);
             $contribution->addProposalAnalyst($assignment);
             $this->em->persist($assignment);
             $this->em->flush();
@@ -68,20 +73,20 @@ final class ProposalResponsesResolverTest extends ResponseVisibilityWebTestCase
     public function testParticipantCookieExposesOnlyItsAuthorsPrivateResponses(string $kind, array $expected): void
     {
         $proposal = $this->contribution('Proposal', $this->account());
-        $author = (new \Capco\AppBundle\Entity\Participant())->setToken('participant-' . bin2hex(random_bytes(8)));
-        $other = (new \Capco\AppBundle\Entity\Participant())->setToken('participant-' . bin2hex(random_bytes(8)));
+        $author = (new Participant())->setToken('participant-' . bin2hex(random_bytes(8)));
+        $other = (new Participant())->setToken('participant-' . bin2hex(random_bytes(8)));
         $proposal->setAuthor(null)->setParticipant($author);
         $this->em->persist($author);
         $this->em->persist($other);
         $this->em->flush();
         if ('missing' !== $kind) {
             $token = 'author' === $kind ? $author->getToken() : ('other' === $kind ? $other->getToken() : 'invalid');
-            $this->browser->getCookieJar()->set(new \Symfony\Component\BrowserKit\Cookie('CapcoParticipant', $token));
+            $this->browser->getCookieJar()->set(new Cookie('CapcoParticipant', $token));
         }
         if ('invalid' === $kind) {
             $this->browser->jsonRequest('POST', '/graphql/internal', [
                 'query' => 'query($id: ID!) { node(id: $id) { ... on Proposal { responses { ... on ValueResponse { value } } } } }',
-                'variables' => ['id' => \Overblog\GraphQLBundle\Relay\Node\GlobalId::toGlobalId('Proposal', $proposal->getId())],
+                'variables' => ['id' => GlobalId::toGlobalId('Proposal', $proposal->getId())],
             ]);
             self::assertResponseStatusCodeSame(401);
             $body = json_decode((string) $this->browser->getResponse()->getContent(), true, 512, \JSON_THROW_ON_ERROR);

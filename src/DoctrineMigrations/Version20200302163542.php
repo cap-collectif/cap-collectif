@@ -30,11 +30,11 @@ final class Version20200302163542 extends AbstractMigration implements Container
         $redis_host = $this->container->getParameter('redis_dsn');
 
         $job = Process::fromShellCommandline(
-            'redis-cli -h ' .
-                $redis_host .
-                ' keys session* | xargs redis-cli -h ' .
-                $redis_host .
-                ' del'
+            'redis-cli -h '
+                . $redis_host
+                . ' keys session* | xargs redis-cli -h '
+                . $redis_host
+                . ' del'
         );
         echo $job->getCommandLine() . \PHP_EOL;
         $job->mustRun();

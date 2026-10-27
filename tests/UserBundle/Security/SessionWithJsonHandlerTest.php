@@ -2,6 +2,8 @@
 
 namespace Capco\Tests\UserBundle\Security;
 
+use Capco\AppBundle\Entity\Organization\Organization;
+use Capco\AppBundle\Entity\Organization\OrganizationMember;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Security\SessionWithJsonHandler;
 use PHPUnit\Framework\TestCase;
@@ -44,8 +46,8 @@ class SessionWithJsonHandlerTest extends TestCase
         $viewer->setEmail('user@example.com');
         $viewer->setRoles($roles);
         if (null !== $organizationRole) {
-            $organization = (new \Capco\AppBundle\Entity\Organization\Organization())->setId('organization-id');
-            $membership = (new \Capco\AppBundle\Entity\Organization\OrganizationMember())->setUser($viewer)->setOrganization($organization)->setRole($organizationRole);
+            $organization = (new Organization())->setId('organization-id');
+            $membership = (new OrganizationMember())->setUser($viewer)->setOrganization($organization)->setRole($organizationRole);
             $viewer->addMemberOfOrganization($membership);
             $organization->addMember($membership);
         }

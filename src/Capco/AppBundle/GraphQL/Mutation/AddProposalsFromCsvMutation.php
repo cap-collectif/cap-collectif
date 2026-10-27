@@ -77,8 +77,8 @@ class AddProposalsFromCsvMutation implements MutationInterface
 
         /** @var ProposalForm $proposalForm */
         $proposalForm = $this->proposalFormRepository->find($input->offsetGet('proposalFormId'));
-        $viewerIsNotProjectOwner =
-            $viewer->isOnlyProjectAdmin() && $proposalForm->getProject()->getOwner() !== $viewer;
+        $viewerIsNotProjectOwner
+            = $viewer->isOnlyProjectAdmin() && $proposalForm->getProject()->getOwner() !== $viewer;
         if (!$proposalForm || $viewerIsNotProjectOwner) {
             return [
                 'importableProposals' => 0,

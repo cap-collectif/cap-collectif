@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Capco\Tests\UserBundle\Functional;
 
 use Capco\UserBundle\Entity\User;
+use Symfony\Component\BrowserKit\Cookie;
 
 /**
  * @internal
@@ -224,7 +225,7 @@ final class PasswordTest extends AccountWebTestCase
         $this->login($email, self::PASSWORD, false);
     }
 
-    /** @param array<\Symfony\Component\BrowserKit\Cookie> $cookies */
+    /** @param array<Cookie> $cookies */
     private function selectSession(array $cookies): void
     {
         // With a shared kernel, reset the session ID so the listener reads this browser's cookies.

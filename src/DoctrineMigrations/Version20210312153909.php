@@ -41,7 +41,7 @@ final class Version20210312153909 extends AbstractMigration implements Container
         $translationId = $query->getOneOrNullResult()['id'];
 
         $query = $em->createQuery(
-            'SELECT spt.id FROM Capco\\AppBundle\\Entity\\SiteParameterTranslation spt WHERE spt.translatable = :translatable'
+            'SELECT spt.id FROM Capco\AppBundle\Entity\SiteParameterTranslation spt WHERE spt.translatable = :translatable'
         );
         $query->setParameter(':translatable', $translationId);
         $result = $query->getArrayResult();

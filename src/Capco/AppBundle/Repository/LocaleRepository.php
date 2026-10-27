@@ -7,6 +7,8 @@ use Capco\AppBundle\Exception\LocaleConfigurationException;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Doctrine\ORM\QueryBuilder;
 
 /**
@@ -66,8 +68,8 @@ class LocaleRepository extends EntityRepository
 
     /**
      * @throws LocaleConfigurationException
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function findDefaultLocale(): Locale
     {

@@ -27,9 +27,9 @@ class SiteParameterResolver
         }
 
         if (null === $locale && null !== $this->requestStack->getCurrentRequest()) {
-            $locale =
-                $this->requestStack->getCurrentRequest()->query->get('tl') ?:
-                $this->requestStack->getCurrentRequest()->getLocale();
+            $locale
+                = $this->requestStack->getCurrentRequest()->query->get('tl')
+                ?: $this->requestStack->getCurrentRequest()->getLocale();
 
             // If request locale is not enabled, fallback to default locale
             if (!$this->entityManager

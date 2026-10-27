@@ -3,7 +3,11 @@
 namespace Capco\Tests\Mutation;
 
 use Capco\AppBundle\Entity\UserPhoneVerificationSms;
+use Capco\AppBundle\Fetcher\SmsProviderFetcher;
+use Capco\AppBundle\GraphQL\Mutation\Sms\VerifyUserPhoneNumberMutation;
+use Capco\AppBundle\Helper\Interfaces\SmsProviderInterface;
 use Capco\Tests\IdentityWebTestCase;
+use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 /**
@@ -40,7 +44,7 @@ final class VerifyUserPhoneNumberMutationTest extends IdentityWebTestCase
         $otherSmsId = $otherSms->getId();
         $otherId = $other->getId();
         $otherPhone = $other->getPhone();
-        $provider = $this->provider(\Capco\AppBundle\GraphQL\Mutation\Sms\VerifyUserPhoneNumberMutation::class);
+        $provider = $this->provider(VerifyUserPhoneNumberMutation::class);
         if ('confirmed' === $kind) {
             $provider->expects(self::never())->method('verifySms');
         } else {
@@ -56,7 +60,7 @@ final class VerifyUserPhoneNumberMutationTest extends IdentityWebTestCase
         self::assertSame(null === $error ? 'APPROVED' : 'PENDING', $this->em->find(UserPhoneVerificationSms::class, $smsId)->getStatus());
         self::assertSame('PENDING', $this->em->find(UserPhoneVerificationSms::class, $olderSmsId)->getStatus());
         self::assertSame('PENDING', $this->em->find(UserPhoneVerificationSms::class, $otherSmsId)->getStatus());
-        $persistedOther = $this->em->find(\Capco\UserBundle\Entity\User::class, $otherId);
+        $persistedOther = $this->em->find(User::class, $otherId);
         self::assertSame($otherPhone, $persistedOther->getPhone());
         self::assertSame('collision' === $kind, $persistedOther->isPhoneConfirmed());
     }
@@ -76,12 +80,12 @@ final class VerifyUserPhoneNumberMutationTest extends IdentityWebTestCase
     }
 
     /** @param class-string $mutation */
-    private function provider(string $mutation): \Capco\AppBundle\Helper\Interfaces\SmsProviderInterface
+    private function provider(string $mutation): SmsProviderInterface
     {
-        $provider = $this->createMock(\Capco\AppBundle\Helper\Interfaces\SmsProviderInterface::class);
-        $fetcher = $this->createStub(\Capco\AppBundle\Fetcher\SmsProviderFetcher::class);
+        $provider = $this->createMock(SmsProviderInterface::class);
+        $fetcher = $this->createStub(SmsProviderFetcher::class);
         $fetcher->method('fetch')->willReturn($provider);
-        self::getContainer()->set(\Capco\AppBundle\Fetcher\SmsProviderFetcher::class, $fetcher);
+        self::getContainer()->set(SmsProviderFetcher::class, $fetcher);
         $this->useProviderEnvironment($mutation);
 
         return $provider;

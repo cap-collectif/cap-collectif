@@ -103,10 +103,10 @@ class ChangeProposalDecisionMutation implements MutationInterface
             $this->entityManager->flush();
         } catch (\Exception $exception) {
             $this->logger->alert(
-                'An error occurred when editing Post and ProposalDecision with proposal id :' .
-                    $proposal->getId() .
-                    '.' .
-                    $exception->getMessage()
+                'An error occurred when editing Post and ProposalDecision with proposal id :'
+                    . $proposal->getId()
+                    . '.'
+                    . $exception->getMessage()
             );
 
             return [

@@ -34,9 +34,9 @@ class ProposalRevokeProcessor implements ProcessorInterface
 
         if (empty($proposals)) {
             $this->logger->error(
-                self::class .
-                    'Unable to find any proposal with ids: ' .
-                    implode(', ', $decoded['proposals'])
+                self::class
+                    . 'Unable to find any proposal with ids: '
+                    . implode(', ', $decoded['proposals'])
             );
 
             return false;

@@ -192,8 +192,8 @@ class IdToUuidMigration extends AbstractMigration implements ContainerAwareInter
                 }
             }
             $this->connection->executeQuery(
-                'ALTER TABLE ' . $fk['table'] . ' ADD CONSTRAINT ' . $fk['name'] . ' FOREIGN KEY (' . $fk['key'] . ') REFERENCES ' . $this->table . ' (id)' .
-                (isset($fk['onDelete']) ? ' ON DELETE ' . $fk['onDelete'] : '')
+                'ALTER TABLE ' . $fk['table'] . ' ADD CONSTRAINT ' . $fk['name'] . ' FOREIGN KEY (' . $fk['key'] . ') REFERENCES ' . $this->table . ' (id)'
+                . (isset($fk['onDelete']) ? ' ON DELETE ' . $fk['onDelete'] : '')
             );
             $this->connection->executeQuery('CREATE INDEX ' . str_replace('FK_', 'IDX_', $fk['name']) . ' ON ' . $fk['table'] . ' (' . $fk['key'] . ')');
         }

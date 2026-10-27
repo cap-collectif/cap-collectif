@@ -39,11 +39,11 @@ class GroupServiceTest extends TestCase
     /**
      * @dataProvider addUsersToGroupFromEmailProvider
      *
-     * @param string[]                                        $emails
-     * @param User[]                                          $existentUsersResult
-     * @param array{userIds: string[], groupId: string}       $usersByGroupParams
-     * @param UserGroup[]                                     $usersByGroupResult
-     * @param array<array-key, array<string[]|User[]|User[]>> $expected
+     * @param string[]                                  $emails
+     * @param User[]                                    $existentUsersResult
+     * @param array{userIds: string[], groupId: string} $usersByGroupParams
+     * @param UserGroup[]                               $usersByGroupResult
+     * @param array<array-key, array<string[]|User[]>>  $expected
      */
     public function testAddUsersToGroupFromEmail(
         array $emails,

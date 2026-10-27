@@ -87,28 +87,28 @@ class ImportIDFProposalsFromCsvCommand extends Command
                 '<info>' . $result['importableProposals'] . ' proposals are importable.</info>'
             );
             $output->writeln(
-                '<info>' .
-                    \count($result['importedProposals']) .
-                    ' proposals successfully created.</info>'
+                '<info>'
+                    . \count($result['importedProposals'])
+                    . ' proposals successfully created.</info>'
             );
             $output->writeln(
-                '<info>' .
-                    array_sum($result['badLines']) .
-                    ' bad data. Lines : ' .
-                    implode(',', array_keys($result['badLines'])) .
-                    '  are bad and not imported.</info>'
+                '<info>'
+                    . array_sum($result['badLines'])
+                    . ' bad data. Lines : '
+                    . implode(',', array_keys($result['badLines']))
+                    . '  are bad and not imported.</info>'
             );
             $output->writeln(
-                '<info>Lines : ' .
-                    implode(',', $result['duplicates']) .
-                    ' already existent and not imported.</info>'
+                '<info>Lines : '
+                    . implode(',', $result['duplicates'])
+                    . ' already existent and not imported.</info>'
             );
             $output->writeln(
-                '<info>' .
-                    array_sum($result['mandatoryMissing']) .
-                    ' mandatory fields missing. Lines : ' .
-                    implode(',', array_keys($result['mandatoryMissing'])) .
-                    ' missing somes required data and not imported.</info>'
+                '<info>'
+                    . array_sum($result['mandatoryMissing'])
+                    . ' mandatory fields missing. Lines : '
+                    . implode(',', array_keys($result['mandatoryMissing']))
+                    . ' missing somes required data and not imported.</info>'
             );
 
             return 0;
@@ -116,9 +116,9 @@ class ImportIDFProposalsFromCsvCommand extends Command
             switch ($exception->getMessage()) {
                 case AddProposalsFromCsvMutation::EMPTY_FILE:
                     $output->writeln(
-                        '<error>Your file with path ' .
-                            $input->getArgument('filePath') .
-                            ' was not found or no proposal was found in your file. Please verify your path and file\'s content.</error>'
+                        '<error>Your file with path '
+                            . $input->getArgument('filePath')
+                            . ' was not found or no proposal was found in your file. Please verify your path and file\'s content.</error>'
                     );
                     $output->writeln('<error>Import cancelled. No proposal was created.</error>');
 

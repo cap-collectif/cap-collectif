@@ -10,6 +10,7 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class AbstractStepRepository extends EntityRepository implements SluggableStepRepositoryInterface
@@ -25,7 +26,7 @@ class AbstractStepRepository extends EntityRepository implements SluggableStepRe
     }
 
     /**
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NonUniqueResultException
      */
     public function getOneBySlugAndProjectSlug(string $slug, string $projectSlug): ?AbstractStep
     {

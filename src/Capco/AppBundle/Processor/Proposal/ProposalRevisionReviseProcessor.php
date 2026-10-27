@@ -42,8 +42,8 @@ class ProposalRevisionReviseProcessor implements ProcessorInterface
 
     private function getProposalRevisionsFromMessage(array $json): ?array
     {
-        $revisedAt =
-            'test' == $this->kernel->getEnvironment()
+        $revisedAt
+            = 'test' == $this->kernel->getEnvironment()
                 ? (new \DateTime($json['date']))->setTime(00, 00)
                 : new \DateTime($json['date']);
 
@@ -54,9 +54,9 @@ class ProposalRevisionReviseProcessor implements ProcessorInterface
 
         if (empty($proposalRevisions)) {
             $this->logger->error(
-                self::class .
-                    ' - Unable to find revisions with for proposal id: ' .
-                    $json['proposalId']
+                self::class
+                    . ' - Unable to find revisions with for proposal id: '
+                    . $json['proposalId']
             );
         }
 

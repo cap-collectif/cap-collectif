@@ -72,6 +72,14 @@ class UserInviteEmailMessageNotifierTest extends TestCase
         self::assertSame(UserInviteEmailMessage::WAITING_SENDING, $emailMessage->getInternalStatus());
     }
 
+    /** @return iterable<string, array{string, class-string}> */
+    public static function deliveryProvider(): iterable
+    {
+        yield 'Mailjet' => [MailerType::MAILJET, MailjetApiTransport::class];
+
+        yield 'Mandrill' => [MailerType::MANDRILL, MandrillApiTransport::class];
+    }
+
     public function testMarksSmtpDeliveryAsSentWithoutSchedulingAStatusCheck(): void
     {
         $emailMessage = (new UserInviteEmailMessage(new UserInvite()))->setId('123');
@@ -138,44 +146,6 @@ class UserInviteEmailMessageNotifierTest extends TestCase
         self::assertSame($expectedInternalStatus, $emailMessage->getInternalStatus());
     }
 
-    /**
-     * @dataProvider queuedProvider
-     *
-     * @param class-string $providerClass
-     */
-    public function testQueuedProviderStatusThrows(string $providerClass): void
-    {
-        $emailMessage = (new UserInviteEmailMessage(new UserInvite()))
-            ->setId('123')
-            ->setMailerId('456')
-        ;
-        $entityManager = $this->createStub(EntityManagerInterface::class);
-        $logger = $this->createStub(LoggerInterface::class);
-        $mailjetClient = $this->createMock(MailjetClient::class);
-        $mandrillClient = $this->createMock(MandrillClient::class);
-        $this->configureProviderResponse(
-            $providerClass,
-            MailjetClient::STATUS_QUEUED,
-            $mailjetClient,
-            $mandrillClient
-        );
-
-        $notifier = $this->createNotifier(
-            $entityManager,
-            $logger,
-            $mailjetClient,
-            $mandrillClient
-        );
-
-        try {
-            $notifier->onStatusCheckInvitation($emailMessage, $providerClass);
-            self::fail('A queued message must be retried.');
-        } catch (UserInviteMessageQueuedException $exception) {
-            self::assertSame(UserInviteMessageQueuedException::MESSAGE_DEFAULT_QUEUED, $exception->getMessage());
-            self::assertSame(UserInviteEmailMessage::WAITING_SENDING, $emailMessage->getInternalStatus());
-        }
-    }
-
     /** @return iterable<string, array{0: class-string, 1: string, 2: string, 3: bool, 4?: string}> */
     public static function processedStatusProvider(): iterable
     {
@@ -230,20 +200,50 @@ class UserInviteEmailMessageNotifierTest extends TestCase
         ];
     }
 
+    /**
+     * @dataProvider queuedProvider
+     *
+     * @param class-string $providerClass
+     */
+    public function testQueuedProviderStatusThrows(string $providerClass): void
+    {
+        $emailMessage = (new UserInviteEmailMessage(new UserInvite()))
+            ->setId('123')
+            ->setMailerId('456')
+        ;
+        $entityManager = $this->createStub(EntityManagerInterface::class);
+        $logger = $this->createStub(LoggerInterface::class);
+        $mailjetClient = $this->createMock(MailjetClient::class);
+        $mandrillClient = $this->createMock(MandrillClient::class);
+        $this->configureProviderResponse(
+            $providerClass,
+            MailjetClient::STATUS_QUEUED,
+            $mailjetClient,
+            $mandrillClient
+        );
+
+        $notifier = $this->createNotifier(
+            $entityManager,
+            $logger,
+            $mailjetClient,
+            $mandrillClient
+        );
+
+        try {
+            $notifier->onStatusCheckInvitation($emailMessage, $providerClass);
+            self::fail('A queued message must be retried.');
+        } catch (UserInviteMessageQueuedException $exception) {
+            self::assertSame(UserInviteMessageQueuedException::MESSAGE_DEFAULT_QUEUED, $exception->getMessage());
+            self::assertSame(UserInviteEmailMessage::WAITING_SENDING, $emailMessage->getInternalStatus());
+        }
+    }
+
     /** @return iterable<string, array{class-string}> */
     public static function queuedProvider(): iterable
     {
         yield 'queued with Mailjet' => [MailjetApiTransport::class];
 
         yield 'queued with Mandrill' => [MandrillApiTransport::class];
-    }
-
-    /** @return iterable<string, array{string, class-string}> */
-    public static function deliveryProvider(): iterable
-    {
-        yield 'Mailjet' => [MailerType::MAILJET, MailjetApiTransport::class];
-
-        yield 'Mandrill' => [MailerType::MANDRILL, MandrillApiTransport::class];
     }
 
     /** @param class-string $providerClass */

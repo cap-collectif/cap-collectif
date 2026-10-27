@@ -125,8 +125,8 @@ class AddProposalSmsVoteMutation implements MutationInterface
         if ($step->isNumberOfVotesLimitted() && $countParticipantsVotes >= $step->getVotesLimit()) {
             // when vote limit is reached we need to fetch user votes to refresh the relay cache
             $paginator = new Paginator(function () use ($step, $token) {
-                $repository =
-                    $step instanceof CollectStep
+                $repository
+                    = $step instanceof CollectStep
                         ? $this->proposalCollectVoteRepository
                         : $this->proposalSelectionVoteRepository;
 

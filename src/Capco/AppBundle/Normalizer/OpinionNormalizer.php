@@ -37,8 +37,8 @@ class OpinionNormalizer implements NormalizerInterface, SerializerAwareInterface
 
     public function normalize($object, $format = null, array $context = [])
     {
-        $groups =
-            isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
+        $groups
+            = isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
         $data = $this->normalizer->normalize($object, $format, $context);
 
         if (
@@ -78,8 +78,8 @@ class OpinionNormalizer implements NormalizerInterface, SerializerAwareInterface
 
         $opinionType = $object->getOpinionType();
         $step = $object->getStep();
-        $project =
-            $step && $step->getProjectAbstractStep()
+        $project
+            = $step && $step->getProjectAbstractStep()
                 ? $step->getProjectAbstractStep()->getProject()
                 : null;
         $token = $this->tokenStorage->getToken();
@@ -111,8 +111,8 @@ class OpinionNormalizer implements NormalizerInterface, SerializerAwareInterface
                 ),
             ];
         }
-        $data['userVote'] =
-            'anon.' === $user
+        $data['userVote']
+            = 'anon.' === $user
                 ? null
                 : $this->voteRepository->getByObjectUser('opinion', $object, $user);
         $data['hasUserReported'] = 'anon.' === $user ? false : $object->userDidReport($user);

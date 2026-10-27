@@ -69,9 +69,9 @@ class CreateResponsesFromCsvCommand extends Command
             ;
             if (!$author) {
                 $output->writeln(
-                    'Author ' .
-                    $row['email'] .
-                    ' does not exist. Create it manually before importing.'
+                    'Author '
+                    . $row['email']
+                    . ' does not exist. Create it manually before importing.'
                 );
 
                 return 1;
@@ -84,9 +84,9 @@ class CreateResponsesFromCsvCommand extends Command
             ;
             if (!$questionnaire) {
                 $output->writeln(
-                    'Questionnaire ' .
-                    $row['questionnaire_id'] .
-                    ' does not exist. Create it manually before importing.'
+                    'Questionnaire '
+                    . $row['questionnaire_id']
+                    . ' does not exist. Create it manually before importing.'
                 );
 
                 return 1;

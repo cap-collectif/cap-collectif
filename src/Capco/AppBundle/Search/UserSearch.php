@@ -273,7 +273,7 @@ class UserSearch extends Search
             $nestedQueryProject->setQuery(
                 (new Query\BoolQuery())
                     ->addFilter(
-                        new Query\Term([
+                        new Term([
                             'participationsCountByProject.project.id' => $project->getId(),
                         ])
                     )
@@ -467,11 +467,11 @@ class UserSearch extends Search
         $proposalSmsAnonymousVotesCount = $this->getProposalSmsAnonymousVotesCount();
         $paperVotesCount = $this->getPaperVotesCount();
 
-        $totalCount =
-            $resultSet->getTotalHits() +
-            $questionnaireAnonymousRepliesCount +
-            $proposalSmsAnonymousVotesCount +
-            $paperVotesCount;
+        $totalCount
+            = $resultSet->getTotalHits()
+            + $questionnaireAnonymousRepliesCount
+            + $proposalSmsAnonymousVotesCount
+            + $paperVotesCount;
 
         return [
             'results' => $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet),

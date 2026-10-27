@@ -78,19 +78,6 @@ class ParticipantNormalizerTest extends TestCase
     }
 
     /**
-     * @phpunit-status compliant
-     *
-     * @phpunit-reason Checks the normalizer public result with real per-test domain objects and controlled
-     * service responses.
-     */
-    public function testSupportsNormalization(): void
-    {
-        $this->assertTrue($this->participantNormalizer->supportsNormalization(new User(), 'csv', [BaseNormalizer::IS_EXPORT_NORMALIZER => true]));
-        $this->assertFalse($this->participantNormalizer->supportsNormalization(new User(), 'csv'));
-        $this->assertFalse($this->participantNormalizer->supportsNormalization(new \stdClass(), 'csv', [BaseNormalizer::IS_EXPORT_NORMALIZER => true]));
-    }
-
-    /**
      * @return array<string, array<int, array<string, null|bool|ExportVariantsEnum|string>>>
      */
     public function normalizationDataProvider(): array
@@ -131,5 +118,18 @@ class ParticipantNormalizerTest extends TestCase
             'Partial Export' => [[BaseNormalizer::EXPORT_VARIANT => ExportVariantsEnum::SIMPLIFIED, BaseNormalizer::IS_EXPORT_NORMALIZER => true], $simplifiedExportResult],
             'Full Export' => [[BaseNormalizer::EXPORT_VARIANT => ExportVariantsEnum::FULL, BaseNormalizer::IS_EXPORT_NORMALIZER => true], $fullExportResult],
         ];
+    }
+
+    /**
+     * @phpunit-status compliant
+     *
+     * @phpunit-reason Checks the normalizer public result with real per-test domain objects and controlled
+     * service responses.
+     */
+    public function testSupportsNormalization(): void
+    {
+        $this->assertTrue($this->participantNormalizer->supportsNormalization(new User(), 'csv', [BaseNormalizer::IS_EXPORT_NORMALIZER => true]));
+        $this->assertFalse($this->participantNormalizer->supportsNormalization(new User(), 'csv'));
+        $this->assertFalse($this->participantNormalizer->supportsNormalization(new \stdClass(), 'csv', [BaseNormalizer::IS_EXPORT_NORMALIZER => true]));
     }
 }

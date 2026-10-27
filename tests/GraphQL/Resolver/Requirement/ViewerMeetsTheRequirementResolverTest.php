@@ -2,6 +2,8 @@
 
 namespace Capco\Tests\GraphQL\Resolver\Requirement;
 
+use Capco\AppBundle\Entity\Requirement;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\Tests\IdentityWebTestCase;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
@@ -42,11 +44,11 @@ final class ViewerMeetsTheRequirementResolverTest extends IdentityWebTestCase
         yield 'missing birth date' => ['DATE_OF_BIRTH', 'setDateOfBirth', null, false];
     }
 
-    private function requirement(string $type): \Capco\AppBundle\Entity\Requirement
+    private function requirement(string $type): Requirement
     {
-        $step = $this->em->getRepository(\Capco\AppBundle\Entity\Steps\CollectStep::class)->findOneBy([]);
+        $step = $this->em->getRepository(CollectStep::class)->findOneBy([]);
         self::assertNotNull($step);
-        $requirement = (new \Capco\AppBundle\Entity\Requirement())->setStep($step)->setType($type)->setPosition(100);
+        $requirement = (new Requirement())->setStep($step)->setType($type)->setPosition(100);
         $this->em->persist($requirement);
         $this->em->flush();
 

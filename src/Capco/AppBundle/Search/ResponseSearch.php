@@ -180,7 +180,7 @@ class ResponseSearch extends Search
                 )
                 ->addShould(
                     (new BoolQuery())->addFilter(
-                        new Query\Term(['textValue.key' => $questionChoice->getTitle()])
+                        new Term(['textValue.key' => $questionChoice->getTitle()])
                     )
                 )
         );

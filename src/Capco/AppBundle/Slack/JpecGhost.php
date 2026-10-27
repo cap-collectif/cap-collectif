@@ -27,23 +27,23 @@ class JpecGhost extends AbstractSlackMessager
 
     private function generateSlackMessage(AnalysisConfigurationProcess $process): string
     {
-        return $this->prefixIfNotProd() .
-            " l'analyse de l'étape du projet " .
-            $this->getProjectUrlAndName($process) .
-            ' vient de passer avec ' .
-            $process->getDecisions()->count() .
-            ' décisions appliquées';
+        return $this->prefixIfNotProd()
+            . " l'analyse de l'étape du projet "
+            . $this->getProjectUrlAndName($process)
+            . ' vient de passer avec '
+            . $process->getDecisions()->count()
+            . ' décisions appliquées';
     }
 
     private function getProjectUrlAndName(AnalysisConfigurationProcess $process): string
     {
         $step = $process->getAnalysisConfiguration()->getAnalysisStep();
 
-        return '[<' .
-            $this->projectAdminAlphaUrlResolver->__invoke($step->getProject()) .
-            '|' .
-            $step->getProject()->getTitle() .
-            '>]';
+        return '[<'
+            . $this->projectAdminAlphaUrlResolver->__invoke($step->getProject())
+            . '|'
+            . $step->getProject()->getTitle()
+            . '>]';
     }
 
     private function prefixIfNotProd(): string

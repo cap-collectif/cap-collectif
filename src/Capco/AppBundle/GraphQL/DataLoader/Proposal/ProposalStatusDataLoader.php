@@ -54,9 +54,9 @@ class ProposalStatusDataLoader extends BatchDataLoader
     {
         if ($this->debug) {
             $this->logger->info(
-                __METHOD__ .
-                    'called for keys : ' .
-                    var_export(
+                __METHOD__
+                    . 'called for keys : '
+                    . var_export(
                         array_map(fn ($key) => $this->serializeKey($key), $keys),
                         true
                     )
@@ -139,10 +139,10 @@ class ProposalStatusDataLoader extends BatchDataLoader
             }
             if (!$step instanceof CollectStep) {
                 $this->logger->error(
-                    __METHOD__ .
-                        'step ' .
-                        $step->getId() .
-                        ' is neither a SelectionStep nor a CollectStep'
+                    __METHOD__
+                        . 'step '
+                        . $step->getId()
+                        . ' is neither a SelectionStep nor a CollectStep'
                 );
 
                 return null;

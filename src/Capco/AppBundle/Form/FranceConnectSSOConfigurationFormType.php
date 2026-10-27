@@ -74,10 +74,10 @@ class FranceConnectSSOConfigurationFormType extends AbstractType
 
             $endpoint = $endpoints[$resolvedEnvironment];
 
-            $data['accessTokenUrl'] =
-                $endpoint . $routes['accessTokenUrl'];
-            $data['authorizationUrl'] =
-                $endpoint . $routes['authorizationUrl'];
+            $data['accessTokenUrl']
+                = $endpoint . $routes['accessTokenUrl'];
+            $data['authorizationUrl']
+                = $endpoint . $routes['authorizationUrl'];
             $data['userInfoUrl'] = $endpoint . $routes['userInfoUrl'];
             $data['logoutUrl'] = $endpoint . $routes['logoutUrl'];
 

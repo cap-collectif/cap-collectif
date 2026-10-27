@@ -350,8 +350,6 @@ services:
     Capco\AppBundle\Cache\SessionListener:
         arguments:
             $session: '@session'
-        tags:
-            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
 
     Capco\AppBundle\Mailer\SendInBlue\ContactsApi:
         arguments:

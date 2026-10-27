@@ -57,8 +57,8 @@ class InviteUsersMutation implements MutationInterface
         }
 
         $isAdmin = UserRole::ROLE_ADMIN === $role;
-        $isProjectAdmin =
-            $this->manager->isActive(Manager::project_admin)
+        $isProjectAdmin
+            = $this->manager->isActive(Manager::project_admin)
             && UserRole::ROLE_PROJECT_ADMIN === $role;
 
         $existingInviteEmails = $this->userInviteRepository->findAllEmails();
@@ -126,8 +126,8 @@ class InviteUsersMutation implements MutationInterface
         $newInvitations = \array_slice($newInvitations, 0, $maxResults);
 
         $offset = 0;
-        $updatedInvitations =
-            0 === \count($toUpdateEmails)
+        $updatedInvitations
+            = 0 === \count($toUpdateEmails)
                 ? []
                 : array_map(static function (UserInvite $invite) use (&$offset) {
                     return new Edge(ConnectionBuilder::offsetToCursor($offset++), $invite);

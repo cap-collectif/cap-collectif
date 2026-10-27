@@ -57,8 +57,8 @@ class ProposalResolver
             $followers[$key]['firstname'] = $userFollower->getFirstname();
             $followers[$key]['lastname'] = $userFollower->getLastname();
             $followers[$key]['followedAt'] = $follower->getFollowedAt()->format('d-m-Y H:i:s');
-            $followers[$key]['userType_name'] =
-                null !== $userFollower->getUserType()
+            $followers[$key]['userType_name']
+                = null !== $userFollower->getUserType()
                     ? $userFollower->getUserType()->getName()
                     : 'NONE';
             $followers[$key]['url'] = $this->userUrlResolver->__invoke($userFollower);

@@ -181,10 +181,10 @@ class SendAnonymizeUsersReminderEmailCommand extends Command
 
     /**
      * @param array{
-     *     siteName: string|null,
-     *     logo: string|null,
+     *     siteName: null|string,
+     *     logo: null|string,
      *     baseUrl: string,
-     *     user_locale: string|null,
+     *     user_locale: null|string,
      *     day: int
      * } $templateBase
      */
@@ -201,10 +201,10 @@ class SendAnonymizeUsersReminderEmailCommand extends Command
 
     /**
      * @return array{
-     *     siteName: string|null,
-     *     logo: string|null,
+     *     siteName: null|string,
+     *     logo: null|string,
      *     baseUrl: string,
-     *     user_locale: string|null,
+     *     user_locale: null|string,
      *     day: int
      * }
      */

@@ -2,6 +2,8 @@
 
 namespace Capco\Tests\Controller\Site;
 
+use Application\Migrations\Version20261009120000;
+use Application\Migrations\Version20261009180000;
 use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalAnalysis;
@@ -16,7 +18,9 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\Tests\IdentityWebTestCase;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\DBAL\Schema\Schema;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Psr\Log\NullLogger;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -212,8 +216,8 @@ final class MediaPrivacyTest extends IdentityWebTestCase
             $this->em->flush();
 
             require_once __DIR__ . '/../../../src/DoctrineMigrations/Version20261009180000.php';
-            $migration = new \Application\Migrations\Version20261009180000($this->em->getConnection(), new \Psr\Log\NullLogger());
-            $migration->up(new \Doctrine\DBAL\Schema\Schema());
+            $migration = new Version20261009180000($this->em->getConnection(), new NullLogger());
+            $migration->up(new Schema());
             foreach ($migration->getSql() as $query) {
                 $this->em->getConnection()->executeStatement($query->getStatement(), $query->getParameters(), $query->getTypes());
             }
@@ -399,8 +403,8 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         $this->em->flush();
 
         require_once __DIR__ . '/../../../src/DoctrineMigrations/Version20261009120000.php';
-        $migration = new \Application\Migrations\Version20261009120000($this->em->getConnection(), new \Psr\Log\NullLogger());
-        $migration->up(new \Doctrine\DBAL\Schema\Schema());
+        $migration = new Version20261009120000($this->em->getConnection(), new NullLogger());
+        $migration->up(new Schema());
         foreach ($migration->getSql() as $query) {
             $this->em->getConnection()->executeStatement($query->getStatement(), $query->getParameters(), $query->getTypes());
         }

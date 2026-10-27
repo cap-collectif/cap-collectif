@@ -2,6 +2,9 @@
 
 namespace Capco\Tests\GraphQL\Resolver\Requirement;
 
+use Capco\AppBundle\Entity\Requirement;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\UserRequirement;
 use Capco\Tests\IdentityWebTestCase;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
@@ -58,10 +61,10 @@ final class RequirementViewerValueResolverTest extends IdentityWebTestCase
         $other = $this->account();
         $requirement = $this->requirement('CHECKBOX');
         $otherRequirement = $this->requirement('CHECKBOX');
-        $this->em->persist(new \Capco\AppBundle\Entity\UserRequirement($other, $requirement, true));
-        $this->em->persist(new \Capco\AppBundle\Entity\UserRequirement($viewer, $otherRequirement, true));
+        $this->em->persist(new UserRequirement($other, $requirement, true));
+        $this->em->persist(new UserRequirement($viewer, $otherRequirement, true));
         if (null !== $value) {
-            $this->em->persist(new \Capco\AppBundle\Entity\UserRequirement($viewer, $requirement, $value));
+            $this->em->persist(new UserRequirement($viewer, $requirement, $value));
         }
         $this->em->flush();
         $this->login($viewer->getEmail());
@@ -80,11 +83,11 @@ final class RequirementViewerValueResolverTest extends IdentityWebTestCase
         yield 'only another user or another requirement accepted' => [null, false];
     }
 
-    private function requirement(string $type): \Capco\AppBundle\Entity\Requirement
+    private function requirement(string $type): Requirement
     {
-        $step = $this->em->getRepository(\Capco\AppBundle\Entity\Steps\CollectStep::class)->findOneBy([]);
+        $step = $this->em->getRepository(CollectStep::class)->findOneBy([]);
         self::assertNotNull($step);
-        $requirement = (new \Capco\AppBundle\Entity\Requirement())->setStep($step)->setType($type)->setPosition(100);
+        $requirement = (new Requirement())->setStep($step)->setType($type)->setPosition(100);
         $this->em->persist($requirement);
         $this->em->flush();
 

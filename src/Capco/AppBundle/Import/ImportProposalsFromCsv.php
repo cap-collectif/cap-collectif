@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Import;
 use Box\Spout\Common\Entity\Row;
 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 use Box\Spout\Reader\CSV\Reader;
+use Box\Spout\Reader\CSV\RowIterator;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Capco\AppBundle\Entity\Media;
@@ -119,7 +120,7 @@ class ImportProposalsFromCsv
         );
         $reader = $this->getRecords();
 
-        /** @var \Box\Spout\Reader\CSV\RowIterator $rows */
+        /** @var RowIterator $rows */
         $rows = $reader
             ->getSheetIterator()
             ->current()
@@ -142,11 +143,11 @@ class ImportProposalsFromCsv
                 $headersJoined = implode(',', $rows->current()->toArray());
 
                 $exceptionMessage = sprintf(
-                    \PHP_EOL . 'file %s ' .
-                    \PHP_EOL . '%s missing headers: %s ' .
-                    \PHP_EOL . 'Expected headers: %s ' .
-                    \PHP_EOL . 'Filled headers: %s ' .
-                    \PHP_EOL . 'Total rows: %s ',
+                    \PHP_EOL . 'file %s '
+                    . \PHP_EOL . '%s missing headers: %s '
+                    . \PHP_EOL . 'Expected headers: %s '
+                    . \PHP_EOL . 'Filled headers: %s '
+                    . \PHP_EOL . 'Total rows: %s ',
                     $this->filePath,
                     \count($missing),
                     implode(', ', $missing),
@@ -449,7 +450,7 @@ class ImportProposalsFromCsv
                     'district' => $district,
                     'media' => $media,
                     'status' => $status,
-                    'address' => $address
+                    'address' => $address,
                 ] = $this->verifyData($row, $dryRun, $isCli, $isCurrentLineFail, $key);
             } catch (\Exception $exception) {
                 $this->logger->error($exception->getMessage());
@@ -822,8 +823,8 @@ class ImportProposalsFromCsv
                     if ('number' === $question->getInputType()) {
                         $value = (float) trim((string) $row[$questionTitle]);
                     } elseif (
-                        AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION ===
-                            $question->getType()
+                        AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION
+                            === $question->getType()
                         && !empty($row[$questionTitle])
                     ) {
                         $csvValue = ucfirst(strtolower((string) $row[$questionTitle]));

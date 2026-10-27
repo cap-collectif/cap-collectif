@@ -22,9 +22,9 @@ class <?php echo $command_class_name; ?> implements ProcessorInterface
     private $<?php echo $varRepositoryName; ?>;
     private $<?php echo $varNotifierName; ?>;
 
-    public function __construct(<?php echo $repositoryName .
-        ' $' .
-        $varRepositoryName; ?>, <?php echo $notifierName . ' $' . $varNotifierName; ?>)
+    public function __construct(<?php echo $repositoryName
+        . ' $'
+        . $varRepositoryName; ?>, <?php echo $notifierName . ' $' . $varNotifierName; ?>)
     {
         $this-><?php echo $varRepositoryName; ?> = $<?php echo $varRepositoryName; ?>;
         $this-><?php echo $varNotifierName; ?> = $<?php echo $varNotifierName; ?>;

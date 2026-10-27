@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Questions\SectionQuestion;
 use Capco\AppBundle\Enum\ProposalFormAffiliation;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\QueryBuilder;
 
 class ProposalFormRepository extends EntityRepository
@@ -15,7 +16,7 @@ class ProposalFormRepository extends EntityRepository
     /**
      * @return mixed
      *
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NonUniqueResultException
      */
     public function getOne(mixed $id)
     {

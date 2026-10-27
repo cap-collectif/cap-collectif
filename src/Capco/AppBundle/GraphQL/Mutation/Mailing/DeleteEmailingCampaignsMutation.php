@@ -78,8 +78,8 @@ class DeleteEmailingCampaignsMutation extends AbstractEmailingCampaignMutation
     {
         if ($campaign->getMailingList()) {
             if (
-                1 ===
-                $campaign
+                1
+                === $campaign
                     ->getMailingList()
                     ->getEmailingCampaigns()
                     ->count()

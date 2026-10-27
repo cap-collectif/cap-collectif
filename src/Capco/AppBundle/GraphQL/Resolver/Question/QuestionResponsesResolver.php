@@ -35,8 +35,8 @@ class QuestionResponsesResolver implements QueryInterface
         }
 
         $arguments = $args->getArrayCopy();
-        $withNotConfirmedUser =
-            isset($arguments['withNotConfirmedUser'])
+        $withNotConfirmedUser
+            = isset($arguments['withNotConfirmedUser'])
             && true === $arguments['withNotConfirmedUser'];
         $term = $arguments['term'] ?? null;
         $sentimentFilter = $args->offsetGet('iaSentiment');
@@ -83,12 +83,12 @@ class QuestionResponsesResolver implements QueryInterface
 
     private static function getOrderBy(array $arguments): array
     {
-        $orderByField =
-            ResponsesOrderField::SORT_FIELD[
+        $orderByField
+            = ResponsesOrderField::SORT_FIELD[
                 $arguments['orderBy']['field'] ?? ResponsesOrderField::CREATED_AT
             ];
-        $orderByDirection =
-            OrderDirection::SORT_DIRECTION[
+        $orderByDirection
+            = OrderDirection::SORT_DIRECTION[
                 $arguments['orderBy']['direction'] ?? OrderDirection::DESC
             ];
 

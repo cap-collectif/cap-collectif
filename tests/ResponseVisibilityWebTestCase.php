@@ -10,6 +10,7 @@ use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\UserBundle\Entity\User;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 abstract class ResponseVisibilityWebTestCase extends IdentityWebTestCase
 {
@@ -49,7 +50,7 @@ abstract class ResponseVisibilityWebTestCase extends IdentityWebTestCase
     /** @param list<string> $expected */
     protected function assertVisibleResponses(string $type, string $id, array $expected): void
     {
-        $result = $this->graphql('query($id: ID!) { node(id: $id) { ... on ' . $type . ' { responses { question { title } ... on ValueResponse { value } } } } }', ['id' => \Overblog\GraphQLBundle\Relay\Node\GlobalId::toGlobalId($type, $id)]);
+        $result = $this->graphql('query($id: ID!) { node(id: $id) { ... on ' . $type . ' { responses { question { title } ... on ValueResponse { value } } } } }', ['id' => GlobalId::toGlobalId($type, $id)]);
         self::assertNotNull($result['node']);
         $visible = [];
         foreach ($result['node']['responses'] as $response) {

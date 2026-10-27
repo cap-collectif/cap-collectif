@@ -44,8 +44,8 @@ class MailerService extends MailerFactory
         if ($recipient instanceof User && $recipient->getId()) {
             $params['unsubscribeUrl'] = $this->getUnsubscribeUrl($recipient);
         }
-        $params['locale'] =
-            $recipient && $recipient->getLocale()
+        $params['locale']
+            = $recipient && $recipient->getLocale()
                 ? $recipient->getLocale()
                 : $this->siteParams->getDefaultLocale();
 

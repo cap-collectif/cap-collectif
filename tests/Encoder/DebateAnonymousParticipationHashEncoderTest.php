@@ -3,6 +3,7 @@
 namespace Capco\Tests\Encoder;
 
 use Capco\AppBundle\Encoder\DebateAnonymousParticipationHashEncoder;
+use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
 use PHPUnit\Framework\TestCase;
@@ -25,7 +26,7 @@ class DebateAnonymousParticipationHashEncoderTest extends TestCase
 
     public function testEncodesAnonymousArgument(): void
     {
-        $argument = (new DebateAnonymousArgument(new \Capco\AppBundle\Entity\Debate\Debate()))->setType('FOR')->setToken('supertoken');
+        $argument = (new DebateAnonymousArgument(new Debate()))->setType('FOR')->setToken('supertoken');
 
         self::assertSame('Rk9SOnN1cGVydG9rZW4=', (new DebateAnonymousParticipationHashEncoder())->encode($argument));
     }

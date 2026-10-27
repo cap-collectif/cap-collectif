@@ -181,9 +181,9 @@ class ConsultationController extends CRUDController
                                 'name' => $this->escapeHtml(
                                     $this->admin->toString($existingObject)
                                 ),
-                                'link_start' => '<a href="' .
-                                    $this->admin->generateObjectUrl('edit', $existingObject) .
-                                    '">',
+                                'link_start' => '<a href="'
+                                    . $this->admin->generateObjectUrl('edit', $existingObject)
+                                    . '">',
                                 'link_end' => '</a>',
                             ],
                             'SonataAdminBundle'

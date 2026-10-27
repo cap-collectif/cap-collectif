@@ -62,8 +62,8 @@ class EventSearch extends Search
             'phrase_prefix'
         );
 
-        $hasOwnerAffiliation =
-            $user
+        $hasOwnerAffiliation
+            = $user
             && !$onlyWhenAuthor
             && $affiliations
             && \in_array(EventAffiliation::OWNER, $affiliations, true);

@@ -464,7 +464,7 @@ class AnalyticsSearch
         \DateTimeInterface $end,
         ?string $projectId = null
     ): \Elastica\Search {
-        $boolQuery = new Query\BoolQuery();
+        $boolQuery = new BoolQuery();
         $boolQuery
             ->addFilter(new Query\Term(['objectType' => 'proposal']))
             ->addFilter(
@@ -500,7 +500,7 @@ class AnalyticsSearch
         \DateTimeInterface $end,
         ?string $projectId = null
     ): \Elastica\Search {
-        $boolQuery = new Query\BoolQuery();
+        $boolQuery = new BoolQuery();
         $boolQuery
             ->addFilter(
                 new Range('createdAt', [

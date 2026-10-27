@@ -62,8 +62,8 @@ class MigrateEventAddressesToJsonAddressesCommand extends Command
     private function migrate(array $events, OutputInterface $output): void
     {
         foreach ($events as $event) {
-            $jsonAddress =
-                !empty($event['lng']) && !empty($event['lat'])
+            $jsonAddress
+                = !empty($event['lng']) && !empty($event['lat'])
                     ? $this->map->reverserGeocodingAddress($event['lat'], $event['lng'])
                     : '';
             $similarity = $this->checkSimilarityAddressDiff($jsonAddress, $output, $event);

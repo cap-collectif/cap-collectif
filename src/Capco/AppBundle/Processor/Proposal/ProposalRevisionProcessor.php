@@ -45,9 +45,9 @@ class ProposalRevisionProcessor implements ProcessorInterface
 
         if (empty($proposalRevision)) {
             $this->logger->error(
-                self::class .
-                    ' - Unable to find revision with for proposal revision id: ' .
-                    $json['proposalRevisionId']
+                self::class
+                    . ' - Unable to find revision with for proposal revision id: '
+                    . $json['proposalRevisionId']
             );
         }
 

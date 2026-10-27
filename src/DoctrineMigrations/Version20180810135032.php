@@ -23,9 +23,9 @@ final class Version20180810135032 extends AbstractMigration
         ];
         foreach ($tables as $table) {
             $this->addSql(
-                'UPDATE ' .
-                    $table['key'] .
-                    ' o SET o.published = true, o.publishedAt = o.created_at WHERE o.expired = false'
+                'UPDATE '
+                    . $table['key']
+                    . ' o SET o.published = true, o.publishedAt = o.created_at WHERE o.expired = false'
             );
         }
         $this->addSql('DROP INDEX idx_enabled ON opinion');

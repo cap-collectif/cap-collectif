@@ -220,9 +220,9 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
         ExportHeaders::EXPORT_USER_TOTAL_VOTES,
         ExportHeaders::EXPORT_USER_TOTAL_PROPOSALS,
         ExportHeaders::EXPORT_USER_VOTES_PROPOSAL_IDS,
-        ExportHEADERS::EXPORT_PROPOSAL_VOTES_ID,
-        ExportHEADERS::EXPORT_PROPOSAL_VOTES_RANKING,
-        ExportHEADERS::EXPORT_PROPOSAL_VOTES_CREATED_AT,
+        ExportHeaders::EXPORT_PROPOSAL_VOTES_ID,
+        ExportHeaders::EXPORT_PROPOSAL_VOTES_RANKING,
+        ExportHeaders::EXPORT_PROPOSAL_VOTES_CREATED_AT,
         ExportHeaders::EXPORT_PROPOSAL_REFERENCE,
         ExportHeaders::EXPORT_PROPOSAL_TITLE,
         ExportHeaders::EXPORT_PROPOSAL_LINK,
@@ -366,9 +366,9 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
 
             $progressBar = $style->createProgressBar($proposalTotalCount);
             $progressBar->setFormat(
-                "\n%current%/%max% processed proposal(s)  [%bar%] %percent%%" .
-                "\n\nTotal Proposals Processed: %total_processed%" .
-                "\nMemory Used: %memory_used%\n"
+                "\n%current%/%max% processed proposal(s)  [%bar%] %percent%%"
+                . "\n\nTotal Proposals Processed: %total_processed%"
+                . "\nMemory Used: %memory_used%\n"
             );
             $progressBar->setMessage('processed proposal(s) ');
             $progressBar->setOverwrite(false);

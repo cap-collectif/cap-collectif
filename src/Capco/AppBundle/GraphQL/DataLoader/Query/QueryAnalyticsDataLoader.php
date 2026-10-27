@@ -22,6 +22,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Search\AnalyticsSearch;
+use Elastica\ResultSet;
 use GraphQL\Error\UserError;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
@@ -211,7 +212,7 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
         ];
     }
 
-    private function hasResultSetError(\Elastica\ResultSet $set, string $field): bool
+    private function hasResultSetError(ResultSet $set, string $field): bool
     {
         if (!$set->getResponse()->hasError()) {
             return false;

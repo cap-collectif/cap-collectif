@@ -27,7 +27,7 @@ final class Version20190809085810 extends AbstractMigration
                 $sources_count,
                 $trashed_sources_count,
                 $votes_count,
-                $contributors_count
+                $contributors_count,
             ] = [
                 $consultationByStep['opinion_count'],
                 $consultationByStep['trashed_opinion_count'],

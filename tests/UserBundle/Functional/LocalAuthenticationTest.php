@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Capco\Tests\UserBundle\Functional;
 
 use Capco\AppBundle\Anonymizer\UserAnonymizer;
+use Capco\UserBundle\Entity\User;
 
 /**
  * @internal
@@ -125,7 +126,7 @@ final class LocalAuthenticationTest extends AccountWebTestCase
         yield 'super administrator inherits administration' => [['ROLE_SUPER_ADMIN'], 301];
     }
 
-    private function registerAccount(string $email, string $username): \Capco\UserBundle\Entity\User
+    private function registerAccount(string $email, string $username): User
     {
         $this->allowRegistrationWithoutCustomResponses();
         $payload = $this->graphql(
@@ -135,14 +136,14 @@ final class LocalAuthenticationTest extends AccountWebTestCase
         self::assertNull($payload['errorsCode']);
         self::assertNotNull($payload['user']);
         $this->em->clear();
-        $user = $this->em->getRepository(\Capco\UserBundle\Entity\User::class)->findOneBy(['email' => $email]);
-        self::assertInstanceOf(\Capco\UserBundle\Entity\User::class, $user);
+        $user = $this->em->getRepository(User::class)->findOneBy(['email' => $email]);
+        self::assertInstanceOf(User::class, $user);
         self::assertSame(base64_encode('User:' . $user->getId()), $payload['user']['id']);
 
         return $user;
     }
 
-    private function confirmAndLogin(\Capco\UserBundle\Entity\User $user, string $email): void
+    private function confirmAndLogin(User $user, string $email): void
     {
         self::assertNotNull($user->getConfirmationToken());
         $this->request('GET', '/account/email_confirmation/' . $user->getConfirmationToken());

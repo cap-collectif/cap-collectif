@@ -44,9 +44,9 @@ class ElasticsearchRabbitMQListener implements EventSubscriberInterface
     {
         if (!empty($this->messageStack)) {
             $this->logger->info(
-                '[elastic_search_rabbitmq_listener] Publishing ' .
-                    \count($this->messageStack) .
-                    ' messages to the stack.'
+                '[elastic_search_rabbitmq_listener] Publishing '
+                    . \count($this->messageStack)
+                    . ' messages to the stack.'
             );
             $arrayObject = new \ArrayObject($this->messageStack);
             $this->messageStack = $this->orderByPriority($arrayObject);

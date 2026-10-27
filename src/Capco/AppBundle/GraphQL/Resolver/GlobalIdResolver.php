@@ -168,8 +168,8 @@ class GlobalIdResolver
 
     public function resolve(string $uuidOrGlobalId, $userOrAnon = null, ?\ArrayObject $context = null)
     {
-        $skipVerification =
-            $context
+        $skipVerification
+            = $context
             && $context->offsetExists('disable_acl')
             && true === $context->offsetGet('disable_acl');
 
@@ -217,8 +217,8 @@ class GlobalIdResolver
         string $type,
         ?\ArrayObject $context = null
     ) {
-        $skipVerification =
-            $context
+        $skipVerification
+            = $context
             && $context->offsetExists('disable_acl')
             && true === $context->offsetGet('disable_acl');
 

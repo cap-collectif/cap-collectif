@@ -155,12 +155,12 @@ class CreateCsvFromUserCommand extends BaseExportCommand
 
         foreach ($finder as $file) {
             Process::fromShellCommandline(
-                'mv ' .
-                    $extractTo .
-                    $file->getRelativePathname() .
-                    ' ' .
-                    $matchTo .
-                    $file->getRelativePathname()
+                'mv '
+                    . $extractTo
+                    . $file->getRelativePathname()
+                    . ' '
+                    . $matchTo
+                    . $file->getRelativePathname()
             )->mustRun();
             chmod($matchTo . $file->getRelativePathname(), 0755);
         }
@@ -607,8 +607,8 @@ class CreateCsvFromUserCommand extends BaseExportCommand
                 },
                 array_filter(
                     $infoResolver->guessHeadersFromFields($data),
-                    fn (string $header) => 'data_node_contributions_edges_node_responses___typename' !==
-                    $header
+                    fn (string $header) => 'data_node_contributions_edges_node_responses___typename'
+                    !== $header
                 )
             ),
         };

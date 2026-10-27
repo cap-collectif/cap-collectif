@@ -155,7 +155,7 @@ class AddProposalNewsMutationSpec extends ObjectBehavior
         $proposalPost->getId()->WillReturn('123456');
         $config->isOnProposalNewsCreate()->willReturn(true);
         $publisher
-            ->publish(\Prophecy\Argument::any(), Argument::type(Message::class))
+            ->publish(Argument::any(), Argument::type(Message::class))
             ->shouldBeCalled()
         ;
 
@@ -209,7 +209,7 @@ class AddProposalNewsMutationSpec extends ObjectBehavior
         $proposalPost->getId()->WillReturn('123456');
 
         $publisher
-            ->publish(\Prophecy\Argument::any(), Argument::type(Message::class))
+            ->publish(Argument::any(), Argument::type(Message::class))
             ->shouldNotBeCalled()
         ;
 

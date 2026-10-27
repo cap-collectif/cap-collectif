@@ -8,6 +8,7 @@ use Capco\Tests\SamlWebTestCase;
 use SimpleSAML\Auth\Simple;
 use SimpleSAML\Configuration;
 use SimpleSAML\Session;
+use Symfony\Component\BrowserKit\Cookie;
 
 /**
  * @internal
@@ -50,7 +51,7 @@ final class SAMLLogoutHandlerTest extends SamlWebTestCase
         self::assertNull($this->browser->getRequest()->getSession()->get('saml-contract-marker'));
         $this->assertViewer(false);
         // Replaying the pre-logout cookie cannot restore authentication or private session data.
-        $this->browser->getCookieJar()->set(new \Symfony\Component\BrowserKit\Cookie($session->getName(), $oldSessionId));
+        $this->browser->getCookieJar()->set(new Cookie($session->getName(), $oldSessionId));
         $this->assertViewer(false);
         self::assertNull($this->browser->getRequest()->getSession()->get('saml-contract-marker'));
         $account = $this->reload($id);

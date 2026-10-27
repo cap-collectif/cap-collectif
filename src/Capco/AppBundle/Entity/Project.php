@@ -555,7 +555,7 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
     /**
      * Get steps.
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getSteps()
     {
@@ -626,7 +626,7 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
     }
 
     /**
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getEvents()
     {
@@ -652,7 +652,7 @@ class Project implements EntityInterface, IndexableInterface, TimeRangeable, Own
     /**
      * Get Posts.
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getPosts()
     {

@@ -105,10 +105,10 @@ class EvaluateProposalAssessmentMutation implements MutationInterface
             $this->notifyIfDecision($oldState, $proposalAssessment);
         } catch (\Exception $exception) {
             $this->logger->alert(
-                'An error occurred when evaluating ProposalAssessment with proposal id :' .
-                    $proposalId .
-                    '.' .
-                    $exception->getMessage()
+                'An error occurred when evaluating ProposalAssessment with proposal id :'
+                    . $proposalId
+                    . '.'
+                    . $exception->getMessage()
             );
 
             return [

@@ -3,6 +3,7 @@
 namespace Capco\UserBundle\OpenID\ExtraMapper;
 
 use Capco\UserBundle\Entity\User;
+use GuzzleHttp\Exception\InvalidArgumentException;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use Psr\Log\LoggerInterface;
 
@@ -29,8 +30,8 @@ class OccitanieExtraMapper
         $birthday = null;
 
         if (isset($this->userInfoData['birthday'])) {
-            $birthday =
-                \DateTime::createFromFormat('d/m/Y', $this->userInfoData['birthday']) ?: null;
+            $birthday
+                = \DateTime::createFromFormat('d/m/Y', $this->userInfoData['birthday']) ?: null;
 
             if ($birthday) {
                 $birthday->setTime(0, 0);
@@ -52,7 +53,7 @@ class OccitanieExtraMapper
         if (isset($this->userInfoData['city']) && !empty($this->userInfoData['city'])) {
             try {
                 $cityFromResponse = \GuzzleHttp\json_decode($this->userInfoData['city'], true);
-            } catch (\GuzzleHttp\Exception\InvalidArgumentException $exception) {
+            } catch (InvalidArgumentException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
             }
             $city = $cityFromResponse['name'] ?? null;

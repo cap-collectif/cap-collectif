@@ -13,7 +13,7 @@ use Box\Spout\Writer\XLSX\Writer as XLSXWriter;
 class WriterFactory
 {
     /**
-     * @return null|CsvWriter|OdsWriter|XlsxWriter
+     * @return null|CsvWriter|OdsWriter|XLSXWriter
      *
      * @throws UnsupportedTypeException
      */

@@ -1163,8 +1163,8 @@ class ProposalForm implements EntityInterface, DisplayableInBOInterface, Questio
                     ->first()
                 ;
 
-                $type =
-                    $nextChoice && \count($choices) > 1
+                $type
+                    = $nextChoice && \count($choices) > 1
                         ? $choices[1]->getTitle()
                         : ($firstPossibleAnswer ? $firstPossibleAnswer->getTitle() : '');
 

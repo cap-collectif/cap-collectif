@@ -81,7 +81,7 @@ class Version20150210172512 extends AbstractMigration implements ContainerAwareI
             $em = $this->container->get('doctrine.orm.entity_manager');
 
             $query = $em->createQuery(
-                'SELECT sp.id FROM Capco\\AppBundle\\Entity\\SiteParameter sp WHERE sp.keyname = :keyname'
+                'SELECT sp.id FROM Capco\AppBundle\Entity\SiteParameter sp WHERE sp.keyname = :keyname'
             );
             $query->setParameter('keyname', $key);
             $parameter = $query->getOneOrNullResult();
@@ -96,7 +96,7 @@ class Version20150210172512 extends AbstractMigration implements ContainerAwareI
         }
 
         $query = $em->createQuery(
-            'SELECT sp.id FROM Capco\\AppBundle\\Entity\\SiteParameter sp WHERE sp.keyname = :keyname'
+            'SELECT sp.id FROM Capco\AppBundle\Entity\SiteParameter sp WHERE sp.keyname = :keyname'
         );
         $query->setParameter('keyname', 'global.site.embed_js');
         $newParameter = $query->getOneOrNullResult();
@@ -124,7 +124,7 @@ class Version20150210172512 extends AbstractMigration implements ContainerAwareI
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
         $query = $em->createQuery(
-            'SELECT sp.id FROM Capco\\AppBundle\\Entity\\SiteParameter sp WHERE sp.keyname = :keyname'
+            'SELECT sp.id FROM Capco\AppBundle\Entity\SiteParameter sp WHERE sp.keyname = :keyname'
         );
         $query->setParameter('keyname', 'global.site.embed_js');
         $newParameter = $query->getOneOrNullResult();

@@ -139,8 +139,8 @@ abstract class Search
     {
         $bool = $query->getQuery();
 
-        if (!$bool instanceof Query\BoolQuery) {
-            $bool = new Query\BoolQuery();
+        if (!$bool instanceof BoolQuery) {
+            $bool = new BoolQuery();
             $bool->addMust($query->getQuery());
         }
 
@@ -152,8 +152,8 @@ abstract class Search
     {
         $bool = $query->getQuery();
 
-        if (!$bool instanceof Query\BoolQuery) {
-            $bool = new Query\BoolQuery();
+        if (!$bool instanceof BoolQuery) {
+            $bool = new BoolQuery();
             $bool->addMust($query->getQuery());
         }
 
@@ -163,11 +163,11 @@ abstract class Search
     }
 
     protected function searchTermsInMultipleFields(
-        Query\BoolQuery $query,
+        BoolQuery $query,
         array $fields,
         $terms = null,
         $type = null
-    ): Query\BoolQuery {
+    ): BoolQuery {
         if (empty(trim((string) $terms))) {
             $multiMatchQuery = new Query\MatchAll();
         } else {
@@ -185,10 +185,10 @@ abstract class Search
     }
 
     protected function searchNotInTermsForField(
-        Query\BoolQuery $query,
+        BoolQuery $query,
         $fieldName,
         $terms
-    ): Query\BoolQuery {
+    ): BoolQuery {
         if (\is_array($terms)) {
             $matchQuery = new Query\Terms($fieldName, $terms);
         } else {
@@ -386,7 +386,7 @@ abstract class Search
         return [$sortField => ['order' => $sortOrder]];
     }
 
-    private function createObjectTypeFilter(?string $type = null): Query\Term
+    private function createObjectTypeFilter(?string $type = null): Term
     {
         if (null === $type) {
             $type = $this->type;
@@ -395,6 +395,6 @@ abstract class Search
             }
         }
 
-        return new Query\Term(['objectType' => $type]);
+        return new Term(['objectType' => $type]);
     }
 }

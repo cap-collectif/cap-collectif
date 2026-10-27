@@ -27,8 +27,8 @@ class AlphaProjectController extends CRUDController
             if ($stepIsNotCollectStep) {
                 throw $this->createAccessDeniedException();
             }
-            $collectStepDontHaveProposalForm =
-                $step->isCollectStep() && $stepEqualSelectedStep && !$step->getProposalForm();
+            $collectStepDontHaveProposalForm
+                = $step->isCollectStep() && $stepEqualSelectedStep && !$step->getProposalForm();
             if ($collectStepDontHaveProposalForm) {
                 throw $this->createAccessDeniedException();
             }

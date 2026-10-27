@@ -44,8 +44,8 @@ class DataLoaderUtils
             if (null === $limit) {
                 $limit = 100;
             }
-            $results =
-                $i - $limit > 0
+            $results
+                = $i - $limit > 0
                     ? \array_slice($results, $i - $limit, $i)
                     : \array_slice($results, 0, $i);
         }

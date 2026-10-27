@@ -77,11 +77,11 @@ class CommentListener
         $oldValue = $changeSet['moderationStatus'][0];
         $newValue = $changeSet['moderationStatus'][1];
 
-        $isApproved =
-            ModerationStatus::APPROVED !== $oldValue && ModerationStatus::APPROVED === $newValue;
+        $isApproved
+            = ModerationStatus::APPROVED !== $oldValue && ModerationStatus::APPROVED === $newValue;
 
-        $isRejected =
-            ModerationStatus::REJECTED !== $oldValue && ModerationStatus::REJECTED === $newValue;
+        $isRejected
+            = ModerationStatus::REJECTED !== $oldValue && ModerationStatus::REJECTED === $newValue;
 
         if ($isApproved) {
             $this->sendApprovedByModerationEmail($comment);

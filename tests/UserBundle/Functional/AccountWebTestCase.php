@@ -7,11 +7,16 @@ namespace Capco\Tests\UserBundle\Functional;
 use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Mailer\MailerService;
+use Capco\AppBundle\Repository\RegistrationFormRepository;
 use Capco\Tests\FeatureFlags\FeatureFlagsAwareTest;
 use Capco\Tests\FeatureFlags\FeatureFlagsTrait;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Security\SessionWithJsonHandler;
 use Doctrine\ORM\EntityManagerInterface;
+use Monolog\Handler\HandlerInterface;
+use Monolog\Handler\StreamHandler;
+use PHPUnit\Framework\MockObject\MockObject;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
@@ -25,7 +30,7 @@ abstract class AccountWebTestCase extends WebTestCase implements FeatureFlagsAwa
     protected KernelBrowser $browser;
     protected EntityManagerInterface $em;
 
-    /** @var MailerService&\PHPUnit\Framework\MockObject\MockObject */
+    /** @var MailerService&MockObject */
     protected MailerService $mailer;
 
     /** @var list<array{type: string, body: array<string, mixed>}> */
@@ -34,7 +39,7 @@ abstract class AccountWebTestCase extends WebTestCase implements FeatureFlagsAwa
     /** @var array<string, true> */
     private array $sessionIds = [];
 
-    /** @var array<string, list<\Monolog\Handler\HandlerInterface>> */
+    /** @var array<string, list<HandlerInterface>> */
     private array $logHandlers = [];
     private ?string $backchannelEnv = null;
     private ?string $backchannelServer = null;
@@ -56,7 +61,7 @@ abstract class AccountWebTestCase extends WebTestCase implements FeatureFlagsAwa
         self::assertSame('test', self::$kernel->getEnvironment(), 'Account tests require the test environment.');
         // Preserve diagnostics without writing into PHPUnit's subprocess protocol.
         $mainHandler = $container->get('monolog.handler.main');
-        $fileHandler = new \Monolog\Handler\StreamHandler(self::$kernel->getLogDir() . '/account-contract.log');
+        $fileHandler = new StreamHandler(self::$kernel->getLogDir() . '/account-contract.log');
         foreach (['logger', 'monolog.logger.request', 'monolog.logger.security', 'monolog.logger.doctrine', 'monolog.logger.php', 'monolog.logger.event'] as $service) {
             if ($container->has($service)) {
                 $logger = $container->get($service);
@@ -97,7 +102,7 @@ abstract class AccountWebTestCase extends WebTestCase implements FeatureFlagsAwa
                     if ($session->isStarted()) {
                         $session->save();
                     }
-                    $handler = self::getContainer()->get(\Capco\UserBundle\Security\SessionWithJsonHandler::class);
+                    $handler = self::getContainer()->get(SessionWithJsonHandler::class);
                     foreach (array_keys($this->sessionIds) as $id) {
                         $handler->destroy($id);
                     }
@@ -162,7 +167,7 @@ abstract class AccountWebTestCase extends WebTestCase implements FeatureFlagsAwa
 
     protected function allowRegistrationWithoutCustomResponses(): void
     {
-        $form = self::getContainer()->get(\Capco\AppBundle\Repository\RegistrationFormRepository::class)->findCurrent();
+        $form = self::getContainer()->get(RegistrationFormRepository::class)->findCurrent();
         self::assertNotNull($form);
         foreach ($form->getQuestionsArray() as $association) {
             $association->getQuestion()->setRequired(false);

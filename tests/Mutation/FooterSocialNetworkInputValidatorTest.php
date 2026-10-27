@@ -43,6 +43,16 @@ class FooterSocialNetworkInputValidatorTest extends TestCase
         self::assertNull(FooterSocialNetworkInputValidator::getErrorCode(new Argument($input)));
     }
 
+    /** @return iterable<string, array{0: array{title: string, link: string, style: string}}> */
+    public static function provideValidInputs(): iterable
+    {
+        yield 'maximum lengths' => [[
+            'title' => str_repeat('a', 255),
+            'link' => str_repeat('b', 255),
+            'style' => str_repeat('c', 20),
+        ]];
+    }
+
     /**
      * @dataProvider provideInvalidInputs
      *
@@ -87,16 +97,6 @@ class FooterSocialNetworkInputValidatorTest extends TestCase
             ['footerSocialNetwork' => null, 'errorCode' => FooterSocialNetworkErrorCode::VALUE_TOO_LONG],
             $mutation(new Argument(['input' => ['id' => 'footer-social-network-id'] + $input]))
         );
-    }
-
-    /** @return iterable<string, array{0: array{title: string, link: string, style: string}}> */
-    public static function provideValidInputs(): iterable
-    {
-        yield 'maximum lengths' => [[
-            'title' => str_repeat('a', 255),
-            'link' => str_repeat('b', 255),
-            'style' => str_repeat('c', 20),
-        ]];
     }
 
     /** @return iterable<string, array{0: array{title: string, link: string, style: string}}> */

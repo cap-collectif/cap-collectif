@@ -4,6 +4,8 @@ namespace Capco\Tests\Elasticsearch;
 
 use Capco\AppBundle\Elasticsearch\IndexationProcessor;
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\Proposal;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
@@ -38,8 +40,8 @@ class IndexationProcessorTest extends TestCase
 
     public static function validMessages(): \Generator
     {
-        yield 'proposal' => [\Capco\AppBundle\Entity\Proposal::class, 'proposal1'];
+        yield 'proposal' => [Proposal::class, 'proposal1'];
 
-        yield 'opinion' => [\Capco\AppBundle\Entity\Opinion::class, 'opinion1'];
+        yield 'opinion' => [Opinion::class, 'opinion1'];
     }
 }

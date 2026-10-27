@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use Capco\AppBundle\Toggle\Manager;
+use Elastica\Util;
 use GraphQL\Type\Definition\ResolveInfo;
 
 class QueryAnalyzer
@@ -38,7 +39,7 @@ class QueryAnalyzer
                     'graphql_schema' => $currentSchemaName,
                     'host' => '',
                     'clientId' => '',
-                    'createdAt' => \Elastica\Util::convertDateTimeObject($now),
+                    'createdAt' => Util::convertDateTimeObject($now),
                 ]);
             }
         }

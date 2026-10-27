@@ -5,6 +5,7 @@ namespace Capco\Tests\Controller\Api;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\PublicApiToken;
 use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -80,7 +81,7 @@ class QuestionnaireResultsAccessTest extends WebTestCase
         self::assertInstanceOf(User::class, $author);
         self::assertInstanceOf(Questionnaire::class, $questionnaire);
         for ($i = 0; $i < 101; ++$i) {
-            $this->entityManager->persist((new \Capco\AppBundle\Entity\Reply())
+            $this->entityManager->persist((new Reply())
                 ->setAuthor($author)->setQuestionnaire($questionnaire));
         }
         $this->entityManager->flush();
@@ -160,6 +161,18 @@ class QuestionnaireResultsAccessTest extends WebTestCase
         self::assertSame($data['countOnly']['totalCount'], $after['withEdges']['totalCount']);
     }
 
+    /** @return iterable<string, array{string, string, string, string}> */
+    public static function visibleStepFilters(): iterable
+    {
+        yield 'restricted collect step' => ['collectstep1', 'CollectStep', 'userWelcomattic', 'userTheo'];
+
+        yield 'restricted consultation step' => ['cstep1', 'ConsultationStep', 'user5', 'userTheo'];
+
+        yield 'manager collect step' => ['collectstep1', 'CollectStep', 'userWelcomattic', 'userAdmin'];
+
+        yield 'manager consultation step' => ['cstep1', 'ConsultationStep', 'user5', 'userAdmin'];
+    }
+
     public function testQuestionnaireOnlyContributorFiltersPreserveSafeVolumes(): void
     {
         $query = 'query($project: ID!, $term: String!) {
@@ -181,18 +194,6 @@ class QuestionnaireResultsAccessTest extends WebTestCase
         self::assertSame([], $data['global']['edges']);
         self::assertSame(['endCursor' => null, 'hasNextPage' => false], $data['global']['pageInfo']);
         self::assertSame($data['global'], $data['filtered']);
-    }
-
-    /** @return iterable<string, array{string, string, string, string}> */
-    public static function visibleStepFilters(): iterable
-    {
-        yield 'restricted collect step' => ['collectstep1', 'CollectStep', 'userWelcomattic', 'userTheo'];
-
-        yield 'restricted consultation step' => ['cstep1', 'ConsultationStep', 'user5', 'userTheo'];
-
-        yield 'manager collect step' => ['collectstep1', 'CollectStep', 'userWelcomattic', 'userAdmin'];
-
-        yield 'manager consultation step' => ['cstep1', 'ConsultationStep', 'user5', 'userAdmin'];
     }
 
     /** @dataProvider resultManagers */

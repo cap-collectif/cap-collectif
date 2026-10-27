@@ -25,8 +25,8 @@ class UserConnectionResolver implements QueryInterface
     {
         $userId = $user->getId();
         $email = $args->offsetGet('email');
-        $aclDisabled =
-            $context
+        $aclDisabled
+            = $context
             && $context->offsetExists('disable_acl')
             && true === $context->offsetGet('disable_acl');
 

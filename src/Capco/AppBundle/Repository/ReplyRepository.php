@@ -84,9 +84,9 @@ class ReplyRepository extends EntityRepository
 
         $query = $this->_em
             ->createNativeQuery(
-                'SELECT COUNT(r.id) as sclr FROM reply r USE INDEX (idx_questionnaire_published) WHERE' .
-                    $where .
-                    ' r.questionnaire_id = :questionnaireId',
+                'SELECT COUNT(r.id) as sclr FROM reply r USE INDEX (idx_questionnaire_published) WHERE'
+                    . $where
+                    . ' r.questionnaire_id = :questionnaireId',
                 $rsm
             )
             ->setParameter('questionnaireId', $questionnaire->getId())
@@ -218,9 +218,9 @@ class ReplyRepository extends EntityRepository
         // This make the query too slow for such a huge table
         $nativeQuery = $this->getEntityManager()
             ->createNativeQuery(
-                'SELECT r.id FROM reply r USE INDEX (idx_questionnaire_published) WHERE' .
-                    $where .
-                    ' r.questionnaire_id = :questionnaire LIMIT :offset, :limit',
+                'SELECT r.id FROM reply r USE INDEX (idx_questionnaire_published) WHERE'
+                    . $where
+                    . ' r.questionnaire_id = :questionnaire LIMIT :offset, :limit',
                 $rsm
             )
             ->setParameter('questionnaire', $questionnaire)

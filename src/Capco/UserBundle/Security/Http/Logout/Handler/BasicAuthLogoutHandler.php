@@ -16,8 +16,8 @@ class BasicAuthLogoutHandler implements LogoutHandlerInterface
     ): RedirectResponseWithRequestInterface {
         $deleteType = $responseWithRequest->getRequest()->get('deleteType');
         if ($deleteType) {
-            $returnTo =
-                DeleteAccountType::SOFT === $deleteType || DeleteAccountType::HARD === $deleteType
+            $returnTo
+                = DeleteAccountType::SOFT === $deleteType || DeleteAccountType::HARD === $deleteType
                     ? $this->router->generate('app_homepage', ['deleteType' => $deleteType])
                     : $responseWithRequest->getRequest()->headers->get('referer', '/');
 

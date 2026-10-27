@@ -4,10 +4,11 @@ namespace Capco\Tests;
 
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 abstract class OAuthLogoutWebTestCase extends IdentityWebTestCase
 {
-    protected function providerSession(string $provider): \Symfony\Component\HttpFoundation\Session\SessionInterface
+    protected function providerSession(string $provider): SessionInterface
     {
         $owner = $this->createStub(ResourceOwnerInterface::class);
         $owner->method('getOption')->willReturn('https://provider.test/logout');

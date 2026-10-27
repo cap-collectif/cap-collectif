@@ -128,7 +128,7 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
             ->shouldBeCalledTimes(2)
             ->willReturn($organizationName)
         ;
-        $subAccount = new class() extends AccountInstance {
+        $subAccount = new class extends AccountInstance {
             public string $sid = 'XXXX';
             public string $authToken = 'XXXX';
 

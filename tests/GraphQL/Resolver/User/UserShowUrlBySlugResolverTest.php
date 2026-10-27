@@ -2,6 +2,7 @@
 
 namespace Capco\Tests\GraphQL\Resolver\User;
 
+use Capco\AppBundle\GraphQL\Resolver\User\UserShowUrlBySlugResolver;
 use Capco\Tests\IdentityWebTestCase;
 
 /**
@@ -21,7 +22,7 @@ final class UserShowUrlBySlugResolverTest extends IdentityWebTestCase
     {
         $user = $this->account();
         $this->setFeature('server_side_rendering', false);
-        $url = self::getContainer()->get(\Capco\AppBundle\GraphQL\Resolver\User\UserShowUrlBySlugResolver::class)($user->getSlug());
+        $url = self::getContainer()->get(UserShowUrlBySlugResolver::class)($user->getSlug());
         $this->browser->request('GET', $url);
         self::assertSame(200, $this->browser->getResponse()->getStatusCode());
         self::assertStringContainsString($user->getUsername(), (string) $this->browser->getResponse()->getContent());

@@ -69,8 +69,7 @@ class AddMediatorVotesMutation extends MediatorVotesMutation implements Mutation
         $checkboxes = $participantInfos['checkboxes'] ?? null;
         unset($participantInfos['checkboxes']);
 
-        $participant = $this->
-        getParticipant($participantInfos);
+        $participant = $this->getParticipant($participantInfos);
 
         if ($participantInfos['phone'] ?? null) {
             try {

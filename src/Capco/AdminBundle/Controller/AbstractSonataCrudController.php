@@ -19,11 +19,12 @@ namespace Capco\AdminBundle\Controller;
 
 use Sonata\AdminBundle\Admin\BreadcrumbsBuilderInterface;
 use Sonata\AdminBundle\Admin\Pool;
+use Sonata\AdminBundle\Controller\CRUDController;
 
 /**
  * This extends Sonata CrudController to add breadcrumbBuild and Pool, remove in v4.
  */
-class AbstractSonataCrudController extends \Sonata\AdminBundle\Controller\CRUDController
+class AbstractSonataCrudController extends CRUDController
 {
     public function __construct(
         protected BreadcrumbsBuilderInterface $breadcrumbsBuilder,

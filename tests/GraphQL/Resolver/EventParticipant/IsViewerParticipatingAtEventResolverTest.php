@@ -2,6 +2,8 @@
 
 namespace Capco\Tests\GraphQL\Resolver\EventParticipant;
 
+use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\EventRegistration;
 use Capco\Tests\IdentityWebTestCase;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
@@ -23,9 +25,9 @@ final class IsViewerParticipatingAtEventResolverTest extends IdentityWebTestCase
     {
         $viewer = $this->account();
         $other = $this->account();
-        $event = $this->em->getRepository(\Capco\AppBundle\Entity\Event::class)->findOneBy([]);
+        $event = $this->em->getRepository(Event::class)->findOneBy([]);
         self::assertNotNull($event);
-        $registration = (new \Capco\AppBundle\Entity\EventRegistration())->setEvent($event)->setUser($registered ? $viewer : $other);
+        $registration = (new EventRegistration())->setEvent($event)->setUser($registered ? $viewer : $other);
         $this->em->persist($registration);
         $this->em->flush();
         $id = GlobalId::toGlobalId('Event', $event->getId());

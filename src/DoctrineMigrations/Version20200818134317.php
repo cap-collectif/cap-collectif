@@ -110,7 +110,7 @@ final class Version20200818134317 extends AbstractMigration implements Container
     ): string {
         $uuid = $this->uuidGenerator->generate($this->entityManager, null);
 
-        return 'INSERT INTO `site_parameter_translation` (`id`, `translatable_id`, `value`, `locale`)' .
-            " VALUES ('{$uuid}', '{$translatableId}', '{$value}', '{$locale}')";
+        return 'INSERT INTO `site_parameter_translation` (`id`, `translatable_id`, `value`, `locale`)'
+            . " VALUES ('{$uuid}', '{$translatableId}', '{$value}', '{$locale}')";
     }
 }

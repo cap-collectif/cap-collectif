@@ -297,11 +297,11 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
         }
         $progress->finish();
         $this->write(
-            '  -> ' .
-                $count .
-                ' votes without user now have one ! ' .
-                $cheaterCount .
-                ' are double vote (one signed in, one anonymous)'
+            '  -> '
+                . $count
+                . ' votes without user now have one ! '
+                . $cheaterCount
+                . ' are double vote (one signed in, one anonymous)'
         );
     }
 

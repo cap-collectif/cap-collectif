@@ -2,8 +2,12 @@
 
 namespace Capco\Tests\UserBundle\Security;
 
+use Capco\AppBundle\Entity\SSO\CASSSOConfiguration;
 use Capco\Tests\IdentityWebTestCase;
+use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Handler\CasHandler;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Symfony\Component\BrowserKit\Cookie;
 
 /**
  * @internal
@@ -24,7 +28,7 @@ final class CasUserProviderTest extends IdentityWebTestCase
     {
         try {
             if (null !== $this->casIdentifier && isset($this->em)) {
-                $account = $this->em->getRepository(\Capco\UserBundle\Entity\User::class)->findOneBy(['casId' => $this->casIdentifier]);
+                $account = $this->em->getRepository(User::class)->findOneBy(['casId' => $this->casIdentifier]);
                 if (null !== $account) {
                     self::getContainer()->get('snc_redis.default')->srem('recalculate_user_counters', [$account->getId()]);
                 }
@@ -37,7 +41,7 @@ final class CasUserProviderTest extends IdentityWebTestCase
     /** @dataProvider accountStates */
     public function testCasLoginCreatesOrReusesItsLocalAccountWithoutOverwritingItsProfile(bool $existing): void
     {
-        $configuration = $this->em->getRepository(\Capco\AppBundle\Entity\SSO\CASSSOConfiguration::class)->findOneBy([]) ?? new \Capco\AppBundle\Entity\SSO\CASSSOConfiguration();
+        $configuration = $this->em->getRepository(CASSSOConfiguration::class)->findOneBy([]) ?? new CASSSOConfiguration();
         $configuration->setEnabled(true);
         $this->em->persist($configuration);
         $this->em->flush();
@@ -56,15 +60,15 @@ final class CasUserProviderTest extends IdentityWebTestCase
             $existingPassword = $account->getPassword();
             $this->em->flush();
         }
-        $cas = $this->createStub(\Capco\UserBundle\Handler\CasHandler::class);
-        self::getContainer()->set(\Capco\UserBundle\Handler\CasHandler::class, $cas);
+        $cas = $this->createStub(CasHandler::class);
+        self::getContainer()->set(CasHandler::class, $cas);
         $session = self::getContainer()->get('session');
         $session->set('cas_login', $identifier);
         $session->save();
-        $this->browser->getCookieJar()->set(new \Symfony\Component\BrowserKit\Cookie($session->getName(), $session->getId()));
+        $this->browser->getCookieJar()->set(new Cookie($session->getName(), $session->getId()));
         $viewer = $this->graphql('{ viewer { id username email } }')['viewer'];
         $this->em->clear();
-        $user = $this->em->getRepository(\Capco\UserBundle\Entity\User::class)->findOneBy(['casId' => $identifier]);
+        $user = $this->em->getRepository(User::class)->findOneBy(['casId' => $identifier]);
         self::assertNotNull($user);
         self::assertSame($expectedUsername, $user->getUsername());
         self::assertSame($expectedEmail, $user->getEmail());
@@ -82,8 +86,8 @@ final class CasUserProviderTest extends IdentityWebTestCase
         $viewer = $this->graphql('{ viewer { id } }')['viewer'];
         self::assertSame(GlobalId::toGlobalId('User', $id), $viewer['id']);
         $this->em->clear();
-        self::assertCount(1, $this->em->getRepository(\Capco\UserBundle\Entity\User::class)->findBy(['casId' => $identifier]));
-        $persisted = $this->em->find(\Capco\UserBundle\Entity\User::class, $id);
+        self::assertCount(1, $this->em->getRepository(User::class)->findBy(['casId' => $identifier]));
+        $persisted = $this->em->find(User::class, $id);
         self::assertCount(1, $persisted->getUserGroups());
         self::assertSame($expectedUsername, $persisted->getUsername());
         self::assertSame($expectedEmail, $persisted->getEmail());
@@ -103,7 +107,7 @@ final class CasUserProviderTest extends IdentityWebTestCase
     /** @dataProvider disabledCasConfigurations */
     public function testCasSessionDoesNotAuthenticateWhenCasIsDisabled(bool $configurationEnabled, bool $featureEnabled): void
     {
-        $configuration = $this->em->getRepository(\Capco\AppBundle\Entity\SSO\CASSSOConfiguration::class)->findOneBy([]) ?? new \Capco\AppBundle\Entity\SSO\CASSSOConfiguration();
+        $configuration = $this->em->getRepository(CASSSOConfiguration::class)->findOneBy([]) ?? new CASSSOConfiguration();
         $configuration->setEnabled($configurationEnabled);
         $this->em->persist($configuration);
         $this->setFeature('login_cas', $featureEnabled);
@@ -113,11 +117,11 @@ final class CasUserProviderTest extends IdentityWebTestCase
         $email = $account->getEmail();
         $password = $account->getPassword();
         $this->em->flush();
-        self::getContainer()->set(\Capco\UserBundle\Handler\CasHandler::class, $this->createStub(\Capco\UserBundle\Handler\CasHandler::class));
+        self::getContainer()->set(CasHandler::class, $this->createStub(CasHandler::class));
         $session = self::getContainer()->get('session');
         $session->set('cas_login', $identifier);
         $session->save();
-        $this->browser->getCookieJar()->set(new \Symfony\Component\BrowserKit\Cookie($session->getName(), $session->getId()));
+        $this->browser->getCookieJar()->set(new Cookie($session->getName(), $session->getId()));
 
         $this->assertViewer(false);
 
@@ -126,7 +130,7 @@ final class CasUserProviderTest extends IdentityWebTestCase
         self::assertSame($email, $account->getEmail());
         self::assertSame($password, $account->getPassword());
         self::assertCount(0, $account->getUserGroups());
-        self::assertCount(1, $this->em->getRepository(\Capco\UserBundle\Entity\User::class)->findBy(['casId' => $identifier]));
+        self::assertCount(1, $this->em->getRepository(User::class)->findBy(['casId' => $identifier]));
     }
 
     /** @return iterable<string, array{bool, bool}> */

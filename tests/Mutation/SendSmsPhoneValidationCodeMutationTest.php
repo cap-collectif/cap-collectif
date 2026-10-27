@@ -2,6 +2,10 @@
 
 namespace Capco\Tests\Mutation;
 
+use Capco\AppBundle\Entity\UserPhoneVerificationSms;
+use Capco\AppBundle\Fetcher\SmsProviderFetcher;
+use Capco\AppBundle\GraphQL\Mutation\Sms\SendSmsPhoneValidationCodeMutation;
+use Capco\AppBundle\Helper\Interfaces\SmsProviderInterface;
 use Capco\Tests\IdentityWebTestCase;
 
 /**
@@ -23,17 +27,17 @@ final class SendSmsPhoneValidationCodeMutationTest extends IdentityWebTestCase
         $user = $this->account()->setPhone('+33612345678')->setPhoneConfirmed('confirmed' === $kind);
         $id = $user->getId();
         for ($i = 0; $i < $count; ++$i) {
-            $sms = (new \Capco\AppBundle\Entity\UserPhoneVerificationSms())->setUser($user)->setPending()->setCreatedAt(new \DateTime($recent ? 'now' : '2000-01-01'));
+            $sms = (new UserPhoneVerificationSms())->setUser($user)->setPending()->setCreatedAt(new \DateTime($recent ? 'now' : '2000-01-01'));
             $this->em->persist($sms);
         }
         $neighbor = $this->account();
         $neighborId = $neighbor->getId();
         for ($i = 0; $i < 2; ++$i) {
-            $sms = (new \Capco\AppBundle\Entity\UserPhoneVerificationSms())->setUser($neighbor)->setPending();
+            $sms = (new UserPhoneVerificationSms())->setUser($neighbor)->setPending();
             $this->em->persist($sms);
         }
         $this->em->flush();
-        $provider = $this->provider(\Capco\AppBundle\GraphQL\Mutation\Sms\SendSmsPhoneValidationCodeMutation::class);
+        $provider = $this->provider(SendSmsPhoneValidationCodeMutation::class);
         if (\in_array($kind, ['confirmed', 'limited'], true)) {
             $provider->expects(self::never())->method('sendVerificationSms');
         } else {
@@ -43,13 +47,13 @@ final class SendSmsPhoneValidationCodeMutationTest extends IdentityWebTestCase
         $result = $this->graphql('mutation { sendSmsPhoneValidationCode(input: {}) { errorCode } }')['sendSmsPhoneValidationCode'];
         self::assertSame($error, $result['errorCode']);
         $user = $this->reload($id);
-        $stored = $this->em->getRepository(\Capco\AppBundle\Entity\UserPhoneVerificationSms::class)->findBy(['user' => $user]);
+        $stored = $this->em->getRepository(UserPhoneVerificationSms::class)->findBy(['user' => $user]);
         self::assertCount($count + (null === $error ? 1 : 0), $stored);
         foreach ($stored as $sms) {
             self::assertSame('PENDING', $sms->getStatus());
         }
         self::assertSame('confirmed' === $kind, $user->isPhoneConfirmed());
-        self::assertCount(2, $this->em->getRepository(\Capco\AppBundle\Entity\UserPhoneVerificationSms::class)->findBy(['user' => $neighborId]));
+        self::assertCount(2, $this->em->getRepository(UserPhoneVerificationSms::class)->findBy(['user' => $neighborId]));
     }
 
     /** @return iterable<string, array{string, int, bool, ?string}> */
@@ -71,12 +75,12 @@ final class SendSmsPhoneValidationCodeMutationTest extends IdentityWebTestCase
     }
 
     /** @param class-string $mutation */
-    private function provider(string $mutation): \Capco\AppBundle\Helper\Interfaces\SmsProviderInterface
+    private function provider(string $mutation): SmsProviderInterface
     {
-        $provider = $this->createMock(\Capco\AppBundle\Helper\Interfaces\SmsProviderInterface::class);
-        $fetcher = $this->createStub(\Capco\AppBundle\Fetcher\SmsProviderFetcher::class);
+        $provider = $this->createMock(SmsProviderInterface::class);
+        $fetcher = $this->createStub(SmsProviderFetcher::class);
         $fetcher->method('fetch')->willReturn($provider);
-        self::getContainer()->set(\Capco\AppBundle\Fetcher\SmsProviderFetcher::class, $fetcher);
+        self::getContainer()->set(SmsProviderFetcher::class, $fetcher);
         $this->useProviderEnvironment($mutation);
 
         return $provider;

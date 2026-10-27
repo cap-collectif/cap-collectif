@@ -135,9 +135,9 @@ class ExportCollectAndSelectionVotesCommand extends BaseExportCommand
 
             $progressBar = $style->createProgressBar($votesTotalCount);
             $progressBar->setFormat(
-                "\n%current%/%max% processed votes(s)  [%bar%] %percent%%" .
-                "\n\nTotal Votes Processed: %total_processed%" .
-                "\nMemory Used: %memory_used%\n"
+                "\n%current%/%max% processed votes(s)  [%bar%] %percent%%"
+                . "\n\nTotal Votes Processed: %total_processed%"
+                . "\nMemory Used: %memory_used%\n"
             );
             $progressBar->setMessage('processed vote(s) ');
             $progressBar->setOverwrite(false);

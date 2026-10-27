@@ -26,7 +26,7 @@ class CreateMailingListMutation implements MutationInterface
     use MutationTrait;
 
     public function __construct(
-        private readonly GlobalIDResolver $globalIDResolver,
+        private readonly GlobalIdResolver $globalIDResolver,
         private readonly ProjectRepository $projectRepository,
         private readonly EntityManagerInterface $entityManager,
         private readonly AuthorizationCheckerInterface $authorizationChecker,

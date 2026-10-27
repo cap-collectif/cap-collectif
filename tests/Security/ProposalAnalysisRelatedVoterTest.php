@@ -5,7 +5,9 @@ namespace Capco\Tests\Security;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalDecision;
+use Capco\AppBundle\Entity\ProposalDecisionMaker;
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\ProposalSupervisor;
 use Capco\AppBundle\Enum\ProposalStatementState;
 use Capco\AppBundle\Security\ProposalAnalysisRelatedVoter;
 use Capco\UserBundle\Entity\User;
@@ -60,9 +62,9 @@ class ProposalAnalysisRelatedVoterTest extends AuthorizationTestCase
         $proposal = new Proposal();
         $this->attachProposalToProject($proposal, new Project());
         if ('decisionMaker' === $role) {
-            $proposal->setProposalDecisionMaker(new \Capco\AppBundle\Entity\ProposalDecisionMaker($proposal, $user));
+            $proposal->setProposalDecisionMaker(new ProposalDecisionMaker($proposal, $user));
         } elseif ('supervisor' === $role) {
-            $proposal->setSupervisor(new \Capco\AppBundle\Entity\ProposalSupervisor($proposal, $user));
+            $proposal->setSupervisor(new ProposalSupervisor($proposal, $user));
         } elseif ('analyst' === $role) {
             $proposal->addAnalysts([$user]);
         }
@@ -90,7 +92,7 @@ class ProposalAnalysisRelatedVoterTest extends AuthorizationTestCase
         $user = (new User());
         $proposal = (new Proposal());
         $proposal->addAnalysts([$user]);
-        $proposal->setProposalDecisionMaker(new \Capco\AppBundle\Entity\ProposalDecisionMaker($proposal, $user));
+        $proposal->setProposalDecisionMaker(new ProposalDecisionMaker($proposal, $user));
         $voter = new ProposalAnalysisRelatedVoter();
         self::assertSame(VoterInterface::ACCESS_GRANTED, $voter->vote($this->token($user), $proposal, [ProposalAnalysisRelatedVoter::ANALYSE]));
         self::assertSame(VoterInterface::ACCESS_GRANTED, $voter->vote($this->token($user), $proposal, [ProposalAnalysisRelatedVoter::DECIDE]));
@@ -105,7 +107,7 @@ class ProposalAnalysisRelatedVoterTest extends AuthorizationTestCase
         $viewer = new User();
         $proposal = new Proposal();
         $proposal->setDecision((new ProposalDecision($proposal))->setState($state));
-        $proposal->setSupervisor(new \Capco\AppBundle\Entity\ProposalSupervisor($proposal, $assigned ? $viewer : new User()));
+        $proposal->setSupervisor(new ProposalSupervisor($proposal, $assigned ? $viewer : new User()));
 
         self::assertSame($expected, (new ProposalAnalysisRelatedVoter())->vote($this->token($viewer), $proposal, [ProposalAnalysisRelatedVoter::EVALUATE]));
     }
@@ -137,9 +139,9 @@ class ProposalAnalysisRelatedVoterTest extends AuthorizationTestCase
             $viewer->addRole('ROLE_PROJECT_ADMIN');
             $project->setOwner($viewer);
         } elseif ('decisionMaker' === $role) {
-            $proposal->setProposalDecisionMaker(new \Capco\AppBundle\Entity\ProposalDecisionMaker($proposal, $viewer));
+            $proposal->setProposalDecisionMaker(new ProposalDecisionMaker($proposal, $viewer));
         } elseif ('supervisor' === $role) {
-            $proposal->setSupervisor(new \Capco\AppBundle\Entity\ProposalSupervisor($proposal, $viewer));
+            $proposal->setSupervisor(new ProposalSupervisor($proposal, $viewer));
         } elseif ('analyst' === $role) {
             $proposal->addAnalysts([$viewer]);
         }

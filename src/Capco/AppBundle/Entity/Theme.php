@@ -10,6 +10,7 @@ use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\Capco\Facade\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -253,7 +254,7 @@ class Theme implements EntityInterface, IndexableInterface, TranslatableInterfac
     }
 
     /**
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getProjects()
     {
@@ -285,7 +286,7 @@ class Theme implements EntityInterface, IndexableInterface, TranslatableInterfac
     /**
      * Get proposals.
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getProposals()
     {
@@ -359,7 +360,7 @@ class Theme implements EntityInterface, IndexableInterface, TranslatableInterfac
     /**
      * Get Posts.
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getPosts()
     {

@@ -65,19 +65,6 @@ class AppLogNormalizerTest extends TestCase
     }
 
     /**
-     * @phpunit-status compliant
-     *
-     * @phpunit-reason Checks the normalizer public result with real per-test domain objects and controlled
-     * service responses.
-     */
-    public function testSupportsNormalization(): void
-    {
-        $this->assertTrue($this->logAdminNormalizer->supportsNormalization(new AppLog(), 'csv', [BaseNormalizer::IS_EXPORT_NORMALIZER => true]));
-        $this->assertFalse($this->logAdminNormalizer->supportsNormalization(new AppLog(), 'csv'));
-        $this->assertFalse($this->logAdminNormalizer->supportsNormalization(new \stdClass(), 'csv', [BaseNormalizer::IS_EXPORT_NORMALIZER => true]));
-    }
-
-    /**
      * @return array<string, array<int, array<string, null|bool|string>>>
      */
     public function normalizationDataProvider(): array
@@ -94,5 +81,18 @@ class AppLogNormalizerTest extends TestCase
         return [
             'Full Export' => [['is_full_export' => true, BaseNormalizer::IS_EXPORT_NORMALIZER => true], $fullExportResult],
         ];
+    }
+
+    /**
+     * @phpunit-status compliant
+     *
+     * @phpunit-reason Checks the normalizer public result with real per-test domain objects and controlled
+     * service responses.
+     */
+    public function testSupportsNormalization(): void
+    {
+        $this->assertTrue($this->logAdminNormalizer->supportsNormalization(new AppLog(), 'csv', [BaseNormalizer::IS_EXPORT_NORMALIZER => true]));
+        $this->assertFalse($this->logAdminNormalizer->supportsNormalization(new AppLog(), 'csv'));
+        $this->assertFalse($this->logAdminNormalizer->supportsNormalization(new \stdClass(), 'csv', [BaseNormalizer::IS_EXPORT_NORMALIZER => true]));
     }
 }

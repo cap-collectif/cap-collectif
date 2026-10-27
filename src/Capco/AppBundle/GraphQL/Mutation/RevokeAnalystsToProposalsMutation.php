@@ -51,8 +51,8 @@ class RevokeAnalystsToProposalsMutation implements MutationInterface
         $connection = $this->builder->connectionFromArray($proposals, $input);
         $connection->setTotalCount(\count($proposals));
 
-        $analysts =
-            $analystIds && \count($analystIds) > 0
+        $analysts
+            = $analystIds && \count($analystIds) > 0
                 ? $this->globalIdResolver->resolveTypeByIds($analystIds, $viewer, 'User')
                 : [];
 

@@ -37,6 +37,7 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
+use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Form\Form;
@@ -499,7 +500,7 @@ class ProposalMutationSpec extends ObjectBehavior
         $publisher
             ->publish(
                 CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE,
-                \Prophecy\Argument::type(\Swarrot\Broker\Message::class)
+                \Prophecy\Argument::type(Message::class)
             )
             ->shouldNotBeCalled()
         ;
@@ -631,7 +632,7 @@ class ProposalMutationSpec extends ObjectBehavior
         $publisher
             ->publish(
                 CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE,
-                \Prophecy\Argument::type(\Swarrot\Broker\Message::class)
+                \Prophecy\Argument::type(Message::class)
             )
             ->shouldNotBeCalled()
         ;

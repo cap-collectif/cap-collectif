@@ -130,9 +130,9 @@ class ProjectController extends Controller
     public function showEventsAction(Project $project)
     {
         return new RedirectResponse(
-            $this->generateUrl('app_event') .
-                '?projectId=' .
-                GlobalId::toGlobalId('Project', $project->getId())
+            $this->generateUrl('app_event')
+                . '?projectId='
+                . GlobalId::toGlobalId('Project', $project->getId())
         );
     }
 

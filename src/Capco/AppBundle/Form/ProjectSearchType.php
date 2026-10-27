@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\ProjectType;
 use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -35,7 +36,7 @@ class ProjectSearchType extends AbstractType
 
         $builder->add('type', EntityType::class, [
             'required' => false,
-            'class' => \Capco\AppBundle\Entity\ProjectType::class,
+            'class' => ProjectType::class,
             'choice_value' => 'slug',
         ]);
 

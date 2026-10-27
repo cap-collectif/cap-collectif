@@ -67,7 +67,7 @@ class ProposalSearch extends Search
         int $limit,
         ?string $cursor
     ): ElasticsearchPaginatedResult {
-        $boolQuery = new Query\BoolQuery();
+        $boolQuery = new BoolQuery();
         if ($providedFilters['term']) {
             $this->searchTermsInMultipleNestedFields($boolQuery, [$providedFilters['term']]);
         }
@@ -145,7 +145,7 @@ class ProposalSearch extends Search
         ?string $term = null,
         ?array $orders = null
     ): ElasticsearchPaginatedResult {
-        $boolQuery = new Query\BoolQuery();
+        $boolQuery = new BoolQuery();
         $this->excludeMissingRequirementsProposals($boolQuery);
 
         $reference = $providedFilters['reference'] ?? null;
@@ -357,7 +357,7 @@ class ProposalSearch extends Search
         int $limit = 20,
         ?string $cursor = null
     ): ElasticsearchPaginatedResult {
-        $boolQuery = new Query\BoolQuery();
+        $boolQuery = new BoolQuery();
         if (isset($providedFilters['term'])) {
             $this->searchTermsInMultipleFields(
                 $boolQuery,
@@ -381,7 +381,7 @@ class ProposalSearch extends Search
 
         $boolQuery->addFilter(new Term(['project.id' => ['value' => $projectId]]));
 
-        $shouldQuery = new Query\BoolQuery();
+        $shouldQuery = new BoolQuery();
         if (ProposalStatementState::TODO === $state) {
             $this->addAssignedViewerProposalsTodo($shouldQuery, $viewerId);
         } elseif (ProposalStatementState::DONE === $state) {

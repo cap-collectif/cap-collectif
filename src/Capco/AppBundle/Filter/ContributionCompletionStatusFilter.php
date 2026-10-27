@@ -2,7 +2,10 @@
 
 namespace Capco\AppBundle\Filter;
 
+use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Interfaces\ContributionInterface;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Enum\ContributionCompletionStatus;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query\Filter\SQLFilter;
@@ -18,9 +21,9 @@ class ContributionCompletionStatusFilter extends SQLFilter
     public function addFilterConstraint(ClassMetadata $targetEntity, $targetTableAlias): string
     {
         $validEntities = [
-            \Capco\AppBundle\Entity\Reply::class,
-            \Capco\AppBundle\Entity\AbstractVote::class,
-            \Capco\AppBundle\Entity\Proposal::class,
+            Reply::class,
+            AbstractVote::class,
+            Proposal::class,
         ];
 
         if (\in_array($targetEntity->getName(), $validEntities)) {

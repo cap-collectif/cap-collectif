@@ -11,6 +11,7 @@ use Capco\AppBundle\GraphQL\DataLoader\Query\QueryAnalyticsDataLoader;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Search\AnalyticsSearch;
 use Elastica\Multi\ResultSet;
+use Elastica\Response;
 use GraphQL\Executor\Promise\Adapter\SyncPromiseAdapter;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
@@ -114,7 +115,7 @@ class QueryAnalyticsDataLoaderSpec extends ObjectBehavior
         CloudflareElasticClient $cloudflareElasticClient,
         ResultSet $multiResultSet,
         \Elastica\ResultSet $resultSetA,
-        \Elastica\Response $responseA
+        Response $responseA
     ) {
         $keys = [
             [
@@ -165,7 +166,7 @@ class QueryAnalyticsDataLoaderSpec extends ObjectBehavior
         CloudflareElasticClient $cloudflareElasticClient,
         ResultSet $multiResultSet,
         \Elastica\ResultSet $resultSetA,
-        \Elastica\Response $responseA
+        Response $responseA
     ) {
         $keys = [
             [
@@ -219,7 +220,7 @@ class QueryAnalyticsDataLoaderSpec extends ObjectBehavior
         CloudflareElasticClient $cloudflareElasticClient,
         ResultSet $multiResultSet,
         \Elastica\ResultSet $resultSetA,
-        \Elastica\Response $responseA
+        Response $responseA
     ) {
         $keys = [
             [

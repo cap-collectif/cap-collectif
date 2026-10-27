@@ -15,7 +15,7 @@ class RepositoryManager
     public function setRepositories(iterable $repositories): void
     {
         foreach ($repositories as $repository) {
-            preg_match('/\\\\(.*?)Repository/', $repository::class, $matches);
+            preg_match('/\\\(.*?)Repository/', $repository::class, $matches);
 
             if (!isset($matches[1])) {
                 continue;

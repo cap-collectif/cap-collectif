@@ -25,8 +25,8 @@ class AuthCacheSubscriber implements EventSubscriberInterface
 
         $token = $this->tokenStorage->getToken();
 
-        $isAuthenticated =
-            $token
+        $isAuthenticated
+            = $token
             && null !== $token->getUser()
             && 'anon.' !== $token->getUser();
 

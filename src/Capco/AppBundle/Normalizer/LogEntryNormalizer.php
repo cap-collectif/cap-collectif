@@ -28,8 +28,8 @@ class LogEntryNormalizer implements NormalizerInterface, SerializerAwareInterfac
 
     public function normalize($object, $format = null, array $context = [])
     {
-        $groups =
-            isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
+        $groups
+            = isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
         $data = $this->normalizer->normalize($object, $format, $context);
         if (\in_array('Elasticsearch', $groups)) {
             return $data;

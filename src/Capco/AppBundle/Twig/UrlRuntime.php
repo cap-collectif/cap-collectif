@@ -33,7 +33,7 @@ class UrlRuntime implements RuntimeExtensionInterface
         }
 
         // We replace `pattern` by italic format (<i>pattern</i>)
-        return preg_replace('/(`(.*?)`)/', '<i>\\2</i>', $string);
+        return preg_replace('/(`(.*?)`)/', '<i>\2</i>', $string);
     }
 
     public function getUsort(array $data, string $property = 'name'): array

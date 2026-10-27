@@ -54,15 +54,15 @@ class Version20151125103922 extends AbstractMigration implements ContainerAwareI
                 [$opinion['o_cst_id'], $opinion['ot_slug']]
             );
             if (\count($ot) < 1) {
-                echo 'Error, opinion type for opinion ' .
-                    $opinion['o_id'] .
-                    " can not be resolved. Please check it.\n";
+                echo 'Error, opinion type for opinion '
+                    . $opinion['o_id']
+                    . " can not be resolved. Please check it.\n";
             } else {
-                echo 'Updating opinion ' .
-                    $opinion['o_id'] .
-                    ' with opinion type ' .
-                    $ot[0]['id'] .
-                    ".\n";
+                echo 'Updating opinion '
+                    . $opinion['o_id']
+                    . ' with opinion type '
+                    . $ot[0]['id']
+                    . ".\n";
                 $this->connection->update(
                     'opinion',
                     ['opinion_type_id' => $ot[0]['id']],
@@ -82,11 +82,11 @@ class Version20151125103922 extends AbstractMigration implements ContainerAwareI
         foreach ($opinionTypesSlugs as $ots) {
             if ($ots['count'] > 1) {
                 // Since we need to use doctrine this migration can break.
-                echo 'Error, multiple (' .
-                    $ots['count'] .
-                    ') opinion types with slug "' .
-                    $ots['slug'] .
-                    "\". Attempting to fix it.\n";
+                echo 'Error, multiple ('
+                    . $ots['count']
+                    . ') opinion types with slug "'
+                    . $ots['slug']
+                    . "\". Attempting to fix it.\n";
                 $em = $this->container->get('doctrine.orm.entity_manager');
                 $opinionTypes = $em
                     ->getRepository('CapcoAppBundle:OpinionType')

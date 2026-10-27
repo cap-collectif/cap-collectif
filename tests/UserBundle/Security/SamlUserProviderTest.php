@@ -85,6 +85,16 @@ final class SamlUserProviderTest extends SamlWebTestCase
         self::assertCount(0, $neighbor->getUserGroups());
     }
 
+    /** @return iterable<string, array{string}> */
+    public static function accountStates(): iterable
+    {
+        yield 'new SAML account' => ['new'];
+
+        yield 'local account with the same email' => ['email'];
+
+        yield 'linked account with an updated email' => ['linked'];
+    }
+
     public function testEmptyProviderResponseRejectsLoginWithoutLinkingAnAccount(): void
     {
         $account = $this->account();
@@ -131,16 +141,6 @@ final class SamlUserProviderTest extends SamlWebTestCase
         self::assertSame($identifier, $emailAccount->getEmail());
         self::assertSame($emailPassword, $emailAccount->getPassword());
         self::assertCount(0, $emailAccount->getUserGroups());
-    }
-
-    /** @return iterable<string, array{string}> */
-    public static function accountStates(): iterable
-    {
-        yield 'new SAML account' => ['new'];
-
-        yield 'local account with the same email' => ['email'];
-
-        yield 'linked account with an updated email' => ['linked'];
     }
 
     /** @dataProvider identityProviders */

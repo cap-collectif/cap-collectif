@@ -15,8 +15,8 @@ class MailjetClientV2
     private readonly Client $client;
 
     public function __construct(
-        readonly string $mailjetPublicKey,
-        readonly string $mailjetPrivateKey,
+        public readonly string $mailjetPublicKey,
+        public readonly string $mailjetPrivateKey,
         private readonly ToggleManager $toggleManager,
     ) {
         $this->client = new Client(

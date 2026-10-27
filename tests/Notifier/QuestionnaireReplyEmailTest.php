@@ -2,6 +2,9 @@
 
 namespace Capco\Tests\Notifier;
 
+use Capco\AppBundle\Entity\Participant;
+use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Capco\Tests\Command\MailerSnapshotCommandTestCase;
 
@@ -21,8 +24,8 @@ class QuestionnaireReplyEmailTest extends MailerSnapshotCommandTestCase
     {
         $emails = $this->captureEmails();
         $notifier = self::getContainer()->get(QuestionnaireReplyNotifier::class);
-        $questionnaire = $this->entityManager->getRepository(\Capco\AppBundle\Entity\Questionnaire::class)->find('questionnaireAnonymous');
-        self::assertInstanceOf(\Capco\AppBundle\Entity\Questionnaire::class, $questionnaire);
+        $questionnaire = $this->entityManager->getRepository(Questionnaire::class)->find('questionnaireAnonymous');
+        self::assertInstanceOf(Questionnaire::class, $questionnaire);
         $configuration = $questionnaire->getNotificationsConfiguration();
         $configuration->setOnQuestionnaireReplyCreate(true);
         $configuration->setOnQuestionnaireReplyUpdate(true);
@@ -42,11 +45,11 @@ class QuestionnaireReplyEmailTest extends MailerSnapshotCommandTestCase
             ];
             $notifier->onDelete($payload['reply']);
         } else {
-            $participant = $this->entityManager->getRepository(\Capco\AppBundle\Entity\Participant::class)->find('participant1');
-            self::assertInstanceOf(\Capco\AppBundle\Entity\Participant::class, $participant);
+            $participant = $this->entityManager->getRepository(Participant::class)->find('participant1');
+            self::assertInstanceOf(Participant::class, $participant);
             $participant->setConfirmationToken('anonymous-questionnaire-confirmation');
-            $reply = $this->entityManager->find(\Capco\AppBundle\Entity\Reply::class, 'replyAnonymous1');
-            self::assertInstanceOf(\Capco\AppBundle\Entity\Reply::class, $reply);
+            $reply = $this->entityManager->find(Reply::class, 'replyAnonymous1');
+            self::assertInstanceOf(Reply::class, $reply);
             $notifier->{'create' === $state ? 'onCreate' : 'onUpdate'}($reply);
         }
 
@@ -77,13 +80,13 @@ class QuestionnaireReplyEmailTest extends MailerSnapshotCommandTestCase
 
     public function testConfirmedAnonymousParticipantDoesNotReceiveAnotherConfirmation(): void
     {
-        $participant = $this->entityManager->getRepository(\Capco\AppBundle\Entity\Participant::class)->find('participant1');
-        self::assertInstanceOf(\Capco\AppBundle\Entity\Participant::class, $participant);
+        $participant = $this->entityManager->getRepository(Participant::class)->find('participant1');
+        self::assertInstanceOf(Participant::class, $participant);
         $participant->setConfirmationToken(null);
         $emails = $this->captureEmails();
 
-        $reply = $this->entityManager->find(\Capco\AppBundle\Entity\Reply::class, 'replyAnonymous1');
-        self::assertInstanceOf(\Capco\AppBundle\Entity\Reply::class, $reply);
+        $reply = $this->entityManager->find(Reply::class, 'replyAnonymous1');
+        self::assertInstanceOf(Reply::class, $reply);
         self::getContainer()->get(QuestionnaireReplyNotifier::class)->onCreate($reply);
 
         self::assertCount(0, $emails->messages);

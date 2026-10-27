@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
+use Capco\AppBundle\Antivirus\AntivirusScanner;
 use Capco\AppBundle\Exception\VocalContributionUploadException;
 use Capco\AppBundle\Manager\MediaManager;
 use Capco\AppBundle\Service\VocalContributionUploadService;
@@ -22,7 +23,7 @@ class MediasController extends AbstractController
     public function __construct(
         private readonly MediaManager $mediaManager,
         private readonly MediaExtension $mediaExtension,
-        private readonly \Capco\AppBundle\Antivirus\AntivirusScanner $antivirusScanner,
+        private readonly AntivirusScanner $antivirusScanner,
         private readonly VocalContributionUploadService $vocalContributionUploadService
     ) {}
 
@@ -85,8 +86,8 @@ class MediasController extends AbstractController
                 'name' => $media->getName(),
                 'id' => $media->getId(),
                 'size' => $this->mediaManager::formatBytes($media->getSize()),
-                'url' => $request->getUriForPath('/media') .
-                    $this->mediaExtension->getMediaUrl($media, 'reference'),
+                'url' => $request->getUriForPath('/media')
+                    . $this->mediaExtension->getMediaUrl($media, 'reference'),
                 'type' => $media->getContentType(),
             ],
             201

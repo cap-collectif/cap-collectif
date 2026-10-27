@@ -3,6 +3,7 @@
 namespace Capco\Tests\UserBundle\Entity;
 
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Utils\Canonicalizer;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\TestCase;
@@ -55,7 +56,7 @@ class UserTest extends TestCase
     /** @dataProvider canonicalIdentities */
     public function testCanonicalizationLowercasesIdentityWithoutTrimming(string $identity, string $expected): void
     {
-        $canonicalizer = new \Capco\AppBundle\Utils\Canonicalizer();
+        $canonicalizer = new Canonicalizer();
 
         self::assertSame($expected, $canonicalizer->canonicalize($identity));
     }

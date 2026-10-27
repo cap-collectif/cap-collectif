@@ -97,9 +97,9 @@ class GroupService
             return ['group' => $group];
         } catch (\Exception $e) {
             $this->logger->error(
-                __METHOD__ .
-                ' addUsersInGroup: ' .
-                sprintf(
+                __METHOD__
+                . ' addUsersInGroup: '
+                . sprintf(
                     'Cannot add users in group with id "%g. Cause : %s"',
                     $group->getId(),
                     $e->getMessage()

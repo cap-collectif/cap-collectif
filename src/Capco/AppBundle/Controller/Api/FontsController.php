@@ -138,9 +138,9 @@ class FontsController extends AbstractController
         return $mediaManager->createFileFromUploadedFile(
             $uploadedFont['file'],
             'default',
-            sha1($uploadedFont['name'] . uniqid('', true) . random_int(11111, 99999)) .
-                '.' .
-                $uploadedFont['extension']
+            sha1($uploadedFont['name'] . uniqid('', true) . random_int(11111, 99999))
+                . '.'
+                . $uploadedFont['extension']
         );
     }
 }

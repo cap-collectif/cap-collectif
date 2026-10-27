@@ -67,9 +67,9 @@ class CommentableCommentsDataLoader extends BatchDataLoader
         $results = [];
         if ($this->debug) {
             $this->logger->info(
-                __METHOD__ .
-                    'called for keys : ' .
-                    var_export(
+                __METHOD__
+                    . 'called for keys : '
+                    . var_export(
                         array_map(fn ($key) => $this->serializeKey($key), $keys),
                         true
                     )
@@ -130,8 +130,8 @@ class CommentableCommentsDataLoader extends BatchDataLoader
             // of the same type.
             // We have to do it for the entities...
             $entitiesForKey = array_values(
-                array_filter($commentables[$type], fn ($commentable) => $this->getIdAccordingToType($type, $commentable) ===
-                    $key['commentable']->getId())
+                array_filter($commentables[$type], fn ($commentable) => $this->getIdAccordingToType($type, $commentable)
+                    === $key['commentable']->getId())
             );
             DataLoaderUtils::getAfterOffset($entitiesForKey, $key);
             DataLoaderUtils::getBeforeOffset($entitiesForKey, $key);
@@ -149,12 +149,12 @@ class CommentableCommentsDataLoader extends BatchDataLoader
                 true
             );
 
-            $totalCount =
-                false !== $totalCountKey
+            $totalCount
+                = false !== $totalCountKey
                     ? (int) $totalCounts[$type][$totalCountKey]['totalCount']
                     : 0;
-            $totalCountWithAnswers =
-                false !== $totalCountWithAnswersKey
+            $totalCountWithAnswers
+                = false !== $totalCountWithAnswersKey
                     ? (int) $totalCountWithAnswersArray[$type][$totalCountWithAnswersKey][
                         'totalCount'
                     ]

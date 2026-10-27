@@ -70,10 +70,10 @@ final class UserInviteEmailMessageNotifier extends BaseNotifier
                 : UserInviteEmailMessage::SEND_FAILURE;
             $emailMessage->setInternalStatus($inviteStatus);
             $this->logger->info(
-                '[USER-INVITE] invitation with id ' .
-                    $emailMessage->getId() .
-                    ' got status : ' .
-                    $inviteStatus
+                '[USER-INVITE] invitation with id '
+                    . $emailMessage->getId()
+                    . ' got status : '
+                    . $inviteStatus
             );
         }
 
@@ -87,16 +87,16 @@ final class UserInviteEmailMessageNotifier extends BaseNotifier
                 throw new UserInviteMessageQueuedException(UserInviteMessageQueuedException::MESSAGE_DEFAULT_QUEUED);
             }
 
-            $inviteStatus =
-                MandrillClient::STATUS_SENT === $messageStatus
+            $inviteStatus
+                = MandrillClient::STATUS_SENT === $messageStatus
                     ? UserInviteEmailMessage::SENT
                     : UserInviteEmailMessage::SEND_FAILURE;
             $emailMessage->setInternalStatus($inviteStatus);
             $this->logger->info(
-                '[USER-INVITE] invitation with id ' .
-                    $emailMessage->getId() .
-                    ' got status : ' .
-                    $inviteStatus
+                '[USER-INVITE] invitation with id '
+                    . $emailMessage->getId()
+                    . ' got status : '
+                    . $inviteStatus
             );
         }
 

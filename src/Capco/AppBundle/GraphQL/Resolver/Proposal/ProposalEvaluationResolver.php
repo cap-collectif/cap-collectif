@@ -51,8 +51,8 @@ class ProposalEvaluationResolver implements QueryInterface
             );
         }
 
-        $viewerCanSeePrivateResponses =
-            $isLegacyAnalyst
+        $viewerCanSeePrivateResponses
+            = $isLegacyAnalyst
             || $isAnalyst
             || ($viewer instanceof User && $viewer->isAdmin())
             || ($context->offsetExists('disable_acl') && true === $context->offsetGet('disable_acl'));

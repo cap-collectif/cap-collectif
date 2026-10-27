@@ -85,10 +85,10 @@ class GeometryHelper
             && $point->x() <= max($vertexA->x(), $vertexB->x())
             && $vertexA->y() != $vertexB->y()
         ) {
-            $intersectionX =
-                (($point->y() - $vertexA->y()) * ($vertexB->x() - $vertexA->x())) /
-                    ($vertexB->y() - $vertexA->y()) +
-                $vertexA->x();
+            $intersectionX
+                = (($point->y() - $vertexA->y()) * ($vertexB->x() - $vertexA->x()))
+                    / ($vertexB->y() - $vertexA->y())
+                + $vertexA->x();
             if ($vertexA->x() == $vertexB->x() || $point->x() <= $intersectionX) {
                 return true;
             }

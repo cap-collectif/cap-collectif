@@ -28,8 +28,8 @@ class UserVotesResolver implements QueryInterface
 
         $onlyAccounted = true === $args->offsetGet('onlyAccounted');
         $contribuableId = $args->offsetGet('contribuableId');
-        $aclDisabled =
-            $context
+        $aclDisabled
+            = $context
             && $context->offsetExists('disable_acl')
             && true === $context->offsetGet('disable_acl');
         $validViewer = $viewer instanceof UserInterface;

@@ -48,7 +48,7 @@ class AnonymizeUsersFromCsvCommand extends Command
             return Command::FAILURE;
         }
 
-        $fileSystem = new FileSystem();
+        $fileSystem = new Filesystem();
         $tempFilePath = '/tmp/anonymize_users.csv';
         $fileSystem->copy($filePath, $tempFilePath);
 

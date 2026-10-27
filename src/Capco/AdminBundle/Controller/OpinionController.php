@@ -9,6 +9,7 @@ use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\AdminBundle\Exception\LockException;
 use Sonata\AdminBundle\Exception\ModelManagerException;
+use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormRenderer;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -90,7 +91,7 @@ class OpinionController extends AbstractSonataCrudController
             return $preResponse;
         }
 
-        /** @var \Symfony\Component\Form\Form $form */
+        /** @var Form $form */
         $form = $this->admin->getForm();
         $form->setData($object);
         $form->handleRequest($request);
@@ -209,7 +210,7 @@ class OpinionController extends AbstractSonataCrudController
 
         $this->admin->setSubject($object);
 
-        /** @var \Symfony\Component\Form\Form $form */
+        /** @var Form $form */
         $form = $this->admin->getForm();
         $form->setData($object);
         $form->handleRequest($request);
@@ -261,9 +262,9 @@ class OpinionController extends AbstractSonataCrudController
                             'flash_lock_error',
                             [
                                 '%name%' => $this->escapeHtml($this->admin->toString($object)),
-                                '%link_start%' => '<a href="' .
-                                    $this->admin->generateObjectUrl('edit', $object) .
-                                    '">',
+                                '%link_start%' => '<a href="'
+                                    . $this->admin->generateObjectUrl('edit', $object)
+                                    . '">',
                                 '%link_end%' => '</a>',
                             ],
                             'CapcoAppBundle'

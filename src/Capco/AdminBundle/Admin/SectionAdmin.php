@@ -188,8 +188,8 @@ class SectionAdmin extends AbstractAdmin
         if ($subject && 'metrics' === $subject->getType()) {
             $args = new Argument(['first' => 100]);
 
-            $basicsMetricsLabel =
-                $this->queryVotesResolver->__invoke($args)->getTotalCount() > 0
+            $basicsMetricsLabel
+                = $this->queryVotesResolver->__invoke($args)->getTotalCount() > 0
                     ? 'admin.fields.section.basicsMetrics'
                     : 'admin.fields.section.basicsMetricsNoVotes';
 

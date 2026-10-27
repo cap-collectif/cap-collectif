@@ -124,11 +124,11 @@ class ExportController extends Controller
             $this->logger->error('GraphQL Query Error: ' . $data['errors']);
             $this->logger->info('GraphQL query: ' . json_encode($data));
         }
-        $fileName =
-            (new \DateTime())->format('Y-m-d') .
-            '-registeredAttendees-' .
-            $event->getSlug() .
-            '.csv';
+        $fileName
+            = (new \DateTime())->format('Y-m-d')
+            . '-registeredAttendees-'
+            . $event->getSlug()
+            . '.csv';
 
         $optionsManager = new CSVOptionsManager();
         $optionsManager->setOption(Options::FIELD_DELIMITER, ';');
@@ -434,11 +434,11 @@ class ExportController extends Controller
             $output
         );
 
-        $filename =
-            Text::sanitizeFileName($step->getProject()->getTitle()) .
-            '-' .
-            Text::sanitizeFileName($step->getTitle()) .
-            '_vierge.csv';
+        $filename
+            = Text::sanitizeFileName($step->getProject()->getTitle())
+            . '-'
+            . Text::sanitizeFileName($step->getTitle())
+            . '_vierge.csv';
 
         setlocale(\LC_CTYPE, str_replace('-', '_', $this->locale));
         $filename = iconv('UTF-8', 'ASCII//TRANSLIT', $filename);

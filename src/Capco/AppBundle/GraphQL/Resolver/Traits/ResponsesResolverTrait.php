@@ -44,14 +44,14 @@ trait ResponsesResolverTrait
         bool $isAnalyst = false,
         bool $canViewPrivateResponses = false
     ): iterable {
-        $skipVerification =
-            $context->offsetExists('disable_acl')
+        $skipVerification
+            = $context->offsetExists('disable_acl')
             && true === $context->offsetGet('disable_acl');
         $isAuthor = null !== $author && $author === $viewer;
         $isAnalystOrAdmin = $skipVerification;
         if (!$skipVerification) {
-            $isAnalystOrAdmin =
-                ($viewer instanceof User && $viewer->isAdmin()) || $isLegacyAnalyst || $isAnalyst;
+            $isAnalystOrAdmin
+                = ($viewer instanceof User && $viewer->isAdmin()) || $isLegacyAnalyst || $isAnalyst;
         }
         $viewerCanSeePrivateResponses = $skipVerification || $isAuthor || $isAnalystOrAdmin || $canViewPrivateResponses;
 
@@ -59,8 +59,8 @@ trait ResponsesResolverTrait
             $viewerCanSeePrivateResponses,
             $isAnalystOrAdmin
         ) {
-            $privateFilter =
-                !$response->getQuestion()->isPrivate() || $viewerCanSeePrivateResponses;
+            $privateFilter
+                = !$response->getQuestion()->isPrivate() || $viewerCanSeePrivateResponses;
             $hiddenFilter = !$response->getQuestion()->getHidden() || $isAnalystOrAdmin;
 
             return $privateFilter && $hiddenFilter;
@@ -132,8 +132,8 @@ trait ResponsesResolverTrait
                 $response = new MediaResponse();
             } elseif ($question instanceof MultipleChoiceQuestion) {
                 $response = new ValueResponse();
-                $value =
-                    'select' === $question->getInputType()
+                $value
+                    = 'select' === $question->getInputType()
                         ? null
                         : ['labels' => [], 'other' => null];
                 $response->setValue($value);

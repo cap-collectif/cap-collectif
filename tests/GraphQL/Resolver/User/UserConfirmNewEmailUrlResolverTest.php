@@ -2,6 +2,7 @@
 
 namespace Capco\Tests\GraphQL\Resolver\User;
 
+use Capco\AppBundle\GraphQL\Resolver\User\UserConfirmNewEmailUrlResolver;
 use Capco\Tests\IdentityWebTestCase;
 
 /**
@@ -24,13 +25,13 @@ final class UserConfirmNewEmailUrlResolverTest extends IdentityWebTestCase
         $newEmail = $this->uniqueEmail();
         $user->setNewEmailToConfirm($newEmail)->setNewEmailConfirmationToken('new-email-token');
         $this->em->flush();
-        $url = self::getContainer()->get(\Capco\AppBundle\GraphQL\Resolver\User\UserConfirmNewEmailUrlResolver::class)($user);
+        $url = self::getContainer()->get(UserConfirmNewEmailUrlResolver::class)($user);
         self::assertNotNull($url);
         $this->browser->request('GET', $url);
         self::assertTrue($this->browser->getResponse()->isRedirection());
         $persisted = $this->reload($id);
         self::assertSame($newEmail, $persisted->getEmail());
         self::assertNull($persisted->getNewEmailConfirmationToken());
-        self::assertNull(self::getContainer()->get(\Capco\AppBundle\GraphQL\Resolver\User\UserConfirmNewEmailUrlResolver::class)($persisted));
+        self::assertNull(self::getContainer()->get(UserConfirmNewEmailUrlResolver::class)($persisted));
     }
 }

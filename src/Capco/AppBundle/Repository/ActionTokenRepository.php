@@ -57,8 +57,8 @@ class ActionTokenRepository extends EntityRepository
 
         $userParamsPlaceholders = implode(',', array_map(fn (string $userParam) => ':' . $userParam, array_keys($userParams)));
 
-        $sql =
-            'SELECT user_id, token, IF(consumption_date IS NOT NULL, 1, 0) as reset_date FROM action_token
+        $sql
+            = 'SELECT user_id, token, IF(consumption_date IS NOT NULL, 1, 0) as reset_date FROM action_token
             WHERE user_id IN (' . $userParamsPlaceholders . ') AND action = :action';
 
         $queryResult = $this->getEntityManager()->getConnection()->fetchAllAssociative($sql, [
@@ -146,8 +146,8 @@ class ActionTokenRepository extends EntityRepository
 
         $placeHolders = implode(',', array_map(fn (string $recipientParam) => ':' . $recipientParam, array_keys($recipientParams)));
 
-        $sql =
-            ' UPDATE action_token SET consumption_date = NULL
+        $sql
+            = ' UPDATE action_token SET consumption_date = NULL
              WHERE user_id IN (' . $placeHolders . ') AND action = :action';
 
         $this->getEntityManager()->getConnection()->executeQuery($sql, [

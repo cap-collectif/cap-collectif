@@ -68,20 +68,20 @@ class GenerateCSVFromProposalFormCommand extends BaseExportCommand
         $proposalForm = $this->proposalFormRepository->find($proposalFormId);
         if (null === $proposalForm) {
             $output->writeln(
-                '<error>Proposal Form with id ' .
-                    $proposalFormId .
-                    ' was not found in your database. Please create it or change the id.</error>'
+                '<error>Proposal Form with id '
+                    . $proposalFormId
+                    . ' was not found in your database. Please create it or change the id.</error>'
             );
             $output->writeln('<error>Import cancelled. No proposal was created.</error>');
 
             return 1;
         }
 
-        $filename =
-            Text::sanitizeFileName($proposalForm->getProject()->getTitle()) .
-            '-' .
-            Text::sanitizeFileName($proposalForm->getStep()->getTitle()) .
-            '_vierge.csv';
+        $filename
+            = Text::sanitizeFileName($proposalForm->getProject()->getTitle())
+            . '-'
+            . Text::sanitizeFileName($proposalForm->getStep()->getTitle())
+            . '_vierge.csv';
         setlocale(\LC_CTYPE, str_replace('-', '_', $this->locale));
         $filename = iconv('UTF-8', 'ASCII//TRANSLIT', $filename);
         $header = array_merge(

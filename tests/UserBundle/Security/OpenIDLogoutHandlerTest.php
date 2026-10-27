@@ -2,6 +2,7 @@
 
 namespace Capco\Tests\UserBundle\Security;
 
+use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
 use Capco\Tests\OAuthLogoutWebTestCase;
 
 /**
@@ -20,7 +21,7 @@ final class OpenIDLogoutHandlerTest extends OAuthLogoutWebTestCase
     /** @dataProvider destinations */
     public function testOpenIdLogoutUsesTheConfiguredDestinationAndClearsLocalAuthentication(?string $configured, bool $switch, string $expected): void
     {
-        $configuration = $this->em->getRepository(\Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration::class)->findOneBy([]) ?? new \Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration();
+        $configuration = $this->em->getRepository(Oauth2SSOConfiguration::class)->findOneBy([]) ?? new Oauth2SSOConfiguration();
         $configuration->setEnabled(true)->setDisconnectSsoOnLogout(true)->setPostLogoutRedirectUri($configured)->setClientId('local-client');
         $this->em->persist($configuration);
         $this->em->flush();

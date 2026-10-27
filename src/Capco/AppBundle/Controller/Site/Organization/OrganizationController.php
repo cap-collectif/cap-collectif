@@ -76,11 +76,11 @@ class OrganizationController extends AbstractController
         $this->em->persist($memberShip);
         $this->em->flush();
         $this->logger->debug(
-            __METHOD__ .
-                ' : ' .
-                $invitation->getUser()->getUsername() .
-                ' joins ' .
-                $invitation->getOrganization()->getUsername()
+            __METHOD__
+                . ' : '
+                . $invitation->getUser()->getUsername()
+                . ' joins '
+                . $invitation->getOrganization()->getUsername()
         );
     }
 }

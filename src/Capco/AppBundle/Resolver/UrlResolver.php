@@ -150,15 +150,15 @@ class UrlResolver
         }
 
         if ($object instanceof Argument && $object->getParent() && $object->getId()) {
-            return $this->generateOpinionOrProposalRoute($object->getParent(), $absolute) .
-                '#arg-' .
-                $object->getId();
+            return $this->generateOpinionOrProposalRoute($object->getParent(), $absolute)
+                . '#arg-'
+                . $object->getId();
         }
 
         if ($object instanceof Source && $object->getParent() && $object->getId()) {
-            return $this->generateOpinionOrProposalRoute($object->getParent(), $absolute) .
-                '#source-' .
-                $object->getId();
+            return $this->generateOpinionOrProposalRoute($object->getParent(), $absolute)
+                . '#source-'
+                . $object->getId();
         }
 
         if ($object instanceof AbstractStep) {
@@ -174,9 +174,9 @@ class UrlResolver
         }
 
         if ($object instanceof Comment && $object->getRelatedObject()) {
-            return $this->getObjectUrl($object->getRelatedObject(), $absolute) .
-                '#comment_' .
-                $object->getId();
+            return $this->getObjectUrl($object->getRelatedObject(), $absolute)
+                . '#comment_'
+                . $object->getId();
         }
 
         if ($object instanceof Reporting && $object->getRelated()) {

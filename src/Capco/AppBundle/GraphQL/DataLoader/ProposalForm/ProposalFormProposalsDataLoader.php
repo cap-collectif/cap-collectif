@@ -65,9 +65,9 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
     {
         if ($this->debug && $this->enableCache) {
             $this->logger->info(
-                __METHOD__ .
-                    'called for keys : ' .
-                    var_export(
+                __METHOD__
+                    . 'called for keys : '
+                    . var_export(
                         array_map(fn ($key) => $this->serializeKey($key), $keys),
                         true
                     )
@@ -252,8 +252,8 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
                     $viewer,
                     &$totalCount
                 ) {
-                    $totalCount =
-                        $viewer instanceof User
+                    $totalCount
+                        = $viewer instanceof User
                             ? $this->proposalRepo->countProposalsByFormAndEvaluer($form, $viewer)
                             : $totalCount;
 

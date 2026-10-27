@@ -3,6 +3,7 @@
 namespace Capco\Tests\GraphQL\Resolver\Reply;
 
 use Capco\Tests\ResponseVisibilityWebTestCase;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 /**
  * @internal
@@ -36,7 +37,7 @@ final class ReplyResponsesResolverTest extends ResponseVisibilityWebTestCase
             $this->login($this->account()->getEmail());
         }
         if (\in_array($kind, ['anonymous', 'other'], true)) {
-            $result = $this->graphql('query($id: ID!) { node(id: $id) { id } }', ['id' => \Overblog\GraphQLBundle\Relay\Node\GlobalId::toGlobalId('Reply', $contribution->getId())]);
+            $result = $this->graphql('query($id: ID!) { node(id: $id) { id } }', ['id' => GlobalId::toGlobalId('Reply', $contribution->getId())]);
             self::assertNull($result['node']);
 
             return;

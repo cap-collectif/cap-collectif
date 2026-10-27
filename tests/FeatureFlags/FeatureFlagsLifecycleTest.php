@@ -116,7 +116,7 @@ final class FeatureFlagsLifecycleTest extends TestCase
 
     public function testKernelTestsReceiveThePresetWithoutOptIn(): void
     {
-        $source = str_replace('extends TestCase', 'extends \\Symfony\\Bundle\\FrameworkBundle\\Test\\KernelTestCase', $this->probeSource(false));
+        $source = str_replace('extends TestCase', 'extends \Symfony\Bundle\FrameworkBundle\Test\KernelTestCase', $this->probeSource(false));
         file_put_contents($this->fixture, $source);
         FeatureFlagsExtension::reset(['calendar' => false, 'shield_mode' => true]);
         $process = $this->runProbe('kernel defaults', false);
@@ -157,7 +157,7 @@ final class FeatureFlagsLifecycleTest extends TestCase
 
     private function probeSource(bool $managed): string
     {
-        $declaration = $managed ? 'implements \\Capco\\Tests\\FeatureFlags\\FeatureFlagsAwareTest' : '';
+        $declaration = $managed ? 'implements \Capco\Tests\FeatureFlags\FeatureFlagsAwareTest' : '';
         $class = pathinfo($this->fixture, \PATHINFO_FILENAME);
         $source = <<<'PHP'
             <?php

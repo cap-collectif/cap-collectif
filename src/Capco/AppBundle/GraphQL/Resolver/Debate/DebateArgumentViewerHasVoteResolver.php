@@ -23,8 +23,8 @@ class DebateArgumentViewerHasVoteResolver implements QueryInterface
     {
         $this->preventNullableViewer($viewer);
 
-        return null !==
-            $this->getRepository($debateArgument)->getOneByDebateArgumentAndUser(
+        return null
+            !== $this->getRepository($debateArgument)->getOneByDebateArgumentAndUser(
                 $debateArgument,
                 $viewer
             );

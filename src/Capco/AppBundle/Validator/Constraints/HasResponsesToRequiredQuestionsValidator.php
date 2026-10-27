@@ -63,8 +63,8 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
                     array_map(
                         fn ($q) => $q->getId(),
                         array_merge($questionsAvailableBeforeAnyLogicJump, $fulfilledQuestions)
-                    ) ??
-                        []
+                    )
+                        ?? []
                 )
             ) {
                 if ($this->isAnyJumpFulfilledForQuestion($question, $responses)) {
@@ -93,8 +93,8 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
             $fulfilledQuestions
         );
         $this->logger->debug(
-            self::LOG_PREFIX_FOUND_QUESTIONS_TO_VALIDATE .
-                json_encode(
+            self::LOG_PREFIX_FOUND_QUESTIONS_TO_VALIDATE
+                . json_encode(
                     array_map(fn ($q) => $q->getId(), $questionsToValidate)
                 )
         );

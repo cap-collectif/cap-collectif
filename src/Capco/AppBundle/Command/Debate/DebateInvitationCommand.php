@@ -130,11 +130,11 @@ class DebateInvitationCommand extends Command
                     }
                 } catch (\Exception $exception) {
                     $output->writeln(
-                        '<error>DebateInvitationCommand error : ' .
-                            $user->getEmail() .
-                            ' => ' .
-                            $exception->getMessage() .
-                            '</error>'
+                        '<error>DebateInvitationCommand error : '
+                            . $user->getEmail()
+                            . ' => '
+                            . $exception->getMessage()
+                            . '</error>'
                     );
                 }
                 if (null === $limit) {

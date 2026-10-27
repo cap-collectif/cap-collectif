@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Author;
 
 use Capco\AppBundle\Entity\Organization\Organization;
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
@@ -21,7 +22,7 @@ class AuthorTypeResolver implements QueryInterface
         if ($node instanceof Organization) {
             return $this->typeResolver->resolve('InternalOrganization');
         }
-        if ($node instanceof \Capco\AppBundle\Entity\Participant) {
+        if ($node instanceof Participant) {
             return $this->typeResolver->resolve('InternalParticipant');
         }
         if ($node instanceof User) {

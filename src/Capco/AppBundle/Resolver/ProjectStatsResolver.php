@@ -59,8 +59,8 @@ class ProjectStatsResolver
         $selectionSteps = $this->selectionStepRepo->getVotableStepsForProject($project);
         $collectSteps = $this->collectStepRepo->getCollectStepsForProject($project);
         $steps = array_merge($collectSteps, $selectionSteps);
-        usort($steps, fn ($a, $b) => $a->getProjectAbstractStep()->getPosition() <=>
-            $b->getProjectAbstractStep()->getPosition());
+        usort($steps, fn ($a, $b) => $a->getProjectAbstractStep()->getPosition()
+            <=> $b->getProjectAbstractStep()->getPosition());
 
         $stepsWithData = [];
         foreach ($steps as $step) {

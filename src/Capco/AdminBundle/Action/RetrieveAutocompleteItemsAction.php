@@ -16,6 +16,7 @@ namespace Capco\AdminBundle\Action;
 use Capco\AppBundle\Search\UserSearch;
 use Capco\UserBundle\Entity\User;
 use Sonata\AdminBundle\Admin\AdminInterface;
+use Sonata\AdminBundle\Admin\FieldDescriptionInterface;
 use Sonata\AdminBundle\Admin\Pool;
 use Sonata\AdminBundle\Datagrid\Pager;
 use Sonata\AdminBundle\Filter\FilterInterface;
@@ -219,7 +220,7 @@ final class RetrieveAutocompleteItemsAction
      *
      * @param string $field
      *
-     * @return \Sonata\AdminBundle\Admin\FieldDescriptionInterface
+     * @return FieldDescriptionInterface
      *
      * @throws \RuntimeException
      */
@@ -245,7 +246,7 @@ final class RetrieveAutocompleteItemsAction
      *
      * @param string $field
      *
-     * @return \Sonata\AdminBundle\Admin\FieldDescriptionInterface
+     * @return FieldDescriptionInterface
      *
      * @throws \RuntimeException
      */

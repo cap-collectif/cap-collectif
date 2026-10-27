@@ -2,8 +2,10 @@
 
 namespace Capco\AppBundle\Command;
 
+use Box\Spout\Common\Exception\IOException;
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
+use Box\Spout\Writer\Exception\WriterNotOpenedException;
 use Box\Spout\Writer\WriterInterface;
 use Capco\AppBundle\Command\Utils\BooleanCell;
 use Capco\AppBundle\Command\Utils\ExportUtils;
@@ -156,8 +158,8 @@ class CreateCsvFromLegacyUsersCommand extends BaseExportCommand
     }
 
     /**
-     * @throws \Box\Spout\Common\Exception\IOException
-     * @throws \Box\Spout\Writer\Exception\WriterNotOpenedException
+     * @throws IOException
+     * @throws WriterNotOpenedException
      */
     private function addUserRow(mixed $user): void
     {

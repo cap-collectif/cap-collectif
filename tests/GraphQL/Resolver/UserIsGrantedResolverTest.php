@@ -2,6 +2,8 @@
 
 namespace Capco\Tests\GraphQL\Resolver;
 
+use Capco\AppBundle\Entity\Organization\Organization;
+use Capco\AppBundle\Entity\Organization\OrganizationMember;
 use Capco\AppBundle\GraphQL\Resolver\UserIsGrantedResolver;
 use Capco\UserBundle\Entity\User;
 use PHPUnit\Framework\TestCase;
@@ -103,8 +105,8 @@ class UserIsGrantedResolverTest extends TestCase
     {
         $user = (new User())->setId($id)->setRoles($roles);
         if (null !== $organizationId) {
-            $organization = (new \Capco\AppBundle\Entity\Organization\Organization())->setId($organizationId);
-            $member = (new \Capco\AppBundle\Entity\Organization\OrganizationMember())->setUser($user)->setOrganization($organization)->setRole('user');
+            $organization = (new Organization())->setId($organizationId);
+            $member = (new OrganizationMember())->setUser($user)->setOrganization($organization)->setRole('user');
             $organization->addMember($member);
             $user->addMemberOfOrganization($member);
         }

@@ -2,8 +2,11 @@
 
 namespace Capco\Tests\Security;
 
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalAnalysis;
 use Capco\AppBundle\Entity\ProposalAnalysisComment;
+use Capco\AppBundle\Entity\ProposalDecisionMaker;
+use Capco\AppBundle\Entity\ProposalSupervisor;
 use Capco\AppBundle\Security\ProposalAnalysisCommentVoter;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -35,13 +38,13 @@ class ProposalAnalysisCommentVoterTest extends AuthorizationTestCase
         $viewer = (new User())->setId('viewer-id');
         $other = (new User())->setId('other-user-id');
         $analysis = (new ProposalAnalysis());
-        $proposal = new \Capco\AppBundle\Entity\Proposal();
+        $proposal = new Proposal();
         $analysis->setProposal($proposal);
         $analysis->setUpdatedBy('analyst' === $role ? $viewer : $other);
         if ('supervisor' === $role) {
-            $proposal->setSupervisor(new \Capco\AppBundle\Entity\ProposalSupervisor($proposal, $viewer));
+            $proposal->setSupervisor(new ProposalSupervisor($proposal, $viewer));
         } elseif ('decision maker' === $role) {
-            $proposal->setProposalDecisionMaker(new \Capco\AppBundle\Entity\ProposalDecisionMaker($proposal, $viewer));
+            $proposal->setProposalDecisionMaker(new ProposalDecisionMaker($proposal, $viewer));
         } elseif ('assigned without analysis' === $role) {
             $proposal->addAnalysts([$viewer]);
         }

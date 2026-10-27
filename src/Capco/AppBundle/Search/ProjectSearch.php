@@ -95,14 +95,14 @@ class ProjectSearch extends Search
             unset($providedFilters['locale']);
         }
 
-        $hasOwnerAffiliation =
-            $user && $affiliations && \in_array(ProjectAffiliation::OWNER, $affiliations, true);
+        $hasOwnerAffiliation
+            = $user && $affiliations && \in_array(ProjectAffiliation::OWNER, $affiliations, true);
         if ($hasOwnerAffiliation) {
             $boolQuery->addFilter(new Term(['owner.id' => $user->getId()]));
         }
 
-        $hasAuthorAffiliation =
-            $user && $affiliations && \in_array(ProjectAffiliation::AUTHOR, $affiliations, true);
+        $hasAuthorAffiliation
+            = $user && $affiliations && \in_array(ProjectAffiliation::AUTHOR, $affiliations, true);
         if ($hasAuthorAffiliation) {
             $boolQuery->addFilter(new Term(['authors.id' => $user->getId()]));
         }

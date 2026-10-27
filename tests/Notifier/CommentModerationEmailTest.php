@@ -2,6 +2,7 @@
 
 namespace Capco\Tests\Notifier;
 
+use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Notifier\CommentNotifier;
 use Capco\Tests\Command\MailerSnapshotCommandTestCase;
 
@@ -24,8 +25,8 @@ class CommentModerationEmailTest extends MailerSnapshotCommandTestCase
         string $recipient,
         string $subject
     ): void {
-        $comment = $this->entityManager->getRepository(\Capco\AppBundle\Entity\ProposalComment::class)->find($commentId);
-        self::assertInstanceOf(\Capco\AppBundle\Entity\ProposalComment::class, $comment);
+        $comment = $this->entityManager->getRepository(ProposalComment::class)->find($commentId);
+        self::assertInstanceOf(ProposalComment::class, $comment);
         $emails = $this->captureEmails();
 
         self::getContainer()->get(CommentNotifier::class)->{$method}($comment);

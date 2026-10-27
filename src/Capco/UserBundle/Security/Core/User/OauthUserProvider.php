@@ -340,8 +340,8 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
         $accessToken = $this->resolveAccessToken($response);
 
         if ('openid' === $serviceName && $resourceOwner instanceof OpenIDResourceOwner) {
-            $needMapping =
-                $this->isNewUser || $resourceOwner->isRefreshingUserInformationsAtEveryLogin();
+            $needMapping
+                = $this->isNewUser || $resourceOwner->isRefreshingUserInformationsAtEveryLogin();
             if ($needMapping) {
                 $user->setUsername($username);
                 $user->setEmail($email);

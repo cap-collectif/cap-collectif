@@ -24,8 +24,8 @@ final class GraphiQLController
      */
     public function indexAction($schemaName = null): Response
     {
-        $endpoint =
-            null === $schemaName
+        $endpoint
+            = null === $schemaName
                 ? $this->graphQLEndpoint->getDefault()
                 : $this->graphQLEndpoint->getBySchema($schemaName);
 

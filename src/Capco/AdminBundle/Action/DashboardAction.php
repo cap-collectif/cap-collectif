@@ -45,8 +45,8 @@ final class DashboardAction
 
         if ($user instanceof User && $user->hasBackOfficeAccess()) {
             return new RedirectResponse(
-                $this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL) .
-                    'admin-next/projects'
+                $this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL)
+                    . 'admin-next/projects'
             );
         }
 

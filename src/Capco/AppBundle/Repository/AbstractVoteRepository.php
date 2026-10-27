@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -68,8 +67,8 @@ class AbstractVoteRepository extends EntityRepository
      */
     public function findAllByAuthor(User $user, int $limit = 100, int $offset = 0): array
     {
-        $sqlRequest =
-            'SELECT * FROM votes WHERE (private = 0 OR private IS NULL) AND voter_id = :user_id LIMIT :offset, :limit';
+        $sqlRequest
+            = 'SELECT * FROM votes WHERE (private = 0 OR private IS NULL) AND voter_id = :user_id LIMIT :offset, :limit';
 
         $rsm = new ResultSetMapping();
         $rsm->addEntityResult(AbstractVote::class, 'v');
@@ -108,7 +107,7 @@ class AbstractVoteRepository extends EntityRepository
     {
         $qb = $this->getEntityManager()
             ->createQueryBuilder()
-            ->from(sprintf('Capco\\AppBundle\\Entity\\%sVote', ucfirst((string) $objectType)), 'v')
+            ->from(sprintf('Capco\AppBundle\Entity\%sVote', ucfirst((string) $objectType)), 'v')
             ->andWhere('v.published = true')
             ->addOrderBy('v.createdAt', 'ASC')
         ;
@@ -137,50 +136,11 @@ class AbstractVoteRepository extends EntityRepository
         return $result;
     }
 
-    /**
-     * Get votes by user.
-     *
-     * @param user
-     *
-     * @return mixed
-     */
-    public function getPublicVotesByUser(mixed $user)
-    {
-        $qb = $this->getQueryBuilder()
-            ->addSelect('u', 'm')
-            ->leftJoin('v.user', 'u')
-            ->leftJoin('u.media', 'm')
-            ->andWhere('v.user = :user')
-            ->setParameter('user', $user)
-            ->orderBy('v.createdAt', 'ASC')
-        ;
-
-        $votes = $qb->getQuery()->execute();
-        $publicVotes = [];
-
-        /** @var AbstractVote $vote */
-        foreach ($votes as $vote) {
-            try {
-                if (
-                    !method_exists($vote, 'getProposal')
-                    || ($vote->getProposal() && !$vote->getProposal()->isDeleted())
-                ) {
-                    if (!method_exists($vote, 'isPrivate') || !$vote->isPrivate()) {
-                        $publicVotes[] = $vote;
-                    }
-                }
-            } catch (EntityNotFoundException) {
-            }
-        }
-
-        return $publicVotes;
-    }
-
     public function getByObjectUser($objectType, $object, $user)
     {
         $qb = $this->getEntityManager()
             ->createQueryBuilder()
-            ->from(sprintf('Capco\\AppBundle\\Entity\\%sVote', ucfirst((string) $objectType)), 'v')
+            ->from(sprintf('Capco\AppBundle\Entity\%sVote', ucfirst((string) $objectType)), 'v')
             ->andWhere('v.published = true')
         ;
         if (\in_array($objectType, ['opinion', 'opinionVersion'], true)) {

@@ -7,6 +7,7 @@ use GraphQL\Executor\Promise\Promise;
 use Overblog\DataLoader\DataLoader;
 use Overblog\DataLoader\Option;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
@@ -36,12 +37,12 @@ abstract class BatchDataLoader extends DataLoader
                 return str_replace(
                     ':',
                     '',
-                    $this->cachePrefix .
-                    '-[' .
-                    (\is_string($serializedKey)
+                    $this->cachePrefix
+                    . '-['
+                    . (\is_string($serializedKey)
                         ? $serializedKey
-                        : base64_encode(var_export($this->serializeKey($key), true))) .
-                    ']-'
+                        : base64_encode(var_export($this->serializeKey($key), true)))
+                    . ']-'
                 );
             },
         ]);
@@ -78,7 +79,7 @@ abstract class BatchDataLoader extends DataLoader
      *
      * @return Promise
      *
-     * @throws \Psr\Cache\InvalidArgumentException
+     * @throws InvalidArgumentException
      *
      * @see DataLoader
      */
@@ -100,9 +101,9 @@ abstract class BatchDataLoader extends DataLoader
         if (!$this->enableCache || !$cacheItem->isHit()) {
             if ($this->debug && $this->enableCache) {
                 $this->logger->info(
-                    static::class .
-                    ' Cache MISS for: ' .
-                    var_export($this->serializeKey($key), true)
+                    static::class
+                    . ' Cache MISS for: '
+                    . var_export($this->serializeKey($key), true)
                 );
             }
             $promise = parent::load($key);

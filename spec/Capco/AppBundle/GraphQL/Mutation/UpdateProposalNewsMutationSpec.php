@@ -167,7 +167,7 @@ class UpdateProposalNewsMutationSpec extends ObjectBehavior
         $configuration->isOnProposalNewsUpdate()->willReturn(true);
 
         $publisher
-            ->publish(\Prophecy\Argument::any(), Argument::type(Message::class))
+            ->publish(Argument::any(), Argument::type(Message::class))
             ->shouldBeCalled()
         ;
 
@@ -212,7 +212,7 @@ class UpdateProposalNewsMutationSpec extends ObjectBehavior
         $configuration->isOnProposalNewsUpdate()->willReturn(false);
 
         $publisher
-            ->publish(\Prophecy\Argument::any(), Argument::type(Message::class))
+            ->publish(Argument::any(), Argument::type(Message::class))
             ->shouldNotBeCalled()
         ;
 

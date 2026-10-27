@@ -20,8 +20,8 @@ class ContributorsFetcher
      */
     public function getRecipientDataFromRegistred(EmailingCampaign $emailingCampaign, ?int $limit = 1000): array
     {
-        $userSql =
-            'SELECT
+        $userSql
+            = 'SELECT
                 u.id as id,
                 u.username as username,
                 u.locale as locale,
@@ -35,8 +35,8 @@ class ContributorsFetcher
             AND u.confirmation_token IS NULL
             AND ecu.id IS NULL';
 
-        $participantSql =
-            'SELECT
+        $participantSql
+            = 'SELECT
                 p.id as id,
                 p.username as username,
                 p.locale as locale,
@@ -53,8 +53,8 @@ class ContributorsFetcher
         // do NOT use UNION without the ALL, and do NOT add DISTINCT to the SELECT
         // they both remove the duplicates and is too costly in this use case
         // we remove them in PHP
-        $sql =
-            'SELECT id, username, email, locale, token, type
+        $sql
+            = 'SELECT id, username, email, locale, token, type
             FROM ( ' . $userSql . ' UNION ALL ' . $participantSql . ' ) AS recipients';
 
         if (null !== $limit && $limit > 0) {

@@ -27,7 +27,7 @@ trait AuthorableTrait
         return $this->getAuthor() === $viewer;
     }
 
-    public function setAuthor(null|Author|ContributorInterface $author): self
+    public function setAuthor(Author|ContributorInterface|null $author): self
     {
         if ($author instanceof User) {
             $this->organization = null;

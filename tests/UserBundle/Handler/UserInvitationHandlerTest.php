@@ -2,7 +2,12 @@
 
 namespace Capco\Tests\UserBundle\Handler;
 
+use Capco\AppBundle\Entity\Group;
+use Capco\AppBundle\Entity\UserGroup;
+use Capco\AppBundle\Entity\UserInvite;
 use Capco\Tests\IdentityWebTestCase;
+use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @internal
@@ -25,12 +30,12 @@ final class UserInvitationHandlerTest extends IdentityWebTestCase
     public function testRegistrationAppliesOnlyEligibleInvitationRolesAndGroups(string $kind, bool $feature, array $roles, bool $confirmed): void
     {
         $email = $this->uniqueEmail();
-        $group = (new \Capco\AppBundle\Entity\Group())->setTitle('Invited group')->setDescription('Registration membership');
+        $group = (new Group())->setTitle('Invited group')->setDescription('Registration membership');
         $this->em->persist($group);
         $this->setFeature('project_admin', $feature);
         $invitation = null;
         if ('none' !== $kind) {
-            $invitation = (new \Capco\AppBundle\Entity\UserInvite())->setEmail($email)->setToken('invitation-' . bin2hex(random_bytes(8)))->setIsAdmin('admin' === $kind)->setIsProjectAdmin('project admin' === $kind)->setExpiresAt(new \DateTime('expired' === $kind ? '2000-01-01' : '2100-01-01'))->setGroups(new \Doctrine\Common\Collections\ArrayCollection([$group]));
+            $invitation = (new UserInvite())->setEmail($email)->setToken('invitation-' . bin2hex(random_bytes(8)))->setIsAdmin('admin' === $kind)->setIsProjectAdmin('project admin' === $kind)->setExpiresAt(new \DateTime('expired' === $kind ? '2000-01-01' : '2100-01-01'))->setGroups(new ArrayCollection([$group]));
             $this->em->persist($invitation);
         }
         $this->em->flush();
@@ -38,15 +43,15 @@ final class UserInvitationHandlerTest extends IdentityWebTestCase
         $result = $this->register($email);
         self::assertNull($result['errorsCode']);
         $this->em->clear();
-        $user = $this->em->getRepository(\Capco\UserBundle\Entity\User::class)->findOneBy(['email' => $email]);
+        $user = $this->em->getRepository(User::class)->findOneBy(['email' => $email]);
         self::assertNotNull($user);
         self::assertSame($confirmed, $user->isEmailConfirmed());
         self::assertSame($roles, $user->getRoles());
-        $memberships = $this->em->getRepository(\Capco\AppBundle\Entity\UserGroup::class)->findBy(['user' => $user]);
+        $memberships = $this->em->getRepository(UserGroup::class)->findBy(['user' => $user]);
         self::assertCount($confirmed ? 1 : 0, $memberships);
         if ($confirmed) {
             self::assertSame($groupId, $memberships[0]->getGroup()->getId());
-            self::assertNotNull($this->em->getRepository(\Capco\AppBundle\Entity\UserInvite::class)->findOneBy(['email' => $email]));
+            self::assertNotNull($this->em->getRepository(UserInvite::class)->findOneBy(['email' => $email]));
         }
     }
 

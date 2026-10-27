@@ -63,8 +63,8 @@ class ProposalNotifier extends BaseNotifier
                 $proposal,
                 [
                     'proposal' => $proposal,
-                    'proposalSummary' => $proposal->getSummary() ??
-                        $this->translator->trans('project.votes.widget.no_value'),
+                    'proposalSummary' => $proposal->getSummary()
+                        ?? $this->translator->trans('project.votes.widget.no_value'),
                     'proposalURL' => $this->proposalUrlResolver->__invoke(
                         $proposal,
                         $this->requestStack

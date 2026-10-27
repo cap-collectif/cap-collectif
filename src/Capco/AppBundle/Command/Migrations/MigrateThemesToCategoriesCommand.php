@@ -65,9 +65,9 @@ class MigrateThemesToCategoriesCommand extends Command
         ]);
         if (!$collectStep || !($form = $collectStep->getProposalForm())) {
             $output->writeln(
-                '<error>Unknown collect step' .
-                    $collectStepSlug .
-                    '. Please provide an existing collect step slug that is linked to a proposal form.</error>'
+                '<error>Unknown collect step'
+                    . $collectStepSlug
+                    . '. Please provide an existing collect step slug that is linked to a proposal form.</error>'
             );
             $output->writeln('<error>Cancelled. No migration executed.</error>');
 

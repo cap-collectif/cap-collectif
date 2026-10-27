@@ -26,8 +26,8 @@ class UserCommentsResolver implements QueryInterface
             $args = new Argument(['first' => 0]);
         }
 
-        $aclDisabled =
-            $context
+        $aclDisabled
+            = $context
             && $context->offsetExists('disable_acl')
             && true === $context->offsetGet('disable_acl');
         $validViewer = $viewer instanceof UserInterface;

@@ -22,8 +22,8 @@ class MediaUrlResolver implements QueryInterface
     public function __invoke(Media $media, ?Arg $args = null, ?\ArrayObject $context = null): string
     {
         $format = $args && $args['format'] ? $args['format'] : 'reference';
-        $isExportContext =
-            $context
+        $isExportContext
+            = $context
             && $context->offsetExists('disable_acl')
             && true === $context->offsetGet('disable_acl');
 
@@ -31,13 +31,13 @@ class MediaUrlResolver implements QueryInterface
         $assetsHost = $this->mediaAccess->isPrivate($media) ? null : $this->assetsHost;
 
         if ('reference' === $format) {
-            $path =
-                $routingContext->getScheme() .
-                '://' .
-                $routingContext->getHost() .
-                '/' .
-                'media' .
-                $this->mediaProvider->generatePublicUrl($media, 'reference');
+            $path
+                = $routingContext->getScheme()
+                . '://'
+                . $routingContext->getHost()
+                . '/'
+                . 'media'
+                . $this->mediaProvider->generatePublicUrl($media, 'reference');
             if ($assetsHost && !$isExportContext) {
                 $path = str_replace($this->routerRequestContextHost, $assetsHost, $path);
             }
@@ -46,10 +46,10 @@ class MediaUrlResolver implements QueryInterface
         }
 
         if ('relative' === $format) {
-            $path =
-                '/' .
-                'media' .
-                $this->mediaProvider->generatePublicUrl($media, 'reference');
+            $path
+                = '/'
+                . 'media'
+                . $this->mediaProvider->generatePublicUrl($media, 'reference');
             if ($assetsHost && !$isExportContext) {
                 $path = str_replace($this->routerRequestContextHost, $assetsHost, $path);
             }

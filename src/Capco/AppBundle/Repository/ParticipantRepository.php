@@ -70,7 +70,7 @@ class ParticipantRepository extends EntityRepository
     public function countWithFilters(
         ?bool $consentInternalCommunication = null,
         ?bool $emailConfirmed = true,
-    ): null|bool|float|int|string {
+    ): bool|float|int|string|null {
         $qb = $this->createQueryBuilder('p')
             ->select('COUNT(p.id)')
         ;

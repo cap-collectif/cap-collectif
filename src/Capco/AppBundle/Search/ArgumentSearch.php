@@ -32,7 +32,7 @@ class ArgumentSearch extends Search
         foreach ($keys as $key) {
             $boolQuery = new BoolQuery();
             $boolQuery->addFilter(
-                new Query\Term(['author.id' => ['value' => $key['user']->getId()]])
+                new Term(['author.id' => ['value' => $key['user']->getId()]])
             );
 
             [
@@ -42,7 +42,7 @@ class ArgumentSearch extends Search
                 $limit,
                 $includeUnpublished,
                 $includeTrashed,
-                $aclDisabled
+                $aclDisabled,
             ] = [
                 $key['args']->offsetGet('after'),
                 $key['args']->offsetGet('orderBy')['field'] ?? 'createdAt',
@@ -58,9 +58,9 @@ class ArgumentSearch extends Search
             }
 
             $boolQuery
-                ->addMustNot(new Query\Term(['published' => ['value' => false]]))
+                ->addMustNot(new Term(['published' => ['value' => false]]))
                 ->addMustNot(new Query\Exists('comment'))
-                ->addMustNot(new Query\Term(['draft' => ['value' => true]]))
+                ->addMustNot(new Term(['draft' => ['value' => true]]))
             ;
 
             if (!$includeTrashed) {

@@ -6,11 +6,12 @@ use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Security\EmailingCampaignVoter;
 use Capco\AppBundle\Toggle\Manager;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class EmailingCampaignController extends \Sonata\AdminBundle\Controller\CRUDController
+class EmailingCampaignController extends CRUDController
 {
     public function listAction(Request $request): Response
     {

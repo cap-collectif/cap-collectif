@@ -104,6 +104,6 @@ class UserArchiveRequestProcessorTest extends KernelTestCase
 
     private function normalizeLocale(string $content): string
     {
-        return preg_replace('/\\?_locale=[a-z]{2}-[A-Z]{2}/', '', $content) ?? $content;
+        return preg_replace('/\?_locale=[a-z]{2}-[A-Z]{2}/', '', $content) ?? $content;
     }
 }

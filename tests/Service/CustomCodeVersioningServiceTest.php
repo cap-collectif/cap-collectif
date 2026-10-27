@@ -187,6 +187,13 @@ class CustomCodeVersioningServiceTest extends KernelTestCase
         self::assertSame($url, $version->getReferenceUrl());
     }
 
+    public static function operations(): \Generator
+    {
+        yield 'commit' => ['commit'];
+
+        yield 'restore' => ['restore'];
+    }
+
     public function testAConflictLeavesTheEntityManagerUsable(): void
     {
         $first = $this->writeVersion($this->service(true), 'commit');
@@ -202,13 +209,6 @@ class CustomCodeVersioningServiceTest extends KernelTestCase
         self::assertFalse($this->entityManager->getConnection()->isTransactionActive());
         $next = $this->service(true)->commit('contact.customcode', '<script>next</script>', 'Next', 'Test', null, null, $first->getContentHash());
         self::assertSame($first->getContentHash(), $next->getPreviousContentHash());
-    }
-
-    public static function operations(): \Generator
-    {
-        yield 'commit' => ['commit'];
-
-        yield 'restore' => ['restore'];
     }
 
     private function service(bool $writes): CustomCodeVersioningService

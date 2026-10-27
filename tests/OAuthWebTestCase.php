@@ -11,6 +11,7 @@ use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
 use Capco\UserBundle\Entity\User;
 use Firebase\JWT\CachedKeySet;
 use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
@@ -228,6 +229,6 @@ abstract class OAuthWebTestCase extends IdentityWebTestCase
         // Seed the isolated JWKS cache through the library's public API, using a fixed provider response.
         $http = new Client(['handler' => HandlerStack::create(new MockHandler([new Response(200, [], json_encode(['keys' => [$jwk]], \JSON_THROW_ON_ERROR))]))]);
         $keys = new CachedKeySet('https://fcp-low.sbx.dev-franceconnect.fr/api/v2/jwks', $http, new HttpFactory(), $this->providerCache);
-        self::assertInstanceOf(\Firebase\JWT\Key::class, $keys['contract-key']);
+        self::assertInstanceOf(Key::class, $keys['contract-key']);
     }
 }

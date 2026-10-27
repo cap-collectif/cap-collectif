@@ -178,8 +178,8 @@ class ProposalActivitiesResolver extends ActivitiesResolver
                     $twentyFourHoursInterval
                 );
                 $currentProposal['comments'] = (int) $proposalCommentYesterdays[0]['countComment'];
-                $currentProposal['votes'] =
-                    $proposalVotesInYesterday[0]['sVotes'] + $proposalVotesInYesterday[0]['cVotes'];
+                $currentProposal['votes']
+                    = $proposalVotesInYesterday[0]['sVotes'] + $proposalVotesInYesterday[0]['cVotes'];
                 $currentProposal['lastStep'] = !empty($proposalStepInYesterday)
                     ? $proposalStepInYesterday[0]
                     : false;

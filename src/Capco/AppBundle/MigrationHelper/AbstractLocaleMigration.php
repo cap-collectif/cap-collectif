@@ -59,19 +59,19 @@ abstract class AbstractLocaleMigration extends AbstractMigration implements Cont
 
     protected function generateLocaleInsertSql(Locale $locale): string
     {
-        return "INSERT INTO locale (id, traduction_key, code, is_enabled, is_published, is_default) VALUES ('" .
-            $this->generateUuid() .
-            "', '" .
-            $locale->getTraductionKey() .
-            "', '" .
-            $locale->getCode() .
-            "', " .
-            ($locale->isEnabled() ? 'true' : 'false') .
-            ', ' .
-            ($locale->isPublished() ? 'true' : 'false') .
-            ', ' .
-            ($locale->isDefault() ? 'true' : 'false') .
-            ')';
+        return "INSERT INTO locale (id, traduction_key, code, is_enabled, is_published, is_default) VALUES ('"
+            . $this->generateUuid()
+            . "', '"
+            . $locale->getTraductionKey()
+            . "', '"
+            . $locale->getCode()
+            . "', "
+            . ($locale->isEnabled() ? 'true' : 'false')
+            . ', '
+            . ($locale->isPublished() ? 'true' : 'false')
+            . ', '
+            . ($locale->isDefault() ? 'true' : 'false')
+            . ')';
     }
 
     protected static function generateLocaleDeleteSql(Locale $locale): string

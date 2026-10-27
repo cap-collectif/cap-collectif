@@ -15,9 +15,9 @@ class PostOrderedProjectsResolver implements QueryInterface
     {
         $projects = $post->getProjects()->toArray();
 
-        usort($projects, fn (Project $projectA, Project $projectB) =>
+        usort($projects, fn (Project $projectA, Project $projectB)
             // slug is unique for projects
-            $projectA->getSlug() <=> $projectB->getSlug());
+            => $projectA->getSlug() <=> $projectB->getSlug());
 
         return $projects;
     }

@@ -18,8 +18,8 @@ class ElasticsearchPaginator
         ?ElasticsearchConnectionBuilder $elasticsearchConnectionBuilder = null
     ) {
         $this->fetcher = $fetcher;
-        $this->elasticsearchConnectionBuilder =
-            $elasticsearchConnectionBuilder ?: new ElasticsearchConnectionBuilder();
+        $this->elasticsearchConnectionBuilder
+            = $elasticsearchConnectionBuilder ?: new ElasticsearchConnectionBuilder();
     }
 
     /**

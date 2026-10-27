@@ -70,9 +70,9 @@ class ConfirmationController extends Controller
         $step = $stepId ? $this->stepRepo->find($stepId) : null;
 
         $response = new RedirectResponse(
-            $step ?
-            $this->stepUrlResolver->__invoke($step) :
-            $this->router->generate('app_homepage')
+            $step
+            ? $this->stepUrlResolver->__invoke($step)
+            : $this->router->generate('app_homepage')
         );
 
         // We create a session for flashBag
@@ -371,13 +371,13 @@ class ConfirmationController extends Controller
     private function addConfirmationMessageToFlashbag(?AbstractStep $step, bool $hasPublishedContributions): void
     {
         $type = ($step && $step->isClosed()) ? 'danger' : 'success';
-        $message = $step ?
-            ($step->isOpen() ?
-                'confirmation-contribution-validation' :
-                'error-contribution-validation') :
-            ($hasPublishedContributions ?
-                'global.alert.email_confirmed_with_republish' :
-                'global.alert.email_confirmed');
+        $message = $step
+            ? ($step->isOpen()
+                ? 'confirmation-contribution-validation'
+                : 'error-contribution-validation')
+            : ($hasPublishedContributions
+                ? 'global.alert.email_confirmed_with_republish'
+                : 'global.alert.email_confirmed');
 
         $this->session->getFlashBag()->add(
             $type,

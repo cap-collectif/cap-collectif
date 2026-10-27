@@ -956,8 +956,8 @@ class Proposal implements EntityInterface, Publishable, Contribution, Commentabl
     public function isInRevision(): bool
     {
         $revisions = $this->getRevisions()->filter(
-            fn (ProposalRevision $revision) => ProposalRevisionStateType::PENDING ===
-                $revision->getState()
+            fn (ProposalRevision $revision) => ProposalRevisionStateType::PENDING
+                === $revision->getState()
         );
 
         return $revisions->count() > 0;
@@ -965,8 +965,8 @@ class Proposal implements EntityInterface, Publishable, Contribution, Commentabl
 
     public function canContribute($viewer = null): bool
     {
-        $canContribute =
-            ($this->isPublished() || $this->isDraft())
+        $canContribute
+            = ($this->isPublished() || $this->isDraft())
             && !$this->isTrashed()
             && $this->getStep()
             && $this->getStep()->canContribute($viewer);

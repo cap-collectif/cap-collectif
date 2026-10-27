@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Capco\UserBundle\Controller;
 
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Exception\ParticipantNotFoundException;
 use Capco\AppBundle\Repository\ParticipantPhoneVerificationSmsRepository;
 use Capco\AppBundle\Service\Encryptor;
@@ -122,7 +123,7 @@ class MagicLinkController extends AbstractController
         return null;
     }
 
-    private function removePhoneVerificationSms(\Capco\AppBundle\Entity\Participant $participant): void
+    private function removePhoneVerificationSms(Participant $participant): void
     {
         $phoneVerificationSmsList = $this->participantPhoneVerificationSmsRepository->findBy([
             'participant' => $participant,

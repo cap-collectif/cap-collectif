@@ -82,7 +82,7 @@ class Version20150211123011 extends AbstractMigration implements ContainerAwareI
 
         foreach ($newParameters as $values) {
             $query = $em->createQuery(
-                'SELECT sp.id FROM Capco\\AppBundle\\Entity\\SiteParameter sp WHERE sp.keyname = :keyname'
+                'SELECT sp.id FROM Capco\AppBundle\Entity\SiteParameter sp WHERE sp.keyname = :keyname'
             );
             $query->setParameter('keyname', $values[0]);
             $param = $query->getOneOrNullResult();
@@ -119,7 +119,7 @@ class Version20150211123011 extends AbstractMigration implements ContainerAwareI
 
         foreach ($parametersKeys as $key) {
             $query = $em->createQuery(
-                'SELECT sp.id FROM Capco\\AppBundle\\Entity\\SiteParameter sp WHERE sp.keyname = :keyname'
+                'SELECT sp.id FROM Capco\AppBundle\Entity\SiteParameter sp WHERE sp.keyname = :keyname'
             );
             $query->setParameter('keyname', $key);
             $param = $query->getOneOrNullResult();

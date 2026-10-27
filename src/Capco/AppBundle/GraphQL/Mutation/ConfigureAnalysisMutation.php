@@ -59,7 +59,7 @@ class ConfigureAnalysisMutation implements MutationInterface
             $selectionStepStatusId,
             $costEstimationEnabled,
             $body,
-            $bodyUsingJoditWysiwyg
+            $bodyUsingJoditWysiwyg,
         ] = [
             $args->offsetGet('proposalFormId'),
             $args->offsetGet('evaluationFormId'),

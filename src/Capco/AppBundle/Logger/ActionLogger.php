@@ -24,7 +24,7 @@ class ActionLogger
     ) {}
 
     public function logGraphQLMutation(
-        null|Organization|User $user,
+        Organization|User|null $user,
         string $actionType,
         ?string $description = null,
         ?string $entityType = null,
@@ -40,7 +40,7 @@ class ActionLogger
     }
 
     public function logGraphQLQuery(
-        null|Organization|User $user,
+        Organization|User|null $user,
         Argument $args,
         string $actionType,
         ?string $description = null,
@@ -75,7 +75,7 @@ class ActionLogger
     }
 
     public function log(
-        null|Organization|User $user,
+        Organization|User|null $user,
         string $actionType,
         string $description,
         ?string $entityType = null,

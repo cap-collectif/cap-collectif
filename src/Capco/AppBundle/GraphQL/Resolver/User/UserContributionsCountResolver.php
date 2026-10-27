@@ -21,13 +21,13 @@ class UserContributionsCountResolver implements QueryInterface
 
     public function __invoke(User $user, ?User $viewer = null): int
     {
-        return $this->userEventCommentsCountResolver->__invoke($user) +
-            $this->userOpinionsResolver->getCountPublicPublished($user, true, $viewer) +
-            $this->userProposalsResolver->__invoke($viewer, $user)->getTotalCount() +
-            $this->argumentRepository->countByUser($user, $viewer) +
-            $this->userOpinionVersionResolver->__invoke($viewer, $user)->getTotalCount() +
-            $this->userVotesResolver->__invoke($viewer, $user)->getTotalCount() +
-            $this->userRepliesResolver->__invoke($viewer, $user)->getTotalCount() +
-            $this->userSourcesResolver->__invoke($viewer, $user)->getTotalCount();
+        return $this->userEventCommentsCountResolver->__invoke($user)
+            + $this->userOpinionsResolver->getCountPublicPublished($user, true, $viewer)
+            + $this->userProposalsResolver->__invoke($viewer, $user)->getTotalCount()
+            + $this->argumentRepository->countByUser($user, $viewer)
+            + $this->userOpinionVersionResolver->__invoke($viewer, $user)->getTotalCount()
+            + $this->userVotesResolver->__invoke($viewer, $user)->getTotalCount()
+            + $this->userRepliesResolver->__invoke($viewer, $user)->getTotalCount()
+            + $this->userSourcesResolver->__invoke($viewer, $user)->getTotalCount();
     }
 }

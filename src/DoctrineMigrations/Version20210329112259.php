@@ -24,8 +24,8 @@ final class Version20210329112259 extends AbstractMigration
             'mysql' !== $this->connection->getDatabasePlatform()->getName(),
             'Migration can only be executed safely on \'mysql\'.'
         );
-        $allowedData =
-            'a:8:{s:10:"given_name";b:1;s:11:"family_name";b:1;s:9:"birthdate";b:0;s:6:"gender";b:0;s:10:"birthplace";b:0;s:12:"birthcountry";b:0;s:5:"email";b:1;s:18:"preferred_username";b:0;}';
+        $allowedData
+            = 'a:8:{s:10:"given_name";b:1;s:11:"family_name";b:1;s:9:"birthdate";b:0;s:6:"gender";b:0;s:10:"birthplace";b:0;s:12:"birthcountry";b:0;s:5:"email";b:1;s:18:"preferred_username";b:0;}';
         $fc = $this->connection->fetchAssociative(
             'SELECT id, allowed_data FROM sso_configuration WHERE ssoType = "franceconnect"'
         );

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\SourceCategory;
 use Doctrine\ORM\EntityRepository;
 
 class SourceCategoryRepository extends EntityRepository
@@ -16,7 +17,7 @@ class SourceCategoryRepository extends EntityRepository
     }
 
     /**
-     * @return array<int, \Capco\AppBundle\Entity\SourceCategory>
+     * @return array<int, SourceCategory>
      */
     public function findAllPaginated(?int $offset = null, ?int $limit = null): array
     {

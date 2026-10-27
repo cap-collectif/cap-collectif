@@ -30,7 +30,7 @@ class Version20150202184849 extends AbstractMigration implements ContainerAwareI
         $em = $this->container->get('doctrine.orm.entity_manager');
 
         $query = $em->createQuery(
-            'SELECT si.id FROM Capco\\AppBundle\\Entity\\SiteImage si JOIN si.Media m WHERE si.keyname = :keyname'
+            'SELECT si.id FROM Capco\AppBundle\Entity\SiteImage si JOIN si.Media m WHERE si.keyname = :keyname'
         );
         $query->setParameter('keyname', 'image.default_avatar');
         $siteImage = $query->getOneOrNullResult();

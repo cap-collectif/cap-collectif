@@ -9,7 +9,7 @@ class CsvDataFormatter
         return (null !== $dateTime) ? $dateTime->format('Y-m-d H:i:s') : null;
     }
 
-    public function getReadableBoolean(null|bool|int $value): ?string
+    public function getReadableBoolean(bool|int|null $value): ?string
     {
         if (null === $value) {
             return null;

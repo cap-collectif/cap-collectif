@@ -4,10 +4,16 @@ declare(strict_types=1);
 
 namespace Capco\Tests\UserBundle\Functional;
 
+use Capco\AppBundle\Anonymizer\UserAnonymizer;
+use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\FileSystem\ConfigFileSystem;
+use Capco\AppBundle\Service\EmailRateLimiter;
 use Capco\UserBundle\Entity\User;
 use Firebase\JWT\JWT;
 use Gaufrette\File;
+use Psr\Log\NullLogger;
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * @internal
@@ -65,13 +71,13 @@ final class MagicLinkTest extends AccountWebTestCase
     public function testRepeatedMagicLinkRequestReturnsRateLimitErrorWithoutOutboundEffects(): void
     {
         // Exercise the real limiter outside its deliberate test-environment bypass.
-        $pool = new \Symfony\Component\Cache\Adapter\ArrayAdapter();
-        $cache = $this->createStub(\Capco\AppBundle\Cache\RedisCache::class);
+        $pool = new ArrayAdapter();
+        $cache = $this->createStub(RedisCache::class);
         $cache->method('getItem')->willReturnCallback($pool->getItem(...));
         $cache->method('save')->willReturnCallback($pool->save(...));
-        $kernel = $this->createStub(\Symfony\Component\HttpKernel\KernelInterface::class);
+        $kernel = $this->createStub(KernelInterface::class);
         $kernel->method('getEnvironment')->willReturn('prod');
-        self::getContainer()->set(\Capco\AppBundle\Service\EmailRateLimiter::class, new \Capco\AppBundle\Service\EmailRateLimiter($cache, new \Psr\Log\NullLogger(), $kernel));
+        self::getContainer()->set(EmailRateLimiter::class, new EmailRateLimiter($cache, new NullLogger(), $kernel));
         $user = $this->account();
         $id = $user->getId();
         $email = $user->getEmail();
@@ -98,7 +104,7 @@ final class MagicLinkTest extends AccountWebTestCase
     {
         $user = $this->account();
         $token = $this->token($user->getEmail());
-        self::getContainer()->get(\Capco\AppBundle\Anonymizer\UserAnonymizer::class)->anonymize($user);
+        self::getContainer()->get(UserAnonymizer::class)->anonymize($user);
         $this->request('GET', '/magic-link/' . $token);
         self::assertTrue($this->browser->getResponse()->isRedirection());
         $this->assertViewer(false);

@@ -42,8 +42,8 @@ final class RequestGuesser implements RequestGuesserInterface
     public static function getClientIpFromRequest(Request $request): ?string
     {
         // Symfony normalized HTTP request headers with lowercase keys
-        return $request->headers->get('true-client-ip') ??
-            ($request->headers->get('cf-connecting-ip') ?? $request->getClientIp());
+        return $request->headers->get('true-client-ip')
+            ?? ($request->headers->get('cf-connecting-ip') ?? $request->getClientIp());
     }
 
     /**

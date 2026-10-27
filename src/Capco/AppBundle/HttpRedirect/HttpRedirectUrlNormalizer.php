@@ -74,8 +74,8 @@ class HttpRedirectUrlNormalizer
     {
         $normalized = '';
         $allowedAsciiPattern = $isPathSegment
-            ? '/^[A-Za-z0-9\\-._~!$&\'()*+,;=:@]$/'
-            : '/^[A-Za-z0-9\\-._~!$\'()*+,;=:@\/?]$/';
+            ? '/^[A-Za-z0-9\-._~!$&\'()*+,;=:@]$/'
+            : '/^[A-Za-z0-9\-._~!$\'()*+,;=:@\/?]$/';
 
         $parts = preg_split('/(%[0-9A-Fa-f]{2})/', $value, -1, \PREG_SPLIT_DELIM_CAPTURE | \PREG_SPLIT_NO_EMPTY);
         if (false === $parts) {

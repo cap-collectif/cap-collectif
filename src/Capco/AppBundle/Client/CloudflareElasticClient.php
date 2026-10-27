@@ -166,10 +166,10 @@ class CloudflareElasticClient
         $useragentFieldSearchQuery = new Search($this->esClient);
 
         // Actually counting how many documents don't have "clientIP" field.
-        $boolQuery = new Query\BoolQuery();
+        $boolQuery = new BoolQuery();
 
         $boolQuery
-            ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]))
+            ->addFilter(new Term(['clientRequestHost.keyword' => $this->hostname]))
             ->addFilter(
                 new Range('edgeEndTimestamp', [
                     'gte' => $start->format(\DateTimeInterface::ATOM),
@@ -223,11 +223,11 @@ class CloudflareElasticClient
         \DateTimeInterface $end,
         ?string $projectSlug = null
     ): \Elastica\Search {
-        $boolQuery = new Query\BoolQuery();
+        $boolQuery = new BoolQuery();
         $boolQuery
-            ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]))
+            ->addFilter(new Term(['clientRequestHost.keyword' => $this->hostname]))
             ->addMustNot(
-                (new Query\BoolQuery())->addFilter(
+                (new BoolQuery())->addFilter(
                     new Query\Terms('clientIPClass.keyword', ['searchEngine', 'monitoringService', 'badHost', 'scan'])
                 )
             )
@@ -284,11 +284,11 @@ class CloudflareElasticClient
         \DateTimeInterface $end,
         ?string $projectSlug = null
     ): \Elastica\Search {
-        $boolQuery = new Query\BoolQuery();
+        $boolQuery = new BoolQuery();
         $boolQuery
-            ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]))
+            ->addFilter(new Term(['clientRequestHost.keyword' => $this->hostname]))
             ->addMustNot(
-                (new Query\BoolQuery())->addFilter(
+                (new BoolQuery())->addFilter(
                     new Query\Terms('clientIPClass.keyword', ['searchEngine', 'monitoringService', 'badHost', 'scan'])
                 )
             )
@@ -327,7 +327,7 @@ class CloudflareElasticClient
         \DateTimeInterface $end,
         ?string $projectSlug = null
     ): \Elastica\Search {
-        $boolQuery = new Query\BoolQuery();
+        $boolQuery = new BoolQuery();
         $boolQuery
             ->addFilter(
                 new Range('edgeEndTimestamp', [
@@ -335,7 +335,7 @@ class CloudflareElasticClient
                     'lt' => $end->format(\DateTimeInterface::ATOM),
                 ])
             )
-            ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]))
+            ->addFilter(new Term(['clientRequestHost.keyword' => $this->hostname]))
         ;
 
         $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
@@ -358,18 +358,18 @@ class CloudflareElasticClient
         \DateTimeInterface $end,
         ?string $projectSlug = null
     ): \Elastica\Search {
-        $boolQuery = new Query\BoolQuery();
+        $boolQuery = new BoolQuery();
         $boolQuery
             ->addFilter(
-                (new Query\BoolQuery())
+                (new BoolQuery())
                     ->addShould(
-                        (new Query\BoolQuery())->addFilter(
-                            new Query\Term(['clientIPClass' => 'searchEngine'])
+                        (new BoolQuery())->addFilter(
+                            new Term(['clientIPClass' => 'searchEngine'])
                         )
                     )
                     ->addShould(
-                        (new Query\BoolQuery())->addFilter(
-                            new Query\Term(['searchEngineReferer' => true])
+                        (new BoolQuery())->addFilter(
+                            new Term(['searchEngineReferer' => true])
                         )
                     )
             )
@@ -379,7 +379,7 @@ class CloudflareElasticClient
                     'lt' => $end->format(\DateTimeInterface::ATOM),
                 ])
             )
-            ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]))
+            ->addFilter(new Term(['clientRequestHost.keyword' => $this->hostname]))
         ;
 
         $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
@@ -399,7 +399,7 @@ class CloudflareElasticClient
         \DateTimeInterface $end,
         ?string $projectSlug = null
     ): \Elastica\Search {
-        $boolQuery = new Query\BoolQuery();
+        $boolQuery = new BoolQuery();
         $boolQuery
             ->addFilter(
                 new Range('edgeEndTimestamp', [
@@ -407,8 +407,8 @@ class CloudflareElasticClient
                     'lt' => $end->format(\DateTimeInterface::ATOM),
                 ])
             )
-            ->addFilter(new Query\Term(['socialNetworkReferer' => true]))
-            ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]))
+            ->addFilter(new Term(['socialNetworkReferer' => true]))
+            ->addFilter(new Term(['clientRequestHost.keyword' => $this->hostname]))
         ;
 
         $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
@@ -422,7 +422,7 @@ class CloudflareElasticClient
         \DateTimeInterface $end,
         ?string $projectSlug = null
     ): \Elastica\Search {
-        $boolQuery = new Query\BoolQuery();
+        $boolQuery = new BoolQuery();
         $boolQuery
             ->addFilter(
                 new Range('edgeEndTimestamp', [
@@ -430,7 +430,7 @@ class CloudflareElasticClient
                     'lt' => $end->format(\DateTimeInterface::ATOM),
                 ])
             )
-            ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]))
+            ->addFilter(new Term(['clientRequestHost.keyword' => $this->hostname]))
             ->addMustNot(new Query\Exists('clientRequestReferer'))
             ->addMustNot(new Query\Exists('socialNetworkReferer'))
         ;
@@ -446,7 +446,7 @@ class CloudflareElasticClient
         \DateTimeInterface $end,
         ?string $projectSlug = null
     ): \Elastica\Search {
-        $boolQuery = new Query\BoolQuery();
+        $boolQuery = new BoolQuery();
         $boolQuery
             ->addFilter(
                 new Range('edgeEndTimestamp', [
@@ -455,9 +455,9 @@ class CloudflareElasticClient
                 ])
             )
             ->addFilter(new Query\Exists('clientRequestReferer'))
-            ->addMustNot(new Query\Term(['socialNetworkReferer' => true]))
-            ->addMustNot(new Query\Term(['searchEngineReferer' => true]))
-            ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]))
+            ->addMustNot(new Term(['socialNetworkReferer' => true]))
+            ->addMustNot(new Term(['searchEngineReferer' => true]))
+            ->addFilter(new Term(['clientRequestHost.keyword' => $this->hostname]))
         ;
 
         $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
@@ -467,11 +467,11 @@ class CloudflareElasticClient
     }
 
     private function filterClientRequestURIByProject(
-        Query\BoolQuery $boolQuery,
+        BoolQuery $boolQuery,
         ?string $projectSlug = null
-    ): Query\BoolQuery {
+    ): BoolQuery {
         if ($projectSlug) {
-            $boolQuery->addFilter(new Query\Term(['projectSlug.keyword' => $projectSlug]));
+            $boolQuery->addFilter(new Term(['projectSlug.keyword' => $projectSlug]));
         }
 
         return $boolQuery;

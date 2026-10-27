@@ -101,14 +101,14 @@ class ElasticaToDoctrineTransformer
         usort($objects, function ($a, $b) use ($idPos, $identifier, $propertyAccessor) {
             if ($this->options['hydrate']) {
                 return $idPos[
-                    $a::getElasticsearchTypeName() .
-                        '#' .
-                        $propertyAccessor->getValue($a, $identifier)
-                ] <=>
-                    $idPos[
-                        $b::getElasticsearchTypeName() .
-                            '#' .
-                            $propertyAccessor->getValue($b, $identifier)
+                    $a::getElasticsearchTypeName()
+                        . '#'
+                        . $propertyAccessor->getValue($a, $identifier)
+                ]
+                    <=> $idPos[
+                        $b::getElasticsearchTypeName()
+                            . '#'
+                            . $propertyAccessor->getValue($b, $identifier)
                     ];
             }
 
@@ -194,8 +194,8 @@ class ElasticaToDoctrineTransformer
     {
         $propertyAccessor = $this->propertyAccessor;
 
-        return fn ($a, $b) => $idPos[(string) $propertyAccessor->getValue($a, $identifierPath)] >
-            $idPos[(string) $propertyAccessor->getValue($b, $identifierPath)];
+        return fn ($a, $b) => $idPos[(string) $propertyAccessor->getValue($a, $identifierPath)]
+            > $idPos[(string) $propertyAccessor->getValue($b, $identifierPath)];
     }
 
     private function getIdentifierField()

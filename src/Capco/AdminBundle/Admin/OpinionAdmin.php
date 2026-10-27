@@ -40,8 +40,8 @@ class OpinionAdmin extends CapcoAdmin
 
     public function getPersistentParameters(): array
     {
-        $opinionTypeId =
-            $this->hasSubject() && $this->getSubject()->getOpinionType()
+        $opinionTypeId
+            = $this->hasSubject() && $this->getSubject()->getOpinionType()
                 ? $this->getSubject()
                     ->getOpinionType()
                     ->getId()

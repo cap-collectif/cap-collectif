@@ -89,8 +89,8 @@ final class Version20191017123246 extends AbstractMigration implements Container
         }
 
         $finder = new Finder();
-        $categoryImages =
-            $this->container->getParameter('kernel.project_dir') . '/fixtures/files/categoryImage/';
+        $categoryImages
+            = $this->container->getParameter('kernel.project_dir') . '/fixtures/files/categoryImage/';
 
         $finder->files()->in($categoryImages);
         foreach ($finder as $file) {

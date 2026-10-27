@@ -72,8 +72,8 @@ class CreateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
         );
         $emailingCampaign->setSenderEmail($this->senderEmailResolver->__invoke());
         $emailingCampaign->setSenderName(
-            $this->siteParams->getValue('admin.mail.notifications.send_name') ??
-                $emailingCampaign->getSenderEmail()
+            $this->siteParams->getValue('admin.mail.notifications.send_name')
+                ?? $emailingCampaign->getSenderEmail()
         );
         $emailingCampaign->setCreator($viewer);
 

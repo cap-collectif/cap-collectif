@@ -25,11 +25,11 @@ class ProposalVotesResolver implements QueryInterface
         ?User $viewer = null
     ) {
         $includeNotAccounted = true === $args->offsetGet('includeNotAccounted');
-        $includeUnpublished =
-            true === $args->offsetGet('includeUnpublished')
+        $includeUnpublished
+            = true === $args->offsetGet('includeUnpublished')
             || ($context->offsetExists('disable_acl') && true === $context->offsetGet('disable_acl'));
-        $includeSecretBallot =
-            true === $args->offsetGet('includeSecretBallot')
+        $includeSecretBallot
+            = true === $args->offsetGet('includeSecretBallot')
             || ($context->offsetExists('disable_acl') && true === $context->offsetGet('disable_acl'));
         $step = null;
         if ($args->offsetExists('stepId') && $args->offsetGet('stepId')) {

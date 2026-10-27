@@ -27,10 +27,10 @@ trait SnapshotCommandTrait
         // @phpstan-ignore-next-line
         if (!$this->toggleManager->isActive(ToggleManager::multilangue)) {
             $io->warning(
-                'You probably will have to enable multilangue feature to run this command, ' .
-                'otherwise you will have links that are followed by _locale=fr_FR (for instance) ' .
-                'and it will wrongly update snapshots. ' .
-                'Also, you probably want to enable it in test env : capco:toggle:enable multilangue --env=test'
+                'You probably will have to enable multilangue feature to run this command, '
+                . 'otherwise you will have links that are followed by _locale=fr_FR (for instance) '
+                . 'and it will wrongly update snapshots. '
+                . 'Also, you probably want to enable it in test env : capco:toggle:enable multilangue --env=test'
             );
         }
 

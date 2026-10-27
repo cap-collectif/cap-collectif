@@ -39,22 +39,22 @@ final class Version20180803144545 extends AbstractMigration
         ];
         foreach ($tables as $table) {
             $this->connection->executeQuery(
-                'UPDATE ' .
-                    $table['key'] .
-                    ' o SET o.trashed_status = "visible" WHERE o.' .
-                    $table['trashed'] .
-                    ' = 1 AND o.' .
-                    $table['enabled'] .
-                    ' = 1'
+                'UPDATE '
+                    . $table['key']
+                    . ' o SET o.trashed_status = "visible" WHERE o.'
+                    . $table['trashed']
+                    . ' = 1 AND o.'
+                    . $table['enabled']
+                    . ' = 1'
             );
             $this->connection->executeQuery(
-                'UPDATE ' .
-                    $table['key'] .
-                    ' o SET o.trashed_status = "invisible" WHERE o.' .
-                    $table['trashed'] .
-                    ' = 1 AND o.' .
-                    $table['enabled'] .
-                    ' = 0'
+                'UPDATE '
+                    . $table['key']
+                    . ' o SET o.trashed_status = "invisible" WHERE o.'
+                    . $table['trashed']
+                    . ' = 1 AND o.'
+                    . $table['enabled']
+                    . ' = 0'
             );
         }
     }

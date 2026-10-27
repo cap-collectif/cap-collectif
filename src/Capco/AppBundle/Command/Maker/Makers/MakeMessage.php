@@ -63,9 +63,9 @@ class MakeMessage extends AbstractMaker
         $this->className = $this->askSimpleQuestion(
             $input,
             $output,
-            'Please type your message name <info>(e.g ' .
-                ($this->entity ? $this->entity->getShortName() : 'Proposal') .
-                'Create)</info>'
+            'Please type your message name <info>(e.g '
+                . ($this->entity ? $this->entity->getShortName() : 'Proposal')
+                . 'Create)</info>'
         );
         $this->className = str_replace('Message', '', $this->className);
         $this->className .= 'Message';

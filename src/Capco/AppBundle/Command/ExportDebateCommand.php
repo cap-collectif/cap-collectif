@@ -330,9 +330,9 @@ class ExportDebateCommand extends BaseExportCommand
 
     private function getPath(string $debateId, string $type, bool $projectAdmin = false): string
     {
-        return $this->projectRootDir .
-            self::EXPORT_DIR .
-            self::getFilename($debateId, $type, $projectAdmin);
+        return $this->projectRootDir
+            . self::EXPORT_DIR
+            . self::getFilename($debateId, $type, $projectAdmin);
     }
 
     private static function getRowCellValue(array $data, string $treePath)
@@ -434,8 +434,8 @@ class ExportDebateCommand extends BaseExportCommand
             $url = $data['data']['node']['url'];
             $dataArguments = $data['data']['node']['arguments'];
             $dataVotes = $data['data']['node']['votes'];
-            $hasNextPage =
-                $dataArguments['pageInfo']['hasNextPage'] || $dataVotes['pageInfo']['hasNextPage'];
+            $hasNextPage
+                = $dataArguments['pageInfo']['hasNextPage'] || $dataVotes['pageInfo']['hasNextPage'];
             $argumentCursor = $dataArguments['pageInfo']['endCursor'];
             $voteCursor = $dataVotes['pageInfo']['endCursor'];
             $arguments = array_merge($arguments, $dataArguments['edges']);

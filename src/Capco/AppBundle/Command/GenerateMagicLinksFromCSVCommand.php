@@ -384,8 +384,8 @@ class GenerateMagicLinksFromCSVCommand extends Command
         $this->style->progressFinish();
         $unHandledUsersCount = \count($this->unHandledUsers);
         if (0 < $unHandledUsersCount) {
-            $this->style->warning($unHandledUsersCount . ' users could not be handled. See ' .
-                $this->kernel->getProjectDir() . self::FILE_FOLDER . $baseFileName . '_errors.csv for more details.');
+            $this->style->warning($unHandledUsersCount . ' users could not be handled. See '
+                . $this->kernel->getProjectDir() . self::FILE_FOLDER . $baseFileName . '_errors.csv for more details.');
         }
         $this->style->success('New completed file available at : ' . $this->kernel->getProjectDir() . self::FILE_FOLDER . $baseFileName . '_complete.csv');
         $durationInDays = $this->kernel->getContainer()->getParameter('magiclinks_duration_in_minutes') / 1440;

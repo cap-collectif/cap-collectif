@@ -2,6 +2,8 @@
 
 namespace Capco\Tests\Mutation;
 
+use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Entity\Reply;
 use Capco\Tests\IdentityWebTestCase;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
@@ -22,14 +24,14 @@ final class UpdateUserReplyMutationTest extends IdentityWebTestCase
     public function testOnlySuccessfulPublicationDispatchesANotification(string $kind, bool $notified): void
     {
         $author = $this->account();
-        $questionnaire = $this->em->getRepository(\Capco\AppBundle\Entity\Questionnaire::class)->findOneBy([]);
+        $questionnaire = $this->em->getRepository(Questionnaire::class)->findOneBy([]);
         $questionnaire->setAnonymousAllowed(true);
         $questionnaire->getNotificationsConfiguration()->setOnQuestionnaireReplyUpdate(true);
         $questionnaire->getStep()->setTimeless(true);
         foreach ($questionnaire->getQuestions() as $association) {
             $association->getQuestion()->setRequired('invalid' === $kind);
         }
-        $reply = (new \Capco\AppBundle\Entity\Reply())->setAuthor($author)->setQuestionnaire($questionnaire)->setDraft(true);
+        $reply = (new Reply())->setAuthor($author)->setQuestionnaire($questionnaire)->setDraft(true);
         $this->em->persist($reply);
         $this->em->flush();
         $id = $reply->getId();

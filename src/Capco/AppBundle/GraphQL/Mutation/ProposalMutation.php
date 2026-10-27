@@ -514,8 +514,8 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
                 return [
                     'userErrors' => [
                         [
-                            'message' => 'Authentication is required to update a proposal, ' .
-                                'or you must provide a token that matches the proposal’s participant token or email token.',
+                            'message' => 'Authentication is required to update a proposal, '
+                                . 'or you must provide a token that matches the proposal’s participant token or email token.',
                         ],
                     ],
                     'shouldTriggerWorkflow' => false,
@@ -555,8 +555,8 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
             ? $proposal
                 ->getRevisions()
                 ->filter(
-                    fn (ProposalRevision $revision) => ProposalRevisionStateType::REVISED !==
-                        $revision->getState()
+                    fn (ProposalRevision $revision) => ProposalRevisionStateType::REVISED
+                        !== $revision->getState()
                 )
             : [];
         $wasInRevision = $proposalRevisionsEnabled && $proposal->isInRevision();
@@ -680,8 +680,8 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
         bool $create = false,
         $unsetValue = true
     ): array {
-        $socialNetworks =
-            !$create && $proposal->getProposalSocialNetworks()
+        $socialNetworks
+            = !$create && $proposal->getProposalSocialNetworks()
                 ? $proposal->getProposalSocialNetworks()
                 : (new ProposalSocialNetworks())->setProposal($proposal);
 

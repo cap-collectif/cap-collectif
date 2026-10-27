@@ -12,8 +12,8 @@ class RegistrationFormQuestionsResolver implements QueryInterface
         $questions = $form->getRealQuestions()->toArray();
         usort(
             $questions,
-            fn ($a, $b) => $a->getQuestionnaireAbstractQuestion()->getPosition() <=>
-            $b->getQuestionnaireAbstractQuestion()->getPosition()
+            fn ($a, $b) => $a->getQuestionnaireAbstractQuestion()->getPosition()
+            <=> $b->getQuestionnaireAbstractQuestion()->getPosition()
         );
 
         return $questions;

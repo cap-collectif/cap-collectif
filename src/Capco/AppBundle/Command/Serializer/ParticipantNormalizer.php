@@ -87,16 +87,16 @@ class ParticipantNormalizer extends BaseNormalizer implements NormalizerInterfac
      *     export_participant_username: string,
      *     export_participant_user_email: string,
      *     export_participant_consent_internal_communication: string,
-     *     export_participant_phone: string|null,
+     *     export_participant_phone: null|string,
      *     export_participant_type: string,
      *     export_participant_firstname: string,
      *     export_participant_lastname: string,
-     *     export_participant_date_of_birth: string|null,
-     *     export_participant_postal_address: string|null,
-     *     export_participant_zip_code: string|null,
-     *     export_participant_city: string|null,
-     *     export_participant_profile_url: string|null,
-     *     export_participant_identification_code: string|null
+     *     export_participant_date_of_birth: null|string,
+     *     export_participant_postal_address: null|string,
+     *     export_participant_zip_code: null|string,
+     *     export_participant_city: null|string,
+     *     export_participant_profile_url: null|string,
+     *     export_participant_identification_code: null|string
      * }
      */
     public function getParticipantPersonnalData(ContributorInterface $contributor): array

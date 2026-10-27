@@ -6,7 +6,7 @@ namespace Capco\AppBundle\FileSystem;
 
 use Gaufrette\Filesystem;
 
-class ConfigFileSystem extends FileSystem
+class ConfigFileSystem extends Filesystem
 {
     public function __construct(ConfigLocalAdapter $adapter)
     {

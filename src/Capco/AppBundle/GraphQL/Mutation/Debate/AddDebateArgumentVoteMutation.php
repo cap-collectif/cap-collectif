@@ -60,8 +60,8 @@ class AddDebateArgumentVoteMutation extends AbstractDebateArgumentVoteMutation i
         DebateArgumentInterface $debateArgument,
         User $viewer
     ): void {
-        $repo =
-            $debateArgument instanceof DebateArgument
+        $repo
+            = $debateArgument instanceof DebateArgument
                 ? $this->repository
                 : $this->anonymousRepository;
         if (null !== $repo->getOneByDebateArgumentAndUser($debateArgument, $viewer)) {
@@ -73,8 +73,8 @@ class AddDebateArgumentVoteMutation extends AbstractDebateArgumentVoteMutation i
         DebateArgumentInterface $debateArgument,
         User $viewer
     ): AbstractVote {
-        $vote =
-            $debateArgument instanceof DebateArgument
+        $vote
+            = $debateArgument instanceof DebateArgument
                 ? new DebateArgumentVote()
                 : new DebateAnonymousArgumentVote();
         $vote->setDebateArgument($debateArgument);

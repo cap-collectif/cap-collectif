@@ -6,12 +6,13 @@ use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Fetcher\SmsProviderFetcher;
 use Capco\AppBundle\Helper\Interfaces\SmsProviderInterface;
 use Capco\Tests\UserBundle\Functional\AccountWebTestCase;
+use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 abstract class ParticipantWebTestCase extends AccountWebTestCase
 {
-    /** @var \PHPUnit\Framework\MockObject\MockObject&SmsProviderInterface */
+    /** @var MockObject&SmsProviderInterface */
     protected SmsProviderInterface $provider;
 
     protected function setUp(): void

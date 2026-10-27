@@ -72,10 +72,10 @@ class MediaProcessor implements ProcessorInterface
                 && $newProviderReference !== $object->getProviderReference()
             ) {
                 Process::fromShellCommandline(
-                    'mv /var/www/public/media/default/0001/01/' .
-                        $object->getProviderReference() .
-                        ' /var/www/public/media/default/0001/01/' .
-                        $newProviderReference
+                    'mv /var/www/public/media/default/0001/01/'
+                        . $object->getProviderReference()
+                        . ' /var/www/public/media/default/0001/01/'
+                        . $newProviderReference
                 )->mustRun();
 
                 // Restore providerReference in fixtures

@@ -29,11 +29,11 @@ final class Version20181008134700 extends AbstractMigration
 
         foreach ($colorsToChange as $oldColor => $newColor) {
             $this->addSql(
-                'UPDATE question_choice SET color = "' .
-                    $newColor .
-                    '" WHERE color = "' .
-                    $oldColor .
-                    '"'
+                'UPDATE question_choice SET color = "'
+                    . $newColor
+                    . '" WHERE color = "'
+                    . $oldColor
+                    . '"'
             );
         }
     }

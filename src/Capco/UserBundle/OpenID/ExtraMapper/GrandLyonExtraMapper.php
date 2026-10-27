@@ -30,8 +30,8 @@ class GrandLyonExtraMapper
         $birthday = null;
 
         if (isset($this->userInfoData['birthdate'])) {
-            $birthday =
-                \DateTime::createFromFormat('Y-m-d', $this->userInfoData['birthdate']) ?: null;
+            $birthday
+                = \DateTime::createFromFormat('Y-m-d', $this->userInfoData['birthdate']) ?: null;
 
             if ($birthday) {
                 $birthday->setTime(0, 0);

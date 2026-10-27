@@ -5,6 +5,9 @@ namespace Capco\AppBundle\Sluggable;
 use Capco\AppBundle\Entity\Proposal;
 use Doctrine\Common\EventArgs;
 use Doctrine\Persistence\ObjectManager;
+use Gedmo\Exception\InvalidArgumentException;
+use Gedmo\Mapping\Event\AdapterInterface;
+use Gedmo\Sluggable\Handler\SlugHandlerInterface;
 use Gedmo\Sluggable\Handler\SlugHandlerWithUniqueCallbackInterface;
 use Gedmo\Sluggable\Mapping\Event\SluggableAdapter;
 use Gedmo\Sluggable\SluggableListener as Base;
@@ -94,12 +97,12 @@ class SluggableListener extends Base
      *
      * @param callable $callable
      *
-     * @throws \Gedmo\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function setTransliterator($callable)
     {
         if (!\is_callable($callable)) {
-            throw new \Gedmo\Exception\InvalidArgumentException('Invalid transliterator callable parameter given');
+            throw new InvalidArgumentException('Invalid transliterator callable parameter given');
         }
         $this->transliterator = $callable;
     }
@@ -113,7 +116,7 @@ class SluggableListener extends Base
     public function setUrlizer($callable)
     {
         if (!\is_callable($callable)) {
-            throw new \Gedmo\Exception\InvalidArgumentException('Invalid urlizer callable parameter given');
+            throw new InvalidArgumentException('Invalid urlizer callable parameter given');
         }
         $this->urlizer = $callable;
     }
@@ -225,9 +228,9 @@ class SluggableListener extends Base
      * Get an event adapter to handle event specific
      * methods.
      *
-     * @return \Gedmo\Mapping\Event\AdapterInterface
+     * @return AdapterInterface
      *
-     * @throws \Gedmo\Exception\InvalidArgumentException - if event is not recognized
+     * @throws InvalidArgumentException - if event is not recognized
      */
     protected function getEventAdapter(EventArgs $args)
     {
@@ -241,7 +244,7 @@ class SluggableListener extends Base
             return $this->adapters[$m[1]];
         }
 
-        throw new \Gedmo\Exception\InvalidArgumentException('Event mapper does not support event arg class: ' . $class);
+        throw new InvalidArgumentException('Event mapper does not support event arg class: ' . $class);
     }
 
     /**
@@ -249,7 +252,7 @@ class SluggableListener extends Base
      *
      * @param string $class
      *
-     * @return \Gedmo\Sluggable\Handler\SlugHandlerInterface
+     * @return SlugHandlerInterface
      */
     private function getHandler($class)
     {
@@ -299,8 +302,8 @@ class SluggableListener extends Base
                     }
                     $value = $meta->getReflectionProperty($sluggableField)->getValue($object);
                     // Remove `$value instanceof \DateTime` check when PHP version is bumped to >=5.5
-                    $slug .=
-                        $value instanceof \DateTime || $value instanceof \DateTimeInterface
+                    $slug
+                        .= $value instanceof \DateTime || $value instanceof \DateTimeInterface
                             ? $value->format($options['dateFormat'])
                             : $value;
                     $slug .= ' ';
@@ -566,7 +569,7 @@ class SluggableListener extends Base
      *
      * @return mixed
      *
-     * @throws \Gedmo\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     private function getFilterCollectionFromObjectManager(ObjectManager $om)
     {
@@ -577,6 +580,6 @@ class SluggableListener extends Base
             return $om->getFilterCollection();
         }
 
-        throw new \Gedmo\Exception\InvalidArgumentException('ObjectManager does not support filters');
+        throw new InvalidArgumentException('ObjectManager does not support filters');
     }
 }

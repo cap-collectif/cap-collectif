@@ -14,13 +14,13 @@ class CollectStepImapConfigResolver implements QueryInterface
     ) {}
 
     /**
-     * @return array{
-     *     id: string|null,
-     *     serverUrl: string|null,
-     *     folder: string|null,
-     *     email: string|null,
-     *     password: string|null
-     * } | null
+     * @return null|array{
+     *     id: null|string,
+     *     serverUrl: null|string,
+     *     folder: null|string,
+     *     email: null|string,
+     *     password: null|string
+     * }
      */
     public function __invoke(CollectStep $collectStep): ?array
     {

@@ -32,8 +32,8 @@ class CheckCustomDomainValidator extends ConstraintValidator
     public function validateSyntax(string $customDomain): bool
     {
         // https://stackoverflow.com/questions/10306690/what-is-a-regular-expression-which-will-match-a-valid-domain-name-without-a-subd
-        $pattern =
-            '/^((?!-))((xn--)?[a-z0-9][a-z0-9-_]{0,61}[a-z0-9]{0,1}\.){0,}(xn--)?([a-z0-9\-]{1,61}|[a-z0-9-]{1,30}\.[a-z]{2,})$/i';
+        $pattern
+            = '/^((?!-))((xn--)?[a-z0-9][a-z0-9-_]{0,61}[a-z0-9]{0,1}\.){0,}(xn--)?([a-z0-9\-]{1,61}|[a-z0-9-]{1,30}\.[a-z]{2,})$/i';
 
         return preg_match($pattern, $customDomain);
     }
@@ -44,8 +44,8 @@ class CheckCustomDomainValidator extends ConstraintValidator
         $ipAddress = $this->getProcessOutput("dig -t a {$customDomain} +short");
 
         $isCnameValid = str_contains((string) $cname, 'proxy-fallback.cap-collectif.com.');
-        $isIpAddressValid =
-            str_contains((string) $ipAddress, '104.17.4.91') || str_contains((string) $ipAddress, '104.17.3.91');
+        $isIpAddressValid
+            = str_contains((string) $ipAddress, '104.17.4.91') || str_contains((string) $ipAddress, '104.17.3.91');
 
         return $isCnameValid || $isIpAddressValid;
     }

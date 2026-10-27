@@ -241,8 +241,8 @@ class FranceConnectSSOConfiguration extends AbstractSSOConfiguration
 
     public function isUseV2(): bool
     {
-        return $this->useV2 ??
-            str_starts_with($this->getAuthorizationUrl(), self::ENDPOINTS_V2[EnumSSOEnvironmentType::DEV])
+        return $this->useV2
+            ?? str_starts_with($this->getAuthorizationUrl(), self::ENDPOINTS_V2[EnumSSOEnvironmentType::DEV])
             || str_starts_with($this->getAuthorizationUrl(), self::ENDPOINTS_V2[EnumSSOEnvironmentType::TESTING])
             || str_starts_with($this->getAuthorizationUrl(), self::ENDPOINTS_V2[EnumSSOEnvironmentType::PRODUCTION]);
     }

@@ -17,12 +17,12 @@ class HasOnlyOneSelectionStepAllowingProgressStepsValidator extends ConstraintVa
         // https://github.com/phpspec/phpspec/issues/991
         // TODO: Fixme by removing ProjectAbstractStep and use an AbstractStep collection instead
         if ($value instanceof Collection) {
-            $steps =
-                0 === $value->count()
+            $steps
+                = 0 === $value->count()
                     ? $value
                     : $value->filter(fn ($pas) => null !== $pas);
-            $steps =
-                0 === $steps->count()
+            $steps
+                = 0 === $steps->count()
                     ? $steps
                     : $steps->map(fn (ProjectAbstractStep $pas) => $pas->getStep());
         } else {

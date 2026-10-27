@@ -23,9 +23,9 @@ class ArgumentUrlResolver implements QueryInterface
             return $this->opinionUrlResolver->__invoke($parent) . '#arg-' . $argument->getId();
         }
         if ($parent instanceof OpinionVersion) {
-            return $this->opinionVersionUrlResolver->__invoke($parent) .
-                '#arg-' .
-                $argument->getId();
+            return $this->opinionVersionUrlResolver->__invoke($parent)
+                . '#arg-'
+                . $argument->getId();
         }
 
         return '';

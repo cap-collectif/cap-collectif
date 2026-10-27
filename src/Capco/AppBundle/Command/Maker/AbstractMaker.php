@@ -87,12 +87,12 @@ abstract class AbstractMaker extends Command
      */
     protected function makeFile(): string
     {
-        $path =
-            $this->getOutputDirectory() .
-            ($this->entity ? '/' . $this->entity->getShortName() : '') .
-            '/' .
-            $this->className .
-            '.php';
+        $path
+            = $this->getOutputDirectory()
+            . ($this->entity ? '/' . $this->entity->getShortName() : '')
+            . '/'
+            . $this->className
+            . '.php';
 
         $parsed = $this->parser->parseTemplate($this->getTemplate(), $this->getTemplateVars());
 
@@ -108,8 +108,8 @@ abstract class AbstractMaker extends Command
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->parser = $this->getContainer()->get('capco.maker_parser');
-        $this->sourcePath =
-            $this->getContainer()
+        $this->sourcePath
+            = $this->getContainer()
                 ->get('kernel')
                 ->getProjectDir() . '/src'
         ;

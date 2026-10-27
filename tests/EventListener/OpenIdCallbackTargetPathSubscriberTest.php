@@ -50,8 +50,8 @@ class OpenIdCallbackTargetPathSubscriberTest extends TestCase
     public function testItExtractsDestinationFromOpenIdReferer(): void
     {
         $request = $this->createCallbackRequest(
-            'https://capco.dev/login/openid?_destination=' .
-            rawurlencode('https://capco.dev/project/bp7/selection/laureats')
+            'https://capco.dev/login/openid?_destination='
+            . rawurlencode('https://capco.dev/project/bp7/selection/laureats')
         );
         $event = new RequestEvent($this->kernel, $request, HttpKernelInterface::MAIN_REQUEST);
 

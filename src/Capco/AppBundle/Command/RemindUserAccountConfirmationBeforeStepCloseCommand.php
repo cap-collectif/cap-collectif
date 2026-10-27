@@ -200,8 +200,8 @@ class RemindUserAccountConfirmationBeforeStepCloseCommand extends Command
         return $contribution instanceof AbstractVote
             && $step instanceof SelectionStep
             && $step->getVotesMin()
-            && $this->proposalSelectionVoteRepository->getByAuthorAndStep($user, $step) <
-                $step->getVotesMin();
+            && $this->proposalSelectionVoteRepository->getByAuthorAndStep($user, $step)
+                < $step->getVotesMin();
     }
 
     private static function getDate(InputInterface $input): \DateTimeImmutable

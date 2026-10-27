@@ -3,6 +3,7 @@
 namespace Capco\Tests\Security;
 
 use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Security\CommentVoter;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -22,7 +23,7 @@ class CommentVoterTest extends AuthorizationTestCase
         $token = $this->createStub(TokenInterface::class);
         $token->method('getUser')->willReturn('anon.');
 
-        self::assertSame(VoterInterface::ACCESS_DENIED, (new CommentVoter())->vote($token, new \Capco\AppBundle\Entity\ProposalComment(), [CommentVoter::DELETE]));
+        self::assertSame(VoterInterface::ACCESS_DENIED, (new CommentVoter())->vote($token, new ProposalComment(), [CommentVoter::DELETE]));
     }
 
     public function testNonAuthorCannotDeleteComment(): void
@@ -30,7 +31,7 @@ class CommentVoterTest extends AuthorizationTestCase
         $viewer = (new User());
 
         $author = (new User());
-        $comment = (new \Capco\AppBundle\Entity\ProposalComment());
+        $comment = (new ProposalComment());
         $comment->setAuthor($author);
         $token = $this->createStub(TokenInterface::class);
         $token->method('getUser')->willReturn($viewer);
@@ -41,7 +42,7 @@ class CommentVoterTest extends AuthorizationTestCase
     public function testAuthorCanDeleteComment(): void
     {
         $viewer = (new User());
-        $comment = (new \Capco\AppBundle\Entity\ProposalComment());
+        $comment = (new ProposalComment());
         $comment->setAuthor($viewer);
         $token = $this->createStub(TokenInterface::class);
         $token->method('getUser')->willReturn($viewer);
@@ -53,7 +54,7 @@ class CommentVoterTest extends AuthorizationTestCase
     {
         $viewer = (new User());
         $viewer->addRole('ROLE_ADMIN');
-        $comment = (new \Capco\AppBundle\Entity\ProposalComment());
+        $comment = (new ProposalComment());
         $comment->setAuthor(null);
         $token = $this->createStub(TokenInterface::class);
         $token->method('getUser')->willReturn($viewer);

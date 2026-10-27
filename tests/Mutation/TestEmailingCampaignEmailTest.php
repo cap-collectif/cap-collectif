@@ -5,6 +5,7 @@ namespace Capco\Tests\Mutation;
 use Capco\AppBundle\Enum\SendEmailingCampaignErrorCode;
 use Capco\Tests\Mailer\EmailWebTestCase;
 use Capco\UserBundle\Entity\User;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 /**
  * @internal
@@ -60,7 +61,7 @@ class TestEmailingCampaignEmailTest extends EmailWebTestCase
         return $this->graphql(
             'mutation($input: TestEmailingCampaignInput!) { testEmailingCampaign(input: $input) { error html } }',
             ['input' => [
-                'id' => \Overblog\GraphQLBundle\Relay\Node\GlobalId::toGlobalId('EmailingCampaign', $campaignId),
+                'id' => GlobalId::toGlobalId('EmailingCampaign', $campaignId),
                 'email' => 'preview-recipient@example.com',
             ]]
         )['testEmailingCampaign'];

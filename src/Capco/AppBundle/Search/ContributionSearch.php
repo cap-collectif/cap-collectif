@@ -54,8 +54,8 @@ class ContributionSearch extends Search
 
     public function getSubmissionsByAuthor(Author $user, string $resultType): ResultSet
     {
-        $boolQuery = (new Query\BoolQuery())->addFilter(
-            new Query\Term(['author.id' => ['value' => $user->getId()]])
+        $boolQuery = (new BoolQuery())->addFilter(
+            new Term(['author.id' => ['value' => $user->getId()]])
         );
 
         $this->applyContributionsFilters(
@@ -106,19 +106,19 @@ class ContributionSearch extends Search
         $contributions = ['results' => []];
         $inConsultation = true;
         $contributionTypes = null;
-        $boolQuery = new Query\BoolQuery();
+        $boolQuery = new BoolQuery();
         [$contribuableDecodedId, $contribuableType] = [
             GlobalId::fromGlobalId($contribuableId)['id'],
             GlobalId::fromGlobalId($contribuableId)['type'],
         ];
-        $boolQuery->addFilter(new Query\Term(['author.id' => ['value' => $user->getId()]]));
+        $boolQuery->addFilter(new Term(['author.id' => ['value' => $user->getId()]]));
 
         if ($contribuableType) {
             switch ($contribuableType) {
                 case 'Consultation':
                     $boolQuery
                         ->addFilter(
-                            new Query\Term([
+                            new Term([
                                 'consultation.id' => ['value' => $contribuableDecodedId],
                             ])
                         )
@@ -131,7 +131,7 @@ class ContributionSearch extends Search
                 case 'Project':
                     $boolQuery
                         ->addFilter(
-                            new Query\Term(['project.id' => ['value' => $contribuableDecodedId]])
+                            new Term(['project.id' => ['value' => $contribuableDecodedId]])
                         )
                         ->addFilter(new Query\Exists('project'))
                     ;
@@ -141,7 +141,7 @@ class ContributionSearch extends Search
                 case str_contains((string) $contribuableType, 'Step'):
                     $boolQuery
                         ->addFilter(
-                            new Query\Term(['step.id' => ['value' => $contribuableDecodedId]])
+                            new Term(['step.id' => ['value' => $contribuableDecodedId]])
                         )
                         ->addFilter(new Query\Exists('step'))
                     ;
@@ -155,7 +155,7 @@ class ContributionSearch extends Search
 
         if (!empty($filters)) {
             foreach ($filters as $filter) {
-                $boolQuery->addFilter(new Query\Term($filter));
+                $boolQuery->addFilter(new Term($filter));
             }
         }
 
@@ -194,9 +194,9 @@ class ContributionSearch extends Search
         ?string $cursor = null,
         bool $includeTrashed = false
     ): ElasticsearchPaginatedResult {
-        $boolQuery = new Query\BoolQuery();
+        $boolQuery = new BoolQuery();
         $boolQuery
-            ->addFilter(new Query\Term(['consultation.id' => $consultationId]))
+            ->addFilter(new Term(['consultation.id' => $consultationId]))
             ->addFilter(new Query\Exists('consultation'))
         ;
 
@@ -223,14 +223,14 @@ class ContributionSearch extends Search
         ?\ArrayObject $context = null,
         bool $countAll = false
     ): ElasticsearchPaginatedResult {
-        $boolQuery = new Query\BoolQuery();
-        $boolQuery->addFilter(new Query\Term(['project.id' => $projectId]));
+        $boolQuery = new BoolQuery();
+        $boolQuery->addFilter(new Term(['project.id' => $projectId]));
         $this->applyContributionsFilters($boolQuery, $filters['_type'], true, true);
         unset($filters['_type']);
 
         if (!empty($filters)) {
             foreach ($filters as $key => $filter) {
-                $boolQuery->addFilter(new Query\Term([$key => ['value' => $filter]]));
+                $boolQuery->addFilter(new Term([$key => ['value' => $filter]]));
             }
         }
         $boolQuery->addFilter(
@@ -273,8 +273,8 @@ class ContributionSearch extends Search
         string $projectId,
         array $objectTypes
     ): ResultSet {
-        $boolQuery = new Query\BoolQuery();
-        $boolQuery->addFilter(new Query\Term(['project.id' => $projectId]));
+        $boolQuery = new BoolQuery();
+        $boolQuery->addFilter(new Term(['project.id' => $projectId]));
         $this->applyContributionsFilters($boolQuery, $objectTypes, true, true);
 
         $boolQuery->addFilter(
@@ -423,7 +423,7 @@ class ContributionSearch extends Search
     }
 
     private function applyContributionsFilters(
-        Query\BoolQuery $query,
+        BoolQuery $query,
         ?array $contributionTypes = null,
         bool $inConsultation = false,
         bool $includeTrashed = false
@@ -431,7 +431,7 @@ class ContributionSearch extends Search
         if ($contributionTypes && \in_array('replyAnonymous', $contributionTypes)) {
             $query
                 ->addFilter(new Query\Terms('objectType', ['reply']))
-                ->addFilter(new Query\Term(['replyType' => ['value' => 'replyAnonymous']]))
+                ->addFilter(new Term(['replyType' => ['value' => 'replyAnonymous']]))
             ;
         } else {
             $query->addFilter(
@@ -443,10 +443,10 @@ class ContributionSearch extends Search
         }
 
         $query
-            ->addMustNot(new Query\Term(['published' => ['value' => false]]))
+            ->addMustNot(new Term(['published' => ['value' => false]]))
             ->addMustNot(new Query\Exists('comment'))
-            ->addMustNot(new Query\Term(['draft' => ['value' => true]]))
-            ->addMustNot(new Query\Term(['completionStatus' => ['value' => ContributionCompletionStatus::MISSING_REQUIREMENTS]]))
+            ->addMustNot(new Term(['draft' => ['value' => true]]))
+            ->addMustNot(new Term(['completionStatus' => ['value' => ContributionCompletionStatus::MISSING_REQUIREMENTS]]))
         ;
 
         $this->addIsAccountedFilter($query);
@@ -478,7 +478,7 @@ class ContributionSearch extends Search
 
     private function createSortedQuery(
         string $order,
-        Query\BoolQuery $boolQuery,
+        BoolQuery $boolQuery,
         string $seed
     ): Query {
         if (ContributionOrderField::RANDOM === strtoupper($order)) {

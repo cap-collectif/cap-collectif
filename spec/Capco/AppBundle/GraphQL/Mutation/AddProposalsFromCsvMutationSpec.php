@@ -17,6 +17,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
@@ -80,7 +81,7 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
         $connection->setTotalCount(0)->shouldBeCalled();
 
         $connectionBuilder
-            ->connectionFromArray([], \Prophecy\Argument::type(Arg::class))
+            ->connectionFromArray([], Argument::type(Arg::class))
             ->willReturn($connection)
             ->shouldBeCalled()
         ;
@@ -138,7 +139,7 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
         $connection->setTotalCount(0)->shouldBeCalled();
 
         $connectionBuilder
-            ->connectionFromArray([], \Prophecy\Argument::type(Arg::class))
+            ->connectionFromArray([], Argument::type(Arg::class))
             ->willReturn($connection)
             ->shouldBeCalled()
         ;
@@ -198,7 +199,7 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
         $connection->setTotalCount(0)->shouldBeCalled();
 
         $connectionBuilder
-            ->connectionFromArray([], \Prophecy\Argument::type(Arg::class))
+            ->connectionFromArray([], Argument::type(Arg::class))
             ->willReturn($connection)
             ->shouldBeCalled()
         ;

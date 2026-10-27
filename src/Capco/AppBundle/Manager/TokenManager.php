@@ -98,9 +98,9 @@ class TokenManager
         foreach ($voteToken->getUser()->getVotes() as $vote) {
             if ($vote instanceof DebateVote && $vote->getDebate() === $voteToken->getDebate()) {
                 $this->logger->info(
-                    $voteToken->getUser()->getUsername() .
-                        ' has already voted on debate ' .
-                        $voteToken
+                    $voteToken->getUser()->getUsername()
+                        . ' has already voted on debate '
+                        . $voteToken
                             ->getDebate()
                             ->getStep()
                             ->getTitle()

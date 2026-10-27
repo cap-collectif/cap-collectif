@@ -57,9 +57,9 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
     {
         if ($this->debug) {
             $this->logger->info(
-                __METHOD__ .
-                    'called for keys : ' .
-                    var_export(
+                __METHOD__
+                    . 'called for keys : '
+                    . var_export(
                         array_map(fn ($key) => $this->serializeKey($key), $keys),
                         true
                     )
@@ -143,16 +143,16 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
         $step = $this->globalIdResolver->resolve($stepId, $user);
 
         if ($step instanceof CollectStep) {
-            return null !==
-                $this->proposalCollectVoteRepository->getByProposalAndStepAndUser(
+            return null
+                !== $this->proposalCollectVoteRepository->getByProposalAndStepAndUser(
                     $proposal,
                     $step,
                     $user
                 );
         }
         if ($step instanceof SelectionStep) {
-            return null !==
-                $this->proposalSelectionVoteRepository->getByProposalAndStepAndUser(
+            return null
+                !== $this->proposalSelectionVoteRepository->getByProposalAndStepAndUser(
                     $proposal,
                     $step,
                     $user

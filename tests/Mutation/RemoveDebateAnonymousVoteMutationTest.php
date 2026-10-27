@@ -2,6 +2,9 @@
 
 namespace Capco\Tests\Mutation;
 
+use Capco\AppBundle\Entity\Debate\Debate;
+use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
+use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
 use Capco\Tests\IdentityWebTestCase;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
@@ -21,14 +24,14 @@ final class RemoveDebateAnonymousVoteMutationTest extends IdentityWebTestCase
     /** @dataProvider removals */
     public function testOnlyMatchingVotesInAnOpenDebateAreRemoved(string $kind, ?string $error): void
     {
-        $debate = $this->em->getRepository(\Capco\AppBundle\Entity\Debate\Debate::class)->findOneBy([]);
+        $debate = $this->em->getRepository(Debate::class)->findOneBy([]);
         $debate->getStep()->setTimeless('closed' !== $kind);
         if ('closed' === $kind) {
             $debate->getStep()->setEndAt(new \DateTime('2000-01-01'));
         }
-        $vote = (new \Capco\AppBundle\Entity\Debate\DebateAnonymousVote())->setDebate($debate)->setType('FOR')->setToken('vote-' . bin2hex(random_bytes(8)));
-        $neighbor = (new \Capco\AppBundle\Entity\Debate\DebateAnonymousVote())->setDebate($debate)->setType('AGAINST')->setToken('vote-' . bin2hex(random_bytes(8)));
-        $argument = (new \Capco\AppBundle\Entity\Debate\DebateAnonymousArgument($debate))->setType('FOR')->setToken('argument-' . bin2hex(random_bytes(8)))->setEmail($this->uniqueEmail())->setBody('Associated argument');
+        $vote = (new DebateAnonymousVote())->setDebate($debate)->setType('FOR')->setToken('vote-' . bin2hex(random_bytes(8)));
+        $neighbor = (new DebateAnonymousVote())->setDebate($debate)->setType('AGAINST')->setToken('vote-' . bin2hex(random_bytes(8)));
+        $argument = (new DebateAnonymousArgument($debate))->setType('FOR')->setToken('argument-' . bin2hex(random_bytes(8)))->setEmail($this->uniqueEmail())->setBody('Associated argument');
         foreach ([$vote, $neighbor, $argument] as $entity) {
             $this->em->persist($entity);
         }
@@ -46,9 +49,9 @@ final class RemoveDebateAnonymousVoteMutationTest extends IdentityWebTestCase
         self::assertSame(null === $error ? GlobalId::toGlobalId('DebateAnonymousVote', $voteId) : null, $result['deletedDebateAnonymousVoteId']);
         self::assertSame('with argument' === $kind ? GlobalId::toGlobalId('DebateArgument', $argumentId) : null, $result['deletedDebateAnonymousArgumentId']);
         $this->em->clear();
-        self::assertSame(null === $error, null === $this->em->find(\Capco\AppBundle\Entity\Debate\DebateAnonymousVote::class, $voteId));
-        self::assertSame('with argument' === $kind, null === $this->em->find(\Capco\AppBundle\Entity\Debate\DebateAnonymousArgument::class, $argumentId));
-        self::assertNotNull($this->em->find(\Capco\AppBundle\Entity\Debate\DebateAnonymousVote::class, $neighborId));
+        self::assertSame(null === $error, null === $this->em->find(DebateAnonymousVote::class, $voteId));
+        self::assertSame('with argument' === $kind, null === $this->em->find(DebateAnonymousArgument::class, $argumentId));
+        self::assertNotNull($this->em->find(DebateAnonymousVote::class, $neighborId));
     }
 
     /** @return iterable<string, array{string, ?string}> */

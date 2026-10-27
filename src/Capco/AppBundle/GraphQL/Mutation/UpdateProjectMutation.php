@@ -46,8 +46,8 @@ class UpdateProjectMutation implements MutationInterface
         }
         $projectId = GlobalId::fromGlobalId($arguments['id'])['id'];
 
-        $arguments['isExternal'] =
-            isset($arguments['externalLink'])
+        $arguments['isExternal']
+            = isset($arguments['externalLink'])
             || (isset($arguments['isExternal']) && $arguments['isExternal']);
 
         $project = $this->projectRepository->find($projectId);

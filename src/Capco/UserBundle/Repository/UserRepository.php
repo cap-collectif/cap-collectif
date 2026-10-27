@@ -196,8 +196,8 @@ class UserRepository extends EntityRepository
      */
     public function getRecipientDataByGroup(EmailingCampaign $emailingCampaign, ?int $limit = 1000): array
     {
-        $sql =
-            'SELECT u.id, u.username, u.email, u.locale, null as token, :userType as type
+        $sql
+            = 'SELECT u.id, u.username, u.email, u.locale, null as token, :userType as type
             FROM fos_user u
             INNER JOIN user_in_group ug ON ug.user_id = u.id
             LEFT JOIN emailing_campaign_user ecu ON ecu.emailing_campaign_id = :emailingCampaign AND ecu.user_id = u.id
@@ -686,12 +686,12 @@ class UserRepository extends EntityRepository
     ): array {
         $em = $this->getEntityManager();
         $voteWith = $excludePrivate ? '(pv.user = u AND pv.private = 0)' : 'pv.user = u';
-        $rawQuery =
-            'SELECT u.id, count(distinct pv) AS proposals_votes_count
+        $rawQuery
+            = 'SELECT u.id, count(distinct pv) AS proposals_votes_count
           from CapcoUserBundle:User u
-          LEFT JOIN CapcoAppBundle:ProposalSelectionVote pv WITH ' .
-            $voteWith .
-            '
+          LEFT JOIN CapcoAppBundle:ProposalSelectionVote pv WITH '
+            . $voteWith
+            . '
           LEFT JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
           LEFT JOIN pv.selectionStep s
           LEFT JOIN s.projectAbstractStep pas

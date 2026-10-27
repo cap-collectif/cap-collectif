@@ -3,10 +3,13 @@
 namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Entity\Row;
+use Box\Spout\Common\Exception\IOException;
+use Box\Spout\Common\Exception\UnsupportedTypeException;
 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 use Box\Spout\Reader\CSV\Reader;
 use Box\Spout\Reader\CSV\RowIterator;
 use Box\Spout\Reader\CSV\Sheet;
+use Box\Spout\Reader\Exception\ReaderNotOpenedException;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
@@ -121,9 +124,9 @@ class ImportProposalsFromCsvCommand extends Command
 
         if (null === $this->proposalForm) {
             $output->writeln(
-                '<error>Proposal Form with id ' .
-                    $proposalFormId .
-                    ' was not found in your database. Please create it or change the id.</error>'
+                '<error>Proposal Form with id '
+                    . $proposalFormId
+                    . ' was not found in your database. Please create it or change the id.</error>'
             );
             $output->writeln('<error>Import cancelled. No proposal was created.</error>');
 
@@ -135,9 +138,9 @@ class ImportProposalsFromCsvCommand extends Command
 
         if (0 === $count) {
             $output->writeln(
-                '<error>Your file with path ' .
-                    $this->filePath .
-                    ' was not found or no proposal was found in your file. Please verify your path and file\'s content.</error>'
+                '<error>Your file with path '
+                    . $this->filePath
+                    . ' was not found or no proposal was found in your file. Please verify your path and file\'s content.</error>'
             );
             $output->writeln('<error>Import cancelled. No proposal was created.</error>');
 
@@ -174,18 +177,18 @@ class ImportProposalsFromCsvCommand extends Command
                 if (!$author) {
                     if (filter_var($row[$this->headers['author']], \FILTER_VALIDATE_EMAIL)) {
                         $output->writeln(
-                            '<error>Could not find user for "' .
-                                $row[$this->headers['author']] .
-                                '"</error>'
+                            '<error>Could not find user for "'
+                                . $row[$this->headers['author']]
+                                . '"</error>'
                         );
 
                         return 1;
                     }
                     if (!isset($this->newUsersMap[trim((string) $row[$this->headers['author']])])) {
                         $output->writeln(
-                            '<info>Creating a new user with a fake email and username: ' .
-                                $row[$this->headers['author']] .
-                                '</info>'
+                            '<info>Creating a new user with a fake email and username: '
+                                . $row[$this->headers['author']]
+                                . '</info>'
                         );
                         $this->newUsersMap[
                             trim((string) $row[$this->headers['author']])
@@ -238,10 +241,10 @@ class ImportProposalsFromCsvCommand extends Command
 
                 if ($input->hasOption('illustrations')) {
                     try {
-                        $filePath =
-                            $input->getArgument('illustrations-path') .
-                            \DIRECTORY_SEPARATOR .
-                            $row[$this->headers['proposal_illustration']];
+                        $filePath
+                            = $input->getArgument('illustrations-path')
+                            . \DIRECTORY_SEPARATOR
+                            . $row[$this->headers['proposal_illustration']];
                         $info = pathinfo($filePath);
                         if (!isset($info['extension'])) {
                             $filePath .= '.jpg';
@@ -287,9 +290,9 @@ class ImportProposalsFromCsvCommand extends Command
         $progress->finish();
 
         $output->writeln(
-            '<info>' .
-                (\count(iterator_to_array($rows)) - 1) .
-                ' proposals successfully created.</info>'
+            '<info>'
+                . (\count(iterator_to_array($rows)) - 1)
+                . ' proposals successfully created.</info>'
         );
 
         return 0;
@@ -349,9 +352,9 @@ class ImportProposalsFromCsvCommand extends Command
     }
 
     /**
-     * @throws \Box\Spout\Common\Exception\UnsupportedTypeException
-     * @throws \Box\Spout\Reader\Exception\ReaderNotOpenedException
-     * @throws \Box\Spout\Common\Exception\IOException
+     * @throws UnsupportedTypeException
+     * @throws ReaderNotOpenedException
+     * @throws IOException
      */
     protected function getRecords(): \Iterator
     {

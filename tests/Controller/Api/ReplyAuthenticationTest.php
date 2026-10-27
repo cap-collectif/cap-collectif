@@ -2,6 +2,7 @@
 
 namespace Capco\Tests\Controller\Api;
 
+use Capco\AppBundle\Entity\Reply;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
@@ -72,10 +73,10 @@ class ReplyAuthenticationTest extends WebTestCase
 
     public function testParticipantReplyPagesAreCappedWithoutTruncatingTheCount(): void
     {
-        $reply = $this->entityManager->find(\Capco\AppBundle\Entity\Reply::class, 'replyAnonymous1');
-        self::assertInstanceOf(\Capco\AppBundle\Entity\Reply::class, $reply);
+        $reply = $this->entityManager->find(Reply::class, 'replyAnonymous1');
+        self::assertInstanceOf(Reply::class, $reply);
         for ($i = 0; $i < 101; ++$i) {
-            $this->entityManager->persist((new \Capco\AppBundle\Entity\Reply())
+            $this->entityManager->persist((new Reply())
                 ->setParticipant($reply->getParticipant())->setQuestionnaire($reply->getQuestionnaire()));
         }
         $this->entityManager->flush();

@@ -39,8 +39,8 @@ abstract class DatabaseCommandTestCase extends KernelTestCase implements Feature
         ;
         self::getContainer()->set(Indexer::class, $this->createMock(Indexer::class));
 
-        $this->temporaryDirectory =
-            sys_get_temp_dir() . '/capco-command-tests-' . bin2hex(random_bytes(8));
+        $this->temporaryDirectory
+            = sys_get_temp_dir() . '/capco-command-tests-' . bin2hex(random_bytes(8));
         (new Filesystem())->mkdir($this->temporaryDirectory);
     }
 

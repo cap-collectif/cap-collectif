@@ -55,20 +55,6 @@ class AnonymousArgumentNormalizerTest extends TestCase
     }
 
     /**
-     * @phpunit-status compliant
-     *
-     * @phpunit-reason Checks the normalizer public result with real per-test domain objects and controlled
-     * service responses.
-     */
-    public function testSupportsNormalization(): void
-    {
-        $debate = new Debate();
-        $this->assertTrue($this->normalizer->supportsNormalization(new DebateAnonymousArgument($debate), 'csv', [BaseNormalizer::IS_EXPORT_NORMALIZER => true]));
-        $this->assertFalse($this->normalizer->supportsNormalization(new DebateAnonymousArgument($debate), 'csv'));
-        $this->assertFalse($this->normalizer->supportsNormalization(new \stdClass(), 'csv', [BaseNormalizer::IS_EXPORT_NORMALIZER => true]));
-    }
-
-    /**
      * @return array<string, array<int, array<string, null|bool|ExportVariantsEnum|string>>>
      */
     public function normalizationDataProvider(): array
@@ -111,5 +97,19 @@ class AnonymousArgumentNormalizerTest extends TestCase
             'Full Export' => [[
                 BaseNormalizer::EXPORT_VARIANT => ExportVariantsEnum::FULL, BaseNormalizer::IS_EXPORT_NORMALIZER => true, ], $fullExportResult],
         ];
+    }
+
+    /**
+     * @phpunit-status compliant
+     *
+     * @phpunit-reason Checks the normalizer public result with real per-test domain objects and controlled
+     * service responses.
+     */
+    public function testSupportsNormalization(): void
+    {
+        $debate = new Debate();
+        $this->assertTrue($this->normalizer->supportsNormalization(new DebateAnonymousArgument($debate), 'csv', [BaseNormalizer::IS_EXPORT_NORMALIZER => true]));
+        $this->assertFalse($this->normalizer->supportsNormalization(new DebateAnonymousArgument($debate), 'csv'));
+        $this->assertFalse($this->normalizer->supportsNormalization(new \stdClass(), 'csv', [BaseNormalizer::IS_EXPORT_NORMALIZER => true]));
     }
 }

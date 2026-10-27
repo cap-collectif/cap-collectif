@@ -48,8 +48,8 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
     final public const CONTEXT_MENU = 'menu';
     final public const CONTEXT_DASHBOARD = 'dashboard';
 
-    final public const CLASS_REGEX =
-        '@
+    final public const CLASS_REGEX
+        = '@
         (?:([A-Za-z0-9]*)\\\)?        # vendor name / app name
         (Bundle\\\)?                  # optional bundle directory
         ([A-Za-z0-9]+?)(?:Bundle)?\\\ # bundle name, with optional suffix
@@ -169,7 +169,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
      *
      * @var null|object
      *
-     * @phpstan-var T|null
+     * @phpstan-var null|T
      */
     private $subject;
 
@@ -1667,9 +1667,9 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
     }
 
     /**
-     * @return array<string, array<string, mixed>>
-     *
      * @phpstan-param T|null $object
+     *
+     * @return array<string, array<string, mixed>>
      */
     final public function getActionButtons(string $action, ?object $object = null): array
     {
@@ -1984,9 +1984,9 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
     /**
      * @param array<string, array<string, mixed>> $buttonList
      *
-     * @return array<string, array<string, mixed>>
-     *
      * @phpstan-param T|null $object
+     *
+     * @return array<string, array<string, mixed>>
      */
     protected function configureActionButtons(array $buttonList, string $action, ?object $object = null): array
     {

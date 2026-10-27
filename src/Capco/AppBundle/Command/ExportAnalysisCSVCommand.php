@@ -325,7 +325,7 @@ class ExportAnalysisCSVCommand extends BaseExportCommand
         $decision = $proposal['decision'] ?? [];
         if (!$analyses && !$assessment && !$decision) {
             if ($isVerbose) {
-                $output->writeln("\t<fg=red>/!\\No analysis for proposal ${proposal['title']}.</>");
+                $output->writeln("\t<fg=red>/!\\No analysis for proposal {$proposal['title']}.</>");
             }
 
             $output->writeln(
@@ -335,7 +335,7 @@ class ExportAnalysisCSVCommand extends BaseExportCommand
             return;
         }
         if ($isVerbose) {
-            $output->writeln("\t<info>Adding analysis of proposal ${proposal['title']}.</info>");
+            $output->writeln("\t<info>Adding analysis of proposal {$proposal['title']}.</info>");
         }
 
         // We iterate over each column of a row to fill them
@@ -666,9 +666,9 @@ class ExportAnalysisCSVCommand extends BaseExportCommand
         bool $isOnlyDecision,
         bool $projectAdmin = false
     ): string {
-        return $this->projectRootDir .
-            '/public/export/' .
-            self::getFilename($projectSlug, $isOnlyDecision, $projectAdmin);
+        return $this->projectRootDir
+            . '/public/export/'
+            . self::getFilename($projectSlug, $isOnlyDecision, $projectAdmin);
     }
 
     private function computeHeaders(bool $isProjectAdmin): array

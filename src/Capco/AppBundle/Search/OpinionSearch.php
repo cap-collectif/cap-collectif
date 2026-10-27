@@ -117,7 +117,7 @@ class OpinionSearch extends Search
         ?string $order,
         int $seed
     ): array {
-        $boolQuery = new Query\BoolQuery();
+        $boolQuery = new BoolQuery();
         $filters = $this->getFilters(['type' => $sectionId]);
 
         foreach ($filters as $key => $value) {

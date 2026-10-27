@@ -38,8 +38,8 @@ trait ResolverTrait
 
     private function isACLDisabled(?\ArrayObject $context = null): bool
     {
-        $skipVerification =
-            $context
+        $skipVerification
+            = $context
             && $context->offsetExists('disable_acl')
             && true === $context->offsetGet('disable_acl');
 

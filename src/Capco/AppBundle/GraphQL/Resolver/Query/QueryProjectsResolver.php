@@ -155,8 +155,8 @@ class QueryProjectsResolver implements QueryInterface
 
     private function setLocaleId(Argument $argument, ?RequestStack $request): void
     {
-        $localeCode =
-            $argument->offsetGet('locale') ?? $request && $request->getCurrentRequest()
+        $localeCode
+            = $argument->offsetGet('locale') ?? $request && $request->getCurrentRequest()
                 ? $request->getCurrentRequest()->getLocale()
                 : null;
         if ($localeCode) {

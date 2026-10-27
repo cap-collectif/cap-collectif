@@ -228,8 +228,8 @@ class CreateProposalMutation implements MutationInterface
         }
 
         if (isset($values['publishedAt'])) {
-            $publishedAt =
-                $values['publishedAt'] instanceof \DateTime
+            $publishedAt
+                = $values['publishedAt'] instanceof \DateTime
                     ? $values['publishedAt']
                     : new \DateTime($values['publishedAt']);
             unset($values['publishedAt']);

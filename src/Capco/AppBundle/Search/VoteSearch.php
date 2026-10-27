@@ -498,11 +498,11 @@ class VoteSearch extends Search
 
                 $boolQuery
                     ->addFilter(
-                        new Query\Term([
+                        new Term([
                             'project.id' => ['value' => $id],
                         ])
                     )
-                    ->addFilter(new Query\Exists('project'))
+                    ->addFilter(new Exists('project'))
                 ;
             } elseif (strpos((string) $type, 'Step')) {
                 $step = $this->abstractStepRepository->find($id);
@@ -513,11 +513,11 @@ class VoteSearch extends Search
                 }
                 $boolQuery
                     ->addFilter(
-                        new Query\Term([
+                        new Term([
                             'step.id' => ['value' => $id],
                         ])
                     )
-                    ->addFilter(new Query\Exists('step'))
+                    ->addFilter(new Exists('step'))
                 ;
             } else {
                 throw new UserError('The contribuableId "' . $contribuableId . '" does not match any Project or Step.');

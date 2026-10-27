@@ -13,8 +13,8 @@ class ScanResult
 
     private function __construct(
         private readonly string $status,
-        private readonly null|string $virusName = null,
-        private readonly null|string $errorMessage = null
+        private readonly ?string $virusName = null,
+        private readonly ?string $errorMessage = null
     ) {}
 
     public static function clean(): self

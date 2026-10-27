@@ -32,10 +32,10 @@ class ExportCollectParticipantsCommandTest extends KernelTestCase
     final public const OUTPUT_DIRECTORY = __DIR__ . '/../../public/export/collect';
     final public const COMMAND = 'capco:export:collect:participants';
     private const BUDGET_PARTICIPATIF_RENNES_COLLECT_STEP_ID = 'collectstep1';
-    private const BUDGET_PARTICIPATIF_RENNES_COLLECT_SIMPLIFIED_EXPORT =
-        'participants_budget-participatif-rennes_collecte-des-propositions_simplified.csv';
-    private const BUDGET_PARTICIPATIF_RENNES_COLLECT_FULL_EXPORT =
-        'participants_budget-participatif-rennes_collecte-des-propositions.csv';
+    private const BUDGET_PARTICIPATIF_RENNES_COLLECT_SIMPLIFIED_EXPORT
+        = 'participants_budget-participatif-rennes_collecte-des-propositions_simplified.csv';
+    private const BUDGET_PARTICIPATIF_RENNES_COLLECT_FULL_EXPORT
+        = 'participants_budget-participatif-rennes_collecte-des-propositions.csv';
 
     protected function setUp(): void
     {

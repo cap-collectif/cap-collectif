@@ -23,6 +23,22 @@ use PHPUnit\Framework\TestCase;
 class ProposalStepSplitViewServiceTest extends TestCase
 {
     /**
+     * @dataProvider shouldDisableProposalStepSplitViewDataProvider
+     *
+     * @param class-string                                                   $stepClass
+     * @param array<string, array<int, array<string, null|int>|bool|string>> $data
+     */
+    public function testShouldDisableProposalStepSplitView(string $stepClass, array $data, bool $expected): void
+    {
+        $step = $this->getMockBuilder($stepClass)->disableOriginalConstructor()->getMock();
+
+        $service = $this->getSut();
+        $result = $service->shouldDisableProposalStepSplitView($step, $data);
+
+        $this->assertEquals($expected, $result);
+    }
+
+    /**
      * @return array<string, array<int, array<string, null|int>|bool|string>>
      */
     public function shouldDisableProposalStepSplitViewDataProvider(): array
@@ -64,22 +80,6 @@ class ProposalStepSplitViewServiceTest extends TestCase
             'SelectionStep with wrong threshold value and without budget' => [SelectionStep::class, $dataWithWrongThresholdWithoutBudget, false],
             'SelectionStep with budget but missing data' => [SelectionStep::class, $dataWithBudgetButMissingKey, false],
         ];
-    }
-
-    /**
-     * @dataProvider shouldDisableProposalStepSplitViewDataProvider
-     *
-     * @param class-string                                                   $stepClass
-     * @param array<string, array<int, array<string, null|int>|bool|string>> $data
-     */
-    public function testShouldDisableProposalStepSplitView(string $stepClass, array $data, bool $expected): void
-    {
-        $step = $this->getMockBuilder($stepClass)->disableOriginalConstructor()->getMock();
-
-        $service = $this->getSut();
-        $result = $service->shouldDisableProposalStepSplitView($step, $data);
-
-        $this->assertEquals($expected, $result);
     }
 
     private function getSut(): ProposalStepSplitViewService

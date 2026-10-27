@@ -2,6 +2,12 @@
 
 namespace Capco\Tests\GraphQL\Resolver\User;
 
+use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\GraphQL\Resolver\User\UserDisableNotificationsUrlResolver;
+use Capco\AppBundle\GraphQL\Resolver\User\UserLoginAndShowDataUrlResolver;
+use Capco\AppBundle\GraphQL\Resolver\User\UserRegistrationConfirmationUrlResolver;
+use Capco\AppBundle\GraphQL\Resolver\User\UserResettingPasswordUrlResolver;
+use Capco\AppBundle\GraphQL\Resolver\User\UserShowNotificationsPreferencesUrlResolver;
 use Capco\Tests\ResponseVisibilityWebTestCase;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
@@ -24,12 +30,12 @@ final class UserIdentityResolversTest extends ResponseVisibilityWebTestCase
         $this->em->flush();
         $id = $user->getId();
         $this->browser->request('GET', '/health-check');
-        $url = self::getContainer()->get(\Capco\AppBundle\GraphQL\Resolver\User\UserRegistrationConfirmationUrlResolver::class)($user);
+        $url = self::getContainer()->get(UserRegistrationConfirmationUrlResolver::class)($user);
         $this->browser->request('GET', $url);
         self::assertTrue($this->browser->getResponse()->isRedirection());
         self::assertTrue($this->reload($id)->isEmailConfirmed());
         $this->assertViewer(true, $id);
-        self::assertNull(self::getContainer()->get(\Capco\AppBundle\GraphQL\Resolver\User\UserRegistrationConfirmationUrlResolver::class)($this->reload($id)));
+        self::assertNull(self::getContainer()->get(UserRegistrationConfirmationUrlResolver::class)($this->reload($id)));
     }
 
     /**
@@ -70,7 +76,7 @@ final class UserIdentityResolversTest extends ResponseVisibilityWebTestCase
         $otherId = $other->getId();
         $this->login($user->getEmail());
         $user = $this->reload($id);
-        $url = self::getContainer()->get(\Capco\AppBundle\GraphQL\Resolver\User\UserDisableNotificationsUrlResolver::class)($user);
+        $url = self::getContainer()->get(UserDisableNotificationsUrlResolver::class)($user);
         $this->browser->request('GET', $url);
         self::assertSame('/profile/edit-profile?%23=notifications', $this->browser->getResponse()->headers->get('Location'));
         self::assertFalse($this->reload($id)->getNotificationsConfiguration()->isOnProposalCommentMail());
@@ -82,7 +88,7 @@ final class UserIdentityResolversTest extends ResponseVisibilityWebTestCase
         $user = $this->account();
         $id = $user->getId();
         $this->browser->request('GET', '/health-check');
-        $url = self::getContainer()->get(\Capco\AppBundle\GraphQL\Resolver\User\UserLoginAndShowDataUrlResolver::class)($user);
+        $url = self::getContainer()->get(UserLoginAndShowDataUrlResolver::class)($user);
         $this->browser->request('GET', $url);
         self::assertSame('/profile/edit-profile?%23=export', $this->browser->getResponse()->headers->get('Location'));
         $this->assertViewer(true, $id);
@@ -92,7 +98,7 @@ final class UserIdentityResolversTest extends ResponseVisibilityWebTestCase
     {
         $this->login($this->account()->getEmail());
         $this->setFeature('server_side_rendering', false);
-        $url = self::getContainer()->get(\Capco\AppBundle\GraphQL\Resolver\User\UserShowNotificationsPreferencesUrlResolver::class)();
+        $url = self::getContainer()->get(UserShowNotificationsPreferencesUrlResolver::class)();
         parse_str((string) parse_url((string) $url, \PHP_URL_QUERY), $parameters);
         self::assertSame('notifications', $parameters['#']);
         $this->browser->request('GET', $url);
@@ -106,7 +112,7 @@ final class UserIdentityResolversTest extends ResponseVisibilityWebTestCase
         $user->setPasswordRequestedAt(new \DateTime());
         $this->em->flush();
         $this->setFeature('server_side_rendering', false);
-        $url = self::getContainer()->get(\Capco\AppBundle\GraphQL\Resolver\User\UserResettingPasswordUrlResolver::class)($user);
+        $url = self::getContainer()->get(UserResettingPasswordUrlResolver::class)($user);
         $this->browser->request('GET', $url);
         self::assertSame(200, $this->browser->getResponse()->getStatusCode());
         self::assertStringContainsString($user->getResetPasswordToken(), (string) $this->browser->getResponse()->getContent());
@@ -127,13 +133,13 @@ final class UserIdentityResolversTest extends ResponseVisibilityWebTestCase
             ['Unrelated article', $author, '2020-01-02'],
             ['Another owners matching article', $otherAuthor, '2020-01-04'],
         ] as [$title, $owner, $date]) {
-            $post = (new \Capco\AppBundle\Entity\Post())->setTitle($title)->setBody($title)->setOwner($owner)->setCreator($owner)->setIsPublished(true)->setPublishedAt(new \DateTime('2020-01-01'));
+            $post = (new Post())->setTitle($title)->setBody($title)->setOwner($owner)->setCreator($owner)->setIsPublished(true)->setPublishedAt(new \DateTime('2020-01-01'));
             $post->mergeNewTranslations();
             $this->em->persist($post);
             $this->em->flush();
             $post->setUpdatedAt(new \DateTime($date));
             $this->em->flush();
-            $this->indexForSearch(\Capco\AppBundle\Entity\Post::class, $post->getId());
+            $this->indexForSearch(Post::class, $post->getId());
         }
         $this->em->clear();
 

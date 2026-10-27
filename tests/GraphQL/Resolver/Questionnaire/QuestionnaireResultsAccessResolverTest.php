@@ -5,11 +5,13 @@ namespace Capco\Tests\GraphQL\Resolver\Questionnaire;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
+use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalViewerIsAnEvaluerResolver;
 use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireResultsAccessResolver;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\AppBundle\Service\CapcoAnonReplyDecoder;
 use Capco\AppBundle\Service\ParticipantAccessResolver;
+use Capco\AppBundle\Service\ParticipantAuthentication;
 use Capco\UserBundle\Entity\User;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -37,8 +39,8 @@ class QuestionnaireResultsAccessResolverTest extends TestCase
             $this->createMock(QuestionnaireRepository::class),
             $this->createMock(ReplyRepository::class),
             new CapcoAnonReplyDecoder(),
-            $this->createMock(\Capco\AppBundle\Service\ParticipantAuthentication::class),
-            $this->createMock(\Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalViewerIsAnEvaluerResolver::class)
+            $this->createMock(ParticipantAuthentication::class),
+            $this->createMock(ProposalViewerIsAnEvaluerResolver::class)
         );
         $orphan = new Reply();
         self::assertFalse($access->canViewReply($orphan));

@@ -2,8 +2,10 @@
 
 namespace Capco\Tests\Security;
 
+use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
 use Capco\AppBundle\DBAL\Enum\OrganizationMemberRoleType;
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\EventReview;
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\Organization\OrganizationMember;
 use Capco\AppBundle\Security\EventVoter;
@@ -39,7 +41,7 @@ class EventVoterTest extends AuthorizationTestCase
     /** @dataProvider reviewVisibility */
     public function testAnonymousVisibilityFollowsTheEventReviewEvenWhenEnabled(string $status, int $expected): void
     {
-        $event = (new Event())->setEnabled(true)->setReview((new \Capco\AppBundle\Entity\EventReview())->setStatus($status));
+        $event = (new Event())->setEnabled(true)->setReview((new EventReview())->setStatus($status));
         $voter = new EventVoter($this->createStub(Manager::class));
 
         self::assertSame($expected, $voter->vote($this->token('anon.'), $event, [EventVoter::VIEW_FRONT]));
@@ -48,11 +50,11 @@ class EventVoterTest extends AuthorizationTestCase
     /** @return iterable<string, array{string, int}> */
     public static function reviewVisibility(): iterable
     {
-        yield 'approved event' => [\Capco\AppBundle\DBAL\Enum\EventReviewStatusType::APPROVED, VoterInterface::ACCESS_GRANTED];
+        yield 'approved event' => [EventReviewStatusType::APPROVED, VoterInterface::ACCESS_GRANTED];
 
-        yield 'awaiting review' => [\Capco\AppBundle\DBAL\Enum\EventReviewStatusType::AWAITING, VoterInterface::ACCESS_DENIED];
+        yield 'awaiting review' => [EventReviewStatusType::AWAITING, VoterInterface::ACCESS_DENIED];
 
-        yield 'refused event' => [\Capco\AppBundle\DBAL\Enum\EventReviewStatusType::REFUSED, VoterInterface::ACCESS_DENIED];
+        yield 'refused event' => [EventReviewStatusType::REFUSED, VoterInterface::ACCESS_DENIED];
     }
 
     public function testAdministratorCanManageAnyEvent(): void

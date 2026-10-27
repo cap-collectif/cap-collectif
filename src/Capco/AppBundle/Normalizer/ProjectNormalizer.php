@@ -37,8 +37,8 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
 
     public function normalize($object, $format = null, array $context = [])
     {
-        $groups =
-            isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
+        $groups
+            = isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
 
         /** @var Project $object */
         $data = $this->normalizer->normalize($object, $format, $context);

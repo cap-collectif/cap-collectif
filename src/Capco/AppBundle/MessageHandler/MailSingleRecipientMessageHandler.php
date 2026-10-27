@@ -10,7 +10,7 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 class MailSingleRecipientMessageHandler
 {
     public function __construct(
-        readonly MailChimpClient $mailChimpClient,
+        public readonly MailChimpClient $mailChimpClient,
     ) {}
 
     public function __invoke(MailSingleRecipientMessage $message): void

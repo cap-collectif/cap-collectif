@@ -8,13 +8,14 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\Mutation\DuplicateProjectMutation;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
 
-class ProjectController extends \Sonata\AdminBundle\Controller\CRUDController
+class ProjectController extends CRUDController
 {
     public function duplicateAction(Request $request): RedirectResponse
     {

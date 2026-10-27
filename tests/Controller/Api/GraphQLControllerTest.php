@@ -62,6 +62,13 @@ class GraphQLControllerTest extends KernelTestCase implements FeatureFlagsAwareT
         self::assertSame([], $content['data']['nodes']);
     }
 
+    public static function graphQlEndpoints(): \Generator
+    {
+        yield 'public API' => ['/graphql', '*'];
+
+        yield 'internal API' => ['/graphql/internal', 'https://capco.dev'];
+    }
+
     public function testPostRequestWithInvalidGraphQLSyntaxReturnsBadRequest(): void
     {
         $response = $this->createClient()->request(Request::METHOD_POST, '/graphql/internal', [
@@ -75,13 +82,6 @@ class GraphQLControllerTest extends KernelTestCase implements FeatureFlagsAwareT
         ]);
 
         self::assertSame(400, $response->getStatusCode());
-    }
-
-    public static function graphQlEndpoints(): \Generator
-    {
-        yield 'public API' => ['/graphql', '*'];
-
-        yield 'internal API' => ['/graphql/internal', 'https://capco.dev'];
     }
 
     private function createClient(): Client

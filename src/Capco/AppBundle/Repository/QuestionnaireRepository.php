@@ -53,7 +53,7 @@ class QuestionnaireRepository extends EntityRepository
     /**
      * @return mixed
      *
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NonUniqueResultException
      */
     public function getOne(mixed $id)
     {

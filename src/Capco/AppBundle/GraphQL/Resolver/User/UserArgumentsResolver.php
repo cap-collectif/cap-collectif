@@ -28,8 +28,8 @@ class UserArgumentsResolver implements QueryInterface
         ?Argument $args = null,
         ?\ArrayObject $context = null
     ): Promise {
-        $aclDisabled =
-            $context
+        $aclDisabled
+            = $context
             && $context->offsetExists('disable_acl')
             && true === $context->offsetGet('disable_acl');
 
@@ -47,8 +47,8 @@ class UserArgumentsResolver implements QueryInterface
         User $user,
         ?\ArrayObject $context = null
     ): int {
-        $aclDisabled =
-            $context
+        $aclDisabled
+            = $context
             && $context->offsetExists('disable_acl')
             && true === $context->offsetGet('disable_acl');
 

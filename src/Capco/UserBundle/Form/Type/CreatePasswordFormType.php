@@ -3,6 +3,7 @@
 namespace Capco\UserBundle\Form\Type;
 
 use Capco\AppBundle\Validator\Constraints\PasswordComplexity;
+use FOS\UserBundle\Form\Type\ChangePasswordFormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,6 +21,6 @@ class CreatePasswordFormType extends AbstractType
 
     public function getParent()
     {
-        return \FOS\UserBundle\Form\Type\ChangePasswordFormType::class;
+        return ChangePasswordFormType::class;
     }
 }

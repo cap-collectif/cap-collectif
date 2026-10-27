@@ -17,10 +17,10 @@ class GraphQLCollector extends DataCollector
     public function collect(
         Request $request,
         Response $response,
-        null|\Exception|\Throwable $exception = null
+        \Exception|\Throwable|null $exception = null
     ): void {
-        $graphqlQuery =
-            'graphql_multiple_endpoint' === $request->attributes->get('_route')
+        $graphqlQuery
+            = 'graphql_multiple_endpoint' === $request->attributes->get('_route')
             || 'graphql_endpoint'
                 ? json_decode($request->getContent(), true)
                 : null;

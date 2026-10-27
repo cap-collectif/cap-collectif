@@ -65,8 +65,8 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface, C
             $this->_capcoProfileEdit = $this->router->generate('capco_profile_edit', [], true);
         }
 
-        $groups =
-            isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
+        $groups
+            = isset($context['groups']) && \is_array($context['groups']) ? $context['groups'] : [];
 
         // We only need Author mapping
         foreach (self::RELATED_GROUPS as $relatedGroup) {

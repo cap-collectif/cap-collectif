@@ -49,9 +49,9 @@ class ProposalViewerIsFollowingDataLoader extends BatchDataLoader
     {
         if ($this->debug) {
             $this->logger->info(
-                __METHOD__ .
-                    'called for keys : ' .
-                    var_export(
+                __METHOD__
+                    . 'called for keys : '
+                    . var_export(
                         array_map(fn ($key) => $this->serializeKey($key), $keys),
                         true
                     )

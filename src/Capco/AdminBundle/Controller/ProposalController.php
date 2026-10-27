@@ -36,7 +36,7 @@ class ProposalController extends CRUDController
         $absolutePath = $export['absolutePath'];
 
         $contentType = 'text/csv';
-        if (TYPE::XLSX === $_format) {
+        if (Type::XLSX === $_format) {
             $contentType = 'application/vnd.ms-excel';
         }
 

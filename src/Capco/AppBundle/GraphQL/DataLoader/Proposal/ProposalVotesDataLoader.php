@@ -52,9 +52,9 @@ class ProposalVotesDataLoader extends BatchDataLoader
     {
         if ($this->debug) {
             $this->logger->info(
-                __METHOD__ .
-                    'called for keys : ' .
-                    var_export(
+                __METHOD__
+                    . 'called for keys : '
+                    . var_export(
                         array_map(fn ($key) => $this->serializeKey($key), $keys),
                         true
                     )
@@ -100,8 +100,8 @@ class ProposalVotesDataLoader extends BatchDataLoader
                         $connections[$i]->getPageInfo()
                     );
                     $connections[$i]->setTotalCount($paginatedResults[$index]->getTotalCount());
-                    $connections[$i]->{'totalPointsCount'} =
-                        $paginatedResults[$index]->totalPointsCount;
+                    $connections[$i]->{'totalPointsCount'}
+                        = $paginatedResults[$index]->totalPointsCount;
                 }
                 ++$index;
             }

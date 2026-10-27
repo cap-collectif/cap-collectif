@@ -127,9 +127,9 @@ class CRUDController extends AbstractSonataCrudController
                                 'name' => $this->escapeHtml(
                                     $this->admin->toString($existingObject)
                                 ),
-                                'link_start' => '<a href="' .
-                                    $this->admin->generateObjectUrl('edit', $existingObject) .
-                                    '">',
+                                'link_start' => '<a href="'
+                                    . $this->admin->generateObjectUrl('edit', $existingObject)
+                                    . '">',
                                 'link_end' => '</a>',
                             ],
                             'SonataAdminBundle'

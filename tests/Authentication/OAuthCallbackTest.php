@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Capco\Tests\Authentication;
 
+use Capco\AppBundle\GraphQL\Mutation\GroupMutation;
 use Capco\Tests\OAuthWebTestCase;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\FranceConnect\FranceConnectOptionsModifier;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * @internal
@@ -64,6 +67,18 @@ final class OAuthCallbackTest extends OAuthWebTestCase
         self::assertCount(0, $neighbor->getUserGroups());
     }
 
+    /** @return iterable<string, array{string, bool}> */
+    public static function providers(): iterable
+    {
+        yield 'OpenID' => ['openid', false];
+
+        yield 'Facebook' => ['facebook', false];
+
+        yield 'FranceConnect v1' => ['franceconnect', false];
+
+        yield 'FranceConnect v2' => ['franceconnect', true];
+    }
+
     /** @dataProvider existingAccounts */
     public function testCallbackReusesTheLocalAccountWithoutChangingItsPasswordOrDuplicatingMemberships(string $provider, bool $linked, bool $v2 = false): void
     {
@@ -83,7 +98,7 @@ final class OAuthCallbackTest extends OAuthWebTestCase
         $this->em->flush();
         $this->configureProvider($provider, $providerEmail, $v2);
         // Existing SSO memberships must survive a new provider callback without duplicates.
-        $groups = self::getContainer()->get(\Capco\AppBundle\GraphQL\Mutation\GroupMutation::class);
+        $groups = self::getContainer()->get(GroupMutation::class);
         $groups->createAndAddUserInGroup($account, 'SSO');
         $groups->createAndAddUserInGroup($account, 'SSO ' . $provider);
         $parameters = $this->beginLogin($provider);
@@ -109,6 +124,20 @@ final class OAuthCallbackTest extends OAuthWebTestCase
         self::assertSame($neighborEmail, $neighbor->getEmail());
         self::assertNull($neighbor->{$getter}());
         self::assertCount(0, $neighbor->getUserGroups());
+    }
+
+    /** @return iterable<string, array{string, bool, bool}> */
+    public static function existingAccounts(): iterable
+    {
+        foreach (['openid', 'facebook', 'franceconnect'] as $provider) {
+            yield $provider . ' email collision' => [$provider, false, false];
+
+            yield $provider . ' linked account with a changed local email' => [$provider, true, false];
+        }
+
+        yield 'FranceConnect v2 email collision' => ['franceconnect', false, true];
+
+        yield 'FranceConnect v2 linked account with changed email' => ['franceconnect', true, true];
     }
 
     /** @dataProvider callbackFailures */
@@ -161,8 +190,8 @@ final class OAuthCallbackTest extends OAuthWebTestCase
 
         self::assertSame(302, $this->browser->getResponse()->getStatusCode());
         self::assertSame('https://capco.test/', $this->browser->getResponse()->headers->get('Location'));
-        $error = $this->browser->getRequest()->getSession()->get(\Symfony\Component\Security\Core\Security::AUTHENTICATION_ERROR);
-        self::assertInstanceOf(\Symfony\Component\Security\Core\Exception\AuthenticationException::class, $error);
+        $error = $this->browser->getRequest()->getSession()->get(Security::AUTHENTICATION_ERROR);
+        self::assertInstanceOf(AuthenticationException::class, $error);
         // Symfony restores the translator locale after handling the response.
         $expectedMessage = str_starts_with($message, 'france-connect-')
             ? self::getContainer()->get('translator.default')->trans($message, [], null, $this->browser->getRequest()->getLocale())
@@ -177,20 +206,6 @@ final class OAuthCallbackTest extends OAuthWebTestCase
         self::assertSame($password, $account->getPassword());
         self::assertCount(0, $account->getUserGroups());
         self::assertSame([$id], array_map(static fn (User $user): string => $user->getId(), $this->em->getRepository(User::class)->findBy(['email' => $email])));
-    }
-
-    /** @return iterable<string, array{string, bool, bool}> */
-    public static function existingAccounts(): iterable
-    {
-        foreach (['openid', 'facebook', 'franceconnect'] as $provider) {
-            yield $provider . ' email collision' => [$provider, false, false];
-
-            yield $provider . ' linked account with a changed local email' => [$provider, true, false];
-        }
-
-        yield 'FranceConnect v2 email collision' => ['franceconnect', false, true];
-
-        yield 'FranceConnect v2 linked account with changed email' => ['franceconnect', true, true];
     }
 
     /** @return iterable<string, array{string, string, string, bool}> */
@@ -225,17 +240,5 @@ final class OAuthCallbackTest extends OAuthWebTestCase
         yield 'FranceConnect foreign nonce' => ['franceconnect', 'bad-nonce', 'france-connect-connection-error', false];
 
         yield 'FranceConnect expired state' => ['franceconnect', 'expired-state', 'france-connect-connection-error', false];
-    }
-
-    /** @return iterable<string, array{string, bool}> */
-    public static function providers(): iterable
-    {
-        yield 'OpenID' => ['openid', false];
-
-        yield 'Facebook' => ['facebook', false];
-
-        yield 'FranceConnect v1' => ['franceconnect', false];
-
-        yield 'FranceConnect v2' => ['franceconnect', true];
     }
 }

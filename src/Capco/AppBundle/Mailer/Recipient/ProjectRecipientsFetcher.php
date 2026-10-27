@@ -29,8 +29,8 @@ class ProjectRecipientsFetcher
         ?int $offset = null,
         ?int $limit = null,
     ): array {
-        $sql =
-            'SELECT DISTINCT id, username, email, token, locale, type FROM ' . $this->getUnionSQLForProject();
+        $sql
+            = 'SELECT DISTINCT id, username, email, token, locale, type FROM ' . $this->getUnionSQLForProject();
 
         if (null !== $limit && $limit > 0) {
             $sql .= ' LIMIT ' . $limit;
@@ -60,9 +60,9 @@ class ProjectRecipientsFetcher
         EmailingCampaign $emailingCampaign,
         ?int $limit = null,
     ): array {
-        $sql =
-            'SELECT id, username, email, token, locale, type ' .
-            'FROM ' . $this->getUnionSQLForEmailingCampaign();
+        $sql
+            = 'SELECT id, username, email, token, locale, type '
+            . 'FROM ' . $this->getUnionSQLForEmailingCampaign();
 
         if (null !== $limit && $limit > 0) {
             $sql .= ' LIMIT ' . $limit;
@@ -106,8 +106,8 @@ class ProjectRecipientsFetcher
     {
         $rsm = new ResultSetMapping();
         $rsm->addScalarResult('count', 'count');
-        $sql =
-            'SELECT COUNT(DISTINCT email) AS count FROM ' . $this->getUnionSQLForProject();
+        $sql
+            = 'SELECT COUNT(DISTINCT email) AS count FROM ' . $this->getUnionSQLForProject();
 
         $query = $this->em->createNativeQuery($sql, $rsm)
             ->setParameters([
@@ -193,8 +193,8 @@ class ProjectRecipientsFetcher
 
     private function getUserReplySQL(bool $checkEmailingCampaignUser): string
     {
-        $sql =
-            'SELECT
+        $sql
+            = 'SELECT
                 u.id,
                 u.username,
                 u.email,
@@ -229,8 +229,8 @@ class ProjectRecipientsFetcher
 
     private function getParticipantReplySQL(bool $checkEmailingCampaignUser): string
     {
-        $sql =
-            'SELECT
+        $sql
+            = 'SELECT
                 p.id,
                 p.username ,
                 p.email,
@@ -265,8 +265,8 @@ class ProjectRecipientsFetcher
 
     private function getOpinionSQL(bool $checkEmailingCampaignUser): string
     {
-        $sql =
-            'SELECT
+        $sql
+            = 'SELECT
                 u.id,
                 u.username,
                 u.email,
@@ -299,8 +299,8 @@ class ProjectRecipientsFetcher
 
     private function getArgumentSQL(bool $checkEmailingCampaignUser): string
     {
-        $sql =
-            'SELECT
+        $sql
+            = 'SELECT
                 u.id,
                 u.username,
                 u.email,
@@ -334,8 +334,8 @@ class ProjectRecipientsFetcher
 
     private function getSourceSQL(bool $checkEmailingCampaignUser): string
     {
-        $sql =
-            'SELECT
+        $sql
+            = 'SELECT
                 u.id,
                 u.username,
                 u.email,
@@ -369,8 +369,8 @@ class ProjectRecipientsFetcher
 
     private function getProposalSQL(bool $checkEmailingCampaignUser): string
     {
-        $sql =
-            'SELECT
+        $sql
+            = 'SELECT
                 u.id,
                 u.username,
                 u.email,
@@ -403,8 +403,8 @@ class ProjectRecipientsFetcher
 
     private function getCommentSQL(bool $checkEmailingCampaignUser): string
     {
-        $sql =
-            'SELECT
+        $sql
+            = 'SELECT
                 u.id,
                 u.username,
                 u.email,
@@ -438,8 +438,8 @@ class ProjectRecipientsFetcher
 
     private function getDebateArgumentSQL(bool $checkEmailingCampaignUser): string
     {
-        $sql =
-            'SELECT
+        $sql
+            = 'SELECT
                 u.id,
                 u.username,
                 u.email,
@@ -472,8 +472,8 @@ class ProjectRecipientsFetcher
 
     private function getDebateVoteSQL(bool $checkEmailingCampaignUser): string
     {
-        $sql =
-            'SELECT
+        $sql
+            = 'SELECT
                 u.id,
                 u.username,
                 u.email,
@@ -506,8 +506,8 @@ class ProjectRecipientsFetcher
 
     private function getUserOpinionVoteSQL(bool $checkEmailingCampaignUser): string
     {
-        $sql =
-            'SELECT
+        $sql
+            = 'SELECT
                 u.id,
                 u.username,
                 u.email,
@@ -541,8 +541,8 @@ class ProjectRecipientsFetcher
 
     private function getParticipantOpinionVoteSQL(bool $checkEmailingCampaignUser): string
     {
-        $sql =
-            'SELECT
+        $sql
+            = 'SELECT
                 p.id,
                 p.username,
                 p.email,
@@ -601,8 +601,8 @@ class ProjectRecipientsFetcher
 
     private function getUserCollectStepVotesSQL(bool $checkEmailingCampaignUser): string
     {
-        $sql =
-            'SELECT
+        $sql
+            = 'SELECT
                 u.id,
                 u.username,
                 u.email,
@@ -637,8 +637,8 @@ class ProjectRecipientsFetcher
 
     private function getParticipantCollectStepVotesSQL(bool $checkEmailingCampaignUser): string
     {
-        $sql =
-            'SELECT
+        $sql
+            = 'SELECT
                 p.id,
                 p.username,
                 p.email,
@@ -673,8 +673,8 @@ class ProjectRecipientsFetcher
 
     private function getUserSelectionStepVotesSQL(bool $checkEmailingCampaignUser): string
     {
-        $sql =
-            'SELECT
+        $sql
+            = 'SELECT
                 u.id,
                 u.username,
                 u.email,
@@ -709,8 +709,8 @@ class ProjectRecipientsFetcher
 
     private function getParticipantSelectionStepVotesSQL(bool $checkEmailingCampaignUser): string
     {
-        $sql =
-            'SELECT
+        $sql
+            = 'SELECT
                 p.id,
                 p.username,
                 p.email,

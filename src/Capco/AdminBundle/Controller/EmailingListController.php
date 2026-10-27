@@ -2,10 +2,11 @@
 
 namespace Capco\AdminBundle\Controller;
 
+use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class EmailingListController extends \Sonata\AdminBundle\Controller\CRUDController
+class EmailingListController extends CRUDController
 {
     public function listAction(Request $request): Response
     {

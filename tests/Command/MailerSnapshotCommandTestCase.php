@@ -2,6 +2,7 @@
 
 namespace Capco\Tests\Command;
 
+use Capco\Tests\Mailer\EmailCaptureTrait;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Mime\Address;
@@ -9,7 +10,7 @@ use Symfony\Component\Mime\Email;
 
 abstract class MailerSnapshotCommandTestCase extends DatabaseCommandTestCase
 {
-    use \Capco\Tests\Mailer\EmailCaptureTrait;
+    use EmailCaptureTrait;
 
     protected const EMAIL_SNAPSHOT_DIRECTORY = __DIR__ . '/../../__snapshots__/emails';
 
@@ -97,7 +98,7 @@ abstract class MailerSnapshotCommandTestCase extends DatabaseCommandTestCase
 
     private function normalizeSnapshotBody(string $body): string
     {
-        return (string) preg_replace('/[ \\t]+$/m', '', $body);
+        return (string) preg_replace('/[ \t]+$/m', '', $body);
     }
 }
 

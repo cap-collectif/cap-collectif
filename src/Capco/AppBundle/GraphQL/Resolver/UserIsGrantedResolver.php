@@ -66,11 +66,11 @@ class UserIsGrantedResolver
         }
 
         $this->logger->warning(
-            __METHOD__ .
-                ' : User with id ' .
-                $user->getId() .
-                ' try to get information about user with id ' .
-                $token->getUser()->getId()
+            __METHOD__
+                . ' : User with id '
+                . $user->getId()
+                . ' try to get information about user with id '
+                . $token->getUser()->getId()
         );
 
         return false;

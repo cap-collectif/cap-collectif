@@ -26,8 +26,8 @@ class UserInviteNewInvitationProcessor implements ProcessorInterface
         }
 
         if (
-            CapcoAppBundleMessagesTypes::USER_INVITE_INVITATION ===
-            $userInviteEmailMessage->getMessageType()
+            CapcoAppBundleMessagesTypes::USER_INVITE_INVITATION
+            === $userInviteEmailMessage->getMessageType()
         ) {
             // $delivered is always true in UserInviteEmailMessageNotifier.
             return $this->notifier->onNewInvitation($userInviteEmailMessage);
