@@ -2,6 +2,6 @@
 user1,lbrunet,lbrunet@cap-collectif.com,Oui,+3300000000,Citoyen,Laurent,Brunet,,,,,https://capco.dev/profile/lbrunet,,0,3,
 user2,sfavot,sfavot@cap-collectif.com,Non,+3300000000,Citoyen,Suzanne,Favot,,,,Antony,https://capco.dev/profile/sfavot,,2,0,"""1337-2,1337-3"""
 user5,user,user@test.com,Oui,+33635492871,Citoyen,Utilisateur,authentifier,"1996-03-01 00:00:00","26 Rue Claude Tillier, 75012 Paris, France",75012,Paris,https://capco.dev/profile/user,DK2AZ554,3,0,"""1337-1,1337-2,1337-3"""
+userMaxime,mauriau,maxime.auriau@cap-collectif.com,Oui,,Citoyen,Maxime,AURIAU,,,,,https://capco.dev/profile/mauriau,,2,0,"""1337-2,1337-3"""
 userJean,Juan,jean@cap-collectif.com,Non,,Citoyen,Jean,Treibert,,,,,https://capco.dev/profile/juan1,,0,2,
 userJeanDuplicates,Juan,jean.duplicates@cap-collectif.com,Non,,Citoyen,Jean,Treibert,,,,,https://capco.dev/profile/juan,,0,1,
-userMaxime,mauriau,maxime.auriau@cap-collectif.com,Oui,,Citoyen,Maxime,AURIAU,,,,,https://capco.dev/profile/mauriau,,2,0,"""1337-2,1337-3"""
