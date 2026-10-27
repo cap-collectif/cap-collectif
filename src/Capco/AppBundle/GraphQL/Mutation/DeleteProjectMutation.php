@@ -14,6 +14,7 @@ use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Error\UserError;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteProjectMutation implements MutationInterface
@@ -32,7 +33,11 @@ class DeleteProjectMutation implements MutationInterface
     {
         $this->formatInput($input);
         $id = $input->offsetGet('id');
+
         $project = $this->globalIdResolver->resolve($id, $viewer);
+        if (!$project instanceof Project) {
+            throw new UserError(sprintf('Unknown project with id "%s"', $id));
+        }
 
         $this->indexer->remove(
             ClassUtils::getClass($project),

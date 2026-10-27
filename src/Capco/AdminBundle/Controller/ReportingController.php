@@ -60,6 +60,7 @@ class ReportingController extends AbstractSonataCrudController
             }
             $this->get(ContributionNotifier::class)->onModeration($related);
         }
+        \assert(\is_object($related));
 
         $this->admin->update($related);
 
@@ -93,6 +94,7 @@ class ReportingController extends AbstractSonataCrudController
             }
             $this->get(ContributionNotifier::class)->onModeration($related);
         }
+        \assert(\is_object($related));
 
         $this->admin->update($related);
 

@@ -212,9 +212,10 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
         $values = $arguments->getArrayCopy();
         $statusId = $values['statusId'] ?? null;
         $proposalId = $values['proposalId'] ?? null;
+
         $proposal = $this->globalIdResolver->resolve($proposalId, $user);
-        if (!$proposal) {
-            throw new UserError('Cant find the proposal');
+        if (!$proposal instanceof Proposal) {
+            throw new UserError(sprintf('Unknown proposal with id "%s"', $proposalId));
         }
 
         $status = null;
@@ -249,6 +250,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
         $user,
         ?string $statusId = null
     ): array {
+        $proposalGlobalId = $proposalId;
         $proposalId = GlobalIdResolver::getDecodedId($proposalId);
         $stepId = GlobalIdResolver::getDecodedId($stepId);
 
@@ -275,6 +277,9 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
             \is_array($proposalId) ? $proposalId['id'] : $proposalId,
             $user
         );
+        if (!$proposal instanceof Proposal) {
+            throw new UserError(sprintf('Unknown proposal with id "%s"', $proposalGlobalId));
+        }
 
         $this->publisher->publish(
             CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE_STATUS,
@@ -297,6 +302,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
 
     public function unselectProposal(string $proposalId, string $stepId, $user): array
     {
+        $proposalGlobalId = $proposalId;
         $proposalId = GlobalIdResolver::getDecodedId($proposalId);
         $stepId = GlobalIdResolver::getDecodedId($stepId);
 
@@ -315,6 +321,9 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
             \is_array($proposalId) ? $proposalId['id'] : $proposalId,
             $user
         );
+        if (!$proposal instanceof Proposal) {
+            throw new UserError(sprintf('Unknown proposal with id "%s"', $proposalGlobalId));
+        }
 
         $this->invalidateCache($proposal);
 
@@ -331,6 +340,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
         User $user,
         ?string $statusId = null
     ): array {
+        $proposalGlobalId = $proposalId;
         $proposalId = GlobalIdResolver::getDecodedId($proposalId);
         $stepId = GlobalIdResolver::getDecodedId($stepId);
 
@@ -349,6 +359,9 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
         }
 
         $proposal = $this->globalIdResolver->resolve($proposalId['id'], $user);
+        if (!$proposal instanceof Proposal) {
+            throw new UserError(sprintf('Unknown proposal with id "%s"', $proposalGlobalId));
+        }
         $step = $this->globalIdResolver->resolve($stepId['id'], $user);
         $selection = new Selection();
         $selection->setSelectionStep($step);

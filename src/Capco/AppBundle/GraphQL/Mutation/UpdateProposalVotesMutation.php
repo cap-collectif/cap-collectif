@@ -3,6 +3,8 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\AbstractVote;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Filter\ContributionCompletionStatusFilter;
@@ -66,6 +68,8 @@ class UpdateProposalVotesMutation implements MutationInterface
         } else {
             throw new UserError(sprintf('Not good step with id "%s"', $stepId));
         }
+
+        /** @var AbstractVote $vote */
         foreach ($votes as $key => $vote) {
             $voteInput = null;
             foreach ($votesInput as $currentInput) {
@@ -83,10 +87,12 @@ class UpdateProposalVotesMutation implements MutationInterface
                     throw new UserError('This step is not contribuable.');
                 }
                 $this->em->remove($vote);
+                $proposal = $vote->getProposal();
+                \assert($proposal instanceof Proposal);
                 $this->indexer->remove(ClassUtils::getClass($vote), $vote->getId());
                 $this->indexer->index(
-                    ClassUtils::getClass($vote->getProposal()),
-                    $vote->getProposal()->getId()
+                    ClassUtils::getClass($proposal),
+                    $proposal->getId()
                 );
 
                 $this->proposalVoteAccountHandler->checkIfUserVotesAreStillAccounted(
@@ -121,15 +127,20 @@ class UpdateProposalVotesMutation implements MutationInterface
         return $connection;
     }
 
+    /**
+     * @param array<int, AbstractVote> $objects
+     */
     private function reindexObjects(array $objects)
     {
+        /** @var AbstractVote $object */
         foreach ($objects as $object) {
             $this->indexer->index(ClassUtils::getClass($object), $object->getId());
 
-            if (method_exists($object, 'getProposal') && $object->getProposal()) {
+            $proposal = $object->getProposal();
+            if (null !== $proposal) {
                 $this->indexer->index(
-                    ClassUtils::getClass($object->getProposal()),
-                    $object->getProposal()->getId()
+                    ClassUtils::getClass($proposal),
+                    $proposal->getId()
                 );
             }
         }

@@ -113,7 +113,7 @@ class Reporting implements EntityInterface, CreatableInterface, ExportableContri
 
     public function __toString(): string
     {
-        return $this->getId() ? 'Signalement de ' . $this->getRelatedObject() : 'Signalement';
+        return (string) ($this->getId() ? 'Signalement de ' . $this->getRelatedObject() : 'Signalement');
     }
 
     public function getKind(): string
@@ -291,7 +291,7 @@ class Reporting implements EntityInterface, CreatableInterface, ExportableContri
 
     // ******************* Custom methods *************************
 
-    public function getRelatedObject()
+    public function getRelatedObject(): ?object
     {
         if (null !== $this->Opinion) {
             return $this->Opinion;
@@ -314,6 +314,8 @@ class Reporting implements EntityInterface, CreatableInterface, ExportableContri
         if (null !== $this->debateArgument) {
             return $this->debateArgument;
         }
+
+        return null;
     }
 
     public function setRelatedObject(ReportableInterface $reportable): self

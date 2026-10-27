@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\AbstractVote;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
@@ -97,12 +98,15 @@ class RemoveProposalVoteMutation implements MutationInterface
         $this->removePendingVotes($step, $user);
 
         $previousVoteId = $currentVote->getId();
+
+        $proposal = $currentVote->getProposal();
+        \assert($proposal instanceof Proposal);
         $this->indexer->remove(ClassUtils::getClass($currentVote), $currentVote->getId());
         $this->em->remove($currentVote);
         $this->em->flush();
         $this->indexer->index(
-            ClassUtils::getClass($currentVote->getProposal()),
-            $currentVote->getProposal()->getId()
+            ClassUtils::getClass($proposal),
+            $proposal->getId()
         );
         $this->indexer->finishBulk();
         $this->indexer->index(User::class, $user->getId());

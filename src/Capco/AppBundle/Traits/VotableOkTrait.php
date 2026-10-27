@@ -37,7 +37,10 @@ trait VotableOkTrait
         return null;
     }
 
-    public function getVotes()
+    /**
+     * @return Collection<int, AbstractVote>
+     */
+    public function getVotes(): Collection
     {
         return $this->votes;
     }
