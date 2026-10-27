@@ -138,10 +138,8 @@
         "willdurand/negotiation": "^3.0"
     },
     "require-dev": {
-        "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
         "friendsofphp/php-cs-fixer": "^3.40",
         "icanhazstring/composer-unused": "^0.8.9",
-        "phpcompatibility/php-compatibility": "^9.3",
         "phpspec/phpspec": "^7.0",
         "phpstan/phpstan": "^1.10",
         "phpstan/phpstan-doctrine": "^1.3",
