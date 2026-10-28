@@ -9,6 +9,7 @@ use Capco\AppBundle\Enum\LogActionType;
 use Capco\AppBundle\Logger\ActionLogger;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Repository\UserRepository;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sonata\AdminBundle\Admin\BreadcrumbsBuilderInterface;
 use Sonata\AdminBundle\Admin\Pool;
@@ -58,6 +59,12 @@ class UserController extends CRUDController
 
         if (!$object) {
             throw $this->createNotFoundException('The user corresponding to this id doesn\'t exist.');
+        }
+
+        // Every edit link (Sonata list, `adminUrl`...) leads to the Admin Next page when the migration feature flag is enabled.
+        // Remove this action, with its template, when the page leaves the rollout.
+        if ($this->get(Manager::class)->isActive(Manager::unstable__sonata_migration_to_admin_next)) {
+            return $this->redirect('/admin-next/user?id=' . GlobalId::toGlobalId('User', $object->getId()));
         }
 
         return $this->renderWithExtraParams(

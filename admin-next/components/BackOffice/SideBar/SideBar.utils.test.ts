@@ -1,7 +1,7 @@
 /* eslint-env jest */
 
 import { defaultFeatureFlags } from '@shared/hooks/useFeatureFlag'
-import { getSideBarItemsFiltered } from './SideBar.utils'
+import { getSideBarItemsFiltered, isSideBarSubItemSelected } from './SideBar.utils'
 
 /**
  * @jest-status compliant
@@ -125,5 +125,26 @@ describe('getSideBarItemsFiltered', () => {
     const settings = sideBarItems.find(item => item.id === 'settings')
 
     expect(settings?.items.some(item => item.href === '/admin-next/hub-api-green')).toBe(false)
+  })
+})
+
+/**
+ * @jest-status compliant
+ * @jest-reason Checks a public function result using explicit local inputs and expected values.
+ */
+describe('isSideBarSubItemSelected', () => {
+  const userTypes = { href: '/admin-next/user-types' }
+  const userList = { href: '/admin/capco/user/user/list', relatedHrefs: ['/admin-next/user'] }
+
+  it('selects an item on its own page', () => {
+    expect(isSideBarSubItemSelected(userTypes, '/admin-next/user-types')).toBe(true)
+  })
+
+  it('selects an item on one of its related pages', () => {
+    expect(isSideBarSubItemSelected(userList, '/admin-next/user')).toBe(true)
+  })
+
+  it('does not select an item whose href only starts with the current page', () => {
+    expect(isSideBarSubItemSelected(userTypes, '/admin-next/user')).toBe(false)
   })
 })

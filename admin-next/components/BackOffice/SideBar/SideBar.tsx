@@ -8,7 +8,7 @@ import CookieHelper from '@utils/cookie-helper'
 import { useAllFeatureFlags } from '@shared/hooks/useFeatureFlag'
 import { getBaseUrlWithAdminNextSupport } from 'utils/config'
 import { useAppContext } from '../AppProvider/App.context'
-import { getSideBarItemsFiltered } from './SideBar.utils'
+import { getSideBarItemsFiltered, isSideBarSubItemSelected } from './SideBar.utils'
 import { useSideBarContext } from '@ui/SideBar/SideBar.context'
 
 interface SideBarProps {}
@@ -77,7 +77,7 @@ const SideBar: FC<SideBarProps> = () => {
               <SideBarUI.Menu.Item
                 key={`${sideBarItem.id}-${idx}`}
                 href={item.href}
-                selected={item.href.includes(pathname)}
+                selected={isSideBarSubItemSelected(item, pathname)}
               >
                 {intl.formatMessage({ id: item.title, defaultMessage: item.defaultMessage })}
               </SideBarUI.Menu.Item>

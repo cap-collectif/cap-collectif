@@ -10,6 +10,10 @@ const SONATA_URL_BY_ADMIN_NEXT_URL: Record<string, string> = {
   '/admin-next/favicon': '/admin/favicon/list',
 }
 
+// An exact match: `includes` would also select "/admin-next/user-types" on the "/admin-next/user" page
+export const isSideBarSubItemSelected = (item: { href: string; relatedHrefs?: string[] }, pathname: string): boolean =>
+  item.href === pathname || (item.relatedHrefs ?? []).includes(pathname)
+
 export const getSideBarItemsFiltered = (
   isAdmin: boolean,
   isSuperAdmin: boolean,

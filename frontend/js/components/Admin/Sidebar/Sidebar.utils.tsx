@@ -38,7 +38,9 @@ export const URL_MAP = {
     '/admin-next/project-types',
   ],
   utilisateurs: [
+    // migrated with feature flag, keep it until the flag is removed for this page
     '/admin/capco/user/user/',
+    '/admin-next/user?',
     '/admin/capco/user/invite/',
     '/admin/capco/app/group/',
     '/admin/capco/user/usertype/',

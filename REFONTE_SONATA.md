@@ -327,7 +327,13 @@ Exemple de référence : la page « Icône du site » (`/admin/favicon/list` →
   `SiteFavicon/SiteFaviconForm.tsx` ; une liste suit les patterns `Table`/modale ci-dessous. Le bouton
   « Enregistrer » se place **à gauche**, sous le dernier champ (`<Flex mt={6}>` sans `justify`), comme demandé sur
   la refonte de l'icône du site : ne pas reprendre l'alignement à droite de `PrivacySettingsForm.tsx`. Aligné à
-  gauche, il n'est pas masqué par le beacon Help Scout, donc pas de marge de 69 px.
+  gauche, il n'est pas masqué par le beacon Help Scout, donc pas de marge de 69 px. Les boutons d'un formulaire
+  rendu dans la page prennent `variantSize="small"` (taille retenue sur la refonte de l'édition d'un utilisateur ; ne
+  pas reprendre le `"medium"` de `SiteFaviconForm.tsx`) et le libellé `global.save` (« Enregistrer »), même si le
+  legacy affichait « Enregistrer les modifications ». Pour une page d'édition atteinte depuis une liste, ajouter à
+  droite de « Enregistrer » un bouton « Retour » (`global.back`, `variant="tertiary"`, `variantColor="hierarchy"`) qui
+  ramène à la liste, comme `PostForm.tsx`. Un uploader seul (ex: photo de profil) reste en haut du formulaire, dans la
+  colonne des champs : la mise en page 70 % / 30 % de `/post` n'a pas été retenue pour ce cas.
 - **Relay** : `admin-next/` a son propre compilateur et ses propres artefacts (`admin-next/__generated__/`). Les
   fragments legacy (`createFragmentContainer`, `QueryRenderer`) deviennent une query `useLazyLoadQuery` dans le
   composant, ou des fragments `useFragment` si la page est découpée. Les mutations sont réécrites dans
@@ -392,10 +398,11 @@ flag), **à nettoyer** (Admin Next déjà en place, route legacy encore présent
 
 #### Utilisateurs
 
-- **Édition d'un utilisateur** — à refondre
-  - URL : `/admin/capco/user/user/{id}/edit`
+- **Édition d'un utilisateur** — refonte en cours sous feature flag
+  - URL : `/admin/capco/user/user/{id}/edit` → `/admin-next/user?id={globalId}`
   - Composant : `UserAdminPageApp` (`User/edit.html.twig`, `UserController`)
-  - Reste : refonte. La liste des utilisateurs est encore sur Sonata.
+  - Reste : fusion, validation, puis nettoyage. La liste des utilisateurs reste sur Sonata : avec le flag,
+    `UserController::editAction` redirige vers Admin Next (à retirer au nettoyage, avec le template).
 
 #### Emailing
 
@@ -547,6 +554,18 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
   wrapper autour de `ColorPicker` de `@cap-collectif/ui`) — voir l'exemple dans
   `admin-next/components/BackOffice/Steps/ProposalStep/ProposalStepStatuses.tsx`. Ne pas réinventer un input
   color custom.
+- **Page d'édition migrée dont la liste reste sur Sonata** (ex: édition d'un utilisateur, `/admin-next/user?id=`) :
+  les liens vers l'édition sont dispersés (`path('admin_capco_user_user_edit')` dans les templates Twig de la liste
+  et d'autres pages, resolver `adminUrl`, redirections après création). Plutôt que de les rendre tous conditionnels,
+  faire rediriger l'action Sonata d'édition vers Admin Next quand le flag de migration est actif (voir
+  `UserController::editAction`). Dans l'autre sens, la route Sonata dépend de l'objet : `withFeatureFlagRequired`
+  prend une URL fixe, donc envelopper le garde dans un `getServerSideProps` qui décode l'id (`fromGlobalId`) pour
+  construire l'URL Sonata de repli (voir `withUserAdminPageRequired` dans `components/BackOffice/UserAdmin/utils.ts`).
+  Ajouter la page dans `relatedHrefs` de l'entrée de la liste, même si celle-ci pointe encore vers Sonata.
+- **Plusieurs onglets avec chacun son formulaire** (ex: édition d'un utilisateur) : `TabBar` (`@cap-collectif/ui`)
+  ne rend que l'onglet actif et démonte les autres, contrairement aux `Tabs` de react-bootstrap du legacy. Créer
+  les `useForm` dans le composant parent et les passer aux onglets (`methods`), sinon une saisie non enregistrée
+  est perdue au changement d'onglet. Voir `UserAdmin/UserAdminPage.tsx`.
 - **Page d'édition dédiée avec `?id=` en query param** (plutôt qu'une modale) : voir le couple
   `pages/admin-next/geographical-area.tsx` (lecture via `node(id:)` + `useUrlState('id', '')`) et
   `components/BackOffice/GeographicalArea/GeographicalAreaForm.tsx`. Déclarer la page d'édition dans le
@@ -1597,6 +1616,16 @@ prop-drillé entre la liste et un ancêtre.
   l'`<input>`. Lui passer un `aria-label` explicite (accessibilité), et le cibler en test par
   `input[aria-label="..."]`, pas par placeholder.
 
+- **Nom d'opération Relay déjà pris dans `admin-next`** : le compilateur Relay d'`admin-next` est unique, donc
+  réécrire une mutation legacy sous le même nom échoue si une autre partie d'`admin-next` l'utilise déjà (ex:
+  `UpdateProfilePersonalDataMutation`, déjà définie par le parcours de participation). Vérifier avec
+  `grep -rhoE "mutation <Nom>" admin-next/components admin-next/mutations` et choisir un nom propre à la page
+  (ex: `UpdateUserAdminPersonalDataMutation`), le fichier portant le même nom que l'opération.
+- **Libellé d'une case à cocher (`FieldInput type="checkbox"`) qui ne s'affiche pas** : passer une seule chaîne en
+  `children`. Avec plusieurs enfants (ex: un texte suivi d'une date entre parenthèses), la case est rendue sans
+  libellé. Construire la chaîne complète avant de la passer.
+- **`FormLabel` n'accepte qu'une chaîne en `label`** : pour ajouter une icône à côté (ex: e-mail confirmé, avec
+  `Tooltip`), la passer en `children` du `FormLabel`.
 - **`Select` à options groupées (`[{ label, options: [...] }]`)** : `FieldInput type="select"` (et le `Select`
   de `@cap-collectif/form`) ne retrouve la valeur sélectionnée que dans une liste plate (`options.find(...)`) : avec
   des groupes, le champ s'affiche vide après chargement. Utiliser un `Controller` de react-hook-form autour du

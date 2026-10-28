@@ -74,18 +74,21 @@
             {
                 "title": "admin.label.post",
                 "href": "/admin-next/posts",
+                "relatedHrefs": ["/admin-next/post"],
                 "rolesRequired": [],
                 "featuresRequired": []
             },
             {
                 "title": "admin.label.events",
                 "href": "/admin-next/events",
+                "relatedHrefs": ["/admin-next/event"],
                 "rolesRequired": [],
                 "featuresRequired": ["calendar"]
             },
             {
                 "title": "admin.label.video",
                 "href": "/admin-next/videos",
+                "relatedHrefs": ["/admin-next/video"],
                 "rolesRequired": ["admin"],
                 "featuresRequired": []
             },
@@ -147,6 +150,7 @@
             {
                 "title": "global.select_user.type",
                 "href": "/admin/capco/user/user/list",
+                "relatedHrefs": ["/admin-next/user"],
                 "rolesRequired": [],
                 "featuresRequired": []
             },
@@ -209,6 +213,7 @@
             {
                 "title": "admin.label.project_district",
                 "href": "/admin-next/geographical-areas",
+                "relatedHrefs": ["/admin-next/geographical-area"],
                 "rolesRequired": [],
                 "featuresRequired": []
             },
