@@ -113,8 +113,8 @@ RUN apt-get install -y -qq --no-install-recommends \
     sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf
 
 # Install ES
-ENV ES_VERSION_PACKAGE 7.16.3-linux-x86_64
-ENV ES_VERSION 7.16.3
+ENV ES_VERSION_PACKAGE 7.17.29-linux-x86_64
+ENV ES_VERSION 7.17.29
 RUN cd / && \
     wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-$ES_VERSION_PACKAGE.tar.gz && \
     tar -xzf elasticsearch-$ES_VERSION_PACKAGE.tar.gz && \
