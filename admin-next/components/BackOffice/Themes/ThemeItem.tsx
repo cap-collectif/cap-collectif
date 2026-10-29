@@ -1,8 +1,8 @@
-import * as React from 'react'
-import { graphql, useFragment } from 'react-relay'
-import { useIntl } from 'react-intl'
-import type { ThemeItem_theme$key } from '@relay/ThemeItem_theme.graphql'
 import { ButtonQuickAction, CapUIIcon, CapUIIconSize, Flex, Link, Table, Tag, Text, Tooltip } from '@cap-collectif/ui'
+import type { ThemeItem_theme$key } from '@relay/ThemeItem_theme.graphql'
+import * as React from 'react'
+import { useIntl } from 'react-intl'
+import { graphql, useFragment } from 'react-relay'
 import DeleteThemeConfirmationModal from './DeleteThemeConfirmationModal'
 import { THEME_STATUS_LABELS } from './utils'
 
@@ -36,14 +36,14 @@ const ThemeItem: React.FC<Props> = ({ theme: themeFragment, connectionId }) => {
   return (
     <>
       <Table.Td>
-        {theme.title.length > 128 ? (
+        {theme.title.length > 70 ? (
           <Tooltip label={theme.title}>
-            <Link truncate={128} href={url}>
+            <Link truncate={70} href={url}>
               {theme.title}
             </Link>
           </Tooltip>
         ) : (
-          <Link truncate={128} href={url}>
+          <Link truncate={70} href={url}>
             {theme.title}
           </Link>
         )}

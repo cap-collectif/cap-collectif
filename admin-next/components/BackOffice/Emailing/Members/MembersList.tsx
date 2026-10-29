@@ -1,6 +1,6 @@
+import { Box, Button, Flex, InfoMessage, Text } from '@cap-collectif/ui'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import { Box, Button, Flex, InfoMessage, Text } from '@cap-collectif/ui'
 
 type Props = {
   readonly members: ReadonlyArray<{ readonly key: string; readonly label: string }>
@@ -19,7 +19,7 @@ const MembersList: React.FC<Props> = ({ members, refusingCount, hasNext, isLoadi
   return (
     <Flex direction="column" spacing={4}>
       {refusingCount > 0 ? (
-        <InfoMessage variant="info">
+        <InfoMessage variant="info" mb={2}>
           <InfoMessage.Title>{intl.formatMessage({ id: 'mailingList-refusing-members-count' })}</InfoMessage.Title>
           <InfoMessage.Content>
             {intl.formatMessage({ id: 'mailingList-refusing-members' }, { num: refusingCount })}

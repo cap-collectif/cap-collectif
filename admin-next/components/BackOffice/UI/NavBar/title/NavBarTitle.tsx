@@ -6,7 +6,17 @@ import { headingStyles, Text, TextProps } from '@cap-collectif/ui'
 export interface NavBarTitleProps extends TextProps {}
 
 export const NavBarTitle: React.FC<NavBarTitleProps> = ({ children, className, ...rest }) => (
-  <Text {...headingStyles.h4} color="blue.800" className={cn('navBar__title', className)} {...rest}>
+  <Text
+    {...headingStyles.h4}
+    color="blue.800"
+    className={cn('navBar__title', className)}
+    minWidth={0}
+    mr={4}
+    overflow="hidden"
+    whiteSpace="nowrap"
+    sx={{ textOverflow: 'ellipsis' }}
+    {...rest}
+  >
     {children}
   </Text>
 )

@@ -12,6 +12,7 @@ import CreatePageMutation from '@mutations/CreatePageMutation'
 import UpdatePageMutation from '@mutations/UpdatePageMutation'
 import type { TranslationLocale } from '@relay/UpdatePageMutation.graphql'
 import { dangerToast, mutationErrorToast, successToast } from '@shared/utils/toasts'
+import { buildToastUrl } from '@components/ParticipationWorkflow/utils/buildToastUrl'
 import { isWYSIWYGContentEmpty } from '@shared/utils/isWYSIWYGContentEmpty'
 import { formatLocaleToCode } from '@utils/locale-helper'
 import { CustomPageFormWrapperQuery, CustomPageFormWrapperQuery$data } from '@relay/CustomPageFormWrapperQuery.graphql'
@@ -196,8 +197,10 @@ const CustomPageFormWrapper = ({ pageId, pageData }: CustomPageFormWrapperProps)
             setIsLoading(false)
             return
           }
-          successToast(intl.formatMessage({ id: 'admin.custom-pages.successfully-created' }))
-          window.location.href = `custom-page?id=${response.createPage?.page?.id}`
+          window.location.href = buildToastUrl(`/admin-next/custom-page?id=${response.createPage?.page?.id}`, {
+            variant: 'success',
+            message: 'admin.custom-pages.successfully-created',
+          })
         })
         .catch(() => {
           setIsLoading(false)

@@ -1,5 +1,5 @@
 import { FieldInput, FormControl, Select } from '@cap-collectif/form'
-import { Accordion, CapInputSize, CapUIAccordionSize, FormLabel } from '@cap-collectif/ui'
+import { Accordion, CapInputSize, CapUIAccordionSize, Flex, FormLabel } from '@cap-collectif/ui'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import * as React from 'react'
 import { useFormContext } from 'react-hook-form'
@@ -59,25 +59,28 @@ const ThemeFormSide: React.FC<ThemeFormSideProps> = ({ availableLocales, current
         <Accordion.Item id="multilingual">
           <Accordion.Button>{intl.formatMessage({ id: 'capco.module.multilangue' })}</Accordion.Button>
           <Accordion.Panel>
-            <FormLabel label={intl.formatMessage({ id: 'global-languages' })} />
-            {/* Display state of the page, not a submitted value: driven by hand, outside react-hook-form */}
-            <Select
-              options={availableLocales.map(locale => ({
-                value: locale.code,
-                label: intl.formatMessage({ id: locale.traductionKey }),
-              }))}
-              value={currentLocale}
-              onChange={value => {
-                const locale = availableLocales.find(({ code }) => code === value)
-                if (locale) setCurrentLocale(locale.code)
-              }}
-            />
+            {/* Outside FormControl (no react-hook-form field), so the label/field spacing is set by hand */}
+            <Flex direction="column" spacing={1}>
+              <FormLabel label={intl.formatMessage({ id: 'global.current-content-language' })} />
+              {/* Display state of the page, not a submitted value: driven by hand, outside react-hook-form */}
+              <Select
+                options={availableLocales.map(locale => ({
+                  value: locale.code,
+                  label: intl.formatMessage({ id: locale.traductionKey }),
+                }))}
+                value={currentLocale}
+                onChange={value => {
+                  const locale = availableLocales.find(({ code }) => code === value)
+                  if (locale) setCurrentLocale(locale.code)
+                }}
+              />
+            </Flex>
           </Accordion.Panel>
         </Accordion.Item>
       )}
 
       <Accordion.Item id="advanced">
-        <Accordion.Button>{intl.formatMessage({ id: 'admin.fields.page.advanced' })}</Accordion.Button>
+        <Accordion.Button>{intl.formatMessage({ id: 'global.advanced.text' })}</Accordion.Button>
         <Accordion.Panel>
           <FormControl name={metaDescriptionField} key={metaDescriptionField} control={control}>
             <FormLabel htmlFor={metaDescriptionField} label={intl.formatMessage({ id: 'global.meta.description' })} />

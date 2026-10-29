@@ -128,7 +128,7 @@ const ThemeForm = ({
 
         <Flex width="30%">
           <FormControl name="media" control={control} width="100%" mt={-1} spacing={0}>
-            <FormLabel htmlFor="media" label={intl.formatMessage({ id: 'global.image' })}>
+            <FormLabel htmlFor="media" label={intl.formatMessage({ id: 'cover-image' })}>
               <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                 {intl.formatMessage({ id: 'global.optional' })}
               </Text>

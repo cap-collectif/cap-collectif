@@ -12,7 +12,12 @@ type Props = BreadCrumbItemType & {
 
 const BreadCrumbItem: React.FC<Props> = ({ title, href, isActive }) => {
   if (isActive) {
-    return <Text color="blue.800">{title}</Text>
+    // Long sub-page titles are truncated so the navbar actions stay visible
+    return (
+      <Text color="blue.800" title={title} overflow="hidden" whiteSpace="nowrap" sx={{ textOverflow: 'ellipsis' }}>
+        {title}
+      </Text>
+    )
   }
 
   return (

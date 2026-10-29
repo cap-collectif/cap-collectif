@@ -584,6 +584,12 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
   les langues sont envoyées, le back supprime la traduction d'une langue dont tous les champs sont vides (hors langue
   par défaut) et laisse intactes les langues absentes de l'input. Liste associée : `ThemeList.tsx`,
   sur le modèle de `VideoList.tsx`.
+  **Accordéon « Multilingue »** (toutes les pages BO concernées) : titre `capco.module.multilangue`, et le label du
+  `Select` de langue utilise la clé `global.current-content-language` (« Langue du contenu actuel »), comme dans
+  `PostFormSide.tsx`. Ne pas inventer une autre clé ni un libellé différent.
+  **Accordéon « Avancée »** : le titre utilise la clé `global.advanced.text` (et non `admin.fields.page.advanced`).
+  Les champs de cet accordéon n'ont pas la mention « Facultatif » (`global.optional`), et « Code personnalisé » /
+  « Méta-description » n'ont pas de `FormGuideline` : superflus, ne pas les ajouter.
 - **Recherche remplaçant le bouton « Filtres » de Sonata** : le ou les champs recherchés dépendent du ticket
   (titre, email, nom…). Ne pas supposer : demander lequel s'applique si le ticket ne le dit pas.
 - **Page "wrapper" standard** : toute page admin-next suit le même squelette —
@@ -1290,6 +1296,46 @@ prop-drillé entre la liste et un ancêtre.
   `global.changes.saved` / "Modifications enregistrées") juste pour factoriser les clés de traduction entre
   create/update/delete — passé dans un `dangerToast`, un texte neutre devient incohérent avec le rouge.
   Écrire un message dédié à la suppression (ex. "Élément supprimé").
+- **Toast suivi d'une redirection (`window.location.href`) : le passer dans l'URL, pas l'afficher avant.**
+  Un toast affiché juste avant une redirection complète (création qui redirige vers la page d'édition,
+  suppression depuis la page d'édition qui redirige vers la liste) disparaît avec le rechargement : il est
+  illisible. Ne pas retarder la redirection avec un `setTimeout` (le toast disparaît quand même au
+  rechargement, et le formulaire reste utilisable pendant le délai). Utiliser le mécanisme existant du
+  parcours de participation : `buildToastUrl` ajoute un paramètre `?toast=` à l'URL de redirection, et le
+  hook `useUrlToast`, appelé par la page d'arrivée, affiche le toast puis retire le paramètre de l'URL.
+  ```tsx
+  // Composant qui redirige
+  import { buildToastUrl } from '@components/ParticipationWorkflow/utils/buildToastUrl'
+
+  if (!connectionId) {
+    // Deleted from the edit page: the toast is shown by the list page
+    window.location.href = buildToastUrl('/admin-next/<entities>', {
+      variant: 'danger',
+      message: 'admin.<entities>.successfully-deleted', // translation key, not a translated text
+    })
+    return
+  }
+  dangerToast(intl.formatMessage({ id: 'admin.<entities>.successfully-deleted' }))
+
+  // Page d'arrivée (pages/admin-next/<entities>.tsx, et <entity>.tsx pour la redirection après création)
+  import { useUrlToast } from '@hooks/useUrlToast'
+
+  const EntitiesPage: React.FC = () => {
+    useUrlToast()
+    // ...
+  }
+  ```
+  Points à respecter :
+  - `message` est une **clé de traduction** : la page d'arrivée la traduit.
+  - L'URL doit être **absolue** (`/admin-next/<entity>?id=…`, pas `<entity>?id=…`) : `buildToastUrl` la
+    résout depuis la racine du site, pas depuis la page courante.
+  - Appeler `useUrlToast()` dans **chaque page d'arrivée possible** (liste et page d'édition).
+  - Sans redirection (suppression depuis la liste, mise à jour), garder le toast immédiat.
+
+  Exemples : `CustomPages/DeleteCustomPageConfirmationModal.tsx`, `CustomPages/CustomPageFormWrapper.tsx`,
+  `Themes/DeleteThemeConfirmationModal.tsx`, `Themes/ThemeFormWrapper.tsx`. `buildToastUrl` et
+  `useUrlToast` existent aussi en copie dans `frontend/js` : leur déplacement dans `admin-next/shared` est
+  prévu dans une issue dédiée. D'ici là, importer les versions d'admin-next ci-dessus.
 - **Clé de traduction du `successToast` après un enregistrement : préférer une clé générique à une clé
   spécifique à la page.** Pour une **mise à jour**, utiliser `admin.update.successful` ("Modifications
   enregistrées") plutôt que de créer une nouvelle clé dédiée (ex: ne pas créer `admin.videos.successfully-

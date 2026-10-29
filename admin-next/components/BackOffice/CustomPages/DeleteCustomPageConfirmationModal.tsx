@@ -11,6 +11,7 @@ import {
 } from '@cap-collectif/ui'
 import DeletePageMutation from '@mutations/DeletePageMutation'
 import { dangerToast, mutationErrorToast } from '@shared/utils/toasts'
+import { buildToastUrl } from '@components/ParticipationWorkflow/utils/buildToastUrl'
 import type { IntlShape } from 'react-intl'
 import { useIntl } from 'react-intl'
 
@@ -31,10 +32,14 @@ const deletePage = async (pageId: string, connectionId: string | undefined, hide
         mutationErrorToast(intl)
         return
       }
-      dangerToast(intl.formatMessage({ id: 'admin.custom-pages.successfully-deleted' }))
       if (!connectionId) {
-        window.location.href = '/admin-next/custom-pages'
+        window.location.href = buildToastUrl('/admin-next/custom-pages', {
+          variant: 'danger',
+          message: 'admin.custom-pages.successfully-deleted',
+        })
+        return
       }
+      dangerToast(intl.formatMessage({ id: 'admin.custom-pages.successfully-deleted' }))
     })
     .catch(() => mutationErrorToast(intl))
 }

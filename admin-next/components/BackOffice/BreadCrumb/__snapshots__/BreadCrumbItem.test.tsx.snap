@@ -3,7 +3,8 @@
 exports[`<BreadCrumbItem /> should render a text when link is active 1`] = `
 <DocumentFragment>
   <p
-    class="sc-bcXGCL fPghBz cap-text"
+    class="sc-bcXGCL gMEePw cap-text"
+    title="Project List"
   >
     Project List
   </p>

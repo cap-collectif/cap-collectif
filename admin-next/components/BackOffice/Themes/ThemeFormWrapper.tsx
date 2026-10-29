@@ -11,6 +11,7 @@ import { useNavBarContext } from '@components/BackOffice/NavBar/NavBar.context'
 import CreateThemeMutation from '@mutations/CreateThemeMutation'
 import UpdateThemeMutation from '@mutations/UpdateThemeMutation'
 import { dangerToast, mutationErrorToast, successToast } from '@shared/utils/toasts'
+import { buildToastUrl } from '@components/ParticipationWorkflow/utils/buildToastUrl'
 import { ThemeFormWrapperQuery, ThemeFormWrapperQuery$data } from '@relay/ThemeFormWrapperQuery.graphql'
 import { ThemeFormWrapper_LocalesQuery } from '@relay/ThemeFormWrapper_LocalesQuery.graphql'
 import { ThemeStatus } from '@relay/UpdateThemeMutation.graphql'
@@ -195,8 +196,10 @@ const ThemeFormWrapper = ({ themeId, themeData }: ThemeFormWrapperProps): JSX.El
             setIsLoading(false)
             return
           }
-          successToast(intl.formatMessage({ id: 'admin.themes.successfully-created' }))
-          window.location.href = `theme?id=${response.createTheme.theme?.id}`
+          window.location.href = buildToastUrl(`/admin-next/theme?id=${response.createTheme.theme?.id}`, {
+            variant: 'success',
+            message: 'admin.themes.successfully-created',
+          })
         })
         .catch(() => {
           setIsLoading(false)

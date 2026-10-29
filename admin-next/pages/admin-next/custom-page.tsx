@@ -3,12 +3,14 @@ import Layout from '@components/BackOffice/Layout/Layout'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
 import { withFeatureFlagRequired } from '@utils/withPageAuthRequired'
 import useUrlState from '@hooks/useUrlState'
+import { useUrlToast } from '@hooks/useUrlToast'
 import CustomPageFormWrapper, {
   CustomPageFormWrapperWithData,
 } from '@components/BackOffice/CustomPages/CustomPageFormWrapper'
 
 const CustomPage = (): React.JSX.Element => {
   const [idFromUrl] = useUrlState('id', '')
+  useUrlToast()
 
   return (
     <Layout navTitle={''}>

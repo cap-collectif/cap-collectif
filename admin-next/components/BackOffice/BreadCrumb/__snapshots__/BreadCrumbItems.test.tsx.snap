@@ -6,10 +6,10 @@ exports[`<BreadCrumbItems /> should render multiple items with slash in between 
     class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />
   <div
-    class="sc-bcXGCL lcYpuI"
+    class="sc-bcXGCL bVOlw"
   >
     <div
-      class="sc-bcXGCL lcYpuI"
+      class="sc-bcXGCL cztlta"
     >
       <a
         class="sc-bcXGCL fOGmNq cap-link"
@@ -24,10 +24,11 @@ exports[`<BreadCrumbItems /> should render multiple items with slash in between 
       </span>
     </div>
     <div
-      class="sc-bcXGCL lcYpuI"
+      class="sc-bcXGCL gNWTZr"
     >
       <p
-        class="sc-bcXGCL hHORdi cap-text"
+        class="sc-bcXGCL jTRvLN cap-text"
+        title="New Project"
       >
         New Project
       </p>
@@ -42,13 +43,14 @@ exports[`<BreadCrumbItems /> should render one single item 1`] = `
     class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />
   <div
-    class="sc-bcXGCL lcYpuI"
+    class="sc-bcXGCL bVOlw"
   >
     <div
-      class="sc-bcXGCL lcYpuI"
+      class="sc-bcXGCL gNWTZr"
     >
       <p
-        class="sc-bcXGCL hHORdi cap-text"
+        class="sc-bcXGCL jTRvLN cap-text"
+        title="Project list"
       >
         Project list
       </p>

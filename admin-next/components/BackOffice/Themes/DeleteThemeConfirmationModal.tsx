@@ -11,6 +11,7 @@ import {
 } from '@cap-collectif/ui'
 import DeleteThemeMutation from '@mutations/DeleteThemeMutation'
 import { dangerToast, mutationErrorToast } from '@shared/utils/toasts'
+import { buildToastUrl } from '@components/ParticipationWorkflow/utils/buildToastUrl'
 import type { IntlShape } from 'react-intl'
 import { useIntl } from 'react-intl'
 
@@ -29,10 +30,14 @@ const deleteTheme = async (themeId: string, connectionId: string | undefined, hi
   })
     .then(response => {
       if (response.deleteTheme?.errorCode) return mutationErrorToast(intl)
-      dangerToast(intl.formatMessage({ id: 'admin.themes.successfully-deleted' }))
       if (!connectionId) {
-        window.location.href = '/admin-next/themes'
+        window.location.href = buildToastUrl('/admin-next/themes', {
+          variant: 'danger',
+          message: 'admin.themes.successfully-deleted',
+        })
+        return
       }
+      dangerToast(intl.formatMessage({ id: 'admin.themes.successfully-deleted' }))
     })
     .catch(() => mutationErrorToast(intl))
 }

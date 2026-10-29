@@ -153,7 +153,10 @@ const PostFormSide: React.FC<PostFormSideProps> = ({
           </Accordion.Button>
           <Accordion.Panel>
             <FormControl name="currentLocale" control={control} key="currentLocale">
-              <FormLabel htmlFor="currentLocale" label={intl.formatMessage({ id: 'admin.post.languages' })} />
+              <FormLabel
+                htmlFor="currentLocale"
+                label={intl.formatMessage({ id: 'global.current-content-language' })}
+              />
               <FieldInput
                 type="select"
                 name="currentLocale"

@@ -4,6 +4,7 @@ import {
   CapInputSize,
   CapUIAccordionSize,
   CapUIFontSize,
+  Flex,
   FormGuideline,
   FormLabel,
   Text,
@@ -39,23 +40,25 @@ const CustomPageFormSide: React.FC<Props> = ({ availableLocales, currentLocale, 
         <Accordion.Item id="multilingual">
           <Accordion.Button>{intl.formatMessage({ id: 'capco.module.multilangue' })}</Accordion.Button>
           <Accordion.Panel>
-            <FormLabel label={intl.formatMessage({ id: 'global-languages' })} />
-            <Select
-              options={availableLocales.map(locale => ({
-                value: locale.code,
-                label: intl.formatMessage({ id: locale.traductionKey }),
-              }))}
-              value={currentLocale}
-              onChange={value => {
-                if (value) setCurrentLocale(String(value))
-              }}
-            />
+            <Flex direction="column" spacing={1}>
+              <FormLabel label={intl.formatMessage({ id: 'global.current-content-language' })} />
+              <Select
+                options={availableLocales.map(locale => ({
+                  value: locale.code,
+                  label: intl.formatMessage({ id: locale.traductionKey }),
+                }))}
+                value={currentLocale}
+                onChange={value => {
+                  if (value) setCurrentLocale(String(value))
+                }}
+              />
+            </Flex>
           </Accordion.Panel>
         </Accordion.Item>
       )}
 
       <Accordion.Item id="advanced">
-        <Accordion.Button>{intl.formatMessage({ id: 'admin.fields.page.advanced' })}</Accordion.Button>
+        <Accordion.Button>{intl.formatMessage({ id: 'global.advanced.text' })}</Accordion.Button>
         <Accordion.Panel>
           <FormControl
             name={`${currentLocale}-metaDescription`}
@@ -65,12 +68,7 @@ const CustomPageFormSide: React.FC<Props> = ({ availableLocales, currentLocale, 
             <FormLabel
               htmlFor={`${currentLocale}-metaDescription`}
               label={intl.formatMessage({ id: 'global.meta.description' })}
-            >
-              <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
-                {intl.formatMessage({ id: 'global.optional' })}
-              </Text>
-            </FormLabel>
-            <FormGuideline>{intl.formatMessage({ id: 'admin.help.metadescription' })}</FormGuideline>
+            />
             <FieldInput
               type="textarea"
               id={`${currentLocale}-metaDescription`}
@@ -81,11 +79,7 @@ const CustomPageFormSide: React.FC<Props> = ({ availableLocales, currentLocale, 
           </FormControl>
 
           <FormControl name="cover" control={control} width="100%">
-            <FormLabel htmlFor="cover" label={intl.formatMessage({ id: 'global.image' })}>
-              <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
-                {intl.formatMessage({ id: 'global.optional' })}
-              </Text>
-            </FormLabel>
+            <FormLabel htmlFor="cover" label={intl.formatMessage({ id: 'global.social-network-image' })} />
             <FormGuideline>
               {intl.formatMessage({ id: 'admin.help.social_network_thumbnail' })}{' '}
               {intl.formatMessage({ id: 'supported.format.listed' }, { format: 'jpg, png' })}
@@ -106,12 +100,7 @@ const CustomPageFormSide: React.FC<Props> = ({ availableLocales, currentLocale, 
           </FormControl>
 
           <FormControl name="customCode" control={control}>
-            <FormLabel htmlFor="customCode" label={intl.formatMessage({ id: 'admin.customcode' })}>
-              <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
-                {intl.formatMessage({ id: 'global.optional' })}
-              </Text>
-            </FormLabel>
-            <FormGuideline>{intl.formatMessage({ id: 'admin.help.customcode' })}</FormGuideline>
+            <FormLabel htmlFor="customCode" label={intl.formatMessage({ id: 'admin.customcode' })} />
             <FieldInput
               type="textarea"
               id="customCode"

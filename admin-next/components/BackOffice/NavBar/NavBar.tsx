@@ -84,7 +84,7 @@ export const NavBar: React.FC<NavBarProps> = ({ title, data }) => {
 
   return (
     <NavBarUI>
-      <NavBarUI.Title>
+      <NavBarUI.Title title={breadCrumbItems.length > 0 ? undefined : title}>
         {breadCrumbItems.length > 0 ? <BreadCrumbItems breadCrumbItems={breadCrumbItems} /> : title}
       </NavBarUI.Title>
 

@@ -2,6 +2,7 @@ import { Button, CapUIIcon, CapUIIconSize, Flex, Search, Spinner } from '@cap-co
 import CustomPageList from '@components/BackOffice/CustomPages/CustomPageList'
 import { CONNECTION_NODES_PER_PAGE } from '@components/BackOffice/CustomPages/utils'
 import Layout from '@components/BackOffice/Layout/Layout'
+import { useUrlToast } from '@hooks/useUrlToast'
 import { customPages_Query } from '@relay/customPages_Query.graphql'
 import debounce from '@shared/utils/debounce-promise'
 import TablePlaceholder from '@ui/Table/TablePlaceholder'
@@ -61,6 +62,7 @@ export const getServerSideProps = withFeatureFlagRequired(
 
 const CustomPagesPage: React.FC = () => {
   const intl = useIntl()
+  useUrlToast()
 
   return (
     <Layout navTitle={intl.formatMessage({ id: 'admin.label.page' })}>
