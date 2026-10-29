@@ -39,12 +39,17 @@ export type StepUserVotesType =
   | 'simple'
   | 'maxRanking'
 
-const deriveTypeFromVoteTypes = (voteTypes: ReadonlyArray<ProposalStepVoteTypeValue>): StepUserVotesType => {
+const deriveTypeFromVoteTypes = (
+  voteTypes: ReadonlyArray<ProposalStepVoteTypeValue>,
+  votesMin: number | null | undefined,
+): StepUserVotesType => {
   const has = (v: ProposalStepVoteTypeValue) => voteTypes.includes(v)
-  if (has('RANKING')) return has('MIN') && has('MAX') ? 'minMaxRanking' : 'maxRanking'
-  if (has('BUDGET')) return has('MIN') || has('MAX') ? 'budgetMinMax' : 'budget'
-  if (has('MIN') && has('MAX')) return 'minMax'
-  if (has('MIN')) return 'min'
+  const hasMin = has('MIN') && votesMin !== null && votesMin !== undefined && votesMin > 1
+
+  if (has('RANKING')) return hasMin && has('MAX') ? 'minMaxRanking' : 'maxRanking'
+  if (has('BUDGET')) return hasMin || has('MAX') ? 'budgetMinMax' : 'budget'
+  if (hasMin && has('MAX')) return 'minMax'
+  if (hasMin) return 'min'
   if (has('MAX')) return 'max'
   if (has('THRESHOLD')) return 'threshold'
   return 'simple'
@@ -174,7 +179,7 @@ const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
   const { colors } = useTheme()
   const [isVotePopupOpen, setIsVotePopupOpen] = useState(false)
 
-  const type = deriveTypeFromVoteTypes(step.voteTypes)
+  const type = deriveTypeFromVoteTypes(step.voteTypes, step.votesMin)
   const { buttonKey, showCircularProgress, getTitleKey, getDescKey } = VOTE_TYPE_CONFIG[type]
   const isSupport = step.actionButtonLabel === 'SUPPORT'
 

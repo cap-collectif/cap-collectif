@@ -209,7 +209,7 @@ const VoteButton = ({
                   id: hasJustFinished ? (isAuthenticated ? 'participation-validated' :  'participation-validated-anonymous') : 'vote-for-x-proposals',
                 },
                 {
-                  num: remainingVotesAfterValidation,
+                  n: remainingVotesAfterValidation,
                   div: (...chunks) => <div>{chunks}</div>,
                   b: (...chunks) => <b>{chunks}</b>,
                   a: (...chunks) => (
