@@ -38,9 +38,7 @@ sonata_admin:
                     - Capco\AdminBundle\Admin\CommentAdmin
             admin.group.content:
                 items:
-                    - Capco\AdminBundle\Admin\ThemeAdmin
                     - Capco\AdminBundle\Admin\EventAdmin
-                    - Capco\AdminBundle\Admin\PageAdmin
                     - Capco\AdminBundle\Admin\MediaAdmin
             admin.group.project:
                 items:
@@ -60,10 +58,6 @@ sonata_admin:
                 items:
                     - Capco\AdminBundle\Admin\SectionAdmin
                     - Capco\AdminBundle\Admin\ContactAdmin
-            admin.group.emailing:
-                items:
-                    - Capco\AdminBundle\Admin\EmailingCampaignAdmin
-                    - Capco\AdminBundle\Admin\EmailingListAdmin
 
 sonata_block:
     default_contexts: [cms]

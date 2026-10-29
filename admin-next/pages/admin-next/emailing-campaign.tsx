@@ -1,9 +1,9 @@
-import * as React from 'react'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
+import EmailingCampaignFormWrapper from '@components/BackOffice/Emailing/EmailingCampaign/EmailingCampaignFormWrapper'
+import { withEmailingPageRequired } from '@components/BackOffice/Emailing/utils'
 import Layout from '@components/BackOffice/Layout/Layout'
 import useUrlState from '@hooks/useUrlState'
-import EmailingCampaignFormWrapper from '@components/BackOffice/Emailing/EmailingCampaign/EmailingCampaignFormWrapper'
-import { SONATA_EMAILING_CAMPAIGNS_URL, withEmailingPageRequired } from '@components/BackOffice/Emailing/utils'
+import * as React from 'react'
 
 const EmailingCampaign: React.FC = () => {
   const [idFromUrl] = useUrlState('id', '')
@@ -23,7 +23,6 @@ const EmailingCampaign: React.FC = () => {
   )
 }
 
-// A campaign is created from the list, which then redirects here
-export const getServerSideProps = withEmailingPageRequired(SONATA_EMAILING_CAMPAIGNS_URL)
+export const getServerSideProps = withEmailingPageRequired
 
 export default EmailingCampaign

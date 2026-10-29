@@ -191,33 +191,13 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
               <SidebarAccordionItem id="contenus">
                 <SidebarButton icon={ICON_NAME.FOLDER_O} text="admin.group.content" isOpen={isOpen} />
                 <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
-                  {isAdmin && (
-                    // Sonata route retained during the Admin Next migration rollout. Remove it when the migration feature flag is removed.
-                    <SidebarLink
-                      text="admin.label.theme"
-                      href={
-                        features.unstable__sonata_migration_to_admin_next
-                          ? '/admin-next/themes'
-                          : '/admin/capco/app/theme/list'
-                      }
-                    />
-                  )}
+                  {isAdmin && <SidebarLink text="admin.label.theme" href="/admin-next/themes" />}
                   {(isAdmin || isProjectAdmin || isOrganizationMember) && (
                     <SidebarLink text="admin.label.post" href="/admin-next/posts" />
                   )}
                   {features.calendar && <SidebarLink text="admin.label.events" href="/admin-next/events" />}
                   {isAdmin && <SidebarLink text="admin.label.video" href="/admin-next/videos" />}
-                  {/* Sonata route retained during the Admin Next migration rollout. Remove it when the migration feature flag is removed. */}
-                  {isAdmin && (
-                    <SidebarLink
-                      text="admin.label.page"
-                      href={
-                        features.unstable__sonata_migration_to_admin_next
-                          ? '/admin-next/custom-pages'
-                          : '/admin/capco/app/page/list'
-                      }
-                    />
-                  )}
+                  {isAdmin && <SidebarLink text="admin.label.page" href="/admin-next/custom-pages" />}
                   {isAdmin && <SidebarLink text="media" href="/admin-next/medias" />}
                 </SidebarAccordionPanel>
               </SidebarAccordionItem>
@@ -257,13 +237,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                   {features.multilangue && <SidebarLink text="global-languages" href="/admin/locale/list" />}
                   <SidebarLink text="domain.and.url" href="/admin-next/domain-url" />
                   <SidebarLink text="admin.customcode" href="/admin-next/custom-code" />
-                  {/* Sonata route retained during the Admin Next migration rollout. Remove it when the migration feature flag is removed. */}
-                  <SidebarLink
-                    text="website-icon"
-                    href={
-                      features.unstable__sonata_migration_to_admin_next ? '/admin-next/favicon' : '/admin/favicon/list'
-                    }
-                  />
+                  <SidebarLink text="website-icon" href="/admin-next/favicon" />
                   <SidebarLink text="global-typeface" href="/admin/font/list" />
                   <SidebarLink text="admin.label.settings.global" href="/admin/settings/settings.global/list" />
                   {isSuperAdmin ? (
@@ -310,23 +284,8 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
               <SidebarAccordionItem id="emailing">
                 <SidebarButton icon={ICON_NAME.ENVELOPE_O} text="admin.group.emailing" isOpen={isOpen} />
                 <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
-                  {/* Sonata routes retained during the Admin Next migration rollout. Remove them when the migration feature flag is removed. */}
-                  <SidebarLink
-                    text="admin-menu-campaign-list"
-                    href={
-                      features.unstable__sonata_migration_to_admin_next
-                        ? '/admin-next/emailing-campaigns'
-                        : '/admin/mailingCampaign/list'
-                    }
-                  />
-                  <SidebarLink
-                    text="admin-menu-emailing-list"
-                    href={
-                      features.unstable__sonata_migration_to_admin_next
-                        ? '/admin-next/mailing-lists'
-                        : '/admin/mailingList/list'
-                    }
-                  />
+                  <SidebarLink text="admin-menu-campaign-list" href="/admin-next/emailing-campaigns" />
+                  <SidebarLink text="admin-menu-emailing-list" href="/admin-next/mailing-lists" />
                   {features.emailing_parameters && isAdmin ? (
                     <SidebarLink text="admin-menu-parameters" href="/admin/mailingParameters/list" />
                   ) : null}

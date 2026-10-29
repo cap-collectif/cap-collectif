@@ -1,12 +1,12 @@
-import * as React from 'react'
-import Layout from '@components/BackOffice/Layout/Layout'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
-import { withFeatureFlagRequired } from '@utils/withPageAuthRequired'
-import useUrlState from '@hooks/useUrlState'
-import { useUrlToast } from '@hooks/useUrlToast'
 import CustomPageFormWrapper, {
   CustomPageFormWrapperWithData,
 } from '@components/BackOffice/CustomPages/CustomPageFormWrapper'
+import Layout from '@components/BackOffice/Layout/Layout'
+import useUrlState from '@hooks/useUrlState'
+import { useUrlToast } from '@hooks/useUrlToast'
+import withPageAuthRequired from '@utils/withPageAuthRequired'
+import * as React from 'react'
 
 const CustomPage = (): React.JSX.Element => {
   const [idFromUrl] = useUrlState('id', '')
@@ -27,9 +27,6 @@ const CustomPage = (): React.JSX.Element => {
   )
 }
 
-export const getServerSideProps = withFeatureFlagRequired(
-  'unstable__sonata_migration_to_admin_next',
-  '/admin/capco/app/page/list',
-)
+export const getServerSideProps = withPageAuthRequired
 
 export default CustomPage

@@ -4,20 +4,6 @@ services:
         public: true
         autowire: true
 
-    Capco\AdminBundle\Admin\PageAdmin:
-        arguments: [~, Capco\AppBundle\Entity\Page, Capco\AdminBundle\Controller\PageController]
-        tags:
-            - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.content,
-                  label: admin.label.page,
-                  show_in_dashboard: true,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
-        calls:
-            - [setTranslationDomain, [CapcoAppBundle]]
-
     Capco\AdminBundle\Admin\OpinionAdmin:
         arguments:
             [
@@ -266,25 +252,6 @@ services:
                       },
                   ],
               ]
-
-    Capco\AdminBundle\Admin\ThemeAdmin:
-        arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\Theme,
-                Capco\AdminBundle\Controller\CRUDController,
-                '@Capco\AppBundle\Elasticsearch\Indexer',
-            ]
-        tags:
-            - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.content,
-                  label: admin.label.theme,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
-        calls:
-            - [setTranslationDomain, [CapcoAppBundle]]
 
     Capco\AdminBundle\Admin\OpinionVoteAdmin:
         arguments: [~, Capco\AppBundle\Entity\OpinionVote, Capco\AdminBundle\Controller\CRUDController]
@@ -596,16 +563,6 @@ services:
         arguments: [~, Capco\AppBundle\Entity\Font, Capco\AdminBundle\Controller\FontController]
         tags:
             - { name: sonata.admin, manager_type: orm, label: global-typeface }
-
-    Capco\AdminBundle\Admin\EmailingListAdmin:
-        arguments: [~, Capco\AppBundle\Entity\MailingList, Capco\AdminBundle\Controller\EmailingListController]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: admin-menu-emailing-list }
-
-    Capco\AdminBundle\Admin\EmailingCampaignAdmin:
-        arguments: [~, Capco\AppBundle\Entity\EmailingCampaign, Capco\AdminBundle\Controller\EmailingCampaignController]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: admin-menu-campaign-list }
 
     Capco\AdminBundle\Admin\MediaAdmin:
         arguments: [~, Capco\AppBundle\Entity\Media, Capco\AdminBundle\Controller\MediaAdminController]

@@ -12,12 +12,6 @@ describe('Theme Admin Page', () => {
 
   beforeEach(() => {
     cy.task('db:restore')
-    cy.task('enable:feature', 'unstable__sonata_migration_to_admin_next')
-  })
-
-  after(() => {
-    cy.task('disable:feature', 'unstable__sonata_migration_to_admin_next')
-    cy.task('disable:feature', 'multilangue')
   })
 
   it('redirects a non-admin account to 403 page', () => {

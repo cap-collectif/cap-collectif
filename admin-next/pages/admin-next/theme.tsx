@@ -1,10 +1,10 @@
-import * as React from 'react'
-import Layout from '@components/BackOffice/Layout/Layout'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
-import { withFeatureFlagRequired } from '@utils/withPageAuthRequired'
+import Layout from '@components/BackOffice/Layout/Layout'
+import ThemeFormWrapper, { ThemeFormWrapperWithData } from '@components/BackOffice/Themes/ThemeFormWrapper'
 import useUrlState from '@hooks/useUrlState'
 import { useUrlToast } from '@hooks/useUrlToast'
-import ThemeFormWrapper, { ThemeFormWrapperWithData } from '@components/BackOffice/Themes/ThemeFormWrapper'
+import withPageAuthRequired from '@utils/withPageAuthRequired'
+import * as React from 'react'
 
 const Theme = (): React.JSX.Element => {
   const [idFromUrl] = useUrlState('id', '')
@@ -25,9 +25,6 @@ const Theme = (): React.JSX.Element => {
   )
 }
 
-export const getServerSideProps = withFeatureFlagRequired(
-  'unstable__sonata_migration_to_admin_next',
-  '/admin/capco/app/theme/list',
-)
+export const getServerSideProps = withPageAuthRequired
 
 export default Theme

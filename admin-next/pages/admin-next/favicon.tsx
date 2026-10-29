@@ -1,10 +1,10 @@
-import * as React from 'react'
-import { Suspense } from 'react'
-import { useIntl } from 'react-intl'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
 import Layout from '@components/BackOffice/Layout/Layout'
 import SiteFaviconForm from '@components/BackOffice/SiteFavicon/SiteFaviconForm'
-import { withFeatureFlagRequired } from '@utils/withPageAuthRequired'
+import withPageAuthRequired from '@utils/withPageAuthRequired'
+import * as React from 'react'
+import { Suspense } from 'react'
+import { useIntl } from 'react-intl'
 
 const SiteFavicon: React.FC = () => {
   const intl = useIntl()
@@ -24,9 +24,6 @@ const SiteFavicon: React.FC = () => {
   )
 }
 
-export const getServerSideProps = withFeatureFlagRequired(
-  'unstable__sonata_migration_to_admin_next',
-  '/admin/favicon/list',
-)
+export const getServerSideProps = withPageAuthRequired
 
 export default SiteFavicon

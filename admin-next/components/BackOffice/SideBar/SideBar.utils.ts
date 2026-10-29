@@ -2,13 +2,8 @@ import { FeatureFlagType } from '@relay/useFeatureFlagQuery.graphql'
 import { FeatureFlags } from 'types'
 import sideBarItems from './SideBarItems.json'
 
-const SONATA_URL_BY_ADMIN_NEXT_URL: Record<string, string> = {
-  '/admin-next/themes': '/admin/capco/app/theme/list',
-  '/admin-next/custom-pages': '/admin/capco/app/page/list',
-  '/admin-next/emailing-campaigns': '/admin/mailingCampaign/list',
-  '/admin-next/mailing-lists': '/admin/mailingList/list',
-  '/admin-next/favicon': '/admin/favicon/list',
-}
+// Admin Next pages in rollout behind the migration feature flag, mapped to the Sonata route served while it is disabled
+const SONATA_URL_BY_ADMIN_NEXT_URL: Record<string, string> = {}
 
 // An exact match: `includes` would also select "/admin-next/user-types" on the "/admin-next/user" page
 export const isSideBarSubItemSelected = (item: { href: string; relatedHrefs?: string[] }, pathname: string): boolean =>

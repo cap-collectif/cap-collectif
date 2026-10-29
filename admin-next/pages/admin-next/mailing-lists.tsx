@@ -1,9 +1,9 @@
+import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
+import MailingListsPage from '@components/BackOffice/Emailing/MailingLists/MailingListsPage'
+import { withEmailingPageRequired } from '@components/BackOffice/Emailing/utils'
+import Layout from '@components/BackOffice/Layout/Layout'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
-import Layout from '@components/BackOffice/Layout/Layout'
-import MailingListsPage from '@components/BackOffice/Emailing/MailingLists/MailingListsPage'
-import { SONATA_MAILING_LISTS_URL, withEmailingPageRequired } from '@components/BackOffice/Emailing/utils'
 
 const MailingLists: React.FC = () => {
   const intl = useIntl()
@@ -27,6 +27,6 @@ const MailingLists: React.FC = () => {
   )
 }
 
-export const getServerSideProps = withEmailingPageRequired(SONATA_MAILING_LISTS_URL)
+export const getServerSideProps = withEmailingPageRequired
 
 export default MailingLists

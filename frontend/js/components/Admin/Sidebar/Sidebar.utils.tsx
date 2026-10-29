@@ -15,14 +15,11 @@ export const URL_MAP = {
   ],
   contenus: [
     '/admin/capco/app/highlightedcontent/',
-    '/admin/capco/app/theme/',
     '/admin-next/themes',
     '/admin-next/theme',
     '/admin/capco/app/event/',
     '/admin-next/videos',
     '/admin-next/video',
-    // migrated with feature flag, keep it until the flag is removed for this page
-    '/admin/capco/app/page/',
     '/admin-next/custom-pages',
     '/admin-next/custom-page',
     '/admin/capco/media/media/',
@@ -54,8 +51,6 @@ export const URL_MAP = {
     '/admin-next/custom-code',
     '/admin/map/',
     '/admin/redirect/',
-    // migrated with feature flag, keep it until the flag is removed for this page
-    '/admin/favicon/',
     '/admin-next/favicon',
     '/admin/font/',
     '/admin/settings/settings.global/',
@@ -85,9 +80,7 @@ export const URL_MAP = {
     '/admin-next/charter-settings',
   ],
   emailing: [
-    '/admin/mailingCampaign/',
     '/admin-next/emailing-campaign',
-    '/admin/mailingList/',
     '/admin-next/mailing-lists',
     '/admin/mailingParameters/list',
     '/admin-next/newsletter-subscriptions',

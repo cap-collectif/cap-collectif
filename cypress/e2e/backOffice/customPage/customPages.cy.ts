@@ -2,11 +2,7 @@
  * @cypress-status compliant
  * @cypress-reason Back-office CRUD workflow following the social networks reference test.
  */
-import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
-
 describe('Custom pages back office', () => {
-  setupFeatureFlags({ unstable__sonata_migration_to_admin_next: true })
-
   before(() => {
     cy.task('db:restore')
   })
@@ -76,12 +72,5 @@ describe('Custom pages back office', () => {
     cy.contains('admin.custom-pages.successfully-deleted').should('be.visible')
 
     cy.contains(updatedTitle).should('not.exist')
-  })
-
-  it('keeps the Sonata custom pages while the migration flag is disabled', () => {
-    cy.setFeatureFlags({ unstable__sonata_migration_to_admin_next: false })
-    cy.directLoginAs('admin')
-    visitCustomPagesPage()
-    cy.url().should('contain', '/admin/capco/app/page/list')
   })
 })

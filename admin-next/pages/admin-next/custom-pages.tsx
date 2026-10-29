@@ -6,7 +6,7 @@ import { useUrlToast } from '@hooks/useUrlToast'
 import { customPages_Query } from '@relay/customPages_Query.graphql'
 import debounce from '@shared/utils/debounce-promise'
 import TablePlaceholder from '@ui/Table/TablePlaceholder'
-import { withFeatureFlagRequired } from '@utils/withPageAuthRequired'
+import withPageAuthRequired from '@utils/withPageAuthRequired'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { graphql, GraphQLTaggedNode, useLazyLoadQuery } from 'react-relay'
@@ -55,10 +55,7 @@ const CustomPagesTab: React.FC = () => {
   )
 }
 
-export const getServerSideProps = withFeatureFlagRequired(
-  'unstable__sonata_migration_to_admin_next',
-  '/admin/capco/app/page/list',
-)
+export const getServerSideProps = withPageAuthRequired
 
 const CustomPagesPage: React.FC = () => {
   const intl = useIntl()

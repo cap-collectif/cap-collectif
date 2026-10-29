@@ -1,6 +1,5 @@
 import ReactOnRails from 'react-on-rails'
 import AdminRightNavbarApp from '~/startup/AdminRightNavbarApp'
-import SiteFaviconAdminPageApp from '~/startup/SiteFaviconAdminPageApp'
 import ProposalFormAdminPageApp from '~/startup/ProposalFormAdminPageApp'
 import QuestionnaireAdminPageApp from '~/startup/QuestionnaireAdminPageApp'
 import UserAdminCreateButtonApp from '~/startup/UserAdminCreateButtonApp'
@@ -15,9 +14,6 @@ import FontAdminPageApp from '~/startup/FontAdminPageApp'
 import appStore from '~/stores/AppStore'
 import ProposalCreateFusionButtonApp from '~/startup/ProposalCreateFusionButtonApp'
 import LanguageButtonApp from '~/startup/LanguageButtonApp'
-import EmailingListPageApp from '~/startup/EmailingListPageApp'
-import EmailingCampaignPageApp from '~/startup/EmailingCampaignPageApp'
-import EmailingMailParameterPageApp from '~/startup/EmailingMailParameterPageApp'
 import EmailingParametersPageApp from '~/startup/EmailingParametersPageApp'
 import ToastsContainerApp from '~/startup/ToastsContainerApp'
 import HomePageProjectsSectionConfigurationApp from '~/startup/HomePageProjectsSectionConfigurationApp'
@@ -29,7 +25,6 @@ ReactOnRails.registerStore({
 })
 ReactOnRails.register({
   ToastsContainerApp,
-  SiteFaviconAdminPageApp,
   AdminRightNavbarApp,
   ProposalFormAdminPageApp,
   QuestionnaireAdminPageApp,
@@ -46,9 +41,6 @@ ReactOnRails.register({
   LanguageButtonApp,
   HomePageProjectsSectionConfigurationApp,
   HomePageProjectsMapSectionConfigurationApp,
-  EmailingListPageApp,
-  EmailingCampaignPageApp,
-  EmailingMailParameterPageApp,
   EmailingParametersPageApp,
   SidebarApp,
 })

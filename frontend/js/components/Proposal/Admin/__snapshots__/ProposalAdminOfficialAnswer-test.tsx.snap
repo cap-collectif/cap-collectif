@@ -4,7 +4,7 @@ exports[`<ProposalAdminOfficialAnswer /> render correctly with analysis 1`] = `
 <div
   className="mt-20"
 >
-  <NoMailingListstyle__Container>
+  <ProposalAdminOfficialAnswerstyle__Container>
     <Icon
       color="#ffffff"
       name="stampedPaper"
@@ -28,7 +28,7 @@ exports[`<ProposalAdminOfficialAnswer /> render correctly with analysis 1`] = `
         values={Object {}}
       />
     </a>
-  </NoMailingListstyle__Container>
+  </ProposalAdminOfficialAnswerstyle__Container>
 </div>
 `;
 

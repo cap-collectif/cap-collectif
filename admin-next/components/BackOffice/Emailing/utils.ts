@@ -9,10 +9,6 @@ export const MAILING_LISTS_URL = '/admin-next/mailing-lists'
 export const EMAILING_CAMPAIGNS_URL = '/admin-next/emailing-campaigns'
 export const getEmailingCampaignUrl = (id: string) => `/admin-next/emailing-campaign?id=${id}`
 
-// Sonata routes retained during the Admin Next migration rollout. Remove them with the migration feature flag.
-export const SONATA_MAILING_LISTS_URL = '/admin/mailingList/list'
-export const SONATA_EMAILING_CAMPAIGNS_URL = '/admin/mailingCampaign/list'
-
 export const HELP_CENTER_LINK_KEY = 'admin.help.link.emailing'
 
 // The only internal list that can be picked as recipient (admins only)
@@ -40,20 +36,5 @@ export const DATE_TIME_FORMAT: Intl.DateTimeFormatOptions = {
   minute: 'numeric',
 }
 
-/**
- * The emailing pages are only reachable when the `emailing` feature is enabled, and during the rollout,
- * when the migration feature flag is enabled (otherwise the Sonata page is served).
- */
-export const withEmailingPageRequired = (sonataUrl: string): GetServerSideProps => {
-  const withMigrationFlag = withFeatureFlagRequired('unstable__sonata_migration_to_admin_next', sonataUrl)
-
-  return async context => {
-    const result = await withMigrationFlag(context)
-
-    if ('props' in result && 'featureFlags' in result.props && !result.props.featureFlags.emailing) {
-      return { redirect: { destination: '/', permanent: false } }
-    }
-
-    return result
-  }
-}
+// The emailing pages are only reachable when the `emailing` feature is enabled
+export const withEmailingPageRequired: GetServerSideProps = withFeatureFlagRequired('emailing', '/')

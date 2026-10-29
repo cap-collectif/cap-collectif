@@ -104,7 +104,7 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
        ne trouve aucune entrée et n'exige donc aucun rôle : un project admin voit le squelette de la page, seules
        les queries/mutations (`access: hasRole('ROLE_ADMIN')`) le bloquent. Toujours protéger aussi le GraphQL.
    - **Contrôle d'accès par objet fait dans le contrôleur Sonata** : certaines pages (ex: édition d'une campagne
-     d'emailing, `EmailingCampaignController`) vérifient un voter sur l'objet (`EmailingCampaignVoter::VIEW`) avant
+     d'emailing, ancien `EmailingCampaignController`) vérifient un voter sur l'objet (`EmailingCampaignVoter::VIEW`) avant
      de rendre un composant React. Ce contrôle disparaît avec le contrôleur : vérifier que la query utilisée par la
      page Admin Next le refait. `node(id:)` (`GlobalIdResolver::viewerCanSee`) renvoie par défaut **n'importe quel**
      objet à n'importe quel viewer, sauf pour les entités traitées explicitement (`canDisplay`,
@@ -158,7 +158,24 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
    - si la page dépend aussi d'un feature flag fonctionnel (ex: `emailing`), le vérifier côté serveur en plus du
      flag de migration : `featuresRequired` dans `SideBarItems.json` ne fait que masquer l'entrée du menu.
      `withFeatureFlagRequired` ne gère qu'un flag ; composer les deux dans un `getServerSideProps` dédié à la
-     feature (voir `withEmailingPageRequired` dans `components/BackOffice/Emailing/utils.ts`).
+     feature, comme l'ont fait les pages d'emailing pendant leur rollout :
+     ```typescript
+     export const withEmailingPageRequired = (sonataUrl: string): GetServerSideProps => {
+       const withMigrationFlag = withFeatureFlagRequired('unstable__sonata_migration_to_admin_next', sonataUrl)
+
+       return async context => {
+         const result = await withMigrationFlag(context)
+
+         if ('props' in result && 'featureFlags' in result.props && !result.props.featureFlags.emailing) {
+           return { redirect: { destination: '/', permanent: false } }
+         }
+
+         return result
+       }
+     }
+     ```
+     Au nettoyage, il ne reste que le flag fonctionnel : `withFeatureFlagRequired('emailing', '/')` (voir
+     `withEmailingPageRequired` dans `components/BackOffice/Emailing/utils.ts`).
    - utiliser le même feature flag pour toutes les pages déjà migrées, afin d'activer progressivement la
      refonte sans multiplier les règles d'accès temporaires. Les pages non encore migrées restent naturellement
      sur Sonata.
@@ -192,6 +209,14 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
      ```typescript
      // Sonata route retained during the Admin Next migration rollout. Remove it with the migration feature flag.
      ```
+   - **Tests unitaires des menus pendant le rollout** (`SideBar.utils.test.ts`, `Sidebar-test.tsx`) : un test par
+     page qui vérifie la bascule, route Sonata avec le flag désactivé et route Admin Next avec le flag activé. Ces
+     tests sont **temporaires** : ils testent la substitution liée au flag, pas un comportement durable du menu,
+     et sont supprimés au nettoyage (étape 4 de la recette de nettoyage). Sans feature flag, n'en écrire aucun :
+     un test qui attend le `href` inscrit dans `SideBarItems.json` ou dans `Sidebar.tsx` ne fait que relire la
+     configuration. Un test de menu n'est durable que s'il teste une logique : condition d'affichage (ex: les
+     réglages de notifications masqués quand `emailing` et `emailing_parameters` sont actifs), filtrage par
+     feature flag ou par rôle, sélection de l'entrée courante.
 10. **Si de nouvelles mutations/types GraphQL backend ont été ajoutés** (nouveaux fichiers yaml sous
    `src/Capco/AppBundle/Resources/config/graphql/internal/`), il faut, **dans cet ordre**, avant que
    `admin-next` puisse les consommer :
@@ -359,8 +384,8 @@ Exemple de référence : la page « Icône du site » (`/admin/favicon/list` →
   place pendant le rollout : ils testent du code encore servi quand le flag est désactivé.
 - Chercher des specs Cypress existantes par l'URL et par les sélecteurs du composant legacy (ex:
   `#site_favicon_save`) : beaucoup de ces pages n'en ont aucune. Pour une page de réglage rarement utilisée
-  (ex: l'icône du site, configurée en général une seule fois par plateforme), ne pas en créer : les tests des
-  menus et les tests Jest API existants suffisent.
+  (ex: l'icône du site, configurée en général une seule fois par plateforme), ne pas en créer : les tests Jest API
+  existants suffisent (les tests des menus ne couvrent que le rollout et sont supprimés au nettoyage).
 
 ### Inventaire des pages React legacy et travail restant
 
@@ -406,18 +431,12 @@ flag), **à nettoyer** (Admin Next déjà en place, route legacy encore présent
 
 #### Emailing
 
-- **Édition d'une campagne** — à refondre (vérifier si la refonte en cours de la page des campagnes la couvre)
-  - Composant : `EmailingMailParameterPageApp` (`Emailing/emailingCampaignEdit.html.twig`)
 - **Paramètres d'emailing** — à refondre
   - URL : `/admin/mailingParameters/list`
   - Composant : `EmailingParametersPageApp` (`EmailingParametersController`)
 
 #### Pages et paramètres
 
-- **Icône du site** — à refondre
-  - URL : `/admin/favicon/list` → `/admin-next/favicon`
-  - Composant : `SiteFaviconAdminPageApp` (`SiteFaviconController`)
-  - Reste : fusion, validation, puis nettoyage.
 - **Contact** — à refondre
   - URL : `/admin/contact/list`
   - Composant : `ContactAdminPageApp` (`ContactController` de l'AdminBundle)
@@ -487,10 +506,11 @@ Pour chaque page qui sort :
 3. **Menu legacy** (`frontend/js/components/Admin/Sidebar/Sidebar.tsx`) : remplacer le `href` conditionnel par
    la route Admin Next en dur et supprimer le commentaire « Sonata route retained… ». Dans `URL_MAP`
    (`Sidebar.utils.tsx`), retirer le préfixe Sonata et garder le préfixe Admin Next.
-4. **Tests unitaires des menus** (`SideBar.utils.test.ts`, `Sidebar-test.tsx`) : remplacer la paire « Sonata
-   quand le flag est désactivé / Admin Next quand il est activé » par un seul test qui attend la route Admin Next
-   **avec les feature flags par défaut** (flag désactivé). C'est ce test qui prouve que la page ne dépend plus du
-   flag. Garder les flags fonctionnels requis par l'entrée (ex: `privacy_policy: true`).
+4. **Tests unitaires des menus** (`SideBar.utils.test.ts`, `Sidebar-test.tsx`) : **supprimer** les tests de
+   rollout de la page (paire « Sonata quand le flag est désactivé / Admin Next quand il est activé »), sans les
+   remplacer par un test « utilise la route Admin Next » : une fois l'entrée retirée de
+   `SONATA_URL_BY_ADMIN_NEXT_URL` et le `href` écrit en dur, un tel test ne ferait que relire la configuration du
+   menu. Garder les tests qui testent une logique (voir l'étape 9 de la méthodologie).
 5. **Specs Cypress** de la page : supprimer les `cy.task('enable:feature' | 'disable:feature',
    'unstable__sonata_migration_to_admin_next')` et `cy.enableFeatureFlag(...)`. Ne pas supprimer les commandes
    `enableFeatureFlag`/`disableFeatureFlag` de `cypress/support/featureFlags.ts`, même si plus aucun spec ne
@@ -514,6 +534,10 @@ Pour chaque page qui sort :
    deux menus, `yarn ts` dans `admin-next/`, et les specs Cypress de la page **avec le flag désactivé**. Après
    un spec qui l'activait sans le désactiver, le flag peut rester actif dans le namespace Redis `test` : le
    désactiver avant de lancer le spec, sinon le run ne prouve rien.
+   `bin/console router:match <ancienne URL>` doit renvoyer `capco_app_cms` : cette route `/{url}` ne sert qu'à
+   générer des URL et n'a pas de contrôleur, Symfony répond donc 404 (un visiteur non connecté est d'abord
+   redirigé vers la connexion par la règle `^/admin`). Toute autre route signifie qu'une route Sonata ou Symfony
+   sert encore l'ancienne URL.
 
 **Ne jamais supprimer le code qui pourrait servir à une prochaine refonte** (le flag, `withFeatureFlagRequired`,
 `SONATA_URL_BY_ADMIN_NEXT_URL`, les commandes Cypress de feature flag, le contrôleur générique des réglages…) tant
@@ -570,10 +594,10 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
   `pages/admin-next/geographical-area.tsx` (lecture via `node(id:)` + `useUrlState('id', '')`) et
   `components/BackOffice/GeographicalArea/GeographicalAreaForm.tsx`. Déclarer la page d'édition dans le
   `relatedHrefs` de l'item de menu de la liste (`SideBarItems.json`) pour qu'elle hérite de son rôle requis.
-  - **Format « articles » (formulaire à 70 % + encart latéral en accordéon à 30 %), avec feature flag de
-    migration** : `pages/admin-next/custom-pages.tsx` / `custom-page.tsx` et
-    `components/BackOffice/CustomPages/` (pages personnalisées). Les deux pages ont le garde
-    `withFeatureFlagRequired`, pas seulement la liste. L'encart reprend la taille d'accordéon des articles
+  - **Format « articles » (formulaire à 70 % + encart latéral en accordéon à 30 %)** :
+    `pages/admin-next/custom-pages.tsx` / `custom-page.tsx` et `components/BackOffice/CustomPages/` (pages
+    personnalisées). Pendant le rollout, les deux pages portaient le garde `withFeatureFlagRequired`, pas
+    seulement la liste. L'encart reprend la taille d'accordéon des articles
     (`CapUIAccordionSize.md`, `PostFormSide.tsx`) ; un uploader dans un accordéon suit
     `OrganizationConfigFormSide.tsx` (`UPLOADER_SIZE.SM`, `isFullWidth`, `FormGuideline` pour formats/poids).
 - **Page dédiée création/édition avec accordéons à droite (layout de `/post`), multilangue inclus** :

@@ -225,15 +225,7 @@ parameters:
 			count: 1
 			path: src/Capco/AdminBundle/Admin/ConsultationAdmin.php
 
-		-
-			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\EmailingCampaignAdmin\\:\\:getFeatures\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/EmailingCampaignAdmin.php
 
-		-
-			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\EmailingListAdmin\\:\\:getFeatures\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/EmailingListAdmin.php
 
 		-
 			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\EventAdmin\\:\\:getFeatures\\(\\) has no return type specified\\.$#"
@@ -360,10 +352,6 @@ parameters:
 			count: 1
 			path: src/Capco/AdminBundle/Admin/OpinionVoteAdmin.php
 
-		-
-			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\PageAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/PageAdmin.php
 
 		-
 			message: "#^If condition is always true\\.$#"
@@ -610,20 +598,8 @@ parameters:
 			count: 1
 			path: src/Capco/AdminBundle/Admin/StepAdmin.php
 
-		-
-			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\ThemeAdmin\\:\\:getFeatures\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/ThemeAdmin.php
 
-		-
-			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/ThemeAdmin.php
 
-		-
-			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\ThemeAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/ThemeAdmin.php
 
 		-
 			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
@@ -730,10 +706,6 @@ parameters:
 			count: 1
 			path: src/Capco/AdminBundle/Controller/ConsultationController.php
 
-		-
-			message: "#^Method Capco\\\\AdminBundle\\\\Controller\\\\EmailingCampaignController\\:\\:getEmailingCampaignFromGlobalId\\(\\) should return Capco\\\\AppBundle\\\\Entity\\\\EmailingCampaign\\|null but returns object\\|null\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Controller/EmailingCampaignController.php
 
 		-
 			message: "#^Method Capco\\\\AdminBundle\\\\Controller\\\\EmailingParametersController\\:\\:listAction\\(\\) has no return type specified\\.$#"
@@ -790,10 +762,6 @@ parameters:
 			count: 2
 			path: src/Capco/AdminBundle/Controller/OpinionController.php
 
-		-
-			message: "#^Negated boolean expression is always true\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Controller/PageController.php
 
 		-
 			message: "#^Method Capco\\\\AdminBundle\\\\Controller\\\\PositionableController\\:\\:downAction\\(\\) has no return type specified\\.$#"
@@ -940,10 +908,6 @@ parameters:
 			count: 1
 			path: src/Capco/AdminBundle/Controller/SettingsController.php
 
-		-
-			message: "#^Method Capco\\\\AdminBundle\\\\Controller\\\\SiteFaviconController\\:\\:listAction\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Controller/SiteFaviconController.php
 
 		-
 			message: "#^Method Capco\\\\AdminBundle\\\\Controller\\\\StepController\\:\\:retrieveProposalsAutocompleteItemsAction\\(\\) has no return type specified\\.$#"
