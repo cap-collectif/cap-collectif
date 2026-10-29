@@ -30,7 +30,7 @@ Si vous avez déjà installé le projet, il embarque un système de précommit q
 * [Atom](https://github.com/Glavin001/atom-beautify)
 * [NetBeans](https://plugins.netbeans.apache.org/catalogue/?id=36)
 * [PhpStorm](https://www.jetbrains.com/help/phpstorm/using-php-cs-fixer.html)
-* [Sublime Text](https://github.com/benmatselby/sublime-phpcs)
+* [Documentation PHP-CS-Fixer](https://cs.symfony.com/doc/)
 * [Vim](https://github.com/stephpy/vim-php-cs-fixer)
 * [VS Code](https://github.com/junstyle/vscode-php-cs-fixer)
 

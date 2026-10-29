@@ -159,7 +159,6 @@
             "pyrech/composer-changelogs": true,
             "simplesamlphp/composer-module-installer": true,
             "php-http/discovery": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true,
             "composer/package-versions-deprecated": true,
             "symfony/flex": true
         },
