@@ -370,6 +370,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
     </Text>
     <Field
       component={[Function]}
+      divClassName="proposal_webPageUrl_container"
       id="proposal_wep_page"
       label="form.label_website"
       name="webPageUrl"
@@ -378,6 +379,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
     />
     <Field
       component={[Function]}
+      divClassName="proposal_twitterUrl_container"
       id="proposal_twitter"
       label="share.twitter"
       name="twitterUrl"
@@ -386,6 +388,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
     />
     <Field
       component={[Function]}
+      divClassName="proposal_facebookUrl_container"
       id="proposal_facebook"
       label="share.facebook"
       name="facebookUrl"
@@ -394,6 +397,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
     />
     <Field
       component={[Function]}
+      divClassName="proposal_instagramUrl_container"
       id="proposal_instagram"
       label="instagram"
       name="instagramUrl"
@@ -402,6 +406,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
     />
     <Field
       component={[Function]}
+      divClassName="proposal_linkedInUrl_container"
       id="proposal_linkedin"
       label="share.linkedin"
       name="linkedInUrl"
@@ -410,6 +415,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
     />
     <Field
       component={[Function]}
+      divClassName="proposal_youtubeUrl_container"
       id="proposal_youtube"
       label="youtube"
       name="youtubeUrl"
@@ -815,6 +821,7 @@ exports[`<ProposalForm /> should render a create Proposal form from back office 
     </Text>
     <Field
       component={[Function]}
+      divClassName="proposal_webPageUrl_container"
       id="proposal_wep_page"
       label="form.label_website"
       name="webPageUrl"
@@ -823,6 +830,7 @@ exports[`<ProposalForm /> should render a create Proposal form from back office 
     />
     <Field
       component={[Function]}
+      divClassName="proposal_twitterUrl_container"
       id="proposal_twitter"
       label="share.twitter"
       name="twitterUrl"
@@ -831,6 +839,7 @@ exports[`<ProposalForm /> should render a create Proposal form from back office 
     />
     <Field
       component={[Function]}
+      divClassName="proposal_facebookUrl_container"
       id="proposal_facebook"
       label="share.facebook"
       name="facebookUrl"
@@ -839,6 +848,7 @@ exports[`<ProposalForm /> should render a create Proposal form from back office 
     />
     <Field
       component={[Function]}
+      divClassName="proposal_instagramUrl_container"
       id="proposal_instagram"
       label="instagram"
       name="instagramUrl"
@@ -847,6 +857,7 @@ exports[`<ProposalForm /> should render a create Proposal form from back office 
     />
     <Field
       component={[Function]}
+      divClassName="proposal_linkedInUrl_container"
       id="proposal_linkedin"
       label="share.linkedin"
       name="linkedInUrl"
@@ -855,6 +866,7 @@ exports[`<ProposalForm /> should render a create Proposal form from back office 
     />
     <Field
       component={[Function]}
+      divClassName="proposal_youtubeUrl_container"
       id="proposal_youtube"
       label="youtube"
       name="youtubeUrl"
@@ -1235,6 +1247,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
     </Text>
     <Field
       component={[Function]}
+      divClassName="proposal_webPageUrl_container"
       id="proposal_wep_page"
       label="form.label_website"
       name="webPageUrl"
@@ -1243,6 +1256,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
     />
     <Field
       component={[Function]}
+      divClassName="proposal_twitterUrl_container"
       id="proposal_twitter"
       label="share.twitter"
       name="twitterUrl"
@@ -1251,6 +1265,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
     />
     <Field
       component={[Function]}
+      divClassName="proposal_facebookUrl_container"
       id="proposal_facebook"
       label="share.facebook"
       name="facebookUrl"
@@ -1259,6 +1274,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
     />
     <Field
       component={[Function]}
+      divClassName="proposal_instagramUrl_container"
       id="proposal_instagram"
       label="instagram"
       name="instagramUrl"
@@ -1267,6 +1283,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
     />
     <Field
       component={[Function]}
+      divClassName="proposal_linkedInUrl_container"
       id="proposal_linkedin"
       label="share.linkedin"
       name="linkedInUrl"
@@ -1275,6 +1292,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
     />
     <Field
       component={[Function]}
+      divClassName="proposal_youtubeUrl_container"
       id="proposal_youtube"
       label="youtube"
       name="youtubeUrl"
@@ -1655,6 +1673,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
     </Text>
     <Field
       component={[Function]}
+      divClassName="proposal_webPageUrl_container"
       id="proposal_wep_page"
       label="form.label_website"
       name="webPageUrl"
@@ -1663,6 +1682,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
     />
     <Field
       component={[Function]}
+      divClassName="proposal_twitterUrl_container"
       id="proposal_twitter"
       label="share.twitter"
       name="twitterUrl"
@@ -1671,6 +1691,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
     />
     <Field
       component={[Function]}
+      divClassName="proposal_facebookUrl_container"
       id="proposal_facebook"
       label="share.facebook"
       name="facebookUrl"
@@ -1679,6 +1700,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
     />
     <Field
       component={[Function]}
+      divClassName="proposal_instagramUrl_container"
       id="proposal_instagram"
       label="instagram"
       name="instagramUrl"
@@ -1687,6 +1709,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
     />
     <Field
       component={[Function]}
+      divClassName="proposal_linkedInUrl_container"
       id="proposal_linkedin"
       label="share.linkedin"
       name="linkedInUrl"
@@ -1695,6 +1718,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
     />
     <Field
       component={[Function]}
+      divClassName="proposal_youtubeUrl_container"
       id="proposal_youtube"
       label="youtube"
       name="youtubeUrl"
@@ -2075,6 +2099,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     </Text>
     <Field
       component={[Function]}
+      divClassName="proposal_webPageUrl_container"
       id="proposal_wep_page"
       label="form.label_website"
       name="webPageUrl"
@@ -2083,6 +2108,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     />
     <Field
       component={[Function]}
+      divClassName="proposal_twitterUrl_container"
       id="proposal_twitter"
       label="share.twitter"
       name="twitterUrl"
@@ -2091,6 +2117,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     />
     <Field
       component={[Function]}
+      divClassName="proposal_facebookUrl_container"
       id="proposal_facebook"
       label="share.facebook"
       name="facebookUrl"
@@ -2099,6 +2126,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     />
     <Field
       component={[Function]}
+      divClassName="proposal_instagramUrl_container"
       id="proposal_instagram"
       label="instagram"
       name="instagramUrl"
@@ -2107,6 +2135,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     />
     <Field
       component={[Function]}
+      divClassName="proposal_linkedInUrl_container"
       id="proposal_linkedin"
       label="share.linkedin"
       name="linkedInUrl"
@@ -2115,6 +2144,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     />
     <Field
       component={[Function]}
+      divClassName="proposal_youtubeUrl_container"
       id="proposal_youtube"
       label="youtube"
       name="youtubeUrl"

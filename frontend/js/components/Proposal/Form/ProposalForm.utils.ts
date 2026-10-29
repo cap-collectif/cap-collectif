@@ -7,6 +7,7 @@ const scrollToFormError = (errors: any) => {
     'theme',
     'category',
     'addressText',
+    'address',
     'district',
     'body',
     'responses',
@@ -25,7 +26,7 @@ const scrollToFormError = (errors: any) => {
   if (error) {
     let selector = ''
     if (error !== 'responses') {
-      selector = `proposal_${error}_container`
+      selector = `proposal_${error === 'address' ? 'addressText' : error}_container`
       const element = document.getElementsByClassName(selector)[0]
       if (element) element.scrollIntoView(true)
     }

@@ -870,6 +870,7 @@ export class ProposalForm extends React.Component<Props, State> {
               <Field
                 id="proposal_wep_page"
                 name="webPageUrl"
+                divClassName="proposal_webPageUrl_container"
                 placeholder={intl.formatMessage({
                   id: 'your-url',
                 })}
@@ -884,6 +885,7 @@ export class ProposalForm extends React.Component<Props, State> {
               <Field
                 id="proposal_twitter"
                 name="twitterUrl"
+                divClassName="proposal_twitterUrl_container"
                 component={component}
                 type="text"
                 label={intl.formatMessage({
@@ -896,6 +898,7 @@ export class ProposalForm extends React.Component<Props, State> {
               <Field
                 id="proposal_facebook"
                 name="facebookUrl"
+                divClassName="proposal_facebookUrl_container"
                 component={component}
                 type="text"
                 label={intl.formatMessage({
@@ -908,6 +911,7 @@ export class ProposalForm extends React.Component<Props, State> {
               <Field
                 id="proposal_instagram"
                 name="instagramUrl"
+                divClassName="proposal_instagramUrl_container"
                 component={component}
                 type="text"
                 label={intl.formatMessage({
@@ -920,6 +924,7 @@ export class ProposalForm extends React.Component<Props, State> {
               <Field
                 id="proposal_linkedin"
                 name="linkedInUrl"
+                divClassName="proposal_linkedInUrl_container"
                 component={component}
                 type="text"
                 label={intl.formatMessage({
@@ -932,6 +937,7 @@ export class ProposalForm extends React.Component<Props, State> {
               <Field
                 id="proposal_youtube"
                 name="youtubeUrl"
+                divClassName="proposal_youtubeUrl_container"
                 component={component}
                 type="text"
                 label={intl.formatMessage({
