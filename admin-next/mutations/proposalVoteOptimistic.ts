@@ -52,7 +52,9 @@ export const getVoteIdForRemoval = (
   proposalId: string,
   voteId: string | null,
 ): string | null =>
-  viewerVotes.find(vote => vote.id === voteId)?.id ?? viewerVotes.find(vote => vote.proposalId === proposalId)?.id ?? null
+  viewerVotes.find(vote => vote.id === voteId)?.id ??
+  viewerVotes.find(vote => vote.proposalId === proposalId)?.id ??
+  null
 
 export const getVotePoints = (ranking: number | null, votesLimit: number | null): number => {
   if (ranking === null || votesLimit === null) return 0
@@ -120,7 +122,8 @@ export const applyOptimisticVoteAddition = (
   proposal.setValue(true, 'viewerHasVote', { step: stepId })
   proposal.setLinkedRecord(clientVote, 'viewerVote', { step: stepId })
 
-  const clientEdge = store.create(`client:proposal-vote-edge:${stepId}:${proposalId}`, 'ProposalVoteEdge')
+  const edgeDataId = `client:proposal-vote-edge:${stepId}:${proposalId}`
+  const clientEdge = store.get(edgeDataId) ?? store.create(edgeDataId, 'ProposalVoteEdge')
   clientEdge.setLinkedRecord(clientVote, 'node')
   const estimation = proposal.getValue('estimation')
   for (const connection of viewerVotesConnections) {
