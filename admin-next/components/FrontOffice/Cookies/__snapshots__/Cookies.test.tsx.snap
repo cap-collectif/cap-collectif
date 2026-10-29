@@ -6,7 +6,7 @@ exports[`<CookieBanner /> renders correctly 1`] = `
     class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />
   <div
-    class="sc-bcXGCL jCKEUm cookie-banner"
+    class="sc-bcXGCL gYDMaH cookie-banner"
     id="cookie-banner"
   >
     <div
@@ -94,7 +94,7 @@ exports[`<CookieManager /> renders correctly 1`] = `
     class="sc-bcXGCL keKWCf"
   >
     <div
-      class="sc-bcXGCL jCKEUm cookie-banner"
+      class="sc-bcXGCL gYDMaH cookie-banner"
       id="cookie-banner"
     >
       <div

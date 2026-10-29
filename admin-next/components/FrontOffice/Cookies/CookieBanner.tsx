@@ -24,7 +24,7 @@ export const CookieBanner: React.FC<Props> = ({ onOpen, onAccept, onRefuse }: Pr
       position="fixed"
       bottom={0}
       width="100%"
-      zIndex={1040}
+      zIndex={2002}
       justifyContent="space-between"
     >
       <Flex direction="column" spacing={2} className="cookie-text-wrapper" alignItems="flex-start">

@@ -186,8 +186,10 @@ export const ProposalCard: React.FC<Props> = ({
             <CardCoverPlaceholder icon={proposalIcon} color={proposalColor} />
           )}
           {status ? (
-            <CardStatusTag variantColor={STATUS_COLOR_MAP[status.color] ?? 'infoGray'}>
-              <CardTagLabel>{status.name}</CardTagLabel>
+            <CardStatusTag variantColor={STATUS_COLOR_MAP[status.color] ?? 'infoGray'} maxWidth="calc(100% - 16px)">
+              <CardTagLabel overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap">
+                {status.name}
+              </CardTagLabel>
             </CardStatusTag>
           ) : null}
         </CardCover>
