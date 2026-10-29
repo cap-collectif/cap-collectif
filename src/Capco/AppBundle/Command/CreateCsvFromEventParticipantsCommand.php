@@ -16,6 +16,7 @@ use Overblog\GraphQLBundle\Request\Executor;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
@@ -72,6 +73,7 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
         $this->setName('capco:export:events:participants')->setDescription(
             'Create csv file from events participants'
         );
+        $this->addOption(name: 'eventId', mode: InputOption::VALUE_REQUIRED, description: 'Only export the given event.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -82,7 +84,7 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
             return 1;
         }
 
-        $events = $this->eventRepository->findAllWithRegistration();
+        $events = $this->getEvents($input);
         foreach ($events as $event) {
             $fileName = self::getFilename($event['slug']);
             $this->generateEventParticipantsFile($event, $input, $output, $fileName);
@@ -92,6 +94,25 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
         }
 
         return 0;
+    }
+
+    /** @return array<array{id: string, slug: ?string}> */
+    private function getEvents(InputInterface $input): array
+    {
+        $eventId = $input->getOption('eventId');
+        if (!$eventId) {
+            return $this->eventRepository->findAllWithRegistration();
+        }
+
+        $event = $this->eventRepository->find($eventId);
+        if (null === $event) {
+            throw new \InvalidArgumentException(sprintf('Event "%s" could not be found.', $eventId));
+        }
+
+        return [[
+            'id' => $event->getId(),
+            'slug' => $event->getSlug(),
+        ]];
     }
 
     private function printMemoryUsage(OutputInterface $output): void

@@ -89,6 +89,10 @@ Pour les prochaines commandes d'export merci de ne pas utiliser graphQL, mais bi
       capco:export:step-contributors
       capco:export:applogs
 
+`capco:export:events:participants --eventId=<id>` génère uniquement le CSV des
+inscrits à l'évènement indiqué. Sans cette option, la commande conserve l'export
+de tous les évènements éligibles avec inscriptions activées.
+
 
 <a div="emails"></a>Génération d'emails - Obsolète ?
 ---  

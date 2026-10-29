@@ -3,6 +3,10 @@ services:
         autowire: true
         autoconfigure: true
 
+    test.messenger.transport.async:
+        alias: messenger.transport.async
+        public: true
+
     Capco\Manager\RepositoryManager:
         calls:
             - method: setRepositories

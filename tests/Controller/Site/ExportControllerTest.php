@@ -2,16 +2,26 @@
 
 namespace Capco\Tests\Controller\Site;
 
+use Capco\AppBundle\Command\CreateCsvFromEventParticipantsCommand;
 use Capco\AppBundle\Command\ExportAnalysisCSVCommand;
 use Capco\AppBundle\Command\Service\FilePathResolver\ContributionsFilePathResolver;
 use Capco\AppBundle\Command\Service\FilePathResolver\ParticipantsFilePathResolver;
+use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Message\ExportOnDemandMessage;
+use Capco\AppBundle\Message\ExportReadyEmailMessage;
 use Capco\AppBundle\Repository\AbstractStepRepository;
+use Capco\Tests\FeatureFlags\FeatureFlagsAwareTest;
+use Capco\Tests\FeatureFlags\FeatureFlagsTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\ReceivedStamp;
+use Symfony\Component\Messenger\Transport\InMemoryTransport;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
@@ -19,27 +29,106 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  *
  * @coversNothing
  */
-class ExportControllerTest extends WebTestCase
+class ExportControllerTest extends WebTestCase implements FeatureFlagsAwareTest
 {
+    use FeatureFlagsTrait;
+
+    public static function featureFlagOverrides(): array
+    {
+        return ['export' => true];
+    }
+
     /**
      * @runInSeparateProcess
      *
      * @preserveGlobalState disabled
      *
-     * @phpunit-status non-compliant
+     * @dataProvider eventParticipantDownloads
      *
-     * @phpunit-reason Creates and deletes shared export files without failure-safe restoration of their
-     * initial contents.
+     * @phpunit-status compliant
+     *
+     * @phpunit-reason Exercises HTTP and real CSV generation, processing queued exports with an in-memory transport and restoring files on failure.
      */
-    public function testAdminCanRequestEventParticipantExport(): void
-    {
-        $client = $this->createAdminClient();
+    public function testEventAuthorOrAdminCanDownloadParticipants(
+        string $email,
+        string $eventId,
+        int $participantCount,
+        string $expectedParticipantEmail
+    ): void {
+        $client = self::createClient();
+        $client->disableReboot();
         $client->setServerParameter('HTTP_ACCEPT_LANGUAGE', 'fr-FR');
+        $transport = new InMemoryTransport();
+        self::getContainer()->set('test.messenger.transport.async', $transport);
+        $em = self::getContainer()->get(EntityManagerInterface::class);
+        $user = $em->getRepository(User::class)->findOneBy(['email' => $email]);
+        self::assertInstanceOf(User::class, $user);
+        $client->loginUser($user);
+        $event = $em->getRepository(Event::class)->find($eventId);
+        self::assertInstanceOf(Event::class, $event);
+        $fileName = CreateCsvFromEventParticipantsCommand::getFilename($event->getSlug());
+        $filePath = self::getContainer()->getParameter('kernel.project_dir') . '/public/export/' . $fileName;
+        $previousContents = is_file($filePath) ? file_get_contents($filePath) : null;
+        if (null !== $previousContents) {
+            self::assertIsString($previousContents);
+        }
 
-        $this->assertExportRequestAccepted(
-            $client,
-            '/export-my-event-participants/event1'
-        );
+        try {
+            if (is_file($filePath)) {
+                unlink($filePath);
+            }
+            $client->request(Request::METHOD_GET, '/export-my-event-participants/' . $eventId);
+
+            self::assertResponseIsSuccessful();
+            $response = $client->getResponse();
+            if (202 === $response->getStatusCode()) {
+                $content = $response->getContent();
+                self::assertIsString($content);
+                self::assertSame(
+                    ['errorTranslationKey' => 'export.requested'],
+                    json_decode($content, true, 512, \JSON_THROW_ON_ERROR)
+                );
+                $envelopes = $transport->getSent();
+                self::assertCount(1, $envelopes);
+                $message = $envelopes[0]->getMessage();
+                self::assertInstanceOf(ExportOnDemandMessage::class, $message);
+                self::assertSame('capco:export:events:participants', $message->getCommandName());
+                self::assertSame(['eventId' => $eventId], $message->getCommandOptions());
+                self::assertSame($filePath, $message->getFilePath());
+                self::getContainer()->get(MessageBusInterface::class)->dispatch(
+                    $envelopes[0]->with(new ReceivedStamp('async'))
+                );
+                $sent = $transport->getSent();
+                self::assertCount(2, $sent);
+                self::assertInstanceOf(ExportReadyEmailMessage::class, $sent[1]->getMessage());
+            } else {
+                self::assertInstanceOf(BinaryFileResponse::class, $response);
+                self::assertSame('text/csv; charset=utf-8', $response->headers->get('Content-Type'));
+            }
+            self::assertFileExists($filePath);
+            $csv = file($filePath, \FILE_IGNORE_NEW_LINES);
+            self::assertIsArray($csv);
+            self::assertCount($participantCount + 1, $csv);
+            $rows = array_map(static fn (string $line): array => str_getcsv($line, ';'), $csv);
+            self::assertSame('user_email', ltrim((string) $rows[0][0], "\xEF\xBB\xBF"));
+            self::assertContains($expectedParticipantEmail, array_column(\array_slice($rows, 1), 0));
+        } finally {
+            if (null !== $previousContents) {
+                file_put_contents($filePath, $previousContents);
+            } elseif (is_file($filePath)) {
+                unlink($filePath);
+            }
+        }
+    }
+
+    /** @return iterable<string, array{string, string, int, string}> */
+    public function eventParticipantDownloads(): iterable
+    {
+        yield 'admin, including the second page' => ['admin@test.com', 'event1', 51, 'lbrunet@cap-collectif.com'];
+
+        yield 'event author' => ['user@test.com', 'event1', 51, 'lbrunet@cap-collectif.com'];
+
+        yield 'event with anonymous registration' => ['admin@test.com', 'event4', 3, 'jpec@benkyou.com'];
     }
 
     /**
