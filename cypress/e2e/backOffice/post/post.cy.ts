@@ -82,7 +82,7 @@ describe('CRUD', () => {
     PostFormPage.visitCreatePostFromProposal()
     cy.wait('@UserListFieldQuery')
     PostFormPage.checkInputProperties('proposals', 'exist', true, linkedProposal)
-    cy.get('#projects input').should('exist').and('have.attr', 'disabled')
+    cy.get('#projects input').should('exist').and('not.have.attr', 'disabled')
     PostFormPage.checkInputProperties('themes', 'exist', false, '')
     PostFormPage.checkCreateButtonState('disabled')
     PostFormPage.updateArticle('Titre', 'Contenu')

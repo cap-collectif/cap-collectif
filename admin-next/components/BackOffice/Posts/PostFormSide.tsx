@@ -16,6 +16,7 @@ type PostFormSideProps = {
   currentLocale: string
   setCurrentLocale: (value: string) => void
   selectedProposal: Option[]
+  proposalProjectOptions: Option[]
 }
 
 const PostFormSide: React.FC<PostFormSideProps> = ({
@@ -23,6 +24,7 @@ const PostFormSide: React.FC<PostFormSideProps> = ({
   currentLocale,
   setCurrentLocale,
   selectedProposal,
+  proposalProjectOptions,
 }: PostFormSideProps) => {
   const intl = useIntl()
   const { control, setValue, setError, clearErrors, watch } = useFormContext()
@@ -37,7 +39,8 @@ const PostFormSide: React.FC<PostFormSideProps> = ({
   const displayProposalField = Boolean(proposalIdFromUrl) || selectedProposal.length > 0
   const displayThemesField = isAdmin
   const displayProjectsField = isAdmin || (isOrgaMemberOrProjectAdmin && !Boolean(proposalIdFromUrl))
-  const disableProjectSelect = (isAdmin && Boolean(proposalIdFromUrl)) || (isAdmin && selectedProposal?.length > 0)
+  // Admins can only pick the project of the linked proposal
+  const restrictProjectsToProposal = (isAdmin || isSuperAdmin) && selectedProposal?.length > 0
 
   const selectedProject = watch('projects')
 
@@ -101,7 +104,7 @@ const PostFormSide: React.FC<PostFormSideProps> = ({
                 placeholder={intl.formatMessage({ id: 'select-projects' })}
                 isMulti
                 id="projects"
-                disabled={disableProjectSelect}
+                restrictToOptions={restrictProjectsToProposal ? proposalProjectOptions : undefined}
               />
             </FormControl>
           )}

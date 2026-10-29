@@ -70,6 +70,10 @@ export const QUERY: GraphQLTaggedNode = graphql`
           ... on Proposal {
             id
             title
+            project {
+              id
+              title
+            }
           }
           ... on Theme {
             id
@@ -109,6 +113,10 @@ export const PROPOSAL_QUERY = graphql`
       ... on Proposal {
         title
         __typename
+        project {
+          id
+          title
+        }
       }
     }
   }
@@ -145,6 +153,15 @@ const PostFormWrapper = ({ postId, postData }: PostFormWrapperProps): JSX.Elemen
   const selectedProposal: Option[] = proposalObject
     ? [{ label: proposalObject.title, value: proposalObject.id }]
     : getSelectedOptions(postData?.post?.relatedContent as RelatedContent[], 'Proposal')
+
+  // The only project an admin may link to a post that is attached to a proposal
+  const relatedProposal = (postData?.post?.relatedContent as ReadonlyArray<any>)?.find(
+    content => content?.__typename === 'Proposal',
+  )
+  const proposalProject = proposalObject?.project ?? relatedProposal?.project ?? null
+  const proposalProjectOptions: Option[] = proposalProject
+    ? [{ label: proposalProject.title, value: proposalProject.id }]
+    : []
 
   const selectedThemes: Option[] = getSelectedOptions(postData?.post?.relatedContent as RelatedContent[], 'Theme')
 
@@ -336,6 +353,7 @@ const PostFormWrapper = ({ postId, postData }: PostFormWrapperProps): JSX.Elemen
           <Flex direction="column" spacing={6} width="30%">
             <PostFormSide
               selectedProposal={selectedProposal}
+              proposalProjectOptions={proposalProjectOptions}
               availableLocales={platformLocales as Locale[]}
               currentLocale={currentLocale}
               setCurrentLocale={setCurrentLocale}

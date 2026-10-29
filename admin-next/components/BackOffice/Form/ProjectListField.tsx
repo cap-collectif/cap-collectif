@@ -14,6 +14,8 @@ interface ProjectListFieldProps
   id?: string
   menuPortalTarget?: boolean
   disabled?: boolean
+  // When set, only these options are proposed instead of querying the viewer's projects
+  restrictToOptions?: ProjectListFieldValue[]
 }
 
 type ProjectListFieldValue = {
@@ -47,13 +49,17 @@ export const getProjectList = graphql`
   }
 ` as GraphQLTaggedNode
 
-export const ProjectListField: React.FC<ProjectListFieldProps> = ({ name, disabled, ...props }) => {
+export const ProjectListField: React.FC<ProjectListFieldProps> = ({ name, disabled, restrictToOptions, ...props }) => {
   const { control } = useFormContext()
   const { viewerSession } = useAppContext()
 
   const affiliations: ProjectAffiliation[] = viewerSession.isAdmin ? null : ['OWNER']
 
   const loadOptions = async (term: string): Promise<ProjectListFieldValue[]> => {
+    if (restrictToOptions) {
+      return restrictToOptions.filter(option => option.label.toLowerCase().includes((term ?? '').toLowerCase()))
+    }
+
     const projectsData = await fetchQuery<ProjectListFieldQuery>(environment, getProjectList, {
       term,
       affiliations: affiliations,
