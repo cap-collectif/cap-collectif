@@ -113,7 +113,6 @@ function configureVhosts(string $mode = 'symfony_bin'): void
         'capco.paris.fr',
         'assets.cap.co',
         'mail.cap.co',
-        'kibana.cap.co',
         'rabbitmq.cap.co',
     ];
 

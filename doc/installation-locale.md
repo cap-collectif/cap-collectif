@@ -14,9 +14,9 @@ Les commandes sont à exécuter depuis la racine du dépôt.
 - `mkcert`
 - Symfony CLI sur macOS (utilisé par `local:system:generate-ssl`)
 
-Mailcatcher et Kibana utilisent explicitement des images `linux/amd64` en local.
-Sur les machines ARM, notamment les Mac Apple Silicon, ces deux services
-s’exécutent via émulation.
+Mailcatcher utilise explicitement une image `linux/amd64` en local.
+Sur les machines ARM, notamment les Mac Apple Silicon, ce service s’exécute
+via émulation.
 
 Sur macOS avec Homebrew :
 

@@ -3,7 +3,6 @@ services:
         links:
             - database:database
             - elasticsearch:elasticsearch
-            - kibana:kibana
             - redis:redis
             - mailcatcher:mailcatchersmtp
             - nextjs
@@ -25,9 +24,6 @@ services:
 
     # These images run under emulation on ARM hosts.
     mailcatcher:
-        platform: linux/amd64
-
-    kibana:
         platform: linux/amd64
 
     nextjs:
