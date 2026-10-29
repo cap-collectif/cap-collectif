@@ -24,6 +24,11 @@ export const BlankPopup = styled(Popup)`
 export const StyledMap = styled(Map)`
   width: 100%;
 
+  /** Display popups above map controls. */
+  .leaflet-popup-pane {
+    z-index: 801;
+  }
+
   /**
     Leaflet ne permet nativement pas de centrer des éléments, c'est éclaté 
     https://github.com/Leaflet/Leaflet/pull/6935
