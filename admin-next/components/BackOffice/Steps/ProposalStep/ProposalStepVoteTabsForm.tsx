@@ -45,6 +45,11 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
   const _voteTypeForTabs = watch('_voteTypeForTabs')
   const voteMinVoteLimitEnabled = votesMin !== null || votesLimit !== null
   const voteThresholdEnabled = voteThreshold !== null
+  const budgetEnabled = budget !== null && budget !== undefined
+  const votesRankingEnabled = votesRanking === true
+  const budgetDisabled = newVoteStepEnabled && !budgetEnabled && (voteThresholdEnabled || votesRankingEnabled)
+  const voteThresholdDisabled = newVoteStepEnabled && !voteThresholdEnabled && (budgetEnabled || votesRankingEnabled)
+  const votesRankingDisabled = newVoteStepEnabled && !votesRankingEnabled && (budgetEnabled || voteThresholdEnabled)
 
   return (
     <>
@@ -102,8 +107,9 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
                     </ListCard.Item.Label>
                     <Switch
                       id="budget_switch"
-                      checked={budget !== null && budget !== undefined}
+                      checked={budgetEnabled}
                       name="budget"
+                      disabled={budgetDisabled}
                       onChange={() => {
                         const toggle = budget !== null && budget !== undefined
                         if (toggle) {
@@ -142,6 +148,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
                       id="votesMin_switch"
                       checked={voteThresholdEnabled}
                       name="voteThreshold"
+                      disabled={voteThresholdDisabled}
                       onChange={() => {
                         if ((voteThreshold ?? 0) > 0) {
                           setValue('voteThreshold', null)
@@ -275,7 +282,13 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
                         </FormControl>
                       </Flex>
                       <FormControl name="votesRanking" control={control} mb={0}>
-                        <FieldInput id="votesRanking" name="votesRanking" control={control} type="checkbox">
+                        <FieldInput
+                          id="votesRanking"
+                          name="votesRanking"
+                          control={control}
+                          type="checkbox"
+                          disabled={votesRankingDisabled}
+                        >
                           {intl.formatMessage({
                             id: 'activate-vote-ranking',
                           })}
