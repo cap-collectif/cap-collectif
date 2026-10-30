@@ -23,92 +23,47 @@ et supprimer la dépendance Python dédiée à Fabric.
 
 ## Décision
 
-Nous remplaçons Fabric/Invoke par Castor comme task runner du projet.
+Castor remplace Fabric/Invoke uniquement pour les commandes des développeurs en
+local. Les tâches PHP de `.castor/`, chargées par `castor.php`, exposent les
+namespaces `app:*`, `database:*`, `infrastructures:*`, `qa:*` et `system:*`,
+ainsi que leurs alias courts. Le préfixe `local:` est supprimé puisque toutes
+les tâches Castor sont locales. Le binaire statique est épinglé dans
+`.castor-version` et conserve son runtime indépendant du PHP applicatif.
 
-Les tâches Castor seront écrites en PHP et organisées par domaines fonctionnels
-dans `.castor/`, avec un point d'entrée `castor.php` à la racine. Les namespaces
-`local` et `ci` seront conservés conceptuellement afin de séparer les usages
-locaux et ceux de la CI. La syntaxe cible sera celle de Castor, par exemple
-`castor local:infrastructures:up` et `castor ci:qa:phpunit`.
+La CI, la QA et les hooks automatisés Jest/Cypress exécutent directement Docker,
+Compose, Symfony et les outils de test. Ils ne doivent ni installer ni invoquer
+Castor. Les anciens wrappers `ci:*` et l'installateur CircleCI sont supprimés,
+y compris dans le job qui construit les images CI/QA. Les Dockerfiles de ces
+images n'installent pas Castor.
 
-Les implémentations communes vivent dans `.castor/shared/`, sous les namespaces
-`Capco\Castor\App`, `Database`, `Infrastructures` et `Qa`. Les fichiers de tâches
-exposent les commandes `local:*` et `ci:*` comme wrappers : ils définissent les
-arguments, les descriptions et les valeurs par défaut de leur contexte. La CI
-utilise Symfony `test` et les fichiers Compose de test ; les alias courts restent
-réservés au développement local.
-
-La migration devra :
-
-1. porter les primitives communes d'exécution de commandes, Docker Compose,
-   Docker, SSH/SCP, environnements et fusion des fichiers YAML ;
-2. porter les tâches réellement utilisées par le développement local, la CI,
-   Jest et Cypress ;
-3. remplacer tous les appelants Fabric et mettre à jour la documentation ;
-4. vérifier les comportements et les tests existants avant de supprimer
-   Fabric, Pipenv et les fichiers Python devenus inutiles ;
-5. utiliser une version de Castor déterministe en local et en CI.
-
-L'installation de Castor devra être compatible avec l'environnement du projet.
-Le projet cible actuellement PHP 8.1, alors que la version actuelle de
-`jolicode/castor` nécessite PHP 8.4 ou supérieur lorsqu'elle est installée
-comme dépendance Composer. Castor pourra néanmoins être utilisé via son
-binaire statique, qui embarque son propre PHP et ne modifie pas le runtime PHP
-8.1 de l'application. Ce choix devra être validé en local et dans la CI avant
-le portage des tâches.
+Deux opérations nécessitent une logique dédiée : la sélection PHPUnit multifichier
+et les instantanés Elasticsearch. Elles vivent dans `scripts/qa/` et s'exécutent
+avec le PHP du conteneur applicatif. Les commandes Castor locales délèguent aux
+mêmes scripts afin de conserver les comportements sans dupliquer cette logique.
+Les requêtes SQL et les overrides JSON sont transmis comme des arguments distincts
+avec `execFile`, sans interpolation shell.
 
 ## Alternatives
 
-- **Conserver Fabric/Invoke** : ne demande pas de migration immédiate, mais
-  conserve la dépendance Python et la double pile technique.
-- **Remplacer Fabric par Make ou des scripts shell** : réduit les dépendances,
-  mais réintroduit une logique multi-plateforme et ne rapproche pas les tâches
-  du code PHP/Symfony.
-- **Créer uniquement des commandes Symfony** : cohérent avec PHP, mais moins
-  adapté aux tâches qui doivent fonctionner avant le démarrage de l'application
-  ou piloter Docker Compose.
-- **Utiliser Castor** : conserve un task runner dédié, apporte l'exécution de
-  processus, les arguments, l'interactivité et l'organisation par namespaces,
-  tout en permettant d'écrire les tâches en PHP. Cette option est retenue.
+- Conserver Castor en CI : ajoute une installation et une couche d'orchestration
+  inutiles pour des commandes déjà explicites dans le pipeline.
+- Remplacer Castor par un autre task runner en CI : conserve la même dépendance
+  d'orchestration et ne répond pas au besoin.
 
 ## Conséquences
 
-### Positives
-
-- suppression progressive de Python, Pipenv, Fabric et Invoke du workflow ;
-- tâches et scripts écrits dans le même langage que l'application ;
-- intégration plus directe avec Composer, Symfony Process et Symfony YAML ;
-- commandes locales et CI plus faciles à découvrir et à documenter ;
-- réduction du nombre d'environnements d'exécution à installer pour contribuer.
-
-### Négatives et risques
-
-- réécriture des tâches existantes et de leurs wrappers `local`/`ci` ;
-- migration de tous les appelants dans CircleCI, Jest, Cypress, scripts et
-  documentation ;
-- risque de régression sur les arguments shell, les codes de retour, les TTY,
-  les snapshots MySQL/Elasticsearch et les commandes interactives ;
-- nécessité de choisir et de maintenir une distribution de Castor compatible
-  avec les postes de développement et les images CI, sans confondre le PHP
-  embarqué par Castor avec le PHP 8.1 de l'application ;
-- les tâches de déploiement ou d'exploitation utilisées hors du dépôt devront
-  être inventoriées avant suppression de Fabric.
-
-La migration ne modifie pas le runtime de l'application en production. Elle
-peut toutefois modifier les outils utilisés pour construire, tester ou déployer
-les environnements ; ces usages doivent donc être validés séparément.
+- Les développeurs conservent les commandes Castor locales et leur ergonomie.
+- La CI/QA ne dépend plus du binaire Castor ni de son téléchargement.
+- Les scripts de test conservent les codes d'échec, rapports JUnit, modes de
+  restauration MySQL et gestion des snapshots/alias Elasticsearch.
+- Toute nouvelle opération automatisée doit appeler ses commandes directement.
 
 ## Statut
 
-Proposé
+Accepté
 
 ## Références
 
-- [`ADR/001-continuous_integration.md`](001-continuous_integration.md)
-- [`ADR/001-preprod_deployment_process.md`](001-preprod_deployment_process.md)
-- [`Pipfile`](../Pipfile)
-- [`fabfile.py`](../fabfile.py)
-- [`infrastructure/deploylib/`](../infrastructure/deploylib/)
-- [Castor - Basic usage](https://castor.jolicode.com/docs/getting-started/basic-usage/)
-- [Castor - Executing processes](https://castor.jolicode.com/docs/getting-started/run/)
-- [Castor - SSH and remote servers](https://castor.jolicode.com/docs/going-further/helpers/ssh/)
+- [Intégration continue](001-continuous_integration.md)
+- [Installation locale](../doc/installation-locale.md)
+- [Scripts QA](../scripts/qa/README.md)

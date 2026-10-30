@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Local\Qa;
+namespace Qa;
 
 use Capco\Castor\Database;
 use Capco\Castor\Qa as Shared;
@@ -47,7 +47,7 @@ function saveEsSnapshot(): void
 #[AsTask(description: 'Restore the Elasticsearch test snapshot.')]
 function restoreEsSnapshot(bool $confirm = false): void
 {
-    Shared\restoreEsSnapshot(confirm: $confirm, recoveryTask: 'local:qa:regenerate-test-data --confirm');
+    Shared\restoreEsSnapshot(confirm: $confirm);
 }
 
 #[AsTask(description: 'Reload test fixtures, then overwrite the MySQL dump and Elasticsearch snapshot used by Cypress.')]

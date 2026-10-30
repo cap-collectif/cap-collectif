@@ -102,7 +102,7 @@ docker exec -w /var/www capco_application_1 <command>
 
 This applies to `php`, `bin/phpunit`, `bin/phpstan`, `bin/console`, `bin/php-cs-fixer`, and `bin/phpspec`. Do not first try the host executable.
 
-**Run project tasks with Castor.** Install the pinned static binary using the
+**Run local developer tasks with Castor.** Install the pinned static binary using the
 instructions in [the local installation guide](doc/installation-locale.md),
 then use `castor <namespace>:<task>` from the repository root.
 
@@ -114,7 +114,7 @@ the request hostname (`capco.test` → `test`, `capco.dev` → `dev`). No
 
 Before running Cypress after resetting or modifying the local database, regenerate the reference data:
 ```bash
-castor local:qa:regenerate-test-data --confirm
+castor qa:regenerate-test-data --confirm
 ```
 
 Cypress no longer overwrites the reference database dump or Elasticsearch snapshot at the start of `cy:run`.
@@ -214,36 +214,38 @@ docker exec -w /var/www capco_application_1 bin/php-cs-fixer fix --config=.php-c
 
 ### Castor Commands (Docker & Infrastructure)
 ```bash
-castor local:infrastructures:build                     # Build local Docker images
-castor local:infrastructures:up                     # Start Docker containers
-castor local:infrastructures:recreate               # Rebuild images and recreate containers, preserving volumes
-castor local:infrastructures:stop                   # Stop Docker containers
-castor local:infrastructures:restart                 # Restart Docker containers
-castor local:infrastructures:down                   # Remove containers and networks, preserving volumes
-castor local:infrastructures:destroy                # Remove containers, networks and data volumes
-castor local:database:reset --environment=dev        # Reset DB, fixtures and Elasticsearch
-castor local:qa:regenerate-test-data --confirm      # Reload test fixtures and rebuild Cypress DB dump/ES snapshot
-castor local:database:migrate --environment=dev      # Apply pending migrations to existing DB without resetting it
-castor local:database:mysql                         # Open the local interactive MySQL console
-castor local:database:reset-elasticsearch           # Rebuild active ES index from current DB
-castor local:app:composer                           # Install PHP dependencies with project options
-castor local:app:composer -- require vendor/package  # Add a PHP dependency in the application container
-castor local:app:install-assets                      # Install Symfony assets
-castor local:app:generate-graphql                     # Generate PHP schemas and both Relay frontends
-castor local:app:start-consumers                     # Start RabbitMQ/Messenger consumers
-castor local:app:stop-consumers                      # Stop RabbitMQ/Messenger consumers
-castor local:app:clear-cache                        # Clear Symfony cache
-castor local:qa:restore-db --confirm                # Restore test database
+castor infrastructures:build                     # Build local Docker images
+castor infrastructures:up                     # Start Docker containers
+castor infrastructures:recreate               # Rebuild images and recreate containers, preserving volumes
+castor infrastructures:stop                   # Stop Docker containers
+castor infrastructures:restart                 # Restart Docker containers
+castor infrastructures:down                   # Remove containers and networks, preserving volumes
+castor infrastructures:destroy                # Remove containers, networks and data volumes
+castor database:reset --environment=dev        # Reset DB, fixtures and Elasticsearch
+castor qa:regenerate-test-data --confirm      # Reload test fixtures and rebuild Cypress DB dump/ES snapshot
+castor database:migrate --environment=dev      # Apply pending migrations to existing DB without resetting it
+castor database:mysql                         # Open the local interactive MySQL console
+castor database:reset-elasticsearch           # Rebuild active ES index from current DB
+castor app:composer                           # Install PHP dependencies with project options
+castor app:composer -- require vendor/package  # Add a PHP dependency in the application container
+castor app:install-assets                      # Install Symfony assets
+castor app:generate-graphql                     # Generate PHP schemas and both Relay frontends
+castor app:start-consumers                     # Start RabbitMQ/Messenger consumers
+castor app:stop-consumers                      # Stop RabbitMQ/Messenger consumers
+castor app:clear-cache                        # Clear Symfony cache
+castor qa:restore-db --confirm                # Restore test database
 ```
 
-CI commands use the same arguments for common operations, with Symfony `test`
-as their default environment. Shared task implementations live in
-`.castor/shared/`; `local:*` and `ci:*` wrappers define their public interfaces.
+Castor is reserved for local developer commands (`app:*`, `database:*`,
+`infrastructures:*`, `qa:*`, `system:*`). CI/QA and automated
+Jest/Cypress hooks invoke Docker, Symfony and the scripts in `scripts/qa/` directly;
+they must not install or invoke Castor. PHPUnit selection and Elasticsearch
+snapshot logic are shared with the local Castor wrappers through those scripts.
 
 For a complete first installation and the required command order, see
 [`doc/installation-locale.md`](doc/installation-locale.md). In particular,
 Install JavaScript and PHP dependencies, reset the database if needed, then
-run `local:app:generate-graphql` and `local:app:install-assets`. Create RabbitMQ
+run `app:generate-graphql` and `app:install-assets`. Create RabbitMQ
 queues separately on first installation.
 
 #### Scripts for agents
@@ -279,7 +281,7 @@ docker exec -w /var/www capco_application_1 php -d memory_limit=-1 bin/console c
 docker exec -w /var/www capco_application_1 php -d memory_limit=-1 bin/console capco:anonymize_users_automated --startAt=2020-01-01 --endAt=2020-12-31 --dry-run
 
 # Run any Symfony command via Castor
-castor local:app:console --command-name="<cmd>"
+castor app:console --command-name="<cmd>"
 ```
 
 The `--startAt` and `--endAt` account-anonymization options must be supplied together in

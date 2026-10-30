@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Local\System;
+namespace System;
 
 use Castor\Attribute\AsTask;
 use Symfony\Component\Process\ExecutableFinder;

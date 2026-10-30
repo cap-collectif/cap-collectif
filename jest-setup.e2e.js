@@ -12,8 +12,6 @@ const util = require('util')
 const exec = util.promisify(require('child_process').exec)
 const execFile = util.promisify(require('child_process').execFile)
 
-const env = process.env.CI ? 'ci' : 'local'
-
 const GraphQLClient = require('graphql-request').GraphQLClient
 
 jest.setTimeout(50000)
@@ -104,18 +102,37 @@ global.rawInternalGraphql = async (query, variables, credentials = null) => {
 }
 
 global.runSQL = async sql => {
-  const { stdout } = await execFile('castor', [
-    `${env}:app:console`,
-    '--command-name=doctrine:query:sql',
-    '--environment=test',
-    '--',
+  const { stdout } = await execFile('docker', [
+    'exec',
+    '-u',
+    'root',
+    '-w',
+    '/var/www',
+    'capco_application_1',
+    'php',
+    '-d',
+    'memory_limit=-1',
+    'bin/console',
+    'doctrine:query:sql',
     sql,
+    '--env=test',
+    '--no-interaction',
   ])
   return stdout
 }
 
 global.resetFeatureFlags = async (overrides = {}) => {
-  await execFile('castor', [`${env}:qa:reset-feature-flags`, `--overrides=${JSON.stringify(overrides)}`])
+  await execFile('docker', [
+    'exec',
+    '-u',
+    'capco',
+    '-w',
+    '/var/www',
+    'capco_application_1',
+    'php',
+    'features/graphql-api/feature-flags-resetter.php',
+    JSON.stringify(overrides),
+  ])
 }
 
 // Redis flags are shared by API requests and are not restored with MySQL or Elasticsearch.
@@ -128,8 +145,23 @@ afterEach(async () => {
 })
 
 global.runSql = async sql => {
-  console.log(`castor ${env}:app:console --command-name=doctrine:query:sql --environment=test -- <redacted>`)
-  await execFile('castor', [`${env}:app:console`, '--command-name=doctrine:query:sql', '--environment=test', '--', sql])
+  console.log('bin/console doctrine:query:sql --env=test <redacted>')
+  await execFile('docker', [
+    'exec',
+    '-u',
+    'root',
+    '-w',
+    '/var/www',
+    'capco_application_1',
+    'php',
+    '-d',
+    'memory_limit=-1',
+    'bin/console',
+    'doctrine:query:sql',
+    sql,
+    '--env=test',
+    '--no-interaction',
+  ])
   return Promise.resolve(null)
 }
 

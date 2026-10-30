@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Local\Infrastructures;
+namespace Infrastructures;
 
 use Capco\Castor\Infrastructures as Shared;
 use Castor\Attribute\AsTask;

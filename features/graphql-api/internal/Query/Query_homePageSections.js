@@ -91,7 +91,19 @@ describe('Internal|Query.homePageSections date ordering', () => {
   // Restore the shared fixture baseline even when the last assertion fails.
   afterAll(async () => {
     const execFile = require('util').promisify(require('child_process').execFile)
-    await execFile('castor', [`${process.env.CI ? 'ci' : 'local'}:qa:restore-db`, '--confirm'])
+    await execFile('docker', [
+      'exec',
+      '-u',
+      'capco',
+      '-w',
+      '/var/www',
+      'capco_application_1',
+      'bash',
+      '-lc',
+      process.env.CI_SHARED_TEST_DATA === '1'
+        ? 'bash .circleci/profile-mysql-restore.sh'
+        : 'mysql -h database -u root symfony < var/db.backup',
+    ])
   })
 
   beforeEach(async () => {

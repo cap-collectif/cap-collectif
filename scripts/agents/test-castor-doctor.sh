@@ -68,7 +68,7 @@ run_doctor() {
         DOCTOR_TEST_YARN_VERSION="$yarn_version" \
         XDG_CACHE_HOME="$test_directory/cache" \
         "$castor_binary" --castor-file="$test_directory/castor.php" \
-            local:system:doctor --no-ansi --no-interaction > "$test_directory/output" 2>&1; then
+            system:doctor --no-ansi --no-interaction > "$test_directory/output" 2>&1; then
         actual_status=0
     else
         actual_status="$?"

@@ -3,11 +3,24 @@ import '../../../_setupDB'
 import '../../../_setupES'
 
 const util = require('util')
-const exec = util.promisify(require('child_process').exec)
-const env = process.env.CI ? 'ci' : 'local'
+const execFile = util.promisify(require('child_process').execFile)
 
 const restoreDebateVotesFixture = () =>
-  exec(`castor ${env}:app:console --command-name="capco:es:populate" --environment=test`)
+  execFile('docker', [
+    'exec',
+    '-u',
+    'root',
+    '-w',
+    '/var/www',
+    'capco_application_1',
+    'php',
+    '-d',
+    'memory_limit=-1',
+    'bin/console',
+    'capco:es:populate',
+    '--env=test',
+    '--no-interaction',
+  ])
 
 // TODO: when https://github.com/cap-collectif/platform/pull/12175 will be merged, the debate votes
 // count should reflect the change because we'll add both of the anonymous votes and the

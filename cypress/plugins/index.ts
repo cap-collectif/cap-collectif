@@ -17,12 +17,7 @@ import * as cp from 'child_process'
 
 import { mailcatcherTasks } from './mailcatcher'
 
-const exec = util.promisify(cp.exec)
 const execFile = util.promisify(cp.execFile)
-
-const env = process.env.CI ? 'ci' : 'local'
-const castor = (group: string, task: string) => `castor ${env}:${group}:${task}`
-const confirm = ' --confirm'
 
 const logRestoreTimings = (output: string) => {
   output
@@ -85,7 +80,17 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
 
   let featureFlagOverrides: Record<string, boolean> = {}
   const prepareFeatureFlags = async (overrides: Record<string, boolean>) => {
-    await execFile('castor', [`${env}:qa:reset-feature-flags`, `--overrides=${JSON.stringify(overrides)}`])
+    await execFile('docker', [
+      'exec',
+      '-u',
+      'capco',
+      '-w',
+      '/var/www',
+      'capco_application_1',
+      'php',
+      'features/graphql-api/feature-flags-resetter.php',
+      JSON.stringify(overrides),
+    ])
     featureFlagOverrides = { ...overrides }
     return null
   }
@@ -94,13 +99,36 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
     'db:restore': async () => {
       console.log('Purging RabbitMQ…')
       console.time('purge_mq')
-      await exec(castor('qa', 'purge-rabbitmq') + confirm)
+      await execFile('docker', [
+        'exec',
+        '-u',
+        'root',
+        '-w',
+        '/var/www',
+        'capco_application_1',
+        'rabbitmqctl',
+        'purge_queue',
+        'elasticsearch_indexation',
+        '--vhost=capco',
+      ])
       console.log('Successfully purged RabbitMQ !')
       console.timeEnd('purge_mq')
 
       console.log('Restoring database…')
       console.time('restore_db')
-      const { stdout: stdoutDb, stderr: stderrDb } = await exec(castor('qa', 'restore-db') + confirm)
+      const { stdout: stdoutDb, stderr: stderrDb } = await execFile('docker', [
+        'exec',
+        '-u',
+        'capco',
+        '-w',
+        '/var/www',
+        'capco_application_1',
+        'bash',
+        '-lc',
+        process.env.CI_SHARED_TEST_DATA === '1'
+          ? 'bash .circleci/profile-mysql-restore.sh'
+          : 'mysql -h database -u root symfony < var/db.backup',
+      ])
       logRestoreTimings(`${stdoutDb}\n${stderrDb}`)
 
       if (stderrDb) {
@@ -111,7 +139,19 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
 
       console.log('Restoring ElasticSearch snapshot…')
       console.time('restore_es')
-      const { stdout: stdoutEs, stderr: stderrEs } = await exec(castor('qa', 'restore-es-snapshot') + confirm)
+      const { stdout: stdoutEs, stderr: stderrEs } = await execFile('docker', [
+        'exec',
+        '-u',
+        'capco',
+        '-w',
+        '/var/www',
+        'capco_application_1',
+        'php',
+        'scripts/qa/elasticsearch-snapshot.php',
+        'restore',
+        '--confirm',
+        ...(process.env.CI_SHARED_TEST_DATA === '1' ? ['--shared'] : []),
+      ])
       logRestoreTimings(`${stdoutEs}\n${stderrEs}`)
       if (stderrEs) {
         console.error(`error: ${stderrEs}`)
@@ -153,12 +193,20 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
 
         if (queue.messages_ready > 0) {
           await execFile(
-            'castor',
+            'docker',
             [
-              `${env}:app:console`,
-              `--command-name=swarrot:consume:${name}`,
-              '--environment=test',
-              '--',
+              'exec',
+              '-u',
+              'root',
+              '-w',
+              '/var/www',
+              'capco_application_1',
+              'php',
+              '-d',
+              'memory_limit=-1',
+              'bin/console',
+              `swarrot:consume:${name}`,
+              '--env=test',
               name,
               `--max-messages=${queue.messages_ready}`,
               '--max-execution-time=10',
@@ -189,13 +237,22 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
       return prepareFeatureFlags({ ...featureFlagOverrides, [name]: false })
     },
     'run:sql': async (sql: string) => {
-      console.log(`${castor('app', 'console')} --command-name=doctrine:query:sql --environment=test -- <redacted>`)
-      await execFile('castor', [
-        `${env}:app:console`,
-        '--command-name=doctrine:query:sql',
-        '--environment=test',
-        '--',
+      console.log('bin/console doctrine:query:sql --env=test <redacted>')
+      await execFile('docker', [
+        'exec',
+        '-u',
+        'root',
+        '-w',
+        '/var/www',
+        'capco_application_1',
+        'php',
+        '-d',
+        'memory_limit=-1',
+        'bin/console',
+        'doctrine:query:sql',
         sql,
+        '--env=test',
+        '--no-interaction',
       ])
       return Promise.resolve(null)
     },
@@ -203,7 +260,22 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
       console.log(`Run command "${name}"...`)
       console.time('run_command')
 
-      await execFile('castor', [`${env}:app:console`, `--command-name=${name}`, '--environment=test'])
+      if (!/^[a-zA-Z0-9:_-]+$/.test(name)) throw new Error('Invalid command name.')
+      await execFile('docker', [
+        'exec',
+        '-u',
+        'root',
+        '-w',
+        '/var/www',
+        'capco_application_1',
+        'php',
+        '-d',
+        'memory_limit=-1',
+        'bin/console',
+        name,
+        '--env=test',
+        '--no-interaction',
+      ])
       console.log(`Successfully run command "${name}"`)
       console.timeEnd('run_command')
       return Promise.resolve(null)

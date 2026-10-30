@@ -32,7 +32,7 @@ Do not use Electron: it is not available in the local setup.
 - One spec: `yarn cy:run --browser chrome --spec e2e/<path>/<name>.cy.ts`.
 - Full E2E suite: `yarn cy:run --browser chrome`.
 - Interactive runner: `yarn cy:open --browser chrome`.
-- `db:restore` restores the local reference MySQL dump and Elasticsearch snapshot; Cypress does not overwrite them at startup. After changing the local database, prepare these references with `castor local:qa:regenerate-test-data --confirm` before running Cypress. Do not skip the data preparation required by a suite that changes data.
+- `db:restore` restores the local reference MySQL dump and Elasticsearch snapshot; Cypress does not overwrite them at startup. After changing the local database, prepare these references with `castor qa:regenerate-test-data --confirm` before running Cypress. Do not skip the data preparation required by a suite that changes data.
 
 When the page state depends on a GraphQL request, intercept the last required operation and wait
 for its alias before asserting the DOM. Do not replace this network synchronization with a fixed

@@ -53,8 +53,8 @@ Les helpers actuels fournissent une stratégie de restauration avant chaque test
 
 Les runners API Query et Mutation rétablissent automatiquement le preset `test`
 avant et après chaque test via `jest-setup.e2e.js`, y compris lors d'un échec
-ou d'une nouvelle tentative Jest. Le reset utilise la tâche Castor
-`local:qa:reset-feature-flags` (ou `ci:qa:reset-feature-flags`), qui valide les
+ou d'une nouvelle tentative Jest. Le reset exécute directement `php features/graphql-api/feature-flags-resetter.php`
+dans le conteneur applicatif. Ce script valide les
 overrides puis prépare tous les flags en une écriture Redis atomique, sans
 démarrer Symfony.
 
@@ -120,8 +120,8 @@ pendant qu'une autre exécution l'utilise.
 Le setup global local sauvegarde le socle MySQL/Elasticsearch ; en CI, le socle
 peut provenir des données préparées par le workflow. Aucun de ces mécanismes ne
 garantit à lui seul l'isolation de chaque test. Les helpers historiques qui
-invoquaient Fabric doivent utiliser les tâches Castor correspondantes
-(`castor local:*` ou `castor ci:*`), selon [AGENTS.md](../../../AGENTS.md).
+invoquaient Fabric doivent utiliser les commandes Docker/Symfony directement,
+sans task runner, selon [AGENTS.md](../../../AGENTS.md).
 
 Le choix du runner et les commandes sont décrits dans le [guide d’exécution](execution.md).
 La restauration des globals et doubles est décrite dans le [guide d’isolation](donnees-isolation.md).

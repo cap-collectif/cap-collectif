@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Local\Database;
+namespace Database;
 
 use Capco\Castor\Database as Shared;
 use Castor\Attribute\AsTask;

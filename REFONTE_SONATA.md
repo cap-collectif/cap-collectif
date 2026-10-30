@@ -228,7 +228,7 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
    3. Un `bin/console cache:clear` peut être nécessaire avant l'étape 1 si le cache Symfony est déjà chaud
       et ne détecte pas les nouveaux fichiers yaml.
    4. Régénérer les classes PHP, les quatre schémas et les deux frontends Relay avec
-      `castor local:app:generate-graphql`, puis committer les schémas modifiés, y compris
+      `castor app:generate-graphql`, puis committer les schémas modifiés, y compris
       `schema.dev.graphql` qui embarque les types internes. La commande nettoie le cache
       Symfony avant la compilation pour éviter les alias de types périmés.
 11. **Lancer `yarn relay` dans `admin-next/`** après avoir écrit les requêtes/fragments/mutations GraphQL
@@ -705,14 +705,14 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
     (`{ ...features, privacy_policy: true }`), sinon l'entrée n'est pas rendue ; la page Sonata, elle, n'exigeait
     pas ce flag (`FeaturesCategoryResolver` sans condition), donc ne pas l'ajouter à la query/mutation.
   - **Snapshots e2e GraphQL, Cypress et dump `var/db.backup`** : `jest-setup-global.e2e.js` (tests e2e
-    GraphQL) et le hook `before:run` de `cypress/plugins/index.ts` commencent par `castor local:qa:save-db`,
+    GraphQL) et le hook `before:run` de `cypress/plugins/index.ts` commencent par `castor qa:save-db`,
     c'est-à-dire qu'ils **écrasent le dump avec l'état courant de la base locale**, puis `_setupDB.js` /
     `cy.task('db:restore')` restaurent ce dump. Si la base locale a été modifiée à la main (traductions ajoutées
     depuis l'UI pendant des tests manuels) ou par un run Cypress précédent (un spec qui enregistre des données
     laisse la base dans cet état à la fin), les snapshots générés avec `-u` embarquent ces données et ne
     correspondent plus aux fixtures, et un spec Cypress qui suppose l'état des fixtures échoue dès son premier
     `should` — le symptôme est un snapshot ou un test qui change alors que le code testé n'a pas bougé. Avant de
-    (re)générer des snapshots ou d'enchaîner des runs Cypress : `castor local:database:reset` pour
+    (re)générer des snapshots ou d'enchaîner des runs Cypress : `castor database:reset` pour
     repartir des fixtures. Le champ `translations` est renvoyé dans l'ordre de la base, non déterministe pour
     des lignes fraîchement insérées : trier par `locale` dans le test avant `toMatchSnapshot()`.
   - **Cypress en local + feature flag Redis (`unstable__sonata_migration_to_admin_next`, `multilangue`...) —
@@ -1591,7 +1591,7 @@ prop-drillé entre la liste et un ancêtre.
   un test de suppression passait une fois puis se mettait à échouer de façon apparemment aléatoire sur un
   tout autre test qui `cy.contains()` une ligne de fixture désormais absente. Si des tests Cypress locaux
   échouent de façon incohérente en réutilisant des lignes de fixtures normalement présentes, relancer
-  `castor local:database:reset` pour repartir d'un état propre avant de chercher un bug côté
+  `castor database:reset` pour repartir d'un état propre avant de chercher un bug côté
   code.
 - **`GlobalIdResolver::resolve()` ne sait pas résoudre un id de `Media`** : `Media.id` est exposé **brut** (pas
   de `Relay::GlobalId`, ex: `media4`, ou l'uuid renvoyé par l'uploader), or `resolve()` ne gère que les global
@@ -1635,7 +1635,7 @@ prop-drillé entre la liste et un ancêtre.
 - **Après un changement de signature d'une méthode publique d'un repository** (ex: `getPaginated(): array`
   → `: Paginator`), le conteneur compilé de l'env `test` garde un proxy lazy avec l'ancienne signature et
   **toute** requête `capco.test` répond 500 (`Compile Error: Declaration of ... must be compatible`) — l'env
-  `dev` recompile seul en debug. Vider le cache avec `castor local:app:clear-cache --environment=test`
+  `dev` recompile seul en debug. Vider le cache avec `castor app:clear-cache --environment=test`
   (qui fait `rm -rf var/cache/test`), **pas** avec `bin/console cache:clear --env=test` via `docker exec`, qui
   reconstruit le conteneur avec les variables d'env du shell et non celles du serveur.
 - **Ne jamais passer un fichier `.json` (ex: `SideBarItems.json`) dans la même commande `prettier --write`

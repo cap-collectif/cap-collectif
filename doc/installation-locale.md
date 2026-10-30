@@ -12,7 +12,7 @@ Les commandes sont à exécuter depuis la racine du dépôt.
 - Castor `v1.8.1` (version définie dans `.castor-version`)
 - `curl` pour installer Castor
 - `mkcert`
-- Symfony CLI sur macOS (utilisé par `local:system:generate-ssl`)
+- Symfony CLI sur macOS (utilisé par `system:generate-ssl`)
 
 Mailcatcher utilise explicitement une image `linux/amd64` en local.
 Sur les machines ARM, notamment les Mac Apple Silicon, ce service s’exécute
@@ -67,10 +67,10 @@ Vérifier les outils :
 ```bash
 corepack enable
 corepack yarn --version
-castor local:system:doctor
+castor system:doctor
 ```
 
-L’alias `castor doctor` correspond à `castor local:system:doctor` et accepte les
+L’alias `castor doctor` correspond à `castor system:doctor` et accepte les
 mêmes options.
 
 `doctor` vérifie les outils nécessaires, les versions de Node.js, Yarn et
@@ -88,7 +88,7 @@ que le contrôle du daemon réussisse.
 ### 1. Certificats locaux
 
 ```bash
-castor local:system:generate-ssl
+castor system:generate-ssl
 ```
 
 La commande est idempotente si `infrastructure/services/local/nginx/ssl/capco.pem`
@@ -97,8 +97,8 @@ existe déjà.
 ### 2. Containers
 
 ```bash
-castor local:infrastructures:build
-castor local:infrastructures:up
+castor infrastructures:build
+castor infrastructures:up
 ```
 
 Les images applicatives locale et distante installent les extensions externes
@@ -117,7 +117,7 @@ sans l'option `--volumes`.
 Pour reconstruire les images sans cache :
 
 ```bash
-castor local:infrastructures:build --no-cache
+castor infrastructures:build --no-cache
 ```
 
 ### 3. Dépendances JavaScript
@@ -129,13 +129,13 @@ corepack yarn install --immutable
 ### 4. Dépendances PHP
 
 Si `.env.local` n’existe pas encore, générer les valeurs locales par défaut
-avec `castor local:app:setup-default-env-vars` ; cette commande écrase le fichier
+avec `castor app:setup-default-env-vars` ; cette commande écrase le fichier
 s’il existe déjà.
 
 La commande est exécutée dans le container applicatif :
 
 ```bash
-castor local:app:composer
+castor app:composer
 ```
 
 Cette étape doit précéder la génération de la base, car le container doit
@@ -144,14 +144,14 @@ disposer de l’autoload Composer pour exécuter Symfony.
 ### 5. Base de données et fixtures
 
 ```bash
-castor local:database:reset --environment=dev
+castor database:reset --environment=dev
 ```
 
 Cette commande réinitialise la base locale, charge les fixtures et prépare les
 fichiers média. Elle est destructive pour les données locales.
 
 Le marquage des migrations affiche uniquement un résumé en cas de succès.
-Pour voir le détail, utiliser `castor local:database:reset -v` ; les erreurs
+Pour voir le détail, utiliser `castor database:reset -v` ; les erreurs
 restent affichées dans tous les cas.
 
 Le reset crée le schéma depuis les entités Doctrine actuelles et marque les
@@ -159,15 +159,15 @@ migrations comme exécutées sans les lancer. Pour appliquer les migrations
 en attente sur une base existante, sans la réinitialiser ni recharger les fixtures :
 
 ```bash
-castor local:database:migrate --environment=dev
+castor database:migrate --environment=dev
 ```
 
 ### 6. GraphQL, assets et queues
 
 ```bash
-castor local:app:generate-graphql
-castor local:app:install-assets
-castor local:app:rabbitmq-queues
+castor app:generate-graphql
+castor app:install-assets
+castor app:rabbitmq-queues
 ```
 
 `generate-graphql` nettoie le cache Symfony, compile les classes PHP, régénère
@@ -190,7 +190,7 @@ corepack yarn build:watch
 RabbitMQ/Swarrot et Messenger :
 
 ```bash
-castor local:app:start-consumers
+castor app:start-consumers
 ```
 
 Le container `admin-next` installe ses dépendances, compile Relay et démarre
@@ -201,7 +201,7 @@ son serveur automatiquement via `admin-next/run.sh`.
 Configurer les domaines locaux :
 
 ```bash
-castor local:system:configure-vhosts
+castor system:configure-vhosts
 ```
 
 La commande configure `/etc/hosts` et, sur macOS, rattache le domaine
@@ -214,22 +214,22 @@ Les tâches locales Docker disposent des alias `up`, `stop`, `restart`,
 commandes complètes, par exemple `castor recreate --no-cache`.
 
 ```bash
-castor local:infrastructures:up
-castor local:app:start-consumers
+castor infrastructures:up
+castor app:start-consumers
 ```
 
 Voir l’état et les logs :
 
 ```bash
-castor local:infrastructures:ps
-castor local:infrastructures:logs
+castor infrastructures:ps
+castor infrastructures:logs
 ```
 
 Après un changement de branche, reconstruire les images et recréer les
 containers en conservant les volumes MySQL et Elasticsearch :
 
 ```bash
-castor local:infrastructures:recreate
+castor infrastructures:recreate
 ```
 
 Pour reconstruire sans cache, ajouter `--no-cache`. Cette commande ne
@@ -238,9 +238,9 @@ réinstalle pas les dépendances applicatives et ne lance pas les migrations.
 Arrêter ou redémarrer :
 
 ```bash
-castor local:app:stop-consumers
-castor local:infrastructures:stop
-castor local:infrastructures:restart
+castor app:stop-consumers
+castor infrastructures:stop
+castor infrastructures:restart
 ```
 
 `restart` redémarre les containers existants sans reconstruire leurs images ni
@@ -248,17 +248,19 @@ appliquer les changements de configuration Compose. Pour supprimer les
 containers et les réseaux tout en conservant les volumes de données :
 
 ```bash
-castor local:infrastructures:down
+castor infrastructures:down
 ```
 
 ## Workflows applicatifs courants
 
-Toutes les commandes ci-dessous s’exécutent avec le préfixe `castor`.
+Toutes les commandes ci-dessous s’exécutent avec le préfixe `castor`. Les
+namespaces sont directement `app`, `database`, `infrastructures`, `qa` et
+`system`, sans préfixe `local:`. Les alias courts restent disponibles.
 
 Les alias `graphql`, `cc`, `console`, `assets` et `composer` correspondent
-respectivement à `local:app:generate-graphql`, `local:app:clear-cache`,
-`local:app:console`, `local:app:install-assets` et
-`local:app:composer`. Ils acceptent les mêmes options que les commandes
+respectivement à `app:generate-graphql`, `app:clear-cache`,
+`app:console`, `app:install-assets` et
+`app:composer`. Ils acceptent les mêmes options que les commandes
 complètes, par exemple `castor graphql` ou
 `castor console --command-name="cache:clear"`.
 
@@ -275,24 +277,24 @@ castor composer -- dump-autoload
 Toutes ces commandes s’exécutent dans le container applicatif.
 
 Les alias `rabbitmq`, `enable` et `disable` correspondent à
-`local:app:rabbitmq-queues`, `local:app:toggle-enable` et
-`local:app:toggle-disable`. `rabbitmq` efface et recrée le vhost et les queues ;
+`app:rabbitmq-queues`, `app:toggle-enable` et
+`app:toggle-disable`. `rabbitmq` efface et recrée le vhost et les queues ;
 `enable` et `disable` exigent le nom du flag en argument, par exemple
 `castor enable multilangue` ou `castor disable multilangue`. L’option
 `--environment` reste disponible, avec `test` comme environnement par défaut.
 
 | Commande | Usage |
 | --- | --- |
-| `local:database:reset` | Repartir des fixtures : base, médias, feature flags, compteurs et Elasticsearch. |
-| `local:qa:regenerate-test-data` | Recharger les fixtures de test et réenregistrer le dump MySQL ainsi que le snapshot ES utilisés par Cypress. |
-| `local:database:migrate` | Appliquer les migrations en attente sur la base existante, sans reset ni rechargement des fixtures. |
-| `local:app:generate-graphql` | Régénérer le backend GraphQL et les deux frontends Relay. |
-| `local:app:clear-cache` | Vider le cache Symfony. |
-| `local:app:console --command-name="…"` | Exécuter une commande Symfony ; les arguments supplémentaires se passent après `--`. |
-| `local:app:install-assets` | Installer les assets Symfony. |
-| `local:app:composer` | Installer les vendors PHP par défaut, ou exécuter une commande Composer avec des arguments après `--`. |
+| `database:reset` | Repartir des fixtures : base, médias, feature flags, compteurs et Elasticsearch. |
+| `qa:regenerate-test-data` | Recharger les fixtures de test et réenregistrer le dump MySQL ainsi que le snapshot ES utilisés par Cypress. |
+| `database:migrate` | Appliquer les migrations en attente sur la base existante, sans reset ni rechargement des fixtures. |
+| `app:generate-graphql` | Régénérer le backend GraphQL et les deux frontends Relay. |
+| `app:clear-cache` | Vider le cache Symfony. |
+| `app:console --command-name="…"` | Exécuter une commande Symfony ; les arguments supplémentaires se passent après `--`. |
+| `app:install-assets` | Installer les assets Symfony. |
+| `app:composer` | Installer les vendors PHP par défaut, ou exécuter une commande Composer avec des arguments après `--`. |
 
-L’alias `castor reset-db` correspond à `castor local:database:reset` et accepte
+L’alias `castor reset-db` correspond à `castor database:reset` et accepte
 les mêmes options. Il supprime les données locales avant de recharger les fixtures.
 
 `reset` supprime les données locales, crée le schéma depuis les entités actuelles,
@@ -308,7 +310,7 @@ Pour reconstruire uniquement l’index Elasticsearch actif depuis la base
 actuelle, sans recharger les fixtures :
 
 ```bash
-castor local:database:reset-elasticsearch
+castor database:reset-elasticsearch
 ```
 
 Cette commande crée un nouvel index et le peuple ; elle conserve les anciens
@@ -318,7 +320,7 @@ Les commandes Yarn couvrent les périmètres suivants :
 
 - `corepack yarn generate-graphql-files` : backend et fichiers de schéma
 - `corepack yarn relay` : backend, fichiers de schéma et Relay du frontend principal
-- `castor local:app:generate-graphql` : backend, fichiers de schéma et les deux frontends Relay
+- `castor app:generate-graphql` : backend, fichiers de schéma et les deux frontends Relay
 
 L’option `--backend-only` de `generate-graphql` limite la génération aux classes
 PHP et aux fichiers de schéma.
@@ -336,13 +338,13 @@ corepack yarn test-e2e-mutations
 Cypress :
 
 ```bash
-castor local:qa:regenerate-test-data --confirm
+castor qa:regenerate-test-data --confirm
 corepack yarn cy:open
 corepack yarn cy:run
 corepack yarn cy:run:ci
 ```
 
-Les hooks Jest et Cypress utilisent Castor pour restaurer la base, Elasticsearch
+Les hooks Jest et Cypress exécutent directement Docker et les scripts QA pour restaurer la base, Elasticsearch
 et les queues RabbitMQ. Cypress ne réécrit plus automatiquement les sauvegardes
 de référence au début de `cy:run`.
 
@@ -367,7 +369,7 @@ Ouvrir une console MySQL interactive sur la base locale `symfony` :
 castor mysql
 ```
 
-Cet alias correspond à `local:database:mysql`. Pour exécuter une requête
+Cet alias correspond à `database:mysql`. Pour exécuter une requête
 ponctuelle via Doctrine :
 
 ```bash
@@ -377,13 +379,13 @@ castor console --command-name=doctrine:query:sql -- "SELECT 1"
 Réinitialiser la base locale :
 
 ```bash
-castor local:database:reset --environment=dev
+castor database:reset --environment=dev
 ```
 
 Sauvegarder la base locale :
 
 ```bash
-castor local:qa:save-db
+castor qa:save-db
 ls -lh var/db.backup
 ```
 
@@ -395,22 +397,22 @@ fixtures en environnement `test`, puis réécrit `var/db.backup` et le snapshot
 Elasticsearch :
 
 ```bash
-castor local:qa:regenerate-test-data --confirm
+castor qa:regenerate-test-data --confirm
 ```
 
 Réinitialiser les queues et les consumers :
 
 ```bash
-castor local:app:rabbitmq-queues
-castor local:app:stop-consumers
-castor local:app:start-consumers
+castor app:rabbitmq-queues
+castor app:stop-consumers
+castor app:start-consumers
 ```
 
 Supprimer les containers et leurs volumes, y compris la base MySQL et les index
 Elasticsearch persistants — opération destructive :
 
 ```bash
-castor local:infrastructures:destroy
+castor infrastructures:destroy
 ```
 
 Ajouter `--remove-images` pour supprimer également les images des services.

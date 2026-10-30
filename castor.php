@@ -21,7 +21,3 @@ import(__DIR__ . '/.castor/database.php');
 import(__DIR__ . '/.castor/app.php');
 import(__DIR__ . '/.castor/qa.php');
 import(__DIR__ . '/.castor/system.php');
-import(__DIR__ . '/.castor/ci.php');
-import(__DIR__ . '/.castor/ci_app.php');
-import(__DIR__ . '/.castor/ci_qa.php');
-import(__DIR__ . '/.castor/ci_database.php');

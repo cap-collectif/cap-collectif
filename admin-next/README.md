@@ -9,7 +9,7 @@ Follow the [local installation guide](../doc/installation-locale.md), then
 check that the Docker stack is running:
 
 ```bash
-castor local:infrastructures:up
+castor infrastructures:up
 ```
 
 `admin-next` uses Redis to access the user's session.

@@ -168,6 +168,6 @@ phpstan.neon
 /vendor/
 ###< symfony/framework-bundle ###
 
-# Temporary selected PHPUnit suites created by Castor.
+# Temporary selected PHPUnit suites.
 /.phpunit-selected-*
 /.phpunit-runner-*

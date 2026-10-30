@@ -97,8 +97,8 @@ Après un run qui modifie les données, restaurer le snapshot initial **avant**
 le prochain lancement. Employer les tâches locales prévues à cet effet :
 
 ```bash
-castor local:qa:restore-db --confirm
-castor local:qa:restore-es-snapshot --confirm
+castor qa:restore-db --confirm
+castor qa:restore-es-snapshot --confirm
 ```
 
 Vérifier auparavant que les snapshots correspondent bien aux données de test

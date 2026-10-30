@@ -12,6 +12,7 @@ parameters:
         - src
         - tests
         - .castor
+        - scripts/qa
     parallel:
         jobSize: 20
         maximumNumberOfProcesses: 16

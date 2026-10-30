@@ -71,7 +71,7 @@ This file provides guidance to WARP (warp.dev) when working with code in this re
 
 ### Infrastructure & local environment
 
-- Local and CI environments are orchestrated via Castor tasks defined under `.castor/` and exposed via `castor.php`.
+- Local developer commands use Castor tasks defined under `.castor/` and exposed via `castor.php`. CI/QA and automated test hooks invoke Docker/Symfony and `scripts/qa/` directly, without Castor.
 - The main pattern is to call namespaced tasks with Castor:
   - Collections: `local.*` for developer workflows, `ci.*` for CI.
   - Sub-collections under `local.*` include `app`, `database`, `infrastructures`, `qa`, and `system`.
@@ -104,7 +104,7 @@ All commands below are run from the repository root unless otherwise specified.
 - PHP dependencies via Composer:
 
   ```bash
-  castor local:app:composer
+  castor app:composer
   ```
 
 See [the local installation guide](doc/installation-locale.md) for the
@@ -112,38 +112,38 @@ prerequisites and the complete first-installation order.
 
 ### Local Docker stack & Symfony app
 
-Castor tasks are namespaced; use `castor` with the `local:*` namespace.
+Castor tasks are namespaced; use `castor` with the `app:*`, `database:*`, `infrastructures:*`, `qa:*`, or `system:*` namespace.
 
 - Build or rebuild local Docker images:
 
   ```bash
-  castor local:infrastructures:build
+  castor infrastructures:build
   ```
 
 - Start the full local stack (Docker services, Symfony app, etc.):
 
   ```bash
-  castor local:infrastructures:up
+  castor infrastructures:up
   ```
 
 - Stop or reboot the stack:
 
   ```bash
-  castor local:infrastructures:stop
-  castor local:infrastructures:restart
+  castor infrastructures:stop
+  castor infrastructures:restart
   ```
 
 - Generate GraphQL schemas, both Relay frontends and install Symfony assets:
 
   ```bash
-  castor local:app:generate-graphql
-  castor local:app:install-assets
+  castor app:generate-graphql
+  castor app:install-assets
   ```
 
 - Generate or refresh the local database, fixtures, Elasticsearch indices, and media directories:
 
   ```bash
-  castor local:database:reset --environment=dev
+  castor database:reset --environment=dev
   ```
 
   This recreates the schema from current entities and marks migrations as executed
@@ -151,19 +151,19 @@ Castor tasks are namespaced; use `castor` with the `local:*` namespace.
   without resetting it or reloading fixtures:
 
   ```bash
-  castor local:database:migrate --environment=dev
+  castor database:migrate --environment=dev
   ```
 
 On first installation, install JavaScript and PHP dependencies, reset the
 database, generate GraphQL and install assets. Database reset is destructive
 for local data. Create RabbitMQ queues separately with
-`local:app:rabbitmq-queues` on first installation; this erases the vhost.
+`app:rabbitmq-queues` on first installation; this erases the vhost.
 
 - Start/stop background consumers (RabbitMQ via Swarrot + supervisord):
 
   ```bash
-  castor local:app:start-consumers
-  castor local:app:stop-consumers
+  castor app:start-consumers
+  castor app:stop-consumers
   ```
 
 > Many backend tests (Jest e2e tests and Cypress) assume the Docker stack, database, and queues are up and the app is reachable at local domains (e.g. `https://capco.dev`).
@@ -365,4 +365,4 @@ Translations are synchronized through Localise.biz and tooling under `packages/t
   - Backend PHP changes → `yarn php:quality` and, where relevant, targeted PHPUnit suites.
 - For changes that touch GraphQL types, resolvers, or front-end queries:
   - Regenerate schemas and Relay artifacts with `yarn relay` (or `yarn generate-graphql-files` + `yarn build-relay-schema`).
-  - For end-to-end behaviours (email flows, exports, queues, etc.), ensure the Docker-based local stack is running (`castor local:infrastructures:up` + `castor local:database:reset --environment=dev` + `castor local:app:generate-graphql` + `castor local:app:install-assets`) before executing Cypress or Jest E2E suites.
+  - For end-to-end behaviours (email flows, exports, queues, etc.), ensure the Docker-based local stack is running (`castor infrastructures:up` + `castor database:reset --environment=dev` + `castor app:generate-graphql` + `castor app:install-assets`) before executing Cypress or Jest E2E suites.

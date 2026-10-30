@@ -37,7 +37,7 @@ unset CI
 cat > "$test_directory/run-castor" <<'SH'
 #!/bin/sh
 "$COMPOSE_TEST_CASTOR" --castor-file="$COMPOSE_TEST_FILE" \
-    local:infrastructures:restart --environment="$1" --no-interaction
+    infrastructures:restart --environment="$1" --no-interaction
 printf '%s\n' "$?" > "$COMPOSE_TEST_STATUS"
 SH
 chmod +x "$test_directory/run-castor"
@@ -74,7 +74,7 @@ grep -Fxq '0' "$test_directory/status"
 grep -Fq 'stderr=no' "$test_directory/record"
 
 "$castor_binary" --castor-file="$test_directory/castor.php" \
-    local:infrastructures:restart < /dev/null > "$test_directory/output" 2>&1
+    infrastructures:restart < /dev/null > "$test_directory/output" 2>&1
 grep -Fq 'stderr=no' "$test_directory/record"
 
 # A failing Compose command must still fail Castor after changing its context.
@@ -86,7 +86,7 @@ if grep -Fxq '0' "$test_directory/status"; then
 fi
 
 if COMPOSE_TEST_EXIT_CODE=7 "$castor_binary" --castor-file="$test_directory/castor.php" \
-    local:infrastructures:restart --no-interaction < /dev/null > "$test_directory/output" 2>&1; then
+    infrastructures:restart --no-interaction < /dev/null > "$test_directory/output" 2>&1; then
     printf 'Compose failure was swallowed.\n' >&2
     exit 1
 fi

@@ -41,12 +41,12 @@ Le job `unit-js` utilise 5 exécuteurs. Les tests historiques de `frontend/` son
 
 Le job `phpunit-tests` utilise quatre exécuteurs. CircleCI découvre les fichiers `tests/**/*Test.php` et les répartit selon les durées historiques par fichier (`--split-by=timings --timings-type=file`). `MigrationCommandTest.php` reste exclu de cette sélection et exécuté par le job `migrations`. Les chemins transmis au répartiteur sont préfixés par `/var/www/` pour correspondre aux attributs `file` des rapports PHPUnit produits dans le conteneur. Un exécuteur sans fichier sélectionné s'arrête avant de préparer sa stack.
 
-Chaque exécuteur transmet sa sélection à Castor avec `--tests`. Pour plusieurs chemins, Castor construit une configuration PHPUnit temporaire à côté de `phpunit.xml`, en conservant ses réglages et en remplaçant ses suites par les fichiers sélectionnés. Cette configuration est supprimée après l'exécution, y compris en cas d'échec. Passer plusieurs fichiers positionnels à PHPUnit 9 est interdit : seul le premier serait exécuté. Les suites `default` et `Unit Tests` restent disponibles pour les exécutions locales. Tout échec de test doit faire échouer le job ; chaque exécuteur publie son propre rapport JUnit non vide comme résultats de tests et comme artefact. Les attributs de fichiers des rapports permettent à CircleCI d'affiner les prochaines répartitions.
+Chaque exécuteur transmet sa sélection à `php scripts/qa/phpunit.php` dans le conteneur applicatif avec `--tests`. Pour une sélection explicite, ce script construit une configuration PHPUnit temporaire dans le répertoire temporaire du conteneur (avec les chemins rendus absolus), en conservant ses réglages et en remplaçant ses suites par les fichiers sélectionnés. Cette configuration est supprimée après l'exécution, y compris en cas d'échec. Passer plusieurs fichiers positionnels à PHPUnit 9 est interdit : seul le premier serait exécuté. Les suites `default` et `Unit Tests` restent disponibles pour les exécutions locales. Tout échec de test doit faire échouer le job ; chaque exécuteur publie son propre rapport JUnit non vide comme résultats de tests et comme artefact. Les attributs de fichiers des rapports permettent à CircleCI d'affiner les prochaines répartitions.
 
 Ce parallélisme doit rester volontairement limité : chaque exécuteur démarre sa propre stack Docker et restaure les données de test. Ajouter des exécuteurs réduit le temps des tests, mais duplique ce coût de restauration, consomme davantage de crédits et occupe plus de capacité de parallélisme sans gain nécessairement proportionnel.
 
-L'exécuteur PHPUnit numéro 0 lance ensuite `.circleci/test-castor-phpunit.sh`
-pour vérifier le runner Castor avec des tests synthétiques : sélection de
+L'exécuteur PHPUnit numéro 0 lance ensuite `.circleci/test-phpunit.sh`
+pour vérifier le runner PHPUnit avec des tests synthétiques : sélection de
 plusieurs fichiers, propagation d'un échec, rapports JUnit et nettoyage de la
 configuration temporaire. Cette vérification réutilise sa stack Docker et ses
 rapports temporaires ne sont pas publiés dans les durées historiques CircleCI.
@@ -63,7 +63,7 @@ Dans l'image de test, Elasticsearch utilise l'UID 1001 et partage le GID 1000 av
 
 Les médias des fixtures restent possédés par l'application (UID 1000) et sont accessibles en écriture au groupe de l'exécuteur CircleCI, afin que les tests GraphQL puissent créer leurs copies temporaires.
 
-Les logs Cypress affichent `restore_db` et `restore_es` pour la durée totale de chaque tâche. Les lignes `CI_RESTORE_TIMING` détaillent l'import MySQL dans le conteneur et les appels Elasticsearch (en millisecondes). L'écart avec les durées totales comprend notamment le démarrage de Castor et les opérations de la tâche hors de ces appels. Comparer ces durées sur le sous-job le plus lent avant de modifier la restauration.
+Les logs Cypress affichent `restore_db` et `restore_es` pour la durée totale de chaque tâche. Les lignes `CI_RESTORE_TIMING` détaillent l'import MySQL dans le conteneur et les appels Elasticsearch (en millisecondes). L'écart avec les durées totales comprend notamment le démarrage de Docker/PHP et les opérations du script hors de ces appels. Comparer ces durées sur le sous-job le plus lent avant de modifier la restauration.
 
 Les lignes `CI_TIMING` complètent ces mesures pendant la préparation des jobs.
 Elles indiquent le début et la fin d'une phase, le job (`job`), l'exécuteur

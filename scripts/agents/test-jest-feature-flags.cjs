@@ -93,7 +93,20 @@ try {
   console.log('Jest feature flags: preset, combined overrides, failure cleanup and retry checks passed.')
 } finally {
   fs.rmSync(directory, { recursive: true, force: true })
-  const environment = process.env.CI ? 'ci' : 'local'
-  const cleanup = spawnSync('castor', [`${environment}:qa:reset-feature-flags`], { cwd: root, encoding: 'utf8' })
+  const cleanup = spawnSync(
+    'docker',
+    [
+      'exec',
+      '-u',
+      'capco',
+      '-w',
+      '/var/www',
+      'capco_application_1',
+      'php',
+      'features/graphql-api/feature-flags-resetter.php',
+      '{}',
+    ],
+    { cwd: root, encoding: 'utf8' },
+  )
   assert.equal(cleanup.status, 0, cleanup.stderr)
 }

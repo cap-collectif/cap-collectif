@@ -191,9 +191,10 @@ Les commandes de compatibilité `cy.enableFeatureFlag` / `cy.disableFeatureFlag`
 et les tâches unitaires utilisent également ce reset Redis, sans démarrer Symfony.
 Ne pas changer les flags dans les hooks de préparation ou de nettoyage des specs.
 
-Les tâches Castor `local:qa:reset-feature-flags` et `ci:qa:reset-feature-flags`
-acceptent `--overrides='{"calendar":true,"captcha":false}'`. Elles utilisent le
-script rapide partagé avec les tests GraphQL, sans démarrer Symfony. Les noms et
+La commande locale Castor `qa:reset-feature-flags` accepte
+`--overrides='{"calendar":true,"captcha":false}'`. Les hooks automatisés appellent
+directement `php features/graphql-api/feature-flags-resetter.php` avec le JSON
+en argument. Tous utilisent ce script rapide, sans démarrer Symfony. Les noms et
 valeurs sont validés avant une écriture Redis atomique des seuls flags de test ;
 une erreur fait échouer la préparation. MySQL, Elasticsearch, les sessions, les
 caches et les flags des autres environnements ne sont pas modifiés.

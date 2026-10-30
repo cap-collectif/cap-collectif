@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Local\App;
+namespace App;
 
 use Capco\Castor\App as Shared;
 use Castor\Attribute\AsArgsAfterOptionEnd;

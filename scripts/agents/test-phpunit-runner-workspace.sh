@@ -10,24 +10,24 @@ cleanup() {
 }
 trap cleanup EXIT
 mkdir -p "$work/project/.circleci" "$work/project/var" "$work/bin"
-cp "$project_directory/.circleci/test-castor-phpunit.sh" "$work/project/.circleci/"
+cp "$project_directory/.circleci/test-phpunit.sh" "$work/project/.circleci/"
 chmod 555 "$work/project/var"
 if [[ -w "$work/project/var" ]]; then
     echo 'This permission regression check requires a non-root user.' >&2
     exit 1
 fi
 
-# Stop at the first Castor call: reaching it proves fixture setup succeeded.
-cat > "$work/bin/castor" <<'SH'
+# Stop at the first Docker call: reaching it proves fixture setup succeeded.
+cat > "$work/bin/docker" <<'SH'
 #!/usr/bin/env bash
-printf 'runner reached Castor\n' > "$RUNNER_PROBE_RECORD"
+printf 'runner reached Docker\n' > "$RUNNER_PROBE_RECORD"
 exit 97
 SH
-chmod +x "$work/bin/castor"
+chmod +x "$work/bin/docker"
 status=0
-PATH="$work/bin:$PATH" RUNNER_PROBE_RECORD="$work/reached-castor" \
-    bash "$work/project/.circleci/test-castor-phpunit.sh" > "$work/output" 2>&1 || status=$?
-if [[ "$status" -ne 97 || ! -f "$work/reached-castor" ]]; then
+PATH="$work/bin:$PATH" RUNNER_PROBE_RECORD="$work/reached-docker" \
+    bash "$work/project/.circleci/test-phpunit.sh" > "$work/output" 2>&1 || status=$?
+if [[ "$status" -ne 97 || ! -f "$work/reached-docker" ]]; then
     cat "$work/output" >&2
     echo 'The PHPUnit runner could not prepare fixtures with a read-only var directory.' >&2
     exit 1

@@ -20,7 +20,7 @@ docker exec -w /var/www capco_application_1 bin/phpunit --list-tests
 Les tests d'intégration nécessitent la stack et les données techniques de
 l'environnement `test`. Vérifier cet environnement avant toute écriture.
 Les tests HTTP nécessitent aussi les queues RabbitMQ : la CI les crée avec
-`castor ci:app:rabbitmq-queues` après la restauration des données.
+la commande `php bin/rabbit vhost:mapping:create` dans le conteneur applicatif (avec les options de `.circleci/config.yml`) après la restauration des données.
 Ce guide conserve les emplacements et les runners actuels.
 
 Les logs de test, warnings et erreurs compris, sont conservés dans
@@ -47,10 +47,10 @@ selon [l'ADR CI](../../../ADR/001-continuous_integration.md).
 Pour lancer l'ensemble des tests hors migrations :
 
 ```bash
-castor local:qa:phpunit --log-junit=var/phpunit/junit.xml
+castor qa:phpunit --log-junit=var/phpunit/junit.xml
 ```
 
-Les tâches Castor locale et CI sélectionnent la suite `default` par défaut.
+Le script `scripts/qa/phpunit.php` et sa commande Castor locale sélectionnent la suite `default` par défaut.
 `defaultTestSuite="default"` préserve aussi ce choix pour un appel direct à `bin/phpunit`.
 `--testsuite` permet de sélectionner une autre suite définie dans `phpunit.xml`.
 Pour cibler un fichier ou un dossier, utiliser
@@ -58,11 +58,11 @@ Pour cibler un fichier ou un dossier, utiliser
 Pour reproduire une sélection de plusieurs fichiers comme en CI :
 
 ```bash
-castor local:qa:phpunit --tests="tests/UnitTests/CronTimeIntervalTest.php tests/UnitTests/MenuItemUrlTest.php" --log-junit=var/phpunit/selection.xml
+castor qa:phpunit --tests="tests/UnitTests/CronTimeIntervalTest.php tests/UnitTests/MenuItemUrlTest.php" --log-junit=var/phpunit/selection.xml
 ```
 
-Une sélection vide est refusée. Avec plusieurs chemins, Castor génère une
-configuration temporaire à côté de `phpunit.xml` : les réglages sont conservés,
+Une sélection vide est refusée. Avec une sélection explicite, le script PHP génère une
+configuration temporaire dans le répertoire temporaire du conteneur (avec les chemins rendus absolus) : les réglages sont conservés,
 mais les suites sont remplacées par la sélection explicite, qui prend le pas
 sur `--testsuite`. La configuration est supprimée même en cas d'échec. Cela évite
 les arguments positionnels multiples, dont PHPUnit 9 n'exécuterait que le premier.
@@ -73,7 +73,7 @@ nouveau fichier après une exécution réussie. En CI, le dossier de sortie doit
 inscriptible par l'utilisateur du conteneur applicatif, dont l'UID peut différer
 de celui qui a créé le dossier dans le checkout.
 
-Le script `bash .circleci/test-castor-phpunit.sh` vérifie ces contrats contre le vrai
+Le script `bash .circleci/test-phpunit.sh` vérifie ces contrats contre le vrai
 runner PHP dans le conteneur, avec des fixtures temporaires sans données métier.
 La CI l'exécute uniquement sur l'exécuteur PHPUnit numéro 0 après sa sélection de
 tests, en réutilisant sa stack déjà préparée. La phase

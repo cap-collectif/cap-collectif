@@ -1,15 +1,24 @@
 /* eslint-disable */
 import 'babel-polyfill'
 const util = require('util')
-const exec = util.promisify(require('child_process').exec)
-const env = process.env.CI ? 'ci' : 'local'
+const execFile = util.promisify(require('child_process').execFile)
 
 module.exports = async () => {
   if (process.env.CI_SHARED_TEST_DATA === '1') return
 
   console.log('Saving database…')
   console.time('save_db')
-  const { stderrDb } = await exec('castor ' + env + ':qa:save-db')
+  const { stderr: stderrDb } = await execFile('docker', [
+    'exec',
+    '-u',
+    'capco',
+    '-w',
+    '/var/www',
+    'capco_application_1',
+    'bash',
+    '-lc',
+    'mysqldump --opt -h database -u root symfony > var/db.backup',
+  ])
 
   if (stderrDb) {
     console.error(`error: ${stderrDb}`)
@@ -19,7 +28,19 @@ module.exports = async () => {
 
   console.log('Writing ElasticSearch snapshot…')
   console.time('save_es')
-  const { stderr } = await exec('castor ' + env + ':qa:save-es-snapshot')
+  const { stderr } = await execFile('docker', [
+    'exec',
+    '-u',
+    'capco',
+    '-w',
+    '/var/www',
+    'capco_application_1',
+    'php',
+    'scripts/qa/elasticsearch-snapshot.php',
+    'save',
+    '--confirm',
+    ...(process.env.CI_SHARED_TEST_DATA === '1' ? ['--shared'] : []),
+  ])
 
   if (stderr) {
     console.error(`error: ${stderr}`)
