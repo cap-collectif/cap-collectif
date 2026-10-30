@@ -20,5 +20,5 @@ when@prod:
                 $transportFactory: '@mailer.transport_factory'
                 $productionSmtpMailer: '%env(bool:SYMFONY_PRODUCTION_SMTP_MAILER)%'
                 $apiDsns:
-                    mandrill: '%env(MAILER_DSN_MANDRILL)%'
-                    mailjet: '%env(MAILER_DSN_MAILJET)%'
+                    mandrill: '%env(SYMFONY_MAILER_DSN_MANDRILL)%'
+                    mailjet: '%env(SYMFONY_MAILER_DSN_MAILJET)%'
