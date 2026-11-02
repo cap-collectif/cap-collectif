@@ -74,7 +74,6 @@ export const defaultFeatureFlags: FeatureFlags = {
   api_sendinblue: false,
   organizations: false,
   moderation_comment: false,
-  unstable__new_create_project: false,
   unstable__sonata_migration_to_admin_next: false,
   new_vote_step: false,
   new_new_vote_step: false,

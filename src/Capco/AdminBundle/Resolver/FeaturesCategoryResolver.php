@@ -51,7 +51,6 @@ class FeaturesCategoryResolver
                     Manager::api_sendinblue,
                     Manager::organizations,
                     Manager::moderation_comment,
-                    Manager::unstable__new_create_project,
                     Manager::mediator,
                     Manager::online_help,
                     Manager::full_proposal_card,

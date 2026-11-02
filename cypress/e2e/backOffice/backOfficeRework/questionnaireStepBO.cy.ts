@@ -2,7 +2,7 @@ import { AdminQuestionnaireStepPage } from '~e2e/pages'
 import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 describe('Questionnaire Step back office', () => {
-  setupFeatureFlags({ unstable__new_create_project: true, helpscout_beacon: false })
+  setupFeatureFlags({ helpscout_beacon: false })
 
   beforeEach(() => {
     cy.task('db:restore')

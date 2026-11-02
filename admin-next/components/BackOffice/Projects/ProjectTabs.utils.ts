@@ -4,26 +4,18 @@ import { fromGlobalId } from '@shared/utils/fromGlobalId'
 const getProjectAdminBaseUrl = (projectId: string, isAdminNext: boolean = false) =>
   isAdminNext ? `/admin-next/project/${projectId}` : `/admin/alpha/project/${projectId}`
 
-type ProjectRoute = {
-  CONFIGURATION: string
-  ANALYSIS: string
-  CONTRIBUTIONS: string
-  PARTICIPANTS: string
-  MEDIATOR: string
-}
+type ProjectRoute = 'CONFIGURATION' | 'ANALYSIS' | 'CONTRIBUTIONS' | 'PARTICIPANTS' | 'MEDIATOR'
 
-const PROJECT_ROUTE: ProjectRoute = {
+const PROJECT_ROUTE = {
   CONTRIBUTIONS: '/contributions',
   PARTICIPANTS: '/participants',
   ANALYSIS: '/analysis',
-  CONFIGURATION: '/edit',
   MEDIATOR: '/mediators',
 }
 
 export const getProjectAdminPath = (
   projectGlobalId: string,
-  type: keyof ProjectRoute,
-  isNewBackOfficeEnabled: boolean = false,
+  type: ProjectRoute,
 ): string => {
   const projectId = fromGlobalId(projectGlobalId).id
   switch (type) {
@@ -34,10 +26,7 @@ export const getProjectAdminPath = (
     case 'ANALYSIS':
       return `${getProjectAdminBaseUrl(projectId)}${PROJECT_ROUTE.ANALYSIS}`
     case 'CONFIGURATION':
-      if (isNewBackOfficeEnabled) {
-        return `${getProjectAdminBaseUrl(projectGlobalId, true)}`
-      }
-      return `${getProjectAdminBaseUrl(projectId)}${PROJECT_ROUTE.CONFIGURATION}`
+      return `${getProjectAdminBaseUrl(projectGlobalId, true)}`
     case 'MEDIATOR':
       return `${getProjectAdminBaseUrl(projectGlobalId, true)}${PROJECT_ROUTE.MEDIATOR}`
     default:

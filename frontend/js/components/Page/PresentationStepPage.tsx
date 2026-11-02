@@ -67,7 +67,6 @@ export const PresentationStepPage = ({ stepId }: Props) => {
   )
   const calendar = useFeatureFlag('calendar')
   const blog = useFeatureFlag('blog')
-  const unstable__new_create_project = useFeatureFlag('unstable__new_create_project')
   const newProjectPage = useFeatureFlag('new_project_page')
   const intl = useIntl()
 
@@ -87,7 +86,7 @@ export const PresentationStepPage = ({ stepId }: Props) => {
   if (!data) return null
   const { presentationStep } = data
   if (!presentationStep) return null
-  const { title, body, project, eventCount } = presentationStep
+  const { body, project, eventCount } = presentationStep
   if (!project) return null
   const { posts, consultationStepOpen, slug } = project
   return (
@@ -98,7 +97,6 @@ export const PresentationStepPage = ({ stepId }: Props) => {
           paddingTop: 48,
         }}
       >
-        {unstable__new_create_project ? null : <h2 className="h2">{title}</h2>}
         {!newProjectPage && (
           <div className="block ">
             <WYSIWYGRender value={body} />

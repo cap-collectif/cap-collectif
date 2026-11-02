@@ -1,18 +1,13 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef } from 'react'
 import { connect } from 'react-redux'
 import { loadQuery, RelayEnvironmentProvider } from 'relay-hooks'
-import { formValueSelector } from 'redux-form'
 import { BrowserRouter as Router, Link, Route, Switch, useLocation } from 'react-router-dom'
 import { createFragmentContainer, graphql } from 'react-relay'
 import { FormattedMessage, useIntl } from 'react-intl'
 import type { ProjectAdminContent_project$data } from '~relay/ProjectAdminContent_project.graphql'
 import '~relay/ProjectAdminContent_project.graphql'
-// @ts-ignore
-import type { ProjectAdminContent_query } from '~relay/ProjectAdminContent_query.graphql'
-import '~relay/ProjectAdminContent_query.graphql'
 import environment from '~/createRelayEnvironment'
 import type { GlobalState } from '~/types'
-import ProjectAdminForm from './Form/ProjectAdminForm'
 import { Content, Count, Header, NavContainer, NavItem } from './ProjectAdminContent.style'
 import {
   initialVariables as queryVariableProposal,
@@ -34,7 +29,7 @@ import ProjectAdminContributionsPage, {
 import { getContributionsPath } from '~/components/Admin/Project/ProjectAdminContributions/IndexContributions/IndexContributions'
 import { ARGUMENT_PAGINATION } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ArgumentTab/ArgumentTab'
 import { VOTE_PAGINATION } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/VoteTab/VoteTab'
-import { getProjectAdminPath, getProjectAdminBaseUrl } from './ProjectAdminPage.utils'
+import { getProjectAdminPath } from './ProjectAdminPage.utils'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import htmlDecode from '~/components/Utils/htmlDecode'
 import ExportModal from '~/components/Admin/Project/Export/ExportModal'
@@ -44,15 +39,14 @@ import { Button, CapUIIcon, Flex } from '@cap-collectif/ui'
 type Props = {
   readonly viewerIsAdmin: boolean
   readonly project: ProjectAdminContent_project$data
-  readonly query: ProjectAdminContent_query
   readonly firstCollectStepId: string | null | undefined
-  readonly hasIdentificationCodeLists: boolean
 }
 type Links = Array<{
   title: string
   count?: number
   url: string
   to: string
+  external?: boolean
   component: any
 }>
 
@@ -100,19 +94,14 @@ const getRouteContributionPath = (
 
 const formatNavbarLinks = (
   project: ProjectAdminContent_project$data,
-  query: ProjectAdminContent_query,
-  path: string,
-  setTitle: (arg0: string) => void,
   firstCollectStepId: string | null | undefined,
   dataPrefetchPage,
   location: string,
   viewerIsAdmin: boolean,
-  hasIdentificationCodeLists: boolean,
-  newCreateProjectFlag: boolean,
   mediatorFeatureFlag: boolean,
 ) => {
   const links = []
-  const baseUrlContributions = getProjectAdminPath(project._id, 'CONTRIBUTIONS', newCreateProjectFlag)
+  const baseUrlContributions = getProjectAdminPath(project._id, 'CONTRIBUTIONS')
   const isCollectStepPage = location === getContributionsPath(baseUrlContributions, 'CollectStep')
   const isQuestionnaireStepPage =
     location ===
@@ -142,8 +131,8 @@ const formatNavbarLinks = (
   links.push({
     title: 'capco.section.metrics.participants',
     count: project.contributors.totalCount,
-    url: getProjectAdminPath(project._id, 'PARTICIPANTS', newCreateProjectFlag),
-    to: getProjectAdminPath(project._id, 'PARTICIPANTS', newCreateProjectFlag),
+    url: getProjectAdminPath(project._id, 'PARTICIPANTS'),
+    to: getProjectAdminPath(project._id, 'PARTICIPANTS'),
     component: () => (
       <ProjectAdminParticipantsProvider>
         <ProjectAdminParticipantTab projectId={project.id} dataPrefetch={dataPrefetchPage.participant} />
@@ -154,8 +143,8 @@ const formatNavbarLinks = (
   if (project.hasAnalysis) {
     links.push({
       title: 'proposal.tabs.evaluation',
-      url: getProjectAdminPath(project._id, 'ANALYSIS', newCreateProjectFlag),
-      to: getProjectAdminPath(project._id, 'ANALYSIS', newCreateProjectFlag),
+      url: getProjectAdminPath(project._id, 'ANALYSIS'),
+      to: getProjectAdminPath(project._id, 'ANALYSIS'),
       count: project.firstAnalysisStep ? project.firstAnalysisStep.proposals.totalCount : undefined,
       component: () => (
         <ProjectAdminProposalsProvider firstCollectStepId={firstCollectStepId}>
@@ -168,29 +157,21 @@ const formatNavbarLinks = (
   if (mediatorFeatureFlag && hasSelectionStep) {
     links.push({
       title: 'global.mediators',
-      url: getProjectAdminPath(project.id, 'MEDIATOR', true),
-      to: getProjectAdminPath(project.id, 'MEDIATOR', true),
+      url: getProjectAdminPath(project.id, 'MEDIATOR'),
+      to: getProjectAdminPath(project.id, 'MEDIATOR'),
+      external: true,
       component: () => <></>,
     })
   }
 
   links.push({
     title: 'global.configuration',
-    url: getProjectAdminPath(newCreateProjectFlag ? project.id : project._id, 'CONFIGURATION', newCreateProjectFlag),
-    to: getProjectAdminPath(newCreateProjectFlag ? project.id : project._id, 'CONFIGURATION', newCreateProjectFlag),
-    component: () =>
-      newCreateProjectFlag ? (
-        <></>
-      ) : (
-        <ProjectAdminForm
-          project={project}
-          onTitleChange={setTitle}
-          viewerIsAdmin={viewerIsAdmin}
-          query={query}
-          hasIdentificationCodeLists={hasIdentificationCodeLists}
-        />
-      ),
+    url: getProjectAdminPath(project.id, 'CONFIGURATION'),
+    to: getProjectAdminPath(project.id, 'CONFIGURATION'),
+    external: true,
+    component: () => <></>,
   })
+
   return links
 }
 
@@ -210,16 +191,11 @@ const projectAdminParticipantAppLogQuery = graphql`
 export const ProjectAdminContent = ({
   project,
   firstCollectStepId,
-  hasIdentificationCodeLists,
   viewerIsAdmin,
-  query,
 }: Props) => {
   const intl = useIntl()
   const location = useLocation()
-  const [title, setTitle] = useState<string>(project.title)
-  const path = getProjectAdminBaseUrl(project._id)
   const hasProjectRevisionEnabled = useFeatureFlag('proposal_revisions')
-  const newCreateProjectFlag = useFeatureFlag('unstable__new_create_project')
   const mediatorFeatureFlag = useFeatureFlag('mediator')
 
   const dataAnalysisPrefetch = loadQuery()
@@ -299,28 +275,18 @@ export const ProjectAdminContent = ({
     () =>
       formatNavbarLinks(
         project,
-        query,
-        path,
-        setTitle,
         firstCollectStepId,
         dataPrefetchPage,
         location.pathname,
         viewerIsAdmin,
-        hasIdentificationCodeLists,
-        newCreateProjectFlag,
         mediatorFeatureFlag,
       ),
     [
       project,
-      query,
-      path,
-      setTitle,
       firstCollectStepId,
       dataPrefetchPage,
       location.pathname,
       viewerIsAdmin,
-      hasIdentificationCodeLists,
-      newCreateProjectFlag,
       mediatorFeatureFlag,
     ],
   )
@@ -345,7 +311,7 @@ export const ProjectAdminContent = ({
     <div className="d-flex">
       <Header>
         <Flex>
-          <h1>{htmlDecode(title)}</h1>
+          <h1>{htmlDecode(project.title)}</h1>
           <Flex spacing={1}>
             <ExportModal project={project} />
             <Button
@@ -369,7 +335,7 @@ export const ProjectAdminContent = ({
         <NavContainer>
           {links.map((link, idx) => (
             <NavItem key={idx} active={location.pathname.includes(link.url)}>
-              {(link.title === 'global.configuration' && newCreateProjectFlag) || link.title === 'global.mediators' ? (
+              {link.external ? (
                 <a href={link.to} id={link.title}>
                   <FormattedMessage id={link.title} />
                 </a>
@@ -400,9 +366,7 @@ export const ProjectAdminContent = ({
 
 const ProjectAdminRouterWrapper = ({
   project,
-  query,
   firstCollectStepId,
-  hasIdentificationCodeLists,
   viewerIsAdmin,
 }: Props & {
   readonly firstCollectStepId?: string | null | undefined
@@ -412,9 +376,7 @@ const ProjectAdminRouterWrapper = ({
       <ProjectAdminContent
         viewerIsAdmin={viewerIsAdmin}
         project={project}
-        query={query}
         firstCollectStepId={firstCollectStepId}
-        hasIdentificationCodeLists={hasIdentificationCodeLists}
       />
     </Router>
   </RelayEnvironmentProvider>
@@ -422,7 +384,6 @@ const ProjectAdminRouterWrapper = ({
 
 const mapStateToProps = (state: GlobalState) => ({
   viewerIsAdmin: state.user.user ? state.user.user.isAdmin : false,
-  title: formValueSelector('projectAdminForm')(state, 'title'),
 })
 
 export default createFragmentContainer(connect(mapStateToProps)(ProjectAdminRouterWrapper), {
@@ -463,13 +424,7 @@ export default createFragmentContainer(connect(mapStateToProps)(ProjectAdminRout
       contributors {
         totalCount
       }
-      ...ProjectAdminForm_project
       ...ExportModal_project
-    }
-  `,
-  query: graphql`
-    fragment ProjectAdminContent_query on Query {
-      ...ProjectAdminForm_query
     }
   `,
 })

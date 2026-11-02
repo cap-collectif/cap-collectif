@@ -47,7 +47,6 @@ class AlphaProjectAdmin extends CapcoAdmin
 
         $collection->clearExcept([
             'create',
-            'edit',
             'editAnalysis',
             'indexProposals',
             'editDebate',

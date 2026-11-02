@@ -1,4 +1,3 @@
-import { $Keys } from 'utility-types'
 // TODO: change when the page is complete
 export const getProjectAdminBaseUrl = (projectId: string, isAdminNext: boolean = false) =>
   isAdminNext ? `/admin-next/project/${projectId}` : `/admin/alpha/project/${projectId}`
@@ -6,14 +5,13 @@ const PROJECT_ROUTE = {
   CONTRIBUTIONS: '/contributions',
   PARTICIPANTS: '/participants',
   ANALYSIS: '/analysis',
-  CONFIGURATION: '/edit',
   MEDIATOR: '/mediators',
 }
+type ProjectRoute = 'CONFIGURATION' | keyof typeof PROJECT_ROUTE
 
 export const getProjectAdminPath = (
   projectId: string,
-  type: $Keys<typeof PROJECT_ROUTE>,
-  newCreateProjectFlag: boolean | undefined = false,
+  type: ProjectRoute,
 ): string => {
   switch (type) {
     case 'CONTRIBUTIONS':
@@ -27,9 +25,7 @@ export const getProjectAdminPath = (
     case 'MEDIATOR':
       return `${getProjectAdminBaseUrl(projectId, true)}${PROJECT_ROUTE.MEDIATOR}`
     case 'CONFIGURATION':
-      return newCreateProjectFlag
-        ? `${getProjectAdminBaseUrl(projectId, true)}`
-        : `${getProjectAdminBaseUrl(projectId)}${PROJECT_ROUTE.CONFIGURATION}`
+      return getProjectAdminBaseUrl(projectId, true)
     default:
       return getProjectAdminBaseUrl(projectId)
   }

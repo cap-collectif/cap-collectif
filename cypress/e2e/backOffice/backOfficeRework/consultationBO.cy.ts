@@ -1,9 +1,6 @@
 import { AdminConsultationPage } from '~e2e/pages'
-import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 describe('Consultation back office', () => {
-  setupFeatureFlags({ unstable__new_create_project: true })
-
   beforeEach(() => {
     cy.task('db:restore')
     cy.directLoginAs('super_admin')

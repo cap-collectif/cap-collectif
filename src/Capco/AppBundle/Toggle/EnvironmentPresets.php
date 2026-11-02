@@ -27,7 +27,6 @@ class EnvironmentPresets
         Manager::questionnaire_result,
         Manager::themes,
         Manager::turnstile_captcha,
-        Manager::unstable__new_create_project,
         Manager::votes_min,
         Manager::export,
     ];

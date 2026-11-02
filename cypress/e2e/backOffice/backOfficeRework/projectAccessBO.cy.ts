@@ -1,5 +1,4 @@
 import { AdminGroupsPage } from '~e2e/pages'
-import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 const PROJECT_GROUP_2_ID = 'UHJvamVjdDpwcm9qZWN0R3JvdXAy'
 
@@ -10,8 +9,6 @@ const openAccessAccordion = () => {
 }
 
 describe('Project access back office', () => {
-  setupFeatureFlags({ unstable__new_create_project: true })
-
   beforeEach(() => {
     cy.task('db:restore')
     cy.directLoginAs('super_admin')

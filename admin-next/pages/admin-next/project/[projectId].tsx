@@ -9,9 +9,9 @@ import { useRouter } from 'next/router'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { ProjectIdQuery } from '@relay/ProjectIdQuery.graphql'
 import ProjectConfigForm from '@components/BackOffice/Projects/ProjectConfig/ProjectConfigForm'
-import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import { getProjectAdminPath, getRouteContributionPath } from '@components/BackOffice/Projects/ProjectTabs.utils'
 import { pxToRem } from '@shared/utils/pxToRem'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 export interface ProjectConfigPageProps {
   projectId: string
@@ -77,9 +77,7 @@ const ProjectConfigPage: React.FC<ProjectConfigPageProps> = ({ projectId }) => {
   const project = response.node
 
   const isMediatorEnabled = useFeatureFlag('mediator')
-  const isNewBackOfficeEnabled = useFeatureFlag('unstable__new_create_project')
-
-  if (!project || !project?.canEdit || !isNewBackOfficeEnabled) {
+  if (!project || !project?.canEdit) {
     window.location.href = '/admin-next/projects'
     return null
   }
@@ -139,9 +137,8 @@ const ProjectConfigPage: React.FC<ProjectConfigPageProps> = ({ projectId }) => {
       <TabBar.Pane
         title={intl.formatMessage({ id: 'global.configuration' })}
         id="global.configuration"
-        href={!isNewBackOfficeEnabled ? getProjectAdminPath(project.id, 'CONFIGURATION', isNewBackOfficeEnabled) : null}
       >
-        {isNewBackOfficeEnabled && <ProjectConfigForm project={project} />}
+        <ProjectConfigForm project={project} />
       </TabBar.Pane>
     </TabBar>
   )

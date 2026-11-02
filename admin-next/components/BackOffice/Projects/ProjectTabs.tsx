@@ -69,8 +69,6 @@ const ProjectTabs: React.FC<ProjectTabsProps> = ({ project: projectRef }) => {
   const router = useRouter()
   const intl = useIntl()
   const isMediatorEnabled = useFeatureFlag('mediator')
-  const isNewBackOfficeEnabled = useFeatureFlag('unstable__new_create_project')
-
   const steps = project.steps
   const hasSelectionStep = steps.some(step => step.__typename === 'SelectionStep')
 
@@ -119,8 +117,8 @@ const ProjectTabs: React.FC<ProjectTabsProps> = ({ project: projectRef }) => {
     }
     links.push({
       title: 'global.configuration',
-      url: getProjectAdminPath(project.id, 'CONFIGURATION', isNewBackOfficeEnabled),
-      to: getProjectAdminPath(project.id, 'CONFIGURATION', isNewBackOfficeEnabled),
+      url: getProjectAdminPath(project.id, 'CONFIGURATION'),
+      to: getProjectAdminPath(project.id, 'CONFIGURATION'),
     })
     return links
   }

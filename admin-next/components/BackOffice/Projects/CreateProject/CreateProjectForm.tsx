@@ -59,7 +59,6 @@ const VIEWER_FRAGMENT = graphql`
 `
 const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHelpMessage }) => {
   const intl = useIntl()
-  const isNewBackOfficeEnabled = useFeatureFlag('unstable__new_create_project')
   const isSsoByPassAuthEnabled = useFeatureFlag('sso_by_pass_auth')
 
   const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment)
@@ -153,7 +152,6 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
             projectTitle: title,
             authors,
             intl,
-            isNewBackOfficeEnabled,
             isSsoByPassAuthEnabled,
           })
 
@@ -167,7 +165,6 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
             projectTitle: title,
             authors,
             intl,
-            isNewBackOfficeEnabled,
             isSsoByPassAuthEnabled,
           })
 
@@ -181,7 +178,6 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
             projectTitle: title,
             authors,
             intl,
-            isNewBackOfficeEnabled,
             isSsoByPassAuthEnabled,
             visibility: isAdmin || isSuperAdmin ? ('ADMIN' as ProjectVisibility) : ('ME' as ProjectVisibility),
           })
@@ -196,7 +192,6 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
             projectTitle: title,
             authors,
             intl,
-            isNewBackOfficeEnabled,
             isSsoByPassAuthEnabled,
             visibility: isAdmin || isSuperAdmin ? ('ADMIN' as ProjectVisibility) : ('ME' as ProjectVisibility),
           })

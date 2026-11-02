@@ -215,7 +215,6 @@ describe('Project', () => {
       cy.directLoginAs('admin')
     })
     it('displays project and allows editing', () => {
-      cy.setFeatureFlags({ unstable__new_create_project: true })
       Base.visit({
         path: '/project/project-pour-la-creation-de-la-capcobeer-visible-par-admin-seulement/collect/collecte-des-propositions-pour-la-capcobeer',
         operationName: 'ProposalListViewRefetchQuery',

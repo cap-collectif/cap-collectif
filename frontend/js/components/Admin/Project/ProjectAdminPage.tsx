@@ -1,37 +1,27 @@
 import React from 'react'
 import { graphql, QueryRenderer } from 'react-relay'
-import { useSelector } from 'react-redux'
 import environment, { graphqlError } from '~/createRelayEnvironment'
 import ProjectAdminContent from './ProjectAdminContent'
 // @ts-ignore
 import type { ProjectAdminPageQueryResponse } from '~relay/ProjectAdminPageQuery.graphql'
-import type { GlobalState } from '~/types'
 type Props = {
   readonly projectId: string | null | undefined
   readonly firstCollectStepId: string | null | undefined
 }
 export const ProjectAdminPage = ({ projectId, firstCollectStepId }: Props) => {
-  const { user } = useSelector((state: GlobalState) => state.user)
   return (
     <QueryRenderer
       environment={environment}
       query={graphql`
-        query ProjectAdminPageQuery($projectId: ID!, $isEditMode: Boolean!, $isAdmin: Boolean!) {
+        query ProjectAdminPageQuery($projectId: ID!, $isEditMode: Boolean!) {
           project: node(id: $projectId) @include(if: $isEditMode) {
             ...ProjectAdminContent_project
-          }
-          ...ProjectAdminContent_query
-          viewer @include(if: $isAdmin) {
-            userIdentificationCodeLists {
-              totalCount
-            }
           }
         }
       `}
       variables={{
         projectId: projectId || '',
         isEditMode: !!projectId,
-        isAdmin: user?.isAdmin,
       }}
       render={({
         props,
@@ -44,13 +34,10 @@ export const ProjectAdminPage = ({ projectId, firstCollectStepId }: Props) => {
         }
 
         if (props) {
-          const hasIdentificationCodeLists = props.viewer && props.viewer.userIdentificationCodeLists.totalCount > 0
           return (
             <ProjectAdminContent
               project={props.project || null}
-              query={props || null}
               firstCollectStepId={firstCollectStepId}
-              hasIdentificationCodeLists={hasIdentificationCodeLists}
             />
           )
         }

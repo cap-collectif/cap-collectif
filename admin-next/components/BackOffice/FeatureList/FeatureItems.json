@@ -91,11 +91,6 @@
                         "description": "description.module.moderation_comment",
                         "onlySuperAdmin": true
                     },
-                    "unstable__new_create_project": {
-                        "title": "capco.module.unstable__new_create_project",
-                        "description": "",
-                        "onlySuperAdmin": true
-                    },
                     "unstable__sonata_migration_to_admin_next": {
                         "title": "Sonata to Admin Next migration",
                         "description": "",

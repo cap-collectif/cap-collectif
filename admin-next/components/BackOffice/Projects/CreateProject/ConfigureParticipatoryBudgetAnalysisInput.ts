@@ -26,7 +26,6 @@ type Params = {
   projectTitle: string
   authors: Array<string>
   intl: IntlShape
-  isNewBackOfficeEnabled: boolean
   isSsoByPassAuthEnabled: boolean
 }
 
@@ -34,7 +33,6 @@ const getParticipatoryBudgetAnalysisInput = ({
   projectTitle,
   authors,
   intl,
-  isNewBackOfficeEnabled,
   isSsoByPassAuthEnabled,
 }: Params): PreConfigureProjectInput => {
   const proposalFormTitle = `${projectTitle} - ${intl.formatMessage({ id: 'proposal-form' })}`
@@ -153,7 +151,7 @@ const getParticipatoryBudgetAnalysisInput = ({
           })}</p><p>- ${intl.formatMessage({ id: 'amount-of-the-dedicated-budget' })}</p><p>- ${intl.formatMessage({
             id: 'schedule-approach',
           })}</p><p>- ${intl.formatMessage({ id: 'rules' })}</p>`,
-          title: isNewBackOfficeEnabled ? '' : `${intl.formatMessage({ id: 'presentation-of-your-project' })}`,
+          title: '',
           label: intl.formatMessage({ id: 'presentation_step' }),
           isEnabled: true,
           requirements: [],
@@ -165,7 +163,7 @@ const getParticipatoryBudgetAnalysisInput = ({
           })}</p><p>- ${intl.formatMessage({
             id: 'distinction-between-operations-and-investment',
           })}</p><p>- ${intl.formatMessage({ id: 'example-of-an-eligible-non-eligible-project' })}</p>`,
-          title: isNewBackOfficeEnabled ? '' : `${intl.formatMessage({ id: 'submit-your-projects' })}`,
+          title: '',
           startAt: stepsDates.collectStep.startAt(),
           endAt: stepsDates.collectStep.endAt(),
           label: intl.formatMessage({ id: 'project-submission' }),
@@ -194,7 +192,7 @@ const getParticipatoryBudgetAnalysisInput = ({
           })}</p><p>- ${intl.formatMessage({
             id: 'official-responses-to-unsuccessful-projects',
           })}</p><p>- ${intl.formatMessage({ id: 'rules' })}</p>`,
-          title: isNewBackOfficeEnabled ? '' : `${intl.formatMessage({ id: 'project-analysis' })}`,
+          title: '',
           startAt: stepsDates.selectionStep1.startAt(),
           endAt: stepsDates.selectionStep1.endAt(),
           isEnabled: true,
@@ -239,7 +237,7 @@ const getParticipatoryBudgetAnalysisInput = ({
         },
         {
           label: voteStepLabel,
-          title: isNewBackOfficeEnabled ? '' : `${intl.formatMessage({ id: 'vote-for-your-favourite-projects' })}`,
+          title: '',
           body: `<p>- ${intl.formatMessage({
             id: 'number-of-votes-and-other-modalities',
           })}</p><p>- ${intl.formatMessage({
@@ -290,7 +288,7 @@ const getParticipatoryBudgetAnalysisInput = ({
         },
         {
           label: intl.formatMessage({ id: 'award-winning-projects' }),
-          title: isNewBackOfficeEnabled ? '' : `${intl.formatMessage({ id: 'list-of-selected-projects' })}`,
+          title: '',
           body: `<p>- ${intl.formatMessage({ id: 'timeframe-for-completion-of-winning-projects' })}</p>`,
           startAt: stepsDates.selectionStep3.startAt(),
           endAt: stepsDates.selectionStep3.endAt(),

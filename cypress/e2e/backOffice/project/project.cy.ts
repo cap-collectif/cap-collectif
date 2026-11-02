@@ -1,178 +1,192 @@
-import { AdminProjectPage, Base } from '~e2e-pages/index'
-import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
+import { AdminProjectPage } from '~e2e-pages/index'
+import { AdminCollectStepPage, AdminConsultationPage, AdminQuestionnaireStepPage } from '~e2e/pages'
+
+const visitCreatedStep = () => {
+  cy.get<string>('@createdStepId').then(stepId => {
+    cy.request('POST', '/graphql/internal', {
+      query: 'query($id: ID!) { node(id: $id) { ... on Step { url } } }',
+      variables: { id: stepId },
+    })
+      .its('body.data.node.url')
+      .then(url => cy.visit(url))
+  })
+}
 
 context('Project', () => {
   describe('Project BO', () => {
-    setupFeatureFlags({ unstable__new_create_project: false })
-
     beforeEach(() => {
       cy.task('db:restore')
       cy.directLoginAs('admin')
     })
 
     it('should enable secret ballot on collect', () => {
-      cy.interceptGraphQLOperation({ operationName: 'UserListFieldQuery' })
-      AdminProjectPage.visit('projectIdf3')
-      cy.wait('@UserListFieldQuery')
-      AdminProjectPage.openAddModal()
-      AdminProjectPage.collectStepSelector.click()
-      cy.wait('@ProjectAdminCollectStepFormProposalsQuery')
+      cy.interceptGraphQLOperation({ operationName: 'CollectStepFormQuery' })
+      AdminCollectStepPage.visitCollectPage('EDIT')
+      cy.wait('@CollectStepFormQuery')
+      AdminCollectStepPage.openVotesAccordion()
+      AdminCollectStepPage.selectAdvancedTab()
+      cy.get('#secretBallot').check({ force: true })
+      AdminCollectStepPage.save()
 
-      cy.assertReactSelectOptionCount('#step-proposalForm', 1)
-      cy.get('div[id="step-proposalForm"]').click()
-      cy.contains('Formulaire avec propriétaire')
-      cy.get('body').type('{enter}')
-
-      AdminProjectPage.fillStepInputs('title', 'label')
-      AdminProjectPage.toggleVote()
-      AdminProjectPage.toggleSecretBallot()
-      AdminProjectPage.submitStepModal()
-      AdminProjectPage.checkStepListLength(7)
-      AdminProjectPage.save()
-
-      cy.wait('@UpdateProjectAlphaMutation')
-      cy.wait('@ProjectAdminAnalysisTabQuery')
-      cy.wait('@ProjectAdminContributionsPageQuery')
-
-      cy.contains('global.saved')
+      AdminCollectStepPage.visitCollectPage('EDIT')
+      cy.wait('@CollectStepFormQuery')
+      AdminCollectStepPage.openVotesAccordion()
+      AdminCollectStepPage.selectAdvancedTab()
+      cy.get('#secretBallot').should('be.checked')
     })
 
     it('should save project metadata changes', () => {
-      AdminProjectPage.visit('project12')
+      cy.interceptGraphQLOperation({ operationName: 'ProjectConfigFormQuery' })
+      cy.interceptGraphQLOperation({ operationName: 'UpdateNewProjectMutation' })
+      cy.visit('/admin-next/project/UHJvamVjdDpwcm9qZWN0MTI=')
+      cy.wait('@ProjectConfigFormQuery')
+      cy.get('#parameters .cap-accordion__button').should('be.visible').click()
 
       cy.get('textarea[name="metaDescription"]').clear().type('Such meta')
+      cy.wait('@UpdateNewProjectMutation').its('response.body.data.updateNewProject.errorCode').should('eq', null)
       cy.get('#video').clear().type('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
-      cy.selectReactSelectOption('#districts', 'Premier Quartier')
-      AdminProjectPage.save()
+      cy.wait('@UpdateNewProjectMutation').its('response.body.data.updateNewProject.errorCode').should('eq', null)
+      cy.openDSSelect('#districts', true)
+      cy.contains('.cap-async-select__option', 'Premier Quartier').click({ force: true })
+      cy.wait('@UpdateNewProjectMutation').its('response.body.data.updateNewProject.errorCode').should('eq', null)
 
-      cy.wait('@UpdateProjectAlphaMutation')
-      cy.contains('global.saved').should('be.visible')
+      cy.reload()
+      cy.wait('@ProjectConfigFormQuery')
+      cy.get('#parameters .cap-accordion__button').should('be.visible').click()
+      cy.get('textarea[name="metaDescription"]').should('have.value', 'Such meta')
+      cy.get('#video').should('have.value', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+      cy.get('#districts').should('contain', 'Premier Quartier')
     })
 
     it('should update an English project title and authors', () => {
+      cy.interceptGraphQLOperation({ operationName: 'ProjectConfigFormQuery' })
+      cy.interceptGraphQLOperation({ operationName: 'UpdateNewProjectMutation' })
       cy.interceptGraphQLOperation({ operationName: 'UserListFieldQuery' })
-      AdminProjectPage.visit('englishProject')
+      cy.visit(`/admin-next/project/${btoa('Project:englishProject')}`)
+      cy.wait('@ProjectConfigFormQuery')
 
-      cy.get('input[name="title"]').clear().type('English Project Edited')
-      cy.get('#project-author .react-select__input input').type('spyl')
+      cy.get('#title').clear().type('English Project Edited')
+      cy.wait('@UpdateNewProjectMutation').its('response.body.data.updateNewProject.errorCode').should('eq', null)
+      cy.openDSSelect('#authors', true)
+      cy.get('#authors input.cap-async-select__input').type('spyl', { force: true })
       cy.wait('@UserListFieldQuery')
-      cy.contains('.react-select__option', 'spyl').click()
-      AdminProjectPage.save()
+      cy.contains('.cap-async-select__option', 'spyl').click()
+      cy.wait('@UpdateNewProjectMutation').its('response.body.data.updateNewProject.errorCode').should('eq', null)
 
-      cy.wait('@UpdateProjectAlphaMutation')
-      cy.contains('global.saved').should('be.visible')
+      cy.reload()
+      cy.wait('@ProjectConfigFormQuery')
+      cy.get('#title').should('have.value', 'English Project Edited')
+      cy.get('#authors').should('contain', 'spyl')
     })
 
-    it('should add presentation and consultation steps', () => {
-      cy.interceptGraphQLOperation({ operationName: 'ProjectAdminConsultationStepFormConsultationsQuery' })
-      AdminProjectPage.visit('project4')
+    it('should add a consultation step and render its content publicly', () => {
+      cy.interceptGraphQLOperation({ operationName: 'CreateStepPageQuery' })
+      cy.interceptGraphQLOperation({ operationName: 'AddConsultationStepMutation' })
+      cy.interceptGraphQLOperation({ operationName: 'ConsultationStepFormQuery' })
+      cy.interceptGraphQLOperation({ operationName: 'CreateOrUpdateConsultationMutation' })
+      cy.interceptGraphQLOperation({ operationName: 'UpdateConsultationStepMutation' })
+      cy.visit(`/admin-next/project/${btoa('Project:project4')}/create-step`)
+      cy.wait('@CreateStepPageQuery')
+      cy.contains('global.consultation').should('be.visible').click()
+      cy.wait('@AddConsultationStepMutation')
+      cy.wait('@ConsultationStepFormQuery')
 
-      AdminProjectPage.addStep('presentation_step')
-      AdminProjectPage.fillStepInputs('PresentationStepTitle', 'PresentationStepLabel')
-      cy.get('#step-body .jodit-wysiwyg').type('PresentationStepBody')
-      // eslint-disable-next-line no-fixed-wait -- Jodit debounces its change event for 100 ms.
-      cy.wait(100)
-      AdminProjectPage.submitStepModal()
-
-      AdminProjectPage.addStep('global.consultation')
-      cy.wait('@ProjectAdminConsultationStepFormConsultationsQuery')
-      AdminProjectPage.fillStepInputs('ConsultationStepTitle', 'ConsultationStepLabel')
-      cy.get('#step-body .jodit-wysiwyg').type('ConsultationStepBody')
-      // eslint-disable-next-line no-fixed-wait -- Jodit debounces its change event for 100 ms.
-      cy.wait(100)
-      cy.selectReactSelectOption('#step-consultations', 'Consultation in project without step')
-      AdminProjectPage.submitStepModal()
-      AdminProjectPage.save()
-
-      cy.wait('@UpdateProjectAlphaMutation')
-      cy.contains('global.saved').should('be.visible')
-      cy.contains('PresentationStepTitle').should('be.visible')
-      cy.contains('ConsultationStepTitle').should('be.visible')
-
-      Base.visit({
-        path: '/project/projet-vide/presentation/presentationsteptitle',
-        operationName: 'PresentationStepPageQuery',
-      })
-      cy.get('#details').should('be.visible')
-      cy.contains('PresentationStepBody').should('be.visible')
-
-      Base.visit({
-        path: '/project/projet-vide/consultation/consultationsteptitle',
-        operationName: 'ConsultationPropositionBoxQuery',
-      })
+      cy.get('#label').clear().type('ConsultationStepTitle')
+      cy.get('.jodit-wysiwyg').first().type('ConsultationStepBody')
+      AdminConsultationPage.fillModel(0, 'Consultation in project without step')
+      cy.get('#save-consultation').should('be.enabled').click()
+      cy.wait('@CreateOrUpdateConsultationMutation')
+      cy.wait('@UpdateConsultationStepMutation').its('request.body.variables.input.stepId').as('createdStepId')
+      visitCreatedStep()
       cy.contains('ConsultationStepBody').should('be.visible')
     })
 
     it('should add a collect step with a proposal form', () => {
-      AdminProjectPage.visit('project4')
-      AdminProjectPage.openAddModal()
-      AdminProjectPage.collectStepSelector.click()
-      cy.wait('@ProjectAdminCollectStepFormProposalsQuery')
+      cy.interceptGraphQLOperation({ operationName: 'CreateStepPageQuery' })
+      cy.interceptGraphQLOperation({ operationName: 'AddCollectStepMutation' })
+      cy.interceptGraphQLOperation({ operationName: 'CollectStepFormQuery' })
+      cy.interceptGraphQLOperation({ operationName: 'UpdateProposalFormMutation' })
+      cy.interceptGraphQLOperation({ operationName: 'UpdateCollectStepMutation' })
+      cy.visit(`/admin-next/project/${btoa('Project:project4')}/create-step`)
+      cy.wait('@CreateStepPageQuery')
+      cy.contains('global.collect.step.label').should('be.visible').click()
+      cy.wait('@AddCollectStepMutation')
+      cy.wait('@CollectStepFormQuery')
 
-      AdminProjectPage.fillStepInputs('CollectStepTitle', 'CollectStepLabel')
-      cy.get('#step-body .jodit-wysiwyg').type('CollectStepBody')
-      cy.get('#step-proposalForm').click()
-      cy.contains('Formulaire avec propriétaire').click()
-      cy.get('#gridView').check({ force: true })
-      AdminProjectPage.submitStepModal()
+      cy.get('#label').clear().type('CollectStepTitle')
+      cy.get('.jodit-wysiwyg').first().type('CollectStepBody')
+      cy.contains('from-model').click()
+      cy.get('#form_model_tab .cap-select__input').click({ force: true })
+      cy.contains('.cap-select__option', 'Formulaire avec propriétaire').click({ force: true })
+      cy.get('#save-collect-step').should('be.enabled').click()
+      cy.wait('@UpdateProposalFormMutation')
+      cy.wait('@UpdateCollectStepMutation')
+        .its('response.body.data.updateCollectStep.collectStep.id')
+        .as('createdStepId')
       cy.contains('CollectStepTitle').should('be.visible')
-      AdminProjectPage.save()
 
-      cy.wait('@UpdateProjectAlphaMutation')
-      cy.contains('global.saved').should('be.visible')
-
-      cy.visit('/project/projet-vide/collect/collectsteptitle')
+      visitCreatedStep()
       cy.get('.ProposalStepPage-rendered').should('be.visible')
       cy.contains('CollectStepBody').should('be.visible')
     })
 
     it('should add a questionnaire step and render its content publicly', () => {
-      cy.interceptGraphQLOperation({ operationName: 'ProjectAdminQuestionnaireStepFormQuestionnairesQuery' })
-      AdminProjectPage.visit('project4')
-      AdminProjectPage.openAddModal()
-      AdminProjectPage.questionnaireSelector.click()
-      cy.wait('@ProjectAdminQuestionnaireStepFormQuestionnairesQuery')
+      cy.interceptGraphQLOperation({ operationName: 'CreateStepPageQuery' })
+      cy.interceptGraphQLOperation({ operationName: 'AddQuestionnaireStepMutation' })
+      cy.interceptGraphQLOperation({ operationName: 'QuestionnaireStepFormQuery' })
+      cy.interceptGraphQLOperation({ operationName: 'QuestionnaireListFieldQuery' })
+      cy.interceptGraphQLOperation({ operationName: 'UpdateQuestionnaireStepMutation' })
+      cy.interceptGraphQLOperation({ operationName: 'UpdateQuestionnaireMutation' })
+      cy.visit(`/admin-next/project/${btoa('Project:project4')}/create-step`)
+      cy.wait('@CreateStepPageQuery')
+      cy.contains('global.questionnaire').should('be.visible').click()
+      cy.wait('@AddQuestionnaireStepMutation')
+      cy.wait('@QuestionnaireStepFormQuery')
 
-      AdminProjectPage.fillStepInputs('QuestionnaireStepTitle', 'QuestionnaireStepLabel')
-      cy.get('#step-body .jodit-wysiwyg').type('QuestionnaireStepBody')
-      cy.get('#step-footer .jodit-wysiwyg').type('QuestionnaireStepFooter')
-      cy.get('#step-questionnaire').click()
+      cy.get('#label').clear().type('QuestionnaireStepTitle')
+      cy.get('.jodit-wysiwyg').first().type('QuestionnaireStepBody')
+      AdminQuestionnaireStepPage.getFromModelTab().click()
+      AdminQuestionnaireStepPage.getFromModelTabListInput().click()
+      cy.wait('@QuestionnaireListFieldQuery')
       cy.contains('Questionnaire visible par un owner sans step').click()
-      AdminProjectPage.submitStepModal()
-      AdminProjectPage.save()
-
-      cy.wait('@UpdateProjectAlphaMutation')
-      cy.contains('global.saved').should('be.visible')
-
-      cy.visit('/project/projet-vide/questionnaire/questionnairesteptitle')
+      cy.get('#accordion-button-optional-settings').click()
+      cy.get('[id^="footer-JoditTextArea"] .jodit-wysiwyg').type('QuestionnaireStepFooter')
+      cy.get('#save-questionnaire-step').should('be.enabled').click()
+      cy.wait('@UpdateQuestionnaireStepMutation').its('request.body.variables.input.stepId').as('createdStepId')
+      cy.wait('@UpdateQuestionnaireMutation')
+      visitCreatedStep()
       cy.get('#reply-form-container').should('be.visible')
       cy.contains('QuestionnaireStepBody').should('be.visible')
       cy.contains('QuestionnaireStepFooter').should('be.visible')
     })
   })
   describe('Authorization', () => {
-    it('should display an unauthorized screen when admin project attempt to edit a project that he does not own', () => {
+    it('should redirect a project admin to the projects list when he cannot edit a project', () => {
       cy.directLoginAs('project_owner')
-      cy.checkAccessDenied('/admin/alpha/project/projectWithAnonymousQuestionnaire/edit')
+      cy.interceptGraphQLOperation({ operationName: 'ProjectIdQuery' })
+      cy.visit(`/admin-next/project/${btoa('Project:projectWithAnonymousQuestionnaire')}`)
+      cy.wait('@ProjectIdQuery')
+      cy.url().should('include', '/admin-next/projects')
     })
   })
   describe('Project access', () => {
-    setupFeatureFlags({ unstable__new_create_project: false })
-
     beforeEach(() => {
       cy.task('db:restore')
       cy.directLoginAs('super_admin')
     })
 
     it('should restrict a project to selected groups', () => {
-      AdminProjectPage.visit('project12')
+      cy.interceptGraphQLOperation({ operationName: 'ProjectConfigFormQuery' })
+      cy.interceptGraphQLOperation({ operationName: 'UpdateNewProjectMutation' })
+      cy.visit('/admin-next/project/UHJvamVjdDpwcm9qZWN0MTI=')
+      cy.wait('@ProjectConfigFormQuery')
+      cy.get('#access .cap-accordion__button').should('be.visible').click()
 
-      cy.get('#project-visibility-CUSTOM').check({ force: true })
-      cy.selectReactSelectOption('#project-restrictedViewerGroups', 'Agent de la ville')
-      AdminProjectPage.save()
+      cy.get('#visibility_choice-CUSTOM').check({ force: true })
+      cy.openDSSelect('#restrictedViewerGroups', true)
+      cy.contains('.cap-async-select__option', 'Agent de la ville').click({ force: true })
+      cy.wait('@UpdateNewProjectMutation').its('response.body.data.updateNewProject.errorCode').should('eq', null)
 
-      cy.wait('@UpdateProjectAlphaMutation')
-      cy.contains('global.saved').should('be.visible')
       cy.visit('/project/projet-sans-etapes-participatives/presentation/presentation-3')
       cy.get('#restricted-access').should('be.visible')
     })

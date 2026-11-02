@@ -119,10 +119,6 @@ services:
         tags:
             - { name: doctrine.event_subscriber }
 
-    Capco\AppBundle\EventListener\NewBackOfficeToggleEventSubscriber:
-        tags:
-            - { name: kernel.event_subscriber }
-
     Capco\AppBundle\EventListener\TranslatableEventSubscriber:
         arguments:
             $translationFetchMode: 'LAZY'

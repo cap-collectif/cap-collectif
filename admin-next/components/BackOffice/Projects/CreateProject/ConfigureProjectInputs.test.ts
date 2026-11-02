@@ -12,7 +12,6 @@ const baseParams = {
   projectTitle: 'Project title',
   authors: ['user-id'],
   intl,
-  isNewBackOfficeEnabled: false,
 }
 
 const getCollectStepRequirementTypes = input =>

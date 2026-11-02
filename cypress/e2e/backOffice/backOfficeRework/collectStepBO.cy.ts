@@ -5,7 +5,6 @@ describe('Collect Step back office', () => {
   setupFeatureFlags({
     display_pictures_in_depository_proposals_list: true,
     votes_min: true,
-    unstable__new_create_project: true,
     helpscout_beacon: false,
   })
 

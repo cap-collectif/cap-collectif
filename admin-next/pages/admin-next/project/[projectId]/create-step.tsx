@@ -3,18 +3,11 @@ import withPageAuthRequired from '@utils/withPageAuthRequired'
 import { useRouter } from 'next/router'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
 import Layout from '@components/BackOffice/Layout/Layout'
-import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import CreateStepPage from '@components/BackOffice/CreateStep/CreateStepPage'
 
 const CreateStepWrapper = () => {
   const router = useRouter()
   const projectId = router.query.projectId
-  const isNewProjectCreateEnabled = useFeatureFlag('unstable__new_create_project')
-
-  if (!isNewProjectCreateEnabled) {
-    throw new Error('You need to enable unstable__new_create_project feature to access this page.')
-  }
-
   if (!projectId) return null
 
   return (

@@ -16,7 +16,6 @@ const getPublicConsultationInput = ({
   projectTitle,
   authors,
   intl,
-  isNewBackOfficeEnabled,
   isSsoByPassAuthEnabled,
   visibility,
 }): PreConfigureProjectInput => {
@@ -198,7 +197,7 @@ const getPublicConsultationInput = ({
       </tr>
    </tbody>
 </table>`,
-          title: isNewBackOfficeEnabled ? '' : `${intl.formatMessage({ id: 'presentation-of-your-project' })}`,
+          title: '',
           label: intl.formatMessage({ id: 'presentation_step' }),
           isEnabled: true,
           requirements: [],
@@ -219,9 +218,7 @@ const getPublicConsultationInput = ({
             id: 'publicConsultation.mediaStep.additionalComments',
           })}</p></div>
 `,
-          title: isNewBackOfficeEnabled
-            ? ''
-            : `${intl.formatMessage({ id: 'publicConsultation.mediaStep.documents' })}`,
+          title: '',
           label: intl.formatMessage({ id: 'publicConsultation.mediaStep.documents' }),
           isEnabled: true,
           requirements: [],
@@ -245,7 +242,7 @@ const getPublicConsultationInput = ({
 <br>
 <p>${text({ id: 'publicConsultation.collectStep.analysis' })}</p>
 </div>`,
-          title: isNewBackOfficeEnabled ? '' : collectStepLabel,
+          title: '',
           startAt: stepsDates.collectStep.startAt(),
           endAt: stepsDates.collectStep.endAt(),
           label: collectStepLabel,
@@ -286,7 +283,7 @@ const getPublicConsultationInput = ({
             id: 'publicConsultation.analysisStep.bodyTitle',
           })}</strong></h3>
       <p>${intl.formatMessage({ id: 'publicConsultation.analysisStep.body' })}</p></div>`,
-          title: isNewBackOfficeEnabled ? '' : `${intl.formatMessage({ id: 'publicConsultation.analysisStep.title' })}`,
+          title: '',
           label: intl.formatMessage({ id: 'publicConsultation.analysisStep.title' }),
           isEnabled: true,
           requirements: [],

@@ -16,7 +16,6 @@ const getPublicInquiryInput = ({
   projectTitle,
   authors,
   intl,
-  isNewBackOfficeEnabled,
   isSsoByPassAuthEnabled,
   visibility,
 }): PreConfigureProjectInput => {
@@ -189,7 +188,7 @@ const getPublicInquiryInput = ({
       </tr>
    </tbody>
 </table>`,
-          title: isNewBackOfficeEnabled ? '' : `${intl.formatMessage({ id: 'presentation-of-your-project' })}`,
+          title: '',
           label: intl.formatMessage({ id: 'presentation_step' }),
           isEnabled: true,
           requirements: [],
@@ -231,7 +230,7 @@ const getPublicInquiryInput = ({
      id: 'publicInquiry.mediaStep.documentsToAdd',
    })}<span style="color:rgb(67,67,67);"><br class="Apple-interchange-newline"></span>
 </div>`,
-          title: isNewBackOfficeEnabled ? '' : `${intl.formatMessage({ id: 'global.question.types.medias' })}`,
+          title: '',
           label: intl.formatMessage({ id: 'global.question.types.medias' }),
           isEnabled: true,
           requirements: [],
@@ -243,7 +242,7 @@ const getPublicInquiryInput = ({
         },
         {
           body: `<p>${intl.formatMessage({ id: 'publicInquiry.collectStep.body' })}</p>`,
-          title: isNewBackOfficeEnabled ? '' : collectStepLabel,
+          title: '',
           startAt: stepsDates.collectStep.startAt(),
           endAt: stepsDates.collectStep.endAt(),
           label: collectStepLabel,
@@ -277,7 +276,7 @@ const getPublicInquiryInput = ({
         },
         {
           body: `<p>${intl.formatMessage({ id: 'publicInquiry.checkupStep.body' })}</p>`,
-          title: isNewBackOfficeEnabled ? '' : `${intl.formatMessage({ id: 'global.checkup' })}`,
+          title: '',
           label: intl.formatMessage({ id: 'global.checkup' }),
           isEnabled: true,
           requirements: [],
