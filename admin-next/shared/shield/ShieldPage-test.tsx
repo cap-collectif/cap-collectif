@@ -1,9 +1,11 @@
 /* eslint-env jest */
-import { render } from '@testing-library/react'
-import { graphql, useLazyLoadQuery } from 'react-relay'
+import { act, render, screen } from '@testing-library/react'
+import { graphql, RelayEnvironmentProvider, useLazyLoadQuery } from 'react-relay'
+import { IntlProvider } from 'react-intl'
+import { CapUIProvider } from '@cap-collectif/ui'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import type { ShieldPageTestQuery } from '@relay/ShieldPageTestQuery.graphql'
-import { ShieldBody } from './ShieldPage'
+import { ShieldBody, ShieldPage } from './ShieldPage'
 
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import { RelaySuspensFragmentTest } from 'tests/testUtils'
@@ -82,4 +84,75 @@ describe('<ShieldPage />', () => {
     const { asFragment } = render(<TestComponent />)
     expect(asFragment()).toMatchSnapshot()
   })
+})
+
+/**
+ * @jest-status compliant
+ * @jest-reason Checks the visible refusal and logout link without initiating a login GraphQL operation.
+ */
+it('shows access denial without loading the login query', () => {
+  const environment = createMockEnvironment()
+  render(
+    // @ts-expect-error React Intl v2 types do not declare children with React 18.
+    <IntlProvider
+      locale="en"
+      messages={{
+        'front.platform-access.restricted-title': 'Restricted access',
+        'front.platform-access.access-denied': 'Contact an administrator to request access.',
+        'global.logout': 'Log out',
+      }}
+    >
+      <RelayEnvironmentProvider environment={environment}>
+        <CapUIProvider>
+          <ShieldPage accessDenied />
+        </CapUIProvider>
+      </RelayEnvironmentProvider>
+    </IntlProvider>,
+  )
+
+  expect(screen.getByRole('heading', { name: 'Restricted access' })).toBeDefined()
+  expect(screen.getByText('Contact an administrator to request access.')).toBeDefined()
+  expect(screen.getByRole('link', { name: 'Log out' }).getAttribute('href')).toBe('/logout')
+  expect(environment.mock.getAllOperations()).toEqual([])
+})
+
+/**
+ * @jest-status compliant
+ * @jest-reason Resolves the real component's Relay query and checks the visible login form instead of the refusal.
+ */
+it('loads and displays the login form when access is not denied', async () => {
+  const environment = createMockEnvironment()
+  const mockFeatureFlag = useFeatureFlag as jest.MockedFunction<typeof useFeatureFlag>
+  const previousImplementation = mockFeatureFlag.getMockImplementation()
+  mockFeatureFlag.mockReturnValue(false)
+
+  try {
+    render(
+      <RelaySuspensFragmentTest environment={environment}>
+        <ShieldPage accessDenied={false} />
+      </RelaySuspensFragmentTest>,
+    )
+
+    expect(environment.mock.getMostRecentOperation().request.node.params.name).toBe('ShieldPageQuery')
+    await act(async () => {
+      environment.mock.resolveMostRecentOperation(operation =>
+        MockPayloadGenerator.generate(operation, {
+          Query: () => ({
+            oauth2sso: { edges: [] },
+            ssoConfigurations: { edges: [] },
+            textTop: { value: null },
+            textBottom: { value: null },
+          }),
+        }),
+      )
+    })
+
+    expect(screen.getByRole('textbox', { name: /global.email/ })).toBeDefined()
+    expect(screen.getByLabelText(/global.password/)).toBeDefined()
+    expect(screen.getByRole('button', { name: 'global.login_me' })).toBeDefined()
+    expect(screen.queryByRole('link', { name: 'global.logout' })).toBeNull()
+  } finally {
+    if (previousImplementation) mockFeatureFlag.mockImplementation(previousImplementation)
+    else mockFeatureFlag.mockReset()
+  }
 })

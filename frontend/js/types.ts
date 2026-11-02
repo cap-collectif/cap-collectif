@@ -86,6 +86,7 @@ export type FeatureToggles = {
   login_franceconnect: boolean | null | undefined
   secure_password: boolean | null | undefined
   restrict_connection: boolean | null | undefined
+  shield_authorized_users_only: boolean | null | undefined
   read_more: boolean | null | undefined
   display_pictures_in_depository_proposals_list: boolean | null | undefined
   external_project: boolean | null | undefined

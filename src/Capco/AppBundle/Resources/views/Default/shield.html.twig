@@ -25,7 +25,8 @@
         </div>
         <div class="row">
             {{ react_render_component('ShieldApp', {'rendering': 'client_side', 'props': {
-                'locale': locale
+                'locale': locale,
+                'accessDenied': accessDenied|default(false)
             } }) }}
         </div>
     </div>

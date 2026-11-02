@@ -12,9 +12,10 @@ import { ChartModalQuery } from '@shared/register/ChartModal'
 
 type Props = {
   SSRData: layoutQuery$data
+  accessDenied?: boolean
 }
 
-export const ShieldPageWrapper: React.FC<Props> = ({ SSRData }) => {
+export const ShieldPageWrapper: React.FC<Props> = ({ SSRData, accessDenied = false }) => {
   const intl = useIntl()
   const shieldImg = SSRData?.shieldImage?.media?.url
   const cookies = SSRData?.cookiesList?.value
@@ -37,7 +38,7 @@ export const ShieldPageWrapper: React.FC<Props> = ({ SSRData }) => {
             width={['100%', '70%', '25rem']}
           >
             <React.Suspense fallback={<Spinner m="auto" />}>
-              <ShieldPage />
+              <ShieldPage accessDenied={accessDenied} />
               <PrivacyModalQuery />
               <ChartModalQuery />
             </React.Suspense>

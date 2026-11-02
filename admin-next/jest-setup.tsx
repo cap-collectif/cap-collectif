@@ -72,6 +72,7 @@ export const appContextValue = {
     id: 'user-123',
     isAdmin: true,
     isSuperAdmin: false,
+    isShieldAuthorizedUser: true,
     isProjectAdmin: false,
   },
   appVersion: 'app-v1',

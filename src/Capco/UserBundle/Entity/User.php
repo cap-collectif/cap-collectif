@@ -771,6 +771,11 @@ class User extends AbstractUser implements EntityInterface, ProjectOwner, Equata
         return $this->hasRole(UserRole::ROLE_ADMIN) || $this->hasRole(UserRole::ROLE_SUPER_ADMIN);
     }
 
+    public function isShieldAuthorizedUser(): bool
+    {
+        return $this->hasRole(UserRole::ROLE_SHIELD_AUTHORIZED_USER) || $this->isAdmin();
+    }
+
     public function isOnlyProjectAdmin(): bool
     {
         return $this->isProjectAdmin() && !$this->isAdmin();

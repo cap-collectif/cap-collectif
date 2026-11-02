@@ -100,7 +100,12 @@ const Shield: FC = () => {
   const [loading, setLoading] = useState(false)
   const { viewerSession } = useAppContext()
   const { shieldAdminForm, availableLocales } = useLazyLoadQuery<ShieldQuery>(QUERY, {})
-  const features = useFeatureFlags(['sso_by_pass_auth', 'multilangue', 'remind_user_account_confirmation'])
+  const features = useFeatureFlags([
+    'sso_by_pass_auth',
+    'multilangue',
+    'remind_user_account_confirmation',
+    'shield_authorized_users_only',
+  ])
   const { setSaving } = useNavBarContext()
 
   const defaultLocale = availableLocales.find(locale => locale.isDefault) as ShieldQuery$data['availableLocales'][0]
@@ -159,6 +164,29 @@ const Shield: FC = () => {
                 )(e)
               }
             >
+              <Flex direction="row" justify="space-between" align="center" width="100%" mb={4} spacing={2}>
+                <Flex direction="column" spacing={1}>
+                  <Text as="label" htmlFor="restrict-platform-access" fontSize={CapUIFontSize.BodyRegular}>
+                    {intl.formatMessage({ id: 'admin.features.restrict-platform-access' })}
+                  </Text>
+                  <Text id="restrict-platform-access-help" color="gray.700" fontSize={CapUIFontSize.BodySmall}>
+                    {intl.formatMessage({ id: 'admin.features.restrict-platform-access-help' })}
+                  </Text>
+                </Flex>
+                <Switch
+                  id="restrict-platform-access"
+                  aria-describedby="restrict-platform-access-help"
+                  checked={features.shield_authorized_users_only}
+                  onChange={() =>
+                    toggleFeatureFlag(
+                      'shield_authorized_users_only',
+                      !features.shield_authorized_users_only,
+                      intl,
+                      setSaving,
+                    )
+                  }
+                />
+              </Flex>
               <FormControl name="introduction" control={control}>
                 <FormLabel label={intl.formatMessage({ id: 'global.intro' })}>
                   <Flex direction="row" justify="space-between" flex={1}>

@@ -1,8 +1,11 @@
 UserRole:
     type: enum
     config:
-        description: '4 possible values'
+        description: 'Roles granted to users.'
         values:
+            ROLE_SHIELD_AUTHORIZED_USER:
+                value: !php/const Capco\AppBundle\Enum\UserRole::ROLE_SHIELD_AUTHORIZED_USER
+                description: 'Allows navigation through the shield when both shield_mode and shield_authorized_users_only are enabled.'
             ROLE_USER:
                 value: !php/const Capco\AppBundle\Enum\UserRole::ROLE_USER
                 description: 'Represents a user.'

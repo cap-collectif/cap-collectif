@@ -28,6 +28,7 @@ export type ViewerSession = {
   id: string
   isAdmin: boolean
   isSuperAdmin: boolean
+  isShieldAuthorizedUser: boolean
   isProjectAdmin: boolean
   isAdminOrganization: boolean
   isOrganizationMember: boolean

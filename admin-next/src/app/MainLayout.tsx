@@ -20,7 +20,14 @@ import { formatCodeToLocale, setLocaleCookie } from '@utils/locale-helper'
 
 const MainLayout: FC<{ SSRData: layoutQuery$data; children: React.ReactNode }> = ({ children, SSRData }) => {
   const shield_mode = useFeatureFlag('shield_mode')
+  const shieldAuthorizedUsersOnly = useFeatureFlag('shield_authorized_users_only')
   const session = useAppContext()
+  const accessDenied = !!(
+    shield_mode &&
+    shieldAuthorizedUsersOnly &&
+    session?.viewerSession &&
+    !session.viewerSession.isShieldAuthorizedUser
+  )
   const isMobile = useIsMobile()
   const cookies = useCookies()
   const { locales } = SSRData
@@ -35,14 +42,6 @@ const MainLayout: FC<{ SSRData: layoutQuery$data; children: React.ReactNode }> =
       window.location.hash = hash
     }
   }, [])
-
-  if (shield_mode && !session?.viewerSession)
-    return (
-      <>
-        <ShieldPageWrapper SSRData={SSRData} />
-        <CookieManager SSRData={SSRData} mode="BANNER" />
-      </>
-    )
 
   const normalizeLocale = (locale?: string | null): string => (locale || '').replace(/_/g, '-')
   const getLocalePrefix = (localeCode: string): string => normalizeLocale(localeCode).split('-')[0].toLowerCase()
@@ -66,6 +65,14 @@ const MainLayout: FC<{ SSRData: layoutQuery$data; children: React.ReactNode }> =
 
     setLocaleCookie(pathLocale, availableLocales)
   }, [availableLocales, cookiesLocale, pathLocale])
+
+  if (shield_mode && (!session?.viewerSession || accessDenied))
+    return (
+      <>
+        <ShieldPageWrapper SSRData={SSRData} accessDenied={accessDenied} />
+        <CookieManager SSRData={SSRData} mode="BANNER" />
+      </>
+    )
 
   return (
     <>

@@ -32,7 +32,9 @@
 
 {% block mainContent %}
     {# Header  #}
-    {% include '@CapcoApp/Default/header.html.twig' %}
+    {% block header %}
+        {% include '@CapcoApp/Default/header.html.twig' %}
+    {% endblock %}
 
     {% include '@CapcoApp/Homepage/flashbag.html.twig' %}
 

@@ -7887,6 +7887,9 @@ enum FeatureFlagType {
   sso_by_pass_auth
   allow_users_to_propose_events
   login_franceconnect
+
+  """Restrict platform access to explicitly authorized users"""
+  shield_authorized_users_only
   restrict_connection
   secure_password
   read_more
@@ -24630,8 +24633,13 @@ enum UserOrderField {
   ACTIVITY
 }
 
-"""4 possible values"""
+"""Roles granted to users."""
 enum UserRole {
+  """
+  Allows navigation through the shield when both shield_mode and shield_authorized_users_only are enabled.
+  """
+  ROLE_SHIELD_AUTHORIZED_USER
+
   """Represents a user."""
   ROLE_USER
 

@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import type { FC, ChangeEvent } from 'react'
-import { Checkbox as CapCheckbox, CheckboxGroup } from '@cap-collectif/ui'
+import { CapUIFontSize, Checkbox as CapCheckbox, CheckboxGroup, Flex, Text } from '@cap-collectif/ui'
 
 export type MultipleCheckboxValue = {
   labels: string[]
@@ -11,6 +11,7 @@ type Choice = {
   id?: string | null
   useIdAsValue: boolean
   label: string
+  description?: string
 }
 
 export interface MultipleCheckboxProps {
@@ -39,6 +40,8 @@ export const MultipleCheckbox: FC<MultipleCheckboxProps> = ({ choices, value, id
       {choices.map((choice, idx) => {
         const choiceKey = choice.id ? `choice-${choice.id}` : `choice-${idx}`
         const choiceValue = choice.useIdAsValue && choice.id ? choice.id : choice.label
+        const labelId = `${id}_${choiceKey}_label`
+        const descriptionId = `${id}_${choiceKey}_description`
 
         return (
           <CapCheckbox
@@ -46,10 +49,26 @@ export const MultipleCheckbox: FC<MultipleCheckboxProps> = ({ choices, value, id
             key={choiceKey}
             name={fieldName}
             id={`${id}_${choiceKey}`}
+            aria-labelledby={choice.description ? labelId : rest['aria-labelledby']}
+            aria-describedby={
+              [rest['aria-describedby'], choice.description ? descriptionId : undefined].filter(Boolean).join(' ') ||
+              undefined
+            }
             checked={finalValue?.includes(choiceValue)}
             onChange={event => handleChange(event, choiceValue)}
           >
-            {choice.label}
+            {choice.description ? (
+              <Flex as="span" direction="column">
+                <Text as="span" id={labelId}>
+                  {choice.label}
+                </Text>
+                <Text as="span" id={descriptionId} fontSize={CapUIFontSize.BodySmall} color="text.secondary">
+                  {choice.description}
+                </Text>
+              </Flex>
+            ) : (
+              choice.label
+            )}
           </CapCheckbox>
         )
       })}

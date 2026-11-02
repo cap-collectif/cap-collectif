@@ -1,0 +1,7 @@
+{% extends '@CapcoUser/layout.html.twig' %}
+
+{% block header %}
+    {% if not is_feature_enabled('shield_mode') %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}

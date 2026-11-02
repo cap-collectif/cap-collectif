@@ -73,6 +73,12 @@ const UserAdminAccount: React.FC<Props> = ({ user: userRef, methods }) => {
 
   const roleChoices = [
     { id: 'ROLE_USER', useIdAsValue: true, label: intl.formatMessage({ id: 'roles.user' }) },
+    {
+      id: 'ROLE_SHIELD_AUTHORIZED_USER',
+      useIdAsValue: true,
+      label: intl.formatMessage({ id: 'roles.shield_authorized_user' }),
+      description: intl.formatMessage({ id: 'roles.shield_authorized_user_help' }),
+    },
     { id: 'ROLE_ADMIN', useIdAsValue: true, label: intl.formatMessage({ id: 'roles.admin' }) },
     ...(hasProjectAdminFeature
       ? [{ id: 'ROLE_PROJECT_ADMIN', useIdAsValue: true, label: intl.formatMessage({ id: 'roles.project_admin' }) }]

@@ -3,7 +3,8 @@
 {% block field %}
     {% apply spaceless %}
         {% for role in value %}
-            {{ role | trans({}, 'CapcoAppBundle') }}{% if not loop.last %}, {% endif %}
+            {% set label = role == 'ROLE_SHIELD_AUTHORIZED_USER' ? 'roles.shield_authorized_user' : role %}
+            {{ label | trans({}, 'CapcoAppBundle') }}{% if not loop.last %}, {% endif %}
         {% endfor %}
     {% endapply %}
 {% endblock %}

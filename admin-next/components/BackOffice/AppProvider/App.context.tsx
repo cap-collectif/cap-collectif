@@ -15,6 +15,7 @@ export const AppContext = React.createContext<AppContext>({
     id: '',
     isAdmin: true,
     isSuperAdmin: false,
+    isShieldAuthorizedUser: true,
     isProjectAdmin: false,
     isAdminOrganization: false,
     isOrganizationMember: false,

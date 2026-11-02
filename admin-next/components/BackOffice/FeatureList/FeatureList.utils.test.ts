@@ -17,6 +17,13 @@ const getVisibleFeatureIds = (viewerSuperAdmin: boolean): string[] =>
  * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
  */
 describe('FeatureList.utils', () => {
+  it.each([false, true])(
+    'keeps the shield-specific restriction out of the feature list (superAdmin=%s)',
+    superAdmin => {
+      expect(getVisibleFeatureIds(superAdmin)).not.toContain('shield_authorized_users_only')
+    },
+  )
+
   it('hides new_project_page from non super admins', () => {
     expect(getVisibleFeatureIds(false)).not.toContain('new_project_page')
   })

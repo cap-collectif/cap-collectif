@@ -73,37 +73,41 @@ class SessionWithJsonHandlerTest extends TestCase
     public static function viewerRoles(): iterable
     {
         yield 'ordinary account' => [['ROLE_USER'], null, [
-            'isAdmin' => false, 'isSuperAdmin' => false, 'isProjectAdmin' => false,
+            'isAdmin' => false, 'isSuperAdmin' => false, 'isShieldAuthorizedUser' => false, 'isProjectAdmin' => false,
             'isAdminOrganization' => false, 'isOrganizationMember' => false,
             'isMediator' => false, 'organization' => null,
         ]];
 
+        yield 'shield authorized user' => [['ROLE_SHIELD_AUTHORIZED_USER'], null, [
+            'isAdmin' => false, 'isSuperAdmin' => false, 'isShieldAuthorizedUser' => true,
+        ]];
+
         yield 'project administrator' => [['ROLE_PROJECT_ADMIN'], null, [
-            'isAdmin' => false, 'isSuperAdmin' => false, 'isProjectAdmin' => true,
+            'isAdmin' => false, 'isSuperAdmin' => false, 'isShieldAuthorizedUser' => false, 'isProjectAdmin' => true,
             'isAdminOrganization' => false, 'isOrganizationMember' => false,
             'isMediator' => false, 'organization' => null,
         ]];
 
         yield 'global administrator' => [['ROLE_ADMIN'], null, [
-            'isAdmin' => true, 'isSuperAdmin' => false, 'isProjectAdmin' => true,
+            'isAdmin' => true, 'isSuperAdmin' => false, 'isShieldAuthorizedUser' => true, 'isProjectAdmin' => true,
             'isAdminOrganization' => false, 'isOrganizationMember' => false,
             'isMediator' => false, 'organization' => null,
         ]];
 
         yield 'organization member' => [['ROLE_USER'], 'user', [
-            'isAdmin' => false, 'isSuperAdmin' => false, 'isProjectAdmin' => false,
+            'isAdmin' => false, 'isSuperAdmin' => false, 'isShieldAuthorizedUser' => false, 'isProjectAdmin' => false,
             'isAdminOrganization' => false, 'isOrganizationMember' => true,
             'isMediator' => false, 'organization' => 'T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbi1pZA==',
         ]];
 
         yield 'organization administrator' => [['ROLE_USER'], 'admin', [
-            'isAdmin' => false, 'isSuperAdmin' => false, 'isProjectAdmin' => false,
+            'isAdmin' => false, 'isSuperAdmin' => false, 'isShieldAuthorizedUser' => false, 'isProjectAdmin' => false,
             'isAdminOrganization' => true, 'isOrganizationMember' => true,
             'isMediator' => false, 'organization' => 'T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbi1pZA==',
         ]];
 
         yield 'super administrator and mediator in an organization' => [['ROLE_SUPER_ADMIN', 'ROLE_MEDIATOR'], 'admin', [
-            'isAdmin' => true, 'isSuperAdmin' => true, 'isProjectAdmin' => true,
+            'isAdmin' => true, 'isSuperAdmin' => true, 'isShieldAuthorizedUser' => true, 'isProjectAdmin' => true,
             'isAdminOrganization' => true, 'isOrganizationMember' => true,
             'isMediator' => true, 'organization' => 'T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbi1pZA==',
         ]];

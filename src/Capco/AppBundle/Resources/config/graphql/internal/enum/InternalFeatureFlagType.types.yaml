@@ -80,6 +80,9 @@ InternalFeatureFlagType:
                 value: !php/const Capco\AppBundle\Toggle\Manager::allow_users_to_propose_events
             login_franceconnect:
                 value: !php/const Capco\AppBundle\Toggle\Manager::login_franceconnect
+            shield_authorized_users_only:
+                value: !php/const Capco\AppBundle\Toggle\Manager::shield_authorized_users_only
+                description: 'Restrict platform access to explicitly authorized users'
             restrict_connection:
                 value: !php/const Capco\AppBundle\Toggle\Manager::restrict_connection
             secure_password:

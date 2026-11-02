@@ -2,12 +2,17 @@
 
 namespace Capco\AppBundle\EventListener;
 
+use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 class ShieldListener
 {
@@ -18,6 +23,7 @@ class ShieldListener
 
         // Login
         'login_check',
+        'fos_user_security_logout',
         'facebook_login',
         'openid_login',
         'franceconnect_login',
@@ -66,12 +72,18 @@ class ShieldListener
     public function __construct(
         protected Manager $manager,
         protected TokenStorageInterface $tokenStorage,
-        protected Environment $templating
+        protected Environment $templating,
+        private readonly RoleHierarchyInterface $hierarchy
     ) {}
 
-    public function onKernelRequest(RequestEvent $event)
+    /**
+     * @throws SyntaxError
+     * @throws RuntimeError
+     * @throws LoaderError
+     */
+    public function onKernelRequest(RequestEvent $event): void
     {
-        if (!$event->isMasterRequest()) {
+        if (!$event->isMainRequest()) {
             return;
         }
 
@@ -79,9 +91,10 @@ class ShieldListener
             return;
         }
 
-        // If already authenticated, we don't need to show the shield
-        $token = $this->tokenStorage->getToken();
-        if ($token && $token->getUser() instanceof UserInterface) {
+        // Authenticated users pass the shield only when its optional role restriction allows them.
+        $user = $this->tokenStorage->getToken()?->getUser();
+        $authenticated = $user instanceof UserInterface;
+        if ($authenticated && $this->isAllowed($user)) {
             return;
         }
 
@@ -99,8 +112,19 @@ class ShieldListener
         $response = new Response(
             $this->templating->render('@CapcoApp/Default/shield.html.twig', [
                 'locale' => $request->getLocale(),
-            ])
+                'accessDenied' => $authenticated,
+            ]),
+            $authenticated ? Response::HTTP_FORBIDDEN : Response::HTTP_OK
         );
         $event->setResponse($response);
+    }
+
+    private function isAllowed(UserInterface $user): bool
+    {
+        if (!$this->manager->isActive(Manager::shield_authorized_users_only)) {
+            return true;
+        }
+
+        return \in_array(UserRole::ROLE_SHIELD_AUTHORIZED_USER, $this->hierarchy->getReachableRoleNames($user->getRoles()), true);
     }
 }

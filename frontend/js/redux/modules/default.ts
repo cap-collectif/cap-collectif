@@ -82,6 +82,7 @@ export const features: FeatureToggles = {
   allow_users_to_propose_events: false,
   secure_password: false,
   restrict_connection: false,
+  shield_authorized_users_only: false,
   login_franceconnect: false,
   read_more: false,
   display_pictures_in_depository_proposals_list: false,

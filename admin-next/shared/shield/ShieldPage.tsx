@@ -8,7 +8,7 @@ import { ShieldPageQuery, ShieldPageQuery$data } from '@relay/ShieldPageQuery.gr
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import LoginFormWrapper from '@shared/login/LoginFormWrapper'
 import { useFormContext } from 'react-hook-form'
-import { Button } from '@cap-collectif/ui'
+import { Box, Button, Flex } from '@cap-collectif/ui'
 
 type Props = {
   loginWithOpenId: boolean
@@ -74,17 +74,35 @@ export const ShieldBody = ({ query, loginWithOpenId }: Props) => {
   )
 }
 
-export const ShieldPage = () => {
+const ShieldLogin = () => {
   const query = useLazyLoadQuery<ShieldPageQuery>(QUERY, {})
   const loginWithOpenId = query.oauth2sso?.edges?.some(edge => edge?.node?.enabled) ?? false
 
+  return <ShieldBody query={query} loginWithOpenId={loginWithOpenId} />
+}
+
+const ShieldAccessDenied = () => {
+  const intl = useIntl()
+
   return (
-    <div id="shield-agent" className="bg-white col-md-4 col-md-offset-4 panel panel-default">
-      <div className="panel-body">
-        <ShieldBody query={query} loginWithOpenId={loginWithOpenId} />
-      </div>
-    </div>
+    <Flex direction="column" gap={4} alignItems="flex-start">
+      <Box as="h1" fontWeight="bold" m={0}>
+        {intl.formatMessage({ id: 'front.platform-access.restricted-title' })}
+      </Box>
+      <Box as="p" m={0}>
+        {intl.formatMessage({ id: 'front.platform-access.access-denied' })}
+      </Box>
+      <Box as="a" href="/logout" sx={{ textDecoration: 'underline' }}>
+        {intl.formatMessage({ id: 'global.logout' })}
+      </Box>
+    </Flex>
   )
 }
+
+export const ShieldPage = ({ accessDenied = false }: { accessDenied?: boolean }) => (
+  <div id="shield-agent" className="bg-white col-md-4 col-md-offset-4 panel panel-default">
+    <div className="panel-body">{accessDenied ? <ShieldAccessDenied /> : <ShieldLogin />}</div>
+  </div>
+)
 
 export default ShieldPage

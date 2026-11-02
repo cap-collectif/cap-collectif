@@ -123,6 +123,7 @@ class SessionWithJsonHandler extends RedisSessionHandler
                 'id' => GlobalId::toGlobalId('User', $viewer->getId()),
                 'isAdmin' => $viewer->isAdmin(),
                 'isSuperAdmin' => $viewer->isSuperAdmin(),
+                'isShieldAuthorizedUser' => $viewer->isShieldAuthorizedUser(),
                 'isProjectAdmin' => $viewer->isProjectAdmin(),
                 'isAdminOrganization' => $viewer->isAdminOrganization(),
                 'isOrganizationMember' => $viewer->isOrganizationMember(),

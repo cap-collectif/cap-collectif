@@ -21,6 +21,14 @@ export class SelectUserRole extends Component<Props> {
     const { isSuperAdmin, hasProjectAdminFeature, intl, id, name, label } = this.props
     const userRoles = [
       {
+        id: 'ROLE_SHIELD_AUTHORIZED_USER',
+        useIdAsValue: true,
+        label: intl.formatMessage({
+          id: 'roles.shield_authorized_user',
+        }),
+        description: intl.formatMessage({ id: 'roles.shield_authorized_user_help' }),
+      },
+      {
         id: 'ROLE_USER',
         useIdAsValue: true,
         label: intl.formatMessage({
