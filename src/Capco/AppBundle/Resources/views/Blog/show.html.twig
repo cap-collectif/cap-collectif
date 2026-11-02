@@ -54,17 +54,32 @@
                 {{ post.body|raw | jolitypo() }}
             </div>
 
-            {% if post.projects | length > 0 %}
-                <div class="block ql-editor blog_link-project">
-                    <p>
-                        {{ 'blog.show.projects.title' | trans({'count': post.projects | length}, 'CapcoAppBundle') }}
-                    </p>
-                    <ul>
-                        {% for project in post.projects %}
-                            <li><a href="{{ project | capco_first_step_link }}">{{ project.title }}</a></li>
-                        {% endfor %}
-                    </ul>
-                </div>
+            {% if post.proposals | length > 0 %}
+                {% set proposal = post.proposals | first %}
+                {{ react_render_component('BlogRelatedContentCardApp', {
+                    'props': {
+                        'label': 'front.blog.related-proposal' | trans({}, 'CapcoAppBundle'),
+                        'imageUrl': proposal.media ? media_public_url(proposal.media, 'default_blockHeader') : (proposal.step.project.cover ? media_public_url(proposal.step.project.cover, 'default_blockHeader') : ''),
+                        'title': proposal.title,
+                        'url': path('app_project_show_proposal', {
+                            'projectSlug': proposal.step.project.slug,
+                            'stepSlug': proposal.step.slug,
+                            'proposalSlug': proposal.slug,
+                            '_locale': app.request.locale,
+                        }),
+                    }
+                }) }}
+            {% elseif post.projects | length > 0 %}
+                {% for project in post.projects %}
+                    {{ react_render_component('BlogRelatedContentCardApp', {
+                        'props': {
+                            'label': loop.first ? 'front.blog.related-project' | trans({'count': post.projects | length}, 'CapcoAppBundle') : '',
+                            'imageUrl': project.cover ? media_public_url(project.cover, 'default_blockHeader') : '',
+                            'title': project.title,
+                            'url': project | capco_first_step_link,
+                        }
+                    }) }}
+                {% endfor %}
             {% endif %}
 
             {{ react_render_component('ShareButtonDropdownApp', {

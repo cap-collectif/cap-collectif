@@ -50,6 +50,7 @@ Capco\AppBundle\Entity\PostTranslation:
     postFr16:
         locale: fr-FR
         translatable: '@post16'
+        slug: post-proposal-and-project
         title: Post d'un projet privé pour admin@test.com
         body: Très bien tout ça je valide
     postEn16:

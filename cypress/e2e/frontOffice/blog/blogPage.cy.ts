@@ -74,6 +74,22 @@ describe('Blog', () => {
     })
   })
 
+  /**
+   * @cypress-status compliant
+   * @cypress-reason Verifies the displayed related content follows proposal priority.
+  */
+  it('shows the linked proposal instead of the linked project', () => {
+    cy.visit('/blog/post-proposal-and-project')
+
+    cy.get('[data-cy="blog-related-content"]')
+      .should('contain', 'Ravalement de la façade de la bibliothèque municipale')
+      .and('contain', 'front.blog.related-proposal')
+      .find('a')
+      .should('have.attr', 'href')
+      .and('contain', '/proposals/')
+    cy.contains('Project pour la création de la capCoBeer').should('not.exist')
+  })
+
   describe('Anonymous wants to comment a blogpost with moderation enabled', () => {
     it('should show email confirmation message when moderation is enabled', () => {
       cy.setFeatureFlags({ moderation_comment: true })

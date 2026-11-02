@@ -84,6 +84,7 @@ import NewsLetterPageApp from './startup/NewsLetterPageApp'
 import CarrouselApp from './startup/CarrouselApp'
 import RequirementsPageApp from './startup/RequirementsPageApp'
 import UserAvatarApp from './startup/UserAvatarApp'
+import BlogRelatedContentCardApp from './startup/BlogRelatedContentCardApp'
 
 ReactOnRails.registerStore({
   appStore,
@@ -157,6 +158,7 @@ ReactOnRails.register({
   CarrouselApp,
   RequirementsPageApp,
   UserAvatarApp,
+  BlogRelatedContentCardApp,
 
   /* # COMPONENTS INTE CLIENT # */
   CalendarApp,
