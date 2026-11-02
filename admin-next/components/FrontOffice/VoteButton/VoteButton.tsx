@@ -13,16 +13,7 @@ import RemoveProposalSmsVoteMutation from '@mutations/RemoveProposalSmsVoteMutat
 import { mutationErrorToast } from '@shared/utils/toasts'
 import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 import CookieMonster from '@shared/utils/CookieMonster'
-
-// Converts GraphQL VoteButtonIcon enum value (SCREAMING_SNAKE_CASE) to the matching CapUIIcon key (PascalCase)
-const getVoteButtonIcon = (icon: string | null | undefined): CapUIIcon => {
-  if (!icon) return CapUIIcon.ThumbUp
-  const pascalCase = icon
-    .split('_')
-    .map(w => w[0] + w.slice(1).toLowerCase())
-    .join('')
-  return (CapUIIcon as Record<string, CapUIIcon>)[pascalCase] ?? CapUIIcon.ThumbUp
-}
+import { getVoteButtonIcon } from '@shared/utils/getVoteButtonIcon'
 
 type Props = {
   proposal: VoteButton_proposal$key

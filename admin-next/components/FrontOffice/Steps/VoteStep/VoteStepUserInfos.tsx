@@ -13,19 +13,20 @@ import {
   Modal,
   useTheme,
 } from '@cap-collectif/ui'
-import { FC, useState } from 'react'
-import { useIntl } from 'react-intl'
-import { graphql, useFragment } from 'react-relay'
+import VotesPopup from '@components/FrontOffice/Steps/VoteStep/VotesPopup/VotesPopup'
+import { useMatchMedia } from '@liinkiing/react-hooks'
 import {
   ProposalStepVoteTypeValue,
   VoteStepUserInfos_proposalStep$key,
 } from '@relay/VoteStepUserInfos_proposalStep.graphql'
-import VotesPopup from '@components/FrontOffice/Steps/VoteStep/VotesPopup/VotesPopup'
+import { getContributionObjectTypeTranslationKey } from '@shared/constants/proposalStepObjectType'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import useIsMobile from '@shared/hooks/useIsMobile'
+import { getVoteButtonIcon } from '@shared/utils/getVoteButtonIcon'
 import { isWYSIWYGContentEmpty } from '@shared/utils/isWYSIWYGContentEmpty'
-import { useMatchMedia } from '@liinkiing/react-hooks'
-import { getContributionObjectTypeTranslationKey } from '@shared/constants/proposalStepObjectType'
+import { FC, useState } from 'react'
+import { useIntl } from 'react-intl'
+import { graphql, useFragment } from 'react-relay'
 import { getTitleValue } from './VoteStepUserInfos.utils'
 
 export type StepUserVotesType =
@@ -154,6 +155,7 @@ const FRAGMENT = graphql`
     voteThreshold
     voteTypes
     actionButtonLabel
+    voteButtonIcon
     form {
       objectType
     }
@@ -191,7 +193,7 @@ const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
   const circularProgress = isBudgetBased ? currentBudget : voteProgress
   const circularLimit = isBudgetBased ? step.budget ?? 0 : step.votesLimit ?? step.votesMin ?? 0
 
-  const voteIcon = isBudgetBased ? CapUIIcon.Bag : CapUIIcon.ThumbUp
+  const voteIcon = getVoteButtonIcon(step.voteButtonIcon)
 
   // isEnded: budget exhausted for `budget`, proposals maxed out for `budgetMinMax` and others
   const endedProgress = type === 'budget' ? currentBudget : voteProgress
@@ -211,18 +213,16 @@ const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
   const buttonNamespace = isSupport ? 'supports' : 'votes'
   const displayButtonKey = isSupport && buttonKey === 'votes' ? 'supports' : buttonKey
   const helpLabelId = isSupport ? 'front.proposal.supports-popup.help' : 'front.proposal.votes-popup.help'
-  const titleTranslationKey =
-    isSupport
-      ? `proposal.step.user.${titleNamespace}.infos.title.${titleKey}`
-      : titleKey === 'proposals' || titleKey === 'proposal-number'
-        ? `front.contribution.${objectType}.votes.title.${titleKey}`
-      : `proposal.step.user.votes.infos.title.${titleKey}`
-  const descTranslationKey =
-    isSupport
-      ? `proposal.step.user.${descNamespace}.infos.desc.${supportDescKey ?? descKey}`
-      : descKey === 'vote-more' || descKey === 'vote-others'
-      ? `front.contribution.${objectType}.votes.desc.${descKey}`
-      : `proposal.step.user.votes.infos.desc.${descKey}`
+  const titleTranslationKey = isSupport
+    ? `proposal.step.user.${titleNamespace}.infos.title.${titleKey}`
+    : titleKey === 'proposals' || titleKey === 'proposal-number'
+    ? `front.contribution.${objectType}.votes.title.${titleKey}`
+    : `proposal.step.user.votes.infos.title.${titleKey}`
+  const descTranslationKey = isSupport
+    ? `proposal.step.user.${descNamespace}.infos.desc.${supportDescKey ?? descKey}`
+    : descKey === 'vote-more' || descKey === 'vote-others'
+    ? `front.contribution.${objectType}.votes.desc.${descKey}`
+    : `proposal.step.user.votes.infos.desc.${descKey}`
   const hasVotesHelpText = !isWYSIWYGContentEmpty(step.votesHelpText)
 
   // Remaining votes/budget toward the next milestone, used by `proposal-number` title
@@ -263,9 +263,19 @@ const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
     >
       <Flex gap="md" alignItems="center">
         {showCircularProgress ? (
-          <CircularStep icon={voteIcon} progress={progress} variantSize={isTabletOrSmaller ? 'small' : 'medium'} />
+          <CircularStep
+            id="vote-step-user-votes-indicator"
+            icon={voteIcon}
+            progress={progress}
+            variantSize={isTabletOrSmaller ? 'small' : 'medium'}
+          />
         ) : (
-          <Icon name={voteIcon} color="primary.base" size={isTabletOrSmaller ? CapUIIconSize.Lg : CapUIIconSize.Xl} />
+          <Icon
+            id="vote-step-user-votes-indicator"
+            name={voteIcon}
+            color="primary.base"
+            size={isTabletOrSmaller ? CapUIIconSize.Lg : CapUIIconSize.Xl}
+          />
         )}
         <Box color="text.primary" fontSize={CapUIFontSize.BodyLarge} flex="1">
           <Box fontWeight={CapUIFontWeight.Semibold}>
