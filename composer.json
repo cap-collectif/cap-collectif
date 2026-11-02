@@ -34,7 +34,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.9",
         "exercise/htmlpurifier-bundle": "^5.0",
-        "firebase/php-jwt": "^6.8",
+        "firebase/php-jwt": "~7.0.5",
         "friendsofsymfony/ckeditor-bundle": "^2.4",
         "friendsofsymfony/http-cache-bundle": "^2.10",
         "friendsofsymfony/user-bundle": "^3.4",

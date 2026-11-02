@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fcd4993f44f73d2750da0c25d69baac7",
+    "content-hash": "cae1e56a616837acdae76ca8148a7c4d",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -2669,16 +2669,16 @@
         },
         {
             "name": "firebase/php-jwt",
-            "version": "v6.11.0",
+            "version": "v7.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/php-jwt.git",
-                "reference": "8f718f4dfc9c5d5f0c994cdfd103921b43592712"
+                "reference": "47ad26bab5e7c70ae8a6f08ed25ff83631121380"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/php-jwt/zipball/8f718f4dfc9c5d5f0c994cdfd103921b43592712",
-                "reference": "8f718f4dfc9c5d5f0c994cdfd103921b43592712",
+                "url": "https://api.github.com/repos/googleapis/php-jwt/zipball/47ad26bab5e7c70ae8a6f08ed25ff83631121380",
+                "reference": "47ad26bab5e7c70ae8a6f08ed25ff83631121380",
                 "shasum": ""
             },
             "require": {
@@ -2686,6 +2686,7 @@
             },
             "require-dev": {
                 "guzzlehttp/guzzle": "^7.4",
+                "phpfastcache/phpfastcache": "^9.2",
                 "phpspec/prophecy-phpunit": "^2.0",
                 "phpunit/phpunit": "^9.5",
                 "psr/cache": "^2.0||^3.0",
@@ -2725,10 +2726,10 @@
                 "php"
             ],
             "support": {
-                "issues": "https://github.com/firebase/php-jwt/issues",
-                "source": "https://github.com/firebase/php-jwt/tree/v6.11.0"
+                "issues": "https://github.com/googleapis/php-jwt/issues",
+                "source": "https://github.com/googleapis/php-jwt/tree/v7.0.5"
             },
-            "time": "2025-01-23T05:11:06+00:00"
+            "time": "2026-04-01T20:38:03+00:00"
         },
         {
             "name": "friendsofphp/proxy-manager-lts",
