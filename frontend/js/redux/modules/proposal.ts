@@ -270,9 +270,12 @@ export const vote = (
         const errorMap = {
           PHONE_ALREADY_USED: 'phone.already.used.in.this.step',
           CONTRIBUTION_NOT_ALLOWED: 'participant-already-contributed-title',
+          VOTE_LIMIT_REACHED: 'global.failure',
+          NOT_ENOUGH_CREDITS: 'global.failure',
         }
 
         if (errorCode) {
+          if (onError) onError()
           toast({
             variant: 'danger',
             content: intl.formatMessage({ id: errorMap[errorCode] }),

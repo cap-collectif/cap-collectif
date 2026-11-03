@@ -10,3 +10,9 @@ AddProposalVoteErrorCode:
             CONTRIBUTION_NOT_ALLOWED:
                 value: !php/const Capco\AppBundle\GraphQL\Mutation\AddProposalVoteMutation::CONTRIBUTION_NOT_ALLOWED
                 description: 'A participant with the same email as the logged in user already voted in this step.'
+            VOTE_LIMIT_REACHED:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\AddProposalVoteMutation::VOTE_LIMIT_REACHED
+                description: 'The participant reached the maximum number of votes for this step.'
+            NOT_ENOUGH_CREDITS:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\AddProposalVoteMutation::NOT_ENOUGH_CREDITS
+                description: 'The proposal exceeds the participant remaining budget.'

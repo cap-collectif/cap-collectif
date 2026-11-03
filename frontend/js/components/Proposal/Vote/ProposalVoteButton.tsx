@@ -304,6 +304,8 @@ const ProposalVoteButton = ({
           return
         }
 
+        if (errorCode) return mutationErrorToast(intl)
+
         const newVote = response.addProposalVote.voteEdge.node
         const updatedVotesCount = response.addProposalVote.voteEdge.node.step.viewerVotes.totalCount
 

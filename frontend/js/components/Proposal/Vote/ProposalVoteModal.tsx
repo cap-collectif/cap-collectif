@@ -178,6 +178,8 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, trigge
     if (!tmpVote) return
     // First we add the vote
     return vote(dispatch, step.id, proposal.id, !tmpVote.public, intl, isAuthenticated, token).then(data => {
+      if (!data) return
+
       const vote = data?.addProposalVote?.voteEdge?.node ?? data?.addProposalSmsVote?.voteEdge?.node
 
       if (!vote) {

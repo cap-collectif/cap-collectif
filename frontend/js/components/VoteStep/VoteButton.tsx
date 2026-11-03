@@ -240,6 +240,8 @@ const VoteButton = ({
         },
         () => setIsLoading(false),
       ).then((data: AddProposalVoteMutation$data) => {
+        if (!data) return
+
         const votes = data?.addProposalVote.voteEdge.node.step.viewerVotes.edges.map(({ node }) => node)
         if (!data?.addProposalVote?.voteEdge?.node || typeof data.addProposalVote.voteEdge === 'undefined') {
           invariant(false, 'The vote id is missing.')

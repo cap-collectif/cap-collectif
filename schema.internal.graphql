@@ -652,6 +652,12 @@ enum AddProposalVoteErrorCode {
   A participant with the same email as the logged in user already voted in this step.
   """
   CONTRIBUTION_NOT_ALLOWED
+
+  """The participant reached the maximum number of votes for this step."""
+  VOTE_LIMIT_REACHED
+
+  """The proposal exceeds the participant remaining budget."""
+  NOT_ENOUGH_CREDITS
 }
 
 input AddProposalVoteInput {

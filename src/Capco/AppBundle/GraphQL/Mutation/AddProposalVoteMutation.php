@@ -42,6 +42,8 @@ class AddProposalVoteMutation implements MutationInterface
 
     public const PHONE_ALREADY_USED = 'PHONE_ALREADY_USED';
     public const CONTRIBUTION_NOT_ALLOWED = 'CONTRIBUTION_NOT_ALLOWED';
+    public const VOTE_LIMIT_REACHED = 'VOTE_LIMIT_REACHED';
+    public const NOT_ENOUGH_CREDITS = 'NOT_ENOUGH_CREDITS';
 
     public function __construct(
         private readonly EntityManagerInterface $em,
@@ -114,7 +116,7 @@ class AddProposalVoteMutation implements MutationInterface
 
         // Check if user has reached limit of votes
         if ($step->isNumberOfVotesLimitted() && $countUserVotes >= $step->getVotesLimit()) {
-            throw new UserError('You have reached the limit of votes.');
+            return ['errorCode' => self::VOTE_LIMIT_REACHED, 'shouldTriggerConsentInternalCommunication' => false];
         }
 
         try {
@@ -151,6 +153,10 @@ class AddProposalVoteMutation implements MutationInterface
 
         $errors = $this->validator->validate($vote);
         foreach ($errors as $error) {
+            if ('proposal.vote.not_enough_credits' === $error->getMessage()) {
+                return ['errorCode' => self::NOT_ENOUGH_CREDITS, 'shouldTriggerConsentInternalCommunication' => false];
+            }
+
             $this->logger->error((string) $error->getMessage());
 
             throw new UserError((string) $error->getMessage());

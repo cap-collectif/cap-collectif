@@ -10,7 +10,7 @@ import AddProposalVoteMutation from '@mutations/AddProposalVoteMutation'
 import AddProposalSmsVoteMutation from '@mutations/AddProposalSmsVoteMutation'
 import RemoveProposalVoteMutation from '@mutations/RemoveProposalVoteMutation'
 import RemoveProposalSmsVoteMutation from '@mutations/RemoveProposalSmsVoteMutation'
-import { mutationErrorToast } from '@shared/utils/toasts'
+import { dangerToast, mutationErrorToast } from '@shared/utils/toasts'
 import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 import CookieMonster from '@shared/utils/CookieMonster'
 import { getVoteButtonIcon } from '@shared/utils/getVoteButtonIcon'
@@ -48,6 +48,9 @@ const STEP_FRAGMENT = graphql`
     votesRanking
     budget
     open
+    form {
+      objectType
+    }
     viewerVotes {
       totalCount
       creditsLeft
@@ -116,7 +119,6 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
   const numericLabelId = isSupport ? 'numeric-supports-count' : 'numeric-votes-count'
   const paperLabelId = isSupport ? 'paper-supports-count' : 'paper-votes-count'
   const displayedCount = isViewerVoteAccounted ? Math.max(votesCount, 1) : votesCount
-  const hasReachedVotesLimit = step.votesLimit != null && viewerVotesCount >= step.votesLimit && !hasVote
 
   useEffect(() => {
     setAnonymousVote(undefined)
@@ -152,6 +154,34 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
 
       const errorCode = payload?.errorCode
       if (errorCode) {
+        if (errorCode === 'NOT_ENOUGH_CREDITS') {
+          dangerToast(
+            intl.formatMessage(
+              {
+                id: 'front.vote.error.budget-exceeded',
+                defaultMessage:
+                  'Cette {contributionType, select, QUESTION {question} OPINION {proposition (consultation)} other {proposition}} dépasse le budget restant de votre panier. Retirez une ou plusieurs {contributionType, select, QUESTION {questions} OPINION {propositions (consultation)} other {propositions}} pour pouvoir l’ajouter.',
+              },
+              { contributionType: step.form?.objectType, voteAction: step.actionButtonLabel },
+            ),
+          )
+          return
+        }
+
+        if (errorCode === 'VOTE_LIMIT_REACHED') {
+          dangerToast(
+            intl.formatMessage(
+              {
+                id: 'front.vote.error.limit-reached',
+                defaultMessage:
+                  'Vous avez atteint le nombre maximal de {voteAction, select, SUPPORT {soutiens} other {votes}} autorisés. Retirez un {voteAction, select, SUPPORT {soutien} other {vote}} pour {voteAction, select, SUPPORT {soutenir} other {voter pour}} cette {contributionType, select, QUESTION {question} OPINION {proposition (consultation)} other {proposition}}.',
+              },
+              { contributionType: step.form?.objectType, voteAction: step.actionButtonLabel },
+            ),
+          )
+          return
+        }
+
         mutationErrorToast(intl)
         return
       }
@@ -167,7 +197,17 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
     } catch {
       mutationErrorToast(intl)
     }
-  }, [isAuthenticated, step?.id, proposal?.id, intl, votesMin, step.viewerVotes?.totalCount, triggerRequirementModal])
+  }, [
+    isAuthenticated,
+    step?.id,
+    step.form?.objectType,
+    step.actionButtonLabel,
+    proposal?.id,
+    intl,
+    votesMin,
+    step.viewerVotes?.totalCount,
+    triggerRequirementModal,
+  ])
 
   const deleteVote = useCallback(async () => {
     if (!step?.id || !proposal?.id) return
@@ -278,7 +318,7 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
       aria-label={intl.formatMessage({ id: hasVote ? 'global.delete' : 'global.add' })}
       height="32px"
       leftIcon={voteIcon}
-      disabled={hasReachedVotesLimit || isLoading}
+      disabled={isLoading}
       isLoading={isLoading}
       flexShrink={0}
     >

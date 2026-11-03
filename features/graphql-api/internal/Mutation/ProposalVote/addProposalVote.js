@@ -80,7 +80,12 @@ describe('mutations.addProposalVote', () => {
         },
         'internal_user',
       ),
-    ).rejects.toThrowError('You have reached the limit of votes.')
+    ).resolves.toMatchObject({
+      addProposalVote: {
+        errorCode: 'VOTE_LIMIT_REACHED',
+        vote: null,
+      },
+    })
   })
 
   /**
@@ -214,10 +219,10 @@ describe('mutations.addProposalVote', () => {
 
   /**
    * @jest-status compliant
-   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * @jest-reason Checks an awaited explicit error code from the real GraphQL API with controlled request inputs
    * and identity.
    */
-  it('Logged in API client wants to vote for a proposal in a not votable selection step', async () => {
+  it('returns NOT_ENOUGH_CREDITS when the proposal exceeds the remaining budget', async () => {
     await expect(
       graphql(
         AddProposalVoteMutation,
@@ -229,7 +234,12 @@ describe('mutations.addProposalVote', () => {
         },
         'internal_admin',
       ),
-    ).rejects.toThrowError('proposal.vote.not_enough_credits')
+    ).resolves.toMatchObject({
+      addProposalVote: {
+        errorCode: 'NOT_ENOUGH_CREDITS',
+        vote: null,
+      },
+    })
   })
 
   /**
