@@ -287,7 +287,8 @@ castor app:console --command-name="<cmd>"
 The `--startAt` and `--endAt` account-anonymization options must be supplied together in
 `Y-m-d` format. They narrow both the identities that already satisfy the configured inactivity
 period and the anonymous debate arguments to the requested activity range; they never make a
-recently active identity eligible.
+recently active identity eligible. For users without a last login, both the inactivity
+threshold and the optional activity range use the account creation date (`created_at`).
 
 The optional `--dry-run` flag uses the same selection criteria and reports user, participant,
 and total counts without modifying application data.

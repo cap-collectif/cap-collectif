@@ -167,7 +167,7 @@ class AnonymizeUsersAutomatedCommand extends Command
         $parameters = ['lastLoginLimit' => $lastLoginLimit->format('Y-m-d H:i:s')];
 
         if (null !== $dateRange) {
-            $dateRangeCondition = ' AND u.last_login >= :startAt AND u.last_login < :endAt';
+            $dateRangeCondition = ' AND COALESCE(u.last_login, u.created_at) >= :startAt AND COALESCE(u.last_login, u.created_at) < :endAt';
             $parameters = array_merge($parameters, $this->formatDateRangeSqlParameters($dateRange));
         }
 
@@ -180,7 +180,7 @@ class AnonymizeUsersAutomatedCommand extends Command
             )'
         );
         $this->connection->executeStatement(
-            "INSERT INTO matching_users SELECT u.id, u.email FROM fos_user u LEFT JOIN organization_member om ON u.id = om.user_id WHERE (u.roles NOT LIKE '%ADMIN%' AND u.roles NOT LIKE '%MEDIATOR%') AND om.id IS NULL AND (u.last_login < :lastLoginLimit OR u.last_login IS NULL) AND u.anonymized_at IS NULL{$dateRangeCondition}",
+            "INSERT INTO matching_users SELECT u.id, u.email FROM fos_user u LEFT JOIN organization_member om ON u.id = om.user_id WHERE (u.roles NOT LIKE '%ADMIN%' AND u.roles NOT LIKE '%MEDIATOR%') AND om.id IS NULL AND COALESCE(u.last_login, u.created_at) < :lastLoginLimit AND u.anonymized_at IS NULL{$dateRangeCondition}",
             $parameters
         );
     }

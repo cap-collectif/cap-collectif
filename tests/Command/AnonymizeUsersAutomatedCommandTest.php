@@ -77,6 +77,62 @@ class AnonymizeUsersAutomatedCommandTest extends DatabaseCommandTestCase
         self::assertSame($afterRangeEmail, $userAfterRange->getEmail());
     }
 
+    /**
+     * @dataProvider provideActivityDates
+     */
+    public function testUsesCreationDateOnlyWhenLastLoginIsMissing(
+        string $createdAt,
+        ?string $lastLogin,
+        bool $withDateRange,
+        bool $expectedAnonymized
+    ): void {
+        $user = $this->entityManager->find(User::class, 'user190');
+        self::assertInstanceOf(User::class, $user);
+        $user->setCreatedAt(new \DateTime($createdAt));
+        $user->clearLastLogin();
+        if (null !== $lastLogin) {
+            $user->setLastLogin(new \DateTime($lastLogin));
+        }
+        $user->setAnonymizedAt(null);
+        $email = $user->getEmail();
+        $this->entityManager->flush();
+
+        $commandTester = $this->createCommandTester(self::COMMAND);
+        $commandTester->execute($withDateRange ? [
+            '--startAt' => '2020-01-01',
+            '--endAt' => '2020-01-31',
+        ] : []);
+
+        self::assertSame(Command::SUCCESS, $commandTester->getStatusCode(), $commandTester->getDisplay());
+        $this->entityManager->clear();
+        $user = $this->entityManager->find(User::class, 'user190');
+        self::assertInstanceOf(User::class, $user);
+        self::assertSame($expectedAnonymized, null !== $user->getAnonymizedAt());
+        self::assertSame($expectedAnonymized ? null : $email, $user->getEmail());
+    }
+
+    /**
+     * @return iterable<string, array{string, ?string, bool, bool}>
+     */
+    public static function provideActivityDates(): iterable
+    {
+        yield 'old account without login' => ['2020-01-01', null, false, true];
+
+        yield 'recent account without login' => ['now', null, false, false];
+
+        yield 'recent login takes precedence' => ['2020-01-01', 'now', false, false];
+
+        yield 'creation at range start' => ['2020-01-01', null, true, true];
+
+        yield 'creation at range end' => ['2020-01-31 23:59:59', null, true, true];
+
+        yield 'creation before range' => ['2019-12-31 23:59:59', null, true, false];
+
+        yield 'creation after range' => ['2020-02-01', null, true, false];
+
+        yield 'login outside range takes precedence' => ['2020-01-01', '2020-02-01', true, false];
+    }
+
     public function testRejectsAnExplicitDateRangeWithAMissingBoundary(): void
     {
         $user = $this->entityManager->find(User::class, 'user190');
