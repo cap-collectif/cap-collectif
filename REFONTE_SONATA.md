@@ -392,8 +392,9 @@ Exemple de référence : la page « Icône du site » (`/admin/favicon/list` →
 **Consigne de mise à jour** : chaque PR qui fait avancer une de ces pages (refonte, nettoyage, suppression de code
 mort) met à jour sa ligne **dans la même PR** : statut et travail restant. Une page dont le nettoyage est fusionné
 est retirée de la liste. Une page découverte en cours de route (template monté par une route encore active) y est
-ajoutée. Comme la doc est fusionnée avant le code, « refonte en cours » veut dire « une branche existe », pas
-« fusionnée » : vérifier sur `preprod` avant de se fier au statut.
+ajoutée. Comme la doc est idéalement fusionnée avant le code, « refonte en cours » veut dire « une branche
+existe », pas « fusionnée » : vérifier sur `preprod` avant de se fier au statut. La PR qui fusionne la refonte
+sous feature flag déplace elle-même la page dans la section « Refontes fusionnées sous feature flag » ci-dessous.
 
 Statuts : **à refondre**, **refonte en cours** (branche ouverte), **en rollout** (fusionnée derrière le feature
 flag), **à nettoyer** (Admin Next déjà en place, route legacy encore présente), **code mort** (aucun appelant).
@@ -421,14 +422,6 @@ flag), **à nettoyer** (Admin Next déjà en place, route legacy encore présent
   - Composant : `QuestionnaireAdminPageApp` (`Questionnaire/edit.html.twig`, `QuestionnaireAdmin`)
   - Reste : refonte. On y accède depuis `/admin-next/forms`.
 
-#### Utilisateurs
-
-- **Édition d'un utilisateur** — refonte en cours sous feature flag
-  - URL : `/admin/capco/user/user/{id}/edit` → `/admin-next/user?id={globalId}`
-  - Composant : `UserAdminPageApp` (`User/edit.html.twig`, `UserController`)
-  - Reste : fusion, validation, puis nettoyage. La liste des utilisateurs reste sur Sonata : avec le flag,
-    `UserController::editAction` redirige vers Admin Next (à retirer au nettoyage, avec le template).
-
 #### Emailing
 
 - **Paramètres d'emailing** — à refondre
@@ -450,9 +443,23 @@ flag), **à nettoyer** (Admin Next déjà en place, route legacy encore présent
 - **Langues** — à refondre
   - URL : `/admin/locale/list`
   - Composant : `LocaleAdminPageApp` (`LocaleController`)
-- **Polices** — à refondre
-  - URL : `/admin/font/list`
+
+#### Refontes fusionnées sous feature flag
+
+Pages dont la refonte Admin Next est fusionnée derrière le feature flag de migration. La page Sonata reste
+servie quand le flag est désactivé : son code legacy sera supprimé par une PR de nettoyage, après validation
+métier (voir la recette « PR de nettoyage » ci-dessous). Ajouter la page ici **dans la PR qui fusionne la refonte
+sous feature flag**, et non dans une PR de doc préalable : une page de cette section est forcément sur `preprod`.
+
+- **Édition d'un utilisateur** — en rollout
+  - URL : `/admin/capco/user/user/{id}/edit` → `/admin-next/user?id={globalId}`
+  - Composant : `UserAdminPageApp` (`User/edit.html.twig`, `UserController`)
+  - Reste : validation métier, puis nettoyage. La liste des utilisateurs reste sur Sonata : avec le flag,
+    `UserController::editAction` redirige vers Admin Next (à retirer au nettoyage, avec le template).
+- **Polices** — en rollout (#20603)
+  - URL : `/admin/font/list` → `/admin-next/fonts`
   - Composant : `FontAdminPageApp` (`FontController`)
+  - Reste : validation métier, puis nettoyage de la route legacy.
 
 #### Déjà sur Admin Next, route legacy à nettoyer
 
@@ -657,6 +664,11 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
   - Sur chaque `Table.Td` de cette colonne : wrapper le(s) bouton(s) dans un `<Flex justifyContent="center">`.
   Voir `ProjectSettingsList.tsx` (colonne "Action" : le `Table.Th` et les deux `Table.Td` concernés, celui de
   `ProjectFeatureRow` et celui de `settings.map(...)`).
+  - **Si la colonne ne contient que des `ButtonQuickAction`**, ne pas lui donner de libellé : `<Table.Th />`
+    vide, comme dans `PostList.tsx`, `ProjectList.tsx` ou `VideoList.tsx`. Chaque `ButtonQuickAction` porte
+    déjà son intitulé dans `label` (infobulle et nom accessible). Les pages de réglages (`ProjectSettingsList.tsx`,
+    `ThemeSettingsList.tsx`…) qui affichent encore « Action » au-dessus de leurs `ButtonQuickAction` ne sont pas
+    à reproduire sur ce point.
 - **Accessibilité : intitulé explicite pour les boutons et champs de recherche, jamais un libellé générique
   seul.** Un lecteur d'écran annonce le bouton/champ hors du contexte visuel de la page : "Créer" ou
   "Rechercher" seuls ne disent pas quoi. Toujours préciser l'entité concernée : "Créer le type", "Créer la
@@ -682,6 +694,30 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
   ..., edgeTypeName: "XEdge")` (create) et `@deleteEdge(connections: ...)` (delete) directement dans le texte
   de la mutation GraphQL, sans écrire de fonction `updater` manuelle avec `ConnectionHandler` — voir
   `CreateUserTypeMutation.ts`/`DeleteUserTypeMutation.ts` pour l'exemple le plus simple.
+- **Mettre à jour l'affichage après une écriture** : le choix dépend de la façon dont la donnée a été écrite.
+  - **Écriture par une mutation GraphQL** : laisser Relay mettre à jour le store à partir du payload, sans
+    relancer de query. Les champs renvoyés avec leur `id` sont fusionnés automatiquement. Pour une suppression,
+    ajouter `deletedXId @deleteRecord` dans le texte de la mutation (voir `DeleteGlobalDistrictMutation.ts`) ;
+    dans une simple liste `[X!]!`, l'enregistrement supprimé apparaît alors en `null` malgré le type généré, donc
+    lire la liste avec `.filter(Boolean)` (voir `GeographicalAreasList.tsx`). Pour une connection, utiliser
+    `@deleteEdge`/`@prependNode` (puce précédente).
+  - **Écriture hors GraphQL** (upload REST comme `/upload/fonts`, `fetch` direct) : le store Relay ne sait pas
+    que les données ont changé, et aucune directive ni `updater` ne peut s'appliquer. Relancer la query de la
+    page avec `fetchQuery`. Le résultat est écrit dans le store, et le `useLazyLoadQuery` qui lit la même query
+    avec les mêmes variables se re-rend sans suspendre. Ne pas utiliser `fetchKey` + `fetchPolicy:
+    'network-only'` : la page entière serait remplacée par le fallback du `<Suspense>`. Pour une liste paginée,
+    appeler plutôt le `refetch()` de `usePaginationFragment`.
+
+    ```tsx
+    import { environment } from '@utils/relay-environement'
+    import { fetchQuery } from 'react-relay'
+
+    const refresh = () => fetchQuery<XListQuery>(environment, QUERY, {}).toPromise()
+    ```
+
+    Prendre l'`environment` importé, comme les fichiers de `admin-next/mutations/` : c'est le même objet que
+    celui renvoyé par `useRelayEnvironment()`. Appeler `refresh()` en dehors du `try` qui gère l'échec de
+    l'écriture : sinon un échec du rafraîchissement affiche une erreur alors que l'écriture a réussi.
 - **Catégorie `SiteParameter` de la page générique `/admin/settings/{category}/list`** (voir le cas
   `SettingsController.php` dans la méthodologie ci-dessus) : toujours vérifier `SiteParameter::isTranslatable()`
   (la constante `NOT_TRANSLATABLE` liste les exceptions par `keyname`) avant de choisir le template, les deux
@@ -1373,6 +1409,13 @@ prop-drillé entre la liste et un ancêtre.
   ajout "à la fin" sans que le client ait à connaître le max actuel), calculer explicitement un fallback dans
   la mutation `create` (ex: `MAX(position) + 1` via une méthode dédiée du repository) plutôt que de compter
   sur un comportement automatique de Gedmo.
+- **Lien externe (article du centre d'aide, documentation…) : jamais d'URL en dur dans le composant, toujours
+  une clé de traduction**, pour que le métier puisse modifier le lien dans Loco sans livraison :
+  `href={intl.formatMessage({ id: 'admin.help.link.emailing' })}` (voir `EmailingHelpLink.tsx`). Le legacy
+  avait souvent l'URL en dur alors qu'une clé existait déjà : avant d'en créer une, chercher l'URL dans
+  `translations/fr-FR.json` (`grep -n "<slug-de-l-article>" translations/fr-FR.json`), et réutiliser la clé
+  trouvée telle quelle (ex: `admin.helplink.custom-fonts` pour la page des polices). Pour une nouvelle clé,
+  suivre le préfixe le plus répandu, `admin.help.link.<page>`.
 - **Clé de traduction déjà utilisée côté Symfony/Twig (Sonata) mais jamais encore appelée depuis React** :
   même si la clé existe déjà dans `translations/fr-FR.json` (et dans les `.xlf`), vérifier qu'elle apparaît
   bien dans le bundle utilisé par `admin-next` avant de supposer qu'elle s'affichera correctement — dans le

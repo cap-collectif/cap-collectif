@@ -238,7 +238,11 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                   <SidebarLink text="domain.and.url" href="/admin-next/domain-url" />
                   <SidebarLink text="admin.customcode" href="/admin-next/custom-code" />
                   <SidebarLink text="website-icon" href="/admin-next/favicon" />
-                  <SidebarLink text="global-typeface" href="/admin/font/list" />
+                  <SidebarLink
+                    text="global-typeface"
+                    // Keep the Sonata route until the migration flag is removed for this page.
+                    href={features.unstable__sonata_migration_to_admin_next ? '/admin-next/fonts' : '/admin/font/list'}
+                  />
                   <SidebarLink text="admin.label.settings.global" href="/admin/settings/settings.global/list" />
                   {isSuperAdmin ? (
                     <SidebarLink text="admin.label.settings.performance" href="/admin-next/performance-settings" />

@@ -55,6 +55,22 @@ const userProjectAdmin = {
  * public DOM behavior.
  */
 describe('<Sidebar />', () => {
+  it.each([
+    [false, '/admin/font/list'],
+    [true, '/admin-next/fonts'],
+  ] as const)('uses the fonts route for rollout %s', (enabled, href) => {
+    const wrapper = render(
+      <MockProviders
+        store={{
+          default: { features: { ...features, unstable__sonata_migration_to_admin_next: enabled } },
+          user: { user: userAdmin },
+        }}
+      >
+        <Sidebar appVersion="test" defaultAccordeon="reglages" />
+      </MockProviders>,
+    )
+    expect(wrapper.find(`a[href$="${href}"]`)).toHaveLength(1)
+  })
   it('renders correctly', () => {
     const wrapper = render(
       <MockProviders

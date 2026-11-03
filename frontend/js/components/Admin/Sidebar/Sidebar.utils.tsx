@@ -52,7 +52,9 @@ export const URL_MAP = {
     '/admin/map/',
     '/admin/redirect/',
     '/admin-next/favicon',
+    // Sonata prefix retained during the Admin Next migration rollout.
     '/admin/font/',
+    '/admin-next/fonts',
     '/admin/settings/settings.global/',
     '/admin-next/performance-settings',
     '/admin/settings/settings.modules/',

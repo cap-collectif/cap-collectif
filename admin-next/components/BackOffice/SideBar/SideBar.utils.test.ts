@@ -8,6 +8,17 @@ import { getSideBarItemsFiltered, isSideBarSubItemSelected } from './SideBar.uti
  * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
  */
 describe('getSideBarItemsFiltered', () => {
+  it.each([
+    [false, '/admin/font/list'],
+    [true, '/admin-next/fonts'],
+  ] as const)('uses the fonts route for rollout %s', (enabled, href) => {
+    const flags = { ...defaultFeatureFlags, unstable__sonata_migration_to_admin_next: enabled }
+    const items = getSideBarItemsFiltered(true, false, flags, false, null, false)
+    expect(
+      items.find(group => group.id === 'settings')?.items.find(item => item.title === 'global-typeface')?.href,
+    ).toBe(href)
+  })
+
   const getNotificationSettingsItem = (featureFlags = defaultFeatureFlags) => {
     const sideBarItems = getSideBarItemsFiltered(true, true, featureFlags, false, null, false)
     return sideBarItems
