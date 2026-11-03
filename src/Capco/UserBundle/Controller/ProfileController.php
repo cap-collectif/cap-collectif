@@ -148,7 +148,7 @@ class ProfileController extends Controller
             $this->loginWithToken($request, $userNotificationsConfiguration);
         }
 
-        return $this->redirectToRoute('capco_profile_edit', ['#' => 'followings']);
+        return $this->redirectToRoute('capco_profile_edit', ['_fragment' => 'followings']);
     }
 
     /**

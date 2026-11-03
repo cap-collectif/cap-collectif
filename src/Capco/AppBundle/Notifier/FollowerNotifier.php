@@ -7,6 +7,7 @@ use Capco\AppBundle\Mailer\Message\Follower\FollowerActivitiesMessage;
 use Capco\AppBundle\Model\UserActivity;
 use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\Resolver\UrlResolver;
+use Capco\AppBundle\SiteColor\Resolver as SiteColorResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Entity\User;
 use Psr\Log\LoggerInterface;
@@ -22,7 +23,8 @@ final class FollowerNotifier extends BaseNotifier
         protected UrlResolver $urlResolver,
         protected LoggerInterface $logger,
         RouterInterface $router,
-        LocaleResolver $localeResolver
+        LocaleResolver $localeResolver,
+        private readonly SiteColorResolver $siteColorResolver
     ) {
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
         $this->siteParams = $siteParams;
@@ -45,7 +47,11 @@ final class FollowerNotifier extends BaseNotifier
         $this->mailer->createAndSendMessage(
             FollowerActivitiesMessage::class,
             $userActivity,
-            ['sendAt' => $this->sendAt],
+            [
+                'sendAt' => $this->sendAt,
+                'primaryColor' => $this->siteColorResolver->getValue('color.btn.primary.bg'),
+                'primaryTextColor' => $this->siteColorResolver->getValue('color.btn.primary.text'),
+            ],
             $recipient
         );
     }

@@ -629,14 +629,25 @@ class ProposalRepository extends EntityRepository
         \DateTime $to,
         string $proposalId
     ): array {
+        // Only accounted votes are counted: votes of a participant who has not reached the
+        // step's minimum number of votes are not displayed.
         $qb = $this->createQueryBuilder('proposal');
         $qb->select('proposal.id')
-            ->addSelect('COUNT(selectionVotes.id) as sVotes,COUNT(collectVotes.id) as cVotes')
-            ->leftJoin('proposal.collectVotes', 'collectVotes')
-            ->leftJoin('proposal.selectionVotes', 'selectionVotes')
-            ->andWhere($qb->expr()->between('selectionVotes.createdAt', ':from', ':to'))
-            ->orWhere($qb->expr()->between('collectVotes.createdAt', ':from', ':to'))
+            ->addSelect('COUNT(DISTINCT selectionVotes.id) as sVotes, COUNT(DISTINCT collectVotes.id) as cVotes')
+            ->leftJoin(
+                'proposal.collectVotes',
+                'collectVotes',
+                'WITH',
+                'collectVotes.isAccounted = true AND collectVotes.createdAt BETWEEN :from AND :to'
+            )
+            ->leftJoin(
+                'proposal.selectionVotes',
+                'selectionVotes',
+                'WITH',
+                'selectionVotes.isAccounted = true AND selectionVotes.createdAt BETWEEN :from AND :to'
+            )
             ->andWhere($qb->expr()->eq('proposal.id', ':id'))
+            ->groupBy('proposal.id')
             ->setParameters(['from' => $from, 'to' => $to, 'id' => $proposalId])
         ;
 
@@ -666,8 +677,14 @@ class ProposalRepository extends EntityRepository
         string $proposalId
     ): array {
         $qb = $this->createQueryBuilder('proposal');
+        // Steps created in the new back office only have a label: fall back to it, like AbstractStep::getTitle().
         $qb->select('proposal.id')
-            ->addSelect('sStep.title as titleStep', 'selections.createdAt', 'status.name as sName')
+            ->addSelect(
+                "COALESCE(NULLIF(sStep.title, ''), sStep.label) as titleStep",
+                'selections.createdAt',
+                'status.name as sName',
+                'status.color as sColor'
+            )
             ->leftJoin('proposal.selections', 'selections')
             ->leftJoin('selections.selectionStep', 'sStep')
             ->leftJoin('selections.status', 'status')

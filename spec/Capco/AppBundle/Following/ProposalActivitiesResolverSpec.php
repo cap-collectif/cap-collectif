@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Following\ActivitiesResolver;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalCurrentVotableStepDataLoader;
+use Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver;
 use Capco\AppBundle\Model\UserActivity;
 use Capco\AppBundle\Repository\FollowerRepository;
 use Capco\AppBundle\Repository\OfficialResponseRepository;
@@ -30,7 +31,8 @@ class ProposalActivitiesResolverSpec extends ObjectBehavior
         OfficialResponseRepository $officialResponseRepository,
         Logger $logger,
         Router $router,
-        ProposalCurrentVotableStepDataLoader $proposalCurrentVotableStepDataLoader
+        ProposalCurrentVotableStepDataLoader $proposalCurrentVotableStepDataLoader,
+        MediaUrlResolver $mediaUrlResolver
     ) {
         $this->beConstructedWith(
             $followerRepository,
@@ -41,7 +43,8 @@ class ProposalActivitiesResolverSpec extends ObjectBehavior
             $officialResponseRepository,
             $logger,
             $router,
-            $proposalCurrentVotableStepDataLoader
+            $proposalCurrentVotableStepDataLoader,
+            $mediaUrlResolver
         );
     }
 
@@ -61,7 +64,8 @@ class ProposalActivitiesResolverSpec extends ObjectBehavior
         OfficialResponseRepository $officialResponseRepository,
         Logger $logger,
         Router $router,
-        ProposalCurrentVotableStepDataLoader $proposalCurrentVotableStepDataLoader
+        ProposalCurrentVotableStepDataLoader $proposalCurrentVotableStepDataLoader,
+        MediaUrlResolver $mediaUrlResolver
     ) {
         $proposalFormRepository->findAll()->willReturn([]);
 
@@ -74,7 +78,8 @@ class ProposalActivitiesResolverSpec extends ObjectBehavior
             $officialResponseRepository,
             $logger,
             $router,
-            $proposalCurrentVotableStepDataLoader
+            $proposalCurrentVotableStepDataLoader,
+            $mediaUrlResolver
         );
 
         $this->getActivitiesByRelativeTime()->shouldBe([]);

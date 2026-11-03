@@ -14,17 +14,17 @@ final class FollowerActivitiesMessage extends AbstractExternalMessage
     public static function getMyTemplateVars(UserActivity $activity, array $params): array
     {
         return [
-            'userProjectsActivities' => $activity->getUserProjects(),
             'sendAt' => $params['sendAt'],
             'username' => $activity->getUsername(),
             'siteName' => $params['siteName'],
             'timezone' => $params['sendAt']->getTimezone(),
-            'to' => self::escape($activity->getEmail()),
-            'siteUrl' => $params['siteURL'],
+            'baseUrl' => rtrim((string) $params['baseURL'], '/'),
             'urlManagingFollowings' => $activity->getUrlManagingFollowings(),
-            'business' => 'Cap Collectif',
-            'businessUrl' => 'https://cap-collectif.com/',
-        ];
+        ] + FollowerActivitiesDigest::build(
+            $activity->getUserProjects(),
+            $params['primaryColor'] ?? null,
+            $params['primaryTextColor'] ?? null
+        );
     }
 
     public static function getMySubjectVars(UserActivity $activity, array $params): array

@@ -1,0 +1,38 @@
+{# Consultation contributions are out of the redesign scope: same content as before, in a plain card. #}
+{% import '@CapcoMail/components/ui.html.twig' as ui %}
+{% set font = "font-family:'Open Sans',Helvetica,Arial,sans-serif;" %}
+<table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse:separate;">
+    <tr>
+        <td class="card card-padding" bgcolor="#FFFFFF" style="padding:24px;background-color:#FFFFFF;border-radius:8px;{{ font }}font-size:16px;line-height:24px;color:#272B30;">
+            <h3 style="margin:0;{{ font }}font-size:18px;line-height:28px;font-weight:600;">
+                <a href="{{ opinion.link }}" class="text-primary" style="color:#272B30;text-decoration:none;">{{ opinion.title }}</a>
+            </h3>
+            <ul class="text-primary" style="margin:16px 0 0 0;padding:0 0 0 20px;color:#272B30;">
+                {% if opinion.argumentFor > 0 %}
+                    <li>{{ 'new-arguments-for-count'|trans({'count': opinion.argumentFor, 'num': opinion.argumentFor}, 'CapcoAppBundle', user_locale) }}</li>
+                {% endif %}
+                {% if opinion.argumentAgainst > 0 %}
+                    <li>{{ 'new-arguments-against-count'|trans({'count': opinion.argumentAgainst, 'num': opinion.argumentAgainst}, 'CapcoAppBundle', user_locale) }}</li>
+                {% endif %}
+                {% if opinion.voteOk > 0 %}
+                    <li>{{ 'new-votes-for-count'|trans({'count': opinion.voteOk, 'num': opinion.voteOk}, 'CapcoAppBundle', user_locale) }}</li>
+                {% endif %}
+                {% if opinion.voteNok > 0 %}
+                    <li>{{ 'new-votes-against-count'|trans({'count': opinion.voteNok, 'num': opinion.voteNok}, 'CapcoAppBundle', user_locale) }}</li>
+                {% endif %}
+                {% if opinion.voteMitige > 0 %}
+                    <li>{{ 'new-votes-mixed-count'|trans({'count': opinion.voteMitige, 'num': opinion.voteMitige}, 'CapcoAppBundle', user_locale) }}</li>
+                {% endif %}
+                {% if opinion.isTrashed %}
+                    <li>{{ 'trashed-by-the-administrator'|trans({}, 'CapcoAppBundle', user_locale) }}</li>
+                {% endif %}
+                {% if opinion.isUpdated %}
+                    <li>{{ 'global.modified'|trans({}, 'CapcoAppBundle', user_locale) }}</li>
+                {% endif %}
+            </ul>
+            <p class="end-button" align="center" style="margin:32px 0 0 0;text-align:center;">
+                {{ ui.button('email.follower-activities.see-contribution'|trans({}, 'CapcoAppBundle', user_locale), opinion.link, 'tertiary', colors) }}
+            </p>
+        </td>
+    </tr>
+</table>

@@ -1,245 +1,181 @@
-<!DOCTYPE>
-<html xmlns="http://www.w3.org/1999/xhtml">
+{% import '@CapcoMail/components/ui.html.twig' as ui %}
+{% set font = "font-family:'Open Sans',Helvetica,Arial,sans-serif;" %}
+{% set logo = app_logo_url() %}
+{% set summaryDate = sendAt|localizeddate('none', 'none', user_locale, timezone, 'd MMMM') %}
+<!DOCTYPE html>
+<html lang="{{ user_locale|slice(0, 2) }}" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
-    {% set siteName = capco_site_parameter_value('global.site.fullname') %}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="telephone=no" name="format-detection" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="supported-color-schemes" content="light dark" />
     <title>{{ 'your-activity-summary-of'|trans({'{siteName}': siteName}, 'CapcoAppBundle', user_locale) }}</title>
-    <style type="text/css" media="screen">
-        .ExternalClass * {line-height:100%}
-        .bb {
-            border-bottom: 1px solid #d9d9d9;
-            border-collapse: collapse;
+    <!--[if mso]>
+    <noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript>
+    <![endif]-->
+    <style type="text/css">
+        :root { color-scheme: light dark; supported-color-schemes: light dark; }
+        body { margin: 0; padding: 0; width: 100% !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+        table { border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+        img { border: 0; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; }
+        h1, h2, h3, h4, p { margin: 0; }
+        a[x-apple-data-detectors] { color: inherit !important; text-decoration: none !important; }
+
+        @media screen and (max-width: 600px) {
+            .container { width: 100% !important; }
+            .block { border-radius: 0 !important; }
+            .block-gap { height: 12px !important; line-height: 12px !important; }
+            .block-padding { padding: 32px 8px 8px 8px !important; }
+            .header-padding { padding: 24px 20px !important; }
+            .block-title-padding { padding: 0 12px !important; }
+            .card-padding { padding: 20px 12px !important; }
+            .card-gap { height: 8px !important; line-height: 8px !important; }
+            .proposal-title { font-size: 16px !important; line-height: 24px !important; }
+            .proposal-cover { height: 128px !important; }
+            .end-button { padding-top: 24px !important; }
+            .post-gap { height: 24px !important; line-height: 24px !important; }
+            .desktop-only { display: none !important; }
+            .mobile-only { display: block !important; max-height: none !important; overflow: visible !important; }
+            .news-text { padding: 24px 20px !important; }
         }
-        .yi, .zi, .im {
-            color: #000000 !important;
-        }
-        #top-mail a {
-            text-decoration: none;
-            color: #337ab7;
-        }
-        #footer-mail  a {
-            color: #999999 !important;
-        }
-        #email-penrose-conteneur {width:600px;}
-        /* Début style responsive (via media queries) */
-        @media (max-width:580px) {
-            *[id=email-penrose-conteneur] {width:90% !important;}
-            table[class=resp-full-table] {width:100% !important; clear:both;}
-            td[class=resp-full-td] {width:100% !important; clear:both;}
-            td[class=resp-full-td-center] {width:100%!important; clear:both; text-align: center !important;}
-            img[class=email-penrose-img-header] {width:100% !important; max-width:340px !important;}
-            hr[class=resp-hr-center] {text-align: center !important; margin-left:auto !important; margin-right:auto !important;}
+
+        @media (prefers-color-scheme: dark) {
+            .body-bg { background-color: #3D454C !important; }
+            .block { background-color: #272B30 !important; }
+            .block-watermark { background-image: url('{{ ui.icon_url(baseUrl, 'project-watermark-dark') }}') !important; }
+            .card { background-color: #3D454C !important; }
+            .badge { background-color: #272B30 !important; }
+            .news-card { border-color: #545E68 !important; }
+            .logo { background-color: #FFFFFF !important; border-radius: 4px; }
+            .text-primary { color: #F7F7F8 !important; }
+            .text-secondary { color: #BEC4CB !important; }
+            .link-primary { color: {{ colors.primaryDark }} !important; }
+            .button-primary { background-color: {{ colors.primaryDark }} !important; border-color: {{ colors.primaryDark }} !important; }
+            .button-primary-text { color: #272B30 !important; }
+            .button-secondary { background-color: transparent !important; border-color: {{ colors.primaryDark }} !important; }
+            .light-img { display: none !important; }
+            .dark-img { display: block !important; }
+            {{ ui.tag_dark_styles(tagColors) }}
         }
     </style>
 </head>
-<body>
-<div id='body' align="center">
-    {% set activitiesDate =  sendAt|localizeddate('long', 'none', user_locale, timezone)  %}
-    <table id="email-penrose-conteneur" align="center" style="margin: 20px; background-color:#ffffff;" border="0" cellspacing="0" cellpadding="0">
+<body class="body-bg" style="margin:0;padding:0;background-color:#FFFFFF;">
+    {# Preheader: shown next to the subject in the inbox. #}
+    <div style="display:none;max-height:0;overflow:hidden;mso-hide:all;font-size:1px;line-height:1px;color:#FFFFFF;opacity:0;">
+        {{ 'email.follower-activities.preheader'|trans({}, 'CapcoAppBundle', user_locale) }}&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;
+    </div>
+    <table role="presentation" class="body-bg" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
         <tr>
-            <td>
-                <table class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
+            <td align="center" style="padding:0;">
+                <!--[if mso]><table role="presentation" width="600" border="0" cellspacing="0" cellpadding="0"><tr><td><![endif]-->
+                <table role="presentation" class="container" width="600" border="0" cellspacing="0" cellpadding="0" style="width:600px;max-width:600px;">
+                    <tr><td class="block-gap" height="16" style="height:16px;line-height:16px;font-size:0;">&nbsp;</td></tr>
+
+                    {# Header block #}
                     <tr>
-                        <td class="resp-full-td" valign="top" style="margin:0 20px; text-align:center;">
-                            <a class="resp-punchline" href="#" style="color:#337ab7; outline:none; text-decoration:none; font-size:20px; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">{{ siteName|raw }}</a>
-                            <h1 class="resp-punchline" style="color:#000000; outline:none; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">  {{ 'summary-of-activities'|trans({}, 'CapcoAppBundle', user_locale) }}</h1>
-                            <span class="resp-punchline" style="color:#999999; outline:none; font-size:12px; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">
-                                {{ activitiesDate }}
-							</span>
+                        <td class="block header-padding" bgcolor="#F7F7F8" style="padding:32px 48px;border-radius:8px;">
+                            <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td valign="middle" style="{{ font }}">
+                                        {% if logo %}
+                                            <img class="logo" src="{{ logo }}" height="40" alt="{{ siteName }}" style="display:block;height:40px;width:auto;max-width:200px;border:0;" />
+                                        {% else %}
+                                            <span class="text-primary" style="{{ font }}font-size:16px;line-height:24px;font-weight:600;color:#272B30;">{{ siteName }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-secondary" valign="middle" align="right" style="padding-left:16px;white-space:nowrap;{{ font }}font-size:14px;line-height:20px;color:#545E68;">
+                                        {{ 'email.follower-activities.summary-of'|trans({'{date}': summaryDate}, 'CapcoAppBundle', user_locale) }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-secondary" style="padding-top:24px;{{ font }}font-size:16px;line-height:24px;color:#545E68;">
+                                        {{ 'email.follower-activities.greeting'|trans({'{username}': username}, 'CapcoAppBundle', user_locale) }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="padding-top:4px;">
+                                        <h1 class="text-primary" style="margin:0;{{ font }}font-size:24px;line-height:32px;font-weight:600;color:#272B30;">
+                                            {{ 'email.follower-activities.introduction'|trans({'num': proposalCount}, 'CapcoAppBundle', user_locale) }}
+                                        </h1>
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="resp-full-td-center" valign="top" style="color:#000000;margin-top: 20px; padding-top:50px; padding-left: 10px">
-                            <b>{{ 'hello-username'|trans({'{username}': username}, 'CapcoAppBundle', user_locale) }}</b><br>
-                            {{ 'activity-summary-introduction'|trans({'{siteName}': siteName, '{activitiesDate}': activitiesDate}, 'CapcoAppBundle', user_locale) }}
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        {% for currentProjectId, project in userProjectsActivities %}
-            <tr>
-                <td style="margin-top: 20px; padding-top: 50px" id="email-penrose-conteneur">
-                    <table width="100%" class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
+
+                    {% for project in projects %}
+                        <tr><td class="block-gap" height="16" style="height:16px;line-height:16px;font-size:0;">&nbsp;</td></tr>
                         <tr>
-                            <td>
-                                <table width="100%" align="left" class="resp-full-table" cellpadding="0" cellspacing="0" style="border: 0.5px solid #d9d9d9;  border-collapse: collapse; margin-top: 0px;">
+                            {# The watermark is decorative: clients without background images simply ignore it. #}
+                            <td class="block block-padding block-watermark" bgcolor="#F7F7F8" background="{{ ui.icon_url(baseUrl, 'project-watermark') }}" style="padding:32px 24px 24px 24px;border-radius:8px;background-color:#F7F7F8;background-image:url('{{ ui.icon_url(baseUrl, 'project-watermark') }}');background-repeat:no-repeat;background-position:top right;background-size:88px 88px;">
+                                <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
                                     <tr>
-                                        <td class="resp-full-td-center" valign="top" style="padding:20px; text-align:center;background-color: #f3f3f3;">
-                                            <span class="resp-punchline" style="color:#999999; outline:none; font-size:14px;line-height:20px; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight: bold;"> {{ 'global.project'|trans({}, 'CapcoAppBundle', user_locale) }}</span>
-                                            <h2 class="resp-punchline" style="color:#337ab7; outline:none; text-decoration:none; line-height:20px;font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">{{ project.projectTitle }}</h2>
-                                            <h3 class="resp-punchline" style="color:#6aa84f; outline:none; text-decoration:none; line-height:20px;font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">
-                                                {{ 'new-activity-count' | trans({'count': project.countActivities, 'num': project.countActivities}, 'CapcoAppBundle') }}
-                                            </h3>
+                                        <td class="block-title-padding" style="padding:0 24px 24px 24px;">
+                                            <p class="text-secondary" style="margin:0;{{ font }}font-size:14px;line-height:20px;color:#545E68;">
+                                                {{ 'email.follower-activities.in-participatory-project'|trans({}, 'CapcoAppBundle', user_locale) }}
+                                            </p>
+                                            <h2 class="text-primary" style="margin:4px 0 0 0;{{ font }}font-size:16px;line-height:24px;font-weight:600;color:#272B30;">{{ project.title }}</h2>
                                         </td>
                                     </tr>
+                                    {% for proposal in project.proposals %}
+                                        {% if not loop.first %}
+                                            <tr><td class="card-gap" height="12" style="height:12px;line-height:12px;font-size:0;">&nbsp;</td></tr>
+                                        {% endif %}
+                                        <tr>
+                                            <td>
+                                                {% include '@CapcoMail/Follower/proposalActivities.html.twig' %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    {% for opinion in project.opinions %}
+                                        {% if not loop.first or project.proposals is not empty %}
+                                            <tr><td class="card-gap" height="12" style="height:12px;line-height:12px;font-size:0;">&nbsp;</td></tr>
+                                        {% endif %}
+                                        <tr>
+                                            <td>
+                                                {% include '@CapcoMail/Follower/opinionActivities.html.twig' %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
                                 </table>
                             </td>
                         </tr>
-                    </table>
-                </td>
-            </tr>
+                    {% endfor %}
 
-            {% if project.proposals is defined %}
-                {% for proposal in project.proposals %}
-                    <tr>
-                        <td style="border:0.5px solid #d9d9d9;  padding:20px; border-top: 0; border-collapse: collapse;" id="email-penrose-conteneur">
-                            <table class="resp-full-table" width="100%" align="left" cellspacing="0" cellpadding="0" style="padding:20px;">
-                                <tr>
-                                    <td>
-                                        <table width="100%" align="center" class="resp-full-table" border="0" cellpadding="0" cellspacing="0" >
-                                            <tr>
-                                                <td class="resp-full-td" valign="top" style="margin:20px 0; text-align:left;">
-                                                    <span class="resp-punchline" style="color:#999999; outline:none; font-size:14px; font-weight: bold; font-family:'Open Sans', helvetica, arial, sans-serif; ">
-                                                        {{ proposal.type is defined and 'opinion' == proposal.type ? 'global.opinion' : 'global.proposal'|trans({}, 'CapcoAppBundle', user_locale) }}
-                                                    </span>
-                                                    <ul style="list-style: none; padding:0; color: #000000;">
-                                                        <a href="{{ proposal.link }}"><h4 class="resp-punchline" style="color:#337ab7; outline:none; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">{{ proposal.title }}</h4></a>
-                                                        {% if proposal.votes > 0 %}
-                                                            <li>
-                                                                <span style="color: #000000;">
-                                                                    {{ 'new-vote-count' | trans({'count': proposal.votes, 'num': proposal.votes}, 'CapcoAppBundle') }}
-                                                                </span>
-                                                            </li>
-                                                        {% endif %}
-                                                        {% if proposal.comments > 0 %}
-                                                            <li>
-                                                                <span style="color: #000000;">
-                                                                    {{ 'new-comment-count' | trans({'count': proposal.comments, 'num': proposal.comments}, 'CapcoAppBundle') }}
-                                                                </span>
-                                                            </li>
-                                                        {% endif %}
-                                                        {% set nbPosts = proposal.posts | length %}
-                                                        {% if proposal.posts > 0 %}
-                                                            <li>
-                                                                <span style="color: #000000;">
-                                                                    {% if nbPosts > 1 %}
-                                                                        {{ 'new-article-count' | trans({'count': nbPosts, 'num': nbPosts}, 'CapcoAppBundle') }}
-                                                                    {% else %}
-                                                                        <a href='{{ url('app_blog_show', { 'slug': proposal.posts[0].slug }) }}'>{{ 'new-article-count' | trans({'count': nbPosts, 'num': nbPosts}, 'CapcoAppBundle') }}</a>
-                                                                    {% endif %}
-                                                                </span>
-                                                            </li>
-                                                        {% endif %}
-                                                        {% if proposal.officialResponses > 0 %}
-                                                            <li>
-                                                                <span style="color: #000000;">
-                                                                    {{ 'new-official-response' | trans({'count': proposal.officialResponses, 'num': proposal.officialResponses}, 'CapcoAppBundle') }}
-                                                                </span>
-                                                            </li>
-                                                        {% endif %}
+                    {% if hiddenProposalCount > 0 %}
+                        <tr><td class="block-gap" height="16" style="height:16px;line-height:16px;font-size:0;">&nbsp;</td></tr>
+                        <tr>
+                            <td class="block header-padding" bgcolor="#F7F7F8" style="padding:24px 48px;border-radius:8px;">
+                                <p class="text-primary" style="margin:0;{{ font }}font-size:16px;line-height:24px;font-weight:600;color:#272B30;">
+                                    {{ 'email.follower-activities.other-proposals'|trans({'num': hiddenProposalCount}, 'CapcoAppBundle', user_locale) }}
+                                </p>
+                                <a href="{{ urlManagingFollowings }}" class="link-primary" style="{{ font }}font-size:16px;line-height:24px;font-weight:600;color:{{ colors.primary }};text-decoration:none;">
+                                    {{ 'email.follower-activities.find-in-followings'|trans({'num': hiddenProposalCount}, 'CapcoAppBundle', user_locale) }}
+                                </a>
+                            </td>
+                        </tr>
+                    {% endif %}
 
-                                                        {% if proposal.lastStep and proposal.lastStep.sName %}
-                                                            <li><span style="color: #000000;">{{ 'moving-to-the-step-with-status'|trans({'{titleStep}': proposal.lastStep.titleStep, '{statusName}': proposal.lastStep.sName }, 'CapcoAppBundle', user_locale) }}</span> </li>
-                                                        {% elseif proposal.lastStep  %}
-                                                            <li><span style="color: #000000;">{{ 'moving-to-the-step'|trans({'{titleStep}': proposal.lastStep.titleStep }, 'CapcoAppBundle', user_locale) }}</span> </li>
-                                                        {% endif %}
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                {% endfor %}
-            {% endif %}
-
-            {% if project.opinions is defined %}
-                {% for opinion in project.opinions %}
+                    {# Footer #}
                     <tr>
-                        <td style="border:0.5px solid #d9d9d9;  padding:20px; border-top: 0; border-collapse: collapse;" id="email-penrose-conteneur">
-                            <table class="resp-full-table" width="100%" align="left" cellspacing="0" cellpadding="0" style="padding:20px;">
-                                <tr>
-                                    <td>
-                                        <table width="100%" align="center" class="resp-full-table" border="0" cellpadding="0" cellspacing="0" >
-                                            <tr>
-                                                <td class="resp-full-td" valign="top" style="margin:20px 0; text-align:left;">
-                                                    <span class="resp-punchline" style="color:#999999; outline:none; font-size:14px; font-weight: bold; font-family:'Open Sans', helvetica, arial, sans-serif; ">{{ 'global.proposal'|trans({}, 'CapcoAppBundle', user_locale) }}</span>
-                                                    <ul style="list-style: none; padding:0; color: #000000;">
-                                                        <a href="{{ opinion.link }}"><h4 class="resp-punchline" style="color:#337ab7; outline:none; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">{{ opinion.title }}</h4></a>
-                                                        {% if opinion.argumentFor > 0 %}
-                                                            <li>
-                                                                <span style="color: #000000;">
-                                                                    {{ 'notification.opinion.vote.for' | trans({'count': opinion.argumentFor, 'num': opinion.argumentFor}, 'CapcoAppBundle') }}
-                                                                </span>
-                                                            </li>
-                                                        {% endif %}
-                                                        {% if opinion.argumentAgainst > 0 %}
-                                                            <li>
-                                                                <span style="color: #000000;">
-                                                                    {{ 'new-arguments-against-count' | trans({'count': opinion.argumentAgainst, 'num': opinion.argumentAgainst}, 'CapcoAppBundle') }}
-                                                                </span>
-                                                            </li>
-                                                        {% endif %}
-                                                        {% if opinion.voteOk > 0 %}
-                                                            <li>
-                                                                <span style="color: #000000;">
-                                                                    {{ 'new-votes-for-count' | trans({'count': opinion.voteOk, 'num': opinion.voteOk}, 'CapcoAppBundle') }}
-                                                                </span>
-                                                            </li>
-                                                        {% endif %}
-                                                        {% if opinion.voteNok > 0 %}
-                                                            <li>
-                                                                <span style="color: #000000;">
-                                                                    {{ 'new-votes-against-count' | trans({'count': opinion.voteNok, 'num': opinion.voteNok}, 'CapcoAppBundle') }}
-                                                                </span>
-                                                            </li>
-                                                        {% endif %}
-                                                        {% if opinion.voteMitige > 0 %}
-                                                            <li>
-                                                                <span style="color: #000000;">
-                                                                    {{ 'new-votes-mixed-count' | trans({'count': opinion.voteMitige, 'num': opinion.voteMitige}, 'CapcoAppBundle') }}
-                                                                </span>
-                                                            </li>
-                                                        {% endif %}
-                                                        {% if opinion.isTrashed %}
-                                                            <li>
-                                                                <span style="color: #000000;">
-                                                                    {{ 'trashed-by-the-administrator' | trans({}, 'CapcoAppBundle') }}
-                                                                </span>
-                                                            </li>
-                                                        {% endif %}
-                                                        {% if opinion.isUpdated %}
-                                                            <li>
-                                                                <span style="color: #000000;">
-                                                                    {{ 'global.modified' | trans({}, 'CapcoAppBundle') }}
-                                                                </span>
-                                                            </li>
-                                                        {% endif %}
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                {% endfor %}
-            {% endif %}
-        {% endfor %}
-    </table>
-    <table id="email-penrose-conteneur" align="center" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-            <td style="margin:20px 0;">
-                <table class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td width="100%" class="resp-full-td" style="text-align: center;color: #000000;">
-                            <span style="color:#000;">{{ 'you-receive-this-email-because'|trans({}, 'CapcoAppBundle', user_locale) }}</span>
-                            <span style="color:#000;">{{ 'you-follow-these-proposals'|trans({}, 'CapcoAppBundle', user_locale) }}</span><br>
-                            <span style="color:#000;"><a href="{{ urlManagingFollowings }}">{{ 'set-up-my-subscriptions'|trans({}, 'CapcoAppBundle', user_locale) }}</a></span>
-                            <span style="font-size:12px; font-family:'Open Sans', helvetica, arial, sans-serif; color:#aeb2b3">{{ 'notification.email.external_footer'|trans({'{to}': to, '{sitename}': siteName, '{business}': business, '{siteUrl}': siteUrl, '{businessUrl}': businessUrl}, 'CapcoAppBundle', user_locale) | raw }}</span>
+                        <td class="text-secondary" align="center" style="padding:32px 24px;{{ font }}font-size:14px;line-height:20px;color:#545E68;">
+                            <p style="margin:0;">
+                                {{ 'email.follower-activities.footer-reason'|trans({'num': proposalCount}, 'CapcoAppBundle', user_locale) }}
+                            </p>
+                            <p style="margin:0;">
+                                <a href="{{ urlManagingFollowings }}" class="text-secondary" style="color:#545E68;text-decoration:underline;">{{ 'email.follower-activities.manage-followings'|trans({}, 'CapcoAppBundle', user_locale) }}</a>
+                            </p>
+                            <p style="margin:8px 0 0 0;">
+                                {{ 'email.follower-activities.powered-by'|trans({'{siteName}': siteName}, 'CapcoAppBundle', user_locale) }}
+                            </p>
                         </td>
                     </tr>
                 </table>
+                <!--[if mso]></td></tr></table><![endif]-->
             </td>
         </tr>
     </table>
-</div>
 </body>
 </html>

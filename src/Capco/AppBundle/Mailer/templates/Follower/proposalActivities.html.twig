@@ -1,0 +1,102 @@
+{% import '@CapcoMail/components/ui.html.twig' as ui %}
+{% set font = "font-family:'Open Sans',Helvetica,Arial,sans-serif;" %}
+<table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse:separate;">
+    {# Cover: proposal image, or category color with its icon, or nothing. #}
+    {% if proposal.image %}
+        <tr>
+            <td style="font-size:0;line-height:0;">
+                <img src="{{ proposal.image }}" width="552" alt="" style="display:block;width:100%;max-width:552px;height:auto;border:0;border-radius:8px 8px 0 0;" />
+            </td>
+        </tr>
+    {% elseif proposal.category %}
+        <tr>
+            <td class="proposal-cover" height="200" align="center" valign="middle" bgcolor="{{ proposal.category.color }}" style="height:200px;border-radius:8px 8px 0 0;background-color:{{ proposal.category.color }};">
+                {% if proposal.category.icon %}
+                    <img src="{{ ui.icon_url(baseUrl, 'category/' ~ proposal.category.icon) }}" width="48" height="48" alt="" style="display:block;width:48px;height:48px;border:0;" />
+                {% endif %}
+            </td>
+        </tr>
+    {% endif %}
+    <tr>
+        <td class="card card-padding" bgcolor="#FFFFFF" style="padding:24px;background-color:#FFFFFF;border-radius:{{ proposal.image or proposal.category ? '0 0 8px 8px' : '8px' }};">
+            <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td>
+                        <h3 class="proposal-title text-primary" style="margin:0;{{ font }}font-size:18px;line-height:28px;font-weight:600;color:#272B30;">{{ proposal.title }}</h3>
+                    </td>
+                </tr>
+
+                {% if proposal.votes > 0 %}
+                    <tr>
+                        <td style="padding-top:16px;">
+                            {{ ui.activity_row(baseUrl, 'votes', '<strong>' ~ proposal.votes ~ '</strong> ' ~ 'email.follower-activities.new-votes'|trans({'num': proposal.votes}, 'CapcoAppBundle', user_locale)|e) }}
+                        </td>
+                    </tr>
+                {% endif %}
+
+                {% if proposal.comments > 0 %}
+                    <tr>
+                        <td style="padding-top:16px;">
+                            {{ ui.activity_row(baseUrl, 'comments', '<strong>' ~ proposal.comments ~ '</strong> ' ~ 'email.follower-activities.new-comments'|trans({'num': proposal.comments}, 'CapcoAppBundle', user_locale)|e) }}
+                        </td>
+                    </tr>
+                {% endif %}
+
+                {% if proposal.step %}
+                    {% set stepText = 'email.follower-activities.moves-to-step'|trans({'{step}': '__STEP__'}, 'CapcoAppBundle', user_locale)|e|replace({'__STEP__': '<strong>' ~ proposal.step.title|e ~ '</strong>'}) %}
+                    <tr>
+                        <td style="padding-top:16px;">
+                            {{ ui.activity_row(baseUrl, 'step', stepText ~ (proposal.step.tag ? '&nbsp; ' ~ ui.tag(proposal.step.tag.label, proposal.step.tag.variant, tagColors) : '')) }}
+                        </td>
+                    </tr>
+                {% endif %}
+
+                {% if proposal.hasOfficialResponse %}
+                    <tr>
+                        <td style="padding-top:16px;">
+                            {{ ui.activity_row(
+                                baseUrl,
+                                'official-response',
+                                '<a href="' ~ proposal.link|e('html_attr') ~ '" class="text-primary" style="font-weight:600;color:#272B30;text-decoration:none;">' ~ 'email.follower-activities.official-response-published'|trans({}, 'CapcoAppBundle', user_locale)|e ~ '</a>',
+                                ui.button('email.follower-activities.read-response'|trans({}, 'CapcoAppBundle', user_locale), proposal.link, proposal.officialResponseButton, colors)
+                            ) }}
+                        </td>
+                    </tr>
+                {% endif %}
+
+                {% if proposal.postCount > 0 %}
+                    <tr>
+                        <td style="padding-top:16px;">
+                            {{ ui.activity_row(baseUrl, 'news', '<strong>' ~ proposal.postCount ~ '</strong> ' ~ 'email.follower-activities.news'|trans({'num': proposal.postCount}, 'CapcoAppBundle', user_locale)|e) }}
+                        </td>
+                    </tr>
+                    {% for post in proposal.posts %}
+                        {% if not loop.first %}
+                            <tr><td class="post-gap" height="32" style="height:32px;line-height:32px;font-size:0;">&nbsp;</td></tr>
+                        {% endif %}
+                        <tr>
+                            <td style="{{ loop.first ? 'padding-top:16px;' : '' }}">
+                                {% include '@CapcoMail/Follower/postCard.html.twig' %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    {% if proposal.hiddenPostCount > 0 %}
+                        <tr>
+                            <td style="padding-top:16px;">
+                                {{ ui.button('email.follower-activities.see-other-news'|trans({'num': proposal.hiddenPostCount}, 'CapcoAppBundle', user_locale), proposal.link, 'tertiary', colors) }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endif %}
+
+                {% if proposal.endButton %}
+                    <tr>
+                        <td class="end-button" align="center" style="padding-top:32px;">
+                            {{ ui.button(proposal.endButton.label|trans({}, 'CapcoAppBundle', user_locale), proposal.link, proposal.endButton.variant, colors) }}
+                        </td>
+                    </tr>
+                {% endif %}
+            </table>
+        </td>
+    </tr>
+</table>

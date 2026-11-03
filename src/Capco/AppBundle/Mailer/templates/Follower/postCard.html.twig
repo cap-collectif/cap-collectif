@@ -1,0 +1,46 @@
+{% import '@CapcoMail/components/ui.html.twig' as ui %}
+{% set font = "font-family:'Open Sans',Helvetica,Arial,sans-serif;" %}
+{#
+    Desktop: image column of 144 on the left. Mobile: 112 high strip on top.
+    Without image, the space is filled with the primary color and a newspaper icon.
+#}
+{% set imageBackground = post.image ? '#E8EBED' : colors.primary %}
+<table role="presentation" class="news-card" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse:separate;border:1px solid #E8EBED;border-radius:4px;">
+    <!--[if !mso]><!-->
+    <tr>
+        <td class="mobile-only" colspan="2" bgcolor="{{ imageBackground }}" align="center" valign="middle" style="display:none;max-height:0;overflow:hidden;height:112px;border-radius:4px 4px 0 0;background-color:{{ imageBackground }};{% if post.image %}background-image:url('{{ post.image }}');background-size:cover;background-position:center;{% endif %}">
+            {% if not post.image %}
+                <img src="{{ ui.icon_url(baseUrl, 'news-placeholder') }}" width="32" height="32" alt="" style="display:inline-block;width:32px;height:32px;margin-top:40px;border:0;" />
+            {% endif %}
+        </td>
+    </tr>
+    <!--<![endif]-->
+    <tr>
+        <td class="desktop-only" width="144" bgcolor="{{ imageBackground }}" align="center" valign="middle" style="width:144px;min-width:144px;border-radius:4px 0 0 4px;background-color:{{ imageBackground }};{% if post.image %}background-image:url('{{ post.image }}');background-size:cover;background-position:center;{% endif %}">
+            {% if not post.image %}
+                <img src="{{ ui.icon_url(baseUrl, 'news-placeholder') }}" width="32" height="32" alt="" style="display:inline-block;width:32px;height:32px;border:0;" />
+            {% else %}
+                &nbsp;
+            {% endif %}
+        </td>
+        <td class="news-text" valign="top" style="padding:24px;">
+            <h4 style="margin:0;{{ font }}font-size:16px;line-height:24px;font-weight:600;">
+                <a href="{{ post.link }}" class="text-primary" style="color:#272B30;text-decoration:none;">{{ post.title }}</a>
+            </h4>
+            {% if post.abstract %}
+                <p class="text-secondary" style="margin:8px 0 0 0;{{ font }}font-size:14px;line-height:20px;color:#545E68;">{{ post.abstract }}</p>
+            {% endif %}
+            {% if post.authorName %}
+                <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="margin-top:12px;">
+                    <tr>
+                        <td valign="middle" width="16" style="width:16px;">{{ ui.icon(baseUrl, 'author', 16) }}</td>
+                        <td class="text-secondary" valign="middle" style="padding-left:8px;{{ font }}font-size:14px;line-height:20px;color:#545E68;">{{ post.authorName }}</td>
+                        {% if post.isPublishedByProposalAuthor %}
+                            <td valign="middle" style="padding-left:8px;">{{ ui.tag('email.follower-activities.project-owner'|trans({}, 'CapcoAppBundle', user_locale), 'default', tagColors) }}</td>
+                        {% endif %}
+                    </tr>
+                </table>
+            {% endif %}
+        </td>
+    </tr>
+</table>

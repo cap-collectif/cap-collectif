@@ -35,6 +35,9 @@ class FollowerNotifierCommandTest extends MailerSnapshotCommandTestCase
         foreach ($snapshots as [$recipient, $snapshot]) {
             $message = $emails->getMessageForRecipient($recipient);
             $this->assertEmailMetadata($message, $recipient, 'your-activity-summary-of');
+            if ('1' === getenv('UPDATE_EMAIL_SNAPSHOTS')) {
+                $this->updateEmailSnapshot($message, $snapshot);
+            }
             $this->assertEmailMatchesSnapshot($message, $snapshot);
         }
     }

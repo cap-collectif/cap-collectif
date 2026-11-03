@@ -4,9 +4,12 @@ namespace Capco\AppBundle\Following;
 
 use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
+use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\Entity\PostAuthor;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalCurrentVotableStepDataLoader;
+use Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver;
 use Capco\AppBundle\Model\UserActivity;
 use Capco\AppBundle\Repository\FollowerRepository;
 use Capco\AppBundle\Repository\OfficialResponseRepository;
@@ -32,7 +35,8 @@ class ProposalActivitiesResolver extends ActivitiesResolver
         private readonly OfficialResponseRepository $officialResponseRepository,
         protected LoggerInterface $logger,
         protected RouterInterface $router,
-        private readonly ProposalCurrentVotableStepDataLoader $proposalCurrentVotableStepDataLoader
+        private readonly ProposalCurrentVotableStepDataLoader $proposalCurrentVotableStepDataLoader,
+        private readonly MediaUrlResolver $mediaUrlResolver
     ) {}
 
     public function getFollowedByUserId(): array
@@ -143,7 +147,10 @@ class ProposalActivitiesResolver extends ActivitiesResolver
                     $proposalId
                 );
                 $currentProposal['posts'] = !empty($proposalBlogPostInYesterday)
-                    ? $proposalBlogPostInYesterday
+                    ? array_map(
+                        fn (Post $post): array => $this->getPostActivity($post, $proposal),
+                        $proposalBlogPostInYesterday
+                    )
                     : false;
                 $currentProposal[
                     'officialResponses'
@@ -154,6 +161,15 @@ class ProposalActivitiesResolver extends ActivitiesResolver
                 );
 
                 $currentProposal['title'] = $proposal->getTitle();
+                $currentProposal['image'] = $proposal->getMedia()
+                    ? $this->mediaUrlResolver->__invoke($proposal->getMedia())
+                    : null;
+                $currentProposal['category'] = $proposal->getCategory()
+                    ? [
+                        'color' => $proposal->getCategory()->getColor(),
+                        'icon' => $proposal->getCategory()->getIcon(),
+                    ]
+                    : null;
                 $currentProposal['link'] = $proposal->getProject()
                     ? $this->router->generate(
                         'app_project_show_proposal',
@@ -271,5 +287,35 @@ class ProposalActivitiesResolver extends ActivitiesResolver
         }
 
         return $activitiesByUserId;
+    }
+
+    /**
+     * @return array{title: ?string, abstract: string, link: string, image: ?string, authorName: ?string, isPublishedByProposalAuthor: bool}
+     */
+    private function getPostActivity(Post $post, Proposal $proposal): array
+    {
+        $proposalAuthor = $proposal->getAuthor();
+        $authors = array_values($post->getAuthors()->toArray());
+        $proposalAuthorAsPostAuthor = null === $proposalAuthor
+            ? null
+            : array_values(array_filter(
+                $authors,
+                static fn (PostAuthor $author): bool => $author->getAuthor() === $proposalAuthor
+            ))[0] ?? null;
+        // Display the proposal author when they co-signed the post, so the badge matches the displayed name
+        $displayedAuthor = $proposalAuthorAsPostAuthor ?? $authors[0] ?? null;
+
+        return [
+            'title' => $post->getTitle(),
+            'abstract' => (string) $post->getAbstractOrBeginningOfTheText(),
+            'link' => $this->router->generate(
+                'app_blog_show',
+                ['slug' => $post->getSlug()],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            ),
+            'image' => $post->getMedia() ? $this->mediaUrlResolver->__invoke($post->getMedia()) : null,
+            'authorName' => $displayedAuthor?->getUsername(),
+            'isPublishedByProposalAuthor' => null !== $proposalAuthorAsPostAuthor,
+        ];
     }
 }

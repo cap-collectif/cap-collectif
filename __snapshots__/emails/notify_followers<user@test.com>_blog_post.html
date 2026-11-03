@@ -1,131 +1,227 @@
-<!DOCTYPE>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="telephone=no" name="format-detection" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="supported-color-schemes" content="light dark" />
     <title>your-activity-summary-of {&quot;{siteName}&quot;:&quot;Cap-Collectif&quot;}</title>
-    <style type="text/css" media="screen">
-        .ExternalClass * {line-height:100%}
-        .bb {
-            border-bottom: 1px solid #d9d9d9;
-            border-collapse: collapse;
+    <!--[if mso]>
+    <noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript>
+    <![endif]-->
+    <style type="text/css">
+        :root { color-scheme: light dark; supported-color-schemes: light dark; }
+        body { margin: 0; padding: 0; width: 100% !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+        table { border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+        img { border: 0; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; }
+        h1, h2, h3, h4, p { margin: 0; }
+        a[x-apple-data-detectors] { color: inherit !important; text-decoration: none !important; }
+
+        @media screen and (max-width: 600px) {
+            .container { width: 100% !important; }
+            .block { border-radius: 0 !important; }
+            .block-gap { height: 12px !important; line-height: 12px !important; }
+            .block-padding { padding: 32px 8px 8px 8px !important; }
+            .header-padding { padding: 24px 20px !important; }
+            .block-title-padding { padding: 0 12px !important; }
+            .card-padding { padding: 20px 12px !important; }
+            .card-gap { height: 8px !important; line-height: 8px !important; }
+            .proposal-title { font-size: 16px !important; line-height: 24px !important; }
+            .proposal-cover { height: 128px !important; }
+            .end-button { padding-top: 24px !important; }
+            .post-gap { height: 24px !important; line-height: 24px !important; }
+            .desktop-only { display: none !important; }
+            .mobile-only { display: block !important; max-height: none !important; overflow: visible !important; }
+            .news-text { padding: 24px 20px !important; }
         }
-        .yi, .zi, .im {
-            color: #000000 !important;
-        }
-        #top-mail a {
-            text-decoration: none;
-            color: #337ab7;
-        }
-        #footer-mail  a {
-            color: #999999 !important;
-        }
-        #email-penrose-conteneur {width:600px;}
-        /* Début style responsive (via media queries) */
-        @media (max-width:580px) {
-            *[id=email-penrose-conteneur] {width:90% !important;}
-            table[class=resp-full-table] {width:100% !important; clear:both;}
-            td[class=resp-full-td] {width:100% !important; clear:both;}
-            td[class=resp-full-td-center] {width:100%!important; clear:both; text-align: center !important;}
-            img[class=email-penrose-img-header] {width:100% !important; max-width:340px !important;}
-            hr[class=resp-hr-center] {text-align: center !important; margin-left:auto !important; margin-right:auto !important;}
+
+        @media (prefers-color-scheme: dark) {
+            .body-bg { background-color: #3D454C !important; }
+            .block { background-color: #272B30 !important; }
+            .block-watermark { background-image: url('https://capco.dev/image/email/project-watermark-dark.png?v1') !important; }
+            .card { background-color: #3D454C !important; }
+            .badge { background-color: #272B30 !important; }
+            .news-card { border-color: #545E68 !important; }
+            .logo { background-color: #FFFFFF !important; border-radius: 4px; }
+            .text-primary { color: #F7F7F8 !important; }
+            .text-secondary { color: #BEC4CB !important; }
+            .link-primary { color: #99C4F3 !important; }
+            .button-primary { background-color: #99C4F3 !important; border-color: #99C4F3 !important; }
+            .button-primary-text { color: #272B30 !important; }
+            .button-secondary { background-color: transparent !important; border-color: #99C4F3 !important; }
+            .light-img { display: none !important; }
+            .dark-img { display: block !important; }
+                    .tag-success { background-color: #165A26 !important; color: #E4F9E9 !important; }
+            .tag-warning { background-color: #704300 !important; color: #FFF3E0 !important; }
+            .tag-caution { background-color: #705400 !important; color: #FFF7E0 !important; }
+            .tag-info { background-color: #003670 !important; color: #E0EFFF !important; }
+            .tag-danger { background-color: #5F1119 !important; color: #FAE5E7 !important; }
+            .tag-default { background-color: #545E68 !important; color: #E8EBED !important; }
+            .tag-primary { background-color: #003670 !important; color: #D9E9FA !important; }
+
         }
     </style>
 </head>
-<body>
-<div id='body' align="center">
-        <table id="email-penrose-conteneur" align="center" style="margin: 20px; background-color:#ffffff;" border="0" cellspacing="0" cellpadding="0">
+<body class="body-bg" style="margin:0;padding:0;background-color:#FFFFFF;">
+        <div style="display:none;max-height:0;overflow:hidden;mso-hide:all;font-size:1px;line-height:1px;color:#FFFFFF;opacity:0;">
+        email.follower-activities.preheader&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;
+    </div>
+    <table role="presentation" class="body-bg" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
         <tr>
-            <td>
-                <table class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td class="resp-full-td" valign="top" style="margin:0 20px; text-align:center;">
-                            <a class="resp-punchline" href="#" style="color:#337ab7; outline:none; text-decoration:none; font-size:20px; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">Cap-Collectif</a>
-                            <h1 class="resp-punchline" style="color:#000000; outline:none; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">  summary-of-activities</h1>
-                            <span class="resp-punchline" style="color:#999999; outline:none; font-size:12px; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">
-                                1 janvier 2019
-							</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="resp-full-td-center" valign="top" style="color:#000000;margin-top: 20px; padding-top:50px; padding-left: 10px">
-                            <b>hello-username {&quot;{username}&quot;:&quot;user&quot;}</b><br>
-                            activity-summary-introduction {&quot;{siteName}&quot;:&quot;Cap-Collectif&quot;,&quot;{activitiesDate}&quot;:&quot;1 janvier 2019&quot;}
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-                    <tr>
-                <td style="margin-top: 20px; padding-top: 50px" id="email-penrose-conteneur">
-                    <table width="100%" class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
-                        <tr>
-                            <td>
-                                <table width="100%" align="left" class="resp-full-table" cellpadding="0" cellspacing="0" style="border: 0.5px solid #d9d9d9;  border-collapse: collapse; margin-top: 0px;">
-                                    <tr>
-                                        <td class="resp-full-td-center" valign="top" style="padding:20px; text-align:center;background-color: #f3f3f3;">
-                                            <span class="resp-punchline" style="color:#999999; outline:none; font-size:14px;line-height:20px; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight: bold;"> global.project</span>
-                                            <h2 class="resp-punchline" style="color:#337ab7; outline:none; text-decoration:none; line-height:20px;font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">Budget Participatif Rennes</h2>
-                                            <h3 class="resp-punchline" style="color:#6aa84f; outline:none; text-decoration:none; line-height:20px;font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">
-                                                new-activity-count {&quot;count&quot;:1,&quot;num&quot;:1}
-                                            </h3>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
+            <td align="center" style="padding:0;">
+                <!--[if mso]><table role="presentation" width="600" border="0" cellspacing="0" cellpadding="0"><tr><td><![endif]-->
+                <table role="presentation" class="container" width="600" border="0" cellspacing="0" cellpadding="0" style="width:600px;max-width:600px;">
+                    <tr><td class="block-gap" height="16" style="height:16px;line-height:16px;font-size:0;">&nbsp;</td></tr>
 
-                                                <tr>
-                        <td style="border:0.5px solid #d9d9d9;  padding:20px; border-top: 0; border-collapse: collapse;" id="email-penrose-conteneur">
-                            <table class="resp-full-table" width="100%" align="left" cellspacing="0" cellpadding="0" style="padding:20px;">
+                                        <tr>
+                        <td class="block header-padding" bgcolor="#F7F7F8" style="padding:32px 48px;border-radius:8px;">
+                            <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
-                                    <td>
-                                        <table width="100%" align="center" class="resp-full-table" border="0" cellpadding="0" cellspacing="0" >
-                                            <tr>
-                                                <td class="resp-full-td" valign="top" style="margin:20px 0; text-align:left;">
-                                                    <span class="resp-punchline" style="color:#999999; outline:none; font-size:14px; font-weight: bold; font-family:'Open Sans', helvetica, arial, sans-serif; ">
-                                                        global.proposal
-                                                    </span>
-                                                    <ul style="list-style: none; padding:0; color: #000000;">
-                                                        <a href="https://capco.dev/project/budget-participatif-rennes/collect/collecte-des-propositions/proposals/ravalement-de-la-facade-de-la-bibliotheque-municipale?_locale=fr-FR"><h4 class="resp-punchline" style="color:#337ab7; outline:none; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">Ravalement de la façade de la bibliothèque municipale</h4></a>
-                                                                                                                                                                                                                                                                                            <li>
-                                                                <span style="color: #000000;">
-                                                                                                                                            <a href='https://capco.dev/blog/post-proposal-and-project'>new-article-count {&quot;count&quot;:1,&quot;num&quot;:1}</a>
-                                                                                                                                    </span>
-                                                            </li>
-
-                                                                                                            </ul>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                    <td valign="middle" style="font-family:&#039;Open Sans&#039;,Helvetica,Arial,sans-serif;">
+                                                                                    <img class="logo" src="https://capco.dev/media/cache/default_logo/default/0001/01/providerReferenceForLogo.png" height="40" alt="Cap-Collectif" style="display:block;height:40px;width:auto;max-width:200px;border:0;" />
+                                                                            </td>
+                                    <td class="text-secondary" valign="middle" align="right" style="padding-left:16px;white-space:nowrap;font-family:&#039;Open Sans&#039;,Helvetica,Arial,sans-serif;font-size:14px;line-height:20px;color:#545E68;">
+                                        email.follower-activities.summary-of {&quot;{date}&quot;:&quot;1 janvier&quot;}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-secondary" style="padding-top:24px;font-family:&#039;Open Sans&#039;,Helvetica,Arial,sans-serif;font-size:16px;line-height:24px;color:#545E68;">
+                                        email.follower-activities.greeting {&quot;{username}&quot;:&quot;user&quot;}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="padding-top:4px;">
+                                        <h1 class="text-primary" style="margin:0;font-family:&#039;Open Sans&#039;,Helvetica,Arial,sans-serif;font-size:24px;line-height:32px;font-weight:600;color:#272B30;">
+                                            email.follower-activities.introduction {&quot;num&quot;:1}
+                                        </h1>
                                     </td>
                                 </tr>
                             </table>
                         </td>
                     </tr>
 
-                        </table>
-    <table id="email-penrose-conteneur" align="center" border="0" cellspacing="0" cellpadding="0">
+                                            <tr><td class="block-gap" height="16" style="height:16px;line-height:16px;font-size:0;">&nbsp;</td></tr>
+                        <tr>
+                                                        <td class="block block-padding block-watermark" bgcolor="#F7F7F8" background="https://capco.dev/image/email/project-watermark.png?v1" style="padding:32px 24px 24px 24px;border-radius:8px;background-color:#F7F7F8;background-image:url('https://capco.dev/image/email/project-watermark.png?v1');background-repeat:no-repeat;background-position:top right;background-size:88px 88px;">
+                                <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td class="block-title-padding" style="padding:0 24px 24px 24px;">
+                                            <p class="text-secondary" style="margin:0;font-family:&#039;Open Sans&#039;,Helvetica,Arial,sans-serif;font-size:14px;line-height:20px;color:#545E68;">
+                                                email.follower-activities.in-participatory-project
+                                            </p>
+                                            <h2 class="text-primary" style="margin:4px 0 0 0;font-family:&#039;Open Sans&#039;,Helvetica,Arial,sans-serif;font-size:16px;line-height:24px;font-weight:600;color:#272B30;">Budget Participatif Rennes</h2>
+                                        </td>
+                                    </tr>
+                                                                                                                    <tr>
+                                            <td>
+                                                <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse:separate;">
+                <tr>
+            <td class="proposal-cover" height="200" align="center" valign="middle" bgcolor="#ef5350" style="height:200px;border-radius:8px 8px 0 0;background-color:#ef5350;">
+                                    <img src="https://capco.dev/image/email/category/official-building.png?v1" width="48" height="48" alt="" style="display:block;width:48px;height:48px;border:0;" />
+                            </td>
+        </tr>
         <tr>
-            <td style="margin:20px 0;">
-                <table class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td width="100%" class="resp-full-td" style="text-align: center;color: #000000;">
-                            <span style="color:#000;">you-receive-this-email-because</span>
-                            <span style="color:#000;">you-follow-these-proposals</span><br>
-                            <span style="color:#000;"><a href="https://capco.dev/profile/followings/SNAPSHOT_TOKEN">set-up-my-subscriptions</a></span>
-                            <span style="font-size:12px; font-family:'Open Sans', helvetica, arial, sans-serif; color:#aeb2b3">notification.email.external_footer {"{to}":"user@test.com","{sitename}":"Cap-Collectif","{business}":"Cap Collectif","{siteUrl}":"https:\/\/capco.dev\/","{businessUrl}":"https:\/\/cap-collectif.com\/"}</span>
-                        </td>
-                    </tr>
-                </table>
+        <td class="card card-padding" bgcolor="#FFFFFF" style="padding:24px;background-color:#FFFFFF;border-radius:0 0 8px 8px;">
+            <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td>
+                        <h3 class="proposal-title text-primary" style="margin:0;font-family:&#039;Open Sans&#039;,Helvetica,Arial,sans-serif;font-size:18px;line-height:28px;font-weight:600;color:#272B30;">Ravalement de la façade de la bibliothèque municipale</h3>
+                    </td>
+                </tr>
+
+
+
+
+
+                                    <tr>
+                        <td style="padding-top:16px;">
+                            <table role="presentation" border="0" cellspacing="0" cellpadding="0" width="100%">
+        <tr>
+            <td class="badge" width="32" height="32" align="center" valign="middle" bgcolor="#F7F7F8" style="width:32px;height:32px;border-radius:16px;">
+                <img class="light-img" src="https://capco.dev/image/email/activity-news.png?v1" width="20" height="20" alt="" style="display:block;width:20px;height:20px;border:0;" />
+    <!--[if !mso]><!--><img class="dark-img" src="https://capco.dev/image/email/activity-news-dark.png?v1" width="20" height="20" alt="" style="display:none;width:20px;height:20px;border:0;" /><!--<![endif]-->
+            </td>
+            <td class="text-primary" valign="middle" style="padding-left:12px;font-family:'Open Sans',Helvetica,Arial,sans-serif;font-size:16px;line-height:24px;color:#272B30;">
+                <strong>1</strong> email.follower-activities.news {&quot;num&quot;:1}
             </td>
         </tr>
     </table>
-</div>
+                        </td>
+                    </tr>
+                                                                    <tr>
+                            <td style="padding-top:16px;">
+                                <table role="presentation" class="news-card" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse:separate;border:1px solid #E8EBED;border-radius:4px;">
+    <!--[if !mso]><!-->
+    <tr>
+        <td class="mobile-only" colspan="2" bgcolor="#006CE0" align="center" valign="middle" style="display:none;max-height:0;overflow:hidden;height:112px;border-radius:4px 4px 0 0;background-color:#006CE0;">
+                            <img src="https://capco.dev/image/email/news-placeholder.png?v1" width="32" height="32" alt="" style="display:inline-block;width:32px;height:32px;margin-top:40px;border:0;" />
+                    </td>
+    </tr>
+    <!--<![endif]-->
+    <tr>
+        <td class="desktop-only" width="144" bgcolor="#006CE0" align="center" valign="middle" style="width:144px;min-width:144px;border-radius:4px 0 0 4px;background-color:#006CE0;">
+                            <img src="https://capco.dev/image/email/news-placeholder.png?v1" width="32" height="32" alt="" style="display:inline-block;width:32px;height:32px;border:0;" />
+                    </td>
+        <td class="news-text" valign="top" style="padding:24px;">
+            <h4 style="margin:0;font-family:&#039;Open Sans&#039;,Helvetica,Arial,sans-serif;font-size:16px;line-height:24px;font-weight:600;">
+                <a href="https://capco.dev/blog/post-proposal-and-project" class="text-primary" style="color:#272B30;text-decoration:none;">Post d&#039;un projet privé pour admin@test.com</a>
+            </h4>
+                            <p class="text-secondary" style="margin:8px 0 0 0;font-family:&#039;Open Sans&#039;,Helvetica,Arial,sans-serif;font-size:14px;line-height:20px;color:#545E68;">Très bien tout ça je valide</p>
+                                        <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="margin-top:12px;">
+                    <tr>
+                        <td valign="middle" width="16" style="width:16px;"><img class="light-img" src="https://capco.dev/image/email/author.png?v1" width="16" height="16" alt="" style="display:block;width:16px;height:16px;border:0;" />
+    <!--[if !mso]><!--><img class="dark-img" src="https://capco.dev/image/email/author-dark.png?v1" width="16" height="16" alt="" style="display:none;width:16px;height:16px;border:0;" /><!--<![endif]--></td>
+                        <td class="text-secondary" valign="middle" style="padding-left:8px;font-family:&#039;Open Sans&#039;,Helvetica,Arial,sans-serif;font-size:14px;line-height:20px;color:#545E68;">admin</td>
+                                            </tr>
+                </table>
+                    </td>
+    </tr>
+</table>
+                            </td>
+                        </tr>
+
+                                    <tr>
+                        <td class="end-button" align="center" style="padding-top:32px;">
+                                            <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="border-collapse:separate;">
+            <tr>
+                <td class="button-primary" align="center" bgcolor="#006CE0" style="border-radius:4px;border:1px solid #006CE0;mso-padding-alt:11px 16px;">
+                    <a href="https://capco.dev/project/budget-participatif-rennes/collect/collecte-des-propositions/proposals/ravalement-de-la-facade-de-la-bibliotheque-municipale?_locale=fr-FR" class="button-primary-text" style="display:inline-block;padding:11px 16px;font-family:'Open Sans',Helvetica,Arial,sans-serif;font-size:16px;line-height:20px;font-weight:600;color:#ffffff;text-decoration:none;">email.follower-activities.see-proposal</a>
+                </td>
+            </tr>
+        </table>
+
+                        </td>
+                    </tr>
+                            </table>
+        </td>
+    </tr>
+</table>
+                                            </td>
+                                        </tr>
+                                                                                                        </table>
+                            </td>
+                        </tr>
+
+
+                                        <tr>
+                        <td class="text-secondary" align="center" style="padding:32px 24px;font-family:&#039;Open Sans&#039;,Helvetica,Arial,sans-serif;font-size:14px;line-height:20px;color:#545E68;">
+                            <p style="margin:0;">
+                                email.follower-activities.footer-reason {&quot;num&quot;:1}
+                            </p>
+                            <p style="margin:0;">
+                                <a href="https://capco.dev/profile/followings/SNAPSHOT_TOKEN" class="text-secondary" style="color:#545E68;text-decoration:underline;">email.follower-activities.manage-followings</a>
+                            </p>
+                            <p style="margin:8px 0 0 0;">
+                                email.follower-activities.powered-by {&quot;{siteName}&quot;:&quot;Cap-Collectif&quot;}
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+                <!--[if mso]></td></tr></table><![endif]-->
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
