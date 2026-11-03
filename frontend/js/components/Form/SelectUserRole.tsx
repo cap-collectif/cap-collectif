@@ -13,21 +13,26 @@ type OwnProps = {
 }
 type Props = OwnProps & {
   isSuperAdmin: boolean
+  hasShieldAuthorizationControls: boolean
   hasProjectAdminFeature: boolean
   intl: IntlShape
 }
 export class SelectUserRole extends Component<Props> {
   render() {
-    const { isSuperAdmin, hasProjectAdminFeature, intl, id, name, label } = this.props
+    const { isSuperAdmin, hasShieldAuthorizationControls, hasProjectAdminFeature, intl, id, name, label } = this.props
     const userRoles = [
-      {
-        id: 'ROLE_SHIELD_AUTHORIZED_USER',
-        useIdAsValue: true,
-        label: intl.formatMessage({
-          id: 'roles.shield_authorized_user',
-        }),
-        description: intl.formatMessage({ id: 'roles.shield_authorized_user_help' }),
-      },
+      ...(hasShieldAuthorizationControls
+        ? [
+            {
+              id: 'ROLE_SHIELD_AUTHORIZED_USER',
+              useIdAsValue: true,
+              label: intl.formatMessage({
+                id: 'roles.shield_authorized_user',
+              }),
+              description: intl.formatMessage({ id: 'roles.shield_authorized_user_help' }),
+            },
+          ]
+        : []),
       {
         id: 'ROLE_USER',
         useIdAsValue: true,
@@ -79,6 +84,7 @@ export class SelectUserRole extends Component<Props> {
 
 const mapStateToProps = (state: GlobalState) => ({
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
+  hasShieldAuthorizationControls: state.default.features.shield_authorization_controls ?? false,
   hasProjectAdminFeature: state.default.features.project_admin ?? false,
 })
 

@@ -104,6 +104,7 @@ const Shield: FC = () => {
     'sso_by_pass_auth',
     'multilangue',
     'remind_user_account_confirmation',
+    'shield_authorization_controls',
     'shield_authorized_users_only',
   ])
   const { setSaving } = useNavBarContext()
@@ -164,29 +165,31 @@ const Shield: FC = () => {
                 )(e)
               }
             >
-              <Flex direction="row" justify="space-between" align="center" width="100%" mb={4} spacing={2}>
-                <Flex direction="column" spacing={1}>
-                  <Text as="label" htmlFor="restrict-platform-access" fontSize={CapUIFontSize.BodyRegular}>
-                    {intl.formatMessage({ id: 'admin.features.restrict-platform-access' })}
-                  </Text>
-                  <Text id="restrict-platform-access-help" color="gray.700" fontSize={CapUIFontSize.BodySmall}>
-                    {intl.formatMessage({ id: 'admin.features.restrict-platform-access-help' })}
-                  </Text>
+              {features.shield_authorization_controls && (
+                <Flex direction="row" justify="space-between" align="center" width="100%" mb={4} spacing={2}>
+                  <Flex direction="column" spacing={1}>
+                    <Text as="label" htmlFor="restrict-platform-access" fontSize={CapUIFontSize.BodyRegular}>
+                      {intl.formatMessage({ id: 'admin.features.restrict-platform-access' })}
+                    </Text>
+                    <Text id="restrict-platform-access-help" color="gray.700" fontSize={CapUIFontSize.BodySmall}>
+                      {intl.formatMessage({ id: 'admin.features.restrict-platform-access-help' })}
+                    </Text>
+                  </Flex>
+                  <Switch
+                    id="restrict-platform-access"
+                    aria-describedby="restrict-platform-access-help"
+                    checked={features.shield_authorized_users_only}
+                    onChange={() =>
+                      toggleFeatureFlag(
+                        'shield_authorized_users_only',
+                        !features.shield_authorized_users_only,
+                        intl,
+                        setSaving,
+                      )
+                    }
+                  />
                 </Flex>
-                <Switch
-                  id="restrict-platform-access"
-                  aria-describedby="restrict-platform-access-help"
-                  checked={features.shield_authorized_users_only}
-                  onChange={() =>
-                    toggleFeatureFlag(
-                      'shield_authorized_users_only',
-                      !features.shield_authorized_users_only,
-                      intl,
-                      setSaving,
-                    )
-                  }
-                />
-              </Flex>
+              )}
               <FormControl name="introduction" control={control}>
                 <FormLabel label={intl.formatMessage({ id: 'global.intro' })}>
                   <Flex direction="row" justify="space-between" flex={1}>

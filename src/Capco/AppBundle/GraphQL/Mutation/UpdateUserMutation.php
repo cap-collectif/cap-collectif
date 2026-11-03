@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\GraphQL\Traits\ShieldRoleChangeTrait;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Traits\FormValidationErrorsTraits;
 use Capco\UserBundle\Entity\User;
@@ -18,6 +19,7 @@ class UpdateUserMutation implements MutationInterface
 {
     use FormValidationErrorsTraits;
     use MutationTrait;
+    use ShieldRoleChangeTrait;
 
     public function __construct(
         private readonly EntityManagerInterface $em,
@@ -29,12 +31,13 @@ class UpdateUserMutation implements MutationInterface
     /**
      * @return array{'user': null|User, 'validationErrors': null|false|non-empty-string}
      */
-    public function __invoke(Argument $input, User $viewer): array
+    public function __invoke(Argument $input, User $viewer, bool $shieldAuthorizationControls): array
     {
         $this->formatInput($input);
         $arguments = $input->getArrayCopy();
 
         $user = $this->getUser($arguments);
+        $this->checkShieldRoleChange($user, $arguments, $shieldAuthorizationControls);
         $this->handlePhone($arguments, $user);
         $this->handleUserType($arguments);
 

@@ -1,9 +1,15 @@
 # Restricted platform navigation
 
-Administrators and super-administrators can enable `shield_authorized_users_only` in
-the shield settings in the back office. It is disabled by default and only takes
-effect while `shield_mode` is enabled. Disabling the shield preserves this setting;
-reactivating it restores the restriction.
+Administrators and super-administrators can enable `shield_authorization_controls` under
+**Features → Other**. It makes the restriction switch available in the shield
+settings and the authorized-user role available in account profiles. The feature
+is off by default.
+
+The restriction applies when `shield_authorization_controls`, `shield_mode` and
+`shield_authorized_users_only` are all enabled. Turning off the feature suspends
+the restriction and preserves both the switch setting and assigned roles.
+While the feature is off, the internal mutations `createUser`, `updateUser` and
+`updateUserAccount` reject changes to the shield role. Other profile fields remain editable.
 
 Administrators can grant or revoke `ROLE_SHIELD_AUTHORIZED_USER` in the user account
 role selector, including the account tab in the Next.js user administration page.
@@ -26,7 +32,7 @@ Symfony checks the authenticated user's roles and their hierarchy in a private
 method of `ShieldListener`, relying on the standard Symfony user-provider refresh
 instead of querying the database again.
 Next.js uses `viewerSession.isShieldAuthorizedUser` in its existing `MainLayout` shield
-check, together with the two feature flags. This role-based boolean is serialized
+check, together with the three feature flags. This role-based boolean is serialized
 from the user alongside `isAdmin` and `isSuperAdmin`.
 The shared shield component renders either the existing login UI or the refusal.
 Symfony refreshes roles on the next authenticated request. Next.js reads the stored

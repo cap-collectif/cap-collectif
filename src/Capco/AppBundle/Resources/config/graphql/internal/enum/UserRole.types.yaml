@@ -5,7 +5,7 @@ UserRole:
         values:
             ROLE_SHIELD_AUTHORIZED_USER:
                 value: !php/const Capco\AppBundle\Enum\UserRole::ROLE_SHIELD_AUTHORIZED_USER
-                description: 'Allows navigation through the shield when both shield_mode and shield_authorized_users_only are enabled.'
+                description: 'Allows navigation through the shield when the authorized-user restriction is active.'
             ROLE_USER:
                 value: !php/const Capco\AppBundle\Enum\UserRole::ROLE_USER
                 description: 'Represents a user.'

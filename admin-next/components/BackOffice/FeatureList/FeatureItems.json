@@ -31,6 +31,11 @@
                 "description": "description.group.others",
                 "onlySuperAdmin": false,
                 "items": {
+                    "shield_authorization_controls": {
+                        "title": "admin.features.authorization-controls-shield",
+                        "description": "admin.features.authorization-controls-shield-help",
+                        "onlySuperAdmin": false
+                    },
                     "share_buttons": {
                         "title": "capco.module.share_buttons",
                         "description": "description.module.share_buttons",

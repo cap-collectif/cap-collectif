@@ -22,7 +22,7 @@ final class PlatformAccessTest extends IdentityWebTestCase
 {
     public static function featureFlagOverrides(): array
     {
-        return [...parent::featureFlagOverrides(), 'shield_mode' => true, 'shield_authorized_users_only' => true];
+        return [...parent::featureFlagOverrides(), 'shield_mode' => true, 'shield_authorization_controls' => true, 'shield_authorized_users_only' => true];
     }
 
     public function testAnonymousVisitorStillSeesTheExistingShield(): void
@@ -94,18 +94,27 @@ final class PlatformAccessTest extends IdentityWebTestCase
         $this->assertViewer(true, $user->getId());
     }
 
-    public function testDisablingShieldPreservesTheRestrictionSetting(): void
+    /** @dataProvider shieldControls */
+    public function testDisablingShieldControlPreservesTheRestrictionSetting(string $control): void
     {
         $this->browser->loginUser($this->account());
-        $this->setFeatureFlags(['shield_mode' => false]);
+        $this->setFeatureFlags([$control => false]);
         $this->browser->request('GET', '/');
         self::assertResponseIsSuccessful();
         self::assertStringNotContainsString('id="shield-mode"', (string) $this->browser->getResponse()->getContent());
         $flags = $this->graphql('{ featureFlags { type enabled } }')['featureFlags'];
         self::assertTrue(array_column($flags, 'enabled', 'type')['shield_authorized_users_only']);
-        $this->setFeatureFlags(['shield_mode' => true]);
+        $this->setFeatureFlags([$control => true]);
         $this->browser->request('GET', '/');
         self::assertResponseStatusCodeSame(403);
+    }
+
+    /** @return iterable<string, array{string}> */
+    public static function shieldControls(): iterable
+    {
+        yield 'shield' => ['shield_mode'];
+
+        yield 'authorized-user shield feature' => ['shield_authorization_controls'];
     }
 
     public function testShieldWithoutRoleRestrictionAllowsOrdinaryUsers(): void

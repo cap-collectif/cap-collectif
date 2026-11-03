@@ -4,7 +4,6 @@ import { execFile } from 'child_process'
 import { promisify } from 'util'
 
 const execFileAsync = promisify(execFile)
-const feature = 'shield_authorized_users_only'
 const mutation = /* GraphQL */ `
   mutation ShieldAuthorizedUsersOnly($input: ToggleFeatureInput!) {
     toggleFeature(input: $input) {
@@ -51,33 +50,49 @@ describe('Internal|shield_authorized_users_only', () => {
     }
   })
 
-  // These fixture accounts have ROLE_ADMIN and ROLE_SUPER_ADMIN respectively.
-  test.each([
-    ['admin', 'internal_admin'],
-    ['super-admin', 'internal_super_admin'],
-  ])('%s can enable and disable platform restriction', async (_role, identity) => {
-    for (const enabled of [true, false]) {
-      await expect(graphql(mutation, { input: { type: feature, enabled } }, identity)).resolves.toEqual({
-        toggleFeature: { featureFlag: { type: feature, enabled } },
-      })
-
-      const result = await graphql(query, {}, identity)
-      expect(result.featureFlags.find(flag => flag.type === feature)).toEqual({ type: feature, enabled })
-    }
+  it('rejects enabling the restriction while the feature is disabled', async () => {
+    await global.resetFeatureFlags({ shield_authorization_controls: false })
+    const type = 'shield_authorized_users_only'
+    await expect(graphql(mutation, { input: { type, enabled: true } }, 'internal_admin')).rejects.toThrow(
+      'Access denied to this field.',
+    )
+    const result = await graphql(query, {}, 'internal_admin')
+    expect(result.featureFlags.find(flag => flag.type === type)).toEqual({ type, enabled: false })
   })
 
-  test.each([
-    ['ordinary user', { email: 'user@test.com', password: 'user' }],
-    ['anonymous visitor', null],
-  ])('%s cannot enable platform restriction', async (_role, credentials) => {
-    const result = await rawInternalGraphql(mutation, { input: { type: feature, enabled: true } }, credentials)
+  describe.each(['shield_authorization_controls', 'shield_authorized_users_only'])('%s', feature => {
+    beforeEach(async () => {
+      await global.resetFeatureFlags({ shield_authorization_controls: feature === 'shield_authorized_users_only' })
+    })
 
-    expect(result.errors).toEqual([
-      expect.objectContaining({ message: 'Access denied to this field.', path: ['toggleFeature'] }),
-    ])
-    expect(result.data.toggleFeature).toBeNull()
+    // These fixture accounts have ROLE_ADMIN and ROLE_SUPER_ADMIN respectively.
+    test.each([
+      ['admin', 'internal_admin'],
+      ['super-admin', 'internal_super_admin'],
+    ])('%s can enable and disable platform restriction', async (_role, identity) => {
+      for (const enabled of [true, false]) {
+        await expect(graphql(mutation, { input: { type: feature, enabled } }, identity)).resolves.toEqual({
+          toggleFeature: { featureFlag: { type: feature, enabled } },
+        })
 
-    const persisted = await graphql(query, {}, 'internal')
-    expect(persisted.featureFlags.find(flag => flag.type === feature)).toEqual({ type: feature, enabled: false })
+        const result = await graphql(query, {}, identity)
+        expect(result.featureFlags.find(flag => flag.type === feature)).toEqual({ type: feature, enabled })
+      }
+    })
+
+    test.each([
+      ['ordinary user', { email: 'user@test.com', password: 'user' }],
+      ['anonymous visitor', null],
+    ])('%s cannot enable platform restriction', async (_role, credentials) => {
+      const result = await rawInternalGraphql(mutation, { input: { type: feature, enabled: true } }, credentials)
+
+      expect(result.errors).toEqual([
+        expect.objectContaining({ message: 'Access denied to this field.', path: ['toggleFeature'] }),
+      ])
+      expect(result.data.toggleFeature).toBeNull()
+
+      const persisted = await graphql(query, {}, 'internal')
+      expect(persisted.featureFlags.find(flag => flag.type === feature)).toEqual({ type: feature, enabled: false })
+    })
   })
 })

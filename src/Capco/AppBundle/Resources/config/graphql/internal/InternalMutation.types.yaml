@@ -738,14 +738,14 @@ InternalMutation:
                 builderConfig:
                     inputType: CreateUserInput
                     payloadType: CreateUserPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateUserMutation", args)'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateUserMutation", args, hasFeatureFlag("shield_authorization_controls"))'
             updateUserAccount:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: UpdateUserAccountInput
                     payloadType: UpdateUserAccountPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateUserAccountMutation", args, getUser())'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateUserAccountMutation", args, getUser(), hasFeatureFlag("shield_authorization_controls"))'
             addUsersToGroupFromEmail:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'
@@ -2350,7 +2350,7 @@ InternalMutation:
                 builderConfig:
                     inputType: UpdateUserInput
                     payloadType: UpdateUserPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateUserMutation", args, getUser())'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateUserMutation", args, getUser(), hasFeatureFlag("shield_authorization_controls"))'
             saveImapConfig:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\SaveImapConfigMutation").isGranted(args["input"]["stepId"], getUser())'
                 builder: 'Relay::Mutation'

@@ -9,6 +9,11 @@ use PhpSpec\ObjectBehavior;
 
 class ToggleFeatureAccessResolverSpec extends ObjectBehavior
 {
+    public function let(Manager $manager): void
+    {
+        $this->beConstructedWith($manager);
+    }
+
     public function it_is_initializable(): void
     {
         $this->shouldHaveType(ToggleFeatureAccessResolver::class);

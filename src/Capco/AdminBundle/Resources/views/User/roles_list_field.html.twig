@@ -2,7 +2,7 @@
 
 {% block field %}
     {% apply spaceless %}
-        {% for role in value %}
+        {% for role in value|filter(role => role != 'ROLE_SHIELD_AUTHORIZED_USER' or is_feature_enabled('shield_authorization_controls')) %}
             {% set label = role == 'ROLE_SHIELD_AUTHORIZED_USER' ? 'roles.shield_authorized_user' : role %}
             {{ label | trans({}, 'CapcoAppBundle') }}{% if not loop.last %}, {% endif %}
         {% endfor %}

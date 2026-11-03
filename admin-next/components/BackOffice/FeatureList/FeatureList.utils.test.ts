@@ -20,6 +20,12 @@ describe('FeatureList.utils', () => {
   it.each([false, true])(
     'keeps the shield-specific restriction out of the feature list (superAdmin=%s)',
     superAdmin => {
+      const groups = getFeatureItemsFiltered('', intl, { ...defaultFeatureFlags }, superAdmin).flatMap(
+        item => item.groups,
+      )
+      expect(groups.find(group => group.title === 'admin.group.others')?.items).toHaveProperty(
+        'shield_authorization_controls',
+      )
       expect(getVisibleFeatureIds(superAdmin)).not.toContain('shield_authorized_users_only')
     },
   )

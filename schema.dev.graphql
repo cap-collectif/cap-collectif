@@ -7888,6 +7888,9 @@ enum FeatureFlagType {
   allow_users_to_propose_events
   login_franceconnect
 
+  """Enable the authorized-user shield setting and user role"""
+  shield_authorization_controls
+
   """Restrict platform access to explicitly authorized users"""
   shield_authorized_users_only
   restrict_connection
@@ -24636,7 +24639,7 @@ enum UserOrderField {
 """Roles granted to users."""
 enum UserRole {
   """
-  Allows navigation through the shield when both shield_mode and shield_authorized_users_only are enabled.
+  Allows navigation through the shield when the authorized-user restriction is active.
   """
   ROLE_SHIELD_AUTHORIZED_USER
 

@@ -20,10 +20,12 @@ import { formatCodeToLocale, setLocaleCookie } from '@utils/locale-helper'
 
 const MainLayout: FC<{ SSRData: layoutQuery$data; children: React.ReactNode }> = ({ children, SSRData }) => {
   const shield_mode = useFeatureFlag('shield_mode')
+  const shieldAuthorizationControls = useFeatureFlag('shield_authorization_controls')
   const shieldAuthorizedUsersOnly = useFeatureFlag('shield_authorized_users_only')
   const session = useAppContext()
   const accessDenied = !!(
     shield_mode &&
+    shieldAuthorizationControls &&
     shieldAuthorizedUsersOnly &&
     session?.viewerSession &&
     !session.viewerSession.isShieldAuthorizedUser

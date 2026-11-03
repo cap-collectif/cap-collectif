@@ -121,7 +121,7 @@ class ShieldListener
 
     private function isAllowed(UserInterface $user): bool
     {
-        if (!$this->manager->isActive(Manager::shield_authorized_users_only)) {
+        if (!$this->manager->isActive(Manager::shield_authorization_controls) || !$this->manager->isActive(Manager::shield_authorized_users_only)) {
             return true;
         }
 

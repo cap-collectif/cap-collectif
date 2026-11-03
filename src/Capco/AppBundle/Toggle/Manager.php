@@ -53,6 +53,7 @@ class Manager
     final public const sso_by_pass_auth = 'sso_by_pass_auth';
     final public const allow_users_to_propose_events = 'allow_users_to_propose_events';
     final public const login_franceconnect = 'login_franceconnect';
+    final public const shield_authorization_controls = 'shield_authorization_controls';
     final public const shield_authorized_users_only = 'shield_authorized_users_only';
     final public const restrict_connection = 'restrict_connection';
     final public const secure_password = 'secure_password';
@@ -119,6 +120,7 @@ class Manager
         self::external_project,
         self::read_more,
         self::secure_password,
+        self::shield_authorization_controls,
         self::shield_authorized_users_only,
         self::restrict_connection,
         self::public_api,
@@ -197,6 +199,7 @@ class Manager
         self::sso_by_pass_auth,
         self::allow_users_to_propose_events,
         self::login_franceconnect,
+        self::shield_authorization_controls,
         self::shield_authorized_users_only,
         self::restrict_connection,
         self::secure_password,

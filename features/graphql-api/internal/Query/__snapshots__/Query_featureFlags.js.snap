@@ -127,6 +127,9 @@ Object {
       "type": "login_franceconnect",
     },
     Object {
+      "type": "shield_authorization_controls",
+    },
+    Object {
       "type": "shield_authorized_users_only",
     },
     Object {

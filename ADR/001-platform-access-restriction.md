@@ -10,14 +10,15 @@ it does not require making publicly accessible data confidential.
 ## Decision
 
 Extend the existing shield with `shield_authorized_users_only` and `ROLE_SHIELD_AUTHORIZED_USER`.
-Require the role only when both the shield and the restriction flags are enabled.
+Expose the restriction setting and role through the `shield_authorization_controls` feature in the back office.
+Require the role when this feature, the shield and the restriction setting are all enabled.
 Disabling the shield preserves the restriction setting.
 
 Symfony applies this decision in `ShieldListener`, using the authenticated user's
 roles and their hierarchy. Rely on Symfony's standard user-provider refresh; do
 not add a separate database lookup for the shield. Next.js uses the serialized
 `viewerSession.isShieldAuthorizedUser` boolean, following the existing `isAdmin` and
-`isSuperAdmin` session model. The layout still checks both feature flags. Reuse the existing shield UI for login; authenticated users denied
+`isSuperAdmin` session model. The layout checks all three flags. Reuse the existing shield UI for login; authenticated users denied
 navigation see a refusal and a logout link. Keep GraphQL and media permissions and
 the existing shield exceptions. Do not add a separate middleware, login route,
 GraphQL filter or caching policy.

@@ -58,6 +58,7 @@ export const features: FeatureFlags = {
   allow_users_to_propose_events: false,
   secure_password: false,
   restrict_connection: false,
+  shield_authorization_controls: false,
   shield_authorized_users_only: false,
   login_franceconnect: false,
   read_more: false,

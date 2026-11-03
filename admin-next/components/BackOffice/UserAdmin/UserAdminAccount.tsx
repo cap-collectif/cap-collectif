@@ -68,17 +68,22 @@ const UserAdminAccount: React.FC<Props> = ({ user: userRef, methods }) => {
   const formId = React.useId()
   const user = useFragment(FRAGMENT, userRef)
   const { viewerSession } = useAppContext()
+  const hasShieldAuthorizationControls = useFeatureFlag('shield_authorization_controls')
   const hasProjectAdminFeature = useFeatureFlag('project_admin')
   const { control, formState, handleSubmit, reset } = methods
 
   const roleChoices = [
     { id: 'ROLE_USER', useIdAsValue: true, label: intl.formatMessage({ id: 'roles.user' }) },
-    {
-      id: 'ROLE_SHIELD_AUTHORIZED_USER',
-      useIdAsValue: true,
-      label: intl.formatMessage({ id: 'roles.shield_authorized_user' }),
-      description: intl.formatMessage({ id: 'roles.shield_authorized_user_help' }),
-    },
+    ...(hasShieldAuthorizationControls
+      ? [
+          {
+            id: 'ROLE_SHIELD_AUTHORIZED_USER',
+            useIdAsValue: true,
+            label: intl.formatMessage({ id: 'roles.shield_authorized_user' }),
+            description: intl.formatMessage({ id: 'roles.shield_authorized_user_help' }),
+          },
+        ]
+      : []),
     { id: 'ROLE_ADMIN', useIdAsValue: true, label: intl.formatMessage({ id: 'roles.admin' }) },
     ...(hasProjectAdminFeature
       ? [{ id: 'ROLE_PROJECT_ADMIN', useIdAsValue: true, label: intl.formatMessage({ id: 'roles.project_admin' }) }]
