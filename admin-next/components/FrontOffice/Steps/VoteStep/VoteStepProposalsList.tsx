@@ -1,5 +1,6 @@
-import { Box, Grid } from '@cap-collectif/ui'
+import { Box, Flex, Grid, Spinner } from '@cap-collectif/ui'
 import * as React from 'react'
+import InfiniteScroll from 'react-infinite-scroller'
 import { graphql, usePaginationFragment } from 'react-relay'
 import { VoteStepProposalsList_proposalStep$key } from '@relay/VoteStepProposalsList_proposalStep.graphql'
 import ProposalCard from '@components/FrontOffice/ProposalCard/ProposalCard'
@@ -7,6 +8,7 @@ import VoteStepEmptyList from './VoteStepEmptyList'
 import { useQueryState } from 'nuqs'
 import { exportLatLngBounds } from '@utils/leaflet'
 import ProjectsListPlaceholder from '@shared/projectCard/ProjectsListSkeleton'
+import { VOTE_STEP_PROPOSALS_COUNT } from './VoteStep.queries'
 
 type TemplateColumns = {
   base: string
@@ -93,7 +95,7 @@ export const VoteStepProposalsList: React.FC<Props> = ({
   selectedId,
   onSelectedIdChange,
 }) => {
-  const { data, refetch } = usePaginationFragment(PROPOSALS_FRAGMENT, stepKey)
+  const { data, refetch, loadNext, hasNext, isLoadingNext } = usePaginationFragment(PROPOSALS_FRAGMENT, stepKey)
 
   const [latlngBounds] = useQueryState('latlngBounds')
   const [sort] = useQueryState('sort')
@@ -107,7 +109,6 @@ export const VoteStepProposalsList: React.FC<Props> = ({
   const [listView] = useQueryState('list_view', { defaultValue: defaultView })
   const [isMapShown] = useQueryState('map_shown')
 
-  const itemRefs = React.useRef<{ [key: string]: HTMLDivElement | null }>({})
   const debounceTimerRef = React.useRef<NodeJS.Timeout | null>(null)
   const hasMountedRef = React.useRef(false)
 
@@ -125,7 +126,7 @@ export const VoteStepProposalsList: React.FC<Props> = ({
     debounceTimerRef.current = setTimeout(() => {
       const geoBoundingBox = exportLatLngBounds(latlngBounds)
       if (geoBoundingBox) {
-        refetch({ geoBoundingBox }, { fetchPolicy: 'network-only' })
+        refetch({ geoBoundingBox, count: VOTE_STEP_PROPOSALS_COUNT, cursor: null }, { fetchPolicy: 'network-only' })
       }
     }, 500)
 
@@ -136,14 +137,9 @@ export const VoteStepProposalsList: React.FC<Props> = ({
     }
   }, [latlngBounds, refetch])
 
-  React.useEffect(() => {
-    if (selectedId && itemRefs.current[selectedId]) {
-      itemRefs.current[selectedId]?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center',
-      })
-    }
-  }, [data.proposals?.edges, selectedId])
+  const scrollToSelectedCard = React.useCallback((card: HTMLDivElement | null) => {
+    card?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  }, [])
 
   // Reset selection when map is hidden or list view changes
   React.useEffect(() => {
@@ -177,27 +173,36 @@ export const VoteStepProposalsList: React.FC<Props> = ({
   }
 
   return proposalsLength ? (
-    <Grid id="proposals-list" templateColumns={gridTemplateColumns} gap="lg" justifyItems="stretch">
-      {sortedEdges.map(({ node }) => (
-        <Box
-          key={node.id}
-          ref={el => {
-            itemRefs.current[node.id] = el
-          }}
-          onMouseEnter={() => handlerMouseOver(node.id, node.id)}
-          onMouseLeave={() => handlerMouseOver(node.id, null)}
-        >
-          <ProposalCard
-            proposal={node}
-            step={data}
-            primaryInfoTag="h2"
-            minWidth="unset"
-            active={node.id === selectedId}
-            triggerRequirementModal={triggerRequirementModal}
-          />
-        </Box>
-      ))}
-    </Grid>
+    <InfiniteScroll
+      initialLoad={false}
+      hasMore={hasNext && !isLoadingNext}
+      loadMore={() => loadNext(VOTE_STEP_PROPOSALS_COUNT)}
+    >
+      <Grid id="proposals-list" templateColumns={gridTemplateColumns} gap="lg" justifyItems="stretch">
+        {sortedEdges.map(({ node }) => (
+          <Box
+            key={node.id}
+            ref={node.id === selectedId ? scrollToSelectedCard : undefined}
+            onMouseEnter={() => handlerMouseOver(node.id, node.id)}
+            onMouseLeave={() => handlerMouseOver(node.id, null)}
+          >
+            <ProposalCard
+              proposal={node}
+              step={data}
+              primaryInfoTag="h2"
+              minWidth="unset"
+              active={node.id === selectedId}
+              triggerRequirementModal={triggerRequirementModal}
+            />
+          </Box>
+        ))}
+      </Grid>
+      {isLoadingNext && (
+        <Flex justify="center" mt="lg">
+          <Spinner />
+        </Flex>
+      )}
+    </InfiniteScroll>
   ) : (
     <VoteStepEmptyList objectType={data.form?.objectType} />
   )
