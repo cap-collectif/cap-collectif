@@ -1,0 +1,10 @@
+ModerateReportingPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            reporting:
+                type: 'Reporting'
+                description: 'The moderated reporting.'
+            errorCode:
+                type: 'ModerateReportingErrorCode'
+                description: 'The available errors if any.'

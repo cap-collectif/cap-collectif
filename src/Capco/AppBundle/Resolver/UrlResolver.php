@@ -279,6 +279,8 @@ class UrlResolver
         return '';
     }
 
+    // Sonata route retained during the Admin Next migration rollout (with the flag, it redirects to /admin-next/reporting?id=).
+    // When the reporting page leaves the rollout, generate the Admin Next URL here before removing ReportingAdmin.
     public function getReportedUrl(Reporting $reporting, bool $absolute = false): string
     {
         $referenceType = $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH;

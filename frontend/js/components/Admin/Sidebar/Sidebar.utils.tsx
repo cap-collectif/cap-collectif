@@ -3,8 +3,10 @@ import * as React from 'react'
 export const URL_MAP = {
   contributions: [
     '/admin-next/voice-messages',
+    // Sonata prefixes retained during the Admin Next migration rollout. Remove them with the migration feature flag.
     '/admin/reporting',
     '/admin/capco/app/reporting',
+    '/admin-next/reporting',
     '/admin/capco/app/proposal/',
     '/admin/capco/app/opinion/',
     '/admin/capco/app/reply/',

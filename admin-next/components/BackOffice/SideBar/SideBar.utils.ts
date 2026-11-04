@@ -6,6 +6,7 @@ import sideBarItems from './SideBarItems.json'
 const SONATA_URL_BY_ADMIN_NEXT_URL: Record<string, string> = {
   '/admin-next/fonts': '/admin/font/list',
   '/admin-next/locales': '/admin/locale/list',
+  '/admin-next/reporting': '/admin/reporting',
 }
 
 // An exact match: `includes` would also select "/admin-next/user-types" on the "/admin-next/user" page

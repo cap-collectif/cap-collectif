@@ -1,0 +1,15 @@
+ModerateReportingAction:
+    type: enum
+    config:
+        name: ModerateReportingAction
+        description: 'The available moderation actions on a reporting.'
+        values:
+            ARCHIVE:
+                value: !php/const Capco\AppBundle\Enum\ModerateReportingAction::ARCHIVE
+                description: 'Mark the reporting as processed, without changing the reported contribution.'
+            TRASH:
+                value: !php/const Capco\AppBundle\Enum\ModerateReportingAction::TRASH
+                description: 'Move the reported contribution to the trash, still visible, and mark the reporting as processed.'
+            DISABLE:
+                value: !php/const Capco\AppBundle\Enum\ModerateReportingAction::DISABLE
+                description: 'Move the reported contribution to the trash, hidden, and mark the reporting as processed.'

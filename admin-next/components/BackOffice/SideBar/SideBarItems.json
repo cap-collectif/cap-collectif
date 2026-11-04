@@ -15,7 +15,7 @@
             },
             {
                 "title": "admin.label.reporting",
-                "href": "/admin/reporting",
+                "href": "/admin-next/reporting",
                 "rolesRequired": [],
                 "featuresRequired": ["reporting"]
             },

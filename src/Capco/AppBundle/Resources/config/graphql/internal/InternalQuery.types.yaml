@@ -863,6 +863,21 @@ InternalQuery:
                         defaultValue: null
                         description: 'Filter by email.'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\NewsletterSubscription\\NewsletterSubscriptionListResolver", args)'
+            reportings:
+                type: 'ReportingConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                description: 'List all reportings, most recent first.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Reporting\\ReportingListResolver", args)'
+            reporting:
+                type: 'Reporting'
+                description: 'Get a reporting by its id.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                args:
+                    id:
+                        type: 'ID!'
+                        description: 'The integer id of the reporting.'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Reporting\\ReportingQueryResolver", args)'
             socialNetworks:
                 type: 'SocialNetworkConnection!'
                 argsBuilder: 'Relay::ForwardConnection'

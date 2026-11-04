@@ -1,0 +1,11 @@
+ModerateReportingInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of moderateReporting mutation.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the reporting.'
+            action:
+                type: 'ModerateReportingAction!'
+                description: 'The moderation action to apply.'

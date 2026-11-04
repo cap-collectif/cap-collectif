@@ -71,6 +71,22 @@ describe('<Sidebar />', () => {
     )
     expect(wrapper.find(`a[href$="${href}"]`)).toHaveLength(1)
   })
+  it.each([
+    [false, '/admin/reporting'],
+    [true, '/admin-next/reporting'],
+  ] as const)('uses the reporting route for rollout %s', (enabled, href) => {
+    const wrapper = render(
+      <MockProviders
+        store={{
+          default: { features: { ...features, reporting: true, unstable__sonata_migration_to_admin_next: enabled } },
+          user: { user: userAdmin },
+        }}
+      >
+        <Sidebar appVersion="test" defaultAccordeon="contributions" />
+      </MockProviders>,
+    )
+    expect(wrapper.find(`a[href$="${href}"]`)).toHaveLength(1)
+  })
   it('renders correctly', () => {
     const wrapper = render(
       <MockProviders

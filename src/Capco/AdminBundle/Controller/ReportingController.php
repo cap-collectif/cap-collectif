@@ -5,6 +5,7 @@ namespace Capco\AdminBundle\Controller;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Capco\AppBundle\Notifier\ContributionNotifier;
+use Capco\AppBundle\Toggle\Manager;
 use Doctrine\Common\Util\ClassUtils;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +21,13 @@ class ReportingController extends AbstractSonataCrudController
         \assert(null !== $id);
         $object = $this->admin->getObject($id);
         \assert(null !== $object);
+
+        // Every show link (reporting e-mail sent to administrators, Sonata list...) leads to the Admin Next list,
+        // which opens the reporting modal, when the migration feature flag is enabled.
+        // Remove this redirection, with the Sonata reporting pages, when the page leaves the rollout.
+        if ($this->get(Manager::class)->isActive(Manager::unstable__sonata_migration_to_admin_next)) {
+            return $this->redirect('/admin-next/reporting?id=' . $object->getId());
+        }
 
         $this->checkParentChildAssociation($request, $object);
 

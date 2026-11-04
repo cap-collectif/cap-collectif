@@ -1,0 +1,12 @@
+ModerateReportingErrorCode:
+    type: enum
+    config:
+        name: ModerateReportingErrorCode
+        description: 'The available errors for the moderateReporting mutation.'
+        values:
+            REPORTING_NOT_FOUND:
+                value: !php/const Capco\AppBundle\Enum\ModerateReportingErrorCode::REPORTING_NOT_FOUND
+                description: 'The reporting does not exist.'
+            REPORTED_CONTRIBUTION_NOT_FOUND:
+                value: !php/const Capco\AppBundle\Enum\ModerateReportingErrorCode::REPORTED_CONTRIBUTION_NOT_FOUND
+                description: 'The reported contribution does not exist or cannot be moved to the trash.'

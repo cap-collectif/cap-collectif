@@ -42,6 +42,7 @@ export const SidebarLink = ({
   const active =
     window.location.href.includes(href) ||
     window.location.href.includes(href.slice(0, -4)) ||
+    // Sonata route retained during the Admin Next migration rollout. Remove it with the migration feature flag.
     (window.location.href.includes('/admin/capco/app/reporting') && href === '/admin/reporting') ||
     (window.location.href.includes('/admin/capco/app/sitecolor/') &&
       href === '/admin/settings/settings.appearance/list')

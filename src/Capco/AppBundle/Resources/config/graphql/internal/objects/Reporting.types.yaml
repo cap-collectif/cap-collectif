@@ -28,4 +28,9 @@ Reporting:
                 type: 'String!'
                 resolve: 'report'
             url:
-                resolve: ''
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Reporting\\ReportingUrlResolver", value)'
+            isArchived:
+                type: 'Boolean!'
+                access: "@=hasRole('ROLE_ADMIN')"
+                description: 'Whether the reporting has been processed by an administrator.'
+                resolve: '@=value.getIsArchived()'

@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Model\Contribution;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
@@ -225,6 +226,32 @@ class ReportingRepository extends EntityRepository
         ;
 
         return $qb->getQuery()->execute();
+    }
+
+    /**
+     * @return Reporting[]
+     */
+    public function getRecentPaginated(int $offset, int $limit): array
+    {
+        // Only many-to-one joins: the SQL limit counts reportings, not joined rows.
+        return $this->createQueryBuilder('r')
+            ->select('r, u, o, ov, s, a, c, p, da')
+            ->leftJoin('r.Reporter', 'u')
+            ->leftJoin('r.Opinion', 'o')
+            ->leftJoin('r.opinionVersion', 'ov')
+            ->leftJoin('r.Source', 's')
+            ->leftJoin('r.Argument', 'a')
+            ->leftJoin('r.Comment', 'c')
+            ->leftJoin('r.proposal', 'p')
+            ->leftJoin('r.debateArgument', 'da')
+            ->addOrderBy('r.createdAt', 'DESC')
+            // Tie-breaker: several reportings can share the same creation date.
+            ->addOrderBy('r.id', 'DESC')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     public function getByContributionType(

@@ -86,9 +86,11 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
      ⚠️ La correspondance se fait sur l'URL exacte : une page qui n'est pas elle-même une entrée du menu
      (ex: le formulaire de création/édition `/admin-next/theme`, atteint depuis la liste `/admin-next/themes`)
      n'hérite d'**aucun** rôle par défaut. Il faut l'ajouter dans `relatedHrefs` de l'item de menu
-     correspondant (`"relatedHrefs": ["/admin-next/theme"]`) pour qu'elle reçoive les mêmes restrictions :
-     sinon aucun rôle n'est exigé côté serveur et un viewer au rôle insuffisant tombe sur des erreurs GraphQL
-     au lieu de la page 403.
+     correspondant (`"relatedHrefs": ["/admin-next/theme"]`) pour qu'elle reçoive les mêmes restrictions.
+     Sinon, `withPageAuthRequired` n'applique que le contrôle générique (admin, project admin, membre
+     d'organisation ou médiateur) : un project admin voit le squelette de la page, et seules les queries et
+     mutations (`access: hasRole('ROLE_ADMIN')`) le bloquent, avec des erreurs GraphQL au lieu de la page 403.
+     Dans tous les cas, protéger aussi le GraphQL de la page.
      - `withPageAuthRequired` gère aussi, automatiquement, le cas où le viewer n'a pas (ou plus) accès à la
        page demandée — **rien à faire dans la page migrée**. Deux redirections possibles, chacune vers une
        page qui doit vivre sous `/admin-next/` et jamais à la racine (le reverse-proxy ne route que ces
@@ -99,10 +101,6 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
          publique (`/`).
        Voir `ADR/001-admin_next_authorization_errors.md` pour le détail et la justification de cette
        distinction.
-     - **Limite connue : la recherche se fait sur l'URL exacte.** Une page d'édition dédiée absente du menu
-       (`/admin-next/video`, `/admin-next/theme`, à côté de la liste `/admin-next/videos`, `/admin-next/themes`)
-       ne trouve aucune entrée et n'exige donc aucun rôle : un project admin voit le squelette de la page, seules
-       les queries/mutations (`access: hasRole('ROLE_ADMIN')`) le bloquent. Toujours protéger aussi le GraphQL.
    - **Contrôle d'accès par objet fait dans le contrôleur Sonata** : certaines pages (ex: édition d'une campagne
      d'emailing, ancien `EmailingCampaignController`) vérifient un voter sur l'objet (`EmailingCampaignVoter::VIEW`) avant
      de rendre un composant React. Ce contrôle disparaît avec le contrôleur : vérifier que la query utilisée par la
@@ -127,7 +125,7 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
      De même, les champs ajoutés à un type déjà exposé publiquement (auteur, code personnalisé, compteurs) portent
      leur propre `access:`.
 5. **Repérer une page `admin-next/` déjà migrée avec une structure similaire** pour copier le pattern plutôt
-   que d'en inventer un nouveau. Voir la section "Patterns de référence" ci-dessous pour choisir le bon
+   que d'en inventer un nouveau. Voir la section "Patterns de référence" pour choisir le bon
    template selon la forme de la donnée (liste plate vs paginée, avec/sans traductions, avec/sans couleur...).
    Réutiliser `Layout` et les composants `Table` de CapUI pour les nouvelles listes,
    y compris les prototypes ; ne pas recréer une liste Twig lorsque la cible demandée est admin-next.
@@ -181,7 +179,7 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
      sur Sonata.
    - lorsqu'une page sort définitivement du rollout, faire une PR de nettoyage dédiée : rendre son URL Admin
      Next permanente et supprimer ses références Sonata. Conserver le feature flag global et son mécanisme pour
-     les autres pages encore en rollout. Suivre la recette « PR de nettoyage : sortie du rollout » ci-dessous.
+     les autres pages encore en rollout. Suivre la recette « PR de nettoyage : sortie du rollout ».
 9. **Maintenir les références de menu dans les deux interfaces** : il existe DEUX menus latéraux distincts,
    plus d'éventuelles autres références à traquer au cas par cas :
    (Les consignes « dépendre du feature flag » ci-dessous valent pour le cas « avec feature flag » de l'étape 8 ;
@@ -203,7 +201,9 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
    - Ces deux fichiers `Sidebar.tsx`/`Sidebar.utils.tsx` ne pourront être supprimés que lorsque **toutes**
      les pages Sonata auront été migrées (ils sont partagés par toutes les pages Sonata restantes).
    - **Et ailleurs si besoin** : faire une recherche globale de l'ancienne URL Sonata (`grep -rn` sur tout le
-     repo). Lorsqu'une référence Sonata est conservée dans un fichier de navigation ou de routes, l'annoter
+     repo), **et du nom de ses routes** (`admin_capco_app_<entité>_list`, `_show`, `_edit`…) : les liens générés
+     par `path()` ou `$router->generate()` n'apparaissent pas dans une recherche d'URL. Exemple : l'e-mail envoyé
+     aux admins à chaque signalement pointe vers la fiche Sonata via `UrlResolver::getReportedUrl()`. Lorsqu'une référence Sonata est conservée dans un fichier de navigation ou de routes, l'annoter
      avec un commentaire **en anglais** indiquant qu'elle est maintenue pendant le rollout derrière le feature
      flag et devra être supprimée lors du nettoyage final, par exemple :
      ```typescript
@@ -235,9 +235,8 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
     (les artefacts générés vivent tous dans `admin-next/__generated__/`, pas de dossier colocalisé).
 12. **Vérifier** : `yarn ts` (TypeScript), `yarn lint` (ESLint), et un test visuel réel dans le navigateur
     (le stack Docker local expose `capco_nextjs_1` sur le port 3000, proxifié derrière `https://capco.dev`).
-    Si le serveur Next.js dev sert une erreur qui ne correspond plus au code sur disque (ex: référence à un
-    import déjà supprimé) après plusieurs éditions rapides, c'est probablement un cache HMR périmé : un
-    `docker restart capco_nextjs_1` force une recompilation propre. **Tester avec au moins deux comptes
+    Si le rendu ne correspond plus au code sur disque, voir le piège « Avant de conclure qu'un correctif ne
+    fonctionne pas ». **Tester avec au moins deux comptes
     de rôles différents** (ex: un admin et un simple project admin) pour vérifier que la restriction d'accès
     de l'étape 4 fonctionne réellement (accès autorisé pour l'un, redirection/refus pour l'autre), pas
     seulement que la page s'affiche.
@@ -353,7 +352,7 @@ Exemple de référence : la page « Icône du site » (`/admin/favicon/list` →
 
 - **Choisir le pattern d'après la forme de la donnée, pas d'après l'ancien écran.** Un seul objet de réglage
   (ex: `siteFavicon`) devient un formulaire rendu directement dans la page (`Box bg="white"`), sur le modèle de
-  `SiteFavicon/SiteFaviconForm.tsx` ; une liste suit les patterns `Table`/modale ci-dessous. Le bouton
+  `SiteFavicon/SiteFaviconForm.tsx` ; une liste suit les patterns `Table`/modale de la section « Patterns de référence ». Le bouton
   « Enregistrer » se place **à gauche**, sous le dernier champ (`<Flex mt={6}>` sans `justify`), comme demandé sur
   la refonte de l'icône du site : ne pas reprendre l'alignement à droite de `PrivacySettingsForm.tsx`. Aligné à
   gauche, il n'est pas masqué par le beacon Help Scout, donc pas de marge de 69 px. Les boutons d'un formulaire
@@ -373,7 +372,7 @@ Exemple de référence : la page « Icône du site » (`/admin/favicon/list` →
 - **Formulaire** : `redux-form` + `AlertForm` deviennent React Hook Form + `successToast`/`mutationErrorToast`
   (`@shared/utils/toasts`). `pristine` correspond à `!formState.isDirty` ; après une sauvegarde réussie, appeler
   `reset(values)` pour que le formulaire redevienne « non modifié ». Ajouter un schéma yup dès qu'il y a une règle
-  de validation (voir la section yup ci-dessous).
+  de validation (voir la section « Validation yup »).
 - **Une mutation de suppression séparée** (ex: `changeSiteFavicon` / `removeSiteFavicon`) se choisit dans le
   `onSubmit` selon la valeur du champ, comme le faisait le composant legacy.
 - **Code partagé** : `@shared/...` est commun aux deux frontends (ex: `@shared/utils/acceptedFiles`), le
@@ -398,7 +397,7 @@ mort) met à jour sa ligne **dans la même PR** : statut et travail restant. Une
 est retirée de la liste. Une page découverte en cours de route (template monté par une route encore active) y est
 ajoutée. Comme la doc est idéalement fusionnée avant le code, « refonte en cours » veut dire « une branche
 existe », pas « fusionnée » : vérifier sur `preprod` avant de se fier au statut. La PR qui fusionne la refonte
-sous feature flag déplace elle-même la page dans la section « Refontes fusionnées sous feature flag » ci-dessous.
+sous feature flag déplace elle-même la page dans la section « Refontes fusionnées sous feature flag ».
 
 Statuts : **à refondre**, **refonte en cours** (branche ouverte), **en rollout** (fusionnée derrière le feature
 flag), **à nettoyer** (Admin Next déjà en place, route legacy encore présente), **code mort** (aucun appelant).
@@ -450,7 +449,7 @@ flag), **à nettoyer** (Admin Next déjà en place, route legacy encore présent
 
 Pages dont la refonte Admin Next est fusionnée derrière le feature flag de migration. La page Sonata reste
 servie quand le flag est désactivé : son code legacy sera supprimé par une PR de nettoyage, après validation
-métier (voir la recette « PR de nettoyage » ci-dessous). Ajouter la page ici **dans la PR qui fusionne la refonte
+métier (voir la recette « PR de nettoyage »). Ajouter la page ici **dans la PR qui fusionne la refonte
 sous feature flag**, et non dans une PR de doc préalable : une page de cette section est forcément sur `preprod`.
 
 - **Édition d'un utilisateur** — en rollout
@@ -539,8 +538,22 @@ Pour chaque page qui sort :
      contrôleur, au template ni à `SiteParameterAdmin`, partagés avec les autres catégories (voir l'étape 14).
    - **Page React legacy servie par Symfony** : suivre « Nettoyage » dans la section « Variante : page React
      legacy servie par Symfony ».
+   - **Page Twig rendue par un contrôleur Symfony dédié** (ex: `/admin/reporting`, `RecentReportingController`,
+     souvent en plus d'une Admin d'entité qui sert la fiche `show` et les actions) :
+     - supprimer le contrôleur (ou seulement son action), son template et les services qui ne servaient qu'à lui
+       (ex: `RecentReportingResolver`). Chercher chaque service dans `config/` : il peut être déclaré à la fois dans
+       `config/packages/admin.yaml` et dans `config/packages/services.xml`. Ce dernier n'est pas chargé par le kernel
+       (`MicroKernelTrait` n'importe que les `*.yaml` de `config/packages/`), mais sa déclaration doit partir aussi ;
+     - retirer les entrées de menu Sonata codées en dur dans `standard_layout.html.twig` (ex: l'include de
+       `RecentReporting/list_items.html.twig`) et les cas particuliers du menu legacy (`SidebarLink.tsx`) ;
+     - **avant** de supprimer l'Admin, rebrancher sur l'URL Admin Next les liens générés par nom de route hors des
+       menus (`UrlResolver`, e-mails) : générer une route supprimée lève une `RouteNotFoundException`. Pour les
+       signalements : `UrlResolver::getReportedUrl()`, à faire pointer vers `/admin-next/reporting?id=<id>` ;
+     - supprimer la redirection temporaire ajoutée dans le contrôleur Sonata pendant le rollout ;
+     - suivre ensuite le cas « Admin d’entité » pour l'Admin elle-même.
    - Ne pas toucher aux clés de traduction (`translations/` est généré) ni au backend GraphQL de la page.
-7. **Vérifier** : `git grep` de l'URL Sonata, du nom de la classe Admin et de la chaîne de catégorie (en dehors
+7. **Vérifier** : `git grep` de l'URL Sonata, du nom de ses routes (`admin_capco_app_<entité>_*`), du nom de la
+   classe Admin et de la chaîne de catégorie (en dehors
    des fixtures, des migrations Doctrine et de ce fichier) ne doit plus rien renvoyer. Lancer ensuite
    la quality gate PHP d'AGENTS.md, `bin/console lint:container` (services Sonata supprimés), les tests Jest des
    deux menus, `yarn ts` dans `admin-next/`, et les specs Cypress de la page **avec le flag désactivé**. Après
@@ -608,6 +621,13 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
   prend une URL fixe, donc envelopper le garde dans un `getServerSideProps` qui décode l'id (`fromGlobalId`) pour
   construire l'URL Sonata de repli (voir `withUserAdminPageRequired` dans `components/BackOffice/UserAdmin/utils.ts`).
   Ajouter la page dans `relatedHrefs` de l'entrée de la liste, même si celle-ci pointe encore vers Sonata.
+- **Liste + fiche Sonata (`show`) migrées en une liste avec modale de détail** (ex: signalements, `/admin/reporting` et
+  `/admin/capco/app/reporting/{id}/show` → `/admin-next/reporting`) : la page lit `?id=` au montage pour ouvrir la
+  modale directement, et l'action `show` du contrôleur Sonata redirige vers `/admin-next/<liste>?id=<id>` quand le flag
+  de migration est actif, comme `UserController::editAction`. Les liens externes vers la fiche (e-mails déjà envoyés,
+  `UrlResolver`) continuent donc de fonctionner sans être modifiés. La modale charge son objet par sa propre query
+  (`reporting(id:)`), pas depuis la liste : l'objet demandé par l'URL n'est pas forcément dans la première page
+  chargée. Voir `components/BackOffice/Reporting/`.
 - **Plusieurs onglets avec chacun son formulaire** (ex: édition d'un utilisateur) : `TabBar` (`@cap-collectif/ui`)
   ne rend que l'onglet actif et démonte les autres, contrairement aux `Tabs` de react-bootstrap du legacy. Créer
   les `useForm` dans le composant parent et les passer aux onglets (`methods`), sinon une saisie non enregistrée
@@ -641,7 +661,7 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
 - **Page "wrapper" standard** : toute page admin-next suit le même squelette —
   `Layout navTitle={...}` + `Suspense fallback={<Spinner .../>}` + `export const getServerSideProps = withPageAuthRequired`.
   Le rôle requis (le cas échéant) se règle dans `rolesRequired` de `SideBarItems.json`, pas dans le code de
-  la page — voir l'étape 4 de la méthodologie ci-dessus.
+  la page — voir l'étape 4 de la méthodologie.
 - **Bouton booléen (activer/désactiver un champ simple)** : ne pas faire un bouton texte "Activer"/"Désactiver" —
   utiliser le composant `Switch` de `@cap-collectif/ui` (`checked={value} onChange={() => mutation(...)}`).
   Deux variantes possibles selon la consigne :
@@ -655,7 +675,7 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
     lettre d'information.
   - **Cas marginal : toggle éditable directement dans la liste** (comme `CardFacebook.tsx`) : `Switch` dans
     la colonne, une seule mutation `update` avec tous les champs optionnels sauf l'id (voir point "CRUD
-    complet" ci-dessous) permet d'envoyer soit l'objet complet (modale), soit juste `{id, isEnabled}` (Switch
+    complet") permet d'envoyer soit l'objet complet (modale), soit juste `{id, isEnabled}` (Switch
     dans la liste). Voir l'exemple dans
     `admin-next/components/BackOffice/Authentication/SSOList/Facebook/CardFacebook.tsx`. Ne suivre ce pattern
     que si la consigne le demande explicitement (ex. besoin de toggler rapidement plusieurs entités sans
@@ -684,6 +704,29 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
     déjà son intitulé dans `label` (infobulle et nom accessible). Les pages de réglages (`ProjectSettingsList.tsx`,
     `ThemeSettingsList.tsx`…) qui affichent encore « Action » au-dessus de leurs `ButtonQuickAction` ne sont pas
     à reproduire sur ce point.
+- **Élément cliquable d'une ligne de `Table` (titre, auteur…) : texte simple, souligné au survol de la ligne, en
+  `primary.base` au survol de l'élément.** Pas de couleur ni de gras au repos : le texte garde la couleur et la
+  graisse de la cellule. `@cap-collectif/ui` le fait nativement pour les liens : au survol d'une ligne, `Table.Tr`
+  passe son fond en `gray.100` et souligne tous ses `<a>` ; au survol d'un `<a>`, `Table.Td` le passe en
+  `primary.base`. Pour un lien de navigation, un `Link` sans couleur suffit (voir `PostItem.tsx`).
+  Pour un titre qui ouvre une modale, utiliser un `<button>` sans style plutôt que `Button variant="link"`, qui est
+  bleu, en gras et souligné en permanence. Les règles de `Table.Tr` et `Table.Td` ne ciblent que les `<a>` :
+  reproduire les deux dans `sx`.
+  ```tsx
+  // A button, not a link: it opens the details modal instead of navigating
+  <Box
+    as="button"
+    type="button"
+    onClick={() => onShow(item.id)}
+    textAlign="left"
+    sx={{ '.cap-table__tr:hover &': { textDecoration: 'underline' }, '&:hover': { color: 'primary.base' } }}
+  >
+    {title}
+  </Box>
+  ```
+  Comportement vérifié dans Chrome avec le style calculé, identique à celui d'un `Link` de la même ligne : couleur
+  de la cellule et pas de soulignement au repos, soulignement au survol de la ligne, `rgb(0, 108, 224)`
+  (`primary.base`) au survol de l'élément. Voir `Reporting/ReportingItem.tsx`.
 - **Accessibilité : intitulé explicite pour les boutons et champs de recherche, jamais un libellé générique
   seul.** Un lecteur d'écran annonce le bouton/champ hors du contexte visuel de la page : "Créer" ou
   "Rechercher" seuls ne disent pas quoi. Toujours préciser l'entité concernée : "Créer le type", "Créer la
@@ -734,7 +777,7 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
     celui renvoyé par `useRelayEnvironment()`. Appeler `refresh()` en dehors du `try` qui gère l'échec de
     l'écriture : sinon un échec du rafraîchissement affiche une erreur alors que l'écriture a réussi.
 - **Catégorie `SiteParameter` de la page générique `/admin/settings/{category}/list`** (voir le cas
-  `SettingsController.php` dans la méthodologie ci-dessus) : toujours vérifier `SiteParameter::isTranslatable()`
+  `SettingsController.php` dans la méthodologie) : toujours vérifier `SiteParameter::isTranslatable()`
   (la constante `NOT_TRANSLATABLE` liste les exceptions par `keyname`) avant de choisir le template, les deux
   cas ayant une forme très différente bien que la table Sonata source soit la même :
   - **Non traduisible** (ex: `settings.notifications` — adresses email, nom d'expéditeur) :
@@ -742,15 +785,15 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
     `FieldInput type="text"` pour `value`, pas de sélecteur de langue. Query `notificationSettings: [SiteParameter!]!`
     ne charge pas `translations`.
   - **Traduisible** (ex: `pages.login`, `pages.blog`, `pages.events`, `pages.projects` — textes affichés
-    publiquement) : suivre la section « Recette : catégorie `SiteParameter` traduisible (multilangue) »
-    ci-dessous, autonome et à appliquer telle quelle. Elle couvre aussi les catégories qui mélangent des
+    publiquement) : suivre la section « Recette : catégorie `SiteParameter` traduisible (multilangue) »,
+    autonome et à appliquer telle quelle. Elle couvre aussi les catégories qui mélangent des
     `keyname` traduisibles et non traduisibles dans une même liste (ex: `pages.events` avec `event.customcode`),
     ainsi que la validation par langue, l'invalidation du cache et la vérification côté site public.
   - **Catégorie à un seul paramètre texte riche** (ex: `pages.cookies`, `pages.privacy` ; à vérifier pour
     `pages.legal`, `pages.charter`) : pas de `Table` ni de modale, le formulaire est rendu directement dans la
     page (`Box bg="white"` + sélecteur de langue + `TextEditor` + `Switch` « Publié » + bouton « Enregistrer »),
     la query `xSettings` et le paramètre étant récupérés par `find(setting => setting.keyname === '...')`. Le
-    backend et la gestion des langues restent ceux de la recette ci-dessous. Voir
+    backend et la gestion des langues restent ceux de la recette « Recette : catégorie `SiteParameter` traduisible (multilangue) ». Voir
     `PrivacySettings/PrivacySettingsForm.tsx`. Si le lien de menu dépend d'un feature flag fonctionnel (ex:
     `privacy_policy` pour `pages.privacy`), les tests unitaires des menus doivent l'activer
     (`{ ...features, privacy_policy: true }`), sinon l'entrée n'est pas rendue ; la page Sonata, elle, n'exigeait
@@ -810,11 +853,9 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
       aussi le flag en `dev` — ce qui recréait alors le symptôme 1) ; les deux passent après. **Ce n'était pas
       un bug du code migré** : la mutation/le resolver GraphQL étaient corrects (le test Jest e2e
       `features/graphql-api/.../updateXSetting.js` passait déjà), prouvé aussi en rejouant la mutation en
-      `curl` (recette du piège ci-dessus) avec le toggle activé une fois en `--environment=dev` (échec, une
+      `curl` (recette du piège « Vérifier une query/mutation GraphQL directement en `curl` ») avec le toggle activé une fois en `--environment=dev` (échec, une
       seule locale enregistrée) puis en `--environment=test` (succès, les deux locales enregistrées) — utile
       pour isoler ce genre de symptôme entre un vrai bug applicatif et un problème d'environnement Cypress.
-    - Le run Cypress refuse aussi de démarrer depuis un terminal VS Code si `ELECTRON_RUN_AS_NODE=1` est
-      hérité (`bad option: --no-sandbox`) : lancer `env -u ELECTRON_RUN_AS_NODE yarn cy:run ...`.
 
 ## Recette : catégorie `SiteParameter` traduisible (multilangue)
 
@@ -1270,7 +1311,7 @@ description > 160 (`cy.interceptGraphQLOperation` + `its('response.body.data.upd
    préfixe d'URL, le cookie `locale`, la session puis `Accept-Language` — une session déjà ouverte fausse le
    test, un `curl -b "locale=en-GB"` aussi.
 6. Avant de (re)générer des snapshots ou d'enchaîner des runs Cypress : piège « Snapshots e2e GraphQL, Cypress
-   et dump `var/db.backup` » ci-dessus.
+   et dump `var/db.backup` ».
 
 ### 6. Pourquoi (à lire avant de dévier de la recette)
 
@@ -1296,7 +1337,7 @@ description > 160 (`cy.interceptGraphQLOperation` + `its('response.body.data.upd
   `BlogSettingsList.tsx`) ne règle pas ça et complique la sauvegarde multi-langues ; le `key` sur le
   `FormControl` remonte une instance fraîche dont `value`/`onChange` sont justes dès le premier rendu. Faire
   varier `selectedLanguage` en plus est inutile (et a été corrélé une fois à un test cassé) ; ce n'est pas la
-  cause du warning « Maximum update depth exceeded », voir le piège `rowId` plus bas.
+  cause du warning « Maximum update depth exceeded », voir le piège « Warning React "Maximum update depth exceeded" sur une liste `Table` ».
 - **`invalidateCache()` sans locale** (`UpdateSiteParameterMutation::invalidateCache(SiteParameter, ?string
   $locale = null)`, `SiteParameterRuntime::invalidateCache(string $key, ?string $locale = null)`) retombe sur la
   locale de la requête courante, c'est-à-dire celle de l'admin : correct pour Sonata (l'admin change sa propre
@@ -1304,8 +1345,6 @@ description > 160 (`cy.interceptGraphQLOperation` + `its('response.body.data.upd
   une locale arbitraire. Symptôme : mutation en succès, traduction en base, mais le site public ne la montre
   jamais dans cette langue. `SiteParameterCacheSubscriber` couvre désormais ce cas au `postFlush` ; passer quand
   même la locale.
-- **`TranslationLocale`** : enum GraphQL sérialisée en `FR_FR`, constante PHP `'fr-FR'`. Côté PHP,
-  `$translation['locale']` est déjà `fr-FR` ; côté client (ids de champs, sélecteurs Cypress), c'est `FR_FR`.
 - **Une mutation par langue** (variante `ProjectSettingsList.tsx`) n'est pas atomique et multiplie les appels
   et les invalidations ; le tableau `translations` règle ça en un appel, et permet `translations: []` pour un
   changement de `isEnabled` seul.
@@ -1480,7 +1519,7 @@ prop-drillé entre la liste et un ancêtre.
   warning apparaît dès le **chargement initial de la page**, avant toute ouverture de modale (confirmé avec un
   navigateur headless réel, `console.error` intercepté juste après le premier rendu, stack pointant dans le
   sous-arbre de `Table`, pas dans `TextEditor`/`Jodit`) — ce qui exclut d'emblée toute cause liée à la modale
-  d'édition ou à `selectedLanguage`. Cause isolée par un test A/B en navigateur headless (voir plus bas) :
+  d'édition ou à `selectedLanguage`. Cause isolée par un test A/B en navigateur headless (voir « Méthode pour isoler ce genre de warning ») :
   retirer `rowId={setting.id}` de `<Table.Tr key={setting.id} rowId={setting.id} ...>` fait disparaître le
   warning intégralement (0 occurrence sur le chargement de la page et sur l'ouverture successive de toutes ses
   modales, y compris celles avec `TextEditor`). `rowId` ne sert qu'à l'affichage d'une checkbox de sélection de
@@ -1512,7 +1551,7 @@ prop-drillé entre la liste et un ancêtre.
     pour qu'il ne soit pas numérique, ex: `rowId={\`newsletter-subscription-${node.id}\`}` (un uuid ou un
     global id base64 n'a pas le problème). Voir `NewsletterSubscriptionList.tsx`.
   - **Méthode pour isoler ce genre de warning avec certitude (A/B empirique, pas déduction sur le code)** :
-    piloter un vrai navigateur headless (voir le piège `playwright-core` plus haut) avec
+    piloter un vrai navigateur headless (voir le piège « Piloter un navigateur headless réel ») avec
     `page.on('console', msg => ...)` filtré sur `msg.type() === 'error' && msg.text().includes('Maximum update
     depth exceeded')`, se connecter via `context.request.post('/login_check', ...)` (JSON, cf. piège dédié),
     puis un `page.goto()` d'une page **Sonata** (ex: `/admin/settings/pages.privacy/list` — `/` seul ne suffit
@@ -1543,14 +1582,14 @@ prop-drillé entre la liste et un ancêtre.
   reproduit ce même câblage mais pour `refetch` (`setRefetch`), et passe `refetch`/`search` directement en prop
   aux modales d'édition/suppression qui sont, elles, déjà enfants de la liste (comme le fait déjà
   `EditGroupModal.tsx`/`DeleteGroupModal.tsx` avec `refetch({ term })`). **Vérifié en pilotant un vrai Chrome
-  headless** (voir le piège `playwright-core` plus haut) : create/edit/delete font bien apparaître/disparaître/
+  headless** (voir le piège « Piloter un navigateur headless réel ») : create/edit/delete font bien apparaître/disparaître/
   mettre à jour la ligne concernée immédiatement, sans `page.reload()`.
 - **Pour un sélecteur de langue dans un formulaire, préférer le composant `Select` importé directement depuis
   `@cap-collectif/form`** (piloté en `value`/`onChange` "à la main", hors react-hook-form — voir
   `BlogSettingsList.tsx` sur `19937-posts-sonata-refonte`, ou `LoginSettingModal.tsx`) **plutôt que**
   `FieldInput type="select"` **ou** le composant `Menu` :
   - `Menu` (`@cap-collectif/ui`, pattern utilisé par `Shield.tsx`) repose sur Ariakit (portail + gestion de
-    focus dédiée) et s'est avéré peu fiable dans une `Modal` en pratique (voir le piège dédié un peu plus haut).
+    focus dédiée) et s'est avéré peu fiable dans une `Modal` en pratique.
   - `FieldInput type="select"` wrappe ce même `Select` mais le pilote via `useController`/`ref` — `Select`
     n'étant pas un `React.forwardRef`, ça déclenche un warning React ("Function components cannot be given
     refs") visible dans la console. Ça reste fonctionnel, mais `Select` utilisé directement (comme fait
@@ -1560,7 +1599,9 @@ prop-drillé entre la liste et un ancêtre.
   `admin.post.languages` qui est spécifique aux articles de blog.
 - **Avant de conclure qu'un correctif ne fonctionne pas suite à un retour utilisateurice pendant un test
   manuel dans le navigateur, vérifier que le serveur `capco_nextjs_1` a bien reconstruit le code modifié —
-  ne pas se fier aux seuls logs `[INFO] Compiled ...`.** Sur `LoginSettingModal.tsx` (refonte de `pages.login`),
+  ne pas se fier aux seuls logs `[INFO] Compiled ...`.** Autre symptôme du même problème : après plusieurs
+  éditions rapides, le serveur sert une erreur qui ne correspond plus au code (ex: référence à un import déjà
+  supprimé). Sur `LoginSettingModal.tsx` (refonte de `pages.login`),
   plusieurs allers-retours de correctifs (`hideOnClickOutside`, `forceModalDialogToFalse`, puis le remplacement
   de `Menu` par `FieldInput type="select"`) ont chacun été signalés comme "ne fonctionne toujours pas" par
   l'utilisatrice alors que le code sur disque était pourtant correct. Cause réelle : le HMR de Next.js restait
@@ -1571,8 +1612,7 @@ prop-drillé entre la liste et un ancêtre.
   navigateur, donc immunisé aux problèmes de cache **côté client**) confirmait pourtant que le DOM réellement
   servi correspondait encore à une **ancienne** version du composant — la build était donc périmée côté
   **serveur**, pas seulement dans le cache du navigateur de l'utilisatrice. Un `docker restart capco_nextjs_1`
-  (puis attendre que `https://capco.dev/<route>` réponde à nouveau, voir le piège plus bas sur `502` pendant le
-  redémarrage) a résolu le problème : le comportement observé correspondait enfin au code sur disque. **Leçon
+  (puis attendre que `https://capco.dev/<route>` réponde à nouveau) a résolu le problème : le comportement observé correspondait enfin au code sur disque. **Leçon
   générale** : si un correctif censé être trivial et correct continue d'échouer après plusieurs itérations dans
   la même session de dev, suspecter une build HMR périmée et faire un restart du conteneur Next.js **avant**
   de continuer à chercher une cause applicative plus complexe — ça évite de partir sur de fausses pistes (ici,
@@ -1584,7 +1624,7 @@ prop-drillé entre la liste et un ancêtre.
   via `chromium.launch({ channel: 'chrome', headless: true, args: ['--ignore-certificate-errors'] })` — installer
   avec `npm install playwright-core --no-save` dans un dossier du scratchpad (pas dans le repo). Se logger avec
   `page.request.post('https://capco.dev/login_check', { data: { username, password }, ... })` (même credentials
-  de fixture dev que pour `curl`, voir le piège dédié plus haut), puis `page.goto(...)`. Capturer
+  de fixture dev que pour `curl`, voir le piège « Vérifier une query/mutation GraphQL directement en `curl` »), puis `page.goto(...)`. Capturer
   `page.on('console', ...)` et `page.on('pageerror', ...)` pour choper les erreurs JS/React réelles (ex: un
   warning React affiché uniquement dans la vraie console du navigateur, invisible autrement), et
   `page.screenshot({ fullPage: true })` pour voir l'état réel rendu. Beaucoup plus fiable qu'un aller-retour de
@@ -1605,8 +1645,8 @@ prop-drillé entre la liste et un ancêtre.
   pas au format code-langue brut (`fr-FR`, `en-GB`...)** utilisé par l'entité `Locale`/les fixtures/les
   colonnes `locale` en base. Concrètement : une query `availableLocales { code }` renvoie `code: "FR_FR"`
   côté client, **pas** `"fr-FR"`. Piège rencontré sur la page vidéo : un champ de formulaire nommé
-  dynamiquement `` `${currentLocale}-title` `` (pattern `MultilangueSidePanel`/`PostFormWrapper`, voir plus
-  bas) se retrouve avec l'id réel `FR_FR-title`, pas `fr-FR-title` — un sélecteur Cypress écrit "à
+  dynamiquement `` `${currentLocale}-title` `` (voir le pattern « Page dédiée création/édition avec accordéons à droite (layout de `/post`), multilangue
+  inclus ») se retrouve avec l'id réel `FR_FR-title`, pas `fr-FR-title` — un sélecteur Cypress écrit "à
   l'intuition" (`#fr-FR-title`) ne trouve alors **aucun élément visible** de façon peu évidente à déboguer
   (le champ existe bien dans le DOM, juste pas à l'id attendu). Toujours vérifier l'id réel du champ dans le
   DOM (ex: `cy.get('input, textarea, select').then($els => cy.log(...))` pour lister tous les ids présents)
@@ -1629,7 +1669,7 @@ prop-drillé entre la liste et un ancêtre.
   survivre à un futur `yarn trad`. Réutiliser une clé déjà existante (`grep` dans `translations/fr-FR.json`
   avant d'en inventer une nouvelle) reste donc préférable à chaque fois que c'est possible.
 - **Colonne `NOT NULL` sans défaut sur un champ de traduction optionnel côté GraphQL** (variante du piège
-  Gedmo `position` déjà documenté plus haut, mais pour un champ texte) : si une mutation `create`/`update`
+  Gedmo `position`, mais pour un champ texte) : si une mutation `create`/`update`
   manuelle (sans Symfony Form) construit l'entité de traduction directement (ex: `$translation->setBody($input['body'] ?? null)`)
   et que la colonne SQL correspondante est `NOT NULL` sans valeur par défaut (ex: `body` sur une entité
   utilisant `TextableTrait`, `@ORM\Column(name="body", type="text")` sans `nullable=true`), envoyer `null`
@@ -1675,7 +1715,7 @@ prop-drillé entre la liste et un ancêtre.
   champ, enregistre, voit le toast de succès, mais la valeur ne change pas (et réapparaît telle quelle au
   rechargement), ce qui donne l'impression que "le champ ne fonctionne pas". Si le champ n'a pas vocation à
   être effacé/optionnel, le rendre requis **avec un vrai schéma yup** (`yup.number().typeError(msg).required(msg)`,
-  voir la section "Validation yup" plus haut — `isRequired` sur `FormControl` seul ne suffit pas) plutôt que
+  voir la section « Validation yup » — `isRequired` sur `FormControl` seul ne suffit pas) plutôt que
   de compter sur le fallback silencieux du backend. Aucun changement backend nécessaire dans ce cas : un
   champ GraphQL `Int` nullable accepte très bien de toujours recevoir un entier non-null envoyé par le
   front.
@@ -1721,11 +1761,6 @@ prop-drillé entre la liste et un ancêtre.
   montre alors aucun message, et rien ne se passe. Garder le mode par défaut (`onSubmit`, puis revalidation à la
   saisie) ; `VideoFormWrapper.tsx` contourne le problème en désactivant le bouton (`disabled={!isValid}`), sans
   expliquer pourquoi. Vu sur la page des rubriques de navigation.
-- **Page d'édition dédiée (`/admin-next/<entité>?id=`) absente de `SideBarItems.json`** : `withPageAuthRequired`
-  ne trouve aucun `rolesRequired` pour cette URL et n'applique que le contrôle générique (admin, project admin,
-  membre d'organisation ou médiateur). La restriction réelle repose alors sur l'`access:` des queries et
-  mutations GraphQL de la page (`hasRole('ROLE_ADMIN')`) : la vérifier, puisque c'est elle qui empêche un
-  project admin d'utiliser la page en saisissant l'URL.
 - **Navigateur headless : « The Json session is empty ! » dans les logs de `capco_nextjs_1` malgré une visite de
   `/`** : la partie JSON de la session (le `viewer`) n'était pas encore écrite. Visiter une deuxième page Symfony
   (ex: `/admin/capco/app/page/list`) avec `waitUntil: 'networkidle'` avant d'ouvrir la page admin-next.
@@ -1754,6 +1789,11 @@ prop-drillé entre la liste et un ancêtre.
   libellé. Construire la chaîne complète avant de la passer.
 - **`FormLabel` n'accepte qu'une chaîne en `label`** : pour ajouter une icône à côté (ex: e-mail confirmé, avec
   `Tooltip`), la passer en `children` du `FormLabel`.
+- **Fragments `... on X` sur une interface ou une union qui demandent un même champ de types différents** (ex:
+  `bodyText` est `String!` sur `Opinion`, `HTML!` sur `Version`, `String` nullable sur `Proposal`) : la validation
+  GraphQL refuse deux champs de même clé de réponse dont le type ou la nullabilité diffère, même sur des types
+  différents. Utiliser un alias par type (`opinionText: bodyText`, `versionText: bodyText`). Voir
+  `Reporting/ReportingModal.tsx`.
 - **`Select` à options groupées (`[{ label, options: [...] }]`)** : `FieldInput type="select"` (et le `Select`
   de `@cap-collectif/form`) ne retrouve la valeur sélectionnée que dans une liste plate (`options.find(...)`) : avec
   des groupes, le champ s'affiche vide après chargement. Utiliser un `Controller` de react-hook-form autour du

@@ -172,7 +172,15 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
               <SidebarAccordionItem id="contributions">
                 <SidebarButton icon={ICON_NAME.PENCIL_O} text="global.contribution" isOpen={isOpen} />
                 <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
-                  {features.reporting && <SidebarLink text="admin.label.reporting" href="/admin/reporting" />}
+                  {features.reporting && (
+                    <SidebarLink
+                      text="admin.label.reporting"
+                      // Sonata route retained during the Admin Next migration rollout. Remove it with the migration feature flag.
+                      href={
+                        features.unstable__sonata_migration_to_admin_next ? '/admin-next/reporting' : '/admin/reporting'
+                      }
+                    />
+                  )}
                   <SidebarLink text="admin.label.proposal" href="/admin/capco/app/proposal/list" />
                   <SidebarLink text="admin.label.opinion" href="/admin/capco/app/opinion/list" />
                   <SidebarLink text="admin.label.opinion_version" href="/admin/capco/app/opinionversion/list" />

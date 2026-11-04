@@ -9876,6 +9876,53 @@ input MenuItemTranslationInput {
   link: String
 }
 
+"""The available moderation actions on a reporting."""
+enum ModerateReportingAction {
+  """
+  Mark the reporting as processed, without changing the reported contribution.
+  """
+  ARCHIVE
+
+  """
+  Move the reported contribution to the trash, still visible, and mark the reporting as processed.
+  """
+  TRASH
+
+  """
+  Move the reported contribution to the trash, hidden, and mark the reporting as processed.
+  """
+  DISABLE
+}
+
+"""The available errors for the moderateReporting mutation."""
+enum ModerateReportingErrorCode {
+  """The reporting does not exist."""
+  REPORTING_NOT_FOUND
+
+  """
+  The reported contribution does not exist or cannot be moved to the trash.
+  """
+  REPORTED_CONTRIBUTION_NOT_FOUND
+}
+
+input ModerateReportingInput {
+  """The id of the reporting."""
+  id: ID!
+
+  """The moderation action to apply."""
+  action: ModerateReportingAction!
+  clientMutationId: String
+}
+
+type ModerateReportingPayload {
+  """The moderated reporting."""
+  reporting: Reporting
+
+  """The available errors if any."""
+  errorCode: ModerateReportingErrorCode
+  clientMutationId: String
+}
+
 """A multiple choice question"""
 type MultipleChoiceQuestion implements Question & Node {
   """The ID of an object."""
@@ -10211,6 +10258,7 @@ type Mutation {
   createNewsletterSubscription(input: CreateNewsletterSubscriptionInput!): CreateNewsletterSubscriptionPayload
   updateNewsletterSubscription(input: UpdateNewsletterSubscriptionInput!): UpdateNewsletterSubscriptionPayload
   deleteNewsletterSubscription(input: DeleteNewsletterSubscriptionInput!): DeleteNewsletterSubscriptionPayload
+  moderateReporting(input: ModerateReportingInput!): ModerateReportingPayload
   createSocialNetwork(input: CreateSocialNetworkInput!): CreateSocialNetworkPayload
   updateSocialNetwork(input: UpdateSocialNetworkInput!): UpdateSocialNetworkPayload
   deleteSocialNetwork(input: DeleteSocialNetworkInput!): DeleteSocialNetworkPayload
@@ -16048,6 +16096,23 @@ type Query {
     search: String = null
   ): NewsletterSubscriptionConnection!
 
+  """List all reportings, most recent first."""
+  reportings(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): ReportingConnection!
+
+  """Get a reporting by its id."""
+  reporting(
+    """The integer id of the reporting."""
+    id: ID!
+  ): Reporting
+
   """List all social networks."""
   socialNetworks(
     """
@@ -17674,6 +17739,9 @@ type Reporting implements Contribution & ContributionWithAuthor {
   """The content of the argument."""
   body: String!
   kind: String!
+
+  """Whether the reporting has been processed by an administrator."""
+  isArchived: Boolean!
 }
 
 """A connection to a list of items."""

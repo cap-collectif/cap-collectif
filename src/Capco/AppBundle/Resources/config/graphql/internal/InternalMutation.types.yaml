@@ -1148,6 +1148,13 @@ InternalMutation:
                     inputType: DeleteNewsletterSubscriptionInput
                     payloadType: DeleteNewsletterSubscriptionPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\NewsletterSubscription\\DeleteNewsletterSubscriptionMutation", args)'
+            moderateReporting:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: ModerateReportingInput
+                    payloadType: ModerateReportingPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Reporting\\ModerateReportingMutation", args)'
             createSocialNetwork:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'
