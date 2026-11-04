@@ -43,7 +43,7 @@ class ProposalNewsCommentVoteNormalizer extends BaseNormalizer implements Normal
                 self::EXPORT_PROPOSAL_NEWS_COMMENTS_VOTE_CREATED_AT => $this->getNullableDatetime($object->getCreatedAt()),
                 self::EXPORT_PROPOSAL_NEWS_COMMENTS_VOTE_PUBLISHED_AT => $this->getNullableDatetime($object->getPublishedAt()),
                 self::EXPORT_PROPOSAL_NEWS_COMMENTS_VOTE_AUTHOR_ID => $author?->getId(),
-                self::EXPORT_PROPOSAL_NEWS_COMMENTS_VOTE_AUTHOR_USERNAME => $author?->getUsername(),
+                self::EXPORT_PROPOSAL_NEWS_COMMENTS_VOTE_AUTHOR_USERNAME => $this->contributorNameResolver->resolveUsername($author),
                 self::EXPORT_PROPOSAL_NEWS_COMMENTS_VOTE_AUTHOR_IS_EMAIL_CONFIRMED => $author?->isEmailConfirmed(),
                 self::EXPORT_PROPOSAL_NEWS_COMMENTS_VOTE_AUTHOR_USER_TYPE_ID => $userType?->getId(),
                 self::EXPORT_PROPOSAL_NEWS_COMMENTS_VOTE_AUTHOR_USER_TYPE_NAME => $userType?->getName(),

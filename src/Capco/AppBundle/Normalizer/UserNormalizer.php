@@ -98,7 +98,7 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface, C
             'settings' => $this->_capcoProfileEdit,
         ];
 
-        if ($this->manager->isActive('profiles')) {
+        if ($this->manager->isActive('profiles') && !$object->isAnonymized()) {
             $links['profile'] = $this->router->generate(
                 'capco_user_profile_show_all',
                 ['slug' => $object->getSlug()],

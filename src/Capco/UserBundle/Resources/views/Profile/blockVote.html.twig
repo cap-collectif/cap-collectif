@@ -3,10 +3,11 @@
         {% include '@CapcoUser/Avatar/avatar.html.twig' with { 'user': vote.user, 'link_classes': 'pull-left'} only %}
         <div class="opinion__data">
             <p>
-                {% if is_feature_enabled('profiles') %}
-                    <a href="{{ path('capco_user_profile_show_all', {'slug': vote.user.slug}) }}">{{ vote.user.username }}</a>
+                {% set author = vote.user|capco_author_profile %}
+                {% if author.url %}
+                    <a href="{{ author.url }}">{{ author.name }}</a>
                 {% else %}
-                    {{ vote.user.username }}
+                    {{ author.name }}
                 {% endif %}
 
                 {% if (vote.value is defined and vote.value == 1) or vote.comment is defined %}

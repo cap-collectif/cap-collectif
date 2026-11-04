@@ -15,6 +15,10 @@ class UserUrlResolver implements QueryInterface
 
     public function __invoke(User $user): string
     {
+        if ($user->isAnonymized()) {
+            return '';
+        }
+
         return $this->router->generate(
             'capco_user_profile_show_all',
             ['slug' => $user->getSlug()],

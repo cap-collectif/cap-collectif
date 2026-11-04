@@ -293,18 +293,39 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                                 "kind": "InlineFragment",
                                 "selections": Array [
                                   Object {
-                                    "abstractKey": "__isContributor",
+                                    "abstractKey": "__isNode",
                                     "kind": "InlineFragment",
                                     "selections": Array [
                                       Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "avatarUrl",
-                                        "storageKey": null,
+                                        "abstractKey": "__isContributor",
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "avatarUrl",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "type": "Contributor",
+                                      },
+                                      Object {
+                                        "abstractKey": "__isAuthor",
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "avatarUrl",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "type": "Author",
                                       },
                                     ],
-                                    "type": "Contributor",
+                                    "type": "Node",
                                   },
                                 ],
                                 "type": "User",
@@ -1533,6 +1554,10 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                                                         "name": "url",
                                                         "storageKey": null,
                                                       },
+                                                      Object {
+                                                        "abstractKey": "__isAuthor",
+                                                        "kind": "TypeDiscriminator",
+                                                      },
                                                     ],
                                                     "storageKey": null,
                                                   },
@@ -1564,6 +1589,10 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                                                         "kind": "ScalarField",
                                                         "name": "url",
                                                         "storageKey": null,
+                                                      },
+                                                      Object {
+                                                        "abstractKey": "__isAuthor",
+                                                        "kind": "TypeDiscriminator",
                                                       },
                                                     ],
                                                     "storageKey": null,
@@ -1617,6 +1646,10 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                                                         "kind": "ScalarField",
                                                         "name": "url",
                                                         "storageKey": null,
+                                                      },
+                                                      Object {
+                                                        "abstractKey": "__isAuthor",
+                                                        "kind": "TypeDiscriminator",
                                                       },
                                                     ],
                                                     "storageKey": null,
@@ -1839,13 +1872,48 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                                                     "storageKey": null,
                                                   },
                                                   Object {
-                                                    "abstractKey": "__isContributor",
+                                                    "abstractKey": "__isNode",
                                                     "kind": "InlineFragment",
                                                     "selections": Array [
                                                       Object {
-                                                        "abstractKey": null,
+                                                        "abstractKey": "__isContributor",
                                                         "kind": "InlineFragment",
                                                         "selections": Array [
+                                                          Object {
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "kind": "ScalarField",
+                                                            "name": "username",
+                                                            "storageKey": null,
+                                                          },
+                                                          Object {
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "kind": "ScalarField",
+                                                            "name": "avatarUrl",
+                                                            "storageKey": null,
+                                                          },
+                                                        ],
+                                                        "type": "Contributor",
+                                                      },
+                                                      Object {
+                                                        "abstractKey": "__isAuthor",
+                                                        "kind": "InlineFragment",
+                                                        "selections": Array [
+                                                          Object {
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "kind": "ScalarField",
+                                                            "name": "username",
+                                                            "storageKey": null,
+                                                          },
+                                                          Object {
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "kind": "ScalarField",
+                                                            "name": "avatarUrl",
+                                                            "storageKey": null,
+                                                          },
                                                           Object {
                                                             "alias": null,
                                                             "args": null,
@@ -1854,24 +1922,10 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                                                             "storageKey": null,
                                                           },
                                                         ],
-                                                        "type": "User",
-                                                      },
-                                                      Object {
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "kind": "ScalarField",
-                                                        "name": "username",
-                                                        "storageKey": null,
-                                                      },
-                                                      Object {
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "kind": "ScalarField",
-                                                        "name": "avatarUrl",
-                                                        "storageKey": null,
+                                                        "type": "Author",
                                                       },
                                                     ],
-                                                    "type": "Contributor",
+                                                    "type": "Node",
                                                   },
                                                 ],
                                                 "storageKey": null,
@@ -2032,13 +2086,48 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                                                     "storageKey": null,
                                                   },
                                                   Object {
-                                                    "abstractKey": "__isContributor",
+                                                    "abstractKey": "__isNode",
                                                     "kind": "InlineFragment",
                                                     "selections": Array [
                                                       Object {
-                                                        "abstractKey": null,
+                                                        "abstractKey": "__isContributor",
                                                         "kind": "InlineFragment",
                                                         "selections": Array [
+                                                          Object {
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "kind": "ScalarField",
+                                                            "name": "username",
+                                                            "storageKey": null,
+                                                          },
+                                                          Object {
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "kind": "ScalarField",
+                                                            "name": "avatarUrl",
+                                                            "storageKey": null,
+                                                          },
+                                                        ],
+                                                        "type": "Contributor",
+                                                      },
+                                                      Object {
+                                                        "abstractKey": "__isAuthor",
+                                                        "kind": "InlineFragment",
+                                                        "selections": Array [
+                                                          Object {
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "kind": "ScalarField",
+                                                            "name": "username",
+                                                            "storageKey": null,
+                                                          },
+                                                          Object {
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "kind": "ScalarField",
+                                                            "name": "avatarUrl",
+                                                            "storageKey": null,
+                                                          },
                                                           Object {
                                                             "alias": null,
                                                             "args": null,
@@ -2047,24 +2136,10 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                                                             "storageKey": null,
                                                           },
                                                         ],
-                                                        "type": "User",
-                                                      },
-                                                      Object {
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "kind": "ScalarField",
-                                                        "name": "username",
-                                                        "storageKey": null,
-                                                      },
-                                                      Object {
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "kind": "ScalarField",
-                                                        "name": "avatarUrl",
-                                                        "storageKey": null,
+                                                        "type": "Author",
                                                       },
                                                     ],
-                                                    "type": "Contributor",
+                                                    "type": "Node",
                                                   },
                                                 ],
                                                 "storageKey": null,
@@ -2517,7 +2592,7 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "99002e2d15d1964709921bafc345f1cb",
+            "cacheID": "8924b6dc2fb2d0581ba8cecd150eac72",
             "id": null,
             "metadata": Object {},
             "name": "ConsultationPropositionBoxQuery",
@@ -2983,16 +3058,23 @@ fragment UserAvatarList_users on User {
   ...UserAvatar_user
 }
 
-fragment UserAvatar_user on Contributor {
-  __isContributor: __typename
-  ... on User {
+fragment UserAvatar_user on Node {
+  __isNode: __typename
+  ... on Contributor {
+    __isContributor: __typename
+    username
+    avatarUrl
+  }
+  ... on Author {
+    __isAuthor: __typename
+    username
+    avatarUrl
     url
   }
-  username
-  avatarUrl
 }
 
-fragment UserLink_user on User {
+fragment UserLink_user on Author {
+  __isAuthor: __typename
   displayName
   url
 }
@@ -3306,18 +3388,39 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                                 "kind": "InlineFragment",
                                 "selections": Array [
                                   Object {
-                                    "abstractKey": "__isContributor",
+                                    "abstractKey": "__isNode",
                                     "kind": "InlineFragment",
                                     "selections": Array [
                                       Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "avatarUrl",
-                                        "storageKey": null,
+                                        "abstractKey": "__isContributor",
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "avatarUrl",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "type": "Contributor",
+                                      },
+                                      Object {
+                                        "abstractKey": "__isAuthor",
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "avatarUrl",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "type": "Author",
                                       },
                                     ],
-                                    "type": "Contributor",
+                                    "type": "Node",
                                   },
                                 ],
                                 "type": "User",
@@ -4546,6 +4649,10 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                                                         "name": "url",
                                                         "storageKey": null,
                                                       },
+                                                      Object {
+                                                        "abstractKey": "__isAuthor",
+                                                        "kind": "TypeDiscriminator",
+                                                      },
                                                     ],
                                                     "storageKey": null,
                                                   },
@@ -4577,6 +4684,10 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                                                         "kind": "ScalarField",
                                                         "name": "url",
                                                         "storageKey": null,
+                                                      },
+                                                      Object {
+                                                        "abstractKey": "__isAuthor",
+                                                        "kind": "TypeDiscriminator",
                                                       },
                                                     ],
                                                     "storageKey": null,
@@ -4630,6 +4741,10 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                                                         "kind": "ScalarField",
                                                         "name": "url",
                                                         "storageKey": null,
+                                                      },
+                                                      Object {
+                                                        "abstractKey": "__isAuthor",
+                                                        "kind": "TypeDiscriminator",
                                                       },
                                                     ],
                                                     "storageKey": null,
@@ -4852,13 +4967,48 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                                                     "storageKey": null,
                                                   },
                                                   Object {
-                                                    "abstractKey": "__isContributor",
+                                                    "abstractKey": "__isNode",
                                                     "kind": "InlineFragment",
                                                     "selections": Array [
                                                       Object {
-                                                        "abstractKey": null,
+                                                        "abstractKey": "__isContributor",
                                                         "kind": "InlineFragment",
                                                         "selections": Array [
+                                                          Object {
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "kind": "ScalarField",
+                                                            "name": "username",
+                                                            "storageKey": null,
+                                                          },
+                                                          Object {
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "kind": "ScalarField",
+                                                            "name": "avatarUrl",
+                                                            "storageKey": null,
+                                                          },
+                                                        ],
+                                                        "type": "Contributor",
+                                                      },
+                                                      Object {
+                                                        "abstractKey": "__isAuthor",
+                                                        "kind": "InlineFragment",
+                                                        "selections": Array [
+                                                          Object {
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "kind": "ScalarField",
+                                                            "name": "username",
+                                                            "storageKey": null,
+                                                          },
+                                                          Object {
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "kind": "ScalarField",
+                                                            "name": "avatarUrl",
+                                                            "storageKey": null,
+                                                          },
                                                           Object {
                                                             "alias": null,
                                                             "args": null,
@@ -4867,24 +5017,10 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                                                             "storageKey": null,
                                                           },
                                                         ],
-                                                        "type": "User",
-                                                      },
-                                                      Object {
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "kind": "ScalarField",
-                                                        "name": "username",
-                                                        "storageKey": null,
-                                                      },
-                                                      Object {
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "kind": "ScalarField",
-                                                        "name": "avatarUrl",
-                                                        "storageKey": null,
+                                                        "type": "Author",
                                                       },
                                                     ],
-                                                    "type": "Contributor",
+                                                    "type": "Node",
                                                   },
                                                 ],
                                                 "storageKey": null,
@@ -5045,13 +5181,48 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                                                     "storageKey": null,
                                                   },
                                                   Object {
-                                                    "abstractKey": "__isContributor",
+                                                    "abstractKey": "__isNode",
                                                     "kind": "InlineFragment",
                                                     "selections": Array [
                                                       Object {
-                                                        "abstractKey": null,
+                                                        "abstractKey": "__isContributor",
                                                         "kind": "InlineFragment",
                                                         "selections": Array [
+                                                          Object {
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "kind": "ScalarField",
+                                                            "name": "username",
+                                                            "storageKey": null,
+                                                          },
+                                                          Object {
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "kind": "ScalarField",
+                                                            "name": "avatarUrl",
+                                                            "storageKey": null,
+                                                          },
+                                                        ],
+                                                        "type": "Contributor",
+                                                      },
+                                                      Object {
+                                                        "abstractKey": "__isAuthor",
+                                                        "kind": "InlineFragment",
+                                                        "selections": Array [
+                                                          Object {
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "kind": "ScalarField",
+                                                            "name": "username",
+                                                            "storageKey": null,
+                                                          },
+                                                          Object {
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "kind": "ScalarField",
+                                                            "name": "avatarUrl",
+                                                            "storageKey": null,
+                                                          },
                                                           Object {
                                                             "alias": null,
                                                             "args": null,
@@ -5060,24 +5231,10 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                                                             "storageKey": null,
                                                           },
                                                         ],
-                                                        "type": "User",
-                                                      },
-                                                      Object {
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "kind": "ScalarField",
-                                                        "name": "username",
-                                                        "storageKey": null,
-                                                      },
-                                                      Object {
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "kind": "ScalarField",
-                                                        "name": "avatarUrl",
-                                                        "storageKey": null,
+                                                        "type": "Author",
                                                       },
                                                     ],
-                                                    "type": "Contributor",
+                                                    "type": "Node",
                                                   },
                                                 ],
                                                 "storageKey": null,
@@ -5530,7 +5687,7 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "99002e2d15d1964709921bafc345f1cb",
+            "cacheID": "8924b6dc2fb2d0581ba8cecd150eac72",
             "id": null,
             "metadata": Object {},
             "name": "ConsultationPropositionBoxQuery",
@@ -5996,16 +6153,23 @@ fragment UserAvatarList_users on User {
   ...UserAvatar_user
 }
 
-fragment UserAvatar_user on Contributor {
-  __isContributor: __typename
-  ... on User {
+fragment UserAvatar_user on Node {
+  __isNode: __typename
+  ... on Contributor {
+    __isContributor: __typename
+    username
+    avatarUrl
+  }
+  ... on Author {
+    __isAuthor: __typename
+    username
+    avatarUrl
     url
   }
-  username
-  avatarUrl
 }
 
-fragment UserLink_user on User {
+fragment UserLink_user on Author {
+  __isAuthor: __typename
   displayName
   url
 }

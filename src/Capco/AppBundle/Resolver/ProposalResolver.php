@@ -8,6 +8,7 @@ use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Box\Spout\Writer\WriterInterface;
 use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\GraphQL\Resolver\User\ContributorNameResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
@@ -35,7 +36,8 @@ class ProposalResolver
         EntityManagerInterface $entityManager,
         string $rootDir,
         UserUrlResolver $userUrlResolver,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        private readonly ContributorNameResolver $contributorNameResolver
     ) {
         $this->em = $entityManager;
         $this->rootDir = $rootDir;
@@ -53,7 +55,7 @@ class ProposalResolver
             $userFollower = $follower->getUser();
             $followers[$key]['id'] = $userFollower->getId();
             $followers[$key]['email'] = $userFollower->getEmail();
-            $followers[$key]['username'] = $userFollower->getUsername();
+            $followers[$key]['username'] = $this->contributorNameResolver->resolveUsername($userFollower);
             $followers[$key]['firstname'] = $userFollower->getFirstname();
             $followers[$key]['lastname'] = $userFollower->getLastname();
             $followers[$key]['followedAt'] = $follower->getFollowedAt()->format('d-m-Y H:i:s');

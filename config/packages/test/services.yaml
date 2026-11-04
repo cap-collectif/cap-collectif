@@ -19,6 +19,11 @@ services:
         autoconfigure: true
         public: true
 
+    # Allow command tests to redirect generated CSV files to a temporary directory.
+    Capco\AppBundle\Command\Service\FilePathResolver\ContributionsFilePathResolver:
+        arguments:
+            $exportDirectory: '%kernel.project_dir%/public/export/'
+
     # Keep SMS and CAS services replaceable before their consumers are instantiated.
     # Redefinitions must retain scalar arguments that cannot be autowired.
     Capco\AppBundle\Fetcher\SmsProviderFetcher:

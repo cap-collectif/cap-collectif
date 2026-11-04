@@ -176,7 +176,7 @@ class ProposalNormalizer extends BaseNormalizer implements NormalizerInterface
                 self::EXPORT_PROPOSAL_UNDRAFT_AT => $this->getNullableDatetime($object->getUndraftAt()),
                 self::EXPORT_PROPOSAL_TRASHED_AT => $this->getNullableDatetime($object->getTrashedAt()),
                 self::EXPORT_PROPOSAL_TRASHED_REASON => $object->getTrashedReason(),
-                self::EXPORT_PROPOSAL_AUTHOR_USERNAME => $author->getUsername(),
+                self::EXPORT_PROPOSAL_AUTHOR_USERNAME => $this->contributorNameResolver->resolveUsername($author),
                 self::EXPORT_PROPOSAL_AUTHOR_IS_EMAIL_CONFIRMED => $this->getReadableBoolean($author->isEmailConfirmed()),
                 self::EXPORT_PROPOSAL_AUTHOR_EMAIL => $author->getEmail(),
                 self::EXPORT_PROPOSAL_AUTHOR_USER_TYPE_ID => $authorUserType?->getId(),

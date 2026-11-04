@@ -33,8 +33,8 @@ const FRAGMENT = graphql`
   fragment ProjectHeaderAuthorsModal_project on Project {
     authors {
       __typename
+      ...UserAvatar_user
       ... on User {
-        ...UserAvatar_user
         userType {
           name
         }
@@ -82,7 +82,7 @@ const ProjectHeaderAuthorsModal = ({ show, onClose, project }: Props): JSX.Eleme
               <div className="d-flex">
                 <UserAvatar user={user} />
                 <div className="d-flex fd-column">
-                  {profilesToggle ? (
+                  {profilesToggle && user.url ? (
                     <a href={user.url}>{user.username}</a>
                   ) : (
                     <span className="font-weight-bold">{user.username}</span>

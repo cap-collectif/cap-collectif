@@ -10,13 +10,14 @@
         {% endif %}
         <div class="opinion__data">
             <p class="h5  opinion__user">
-                {% if is_feature_enabled('profiles') %}
-                    <a href="{{ path('capco_user_profile_show_all', {'slug': argument.Author.slug}) }}">
-                        {{ argument.Author.username }}
+                {% set authorProfile = argument.author|capco_author_profile %}
+                {% if authorProfile.url %}
+                    <a href="{{ authorProfile.url }}">
+                        {{ authorProfile.name }}
                     </a>
                 {% else %}
                     <span>
-                        {{ argument.Author.username }}
+                        {{ authorProfile.name }}
                     </span>
                 {% endif %}
                 {% if profile is defined %}

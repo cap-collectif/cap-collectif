@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Enum\ExportHeaders;
 use Capco\AppBundle\Enum\ExportVariantsEnum;
+use Capco\AppBundle\GraphQL\Resolver\User\ContributorNameResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
 use Capco\AppBundle\Repository\DebateRepository;
 use Capco\AppBundle\Repository\DebateStepRepository;
@@ -71,6 +72,7 @@ class ExportDebateGroupedCommand extends BaseExportCommand
         private readonly Stopwatch $stopwatch,
         private readonly EntityManagerInterface $em,
         private readonly TranslatorInterface $translator,
+        private readonly ContributorNameResolver $contributorNameResolver,
         private readonly DebateRepository $debateRepository,
         private readonly DebateStepRepository $debateStepRepository,
         private readonly ContributionsFilePathResolver $contributionsFilePathResolver,
@@ -248,7 +250,7 @@ class ExportDebateGroupedCommand extends BaseExportCommand
 
             $csvData = [
                 ExportHeaders::EXPORT_PARTICIPANT_USER_ID => $author->getId(),
-                ExportHeaders::EXPORT_PARTICIPANT_USERNAME => $author->getUsername(),
+                ExportHeaders::EXPORT_PARTICIPANT_USERNAME => $this->contributorNameResolver->resolveUsername($author),
                 ExportHeaders::EXPORT_PARTICIPANT_USER_EMAIL => $author->getEmail(),
                 ExportHeaders::EXPORT_CONTRIBUTION_ARGUMENT_AUTHOR_INTERNAL_COMMUNICATION => $this->csvDataFormatter->getReadableBoolean($author->isConsentExternalCommunication()),
                 ExportHeaders::EXPORT_CONTRIBUTION_NO_ACCOUNT_EMAIL => $this->csvDataFormatter->getReadableBoolean(false),
@@ -304,7 +306,7 @@ class ExportDebateGroupedCommand extends BaseExportCommand
         foreach ($anonymousArguments as $anonymousArgument) {
             $csvData = [
                 ExportHeaders::EXPORT_PARTICIPANT_USER_ID => null,
-                ExportHeaders::EXPORT_PARTICIPANT_USERNAME => $anonymousArgument->getUsername(),
+                ExportHeaders::EXPORT_PARTICIPANT_USERNAME => $this->contributorNameResolver->resolveUsername($anonymousArgument),
                 ExportHeaders::EXPORT_PARTICIPANT_USER_EMAIL => $anonymousArgument->getEmail(),
                 ExportHeaders::EXPORT_CONTRIBUTION_ARGUMENT_AUTHOR_INTERNAL_COMMUNICATION => $this->csvDataFormatter->getReadableBoolean($anonymousArgument->isConsentInternalCommunication()),
                 ExportHeaders::EXPORT_CONTRIBUTION_NO_ACCOUNT_EMAIL => $this->csvDataFormatter->getReadableBoolean(true),

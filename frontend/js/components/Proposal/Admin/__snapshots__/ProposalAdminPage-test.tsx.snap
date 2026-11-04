@@ -2077,18 +2077,43 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                                     "storageKey": null,
                                   },
                                   Object {
-                                    "abstractKey": "__isContributor",
+                                    "abstractKey": "__isNode",
                                     "kind": "InlineFragment",
                                     "selections": Array [
                                       Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "avatarUrl",
-                                        "storageKey": null,
+                                        "abstractKey": "__isContributor",
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "avatarUrl",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "type": "Contributor",
+                                      },
+                                      Object {
+                                        "abstractKey": "__isAuthor",
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "avatarUrl",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "type": "Author",
                                       },
                                     ],
-                                    "type": "Contributor",
+                                    "type": "Node",
+                                  },
+                                  Object {
+                                    "abstractKey": "__isAuthor",
+                                    "kind": "TypeDiscriminator",
                                   },
                                 ],
                                 "storageKey": null,
@@ -2429,7 +2454,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "917477d54c51466456f53a99827a314e",
+            "cacheID": "dc0f82e24c39fd75fd691abc1cfda25d",
             "id": null,
             "metadata": Object {},
             "name": "ProposalAdminPageQuery",
@@ -2898,20 +2923,27 @@ fragment ProposalRevision_proposal on Proposal {
   ...ProposalRevisionModalForm_proposal
 }
 
-fragment UserAvatar_user on Contributor {
-  __isContributor: __typename
-  ... on User {
+fragment UserAvatar_user on Node {
+  __isNode: __typename
+  ... on Contributor {
+    __isContributor: __typename
+    username
+    avatarUrl
+  }
+  ... on Author {
+    __isAuthor: __typename
+    username
+    avatarUrl
     url
   }
-  username
-  avatarUrl
 }
 
 fragment UserBox_user on User {
   ...UserPreview_user
 }
 
-fragment UserLink_user on User {
+fragment UserLink_user on Author {
+  __isAuthor: __typename
   displayName
   url
 }

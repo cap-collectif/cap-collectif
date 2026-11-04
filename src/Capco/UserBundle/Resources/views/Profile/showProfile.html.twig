@@ -1,9 +1,6 @@
 {% set locale = app.request.locale %}
-{% set username = user.username %}
-{% if 'deleted-user'
-    == username %}
-    {% set username = username | trans({}, 'CapcoAppBundle') %}
-{% endif %}
+{% set authorProfile = user|capco_author_profile %}
+{% set username = authorProfile.name %}
 
 <section class="profile section--custom">
     <div class="container">
@@ -46,7 +43,7 @@
                     react_render_component('ShareButtonDropdownApp', {
                         'props': {
                             'url': url('capco_user_profile_show_all', {'slug': user.slug, '_locale': locale }),
-                            'title': user.userName,
+                            'title': username,
                             'id': 'user-' ~ user.userName,
                         }
                     })

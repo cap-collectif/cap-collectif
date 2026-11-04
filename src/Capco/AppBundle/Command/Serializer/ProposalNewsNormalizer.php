@@ -53,7 +53,7 @@ class ProposalNewsNormalizer extends BaseNormalizer implements NormalizerInterfa
             }
 
             $authorsValues['id'][] = $postAuthor->getId();
-            $authorsValues['username'][] = $postAuthor->getUsername();
+            $authorsValues['username'][] = $this->contributorNameResolver->resolveUsername($author);
             $authorsValues['isEmailConfirmed'][] = $this->getReadableBoolean($author->isEmailConfirmed());
             $authorsValues['userTypeId'][] = $author->getUserType()?->getId();
             $authorsValues['userTypeName'][] = $author->getUserType()?->getName();

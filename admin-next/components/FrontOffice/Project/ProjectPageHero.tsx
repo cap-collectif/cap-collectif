@@ -50,11 +50,7 @@ const FRAGMENT = graphql`
       id
       url
       username
-      ... on User {
-        media {
-          url
-        }
-      }
+      avatarUrl
     }
     themes {
       id
@@ -182,11 +178,11 @@ const ProjectPageHero: React.FC<Props> = ({ project: projectKey, query: queryKey
                 <Avatar
                   size="xs"
                   name={author.username ?? ''}
-                  src={(author as any).media?.url || defaultAvatar?.media?.url}
+                  src={author.avatarUrl || defaultAvatar?.media?.url}
                   mr={1}
                 />
                 <Tag.Label>
-                  {profiles || author.__typename === 'Organization' ? (
+                  {author.url && (profiles || author.__typename === 'Organization') ? (
                     <Box as="a" href={author.url} color="primary.darker">
                       {author.username}
                     </Box>

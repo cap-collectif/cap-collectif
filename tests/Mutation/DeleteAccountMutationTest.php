@@ -39,6 +39,8 @@ final class DeleteAccountMutationTest extends IdentityWebTestCase
         $persisted = $this->reload($id);
         self::assertNotSame($email, $persisted->getEmail());
         self::assertNotNull($persisted->getDeletedAccountAt());
+        self::assertSame('global.user.anonymized', $persisted->getUsername());
+        self::assertSame('global.user.anonymized', $persisted->getUsernameCanonical());
         $proposal = $this->em->find(Proposal::class, $proposalId);
         self::assertSame('Associated content', $proposal->getTitle());
         self::assertSame('Retained body', $proposal->getBody());

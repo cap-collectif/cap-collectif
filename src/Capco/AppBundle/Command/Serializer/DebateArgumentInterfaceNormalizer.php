@@ -39,12 +39,12 @@ class DebateArgumentInterfaceNormalizer extends BaseNormalizer implements Normal
 
         /** @var ExportableDebateContributionInterface $object */
         $author = $object->getAuthor();
-        $username = null !== $author ? $author->getUsername() : null;
+        $username = $this->contributorNameResolver->resolveUsername($author);
         $email = null !== $author ? $author->getEmail() : null;
         $hasAccount = null !== $author ? $this->getReadableBoolean(true) : null;
 
         if ($object instanceof DebateAnonymousArgument) {
-            $username = $object->getUsername();
+            $username = $this->contributorNameResolver->resolveUsername($object);
             $email = $object->getEmail();
             $hasAccount = $this->getReadableBoolean(false);
         }

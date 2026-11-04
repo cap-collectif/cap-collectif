@@ -75,9 +75,6 @@ const FRAGMENT = graphql`
           userType {
             name
           }
-          media {
-            url
-          }
         }
       }
       themes {
@@ -107,11 +104,6 @@ const FRAGMENT = graphql`
                   username
                   url
                   avatarUrl
-                  ... on User {
-                    media {
-                      url
-                    }
-                  }
                 }
               }
             }
@@ -220,7 +212,7 @@ const VoteStepProjectHero: React.FC<Props> = ({ step: stepKey }) => {
   if (!project) return null
 
   const firstAuthor = project.authors?.[0]
-  const showFirstAuthorProfileLink = profiles || firstAuthor?.__typename === 'Organization'
+  const showFirstAuthorProfileLink = !!firstAuthor?.url && (profiles || firstAuthor?.__typename === 'Organization')
   const authorsLabel = (() => {
     if (!firstAuthor) return null
 
@@ -246,7 +238,6 @@ const VoteStepProjectHero: React.FC<Props> = ({ step: stepKey }) => {
       ?.map(edge => edge?.node)
       .filter((group): group is RestrictedViewerGroup => !!group) ?? []
   const title = htmlDecode(project.title)
-  const getAvatarUrl = (author: Project['authors'][number]) => author.avatarUrl || (author as any).media?.url
   const authorsCount = project.authors.length
   const hiddenAuthorsCount = Math.max(authorsCount - BREAKING_NUMBER, 0)
   const avatarSize = isMobile ? 56 : 40
@@ -263,7 +254,7 @@ const VoteStepProjectHero: React.FC<Props> = ({ step: stepKey }) => {
           key={author.id}
           size={isMobile ? 'xl' : 'lg'}
           name={author.username ?? ''}
-          src={getAvatarUrl(author)}
+          src={author.avatarUrl}
           marginLeft={index === 0 ? 0 : '-8px'}
           border="2px solid white"
           zIndex={index + 1}
@@ -356,9 +347,9 @@ const VoteStepProjectHero: React.FC<Props> = ({ step: stepKey }) => {
             <Box as="ul" p={0} m={0}>
               {project.authors.map(author => (
                 <Flex key={author.id} as="li" alignItems="center" gap={2} py={2} sx={{ listStyle: 'none' }}>
-                  <Avatar size="md" name={author.username ?? ''} src={getAvatarUrl(author)} />
+                  <Avatar size="md" name={author.username ?? ''} src={author.avatarUrl} />
                   <Flex direction="column">
-                    {profiles || author.__typename === 'Organization' ? (
+                    {author.url && (profiles || author.__typename === 'Organization') ? (
                       <Box as="a" href={author.url} color="neutral-gray.900">
                         {author.username}
                       </Box>
@@ -603,7 +594,7 @@ const VoteStepProjectHero: React.FC<Props> = ({ step: stepKey }) => {
                 .filter(Boolean)
                 .map(user => (
                   <Flex key={user.id} as="li" alignItems="center" gap={2} py={2} sx={{ listStyle: 'none' }}>
-                    <Avatar size="md" name={user.username ?? ''} src={user.avatarUrl || (user as any).media?.url} />
+                    <Avatar size="md" name={user.username ?? ''} src={user.avatarUrl} />
                     <Box
                       as="a"
                       href={user.url}

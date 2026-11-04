@@ -454,6 +454,31 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                                 "storageKey": null,
                               },
                               Object {
+                                "abstractKey": "__isAuthor",
+                                "kind": "TypeDiscriminator",
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "avatarUrl",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "displayName",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "url",
+                                "storageKey": null,
+                              },
+                              Object {
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
@@ -461,48 +486,9 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                                 "storageKey": null,
                               },
                               Object {
-                                "abstractKey": null,
+                                "abstractKey": "__isNode",
                                 "kind": "InlineFragment",
                                 "selections": Array [
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "concreteType": "Media",
-                                    "kind": "LinkedField",
-                                    "name": "media",
-                                    "plural": false,
-                                    "selections": Array [
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "url",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "id",
-                                        "storageKey": null,
-                                      },
-                                    ],
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "displayName",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "url",
-                                    "storageKey": null,
-                                  },
                                   Object {
                                     "abstractKey": "__isContributor",
                                     "kind": "InlineFragment",
@@ -514,18 +500,25 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                                         "name": "username",
                                         "storageKey": null,
                                       },
+                                    ],
+                                    "type": "Contributor",
+                                  },
+                                  Object {
+                                    "abstractKey": "__isAuthor",
+                                    "kind": "InlineFragment",
+                                    "selections": Array [
                                       Object {
                                         "alias": null,
                                         "args": null,
                                         "kind": "ScalarField",
-                                        "name": "avatarUrl",
+                                        "name": "username",
                                         "storageKey": null,
                                       },
                                     ],
-                                    "type": "Contributor",
+                                    "type": "Author",
                                   },
                                 ],
-                                "type": "User",
+                                "type": "Node",
                               },
                             ],
                             "storageKey": null,
@@ -897,6 +890,31 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                                 "storageKey": null,
                               },
                               Object {
+                                "abstractKey": "__isAuthor",
+                                "kind": "TypeDiscriminator",
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "avatarUrl",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "displayName",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "url",
+                                "storageKey": null,
+                              },
+                              Object {
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
@@ -904,48 +922,9 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                                 "storageKey": null,
                               },
                               Object {
-                                "abstractKey": null,
+                                "abstractKey": "__isNode",
                                 "kind": "InlineFragment",
                                 "selections": Array [
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "concreteType": "Media",
-                                    "kind": "LinkedField",
-                                    "name": "media",
-                                    "plural": false,
-                                    "selections": Array [
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "url",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "id",
-                                        "storageKey": null,
-                                      },
-                                    ],
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "displayName",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "url",
-                                    "storageKey": null,
-                                  },
                                   Object {
                                     "abstractKey": "__isContributor",
                                     "kind": "InlineFragment",
@@ -957,18 +936,25 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                                         "name": "username",
                                         "storageKey": null,
                                       },
+                                    ],
+                                    "type": "Contributor",
+                                  },
+                                  Object {
+                                    "abstractKey": "__isAuthor",
+                                    "kind": "InlineFragment",
+                                    "selections": Array [
                                       Object {
                                         "alias": null,
                                         "args": null,
                                         "kind": "ScalarField",
-                                        "name": "avatarUrl",
+                                        "name": "username",
                                         "storageKey": null,
                                       },
                                     ],
-                                    "type": "Contributor",
+                                    "type": "Author",
                                   },
                                 ],
-                                "type": "User",
+                                "type": "Node",
                               },
                             ],
                             "storageKey": null,
@@ -1739,6 +1725,31 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                                         "storageKey": null,
                                       },
                                       Object {
+                                        "abstractKey": "__isAuthor",
+                                        "kind": "TypeDiscriminator",
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "avatarUrl",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "displayName",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "url",
+                                        "storageKey": null,
+                                      },
+                                      Object {
                                         "alias": null,
                                         "args": null,
                                         "kind": "ScalarField",
@@ -1746,48 +1757,9 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                                         "storageKey": null,
                                       },
                                       Object {
-                                        "abstractKey": null,
+                                        "abstractKey": "__isNode",
                                         "kind": "InlineFragment",
                                         "selections": Array [
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "concreteType": "Media",
-                                            "kind": "LinkedField",
-                                            "name": "media",
-                                            "plural": false,
-                                            "selections": Array [
-                                              Object {
-                                                "alias": null,
-                                                "args": null,
-                                                "kind": "ScalarField",
-                                                "name": "url",
-                                                "storageKey": null,
-                                              },
-                                              Object {
-                                                "alias": null,
-                                                "args": null,
-                                                "kind": "ScalarField",
-                                                "name": "id",
-                                                "storageKey": null,
-                                              },
-                                            ],
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "displayName",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "url",
-                                            "storageKey": null,
-                                          },
                                           Object {
                                             "abstractKey": "__isContributor",
                                             "kind": "InlineFragment",
@@ -1799,18 +1771,25 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                                                 "name": "username",
                                                 "storageKey": null,
                                               },
+                                            ],
+                                            "type": "Contributor",
+                                          },
+                                          Object {
+                                            "abstractKey": "__isAuthor",
+                                            "kind": "InlineFragment",
+                                            "selections": Array [
                                               Object {
                                                 "alias": null,
                                                 "args": null,
                                                 "kind": "ScalarField",
-                                                "name": "avatarUrl",
+                                                "name": "username",
                                                 "storageKey": null,
                                               },
                                             ],
-                                            "type": "Contributor",
+                                            "type": "Author",
                                           },
                                         ],
-                                        "type": "User",
+                                        "type": "Node",
                                       },
                                     ],
                                     "storageKey": null,
@@ -1965,7 +1944,7 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "6036b23ee6dd557cb4cccbc9b87aed04",
+            "cacheID": "616c505d273a22695ab7829d7134301c",
             "id": null,
             "metadata": Object {},
             "name": "EventListPageQuery",
@@ -2235,25 +2214,30 @@ fragment TagThemes_themes on Theme {
   title
 }
 
-fragment TagUser_user on User {
-  media {
-    url
-    id
-  }
+fragment TagUser_user on Author {
+  __isAuthor: __typename
+  avatarUrl
   ...UserAvatar_user
   ...UserLink_user
 }
 
-fragment UserAvatar_user on Contributor {
-  __isContributor: __typename
-  ... on User {
+fragment UserAvatar_user on Node {
+  __isNode: __typename
+  ... on Contributor {
+    __isContributor: __typename
+    username
+    avatarUrl
+  }
+  ... on Author {
+    __isAuthor: __typename
+    username
+    avatarUrl
     url
   }
-  username
-  avatarUrl
 }
 
-fragment UserLink_user on User {
+fragment UserLink_user on Author {
+  __isAuthor: __typename
   displayName
   url
 }
@@ -2741,6 +2725,31 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                                 "storageKey": null,
                               },
                               Object {
+                                "abstractKey": "__isAuthor",
+                                "kind": "TypeDiscriminator",
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "avatarUrl",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "displayName",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "url",
+                                "storageKey": null,
+                              },
+                              Object {
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
@@ -2748,48 +2757,9 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                                 "storageKey": null,
                               },
                               Object {
-                                "abstractKey": null,
+                                "abstractKey": "__isNode",
                                 "kind": "InlineFragment",
                                 "selections": Array [
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "concreteType": "Media",
-                                    "kind": "LinkedField",
-                                    "name": "media",
-                                    "plural": false,
-                                    "selections": Array [
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "url",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "id",
-                                        "storageKey": null,
-                                      },
-                                    ],
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "displayName",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "url",
-                                    "storageKey": null,
-                                  },
                                   Object {
                                     "abstractKey": "__isContributor",
                                     "kind": "InlineFragment",
@@ -2801,18 +2771,25 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                                         "name": "username",
                                         "storageKey": null,
                                       },
+                                    ],
+                                    "type": "Contributor",
+                                  },
+                                  Object {
+                                    "abstractKey": "__isAuthor",
+                                    "kind": "InlineFragment",
+                                    "selections": Array [
                                       Object {
                                         "alias": null,
                                         "args": null,
                                         "kind": "ScalarField",
-                                        "name": "avatarUrl",
+                                        "name": "username",
                                         "storageKey": null,
                                       },
                                     ],
-                                    "type": "Contributor",
+                                    "type": "Author",
                                   },
                                 ],
-                                "type": "User",
+                                "type": "Node",
                               },
                             ],
                             "storageKey": null,
@@ -3184,6 +3161,31 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                                 "storageKey": null,
                               },
                               Object {
+                                "abstractKey": "__isAuthor",
+                                "kind": "TypeDiscriminator",
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "avatarUrl",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "displayName",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "url",
+                                "storageKey": null,
+                              },
+                              Object {
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
@@ -3191,48 +3193,9 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                                 "storageKey": null,
                               },
                               Object {
-                                "abstractKey": null,
+                                "abstractKey": "__isNode",
                                 "kind": "InlineFragment",
                                 "selections": Array [
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "concreteType": "Media",
-                                    "kind": "LinkedField",
-                                    "name": "media",
-                                    "plural": false,
-                                    "selections": Array [
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "url",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "id",
-                                        "storageKey": null,
-                                      },
-                                    ],
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "displayName",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "url",
-                                    "storageKey": null,
-                                  },
                                   Object {
                                     "abstractKey": "__isContributor",
                                     "kind": "InlineFragment",
@@ -3244,18 +3207,25 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                                         "name": "username",
                                         "storageKey": null,
                                       },
+                                    ],
+                                    "type": "Contributor",
+                                  },
+                                  Object {
+                                    "abstractKey": "__isAuthor",
+                                    "kind": "InlineFragment",
+                                    "selections": Array [
                                       Object {
                                         "alias": null,
                                         "args": null,
                                         "kind": "ScalarField",
-                                        "name": "avatarUrl",
+                                        "name": "username",
                                         "storageKey": null,
                                       },
                                     ],
-                                    "type": "Contributor",
+                                    "type": "Author",
                                   },
                                 ],
-                                "type": "User",
+                                "type": "Node",
                               },
                             ],
                             "storageKey": null,
@@ -4026,6 +3996,31 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                                         "storageKey": null,
                                       },
                                       Object {
+                                        "abstractKey": "__isAuthor",
+                                        "kind": "TypeDiscriminator",
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "avatarUrl",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "displayName",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "url",
+                                        "storageKey": null,
+                                      },
+                                      Object {
                                         "alias": null,
                                         "args": null,
                                         "kind": "ScalarField",
@@ -4033,48 +4028,9 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                                         "storageKey": null,
                                       },
                                       Object {
-                                        "abstractKey": null,
+                                        "abstractKey": "__isNode",
                                         "kind": "InlineFragment",
                                         "selections": Array [
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "concreteType": "Media",
-                                            "kind": "LinkedField",
-                                            "name": "media",
-                                            "plural": false,
-                                            "selections": Array [
-                                              Object {
-                                                "alias": null,
-                                                "args": null,
-                                                "kind": "ScalarField",
-                                                "name": "url",
-                                                "storageKey": null,
-                                              },
-                                              Object {
-                                                "alias": null,
-                                                "args": null,
-                                                "kind": "ScalarField",
-                                                "name": "id",
-                                                "storageKey": null,
-                                              },
-                                            ],
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "displayName",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "url",
-                                            "storageKey": null,
-                                          },
                                           Object {
                                             "abstractKey": "__isContributor",
                                             "kind": "InlineFragment",
@@ -4086,18 +4042,25 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                                                 "name": "username",
                                                 "storageKey": null,
                                               },
+                                            ],
+                                            "type": "Contributor",
+                                          },
+                                          Object {
+                                            "abstractKey": "__isAuthor",
+                                            "kind": "InlineFragment",
+                                            "selections": Array [
                                               Object {
                                                 "alias": null,
                                                 "args": null,
                                                 "kind": "ScalarField",
-                                                "name": "avatarUrl",
+                                                "name": "username",
                                                 "storageKey": null,
                                               },
                                             ],
-                                            "type": "Contributor",
+                                            "type": "Author",
                                           },
                                         ],
-                                        "type": "User",
+                                        "type": "Node",
                                       },
                                     ],
                                     "storageKey": null,
@@ -4252,7 +4215,7 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "6036b23ee6dd557cb4cccbc9b87aed04",
+            "cacheID": "616c505d273a22695ab7829d7134301c",
             "id": null,
             "metadata": Object {},
             "name": "EventListPageQuery",
@@ -4522,25 +4485,30 @@ fragment TagThemes_themes on Theme {
   title
 }
 
-fragment TagUser_user on User {
-  media {
-    url
-    id
-  }
+fragment TagUser_user on Author {
+  __isAuthor: __typename
+  avatarUrl
   ...UserAvatar_user
   ...UserLink_user
 }
 
-fragment UserAvatar_user on Contributor {
-  __isContributor: __typename
-  ... on User {
+fragment UserAvatar_user on Node {
+  __isNode: __typename
+  ... on Contributor {
+    __isContributor: __typename
+    username
+    avatarUrl
+  }
+  ... on Author {
+    __isAuthor: __typename
+    username
+    avatarUrl
     url
   }
-  username
-  avatarUrl
 }
 
-fragment UserLink_user on User {
+fragment UserLink_user on Author {
+  __isAuthor: __typename
   displayName
   url
 }
@@ -5028,6 +4996,31 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                                 "storageKey": null,
                               },
                               Object {
+                                "abstractKey": "__isAuthor",
+                                "kind": "TypeDiscriminator",
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "avatarUrl",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "displayName",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "url",
+                                "storageKey": null,
+                              },
+                              Object {
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
@@ -5035,48 +5028,9 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                                 "storageKey": null,
                               },
                               Object {
-                                "abstractKey": null,
+                                "abstractKey": "__isNode",
                                 "kind": "InlineFragment",
                                 "selections": Array [
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "concreteType": "Media",
-                                    "kind": "LinkedField",
-                                    "name": "media",
-                                    "plural": false,
-                                    "selections": Array [
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "url",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "id",
-                                        "storageKey": null,
-                                      },
-                                    ],
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "displayName",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "url",
-                                    "storageKey": null,
-                                  },
                                   Object {
                                     "abstractKey": "__isContributor",
                                     "kind": "InlineFragment",
@@ -5088,18 +5042,25 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                                         "name": "username",
                                         "storageKey": null,
                                       },
+                                    ],
+                                    "type": "Contributor",
+                                  },
+                                  Object {
+                                    "abstractKey": "__isAuthor",
+                                    "kind": "InlineFragment",
+                                    "selections": Array [
                                       Object {
                                         "alias": null,
                                         "args": null,
                                         "kind": "ScalarField",
-                                        "name": "avatarUrl",
+                                        "name": "username",
                                         "storageKey": null,
                                       },
                                     ],
-                                    "type": "Contributor",
+                                    "type": "Author",
                                   },
                                 ],
-                                "type": "User",
+                                "type": "Node",
                               },
                             ],
                             "storageKey": null,
@@ -5471,6 +5432,31 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                                 "storageKey": null,
                               },
                               Object {
+                                "abstractKey": "__isAuthor",
+                                "kind": "TypeDiscriminator",
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "avatarUrl",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "displayName",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "url",
+                                "storageKey": null,
+                              },
+                              Object {
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
@@ -5478,48 +5464,9 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                                 "storageKey": null,
                               },
                               Object {
-                                "abstractKey": null,
+                                "abstractKey": "__isNode",
                                 "kind": "InlineFragment",
                                 "selections": Array [
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "concreteType": "Media",
-                                    "kind": "LinkedField",
-                                    "name": "media",
-                                    "plural": false,
-                                    "selections": Array [
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "url",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "id",
-                                        "storageKey": null,
-                                      },
-                                    ],
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "displayName",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "url",
-                                    "storageKey": null,
-                                  },
                                   Object {
                                     "abstractKey": "__isContributor",
                                     "kind": "InlineFragment",
@@ -5531,18 +5478,25 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                                         "name": "username",
                                         "storageKey": null,
                                       },
+                                    ],
+                                    "type": "Contributor",
+                                  },
+                                  Object {
+                                    "abstractKey": "__isAuthor",
+                                    "kind": "InlineFragment",
+                                    "selections": Array [
                                       Object {
                                         "alias": null,
                                         "args": null,
                                         "kind": "ScalarField",
-                                        "name": "avatarUrl",
+                                        "name": "username",
                                         "storageKey": null,
                                       },
                                     ],
-                                    "type": "Contributor",
+                                    "type": "Author",
                                   },
                                 ],
-                                "type": "User",
+                                "type": "Node",
                               },
                             ],
                             "storageKey": null,
@@ -6313,6 +6267,31 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                                         "storageKey": null,
                                       },
                                       Object {
+                                        "abstractKey": "__isAuthor",
+                                        "kind": "TypeDiscriminator",
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "avatarUrl",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "displayName",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "url",
+                                        "storageKey": null,
+                                      },
+                                      Object {
                                         "alias": null,
                                         "args": null,
                                         "kind": "ScalarField",
@@ -6320,48 +6299,9 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                                         "storageKey": null,
                                       },
                                       Object {
-                                        "abstractKey": null,
+                                        "abstractKey": "__isNode",
                                         "kind": "InlineFragment",
                                         "selections": Array [
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "concreteType": "Media",
-                                            "kind": "LinkedField",
-                                            "name": "media",
-                                            "plural": false,
-                                            "selections": Array [
-                                              Object {
-                                                "alias": null,
-                                                "args": null,
-                                                "kind": "ScalarField",
-                                                "name": "url",
-                                                "storageKey": null,
-                                              },
-                                              Object {
-                                                "alias": null,
-                                                "args": null,
-                                                "kind": "ScalarField",
-                                                "name": "id",
-                                                "storageKey": null,
-                                              },
-                                            ],
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "displayName",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "url",
-                                            "storageKey": null,
-                                          },
                                           Object {
                                             "abstractKey": "__isContributor",
                                             "kind": "InlineFragment",
@@ -6373,18 +6313,25 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                                                 "name": "username",
                                                 "storageKey": null,
                                               },
+                                            ],
+                                            "type": "Contributor",
+                                          },
+                                          Object {
+                                            "abstractKey": "__isAuthor",
+                                            "kind": "InlineFragment",
+                                            "selections": Array [
                                               Object {
                                                 "alias": null,
                                                 "args": null,
                                                 "kind": "ScalarField",
-                                                "name": "avatarUrl",
+                                                "name": "username",
                                                 "storageKey": null,
                                               },
                                             ],
-                                            "type": "Contributor",
+                                            "type": "Author",
                                           },
                                         ],
-                                        "type": "User",
+                                        "type": "Node",
                                       },
                                     ],
                                     "storageKey": null,
@@ -6539,7 +6486,7 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "6036b23ee6dd557cb4cccbc9b87aed04",
+            "cacheID": "616c505d273a22695ab7829d7134301c",
             "id": null,
             "metadata": Object {},
             "name": "EventListPageQuery",
@@ -6809,25 +6756,30 @@ fragment TagThemes_themes on Theme {
   title
 }
 
-fragment TagUser_user on User {
-  media {
-    url
-    id
-  }
+fragment TagUser_user on Author {
+  __isAuthor: __typename
+  avatarUrl
   ...UserAvatar_user
   ...UserLink_user
 }
 
-fragment UserAvatar_user on Contributor {
-  __isContributor: __typename
-  ... on User {
+fragment UserAvatar_user on Node {
+  __isNode: __typename
+  ... on Contributor {
+    __isContributor: __typename
+    username
+    avatarUrl
+  }
+  ... on Author {
+    __isAuthor: __typename
+    username
+    avatarUrl
     url
   }
-  username
-  avatarUrl
 }
 
-fragment UserLink_user on User {
+fragment UserLink_user on Author {
+  __isAuthor: __typename
   displayName
   url
 }

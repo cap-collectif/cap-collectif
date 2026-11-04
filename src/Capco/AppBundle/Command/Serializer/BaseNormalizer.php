@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Command\Serializer;
 use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\Enum\ForOrAgainstType;
 use Capco\AppBundle\Enum\ProposalPublicationStatus;
+use Capco\AppBundle\GraphQL\Resolver\User\ContributorNameResolver;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 abstract class BaseNormalizer
@@ -341,9 +342,13 @@ abstract class BaseNormalizer
         ForOrAgainstType::AGAINST => self::EXPORT_VOTE_TYPE_AGAINST,
     ];
 
+    protected readonly ContributorNameResolver $contributorNameResolver;
+
     public function __construct(
         protected TranslatorInterface $translator
-    ) {}
+    ) {
+        $this->contributorNameResolver = new ContributorNameResolver($translator);
+    }
 
     /**
      * @param array<mixed, mixed> $context

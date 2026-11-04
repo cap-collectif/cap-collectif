@@ -208,7 +208,11 @@ export class Post extends React.Component<Props> {
                     <span>
                       {post.authors.map((author, i) => (
                         <span key={i}>
-                          {features.profiles ? <a href={author.url}>{author.displayName}</a> : author.displayName}
+                          {features.profiles && author.url ? (
+                            <a href={author.url}>{author.displayName}</a>
+                          ) : (
+                            author.displayName
+                          )}
                           {post.authors.length > i + 1 && ', '}
                         </span>
                       ))}

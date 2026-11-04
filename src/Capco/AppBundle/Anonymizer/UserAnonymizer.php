@@ -14,7 +14,6 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Gedmo\Sluggable\SluggableListener;
 use Psr\Log\LoggerInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UserAnonymizer
 {
@@ -31,8 +30,7 @@ class UserAnonymizer
         private readonly ProposalAuthorDataLoader $proposalAuthorDataLoader,
         private readonly UserManager $userManager,
         private readonly MediaRepository $mediaRepository,
-        private readonly MailingListUserRepository $mailingListUserRepository,
-        private readonly TranslatorInterface $translator
+        private readonly MailingListUserRepository $mailingListUserRepository
     ) {}
 
     public function anonymize(User $user): void
@@ -57,7 +55,7 @@ class UserAnonymizer
 
             $user->setEmail(null);
             $user->setEmailCanonical(null);
-            $user->setUsername($this->translator->trans('deleted-user'));
+            $user->setUsername('global.user.anonymized');
             $user->setDeletedAccountAt(new \DateTime());
             $user->setPlainPassword(null);
             $user->clearLastLogin();

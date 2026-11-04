@@ -15,6 +15,10 @@ class ContributorAvatarUrlResolver implements QueryInterface
 
     public function __invoke(Author|ContributorInterface $contributor): ?string
     {
+        if ($contributor instanceof ContributorInterface && $contributor->isAnonymized()) {
+            return '/svg/anonymized-profile.svg';
+        }
+
         $media = $contributor->getMedia();
         if (!$media) {
             return null;

@@ -35,7 +35,7 @@ class AppLogNormalizer extends BaseNormalizer implements NormalizerInterface
 
         $logs = [
             self::EXPORT_APP_LOG_CREATED_AT => $this->getNullableDatetime($object->getCreatedAt()),
-            self::EXPORT_APP_LOG_USER_USERNAME => $object->getUser()->getUsername(),
+            self::EXPORT_APP_LOG_USER_USERNAME => $this->contributorNameResolver->resolveUsername($object->getUser()),
             self::EXPORT_APP_LOG_USER_EMAIL => $object->getUser()->getEmail(),
             self::EXPORT_APP_LOG_IP => $object->getIp(),
             self::EXPORT_APP_LOG_ACTION_TYPE => $this->translator->trans(LogActionType::getTranslationKey($object->getActionType())),

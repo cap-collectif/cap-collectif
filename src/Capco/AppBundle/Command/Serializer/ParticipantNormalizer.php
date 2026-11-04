@@ -105,7 +105,7 @@ class ParticipantNormalizer extends BaseNormalizer implements NormalizerInterfac
 
         return [
             self::EXPORT_PARTICIPANT_USER_ID => $contributor->getId(),
-            self::EXPORT_PARTICIPANT_USERNAME => $contributor->getUsername(),
+            self::EXPORT_PARTICIPANT_USERNAME => $this->contributorNameResolver->resolveUsername($contributor),
             self::EXPORT_PARTICIPANT_USER_EMAIL => $contributor->getEmail(),
             self::EXPORT_PARTICIPANT_CONSENT_INTERNAL_COMMUNICATION => $this->getReadableBoolean($contributor->isConsentInternalCommunication()),
             self::EXPORT_PARTICIPANT_PHONE => $contributor->getPhone(),

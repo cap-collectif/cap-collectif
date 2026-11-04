@@ -1,9 +1,12 @@
 <div class="block  block--bordered  profile__contribution">
 	<div class="profile__contribution__header">
 	    <p class="profile__contribution__title">
-	    	<a href="{{ path('capco_user_profile_show_all', {'slug': user.slug}) }}">
-	    		{{ user.username }}
-	    	</a>
+            {% set author = user|capco_author_profile %}
+            {% if author.url %}
+                <a href="{{ author.url }}">{{ author.name }}</a>
+            {% else %}
+                {{ author.name }}
+            {% endif %}
 	    	{% if vote.value == 1 %}
 	    		{{ 'user.profile.show.propositions.votes.agree'|trans({'%startlabel%': '<span class="label label-success">', '%endlabel%': '</span>'}, 'CapcoAppBundle') | raw }}
 	    	{% else %}

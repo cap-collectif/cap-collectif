@@ -63,7 +63,7 @@ class ReplyNormalizer extends BaseNormalizer implements NormalizerInterface
         if ($isFullExport) {
             $fullUserArray = [
                 self::EXPORT_CONTRIBUTION_PUBLISHED => $this->getReadableBoolean($object->isPublished()),
-                self::EXPORT_CONTRIBUTION_AUTHOR => $contributor->getUsername(),
+                self::EXPORT_CONTRIBUTION_AUTHOR => $this->contributorNameResolver->resolveUsername($contributor),
                 self::EXPORT_CONTRIBUTION_AUTHOR_EMAIL => $contributor->getEmail(),
                 self::EXPORT_CONTRIBUTION_AUTHOR_PHONE => $contributor->getPhone(),
                 self::EXPORT_CONTRIBUTION_CREATED_AT => $this->getNullableDatetime($object->getCreatedAt()),

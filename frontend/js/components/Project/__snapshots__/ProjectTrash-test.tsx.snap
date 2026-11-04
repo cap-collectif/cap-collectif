@@ -389,25 +389,53 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                           "storageKey": null,
                                         },
                                         Object {
-                                          "abstractKey": "__isContributor",
+                                          "abstractKey": "__isNode",
                                           "kind": "InlineFragment",
                                           "selections": Array [
                                             Object {
-                                              "alias": null,
-                                              "args": null,
-                                              "kind": "ScalarField",
-                                              "name": "username",
-                                              "storageKey": null,
+                                              "abstractKey": "__isContributor",
+                                              "kind": "InlineFragment",
+                                              "selections": Array [
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "username",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "avatarUrl",
+                                                  "storageKey": null,
+                                                },
+                                              ],
+                                              "type": "Contributor",
                                             },
                                             Object {
-                                              "alias": null,
-                                              "args": null,
-                                              "kind": "ScalarField",
-                                              "name": "avatarUrl",
-                                              "storageKey": null,
+                                              "abstractKey": "__isAuthor",
+                                              "kind": "InlineFragment",
+                                              "selections": Array [
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "username",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "avatarUrl",
+                                                  "storageKey": null,
+                                                },
+                                              ],
+                                              "type": "Author",
                                             },
                                           ],
-                                          "type": "Contributor",
+                                          "type": "Node",
                                         },
                                         Object {
                                           "condition": "isAuthenticated",
@@ -422,6 +450,10 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                               "storageKey": null,
                                             },
                                           ],
+                                        },
+                                        Object {
+                                          "abstractKey": "__isAuthor",
+                                          "kind": "TypeDiscriminator",
                                         },
                                       ],
                                       "storageKey": null,
@@ -529,25 +561,57 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                                       "storageKey": null,
                                                     },
                                                     Object {
-                                                      "abstractKey": "__isContributor",
+                                                      "abstractKey": "__isNode",
                                                       "kind": "InlineFragment",
                                                       "selections": Array [
                                                         Object {
-                                                          "alias": null,
-                                                          "args": null,
-                                                          "kind": "ScalarField",
-                                                          "name": "username",
-                                                          "storageKey": null,
+                                                          "abstractKey": "__isContributor",
+                                                          "kind": "InlineFragment",
+                                                          "selections": Array [
+                                                            Object {
+                                                              "alias": null,
+                                                              "args": null,
+                                                              "kind": "ScalarField",
+                                                              "name": "username",
+                                                              "storageKey": null,
+                                                            },
+                                                            Object {
+                                                              "alias": null,
+                                                              "args": null,
+                                                              "kind": "ScalarField",
+                                                              "name": "avatarUrl",
+                                                              "storageKey": null,
+                                                            },
+                                                          ],
+                                                          "type": "Contributor",
                                                         },
                                                         Object {
-                                                          "alias": null,
-                                                          "args": null,
-                                                          "kind": "ScalarField",
-                                                          "name": "avatarUrl",
-                                                          "storageKey": null,
+                                                          "abstractKey": "__isAuthor",
+                                                          "kind": "InlineFragment",
+                                                          "selections": Array [
+                                                            Object {
+                                                              "alias": null,
+                                                              "args": null,
+                                                              "kind": "ScalarField",
+                                                              "name": "username",
+                                                              "storageKey": null,
+                                                            },
+                                                            Object {
+                                                              "alias": null,
+                                                              "args": null,
+                                                              "kind": "ScalarField",
+                                                              "name": "avatarUrl",
+                                                              "storageKey": null,
+                                                            },
+                                                          ],
+                                                          "type": "Author",
                                                         },
                                                       ],
-                                                      "type": "Contributor",
+                                                      "type": "Node",
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "TypeDiscriminator",
                                                     },
                                                     Object {
                                                       "condition": "isAuthenticated",
@@ -1203,6 +1267,27 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                           "storageKey": null,
                                         },
                                         Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "id",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "username",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "displayName",
+                                          "storageKey": null,
+                                        },
+                                        Object {
                                           "abstractKey": null,
                                           "kind": "InlineFragment",
                                           "selections": Array [
@@ -1256,36 +1341,46 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                           "type": "User",
                                         },
                                         Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "id",
-                                          "storageKey": null,
-                                        },
-                                        Object {
-                                          "abstractKey": "__isContributor",
-                                          "kind": "TypeDiscriminator",
-                                        },
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "username",
-                                          "storageKey": null,
-                                        },
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "avatarUrl",
-                                          "storageKey": null,
-                                        },
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "displayName",
-                                          "storageKey": null,
+                                          "abstractKey": "__isNode",
+                                          "kind": "InlineFragment",
+                                          "selections": Array [
+                                            Object {
+                                              "abstractKey": "__isContributor",
+                                              "kind": "InlineFragment",
+                                              "selections": Array [
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "avatarUrl",
+                                                  "storageKey": null,
+                                                },
+                                              ],
+                                              "type": "Contributor",
+                                            },
+                                            Object {
+                                              "abstractKey": "__isAuthor",
+                                              "kind": "InlineFragment",
+                                              "selections": Array [
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "avatarUrl",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "url",
+                                                  "storageKey": null,
+                                                },
+                                              ],
+                                              "type": "Author",
+                                            },
+                                          ],
+                                          "type": "Node",
                                         },
                                       ],
                                       "storageKey": null,
@@ -1622,8 +1717,60 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                           "storageKey": null,
                                         },
                                         Object {
-                                          "abstractKey": "__isContributor",
-                                          "kind": "TypeDiscriminator",
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "displayName",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "username",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "abstractKey": "__isNode",
+                                          "kind": "InlineFragment",
+                                          "selections": Array [
+                                            Object {
+                                              "abstractKey": "__isContributor",
+                                              "kind": "InlineFragment",
+                                              "selections": Array [
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "avatarUrl",
+                                                  "storageKey": null,
+                                                },
+                                              ],
+                                              "type": "Contributor",
+                                            },
+                                            Object {
+                                              "abstractKey": "__isAuthor",
+                                              "kind": "InlineFragment",
+                                              "selections": Array [
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "avatarUrl",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "url",
+                                                  "storageKey": null,
+                                                },
+                                              ],
+                                              "type": "Author",
+                                            },
+                                          ],
+                                          "type": "Node",
                                         },
                                         Object {
                                           "abstractKey": null,
@@ -1670,27 +1817,6 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                             },
                                           ],
                                           "type": "User",
-                                        },
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "username",
-                                          "storageKey": null,
-                                        },
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "avatarUrl",
-                                          "storageKey": null,
-                                        },
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "displayName",
-                                          "storageKey": null,
                                         },
                                       ],
                                       "storageKey": null,
@@ -1892,7 +2018,7 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
               ],
             },
             "params": Object {
-              "cacheID": "349caafc4f86a062e22c437f2c37c8ce",
+              "cacheID": "271aea0b4a5987b33c739a3b86a62d36",
               "id": null,
               "metadata": Object {},
               "name": "ProjectTrashQuery",
@@ -2275,16 +2401,23 @@ fragment UnpublishedTooltip_publishable on Publishable {
   notPublishedReason
 }
 
-fragment UserAvatar_user on Contributor {
-  __isContributor: __typename
-  ... on User {
+fragment UserAvatar_user on Node {
+  __isNode: __typename
+  ... on Contributor {
+    __isContributor: __typename
+    username
+    avatarUrl
+  }
+  ... on Author {
+    __isAuthor: __typename
+    username
+    avatarUrl
     url
   }
-  username
-  avatarUrl
 }
 
-fragment UserLink_user on User {
+fragment UserLink_user on Author {
+  __isAuthor: __typename
   displayName
   url
 }

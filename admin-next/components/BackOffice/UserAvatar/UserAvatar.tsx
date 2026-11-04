@@ -6,9 +6,7 @@ import type { UserAvatar_user$key } from '@relay/UserAvatar_user.graphql'
 const FRAGMENT = graphql`
   fragment UserAvatar_user on User {
     displayName
-    media {
-      url
-    }
+    avatarUrl
   }
 `
 
@@ -21,7 +19,7 @@ export const UserAvatar: FC<UserAvatarProps> = ({ user: userFragment, alt, ...pr
 
   if (!user) return null
 
-  return <Avatar name={user.displayName} src={user.media?.url} alt={alt ?? user.displayName} {...props} />
+  return <Avatar name={user.displayName} src={user.avatarUrl} alt={alt ?? user.displayName} {...props} />
 }
 
 export default UserAvatar

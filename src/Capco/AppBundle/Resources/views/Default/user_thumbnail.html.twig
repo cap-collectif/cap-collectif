@@ -1,8 +1,9 @@
 {% if private is not defined %}
     {% set private = false %}
 {% endif %}
+{% set authorProfile = user|capco_author_profile(private) %}
 {% if user is not null %}
-    {% set username = user.username %}
+    {% set username = authorProfile.name %}
 {% elseif username is defined %}
     {% set username = username %}
 {% endif %}
@@ -16,14 +17,10 @@
 
         <div class="media-body">
             <p class="{% if user is not null and not private %}media-heading{% else %}media--aligned{% endif %} media--macro__user">
-                {% if user is not null and not private %}
-                    {% if is_feature_enabled('profiles') %}
-                        <a href="{{ path('capco_user_profile_show_all', {'slug': user.slug}) }}">{{ username|trans({}, 'CapcoAppBundle') }}</a>
-                    {% else %}
-                        {{ username|trans({}, 'CapcoAppBundle') }}
-                    {% endif %}
+                {% if authorProfile.url %}
+                    <a href="{{ authorProfile.url }}">{{ username }}</a>
                 {% else %}
-                    {{ username|trans({}, 'CapcoAppBundle') }}
+                    {{ username }}
                 {% endif %}
             </p>
             <span class="excerpt">

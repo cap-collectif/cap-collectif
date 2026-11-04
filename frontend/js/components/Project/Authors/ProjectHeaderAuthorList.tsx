@@ -33,7 +33,7 @@ const ProjectHeaderAuthorList = ({ project }: Props): JSX.Element => {
     const firstAuthor = data.authors[0]
 
     if (data.authors.length === 1) {
-      const showProfileLink = profilesToggle || firstAuthor.__typename === 'Organization'
+      const showProfileLink = !!firstAuthor.url && (profilesToggle || firstAuthor.__typename === 'Organization')
       return (
         <ProjectHeaderLayout.Authors
           active={showProfileLink}

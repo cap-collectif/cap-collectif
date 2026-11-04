@@ -29,8 +29,12 @@ const FRAGMENT = graphql`
     adminUrl
     url
     authors {
+      __typename
       url
       username
+      ... on User {
+        isAnonymized
+      }
     }
     isPublished
     publishedAt
@@ -73,6 +77,8 @@ const PostItem: React.FC<PostItemProps> = ({ post: postFragment, viewer: viewerF
   const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment)
   const { isAdmin, isAdminOrganization } = viewer
   const intl = useIntl()
+  const author = post.authors[0]
+  const isAuthorAnonymized = author?.__typename === 'User' && author.isAnonymized
   const viewerBelongsToAnOrganization = (viewer.organizations?.length ?? 0) > 0
   const canDelete = viewerBelongsToAnOrganization ? viewer?.isAdminOrganization || viewer.id === post.creator?.id : true
   const project = post.relatedContent.filter(content => content.__typename === 'Project')[0]
@@ -113,7 +119,8 @@ const PostItem: React.FC<PostItemProps> = ({ post: postFragment, viewer: viewerF
       </Table.Td>
       {isAdmin && (
         <Table.Td>
-          {post.authors.length > 0 && <Link href={post.authors[0].url}>{post.authors[0].username}</Link>}
+          {author &&
+            (author.url && !isAuthorAnonymized ? <Link href={author.url}>{author.username}</Link> : author.username)}
         </Table.Td>
       )}
       {isAdmin || isAdminOrganization ? <Table.Td>{post.owner?.username}</Table.Td> : null}

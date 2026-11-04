@@ -76,12 +76,13 @@ const StatusTag = ({ reply, intl }: { reply: ReplyItem_reply$data; intl: IntlSha
 
 const getUsername = (reply: ReplyItem_reply$data, intl: IntlShape) => {
   if (reply.isAnonymous) {
-    return intl.formatMessage({ id: 'no-account-user' });
+    return intl.formatMessage({ id: 'no-account-user' })
   }
 
-  if (reply.contributor?.username === 'deleted-user') {
+  const username = reply.contributor?.username
+  if (username === 'deleted-user' || username === 'global.user.anonymized') {
     return intl.formatMessage({
-      id: 'deleted-user',
+      id: username,
     })
   }
 

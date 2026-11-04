@@ -9,6 +9,7 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ProposalStepInterface;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\ExportVariantsEnum;
+use Capco\AppBundle\GraphQL\Resolver\User\ContributorNameResolver;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -19,6 +20,7 @@ class ProposalVoteExporter
         private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository,
         private readonly TranslatorInterface $translator,
+        private readonly ContributorNameResolver $contributorNameResolver,
         private readonly ExportProposalVoteFullDataTransformer $exportProposalVoteFullDataTransformer,
         private readonly ExportProposalVoteGroupedDataTransformer $exportProposalVoteGroupedDataTransformer,
     ) {}
@@ -51,6 +53,9 @@ class ProposalVoteExporter
         $variantData = $this->prepareVariantData($variants, $proposalData, $step);
 
         foreach ($votes as $vote) {
+            if ($vote['author_is_anonymized']) {
+                $vote['author_username'] = $this->contributorNameResolver->anonymizedName();
+            }
             foreach ($variantData as $variantName => $data) {
                 $voteData = $this->transformVoteForVariant(
                     variantName: $variantName,

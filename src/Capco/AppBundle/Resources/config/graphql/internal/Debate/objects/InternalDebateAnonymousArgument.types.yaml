@@ -17,6 +17,7 @@ InternalDebateAnonymousArgument:
                 type: Email!
                 description: 'Email'
             username:
+                resolve: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ContributorNameResolver").resolveUsername(value)'
                 type: String
                 description: 'Username (not mandatory)'
             consentInternalCommunication:

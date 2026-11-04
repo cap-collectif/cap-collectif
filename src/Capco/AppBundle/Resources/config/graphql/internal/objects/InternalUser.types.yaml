@@ -29,6 +29,14 @@ InternalUser:
             - InternalConsultationOwner
             - Author
         fields:
+            # Keep anonymization fields explicit to preserve PreviewUser/Author inheritance precedence.
+            username:
+                description: "The user's public name."
+                resolve: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ContributorNameResolver").resolveUsername(value)'
+            isAnonymized:
+                type: 'Boolean!'
+                description: 'Whether this contributor has been anonymized.'
+                resolve: '@=value.isAnonymized()'
             adminUrl:
                 type: 'URI!'
                 description: "The user's admin edit url"
@@ -40,6 +48,7 @@ InternalUser:
             displayName:
                 type: 'String!'
                 description: "The user's public profile name."
+                resolve: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ContributorNameResolver").resolveDisplayName(value)'
             # TODO rename this to `isVip`
             vip:
                 type: 'Boolean!'

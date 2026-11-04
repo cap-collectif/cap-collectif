@@ -15,7 +15,7 @@
         'url':         url('app_project_show_opinion_version', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'versionSlug': version.slug}),
         'type':        'article',
         'image':       projectCover,
-        'author':      is_feature_enabled('profiles') ? url('capco_user_profile_show_all', {'slug': opinion.Author.slug}) : null
+        'author':      (opinion.author|capco_author_profile).url ? absolute_url((opinion.author|capco_author_profile).url) : null
     } only %}
 {% endblock %}
 

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { FormattedMessage } from 'react-intl'
 
-export const TO_TRANSLATE = ['deleted-title', 'deleted-content-by-author', 'deleted-user']
+export const TO_TRANSLATE = ['deleted-title', 'deleted-content-by-author', 'deleted-user', 'global.user.anonymized']
 
 export const isPredefinedTraductionKey = (value: string): boolean => {
   return TO_TRANSLATE.includes(value)

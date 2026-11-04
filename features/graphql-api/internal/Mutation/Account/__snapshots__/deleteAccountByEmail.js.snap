@@ -43,13 +43,13 @@ Object {
     "deletedAccountAt": Any<String>,
     "email": null,
     "id": "VXNlcjplbWFpbGluZ1VzZXIxNw==",
-    "username": "Utilisateur supprimé",
+    "username": "global.user.anonymized",
   },
   "closedVote": Object {
     "author": Object {
       "email": null,
       "id": "VXNlcjplbWFpbGluZ1VzZXIxNw==",
-      "username": "Utilisateur supprimé",
+      "username": "global.user.anonymized",
     },
     "createdAt": "2025-08-03 00:00:00",
     "id": "2074",
@@ -265,13 +265,13 @@ Object {
     "deletedAccountAt": Any<String>,
     "email": null,
     "id": "VXNlcjp1c2VyNQ==",
-    "username": "Utilisateur supprimé",
+    "username": "global.user.anonymized",
   },
   "closedArgument": Object {
     "author": Object {
       "email": null,
       "id": "VXNlcjp1c2VyNQ==",
-      "username": "Utilisateur supprimé",
+      "username": "global.user.anonymized",
     },
     "body": "<p>Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus.</p>",
     "id": "QXJndW1lbnQ6YXJndW1lbnQxNDg=",
@@ -281,7 +281,7 @@ Object {
     "author": Object {
       "email": null,
       "id": "VXNlcjp1c2VyNQ==",
-      "username": "Utilisateur supprimé",
+      "username": "global.user.anonymized",
     },
     "body": "<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>",
     "id": "T3BpbmlvbjpvcGluaW9uNTE=",
@@ -291,7 +291,7 @@ Object {
     "author": Object {
       "email": null,
       "id": "VXNlcjp1c2VyNQ==",
-      "username": "Utilisateur supprimé",
+      "username": "global.user.anonymized",
     },
     "body": "TODO",
     "estimation": 100,
@@ -308,7 +308,7 @@ Object {
             "author": Object {
               "email": null,
               "id": "VXNlcjp1c2VyNQ==",
-              "username": "Utilisateur supprimé",
+              "username": "global.user.anonymized",
             },
             "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
             "id": "Q29tbWVudDpwcm9wb3NhbENvbW1lbnQzMg==",
@@ -320,7 +320,7 @@ Object {
             "author": Object {
               "email": null,
               "id": "VXNlcjp1c2VyNQ==",
-              "username": "Utilisateur supprimé",
+              "username": "global.user.anonymized",
             },
             "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
             "id": "Q29tbWVudDpwcm9wb3NhbENvbW1lbnQzMQ==",
@@ -332,7 +332,7 @@ Object {
             "author": Object {
               "email": null,
               "id": "VXNlcjp1c2VyNQ==",
-              "username": "Utilisateur supprimé",
+              "username": "global.user.anonymized",
             },
             "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
             "id": "Q29tbWVudDpwcm9wb3NhbENvbW1lbnQzMA==",
@@ -344,7 +344,7 @@ Object {
             "author": Object {
               "email": null,
               "id": "VXNlcjp1c2VyNQ==",
-              "username": "Utilisateur supprimé",
+              "username": "global.user.anonymized",
             },
             "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
             "id": "Q29tbWVudDpwcm9wb3NhbENvbW1lbnQyOQ==",
@@ -356,7 +356,7 @@ Object {
             "author": Object {
               "email": null,
               "id": "VXNlcjp1c2VyNQ==",
-              "username": "Utilisateur supprimé",
+              "username": "global.user.anonymized",
             },
             "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
             "id": "Q29tbWVudDpwcm9wb3NhbENvbW1lbnQyOA==",
@@ -369,7 +369,7 @@ Object {
     "author": Object {
       "email": null,
       "id": "VXNlcjp1c2VyNQ==",
-      "username": "Utilisateur supprimé",
+      "username": "global.user.anonymized",
     },
     "body": "<i>L’exactitude des informations ci-dessous relève uniquement de la responsabilité de l’organisateur de l’évènement“</i> <h2>Objet</h2> exprimer et échanger sur les réformes qui vous semblent nécessaires <h2>Public attendu</h2> Cet événement est ouvert au public dans la limite de 30 participants, sans inscription. Pour participer, rendez-vous à l’heure dite et au lieu indiqué.",
     "enabled": true,
@@ -385,7 +385,7 @@ Object {
     "author": Object {
       "email": null,
       "id": "VXNlcjp1c2VyNQ==",
-      "username": "Utilisateur supprimé",
+      "username": "global.user.anonymized",
     },
     "body": "Coucou, je suis un bel argument !",
     "id": "QXJndW1lbnQ6YXJndW1lbnQx",
@@ -395,7 +395,7 @@ Object {
     "author": Object {
       "email": null,
       "id": "VXNlcjp1c2VyNQ==",
-      "username": "Utilisateur supprimé",
+      "username": "global.user.anonymized",
     },
     "body": "<p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>",
     "id": "T3BpbmlvbjpvcGluaW9uMTA1",
@@ -405,7 +405,7 @@ Object {
     "author": Object {
       "email": null,
       "id": "VXNlcjp1c2VyNQ==",
-      "username": "Utilisateur supprimé",
+      "username": "global.user.anonymized",
     },
     "body": "<p>On va en faire un beau gymnase, promis :)</p>",
     "estimation": null,
@@ -417,7 +417,7 @@ Object {
     "author": Object {
       "email": null,
       "id": "VXNlcjp1c2VyNQ==",
-      "username": "Utilisateur supprimé",
+      "username": "global.user.anonymized",
     },
     "body": "blabla",
     "id": "U291cmNlOnNvdXJjZTE=",
@@ -428,7 +428,7 @@ Object {
     "author": Object {
       "email": null,
       "id": "VXNlcjp1c2VyNQ==",
-      "username": "Utilisateur supprimé",
+      "username": "global.user.anonymized",
     },
     "createdAt": "2017-02-01 00:00:53",
     "id": "1053",

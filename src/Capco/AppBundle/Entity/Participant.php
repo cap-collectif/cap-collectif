@@ -577,6 +577,11 @@ class Participant implements EntityInterface, ContributorInterface, IndexableInt
         return $this->anonymizedAt;
     }
 
+    public function isAnonymized(): bool
+    {
+        return null !== $this->anonymizedAt;
+    }
+
     public function setAnonymizedAt(?\DateTime $anonymizedAt): self
     {
         $this->anonymizedAt = $anonymizedAt;

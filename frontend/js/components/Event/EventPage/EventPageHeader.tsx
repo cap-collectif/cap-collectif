@@ -262,11 +262,11 @@ export const EventPageHeader = ({ queryRef }: Props) => {
             </Tag>
           ) : (
             <Authors
-              active={profilesToggle}
+              active={profilesToggle && !!author?.url}
               style={{
-                cursor: profilesToggle ? 'pointer' : 'default',
+                cursor: profilesToggle && author?.url ? 'pointer' : 'default',
               }}
-              onClick={() => (profilesToggle ? window.open(author?.url, '_self') : null)}
+              onClick={() => (profilesToggle && author?.url ? window.open(author.url, '_self') : null)}
               authors={author ? [author] : null}
             >
               <Avatar key={author?.id} name={author?.username} src={author?.avatarUrl} />

@@ -76,7 +76,7 @@ const ProjectHeaderAuthorsModalLegacy = ({ show, onClose, project }: Props): JSX
               <div className="d-flex">
                 <UserAvatar user={user} />
                 <div className="d-flex fd-column">
-                  {profilesToggle ? (
+                  {profilesToggle && user.url ? (
                     <a href={user.url}>{user.username}</a>
                   ) : (
                     <span className="font-weight-bold">{user.username}</span>

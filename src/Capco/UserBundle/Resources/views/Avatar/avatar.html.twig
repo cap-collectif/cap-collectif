@@ -1,7 +1,7 @@
 {% if private is not defined %}
     {% set private = false %}
 {% endif %}
-{%  set avatar = (user is not null and not private) ? user.media|capco_default_avatar : null %}
+{% set author = user|capco_author_profile(private) %}
 {% set format = (format is defined) ? format : 'avatar' %}
 {% if format == 'avatar' %}
     {% set width = 'lg' %}
@@ -12,20 +12,14 @@
 {% endif %}
 {% set classes = (classes is defined) ? ' ' ~ classes : '' %}
 
-{% if user is not null and not private and is_feature_enabled('profiles') %}
-
-    {% set profile_url = 'capco_user_profile_show_all' %}
-    {% if user is instanceof('Capco\\AppBundle\\Entity\\Organization\\Organization') %}
-        {% set profile_url = 'capco_organization_profile_show_all' %}
-    {% endif %}
-
-    <a {% if link_classes is defined %}class="{{ link_classes }}"{% endif %} href="{{ path(profile_url, {'slug': user.slug}) }}" title="{{ 'usernames-profile'|trans({'userName': user.username}, 'CapcoAppBundle') }}">
-        <span style="display: none" class="mr-10">{{ user.username }}</span>
+{% if author.url %}
+    <a {% if link_classes is defined %}class="{{ link_classes }}"{% endif %} href="{{ author.url }}" title="{{ 'usernames-profile'|trans({'userName': author.name}, 'CapcoAppBundle') }}">
+        <span style="display: none" class="mr-10">{{ author.name }}</span>
 {% else %}
     <span {% if link_classes is defined %}class="{{ link_classes }}"{% endif %}>
 {% endif %}
-     {{ react_render_component('UserAvatarApp', { 'props': {'userId': user.id|toGlobalId('User'), 'size': width } }) }}
-{% if user is not null and not private and is_feature_enabled('profiles') %}
+     {{ react_render_component('UserAvatarApp', { 'props': {'userId': author.globalId, 'size': width } }) }}
+{% if author.url %}
     </a>
 {% else %}
     </span>

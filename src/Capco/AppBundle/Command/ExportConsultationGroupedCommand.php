@@ -15,6 +15,7 @@ use Capco\AppBundle\Enum\ExportHeaders;
 use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\GraphQL\Resolver\Argument\ArgumentUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionUrlResolver;
+use Capco\AppBundle\GraphQL\Resolver\User\ContributorNameResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
@@ -107,6 +108,7 @@ class ExportConsultationGroupedCommand extends BaseExportCommand
         private readonly Stopwatch $stopwatch,
         private readonly EntityManagerInterface $em,
         private readonly TranslatorInterface $translator,
+        private readonly ContributorNameResolver $contributorNameResolver,
         private readonly ContributionsFilePathResolver $contributionsFilePathResolver,
         private readonly UserUrlResolver $userUrlResolver,
         private readonly CsvDataFormatter $csvDataFormatter,
@@ -371,7 +373,7 @@ class ExportConsultationGroupedCommand extends BaseExportCommand
     private function setParticipantData(array $opinionArray, User $author): array
     {
         $opinionArray[ExportHeaders::EXPORT_CONTRIBUTION_AUTHOR_ID] = $author->getId();
-        $opinionArray[ExportHeaders::EXPORT_PARTICIPANT_USERNAME] = $author->getUsername();
+        $opinionArray[ExportHeaders::EXPORT_PARTICIPANT_USERNAME] = $this->contributorNameResolver->resolveUsername($author);
         $opinionArray[ExportHeaders::EXPORT_PARTICIPANT_USER_EMAIL] = $author->getEmail();
         $opinionArray[ExportHeaders::EXPORT_PARTICIPANT_CONSENT_INTERNAL_COMMUNICATION] = $this->csvDataFormatter->getReadableBoolean($author->isConsentInternalCommunication());
         $opinionArray[ExportHeaders::EXPORT_PARTICIPANT_PHONE] = $author->getPhone();

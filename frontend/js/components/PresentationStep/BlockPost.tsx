@@ -250,7 +250,7 @@ export const BlockPost = ({ post: dataPost }: Props) => {
               {authors.map((author, idx) => {
                 let username
 
-                if (profiles) {
+                if (profiles && author.url) {
                   username = <a href={author.url}>{author.username}</a>
                 } else username = <span>{author.username}</span>
 

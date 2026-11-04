@@ -45,7 +45,7 @@ class ProposalNewsCommentReporting extends BaseNormalizer implements NormalizerI
                 self::EXPORT_PROPOSAL_NEWS_COMMENTS_REPORTINGS_ID => $object->getId(),
                 self::EXPORT_PROPOSAL_NEWS_COMMENTS_REPORTINGS_CREATED_AT => $this->getNullableDatetime($object->getCreatedAt()),
                 self::EXPORT_PROPOSAL_NEWS_COMMENTS_REPORTINGS_AUTHOR_ID => $author?->getId(),
-                self::EXPORT_PROPOSAL_NEWS_COMMENTS_REPORTINGS_AUTHOR_USERNAME => $author?->getUsername(),
+                self::EXPORT_PROPOSAL_NEWS_COMMENTS_REPORTINGS_AUTHOR_USERNAME => $this->contributorNameResolver->resolveUsername($author),
                 self::EXPORT_PROPOSAL_NEWS_COMMENTS_REPORTINGS_AUTHOR_IS_EMAIL_CONFIRMED => $author?->isEmailConfirmed(),
                 self::EXPORT_PROPOSAL_NEWS_COMMENTS_REPORTINGS_AUTHOR_USER_TYPE_ID => $userType?->getId(),
                 self::EXPORT_PROPOSAL_NEWS_COMMENTS_REPORTINGS_AUTHOR_USER_TYPE_NAME => $userType?->getName(),

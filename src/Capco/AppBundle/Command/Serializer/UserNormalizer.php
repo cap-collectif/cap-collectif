@@ -41,7 +41,7 @@ class UserNormalizer extends BaseNormalizer implements NormalizerInterface
 
         $userArray = [
             self::EXPORT_PARTICIPANT_USER_ID => $object->getId(),
-            self::EXPORT_PARTICIPANT_USERNAME => $object->getUsername(),
+            self::EXPORT_PARTICIPANT_USERNAME => $this->contributorNameResolver->resolveUsername($object),
             self::EXPORT_PARTICIPANT_USER_EMAIL => $object->getEmail(),
             self::EXPORT_PARTICIPANT_USER_IS_EMAIL_CONFIRMED => $this->getReadableBoolean($object->isEmailConfirmed()),
             self::EXPORT_PARTICIPANT_USER_ROLES_TEXT => $this->userRolesTextResolver->resolve($object),

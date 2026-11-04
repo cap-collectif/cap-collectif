@@ -4,13 +4,18 @@ namespace Capco\Tests\Normalizer;
 
 use Capco\AppBundle\Command\Serializer\BaseNormalizer;
 use Capco\AppBundle\Command\Serializer\ParticipantNormalizer;
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Security\UserIdentificationCode;
 use Capco\AppBundle\Enum\ExportVariantsEnum;
 use Capco\AppBundle\GraphQL\Resolver\User\UserRolesTextResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserUrlResolver;
 use Capco\UserBundle\Entity\User;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Translation\Loader\ArrayLoader;
+use Symfony\Component\Translation\Translator;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -35,6 +40,27 @@ class ParticipantNormalizerTest extends TestCase
         $translator->method('trans')
             ->willReturnCallback(fn ($key) => $key)
         ;
+    }
+
+    public function testCsvTranslatesOnlyAnonymizedParticipantNames(): void
+    {
+        $key = 'global.user.anonymized';
+        $translator = new Translator('fr-FR');
+        $translator->addLoader('array', new ArrayLoader());
+        $translator->addResource('array', [$key => 'Profil anonymisé'], 'fr-FR', 'CapcoAppBundle');
+
+        $normalizer = new ParticipantNormalizer($this->createStub(UserRolesTextResolver::class), $this->createStub(UserUrlResolver::class), $translator);
+        $serializer = new Serializer([$normalizer], [new CsvEncoder()]);
+        $active = (new Participant())->setUsername($key);
+        $anonymized = (new Participant())->setUsername($key)->setAnonymizedAt(new \DateTime());
+
+        $csv = $serializer->serialize([$anonymized, $active], 'csv', [
+            BaseNormalizer::IS_EXPORT_NORMALIZER => true,
+            BaseNormalizer::EXPORT_VARIANT => ExportVariantsEnum::SIMPLIFIED,
+        ]);
+
+        $rows = $serializer->decode($csv, 'csv');
+        self::assertSame(['Profil anonymisé', $key], array_column($rows, 'export_participant_username'));
     }
 
     /**

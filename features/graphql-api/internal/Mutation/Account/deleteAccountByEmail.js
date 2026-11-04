@@ -199,8 +199,8 @@ const ClosedVoteQuery = /* GraphQL */ `
 const anonymizeAccount = email => graphql(DeleteAccountByEmailMutation, { input: { email } }, 'internal_super_admin')
 
 /**
- * @jest-status non-compliant
- * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ * @jest-status compliant
+ * @jest-reason Checks persisted account anonymization and preserved content over HTTP; snapshots supplement explicit identity and content assertions.
  */
 describe('mutations.deleteAccountByEmail', () => {
   it('preserves content in open and closed steps while anonymizing its author', async () => {
@@ -217,13 +217,49 @@ describe('mutations.deleteAccountByEmail', () => {
       openVoteId: 'QWJzdHJhY3RWb3RlOjEwNTM=', // AbstractVote:1053
       eventId: 'RXZlbnQ6ZXZlbnQx', // Event:event1
     }
-    await expect(graphql(UserContentQuery, variables, 'internal_super_admin')).resolves.toMatchSnapshot()
+    const before = await graphql(UserContentQuery, variables, 'internal_super_admin')
+    expect(before.account.email).toBe('user@test.com')
+    expect(before.account.deletedAccountAt).toBeNull()
+    expect(before).toMatchSnapshot()
 
-    await expect(anonymizeAccount('user@test.com')).resolves.toMatchSnapshot()
+    const result = await anonymizeAccount('user@test.com')
+    expect(result).toEqual({ deleteAccountByEmail: { email: 'user@test.com', errorCode: null } })
+    expect(result).toMatchSnapshot()
 
-    await expect(graphql(UserContentQuery, variables, 'internal_super_admin')).resolves.toMatchSnapshot({
-      account: { deletedAccountAt: expect.any(String) },
+    const after = await graphql(UserContentQuery, variables, 'internal_super_admin')
+    const identity = { id: variables.accountId, username: 'global.user.anonymized', email: null }
+    expect(after.account).toEqual({ ...identity, deletedAccountAt: expect.any(String) })
+    for (const field of [
+      'openProposal',
+      'closedProposal',
+      'openOpinion',
+      'closedOpinion',
+      'openSource',
+      'openArgument',
+      'closedArgument',
+      'openVote',
+      'event',
+    ]) {
+      expect(after[field]).toEqual({ ...before[field], author: identity })
+    }
+    expect(after.commentableProposal).toEqual({
+      ...before.commentableProposal,
+      comments: {
+        ...before.commentableProposal.comments,
+        edges: before.commentableProposal.comments.edges.map(edge => ({
+          ...edge,
+          node: {
+            ...edge.node,
+            author: edge.node.author.id === variables.accountId ? identity : edge.node.author,
+            answers: edge.node.answers.map(answer => ({
+              ...answer,
+              author: answer.author.id === variables.accountId ? identity : answer.author,
+            })),
+          },
+        })),
+      },
     })
+    expect(after).toMatchSnapshot({ account: { deletedAccountAt: expect.any(String) } })
   })
 
   it('preserves a vote in a closed step while anonymizing its author', async () => {
@@ -231,12 +267,19 @@ describe('mutations.deleteAccountByEmail', () => {
       accountId: 'VXNlcjplbWFpbGluZ1VzZXIxNw==', // User:emailingUser17
       closedVoteId: 'QWJzdHJhY3RWb3RlOjIwNzQ=', // AbstractVote:2074
     }
-    await expect(graphql(ClosedVoteQuery, variables, 'internal_super_admin')).resolves.toMatchSnapshot()
+    const before = await graphql(ClosedVoteQuery, variables, 'internal_super_admin')
+    expect(before.account.email).toBe('emailing.user17@fake-email.com')
+    expect(before.account.deletedAccountAt).toBeNull()
+    expect(before).toMatchSnapshot()
 
-    await expect(anonymizeAccount('emailing.user17@fake-email.com')).resolves.toMatchSnapshot()
+    const result = await anonymizeAccount('emailing.user17@fake-email.com')
+    expect(result).toEqual({ deleteAccountByEmail: { email: 'emailing.user17@fake-email.com', errorCode: null } })
+    expect(result).toMatchSnapshot()
 
-    await expect(graphql(ClosedVoteQuery, variables, 'internal_super_admin')).resolves.toMatchSnapshot({
-      account: { deletedAccountAt: expect.any(String) },
-    })
+    const after = await graphql(ClosedVoteQuery, variables, 'internal_super_admin')
+    const identity = { id: variables.accountId, username: 'global.user.anonymized', email: null }
+    expect(after.account).toEqual({ ...identity, deletedAccountAt: expect.any(String) })
+    expect(after.closedVote).toEqual({ ...before.closedVote, author: identity })
+    expect(after).toMatchSnapshot({ account: { deletedAccountAt: expect.any(String) } })
   })
 })

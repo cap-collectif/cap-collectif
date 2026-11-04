@@ -48,7 +48,7 @@ class ProposalCommentVoteNormalizer extends BaseNormalizer implements Normalizer
                 self::EXPORT_PROPOSAL_COMMENTS_VOTE_CREATED_AT => $this->getNullableDatetime($object->getCreatedAt()),
                 self::EXPORT_PROPOSAL_COMMENTS_VOTE_PUBLISHED_AT => $this->getNullableDatetime($object->getPublishedAt()),
                 self::EXPORT_PROPOSAL_COMMENTS_VOTE_AUTHOR_ID => $commentAuthor?->getId(),
-                self::EXPORT_PROPOSAL_COMMENTS_VOTE_AUTHOR_USERNAME => $commentAuthor?->getUsername(),
+                self::EXPORT_PROPOSAL_COMMENTS_VOTE_AUTHOR_USERNAME => $this->contributorNameResolver->resolveUsername($commentAuthor),
                 self::EXPORT_PROPOSAL_COMMENTS_VOTE_AUTHOR_IS_EMAIL_CONFIRMED => null !== $commentAuthor ? $this->getReadableBoolean($commentAuthor->isEmailConfirmed()) : null,
                 self::EXPORT_PROPOSAL_COMMENTS_VOTE_AUTHOR_USER_TYPE_ID => $commentAuthorUserType ? $commentAuthorUserType->getId() : null,
                 self::EXPORT_PROPOSAL_COMMENTS_VOTE_AUTHOR_USER_TYPE_NAME => $commentAuthorUserType ? $commentAuthorUserType->getName() : null,

@@ -3650,6 +3650,9 @@ interface Contributor {
   """The contributor's display name."""
   displayName: String!
   username: String
+
+  """Whether this contributor has been anonymized."""
+  isAnonymized: Boolean!
   email: String
   firstname: String
   lastname: String
@@ -11669,6 +11672,9 @@ type Participant implements Node & Contributor {
   """The contributor's display name."""
   displayName: String!
   username: String
+
+  """Whether this contributor has been anonymized."""
+  isAnonymized: Boolean!
   email: String
   firstname: String
   lastname: String
@@ -23684,7 +23690,7 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
   """Author ID"""
   id: ID!
 
-  """Author username"""
+  """The user's public name."""
   username: String
 
   """The user profile URL."""
@@ -23981,6 +23987,9 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
   """The user's public avatar file."""
   media: Media
   isProjectAdmin: Boolean!
+
+  """Whether this contributor has been anonymized."""
+  isAnonymized: Boolean!
 
   """The user's admin edit url"""
   adminUrl: URI!

@@ -731,6 +731,13 @@ class User extends AbstractUser implements EntityInterface, ProjectOwner, Equata
         return $this->email ?? '';
     }
 
+    // TODO: Harmonize anonymization flows and consistently populate deletedAccountAt and anonymizedAt.
+    // Manual/API and CSV anonymization currently set only deletedAccountAt, while automated flows set both timestamps.
+    public function isAnonymized(): bool
+    {
+        return null !== $this->deletedAccountAt || null !== $this->anonymizedAt;
+    }
+
     public function getUsername(): ?string
     {
         return $this->username;

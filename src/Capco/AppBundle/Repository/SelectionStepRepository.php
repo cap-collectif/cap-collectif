@@ -37,7 +37,8 @@ class SelectionStepRepository extends AbstractStepRepository
 
     public function findProjectMediatorsProposalsVotes(string $projectId): array
     {
-        $sql = 'SELECT v.id as vote_id, v.proposal_id, p.title, p.reference, v.created_at, v.is_accounted, v.position, v.participant_id, p2.lastname, p2.firstname, p2.date_of_birth, p2.postal_address, p2.email, p2.phone, u.id as mediator_id, u.username
+        $sql = 'SELECT v.id as vote_id, v.proposal_id, p.title, p.reference, v.created_at, v.is_accounted, v.position, v.participant_id, p2.lastname, p2.firstname, p2.date_of_birth, p2.postal_address, p2.email, p2.phone, u.id as mediator_id, u.username,
+                       (u.deleted_account_at IS NOT NULL OR u.anonymized_at IS NOT NULL) AS mediator_is_anonymized
                 FROM votes v
                          JOIN project_abstractstep pas on v.selection_step_id = pas.step_id
                          JOIN proposal p on v.proposal_id = p.id

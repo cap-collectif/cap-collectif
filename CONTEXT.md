@@ -6,6 +6,21 @@ This context defines terms whose meaning must remain consistent across the platf
 
 **Account anonymization**:
 The irreversible removal of identifying and personal data from a user account while retaining an anonymous author identity and leaving its associated content unchanged.
+Anonymized accounts expose the stable `global.user.anonymized` name key, translated at display
+time using the Loco catalog (“Profil anonymisé” in French), with the neutral
+`public/svg/anonymized-profile.svg` avatar and no public profile link. This also
+applies to accounts anonymized before this display convention was introduced:
+migration `Version20261020120000` replaces their stored legacy name with
+`global.user.anonymized` in users, participants and anonymous debate arguments. New
+anonymizations store this key directly; entity getters return the stored name.
+The legacy `deleted-user` translation keeps its original meaning; the anonymized
+profile label uses its own Loco entry, `global.user.anonymized`. CSV exports use the
+same localized name. If the label is missing in the current locale, the French
+catalog supplies the fallback.
+The internal GraphQL `Contributor.isAnonymized` field exposes the domain status:
+either account timestamp for users, or `anonymizedAt` for participants. UI behavior
+uses this status rather than inferring it from the profile name or avatar URL.
+
 _Avoid_: Soft deletion, content anonymization
 
 **Associated content**:

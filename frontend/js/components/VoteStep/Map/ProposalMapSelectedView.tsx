@@ -47,11 +47,7 @@ const FRAGMENT: GraphQLTaggedNode = graphql`
     author {
       username
       displayName
-      ...on User {
-        media {
-          url
-        }
-      }
+      avatarUrl
     }
     ...VoteButton_proposal @arguments(isAuthenticated: $isAuthenticated, stepId: $stepId)
   }
@@ -164,7 +160,7 @@ export const ProposalMapSelectedView = ({
         </Link>
         <Flex justifyContent="space-between" alignItems="start" direction="column" mt={4}>
           <Flex alignItems="center" spacing={2}>
-            <Avatar src={author.media?.url} alt={authorName} name={authorName} />
+            <Avatar src={author.avatarUrl} alt={authorName} name={authorName} />
             <Text as="span" fontSize={CapUIFontSize.BodySmall} color="gray.500">
               {authorName}
             </Text>

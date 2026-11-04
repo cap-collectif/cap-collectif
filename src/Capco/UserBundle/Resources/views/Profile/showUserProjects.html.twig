@@ -4,7 +4,7 @@
 {% block canonical_link %}{{ url('capco_user_profile_show_projects', {'slug': user.slug}) }}{% endblock %}
 
 {% block title %}
-    {{ parent() }} - {{ 'usernames-profile'|trans({'userName': user.username }, 'CapcoAppBundle') }}
+    {{ parent() }} - {{ 'usernames-profile'|trans({'userName': (user|capco_author_profile).name }, 'CapcoAppBundle') }}
 {% endblock %}
 
 {% block jumbotron %}{% endblock %}

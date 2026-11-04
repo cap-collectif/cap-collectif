@@ -5,14 +5,11 @@
                 {% if authors|length > 0 %}
                     {% for author in authors %}
                         {% include '@CapcoUser/Avatar/avatar.html.twig' with { 'user': author.author, 'classes': 'media-object media--news__author'} only %}
-                        {% set profile_url = 'capco_user_profile_show_all' %}
-                        {% if author.author is instanceof('Capco\\AppBundle\\Entity\\Organization\\Organization') %}
-                            {% set profile_url = 'capco_organization_profile_show_all' %}
-                        {% endif %}
+                        {% set authorProfile = author.author|capco_author_profile %}
 
-                        {% if is_feature_enabled('profiles') %}
-                            <a href="{{ path(profile_url, { slug: author.author.slug })}}">
-                                {{ author.author.username }}</a>{% else %}<span>{{ author.author.username }}</span>{% endif %}{% if loop.revindex0 == '1' %}{{ 'blog.and' | trans({}, 'CapcoAppBundle') }}{% elseif loop.revindex0 >= '2' %}, {% endif %}{% endfor %},
+                        {% if authorProfile.url %}
+                            <a href="{{ authorProfile.url }}">
+                                {{ authorProfile.name }}</a>{% else %}<span>{{ authorProfile.name }}</span>{% endif %}{% if loop.revindex0 == '1' %}{{ 'blog.and' | trans({}, 'CapcoAppBundle') }}{% elseif loop.revindex0 >= '2' %}, {% endif %}{% endfor %},
 
                 {% endif %}
                 {% if is_feature_enabled('themes') and themes | length > 0 %}

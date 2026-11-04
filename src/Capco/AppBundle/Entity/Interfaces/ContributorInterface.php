@@ -55,6 +55,8 @@ interface ContributorInterface
 
     public function getUsername(): ?string;
 
+    public function isAnonymized(): bool;
+
     public function isConsentInternalCommunication(): bool;
 
     public function isConsentPrivacyPolicy(): bool;

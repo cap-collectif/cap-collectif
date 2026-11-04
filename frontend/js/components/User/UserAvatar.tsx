@@ -61,12 +61,16 @@ const UserAvatarContainer = styled.span<{
 `
 
 const FRAGMENT = graphql`
-  fragment UserAvatar_user on Contributor {
-    ...on User {
-        url
+  fragment UserAvatar_user on Node {
+    ... on Contributor {
+      username
+      avatarUrl
     }
-    username
-    avatarUrl
+    ... on Author {
+      username
+      avatarUrl
+      url
+    }
   }
 `
 
@@ -123,14 +127,14 @@ export const UserAvatarRender = connect(mapStateToProps)(
       onMouseOut,
     }
 
-    if (user && user.url && profiles) {
+    if (user?.url && profiles && displayUrl) {
       return (
         <UserAvatarLink
           {...funcProps}
           className={className}
           style={style}
           hasBadge={!!badge}
-          href={displayUrl ? user.url : null}
+          href={user.url}
           aria-describedby={props['aria-describedby']}
         >
           {renderAvatar()}

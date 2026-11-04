@@ -341,7 +341,7 @@ class AnonymizeUsersAutomatedCommandTest extends DatabaseCommandTestCase
         self::assertInstanceOf(DebateAnonymousArgument::class, $argumentOutsideRange);
         self::assertInstanceOf(DebateAnonymousArgument::class, $argumentAfterRange);
         self::assertSame('', $argumentInsideRange->getEmail());
-        self::assertSame('Utilisateur supprimé', $argumentInsideRange->getUsername());
+        self::assertSame('global.user.anonymized', $argumentInsideRange->getUsername());
         self::assertFalse($argumentInsideRange->isConsentInternalCommunication());
         self::assertSame('outside-range@example.com', $argumentOutsideRange->getEmail());
         self::assertSame('Outside range', $argumentOutsideRange->getUsername());
@@ -548,7 +548,7 @@ class AnonymizeUsersAutomatedCommandTest extends DatabaseCommandTestCase
         self::assertInstanceOf(User::class, $contentAuthor);
         self::assertInstanceOf(User::class, $mailingListMember);
         self::assertNull($contentAuthor->getEmail());
-        self::assertSame('Utilisateur supprimé', $contentAuthor->getUsername());
+        self::assertSame('global.user.anonymized', $contentAuthor->getUsername());
         self::assertSame($proposalCount, $proposalRepository->count(['author' => $contentAuthor]));
         self::assertSame(0, $mailingListUserRepository->count(['user' => $mailingListMember]));
     }

@@ -665,6 +665,7 @@ class ProposalCollectVoteRepository extends EntityRepository
                         select v.created_at, v.publishedAt, v.published, v.is_accounted, v.private, v.id vote_id, v.position
                            ,(IFNULL(u.id, participant.id)) author_id,
                             (IFNULL(u.username, participant.username)) author_username,
+                            IF(u.id IS NULL, participant.anonymized_at IS NOT NULL, u.anonymized_at IS NOT NULL OR u.deleted_account_at IS NOT NULL) author_is_anonymized,
                             (IFNULL(u.email, participant.email)) author_email,
                             (IFNULL(u.confirmation_token, participant.confirmation_token)) author_email_confirmed,
                             (IFNULL(u.consent_internal_communication, participant.consent_internal_communication)) author_consent_internal_communication,

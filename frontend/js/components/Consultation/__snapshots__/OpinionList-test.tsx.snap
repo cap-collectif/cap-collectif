@@ -527,6 +527,10 @@ exports[`<OpinionList /> renders correcty when not contribuable 1`] = `
                                                       "name": "url",
                                                       "storageKey": null,
                                                     },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "TypeDiscriminator",
+                                                    },
                                                   ],
                                                   "storageKey": null,
                                                 },
@@ -558,6 +562,10 @@ exports[`<OpinionList /> renders correcty when not contribuable 1`] = `
                                                       "kind": "ScalarField",
                                                       "name": "url",
                                                       "storageKey": null,
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "TypeDiscriminator",
                                                     },
                                                   ],
                                                   "storageKey": null,
@@ -611,6 +619,10 @@ exports[`<OpinionList /> renders correcty when not contribuable 1`] = `
                                                       "kind": "ScalarField",
                                                       "name": "url",
                                                       "storageKey": null,
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "TypeDiscriminator",
                                                     },
                                                   ],
                                                   "storageKey": null,
@@ -833,13 +845,48 @@ exports[`<OpinionList /> renders correcty when not contribuable 1`] = `
                                                   "storageKey": null,
                                                 },
                                                 Object {
-                                                  "abstractKey": "__isContributor",
+                                                  "abstractKey": "__isNode",
                                                   "kind": "InlineFragment",
                                                   "selections": Array [
                                                     Object {
-                                                      "abstractKey": null,
+                                                      "abstractKey": "__isContributor",
                                                       "kind": "InlineFragment",
                                                       "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
+                                                      ],
+                                                      "type": "Contributor",
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "InlineFragment",
+                                                      "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
                                                         Object {
                                                           "alias": null,
                                                           "args": null,
@@ -848,24 +895,10 @@ exports[`<OpinionList /> renders correcty when not contribuable 1`] = `
                                                           "storageKey": null,
                                                         },
                                                       ],
-                                                      "type": "User",
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "username",
-                                                      "storageKey": null,
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "avatarUrl",
-                                                      "storageKey": null,
+                                                      "type": "Author",
                                                     },
                                                   ],
-                                                  "type": "Contributor",
+                                                  "type": "Node",
                                                 },
                                               ],
                                               "storageKey": null,
@@ -1026,13 +1059,48 @@ exports[`<OpinionList /> renders correcty when not contribuable 1`] = `
                                                   "storageKey": null,
                                                 },
                                                 Object {
-                                                  "abstractKey": "__isContributor",
+                                                  "abstractKey": "__isNode",
                                                   "kind": "InlineFragment",
                                                   "selections": Array [
                                                     Object {
-                                                      "abstractKey": null,
+                                                      "abstractKey": "__isContributor",
                                                       "kind": "InlineFragment",
                                                       "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
+                                                      ],
+                                                      "type": "Contributor",
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "InlineFragment",
+                                                      "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
                                                         Object {
                                                           "alias": null,
                                                           "args": null,
@@ -1041,24 +1109,10 @@ exports[`<OpinionList /> renders correcty when not contribuable 1`] = `
                                                           "storageKey": null,
                                                         },
                                                       ],
-                                                      "type": "User",
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "username",
-                                                      "storageKey": null,
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "avatarUrl",
-                                                      "storageKey": null,
+                                                      "type": "Author",
                                                     },
                                                   ],
-                                                  "type": "Contributor",
+                                                  "type": "Node",
                                                 },
                                               ],
                                               "storageKey": null,
@@ -1206,7 +1260,7 @@ exports[`<OpinionList /> renders correcty when not contribuable 1`] = `
               ],
             },
             "params": Object {
-              "cacheID": "6206acb7f5c77b60f8792dbfc1f6bb5f",
+              "cacheID": "64f61683d125f606ab9019bf0a4f445b",
               "id": null,
               "metadata": Object {},
               "name": "OpinionListQuery",
@@ -1428,16 +1482,23 @@ fragment UnpublishedLabel_publishable on Publishable {
   publishableUntil
 }
 
-fragment UserAvatar_user on Contributor {
-  __isContributor: __typename
-  ... on User {
+fragment UserAvatar_user on Node {
+  __isNode: __typename
+  ... on Contributor {
+    __isContributor: __typename
+    username
+    avatarUrl
+  }
+  ... on Author {
+    __isAuthor: __typename
+    username
+    avatarUrl
     url
   }
-  username
-  avatarUrl
 }
 
-fragment UserLink_user on User {
+fragment UserLink_user on Author {
+  __isAuthor: __typename
   displayName
   url
 }
@@ -2017,6 +2078,10 @@ exports[`<OpinionList /> renders correcty with pagination disabled 1`] = `
                                                       "name": "url",
                                                       "storageKey": null,
                                                     },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "TypeDiscriminator",
+                                                    },
                                                   ],
                                                   "storageKey": null,
                                                 },
@@ -2048,6 +2113,10 @@ exports[`<OpinionList /> renders correcty with pagination disabled 1`] = `
                                                       "kind": "ScalarField",
                                                       "name": "url",
                                                       "storageKey": null,
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "TypeDiscriminator",
                                                     },
                                                   ],
                                                   "storageKey": null,
@@ -2101,6 +2170,10 @@ exports[`<OpinionList /> renders correcty with pagination disabled 1`] = `
                                                       "kind": "ScalarField",
                                                       "name": "url",
                                                       "storageKey": null,
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "TypeDiscriminator",
                                                     },
                                                   ],
                                                   "storageKey": null,
@@ -2323,13 +2396,48 @@ exports[`<OpinionList /> renders correcty with pagination disabled 1`] = `
                                                   "storageKey": null,
                                                 },
                                                 Object {
-                                                  "abstractKey": "__isContributor",
+                                                  "abstractKey": "__isNode",
                                                   "kind": "InlineFragment",
                                                   "selections": Array [
                                                     Object {
-                                                      "abstractKey": null,
+                                                      "abstractKey": "__isContributor",
                                                       "kind": "InlineFragment",
                                                       "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
+                                                      ],
+                                                      "type": "Contributor",
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "InlineFragment",
+                                                      "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
                                                         Object {
                                                           "alias": null,
                                                           "args": null,
@@ -2338,24 +2446,10 @@ exports[`<OpinionList /> renders correcty with pagination disabled 1`] = `
                                                           "storageKey": null,
                                                         },
                                                       ],
-                                                      "type": "User",
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "username",
-                                                      "storageKey": null,
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "avatarUrl",
-                                                      "storageKey": null,
+                                                      "type": "Author",
                                                     },
                                                   ],
-                                                  "type": "Contributor",
+                                                  "type": "Node",
                                                 },
                                               ],
                                               "storageKey": null,
@@ -2516,13 +2610,48 @@ exports[`<OpinionList /> renders correcty with pagination disabled 1`] = `
                                                   "storageKey": null,
                                                 },
                                                 Object {
-                                                  "abstractKey": "__isContributor",
+                                                  "abstractKey": "__isNode",
                                                   "kind": "InlineFragment",
                                                   "selections": Array [
                                                     Object {
-                                                      "abstractKey": null,
+                                                      "abstractKey": "__isContributor",
                                                       "kind": "InlineFragment",
                                                       "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
+                                                      ],
+                                                      "type": "Contributor",
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "InlineFragment",
+                                                      "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
                                                         Object {
                                                           "alias": null,
                                                           "args": null,
@@ -2531,24 +2660,10 @@ exports[`<OpinionList /> renders correcty with pagination disabled 1`] = `
                                                           "storageKey": null,
                                                         },
                                                       ],
-                                                      "type": "User",
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "username",
-                                                      "storageKey": null,
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "avatarUrl",
-                                                      "storageKey": null,
+                                                      "type": "Author",
                                                     },
                                                   ],
-                                                  "type": "Contributor",
+                                                  "type": "Node",
                                                 },
                                               ],
                                               "storageKey": null,
@@ -2696,7 +2811,7 @@ exports[`<OpinionList /> renders correcty with pagination disabled 1`] = `
               ],
             },
             "params": Object {
-              "cacheID": "6206acb7f5c77b60f8792dbfc1f6bb5f",
+              "cacheID": "64f61683d125f606ab9019bf0a4f445b",
               "id": null,
               "metadata": Object {},
               "name": "OpinionListQuery",
@@ -2918,16 +3033,23 @@ fragment UnpublishedLabel_publishable on Publishable {
   publishableUntil
 }
 
-fragment UserAvatar_user on Contributor {
-  __isContributor: __typename
-  ... on User {
+fragment UserAvatar_user on Node {
+  __isNode: __typename
+  ... on Contributor {
+    __isContributor: __typename
+    username
+    avatarUrl
+  }
+  ... on Author {
+    __isAuthor: __typename
+    username
+    avatarUrl
     url
   }
-  username
-  avatarUrl
 }
 
-fragment UserLink_user on User {
+fragment UserLink_user on Author {
+  __isAuthor: __typename
   displayName
   url
 }
@@ -3507,6 +3629,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 1`] = `
                                                       "name": "url",
                                                       "storageKey": null,
                                                     },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "TypeDiscriminator",
+                                                    },
                                                   ],
                                                   "storageKey": null,
                                                 },
@@ -3538,6 +3664,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 1`] = `
                                                       "kind": "ScalarField",
                                                       "name": "url",
                                                       "storageKey": null,
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "TypeDiscriminator",
                                                     },
                                                   ],
                                                   "storageKey": null,
@@ -3591,6 +3721,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 1`] = `
                                                       "kind": "ScalarField",
                                                       "name": "url",
                                                       "storageKey": null,
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "TypeDiscriminator",
                                                     },
                                                   ],
                                                   "storageKey": null,
@@ -3813,13 +3947,48 @@ exports[`<OpinionList /> renders correcty with pagination enabled 1`] = `
                                                   "storageKey": null,
                                                 },
                                                 Object {
-                                                  "abstractKey": "__isContributor",
+                                                  "abstractKey": "__isNode",
                                                   "kind": "InlineFragment",
                                                   "selections": Array [
                                                     Object {
-                                                      "abstractKey": null,
+                                                      "abstractKey": "__isContributor",
                                                       "kind": "InlineFragment",
                                                       "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
+                                                      ],
+                                                      "type": "Contributor",
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "InlineFragment",
+                                                      "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
                                                         Object {
                                                           "alias": null,
                                                           "args": null,
@@ -3828,24 +3997,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 1`] = `
                                                           "storageKey": null,
                                                         },
                                                       ],
-                                                      "type": "User",
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "username",
-                                                      "storageKey": null,
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "avatarUrl",
-                                                      "storageKey": null,
+                                                      "type": "Author",
                                                     },
                                                   ],
-                                                  "type": "Contributor",
+                                                  "type": "Node",
                                                 },
                                               ],
                                               "storageKey": null,
@@ -4006,13 +4161,48 @@ exports[`<OpinionList /> renders correcty with pagination enabled 1`] = `
                                                   "storageKey": null,
                                                 },
                                                 Object {
-                                                  "abstractKey": "__isContributor",
+                                                  "abstractKey": "__isNode",
                                                   "kind": "InlineFragment",
                                                   "selections": Array [
                                                     Object {
-                                                      "abstractKey": null,
+                                                      "abstractKey": "__isContributor",
                                                       "kind": "InlineFragment",
                                                       "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
+                                                      ],
+                                                      "type": "Contributor",
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "InlineFragment",
+                                                      "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
                                                         Object {
                                                           "alias": null,
                                                           "args": null,
@@ -4021,24 +4211,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 1`] = `
                                                           "storageKey": null,
                                                         },
                                                       ],
-                                                      "type": "User",
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "username",
-                                                      "storageKey": null,
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "avatarUrl",
-                                                      "storageKey": null,
+                                                      "type": "Author",
                                                     },
                                                   ],
-                                                  "type": "Contributor",
+                                                  "type": "Node",
                                                 },
                                               ],
                                               "storageKey": null,
@@ -4186,7 +4362,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 1`] = `
               ],
             },
             "params": Object {
-              "cacheID": "6206acb7f5c77b60f8792dbfc1f6bb5f",
+              "cacheID": "64f61683d125f606ab9019bf0a4f445b",
               "id": null,
               "metadata": Object {},
               "name": "OpinionListQuery",
@@ -4408,16 +4584,23 @@ fragment UnpublishedLabel_publishable on Publishable {
   publishableUntil
 }
 
-fragment UserAvatar_user on Contributor {
-  __isContributor: __typename
-  ... on User {
+fragment UserAvatar_user on Node {
+  __isNode: __typename
+  ... on Contributor {
+    __isContributor: __typename
+    username
+    avatarUrl
+  }
+  ... on Author {
+    __isAuthor: __typename
+    username
+    avatarUrl
     url
   }
-  username
-  avatarUrl
 }
 
-fragment UserLink_user on User {
+fragment UserLink_user on Author {
+  __isAuthor: __typename
   displayName
   url
 }
@@ -4997,6 +5180,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 2`] = `
                                                       "name": "url",
                                                       "storageKey": null,
                                                     },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "TypeDiscriminator",
+                                                    },
                                                   ],
                                                   "storageKey": null,
                                                 },
@@ -5028,6 +5215,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 2`] = `
                                                       "kind": "ScalarField",
                                                       "name": "url",
                                                       "storageKey": null,
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "TypeDiscriminator",
                                                     },
                                                   ],
                                                   "storageKey": null,
@@ -5081,6 +5272,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 2`] = `
                                                       "kind": "ScalarField",
                                                       "name": "url",
                                                       "storageKey": null,
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "TypeDiscriminator",
                                                     },
                                                   ],
                                                   "storageKey": null,
@@ -5303,13 +5498,48 @@ exports[`<OpinionList /> renders correcty with pagination enabled 2`] = `
                                                   "storageKey": null,
                                                 },
                                                 Object {
-                                                  "abstractKey": "__isContributor",
+                                                  "abstractKey": "__isNode",
                                                   "kind": "InlineFragment",
                                                   "selections": Array [
                                                     Object {
-                                                      "abstractKey": null,
+                                                      "abstractKey": "__isContributor",
                                                       "kind": "InlineFragment",
                                                       "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
+                                                      ],
+                                                      "type": "Contributor",
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "InlineFragment",
+                                                      "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
                                                         Object {
                                                           "alias": null,
                                                           "args": null,
@@ -5318,24 +5548,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 2`] = `
                                                           "storageKey": null,
                                                         },
                                                       ],
-                                                      "type": "User",
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "username",
-                                                      "storageKey": null,
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "avatarUrl",
-                                                      "storageKey": null,
+                                                      "type": "Author",
                                                     },
                                                   ],
-                                                  "type": "Contributor",
+                                                  "type": "Node",
                                                 },
                                               ],
                                               "storageKey": null,
@@ -5496,13 +5712,48 @@ exports[`<OpinionList /> renders correcty with pagination enabled 2`] = `
                                                   "storageKey": null,
                                                 },
                                                 Object {
-                                                  "abstractKey": "__isContributor",
+                                                  "abstractKey": "__isNode",
                                                   "kind": "InlineFragment",
                                                   "selections": Array [
                                                     Object {
-                                                      "abstractKey": null,
+                                                      "abstractKey": "__isContributor",
                                                       "kind": "InlineFragment",
                                                       "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
+                                                      ],
+                                                      "type": "Contributor",
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "InlineFragment",
+                                                      "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
                                                         Object {
                                                           "alias": null,
                                                           "args": null,
@@ -5511,24 +5762,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 2`] = `
                                                           "storageKey": null,
                                                         },
                                                       ],
-                                                      "type": "User",
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "username",
-                                                      "storageKey": null,
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "avatarUrl",
-                                                      "storageKey": null,
+                                                      "type": "Author",
                                                     },
                                                   ],
-                                                  "type": "Contributor",
+                                                  "type": "Node",
                                                 },
                                               ],
                                               "storageKey": null,
@@ -5676,7 +5913,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 2`] = `
               ],
             },
             "params": Object {
-              "cacheID": "6206acb7f5c77b60f8792dbfc1f6bb5f",
+              "cacheID": "64f61683d125f606ab9019bf0a4f445b",
               "id": null,
               "metadata": Object {},
               "name": "OpinionListQuery",
@@ -5898,16 +6135,23 @@ fragment UnpublishedLabel_publishable on Publishable {
   publishableUntil
 }
 
-fragment UserAvatar_user on Contributor {
-  __isContributor: __typename
-  ... on User {
+fragment UserAvatar_user on Node {
+  __isNode: __typename
+  ... on Contributor {
+    __isContributor: __typename
+    username
+    avatarUrl
+  }
+  ... on Author {
+    __isAuthor: __typename
+    username
+    avatarUrl
     url
   }
-  username
-  avatarUrl
 }
 
-fragment UserLink_user on User {
+fragment UserLink_user on Author {
+  __isAuthor: __typename
   displayName
   url
 }
@@ -6487,6 +6731,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 3`] = `
                                                       "name": "url",
                                                       "storageKey": null,
                                                     },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "TypeDiscriminator",
+                                                    },
                                                   ],
                                                   "storageKey": null,
                                                 },
@@ -6518,6 +6766,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 3`] = `
                                                       "kind": "ScalarField",
                                                       "name": "url",
                                                       "storageKey": null,
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "TypeDiscriminator",
                                                     },
                                                   ],
                                                   "storageKey": null,
@@ -6571,6 +6823,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 3`] = `
                                                       "kind": "ScalarField",
                                                       "name": "url",
                                                       "storageKey": null,
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "TypeDiscriminator",
                                                     },
                                                   ],
                                                   "storageKey": null,
@@ -6793,13 +7049,48 @@ exports[`<OpinionList /> renders correcty with pagination enabled 3`] = `
                                                   "storageKey": null,
                                                 },
                                                 Object {
-                                                  "abstractKey": "__isContributor",
+                                                  "abstractKey": "__isNode",
                                                   "kind": "InlineFragment",
                                                   "selections": Array [
                                                     Object {
-                                                      "abstractKey": null,
+                                                      "abstractKey": "__isContributor",
                                                       "kind": "InlineFragment",
                                                       "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
+                                                      ],
+                                                      "type": "Contributor",
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "InlineFragment",
+                                                      "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
                                                         Object {
                                                           "alias": null,
                                                           "args": null,
@@ -6808,24 +7099,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 3`] = `
                                                           "storageKey": null,
                                                         },
                                                       ],
-                                                      "type": "User",
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "username",
-                                                      "storageKey": null,
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "avatarUrl",
-                                                      "storageKey": null,
+                                                      "type": "Author",
                                                     },
                                                   ],
-                                                  "type": "Contributor",
+                                                  "type": "Node",
                                                 },
                                               ],
                                               "storageKey": null,
@@ -6986,13 +7263,48 @@ exports[`<OpinionList /> renders correcty with pagination enabled 3`] = `
                                                   "storageKey": null,
                                                 },
                                                 Object {
-                                                  "abstractKey": "__isContributor",
+                                                  "abstractKey": "__isNode",
                                                   "kind": "InlineFragment",
                                                   "selections": Array [
                                                     Object {
-                                                      "abstractKey": null,
+                                                      "abstractKey": "__isContributor",
                                                       "kind": "InlineFragment",
                                                       "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
+                                                      ],
+                                                      "type": "Contributor",
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "InlineFragment",
+                                                      "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
                                                         Object {
                                                           "alias": null,
                                                           "args": null,
@@ -7001,24 +7313,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 3`] = `
                                                           "storageKey": null,
                                                         },
                                                       ],
-                                                      "type": "User",
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "username",
-                                                      "storageKey": null,
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "avatarUrl",
-                                                      "storageKey": null,
+                                                      "type": "Author",
                                                     },
                                                   ],
-                                                  "type": "Contributor",
+                                                  "type": "Node",
                                                 },
                                               ],
                                               "storageKey": null,
@@ -7166,7 +7464,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 3`] = `
               ],
             },
             "params": Object {
-              "cacheID": "6206acb7f5c77b60f8792dbfc1f6bb5f",
+              "cacheID": "64f61683d125f606ab9019bf0a4f445b",
               "id": null,
               "metadata": Object {},
               "name": "OpinionListQuery",
@@ -7388,16 +7686,23 @@ fragment UnpublishedLabel_publishable on Publishable {
   publishableUntil
 }
 
-fragment UserAvatar_user on Contributor {
-  __isContributor: __typename
-  ... on User {
+fragment UserAvatar_user on Node {
+  __isNode: __typename
+  ... on Contributor {
+    __isContributor: __typename
+    username
+    avatarUrl
+  }
+  ... on Author {
+    __isAuthor: __typename
+    username
+    avatarUrl
     url
   }
-  username
-  avatarUrl
 }
 
-fragment UserLink_user on User {
+fragment UserLink_user on Author {
+  __isAuthor: __typename
   displayName
   url
 }
@@ -7977,6 +8282,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 4`] = `
                                                       "name": "url",
                                                       "storageKey": null,
                                                     },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "TypeDiscriminator",
+                                                    },
                                                   ],
                                                   "storageKey": null,
                                                 },
@@ -8008,6 +8317,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 4`] = `
                                                       "kind": "ScalarField",
                                                       "name": "url",
                                                       "storageKey": null,
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "TypeDiscriminator",
                                                     },
                                                   ],
                                                   "storageKey": null,
@@ -8061,6 +8374,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 4`] = `
                                                       "kind": "ScalarField",
                                                       "name": "url",
                                                       "storageKey": null,
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "TypeDiscriminator",
                                                     },
                                                   ],
                                                   "storageKey": null,
@@ -8283,13 +8600,48 @@ exports[`<OpinionList /> renders correcty with pagination enabled 4`] = `
                                                   "storageKey": null,
                                                 },
                                                 Object {
-                                                  "abstractKey": "__isContributor",
+                                                  "abstractKey": "__isNode",
                                                   "kind": "InlineFragment",
                                                   "selections": Array [
                                                     Object {
-                                                      "abstractKey": null,
+                                                      "abstractKey": "__isContributor",
                                                       "kind": "InlineFragment",
                                                       "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
+                                                      ],
+                                                      "type": "Contributor",
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "InlineFragment",
+                                                      "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
                                                         Object {
                                                           "alias": null,
                                                           "args": null,
@@ -8298,24 +8650,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 4`] = `
                                                           "storageKey": null,
                                                         },
                                                       ],
-                                                      "type": "User",
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "username",
-                                                      "storageKey": null,
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "avatarUrl",
-                                                      "storageKey": null,
+                                                      "type": "Author",
                                                     },
                                                   ],
-                                                  "type": "Contributor",
+                                                  "type": "Node",
                                                 },
                                               ],
                                               "storageKey": null,
@@ -8476,13 +8814,48 @@ exports[`<OpinionList /> renders correcty with pagination enabled 4`] = `
                                                   "storageKey": null,
                                                 },
                                                 Object {
-                                                  "abstractKey": "__isContributor",
+                                                  "abstractKey": "__isNode",
                                                   "kind": "InlineFragment",
                                                   "selections": Array [
                                                     Object {
-                                                      "abstractKey": null,
+                                                      "abstractKey": "__isContributor",
                                                       "kind": "InlineFragment",
                                                       "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
+                                                      ],
+                                                      "type": "Contributor",
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "InlineFragment",
+                                                      "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
                                                         Object {
                                                           "alias": null,
                                                           "args": null,
@@ -8491,24 +8864,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 4`] = `
                                                           "storageKey": null,
                                                         },
                                                       ],
-                                                      "type": "User",
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "username",
-                                                      "storageKey": null,
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "avatarUrl",
-                                                      "storageKey": null,
+                                                      "type": "Author",
                                                     },
                                                   ],
-                                                  "type": "Contributor",
+                                                  "type": "Node",
                                                 },
                                               ],
                                               "storageKey": null,
@@ -8656,7 +9015,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 4`] = `
               ],
             },
             "params": Object {
-              "cacheID": "6206acb7f5c77b60f8792dbfc1f6bb5f",
+              "cacheID": "64f61683d125f606ab9019bf0a4f445b",
               "id": null,
               "metadata": Object {},
               "name": "OpinionListQuery",
@@ -8878,16 +9237,23 @@ fragment UnpublishedLabel_publishable on Publishable {
   publishableUntil
 }
 
-fragment UserAvatar_user on Contributor {
-  __isContributor: __typename
-  ... on User {
+fragment UserAvatar_user on Node {
+  __isNode: __typename
+  ... on Contributor {
+    __isContributor: __typename
+    username
+    avatarUrl
+  }
+  ... on Author {
+    __isAuthor: __typename
+    username
+    avatarUrl
     url
   }
-  username
-  avatarUrl
 }
 
-fragment UserLink_user on User {
+fragment UserLink_user on Author {
+  __isAuthor: __typename
   displayName
   url
 }
@@ -9467,6 +9833,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 5`] = `
                                                       "name": "url",
                                                       "storageKey": null,
                                                     },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "TypeDiscriminator",
+                                                    },
                                                   ],
                                                   "storageKey": null,
                                                 },
@@ -9498,6 +9868,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 5`] = `
                                                       "kind": "ScalarField",
                                                       "name": "url",
                                                       "storageKey": null,
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "TypeDiscriminator",
                                                     },
                                                   ],
                                                   "storageKey": null,
@@ -9551,6 +9925,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 5`] = `
                                                       "kind": "ScalarField",
                                                       "name": "url",
                                                       "storageKey": null,
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "TypeDiscriminator",
                                                     },
                                                   ],
                                                   "storageKey": null,
@@ -9773,13 +10151,48 @@ exports[`<OpinionList /> renders correcty with pagination enabled 5`] = `
                                                   "storageKey": null,
                                                 },
                                                 Object {
-                                                  "abstractKey": "__isContributor",
+                                                  "abstractKey": "__isNode",
                                                   "kind": "InlineFragment",
                                                   "selections": Array [
                                                     Object {
-                                                      "abstractKey": null,
+                                                      "abstractKey": "__isContributor",
                                                       "kind": "InlineFragment",
                                                       "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
+                                                      ],
+                                                      "type": "Contributor",
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "InlineFragment",
+                                                      "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
                                                         Object {
                                                           "alias": null,
                                                           "args": null,
@@ -9788,24 +10201,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 5`] = `
                                                           "storageKey": null,
                                                         },
                                                       ],
-                                                      "type": "User",
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "username",
-                                                      "storageKey": null,
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "avatarUrl",
-                                                      "storageKey": null,
+                                                      "type": "Author",
                                                     },
                                                   ],
-                                                  "type": "Contributor",
+                                                  "type": "Node",
                                                 },
                                               ],
                                               "storageKey": null,
@@ -9966,13 +10365,48 @@ exports[`<OpinionList /> renders correcty with pagination enabled 5`] = `
                                                   "storageKey": null,
                                                 },
                                                 Object {
-                                                  "abstractKey": "__isContributor",
+                                                  "abstractKey": "__isNode",
                                                   "kind": "InlineFragment",
                                                   "selections": Array [
                                                     Object {
-                                                      "abstractKey": null,
+                                                      "abstractKey": "__isContributor",
                                                       "kind": "InlineFragment",
                                                       "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
+                                                      ],
+                                                      "type": "Contributor",
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "InlineFragment",
+                                                      "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
                                                         Object {
                                                           "alias": null,
                                                           "args": null,
@@ -9981,24 +10415,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 5`] = `
                                                           "storageKey": null,
                                                         },
                                                       ],
-                                                      "type": "User",
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "username",
-                                                      "storageKey": null,
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "avatarUrl",
-                                                      "storageKey": null,
+                                                      "type": "Author",
                                                     },
                                                   ],
-                                                  "type": "Contributor",
+                                                  "type": "Node",
                                                 },
                                               ],
                                               "storageKey": null,
@@ -10146,7 +10566,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 5`] = `
               ],
             },
             "params": Object {
-              "cacheID": "6206acb7f5c77b60f8792dbfc1f6bb5f",
+              "cacheID": "64f61683d125f606ab9019bf0a4f445b",
               "id": null,
               "metadata": Object {},
               "name": "OpinionListQuery",
@@ -10368,16 +10788,23 @@ fragment UnpublishedLabel_publishable on Publishable {
   publishableUntil
 }
 
-fragment UserAvatar_user on Contributor {
-  __isContributor: __typename
-  ... on User {
+fragment UserAvatar_user on Node {
+  __isNode: __typename
+  ... on Contributor {
+    __isContributor: __typename
+    username
+    avatarUrl
+  }
+  ... on Author {
+    __isAuthor: __typename
+    username
+    avatarUrl
     url
   }
-  username
-  avatarUrl
 }
 
-fragment UserLink_user on User {
+fragment UserLink_user on Author {
+  __isAuthor: __typename
   displayName
   url
 }
@@ -10957,6 +11384,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 6`] = `
                                                       "name": "url",
                                                       "storageKey": null,
                                                     },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "TypeDiscriminator",
+                                                    },
                                                   ],
                                                   "storageKey": null,
                                                 },
@@ -10988,6 +11419,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 6`] = `
                                                       "kind": "ScalarField",
                                                       "name": "url",
                                                       "storageKey": null,
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "TypeDiscriminator",
                                                     },
                                                   ],
                                                   "storageKey": null,
@@ -11041,6 +11476,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 6`] = `
                                                       "kind": "ScalarField",
                                                       "name": "url",
                                                       "storageKey": null,
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "TypeDiscriminator",
                                                     },
                                                   ],
                                                   "storageKey": null,
@@ -11263,13 +11702,48 @@ exports[`<OpinionList /> renders correcty with pagination enabled 6`] = `
                                                   "storageKey": null,
                                                 },
                                                 Object {
-                                                  "abstractKey": "__isContributor",
+                                                  "abstractKey": "__isNode",
                                                   "kind": "InlineFragment",
                                                   "selections": Array [
                                                     Object {
-                                                      "abstractKey": null,
+                                                      "abstractKey": "__isContributor",
                                                       "kind": "InlineFragment",
                                                       "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
+                                                      ],
+                                                      "type": "Contributor",
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "InlineFragment",
+                                                      "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
                                                         Object {
                                                           "alias": null,
                                                           "args": null,
@@ -11278,24 +11752,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 6`] = `
                                                           "storageKey": null,
                                                         },
                                                       ],
-                                                      "type": "User",
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "username",
-                                                      "storageKey": null,
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "avatarUrl",
-                                                      "storageKey": null,
+                                                      "type": "Author",
                                                     },
                                                   ],
-                                                  "type": "Contributor",
+                                                  "type": "Node",
                                                 },
                                               ],
                                               "storageKey": null,
@@ -11456,13 +11916,48 @@ exports[`<OpinionList /> renders correcty with pagination enabled 6`] = `
                                                   "storageKey": null,
                                                 },
                                                 Object {
-                                                  "abstractKey": "__isContributor",
+                                                  "abstractKey": "__isNode",
                                                   "kind": "InlineFragment",
                                                   "selections": Array [
                                                     Object {
-                                                      "abstractKey": null,
+                                                      "abstractKey": "__isContributor",
                                                       "kind": "InlineFragment",
                                                       "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
+                                                      ],
+                                                      "type": "Contributor",
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "InlineFragment",
+                                                      "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
                                                         Object {
                                                           "alias": null,
                                                           "args": null,
@@ -11471,24 +11966,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 6`] = `
                                                           "storageKey": null,
                                                         },
                                                       ],
-                                                      "type": "User",
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "username",
-                                                      "storageKey": null,
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "avatarUrl",
-                                                      "storageKey": null,
+                                                      "type": "Author",
                                                     },
                                                   ],
-                                                  "type": "Contributor",
+                                                  "type": "Node",
                                                 },
                                               ],
                                               "storageKey": null,
@@ -11636,7 +12117,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 6`] = `
               ],
             },
             "params": Object {
-              "cacheID": "6206acb7f5c77b60f8792dbfc1f6bb5f",
+              "cacheID": "64f61683d125f606ab9019bf0a4f445b",
               "id": null,
               "metadata": Object {},
               "name": "OpinionListQuery",
@@ -11858,16 +12339,23 @@ fragment UnpublishedLabel_publishable on Publishable {
   publishableUntil
 }
 
-fragment UserAvatar_user on Contributor {
-  __isContributor: __typename
-  ... on User {
+fragment UserAvatar_user on Node {
+  __isNode: __typename
+  ... on Contributor {
+    __isContributor: __typename
+    username
+    avatarUrl
+  }
+  ... on Author {
+    __isAuthor: __typename
+    username
+    avatarUrl
     url
   }
-  username
-  avatarUrl
 }
 
-fragment UserLink_user on User {
+fragment UserLink_user on Author {
+  __isAuthor: __typename
   displayName
   url
 }
@@ -12447,6 +12935,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 7`] = `
                                                       "name": "url",
                                                       "storageKey": null,
                                                     },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "TypeDiscriminator",
+                                                    },
                                                   ],
                                                   "storageKey": null,
                                                 },
@@ -12478,6 +12970,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 7`] = `
                                                       "kind": "ScalarField",
                                                       "name": "url",
                                                       "storageKey": null,
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "TypeDiscriminator",
                                                     },
                                                   ],
                                                   "storageKey": null,
@@ -12531,6 +13027,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 7`] = `
                                                       "kind": "ScalarField",
                                                       "name": "url",
                                                       "storageKey": null,
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "TypeDiscriminator",
                                                     },
                                                   ],
                                                   "storageKey": null,
@@ -12753,13 +13253,48 @@ exports[`<OpinionList /> renders correcty with pagination enabled 7`] = `
                                                   "storageKey": null,
                                                 },
                                                 Object {
-                                                  "abstractKey": "__isContributor",
+                                                  "abstractKey": "__isNode",
                                                   "kind": "InlineFragment",
                                                   "selections": Array [
                                                     Object {
-                                                      "abstractKey": null,
+                                                      "abstractKey": "__isContributor",
                                                       "kind": "InlineFragment",
                                                       "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
+                                                      ],
+                                                      "type": "Contributor",
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "InlineFragment",
+                                                      "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
                                                         Object {
                                                           "alias": null,
                                                           "args": null,
@@ -12768,24 +13303,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 7`] = `
                                                           "storageKey": null,
                                                         },
                                                       ],
-                                                      "type": "User",
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "username",
-                                                      "storageKey": null,
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "avatarUrl",
-                                                      "storageKey": null,
+                                                      "type": "Author",
                                                     },
                                                   ],
-                                                  "type": "Contributor",
+                                                  "type": "Node",
                                                 },
                                               ],
                                               "storageKey": null,
@@ -12946,13 +13467,48 @@ exports[`<OpinionList /> renders correcty with pagination enabled 7`] = `
                                                   "storageKey": null,
                                                 },
                                                 Object {
-                                                  "abstractKey": "__isContributor",
+                                                  "abstractKey": "__isNode",
                                                   "kind": "InlineFragment",
                                                   "selections": Array [
                                                     Object {
-                                                      "abstractKey": null,
+                                                      "abstractKey": "__isContributor",
                                                       "kind": "InlineFragment",
                                                       "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
+                                                      ],
+                                                      "type": "Contributor",
+                                                    },
+                                                    Object {
+                                                      "abstractKey": "__isAuthor",
+                                                      "kind": "InlineFragment",
+                                                      "selections": Array [
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "username",
+                                                          "storageKey": null,
+                                                        },
+                                                        Object {
+                                                          "alias": null,
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "avatarUrl",
+                                                          "storageKey": null,
+                                                        },
                                                         Object {
                                                           "alias": null,
                                                           "args": null,
@@ -12961,24 +13517,10 @@ exports[`<OpinionList /> renders correcty with pagination enabled 7`] = `
                                                           "storageKey": null,
                                                         },
                                                       ],
-                                                      "type": "User",
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "username",
-                                                      "storageKey": null,
-                                                    },
-                                                    Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "avatarUrl",
-                                                      "storageKey": null,
+                                                      "type": "Author",
                                                     },
                                                   ],
-                                                  "type": "Contributor",
+                                                  "type": "Node",
                                                 },
                                               ],
                                               "storageKey": null,
@@ -13126,7 +13668,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 7`] = `
               ],
             },
             "params": Object {
-              "cacheID": "6206acb7f5c77b60f8792dbfc1f6bb5f",
+              "cacheID": "64f61683d125f606ab9019bf0a4f445b",
               "id": null,
               "metadata": Object {},
               "name": "OpinionListQuery",
@@ -13348,16 +13890,23 @@ fragment UnpublishedLabel_publishable on Publishable {
   publishableUntil
 }
 
-fragment UserAvatar_user on Contributor {
-  __isContributor: __typename
-  ... on User {
+fragment UserAvatar_user on Node {
+  __isNode: __typename
+  ... on Contributor {
+    __isContributor: __typename
+    username
+    avatarUrl
+  }
+  ... on Author {
+    __isAuthor: __typename
+    username
+    avatarUrl
     url
   }
-  username
-  avatarUrl
 }
 
-fragment UserLink_user on User {
+fragment UserLink_user on Author {
+  __isAuthor: __typename
   displayName
   url
 }

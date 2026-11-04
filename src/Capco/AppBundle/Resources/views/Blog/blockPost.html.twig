@@ -40,12 +40,13 @@
             {% if post.authors|length > 0 %}
                 {{ 'global.written_by' | trans({}, 'CapcoAppBundle') }}
                 {% for author in post.authors %}
-                    {% if is_feature_enabled('profiles') %}
-                        <a href="{{ path('capco_user_profile_show_all', { slug: author.author.slug, '_locale': app.request.locale })}}">
-                            {{ author.username }}
+                    {% set authorProfile = author.author|capco_author_profile %}
+                    {% if authorProfile.url %}
+                        <a href="{{ authorProfile.url }}">
+                            {{ authorProfile.name }}
                         </a>
                     {% else %}
-                        <span>{{ author.username }}</span>
+                        <span>{{ authorProfile.name }}</span>
                     {% endif %}
                     {% if loop.revindex0 == '1' %}
                         {{ 'blog.and' | trans({}, 'CapcoAppBundle') }}

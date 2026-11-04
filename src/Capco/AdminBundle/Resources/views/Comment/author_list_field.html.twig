@@ -3,11 +3,16 @@
 {% block field %}
     <div>
         {% if(object.Author is not null) %}
+            {% set authorProfile = object.Author|capco_author_profile %}
 {#            TODO: When the show user page in BO will be re enabled, set the path to the show user route (`admin_capco_user_user_show`)  #}
             <span>
-                <a href="{{ path('admin_capco_user_user_edit', {'id': object.Author.id}) }}">
-                    {{ object.Author.username | trans({}, 'CapcoAppBundle') }}
-                </a>
+                {% if object.Author.anonymized %}
+                    {{ authorProfile.name }}
+                {% else %}
+                    <a href="{{ path('admin_capco_user_user_edit', {'id': object.Author.id}) }}">
+                        {{ authorProfile.name }}
+                    </a>
+                {% endif %}
             </span>
         {% else %}
             <span>

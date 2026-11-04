@@ -258,7 +258,7 @@ export const Authors = ({ children, active, onClick, authors, ...rest }: Authors
   const intl = useIntl()
   const profilesToggle = useFeatureFlag('profiles')
   const firstAuthor = authors?.[0]
-  const showProfileLink = profilesToggle || firstAuthor?.__typename === 'Organization'
+  const showProfileLink = !!firstAuthor?.url && (profilesToggle || firstAuthor?.__typename === 'Organization')
   if (!authors) return null
 
   const getTextValue = (): string => {

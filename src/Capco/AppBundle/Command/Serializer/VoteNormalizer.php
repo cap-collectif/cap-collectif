@@ -58,7 +58,7 @@ class VoteNormalizer extends BaseNormalizer implements NormalizerInterface
             $fullExportData = [
                 self::EXPORT_VOTE_SOURCE => $this->getVoteSource($data),
                 self::EXPORT_VOTE_AUTHOR_ZIP_CODE => null !== $author ? $author->getZipCode() : null,
-                self::EXPORT_VOTE_AUTHOR_USERNAME => null !== $author ? $author->getUsername() : null,
+                self::EXPORT_VOTE_AUTHOR_USERNAME => $this->contributorNameResolver->resolveUsername($author),
                 self::EXPORT_VOTE_AUTHOR_IS_EMAIL_CONFIRMED => null !== $author ? $this->getReadableBoolean($author->isEmailConfirmed()) : null,
                 self::EXPORT_VOTE_AUTHOR_EMAIL => null !== $author ? $author->getEmail() : null,
                 self::EXPORT_VOTE_AUTHOR_USER_TYPE_NAME => null !== $userType ? $userType->getName() : null,

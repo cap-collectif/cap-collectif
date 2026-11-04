@@ -14,7 +14,6 @@ import { useProjectAdminParticipantsContext } from '~/components/Admin/Project/P
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import Tooltip from '~ds/Tooltip/Tooltip'
 import Text from '~ui/Primitives/Text'
-import { Avatar } from '@cap-collectif/ui'
 export type OwnProps = {
   readonly rowId: string
   readonly selected: boolean
@@ -41,24 +40,28 @@ const ProjectAdminParticipant = ({ participant, selected }: Props) => {
     contributions,
     userType,
     isEmailConfirmed,
+    isAnonymized,
     consentInternalCommunication,
-    __typename,
   } = participant
 
   const hasCompleteName = !!firstname && !!lastname
-  const hasAccountDeleted = username === 'deleted-user'
 
   return (
     <Container rowId={id} selected={selected} isSelectable={hasFeatureEmail}>
       <ParticipantInfo>
         <UsernameContainer>
-          {
-              participant.__typename === 'User' && (<a href={adminUrl ?? url}>{translateContent(username)}</a>)
-          }
-          {
-            (participant.__typename === 'Participant') ? <Text fontWeight={600}>{intl.formatMessage({ id: 'no-account-user' })}</Text> : null
-          }
-          {vip && !hasAccountDeleted && (
+          {participant.__typename === 'User' &&
+            (isAnonymized ? (
+              <span>{translateContent(username)}</span>
+            ) : (
+              <a href={adminUrl ?? url}>{translateContent(username)}</a>
+            ))}
+          {participant.__typename === 'Participant' ? (
+            <Text fontWeight={600}>
+              {isAnonymized ? translateContent(username) : intl.formatMessage({ id: 'no-account-user' })}
+            </Text>
+          ) : null}
+          {vip && !isAnonymized && (
             <Tooltip
               placement="top"
               label={intl.formatMessage({
@@ -76,7 +79,7 @@ const ProjectAdminParticipant = ({ participant, selected }: Props) => {
             </Tooltip>
           )}
 
-          {isEmailConfirmed && !vip && !hasAccountDeleted && (
+          {isEmailConfirmed && !vip && !isAnonymized && (
             <Tooltip
               placement="top"
               label={intl.formatMessage({
@@ -134,7 +137,7 @@ const ProjectAdminParticipant = ({ participant, selected }: Props) => {
         )}
 
         <InlineList separator=" ">
-          {!hasAccountDeleted && userType && (
+          {!isAnonymized && userType && (
             <li>
               <button
                 type="button"
@@ -182,11 +185,7 @@ const ProjectAdminParticipant = ({ participant, selected }: Props) => {
         </InlineList>
       </ParticipantInfo>
 
-      {__typename === 'Participant' ? (
-        <Avatar size="lg" name={participant.firstname || ""} mr={2} />
-      ) : (
-        <UserAvatar user={participant} size="lg" />
-      )}
+      <UserAvatar user={participant} size="lg" />
     </Container>
   )
 }
@@ -197,6 +196,8 @@ const ProjectAdminParticipantRelay = createFragmentContainer(ProjectAdminPartici
     @argumentDefinitions(contribuableId: { type: "ID" }, viewerIsAdmin: { type: "Boolean!" }) {
       __typename
       id
+      username
+      isAnonymized
       firstname
       lastname
       email
@@ -206,7 +207,6 @@ const ProjectAdminParticipantRelay = createFragmentContainer(ProjectAdminPartici
       }
       ...UserAvatar_user
       ... on User {
-        username
         adminUrl @include(if: $viewerIsAdmin)
         url
         lastLogin

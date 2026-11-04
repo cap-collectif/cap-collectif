@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { graphql, createFragmentContainer } from 'react-relay'
 import { connect } from 'react-redux'
-import type { UserLink_user } from '~relay/UserLink_user.graphql'
+import type { UserLink_user$data } from '~relay/UserLink_user.graphql'
 import type { State } from '~/types'
 import { translateContent } from '@shared/utils/contentTranslator'
 type ReduxProps = {
@@ -10,7 +10,7 @@ type ReduxProps = {
 }
 type Props = ReduxProps & {
   readonly className?: string
-  readonly user?: UserLink_user | null | undefined
+  readonly user?: UserLink_user$data | null | undefined
   readonly legacyUser?: Record<string, any>
   readonly ariaLabel?: string
 }
@@ -20,7 +20,7 @@ export const UserLink = ({ legacyUser, className = '', toggled, user, ariaLabel 
   if (legacyUser) {
     let userUrl =
       legacyUser && legacyUser._links && legacyUser._links.profile && toggled ? legacyUser._links.profile : null
-    const username = legacyUser && legacyUser.displayName ? legacyUser.displayName : 'deleted-user'
+    const username = legacyUser && legacyUser.displayName ? legacyUser.displayName : 'global.user.anonymized'
 
     const label = ariaLabel
       ? intl.formatMessage(
@@ -57,7 +57,7 @@ export const UserLink = ({ legacyUser, className = '', toggled, user, ariaLabel 
           { author: translateContent(user.displayName) },
         )
       : undefined
-    if (toggled) {
+    if (toggled && user.url) {
       return (
         <a className={className} href={user.url} aria-label={label} title={user?.displayName}>
           {translateContent(user.displayName)}
@@ -83,7 +83,7 @@ export // @ts-ignore
 const container = connect(mapStateToProps)(UserLink)
 export default createFragmentContainer(container, {
   user: graphql`
-    fragment UserLink_user on User {
+    fragment UserLink_user on Author {
       displayName
       url
     }

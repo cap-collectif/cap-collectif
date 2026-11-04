@@ -9,6 +9,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalUrlResolver;
+use Capco\AppBundle\GraphQL\Resolver\User\ContributorNameResolver;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\SelectionStepRepository;
@@ -44,6 +45,7 @@ class CreateCsvFromProjectMediatorsProposalsVotesCommand extends BaseExportComma
         private readonly ProposalUrlResolver $proposalUrlResolver,
         private readonly RequestStack $requestStack,
         private readonly TranslatorInterface $translator,
+        private readonly ContributorNameResolver $contributorNameResolver,
         private readonly Map $map
     ) {
         $listener->disableAcl();
@@ -119,7 +121,9 @@ class CreateCsvFromProjectMediatorsProposalsVotesCommand extends BaseExportComma
             $orderedArray['voter_email'] = $projectMediatorsProposalsVote['email'];
             $orderedArray['voter_phone'] = $projectMediatorsProposalsVote['phone'];
             $orderedArray['mediator_id'] = $projectMediatorsProposalsVote['mediator_id'];
-            $orderedArray['mediator_username'] = $projectMediatorsProposalsVote['username'];
+            $orderedArray['mediator_username'] = $projectMediatorsProposalsVote['mediator_is_anonymized']
+                ? $this->contributorNameResolver->anonymizedName()
+                : $projectMediatorsProposalsVote['username'];
 
             $writer->addRow(WriterEntityFactory::createRowFromArray($orderedArray));
         }

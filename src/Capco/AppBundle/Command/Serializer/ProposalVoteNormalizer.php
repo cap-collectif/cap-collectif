@@ -65,7 +65,7 @@ class ProposalVoteNormalizer extends BaseNormalizer implements NormalizerInterfa
                 self::EXPORT_PROPOSAL_VOTES_ACCOUNTED => $this->getReadableBoolean($object->getIsAccounted()),
                 self::EXPORT_PROPOSAL_VOTES_ANONYMOUS => $this->getReadableBoolean($isPrivate),
                 self::EXPORT_PROPOSAL_VOTES_AUTHOR_ID => $author->getId(),
-                self::EXPORT_PROPOSAL_VOTES_AUTHOR_USERNAME => $author->getUsername(),
+                self::EXPORT_PROPOSAL_VOTES_AUTHOR_USERNAME => $this->contributorNameResolver->resolveUsername($author),
                 self::EXPORT_PROPOSAL_VOTES_AUTHOR_IS_EMAIL_CONFIRMED => $this->getReadableBoolean($author->isEmailConfirmed()),
                 self::EXPORT_PROPOSAL_VOTES_AUTHOR_IS_PHONE_CONFIRMED => $this->getReadableBoolean($author->isPhoneConfirmed()),
                 self::EXPORT_PROPOSAL_VOTES_AUTHOR_USER_TYPE_ID => $userType?->getId(),

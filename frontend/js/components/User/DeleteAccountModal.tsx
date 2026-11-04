@@ -6,7 +6,7 @@ import { Modal, Button, Radio, Panel } from 'react-bootstrap'
 import { createFragmentContainer, graphql } from 'react-relay'
 import type { DeleteAccountModal_viewer } from '~relay/DeleteAccountModal_viewer.graphql'
 import type { DeleteAccountType } from '~relay/DeleteAccountMutation.graphql'
-import DefaultAvatar from './DefaultAvatar'
+import { ANONYMIZED_PROFILE_AVATAR } from '@shared/utils/anonymizedProfile'
 import CloseButton from '../Form/CloseButton'
 import DeleteAccountMutation from '../../mutations/DeleteAccountMutation'
 import { colors } from '~/utils/colors'
@@ -169,10 +169,10 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                           <div className="panel-body">
                             <div className="row">
                               <div className="col-sm-4 delete__inception__avatar">
-                                <DefaultAvatar size={35} />
+                                <img src={ANONYMIZED_PROFILE_AVATAR} width={35} height={35} alt="" className="mr-10" />
                               </div>
                               <div className="col-sm-8 delete__example">
-                                <FormattedMessage id="deleted-user" />
+                                <FormattedMessage id="global.user.anonymized" />
                                 <br />
                                 <strong>
                                   <FormattedMessage id="modal-example-contribution-title" />
@@ -221,10 +221,10 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                           <div className="panel-body">
                             <div className="row">
                               <div className="col-sm-4 delete__inception__avatar">
-                                <DefaultAvatar size={35} />
+                                <img src={ANONYMIZED_PROFILE_AVATAR} width={35} height={35} alt="" className="mr-10" />
                               </div>
                               <div className="col-sm-8 delete__example">
-                                <FormattedMessage id="deleted-user" />
+                                <FormattedMessage id="global.user.anonymized" />
                                 <br />
                                 <strong>
                                   <FormattedMessage id="deleted-title" />
@@ -242,7 +242,6 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                   </Panel.Body>
                 </Panel>
               </fieldset>
-
             </form>
           </Modal.Body>
           <Modal.Footer>

@@ -170,7 +170,7 @@ class AnonymizeUsersFromCsvCommand extends Command
                         UPDATE fos_user SET
                             email = NULL,
                             email_canonical = NULL,
-                            username = 'Utilisateur supprimé',
+                            username = 'global.user.anonymized',
                             deleted_account_at = NOW(),
                             password = NULL,
                             last_login = NULL,
@@ -204,7 +204,7 @@ class AnonymizeUsersFromCsvCommand extends Command
                             consent_external_communication = FALSE,
                             consent_internal_communication = FALSE,
                             email_confirmation_sent_at = NULL,
-                            username_canonical = 'Utilisateur supprimé',
+                            username_canonical = 'global.user.anonymized',
                             slug = CONCAT('utilisateursupprime-', UUID()),
                             updated_at = NOW()
                         WHERE id in (SELECT id FROM matching_users)

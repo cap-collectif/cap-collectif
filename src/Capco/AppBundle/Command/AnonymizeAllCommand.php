@@ -642,7 +642,7 @@ class AnonymizeAllCommand extends Command
             SET
                 u.email = NULL,
                 u.email_canonical = NULL,
-                u.username = 'Utilisateur supprimé',
+                u.username = 'global.user.anonymized',
                 u.deleted_account_at = NOW(),
                 u.password = NULL,
                 u.last_login = NULL,
@@ -676,7 +676,7 @@ class AnonymizeAllCommand extends Command
                 u.consent_internal_communication = FALSE,
                 u.email_confirmation_sent_at = NULL,
                 u.birth_place = NULL,
-                u.username_canonical = 'Utilisateur supprimé',
+                u.username_canonical = 'global.user.anonymized',
                 u.slug = CONCAT('utilisateursupprime-', UUID()),
                 u.updated_at = NOW(),
                 u.anonymized_at = NOW()
@@ -784,7 +784,7 @@ class AnonymizeAllCommand extends Command
                 p.new_email_confirmation_token = NULL,
                 p.confirmation_token = NULL,
                 p.token = CONCAT('anonymized-', UUID()),
-                p.username = 'Participant supprimé',
+                p.username = 'global.user.anonymized',
                 p.lastname = NULL,
                 p.firstname = NULL,
                 p.phone = NULL,

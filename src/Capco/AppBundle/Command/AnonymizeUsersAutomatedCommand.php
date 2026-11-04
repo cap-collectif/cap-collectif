@@ -364,7 +364,7 @@ class AnonymizeUsersAutomatedCommand extends Command
             UPDATE debate_anonymous_argument daa
             SET
                 daa.email = '',
-                daa.username = 'Utilisateur supprimé',
+                daa.username = 'global.user.anonymized',
                 daa.ip_address = NULL,
                 daa.navigator = NULL,
                 daa.consent_internal_communication = FALSE
@@ -390,7 +390,7 @@ class AnonymizeUsersAutomatedCommand extends Command
                         SET
                             u.email = NULL,
                             u.email_canonical = NULL,
-                            u.username = 'Utilisateur supprimé',
+                            u.username = 'global.user.anonymized',
                             u.deleted_account_at = NOW(),
                             u.password = NULL,
                             u.last_login = NULL,
@@ -425,7 +425,7 @@ class AnonymizeUsersAutomatedCommand extends Command
                             u.consent_internal_communication = FALSE,
                             u.email_confirmation_sent_at = NULL,
                             u.birth_place = NULL,
-                            u.username_canonical = 'Utilisateur supprimé',
+                            u.username_canonical = 'global.user.anonymized',
                             u.slug = CONCAT('utilisateursupprime-', UUID()),
                             u.updated_at = NOW(),
                             u.anonymized_at = NOW()
@@ -447,7 +447,7 @@ class AnonymizeUsersAutomatedCommand extends Command
                             p.postal_address = NULL,
                             p.zip_code = NULL,
                             p.date_of_birth = NULL,
-                            p.username = 'Utilisateur supprimé',
+                            p.username = 'global.user.anonymized',
                             p.phone_confirmed = FALSE,
                             p.email_confirmation_sent_at = NULL,
                             p.new_email_to_confirm = NULL,
