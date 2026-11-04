@@ -250,6 +250,14 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
     - Ne pas chercher à lire / modifier les variables d'environnement, demander à la développeuse aux commandes de modifier les éléments nécessaires.
     - Vérifier les tests **Cypress** qui couvrent la page Sonata migrée, rangés dans `cypress/e2e/backOffice/<feature>/`
       (convention de dossier par feature, ex: `cypress/e2e/backOffice/project/`).
+    - **Nouveau dossier `cypress/e2e/backOffice/<feature>/`** : l'ajouter à l'une des six suites de
+      `.circleci/cypress-suites.cjs`, dans le même commit, sinon le job CircleCI `check-cypress-spec-coverage`
+      échoue (« No domain suite covers … ») et la spec n'est jouée par aucun job. Choisir la suite par domaine
+      fonctionnel, pas par front/back office : un réglage du site va dans `site-content`, une page liée aux
+      comptes ou aux accès dans `accounts-access`, la modération des contributions (ex: `backOffice/reporting`)
+      dans `consultations-debates`. Une spec ajoutée dans un dossier déjà listé hérite de sa suite, rien à
+      faire. Vérifier avec `node .circleci/cypress-suites.cjs` depuis la racine du dépôt (règles complètes :
+      `ADR/001-frontend_tests.md`).
     - Si des tests **Cypress** existent déjà pour cette page, **vérifier qu'ils passent toujours** après la
       migration (les sélecteurs, les URLs, la structure du DOM ont pu changer) et les réparer si besoin.
     - Ne pas ajouter de scénarios Cypress superflus : beaucoup de pages admin sont peu utilisées, inutile
