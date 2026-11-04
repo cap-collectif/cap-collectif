@@ -46,6 +46,17 @@ describe('getSideBarItemsFiltered', () => {
 
     expect(settings?.items.some(item => item.href === '/admin-next/hub-api-green')).toBe(false)
   })
+
+  it.each([
+    [false, '/admin/locale/list'],
+    [true, '/admin-next/locales'],
+  ] as const)('uses the locales route for rollout %s', (enabled, href) => {
+    const flags = { ...defaultFeatureFlags, multilangue: true, unstable__sonata_migration_to_admin_next: enabled }
+    const items = getSideBarItemsFiltered(true, false, flags, false, null, false)
+    expect(
+      items.find(group => group.id === 'settings')?.items.find(item => item.title === 'global-languages')?.href,
+    ).toBe(href)
+  })
 })
 
 /**

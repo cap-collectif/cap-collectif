@@ -219,7 +219,7 @@
             },
             {
                 "title": "global-languages",
-                "href": "/admin/locale/list",
+                "href": "/admin-next/locales",
                 "rolesRequired": [],
                 "featuresRequired": ["multilangue"]
             },

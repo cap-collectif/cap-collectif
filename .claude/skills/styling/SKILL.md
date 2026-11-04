@@ -171,8 +171,10 @@ yellow.100 → yellow.900 // Warning
 
 <Text color="primary.600">Texte principal</Text>
 <Text color="red.500">Erreur</Text>
-<Text color="gray.500">Texte secondaire</Text>
+<Text color="gray.600">Texte secondaire</Text>
 ```
+
+**Contraste du texte gris** : sur fond blanc, utiliser au minimum `gray.600` pour du texte (aide, mention "facultatif", date...). `gray.500` n'offre pas un contraste suffisant pour l'accessibilite. Du code existant utilise encore `gray.500` : ne pas le reprendre comme modele.
 
 ## Typographie
 
@@ -393,7 +395,7 @@ import {
     primaryInfoTag="h2"
   >
     <CardTagList>
-      <Text fontSize="sm" color="gray.500">{date}</Text>
+      <Text fontSize="sm" color="gray.600">{date}</Text>
     </CardTagList>
   </CardContent>
 </Card>
@@ -569,7 +571,8 @@ const Container = styled.div`
 - [ ] Pas de styled-components
 - [ ] Tokens semantiques pour spacing (`"md"` pas `16`)
 - [ ] Props responsive avec `base`, `md`, `lg`
-- [ ] Couleurs du theme (`gray.500` pas `#999`)
+- [ ] Couleurs du theme (`gray.600` pas `#999`)
+- [ ] Texte gris sur fond blanc en `gray.600` minimum (contraste)
 - [ ] Composants CapUI (Button, Card, Modal...)
 - [ ] `sx` uniquement pour styles non couverts par props
 - [ ] Mobile-first (base = mobile)

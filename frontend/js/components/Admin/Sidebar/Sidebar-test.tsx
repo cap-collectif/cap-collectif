@@ -105,4 +105,21 @@ describe('<Sidebar />', () => {
     )
     expect(wrapper).toMatchSnapshot()
   })
+
+  it.each([
+    [false, '/admin/locale/list'],
+    [true, '/admin-next/locales'],
+  ] as const)('uses the locales route for rollout %s', (enabled, href) => {
+    const wrapper = render(
+      <MockProviders
+        store={{
+          default: { features: { ...features, multilangue: true, unstable__sonata_migration_to_admin_next: enabled } },
+          user: { user: userAdmin },
+        }}
+      >
+        <Sidebar appVersion="test" defaultAccordeon="reglages" />
+      </MockProviders>,
+    )
+    expect(wrapper.find(`a[href$="${href}"]`)).toHaveLength(1)
+  })
 })

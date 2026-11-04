@@ -335,6 +335,10 @@ Exemple de référence : la page « Icône du site » (`/admin/favicon/list` →
      `ReactBootstrapInput` (`accept={ALLOWED_IMAGE_MIMETYPES}`, soit png/gif/jpeg/webp, et `maxSize` de
      25 Mo). Reproduire ces contraintes dans le `FieldInput type="uploader"` plutôt que de copier le
      `format`/`maxSize` d'une autre page Admin Next ;
+   - les champs envoyés par chaque action : pour une mutation partielle, vérifier aussi ce que le backend fait
+     lorsqu’un champ est omis. Si la désactivation est refusée tant qu’un élément est publié, désactiver le
+     contrôle correspondant dans la modale d’ajout. Réserver la dépublication suivie du retrait à l’action
+     qui demande confirmation ;
    - les effets de bord du composant hors formulaire (manipulation du DOM, rechargement, redirection…). Les
      lister à l'utilisateurice et décider ensemble s'ils ont un sens dans Admin Next. Exemple : le formulaire
      legacy de l'icône du site réécrivait les `<link rel="icon">` de la page ; le layout Admin Next n'en rend
@@ -440,9 +444,7 @@ flag), **à nettoyer** (Admin Next déjà en place, route legacy encore présent
   - Composants : `HomePageProjectsSectionConfigurationApp`, `HomePageProjectsMapSectionConfigurationApp`
     (`SectionController`)
   - Les sections carrousel redirigent déjà vers Admin Next. La liste des sections est encore sur Sonata.
-- **Langues** — à refondre
-  - URL : `/admin/locale/list`
-  - Composant : `LocaleAdminPageApp` (`LocaleController`)
+
 
 #### Refontes fusionnées sous feature flag
 
@@ -460,7 +462,10 @@ sous feature flag**, et non dans une PR de doc préalable : une page de cette se
   - URL : `/admin/font/list` → `/admin-next/fonts`
   - Composant : `FontAdminPageApp` (`FontController`)
   - Reste : validation métier, puis nettoyage de la route legacy.
-
+- **Langues** — refonte en cours (#20602, `/admin-next/locales` derrière le flag commun). Nettoyage de la route legacy après le rollout.
+  - URL : `/admin/locale/list`
+  - Composant : `LocaleAdminPageApp` (`LocaleController`)
+  
 #### Déjà sur Admin Next, route legacy à nettoyer
 
 - **Liste des formulaires de dépôt** — à nettoyer
@@ -578,6 +583,16 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
 - **Couleur des `ButtonQuickAction`** : le bouton d'édition (`icon={CapUIIcon.Pencil}`) doit avoir
   `variantColor="primary"`, le bouton de suppression (`icon={CapUIIcon.Trash}`) doit avoir
   `variantColor="danger"`.
+- **Texte d'aide en gris** (ex: texte explicatif au-dessus d'une liste, comme `multi-language-help-text` dans
+  `Locales/LocalesList.tsx`) : `<Text color="gray.600">`. `gray.500` (couleur de la mention « Facultatif » de
+  beaucoup de formulaires existants) n'a pas un contraste suffisant sur fond blanc : ne pas la reprendre pour du
+  texte, utiliser `gray.600` au minimum.
+- **Dimensions : tokens du DS ou `pxToRem`, jamais de valeur brute** : pour les espacements (`p`, `m*`, `gap`,
+  `spacing`…), utiliser les tokens sémantiques de CapUI (`xxs` 4 px, `xs` 8 px, `sm` 12 px, `md` 16 px, `lg` 24 px,
+  `xl` 32 px, `xxl` 48 px), pas les valeurs numériques (`p={6}`, `mb={4}`) : ce sont l'ancienne échelle
+  `LEGACY_SPACING` de CapUI, encore très présente dans le code existant, à ne pas reprendre. Pour une valeur hors
+  tokens (largeur, hauteur, rayon…), utiliser `pxToRem` (`@shared/utils/pxToRem`), ex. `maxWidth={pxToRem(300)}`,
+  jamais `"300px"`. Avant de rendre la main, vérifier tout le diff de la PR. Exemple : `Locales/LocalesList.tsx`.
 - **Liste paginée (Relay connection) avec recherche / infinite scroll** : `ProjectList.tsx` / `PostList.tsx`
   (`usePaginationFragment` + `Table.Tbody useInfiniteScroll`) ou `UserGroupsList.tsx`.
 - **Entité avec traductions multi-langues + media** : `UserTypesList.tsx` / `UserTypeModal.tsx` (Types de profil).

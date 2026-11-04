@@ -5,6 +5,7 @@ import sideBarItems from './SideBarItems.json'
 // Admin Next pages in rollout behind the migration feature flag, mapped to the Sonata route served while it is disabled
 const SONATA_URL_BY_ADMIN_NEXT_URL: Record<string, string> = {
   '/admin-next/fonts': '/admin/font/list',
+  '/admin-next/locales': '/admin/locale/list',
 }
 
 // An exact match: `includes` would also select "/admin-next/user-types" on the "/admin-next/user" page

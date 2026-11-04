@@ -234,7 +234,15 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                   <SidebarLink text="admin.label.social_network" href="/admin-next/social-networks" />
                   <SidebarLink text="admin.label.footer_social_network" href="/admin-next/footer-social-networks" />
                   <SidebarLink text="admin.label.project_district" href="/admin-next/geographical-areas" />
-                  {features.multilangue && <SidebarLink text="global-languages" href="/admin/locale/list" />}
+                  {features.multilangue && (
+                    <SidebarLink
+                      text="global-languages"
+                      // Keep the Sonata route until the migration flag is removed for this page.
+                      href={
+                        features.unstable__sonata_migration_to_admin_next ? '/admin-next/locales' : '/admin/locale/list'
+                      }
+                    />
+                  )}
                   <SidebarLink text="domain.and.url" href="/admin-next/domain-url" />
                   <SidebarLink text="admin.customcode" href="/admin-next/custom-code" />
                   <SidebarLink text="website-icon" href="/admin-next/favicon" />

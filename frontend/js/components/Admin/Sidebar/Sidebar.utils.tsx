@@ -43,7 +43,9 @@ export const URL_MAP = {
     '/admin/capco/user/usertype/',
   ],
   reglages: [
+    // Sonata prefix retained during the Admin Next migration rollout.
     '/admin/locale/',
+    '/admin-next/locales',
     '/admin-next/menu-item',
     '/admin-next/social-networks',
     '/admin-next/footer-social-networks',
