@@ -238,7 +238,7 @@ global qui ignore toutes les exceptions. Une erreur applicative réelle doit
 - Exécuter ESLint sur les fichiers touchés et `git diff --check`.
 - Vérifier que les nouvelles specs sont couvertes par les patterns CircleCI
   si une spec permanente est ajoutée. Le contrôle existant est
-  `.circleci/check-cypress-spec-coverage.sh`.
+  `node .circleci/cypress-suites.cjs`.
 - Respecter les contrôles PHP obligatoires de `AGENTS.md` avant tout commit
   contenant des changements PHP.
 - Vérifier qu’aucun délai injecté, log de diagnostic, `.only()` ou `.skip()`

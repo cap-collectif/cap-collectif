@@ -10,12 +10,13 @@ Utiliser Cypress pour les tests front-end (E2E + intégration).
 Cypress est choisi pour sa stabilité, son ergonomie et son intégration avec les frameworks modernes.
 
 ## Structure
-Afin de garantir que les tests soient bien joués dans la CI, il est nécessaire de les ajouter dans l'un des dossiers suivants
-- cypress/
-    - e2e/
-        - frontOffice/
-        - backOffice/
+Les specs se trouvent sous `cypress/e2e/`, dans `frontOffice/`, `backOffice/` ou `frontOfficeWorkflow/`. CircleCI les regroupe par fonctionnalité.
 
+- Une nouvelle spec hérite de la suite de son dossier si celui-ci est déjà attribué (par exemple `frontOffice/proposal/`).
+- Pour un dossier encore non couvert, ajouter son chemin à la suite correspondante dans `.circleci/cypress-suites.cjs`. Si le dossier est partagé entre plusieurs suites (par exemple `frontOfficeWorkflow/`), ajouter le chemin de la spec à sa suite.
+- Lors du renommage, du déplacement ou de la suppression d’un fichier ou dossier explicitement listé, mettre à jour son entrée dans le même commit.
+
+Après ces changements, exécuter `node .circleci/cypress-suites.cjs` depuis la racine du dépôt pour vérifier que chaque spec appartient à exactement une suite. Le découpage et le parallélisme sont documentés dans [l’ADR sur la CI](001-continuous_integration.md).
 
 ## Convention de nommage
 Nommage : `featureNameInCamelCase.cy.ts`
