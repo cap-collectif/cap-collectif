@@ -99,6 +99,11 @@ when `X-User-Logged-In` is zero. Its current shared cache only applies to
 
 ## Verification
 
+Run the [production Nginx routing tests](../infrastructure/services/remote/nginx/README.md)
+to verify that media extensions reach PHP, application responses are preserved and
+static assets retain their cache policy. These tests use real Nginx/PHP-FPM with a
+synthetic handler; the Symfony tests below cover application permissions.
+
 Run `tests/GraphQL/Resolver/ResponsePrivacyTest.php`,
 `tests/GraphQL/Resolver/Questionnaire/QuestionnaireCacheHeadersTest.php`,
 `tests/Controller/Site/MediaPrivacyTest.php` and
