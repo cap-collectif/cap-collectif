@@ -57,7 +57,7 @@ export const joditFileUploader = {
   },
 }
 
-export const uppyListener = (editor: Jodit, platformLanguage: string, intl: IntlShape) => {
+export const uppyListener = (editor: Jodit, platformLanguage: string, intl: IntlShape, questionId?: string) => {
   onElementAvailable(`#${fileInput}`, () => {
     editor.s.save()
     new Uppy({
@@ -87,6 +87,7 @@ export const uppyListener = (editor: Jodit, platformLanguage: string, intl: Intl
           ...currentFile.meta,
           name: cleanFileName,
           type: currentFile.type,
+          ...(questionId ? { questionId } : {}),
         }
 
         return currentFile

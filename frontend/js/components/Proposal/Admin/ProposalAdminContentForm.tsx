@@ -1,9 +1,10 @@
+import proposalSubmitError from '~/utils/form/proposalSubmitError'
 import { $PropertyType } from 'utility-types'
 import * as React from 'react'
 import type { IntlShape } from 'react-intl'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import { connect } from 'react-redux'
-import { Field, FieldArray, formValueSelector, reduxForm, SubmissionError, submit } from 'redux-form'
+import { Field, FieldArray, formValueSelector, reduxForm, submit } from 'redux-form'
 import { createFragmentContainer, graphql } from 'react-relay'
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
@@ -228,10 +229,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { proposal, isAdmin, f
         throw new Error('Mutation "changeProposalContent" failed.')
       }
     })
-    .catch(() => {
-      throw new SubmissionError({
-        _error: 'global.error.server.form',
-      })
+    .catch(e => {
+      throw proposalSubmitError(e, values.responses)
     })
 }
 

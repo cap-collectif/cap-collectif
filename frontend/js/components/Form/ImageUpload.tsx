@@ -13,6 +13,7 @@ import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon'
 import Image from '~ui/Primitives/Image'
 
 type Props = {
+  uploadQuestionId?: string
   value: Record<string, any> | Array<Record<string, any>>
   onChange: (...args: Array<any>) => any
   id: string
@@ -69,6 +70,7 @@ export class ImageUpload extends React.Component<Props, State> {
     for (const file of acceptedFiles) {
       const formData = new FormData()
       formData.append('file', file)
+      if (this.props.uploadQuestionId) formData.append('questionId', this.props.uploadQuestionId)
       Fetcher.postFormData('/files', formData)
         .then(json)
         .then(res => {

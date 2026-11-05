@@ -18,6 +18,7 @@ const ERROR_TYPE = {
   MAX_FILE: ['impossible-to-download-document', 'more-than-5-documents-error'],
 }
 type Props = {
+  uploadQuestionId?: string
   id: string
   typeForm: $Values<typeof TYPE_FORM>
   onChange: (value: Array<FileInfo>) => void
@@ -26,7 +27,7 @@ type Props = {
   value: Array<FileInfo> | null
 }
 
-const FileUpload = ({ id, typeForm, className, onChange, disabled, value }: Props) => {
+const FileUpload = ({ id, typeForm, className, onChange, disabled, value, uploadQuestionId }: Props) => {
   const [errors, setErrors] = useState<Array<string> | null>(null)
 
   const deleteFile = currentIdFile => {
@@ -44,6 +45,7 @@ const FileUpload = ({ id, typeForm, className, onChange, disabled, value }: Prop
 
       <Dropzone
         onChange={onChange}
+        uploadQuestionId={uploadQuestionId}
         setError={setErrors}
         errors={ERROR_TYPE}
         accept={ALLOWED_MIMETYPES}

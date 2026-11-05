@@ -9,6 +9,7 @@ import type { AddressProps } from '~/components/Form/Address/Address.type'
 import type { DateTimeInputProps, TimeConstraintsProps, DateProps } from '~/components/Form/DateTime'
 
 type Props = {
+  uploadQuestionId?: string
   meta: {
     touched: boolean
     dirty?: boolean
@@ -165,6 +166,7 @@ class Field extends React.Component<Props> {
       noCode,
       onKeyDown,
       captchaRef,
+      uploadQuestionId,
     } = this.props
     const check = touched || (dirty && !disableValidation)
     let errorMessage: any = null
@@ -240,6 +242,7 @@ class Field extends React.Component<Props> {
         noCode={noCode}
         onKeyDown={onKeyDown}
         captchaRef={captchaRef}
+        uploadQuestionId={uploadQuestionId}
         {...input}
       >
         {children}

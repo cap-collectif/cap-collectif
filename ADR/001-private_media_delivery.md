@@ -4,6 +4,22 @@
 
 Accepted, 9 October 2026.
 
+## Prevent new private-media reuse, 23 October 2026
+
+Answer uploads carry their question identifier so the server can classify private,
+hidden and questionnaire uploads before storing them. A session-scoped 24-hour
+pending grant supports previews before submission; response permissions apply after
+submission. Private HTML references cannot grant access without existing permission.
+
+New public covers and rich-text references reject private media before flush,
+including for administrators and authorized readers. Publication transitions also
+validate unchanged content. Form errors identify the affected field and file.
+
+This is the first of three deployment stages. Both read exceptions below remain
+active. Deploy these write protections first, then deploy and run the separate
+historical conversion command on every instance. Remove the HTTP and GraphQL read
+bypasses only in the third stage, after conversion and verification everywhere.
+
 ## Temporary exception — 15 October 2026
 
 Direct `/media/` delivery temporarily allows anonymous access to registered media,

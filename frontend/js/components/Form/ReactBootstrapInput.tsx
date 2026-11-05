@@ -39,6 +39,7 @@ import { ALLOWED_IMAGE_MIMETYPES, ALLOWED_MIMETYPES } from '@shared/utils/accept
 import WYSIWYG from './WysiwygEditor'
 
 export type ParentProps = {
+  uploadQuestionId?: string
   name?: string | null | undefined
   image?: string | null | undefined
   id: string | null | undefined
@@ -296,6 +297,7 @@ class ReactBootstrapInput extends React.Component<Props> {
             onChange={props.onChange}
             value={value}
             disabled={props.disabled}
+            uploadQuestionId={props.uploadQuestionId}
           />
         )
       }
@@ -310,6 +312,7 @@ class ReactBootstrapInput extends React.Component<Props> {
             accept={ALLOWED_MIMETYPES.join()}
             maxSize={maxSize}
             disablePreview
+            uploadQuestionId={props.uploadQuestionId}
             multiple
           />
         </div>

@@ -10,6 +10,7 @@ import FakeLoaderBar from '~ui/FakeLoaderBar/FakeLoaderBar'
 export const TIMEOUT_LOADER_DISPLAY = 2000
 type Errors = Record<string, Array<string>>
 type Props = {
+  uploadQuestionId?: string
   onChange: (...args: Array<any>) => any
   setError: (arg0: Array<string>) => void
   errors: Errors
@@ -24,6 +25,7 @@ type Props = {
 
 const Dropzone = ({
   onChange,
+  uploadQuestionId,
   setError,
   errors,
   value,
@@ -54,6 +56,7 @@ const Dropzone = ({
     const promisesUpload = acceptedFiles.map(file => {
       const formData = new FormData()
       formData.append('file', file)
+      if (uploadQuestionId) formData.append('questionId', uploadQuestionId)
       return Fetcher.postFormData('/files', formData)
         .then(json)
         .then(res => ({

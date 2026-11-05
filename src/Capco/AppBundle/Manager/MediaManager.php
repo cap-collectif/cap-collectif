@@ -29,7 +29,8 @@ class MediaManager
         string $context = 'default',
         ?string $providerReference = null,
         ?string $authorName = null,
-        bool $flush = true
+        bool $flush = true,
+        bool $private = false
     ): Media {
         $name = $file->getClientOriginalName();
         $size = $file->getSize();
@@ -41,6 +42,9 @@ class MediaManager
         $media->setProviderReference(
             $providerReference ?: $this->mediaProvider->generateName($media)
         );
+        if ($private) {
+            $media->setMetadataValue('private_attachment', '1');
+        }
         $media->setName($name);
         $media->setAuthorName($authorName);
         $media->setContentType($contentType);

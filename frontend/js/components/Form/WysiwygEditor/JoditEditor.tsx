@@ -8,6 +8,7 @@ import localConfig from '~/config'
 import { dangerToast } from '@shared/utils/toasts'
 
 export type Props = {
+  uploadQuestionId?: string
   value?: any
   onChange: (arg0: string) => void
   id?: string
@@ -54,6 +55,7 @@ const getConfig = (
   clientConfig,
   disabled,
   intl,
+  uploadQuestionId?: string,
 ) => {
   const buttons = clientConfig
     ? CLIENT_CONFIG
@@ -109,6 +111,7 @@ const getConfig = (
       headers: {},
       prepareData: data => {
         data.append('file', data.getAll('files[0]')[0])
+        if (uploadQuestionId) data.append('questionId', uploadQuestionId)
         data.delete('file[0]')
       },
       isSuccess: resp => {
@@ -158,7 +161,7 @@ const getConfig = (
     tabIndex: 0,
     disablePlugins: 'add-new-line',
     events: {
-      [FILE_UPLOAD_POPUP_OPENED]: (editor: IJodit) => uppyListener(editor, currentLanguage, intl),
+      [FILE_UPLOAD_POPUP_OPENED]: (editor: IJodit) => uppyListener(editor, currentLanguage, intl, uploadQuestionId),
     },
     popup: {
       a: linktooltip,
@@ -175,12 +178,13 @@ const Jodit = ({
   noCode,
   clientConfig,
   disabled = false,
+  uploadQuestionId,
 }: Props) => {
   const intl = useIntl()
   const editor = useRef<any>(null)
   const config = useMemo(
-    () => getConfig(currentLanguage, noCode, editor, clientConfig, disabled, intl),
-    [currentLanguage, noCode, clientConfig, disabled, intl],
+    () => getConfig(currentLanguage, noCode, editor, clientConfig, disabled, intl, uploadQuestionId),
+    [currentLanguage, noCode, clientConfig, disabled, intl, uploadQuestionId],
   )
 
   return useMemo(

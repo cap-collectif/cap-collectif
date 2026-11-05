@@ -7,6 +7,7 @@ use Capco\AppBundle\Controller\Api\MediasController;
 use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\VocalContribution;
 use Capco\AppBundle\Manager\MediaManager;
+use Capco\AppBundle\Service\PrivateMediaUpload;
 use Capco\AppBundle\Service\VocalContributionUploadService;
 use Capco\AppBundle\Twig\MediaExtension;
 use PHPUnit\Framework\TestCase;
@@ -38,6 +39,7 @@ class VoiceMessageControllerTest extends TestCase
                 $this->createStub(MediaExtension::class),
                 $this->createStub(AntivirusScanner::class),
                 $service,
+                $this->createStub(PrivateMediaUpload::class),
             ])
             ->onlyMethods(['getUser'])
             ->getMock()

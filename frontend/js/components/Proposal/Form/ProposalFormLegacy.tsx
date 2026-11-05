@@ -1,6 +1,7 @@
 // @ts-nocheck
 // Legacy : https://github.com/cap-collectif/platform/issues/13828
 import * as React from 'react'
+import proposalSubmitError from '~/utils/form/proposalSubmitError'
 import type { IntlShape } from 'react-intl'
 import { injectIntl, FormattedHTMLMessage, FormattedMessage } from 'react-intl'
 import { connect } from 'react-redux'
@@ -209,7 +210,8 @@ const onSubmit = (
   }
 
   const participantToken = CookieMonster.getParticipantCookie()
-  const emailToken = typeof window === 'undefined' ? undefined : new URLSearchParams(window.location.search).get('token')
+  const emailToken =
+    typeof window === 'undefined' ? undefined : new URLSearchParams(window.location.search).get('token')
 
   if (proposal) {
     return ChangeProposalContentMutation.commit({
@@ -235,11 +237,9 @@ const onSubmit = (
 
         window.location.reload()
       })
-      .catch(() => {
+      .catch(e => {
         onSubmitFailed()
-        throw new SubmissionError({
-          _error: 'global.error.server.form',
-        })
+        throw proposalSubmitError(e, values.responses)
       })
   }
 
@@ -304,9 +304,7 @@ const onSubmit = (
         throw e
       }
 
-      throw new SubmissionError({
-        _error: 'global.error.server.form',
-      })
+      throw proposalSubmitError(e, values.responses)
     })
 }
 
@@ -479,16 +477,12 @@ export class ProposalFormLegacy extends React.Component<Props, State> {
       isBackOfficeInput,
     } = this.props
     const availableQuestions = memoizeAvailableQuestions.cache.get('availableQuestions')
-    const titleFieldTradKey =
-      isProposalLikeObjectType(proposalForm.objectType)
-        ? 'global.title'
-        : 'title'
-    const titleSuggestHeader =
-      isProposalLikeObjectType(proposalForm.objectType)
-        ? 'proposal.suggest_header'
-        : proposalForm.step && isInterpellationContextFromStep(proposalForm.step)
-        ? 'interpellation.suggest_header'
-        : 'question.suggest_header'
+    const titleFieldTradKey = isProposalLikeObjectType(proposalForm.objectType) ? 'global.title' : 'title'
+    const titleSuggestHeader = isProposalLikeObjectType(proposalForm.objectType)
+      ? 'proposal.suggest_header'
+      : proposalForm.step && isInterpellationContextFromStep(proposalForm.step)
+      ? 'interpellation.suggest_header'
+      : 'question.suggest_header'
     const { districtIdsFilteredByAddress, isLoadingTitleSuggestions, titleSuggestions } = this.state
     const optional = (
       <Text as="span" fontWeight="normal" color={!isBackOfficeInput ? '#707070' : 'gray.500'}>

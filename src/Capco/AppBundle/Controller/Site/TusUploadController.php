@@ -6,6 +6,7 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Manager\MediaManager;
 use Capco\AppBundle\Provider\AllowedExtensions;
+use Capco\AppBundle\Service\PrivateMediaUpload;
 use Capco\AppBundle\Validator\Constraints\MaxFolderSize;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
@@ -25,7 +26,8 @@ use TusPhp\Tus\Server;
 class TusUploadController extends AbstractController
 {
     public function __construct(
-        private readonly int $tusMediaSizeLimit
+        private readonly int $tusMediaSizeLimit,
+        private readonly PrivateMediaUpload $privateUpload
     ) {}
 
     /**
@@ -50,6 +52,7 @@ class TusUploadController extends AbstractController
         $server->event()->addListener(UploadCreated::NAME, function (TusEvent $event) use ($validator, $logger) {
             $file = $event->getFile();
             $metadata = $file->details()['metadata'] ?? [];
+            $this->privateUpload->isPrivate($metadata['questionId'] ?? null);
 
             try {
                 MediaManager::assertMimeTypeIsAllowed($metadata['filetype'] ?? null, AllowedExtensions::ALLOWED_MIMETYPES_WITH_ARCHIVES);
@@ -92,8 +95,15 @@ class TusUploadController extends AbstractController
             }
 
             $media = $mediaManager->createImageFromPath(path: $path, mediaName: $name, createFile: false);
+            $private = $this->privateUpload->isPrivate($file->details()['metadata']['questionId'] ?? null);
+            if ($private) {
+                $media->setMetadataValue('private_attachment', '1');
+            }
             $em->persist($media);
             $em->flush();
+            if ($private) {
+                $this->privateUpload->remember($media);
+            }
 
             $providerReference = $media->getProviderReference();
             $headers['File-URL'] = "/media/default/0001/01/{$providerReference}";

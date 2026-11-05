@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Controller\Api;
 use Capco\AppBundle\Antivirus\AntivirusScanner;
 use Capco\AppBundle\Exception\VocalContributionUploadException;
 use Capco\AppBundle\Manager\MediaManager;
+use Capco\AppBundle\Service\PrivateMediaUpload;
 use Capco\AppBundle\Service\VocalContributionUploadService;
 use Capco\AppBundle\Twig\MediaExtension;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
@@ -24,7 +25,8 @@ class MediasController extends AbstractController
         private readonly MediaManager $mediaManager,
         private readonly MediaExtension $mediaExtension,
         private readonly AntivirusScanner $antivirusScanner,
-        private readonly VocalContributionUploadService $vocalContributionUploadService
+        private readonly VocalContributionUploadService $vocalContributionUploadService,
+        private readonly PrivateMediaUpload $privateUpload
     ) {}
 
     /**
@@ -79,7 +81,11 @@ class MediasController extends AbstractController
             return $this->json(['errorCode' => self::VIRUS_DETECTED], 400);
         }
 
-        $media = $this->mediaManager->createFileFromUploadedFile($uploadedFile);
+        $private = $this->privateUpload->isPrivate($request->request->get('questionId'));
+        $media = $this->mediaManager->createFileFromUploadedFile($uploadedFile, private: $private);
+        if ($private) {
+            $this->privateUpload->remember($media);
+        }
 
         return $this->json(
             [
@@ -110,7 +116,11 @@ class MediasController extends AbstractController
             return $this->json(['errorCode' => self::VIRUS_DETECTED], 400);
         }
 
-        $media = $this->mediaManager->createFileFromUploadedFile($uploadedFile);
+        $private = $this->privateUpload->isPrivate($request->request->get('questionId'));
+        $media = $this->mediaManager->createFileFromUploadedFile($uploadedFile, private: $private);
+        if ($private) {
+            $this->privateUpload->remember($media);
+        }
 
         $response = $this->render('@CapcoApp/MediaAdmin/upload.html.twig', [
             'object' => $media,

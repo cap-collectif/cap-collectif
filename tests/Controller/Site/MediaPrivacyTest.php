@@ -4,7 +4,13 @@ namespace Capco\Tests\Controller\Site;
 
 use Application\Migrations\Version20261009120000;
 use Application\Migrations\Version20261009180000;
+use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
+use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\EventReview;
 use Capco\AppBundle\Entity\Media;
+use Capco\AppBundle\Entity\Page;
+use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalAnalysis;
 use Capco\AppBundle\Entity\ProposalAnalyst;
@@ -12,8 +18,10 @@ use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
+use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
+use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\Tests\IdentityWebTestCase;
 use Capco\UserBundle\Entity\User;
@@ -92,8 +100,9 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         $owner = $this->account();
         $viewer = $this->account();
         $media = [...$this->attachment($owner)->getMedias()][0];
-        $viewer->setMedia($media);
-        $this->em->flush();
+        // Seed a historical association that new writes now reject.
+        $this->em->getConnection()->update($this->em->getClassMetadata(User::class)->getTableName(), ['media_id' => $media->getId()], ['id' => $viewer->getId()]);
+        $this->em->refresh($viewer);
 
         $result = $this->graphResponse('query($id:ID!){node(id:$id){...on User{media{id url name providerReference}}}}', ['id' => GlobalId::toGlobalId('User', $viewer->getId())]);
         self::assertSame($media->getId(), $result['data']['node']['media']['id']);
@@ -130,7 +139,7 @@ final class MediaPrivacyTest extends IdentityWebTestCase
     }
 
     /** @dataProvider shieldModes */
-    public function testVoiceMessagesRemainProtectedDuringTemporaryPublicDelivery(bool $shield): void
+    public function testVoiceMessagesRemainProtected(bool $shield): void
     {
         $this->setFeature('shield_mode', $shield);
         $media = (new Media())->setName('private.webm')->setProviderReference(bin2hex(random_bytes(16)) . '.webm')->setContext(Media::VOCAL_CONTRIBUTION_CONTEXT)->setContentType('audio/webm')->setSize(1);
@@ -454,8 +463,9 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         $media = [...$this->attachment($owner)->getMedias()][0];
         $id = $media->getId();
         $file = $this->root() . '/default/0001/01/' . $media->getProviderReference();
-        $viewer->setMedia($media);
-        $this->em->flush();
+        // Seed a historical association that new writes now reject.
+        $this->em->getConnection()->update($this->em->getClassMetadata(User::class)->getTableName(), ['media_id' => $media->getId()], ['id' => $viewer->getId()]);
+        $this->em->refresh($viewer);
         $this->login($viewer->getEmail());
         $this->graphql('mutation($input:UpdateProfilePublicDataInput!){updateProfilePublicData(input:$input){user{id}}}', ['input' => [
             'username' => $viewer->getUsername(), 'media' => null,
@@ -524,6 +534,234 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         $this->browser->request('GET', '/download/' . $attachment->getId() . '/media/' . $public->getId());
         self::assertResponseStatusCodeSame(403);
         self::assertSame('1', $this->em->find(Media::class, $public->getId())->getMetadataValue('private_attachment'));
+    }
+
+    public function testAdminCannotReusePrivateMediaAsProjectCover(): void
+    {
+        $admin = $this->account()->addRole('ROLE_ADMIN');
+        $media = [...$this->attachment($admin)->getMedias()][0];
+        $project = $this->em->getRepository(Project::class)->findOneBy(['visibility' => 2]);
+        $id = $project->getId();
+        $previousCover = $project->getCover()?->getId();
+        $this->login($admin->getEmail());
+        $result = $this->graphResponse('mutation($input:UpdateProjectInput!){updateProject(input:$input){project{id}}}', ['input' => [
+            'id' => GlobalId::toGlobalId('Project', $id),
+            'authors' => [GlobalId::toGlobalId('User', $admin->getId())],
+            'cover' => $media->getId(),
+        ]]);
+        self::assertSame('MEDIA_REUSE_DENIED', $result['errors'][0]['extensions']['code']);
+        self::assertSame('cover', $result['errors'][0]['extensions']['field']);
+        $this->em->clear();
+        self::assertSame($previousCover, $this->em->find(Project::class, $id)->getCover()?->getId());
+        self::assertSame('1', $this->em->find(Media::class, $media->getId())->getMetadataValue('private_attachment'));
+    }
+
+    /** @dataProvider privatePublicHtml */
+    public function testPublicProposalRejectsPrivateWysiwygWithoutPersistingIt(string $markup, bool $draft): void
+    {
+        $owner = $this->account();
+        $media = [...$this->attachment($owner)->getMedias()][0];
+        $form = $this->em->find(ProposalForm::class, 'proposalForm4');
+        $form->setUsingDescription(true);
+        $form->getStep()->setEndAt(new \DateTime('+1 year'));
+        $form->getStep()->setPrivate(false);
+        $form->getStep()->getProject()->setVisibility(2);
+        $body = sprintf($markup, '/media/default/0001/01/' . $media->getProviderReference());
+        $proposal = (new Proposal())->setTitle('Private reuse rejected')->setProposalForm($form)->setAuthor($owner)->setDraft($draft)->setBody($draft ? $body : '<p>Original</p>')->setPublishedAt(new \DateTime('-1 day'));
+        $this->em->persist($proposal);
+        $this->em->flush();
+        $id = $proposal->getId();
+        $previousBody = $proposal->getBody();
+        $this->login($owner->getEmail());
+        $result = $this->graphResponse('mutation($input:ChangeProposalContentInput!){changeProposalContent(input:$input){proposal{id}}}', ['input' => [
+            'id' => GlobalId::toGlobalId('Proposal', $id), 'title' => $proposal->getTitle(), 'draft' => false, 'body' => $body,
+        ]]);
+        self::assertSame('MEDIA_REUSE_DENIED', $result['errors'][0]['extensions']['code']);
+        self::assertSame('body', $result['errors'][0]['extensions']['field']);
+        $this->em->clear();
+        self::assertSame($previousBody, $this->em->find(Proposal::class, $id)->getBody());
+        self::assertSame($draft, $this->em->find(Proposal::class, $id)->isDraft());
+        self::assertSame('1', $this->em->find(Media::class, $media->getId())->getMetadataValue('private_attachment'));
+    }
+
+    /** @return iterable<string, array{string, bool}> */
+    public static function privatePublicHtml(): iterable
+    {
+        yield 'image' => ['<img src="%s">', false];
+
+        yield 'link' => ['<a href="%s">download</a>', false];
+
+        yield 'greater than in attribute' => ['<img title=">" src="%s">', false];
+
+        yield 'draft publication' => ['<img src="%s">', true];
+    }
+
+    public function testPrivateEditorUploadIsClassifiedBeforeSubmissionDuringReadBypass(): void
+    {
+        $owner = $this->account();
+        $question = (new SimpleQuestion())->setTitle('Private editor')->setType(2)->setPrivate(true);
+        $this->em->persist($question);
+        $this->em->flush();
+        $this->login($owner->getEmail());
+        $file = tempnam(sys_get_temp_dir(), 'media-privacy-upload-');
+        self::assertIsString($file);
+        $this->files[] = $file;
+        file_put_contents($file, base64_decode(self::PNG));
+        $this->setFeature('antivirus', false);
+        $this->browser->request('POST', '/api/files', ['questionId' => GlobalId::toGlobalId('Question', $question->getId())], ['file' => new UploadedFile($file, 'private.png', 'image/png', null, true)]);
+        self::assertResponseStatusCodeSame(201);
+        $uploaded = json_decode((string) $this->browser->getResponse()->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+        $media = $this->em->find(Media::class, $uploaded['id']);
+        $this->files[] = $this->root() . '/default/0001/01/' . $media->getProviderReference();
+        self::assertSame('1', $media->getMetadataValue('private_attachment'));
+        $this->browser->request('GET', $uploaded['url']);
+        self::assertResponseStatusCodeSame(200);
+        $this->logout();
+        $this->browser->getCookieJar()->clear();
+        $this->browser->request('GET', $uploaded['url']);
+        self::assertResponseStatusCodeSame(200);
+    }
+
+    public function testApprovingEventRejectsUnchangedPrivateHtml(): void
+    {
+        $admin = $this->account()->addRole('ROLE_ADMIN');
+        $media = [...$this->attachment($this->account())->getMedias()][0];
+        $event = $this->em->getRepository(Event::class)->findOneBy([]);
+        $review = (new EventReview())->setStatus(EventReviewStatusType::AWAITING);
+        $event->setReview($review)->setEnabled(false);
+        $event->setBody('<img src="/media/default/0001/01/' . $media->getProviderReference() . '">');
+        $this->em->persist($review);
+        $this->em->flush();
+        $id = $event->getId();
+        $this->login($admin->getEmail());
+        $result = $this->graphResponse('mutation($input:ReviewEventInput!){reviewEvent(input:$input){event{id}}}', ['input' => ['id' => GlobalId::toGlobalId('Event', $id), 'status' => 'APPROVED']]);
+        self::assertSame('MEDIA_REUSE_DENIED', $result['errors'][0]['extensions']['code']);
+        $this->em->clear();
+        self::assertFalse($this->em->find(Event::class, $id)->isEnabledOrApproved());
+    }
+
+    public function testScheduledArticleRejectsPrivateHtml(): void
+    {
+        $admin = $this->account()->addRole('ROLE_ADMIN');
+        $media = [...$this->attachment($this->account())->getMedias()][0];
+        $post = $this->em->getRepository(Post::class)->findOneBy([]);
+        $id = $post->getId();
+        $previous = $post->getBody();
+        $this->login($admin->getEmail());
+        $result = $this->graphResponse('mutation($input:UpdatePostInput!){updatePost(input:$input){post{id}}}', ['input' => [
+            'id' => GlobalId::toGlobalId('Post', $id), 'authors' => [GlobalId::toGlobalId('User', $admin->getId())],
+            'translations' => [['locale' => 'FR_FR', 'title' => 'Scheduled article', 'body' => '<img src="/media/default/0001/01/' . $media->getProviderReference() . '">']],
+            'publishedAt' => (new \DateTime('+1 day'))->format('Y-m-d H:i:s'), 'isPublished' => true, 'displayedOnBlog' => true, 'commentable' => false, 'projects' => [], 'proposals' => [], 'themes' => [],
+        ]]);
+        self::assertSame('MEDIA_REUSE_DENIED', $result['errors'][0]['extensions']['code']);
+        $this->em->clear();
+        self::assertSame($previous, $this->em->find(Post::class, $id)->getBody());
+    }
+
+    /** @dataProvider privatePageHtml */
+    public function testPublishingPageRejectsUnchangedPrivateHtml(string $markup): void
+    {
+        $admin = $this->account()->addRole('ROLE_ADMIN');
+        $media = [...$this->attachment($this->account())->getMedias()][0];
+        $page = $this->em->getRepository(Page::class)->findOneBy([]);
+        $page->setIsEnabled(false);
+        $page->setBody(sprintf($markup, '/media/default/0001/01/' . $media->getProviderReference()));
+        $this->em->flush();
+        $id = $page->getId();
+        $this->login($admin->getEmail());
+        $result = $this->graphResponse('mutation($input:UpdatePageInput!){updatePage(input:$input){page{id}}}', ['input' => ['id' => GlobalId::toGlobalId('Page', $id), 'isEnabled' => true, 'translations' => [['locale' => 'FR_FR', 'title' => $page->getTitle(), 'body' => $page->getBody()]]]]);
+        self::assertSame('MEDIA_REUSE_DENIED', $result['errors'][0]['extensions']['code']);
+        $this->em->clear();
+        self::assertFalse($this->em->find(Page::class, $id)->getIsEnabled());
+    }
+
+    /** @return iterable<string, array{string}> */
+    public static function privatePageHtml(): iterable
+    {
+        yield 'image' => ['<img src="%s">'];
+
+        yield 'srcset' => ['<img srcset="%s 2x">'];
+    }
+
+    public function testRejectedSubmissionKeepsPrivateUploadAvailableForRetry(): void
+    {
+        $owner = $this->account();
+        $forbidden = [...$this->attachment($owner)->getMedias()][0];
+        $form = $this->em->find(ProposalForm::class, 'proposalForm4');
+        $form->setUsingDescription(true);
+        $form->getStep()->setEndAt(new \DateTime('+1 year'));
+        $form->getStep()->setPrivate(false);
+        $form->getStep()->getProject()->setVisibility(2);
+        $question = (new SimpleQuestion())->setTitle('Private editor')->setType(2)->setPrivate(true);
+        $link = (new QuestionnaireAbstractQuestion())->setQuestion($question)->setProposalForm($form)->setPosition(100);
+        $form->addQuestion($link);
+        $proposal = (new Proposal())->setTitle('Retry private upload')->setProposalForm($form)->setAuthor($owner)->setDraft(false)->setBody('<p>Original</p>')->setPublishedAt(new \DateTime('-1 day'));
+        foreach ([$question, $link, $proposal] as $entity) {
+            $this->em->persist($entity);
+        }
+        $this->em->flush();
+        $this->login($owner->getEmail());
+        $questionId = GlobalId::toGlobalId('Question', $question->getId());
+        $file = tempnam(sys_get_temp_dir(), 'media-retry-');
+        self::assertIsString($file);
+        $this->files[] = $file;
+        file_put_contents($file, base64_decode(self::PNG));
+        $this->setFeature('antivirus', false);
+        $this->browser->request('POST', '/api/files', ['questionId' => $questionId], ['file' => new UploadedFile($file, 'retry.png', 'image/png', null, true)]);
+        self::assertResponseStatusCodeSame(201);
+        $uploaded = json_decode((string) $this->browser->getResponse()->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+        $media = $this->em->find(Media::class, $uploaded['id']);
+        $this->files[] = $this->root() . '/default/0001/01/' . $media->getProviderReference();
+        $html = '<img src="/media/default/0001/01/' . $media->getProviderReference() . '">';
+        $query = 'mutation($input:ChangeProposalContentInput!){changeProposalContent(input:$input){proposal{id}}}';
+        $input = [
+            'id' => GlobalId::toGlobalId('Proposal', $proposal->getId()), 'title' => $proposal->getTitle(), 'draft' => false,
+            'body' => '<img src="/media/default/0001/01/' . $forbidden->getProviderReference() . '">',
+            'responses' => [['question' => $questionId, 'value' => $html]],
+        ];
+        $result = $this->graphResponse($query, ['input' => $input]);
+        self::assertSame('MEDIA_REUSE_DENIED', $result['errors'][0]['extensions']['code']);
+        self::assertSame('body', $result['errors'][0]['extensions']['field']);
+        $this->em->clear();
+        self::assertNull($this->em->find(Media::class, $uploaded['id'])->getMetadataValue('private_html_responses'));
+
+        $input['body'] = '<p>Corrected public description</p>';
+        $result = $this->graphResponse($query, ['input' => $input]);
+        self::assertArrayNotHasKey('errors', $result, json_encode($result, \JSON_THROW_ON_ERROR));
+        $this->em->clear();
+        $saved = $this->em->find(Proposal::class, $proposal->getId());
+        self::assertSame($input['body'], $saved->getBody());
+        $responses = $this->em->getRepository(ValueResponse::class)->findBy(['proposal' => $saved, 'question' => $question->getId()]);
+        self::assertCount(1, $responses);
+        self::assertSame($html, $responses[0]->getValue());
+    }
+
+    public function testPrivateEditorCannotGrantAccessToAnotherAuthorsMedia(): void
+    {
+        $media = [...$this->attachment($this->account())->getMedias()][0];
+        $owner = $this->account();
+        $form = $this->em->find(ProposalForm::class, 'proposalForm4');
+        $form->getStep()->setEndAt(new \DateTime('+1 year'));
+        $question = (new SimpleQuestion())->setTitle('Private editor')->setType(2)->setPrivate(true);
+        $link = (new QuestionnaireAbstractQuestion())->setQuestion($question)->setProposalForm($form)->setPosition(100);
+        $form->addQuestion($link);
+        $proposal = (new Proposal())->setTitle('Private editor grant test')->setProposalForm($form)->setAuthor($owner)->setDraft(true);
+        foreach ([$question, $link, $proposal] as $entity) {
+            $this->em->persist($entity);
+        }
+        $this->em->flush();
+        $this->login($owner->getEmail());
+        $questionId = GlobalId::toGlobalId('Question', $question->getId());
+        $result = $this->graphResponse('mutation($input:ChangeProposalContentInput!){changeProposalContent(input:$input){proposal{id}}}', ['input' => [
+            'id' => GlobalId::toGlobalId('Proposal', $proposal->getId()), 'title' => $proposal->getTitle(), 'draft' => true,
+            'responses' => [['question' => $questionId, 'value' => '<img src="/media/default/0001/01/' . $media->getProviderReference() . '">']],
+        ]]);
+        self::assertSame('MEDIA_REUSE_DENIED', $result['errors'][0]['extensions']['code']);
+        self::assertSame($questionId, $result['errors'][0]['extensions']['questionId']);
+        $this->em->clear();
+        self::assertNull($this->em->find(Media::class, $media->getId())->getMetadataValue('private_html_responses'));
+        $this->browser->request('GET', '/media/default/0001/01/' . $media->getProviderReference());
+        self::assertResponseStatusCodeSame(200);
     }
 
     private function attachment(User $owner, ?Media $media = null): MediaResponse

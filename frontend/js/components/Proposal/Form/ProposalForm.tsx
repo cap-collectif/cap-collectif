@@ -1,3 +1,4 @@
+import proposalSubmitError from '~/utils/form/proposalSubmitError'
 import * as React from 'react'
 import type { IntlShape } from 'react-intl'
 import { injectIntl, FormattedHTMLMessage, FormattedMessage } from 'react-intl'
@@ -218,7 +219,8 @@ const onSubmit = (
   }
 
   const participantToken = CookieMonster.getParticipantCookie()
-  const emailToken = typeof window === 'undefined' ? undefined : new URLSearchParams(window.location.search).get('token')
+  const emailToken =
+    typeof window === 'undefined' ? undefined : new URLSearchParams(window.location.search).get('token')
 
   if (proposal) {
     if (setValuesSaved) setValuesSaved({ ...data, id: proposal.id })
@@ -245,11 +247,9 @@ const onSubmit = (
 
         window.location.reload()
       })
-      .catch(() => {
+      .catch(e => {
         onSubmitFailed()
-        throw new SubmissionError({
-          _error: 'global.error.server.form',
-        })
+        throw proposalSubmitError(e, values.responses)
       })
   }
 
@@ -335,9 +335,7 @@ const onSubmit = (
         throw e
       }
 
-      throw new SubmissionError({
-        _error: 'global.error.server.form',
-      })
+      throw proposalSubmitError(e, values.responses)
     })
 }
 
@@ -525,12 +523,11 @@ export class ProposalForm extends React.Component<Props, State> {
       isBackOfficeInput,
     } = this.props
     const availableQuestions = memoizeAvailableQuestions.cache.get(getAvailabeQuestionsCacheKey(proposalForm.id))
-    const titleFieldTradKey =
-      isProposalLikeObjectType(proposalForm.objectType)
-        ? 'global.title'
-        : proposalForm.objectType === 'OPINION'
-        ? 'opinion-title'
-        : 'title'
+    const titleFieldTradKey = isProposalLikeObjectType(proposalForm.objectType)
+      ? 'global.title'
+      : proposalForm.objectType === 'OPINION'
+      ? 'opinion-title'
+      : 'title'
     const titleSuggestHeader =
       proposalForm.objectType === 'QUESTION'
         ? 'question.suggest_header'

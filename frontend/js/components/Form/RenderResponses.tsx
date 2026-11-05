@@ -182,6 +182,7 @@ const RenderResponses = ({
                       name={`${member}.value`}
                       id={`${cleanDomId(`${form}-${member}`)}`}
                       type="medias"
+                      uploadQuestionId={field.id}
                       component={component}
                       help={field.helpText}
                       description={field.description}
@@ -360,6 +361,7 @@ const RenderResponses = ({
                       label={label}
                       disabled={disabled}
                       value={response}
+                      uploadQuestionId={field.id}
                       typeForm={typeForm}
                       onChange={() => setLastQuestionType(field.type)}
                       groupedResponsesEnabled={field.groupedResponsesEnabled}
