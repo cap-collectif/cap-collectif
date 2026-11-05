@@ -44,6 +44,25 @@ class PrivateMediaSubscriber implements EventSubscriberInterface
         foreach ([...$uow->getScheduledCollectionUpdates(), ...$uow->getScheduledCollectionDeletions()] as $collection) {
             $responses[] = $collection->getOwner();
         }
+        // Public files must stay public; confidential answers need a separate private upload.
+        foreach ($responses as $response) {
+            if (!$response instanceof MediaResponse || !MediaAccessResolver::isPrivateResponse($response) || $uow->isScheduledForDelete($response)) {
+                continue;
+            }
+            foreach ($response->getMedias() as $media) {
+                if ('1' === $media->getMetadataValue('historical_public_original')
+                    || !$uow->isScheduledForInsert($media) && !$this->access->isPrivate($media)) {
+                    $em->clear();
+
+                    throw new Error('Upload a separate private file for this answer.', null, null, [], null, new UserError('A public file cannot become private.'), [
+                        'code' => 'MEDIA_REUSE_DENIED',
+                        'field' => 'medias',
+                        'questionId' => GlobalId::toGlobalId('Question', $response->getQuestion()->getId()),
+                        'mediaReference' => $media->getProviderReference(),
+                    ]);
+                }
+            }
+        }
         // Check existing permissions before adding any new response-based access grant.
         foreach ($responses as $response) {
             if (!$response instanceof ValueResponse || !MediaAccessResolver::isPrivateResponse($response) || !\is_string($response->getValue())) {
@@ -95,6 +114,9 @@ class PrivateMediaSubscriber implements EventSubscriberInterface
 
         /** @var Media $media */
         foreach ($medias as $media) {
+            if ('1' === $media->getMetadataValue('historical_public_original')) {
+                continue;
+            }
             $this->pendingUploads[$media->getId()] = $media;
             if ('1' !== $media->getMetadataValue(MediaAccessResolver::PRIVATE_ATTACHMENT)) {
                 $media->setMetadataValue(MediaAccessResolver::PRIVATE_ATTACHMENT, '1');

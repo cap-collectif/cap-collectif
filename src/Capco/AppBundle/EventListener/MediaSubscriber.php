@@ -41,7 +41,7 @@ class MediaSubscriber implements EventSubscriberInterface
 
         [$oldValue, $newValue] = $mediaChanges;
 
-        if ($oldValue instanceof Media && null === $newValue && !$this->mediaAccess->isPrivate($oldValue)) {
+        if ($oldValue instanceof Media && '1' !== $oldValue->getMetadataValue('historical_public_original') && null === $newValue && !$this->mediaAccess->isPrivate($oldValue)) {
             $this->mediaManager->removeWithFileIfFileExists($oldValue);
         }
     }

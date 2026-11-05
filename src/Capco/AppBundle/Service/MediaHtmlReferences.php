@@ -38,6 +38,27 @@ class MediaHtmlReferences
         return array_values($found);
     }
 
+    public function replace(string $html, Media $original, string $newReference): string
+    {
+        return $this->map($html, function (string $url) use ($original, $newReference): string {
+            foreach ($this->resolve($url) as $media) {
+                if ($media->getId() === $original->getId()) {
+                    // Conversion copies the source, not its cached thumbnails.
+                    $newPath = '/media/' . rawurlencode((string) $original->getContext()) . '/0001/01/' . rawurlencode($newReference);
+
+                    $parts = parse_url($url);
+
+                    // Private copies use the application host so requests carry its session cookies.
+                    return $this->parameters->get('router.request_context.scheme') . '://' . $this->parameters->get('router.request_context.host') . $newPath
+                        . (isset($parts['query']) ? '?' . $parts['query'] : '')
+                        . (isset($parts['fragment']) ? '#' . $parts['fragment'] : '');
+                }
+            }
+
+            return $url;
+        });
+    }
+
     /** @return list<Media> */
     private function resolve(string $value): array
     {
@@ -57,5 +78,28 @@ class MediaHtmlReferences
         }
 
         return array_values($this->medias->findBy(['context' => $parts[1], 'providerReference' => $parts[2]]));
+    }
+
+    /** Keep the original markup; only rewrite URL attributes, never surrounding text. */
+    private function map(string $html, callable $transform): string
+    {
+        return (string) preg_replace_callback('~<[a-z](?:[^>\"\x27]|\"[^\"]*\"|\x27[^\x27]*\x27)*>~is', static fn (array $tag): string => (string) preg_replace_callback(
+            '~(\s(?:src|href|poster|srcset)\s*=\s*)(?:"([^"]*)"|\x27([^\x27]*)\x27|([^\s>]+))~i',
+            static function (array $attribute) use ($transform): string {
+                $value = $attribute[2] ?? '';
+                $quote = '"';
+                if (str_contains($attribute[0], "'") && '' === $value) {
+                    $value = $attribute[3] ?? '';
+                    $quote = "'";
+                } elseif (isset($attribute[4])) {
+                    $value = $attribute[4];
+                    $quote = '';
+                }
+                $mapped = (string) preg_replace_callback('~[^\s,]+~', static fn (array $token): string => $transform($token[0]), $value);
+
+                return $attribute[1] . $quote . $mapped . $quote;
+            },
+            $tag[0]
+        ), $html);
     }
 }

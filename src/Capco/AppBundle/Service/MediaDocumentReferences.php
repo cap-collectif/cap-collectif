@@ -46,6 +46,106 @@ class MediaDocumentReferences
         return $result;
     }
 
+    /** @return array<string, list<array{class-string, array<string, mixed>}>> */
+    public function inventory(int $batchSize, callable $progress, ?string $mediaId = null): array
+    {
+        $inventory = [];
+        foreach ($this->candidates($batchSize, $progress) as $entity) {
+            $metadata = $this->em->getClassMetadata($entity::class);
+            foreach ($this->references($entity) as $medias) {
+                foreach ($medias as $media) {
+                    if (null === $mediaId || $mediaId === $media->getId()) {
+                        $inventory[$media->getId()][] = [$metadata->name, $metadata->getIdentifierValues($entity)];
+                    }
+                }
+            }
+        }
+
+        return $inventory;
+    }
+
+    /**
+     * @param list<array{class-string, array<string, mixed>}> $references
+     *
+     * @return iterable<object>
+     */
+    public function indexedCandidates(array $references): iterable
+    {
+        $seen = [];
+        foreach ($references as [$class, $id]) {
+            $key = $class . ':' . json_encode($id);
+            if (isset($seen[$key])) {
+                continue;
+            }
+            $seen[$key] = true;
+            $entity = $this->em->find($class, $id);
+            if (null === $entity) {
+                throw new \RuntimeException('An inventoried reference disappeared; rerun the inventory during maintenance.');
+            }
+
+            $this->em->initializeObject($entity);
+
+            yield $entity;
+        }
+    }
+
+    /** @return iterable<object> */
+    private function candidates(int $batchSize, callable $progress): iterable
+    {
+        $seen = [];
+        $queries = [];
+        foreach ($this->em->getMetadataFactory()->getAllMetadata() as $metadata) {
+            if ($metadata->isMappedSuperclass || $metadata->isEmbeddedClass || Media::class === $metadata->name) {
+                continue;
+            }
+            $conditions = [];
+            foreach ($this->fields($metadata) as $field) {
+                // JSON may encode '<' as a Unicode escape; inspect its decoded value.
+                $conditions[] = 'e.' . $field . ' LIKE :html';
+                if ('json' === $metadata->fieldMappings[$field]['type']) {
+                    $conditions[] = 'e.' . $field . ' LIKE :escapedHtml';
+                }
+            }
+            foreach ($metadata->associationMappings as $field => $mapping) {
+                if (Media::class === $mapping['targetEntity']) {
+                    $conditions[] = 'e.' . $field . ($metadata->isCollectionValuedAssociation($field) ? ' IS NOT EMPTY' : ' IS NOT NULL');
+                }
+            }
+            if (!$conditions) {
+                continue;
+            }
+            $builder = $this->em->createQueryBuilder()->select('e')->from($metadata->name, 'e')->where(implode(' OR ', $conditions));
+            if (str_contains(implode('', $conditions), ':html')) {
+                $builder->setParameter('html', '%<%');
+            }
+            if (str_contains(implode('', $conditions), ':escapedHtml')) {
+                $builder->setParameter('escapedHtml', '%\\\u003%');
+            }
+            $query = $builder->getQuery();
+            $sql = $query->getSQL();
+            if (isset($queries[$sql])) {
+                continue;
+            }
+            $queries[$sql] = true;
+            $progress(0, $metadata->name);
+            $processed = 0;
+            foreach ($query->toIterable() as $entity) {
+                $entityMetadata = $this->em->getClassMetadata($entity::class);
+                $key = $entityMetadata->name . ':' . json_encode($entityMetadata->getIdentifierValues($entity));
+                if (!isset($seen[$key])) {
+                    $seen[$key] = true;
+
+                    yield $entity;
+                    $progress(1, $metadata->name);
+                }
+                if (0 === ++$processed % $batchSize) {
+                    $this->em->clear();
+                }
+            }
+            $this->em->clear();
+        }
+    }
+
     /** @return list<Media> */
     private function valueReferences(mixed $value): array
     {

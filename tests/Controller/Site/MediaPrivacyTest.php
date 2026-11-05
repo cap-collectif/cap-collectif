@@ -206,6 +206,7 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         $public = $this->media();
         $response = (new MediaResponse())->setQuestion($question)->addMedia($media);
         if ('analysis' === $source) {
+            $media->setMetadataValue('private_attachment', '1');
             $analysis = (new ProposalAnalysis())->setProposal($proposal)->setUpdatedBy($owner);
             $response->setAnalysis($analysis);
             $this->em->persist($analysis);
@@ -293,6 +294,8 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         $own = $this->media();
         $ownerReply = (new Reply())->setQuestionnaire($questionnaire)->setAuthor($owner)->setDraft(false);
         $ownReply = (new Reply())->setQuestionnaire($questionnaire)->setAuthor($viewer)->setDraft(false);
+        $private->setMetadataValue('private_attachment', '1');
+        $own->setMetadataValue('private_attachment', '1');
         $ownerResponse = (new MediaResponse())->setQuestion($question)->addMedia($private);
         $ownResponse = (new MediaResponse())->setQuestion($question)->addMedia($own);
         $ownerReply->addResponse($ownerResponse);
@@ -325,12 +328,22 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         $this->browser->request('GET', $privatePath);
         self::assertResponseStatusCodeSame(403);
 
-        $public = $this->media();
-        $variables['reply']['responses'][0]['medias'] = [$own->getId(), $public->getId()];
+        $file = tempnam(sys_get_temp_dir(), 'private-attachment-');
+        self::assertIsString($file);
+        $this->files[] = $file;
+        file_put_contents($file, base64_decode(self::PNG));
+        $this->setFeature('antivirus', false);
+        $this->browser->request('POST', '/api/files', ['questionId' => GlobalId::toGlobalId('Question', $question->getId())], ['file' => new UploadedFile($file, 'attachment.png', 'image/png', null, true)]);
+        self::assertResponseStatusCodeSame(201);
+        $uploaded = json_decode((string) $this->browser->getResponse()->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+        $newPrivate = $this->em->find(Media::class, $uploaded['id']);
+        $this->files[] = $this->root() . '/default/0001/01/' . $newPrivate->getProviderReference();
+        self::assertSame('1', $newPrivate->getMetadataValue('private_attachment'));
+        $variables['reply']['responses'][0]['medias'] = [$own->getId(), $newPrivate->getId()];
         $this->graphql($query, $variables);
         $this->em->clear();
         $stored = $this->em->find(MediaResponse::class, $responseId);
-        self::assertEqualsCanonicalizing([$own->getId(), $public->getId()], array_map(static fn (Media $media) => $media->getId(), [...$stored->getMedias()]));
+        self::assertEqualsCanonicalizing([$own->getId(), $newPrivate->getId()], array_map(static fn (Media $media) => $media->getId(), [...$stored->getMedias()]));
     }
 
     /** @dataProvider privateAttachmentRemovalModes */
@@ -764,12 +777,60 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         self::assertResponseStatusCodeSame(200);
     }
 
+    /** @dataProvider publicAttachmentOrigins */
+    public function testPublicFileCannotBecomePrivateThroughANewAnswer(bool $converted): void
+    {
+        $owner = $this->account();
+        $media = $this->media();
+        if ($converted) {
+            $media->setMetadataValue('historical_public_original', '1');
+        }
+        $project = $this->em->getRepository(Project::class)->findOneBy(['visibility' => 2]);
+        $project->setCover($media);
+        $projectId = $project->getId();
+        $form = $this->em->find(ProposalForm::class, 'proposalForm4');
+        $form->getStep()->setEndAt(new \DateTime('+1 year'));
+        $question = (new MediaQuestion())->setTitle('Private file')->setPrivate(true);
+        $link = (new QuestionnaireAbstractQuestion())->setQuestion($question)->setProposalForm($form)->setPosition(100);
+        $form->addQuestion($link);
+        $proposal = (new Proposal())->setTitle('Public original reuse')->setProposalForm($form)->setAuthor($owner)->setDraft(true);
+        foreach ([$question, $link, $proposal] as $entity) {
+            $this->em->persist($entity);
+        }
+        $this->em->flush();
+        $this->login($owner->getEmail());
+        $result = $this->graphResponse('mutation($input:ChangeProposalContentInput!){changeProposalContent(input:$input){proposal{id}}}', ['input' => [
+            'id' => GlobalId::toGlobalId('Proposal', $proposal->getId()), 'title' => $proposal->getTitle(), 'draft' => true,
+            'responses' => [['question' => GlobalId::toGlobalId('Question', $question->getId()), 'medias' => [$media->getId()]]],
+        ]]);
+        self::assertSame('MEDIA_REUSE_DENIED', $result['errors'][0]['extensions']['code']);
+        $this->em->clear();
+        self::assertNull($this->em->find(Media::class, $media->getId())->getMetadataValue('private_attachment'));
+        self::assertSame($media->getId(), $this->em->find(Project::class, $projectId)->getCover()->getId());
+        self::assertCount(0, $this->em->getRepository(MediaResponse::class)->findBy(['proposal' => $proposal->getId()]));
+        $this->logout();
+        $this->browser->getCookieJar()->clear();
+        $this->browser->request('GET', '/media/default/0001/01/' . $media->getProviderReference());
+        self::assertResponseStatusCodeSame(200);
+    }
+
+    /** @return iterable<string, array{bool}> */
+    public static function publicAttachmentOrigins(): iterable
+    {
+        yield 'converted original' => [true];
+
+        yield 'ordinary public cover' => [false];
+    }
+
     private function attachment(User $owner, ?Media $media = null): MediaResponse
     {
         $questionnaire = (new Questionnaire())->setTitle('Private files')->setOwner($owner);
         $reply = (new Reply())->setQuestionnaire($questionnaire)->setAuthor($owner);
         $question = (new MediaQuestion())->setTitle('Document')->setPrivate(false);
-        $response = (new MediaResponse())->setQuestion($question)->setReply($reply)->addMedia($media ?? $this->media());
+        // Model private upload classification, including deliberately seeded historical sharing.
+        $media ??= $this->media();
+        $media->setMetadataValue('private_attachment', '1');
+        $response = (new MediaResponse())->setQuestion($question)->setReply($reply)->addMedia($media);
         foreach ([$questionnaire, $reply, $question, $response] as $entity) {
             $this->em->persist($entity);
         }

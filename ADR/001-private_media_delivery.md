@@ -4,21 +4,23 @@
 
 Accepted, 9 October 2026.
 
-## Prevent new private-media reuse, 23 October 2026
+## Historical split preparation, 23 October 2026
 
-Answer uploads carry their question identifier so the server can classify private,
-hidden and questionnaire uploads before storing them. A session-scoped 24-hour
-pending grant supports previews before submission; response permissions apply after
-submission. Private HTML references cannot grant access without existing permission.
+The temporary direct-delivery and GraphQL exceptions below remain active during
+this second deployment. Private copies are classified as private, but their direct
+URLs and otherwise reachable GraphQL fields still bypass media authorization.
+Voice messages and protected response downloads retain their existing checks.
 
-New public covers and rich-text references reject private media before flush,
-including for administrators and authorized readers. Publication transitions also
-validate unchanged content. Form errors identify the affected field and file.
+The preceding write-protection PR already classifies answer uploads and rejects
+new private references in public content. This second PR adds the command
+`capco:media:split-historical-private` moves historical confidential references to
+verified private copies while preserving public originals and URLs.
 
-This is the first of three deployment stages. Both read exceptions below remain
-active. Deploy these write protections first, then deploy and run the separate
-historical conversion command on every instance. Remove the HTTP and GraphQL read
-bypasses only in the third stage, after conversion and verification everywhere.
+Deploy this preparation to every instance, run and review the audit, then apply
+conversion during a window without writes or media purges. Resolve every error
+and rerun the audit before deploying the third-stage read-enforcement PR. The
+`--maintenance-confirmed` option does not stop writes itself. See the
+[operator procedure](../docs/private-media-public-copies-spec.md).
 
 ## Temporary exception — 15 October 2026
 

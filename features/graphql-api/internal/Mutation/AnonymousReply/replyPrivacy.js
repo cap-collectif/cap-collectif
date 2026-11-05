@@ -32,19 +32,6 @@ describe('Private reply lifecycle', () => {
     let reused
     let mediaId
     try {
-      const form = new FormData()
-      form.append(
-        'file',
-        Buffer.from(
-          'iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAAEElEQVR4nGP4z8AARAwQCgAf7gP9i18U1AAAAABJRU5ErkJggg==',
-          'base64',
-        ),
-        { filename: 'reply-privacy.png', contentType: 'image/png' },
-      )
-      const upload = await fetch('https://capco.test/api/files', { method: 'POST', body: form })
-      const uploaded = await upload.json()
-      mediaId = uploaded.id
-      expect(mediaId).toEqual(expect.any(String))
       const added = await request(
         `mutation($input: AddStepInput!) { addQuestionnaireStep(input: $input) {
         step { id ... on QuestionnaireStep { questionnaire { id } } }
@@ -101,6 +88,21 @@ describe('Private reply lifecycle', () => {
         'internal',
         admin,
       )
+      const form = new FormData()
+      form.append('questionId', media.id)
+      form.append(
+        'file',
+        Buffer.from(
+          'iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAAEElEQVR4nGP4z8AARAwQCgAf7gP9i18U1AAAAABJRU5ErkJggg==',
+          'base64',
+        ),
+        { filename: 'reply-privacy.png', contentType: 'image/png' },
+      )
+      const upload = await fetch('https://capco.test/api/files', { method: 'POST', body: form })
+      expect(upload.status).toBe(201)
+      const uploaded = await upload.json()
+      mediaId = uploaded.id
+      expect(mediaId).toEqual(expect.any(String))
       const responses = [
         { question: email.id, value: 'private-participant@example.test' },
         { question: media.id, medias: [mediaId] },
@@ -115,6 +117,13 @@ describe('Private reply lifecycle', () => {
         {
           input: { questionnaireId, responses },
           other: { questionnaireId, responses: [{ question: email.id, value: 'other@example.test' }] },
+        },
+        'internal',
+        {
+          Cookie: upload.headers
+            .raw()
+            ['set-cookie'].map(cookie => cookie.split(';')[0])
+            .join('; '),
         },
       )
       first = { ...created.first, reply: created.first.created }
