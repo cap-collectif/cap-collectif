@@ -1,7 +1,11 @@
 import { SubmissionError } from 'redux-form'
 import type { ResponsesInReduxForm } from '~/components/Form/Form.type'
 
-export default function proposalSubmitError(error: any, responses: ResponsesInReduxForm) {
+export default function proposalSubmitError(
+  error: any,
+  responses: ResponsesInReduxForm,
+  onUnexpectedError?: () => void,
+) {
   if (error instanceof SubmissionError) return error
 
   const details = error?.extensions
@@ -22,5 +26,6 @@ export default function proposalSubmitError(error: any, responses: ResponsesInRe
     })
   }
 
+  onUnexpectedError?.()
   return new SubmissionError({ _error: 'global.error.server.form' })
 }

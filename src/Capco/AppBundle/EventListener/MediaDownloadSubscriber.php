@@ -7,6 +7,7 @@ use Capco\AppBundle\Exception\ParticipantNotFoundException;
 use Capco\AppBundle\Repository\MediaRepository;
 use Capco\AppBundle\Service\MediaAccessResolver;
 use Capco\AppBundle\Service\ParticipantAuthentication;
+use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
@@ -20,7 +21,8 @@ class MediaDownloadSubscriber implements EventSubscriberInterface
         private readonly MediaRepository $mediaRepository,
         private readonly MediaAccessResolver $access,
         private readonly ParticipantAuthentication $participantAuthentication,
-        private readonly Security $security
+        private readonly Security $security,
+        private readonly Manager $toggles
     ) {}
 
     public static function getSubscribedEvents(): array
@@ -55,8 +57,8 @@ class MediaDownloadSubscriber implements EventSubscriberInterface
 
         try {
             foreach ($medias as $media) {
-                // shortcut: public file delivery until explicit public/private media copies are implemented.
-                if (Media::VOCAL_CONTRIBUTION_CONTEXT !== $media->getContext()) {
+                if (Media::VOCAL_CONTRIBUTION_CONTEXT !== $media->getContext()
+                    && !$this->toggles->isActive(Manager::private_media_read_enforcement)) {
                     continue;
                 }
                 if ($this->access->isPrivate($media)) {

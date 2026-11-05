@@ -4,6 +4,9 @@ InternalFeatureFlagType:
         name: FeatureFlagType
         description: 'The possible types for a feature flag.'
         values:
+            private_media_read_enforcement:
+                value: !php/const Capco\AppBundle\Toggle\Manager::private_media_read_enforcement
+                description: 'Whether private media read permissions are enforced.'
             graphql_query_analytics:
                 value: !php/const Capco\AppBundle\Toggle\Manager::graphql_query_analytics
             questionnaire_result:

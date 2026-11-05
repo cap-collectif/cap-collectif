@@ -4,6 +4,9 @@ exports[`Internal|Query.featureFlags fetches all feature flags 1`] = `
 Object {
   "featureFlags": Array [
     Object {
+      "type": "private_media_read_enforcement",
+    },
+    Object {
       "type": "noindex_on_profiles",
     },
     Object {

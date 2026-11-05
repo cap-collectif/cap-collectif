@@ -5,6 +5,7 @@ namespace Capco\Tests\Controller\Site;
 use Application\Migrations\Version20261009120000;
 use Application\Migrations\Version20261009180000;
 use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
+use Capco\AppBundle\Entity\District\GlobalDistrict;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventReview;
 use Capco\AppBundle\Entity\Media;
@@ -15,6 +16,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalAnalysis;
 use Capco\AppBundle\Entity\ProposalAnalyst;
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\PublicApiToken;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
@@ -63,6 +65,12 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         }
     }
 
+    /** @return array<string, bool> */
+    public static function featureFlagOverrides(): array
+    {
+        return ['private_media_read_enforcement' => true];
+    }
+
     /** @dataProvider profileMutations */
     public function testProfilesRejectPrivateAttachmentsAndAcceptPublicMedia(string $mutation, string $inputType): void
     {
@@ -95,7 +103,7 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         yield 'personal profile' => ['updateProfilePersonalData', 'UpdateProfilePersonalDataInput'];
     }
 
-    public function testLegacyAvatarExposesMediaMetadataDuringTemporaryGraphqlBypass(): void
+    public function testLegacyAvatarDoesNotExposePrivateMediaMetadata(): void
     {
         $owner = $this->account();
         $viewer = $this->account();
@@ -105,13 +113,13 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         $this->em->refresh($viewer);
 
         $result = $this->graphResponse('query($id:ID!){node(id:$id){...on User{media{id url name providerReference}}}}', ['id' => GlobalId::toGlobalId('User', $viewer->getId())]);
-        self::assertSame($media->getId(), $result['data']['node']['media']['id']);
-        self::assertSame($media->getName(), $result['data']['node']['media']['name']);
-        self::assertSame($media->getProviderReference(), $result['data']['node']['media']['providerReference']);
+        self::assertSame('Access denied to this field.', $result['extensions']['warnings'][0]['message']);
+        self::assertSame(['node', 'media', 'id'], $result['extensions']['warnings'][0]['path']);
+        self::assertNull($result['data']['node']['media']);
     }
 
     /** @dataProvider shieldModes */
-    public function testPrivateAttachmentsAreTemporarilyReadableByDirectUrl(bool $shield): void
+    public function testPrivateAttachmentsRequireAuthorizationByDirectUrl(bool $shield): void
     {
         $this->setFeature('shield_mode', $shield);
         $owner = $this->account();
@@ -119,43 +127,84 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         $relative = 'default/0001/01/' . $media->getProviderReference();
         $this->write('cache/default_avatar/' . $relative, base64_decode(self::PNG));
         $paths = ['/media/' . $relative, '/media/cache/default_avatar/' . $relative, '/media/cache/resolve/default_avatar/' . $relative];
-        foreach ($paths as $index => $path) {
+        foreach ($paths as $path) {
             foreach (['GET', 'HEAD'] as $method) {
                 $this->browser->request($method, $path);
-                self::assertResponseStatusCodeSame(2 === $index ? 302 : 200);
+                self::assertResponseStatusCodeSame(403);
                 self::assertTrue($this->browser->getResponse()->headers->hasCacheControlDirective('no-store'));
-                self::assertSame(2 === $index, $this->browser->getResponse()->headers->has('Location'));
+                self::assertFalse($this->browser->getResponse()->headers->has('Location'));
+            }
+        }
+        foreach ([false, true, false] as $enforce) {
+            $this->setFeatureFlags(['private_media_read_enforcement' => $enforce]);
+            foreach ($paths as $index => $path) {
+                foreach (['GET', 'HEAD'] as $method) {
+                    $this->browser->request($method, $path);
+                    self::assertResponseStatusCodeSame($enforce ? 403 : (2 === $index ? 302 : 200));
+                    self::assertTrue($this->browser->getResponse()->headers->hasCacheControlDirective('no-store'));
+                }
             }
         }
         $this->login($owner->getEmail());
-        foreach ($paths as $index => $path) {
-            $this->browser->request('GET', $path);
-            self::assertResponseStatusCodeSame(2 === $index ? 302 : 200);
-            self::assertTrue($this->browser->getResponse()->headers->hasCacheControlDirective('no-store'));
+        foreach ([true, false] as $enforce) {
+            $this->setFeatureFlags(['private_media_read_enforcement' => $enforce]);
+            foreach ($paths as $index => $path) {
+                $this->browser->request('GET', $path);
+                self::assertResponseStatusCodeSame(2 === $index ? 302 : 200);
+                self::assertTrue($this->browser->getResponse()->headers->hasCacheControlDirective('no-store'));
+            }
         }
+        $this->setFeatureFlags(['private_media_read_enforcement' => true]);
         $this->logout();
         $this->browser->request('GET', $paths[1]);
-        self::assertResponseStatusCodeSame(200);
+        self::assertResponseStatusCodeSame(403);
     }
 
-    /** @dataProvider shieldModes */
-    public function testVoiceMessagesRemainProtected(bool $shield): void
+    /** @return iterable<string, array{bool}> */
+    public static function shieldModes(): iterable
     {
-        $this->setFeature('shield_mode', $shield);
-        $media = (new Media())->setName('private.webm')->setProviderReference(bin2hex(random_bytes(16)) . '.webm')->setContext(Media::VOCAL_CONTRIBUTION_CONTEXT)->setContentType('audio/webm')->setSize(1);
+        yield 'without shield' => [false];
+
+        yield 'with shield' => [true];
+    }
+
+    /** @dataProvider publicReadModes */
+    public function testVoiceMessagesRemainProtected(bool $shield, bool $enforce): void
+    {
+        $this->setFeatureFlags(['shield_mode' => $shield, 'private_media_read_enforcement' => $enforce]);
+        $media = (new Media())->setName('private.webm')->setProviderReference(bin2hex(random_bytes(16)) . '.webm')->setContext(Media::VOCAL_CONTRIBUTION_CONTEXT)->setContentType('audio/webm')->setSize(13);
         $this->em->persist($media);
         $this->em->flush();
         $relative = Media::VOCAL_CONTRIBUTION_CONTEXT . '/0001/01/' . $media->getProviderReference();
-        foreach (['/media/' . $relative, '/media/cache/default_avatar/' . $relative, '/media/cache/resolve/default_avatar/' . $relative] as $path) {
-            $this->browser->request('GET', $path);
-            self::assertResponseStatusCodeSame(403);
-            self::assertTrue($this->browser->getResponse()->headers->hasCacheControlDirective('no-store'));
+        $this->write($relative, 'private audio');
+        $this->write('cache/default_avatar/' . $relative, 'private audio');
+        foreach ([null, $this->account()] as $viewer) {
+            if ($viewer) {
+                $this->login($viewer->getEmail());
+            }
+            foreach (['/media/' . $relative, '/media/cache/default_avatar/' . $relative, '/media/cache/resolve/default_avatar/' . $relative] as $path) {
+                foreach (['GET', 'HEAD'] as $method) {
+                    $this->browser->request($method, $path);
+                    self::assertResponseStatusCodeSame(403);
+                    self::assertTrue($this->browser->getResponse()->headers->hasCacheControlDirective('no-store'));
+                }
+            }
         }
+        $this->logout();
+        $admin = $this->account()->addRole('ROLE_ADMIN');
+        $this->em->flush();
+        $this->login($admin->getEmail());
+        $this->browser->request('GET', '/media/' . $relative);
+        self::assertResponseStatusCodeSame(200);
+        $response = $this->browser->getResponse();
+        self::assertInstanceOf(BinaryFileResponse::class, $response);
+        self::assertSame('private audio', file_get_contents($response->getFile()->getPathname()));
     }
 
-    /** @dataProvider shieldModes */
-    public function testPublicImageAndGeneratedThumbnailRemainReadable(bool $shield): void
+    /** @dataProvider publicReadModes */
+    public function testPublicImageAndGeneratedThumbnailRemainReadable(bool $shield, bool $enforce): void
     {
+        $this->setFeatureFlags(['private_media_read_enforcement' => $enforce]);
         $this->setFeature('shield_mode', $shield);
         $media = $this->media();
         $relative = 'default/0001/01/' . $media->getProviderReference();
@@ -171,15 +220,17 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         self::assertResponseStatusCodeSame(200);
     }
 
-    /** @return iterable<string, array{bool}> */
-    public static function shieldModes(): iterable
+    /** @return iterable<string, array{bool, bool}> */
+    public static function publicReadModes(): iterable
     {
-        yield 'without shield' => [false];
-
-        yield 'with shield' => [true];
+        foreach ([false, true] as $shield) {
+            foreach ([false, true] as $enforce) {
+                yield sprintf('shield %d enforcement %d', $shield, $enforce) => [$shield, $enforce];
+            }
+        }
     }
 
-    public function testRemovingReplyPreservesPrivacyMarkerDuringTemporaryPublicDelivery(): void
+    public function testRemovingReplyKeepsItsAttachmentsPrivate(): void
     {
         $response = $this->attachment($this->account());
         $media = [...$response->getMedias()][0];
@@ -189,12 +240,12 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         $this->em->flush();
         $this->em->clear();
         $this->browser->request('GET', $path);
-        self::assertResponseStatusCodeSame(200);
+        self::assertResponseStatusCodeSame(403);
         self::assertSame('1', $this->em->find(Media::class, $mediaId)->getMetadataValue('private_attachment'));
     }
 
     /** @dataProvider analysisAttachments */
-    public function testAnalysisAndHiddenAttachmentsKeepProtectedDownloadsDuringTemporaryPublicDelivery(string $source, bool $legacy): void
+    public function testAnalysisAndHiddenAttachmentsRequireAuthorization(string $source, bool $legacy): void
     {
         $owner = $this->account();
         $analyst = $this->account();
@@ -252,7 +303,7 @@ final class MediaPrivacyTest extends IdentityWebTestCase
             $allowed = $viewer === $analyst || $viewer === $admin;
             foreach (['/media/' . $relative => 200, '/media/cache/default_avatar/' . $relative => 200, '/media/cache/resolve/default_avatar/' . $relative => 302, '/download/' . $responseId . '/media/' . $mediaId => 302] as $path => $status) {
                 $this->browser->request('GET', $path);
-                self::assertResponseStatusCodeSame($allowed || str_starts_with($path, '/media/') ? $status : 403);
+                self::assertResponseStatusCodeSame($allowed ? $status : 403);
                 self::assertTrue($this->browser->getResponse()->headers->hasCacheControlDirective('no-store'));
             }
             if ($viewer) {
@@ -264,7 +315,7 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         $this->em->flush();
         $this->em->clear();
         $this->browser->request('GET', '/media/' . $relative);
-        self::assertResponseStatusCodeSame(200);
+        self::assertResponseStatusCodeSame(403);
     }
 
     /** @return iterable<string, array{string, bool}> */
@@ -347,7 +398,7 @@ final class MediaPrivacyTest extends IdentityWebTestCase
     }
 
     /** @dataProvider privateAttachmentRemovalModes */
-    public function testPrivatizingAQuestionMarksItsRemovedAttachmentsDuringTemporaryPublicDelivery(string $mode): void
+    public function testPrivatizingAQuestionProtectsItsRemovedAttachments(string $mode): void
     {
         $author = $this->account();
         $author->addRole('ROLE_ADMIN');
@@ -379,7 +430,7 @@ final class MediaPrivacyTest extends IdentityWebTestCase
             $this->em->clear();
             self::assertSame('1', $this->em->find(Media::class, $media->getId())->getMetadataValue('private_attachment'));
             $this->browser->request('GET', $path);
-            self::assertResponseStatusCodeSame(200);
+            self::assertResponseStatusCodeSame(403);
         } else {
             $this->em->find(MediaQuestion::class, $questionId)->setPrivate(true);
         }
@@ -393,7 +444,7 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         $this->em->clear();
         self::assertCount(0, $this->em->find(MediaResponse::class, $responseId)->getMedias());
         $this->browser->request('GET', $path);
-        self::assertResponseStatusCodeSame(200);
+        self::assertResponseStatusCodeSame(403);
     }
 
     /** @return iterable<string, array{string}> */
@@ -406,8 +457,10 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         yield 'cleared during the privacy change' => ['clear'];
     }
 
-    public function testUnregisteredFileIsNotServed(): void
+    /** @dataProvider enforcementModes */
+    public function testUnregisteredFileIsNotServed(bool $enforce): void
     {
+        $this->setFeatureFlags(['private_media_read_enforcement' => $enforce]);
         $relative = 'default/0001/01/' . bin2hex(random_bytes(16)) . '.png';
         $this->write($relative, base64_decode(self::PNG));
         $this->browser->request('GET', '/media/' . $relative);
@@ -488,8 +541,10 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         self::assertFileExists($file);
     }
 
-    public function testProposalIllustrationRejectsAnotherAuthorsAttachment(): void
+    /** @dataProvider enforcementModes */
+    public function testProposalIllustrationRejectsAnotherAuthorsAttachment(bool $enforce): void
     {
+        $this->setFeatureFlags(['private_media_read_enforcement' => $enforce]);
         $media = [...$this->attachment($this->account())->getMedias()][0];
         $viewer = $this->account();
         $form = $this->em->getRepository(ProposalForm::class)->findOneBy([]);
@@ -514,7 +569,15 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         self::assertSame($publicMedia->getId(), $proposal->getMedia()?->getId());
     }
 
-    public function testProposalCoverRemainsReadableAfterItsMediaBecomesPrivate(): void
+    /** @return iterable<string, array{bool}> */
+    public static function enforcementModes(): iterable
+    {
+        yield 'enforced' => [true];
+
+        yield 'bypassed' => [false];
+    }
+
+    public function testProposalCoverDoesNotGrantAccessToPrivateMedia(): void
     {
         $owner = $this->account();
         $public = $this->media();
@@ -538,11 +601,11 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         self::assertSame('1', $public->getMetadataValue('private_attachment'));
         $this->em->clear();
 
-        $result = $this->graphql($query, $variables);
-        self::assertNotNull($result['node']['media'], 'A private attachment reused as a cover must still expose its URL.');
-        self::assertSame($public->getId(), $result['node']['media']['id']);
-        $this->browser->request('GET', $result['node']['media']['url']);
-        self::assertResponseStatusCodeSame(200);
+        $result = $this->graphResponse($query, $variables);
+        self::assertSame('Access denied to this field.', $result['extensions']['warnings'][0]['message']);
+        self::assertNull($result['data']['node']['media']);
+        $this->browser->request('GET', '/media/default/0001/01/' . $public->getProviderReference());
+        self::assertResponseStatusCodeSame(403);
 
         $this->browser->request('GET', '/download/' . $attachment->getId() . '/media/' . $public->getId());
         self::assertResponseStatusCodeSame(403);
@@ -609,7 +672,7 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         yield 'draft publication' => ['<img src="%s">', true];
     }
 
-    public function testPrivateEditorUploadIsClassifiedBeforeSubmissionDuringReadBypass(): void
+    public function testPrivateEditorUploadIsProtectedBeforeSubmission(): void
     {
         $owner = $this->account();
         $question = (new SimpleQuestion())->setTitle('Private editor')->setType(2)->setPrivate(true);
@@ -632,7 +695,7 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         $this->logout();
         $this->browser->getCookieJar()->clear();
         $this->browser->request('GET', $uploaded['url']);
-        self::assertResponseStatusCodeSame(200);
+        self::assertResponseStatusCodeSame(403);
     }
 
     public function testApprovingEventRejectsUnchangedPrivateHtml(): void
@@ -774,7 +837,7 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         $this->em->clear();
         self::assertNull($this->em->find(Media::class, $media->getId())->getMetadataValue('private_html_responses'));
         $this->browser->request('GET', '/media/default/0001/01/' . $media->getProviderReference());
-        self::assertResponseStatusCodeSame(200);
+        self::assertResponseStatusCodeSame(403);
     }
 
     /** @dataProvider publicAttachmentOrigins */
@@ -820,6 +883,132 @@ final class MediaPrivacyTest extends IdentityWebTestCase
         yield 'converted original' => [true];
 
         yield 'ordinary public cover' => [false];
+    }
+
+    /** @dataProvider mediaReadModes */
+    public function testMediaGraphqlEnforcementCanBeToggled(string $schema, bool $enforce, string $access): void
+    {
+        $this->setFeatureFlags(['private_media_read_enforcement' => $enforce]);
+        $owner = $this->account();
+        $reader = 'owner' === $access ? $owner : $this->account();
+        $media = $this->media();
+        $district = (new GlobalDistrict())->setName('Historical public cover')->setCover($media);
+        $token = bin2hex(random_bytes(16));
+        $this->em->persist(new PublicApiToken($reader, $token));
+        $this->em->persist($district);
+        $this->em->flush();
+        if ('public' !== $access) {
+            $this->attachment($owner, $media);
+        }
+        $query = ['query' => 'query($id:ID!){node(id:$id){...on GlobalDistrict{cover{url}}}}', 'variables' => ['id' => GlobalId::toGlobalId('District', $district->getId())]];
+        $this->browser->request('POST', 'preview' === $schema ? '/graphql' : '/graphql/internal', [], [], [
+            'CONTENT_TYPE' => 'application/json',
+            'HTTP_ACCEPT' => 'preview' === $schema ? 'application/vnd.cap-collectif.preview+json' : 'application/json',
+            'HTTP_AUTHORIZATION' => 'Bearer ' . $token,
+        ], json_encode($query, \JSON_THROW_ON_ERROR));
+        self::assertResponseStatusCodeSame(200);
+        $result = json_decode((string) $this->browser->getResponse()->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+        self::assertArrayNotHasKey('errors', $result, json_encode($result, \JSON_THROW_ON_ERROR));
+        if ('private' === $access && $enforce) {
+            self::assertSame('Access denied to this field.', $result['extensions']['warnings'][0]['message']);
+        } else {
+            self::assertArrayNotHasKey('warnings', $result['extensions'] ?? [], json_encode($result, \JSON_THROW_ON_ERROR));
+            self::assertStringContainsString($media->getProviderReference(), $result['data']['node']['cover']['url']);
+        }
+    }
+
+    /** @return iterable<string, array{string, bool, string}> */
+    public static function mediaReadModes(): iterable
+    {
+        foreach (['internal', 'preview'] as $schema) {
+            foreach ([false, true] as $enforce) {
+                foreach (['public', 'private', 'owner'] as $access) {
+                    yield sprintf('%s enforcement %d %s', $schema, $enforce, $access) => [$schema, $enforce, $access];
+                }
+            }
+        }
+    }
+
+    /** @dataProvider editorPrivacyChanges */
+    public function testEditorPrivacyTransitionRejectsPublicMedia(string $privacy): void
+    {
+        $owner = $this->account();
+        $owner->addRole('ROLE_ADMIN');
+        $form = (new ProposalForm())->setTitle('Assessment')->setOwner($owner);
+        $proposal = (new Proposal())->setTitle('Assessment')->setProposalForm($form)->setAuthor($owner)->setDraft(false);
+        $question = (new SimpleQuestion())->setTitle('Editor')->setType(2)->setPrivate(false);
+        $association = (new QuestionnaireAbstractQuestion())->setProposalForm($form)->setQuestion($question)->setPosition(1);
+        $form->addQuestion($association);
+        $media = $this->media();
+        $path = '/media/default/0001/01/' . $media->getProviderReference();
+        $response = (new ValueResponse())->setQuestion($question)->setProposal($proposal)->setValue('<img src="' . $path . '">');
+        foreach ([$form, $association, $proposal, $question, $response] as $entity) {
+            $this->em->persist($entity);
+        }
+        $this->em->flush();
+        $questionId = $question->getId();
+        $this->login($owner->getEmail());
+        $result = $this->graphResponse('mutation($input:UpdateProposalFormInput!){updateProposalForm(input:$input){proposalForm{id}}}', ['input' => [
+            'proposalFormId' => $form->getId(),
+            'questions' => [['question' => ['id' => GlobalId::toGlobalId('Question', $questionId), 'title' => 'Editor', 'type' => 'editor', $privacy => true]]],
+        ]]);
+        self::assertSame('MEDIA_REUSE_DENIED', $result['errors'][0]['extensions']['code']);
+        self::assertSame('value', $result['errors'][0]['extensions']['field']);
+        self::assertSame(GlobalId::toGlobalId('Question', $questionId), $result['errors'][0]['extensions']['questionId']);
+        $this->logout();
+        $this->em->clear();
+        self::assertFalse($this->em->find(SimpleQuestion::class, $questionId)->isPrivate());
+        self::assertFalse($this->em->find(SimpleQuestion::class, $questionId)->getHidden());
+        self::assertNull($this->em->find(Media::class, $media->getId())->getMetadataValue('private_attachment'));
+        $this->browser->request('GET', $path);
+        self::assertResponseStatusCodeSame(200);
+    }
+
+    /** @return iterable<string, array{string}> */
+    public static function editorPrivacyChanges(): iterable
+    {
+        yield 'private' => ['private'];
+
+        yield 'hidden' => ['hidden'];
+    }
+
+    /** @dataProvider incompleteHtmlViewers */
+    public function testIncompleteReplyHtmlMediaFollowsOwnership(string $viewer, int $status): void
+    {
+        $owner = $this->account();
+        $questionnaire = (new Questionnaire())->setTitle('Assessment')->setOwner($owner);
+        $reply = (new Reply())->setQuestionnaire($questionnaire)->setAuthor($owner)->setMissingRequirementsStatus();
+        $question = (new SimpleQuestion())->setTitle('Editor')->setType(2);
+        $media = $this->media();
+        $media->setMetadataValue('private_attachment', '1');
+        $response = (new ValueResponse())->setQuestion($question)->setReply($reply)->setValue('Before historical link');
+        foreach ([$questionnaire, $reply, $question, $response] as $entity) {
+            $this->em->persist($entity);
+        }
+        $this->em->flush();
+        $this->em->getConnection()->update($this->em->getClassMetadata(ValueResponse::class)->getTableName(), ['value' => json_encode('<img src="/media/default/0001/01/' . $media->getProviderReference() . '">')], ['id' => $response->getId()]);
+        $this->em->getConnection()->update('media__media', ['provider_metadata' => json_encode(['private_attachment' => '1', 'private_html_responses' => [$response->getId()]])], ['id' => $media->getId()]);
+        if ('owner' === $viewer) {
+            $this->login($owner->getEmail());
+        } elseif ('other' === $viewer) {
+            $this->login($this->account()->getEmail());
+        }
+        $path = '/media/default/0001/01/' . $media->getProviderReference();
+        $this->em->clear();
+        self::assertTrue($this->em->getFilters()->isEnabled('contributionCompletionStatus'));
+        $this->browser->request('GET', $path);
+        self::assertResponseStatusCodeSame($status);
+        self::assertTrue($this->em->getFilters()->isEnabled('contributionCompletionStatus'));
+    }
+
+    /** @return iterable<string, array{string, int}> */
+    public static function incompleteHtmlViewers(): iterable
+    {
+        yield 'owner' => ['owner', 200];
+
+        yield 'anonymous' => ['anonymous', 403];
+
+        yield 'other user' => ['other', 403];
     }
 
     private function attachment(User $owner, ?Media $media = null): MediaResponse

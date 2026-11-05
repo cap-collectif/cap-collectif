@@ -137,13 +137,13 @@ class SplitHistoricalPrivateMediaCommand extends Command
                         $media = $this->em->find(Media::class, $last);
                         $references = $inventory[$last] ?? [];
                         $plan = $this->split->inspect($media, $references);
-                        if ($plan['public']) {
+                        if ($plan['public'] || $plan['classify']) {
                             $report['eligible_media_ids'][] = $last;
                             if ($apply) {
                                 $this->split->apply($media, $references);
                                 $report['converted_media_ids'][] = $last;
                             }
-                            $results[] = sprintf('%s: %d public reference(s), %d confidential reference(s), %s', $last, $plan['public'], \count($plan['private']), $plan['private'] ? 'private copy required' : 'no copy required');
+                            $results[] = sprintf('%s: %d public reference(s), %d confidential reference(s), %s', $last, $plan['public'], \count($plan['private']), $plan['public'] && $plan['private'] ? 'private copy required' : 'no copy required');
                             ++$converted;
                         }
                     } catch (\Throwable $error) {

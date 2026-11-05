@@ -20,6 +20,7 @@ export const intlMock = {
 }
 
 export const features: FeatureFlags = {
+  private_media_read_enforcement: false,
   report_browers_errors_to_sentry: false,
   login_saml: false,
   login_cas: false,

@@ -63,8 +63,10 @@ describe('proposal submission errors', () => {
   })
 
   it('does not expose unexpected server error details', () => {
-    expect(proposalSubmitError(new Error('Internal database details'), []).errors).toEqual({
+    const onUnexpectedError = jest.fn()
+    expect(proposalSubmitError(new Error('Internal database details'), [], onUnexpectedError).errors).toEqual({
       _error: 'global.error.server.form',
     })
+    expect(onUnexpectedError).toHaveBeenCalledTimes(1)
   })
 })

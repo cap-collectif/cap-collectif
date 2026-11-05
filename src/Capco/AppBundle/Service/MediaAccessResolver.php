@@ -46,9 +46,8 @@ class MediaAccessResolver
             }
         }
 
-        foreach ($media->getProviderMetadata()['private_html_responses'] ?? [] as $responseId) {
-            $response = $this->em->find(ValueResponse::class, $responseId);
-            if (!$response || !\is_string($response->getValue())) {
+        foreach ($this->em->getRepository(ValueResponse::class)->findByIdsWithReply($media->getProviderMetadata()['private_html_responses'] ?? []) as $response) {
+            if (!\is_string($response->getValue())) {
                 continue;
             }
             $attached = true;

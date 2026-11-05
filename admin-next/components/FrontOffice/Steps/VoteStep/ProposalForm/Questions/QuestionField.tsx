@@ -299,6 +299,7 @@ const QuestionField: React.FC<Props> = ({ question, id, name, control, defaultLo
             showThumbnail
             size={UPLOADER_SIZE.LG}
             uploadURI={UPLOAD_PATH}
+            questionId={question.id}
           />
         </FormControl>
       )

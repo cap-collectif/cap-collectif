@@ -7853,6 +7853,8 @@ type FeatureFlag {
 
 """The possible types for a feature flag."""
 enum FeatureFlagType {
+  """Whether private media read permissions are enforced."""
+  private_media_read_enforcement
   graphql_query_analytics
   questionnaire_result
   blog

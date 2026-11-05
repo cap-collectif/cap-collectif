@@ -171,7 +171,7 @@ export const ExternalLinks = styled.div<{ paddingY?: string }>`
   }
 `
 
-const onSubmit = (
+export const onSubmit = (
   values: FormValues,
   dispatch: Dispatch,
   { proposalForm, proposal, features, intl, onSubmitSuccess, onSubmitFailed, setValuesSaved, isAuthenticated }: Props,
@@ -248,8 +248,7 @@ const onSubmit = (
         window.location.reload()
       })
       .catch(e => {
-        onSubmitFailed()
-        throw proposalSubmitError(e, values.responses)
+        throw proposalSubmitError(e, values.responses, onSubmitFailed)
       })
   }
 
@@ -329,13 +328,7 @@ const onSubmit = (
       onSubmitSuccess()
     })
     .catch(e => {
-      onSubmitFailed()
-
-      if (e instanceof SubmissionError) {
-        throw e
-      }
-
-      throw proposalSubmitError(e, values.responses)
+      throw proposalSubmitError(e, values.responses, onSubmitFailed)
     })
 }
 

@@ -11,6 +11,7 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class Manager
 {
+    final public const private_media_read_enforcement = 'private_media_read_enforcement';
     final public const noindex_on_profiles = 'noindex_on_profiles';
     final public const graphql_query_analytics = 'graphql_query_analytics';
     final public const questionnaire_result = 'questionnaire_result';
@@ -158,6 +159,7 @@ class Manager
     ];
 
     public static $toggles = [
+        self::private_media_read_enforcement,
         self::noindex_on_profiles,
         self::graphql_query_analytics,
         self::questionnaire_result,

@@ -43,6 +43,12 @@ final class MediaResponseDownloadTest extends IdentityWebTestCase
         }
     }
 
+    /** @return array<string, bool> */
+    public static function featureFlagOverrides(): array
+    {
+        return ['private_media_read_enforcement' => true];
+    }
+
     /** @dataProvider questionnaireViewers */
     public function testQuestionnaireDownloadsFollowReplyPermissions(string $viewer, bool $privateQuestion, bool $allowed): void
     {
@@ -176,6 +182,20 @@ final class MediaResponseDownloadTest extends IdentityWebTestCase
         yield 'private proposal attachment author' => ['author', true, true];
     }
 
+    public function testBypassDoesNotAuthorizeResponseDownloads(): void
+    {
+        $this->setFeatureFlags(['private_media_read_enforcement' => false]);
+        $response = $this->attachment(true);
+        $response->setUser($this->account());
+        $this->em->flush();
+        $media = [...$response->getMedias()][0];
+        $this->browser->request('GET', $this->url($response, $media));
+        self::assertResponseStatusCodeSame(403);
+        $this->browser->request('GET', '/media/default/0001/01/' . $media->getProviderReference());
+        self::assertResponseStatusCodeSame(200);
+        self::assertTrue($this->browser->getResponse()->headers->hasCacheControlDirective('no-store'));
+    }
+
     private function attachment(bool $private): MediaResponse
     {
         $question = (new MediaQuestion())->setTitle('Attachment')->setPrivate($private);
@@ -210,7 +230,7 @@ final class MediaResponseDownloadTest extends IdentityWebTestCase
         }
 
         $this->browser->request('GET', '/media/default/0001/01/' . $media->getProviderReference());
-        self::assertResponseStatusCodeSame(200);
+        self::assertResponseStatusCodeSame($allowed ? 200 : 403);
         self::assertTrue($this->browser->getResponse()->headers->hasCacheControlDirective('no-store'));
     }
 }

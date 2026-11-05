@@ -16,6 +16,7 @@ export interface UploaderProps
   extends Omit<CapUploaderProps, 'wording' | 'isInvalid' | 'isRequired' | 'onDrop' | 'onChange'> {
   onDrop?: CapUploaderProps['onDrop']
   uploadURI?: string
+  questionId?: string
   onChange?: (value: UploaderValue) => void
 }
 
@@ -42,10 +43,11 @@ const formatMediaSize = (size: number) => {
 export type UploaderError = string | string[] | null
 export type UploaderWarning = string | null
 
-export async function uploadFiles(files: File[], uploadURI: string): Promise<ApiFileInfo[]> {
+export async function uploadFiles(files: File[], uploadURI: string, questionId?: string): Promise<ApiFileInfo[]> {
   const allFilesUpload: Promise<ApiFileInfo>[] = files.map(file => {
     const formData = new FormData()
     formData.append('file', file)
+    if (questionId) formData.append('questionId', questionId)
 
     return fetch(uploadURI, {
       method: 'POST',

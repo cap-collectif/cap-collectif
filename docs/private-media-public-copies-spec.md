@@ -27,6 +27,10 @@ La validation est côté serveur et intervient avant toute modification persist�
 
 Un brouillon ou un contenu privé peut conserver des références privées selon ses permissions habituelles. Lorsqu'il devient public, ces références provoquent le même refus, même si le HTML n'a pas changé. Les changements de visibilité du contexte parent doivent également être couverts. Un média déjà public reste réutilisable dans les contenus publics selon les règles existantes. Une nouvelle réponse confidentielle doit utiliser un upload privé distinct ; elle ne peut pas rendre privé un fichier public, même s'il n'a pas été traité par la reprise historique.
 
+Passer une question éditeur en privé ou la cacher vérifie également les fichiers de ses
+réponses existantes. Si une réponse référence un fichier public, la modification est refusée
+avant enregistrement et demande un upload privé distinct.
+
 Les références internes sont reconnues à partir des hôtes configurés, sans faire confiance au Host de la requête. Vérifier les formats réellement émis par les éditeurs : images, liens, miniatures et éventuels `srcset`. Les URL externes ne sont pas téléchargées ou converties par ce mécanisme.
 
 ## Reprise de l'existant
@@ -55,6 +59,10 @@ Les fichiers manquants et références ambiguës sont signalés sans ouverture d
 
 L'application de la commande constitue une opération administrative explicite de reprise historique, y compris pour les médias dont l'uploader est inconnu. Elle n'autorise pas de nouvelles publications privées depuis les formulaires.
 
+Les médias historiques utilisés exclusivement dans des réponses HTML confidentielles sont
+classés privés sur place, avec leurs rattachements aux réponses, sans copie ni changement
+d’URL. L’audit les signale comme éligibles jusqu’à cette classification.
+
 ### Exécution et reprise après erreur
 
 La commande propose une simulation par défaut, sans mutation de la base ni du stockage, et une option explicite d'application. Elle travaille par lots et fournit progression, bilan et erreurs par média ou contenu, sans exposer les réponses privées.
@@ -78,21 +86,27 @@ Le déploiement est séparé en trois PR :
 2. `20499-prepare-private-media-split` ajoute la commande de reprise et les protections des
    originaux convertis. Déployer après la première PR, puis auditer et convertir chaque instance.
    Les copies sont marquées privées, mais leurs URL directes restent accessibles pendant cette phase.
-3. `20499-enforce-private-media-reads` retire les deux exceptions uniquement après la reprise
-   de toutes les instances. Vérifier alors le refus anonyme sur les copies et leurs miniatures.
+3. `20499-enforce-private-media-reads` ajoute le toggle `private_media_read_enforcement`,
+   désactivé par défaut. Les exceptions de lecture HTTP et GraphQL restent actives jusqu’à
+   son activation explicite par instance. Les fichiers vocaux restent réservés aux administrateurs, quel que soit le flag. Vérifier alors le refus anonyme sur les copies et leurs miniatures.
 
-Avant la troisième PR, chaque instance doit avoir un audit terminé, sans erreur non résolue,
+Avant d’activer le toggle, chaque instance doit avoir un audit terminé, sans erreur non résolue,
 et sans média éligible restant après conversion. Ne pas confondre `completed: true` avec
-l'absence d'erreurs. Conserver les rapports par instance. Limiter le délai avant la troisième phase.
+l'absence d'erreurs. Conserver les rapports par instance. Limiter le délai avant l’activation des permissions.
 
 1. Inventorier les usages historiques à reprendre et les points d'entrée permettant de nouvelles références privées dans des contenus publics. Vérifier aussi les migrations de confidentialité présentes sur la branche ; un nombre de références ne prouve pas qu'un média est public.
 2. Déployer le refus des nouvelles réutilisations et des publications contenant un média privé. Les éventuels contenus historiques refusés lors d'une édition doivent être repris par la commande, sans exception permanente dans la validation.
 3. Exécuter la simulation, examiner les exceptions et appliquer la reprise avec la protection nécessaire contre les écritures concurrentes.
-4. Vérifier que les références privées ont été transférées, que les copies sont protégées et que les URL publiques restent inchangées. Traiter les exceptions avant de retirer la compatibilité de lecture correspondante.
-5. Supprimer l'exception qui autorise un média privé sur la base de ses références publiques. Les originaux convertis sont publics par classification ; les copies et les autres médias privés restent soumis aux permissions.
+4. Vérifier que les références privées ont été transférées, que les copies sont marquées privées et que les URL publiques restent inchangées. Traiter les exceptions avant de retirer la compatibilité de lecture correspondante.
+5. Activer `private_media_read_enforcement` sur l’instance après validation de la reprise. Les originaux convertis sont publics par classification ; les copies et les autres médias privés restent soumis aux permissions.
 6. Renouveler les caches applicatifs et invalider les données mises en cache contenant les anciens rattachements privés. Contrôler originaux, copies, miniatures, génération d'images et métadonnées GraphQL.
 
-Les protections HTTP et GraphQL des médias privés restent en place. Aucune redirection anonyme de la copie privée vers l'original public n'est ajoutée. L'optimisation des caches publics est un travail séparé.
+Le toggle contrôle uniquement les lectures directes HTTP et les champs Media GraphQL internal/preview.
+Désactivé, il rend les URL privées connues accessibles ; les protections d’écriture,
+les téléchargements de réponses et les en-têtes `private, no-store` restent en place.
+Activer avec `docker exec -w /var/www capco_application_1 bin/console capco:toggle:enable private_media_read_enforcement`.
+Pour rétablir temporairement la compatibilité de lecture, utiliser la même commande avec
+`capco:toggle:disable`. Le changement s’applique aux requêtes suivantes sans reconstruction GraphQL. Aucune redirection anonyme de la copie privée vers l'original public n'est ajoutée. L'optimisation des caches publics est un travail séparé.
 
 ## Critères d'acceptation
 

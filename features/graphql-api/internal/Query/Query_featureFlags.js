@@ -8,11 +8,13 @@ const InternalQuery = /* GraphQL */ `
 `
 
 /**
- * @jest-status non-compliant
- * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ * @jest-status compliant
+ * @jest-reason Verifies the new flag is queryable through the real API and snapshots the complete flag list.
  */
 describe('Internal|Query.featureFlags', () => {
   it('fetches all feature flags', async () => {
-    await expect(graphql(InternalQuery, {}, 'internal')).resolves.toMatchSnapshot()
+    const result = await graphql(InternalQuery, {}, 'internal')
+    expect(result.featureFlags).toContainEqual({ type: 'private_media_read_enforcement' })
+    expect(result).toMatchSnapshot()
   })
 })

@@ -255,6 +255,42 @@ final class SplitHistoricalPrivateMediaCommandTest extends DatabaseCommandTestCa
         self::assertGreaterThanOrEqual(0, $report['duration_seconds']);
     }
 
+    /** @dataProvider historicalHtmlPaths */
+    public function testPrivateOnlyHistoricalHtmlIsProtectedWithoutCopying(string $prefix, bool $marked): void
+    {
+        [$media, $attachment] = $this->legacy(false);
+        $question = (new SimpleQuestion())->setTitle('Private editor')->setType(2);
+        $response = (new ValueResponse())->setQuestion($question)->setReply($attachment->getReply())->setValue('Before historical link');
+        $this->entityManager->persist($question);
+        $this->entityManager->persist($response);
+        $this->entityManager->flush();
+        $html = '<img src="' . $prefix . 'default/0001/01/' . $media->getProviderReference() . '">';
+        $mapping = $this->entityManager->getClassMetadata($response::class);
+        $this->entityManager->getConnection()->update($mapping->getTableName(), ['value' => json_encode($html)], ['id' => $response->getId()]);
+        $this->entityManager->getConnection()->delete('responses_medias', ['response_id' => $attachment->getId()]);
+        if (!$marked) {
+            $this->entityManager->getConnection()->update('media__media', ['provider_metadata' => '{}'], ['id' => $media->getId()]);
+        }
+        $this->entityManager->clear();
+        $tester = $this->createCommandTester('capco:media:split-historical-private');
+        self::assertSame(0, $tester->execute(['--media-id' => $media->getId(), '--apply' => true, '--maintenance-confirmed' => true, '--format' => 'json']));
+        $report = json_decode($tester->getDisplay(), true, 512, \JSON_THROW_ON_ERROR);
+        self::assertTrue($report['completed']);
+        self::assertSame([], $report['errors']);
+        self::assertSame([$media->getId()], $report['eligible_media_ids']);
+        self::assertSame([$media->getId()], $report['converted_media_ids']);
+        self::getContainer()->get('security.token_storage')->setToken(new AnonymousToken('main', 'anonymous'));
+        $original = $this->entityManager->find(Media::class, $media->getId());
+        $access = self::getContainer()->get(MediaAccessResolver::class);
+        self::assertFalse($access->canView($original));
+        self::assertTrue($access->canView($original, $this->entityManager->find(User::class, 'user5')));
+        self::assertSame($html, $this->entityManager->find(ValueResponse::class, $response->getId())->getValue());
+        self::assertNull($original->getMetadataValue('historical_private_copy'));
+        self::assertSame('private bytes', self::getContainer()->get(Filesystem::class)->read($this->paths[0]));
+        self::assertSame(0, $tester->execute(['--media-id' => $media->getId(), '--format' => 'json']));
+        self::assertSame([], json_decode($tester->getDisplay(), true, 512, \JSON_THROW_ON_ERROR)['eligible_media_ids']);
+    }
+
     /** @return array{Media, MediaResponse, Project} */
     private function legacy(bool $publicReference = true): array
     {

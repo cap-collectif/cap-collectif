@@ -4,56 +4,48 @@
 
 Accepted, 9 October 2026.
 
-## Historical split preparation, 23 October 2026
+## Read enforcement toggle — 26 October 2026
 
-The temporary direct-delivery and GraphQL exceptions below remain active during
-this second deployment. Private copies are classified as private, but their direct
-URLs and otherwise reachable GraphQL fields still bypass media authorization.
-Voice messages and protected response downloads retain their existing checks.
+The `private_media_read_enforcement` feature flag controls direct file delivery,
+thumbnail generation and internal/preview GraphQL Media field authorization.
+It is disabled by default on existing and new instances. While disabled, anyone
+who knows a registered private media URL can read it, except for voice messages,
+whose HTTP delivery always requires an administrator. Unknown files still return
+404 and media HTTP responses retain `private, no-store` headers.
 
-The preceding write-protection PR already classifies answer uploads and rejects
-new private references in public content. This second PR adds the command
-`capco:media:split-historical-private` moves historical confidential references to
-verified private copies while preserving public originals and URLs.
+Enable the flag only after write protections and historical conversion have been
+deployed and conversion has completed on the instance, with no unresolved audit
+errors or eligible media remaining. Keep the instance report as the activation
+gate. See the [staged rollout procedure](../docs/private-media-public-copies-spec.md#déploiement).
 
-Deploy this preparation to every instance, run and review the audit, then apply
-conversion during a window without writes or media purges. Resolve every error
-and rerun the audit before deploying the third-stage read-enforcement PR. The
-`--maintenance-confirmed` option does not stop writes itself. See the
-[operator procedure](../docs/private-media-public-copies-spec.md).
+```bash
+# Enforce private media read permissions on this instance.
+docker exec -w /var/www capco_application_1 bin/console capco:toggle:enable private_media_read_enforcement
+# Restore the read bypass if legitimate media becomes inaccessible.
+docker exec -w /var/www capco_application_1 bin/console capco:toggle:disable private_media_read_enforcement
+```
 
-## Temporary exception — 15 October 2026
+Changes take effect on subsequent requests without rebuilding GraphQL definitions.
+With enforcement enabled, public files remain accessible; a public association
+does not grant access to a private attachment. The flag does not change response
+download permissions, media selection, upload classification or write protections.
 
-Direct `/media/` delivery temporarily allows anonymous access to registered media,
-including confidential attachments, cached thumbnails and image generation. This
-restores historical rich-text images that reuse private attachments while explicit
-public/private copies are being designed. Voice messages remain protected.
+New public covers and rich-text references reject private media before flush,
+including for administrators and authorized readers. Publication transitions validate
+unchanged content as well. Answer uploads carry their question identifier; the server
+classifies private, hidden and questionnaire uploads before storing them. A session-scoped
+24-hour pending grant permits the uploader to preview a private file before submission.
+After submission, response permissions apply.
 
-This exception overrides the delivery restrictions below, including for orphaned
-attachments: anyone knowing a file URL can read it. Response permissions, GraphQL
-media permissions, media selection and `/download/{responseId}/media/{mediaId}`
-authorization remain enforced. Privacy markers are retained and `private, no-store`
-headers still apply. No SQL change or migration is required. Remove the temporary
-bypass in `MediaDownloadSubscriber::authorize` and restore the restricted-delivery
-test expectations when the replacement system tracked in
-[#20499](https://github.com/cap-collectif/platform/issues/20499) is ready.
+Historical shared files are converted only by `capco:media:split-historical-private`.
+One verified private copy receives confidential answer associations and supported private
+HTML references; the original becomes public with its identifiers and URLs unchanged.
+Conversion is atomic in the database and tracked in provider metadata. No schema migration
+or runtime public-reference scan is required. Converted originals stay public after their
+last public association is removed. Unknown or unsupported confidential references block
+conversion. See the [specification and operator procedure](../docs/private-media-public-copies-spec.md).
 
-## Temporary GraphQL exception — 16 October 2026
-
-Media fields in the internal and preview GraphQL schemas no longer enforce
-`MediaAccessResolver.canView`. This restores proposal covers whose media also
-belongs to a confidential response. All fields of an otherwise reachable Media,
-including its URL and metadata, are readable without the media-level permission
-check. This exception supersedes the GraphQL restriction stated above.
-
-Response permissions, media selection, cropping, protected response downloads
-and voice-message delivery keep their existing checks. Privacy markers are not
-removed. The exception does not grant access to an otherwise inaccessible parent
-response, but an existing public association can expose a private media's metadata
-and URL. Combined with the direct-delivery exception, that URL can expose the file.
-
-Regenerate GraphQL types and clear Symfony caches when deploying this change.
-Restore media field checks alongside the public/private usage model in #20499.
+Regenerate GraphQL definitions and renew Symfony caches when deploying.
 
 ## Context
 
@@ -66,7 +58,7 @@ reuse an inaccessible attachment as a public illustration.
 
 Keep existing file paths and URLs. Nginx sends every `/media/` request to Symfony,
 including existing thumbnails and image-generation requests. The application
-requires a registered media record and checks answer permissions before serving
+requires a registered media record and, when enforcement is enabled, checks answer permissions before serving
 or transforming its file. Questionnaire files follow reply permissions, including
 the participant and exact-reply cookies. Private proposal and profile answers use
 the same permissions for direct GraphQL reads and attachments. Authors retain
@@ -87,7 +79,7 @@ remain restricted to administrators.
 Media selection in Doctrine form fields and the direct illustration mutation
 checks the same permissions before form listeners mutate managed media collections.
 A rejected selection cannot be persisted by another mutation in the same request.
-Cropping remains administrator-only. GraphQL media fields also check access, including
+Cropping remains administrator-only. With enforcement enabled, GraphQL media fields also check access, including
 legacy public associations. Each upload creates its own media record and file;
 filename, size and MIME type do not prove identical contents or ownership.
 
@@ -109,7 +101,7 @@ when `X-User-Logged-In` is zero. Its current shared cache only applies to
   on every cache in front of the origin before declaring the exposure resolved.
 - Purge previously cached GraphQL responses when deploying the remote Varnish
   change. Reloading a VCL does not remove objects already stored by the old policy.
-- Verify an anonymous request to a known confidential original, cached thumbnail
+- After enabling enforcement, verify an anonymous request to a known confidential original, cached thumbnail
   and image-generation URL is denied, then verify owner access and a public image.
 - No file relocation or deletion is needed. Files without a registered media
   record now return 404. Existing downloaded or browser-cached copies cannot be

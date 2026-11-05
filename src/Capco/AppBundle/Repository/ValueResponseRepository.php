@@ -3,12 +3,44 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Entity\Responses\ValueResponse;
+use Capco\AppBundle\Filter\ContributionCompletionStatusFilter;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class ValueResponseRepository extends EntityRepository
 {
+    /**
+     * @param list<string> $ids
+     *
+     * @return list<ValueResponse>
+     */
+    public function findByIdsWithReply(array $ids): array
+    {
+        if (!$ids) {
+            return [];
+        }
+        $filters = $this->getEntityManager()->getFilters();
+        $wasEnabled = $filters->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME);
+        if ($wasEnabled) {
+            $filters->disable(ContributionCompletionStatusFilter::FILTER_NAME);
+        }
+
+        try {
+            // Initialize incomplete replies before restoring the filter so ownership can be checked.
+            return $this->createQueryBuilder('r')
+                ->addSelect('reply')->leftJoin('r.reply', 'reply')
+                ->where('r.id IN (:ids)')->setParameter('ids', $ids)
+                ->getQuery()->getResult()
+            ;
+        } finally {
+            if ($wasEnabled) {
+                $filters->enable(ContributionCompletionStatusFilter::FILTER_NAME);
+            }
+        }
+    }
+
     public function countByQuestion(
         AbstractQuestion $question,
         bool $withNotConfirmedUser = false

@@ -3,7 +3,8 @@
 namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\Entity\Media;
-use Capco\AppBundle\Entity\Questions\MediaQuestion;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Service\MediaAccessResolver;
@@ -36,9 +37,9 @@ class PrivateMediaSubscriber implements EventSubscriberInterface
         $uow = $em->getUnitOfWork();
         $responses = [...$uow->getScheduledEntityInsertions(), ...$uow->getScheduledEntityUpdates(), ...$uow->getScheduledEntityDeletions()];
         foreach ($uow->getScheduledEntityUpdates() as $entity) {
-            if ($entity instanceof MediaQuestion && (true === ($uow->getEntityChangeSet($entity)['private'][1] ?? false)
+            if ($entity instanceof AbstractQuestion && (true === ($uow->getEntityChangeSet($entity)['private'][1] ?? false)
                 || true === ($uow->getEntityChangeSet($entity)['hidden'][1] ?? false))) {
-                $responses = [...$responses, ...$em->getRepository(MediaResponse::class)->findBy(['question' => $entity])];
+                $responses = [...$responses, ...$em->getRepository(AbstractResponse::class)->findBy(['question' => $entity])];
             }
         }
         foreach ([...$uow->getScheduledCollectionUpdates(), ...$uow->getScheduledCollectionDeletions()] as $collection) {
@@ -65,14 +66,14 @@ class PrivateMediaSubscriber implements EventSubscriberInterface
         }
         // Check existing permissions before adding any new response-based access grant.
         foreach ($responses as $response) {
-            if (!$response instanceof ValueResponse || !MediaAccessResolver::isPrivateResponse($response) || !\is_string($response->getValue())) {
+            if (!$response instanceof ValueResponse || !MediaAccessResolver::isPrivateResponse($response) || !\is_string($response->getValue()) || $uow->isScheduledForDelete($response)) {
                 continue;
             }
             foreach ($this->html->references($response->getValue()) as $media) {
-                if ($this->access->isPrivate($media) && !$this->access->canView($media, $this->security->getUser())) {
+                if (!$this->access->isPrivate($media) || !$this->access->canView($media, $this->security->getUser())) {
                     $em->clear();
 
-                    throw new Error('Private media cannot be reused without access.', null, null, [], null, new UserError('Private media access denied.'), [
+                    throw new Error('This file cannot be reused in a private answer.', null, null, [], null, new UserError('Upload a separate private file for this answer.'), [
                         'code' => 'MEDIA_REUSE_DENIED',
                         'field' => 'value',
                         'questionId' => GlobalId::toGlobalId('Question', $response->getQuestion()->getId()),

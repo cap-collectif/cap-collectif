@@ -23,11 +23,11 @@ class HistoricalMediaSplit
     /**
      * @param list<array{class-string, array<string, mixed>}> $references
      *
-     * @return array{public: int, private: list<array{object, string}>}
+     * @return array{public: int, private: list<array{object, string}>, classify: bool}
      */
     public function inspect(Media $media, array $references): array
     {
-        $result = ['public' => 0, 'private' => []];
+        $result = ['public' => 0, 'private' => [], 'classify' => false];
         if (Media::VOCAL_CONTRIBUTION_CONTEXT === $media->getContext()) {
             return $result;
         }
@@ -56,15 +56,23 @@ class HistoricalMediaSplit
         }
         // Historical editor uploads may have no privacy marker or attachment association.
         if (!$this->access->isPrivate($media) && !$result['private']) {
-            return ['public' => 0, 'private' => []];
+            return ['public' => 0, 'private' => [], 'classify' => false];
+        }
+        if (!$result['public']) {
+            foreach ($result['private'] as [$entity]) {
+                if ($entity instanceof ValueResponse && ('1' !== $media->getMetadataValue('private_attachment')
+                    || !\in_array($entity->getId(), $media->getProviderMetadata()['private_html_responses'] ?? [], true))) {
+                    $result['classify'] = true;
+                }
+            }
         }
         if (1 !== $this->em->getRepository(Media::class)->count(['context' => $media->getContext(), 'providerReference' => $media->getProviderReference()])) {
             throw new \RuntimeException('Ambiguous shared storage path.');
         }
-        if ($result['public'] && $unsupported) {
+        if (($result['public'] || $result['classify']) && $unsupported) {
             throw new \RuntimeException($unsupported);
         }
-        if ($result['public'] && !$this->filesystem->has($this->path($media))) {
+        if (($result['public'] || $result['classify']) && !$this->filesystem->has($this->path($media))) {
             throw new \RuntimeException('Source file is missing.');
         }
 
@@ -85,12 +93,26 @@ class HistoricalMediaSplit
                 throw new \RuntimeException('Source media disappeared.');
             }
             $plan = $this->inspect($media, $references);
-            if (!$plan['public']) {
+            if (!$plan['public'] && !$plan['classify']) {
                 $connection->commit();
 
                 return null;
             }
             $metadata = json_decode((string) $row['provider_metadata'], true) ?: [];
+            $privateHtmlResponses = [];
+            foreach ($plan['private'] as [$entity]) {
+                if ($entity instanceof ValueResponse) {
+                    $privateHtmlResponses[] = $entity->getId();
+                }
+            }
+            if (!$plan['public']) {
+                $metadata['private_attachment'] = '1';
+                $metadata['private_html_responses'] = array_values(array_unique([...($metadata['private_html_responses'] ?? []), ...$privateHtmlResponses]));
+                $connection->update('media__media', ['provider_metadata' => json_encode($metadata, \JSON_THROW_ON_ERROR)], ['id' => $media->getId()]);
+                $connection->commit();
+
+                return null;
+            }
             $copyId = null;
             if ($plan['private']) {
                 $copyId = Uuid::uuid5(Uuid::NAMESPACE_URL, 'capco-private-copy:' . $media->getId())->toString();
@@ -103,12 +125,6 @@ class HistoricalMediaSplit
                 }
                 if (hash('sha256', $bytes) !== hash('sha256', $this->filesystem->read($copyPath))) {
                     throw new \RuntimeException('Copy verification failed.');
-                }
-                $privateHtmlResponses = [];
-                foreach ($plan['private'] as [$entity]) {
-                    if ($entity instanceof ValueResponse) {
-                        $privateHtmlResponses[] = $entity->getId();
-                    }
                 }
                 $copy = $row;
                 $copy['id'] = $copyId;

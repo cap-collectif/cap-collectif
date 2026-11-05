@@ -4,7 +4,7 @@ PreviewMedia:
         - UniformResourceLocatable
     config:
         name: Media
-        # shortcut: expose media fields until the public/private usage model in #20499 is implemented.
+        fieldsDefaultAccess: '@=!hasFeatureFlag("private_media_read_enforcement") or service("Capco\\AppBundle\\Service\\MediaAccessResolver").canView(value, getUser(), context, info)'
         interfaces:
             - UniformResourceLocatable
         description: 'A file uploaded by a user.'

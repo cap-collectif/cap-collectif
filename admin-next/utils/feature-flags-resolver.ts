@@ -3,6 +3,7 @@ import { getEnv } from '../config'
 import { FeatureFlags } from '../types'
 
 export const defaultFeatureFlags: FeatureFlags = {
+  private_media_read_enforcement: false,
   report_browers_errors_to_sentry: false,
   login_saml: false,
   oauth2_switch_user: false,

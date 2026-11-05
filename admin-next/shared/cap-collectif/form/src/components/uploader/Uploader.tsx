@@ -13,7 +13,18 @@ import {
 
 export const Uploader = forwardRef<HTMLInputElement, UploaderProps>(
   (
-    { onDrop, onDropRejected, uploadURI, multiple = false, maxSize = 10000000, value, onChange, onRemove, ...props },
+    {
+      onDrop,
+      onDropRejected,
+      uploadURI,
+      questionId,
+      multiple = false,
+      maxSize = 10000000,
+      value,
+      onChange,
+      onRemove,
+      ...props
+    },
     ref,
   ) => {
     const intl = useIntl()
@@ -45,7 +56,7 @@ export const Uploader = forwardRef<HTMLInputElement, UploaderProps>(
             handleWarning(args[0], setWarning, intl, props.minResolution)
 
             if (uploadURI) {
-              const filesUploaded = await uploadFiles(args[0], uploadURI)
+              const filesUploaded = await uploadFiles(args[0], uploadURI, questionId)
 
               if (onChange) {
                 if (multiple) {

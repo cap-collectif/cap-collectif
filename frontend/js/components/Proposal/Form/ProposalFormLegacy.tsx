@@ -106,6 +106,7 @@ export type Props = ReduxFormFormProps &
     readonly onSubmitSuccess: () => void
     readonly onSubmitFailed: () => void
     readonly onSubmit?: () => void
+    readonly isAuthenticated?: boolean
     readonly isBackOfficeInput?: boolean
     readonly errorCount?: number
     readonly onAddressEdit?: () => void
@@ -162,10 +163,10 @@ export const ExternalLinks = styled.div`
   }
 `
 
-const onSubmit = (
+export const onSubmit = (
   values: FormValues,
   dispatch: Dispatch,
-  { proposalForm, proposal, features, intl, onSubmitSuccess, onSubmitFailed }: Props,
+  { proposalForm, proposal, features, intl, onSubmitSuccess, onSubmitFailed, isAuthenticated }: Props,
 ) => {
   const data = {
     title: values.title,
@@ -238,8 +239,7 @@ const onSubmit = (
         window.location.reload()
       })
       .catch(e => {
-        onSubmitFailed()
-        throw proposalSubmitError(e, values.responses)
+        throw proposalSubmitError(e, values.responses, onSubmitFailed)
       })
   }
 
@@ -298,13 +298,7 @@ const onSubmit = (
       onSubmitSuccess()
     })
     .catch(e => {
-      onSubmitFailed()
-
-      if (e instanceof SubmissionError) {
-        throw e
-      }
-
-      throw proposalSubmitError(e, values.responses)
+      throw proposalSubmitError(e, values.responses, onSubmitFailed)
     })
 }
 
@@ -917,6 +911,7 @@ const mapStateToProps = (state: GlobalState, { proposal, proposalForm, isBackOff
     category: selector(state, 'category'),
     addressValue: selector(state, 'address'),
     features: state.default.features,
+    isAuthenticated: !!state.user.user,
     themes: state.default.themes,
     user: state.user.user,
     isBackOfficeInput,
