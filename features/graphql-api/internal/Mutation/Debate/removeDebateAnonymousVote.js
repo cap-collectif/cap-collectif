@@ -2,26 +2,6 @@
 import '../../../_setupDB'
 import '../../../_setupES'
 
-const util = require('util')
-const execFile = util.promisify(require('child_process').execFile)
-
-const restoreDebateVotesFixture = () =>
-  execFile('docker', [
-    'exec',
-    '-u',
-    'root',
-    '-w',
-    '/var/www',
-    'capco_application_1',
-    'php',
-    '-d',
-    'memory_limit=-1',
-    'bin/console',
-    'capco:es:populate',
-    '--env=test',
-    '--no-interaction',
-  ])
-
 // TODO: when https://github.com/cap-collectif/platform/pull/12175 will be merged, the debate votes
 // count should reflect the change because we'll add both of the anonymous votes and the
 // logged in votes in the `votes` connection. Actually, it only counts the `DebateVote` entity, because
@@ -49,11 +29,6 @@ const RemoveDebateAnonymousVoteMutation = /* GraphQL */ `
  * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
  */
 describe('Internal|RemoveDebateAnonymousVote mutation', () => {
-  beforeEach(async () => {
-    // Rebuild Elasticsearch from the restored database fixtures.
-    await restoreDebateVotesFixture()
-  })
-
   it('should successfully remove an existing anonymous vote when the given hash is valid.', async () => {
     // AGAINST:jesuisunsupertokengenshinimpact1
     const hash = 'QUdBSU5TVDpqZXN1aXN1bnN1cGVydG9rZW5nZW5zaGluaW1wYWN0MQ=='

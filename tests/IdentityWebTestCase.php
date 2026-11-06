@@ -14,7 +14,6 @@ use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Security\SessionWithJsonHandler;
 use Doctrine\ORM\EntityManagerInterface;
-use Monolog\Logger;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use PHPUnit\Framework\MockObject\MockObject;
 use Swarrot\Broker\Message;
@@ -66,8 +65,6 @@ abstract class IdentityWebTestCase extends WebTestCase implements FeatureFlagsAw
         ]);
         $this->browser->disableReboot();
         $container = self::getContainer();
-        // Expected authentication failures must not write to subprocess stderr.
-        $container->get('monolog.handler.main')->setLevel(Logger::EMERGENCY);
         self::assertSame('test', $container->getParameter('kernel.environment'));
         $container->get('event_dispatcher')->addListener(KernelEvents::RESPONSE, function (ResponseEvent $event): void {
             $request = $event->getRequest();

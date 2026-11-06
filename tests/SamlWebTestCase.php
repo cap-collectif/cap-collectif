@@ -62,7 +62,9 @@ abstract class SamlWebTestCase extends IdentityWebTestCase
     /** @param array<string, mixed> $options */
     protected static function createKernel(array $options = []): SamlTestKernel
     {
-        return new SamlTestKernel('test', true);
+        $debug = (bool) ($options['debug'] ?? $_ENV['APP_DEBUG'] ?? $_SERVER['APP_DEBUG'] ?? true);
+
+        return new SamlTestKernel('test', $debug);
     }
 
     /** @param array<string, list<string>> $attributes */

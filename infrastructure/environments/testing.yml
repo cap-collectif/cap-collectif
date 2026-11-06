@@ -3,8 +3,10 @@ services:
         hostname: capco.test
         environment:
             DOCKER_GID: 998
+            APP_DEBUG: '0'
             CI: ${CI}
             CIRCLE_JOB: ${CIRCLE_JOB}
+            CIRCLE_SHA1: ${CIRCLE_SHA1:-}
             # Set the following variables on CircleCI
             # https://app.circleci.com/settings/project/github/cap-collectif/platform/environment-variables
             SYMFONY_DEPLOYER_API_URL: ${SYMFONY_DEPLOYER_API_URL}

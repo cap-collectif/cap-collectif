@@ -16,6 +16,7 @@ use Capco\Tests\IdentityWebTestCase;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\BrowserKit\Cookie;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * @internal
@@ -161,6 +162,15 @@ final class ResponsePrivacyTest extends IdentityWebTestCase
             $responses = array_values(array_filter($result['data']['node']['responses'], static fn (array $response) => 'Empty private response' === $response['question']['title']));
             self::assertSame([['question' => ['title' => 'Empty private response'], 'value' => null, 'formattedValue' => null]], $responses);
         }
+    }
+
+    /** @param array<string, mixed> $options */
+    protected static function createKernel(array $options = []): KernelInterface
+    {
+        // Debug validation reloads schema types and can hide stale state between API requests.
+        $options['debug'] = false;
+
+        return parent::createKernel($options);
     }
 
     private function assertDirectAccess(ValueResponse $response, bool $allowed): void

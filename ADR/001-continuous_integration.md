@@ -34,6 +34,22 @@ Les workflows `tests`, `test-and-build` et `preprod` exécutent six suites Cypre
 
 Les 14 exécuteurs remplacent les 20 du découpage par dossier. Chaque machine démarre sa propre stack Docker et restaure les données de test. CircleCI répartit les specs de chaque suite selon leurs durées historiques.
 
+`prepare-test-data` construit une seule fois le cache Symfony `test` sans debug
+dans le conteneur applicatif. Chaque machine le restaure avec les données de test
+et réinitialise les flags Redis avec le helper commun aux tests.
+
+Les exécuteurs PHP et le conteneur applicatif de CI définissent `APP_DEBUG=0` :
+les commandes CLI et les kernels PHPUnit utilisent le mode sans debug, comme
+les requêtes HTTP de test. Le cache reste propre au workflow et à sa révision.
+Le debug reste disponible explicitement pour un test qui en dépend.
+
+`prepare-admin-next` construit Admin Next en environnement `test` une seule fois,
+en parallèle des données de test. Les machines Cypress récupèrent le même build
+par le workspace, vérifient sa révision et démarrent uniquement le serveur.
+Les autres suites ne dépendent pas de ce build. Ces préparations partagées sont
+systématiques dans les workflows de tests ; leurs commandes et leur diagnostic
+sont décrits dans [`docs/agents/circleci.md`](../docs/agents/circleci.md).
+
 #### 3. Parallélisme optimisé
 
 **Décision** : Le parallélisme est configuré à divers endroits pour diminuer le temps nécessaire à certains jobs très longs lors du run initial ou de potentiel rerun (si flaky ou échec circonstanciel).
@@ -60,7 +76,7 @@ Les trois autres exécuteurs ne la répètent pas. La phase
 
 #### 4. Données de test communes aux exécuteurs
 
-**Décision** : Le job `prepare-test-data` réinitialise MySQL et Elasticsearch une seule fois par workflow. Il transmet par le workspace CircleCI le dump MySQL, l'instantané Elasticsearch, le pipeline d'ingestion `geoip` et les médias créés par les fixtures. Les jobs Cypress, GraphQL API et PHPUnit restaurent ces données dans leur propre stack Docker, puis reconstruisent le cache Symfony `test` pour générer les proxies Doctrine dans le conteneur. Les feature flags Redis sont réinitialisés dans chaque stack ; Cypress continue à restaurer les données avant chaque suite.
+**Décision** : Le job `prepare-test-data` réinitialise MySQL et Elasticsearch une seule fois par workflow. Il transmet par le workspace CircleCI le dump MySQL, l'instantané Elasticsearch, le pipeline d'ingestion `geoip`, les médias créés par les fixtures et le cache Symfony `test` sans debug, avec ses proxies Doctrine générés dans le conteneur. Les jobs Cypress, GraphQL API et PHPUnit restaurent ces données et ce cache dans leur propre stack Docker. Les feature flags Redis sont réinitialisés dans chaque stack ; Cypress continue à restaurer les données avant chaque suite.
 
 **Raison** : Éviter de rejouer les migrations, les fixtures et l'indexation dans chaque exécuteur tout en conservant leur isolation. Les données sont recréées à chaque workflow car certaines fixtures dépendent de la date. Un artefact manquant ou une restauration incomplète fait échouer le job.
 

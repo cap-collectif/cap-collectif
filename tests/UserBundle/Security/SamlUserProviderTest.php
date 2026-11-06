@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Capco\Tests\UserBundle\Security;
 
+use Capco\Tests\SamlTestKernel;
 use Capco\Tests\SamlWebTestCase;
 use Capco\UserBundle\Entity\User;
 
@@ -20,6 +21,12 @@ use Capco\UserBundle\Entity\User;
  */
 final class SamlUserProviderTest extends SamlWebTestCase
 {
+    public static function featureFlagOverrides(): array
+    {
+        // Error page content is rendered by Twig; React rendering belongs to browser tests.
+        return array_replace(parent::featureFlagOverrides(), ['server_side_rendering' => false]);
+    }
+
     /** @dataProvider accountStates */
     public function testLoginCreatesOrReusesAnAccountAndPreservesItsLocalProfile(string $state): void
     {
@@ -166,18 +173,23 @@ final class SamlUserProviderTest extends SamlWebTestCase
     }
 
     /** @dataProvider identityProviders */
-    public function testCharacterizationGapMissingIdentityAttributeReturnsServerError(string $idp, string $attribute): void
+    public function testCharacterizationGapMissingIdentityAttributeShowsPublicErrorPage(string $idp, string $attribute): void
     {
         $account = $this->account();
         $id = $account->getId();
         $password = $account->getPassword();
         $this->configureSaml(['unrelated-attribute' => [$account->getEmail()]], $idp);
 
-        $this->browser->request('GET', '/login-saml');
+        $crawler = $this->browser->request('GET', '/login-saml');
 
         self::assertSame(500, $this->browser->getResponse()->getStatusCode());
-        self::assertStringContainsString($attribute, (string) $this->browser->getResponse()->getContent());
-        self::assertStringContainsString('was not found', (string) $this->browser->getResponse()->getContent());
+        $translator = self::getContainer()->get('translator');
+        $locale = $this->browser->getRequest()->getLocale();
+        self::assertSelectorTextSame('h1', $translator->trans('error-500-title', ['code' => 500], 'CapcoAppBundle', $locale));
+        self::assertSelectorTextContains('main a[href="/"]', $translator->trans('error.to_homepage', [], 'CapcoAppBundle', $locale));
+        self::assertSelectorTextContains('main a[href="/contact"]', $translator->trans('error.report', [], 'CapcoAppBundle', $locale));
+        self::assertStringNotContainsString(sprintf("Attribute '%s' was not found", $attribute), $crawler->text());
+        self::assertStringNotContainsString('MissingSamlAuthAttributeException', (string) $this->browser->getResponse()->getContent());
 
         $this->assertViewer(false);
         $account = $this->reload($id);
@@ -202,5 +214,14 @@ final class SamlUserProviderTest extends SamlWebTestCase
         yield 'Clermont' => ['clermont', 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
 
         yield 'Sorbonne' => ['sorbonne', 'mail'];
+    }
+
+    /** @param array<string, mixed> $options */
+    protected static function createKernel(array $options = []): SamlTestKernel
+    {
+        // Exercise the public error page even when the local environment enables debug.
+        $options['debug'] = false;
+
+        return parent::createKernel($options);
     }
 }
