@@ -12,11 +12,20 @@ use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
 
 class SitemapsController extends Controller
 {
+    /**
+     * @Route("/sitemap", name="app_sitemap_html", options={"i18n" = true})
+     */
+    public function htmlSitemapAction(): Response
+    {
+        return new Response('', Response::HTTP_I_AM_A_TEAPOT);
+    }
+
     /**
      * @Route("/sitemap.{_format}", name="app_sitemap", requirements={"_format" = "xml"}, options={"i18n" = false})
      *

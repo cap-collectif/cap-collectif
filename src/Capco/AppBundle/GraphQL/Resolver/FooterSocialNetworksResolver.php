@@ -3,13 +3,11 @@
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Cache\RedisCache;
-use Capco\AppBundle\Entity\MenuItem;
 use Capco\AppBundle\Entity\SiteParameter;
 use Capco\AppBundle\GraphQL\Resolver\Locale\GraphQLLocaleResolver;
-use Capco\AppBundle\Manager\MenuItemResolver;
 use Capco\AppBundle\Repository\FooterSocialNetworkRepository;
-use Capco\AppBundle\Repository\MenuItemRepository;
 use Capco\AppBundle\Repository\SiteParameterRepository;
+use Capco\AppBundle\Service\FooterLinksProvider;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -19,13 +17,12 @@ class FooterSocialNetworksResolver
     final public const CACHE_KEY_SOCIAL_NETWORKS = 'getFooterSocialNetworks';
 
     public function __construct(
-        protected MenuItemRepository $menuItemRepository,
         protected FooterSocialNetworkRepository $footerSocialNetworkRepository,
         protected SiteParameterRepository $siteParameterRepository,
         protected RedisCache $cache,
-        protected MenuItemResolver $menuItemResolver,
         protected RequestStack $requestStack,
-        private readonly GraphQLLocaleResolver $localeResolver
+        private readonly GraphQLLocaleResolver $localeResolver,
+        private readonly FooterLinksProvider $footerLinksProvider,
     ) {}
 
     /**
@@ -37,16 +34,8 @@ class FooterSocialNetworksResolver
         if (!$request) {
             return [];
         }
-        $locale = $this->resolveLocale($request);
-        $pages = $this->menuItemRepository->getPublishedFooterPages();
 
-        $links = array_map(fn (MenuItem $menuItem) => [
-            'name' => $this->resolveMenuItemTitle($menuItem, $locale),
-            'url' => $this->menuItemResolver->getMenuUrl($menuItem, $request),
-            'isExternalLink' => $menuItem->isExternalLink(),
-        ], $pages);
-
-        return array_values(array_filter($links, fn (array $link): bool => '' !== trim((string) $link['name'])));
+        return $this->footerLinksProvider->getLinks($request, $this->resolveLocale($request));
     }
 
     public static function generateFooterLegalCacheKey(string $locale): string
@@ -109,22 +98,5 @@ class FooterSocialNetworksResolver
     private function resolveLocale(Request $request): string
     {
         return $this->localeResolver->resolveFromRequest($request);
-    }
-
-    private function resolveMenuItemTitle(MenuItem $menuItem, string $locale): string
-    {
-        $title = $menuItem->getTitle($locale, true);
-        if (\is_string($title) && '' !== trim($title)) {
-            return $title;
-        }
-
-        if ($menuItem->getPage()) {
-            $pageTitle = $menuItem->getPage()->getTitle($locale);
-            if (\is_string($pageTitle) && '' !== trim($pageTitle)) {
-                return $pageTitle;
-            }
-        }
-
-        return '';
     }
 }

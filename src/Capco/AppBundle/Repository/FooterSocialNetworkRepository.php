@@ -15,7 +15,7 @@ class FooterSocialNetworkRepository extends EntityRepository
         return 'FooterSocialNetworkRepository_getEnabled_resultcache_';
     }
 
-    public function getEnabled(): array
+    public function getEnabled(bool $useCache = true): array
     {
         $qb = $this->createQueryBuilder('s')
             ->select('s.title, s.link, s.style')
@@ -24,12 +24,12 @@ class FooterSocialNetworkRepository extends EntityRepository
             ->setParameter('enabled', true)
         ;
 
-        return $qb
-            ->getQuery()
-            ->useQueryCache(true)
-            ->enableResultCache(60, self::getEnabledCacheKey())
-            ->getArrayResult()
-        ;
+        $query = $qb->getQuery()->useQueryCache(true);
+        if ($useCache) {
+            $query->enableResultCache(60, self::getEnabledCacheKey());
+        }
+
+        return $query->getArrayResult();
     }
 
     public function countAll(): int

@@ -949,6 +949,10 @@ InternalQuery:
                 type: '[InternalMenuItem!]!'
                 description: 'The navbar menu items.'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\MenuItemsResolver", args)'
+            sitemap:
+                type: 'Sitemap!'
+                description: 'The public site map.'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\SitemapResolver", getUser())'
             arguments:
                 type: 'ArgumentConnection!'
                 description: 'List of arguments'

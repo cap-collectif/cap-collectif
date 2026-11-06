@@ -25,11 +25,18 @@ const FooterQuery = /* GraphQL */ `
 `
 
 /**
- * @jest-status non-compliant
- * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ * @jest-status compliant
+ * @jest-reason Checks the sitemap footer-link contract explicitly and keeps the complete footer response snapshot.
  */
 describe('Internal|Query footer', () => {
   it('Get Footer data', async () => {
-    await expect(graphql(FooterQuery, {}, 'internal')).resolves.toMatchSnapshot()
+    const response = await graphql(FooterQuery, {}, 'internal')
+
+    const sitemapLinks = response.footer.links.filter(({ url }) =>
+      new URL(url, 'http://localhost').pathname.endsWith('/sitemap'),
+    )
+    expect(sitemapLinks).toHaveLength(1)
+    expect(sitemapLinks[0].name).toBe('Plan du site')
+    expect(response).toMatchSnapshot()
   })
 })

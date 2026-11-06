@@ -16206,6 +16206,9 @@ type Query {
   """The navbar menu items."""
   menuItems: [MenuItem!]!
 
+  """The public site map."""
+  sitemap: Sitemap!
+
   """List of arguments"""
   arguments(
     """
@@ -19337,6 +19340,43 @@ enum SiteSettingsStatus {
 
   """The site redirects correctly to the custom domain."""
   ACTIVE
+}
+
+type Sitemap {
+  projects: [SitemapProject!]!
+  headerItems: [SitemapMenuItem!]!
+  footerLinks: [FooterLinks!]!
+  footerLegals: FooterLegals!
+  homeUrl: String!
+  sitemapUrl: String!
+  legalUrls: SitemapLegalUrls!
+  linkColor: String
+  linkHoverColor: String
+}
+
+type SitemapLegalUrls {
+  cookies: String!
+  privacy: String!
+  legal: String!
+}
+
+type SitemapMenuItem {
+  title: String
+  link: String!
+  isExternalLink: Boolean!
+  hasEnabledFeature: Boolean!
+  children: [SitemapMenuItem!]
+}
+
+type SitemapProject {
+  title: String!
+  url: String!
+  steps: [SitemapStep!]!
+}
+
+type SitemapStep {
+  title: String!
+  url: String!
 }
 
 """Available sluggable entities."""

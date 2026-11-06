@@ -6,10 +6,9 @@ use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Entity\MenuItem;
 use Capco\AppBundle\Entity\SiteParameter;
 use Capco\AppBundle\Enum\TranslationLocale;
-use Capco\AppBundle\Manager\MenuItemResolver;
 use Capco\AppBundle\Repository\FooterSocialNetworkRepository;
-use Capco\AppBundle\Repository\MenuItemRepository;
 use Capco\AppBundle\Repository\SiteParameterRepository;
+use Capco\AppBundle\Service\FooterLinksProvider;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\RuntimeExtensionInterface;
@@ -19,26 +18,21 @@ class FooterRuntime implements RuntimeExtensionInterface
     final public const CACHE_KEY_LEGALS = 'getLegalsPages';
     final public const CACHE_KEY_SOCIAL_NETWORKS = 'getFooterSocialNetworks';
 
-    protected $menuItemRepository;
     protected $footerSocialNetworkRepository;
     protected $siteParameterRepository;
     protected $cache;
-    protected $menuItemResolver;
     protected $requestStack;
 
     public function __construct(
-        MenuItemRepository $menuItemRepository,
         FooterSocialNetworkRepository $footerSocialNetworkRepository,
         SiteParameterRepository $siteParameterRepository,
         RedisCache $cache,
-        MenuItemResolver $menuItemResolver,
-        RequestStack $requestStack
+        RequestStack $requestStack,
+        private readonly FooterLinksProvider $footerLinksProvider,
     ) {
-        $this->menuItemRepository = $menuItemRepository;
         $this->footerSocialNetworkRepository = $footerSocialNetworkRepository;
         $this->siteParameterRepository = $siteParameterRepository;
         $this->cache = $cache;
-        $this->menuItemResolver = $menuItemResolver;
         $this->requestStack = $requestStack;
     }
 
@@ -48,16 +42,8 @@ class FooterRuntime implements RuntimeExtensionInterface
         if (!$request) {
             return [];
         }
-        $locale = $this->resolveLocale($request);
-        $pages = $this->menuItemRepository->getPublishedFooterPages();
 
-        $links = array_map(fn (MenuItem $menuItem) => [
-            'name' => $this->resolveMenuItemTitle($menuItem, $locale),
-            'url' => $this->menuItemResolver->getMenuUrl($menuItem, $request),
-            'isExternalLink' => $menuItem->isExternalLink(),
-        ], $pages);
-
-        return array_values(array_filter($links, fn (array $link): bool => '' !== trim((string) $link['name'])));
+        return $this->footerLinksProvider->getLinks($request, $this->resolveLocale($request));
     }
 
     public function isNextLinkEnabled(array $links, int $index): bool
@@ -73,15 +59,15 @@ class FooterRuntime implements RuntimeExtensionInterface
         return self::CACHE_KEY_LEGALS . '-' . $locale;
     }
 
-    public function getLegalsPages()
+    public function getLegalsPages(bool $useCache = true)
     {
         $request = $this->requestStack->getCurrentRequest();
 
-        $cachedItem = $this->cache->getItem(
+        $cachedItem = $useCache ? $this->cache->getItem(
             self::generateFooterLegalCacheKey($request ? $request->getLocale() : '')
-        );
+        ) : null;
 
-        if (!$cachedItem->isHit()) {
+        if (!$cachedItem || !$cachedItem->isHit()) {
             /** @var SiteParameter $cookies */
             $cookies = $this->siteParameterRepository->findOneByKeyname('cookies-list');
             $legal = $this->siteParameterRepository->findOneByKeyname('legal-mentions');
@@ -91,8 +77,12 @@ class FooterRuntime implements RuntimeExtensionInterface
                 'legal' => $legal ? $legal->getIsEnabled() : false,
                 'privacy' => $privacy ? $privacy->getIsEnabled() : false,
             ];
-            $cachedItem->set($data)->expiresAfter(RedisCache::ONE_MINUTE);
-            $this->cache->save($cachedItem);
+            if ($cachedItem) {
+                $cachedItem->set($data)->expiresAfter(RedisCache::ONE_MINUTE);
+                $this->cache->save($cachedItem);
+            }
+
+            return $data;
         }
 
         return $cachedItem->get();
@@ -103,17 +93,21 @@ class FooterRuntime implements RuntimeExtensionInterface
         return self::CACHE_KEY_SOCIAL_NETWORKS . '-' . $locale;
     }
 
-    public function getFooterSocialNetworks(): array
+    public function getFooterSocialNetworks(bool $useCache = true): array
     {
         $request = $this->requestStack->getCurrentRequest();
-        $cachedItem = $this->cache->getItem(
+        $cachedItem = $useCache ? $this->cache->getItem(
             self::generateFooterSocialNetworksCacheKey($request ? $request->getLocale() : '')
-        );
+        ) : null;
 
-        if (!$cachedItem->isHit()) {
-            $data = $this->footerSocialNetworkRepository->getEnabled();
-            $cachedItem->set($data)->expiresAfter(RedisCache::ONE_MINUTE);
-            $this->cache->save($cachedItem);
+        if (!$cachedItem || !$cachedItem->isHit()) {
+            $data = $this->footerSocialNetworkRepository->getEnabled($useCache);
+            if ($cachedItem) {
+                $cachedItem->set($data)->expiresAfter(RedisCache::ONE_MINUTE);
+                $this->cache->save($cachedItem);
+            }
+
+            return $data;
         }
 
         return $cachedItem->get();
@@ -132,22 +126,5 @@ class FooterRuntime implements RuntimeExtensionInterface
         }
 
         return $request->getLocale();
-    }
-
-    private function resolveMenuItemTitle(MenuItem $menuItem, string $locale): string
-    {
-        $title = $menuItem->getTitle($locale, true);
-        if (\is_string($title) && '' !== trim($title)) {
-            return $title;
-        }
-
-        if ($menuItem->getPage()) {
-            $pageTitle = $menuItem->getPage()->getTitle($locale);
-            if (\is_string($pageTitle) && '' !== trim($pageTitle)) {
-                return $pageTitle;
-            }
-        }
-
-        return '';
     }
 }

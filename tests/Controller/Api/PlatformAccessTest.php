@@ -49,6 +49,29 @@ final class PlatformAccessTest extends IdentityWebTestCase
         self::assertTrue($this->browser->getResponse()->isRedirection());
     }
 
+    public function testDeniedUserCannotReadTheSitemapThroughGraphql(): void
+    {
+        $this->browser->loginUser($this->account());
+
+        $response = $this->graphResponse('{ sitemap { homeUrl projects { title } } }');
+
+        self::assertNotEmpty($response['errors'] ?? []);
+        self::assertSame(['sitemap'], $response['errors'][0]['path']);
+        self::assertNull($response['data'] ?? null);
+    }
+
+    public function testAuthorizedUserCanReadTheSitemapThroughGraphql(): void
+    {
+        $user = $this->account();
+        $user->addRole('ROLE_SHIELD_AUTHORIZED_USER');
+        $this->em->flush();
+        $this->browser->loginUser($user);
+
+        $sitemap = $this->graphql('{ sitemap { homeUrl } }')['sitemap'];
+
+        self::assertNotEmpty($sitemap['homeUrl']);
+    }
+
     /** @dataProvider allowedRoles */
     public function testAuthorizedUsersPassTheShield(string $role): void
     {

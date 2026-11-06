@@ -20,6 +20,10 @@ Object {
         "name": "Développeurs",
         "url": "/developer?_locale=fr-FR",
       },
+      Object {
+        "name": "Plan du site",
+        "url": "/sitemap",
+      },
     ],
     "socialNetworks": Array [
       Object {

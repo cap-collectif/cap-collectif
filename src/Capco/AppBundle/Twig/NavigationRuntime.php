@@ -15,11 +15,12 @@ class NavigationRuntime implements RuntimeExtensionInterface
         $this->menuResolver = $menuResolver;
     }
 
-    public function getHeaders($currentUrl = null): array
+    public function getHeaders($currentUrl = null, bool $useCache = true): array
     {
         return $this->menuResolver->getEnabledMenuItemsWithChildren(
             MenuItem::TYPE_HEADER,
-            $currentUrl
+            $currentUrl,
+            $useCache
         );
     }
 }

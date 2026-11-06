@@ -1,0 +1,13 @@
+Sitemap:
+    type: object
+    config:
+        fields:
+            projects: { type: '[SitemapProject!]!' }
+            headerItems: { type: '[SitemapMenuItem!]!' }
+            footerLinks: { type: '[FooterLinks!]!' }
+            footerLegals: { type: 'FooterLegals!' }
+            homeUrl: { type: 'String!' }
+            sitemapUrl: { type: 'String!' }
+            legalUrls: { type: 'SitemapLegalUrls!' }
+            linkColor: { type: 'String' }
+            linkHoverColor: { type: 'String' }

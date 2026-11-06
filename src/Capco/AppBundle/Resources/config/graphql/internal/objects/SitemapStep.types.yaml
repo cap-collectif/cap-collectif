@@ -1,0 +1,6 @@
+SitemapStep:
+    type: object
+    config:
+        fields:
+            title: { type: 'String!' }
+            url: { type: 'String!' }

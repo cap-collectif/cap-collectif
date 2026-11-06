@@ -1,0 +1,9 @@
+SitemapMenuItem:
+    type: object
+    config:
+        fields:
+            title: { type: 'String' }
+            link: { type: 'String!' }
+            isExternalLink: { type: 'Boolean!' }
+            hasEnabledFeature: { type: 'Boolean!' }
+            children: { type: '[SitemapMenuItem!]' }

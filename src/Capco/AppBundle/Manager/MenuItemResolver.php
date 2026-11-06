@@ -31,23 +31,23 @@ class MenuItemResolver
         $this->requestStack = $requestStack;
     }
 
-    public function getEnabledMenuItemsWithChildren($menu, $currentUrl = null): array
+    public function getEnabledMenuItemsWithChildren($menu, $currentUrl = null, bool $useCache = true): array
     {
         if (!$menu) {
             return [];
         }
 
         $request = $this->requestStack->getCurrentRequest();
-        $cachedItem = $this->cache->getItem(
+        $cachedItem = $useCache ? $this->cache->getItem(
             self::MENU_CACHE_KEY
                 . '-'
                 . $menu
                 . '-'
                 . preg_replace('/[^A-Za-z0-9\-]/', '', (string) $currentUrl)
                 . ($request ? $request->getLocale() : '')
-        );
+        ) : null;
 
-        if (!$cachedItem->isHit()) {
+        if (!$cachedItem || !$cachedItem->isHit()) {
             $parents = $this->repository->getParentItems($menu);
             $children = $this->repository->getChildItems($menu);
             $links = [];
@@ -62,6 +62,7 @@ class MenuItemResolver
                                 'id' => $child->getId(),
                                 'title' => $child->getTitle(),
                                 'link' => $link,
+                                'isExternalLink' => $child->isExternalLink(),
                                 'hasEnabledFeature' => $this->manager->containsEnabledFeature(
                                     $child->getAssociatedFeatures()
                                 ),
@@ -74,6 +75,7 @@ class MenuItemResolver
                         'id' => $parent->getId(),
                         'title' => $parent->getTitle(),
                         'link' => $link,
+                        'isExternalLink' => $parent->isExternalLink(),
                         'hasEnabledFeature' => $this->manager->containsEnabledFeature(
                             $parent->getAssociatedFeatures()
                         ),
@@ -83,8 +85,12 @@ class MenuItemResolver
                 }
             }
 
-            $cachedItem->set($links)->expiresAfter(RedisCache::ONE_MINUTE);
-            $this->cache->save($cachedItem);
+            if ($cachedItem) {
+                $cachedItem->set($links)->expiresAfter(RedisCache::ONE_MINUTE);
+                $this->cache->save($cachedItem);
+            }
+
+            return $links;
         }
 
         return $cachedItem->get();

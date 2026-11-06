@@ -24,6 +24,33 @@ class ProjectRepository extends EntityRepository implements SluggableRepositoryI
 {
     use ProjectVisibilityTrait;
 
+    /**
+     * @return array<Project>
+     */
+    public function findPublicNonArchivedWithSteps(?string $locale = null): array
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->addSelect('pas', 'step')
+            ->innerJoin('p.steps', 'pas')
+            ->innerJoin('pas.step', 'step')
+            ->andWhere('p.visibility = :visibility')
+            ->andWhere('p.archived = :archived')
+            ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
+            ->setParameter('archived', false)
+            ->orderBy('p.publishedAt', 'DESC')
+            ->addOrderBy('pas.position', 'ASC')
+        ;
+
+        if (null !== $locale) {
+            $qb->leftJoin('p.locale', 'locale')
+                ->andWhere('p.locale IS NULL OR locale.code = :locale')
+                ->setParameter('locale', $locale)
+            ;
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function findAllIdsWithSlugs(): array
     {
         $qb = $this->createQueryBuilder('p');

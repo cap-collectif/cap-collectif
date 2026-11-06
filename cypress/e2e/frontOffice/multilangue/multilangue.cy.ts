@@ -20,8 +20,10 @@ describe('Multilangue', () => {
 
   it('throws 404 if user visits the english page while multilangue feature is not activated', () => {
     cy.setFeatureFlags({ multilangue: false })
-    cy.visit('/en/')
-    cy.contains('error.404.title').should('be.visible')
+    cy.request({ url: '/en/', failOnStatusCode: false }).its('status').should('eq', 404)
+    cy.visit('/en/', { failOnStatusCode: false })
+    cy.get('.error-page').should('be.visible')
+    cy.get('.error-page__back-home').should('be.visible')
   })
 
   // TODO - since refactor to nextjs, the behavior has changed and the test should have been failing all along

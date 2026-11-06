@@ -1,0 +1,7 @@
+SitemapLegalUrls:
+    type: object
+    config:
+        fields:
+            cookies: { type: 'String!' }
+            privacy: { type: 'String!' }
+            legal: { type: 'String!' }

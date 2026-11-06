@@ -25,6 +25,7 @@ app_email: '/email/{messageType}'
 app_event: /events
 app_event_show: '/events/{slug}'
 app_homepage: /
+app_sitemap_html: /sitemap
 app_legal: /legal
 app_members: '/members/{page}'
 app_members_type: '/members/{userType}/{page}'
