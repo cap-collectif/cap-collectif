@@ -280,20 +280,41 @@ aux labels présents sur une pull request du même repository :
   exécuter les autres jobs de validation ; ce profil est disponible pour les branches de pull request.
 - `🔬 In test` : workflow `qa`, qui construit et déploie l’image sur l’instance QA.
 
-Le workflow est déclenché dans les cas suivants :
+La sélection applique les règles suivantes :
 
-- à l'ajout d'un label, le workflow correspondant est déclenché et les workflows déjà actifs
-  correspondant aux autres labels sont conservés ;
-- au retrait d'un label, le workflow correspondant est annulé ;
-- à la synchronisation d'une pull request, les workflows correspondant à tous les labels
-  présents sont annulés puis relancés, y compris le workflow QA pour `🔬 In test` ;
-- manuellement avec `workflow_dispatch`, en choisissant un profil à exécuter (`static`, `tests`,
-  `full` ou `build-prod`).
+- `Workflow full` remplace `Workflow static` et `Workflow tests` lorsqu'ils sont présents
+  ensemble ; les labels restent en place. Sans `full`, `static` et `tests` peuvent coexister.
+  `build-prod` et `qa` restent indépendants ;
+- un résultat est réutilisable pour la même branche, le même SHA complet, le même workflow et
+  les mêmes paramètres de pipeline, numéro de PR QA compris. Une exécution active est conservée,
+  et un dernier résultat réussi évite une nouvelle exécution. Un ancien succès ne masque pas
+  une tentative plus récente échouée ou annulée ;
+- un nouveau SHA, notamment après un rebase suivi d'un push, annule les workflows gérés encore
+  actifs sur les anciennes révisions et lance les profils demandés sur la nouvelle révision.
+  Un événement répété sur le même SHA ne relance pas ces profils ;
+- ajouter un label lance seulement les profils manquants. Une exécution échouée ou annulée peut
+  repartir lorsque son profil devient nouvellement demandé ; un changement d'un autre label
+  ne la relance pas. Rejouer le même événement ne relance pas l'échec produit par cet événement ;
+- retirer un label annule seulement les workflows actifs qui cessent d'être demandés. Retirer
+  `full` rend à nouveau applicables les éventuels labels `static` et `tests`, avec réutilisation
+  de leurs résultats réussis sur le même SHA ;
+- remettre `🔬 In test` demande un redéploiement de la QA, même sur le même SHA, pour réactiver
+  une instance mise en pause. Rejouer cet événement réutilise la QA déjà lancée depuis l'ajout ;
+- un `workflow_dispatch` force uniquement le profil choisi (`static`, `tests`, `full` ou
+  `build-prod`), même s'il a déjà réussi, et remplace uniquement ses exécutions actives.
 
-Les événements du même pull request sont traités séquentiellement avec une file d'attente GitHub.
-Chaque exécution recharge les labels courants et les exécutions supersédées sont ignorées afin
-qu'un ajout ou retrait rapide de plusieurs labels ne déclenche pas de workflows obsolètes ou en
-double.
+Les événements et demandes manuelles d'une même branche sont traités séquentiellement par la
+file d'attente GitHub, y compris la mise en pause QA. Le déclencheur recharge les labels et le
+SHA courants et vérifie qu'ils n'ont pas changé avant les mutations. Il attend qu'un pipeline
+CircleCI en création expose ses workflows avant de décider de lancer un autre pipeline. Si des
+doublons sont déjà actifs, il conserve le plus ancien et annule les autres. Les workflows de
+`preprod`, `deploy` et les workflows non gérés ne sont pas annulés par ce mécanisme.
+
+La réconciliation est implémentée dans `.circleci/trigger-ci-profiles.cjs`, appelée par le
+point d'entrée shell existant, avec la version Node de `.nvmrc` et sans installation de
+paquets. Le checkout de `pull_request_target` reste celui de la branche de base.
+Les tests `node --test .circleci/trigger-ci-profiles.test.cjs` simulent les API GitHub et
+CircleCI ; ils s'exécutent aussi dans `check-cypress-spec-coverage`.
 
 L'ouverture ou la réouverture d'une pull request ne déclenche aucun workflow. Si aucun label géré
 n'est présent, aucun workflow n'est lancé. Les événements de pull request sont limités aux PR du
@@ -316,11 +337,16 @@ de labels et de synchronisation lorsqu'il porte le label `🔬 In test`.
 
 La mise en pause de l'instance QA est exécutée dans `Trigger CircleCI workflows`, après
 l'annulation réussie du workflow `qa` lors du retrait de `🔬 In test`, afin d'éviter une course
-entre CircleCI et la mise à jour du dépôt `cluster`.
+entre CircleCI et la mise à jour du dépôt `cluster`. La pause n'est autorisée que si le label
+reste absent de l'état courant de la PR.
 
 Les lectures et annulations de workflows CircleCI sont réessayées en cas d'erreur transitoire.
 Si une lecture ou une annulation échoue encore après les tentatives prévues, aucun nouveau workflow
 n'est déclenché et le job GitHub échoue afin d'éviter une exécution concurrente non maîtrisée.
+La création d'un pipeline n'est pas réessayée automatiquement après une réponse ambiguë :
+la réconciliation suivante recherche d'abord le pipeline éventuellement créé. L'API v2 résout
+la branche au moment du déclenchement ; si le SHA obtenu diffère du SHA demandé, les workflows
+actifs de ce pipeline sont annulés et le déclencheur échoue.
 
 ### Statut
 
