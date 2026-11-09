@@ -15,3 +15,13 @@ exercise_html_purifier:
                 URI.SafeIframeRegexp: "#^(https?:)?//([-\\w\\.]+)+(:\\d+)?(/([\\w/_\\.]*(\\?\\S+)?)?)?#"
                 CSS.AllowTricky: true
                 CSS.Trusted: true
+            # Keep the markup required by Instagram and TikTok embed scripts.
+            attributes:
+                blockquote:
+                    data-instgrm-permalink: URI
+                    data-instgrm-version: Number
+                    data-instgrm-captioned: Text
+                    data-video-id: Text
+                    data-embed-from: Text
+            elements:
+                section: ['Block', 'Flow', 'Common']
