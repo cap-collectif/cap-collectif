@@ -46,6 +46,14 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
    des données personnelles) et l'appeler depuis Admin Next avec `downloadCSV()` (`@utils/download-csv`). Voir
    `NewsletterSubscriptionExportController.php`. `downloadCSV()` lit le nom de fichier par un simple
    `split('=')` sur `Content-Disposition` : garder un nom sans caractère qui forcerait des guillemets.
+   **Si l'utilisatrice veut le même fichier que l'existant**, reproduire l'exporteur Sonata : colonnes = champs
+   mappés de l'entité dans l'ordre Doctrine (`ModelManager::getExportFields()`, sauf si l'Admin surcharge
+   `configureExportFields()`), en-tête = chaque nom de champ passé dans `trans($champ, [], 'CapcoAppBundle')`
+   (seuls quelques-uns ont une traduction, ex: `title` → « Intitulé »), dates au format `r`, booléens bruts
+   (`fputcsv` écrit `1` ou une chaîne vide), séparateur `;`, sans BOM, nom `export_<entité>_Y_m_d_H_i_s.csv`. Le
+   fichier suit les filtres de la liste (le bouton Sonata les transmet) et la restriction de `createQuery()` :
+   passer la recherche en paramètre. Vérifier avec `cmp` contre `/admin/capco/app/<entité>/export?format=csv`
+   avec la même session. Voir `OpinionAdminExportController.php`.
    L'export générique Sonata (`/admin/capco/app/<entité>/export`) n'est appelé que depuis la liste Sonata : en mode
    « avec feature flag », ne rien supprimer, il disparaîtra avec la classe Admin lors de la PR de nettoyage.
    `getFeatures()` dans la classe Admin ne protège pas la page : `FeaturesCategoryResolver::isAdminEnabled()`
@@ -58,6 +66,12 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
    `cover` (image réseaux sociaux) mais la page publique Next.js lisait `media` depuis sa migration : l'image
    saisie n'avait plus d'effet. Signaler ce genre d'écart à l'utilisateurice avant de choisir le champ à
    éditer, plutôt que de reproduire un champ mort.
+   **Chercher aussi les règles portées par l'entité, invisibles dans la classe Admin** : contraintes de classe
+   (`@CapcoAssert\HasAuthor()` rend l'auteur d'une `Answer` obligatoire alors qu'`AnswerAdmin` ne le dit pas),
+   `Resources/config/validation.yml`, et listeners Doctrine qui calculent un champ à l'enregistrement (ex:
+   `Publishable\DoctrineListener::prePersist` publie une contribution créée : « Publié » en lecture seule dans
+   Sonata ne veut pas dire « jamais publié »). Valider l'entité avec le `ValidatorInterface` dans la mutation
+   reproduit les contraintes du formulaire Sonata.
 3. **Vérifier l'existant GraphQL** (`schema.internal.graphql` + `src/Capco/AppBundle/Resources/config/graphql/internal/`) :
    - Le type GraphQL existe-t-il déjà ? Est-il exposé en connection paginée (`XConnection`) ou en simple liste (`[X!]!`) ?
    - Les mutations `create`/`update`/`delete` existent-elles déjà ? Si non, il faudra les créer en suivant le
@@ -115,6 +129,14 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
      publique et l'appeler dans `viewerCanSee` (voir `EmailingCampaignVoter::viewerCanView`) plutôt que de la
      dupliquer, puis couvrir le refus par un test Jest API (`node` à `null` pour un viewer non autorisé). La page
      affiche alors son message « page introuvable » pour un objet inconnu comme pour un objet interdit.
+   - **Liste Sonata filtrée par `createQuery()`** dans la classe Admin (ex: `OpinionAdmin` : un super admin voit
+     tout, un autre admin seulement les contributions des projets visibles par les administrateurs ou de ses projets
+     privés) : reproduire ce filtre dans le repository de la query de liste et de l'export, et le vérifier avec deux
+     comptes (un test Jest API par viewer). Pour une condition sur une relation multiple (auteurs du projet),
+     utiliser un `EXISTS` plutôt qu'une jointure, pour que la limite SQL compte des entités et non des lignes. Les
+     actions `edit`/`delete` du contrôleur peuvent être moins restreintes que la liste (ex: `canDisplay()` vrai pour
+     tout admin) : reproduire chaque règle telle quelle, sans aligner l'une sur l'autre. Voir
+     `OpinionRepository::getAdminQueryBuilder()`.
    - L'endroit naturel pour une vraie restriction **côté GraphQL** (utile si la query/mutation n'est pas déjà
      couverte par le point précédent, ou si on veut protéger l'API elle-même) est le champ concerné
      (`access:` dans les yaml, ex: `access: "@=hasRole('ROLE_ADMIN')"` sur une mutation). **Mais avant
@@ -615,6 +637,16 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
 - **Couleur des `ButtonQuickAction`** : le bouton d'édition (`icon={CapUIIcon.Pencil}`) doit avoir
   `variantColor="primary"`, le bouton de suppression (`icon={CapUIIcon.Trash}`) doit avoir
   `variantColor="danger"`.
+- **Colonne « ID » d'une liste Sonata** : proposer de ne pas la reprendre. En production c'est un UUID illisible ;
+  sans le filtre par ID de Sonata, il ne permet plus de retrouver un élément ; il figure déjà dans l'URL de la page
+  d'édition et, le cas échéant, dans l'export. Retirée sur la liste des propositions de consultation.
+- **Liste à beaucoup de colonnes (une dizaine ou plus) qui déborde de la page** : `sx={{ tableLayout: 'fixed' }}` sur
+  la `Table`, une largeur en pourcentage sur chaque `Table.Th` (total 100 %, la table ne peut plus dépasser), et dans
+  le même `sx` `'.cap-table__th, .cap-table__td': { px: 'xs', overflowWrap: 'anywhere' }` : le padding de 16 px des
+  cellules CapUI coûte sinon plus de 400 px sur 13 colonnes, et les mots longs se coupent au lieu de pousser la
+  colonne. Un `Tag` prend `maxWidth="100%"` et son texte dans `Tag.Label` (ellipsis, texte complet au survol) ; la
+  colonne des `ButtonQuickAction` un `Flex wrap="wrap"`. Calibrer les pourcentages sur un écran de 1 440 px (zone
+  utile de 1 104 px) : en-têtes d'un seul mot et dates sans coupure. Voir `Opinions/OpinionList.tsx`.
 - **Texte d'aide en gris** (ex: texte explicatif au-dessus d'une liste, comme `multi-language-help-text` dans
   `Locales/LocalesList.tsx`) : `<Text color="gray.600">`. `gray.500` (couleur de la mention « Facultatif » de
   beaucoup de formulaires existants) n'a pas un contraste suffisant sur fond blanc : ne pas la reprendre pour du
@@ -678,6 +710,14 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
   **Accordéon « Avancée »** : le titre utilise la clé `global.advanced.text` (et non `admin.fields.page.advanced`).
   Les champs de cet accordéon n'ont pas la mention « Facultatif » (`global.optional`), et « Code personnalisé » /
   « Méta-description » n'ont pas de `FormGuideline` : superflus, ne pas les ajouter.
+- **Création précédée d'un choix (type, catégorie…) et formulaire migré avec la liste** (ex: propositions de
+  consultation, `/admin/capco/app/opinion/list` → `/admin-next/opinions`) : le bouton de création ouvre une modale
+  de liens vers `/admin-next/<entité>?<choix>Id=…` (contenu chargé dans le render-prop de `Modal`, donc à
+  l'ouverture seulement), et la page d'édition sert aussi la création selon le paramètre présent. Pendant le
+  rollout, son garde calcule l'URL Sonata de repli d'après ce paramètre (édition, création ou liste) : voir
+  `withOpinionAdminPageRequired` dans `components/BackOffice/Opinions/utils.ts`. Une liste d'au plus quelques
+  centaines d'éléments sans pagination côté API (ex: consultations) se charge avec un `first` élevé, nommé en
+  constante.
 - **Recherche remplaçant le bouton « Filtres » de Sonata** : le ou les champs recherchés dépendent du ticket
   (titre, email, nom…). Ne pas supposer : demander lequel s'applique si le ticket ne le dit pas.
 - **Page "wrapper" standard** : toute page admin-next suit le même squelette —
@@ -1785,7 +1825,9 @@ prop-drillé entre la liste et un ancêtre.
   expliquer pourquoi. Vu sur la page des rubriques de navigation.
 - **Navigateur headless : « The Json session is empty ! » dans les logs de `capco_nextjs_1` malgré une visite de
   `/`** : la partie JSON de la session (le `viewer`) n'était pas encore écrite. Visiter une deuxième page Symfony
-  (ex: `/admin/capco/app/page/list`) avec `waitUntil: 'networkidle'` avant d'ouvrir la page admin-next.
+  (ex: `/admin/capco/app/page/list`) avec `waitUntil: 'networkidle'` avant d'ouvrir la page admin-next. Le
+  symptôme reste intermittent : dans un script, boucler quelques fois (page admin-next, puis `/` et une liste
+  Sonata si l'URL obtenue n'est plus sous `/admin-next/`) plutôt que d'enchaîner les correctifs.
 - **`TextEditor` (Jodit) ne revalide pas le formulaire** : il écrit sa valeur avec `setValue(name, value)`,
   sans `shouldValidate`. Avec un schéma yup qui exige un contenu, `formState.isValid` reste donc à `false`
   et un bouton `disabled={!isValid}` ne s'active jamais, même contenu saisi. Appeler
@@ -1811,6 +1853,15 @@ prop-drillé entre la liste et un ancêtre.
   libellé. Construire la chaîne complète avant de la passer.
 - **`FormLabel` n'accepte qu'une chaîne en `label`** : pour ajouter une icône à côté (ex: e-mail confirmé, avec
   `Tooltip`), la passer en `children` du `FormLabel`.
+- **Ne pas ajouter de champ `id` à un type GraphQL dont les valeurs reprennent celles d'un autre type** (ex:
+  `AppendixType.id` et `SectionAppendixType.id` valent tous deux `1`, `2`…). Relay range les enregistrements par
+  `id`, quel que soit leur type : la page affiche « Expected __typename to be consistent » et peut mélanger les
+  données des deux types. Le compilateur Relay ajoute en plus tout champ `id: ID` aux sélections, y compris dans le
+  front legacy. Exposer plutôt l'identifiant sous un autre nom (ex: `Appendix.appendixTypeId`) et, côté fragment,
+  aliaser un `id` de type `String` (`appendixTypeId: id`) pour qu'il ne serve pas de clé.
+- **Navigateur headless et `TextEditor` (Jodit)** : la saisie dans un éditeur n'est transmise au formulaire que si
+  le focus le quitte par une vraie interaction. Après `page.keyboard.type(...)` dans `.jodit-wysiwyg`, cliquer sur
+  un autre champ (`locator.click()`) avant tout `page.fill()`, sinon le texte reste affiché mais est envoyé vide.
 - **Fragments `... on X` sur une interface ou une union qui demandent un même champ de types différents** (ex:
   `bodyText` est `String!` sur `Opinion`, `HTML!` sur `Version`, `String` nullable sur `Proposal`) : la validation
   GraphQL refuse deux champs de même clé de réponse dont le type ou la nullabilité diffère, même sur des types

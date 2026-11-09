@@ -1,0 +1,10 @@
+CreateOpinionAdminInput:
+    type: relay-mutation-input
+    inherits:
+        - OpinionAdminFields
+    config:
+        description: 'Input of createOpinionAdmin mutation.'
+        fields:
+            opinionTypeId:
+                type: 'ID!'
+                description: 'The id of the opinion type (section). The opinion is created in its consultation.'

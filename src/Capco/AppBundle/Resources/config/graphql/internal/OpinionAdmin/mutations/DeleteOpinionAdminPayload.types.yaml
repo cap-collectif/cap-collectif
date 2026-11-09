@@ -1,0 +1,10 @@
+DeleteOpinionAdminPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            deletedOpinionId:
+                type: 'ID'
+                description: 'The deleted opinion id.'
+            errorCode:
+                type: 'OpinionAdminErrorCode'
+                description: 'The available errors if any.'

@@ -1,0 +1,31 @@
+OpinionAdminFields:
+    decorator: true
+    config:
+        fields:
+            title:
+                type: 'String!'
+                description: 'The title of the opinion.'
+            body:
+                type: 'String!'
+                description: 'The content of the opinion.'
+            author:
+                type: 'ID!'
+                description: 'The id of the author of the opinion.'
+            position:
+                type: 'Int'
+                description: 'The position of the opinion in its section.'
+            appendices:
+                type: '[OpinionAdminAppendixInput!]'
+                description: 'The content of the appendices. Appendix types missing from the list are left unchanged.'
+            pinned:
+                type: 'Boolean'
+                description: 'Whether the opinion is pinned.'
+            trashedStatus:
+                type: 'TrashableStatus'
+                description: 'The trash status of the opinion, null when it is not in the trash.'
+            trashedReason:
+                type: 'String'
+                description: 'The reason why the opinion is in the trash.'
+            answer:
+                type: 'OpinionAdminAnswerInput'
+                description: 'The official answer of the opinion, null to remove it.'

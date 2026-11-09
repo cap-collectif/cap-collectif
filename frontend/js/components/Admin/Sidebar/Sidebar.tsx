@@ -190,7 +190,15 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                         : '/admin/capco/app/proposal/list'
                     }
                   />
-                  <SidebarLink text="admin.label.opinion" href="/admin/capco/app/opinion/list" />
+                  <SidebarLink
+                    text="admin.label.opinion"
+                    // Sonata route retained during the Admin Next migration rollout. Remove it with the migration feature flag.
+                    href={
+                      features.unstable__sonata_migration_to_admin_next
+                        ? '/admin-next/opinions'
+                        : '/admin/capco/app/opinion/list'
+                    }
+                  />
                   <SidebarLink text="admin.label.opinion_version" href="/admin/capco/app/opinionversion/list" />
                   <SidebarLink text="admin.label.argument" href="/admin/capco/app/argument/list" />
                   <SidebarLink text="admin.label.source" href="/admin/capco/app/source/list" />

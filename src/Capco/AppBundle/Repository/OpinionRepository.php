@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\ProjectAuthor;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
@@ -569,9 +570,92 @@ class OpinionRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * Back-office list, ordered by title like the former Sonata list.
+     *
+     * @return Opinion[]
+     */
+    public function getAdminPaginated(User $viewer, ?string $search, int $offset, int $limit): array
+    {
+        return $this->getAdminQueryBuilder($viewer, $search)
+            ->addSelect('author', 'opinionType')
+            ->leftJoin('o.author', 'author')
+            ->leftJoin('o.OpinionType', 'opinionType')
+            ->orderBy('o.title', 'ASC')
+            // Tie-breaker: several opinions can share the same title.
+            ->addOrderBy('o.id', 'ASC')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function countAdmin(User $viewer, ?string $search): int
+    {
+        return (int) $this->getAdminQueryBuilder($viewer, $search)
+            ->select('COUNT(o.id)')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+    /**
+     * @return iterable<Opinion>
+     */
+    public function iterateAdmin(User $viewer, ?string $search): iterable
+    {
+        return $this->getAdminQueryBuilder($viewer, $search)
+            ->orderBy('o.title', 'ASC')
+            ->addOrderBy('o.id', 'ASC')
+            ->getQuery()
+            ->toIterable()
+        ;
+    }
+
     protected function getIsEnabledQueryBuilder($alias = 'o'): QueryBuilder
     {
         return $this->createQueryBuilder($alias)->andWhere($alias . '.published = true');
+    }
+
+    /**
+     * Same scope as the former Sonata list (OpinionAdmin::createQuery()): a super admin sees every opinion, another
+     * administrator only the opinions of the projects visible to administrators, or of the private projects they author.
+     */
+    private function getAdminQueryBuilder(User $viewer, ?string $search): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('o');
+
+        if (null !== $search && '' !== trim($search)) {
+            $qb->andWhere('o.title LIKE :search')->setParameter('search', '%' . trim($search) . '%');
+        }
+
+        if ($viewer->isSuperAdmin()) {
+            return $qb;
+        }
+
+        // Only many-to-one joins and an EXISTS on the project authors: the SQL limit counts opinions, not joined rows.
+        return $qb
+            ->innerJoin('o.consultation', 'adminConsultation')
+            ->innerJoin('adminConsultation.step', 'adminStep')
+            ->leftJoin('adminStep.projectAbstractStep', 'adminProjectAbstractStep')
+            ->leftJoin('adminProjectAbstractStep.project', 'adminProject')
+            ->andWhere(
+                $qb->expr()->orX(
+                    'adminProject.visibility >= :adminVisibility',
+                    $qb->expr()->andX(
+                        'adminProject.visibility = :meVisibility',
+                        sprintf(
+                            'EXISTS (SELECT adminProjectAuthor.id FROM %s adminProjectAuthor WHERE adminProjectAuthor.project = adminProject AND adminProjectAuthor.user = :viewer)',
+                            ProjectAuthor::class
+                        )
+                    )
+                )
+            )
+            ->setParameter('adminVisibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
+            ->setParameter('meVisibility', ProjectVisibilityMode::VISIBILITY_ME)
+            ->setParameter('viewer', $viewer)
+        ;
     }
 
     private function getOpinionsByConsultationStepWithUserConfirmedQuery(ConsultationStep $consultationStep): QueryBuilder

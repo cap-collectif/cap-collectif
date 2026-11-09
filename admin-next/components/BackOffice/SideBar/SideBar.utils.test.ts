@@ -31,6 +31,17 @@ describe('getSideBarItemsFiltered', () => {
     ).toBe(href)
   })
 
+  it.each([
+    [false, '/admin/capco/app/opinion/list'],
+    [true, '/admin-next/opinions'],
+  ] as const)('uses the opinions route for rollout %s', (enabled, href) => {
+    const flags = { ...defaultFeatureFlags, unstable__sonata_migration_to_admin_next: enabled }
+    const items = getSideBarItemsFiltered(true, false, flags, false, null, false)
+    expect(
+      items.find(group => group.id === 'contributions')?.items.find(item => item.title === 'admin.label.opinion')?.href,
+    ).toBe(href)
+  })
+
   const getNotificationSettingsItem = (featureFlags = defaultFeatureFlags) => {
     const sideBarItems = getSideBarItemsFiltered(true, true, featureFlags, false, null, false)
     return sideBarItems

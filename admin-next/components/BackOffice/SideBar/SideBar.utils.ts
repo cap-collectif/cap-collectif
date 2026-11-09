@@ -8,6 +8,7 @@ const SONATA_URL_BY_ADMIN_NEXT_URL: Record<string, string> = {
   '/admin-next/locales': '/admin/locale/list',
   '/admin-next/reporting': '/admin/reporting',
   '/admin-next/proposals': '/admin/capco/app/proposal/list',
+  '/admin-next/opinions': '/admin/capco/app/opinion/list',
 }
 
 // An exact match: `includes` would also select "/admin-next/user-types" on the "/admin-next/user" page

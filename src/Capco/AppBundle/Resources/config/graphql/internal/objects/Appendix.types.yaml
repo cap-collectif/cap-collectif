@@ -15,3 +15,7 @@ Appendix:
             appendixType:
                 type: 'AppendixType!'
                 resolve: '@=value.getAppendixType()'
+            appendixTypeId:
+                type: 'ID!'
+                description: 'The id of the appendix type, as exposed by SectionAppendixType.id. Not named "id": Relay would merge the two types in its store.'
+                resolve: '@=value.getAppendixType().getId()'

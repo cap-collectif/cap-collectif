@@ -1,0 +1,14 @@
+OpinionAdminAnswerInput:
+    type: input-object
+    config:
+        description: 'The official answer of an opinion.'
+        fields:
+            title:
+                type: 'String'
+                description: 'The title of the answer.'
+            body:
+                type: 'String!'
+                description: 'The content of the answer.'
+            author:
+                type: 'ID!'
+                description: 'The id of the user who wrote the answer, required as in Sonata (Answer has the HasAuthor constraint).'

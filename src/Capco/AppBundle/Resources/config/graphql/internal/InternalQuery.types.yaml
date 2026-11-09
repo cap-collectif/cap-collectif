@@ -844,6 +844,17 @@ InternalQuery:
                         defaultValue: null
                         description: 'Filter by title.'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Page\\PageListResolver", args)'
+            adminOpinions:
+                type: 'OpinionConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                description: 'List the opinions visible to the viewer in the back office, ordered by title.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                args:
+                    search:
+                        type: 'String'
+                        defaultValue: null
+                        description: 'Filter by title.'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionAdminListResolver", args, getUser())'
             customPage:
                 type: 'InternalPage'
                 description: 'Get a single custom page by id.'

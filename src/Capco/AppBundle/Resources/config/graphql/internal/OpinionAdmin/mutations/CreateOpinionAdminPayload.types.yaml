@@ -1,0 +1,10 @@
+CreateOpinionAdminPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            opinion:
+                type: 'InternalOpinion'
+                description: 'The created opinion.'
+            errorCode:
+                type: 'OpinionAdminErrorCode'
+                description: 'The available errors if any.'

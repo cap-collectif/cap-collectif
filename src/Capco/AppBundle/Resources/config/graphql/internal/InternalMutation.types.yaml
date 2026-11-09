@@ -1596,6 +1596,30 @@ InternalMutation:
                     inputType: UpdateOpinionInput
                     payloadType: UpdateOpinionPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateOpinionMutation", args, getUser())'
+            createOpinionAdmin:
+                description: 'Create an opinion from the back office.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CreateOpinionAdminInput
+                    payloadType: CreateOpinionAdminPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\OpinionAdmin\\CreateOpinionAdminMutation", args)'
+            updateOpinionAdmin:
+                description: 'Update an opinion from the back office.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateOpinionAdminInput
+                    payloadType: UpdateOpinionAdminPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\OpinionAdmin\\UpdateOpinionAdminMutation", args)'
+            deleteOpinionAdmin:
+                description: 'Delete an opinion from the back office.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteOpinionAdminInput
+                    payloadType: DeleteOpinionAdminPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\OpinionAdmin\\DeleteOpinionAdminMutation", args)'
             updateExternalServiceConfiguration:
                 description: 'Update an external service configuration.'
                 access: "@=hasRole('ROLE_ADMIN')"

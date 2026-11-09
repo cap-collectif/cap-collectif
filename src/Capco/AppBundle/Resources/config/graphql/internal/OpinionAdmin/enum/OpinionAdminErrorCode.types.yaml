@@ -1,0 +1,18 @@
+OpinionAdminErrorCode:
+    type: enum
+    config:
+        name: OpinionAdminErrorCode
+        description: 'The available errors when an administrator manages opinions.'
+        values:
+            NOT_FOUND:
+                value: !php/const Capco\AppBundle\Enum\OpinionAdminErrorCode::NOT_FOUND
+                description: 'The opinion does not exist.'
+            OPINION_TYPE_NOT_FOUND:
+                value: !php/const Capco\AppBundle\Enum\OpinionAdminErrorCode::OPINION_TYPE_NOT_FOUND
+                description: 'The opinion type (section) does not exist or has no consultation.'
+            AUTHOR_NOT_FOUND:
+                value: !php/const Capco\AppBundle\Enum\OpinionAdminErrorCode::AUTHOR_NOT_FOUND
+                description: 'The author of the opinion or of its official answer does not exist.'
+            INVALID_DATA:
+                value: !php/const Capco\AppBundle\Enum\OpinionAdminErrorCode::INVALID_DATA
+                description: 'A required value is missing or a value is invalid.'

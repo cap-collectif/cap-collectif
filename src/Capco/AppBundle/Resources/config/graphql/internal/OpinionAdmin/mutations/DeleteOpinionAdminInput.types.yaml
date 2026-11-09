@@ -1,0 +1,8 @@
+DeleteOpinionAdminInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of deleteOpinionAdmin mutation.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the opinion to delete.'

@@ -27,7 +27,8 @@
             },
             {
                 "title": "admin.label.opinion",
-                "href": "/admin/capco/app/opinion/list",
+                "href": "/admin-next/opinions",
+                "relatedHrefs": ["/admin-next/opinion"],
                 "rolesRequired": [],
                 "featuresRequired": []
             },

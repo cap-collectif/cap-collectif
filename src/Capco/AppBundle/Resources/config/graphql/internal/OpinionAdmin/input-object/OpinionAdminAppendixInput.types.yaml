@@ -1,0 +1,11 @@
+OpinionAdminAppendixInput:
+    type: input-object
+    config:
+        description: 'The content of an appendix of an opinion.'
+        fields:
+            appendixTypeId:
+                type: 'ID!'
+                description: 'The id of the appendix type, one of the appendix types of the opinion type.'
+            body:
+                type: 'String'
+                description: 'The content of the appendix.'

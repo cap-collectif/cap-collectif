@@ -1141,6 +1141,12 @@ type Appendix {
   """Identifies the body of the contribution rendered to text."""
   bodyText: String
   appendixType: AppendixType!
+
+  """
+  The id of the appendix type, as exposed by SectionAppendixType.id. Not named
+  "id": Relay would merge the two types in its store.
+  """
+  appendixTypeId: ID!
 }
 
 """A contribution"""
@@ -4267,6 +4273,52 @@ type CreateOauth2SSOConfigurationPayload {
   clientMutationId: String
 }
 
+input CreateOpinionAdminInput {
+  """The title of the opinion."""
+  title: String!
+
+  """The content of the opinion."""
+  body: String!
+
+  """The id of the author of the opinion."""
+  author: ID!
+
+  """The position of the opinion in its section."""
+  position: Int
+
+  """
+  The content of the appendices. Appendix types missing from the list are left unchanged.
+  """
+  appendices: [OpinionAdminAppendixInput!]
+
+  """Whether the opinion is pinned."""
+  pinned: Boolean
+
+  """The trash status of the opinion, null when it is not in the trash."""
+  trashedStatus: TrashableStatus
+
+  """The reason why the opinion is in the trash."""
+  trashedReason: String
+
+  """The official answer of the opinion, null to remove it."""
+  answer: OpinionAdminAnswerInput
+
+  """
+  The id of the opinion type (section). The opinion is created in its consultation.
+  """
+  opinionTypeId: ID!
+  clientMutationId: String
+}
+
+type CreateOpinionAdminPayload {
+  """The created opinion."""
+  opinion: Opinion
+
+  """The available errors if any."""
+  errorCode: OpinionAdminErrorCode
+  clientMutationId: String
+}
+
 """Available errors on opinion creation"""
 enum CreateOpinionErrorCode {
   """this opinionType is not enabled"""
@@ -6512,6 +6564,21 @@ type DeleteOfficialResponsePayload {
 
   """The error, if any."""
   error: DeleteOfficialResponseErrorCode
+  clientMutationId: String
+}
+
+input DeleteOpinionAdminInput {
+  """The id of the opinion to delete."""
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteOpinionAdminPayload {
+  """The deleted opinion id."""
+  deletedOpinionId: ID
+
+  """The available errors if any."""
+  errorCode: OpinionAdminErrorCode
   clientMutationId: String
 }
 
@@ -10360,6 +10427,15 @@ type Mutation {
   """Update Opinion"""
   updateOpinion(input: UpdateOpinionInput!): UpdateOpinionPayload
 
+  """Create an opinion from the back office."""
+  createOpinionAdmin(input: CreateOpinionAdminInput!): CreateOpinionAdminPayload
+
+  """Update an opinion from the back office."""
+  updateOpinionAdmin(input: UpdateOpinionAdminInput!): UpdateOpinionAdminPayload
+
+  """Delete an opinion from the back office."""
+  deleteOpinionAdmin(input: DeleteOpinionAdminInput!): DeleteOpinionAdminPayload
+
   """Update an external service configuration."""
   updateExternalServiceConfiguration(input: UpdateExternalServiceConfigurationInput!): UpdateExternalServiceConfigurationPayload
 
@@ -10938,6 +11014,46 @@ type Opinion implements Node & Contribution & Publishable & Argumentable & Sourc
   ranking: Int
   modals: [OpinionModal]
   appendices: [Appendix]
+}
+
+"""The official answer of an opinion."""
+input OpinionAdminAnswerInput {
+  """The title of the answer."""
+  title: String
+
+  """The content of the answer."""
+  body: String!
+
+  """
+  The id of the user who wrote the answer, required as in Sonata (Answer has the HasAuthor constraint).
+  """
+  author: ID!
+}
+
+"""The content of an appendix of an opinion."""
+input OpinionAdminAppendixInput {
+  """
+  The id of the appendix type, one of the appendix types of the opinion type.
+  """
+  appendixTypeId: ID!
+
+  """The content of the appendix."""
+  body: String
+}
+
+"""The available errors when an administrator manages opinions."""
+enum OpinionAdminErrorCode {
+  """The opinion does not exist."""
+  NOT_FOUND
+
+  """The opinion type (section) does not exist or has no consultation."""
+  OPINION_TYPE_NOT_FOUND
+
+  """The author of the opinion or of its official answer does not exist."""
+  AUTHOR_NOT_FOUND
+
+  """A required value is missing or a value is invalid."""
+  INVALID_DATA
 }
 
 """A connection to a list of items."""
@@ -16085,6 +16201,22 @@ type Query {
     """Filter by title."""
     search: String = null
   ): PageConnection!
+
+  """
+  List the opinions visible to the viewer in the back office, ordered by title.
+  """
+  adminOpinions(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Filter by title."""
+    search: String = null
+  ): OpinionConnection!
 
   """Get a single custom page by id."""
   customPage(id: ID!): Page
@@ -22121,6 +22253,50 @@ type UpdateOfficialResponsePayload {
 
   """The error, if any."""
   error: UpdateOfficialResponseErrorCode
+  clientMutationId: String
+}
+
+input UpdateOpinionAdminInput {
+  """The title of the opinion."""
+  title: String!
+
+  """The content of the opinion."""
+  body: String!
+
+  """The id of the author of the opinion."""
+  author: ID!
+
+  """The position of the opinion in its section."""
+  position: Int
+
+  """
+  The content of the appendices. Appendix types missing from the list are left unchanged.
+  """
+  appendices: [OpinionAdminAppendixInput!]
+
+  """Whether the opinion is pinned."""
+  pinned: Boolean
+
+  """The trash status of the opinion, null when it is not in the trash."""
+  trashedStatus: TrashableStatus
+
+  """The reason why the opinion is in the trash."""
+  trashedReason: String
+
+  """The official answer of the opinion, null to remove it."""
+  answer: OpinionAdminAnswerInput
+
+  """The id of the opinion to update."""
+  id: ID!
+  clientMutationId: String
+}
+
+type UpdateOpinionAdminPayload {
+  """The updated opinion."""
+  opinion: Opinion
+
+  """The available errors if any."""
+  errorCode: OpinionAdminErrorCode
   clientMutationId: String
 }
 

@@ -1,0 +1,10 @@
+UpdateOpinionAdminInput:
+    type: relay-mutation-input
+    inherits:
+        - OpinionAdminFields
+    config:
+        description: 'Input of updateOpinionAdmin mutation.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The id of the opinion to update.'
