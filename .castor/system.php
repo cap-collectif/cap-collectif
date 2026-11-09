@@ -16,27 +16,35 @@ function doctor(): void
 {
     $package = json_decode(file_get_contents('package.json') ?: '{}', true, 512, \JSON_THROW_ON_ERROR);
     $checks = [
-        ['Git', ['git', '--version'], null],
-        ['Docker CLI', ['docker', '--version'], null],
-        ['Docker Compose', ['docker', 'compose', 'version'], null],
-        ['Docker daemon', ['docker', 'info', '--format', '{{.ServerVersion}}'], null],
-        ['Node.js', ['node', '--version'], trim(file_get_contents('.nvmrc') ?: '')],
-        ['Corepack', ['corepack', '--version'], null],
-        ['Yarn via Corepack', ['corepack', 'yarn', '--version'], str_replace('yarn@', '', (string) ($package['packageManager'] ?? ''))],
-        ['Castor', ['castor', '--version'], trim(file_get_contents('.castor-version') ?: '')],
-        ['mkcert', ['mkcert', '-version'], null],
-        ['curl', ['curl', '--version'], null],
+        'Tools without version checks' => [
+            ['Git', ['git', '--version'], null],
+            ['Docker CLI', ['docker', '--version'], null],
+            ['Docker Compose', ['docker', 'compose', 'version'], null],
+            ['Docker daemon', ['docker', 'info', '--format', '{{.ServerVersion}}'], null],
+            ['Corepack', ['corepack', '--version'], null],
+            ['Castor', ['castor', '--version'], null],
+            ['mkcert', ['mkcert', '-version'], null],
+            ['curl', ['curl', '--version'], null],
+        ],
+        'Tools with version checks' => [
+            ['Node.js', ['node', '--version'], trim(file_get_contents('.nvmrc') ?: '')],
+            ['Yarn via Corepack', ['corepack', 'yarn', '--version'], str_replace('yarn@', '', (string) ($package['packageManager'] ?? ''))],
+        ],
     ];
 
     if ('Darwin' === \PHP_OS_FAMILY) {
-        $checks[] = ['Symfony CLI', ['symfony', '-V'], null];
+        $checks['Tools without version checks'][] = ['Symfony CLI', ['symfony', '-V'], null];
     }
 
     $failures = [];
 
-    foreach ($checks as [$label, $command, $expectedVersion]) {
-        if (!doctorCheck($label, $command, $expectedVersion)) {
-            $failures[] = $label;
+    foreach ($checks as $section => $sectionChecks) {
+        io()->section($section);
+
+        foreach ($sectionChecks as [$label, $command, $expectedVersion]) {
+            if (!doctorCheck($label, $command, $expectedVersion)) {
+                $failures[] = $label;
+            }
         }
     }
 

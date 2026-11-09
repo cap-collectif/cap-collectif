@@ -73,11 +73,16 @@ castor system:doctor
 L’alias `castor doctor` correspond à `castor system:doctor` et accepte les
 mêmes options.
 
-`doctor` vérifie les outils nécessaires, les versions de Node.js, Yarn et
-Castor épinglées dans le dépôt, ainsi que l’accès au daemon Docker. Il affiche
-tous les diagnostics avant de retourner un échec si un prérequis manque,
-si une version diffère ou si Docker est arrêté ou inaccessible. PHP et Composer
-ne sont pas requis sur le poste : ils s’exécutent dans le container applicatif.
+`doctor` vérifie les outils nécessaires, les versions de Node.js et Yarn
+épinglées dans le dépôt, ainsi que l’accès au daemon Docker. La sortie présente
+d’abord les outils sans comparaison de version, puis ceux avec comparaison
+(Node.js et Yarn). Il affiche tous les diagnostics avant de retourner un échec
+si un prérequis manque, si une version de Node.js ou Yarn diffère ou si Docker
+est arrêté ou inaccessible.
+Pour Castor, seule la bonne exécution de `castor --version` est vérifiée, sans
+comparaison avec `.castor-version`.
+PHP et Composer ne sont pas requis sur le poste : ils s’exécutent dans le
+container applicatif.
 La vérification Yarn passe par Corepack et n’autorise aucun téléchargement.
 La commande `corepack yarn --version` ci-dessus prépare la version de Yarn
 épinglée si elle n’est pas encore disponible ; Docker doit être démarré pour
