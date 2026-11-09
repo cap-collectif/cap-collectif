@@ -98,6 +98,11 @@ InternalProposal:
                 type: 'InternalUser'
                 description: 'The update user.'
                 resolve: '@=value.getUpdateAuthor()'
+            lastStatus:
+                type: 'ProposalStepStatus'
+                description: 'The status of the last step (by position) where the proposal has one, otherwise its collect status.'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=value.lastStatus()'
             publicationStatus:
                 type: 'ProposalPublicationStatus!'
                 description: 'The publication status for this proposal.'

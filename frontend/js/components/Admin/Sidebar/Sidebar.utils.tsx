@@ -8,6 +8,7 @@ export const URL_MAP = {
     '/admin/capco/app/reporting',
     '/admin-next/reporting',
     '/admin/capco/app/proposal/',
+    '/admin-next/proposals',
     '/admin/capco/app/opinion/',
     '/admin/capco/app/reply/',
     '/admin/capco/app/opinionversion/',

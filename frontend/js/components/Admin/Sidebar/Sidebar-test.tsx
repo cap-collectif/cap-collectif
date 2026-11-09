@@ -138,4 +138,21 @@ describe('<Sidebar />', () => {
     )
     expect(wrapper.find(`a[href$="${href}"]`)).toHaveLength(1)
   })
+
+  it.each([
+    [false, '/admin/capco/app/proposal/list'],
+    [true, '/admin-next/proposals'],
+  ] as const)('uses the proposals route for rollout %s', (enabled, href) => {
+    const wrapper = render(
+      <MockProviders
+        store={{
+          default: { features: { ...features, unstable__sonata_migration_to_admin_next: enabled } },
+          user: { user: userAdmin },
+        }}
+      >
+        <Sidebar appVersion="test" defaultAccordeon="contributions" />
+      </MockProviders>,
+    )
+    expect(wrapper.find(`a[href$="${href}"]`)).toHaveLength(1)
+  })
 })

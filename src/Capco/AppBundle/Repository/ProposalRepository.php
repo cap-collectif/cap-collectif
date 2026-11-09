@@ -1005,6 +1005,36 @@ class ProposalRepository extends EntityRepository
         ;
     }
 
+    /**
+     * @return array<Proposal>
+     */
+    public function getAdminPaginated(?string $search = null, ?int $offset = null, ?int $limit = null): array
+    {
+        $qb = $this->getAdminPaginatedQueryBuilder($search)
+            ->orderBy('p.createdAt', 'DESC')
+            ->addOrderBy('p.id', 'ASC')
+        ;
+
+        if (null !== $offset) {
+            $qb->setFirstResult($offset);
+        }
+
+        if (null !== $limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function countAdminPaginated(?string $search = null): int
+    {
+        return (int) $this->getAdminPaginatedQueryBuilder($search)
+            ->select('COUNT(p.id)')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
     protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder
     {
         return $this->createQueryBuilder($alias)
@@ -1041,6 +1071,20 @@ class ProposalRepository extends EntityRepository
         }
 
         $qb->setParameter('step', $step);
+
+        return $qb;
+    }
+
+    private function getAdminPaginatedQueryBuilder(?string $search = null): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        if (null !== $search && '' !== trim($search)) {
+            $qb
+                ->andWhere('p.title LIKE :search')
+                ->setParameter('search', '%' . trim($search) . '%')
+            ;
+        }
 
         return $qb;
     }

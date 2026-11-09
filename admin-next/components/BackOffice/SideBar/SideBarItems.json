@@ -21,7 +21,7 @@
             },
             {
                 "title": "admin.label.proposal",
-                "href": "/admin/capco/app/proposal/list",
+                "href": "/admin-next/proposals",
                 "rolesRequired": [],
                 "featuresRequired": []
             },

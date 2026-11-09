@@ -29,7 +29,7 @@ const UserGroupsTab: React.FC = () => {
   const queryReference = useLazyLoadQuery<groups_Query>(QUERY, { term, first: CONNECTION_NODES_PER_PAGE })
 
   return (
-    <Flex direction="column" width="100%" spacing={6} bg="white" borderRadius="accordion" p={8} justify="flex-start">
+    <Flex direction="column" width="100%" spacing={6} bg="white" borderRadius="accordion" p={6} justify="flex-start">
       <Flex alignItems="center" spacing={6}>
         <CreateGroupModal connectionId={connectionId} />
         <Button

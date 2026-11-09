@@ -852,6 +852,17 @@ InternalQuery:
                     id:
                         type: 'ID!'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Page\\PageResolver", args)'
+            adminProposals:
+                type: 'InternalProposalConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                description: 'List all proposals, including the deleted ones, ordered by creation date (most recent first).'
+                access: "@=hasRole('ROLE_ADMIN')"
+                args:
+                    search:
+                        type: 'String'
+                        defaultValue: null
+                        description: 'Filter by title.'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\AdminProposalListResolver", args)'
             newsletterSubscriptions:
                 type: 'NewsletterSubscriptionConnection!'
                 argsBuilder: 'Relay::ForwardConnection'

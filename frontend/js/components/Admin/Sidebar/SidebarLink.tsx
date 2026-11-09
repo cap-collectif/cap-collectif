@@ -44,6 +44,8 @@ export const SidebarLink = ({
     window.location.href.includes(href.slice(0, -4)) ||
     // Sonata route retained during the Admin Next migration rollout. Remove it with the migration feature flag.
     (window.location.href.includes('/admin/capco/app/reporting') && href === '/admin/reporting') ||
+    // The proposal edit page stays on Sonata while its list is in the Admin Next migration rollout.
+    (window.location.href.includes('/admin/capco/app/proposal/') && href === '/admin-next/proposals') ||
     (window.location.href.includes('/admin/capco/app/sitecolor/') &&
       href === '/admin/settings/settings.appearance/list')
   return (

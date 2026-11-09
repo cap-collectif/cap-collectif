@@ -69,6 +69,18 @@ describe('getSideBarItemsFiltered', () => {
       items.find(group => group.id === 'settings')?.items.find(item => item.title === 'global-languages')?.href,
     ).toBe(href)
   })
+
+  it.each([
+    [false, '/admin/capco/app/proposal/list'],
+    [true, '/admin-next/proposals'],
+  ] as const)('uses the proposals route for rollout %s', (enabled, href) => {
+    const flags = { ...defaultFeatureFlags, unstable__sonata_migration_to_admin_next: enabled }
+    const items = getSideBarItemsFiltered(true, false, flags, false, null, false)
+    expect(
+      items.find(group => group.id === 'contributions')?.items.find(item => item.title === 'admin.label.proposal')
+        ?.href,
+    ).toBe(href)
+  })
 })
 
 /**

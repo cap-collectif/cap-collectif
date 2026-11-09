@@ -13697,6 +13697,11 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   """The update user."""
   updatedBy: User
 
+  """
+  The status of the last step (by position) where the proposal has one, otherwise its collect status.
+  """
+  lastStatus: ProposalStepStatus
+
   """The publication status for this proposal."""
   publicationStatus: ProposalPublicationStatus!
 
@@ -16083,6 +16088,22 @@ type Query {
 
   """Get a single custom page by id."""
   customPage(id: ID!): Page
+
+  """
+  List all proposals, including the deleted ones, ordered by creation date (most recent first).
+  """
+  adminProposals(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Filter by title."""
+    search: String = null
+  ): ProposalConnection!
 
   """List all newsletter subscriptions, ordered by email."""
   newsletterSubscriptions(

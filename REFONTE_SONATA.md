@@ -9,6 +9,11 @@ Il sert à lister les étapes / informations nécessaires / utiles à ces refont
 réutilisable pour de futures migrations — si oui, l'ajouter ici. Ne pas attendre la fin de la tâche ni une
 demande explicite de mise à jour de la doc pour faire cette vérification.
 
+**Consigne pour les outils IA, en fin de refonte** : avant de rendre la main à l'utilisatrice, relire ce
+document **en intégralité** (« Pièges connus » compris) et vérifier, point par point, sur tout le diff de la
+PR, qu'aucune consigne n'a été ignorée ou mal appliquée. Corriger ce qui peut l'être, et signaler le reste dans
+le compte rendu final.
+
 ## Contexte général
 
 Toutes les pages d'administration encore construites avec Sonata (`src/Capco/AdminBundle/`, routes
@@ -423,7 +428,8 @@ flag), **à nettoyer** (Admin Next déjà en place, route legacy encore présent
 - **Édition d'une proposition** — à refondre
   - URL : `/admin/capco/app/proposal/{id}/edit`
   - Composant : `ProposalAdminPageApp` (`Proposal/edit.html.twig`, `ProposalAdmin`)
-  - Reste : refonte. La liste des propositions est encore sur Sonata.
+  - Reste : refonte. La liste des propositions est en rollout sur `/admin-next/proposals` : ses liens de titre
+    (`Proposal.adminUrl`) et la redirection après un regroupement mènent encore ici.
 - **Édition d'un formulaire de dépôt** — à refondre
   - URL : `/admin/capco/app/proposalform/{id}/edit`
   - Composant : `ProposalFormAdminPageApp` (`ProposalForm/edit.html.twig`, `ProposalFormAdmin`)
@@ -599,6 +605,11 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
   `admin-next/components/BackOffice/Redirection/CustomRedirection.tsx` — `Table` + `Table.Thead`/`Table.Th`
   par colonne + `Table.Tbody`/`Table.Tr`/`Table.Td` + `ButtonQuickAction icon={CapUIIcon.Pencil}` en dernière
   colonne.
+- **`Table.Th` : pas de `lineHeight="sm"`.** Beaucoup de listes existantes l'écrivent sur chaque en-tête, mais
+  `sm` n'est pas une clé de `lineHeights` dans le thème CapUI (`S`, `M`, `Normal`, `L`, `XL`, `XXL`) : la valeur
+  est émise telle quelle (`line-height: sm`), le navigateur l'ignore. `Table.Th` applique déjà le style `h5`
+  (`lineHeight` `S`, 16 px). Écrire `<Table.Th>…</Table.Th>` sans ce prop. Plus généralement, ne pas recopier
+  un prop de style sans vérifier qu'il a un effet.
 - **Liste de cards à un seul "label"** (ex: `GlobalDistrict`) : `GeographicalAreasList.tsx` — `ListCard` +
   `ListCard.Item` + `ButtonQuickAction` (pencil/trash) dans un `ButtonGroup`.
 - **Couleur des `ButtonQuickAction`** : le bouton d'édition (`icon={CapUIIcon.Pencil}`) doit avoir
@@ -614,6 +625,9 @@ Selon la forme des données à afficher, s'inspirer du composant le plus proche 
   `LEGACY_SPACING` de CapUI, encore très présente dans le code existant, à ne pas reprendre. Pour une valeur hors
   tokens (largeur, hauteur, rayon…), utiliser `pxToRem` (`@shared/utils/pxToRem`), ex. `maxWidth={pxToRem(300)}`,
   jamais `"300px"`. Avant de rendre la main, vérifier tout le diff de la PR. Exemple : `Locales/LocalesList.tsx`.
+- **Conteneur blanc d'une page liste : `p="lg"` (24 px).** C'est la valeur retenue pour harmoniser les pages
+  refondues du BO (ex: `pages/admin-next/proposals.tsx`). Certaines de pages existantes ont encore `p={8}` (32 px,
+  ex: `themes.tsx`, `reporting.tsx`) : ne pas les recopier, et les aligner sur `p="lg"` quand on les retouche.
 - **Liste paginée (Relay connection) avec recherche / infinite scroll** : `ProjectList.tsx` / `PostList.tsx`
   (`usePaginationFragment` + `Table.Tbody useInfiniteScroll`) ou `UserGroupsList.tsx`.
 - **Entité avec traductions multi-langues + media** : `UserTypesList.tsx` / `UserTypeModal.tsx` (Types de profil).
@@ -1818,6 +1832,33 @@ prop-drillé entre la liste et un ancêtre.
   `useForm({ context })` puis modifié juste avant chaque `handleSubmit`. Voir `EmailingCampaignFormWrapper.tsx`.
 - **Aperçu HTML rendu par le serveur** (ex: e-mail d'une campagne) : l'afficher dans une `iframe` avec `srcDoc` et
   `sandbox=""` plutôt qu'avec `dangerouslySetInnerHTML`, pour isoler ses styles et bloquer ses scripts.
+- **« Les liens de la page Sonata ne fonctionnent pas » : tester chaque destination avant de conclure.** Ouvrir chaque
+  lien avec une session admin (`curl` ou navigateur headless) et noter le code HTTP et les erreurs GraphQL. Sur la liste
+  des propositions, trois causes différentes se mélangeaient :
+  - **GraphQL compilé périmé après un changement de branche** : toutes les pages React du back-office affichent « Désolé
+    une erreur s'est produite » et `/graphql/internal` répond 500 `Could not find type with alias "<Type>"`. Les
+    classes de `src/Capco/AppBundle/GraphQL/__generated__` (non versionnées) viennent de l'autre branche :
+    `castor app:generate-graphql`. Ce n'est pas un bug de la page.
+  - **Lien vers l'édition Sonata d'un projet** (`admin_capco_app_project_edit`) : 500 (`breadcrumbs_builder`). La
+    configuration d'un projet est sur Admin Next : utiliser `Project.adminAlphaUrl` (`/admin-next/project/{globalId}`).
+  - **Lien `show` d'une Admin sans `configureShowFields`** (ex: catégorie de proposition) : page vide. Ne pas le
+    reproduire : texte simple, ou lien vers la page où l'objet se configure, au choix de l'utilisateurice.
+- **Action legacy qui échoue silencieusement : rejouer sa mutation en `curl` avant de la reproduire.** Le bouton
+  « Regrouper » de la liste des propositions n'envoyait pas `title`, devenu obligatoire dans
+  `CreateProposalFusionInput` (#10617). Le composant legacy en `@ts-nocheck` ne le signalait pas, et le spec Cypress ne
+  vérifiait rien après la soumission. Signaler ce genre de cas à l'utilisateurice, corriger la version Admin Next (ici
+  un champ « Titre » requis) et vérifier dans le test Cypress le payload de la mutation (`its('response.body.data...')`)
+  et la redirection.
+- **Liste admin qui doit inclure les éléments supprimés (soft delete)** : la classe Admin Sonata désactivait le filtre
+  Doctrine `softdeleted` dans `createQuery()`, sans le réactiver. Dans le resolver GraphQL, le désactiver seulement le
+  temps de la requête et du comptage, puis le réactiver dans un `finally` pour ne pas affecter le reste de la requête
+  GraphQL. Voir `AdminProposalListResolver.php`.
+- **Réutiliser une connection existante dont les champs supplémentaires sont non nullables** (ex: `ProposalConnection`,
+  `fusionCount: Int!`) : la `Connection` renvoyée par `Paginator::auto()` ne porte pas ces champs. La recopier dans une
+  `ExtraFieldsConnection`, qui les déclare avec une valeur par défaut (`0`).
+- **Cypress : un select asynchrone avec `defaultOptions` lance sa query dès son montage**, pas au clic. Déclarer
+  `cy.interceptGraphQLOperation` avant l'action qui le monte (ouverture de la modale, choix d'un champ dont il
+  dépend), sinon le `cy.wait` expire avec « No request ever occurred ».
 
 ## Validation yup : toujours un schéma, et un champ texte requis n'est pas juste `.required()`
 

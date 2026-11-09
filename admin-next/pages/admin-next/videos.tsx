@@ -28,7 +28,7 @@ const VideosTab: React.FC = () => {
   })
 
   return (
-    <Flex direction="column" width="100%" spacing={6} bg="white" borderRadius="accordion" p={8} justify="flex-start">
+    <Flex direction="column" width="100%" spacing={6} bg="white" borderRadius="accordion" p="lg" justify="flex-start">
       <Flex alignItems="center" spacing={6}>
         <Button
           variant="primary"
