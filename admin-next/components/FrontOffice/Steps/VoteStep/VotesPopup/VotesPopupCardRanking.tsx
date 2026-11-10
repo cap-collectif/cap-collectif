@@ -1,7 +1,14 @@
 import { Box, CapUIIcon, Flex, Icon, Text } from '@cap-collectif/ui'
-import { VotesPopupCardRanking_vote$key } from '@relay/VotesPopupCardRanking_vote.graphql'
-import { VotesPopupCardRanking_step$key } from '@relay/VotesPopupCardRanking_step.graphql'
-import { FC } from 'react'
+import type { VotesPopupCardRanking_vote$key } from '@relay/VotesPopupCardRanking_vote.graphql'
+import type { VotesPopupCardRanking_step$key } from '@relay/VotesPopupCardRanking_step.graphql'
+import type { FC } from 'react'
+import type { PayloadError, RecordSourceSelectorProxy } from 'relay-runtime'
+import { useIntl } from 'react-intl'
+import { mutationErrorToast } from '@shared/utils/toasts'
+import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
+import CookieMonster from '@shared/utils/CookieMonster'
+import type { VotesPopupCardRankingUpdateVotesMutation } from '@relay/VotesPopupCardRankingUpdateVotesMutation.graphql'
+import type { VotesPopupCardRankingUpdateAnonymousVotesMutation } from '@relay/VotesPopupCardRankingUpdateAnonymousVotesMutation.graphql'
 import { graphql, useFragment, useMutation } from 'react-relay'
 import { areVotesAccounted, getRankingPointsDelta } from '@mutations/proposalVoteOptimistic'
 
@@ -13,14 +20,12 @@ interface Props {
 const VOTE_FRAGMENT = graphql`
   fragment VotesPopupCardRanking_vote on ProposalVote {
     id
-    anonymous
     ranking
   }
 `
 
 const STEP_FRAGMENT = graphql`
   fragment VotesPopupCardRanking_step on ProposalStep {
-    __typename
     id
     votesLimit
     votesMin
@@ -39,23 +44,19 @@ const STEP_FRAGMENT = graphql`
   }
 `
 
-const UPDATE_VOTES_MUTATION = graphql`
-  mutation VotesPopupCardRankingUpdateVotesMutation($input: UpdateProposalVotesInput!, $stepId: ID!) {
-    updateProposalVotes(input: $input) {
-      step {
-        ...VotesPopup_proposalStep
-        rankedViewerVotes: viewerVotes(orderBy: { field: POSITION, direction: ASC }) {
-          totalCount
-          edges {
-            node {
-              id
-              ranking
-              proposal {
-                id
-                votes(stepId: $stepId, first: 0) {
-                  totalPointsCount
-                }
-              }
+const UPDATED_STEP_FRAGMENT = graphql`
+  fragment VotesPopupCardRanking_updatedStep on ProposalStep @argumentDefinitions(stepId: { type: "ID!" }) {
+    ...VotesPopup_proposalStep
+    rankedViewerVotes: viewerVotes(orderBy: { field: POSITION, direction: ASC }) {
+      totalCount
+      edges {
+        node {
+          id
+          ranking
+          proposal {
+            id
+            votes(stepId: $stepId, first: 0) {
+              totalPointsCount
             }
           }
         }
@@ -64,49 +65,69 @@ const UPDATE_VOTES_MUTATION = graphql`
   }
 `
 
+const UPDATE_VOTES_MUTATION = graphql`
+  mutation VotesPopupCardRankingUpdateVotesMutation($input: UpdateProposalVotesInput!, $stepId: ID!) {
+    updateProposalVotes(input: $input) {
+      step {
+        ...VotesPopupCardRanking_updatedStep @arguments(stepId: $stepId)
+      }
+    }
+  }
+`
+
+const UPDATE_ANONYMOUS_VOTES_MUTATION = graphql`
+  mutation VotesPopupCardRankingUpdateAnonymousVotesMutation($input: UpdateAnonymousProposalVotesInput!, $stepId: ID!) {
+    updateAnonymousProposalVotes(input: $input) {
+      step {
+        ...VotesPopupCardRanking_updatedStep @arguments(stepId: $stepId)
+      }
+    }
+  }
+`
+
 const VotesPopupCardRanking: FC<Props> = ({ vote: voteKey, step: stepKey }) => {
   const vote = useFragment(VOTE_FRAGMENT, voteKey)
   const step = useFragment(STEP_FRAGMENT, stepKey)
-  const [commitUpdateVotes, isLoading] = useMutation(UPDATE_VOTES_MUTATION)
+  const { viewerSession } = useAppContext()
+  const intl = useIntl()
+  const [commitUpdateVotes, isUpdatingVotes] =
+    useMutation<VotesPopupCardRankingUpdateVotesMutation>(UPDATE_VOTES_MUTATION)
+  const [commitUpdateAnonymousVotes, isUpdatingAnonymousVotes] =
+    useMutation<VotesPopupCardRankingUpdateAnonymousVotesMutation>(UPDATE_ANONYMOUS_VOTES_MUTATION)
+  const isLoading = isUpdatingVotes || isUpdatingAnonymousVotes
   const maxPoints = step.votesLimit !== null ? step.votesLimit : step.votesMin
 
-  const updateVoteRanking = (votes, voteId, delta) => {
-    votes.sort((a, b) => a.node.ranking - b.node.ranking)
-    const voteIndex = votes.findIndex(edge => edge.node.id === voteId)
-    const voteTmp = votes[voteIndex]
-    if (delta > 0 && votes[voteIndex + 1]) {
-      votes[voteIndex] = votes[voteIndex + 1]
-      votes[voteIndex + 1] = voteTmp
+  const handleUpdate = (delta: -1 | 1) => {
+    if (isLoading) return
+
+    const orderedVotes = (step.rankedViewerVotes.edges ?? [])
+      .flatMap(edge => (edge?.node ? [edge.node] : []))
+      .sort((a, b) => (a.ranking ?? 0) - (b.ranking ?? 0))
+    const currentIndex = orderedVotes.findIndex(node => node.id === vote.id)
+    const nextIndex = currentIndex + delta
+    if (currentIndex < 0 || nextIndex < 0 || nextIndex >= orderedVotes.length) return
+
+    const token = viewerSession ? null : CookieMonster.getParticipantCookie()
+    if (!viewerSession && !token) {
+      mutationErrorToast(intl)
+      return
     }
-    if (delta < 0 && votes[voteIndex - 1]) {
-      votes[voteIndex] = votes[voteIndex - 1]
-      votes[voteIndex - 1] = voteTmp
+
+    const normalisedVotes = orderedVotes.map(({ id, anonymous }) => ({ id, anonymous }))
+    const [movedVote] = normalisedVotes.splice(currentIndex, 1)
+    normalisedVotes.splice(nextIndex, 0, movedVote)
+
+    const input = {
+      step: step.id,
+      votes: normalisedVotes,
     }
-    votes.forEach((edge, i) => (edge.node.ranking = i))
-    return votes
-  }
 
-  const handleUpdate = (delta: number) => {
-    const newRanking = vote.ranking + delta
-    if (newRanking < 0 || newRanking > step.rankedViewerVotes.edges.length - 1) return
-    handleUpdateRanking(vote.id, delta)
-  }
-
-  const handleUpdateRanking = (voteId: string, delta: number) => {
-    // Make a copy of the votes removing the references and readonly
-    let updatedVotes = structuredClone(step.rankedViewerVotes.edges)
-    updatedVotes = updateVoteRanking(updatedVotes, voteId, delta)
-    const normalisedVotes = updatedVotes.map(edge => ({ id: edge.node.id, anonymous: edge.node.anonymous }))
-
-    commitUpdateVotes({
-      variables: {
-        input: {
-          step: step.id,
-          votes: normalisedVotes,
-        },
-        stepId: step.id,
+    const config = {
+      onCompleted: (_response: unknown, errors: ReadonlyArray<PayloadError> | null) => {
+        if (errors?.length) mutationErrorToast(intl)
       },
-      optimisticUpdater: store => {
+      onError: () => mutationErrorToast(intl),
+      optimisticUpdater: (store: RecordSourceSelectorProxy) => {
         const stepRecord = store.get(step.id)
         if (!stepRecord) return
 
@@ -125,7 +146,7 @@ const VotesPopupCardRanking: FC<Props> = ({ vote: voteKey, step: stepKey }) => {
           existingEdges.map(edgeRecord => [edgeRecord.getLinkedRecord('node')?.getValue('id'), edgeRecord]),
         )
 
-        const reorderedEdges = updatedVotes.map(({ node }) => edgesById.get(node.id)).filter(Boolean)
+        const reorderedEdges = normalisedVotes.map(({ id }) => edgesById.get(id)).filter(Boolean)
 
         reorderedEdges.forEach((edgeRecord, index) => {
           const nodeRecord = edgeRecord.getLinkedRecord('node')
@@ -147,7 +168,22 @@ const VotesPopupCardRanking: FC<Props> = ({ vote: voteKey, step: stepKey }) => {
 
         connection.setLinkedRecords(reorderedEdges, 'edges')
       },
-    })
+    }
+
+    if (viewerSession) {
+      commitUpdateVotes({
+        ...config,
+        variables: { input, stepId: step.id },
+      })
+    } else {
+      commitUpdateAnonymousVotes({
+        ...config,
+        variables: {
+          input: { ...input, token },
+          stepId: step.id,
+        },
+      })
+    }
   }
 
   return (
@@ -165,9 +201,9 @@ const VotesPopupCardRanking: FC<Props> = ({ vote: voteKey, step: stepKey }) => {
       <Box
         as="button"
         onClick={() => handleUpdate(1)}
-        opacity={isLoading || vote.ranking == step.rankedViewerVotes.edges.length - 1 ? 0.3 : 1}
-        disabled={isLoading || vote.ranking == step.rankedViewerVotes.edges.length - 1}
-        sx={{ cursor: isLoading || vote.ranking == step.rankedViewerVotes.edges.length - 1 ? 'default' : 'pointer' }}
+        opacity={isLoading || vote.ranking === step.rankedViewerVotes.edges.length - 1 ? 0.3 : 1}
+        disabled={isLoading || vote.ranking === step.rankedViewerVotes.edges.length - 1}
+        sx={{ cursor: isLoading || vote.ranking === step.rankedViewerVotes.edges.length - 1 ? 'default' : 'pointer' }}
       >
         <Icon name={CapUIIcon.ArrowDownO} />
       </Box>
