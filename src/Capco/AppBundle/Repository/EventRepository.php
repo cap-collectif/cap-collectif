@@ -194,7 +194,7 @@ class EventRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function findAllWithRegistration()
+    public function findAllWithRegistration(?string $eventId = null)
     {
         $qb = $this->createQueryBuilder('e')
             ->leftJoin('e.translations', 'translation')
@@ -204,6 +204,10 @@ class EventRepository extends EntityRepository
             ->andWhere('e.enabled = true OR r.status = :status')
             ->setParameter('status', EventReviewStatusType::APPROVED)
         ;
+
+        if (null !== $eventId) {
+            $qb->andWhere('e.id = :eventId')->setParameter('eventId', $eventId);
+        }
 
         return $qb->getQuery()->getArrayResult();
     }

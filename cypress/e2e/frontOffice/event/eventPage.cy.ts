@@ -2,56 +2,30 @@ import { Base, EventPage } from '~e2e/pages'
 import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 describe('Event Page - Event author want to export guests list', () => {
-  setupFeatureFlags({ calendar: true, export: true })
+  setupFeatureFlags({ calendar: true, export: true, allow_users_to_propose_events: true })
+
+  before(() => {
+    cy.task('db:restore')
+  })
 
   beforeEach(() => {
-    cy.task('db:restore')
-    cy.task('run:command', 'capco:export:events:participants')
     cy.directLoginAs('user')
   })
 
-  Cypress.on('uncaught:exception', (err, runnable) => {
-    // returning false here prevents Cypress from failing the test
-    return false
-  })
-
-  it.skip('exports guests list as Event author', () => {
-    cy.interceptGraphQLOperation({ operationName: 'EventPageQuery' })
+  /**
+   * @cypress-status compliant
+   * @cypress-reason Checks the author's real download through the event menu; CSV contents are covered by PHPUnit.
+   */
+  it('exports guests list as Event author', () => {
     EventPage.visitEventApprovedWithRegistration()
-    EventPage.quickActionButton.click({ force: true })
-
-    // TODO remove this block after migrate to cypress 13, this one is only a workaround to fix the issue https://github.com/cypress-io/cypress/issues/14857
-    cy.window().then(win => {
-      const triggerAutIframeLoad = () => {
-        const AUT_IFRAME_SELECTOR = '.aut-iframe'
-
-        // get the application iframe
-        const autIframe = win.parent.document.querySelector(AUT_IFRAME_SELECTOR)
-
-        if (!autIframe) {
-          throw new ReferenceError(`Failed to get the application frame using the selector '${AUT_IFRAME_SELECTOR}'`)
-        }
-
-        autIframe.dispatchEvent(new Event('load'))
-        // remove the event listener to prevent it from firing the load event before each next unload (basically before each successive test)
-        win.removeEventListener('beforeunload', triggerAutIframeLoad)
-      }
-
-      win.addEventListener('beforeunload', triggerAutIframeLoad)
+    EventPage.quickActionButton.should('be.visible').click()
+    cy.intercept('GET', '/export-my-event-participants/eventCreateByAUserReviewApproved').as('downloadParticipants')
+    cy.get('#download-event-registration').should('be.visible').click()
+    return cy.wait('@downloadParticipants').then(({ response }) => {
+      assert.equal(response?.statusCode, 200)
+      assert.include(response?.headers['content-type'], 'text/csv')
+      assert.include(response?.headers['content-disposition'], 'attachment')
     })
-
-    // TODO: A column is missing in the generated snapshot, we should investigate this with the export tests.
-    cy.get('#download-event-registration')
-      .click({ force: true })
-      .then(() => {
-        cy.request({
-          url: '/export-my-event-participants/eventCreateByAUserReviewApproved',
-          method: 'GET',
-        }).then(response => {
-          expect(response.status).not.to.equal(404)
-          expect(response.status).not.to.equal(500)
-        })
-      })
   })
 
   it('should show deleted cancelled event message', () => {
@@ -64,6 +38,10 @@ describe('Event Page - Event author want to export guests list', () => {
 
 describe('Events feature', () => {
   setupFeatureFlags({ calendar: true })
+
+  before(() => {
+    cy.task('db:restore')
+  })
 
   it('should see events list', () => {
     Base.visit({ path: '/events', operationName: 'EventRefetchRefetchQuery' })

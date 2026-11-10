@@ -13,13 +13,17 @@ describe('Opinion versions actions', () => {
     cy.get('#opinion-delete').should('not.exist')
   })
 
-  // TODO: fixme
-  // ! this test currently fails in CI, preventing the pipeline from succeeding.
-  // the behavior must be fixed urgently and the test must be uncommented
-  it.skip('should allow anonymous user to view all votes of a version', () => {
+  /**
+   * @cypress-status compliant
+   * @cypress-reason Checks that an anonymous visitor can open the version voters dialog.
+   */
+  it('should allow anonymous user to view all votes of a version', () => {
     OpinionPage.visitVersionWithVotesPage()
-    cy.get('button#opinion-votes-show-all').click({ force: true })
-    cy.get('.opinion__votes__userbox').should('exist').and('have.length.greaterThan', 10)
+    cy.get('button#opinion-votes-show-all').should('be.visible').click()
+    cy.get('[role="dialog"][aria-labelledby="opinion-votes-more-title"]')
+      .should('be.visible')
+      .find('.opinion__votes__userbox')
+      .should('have.length.greaterThan', 10)
   })
 
   it('should allow the author of a version to delete it', () => {

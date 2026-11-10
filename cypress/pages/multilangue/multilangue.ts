@@ -3,7 +3,8 @@ export default new (class Multilangue {
     return cy
   }
 
-  visitProjectsPage() {
-    cy.get('nav[role="navigation"] a').contains('Projets participatifs').click()
+  visitProjectsPage(localePrefix = '') {
+    const path = localePrefix ? `/${localePrefix}/projects` : '/projects'
+    cy.get(`nav a[href$="${path}"]`).first().should('be.visible').click()
   }
 })()

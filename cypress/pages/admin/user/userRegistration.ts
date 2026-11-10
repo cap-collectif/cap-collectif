@@ -15,11 +15,10 @@ export default new (class UserRegistration {
     cy.interceptGraphQLOperation({ operationName: 'RegisterMutation' })
     cy.get('[name=charte]').check({ force: true })
 
-    cy.get('#confirm-login').click({ force: true })
+    cy.get('#confirm-login').should('be.visible').click()
     cy.wait('@RegisterMutation')
 
-    // cy.get('#email-confirmation-help-message').should('exist') // todo: currently not working, skipping because CI needs to pass for now as is
-    // cy.get('.cap-modal__body').scrollTo('bottom') // todo: same comment
+    cy.get('#email-confirmation-help-message').scrollIntoView().should('be.visible')
   }
 
   fillUser() {

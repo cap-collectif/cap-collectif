@@ -2,6 +2,7 @@ import { defineConfig } from 'cypress'
 
 export default defineConfig({
   fixturesFolder: './fixtures',
+  downloadsFolder: './downloads',
   screenshotsFolder: './screenshots',
   videosFolder: './videos',
   viewportWidth: 1280,

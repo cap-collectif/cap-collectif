@@ -84,7 +84,13 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
             return 1;
         }
 
-        $events = $this->getEvents($input);
+        $eventId = $input->getOption('eventId');
+        $events = $this->eventRepository->findAllWithRegistration($eventId);
+        if (null !== $eventId && [] === $events) {
+            $output->writeln('<error>No eligible event found for the requested ID.</error>');
+
+            return 1;
+        }
         foreach ($events as $event) {
             $fileName = self::getFilename($event['slug']);
             $this->generateEventParticipantsFile($event, $input, $output, $fileName);
@@ -94,25 +100,6 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
         }
 
         return 0;
-    }
-
-    /** @return array<array{id: string, slug: ?string}> */
-    private function getEvents(InputInterface $input): array
-    {
-        $eventId = $input->getOption('eventId');
-        if (!$eventId) {
-            return $this->eventRepository->findAllWithRegistration();
-        }
-
-        $event = $this->eventRepository->find($eventId);
-        if (null === $event) {
-            throw new \InvalidArgumentException(sprintf('Event "%s" could not be found.', $eventId));
-        }
-
-        return [[
-            'id' => $event->getId(),
-            'slug' => $event->getSlug(),
-        ]];
     }
 
     private function printMemoryUsage(OutputInterface $output): void

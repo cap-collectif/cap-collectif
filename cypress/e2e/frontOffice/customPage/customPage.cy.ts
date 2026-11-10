@@ -1,21 +1,20 @@
-describe('Custom page', () => {
-  beforeEach(() => {
+/**
+ * @cypress-status compliant
+ * @cypress-reason Checks translated and encoded page URLs against server-rendered content.
+ */
+describe('Custom page translations', () => {
+  before(() => {
     cy.task('db:restore')
   })
-  it('User wants to see a custom page in french', () => {
-    cy.visit('/pages/faq')
-    cy.contains('FAQ FR')
-  })
-  it('User wants to see a custom page in english', () => {
+
+  // The default French page is already covered by publicNextRoutesSmoke.cy.ts.
+  it('renders the English translation selected by its slug', () => {
     cy.visit('/pages/faq-en')
-    cy.contains('FAQ EN')
+    cy.contains('h1', 'FAQ EN').should('be.visible')
   })
 
-  // TODO: fixme
-  // ! this test currently fails in CI, preventing the pipeline from succeeding.
-  // it must be fixed urgently and the test must be uncommented
-  it.skip('User wants to see a custom page with a non-standard URL', () => {
-    cy.visit('/pages/faq-Èn')
-    cy.contains('FAQ EN')
+  it('normalizes accents and case in an encoded page URL', () => {
+    cy.visit(encodeURI('/pages/faq-Èn'))
+    cy.contains('h1', 'FAQ EN').should('be.visible')
   })
 })

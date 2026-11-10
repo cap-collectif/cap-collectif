@@ -52,6 +52,10 @@ context('Votes from selection step page', () => {
 })
 
 context('Votes from proposal page', () => {
+  before(() => {
+    cy.task('db:restore')
+  })
+
   it('should disable vote button when admin has not enough credits', () => {
     cy.directLoginAs('admin')
 
@@ -103,21 +107,6 @@ context('Votes management page', () => {
     cy.get('#proposal-UHJvcG9zYWw6cHJvcG9zYWwz').find('.card__counters__value').contains('47')
     cy.get('#proposal-UHJvcG9zYWw6cHJvcG9zYWwz').find('.proposal__button__vote').click({ force: true })
     cy.get('#proposal-UHJvcG9zYWw6cHJvcG9zYWwz').find('.card__counters__value').contains('46')
-  })
-
-  /* cypress cannot test this behaviour with react-beautiful-dnd because it doesn't use browser drag and drop behaviour */
-  it.skip('should allow user to reorder votes for a project', () => {
-    cy.directLoginAs('user')
-    Base.visit({ path: '/projects/bp-avec-vote-classement/votes', operationName: 'NavBarMenuQuery' })
-
-    /* This will pass but html would not change! */
-    cy.get('.list__item')
-      .last()
-      .trigger('mousedown', { which: 1 })
-      .trigger('mousemove', { clientY: -200 })
-      .trigger('mouseup', { force: true })
-
-    cy.get('#vote-table-step-collecte-avec-vote-classement-limite').find('#confirm-update-votes').click({ force: true })
   })
 
   it('should allow user to set a vote as anonymous', () => {

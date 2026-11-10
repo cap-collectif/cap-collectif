@@ -47,7 +47,7 @@ class ExportControllerTest extends WebTestCase implements FeatureFlagsAwareTest
      *
      * @phpunit-status compliant
      *
-     * @phpunit-reason Exercises HTTP and real CSV generation, processing queued exports with an in-memory transport and restoring files on failure.
+     * @phpunit-reason Exercises HTTP and real CSV generation, processing queued exports with an in-memory transport and restoring registration settings and files on failure.
      */
     public function testEventAuthorOrAdminCanDownloadParticipants(
         string $email,
@@ -72,8 +72,12 @@ class ExportControllerTest extends WebTestCase implements FeatureFlagsAwareTest
         if (null !== $previousContents) {
             self::assertIsString($previousContents);
         }
+        $connection = $em->getConnection();
+        $previousGuestListEnabled = $event->isGuestListEnabled();
 
         try {
+            // The export subprocess must see the registration setting without changing the shared fixture permanently.
+            $connection->update('event', ['guest_list_enabled' => 1], ['id' => $eventId]);
             if (is_file($filePath)) {
                 unlink($filePath);
             }
@@ -113,6 +117,7 @@ class ExportControllerTest extends WebTestCase implements FeatureFlagsAwareTest
             self::assertSame('user_email', ltrim((string) $rows[0][0], "\xEF\xBB\xBF"));
             self::assertContains($expectedParticipantEmail, array_column(\array_slice($rows, 1), 0));
         } finally {
+            $connection->update('event', ['guest_list_enabled' => (int) $previousGuestListEnabled], ['id' => $eventId]);
             if (null !== $previousContents) {
                 file_put_contents($filePath, $previousContents);
             } elseif (is_file($filePath)) {

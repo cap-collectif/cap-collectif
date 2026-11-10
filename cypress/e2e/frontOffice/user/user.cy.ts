@@ -1,6 +1,10 @@
 import { Base, UserRegistration } from '~e2e-pages/index'
 import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
+/**
+ * @cypress-status compliant
+ * @cypress-reason Checks registration outcomes with isolated accounts and declarative feature flags.
+ */
 context('Register as a user', () => {
   describe('User register with any features', () => {
     setupFeatureFlags({
@@ -11,12 +15,9 @@ context('Register as a user', () => {
       turnstile_captcha: true,
     })
 
+    // Each registration creates the same account, including on retries.
     beforeEach(() => {
       cy.task('db:restore')
-    })
-    Cypress.on('uncaught:exception', (err, runnable) => {
-      // returning false here prevents Cypress from failing the test
-      return false
     })
 
     it('should register with user type and zipcode', () => {
@@ -38,6 +39,7 @@ context('Register as a user', () => {
     })
 
     it('should register without user type or zipcode', () => {
+      cy.setFeatureFlags({ user_type: false, zipcode_at_register: false })
       Base.visitHomepage()
       UserRegistration.clickRegistrationButton()
       cy.get('#username').should('be.visible')

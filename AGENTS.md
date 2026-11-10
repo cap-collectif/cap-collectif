@@ -434,7 +434,12 @@ capco:import:users            # Import users from CSV
 capco:export:users            # Export users (use SQL, not GraphQL)
 capco:export:consultation
 capco:export:debate
+capco:export:events:participants --eventId=<event-id> # Export one eligible event
 ```
+
+The optional `--eventId` limits event participant exports to one event with
+registration enabled. Without it, the command exports all eligible events.
+An unknown or ineligible ID fails without exporting other events.
 
 ## Workspaces & Subdirectory Commands
 
