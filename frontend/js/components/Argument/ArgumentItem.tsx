@@ -3,7 +3,7 @@ import { FormattedDate, FormattedMessage } from 'react-intl'
 import { graphql, createFragmentContainer } from 'react-relay'
 import classNames from 'classnames'
 import moment from 'moment'
-import Linkify from 'react-linkify'
+import Linkify from '@shared/ui/Linkify'
 import { Label, ListGroupItem } from 'react-bootstrap'
 
 import styled from 'styled-components'
@@ -109,13 +109,7 @@ export class ArgumentItem extends React.Component<Props> {
           <div className="opinion__body">
             <TrashedMessage contribution={argument}>
               <OpinionText className="opinion__text">
-                <Linkify
-                  properties={{
-                    className: 'external-link',
-                  }}
-                >
-                  {translateContent(htmlDecode(argument.body))}
-                </Linkify>
+                <Linkify linkClassName="external-link">{translateContent(htmlDecode(argument.body))}</Linkify>
               </OpinionText>
             </TrashedMessage>
             <ArgumentButtons argument={argument} />

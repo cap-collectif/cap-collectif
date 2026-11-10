@@ -1,6 +1,6 @@
 import React from 'react'
 import { createFragmentContainer, graphql } from 'react-relay'
-import Linkify from 'react-linkify'
+import Linkify from '@shared/ui/Linkify'
 import { FormattedMessage } from 'react-intl'
 import nl2br from 'react-nl2br'
 import type { CommentBody_comment } from '~relay/CommentBody_comment.graphql'
@@ -93,13 +93,7 @@ export class CommentBody extends React.Component<Props, State> {
         }}
       >
         {this.renderTrashedLabel()}
-        <Linkify
-          properties={{
-            className: 'external-link',
-          }}
-        >
-          {nl2br(this.generateText())}
-        </Linkify>
+        <Linkify linkClassName="external-link">{nl2br(this.generateText())}</Linkify>
         {this.renderReadMoreOrLess()}
         {this.renderTrashedReason()}
       </div>

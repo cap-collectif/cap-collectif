@@ -7418,6 +7418,7 @@ __metadata:
     leaflet-gesture-handling: "npm:^1.2.2"
     leaflet.locatecontrol: "npm:0.84.2"
     leaflet.markercluster: "npm:1.5.3"
+    linkify-it: "npm:^6.1.0"
     lint-staged: "npm:^10.0.7"
     lodash: "npm:^4.17.21"
     mailcheck: "npm:^1.1.1"
@@ -7449,7 +7450,6 @@ __metadata:
     react-intl-redux: "npm:^2.0.2"
     react-leaflet: "npm:4.2.1"
     react-leaflet-markercluster: "npm:4.2.1"
-    react-linkify: "npm:^0.2.2"
     react-nl2br: "npm:^0.4.0"
     react-on-rails: "npm:^11.3.1"
     react-places-autocomplete: "npm:^7.3.0"
@@ -7481,6 +7481,7 @@ __metadata:
     stylelint-processor-styled-components: "npm:^1.9.0"
     terser-webpack-plugin: "npm:^5.1.1"
     tinycolor2: "npm:^1.4.2"
+    tlds: "npm:^1.261.0"
     ts-loader: "npm:^9.5.0"
     turf-meta: "npm:^3.0.12"
     turf-union: "npm:^3.0.12"
@@ -13768,12 +13769,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"linkify-it@npm:^2.0.3":
-  version: 2.2.0
-  resolution: "linkify-it@npm:2.2.0"
+"linkify-it@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "linkify-it@npm:6.1.0"
   dependencies:
-    uc.micro: "npm:^1.0.1"
-  checksum: 10c0/640f926fa71d46f9451b4dc999c94b2dcad920abf5fe174a85f120b420cbb34b8f950e251846ed73db715ec9aaadadf1f2482d27088dddd21b1c84761f6a0b5a
+    uc.micro: "npm:^3.0.0"
+  checksum: 10c0/9b2b25244088dc345698fae7d3801c505f001dd0fa052298236bbc49f34e9c744ea73b53801635909a6a411e3b046074b13047aba47b72e26922114a89fea691
   languageName: node
   linkType: hard
 
@@ -16774,17 +16775,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-linkify@npm:^0.2.2":
-  version: 0.2.2
-  resolution: "react-linkify@npm:0.2.2"
-  dependencies:
-    linkify-it: "npm:^2.0.3"
-    prop-types: "npm:^15.5.8"
-    tlds: "npm:^1.57.0"
-  checksum: 10c0/d288311b7f82baa81b9e90d52699c8b1ffbc7a45ebc05a8dd9a935d7662999c9a70818de67803e18c501ae0ff58185d50954101692a2af6bbc76285450a7c8b6
-  languageName: node
-  linkType: hard
-
 "react-moment-proptypes@npm:^1.6.0":
   version: 1.8.1
   resolution: "react-moment-proptypes@npm:1.8.1"
@@ -19522,12 +19512,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tlds@npm:^1.57.0":
-  version: 1.221.1
-  resolution: "tlds@npm:1.221.1"
+"tlds@npm:^1.261.0":
+  version: 1.261.0
+  resolution: "tlds@npm:1.261.0"
   bin:
     tlds: bin.js
-  checksum: 10c0/bdb7aec49e9268977d2e1d9acc7d3eccd3266d6e2a1d9531c730e044c1c407067b3a62cf28fe71ef8d99106e10a47ebba019c6ad161ba0843d9c520fca223c71
+  checksum: 10c0/ce05d266618312dd52efe0c958ebd668da70b9b752b7ec1f1b8c4b8fabc6e0f044159f80fec6c3a78df02572afbeb343208df7ef8e83a43e9f8e6c26134c76ee
   languageName: node
   linkType: hard
 
@@ -20006,10 +19996,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uc.micro@npm:^1.0.1":
-  version: 1.0.6
-  resolution: "uc.micro@npm:1.0.6"
-  checksum: 10c0/9bde2afc6f2e24b899db6caea47dae778b88862ca76688d844ef6e6121dec0679c152893a74a6cfbd2e6fde34654e6bd8424fee8e0166cdfa6c9ae5d42b8a17b
+"uc.micro@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "uc.micro@npm:3.0.0"
+  checksum: 10c0/891907f5a389cdd48c5bad1a5516242a6db3a700620765b5bfe8b117a5632ccd276177382b0bd37aac85b56c90577840038cdd54f437dfbc30714cd2086a637a
   languageName: node
   linkType: hard
 

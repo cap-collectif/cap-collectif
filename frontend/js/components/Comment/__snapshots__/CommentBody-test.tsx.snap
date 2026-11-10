@@ -10,13 +10,7 @@ exports[`<CommentBody /> should render correctly 1`] = `
   }
 >
   <Linkify
-    className="Linkify"
-    component="a"
-    properties={
-      Object {
-        "className": "external-link",
-      }
-    }
+    linkClassName="external-link"
   >
     lol
   </Linkify>
@@ -41,13 +35,7 @@ exports[`<CommentBody /> should render correctly when trashed with body 1`] = `
     />
   </span>
   <Linkify
-    className="Linkify"
-    component="a"
-    properties={
-      Object {
-        "className": "external-link",
-      }
-    }
+    linkClassName="external-link"
   >
     lol
   </Linkify>
