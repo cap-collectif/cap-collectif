@@ -51,6 +51,7 @@ use Capco\Manager\RepositoryManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -120,16 +121,6 @@ class GlobalIdResolver
         'HttpRedirect',
         'SocialNetwork',
         'FooterSocialNetwork',
-    ];
-
-    private const CUSTOM_REPOSITORY_RESOLVER = [
-        'DebateArgument',
-        'Question',
-        'Reply',
-        'District',
-        'Contributor',
-        'SectionCarrouselElement',
-        'Version',
     ];
 
     private const LEGACY_REPOSITORY = [
@@ -323,6 +314,52 @@ class GlobalIdResolver
         return $uuidOrGlobalId;
     }
 
+    /**
+     * Assert that a decoded Global ID matches the expected type and existing node identity.
+     * Do not apply viewer permissions or change Doctrine filters.
+     *
+     * @param array{type: string, id: string} $decodedId
+     * @param class-string                    $expectedClass
+     *
+     * @throws \InvalidArgumentException When the Global ID does not match the expected class or node
+     */
+    public function assertGlobalIdMatchesClass(array $decodedId, string $expectedClass): void
+    {
+        $this->resolveGlobalIdForClass($decodedId, $expectedClass);
+    }
+
+    /**
+     * Resolve a decoded Global ID for the expected class, returning null when its node no longer exists.
+     * Do not apply viewer permissions or change Doctrine filters.
+     *
+     * @param array{type: string, id: string} $decodedId
+     * @param class-string                    $expectedClass
+     *
+     * @throws \InvalidArgumentException When the Global ID does not match the expected class or node
+     */
+    public function resolveGlobalIdForClass(array $decodedId, string $expectedClass): ?object
+    {
+        $compatible = false;
+        foreach ($this->getRepositoriesForType($decodedId['type']) as $repository) {
+            $nodeClass = $repository->getClassName();
+            if (is_a($nodeClass, $expectedClass, true) || is_a($expectedClass, $nodeClass, true)) {
+                $compatible = true;
+
+                break;
+            }
+        }
+        if (!$compatible) {
+            throw new \InvalidArgumentException(sprintf('Global ID type "%s" does not match expected class "%s".', $decodedId['type'], $expectedClass));
+        }
+
+        $entity = $this->entityManager->getRepository($expectedClass)->find($decodedId['id']);
+        if (null !== $entity && $this->getGraphQLId($decodedId) !== $entity) {
+            throw new \InvalidArgumentException(sprintf('Global ID type "%s" does not match the requested "%s" object with ID "%s".', $decodedId['type'], $expectedClass, $decodedId['id']));
+        }
+
+        return $entity;
+    }
+
     public function resolveByModerationToken(string $token): ModerableInterface
     {
         $moderableRepositories = [
@@ -446,38 +483,51 @@ class GlobalIdResolver
      */
     private function getGraphQLId(array|string $decodeGlobalId)
     {
-        $type = $decodeGlobalId['type'];
-
-        $repository = $this->repositoryManager->get($type);
-
-        $uuid = $decodeGlobalId['id'];
-
-        if (null !== $repository && !class_exists($repository::class)) {
-            return null;
+        foreach ($this->getRepositoriesForType($decodeGlobalId['type']) as $repository) {
+            $node = $repository->find($decodeGlobalId['id']);
+            if (null !== $node) {
+                return $node;
+            }
         }
+
+        return null;
+    }
+
+    /**
+     * @return iterable<EntityRepository>
+     */
+    private function getRepositoriesForType(string $type): iterable
+    {
+        $repository = $this->repositoryManager->get('VersionVote' === $type ? 'OpinionVersionVote' : $type);
 
         if (is_subclass_of($repository, AbstractStepRepository::class)) {
-            return $this->container->get(AbstractStepRepository::class)->find($uuid);
+            $stepRepository = $this->container->get(AbstractStepRepository::class);
+            \assert($stepRepository instanceof EntityRepository);
+
+            yield $stepRepository;
+
+            return;
         }
 
-        if (\in_array($type, self::CUSTOM_REPOSITORY_RESOLVER)) {
-            return match ($type) {
-                'DebateArgument' => $repository->find($uuid) ?? $this->container->get(DebateAnonymousArgumentRepository::class)->find($uuid),
-                'Question' => $this->container->get(AbstractQuestionRepository::class)->find($uuid),
-                'Reply' => $repository->find($uuid),
-                'District' => $this->container->get(ProposalDistrictRepository::class)->find($uuid) ?? $this->container->get(GlobalDistrictRepository::class)->find($uuid),
-                'Contributor' => $this->container->get(UserRepository::class)->find($uuid) ?? $this->container->get(ParticipantRepository::class)->find($uuid),
-                'SectionCarrouselElement' => $this->container->get(SectionCarrouselElementRepository::class)->find($uuid),
-                'Version' => $this->container->get(OpinionVersionRepository::class)->find($uuid),
-                default => null,
-            };
-        }
+        $repositoryClasses = match ($type) {
+            'DebateArgument' => [DebateArgumentRepository::class, DebateAnonymousArgumentRepository::class],
+            'Question' => [AbstractQuestionRepository::class],
+            'District' => [ProposalDistrictRepository::class, GlobalDistrictRepository::class],
+            'Contributor' => [UserRepository::class, ParticipantRepository::class],
+            'SectionCarrouselElement' => [SectionCarrouselElementRepository::class],
+            'Version' => [OpinionVersionRepository::class],
+            default => [],
+        };
+        if ([] !== $repositoryClasses) {
+            foreach ($repositoryClasses as $repositoryClass) {
+                $customRepository = $this->container->get($repositoryClass);
+                \assert($customRepository instanceof EntityRepository);
 
-        if (null === $repository) {
-            return null;
+                yield $customRepository;
+            }
+        } elseif (null !== $repository) {
+            yield $repository;
         }
-
-        return $repository->find($uuid);
     }
 
     private function getLegacyId(string $uuid)

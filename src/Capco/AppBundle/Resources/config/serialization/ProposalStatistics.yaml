@@ -1,5 +1,8 @@
 Capco\AppBundle\Entity\ProposalStatistics:
     attributes:
+        elasticsearchTypeName:
+            serialized_name: objectType
+            groups: [ElasticsearchProposalStatistics]
         getNbrOfMessagesSentToAuthor:
             groups: [Proposals, ElasticsearchProposalStatistics]
             serialized_name: nbrOfMessagesSentToAuthor

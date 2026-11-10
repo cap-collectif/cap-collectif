@@ -38,6 +38,10 @@ services:
         public: true
         lazy: true
 
+    Capco\AppBundle\Elasticsearch\IndexableTypesRegistry:
+        arguments:
+            $cache: '@cache.system'
+
     Elastica\Index:
         autowire: true
         public: true

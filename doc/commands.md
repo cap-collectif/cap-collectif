@@ -30,7 +30,39 @@ Indexation Elasticsearch
       capco:es:create-analytics-test-index        
       capco:es:mapping                            
       capco:es:migrate                            
-      capco:es:populate     
+      capco:es:populate
+
+La commande `capco:es:populate [type] [offset]` accepte aussi `--id=<identifiant>`
+pour synchroniser un seul document à partir de son ID ou UUID en base, ou de son Global ID
+GraphQL. Le format est détecté automatiquement, sans option supplémentaire.
+Le type encodé dans un Global ID doit désigner l'objet demandé, y compris son
+sous-type (`ValueResponse` ou `MediaResponse`, par exemple). En cas d'incohérence,
+la commande échoue sans modifier l'index.
+Le type est obligatoire avec `--id`, qui ne peut pas être combiné à un offset non nul.
+Si l'objet est absent de la base ou n'est plus indexable, son document Elasticsearch
+est supprimé. Un document déjà absent ne provoque pas d'erreur. Le type d'un Global ID
+est vérifié même si l'entité a disparu ; si elle existe, son sous-type est également vérifié.
+Les autres documents restent inchangés.
+
+La correspondance entre types Elasticsearch et classes Doctrine est conservée dans
+le cache système Symfony et préparée pendant le warmup, sans connexion à Elasticsearch.
+Après l'ajout d'une entité indexable ou la modification de son type, reconstruire
+ce cache avec `bin/console cache:clear` (avec warmup) ou `bin/console cache:warmup`,
+dans le conteneur applicatif et l'environnement concerné.
+
+```bash
+# Toutes les propositions
+docker exec -w /var/www capco_application_1 bin/console capco:es:populate proposal
+
+# Synchroniser une proposition (ou supprimer son document si elle a disparu), avec rafraîchissement immédiat
+docker exec -w /var/www capco_application_1 bin/console capco:es:populate proposal --id=<uuid>
+
+# Le même argument accepte un Global ID GraphQL (exemple : Proposal:proposal1)
+docker exec -w /var/www capco_application_1 bin/console capco:es:populate proposal --id=UHJvcG9zYWw6cHJvcG9zYWwx
+
+# Sur une instance distante
+capcocli exec <instance> 'php -d memory_limit=-1 bin/console capco:es:populate proposal --id=<uuid>'
+```
 
 Importer les fixtures de pro ou benchmark
 

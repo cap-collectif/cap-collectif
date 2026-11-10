@@ -3,6 +3,7 @@
 namespace spec\Capco\AppBundle\Elasticsearch;
 
 use Capco\AppBundle\Elasticsearch\Client;
+use Capco\AppBundle\Elasticsearch\IndexableTypesRegistry;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\ArgumentVote;
@@ -24,6 +25,7 @@ use Doctrine\Persistence\Mapping\ClassMetadataFactory;
 use Elastica\Index;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
 
@@ -62,7 +64,8 @@ class IndexerSpec extends ObjectBehavior
             ])
         ;
 
-        $this->beConstructedWith($registry, $serializer, $index, $logger, $stopwatch);
+        $types = new IndexableTypesRegistry($registry->getWrappedObject(), new ArrayAdapter());
+        $this->beConstructedWith($registry, $serializer, $index, $logger, $stopwatch, $types);
     }
 
     public function it_is_initializable(): void

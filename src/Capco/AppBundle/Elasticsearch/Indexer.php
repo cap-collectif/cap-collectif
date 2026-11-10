@@ -7,7 +7,6 @@ use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\District\AbstractDistrict;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Filter\ContributionCompletionStatusFilter;
 use Doctrine\ORM\EntityManager;
@@ -52,17 +51,13 @@ class Indexer
      */
     private $em;
 
-    /**
-     * @var array
-     */
-    private $classes;
-
     public function __construct(
         ManagerRegistry $registry,
         private readonly SerializerInterface $serializer,
         Index $index,
         private readonly LoggerInterface $logger,
-        private readonly Stopwatch $stopwatch
+        private readonly Stopwatch $stopwatch,
+        private readonly IndexableTypesRegistry $indexableTypes
     ) {
         $this->index = $index;
         $this->client = $index->getClient();
@@ -79,8 +74,7 @@ class Indexer
      */
     public function indexAll(?OutputInterface $output = null, bool $isCli = false): void
     {
-        $this->disableBuiltinSoftdelete();
-        $this->disableContributionCompletionStatusFilter();
+        $this->disableIndexingFilters();
         if ($isCli) {
             $this->getIndex()->setSettings(['index' => ['refresh_interval' => '-1']]);
         }
@@ -93,6 +87,8 @@ class Indexer
 
         foreach ($classesOrdered as $class) {
             $this->indexType($class, 0, $output);
+            // Later types compute counters by searching documents from earlier types.
+            $this->getIndex()->refresh();
         }
 
         if ($isCli) {
@@ -107,14 +103,14 @@ class Indexer
         ?OutputInterface $output = null,
         bool $isCli = false
     ): void {
-        $this->disableBuiltinSoftdelete();
-        $this->disableContributionCompletionStatusFilter();
+        $this->disableIndexingFilters();
         if ($isCli) {
             $this->getIndex()->setSettings(['index' => ['refresh_interval' => '-1']]);
         }
 
         $classes = $this->getClassesToIndex();
         $this->indexType($classes[$type], $offset, $output);
+        $this->getIndex()->refresh();
         if ($isCli) {
             $this->getIndex()->setSettings(['index' => ['refresh_interval' => '1s']]);
             $this->index->forcemerge(['max_num_segments' => 5]);
@@ -127,11 +123,20 @@ class Indexer
      */
     public function index(string $entityFQN, mixed $identifier): void
     {
-        $this->disableBuiltinSoftdelete();
-        $this->disableContributionCompletionStatusFilter();
+        $this->disableIndexingFilters();
 
         $repository = $this->em->getRepository($entityFQN);
         $object = $repository->findOneBy(['id' => $identifier]);
+        $this->indexResolvedObject($entityFQN, $identifier, $object);
+    }
+
+    /**
+     * Synchronize an already resolved target without reading it again.
+     * The caller must resolve it with indexing filters disabled and validate its identity.
+     * Call finishBulk() to send the pending operation.
+     */
+    public function indexResolvedObject(string $entityFQN, mixed $identifier, ?object $object): void
+    {
         if ($object instanceof IndexableInterface && $object->isIndexable()) {
             $document = $this->buildDocument($object);
             $this->addToBulk($document);
@@ -201,27 +206,7 @@ class Indexer
      */
     public function getClassesToIndex(): array
     {
-        if (!empty($this->classes)) {
-            return $this->classes;
-        }
-
-        $this->classes = [];
-        $metas = $this->em->getMetadataFactory()->getAllMetadata();
-        foreach ($metas as $meta) {
-            $interfaces = class_implements($meta->getName());
-            if ($interfaces && \in_array(IndexableInterface::class, $interfaces, true)) {
-                $type = \call_user_func($meta->getName() . '::getElasticsearchTypeName');
-                $this->classes[$type] = $meta->getName();
-            }
-        }
-
-        $this->classes['comment'] = Comment::class;
-        $this->classes['reply'] = Reply::class;
-        $this->classes['vote'] = AbstractVote::class;
-        $this->classes['response'] = AbstractResponse::class;
-        $this->classes['district'] = AbstractDistrict::class;
-
-        return $this->classes;
+        return $this->indexableTypes->getClasses();
     }
 
     public function setIndex(Index $index): self
@@ -229,6 +214,28 @@ class Indexer
         $this->index = $index;
 
         return $this;
+    }
+
+    /**
+     * Restore only filters disabled by this scope, including on failure or nested calls.
+     *
+     * @template T
+     *
+     * @param callable(): T $operation
+     *
+     * @return T
+     */
+    public function withIndexingFiltersDisabled(callable $operation): mixed
+    {
+        $disabledFilters = $this->disableIndexingFilters();
+
+        try {
+            return $operation();
+        } finally {
+            foreach ($disabledFilters as $filter) {
+                $this->em->getFilters()->enable($filter);
+            }
+        }
     }
 
     public function addApiAnalyticsDocumentToBulk(array $data): void
@@ -256,22 +263,22 @@ class Indexer
     }
 
     /**
-     * @todo remove this when we no more use doctrine built-in sofdelete
+     * Let isIndexable() decide eligibility, including for filtered entities.
+     *
+     * @return list<string> Previously enabled filters, for callers that restore their state
      */
-    private function disableBuiltinSoftdelete(): void
+    private function disableIndexingFilters(): array
     {
         $filters = $this->em->getFilters();
-        if ($filters->isEnabled('softdeleted')) {
-            $filters->disable('softdeleted');
+        $disabledFilters = [];
+        foreach (['softdeleted', ContributionCompletionStatusFilter::FILTER_NAME] as $name) {
+            if ($filters->isEnabled($name)) {
+                $filters->disable($name);
+                $disabledFilters[] = $name;
+            }
         }
-    }
 
-    private function disableContributionCompletionStatusFilter(): void
-    {
-        $filters = $this->em->getFilters();
-        if ($filters->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME)) {
-            $filters->disable(ContributionCompletionStatusFilter::FILTER_NAME);
-        }
+        return $disabledFilters;
     }
 
     private function getTypeFromEntityFQN($entityFQN): string
@@ -334,37 +341,37 @@ class Indexer
         $correctlyIndexed = 0;
         $correctlyDeleted = 0;
         foreach ($iterableResult as $key => $row) {
-            if ($key < $offset) {
-                if (isset($progress)) {
-                    $progress->advance();
+            if ($key >= $offset) {
+                /** @var IndexableInterface $object */
+                $object = $row[0];
+
+                if ($object->isIndexable()) {
+                    $document = $this->buildDocument($object);
+                    $this->addToBulk($document, false);
+                    ++$correctlyIndexed;
+                } else {
+                    // Empty means DELETE.
+                    $this->addToBulk(
+                        new Document(
+                            sprintf('%s:%s', $object::getElasticsearchTypeName(), $object->getId()),
+                            [],
+                            '_doc'
+                        ),
+                        false
+                    );
+                    ++$correctlyDeleted;
                 }
-
-                continue;
-            }
-
-            /** @var IndexableInterface $object */
-            $object = $row[0];
-
-            if ($object->isIndexable()) {
-                $document = $this->buildDocument($object);
-
-                $this->addToBulk($document);
-
-                ++$correctlyIndexed;
-            } else {
-                // Empty mean DELETE
-                $this->addToBulk(
-                    new Document(
-                        sprintf('%s:%s', $object::getElasticsearchTypeName(), $object->getId()),
-                        [],
-                        '_doc'
-                    )
-                );
-                ++$correctlyDeleted;
             }
 
             if (isset($progress)) {
                 $progress->advance();
+            }
+
+            // Documents already contain serialized data; release their entity graphs,
+            // including rows skipped by the offset, before processing the next batch.
+            if (0 === ($key + 1) % self::BULK_SIZE) {
+                $this->finishBulk(true);
+                $this->em->clear();
             }
         }
         $this->em->clear();
@@ -388,7 +395,7 @@ class Indexer
      * Add a Document to the current bulk.
      * This does not send the bulk! /!\ (only if the threshold is hit).
      */
-    private function addToBulk(Document $document): void
+    private function addToBulk(Document $document, bool $refresh = true): void
     {
         $document->setIndex($this->index);
 
@@ -402,7 +409,7 @@ class Indexer
             \count($this->currentInsertBulk) >= self::BULK_SIZE
             || \count($this->currentDeleteBulk) >= self::BULK_SIZE
         ) {
-            $this->finishBulk();
+            $this->finishBulk(!$refresh);
         }
     }
 }
