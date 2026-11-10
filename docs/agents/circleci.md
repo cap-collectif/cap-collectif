@@ -70,7 +70,13 @@ attendent ce nouveau job dans les workflows `tests`, `test-and-build` et `prepro
 
 Le build de production hérité de `prepare` est remplacé avant compilation. Une
 archive dédiée au workflow contient le résultat `.next` et les workers MapLibre,
-sans le cache du compilateur ni le bundle standalone. Chaque machine Cypress
+sans le cache du compilateur ni le bundle standalone. Avant sa persistance,
+l’archive est copiée sur l’hôte dans `~/admin-next-workspace`, hors des volumes
+Docker. Les changements récursifs de propriétaire au démarrage PHP peuvent ainsi
+toucher `var/` sans modifier les métadonnées de la copie lue par CircleCI et
+provoquer l’erreur tar `file changed as we read it`. Une copie indépendante est
+nécessaire ; un lien physique partagerait les mêmes métadonnées. Le chemin relatif
+`var/ci-admin-next` reste identique dans le workspace. Chaque machine Cypress
 restaure cette archive avant de démarrer Docker, puis lance seulement `next start`.
 Le SHA enregistré dans le build doit correspondre à `CIRCLE_SHA1`. Une archive
 absente, corrompue ou issue d’une autre révision fait échouer le job, sans rebuild
