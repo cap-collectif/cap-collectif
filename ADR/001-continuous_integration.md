@@ -225,6 +225,18 @@ Si l'un des jobs de vérification rapide échoue, les jobs suivants ne sont pas 
 
 #### Cache
 
+Le Docker Layer Caching (DLC) est désactivé sur `production-executor`, utilisé
+pour construire les images QA et production. Sur le comparatif du 10 novembre
+2026, à SHA, contexte et image de base identiques, le job
+[avec DLC](https://circleci.com/gh/cap-collectif/platform/1756105) a consommé
+224 crédits contre 58 pour le job
+[sans DLC](https://circleci.com/gh/cap-collectif/platform/1756104).
+La construction sans cache a pris 3 min 27 supplémentaires, mais économisé
+166 crédits : le forfait DLC de 200 crédits par job dépassait le calcul évité.
+Cette mesure justifie la désactivation ; le gain exact varie selon les builds.
+Les caches de dépendances, de builds JavaScript et les archives Docker utilisées
+par les machines de test restent indépendants de cette option.
+
 Le cache CircleCI est limité (2GB inclus par période de facturation). Éviter de stocker des artefacts volumineux inutilement.
 Afin de limiter les problèmes liés au cache et de diminuer les factures, nous avons choisi de diminuer la durée de conservation du cache.
 
