@@ -15,6 +15,7 @@ use Capco\AppBundle\Entity\ProposalRevision;
 use Capco\AppBundle\Entity\ProposalSocialNetworks;
 use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Entity\Status;
+use Capco\AppBundle\Enum\ContributionCompletionStatus;
 use Capco\AppBundle\Enum\ProposalPublicationStatus;
 use Capco\AppBundle\Form\ProposalAdminType;
 use Capco\AppBundle\Form\ProposalEvaluersType;
@@ -35,8 +36,10 @@ use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\SelectionRepository;
 use Capco\AppBundle\Repository\StatusRepository;
+use Capco\AppBundle\Service\ParticipantAuthentication;
 use Capco\AppBundle\Service\ParticipantHelper;
 use Capco\AppBundle\Service\ProjectParticipantsTotalCountCacheHandler;
+use Capco\AppBundle\Service\ProposalWorkflowAuthentication;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Util\ClassUtils;
@@ -81,6 +84,8 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
         ProjectParticipantsTotalCountCacheHandler $participantsTotalCountCacheHandler,
         TokenGeneratorInterface $tokenGenerator,
         private readonly ProposalAccessResolver $proposalAccessResolver,
+        private readonly ParticipantAuthentication $participantAuthentication,
+        private readonly ProposalWorkflowAuthentication $workflowAuthentication,
     ) {
         parent::__construct(
             $logger,
@@ -479,6 +484,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
     {
         $this->formatInput($input);
         $values = $input->getArrayCopy();
+        $publishRequested = false === ($values['draft'] ?? null);
         $emailToken = $values['emailToken'] ?? null;
         $participantToken = $values['participantToken'] ?? null;
         if ($participantToken) {
@@ -487,6 +493,12 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
 
         /** @var Proposal $proposal */
         $proposal = $this->globalIdResolver->resolve($values['id'], $viewer);
+        if (!$proposal && !$viewer && $emailToken) {
+            $candidate = $this->globalIdResolver->resolve($values['id'], null, new \ArrayObject(['disable_acl' => true]));
+            if ($candidate instanceof Proposal && !$candidate->isDeleted() && $candidate->getEmailToken() && hash_equals($candidate->getEmailToken(), $emailToken)) {
+                $proposal = $candidate;
+            }
+        }
 
         if (!$proposal) {
             $error = sprintf('Unknown proposal with id "%s"', $values['id']);
@@ -669,7 +681,16 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
         $this->indexer->index(ClassUtils::getClass($proposal), $proposal->getId());
         $this->indexer->finishBulk();
 
-        return ['proposal' => $proposal, 'shouldTriggerWorkflow' => $shouldTriggerWorkflow];
+        $participantAuthenticationRequired = !$viewer
+            && $proposalParticipant
+            && $publishRequested
+            && ($shouldTriggerWorkflow || ContributionCompletionStatus::MISSING_REQUIREMENTS === $proposal->getCompletionStatus())
+            && $this->participantAuthentication->getParticipant()?->getId() !== $proposalParticipant->getId();
+        if ($participantAuthenticationRequired) {
+            $this->workflowAuthentication->request($proposal);
+        }
+
+        return ['proposal' => $proposal, 'shouldTriggerWorkflow' => $shouldTriggerWorkflow, 'participantAuthenticationRequired' => $participantAuthenticationRequired];
     }
 
     /** TODO use social networks validator */

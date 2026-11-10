@@ -49,6 +49,7 @@ import DsButton from '~ds/Button/Button'
 import { toast } from '~/components/DesignSystem/Toast'
 import { mapOpenPopup } from '~/components/Proposal/Map/Map.events'
 import CookieMonster from '@shared/utils/CookieMonster'
+import { CONTRIBUTION_ID_URL_PARAM } from '~/components/ParticipationWorkflow/ParticipationWorkflow'
 const getAvailableDistrictsQuery = graphql`
   query ProposalFormLegacyAvailableDistrictsForLocalisationQuery(
     $proposalFormId: ID!
@@ -166,7 +167,7 @@ export const ExternalLinks = styled.div`
 export const onSubmit = (
   values: FormValues,
   dispatch: Dispatch,
-  { proposalForm, proposal, features, intl, onSubmitSuccess, onSubmitFailed, isAuthenticated }: Props,
+  { proposalForm, proposal, features, intl, onSubmitSuccess, onSubmitFailed, isAuthenticated, user }: Props,
 ) => {
   const data = {
     title: values.title,
@@ -230,6 +231,27 @@ export const onSubmit = (
         }
 
         window.removeEventListener('beforeunload', onUnload)
+        if (response.changeProposalContent.participantAuthenticationRequired) {
+          toast({ variant: 'success', content: intl.formatMessage({ id: 'user.confirm.sent' }) })
+          onSubmitSuccess()
+          return
+        }
+
+        const updatedProposal = response.changeProposalContent.proposal
+        if (
+          updatedProposal.form.step &&
+          !values.draft &&
+          (!isAuthenticated || (user?.id && updatedProposal.author?.id === user.id)) &&
+          (updatedProposal.completionStatus === 'MISSING_REQUIREMENTS' ||
+            response.changeProposalContent.shouldTriggerWorkflow)
+        ) {
+          const url = new URL(updatedProposal.form.step.url, window.location.href)
+          url.searchParams.set('workflow', '')
+          url.searchParams.set(CONTRIBUTION_ID_URL_PARAM, updatedProposal.id)
+          window.location.assign(url.toString())
+          return
+        }
+
         onSubmitSuccess()
 
         if (window.location.href.includes(EDIT_MODAL_ANCHOR)) {

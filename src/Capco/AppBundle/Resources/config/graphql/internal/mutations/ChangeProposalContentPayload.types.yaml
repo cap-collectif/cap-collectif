@@ -4,6 +4,9 @@ ChangeProposalContentPayload:
         fields:
             proposal:
                 type: 'InternalProposal'
+            participantAuthenticationRequired:
+                type: 'Boolean'
+                description: 'Whether a fresh email authentication is required before resuming the participation workflow.'
             shouldTriggerWorkflow:
                 type: 'Boolean!'
                 description: 'Whether the workflow should be triggered'

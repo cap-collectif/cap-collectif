@@ -23,8 +23,10 @@ use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Service\ParticipantAuthentication;
 use Capco\AppBundle\Service\ParticipantHelper;
 use Capco\AppBundle\Service\ProjectParticipantsTotalCountCacheHandler;
+use Capco\AppBundle\Service\ProposalWorkflowAuthentication;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
@@ -72,6 +74,8 @@ class ProposalMutationSpec extends ObjectBehavior
         ProjectParticipantsTotalCountCacheHandler $participantsTotalCountCacheHandler,
         TokenGeneratorInterface $tokenGenerator,
         ProposalAccessResolver $proposalAccessResolver,
+        ParticipantAuthentication $participantAuthentication,
+        ProposalWorkflowAuthentication $workflowAuthentication,
     ) {
         $this->beConstructedWith(
             $logger,
@@ -94,7 +98,9 @@ class ProposalMutationSpec extends ObjectBehavior
             $participantRepository,
             $participantsTotalCountCacheHandler,
             $tokenGenerator,
-            $proposalAccessResolver
+            $proposalAccessResolver,
+            $participantAuthentication,
+            $workflowAuthentication
         );
     }
 
@@ -227,7 +233,7 @@ class ProposalMutationSpec extends ObjectBehavior
         ;
         $indexer->finishBulk()->shouldBeCalled();
 
-        $this->changeContent($input, $user)->shouldBe(['proposal' => $proposal, 'shouldTriggerWorkflow' => true]);
+        $this->changeContent($input, $user)->shouldBe(['proposal' => $proposal, 'shouldTriggerWorkflow' => true, 'participantAuthenticationRequired' => false]);
     }
 
     public function it_change_content_from_revision_as_role_user(
@@ -400,7 +406,7 @@ class ProposalMutationSpec extends ObjectBehavior
         ;
         $indexer->finishBulk()->shouldBeCalled();
 
-        $this->changeContent($input, $user)->shouldBe(['proposal' => $proposal, 'shouldTriggerWorkflow' => false]);
+        $this->changeContent($input, $user)->shouldBe(['proposal' => $proposal, 'shouldTriggerWorkflow' => false, 'participantAuthenticationRequired' => false]);
     }
 
     public function it_change_content_as_project_owner(
@@ -534,7 +540,7 @@ class ProposalMutationSpec extends ObjectBehavior
         ;
         $indexer->finishBulk()->shouldBeCalled();
 
-        $this->changeContent($input, $owner)->shouldBe(['proposal' => $proposal, 'shouldTriggerWorkflow' => false]);
+        $this->changeContent($input, $owner)->shouldBe(['proposal' => $proposal, 'shouldTriggerWorkflow' => false, 'participantAuthenticationRequired' => false]);
     }
 
     public function it_change_content_as_role_admin(
@@ -666,7 +672,7 @@ class ProposalMutationSpec extends ObjectBehavior
         ;
         $indexer->finishBulk()->shouldBeCalled();
 
-        $this->changeContent($input, $admin)->shouldBe(['proposal' => $proposal, 'shouldTriggerWorkflow' => false]);
+        $this->changeContent($input, $admin)->shouldBe(['proposal' => $proposal, 'shouldTriggerWorkflow' => false, 'participantAuthenticationRequired' => false]);
     }
 
     public function it_hydrate_social_networks(

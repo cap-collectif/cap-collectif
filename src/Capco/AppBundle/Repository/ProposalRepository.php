@@ -11,7 +11,9 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ProposalStepInterface;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Enum\ContributionCompletionStatus;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Capco\AppBundle\Filter\ContributionCompletionStatusFilter;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\DBAL\Types\Types;
@@ -128,12 +130,27 @@ class ProposalRepository extends EntityRepository
             ->setParameter('proposalId', $id)
         ;
 
-        return $qb
-            ->getQuery()
-            ->useQueryCache(true)
-            ->enableResultCache(60, self::getOneBySlugCacheKey($slug))
-            ->getOneOrNullResult()
-        ;
+        $filters = $this->_em->getFilters();
+        $wasEnabled = $filters->isEnabled(ContributionCompletionStatusFilter::FILTER_NAME);
+        if ($wasEnabled) {
+            $filters->disable(ContributionCompletionStatusFilter::FILTER_NAME);
+            $qb->andWhere('p.completionStatus = :completed OR p.draft = true')
+                ->setParameter('completed', ContributionCompletionStatus::COMPLETED)
+            ;
+        }
+
+        try {
+            return $qb
+                ->getQuery()
+                ->useQueryCache(true)
+                ->enableResultCache(60, self::getOneBySlugCacheKey($slug))
+                ->getOneOrNullResult()
+            ;
+        } finally {
+            if ($wasEnabled) {
+                $filters->enable(ContributionCompletionStatusFilter::FILTER_NAME);
+            }
+        }
     }
 
     public function getProposalsGroupedByCollectSteps(User $user, bool $onlyVisible = false): array

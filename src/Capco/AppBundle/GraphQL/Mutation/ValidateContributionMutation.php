@@ -85,6 +85,9 @@ class ValidateContributionMutation implements MutationInterface
         }
 
         $contributor = $participant ?? $viewer;
+        if (!$contributor) {
+            throw new UserError('You must be logged in or send a valid participant token');
+        }
 
         $contributionId = $input->offsetGet('contributionId');
         if ('VocalContribution' === (GlobalId::fromGlobalId($contributionId)['type'] ?? null)) {

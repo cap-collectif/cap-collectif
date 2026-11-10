@@ -29,6 +29,10 @@ services:
     Capco\AppBundle\Service\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Service/*'
 
+    Capco\AppBundle\Service\ProposalWorkflowAuthentication:
+        arguments:
+            $redis: '@snc_redis.default'
+
     Capco\AppBundle\Service\MediaAccessResolver:
         public: true
 

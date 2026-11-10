@@ -23,6 +23,7 @@ import type { ChangeProposalContentInput } from '~relay/ChangeProposalContentMut
 import ChangeProposalContentMutation from '~/mutations/ChangeProposalContentMutation'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import CookieMonster from '@shared/utils/CookieMonster'
+import { CONTRIBUTION_ID_URL_PARAM } from '~/components/ParticipationWorkflow/ParticipationWorkflow'
 type Props = {
   readonly onClose: () => void
   readonly resetModalState: () => void
@@ -33,9 +34,10 @@ type Props = {
   readonly proposal: ProposalErrorModal_proposal$key
   readonly onSubmitFailed: () => void
   readonly isAuthenticated?: boolean
+  readonly viewerId?: string
 }
 
-const saveProposal = (
+export const saveProposal = (
   data: CreateProposalInput | ChangeProposalContentInput,
   proposalForm: ProposalErrorModal_proposalForm,
   proposal: ProposalErrorModal_proposal,
@@ -45,9 +47,11 @@ const saveProposal = (
   onClose: () => void,
   onSubmitFailed: () => void,
   isAuthenticated?: boolean,
+  viewerId?: string,
 ) => {
   const participantToken = CookieMonster.getParticipantCookie()
-  const emailToken = typeof window === 'undefined' ? undefined : new URLSearchParams(window.location.search).get('token')
+  const emailToken =
+    typeof window === 'undefined' ? undefined : new URLSearchParams(window.location.search).get('token')
 
   if (data.proposalFormId) {
     return CreateProposalMutation.commit({
@@ -141,6 +145,27 @@ const saveProposal = (
         window.removeEventListener('beforeunload', e => {
           e.returnValue = true
         })
+        if (response.changeProposalContent.participantAuthenticationRequired) {
+          toast({ variant: 'success', content: intl.formatMessage({ id: 'user.confirm.sent' }) })
+          onClose()
+          return
+        }
+
+        const updatedProposal = response.changeProposalContent.proposal
+        if (
+          updatedProposal.form.step &&
+          !data.draft &&
+          (!isAuthenticated || (viewerId && updatedProposal.author?.id === viewerId)) &&
+          (updatedProposal.completionStatus === 'MISSING_REQUIREMENTS' ||
+            response.changeProposalContent.shouldTriggerWorkflow)
+        ) {
+          const url = new URL(updatedProposal.form.step.url, window.location.href)
+          url.searchParams.set('workflow', '')
+          url.searchParams.set(CONTRIBUTION_ID_URL_PARAM, updatedProposal.id)
+          window.location.assign(url.toString())
+          return
+        }
+
         onClose()
 
         if (window.location.href.includes(EDIT_MODAL_ANCHOR)) {
@@ -182,6 +207,7 @@ const ProposalErrorModal = ({
   proposal: proposalFragment,
   onSubmitFailed,
   isAuthenticated,
+  viewerId,
 }: Props): JSX.Element => {
   const intl = useIntl()
   const dispatch: Dispatch = useDispatch()
@@ -249,6 +275,7 @@ const ProposalErrorModal = ({
                   onClose,
                   onSubmitFailed,
                   isAuthenticated,
+                  viewerId,
                 )
               }
 
@@ -268,6 +295,7 @@ const ProposalErrorModal = ({
 const mapStateToProps = (state: GlobalState) => ({
   submitting: isSubmitting(formName)(state),
   isAuthenticated: !!state.user.user,
+  viewerId: state.user.user?.id,
 })
 
 export default connect(mapStateToProps)(ProposalErrorModal)

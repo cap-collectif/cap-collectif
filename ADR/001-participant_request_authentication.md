@@ -53,3 +53,28 @@ Anonymous reply creation returns answer content before the client writes its rep
 - Verify field-order independence, cross-participant denial, cross-questionnaire ownership, invalid participant cookies on unsigned requests, participant-cookie/reply-cookie precedence, cookie-only compatibility, and mutation payload isolation. Include creation without credentials and authenticated-user access with stale or invalid participation cookies.
 
 Payload grants are bound to the returned reply ID and its GraphQL response path, including aliases; they are never included in collection criteria. GraphQL responses are private and non-cacheable, including credential-free creation responses containing a new participant token. Cookie-authenticated participant requests with a cross-site Origin or fetch-site indicator are rejected before execution.
+
+## Resuming proposal requirements from an email edit link
+
+A proposal email token authorizes editing that proposal only. It must not be
+exchanged for a participant cookie, exposed as a participant token, or used to
+read or modify another contribution or the participant's shared profile.
+
+When publishing an incomplete proposal through this link without the matching
+participant cookie, the mutation saves the proposal and returns
+`participantAuthenticationRequired`. The client waits instead of opening the
+participant-wide workflow. The server sends a separate confirmation to the
+participant's existing email address; the caller cannot select its recipient.
+Only this fresh mailbox proof authenticates the participant. Its random token
+expires after 15 minutes, is consumed atomically once, and is bound to the
+participant's email and current credential. It is never returned by GraphQL.
+The confirmation sets a secure session cookie and redirects to the original
+proposal's collection workflow. A signed-in user cannot consume this anonymous
+authentication link. Existing matching participant sessions and signed-in authors
+retain the direct workflow. Creating or saving a draft does not open the workflow
+or send an authentication email, even when requirements are missing.
+
+This deliberately adds an email confirmation for browsers without the matching
+session instead of extending the original edit link's permissions. The response
+uses the existing email-confirmation notification; mail delivery failures remain
+mutation errors. Deploy with regenerated GraphQL definitions and schemas.

@@ -10,7 +10,15 @@ import type {
 const mutation = graphql`
   mutation ChangeProposalContentMutation($input: ChangeProposalContentInput!, $proposalRevisionsEnabled: Boolean!) {
     changeProposalContent(input: $input) {
+      participantAuthenticationRequired
+      shouldTriggerWorkflow
       proposal {
+        completionStatus
+        form {
+          step {
+            url
+          }
+        }
         ...ProposalEditModal_proposal @arguments(proposalRevisionsEnabled: false)
         ...ProposalRevision_proposal @include(if: $proposalRevisionsEnabled)
         id

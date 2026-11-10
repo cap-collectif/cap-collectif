@@ -2103,6 +2103,11 @@ input ChangeProposalContentInput {
 type ChangeProposalContentPayload {
   proposal: Proposal
 
+  """
+  Whether a fresh email authentication is required before resuming the participation workflow.
+  """
+  participantAuthenticationRequired: Boolean
+
   """Whether the workflow should be triggered"""
   shouldTriggerWorkflow: Boolean!
 
