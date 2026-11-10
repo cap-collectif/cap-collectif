@@ -9,6 +9,7 @@ import { useQueryState } from 'nuqs'
 import { exportLatLngBounds } from '@utils/leaflet'
 import ProjectsListPlaceholder from '@shared/projectCard/ProjectsListSkeleton'
 import { VOTE_STEP_PROPOSALS_COUNT } from './VoteStep.queries'
+import useIsMobile from '@shared/hooks/useIsMobile'
 
 type TemplateColumns = {
   base: string
@@ -96,6 +97,7 @@ export const VoteStepProposalsList: React.FC<Props> = ({
   onSelectedIdChange,
 }) => {
   const { data, refetch, loadNext, hasNext, isLoadingNext } = usePaginationFragment(PROPOSALS_FRAGMENT, stepKey)
+  const isMobile = useIsMobile()
 
   const [latlngBounds] = useQueryState('latlngBounds')
   const [sort] = useQueryState('sort')
@@ -106,7 +108,8 @@ export const VoteStepProposalsList: React.FC<Props> = ({
       ? data.project?.firstCollectStep?.mainView
       : undefined
   const defaultView = mainView === 'LIST' ? 'list' : 'grid'
-  const [listView] = useQueryState('list_view', { defaultValue: defaultView })
+  const [requestedView] = useQueryState('list_view', { defaultValue: defaultView })
+  const listView = isMobile ? 'grid' : requestedView
   const [isMapShown] = useQueryState('map_shown')
 
   const debounceTimerRef = React.useRef<NodeJS.Timeout | null>(null)

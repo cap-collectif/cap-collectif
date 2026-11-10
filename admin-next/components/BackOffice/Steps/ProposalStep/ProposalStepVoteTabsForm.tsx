@@ -426,7 +426,9 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
           <Tabs.Panel />
         </Tabs.PanelList>
       </Tabs>
-      {newVoteStepEnabled ? <ProposalStepVoteBtn /> : null}
+      {newVoteStepEnabled && (_voteTypeForTabs === 'SIMPLE' || _voteTypeForTabs === 'ADVANCED') ? (
+        <ProposalStepVoteBtn />
+      ) : null}
     </>
   )
 }

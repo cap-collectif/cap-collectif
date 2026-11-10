@@ -78,7 +78,7 @@ const VoteStepMobileVotesModal: FC<Props> = ({ step: stepKey, isActive = false, 
       alwaysOpenInPortal
       forceModalDialogToFalse
       hideOnClickOutside={false}
-      zIndex={1999}
+      zIndex={999}
     >
       <Modal.Body pt="md" pb={pxToRem(72)} overflow="hidden">
         <VoteStepUserInfos step={step} />

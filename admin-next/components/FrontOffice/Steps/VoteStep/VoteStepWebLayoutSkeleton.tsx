@@ -21,7 +21,7 @@ export const VoteStepWebLayoutSkeleton: React.FC<{ hasMapView: boolean }> = ({ h
 )
 
 export const VoteStepProjectHeroSkeleton: React.FC = () => (
-  <Box backgroundColor="white" borderBottom="1px solid #e3e3e3" mb="md">
+  <Box backgroundColor="white" borderBottom="1px solid #e3e3e3">
     <Box maxWidth={pxToRem(1280)} width="100%" margin="auto" py={9} px={[4, 6]}>
       <Flex gap="lg" flexDirection={['column-reverse', 'row']}>
         <Box flex="1">

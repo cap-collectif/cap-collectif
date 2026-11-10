@@ -35,7 +35,6 @@ import useIsMobile from '@shared/hooks/useIsMobile'
 import DefaultProjectImage from '@shared/sections/carrousel/DefaultProjectImage'
 import htmlDecode from '@shared/utils/htmlDecode'
 import VoteStepProjectHeroStats from './VoteStepProjectHeroStats'
-import VoteStepProjectHeroStepInfo from './VoteStepProjectHeroStepInfo'
 
 type Props = {
   step: VoteStepProjectHero_proposalStep$key
@@ -49,11 +48,6 @@ type RestrictedViewerGroup = NonNullable<
 const FRAGMENT = graphql`
   fragment VoteStepProjectHero_proposalStep on ProposalStep {
     id
-    state
-    timeRange {
-      startAt
-      endAt
-    }
     project {
       title
       url
@@ -669,7 +663,6 @@ const VoteStepProjectHero: React.FC<Props> = ({ step: stepKey }) => {
         className="projectHeader voteStepProjectHero"
         maxWidth="100%"
         paddingY={[0, 9]}
-        mb="md"
         borderBottom="1px solid #e3e3e3"
       >
         <Box maxWidth={pxToRem(1280)} width="100%" margin="auto" px={[0, 'lg']}>
@@ -792,9 +785,6 @@ const VoteStepProjectHero: React.FC<Props> = ({ step: stepKey }) => {
             marginTop={3}
           />
         </Box>
-      </Box>
-      <Box className="voteStepProjectHero" maxWidth={pxToRem(1280)} width="100%" margin="3rem auto 0" px={[4, 'lg']}>
-        <VoteStepProjectHeroStepInfo state={step.state} timeRange={step.timeRange} />
       </Box>
     </>
   )

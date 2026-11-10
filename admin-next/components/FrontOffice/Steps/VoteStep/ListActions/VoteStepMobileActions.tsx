@@ -69,7 +69,7 @@ const StepVoteMobileActions: React.FC<Props> = ({ step: stepKey, onWorkflowTrigg
   }
 
   return (
-    <Box position="fixed" zIndex={2000} bottom={0} left={0} width="100%" backgroundColor="white" px="xs" py="sm">
+    <Box position="fixed" zIndex={1000} bottom={0} left={0} width="100%" backgroundColor="white" px="xs" py="sm">
       <Flex id="view-change-panel" width="100%">
         <VoteStepMobileFiltersModal
           stepId={step.id}

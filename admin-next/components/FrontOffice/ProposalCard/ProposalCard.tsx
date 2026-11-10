@@ -21,6 +21,7 @@ import { VoteButton } from '@components/FrontOffice/VoteButton/VoteButton'
 import { ProposalCard_proposal$key } from '@relay/ProposalCard_proposal.graphql'
 import { ProposalCard_step$key } from '@relay/ProposalCard_step.graphql'
 import convertIconToDs from '@shared/utils/convertIconToDs'
+import useIsMobile from '@shared/hooks/useIsMobile'
 import stripHTML from '@shared/utils/stripHTML'
 import { getProposalAuthorDisplayName } from '@utils/proposalAuthor'
 import { parseAsInteger, useQueryState } from 'nuqs'
@@ -125,6 +126,7 @@ export const ProposalCard: React.FC<Props> = ({
 }) => {
   const proposal = useFragment(PROPOSAL_FRAGMENT, proposalKey)
   const step = useFragment(STEP_FRAGMENT, stepFragment)
+  const isMobile = useIsMobile()
   const intl = useIntl()
   const authorName = getProposalAuthorDisplayName(proposal.author)
   const { id, title, url, media, summary, body, category, form, status } = proposal
@@ -141,7 +143,8 @@ export const ProposalCard: React.FC<Props> = ({
       ? step.project?.firstCollectStep?.mainView
       : undefined
   const defaultView = mainView === 'LIST' ? 'list' : 'grid'
-  const [listView] = useQueryState('list_view', { defaultValue: defaultView })
+  const [requestedView] = useQueryState('list_view', { defaultValue: defaultView })
+  const listView = isMobile ? 'grid' : requestedView
   const [isMapShown] = useQueryState('map_shown', parseAsInteger)
 
   const descriptionLineClamp = isMapShown !== 0 ? 3 : 4
@@ -186,7 +189,11 @@ export const ProposalCard: React.FC<Props> = ({
             <CardCoverPlaceholder icon={proposalIcon} color={proposalColor} />
           )}
           {status ? (
-            <CardStatusTag variantColor={STATUS_COLOR_MAP[status.color] ?? 'infoGray'} maxWidth="calc(100% - 16px)">
+            <CardStatusTag
+              variantColor={STATUS_COLOR_MAP[status.color] ?? 'infoGray'}
+              maxWidth="calc(100% - 16px)"
+              sx={status.color === 'INFO' ? { bg: 'blue.150', color: 'blue.800' } : undefined}
+            >
               <CardTagLabel overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap">
                 {status.name}
               </CardTagLabel>

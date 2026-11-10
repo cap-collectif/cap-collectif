@@ -16,6 +16,7 @@ import ProposalDrafts from './ProposalDrafts/ProposalDrafts'
 import VoteStepListHeader from './VoteStepListHeader'
 import VoteStepProposalsList from './VoteStepProposalsList'
 import VoteStepUserInfos from './VoteStepUserInfos'
+import VoteStepProjectHeroStepInfo from './VoteStepProjectHeroStepInfo'
 
 type Props = {
   customCode?: string
@@ -39,6 +40,11 @@ const FRAGMENT = graphql`
   ) {
     id
     __typename
+    state
+    timeRange {
+      startAt
+      endAt
+    }
     ...VoteStepProposalsList_proposalStep
       @arguments(
         count: $count
@@ -176,6 +182,7 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey, customCode, 
     <Box backgroundColor="neutral-gray.50">
       <Box maxWidth={pxToRem(1280)} width="100%" margin="auto" py={8} px={[4, 6]}>
         <Flex direction="column" gap="md" mb="xl">
+          <VoteStepProjectHeroStepInfo state={step.state} timeRange={step.timeRange} />
           <StepLinkedEvents step={step} />
           <AbstractCard width="100%" border="none" backgroundColor="white">
             <WYSIWYGRender value={step.body} />
@@ -238,7 +245,7 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey, customCode, 
           </Flex>
         </Box>
         {viewForm?.isMapViewEnabled && (isMapOnlyView || isMobileMapVisible) && isMobile ? (
-          <Box position="fixed" top={0} left={0} right={0} bottom="72px" zIndex={1999} backgroundColor="white">
+          <Box position="fixed" top={0} left={0} right={0} bottom="72px" zIndex={999} backgroundColor="white">
             <VoteStepMap
               step={step}
               showMapPlaceholder={false}
