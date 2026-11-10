@@ -19,7 +19,7 @@ PreviewProposalDecision:
                 resolve: '@=value.getUpdatedBy()'
                 description: 'The last updated by a decision-maker.'
             isApproved:
-                type: 'Boolean!'
+                type: 'Boolean'
                 description: 'The current state of the decision.'
             estimatedCost:
                 type: 'Int'

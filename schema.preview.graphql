@@ -1257,7 +1257,7 @@ type ProposalDecision {
   decisionMaker: User!
 
   """The current state of the decision."""
-  isApproved: Boolean!
+  isApproved: Boolean
 
   """The estimated cost of the related proposal in €."""
   estimatedCost: Int

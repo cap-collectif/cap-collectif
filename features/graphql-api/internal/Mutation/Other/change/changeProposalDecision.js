@@ -1,5 +1,10 @@
 /* eslint-env jest */
 import '../../../../_setupDB'
+import '../../../../_setupES'
+import { execFile as execFileCallback } from 'child_process'
+import { promisify } from 'util'
+
+const execFile = promisify(execFileCallback)
 
 const ChangeProposalDecisionMutation = /* GraphQL */ `
   mutation ChangeProposalDecisionMutation($input: ChangeProposalDecisionInput!) {
@@ -53,52 +58,80 @@ const ChangeProposalDecisionWithAssessmentMutation = /* GraphQL */ `
   }
 `
 
-const ConfigureAnalysisMutation = /* GraphQL */ `
-  mutation ConfigureAnalysisMutation($input: ConfigureAnalysisInput!) {
-    configureAnalysis(input: $input) {
-      analysisConfiguration {
-        id
-        effectiveDate
-        analysisStep {
-          id
-        }
-        moveToSelectionStep {
-          id
-        }
-        selectionStepStatus {
-          id
-        }
-        proposalForm {
-          id
-        }
-        unfavourableStatuses {
-          id
-        }
-        favourableStatus {
-          id
+const ProposalDecisionQuery = /* GraphQL */ `
+  query ProposalDecision($id: ID!) {
+    node(id: $id) {
+      ... on Proposal {
+        decision {
+          isApproved
+          state
+          estimatedCost
         }
       }
     }
   }
 `
 
+// These fixtures are assigned to the decision maker; proposal110 also has an assessment.
+const assignedProposalId = toGlobalId('Proposal', 'proposal112')
+const assessedProposalId = toGlobalId('Proposal', 'proposal110')
+const readDecision = async proposalId => {
+  const response = await graphql(ProposalDecisionQuery, { id: proposalId }, 'internal_decision_maker')
+  return response.node.decision
+}
+
 /**
- * @jest-status non-compliant
- * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
+ * @jest-status compliant
+ * @jest-reason Checks API outcomes and persisted decisions with MySQL and Elasticsearch restoration.
  */
 describe('mutations.changeProposalDecision', () => {
+  afterAll(async () => {
+    try {
+      await execFile('docker', [
+        'exec',
+        '-u',
+        'capco',
+        '-w',
+        '/var/www',
+        'capco_application_1',
+        'bash',
+        '-lc',
+        process.env.CI_SHARED_TEST_DATA === '1'
+          ? 'bash .circleci/profile-mysql-restore.sh'
+          : 'mysql -h database -u root symfony < var/db.backup',
+      ])
+    } finally {
+      await execFile('docker', [
+        'exec',
+        '-u',
+        'capco',
+        '-w',
+        '/var/www',
+        'capco_application_1',
+        'php',
+        'scripts/qa/elasticsearch-snapshot.php',
+        'restore',
+        '--confirm',
+        ...(process.env.CI_SHARED_TEST_DATA === '1' ? ['--shared'] : []),
+      ])
+    }
+  })
+
   it('should create a new empty proposal decision on the proposal.', async () => {
     const createDecision = await graphql(
       ChangeProposalDecisionMutation,
       {
         input: {
-          proposalId: 'UHJvcG9zYWw6cHJvcG9zYWwxMTI=',
+          proposalId: assignedProposalId,
           isApproved: true,
         },
       },
       'internal_decision_maker',
     )
-    expect(createDecision).toMatchSnapshot()
+    expect(createDecision.changeProposalDecision.errorCode).toBeNull()
+    const expected = { isApproved: true, state: 'IN_PROGRESS', estimatedCost: 0 }
+    expect(createDecision.changeProposalDecision.decision).toMatchObject(expected)
+    expect(await readDecision(assignedProposalId)).toEqual(expected)
   })
 
   it('should modify the proposal decision.', async () => {
@@ -106,7 +139,7 @@ describe('mutations.changeProposalDecision', () => {
       ChangeProposalDecisionMutation,
       {
         input: {
-          proposalId: 'UHJvcG9zYWw6cHJvcG9zYWwxMTI=',
+          proposalId: assignedProposalId,
           estimatedCost: 50000,
           body: "Je suis le body de l'article lié à la proposition sur laquelle je donne ma décision",
           authors: ['VXNlcjp1c2VyU3VwZXJ2aXNvcjI=', 'VXNlcjp1c2VyRGVjaXNpb25NYWtlcg=='],
@@ -116,15 +149,26 @@ describe('mutations.changeProposalDecision', () => {
       },
       'internal_decision_maker',
     )
-    expect(modifyDecision).toMatchSnapshot()
+    expect(modifyDecision.changeProposalDecision.errorCode).toBeNull()
+    expect(modifyDecision.changeProposalDecision.decision).toMatchObject({
+      isApproved: true,
+      state: 'DONE',
+      estimatedCost: 50000,
+      officialResponse: {
+        body: "Je suis le body de l'article lié à la proposition sur laquelle je donne ma décision",
+        authors: [{ id: 'VXNlcjp1c2VyU3VwZXJ2aXNvcjI=' }, { id: 'VXNlcjp1c2VyRGVjaXNpb25NYWtlcg==' }],
+      },
+    })
+    expect(await readDecision(assignedProposalId)).toEqual({ isApproved: true, state: 'DONE', estimatedCost: 50000 })
   })
 
-  it('should not modify the proposal decision if the refused reason is empty.', async () => {
+  it('rejects finalization without a refusal reason and leaves the decision unchanged', async () => {
+    const originalDecision = await readDecision(assignedProposalId)
     const modifyDecision = await graphql(
       ChangeProposalDecisionMutation,
       {
         input: {
-          proposalId: 'UHJvcG9zYWw6cHJvcG9zYWwxMTI=',
+          proposalId: assignedProposalId,
           authors: ['VXNlcjp1c2VyU3VwZXJ2aXNvcjI=', 'VXNlcjp1c2VyRGVjaXNpb25NYWtlcg=='],
           isApproved: false,
           isDone: true,
@@ -132,18 +176,25 @@ describe('mutations.changeProposalDecision', () => {
       },
       'internal_decision_maker',
     )
-    expect(modifyDecision).toMatchSnapshot()
+    expect(modifyDecision.changeProposalDecision).toMatchObject({
+      decision: null,
+      errorCode: 'REFUSED_REASON_REQUIRED',
+    })
+    expect(await readDecision(assignedProposalId)).toEqual(originalDecision)
   })
 
-  it('should create a pre-filled decision if an assessment already exist on the proposal.', async () => {
+  it('saves a draft without an approval choice on an assessed proposal', async () => {
     const createDecisionWithAssessment = await graphql(
       ChangeProposalDecisionMutation,
       {
-        input: { proposalId: 'UHJvcG9zYWw6cHJvcG9zYWwxMTA=' },
+        input: { proposalId: assessedProposalId },
       },
       'internal_decision_maker',
     )
-    expect(createDecisionWithAssessment).toMatchSnapshot()
+    expect(createDecisionWithAssessment.changeProposalDecision.errorCode).toBeNull()
+    const expected = { isApproved: null, state: 'IN_PROGRESS', estimatedCost: 0 }
+    expect(createDecisionWithAssessment.changeProposalDecision.decision).toMatchObject(expected)
+    expect(await readDecision(assessedProposalId)).toEqual(expected)
   })
 
   it('should change the related assessment state when the decision is taken.', async () => {
@@ -158,6 +209,25 @@ describe('mutations.changeProposalDecision', () => {
       },
       'internal_decision_maker',
     )
-    expect(modifyDecisionWithAssessment).toMatchSnapshot()
+    expect(modifyDecisionWithAssessment.changeProposalDecision).toEqual({
+      errorCode: null,
+      decision: { isApproved: true, state: 'DONE', proposal: { assessment: { state: 'TOO_LATE' } } },
+    })
+    const persistedAssessment = await graphql(
+      `
+        query AssessedProposal($id: ID!) {
+          node(id: $id) {
+            ... on Proposal {
+              assessment {
+                state
+              }
+            }
+          }
+        }
+      `,
+      { id: toGlobalId('Proposal', 'proposal109') },
+      'internal_decision_maker',
+    )
+    expect(persistedAssessment.node.assessment.state).toBe('TOO_LATE')
   })
 })

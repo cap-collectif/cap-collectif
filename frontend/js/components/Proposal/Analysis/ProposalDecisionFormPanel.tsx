@@ -36,7 +36,7 @@ type Props = ReduxFormFormProps & {
   proposalRevisionsEnabled: boolean
   proposal: ProposalDecisionFormPanel_proposal
   disabled?: boolean
-  initialIsApproved: boolean
+  initialIsApproved: Decision | null | undefined
   onValidate: (arg0: SubmittingState, arg1: boolean | null | undefined) => void
   costEstimationEnabled: boolean
 }
@@ -57,6 +57,9 @@ export type FormValues = {
   }
 }
 
+export const getInitialEstimatedCost = (proposal: Props['proposal']): number =>
+  proposal?.decision?.estimatedCost ?? proposal?.assessment?.estimatedCost ?? 0
+
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { proposal, onValidate } = props
   const input = {
@@ -73,7 +76,26 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   return ChangeProposalDecisionMutation.commit({
     input,
   })
-    .then(() => {
+    .then(res => {
+      const errorCode = res?.changeProposalDecision?.errorCode
+      if (errorCode === 'DECISION_REQUIRED') {
+        onValidate('ERROR_DECISION_REQUIRED')
+
+        return
+      }
+
+      if (errorCode === 'REFUSED_REASON_REQUIRED') {
+        onValidate('ERROR_REFUSED_REASON_REQUIRED')
+
+        return
+      }
+
+      if (errorCode) {
+        onValidate('ERROR')
+
+        return
+      }
+
       onValidate(values.validate || values.isDone ? 'SAVED' : 'DRAFT_SAVED', values.validate)
     })
     .catch(e => {
@@ -175,7 +197,7 @@ export const ProposalDecisionFormPanel = ({
             name="isApproved"
             type="radio"
             value="FAVOURABLE"
-            radioChecked={isApproved === true}
+            radioChecked={isApproved === 'FAVOURABLE'}
           >
             <ProposalAnalysisStatusLabel
               fontSize={14}
@@ -194,7 +216,7 @@ export const ProposalDecisionFormPanel = ({
             name="isApproved"
             type="radio"
             value="UNFAVOURABLE"
-            radioChecked={isApproved === false}
+            radioChecked={isApproved === 'UNFAVOURABLE'}
           >
             <ProposalAnalysisStatusLabel
               fontSize={14}
@@ -279,7 +301,7 @@ const mapStateToProps = (state: GlobalState, { proposal }: Props) => {
   return {
     initialValues: {
       body: proposal?.decision?.officialResponse?.body || proposal?.assessment?.officialResponse || null,
-      estimatedCost: proposal?.assessment?.estimatedCost || proposal?.decision?.estimatedCost || 0,
+      estimatedCost: getInitialEstimatedCost(proposal),
       authors: proposal?.decision?.officialResponse?.authors || [],
       isApproved: isApproved ? 'FAVOURABLE' : isApproved === false ? 'UNFAVOURABLE' : null,
       refusedReason: proposal?.decision?.refusedReason || null,

@@ -78,7 +78,9 @@ export const ProposalPageMetadata = ({
   showThemes,
 }: Props) => {
   const intl = useIntl()
-  const estimation = !proposal?.estimation && showNullEstimation ? 0 : proposal?.estimation
+  const rawEstimation = proposal?.estimation
+  const shouldDisplayEstimation = showNullEstimation || rawEstimation != null
+  const estimation = rawEstimation == null && showNullEstimation ? 0 : rawEstimation
   const archivedDate = proposal.archiveLimitDate ? moment(proposal.archiveLimitDate) : null
 
   const getArchivedLabel = () => {
@@ -120,7 +122,7 @@ export const ProposalPageMetadata = ({
       {((showCategories && proposal?.category) ||
         (showDistricts && proposal?.district) ||
         proposal?.likers ||
-        (showNullEstimation && proposal?.estimation) ||
+        shouldDisplayEstimation ||
         !proposal) && (
         <ProposalPageMetadataContainer>
           {showArchiveLimitDate && (
@@ -172,9 +174,9 @@ export const ProposalPageMetadata = ({
               <Text sx={{ wordBreak: 'break-word' }}>{proposal?.district?.name || ''}</Text>
             </MetadataRow>
           ) : null}
-          {!proposal || (estimation !== null && typeof estimation !== 'undefined') ? (
+          {!proposal || shouldDisplayEstimation ? (
             <MetadataRow name={ICON_NAME.accounting} size={10} color={colors.primaryColor} ready={!!proposal}>
-              <FormattedNumber minimumFractionDigits={0} value={estimation || 0} style="currency" currency="EUR" />
+              <FormattedNumber minimumFractionDigits={0} value={estimation ?? 0} style="currency" currency="EUR" />
             </MetadataRow>
           ) : null}
           {!proposal || proposal?.likers.length > 0 ? (

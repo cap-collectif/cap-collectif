@@ -96,7 +96,7 @@ exports[`<ProposalDecisionFormPanel  />  renders correctly 1`] = `
         }
         name="isApproved"
         onChange={[Function]}
-        radioChecked={false}
+        radioChecked={true}
         type="radio"
         typeForm="questionnaire"
         value="FAVOURABLE"
@@ -114,7 +114,7 @@ exports[`<ProposalDecisionFormPanel  />  renders correctly 1`] = `
         id="isApproved-UNFAVOURABLE"
         name="isApproved"
         onChange={[Function]}
-        radioChecked={true}
+        radioChecked={false}
         type="radio"
         typeForm="questionnaire"
         value="UNFAVOURABLE"
@@ -152,6 +152,7 @@ exports[`<ProposalDecisionFormPanel  />  renders correctly 1`] = `
   </form>
 </Fragment>
 `;
+
 
 exports[`<ProposalDecisionFormPanel  />  renders correctly with proposal revisions feature enabled 1`] = `
 <Fragment>
@@ -295,7 +296,7 @@ exports[`<ProposalDecisionFormPanel  />  renders correctly with proposal revisio
         }
         name="isApproved"
         onChange={[Function]}
-        radioChecked={false}
+        radioChecked={true}
         type="radio"
         typeForm="questionnaire"
         value="FAVOURABLE"
@@ -313,7 +314,7 @@ exports[`<ProposalDecisionFormPanel  />  renders correctly with proposal revisio
         id="isApproved-UNFAVOURABLE"
         name="isApproved"
         onChange={[Function]}
-        radioChecked={true}
+        radioChecked={false}
         type="radio"
         typeForm="questionnaire"
         value="UNFAVOURABLE"

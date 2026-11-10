@@ -2,20 +2,20 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\CapcoAppBundleEvents;
-use Capco\AppBundle\CapcoAppBundleMessagesTypes;
-use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\OfficialResponse;
 use Capco\AppBundle\Entity\OfficialResponseAuthor;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalDecision;
 use Capco\AppBundle\Enum\ProposalStatementErrorCode;
 use Capco\AppBundle\Enum\ProposalStatementState;
-use Capco\AppBundle\Event\DecisionEvent;
+use Capco\AppBundle\GraphQL\Mutation\ProposalDecision\DecisionFlowContext;
+use Capco\AppBundle\GraphQL\Mutation\ProposalDecision\DecisionFlowStrategyInterface;
+use Capco\AppBundle\GraphQL\Mutation\ProposalDecision\DecisionTransitionContext;
+use Capco\AppBundle\GraphQL\Mutation\ProposalDecision\ImmediatelyEffectiveDecisionFlowStrategy;
+use Capco\AppBundle\GraphQL\Mutation\ProposalDecision\StandardDecisionFlowStrategy;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
-use Capco\AppBundle\Repository\ProposalDecisionRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\StatusRepository;
 use Capco\AppBundle\Security\ProposalAnalysisRelatedVoter;
@@ -25,11 +25,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Psr\Log\LoggerInterface;
-use Swarrot\Broker\Message;
-use Swarrot\SwarrotBundle\Broker\Publisher;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -37,7 +32,6 @@ class ChangeProposalDecisionMutation implements MutationInterface
 {
     use MutationTrait;
     use ResolverTrait;
-    private readonly ProposalDecisionRepository $proposalDecisionRepository;
 
     public function __construct(
         private readonly ProposalRepository $proposalRepository,
@@ -45,79 +39,52 @@ class ChangeProposalDecisionMutation implements MutationInterface
         private readonly EntityManagerInterface $entityManager,
         private readonly StatusRepository $statusRepository,
         private readonly AuthorizationCheckerInterface $authorizationChecker,
-        private readonly LoggerInterface $logger,
-        private readonly Indexer $indexer,
         private readonly TranslatorInterface $translator,
-        private readonly EventDispatcherInterface $eventDispatcher,
-        private readonly Publisher $publisher,
-        private readonly GlobalIdResolver $globalIdResolver
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly ImmediatelyEffectiveDecisionFlowStrategy $immediatelyEffectiveDecisionFlowStrategy,
+        private readonly StandardDecisionFlowStrategy $standardDecisionFlowStrategy
     ) {}
 
-    public function __invoke(Argument $args, $viewer, RequestStack $request): array
+    public function __invoke(Argument $args, $viewer): array
     {
+        // Step 1: validate input and access.
         $this->formatInput($args);
         $this->preventNullableViewer($viewer);
         $proposal = $this->getProposal($args);
 
         $errorCode = $this->getErrorCode($proposal, $args);
         if ($errorCode) {
-            return [
-                'decision' => null,
-                'errorCode' => $errorCode,
-            ];
+            return $this->buildErrorPayload($errorCode);
         }
 
-        if (!($proposalDecision = $proposal->getDecision())) {
-            $proposalDecision = $this->createProposalDecision(
-                $proposal,
-                $request->getCurrentRequest()->getLocale()
-            );
-        }
+        // Step 2: load or create decision and capture pre-update state.
+        $proposalDecision = $this->getOrCreateProposalDecision($proposal);
         $oldState = $proposalDecision->getState();
+        $transitionContext = $this->computeDecisionTransitionContext($proposalDecision, $args, $oldState);
 
+        // Step 3: apply decision changes.
         $this->updateDecision($proposalDecision, $args, $viewer);
         $this->handleDecisionOfficialResponse($proposalDecision, $args, $viewer);
         $this->setRefusedReasonIfAny($proposalDecision, $args);
 
-        if ($args->offsetGet('isDone')) {
-            self::setAnalysisAndStatementAsTooLate($proposal);
+        // Step 4: update related analyses when transitioning to done.
+        if ($transitionContext->isTransitionToDone) {
+            $this->setAnalysisAndStatementAsTooLate($proposal);
         }
 
-        $analysisConfig = $proposal->getProposalForm()->getAnalysisConfiguration();
-        if ($analysisConfig && $analysisConfig->isImmediatelyEffective()) {
-            if ($args->offsetGet('isDone')) {
-                $this->dispatchEvent($proposal, $args);
-            }
-            $this->entityManager->flush();
-            $this->index($proposal);
-            $this->notifyIfDecision($oldState, $proposalDecision);
-
-            return [
-                'decision' => $proposalDecision,
-                'proposal' => $proposal,
-                'errorCode' => null,
-            ];
+        // Step 5: route to immediate or standard flow.
+        $errorCode = $this->executeDecisionFlow(
+            $proposal,
+            $proposalDecision,
+            $args,
+            $oldState,
+            $transitionContext
+        );
+        if (null !== $errorCode) {
+            return $this->buildErrorPayload($errorCode);
         }
 
-        try {
-            $this->entityManager->flush();
-        } catch (\Exception $exception) {
-            $this->logger->alert(
-                'An error occurred when editing Post and ProposalDecision with proposal id :'
-                    . $proposal->getId()
-                    . '.'
-                    . $exception->getMessage()
-            );
-
-            return [
-                'decision' => null,
-                'errorCode' => ProposalStatementErrorCode::INTERNAL_ERROR,
-            ];
-        }
-        $this->index($proposal);
-
-        $this->notifyIfDecision($oldState, $proposalDecision);
-
+        // Step 6: return successful payload.
         return [
             'decision' => $proposalDecision,
             'proposal' => $proposal,
@@ -125,13 +92,81 @@ class ChangeProposalDecisionMutation implements MutationInterface
         ];
     }
 
-    private function createProposalDecision(Proposal $proposal, string $locale): ProposalDecision
+    private function getOrCreateProposalDecision(Proposal $proposal): ProposalDecision
     {
+        $proposalDecision = $proposal->getDecision();
+        if ($proposalDecision) {
+            return $proposalDecision;
+        }
+
         $proposalDecision = new ProposalDecision($proposal);
         $proposalDecision->setProposal($proposal);
         $this->entityManager->persist($proposalDecision);
 
         return $proposalDecision;
+    }
+
+    private function computeDecisionTransitionContext(
+        ProposalDecision $proposalDecision,
+        Argument $args,
+        string $oldState
+    ): DecisionTransitionContext {
+        $wasDone = ProposalStatementState::DONE === $oldState;
+        $isDoneRequested = (bool) $args->offsetGet('isDone');
+        $isTransitionToDone = $isDoneRequested && !$wasDone;
+        $hasOfficialResponseContentChanged = $this->hasOfficialResponseContentChanged($proposalDecision, $args);
+        $shouldDispatchFinalizationEvent
+            = $isTransitionToDone
+            || ($wasDone && $isDoneRequested && $this->hasDecisionOutcomeChanged($proposalDecision, $args));
+
+        return new DecisionTransitionContext(
+            $wasDone,
+            $isDoneRequested,
+            $isTransitionToDone,
+            $hasOfficialResponseContentChanged,
+            $shouldDispatchFinalizationEvent
+        );
+    }
+
+    private function executeDecisionFlow(
+        Proposal $proposal,
+        ProposalDecision $proposalDecision,
+        Argument $args,
+        string $oldState,
+        DecisionTransitionContext $transitionContext
+    ): ?string {
+        $strategy = $this->resolveDecisionFlowStrategy($proposal);
+
+        return $strategy->execute(
+            new DecisionFlowContext(
+                $proposal,
+                $proposalDecision,
+                $args,
+                $oldState,
+                $transitionContext
+            )
+        );
+    }
+
+    private function resolveDecisionFlowStrategy(Proposal $proposal): DecisionFlowStrategyInterface
+    {
+        $analysisConfig = $proposal->getProposalForm()->getAnalysisConfiguration();
+        if (null !== $analysisConfig && $analysisConfig->isImmediatelyEffective()) {
+            return $this->immediatelyEffectiveDecisionFlowStrategy;
+        }
+
+        return $this->standardDecisionFlowStrategy;
+    }
+
+    /**
+     * @return array{decision: null, errorCode: ?string}
+     */
+    private function buildErrorPayload(?string $errorCode): array
+    {
+        return [
+            'decision' => null,
+            'errorCode' => $errorCode,
+        ];
     }
 
     private function getErrorCode(?Proposal $proposal, Argument $args): ?string
@@ -144,8 +179,19 @@ class ChangeProposalDecisionMutation implements MutationInterface
         ) {
             return ProposalStatementErrorCode::NOT_ASSIGNED_PROPOSAL;
         }
-        if (!$args->offsetGet('isApproved') && null === $args->offsetGet('refusedReason')) {
-            return ProposalStatementErrorCode::REFUSED_REASON_EMPTY;
+
+        $isDoneRequested = (bool) ($args->offsetGet('isDone') ?? false);
+        if (!$isDoneRequested) {
+            return null;
+        }
+
+        $isApproved = $args->offsetGet('isApproved');
+        if (null === $isApproved) {
+            return ProposalStatementErrorCode::DECISION_REQUIRED;
+        }
+
+        if (false === $isApproved && null === $args->offsetGet('refusedReason')) {
+            return ProposalStatementErrorCode::REFUSED_REASON_REQUIRED;
         }
 
         return null;
@@ -164,7 +210,7 @@ class ChangeProposalDecisionMutation implements MutationInterface
         User $viewer
     ): void {
         $proposalDecision
-            ->setIsApproved($args->offsetGet('isApproved') ?? false)
+            ->setIsApproved($args->offsetGet('isApproved'))
             ->setUpdatedBy($viewer)
             ->setEstimatedCost((int) $args->offsetGet('estimatedCost'))
             ->setState(
@@ -221,19 +267,84 @@ class ChangeProposalDecisionMutation implements MutationInterface
         return $officialResponse;
     }
 
+    private function hasDecisionOutcomeChanged(
+        ProposalDecision $proposalDecision,
+        Argument $args
+    ): bool {
+        $newIsApproved = $args->offsetGet('isApproved');
+        $oldIsApproved = $proposalDecision->isApproved();
+        if ($oldIsApproved !== $newIsApproved) {
+            return true;
+        }
+
+        $newEstimatedCost = (int) $args->offsetGet('estimatedCost');
+        $oldEstimatedCost = (int) ($proposalDecision->getEstimatedCost() ?? 0);
+        if ($oldEstimatedCost !== $newEstimatedCost) {
+            return true;
+        }
+
+        if (true === $newIsApproved) {
+            return false;
+        }
+
+        $newRefusedReasonId = $args->offsetGet('refusedReason');
+        $oldRefusedReasonId = $proposalDecision->getRefusedReason()?->getId();
+
+        return $oldRefusedReasonId !== $newRefusedReasonId;
+    }
+
+    private function hasOfficialResponseContentChanged(
+        ProposalDecision $proposalDecision,
+        Argument $args
+    ): bool {
+        $newBody = (string) ($args->offsetGet('body') ?? '');
+        $newAuthors = $args->offsetGet('authors') ?? [];
+        sort($newAuthors);
+
+        $officialResponse = $proposalDecision->getOfficialResponse();
+        if (null === $officialResponse) {
+            return '' !== strip_tags($newBody) || !empty($newAuthors);
+        }
+
+        $oldBody = (string) ($officialResponse->getBody() ?? '');
+        if ($oldBody !== $newBody) {
+            return true;
+        }
+
+        $oldAuthorsObject = $officialResponse->getAuthorsObject();
+        $oldAuthors = [];
+        foreach ($oldAuthorsObject as $author) {
+            if (null === $author || null === $author->getId()) {
+                continue;
+            }
+
+            $authorType = $author instanceof User ? 'User' : 'Organization';
+            $oldAuthors[] = GlobalId::toGlobalId($authorType, $author->getId());
+        }
+        sort($oldAuthors);
+
+        return $oldAuthors !== $newAuthors;
+    }
+
     private function setRefusedReasonIfAny(
         ProposalDecision $proposalDecision,
         Argument $args
     ): ProposalDecision {
-        if ($args->offsetGet('refusedReason')) {
+        if (false === $args->offsetGet('isApproved') && $args->offsetGet('refusedReason')) {
             $status = $this->statusRepository->find($args->offsetGet('refusedReason'));
             $proposalDecision->setRefusedReason($status);
+
+            return $proposalDecision;
+        }
+
+        if (null !== $proposalDecision->getRefusedReason()) {
+            $proposalDecision->setRefusedReason(null);
         }
 
         return $proposalDecision;
     }
 
-    private static function setAnalysisAndStatementAsTooLate(Proposal $proposal): Proposal
+    private function setAnalysisAndStatementAsTooLate(Proposal $proposal): Proposal
     {
         $proposalAssessment = $proposal->getAssessment();
         if (
@@ -251,45 +362,5 @@ class ChangeProposalDecisionMutation implements MutationInterface
         }
 
         return $proposal;
-    }
-
-    private function index(Proposal $proposal): void
-    {
-        $this->indexer->index(Proposal::class, $proposal->getId());
-
-        $this->indexer->finishBulk();
-    }
-
-    private function dispatchEvent(Proposal $proposal, Argument $args): DecisionEvent
-    {
-        $decision = $args->offsetGet('isApproved')
-            ? CapcoAppBundleEvents::DECISION_APPROVED
-            : CapcoAppBundleEvents::DECISION_REFUSED;
-        $event = new DecisionEvent(
-            $proposal,
-            $proposal->getDecision(),
-            $proposal->getProposalForm()->getAnalysisConfiguration()
-        );
-        $this->eventDispatcher->dispatch($event, $decision);
-
-        return $event;
-    }
-
-    private function notifyIfDecision(string $oldState, ProposalDecision $proposalDecision): void
-    {
-        $message = [
-            'type' => 'decision',
-            'proposalId' => $proposalDecision->getProposal()->getId(),
-            'date' => $proposalDecision->getUpdatedAt()->format('Y-m-d H:i:s'),
-        ];
-        if (
-            ProposalStatementState::DONE === $proposalDecision->getState()
-            && $proposalDecision->getState() != $oldState
-        ) {
-            $this->publisher->publish(
-                CapcoAppBundleMessagesTypes::PROPOSAL_ANALYSE,
-                new Message(json_encode($message))
-            );
-        }
     }
 }

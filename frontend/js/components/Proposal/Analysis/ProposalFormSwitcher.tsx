@@ -95,13 +95,22 @@ type Props = {
   panelState: PanelState
   viewer: ProposalFormSwitcher_viewer
 }
-export type SubmittingState = 'SAVED' | 'SAVING' | 'DRAFT_SAVED' | 'DRAFT_SAVING' | 'ERROR'
-const stateToKey = {
+export type SubmittingState =
+  | 'SAVED'
+  | 'SAVING'
+  | 'DRAFT_SAVED'
+  | 'DRAFT_SAVING'
+  | 'ERROR'
+  | 'ERROR_DECISION_REQUIRED'
+  | 'ERROR_REFUSED_REASON_REQUIRED'
+const stateToKey: Record<SubmittingState, string> = {
   SAVED: 'all.data.saved',
   SAVING: 'global.saving',
   DRAFT_SAVED: 'label.draft.saved',
   DRAFT_SAVING: 'label.draft.being.saved',
   ERROR: 'global.invalid.form',
+  ERROR_DECISION_REQUIRED: 'decision.is_approved.required',
+  ERROR_REFUSED_REASON_REQUIRED: 'decision.refused_reason.required',
 }
 export const ProposalFormSwitcher = ({ onClose, proposal, onBackClick, user, disabled, panelState, viewer }: Props) => {
   const [submittingState, setSubmittingState] = useState<SubmittingState | null | undefined>(null)

@@ -44,9 +44,9 @@ class ProposalDecision implements EntityInterface, Timestampable
     private string $state = ProposalStatementState::IN_PROGRESS;
 
     /**
-     * @ORM\Column(type="boolean", nullable=false, name="is_approved")
+     * @ORM\Column(type="boolean", nullable=true, name="is_approved")
      */
-    private bool $isApproved = true;
+    private ?bool $isApproved = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Status")

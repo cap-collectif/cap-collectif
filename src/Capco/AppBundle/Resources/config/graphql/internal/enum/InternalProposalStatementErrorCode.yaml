@@ -16,9 +16,12 @@ InternalProposalStatementErrorCode:
             INTERNAL_ERROR:
                 value: !php/const Capco\AppBundle\Enum\ProposalStatementErrorCode::INTERNAL_ERROR
                 description: 'An internal server error occurred.'
-            REFUSED_REASON_EMPTY:
-                value: !php/const Capco\AppBundle\Enum\ProposalStatementErrorCode::REFUSED_REASON_EMPTY
-                description: 'The refused reason must not be empty if the proposal is not approved.'
+            DECISION_REQUIRED:
+                value: !php/const Capco\AppBundle\Enum\ProposalStatementErrorCode::DECISION_REQUIRED
+                description: 'An approval choice (favourable or unfavourable) is required to finalize the decision.'
+            REFUSED_REASON_REQUIRED:
+                value: !php/const Capco\AppBundle\Enum\ProposalStatementErrorCode::REFUSED_REASON_REQUIRED
+                description: 'A refused reason is required when the decision is unfavourable.'
             NON_EXISTING_ANALYSIS:
                 value: !php/const Capco\AppBundle\Enum\ProposalStatementErrorCode::NON_EXISTING_ANALYSIS
                 description: 'The proposal analysis does not exist.'

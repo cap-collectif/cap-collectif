@@ -14210,7 +14210,7 @@ type ProposalDecision {
   decisionMaker: User!
 
   """The current state of the decision."""
-  isApproved: Boolean!
+  isApproved: Boolean
 
   """The estimated cost of the related proposal in €."""
   estimatedCost: Int
@@ -14943,8 +14943,13 @@ enum ProposalStatementErrorCode {
   """An internal server error occurred."""
   INTERNAL_ERROR
 
-  """The refused reason must not be empty if the proposal is not approved."""
-  REFUSED_REASON_EMPTY
+  """
+  An approval choice (favourable or unfavourable) is required to finalize the decision.
+  """
+  DECISION_REQUIRED
+
+  """A refused reason is required when the decision is unfavourable."""
+  REFUSED_REASON_REQUIRED
 
   """The proposal analysis does not exist."""
   NON_EXISTING_ANALYSIS

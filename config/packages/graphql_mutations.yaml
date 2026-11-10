@@ -19,7 +19,11 @@ services:
         autowire: true
         autoconfigure: true
         public: true
-        exclude: '%kernel.project_dir%/src/Capco/AppBundle/GraphQL/Mutation/{ProposalMutation.php,ProposalFormMutation.php,GroupMutation.php,ContactFormMutation.php}'
+        exclude: '%kernel.project_dir%/src/Capco/AppBundle/GraphQL/Mutation/{ProposalMutation.php,ProposalFormMutation.php,GroupMutation.php,ContactFormMutation.php,ProposalDecision/*}'
+
+    Capco\AppBundle\GraphQL\Mutation\ProposalDecision\ImmediatelyEffectiveDecisionFlowStrategy: ~
+    Capco\AppBundle\GraphQL\Mutation\ProposalDecision\StandardDecisionFlowStrategy: ~
+    Capco\AppBundle\GraphQL\Mutation\ProposalDecision\DecisionFlowSideEffectsService: ~
 
     Capco\AppBundle\GraphQL\Mutation\HubApiGreen\SynchronizeHubApiGreenMediaMutation:
         arguments:
