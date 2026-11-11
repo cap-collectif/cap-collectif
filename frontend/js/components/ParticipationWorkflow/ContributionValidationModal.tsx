@@ -1,3 +1,4 @@
+import { useContributionTracking } from './useContributionTracking'
 import React, { useEffect } from 'react'
 import { Box, CapUIFontSize, Flex, Text, toast, useMultiStepModal } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
@@ -17,6 +18,7 @@ type Props = {
 }
 
 const ContributionValidationModal: React.FC<Props> = ({ contributionId }) => {
+  const track = useContributionTracking('submission')
   const intl = useIntl()
   const token = CookieMonster.getParticipantCookie()
   const { commit } = useValidateContributionMutation()
@@ -67,20 +69,27 @@ const ContributionValidationModal: React.FC<Props> = ({ contributionId }) => {
       onCompleted: async (response, errors) => {
         if (errors && errors.length > 0) {
           for (const error of errors) {
-            if(error.message === 'Step closed') {
+            if (error.message === 'Step closed') {
+              track('error')
               toast({
                 variant: 'danger',
-                content: intl.formatMessage({ id: 'error-contribution-validation' })
+                content: intl.formatMessage({ id: 'error-contribution-validation' }),
               })
               setTimeout(() => {
-                window.location.href = '/';
+                window.location.href = '/'
               }, 1000)
-              return;
+              return
             }
           }
-          return mutationErrorToast(intl);
+          track('error')
+          return mutationErrorToast(intl)
         }
 
+        if (!response?.validateContribution) {
+          track('error')
+          return
+        }
+        track('completed')
         await fakeTimer(800)
 
         if (hasNextStep) {
@@ -94,10 +103,11 @@ const ContributionValidationModal: React.FC<Props> = ({ contributionId }) => {
         })
       },
       onError: () => {
+        track('error')
         return mutationErrorToast(intl)
       },
     })
-  }, [commit, intl, contributionId, token, currentStep, successTranslationKey, hasNextStep, goToNextStep])
+  }, [commit, intl, contributionId, token, currentStep, track, successTranslationKey, hasNextStep, goToNextStep])
 
   return (
     <ModalLayout

@@ -1,3 +1,4 @@
+import { trackContribution } from '~/utils/contributionTracking'
 import { $Values } from 'utility-types'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
@@ -125,6 +126,7 @@ const ProposalCreateModal = ({
           </ResetCss>
           <>
             <ProposalOtherPanelsModal
+              onAbandon={() => trackContribution('Proposal', 'abandoned', 'form')}
               proposalForm={proposalForm}
               onClose={onClose}
               modalState={modalState as 'NORMAL' | 'LEAVE' | 'MAP' | 'ERROR'}

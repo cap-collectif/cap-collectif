@@ -1,3 +1,4 @@
+import { useContributionTracking } from './useContributionTracking'
 import React from 'react'
 import ModalLayout from '~/components/ParticipationWorkflow/ModalLayout'
 import { graphql, useFragment } from 'react-relay'
@@ -28,6 +29,7 @@ const COLORS_FRAGMENT = graphql`
 export const ACCOUNT_LOGIN_SSO_FORM_INDEX = 5
 
 const EmailAccountLoginSSOForm: React.FC<Props> = ({ children, colors: colorsRef, modalTitle, modalInfo }) => {
+  useContributionTracking('sso')
   const colors = useFragment(COLORS_FRAGMENT, colorsRef)
 
   const { setCurrentStep } = useMultiStepModal()

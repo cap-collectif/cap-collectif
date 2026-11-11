@@ -68,6 +68,7 @@ export const EventFormAnonymousModal = ({ eventId, register }: Props) => {
           variant="primary"
           variantSize="big"
           label="event_registration.create.register"
+          data-capco-event-registration
           width={['100%', 'auto']}
           justifyContent="center"
         >

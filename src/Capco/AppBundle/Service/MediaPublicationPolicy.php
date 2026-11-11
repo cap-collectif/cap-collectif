@@ -16,6 +16,7 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Entity\Theme;
+use Capco\AppBundle\Entity\VocalContribution;
 use Capco\AppBundle\Model\TranslationInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -102,6 +103,9 @@ class MediaPublicationPolicy
     /** Null means the historical command must not guess the visibility. */
     public function isPublic(object $entity): ?bool
     {
+        if ($entity instanceof VocalContribution) {
+            return false;
+        }
         if ($entity instanceof TranslationInterface) {
             return $this->isPublic($entity->getTranslatable());
         }

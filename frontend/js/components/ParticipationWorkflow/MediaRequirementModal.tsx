@@ -1,15 +1,7 @@
+import { useContributionTracking } from './useContributionTracking'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import {
-  Box,
-  useMultiStepModal,
-  Button,
-  Text,
-  FormGuideline,
-  UPLOADER_SIZE,
-  Flex,
-  Avatar,
-} from '@cap-collectif/ui'
+import { Box, useMultiStepModal, Button, Text, FormGuideline, UPLOADER_SIZE, Flex, Avatar } from '@cap-collectif/ui'
 import { useFormContext } from 'react-hook-form'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import ModalLayout from './ModalLayout'
@@ -31,6 +23,7 @@ type Props = {
 }
 
 const MediaRequirementModal: React.FC<Props> = ({ hideGoBackArrow, username }) => {
+  const track = useContributionTracking('profile_picture')
   const { goToNextStep } = useMultiStepModal()
   const intl = useIntl()
   const isAuthenticated = useSelector((state: GlobalState) => !!state.user.user)
@@ -51,11 +44,13 @@ const MediaRequirementModal: React.FC<Props> = ({ hideGoBackArrow, username }) =
       },
       onCompleted: async (response, errors) => {
         if (errors && errors.length > 0) {
+          track('error')
           return mutationErrorToast(intl)
         }
         goToNextStep()
       },
       onError: () => {
+        track('error')
         return mutationErrorToast(intl)
       },
     })
@@ -72,11 +67,13 @@ const MediaRequirementModal: React.FC<Props> = ({ hideGoBackArrow, username }) =
       },
       onCompleted: (response, errors) => {
         if (errors && errors.length > 0) {
+          track('error')
           return mutationErrorToast(intl)
         }
         goToNextStep()
       },
       onError: () => {
+        track('error')
         return mutationErrorToast(intl)
       },
     })
@@ -120,7 +117,7 @@ const MediaRequirementModal: React.FC<Props> = ({ hideGoBackArrow, username }) =
         <Box
           as="form"
           width="100%"
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(onSubmit, () => track('error'))}
           sx={{ '.cap-uploader': { alignSelf: 'center', mb: 'md' } }}
         >
           <Flex alignItems="center" borderRadius="xs" bg="white" px="md" py="sm" gap="xs" mb="md" overflow="hidden">

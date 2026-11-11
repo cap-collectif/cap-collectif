@@ -6,11 +6,12 @@ import { Text, Button, ButtonGroup, Modal, Flex, CapUIFontSize } from '@cap-coll
 import { formName } from '../Form/ProposalForm'
 import type { Dispatch } from '~/types'
 type Props = {
+  readonly onAbandon?: () => void
   readonly onClose: () => void
   readonly resetModalState: () => void
 }
 
-const ProposalLeaveModal = ({ onClose, resetModalState }: Props): JSX.Element => {
+const ProposalLeaveModal = ({ onClose, resetModalState, onAbandon }: Props): JSX.Element => {
   const intl = useIntl()
   const dispatch: Dispatch = useDispatch()
   return (
@@ -22,7 +23,12 @@ const ProposalLeaveModal = ({ onClose, resetModalState }: Props): JSX.Element =>
               🚪
             </span>
           </Text>
-          <Text textAlign="center" fontSize={[CapUIFontSize.Headline, CapUIFontSize.DisplayMedium]} fontWeight={600} mb={2}>
+          <Text
+            textAlign="center"
+            fontSize={[CapUIFontSize.Headline, CapUIFontSize.DisplayMedium]}
+            fontWeight={600}
+            mb={2}
+          >
             {intl.formatMessage({
               id: 'leave-form',
             })}
@@ -46,6 +52,7 @@ const ProposalLeaveModal = ({ onClose, resetModalState }: Props): JSX.Element =>
             variant="primary"
             variantColor="danger"
             onClick={() => {
+              onAbandon?.()
               resetModalState()
               onClose()
               dispatch(reset(formName))

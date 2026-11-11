@@ -1,3 +1,8 @@
+import {
+  bindContributionTrackingAttempt,
+  getContributionTrackingAttempt,
+  trackContribution,
+} from '~/utils/contributionTracking'
 import proposalSubmitError from '~/utils/form/proposalSubmitError'
 import * as React from 'react'
 import type { IntlShape } from 'react-intl'
@@ -184,6 +189,7 @@ export const onSubmit = (
     setValuesSaved,
     isAuthenticated,
     user,
+    isBackOfficeInput,
   }: Props,
 ) => {
   const data = {
@@ -224,6 +230,7 @@ export const onSubmit = (
   const isEmptyArray = responsesError.responses ? responsesError.responses.filter(Boolean) : []
 
   if (isEmptyArray && isEmptyArray.length) {
+    if (!proposal && !isBackOfficeInput && !values.draft) trackContribution('Proposal', 'error', 'form')
     errors.responses = responsesError.responses
     throw new SubmissionError(errors)
   }
@@ -285,6 +292,9 @@ export const onSubmit = (
 
   if (setValuesSaved) setValuesSaved({ ...data, proposalFormId: proposalForm.id })
 
+  if (!isBackOfficeInput && !values.draft) trackContribution('Proposal', 'step_viewed', 'submission')
+  const attemptId = getContributionTrackingAttempt('Proposal')
+
   return CreateProposalMutation.commit({
     input: {
       ...data,
@@ -314,6 +324,11 @@ export const onSubmit = (
         CookieMonster.addParticipantCookie(newParticipantToken)
       }
 
+      const contributionId = response.createProposal.proposalId?.id
+      if (!isBackOfficeInput && !values.draft && contributionId) {
+        bindContributionTrackingAttempt(contributionId, attemptId)
+      }
+
       if (!values.draft && response.createProposal.shouldTriggerWorkflow) {
         const url = new URL(window.location.href)
         if (!url.searchParams.has('workflow')) {
@@ -324,6 +339,9 @@ export const onSubmit = (
         return
       }
 
+      if (!isBackOfficeInput && !values.draft) {
+        trackContribution('Proposal', 'completed', 'participation_confirmed', contributionId)
+      }
       const createdProposal = response.createProposal.proposal
       window.removeEventListener('beforeunload', onUnload)
       const message =
@@ -359,6 +377,7 @@ export const onSubmit = (
       onSubmitSuccess()
     })
     .catch(e => {
+      if (!isBackOfficeInput && !values.draft) trackContribution('Proposal', 'error', 'submission')
       throw proposalSubmitError(e, values.responses, onSubmitFailed)
     })
 }
@@ -463,7 +482,11 @@ export class ProposalForm extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    const { isBackOfficeInput } = this.props
+    const { isBackOfficeInput, proposal } = this.props
+    if (!isBackOfficeInput && !proposal) {
+      trackContribution('Proposal', 'started', 'form')
+      trackContribution('Proposal', 'step_viewed', 'form')
+    }
 
     if (isBackOfficeInput) {
       window.removeEventListener('beforeunload', onUnload)
@@ -1022,7 +1045,10 @@ const form = reduxForm({
   form: formName,
   validate,
   onSubmit,
-  onSubmitFail: errors => {
+  onSubmitFail: (errors, _dispatch, submitError, props: Props) => {
+    if (!submitError && !props.proposal && !props.isBackOfficeInput) {
+      trackContribution('Proposal', 'error', 'form')
+    }
     scrollToFormError(errors)
   },
 })(ProposalForm)

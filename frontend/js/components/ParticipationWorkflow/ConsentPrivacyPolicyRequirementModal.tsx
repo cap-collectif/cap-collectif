@@ -1,3 +1,4 @@
+import { useContributionTracking } from './useContributionTracking'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { Box, useMultiStepModal, Button, Flex } from '@cap-collectif/ui'
@@ -17,6 +18,7 @@ type Props = {
 }
 
 const ConsentPrivacyPolicyRequirementModal: React.FC<Props> = ({ hideGoBackArrow }) => {
+  const track = useContributionTracking('privacy_policy')
   const { goToNextStep } = useMultiStepModal()
   const intl = useIntl()
   const isAuthenticated = useSelector((state: GlobalState) => !!state.user.user)
@@ -43,11 +45,14 @@ const ConsentPrivacyPolicyRequirementModal: React.FC<Props> = ({ hideGoBackArrow
       },
       onCompleted: async (response, errors) => {
         if (errors && errors.length > 0) {
+          track('error')
           return mutationErrorToast(intl)
         }
+        track('requirement_validated')
         goToNextStep()
       },
       onError: () => {
+        track('error')
         return mutationErrorToast(intl)
       },
     })
@@ -64,11 +69,14 @@ const ConsentPrivacyPolicyRequirementModal: React.FC<Props> = ({ hideGoBackArrow
       },
       onCompleted: (response, errors) => {
         if (errors && errors.length > 0) {
+          track('error')
           return mutationErrorToast(intl)
         }
+        track('requirement_validated')
         goToNextStep()
       },
       onError: () => {
+        track('error')
         return mutationErrorToast(intl)
       },
     })

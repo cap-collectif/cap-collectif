@@ -1,3 +1,4 @@
+import { useContributionTracking } from './useContributionTracking'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { Box, useMultiStepModal, Button, FormLabel, CapInputSize } from '@cap-collectif/ui'
@@ -24,6 +25,7 @@ type ValidationErrors = {
 }
 
 const IdentificationCodeRequirementModal: React.FC<Props> = ({ hideGoBackArrow }) => {
+  const track = useContributionTracking('identification_code')
   const { goToNextStep } = useMultiStepModal()
   const intl = useIntl()
   const isAuthenticated = useSelector((state: GlobalState) => !!state.user.user)
@@ -52,6 +54,7 @@ const IdentificationCodeRequirementModal: React.FC<Props> = ({ hideGoBackArrow }
         const errorCode = response.updateProfilePersonalData?.errorCode
 
         if (['BAD_CODE', 'CODE_ALREADY_USED'].includes(errorCode)) {
+          track('error')
           setError('userIdentificationCode', {
             type: 'manual',
             message: intl.formatMessage({ id: errorCode }),
@@ -60,11 +63,14 @@ const IdentificationCodeRequirementModal: React.FC<Props> = ({ hideGoBackArrow }
         }
 
         if (errors && errors.length > 0) {
+          track('error')
           return mutationErrorToast(intl)
         }
+        track('requirement_validated')
         goToNextStep()
       },
       onError: () => {
+        track('error')
         return mutationErrorToast(intl)
       },
     })
@@ -87,6 +93,7 @@ const IdentificationCodeRequirementModal: React.FC<Props> = ({ hideGoBackArrow }
             keyof ValidationErrors,
             ValidationErrors[keyof ValidationErrors],
           ][]) {
+            track('error')
             setError(formKey, {
               type: 'manual',
               message: intl.formatMessage({ id: error }),
@@ -96,11 +103,14 @@ const IdentificationCodeRequirementModal: React.FC<Props> = ({ hideGoBackArrow }
         }
 
         if (errors && errors.length > 0) {
+          track('error')
           return mutationErrorToast(intl)
         }
+        track('requirement_validated')
         goToNextStep()
       },
       onError: () => {
+        track('error')
         return mutationErrorToast(intl)
       },
     })
@@ -135,7 +145,7 @@ const IdentificationCodeRequirementModal: React.FC<Props> = ({ hideGoBackArrow }
         title={intl.formatMessage({ id: 'identification_code' })}
         info={intl.formatMessage({ id: 'participation-workflow.userIdentificationCode_helptext' })}
       >
-        <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
+        <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit, () => track('error'))}>
           <FormControl name="userIdentificationCode" control={control} isRequired>
             <FormLabel
               htmlFor="userIdentificationCode"

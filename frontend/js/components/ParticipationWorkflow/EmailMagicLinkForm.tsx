@@ -1,3 +1,4 @@
+import { useContributionTracking } from './useContributionTracking'
 import React from 'react'
 import ModalLayout from '~/components/ParticipationWorkflow/ModalLayout'
 import { Box, Button, CapInputSize, FormLabel, useMultiStepModal } from '@cap-collectif/ui'
@@ -15,6 +16,7 @@ type FormValues = {
 export const MAGIC_LINK_FORM_INDEX = 6
 
 const EmailMagicLinkForm: React.FC = () => {
+  const track = useContributionTracking('email')
   const intl = useIntl()
 
   const { setCurrentStep } = useMultiStepModal()
@@ -47,7 +49,7 @@ const EmailMagicLinkForm: React.FC = () => {
         onClose={() => {}}
         onBack={goToAccountLoginForm}
       >
-        <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
+        <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit, () => track('error'))}>
           <FormControl name="email" control={control} isRequired>
             <FormLabel fontWeight={[400, 600]} htmlFor="email" label={intl.formatMessage({ id: 'user_email' })} />
             <FieldInput

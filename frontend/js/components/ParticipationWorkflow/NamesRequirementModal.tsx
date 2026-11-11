@@ -1,3 +1,4 @@
+import { useContributionTracking } from './useContributionTracking'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { Box, Button, CapInputSize, FormLabel, useMultiStepModal } from '@cap-collectif/ui'
 import CookieMonster from '@shared/utils/CookieMonster'
@@ -22,6 +23,7 @@ type Props = {
 }
 
 const NamesRequirementModal: React.FC<Props> = ({ hideGoBackArrow, showFirstname, showLastname }) => {
+  const track = useContributionTracking('names')
   const { goToNextStep } = useMultiStepModal()
   const intl = useIntl()
   const isAuthenticated = useSelector((state: GlobalState) => !!state.user.user)
@@ -48,11 +50,14 @@ const NamesRequirementModal: React.FC<Props> = ({ hideGoBackArrow, showFirstname
       },
       onCompleted: async (response, errors) => {
         if (errors && errors.length > 0) {
+          track('error')
           return mutationErrorToast(intl)
         }
+        track('requirement_validated')
         goToNextStep()
       },
       onError: () => {
+        track('error')
         return mutationErrorToast(intl)
       },
     })
@@ -70,11 +75,14 @@ const NamesRequirementModal: React.FC<Props> = ({ hideGoBackArrow, showFirstname
       },
       onCompleted: (response, errors) => {
         if (errors && errors.length > 0) {
+          track('error')
           return mutationErrorToast(intl)
         }
+        track('requirement_validated')
         goToNextStep()
       },
       onError: () => {
+        track('error')
         return mutationErrorToast(intl)
       },
     })
@@ -108,7 +116,7 @@ const NamesRequirementModal: React.FC<Props> = ({ hideGoBackArrow, showFirstname
         title={intl.formatMessage({ id: 'participation-workflow.names' })}
         info={intl.formatMessage({ id: 'participation-workflow.names_helptext' })}
       >
-        <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
+        <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit, () => track('error'))}>
           {showFirstname && (
             <FormControl name="firstname" control={control} isRequired>
               <FormLabel

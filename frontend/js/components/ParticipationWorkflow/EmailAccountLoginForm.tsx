@@ -1,3 +1,4 @@
+import { useContributionTracking } from './useContributionTracking'
 import React from 'react'
 import ModalLayout from '~/components/ParticipationWorkflow/ModalLayout'
 import { Box, Button, CapInputSize, Flex, FormLabel, Text, useMultiStepModal, toast } from '@cap-collectif/ui'
@@ -23,6 +24,7 @@ type FormState = 'LOADING' | 'ERROR'
 export const ACCOUNT_LOGIN_FORM_INDEX = 3
 
 const EmailAccountLoginForm: React.FC<Props> = ({ children }) => {
+  const track = useContributionTracking('login')
   const intl = useIntl()
   const { setCurrentStep } = useMultiStepModal()
   const { requirementsUrl } = useParticipationWorkflow()
@@ -71,12 +73,15 @@ const EmailAccountLoginForm: React.FC<Props> = ({ children }) => {
     })
 
     if (!response.ok) {
+      track('error')
       setFormState('ERROR')
       if (isDesktop) {
+        track('error')
         setError('email', {
           type: 'manual',
           message: '',
         })
+        track('error')
         setError('password', {
           type: 'manual',
           message: intl.formatMessage({ id: 'login-informations-incorrect' }),
@@ -108,7 +113,7 @@ const EmailAccountLoginForm: React.FC<Props> = ({ children }) => {
         info={info}
         onBack={goToParticipantForm}
       >
-        <Box as="form" width="100%" onSubmit={handleSubmit(login)}>
+        <Box as="form" width="100%" onSubmit={handleSubmit(login, () => track('error'))}>
           <FormControl name="email" control={control} isRequired>
             <FormLabel fontWeight={[400, 600]} htmlFor="email" label={intl.formatMessage({ id: 'user_email' })} />
             <FieldInput

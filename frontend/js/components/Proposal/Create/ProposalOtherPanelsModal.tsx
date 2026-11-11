@@ -4,6 +4,7 @@ import ProposalLeaveModal from './ProposalLeaveModal'
 import ProposalChangeAddressModal from './ProposalChangeAddressModal'
 import type { ProposalOtherPanelsModal_proposalForm$key } from '~relay/ProposalOtherPanelsModal_proposalForm.graphql'
 type Props = {
+  readonly onAbandon?: () => void
   readonly onClose: () => void
   readonly resetModalState: () => void
   readonly modalState: 'LEAVE' | 'ERROR' | 'NORMAL' | 'MAP'
@@ -18,6 +19,7 @@ const FRAGMENT = graphql`
 
 const ProposalOtherPanelsModal = ({
   resetModalState,
+  onAbandon,
   onClose,
   modalState,
   proposalForm: proposalFormFragment,
@@ -25,7 +27,9 @@ const ProposalOtherPanelsModal = ({
   const proposalForm = useFragment(FRAGMENT, proposalFormFragment)
   return (
     <>
-      {modalState === 'LEAVE' && <ProposalLeaveModal resetModalState={resetModalState} onClose={onClose} />}
+      {modalState === 'LEAVE' && (
+        <ProposalLeaveModal onAbandon={onAbandon} resetModalState={resetModalState} onClose={onClose} />
+      )}
       {modalState === 'MAP' && (
         <ProposalChangeAddressModal proposalForm={proposalForm} resetModalState={resetModalState} onClose={onClose} />
       )}

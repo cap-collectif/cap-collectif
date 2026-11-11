@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 class MediasController extends AbstractController
 {
@@ -28,6 +29,18 @@ class MediasController extends AbstractController
         private readonly VocalContributionUploadService $vocalContributionUploadService,
         private readonly PrivateMediaUpload $privateUpload
     ) {}
+
+    /**
+     * @Route("/voice-messages", name="get_voice_message_csrf_token", methods={"GET"}, options={"i18n" = false})
+     */
+    public function getVoiceMessageCsrfToken(CsrfTokenManagerInterface $csrfTokenManager): JsonResponse
+    {
+        return $this->json(
+            ['csrfToken' => $csrfTokenManager->getToken('voice_message')->getValue()],
+            Response::HTTP_OK,
+            ['Cache-Control' => 'private, no-store']
+        );
+    }
 
     /**
      * @Route("/voice-messages", name="upload_voice_message", methods={"POST"}, options={"i18n" = false})

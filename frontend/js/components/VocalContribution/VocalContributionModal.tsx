@@ -1,3 +1,8 @@
+import {
+  bindContributionTrackingAttempt,
+  getContributionTrackingAttempt,
+  trackContribution,
+} from '~/utils/contributionTracking'
 import { Box, useTheme } from '@cap-collectif/ui'
 import CookieMonster from '@shared/utils/CookieMonster'
 import * as React from 'react'
@@ -149,6 +154,10 @@ const VocalContributionModal = ({ uploadConfig, onParticipationWorkflowRequired 
   const isOpenRef = React.useRef(false)
   const inertedRef = React.useRef<Element[]>([])
 
+  React.useEffect(() => {
+    if (isOpen) trackContribution('VocalContribution', 'step_viewed', screen === 'rec' ? 'recording' : screen)
+  }, [isOpen, screen])
+
   const maxDurationText = intl.formatMessage({ id: 'front.vocal-contribution.max-duration' }, { minutes: MAX_MINUTES })
 
   const announce = React.useCallback((text: string) => {
@@ -173,7 +182,10 @@ const VocalContributionModal = ({ uploadConfig, onParticipationWorkflowRequired 
   const recorder = useVocalRecorder({
     onRecorded: result => {
       replaceRecording(result)
-      if (screenRef.current === 'rec' || screenRef.current === 'quit') show('review')
+      if (screenRef.current === 'rec' || screenRef.current === 'quit') {
+        show('review')
+        if (result.duration < MIN_DURATION) trackContribution('VocalContribution', 'error', 'review')
+      }
     },
     onAlert: () =>
       announce(intl.formatMessage({ id: 'front.vocal-contribution.alert' }, { seconds: ALERT_BEFORE_END })),
@@ -212,6 +224,7 @@ const VocalContributionModal = ({ uploadConfig, onParticipationWorkflowRequired 
     (trigger: HTMLElement | null) => {
       if (isOpenRef.current) return
       triggerRef.current = trigger ?? (document.activeElement as HTMLElement | null)
+      trackContribution('VocalContribution', 'started', recordingRef.current ? 'review' : 'intro')
       isOpenRef.current = true
       setIsOpen(true)
       show(recordingRef.current ? 'review' : 'intro')
@@ -261,6 +274,7 @@ const VocalContributionModal = ({ uploadConfig, onParticipationWorkflowRequired 
       show('rec')
       announce(intl.formatMessage({ id: 'front.vocal-contribution.started' }, { duration: maxDurationText }))
     } catch (error) {
+      trackContribution('VocalContribution', 'error', 'microphone')
       setMicError(error instanceof MicError ? error.kind : 'other')
       show('micro')
     } finally {
@@ -280,6 +294,8 @@ const VocalContributionModal = ({ uploadConfig, onParticipationWorkflowRequired 
     const { current } = recordingRef
     if (isSending || !current) return
     stopAudio()
+    trackContribution('VocalContribution', 'step_viewed', 'submission')
+    const attemptId = getContributionTrackingAttempt('VocalContribution')
     setIsSending(true)
     setSubmitError('')
     try {
@@ -290,8 +306,12 @@ const VocalContributionModal = ({ uploadConfig, onParticipationWorkflowRequired 
         upload.vocalId,
         isAuthenticated ? null : upload.participantToken ?? cookieToken,
       )
+      bindContributionTrackingAttempt(payload.contributionId, attemptId)
       if (!isAuthenticated && payload.participantToken) CookieMonster.addParticipantCookie(payload.participantToken)
       setIsSending(false)
+      if (payload.completionStatus === 'COMPLETED') {
+        trackContribution('VocalContribution', 'completed', 'participation_confirmed', payload.contributionId)
+      }
       resetRecording()
       close()
       // Same rule as the replies: the workflow also asks for the optional internal communication consent
@@ -308,10 +328,12 @@ const VocalContributionModal = ({ uploadConfig, onParticipationWorkflowRequired 
       else window.location.href = buildToastUrl('/', { variant: 'success', message: 'your-participation-is-confirmed' })
     } catch (error) {
       // The message shown to the participant is generic: keep the actual cause for debugging
+      trackContribution('VocalContribution', 'error', 'submission')
       console.error('Vocal contribution submission failed', error)
       setIsSending(false)
       setSubmitError(intl.formatMessage({ id: getSubmitErrorKey(error) }))
       show('review', true)
+      trackContribution('VocalContribution', 'step_viewed', 'review')
     }
   }
   // Opening: lock the page behind the modal, then fade in
@@ -620,6 +642,11 @@ const VocalContributionModal = ({ uploadConfig, onParticipationWorkflowRequired 
               label={intl.formatMessage({ id: 'front.vocal-contribution.quit.leave' })}
               onClick={() => {
                 resetRecording()
+                trackContribution(
+                  'VocalContribution',
+                  'abandoned',
+                  backRef.current === 'rec' ? 'recording' : backRef.current,
+                )
                 close()
               }}
             />

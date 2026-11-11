@@ -1,3 +1,4 @@
+import { useContributionTracking } from './useContributionTracking'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { Box, Button, CapInputSize, FormLabel, useMultiStepModal } from '@cap-collectif/ui'
 import CookieMonster from '@shared/utils/CookieMonster'
@@ -21,6 +22,7 @@ type Props = {
 }
 
 const BirthdayRequirementModal: React.FC<Props> = ({ hideGoBackArrow }) => {
+  const track = useContributionTracking('birthday')
   const { goToNextStep } = useMultiStepModal()
   const intl = useIntl()
   const isAuthenticated = useSelector((state: GlobalState) => !!state.user.user)
@@ -47,11 +49,14 @@ const BirthdayRequirementModal: React.FC<Props> = ({ hideGoBackArrow }) => {
       },
       onCompleted: async (response, errors) => {
         if (errors && errors.length > 0) {
+          track('error')
           return mutationErrorToast(intl)
         }
+        track('requirement_validated')
         goToNextStep()
       },
       onError: () => {
+        track('error')
         return mutationErrorToast(intl)
       },
     })
@@ -68,11 +73,14 @@ const BirthdayRequirementModal: React.FC<Props> = ({ hideGoBackArrow }) => {
       },
       onCompleted: (response, errors) => {
         if (errors && errors.length > 0) {
+          track('error')
           return mutationErrorToast(intl)
         }
+        track('requirement_validated')
         goToNextStep()
       },
       onError: () => {
+        track('error')
         return mutationErrorToast(intl)
       },
     })
@@ -107,7 +115,7 @@ const BirthdayRequirementModal: React.FC<Props> = ({ hideGoBackArrow }) => {
         title={intl.formatMessage({ id: 'participation-workflow.birthday' })}
         info={intl.formatMessage({ id: 'participation-workflow.birthday_helptext' })}
       >
-        <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
+        <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit, () => track('error'))}>
           <FormControl name="birthday" control={control} isRequired>
             <FormLabel
               fontWeight={[400, 600]}

@@ -1,3 +1,4 @@
+import { useContributionTracking } from './useContributionTracking'
 import React from 'react'
 import { CapUIIconSize, Flex, Spinner, toast, useMultiStepModal } from '@cap-collectif/ui'
 import { PARTICIPANT_CHECK_EMAIL_INDEX } from '~/components/ParticipationWorkflow/EmailParticipantCheckEmail'
@@ -12,6 +13,7 @@ import { useParticipationWorkflow } from '~/components/ParticipationWorkflow/Par
 export const PARTICIPANT_CAPTCHA_INDEX = 1
 
 const EmailParticipantCaptcha: React.FC = () => {
+  const track = useContributionTracking('captcha', false)
   const { setCurrentStep } = useMultiStepModal()
   const intl = useIntl()
   const { requirementsUrl } = useParticipationWorkflow()
@@ -36,6 +38,7 @@ const EmailParticipantCaptcha: React.FC = () => {
       },
       onCompleted: (response, errors) => {
         if (errors && errors.length > 0) {
+          track('error')
           return mutationErrorToast(intl)
         }
 
@@ -43,6 +46,7 @@ const EmailParticipantCaptcha: React.FC = () => {
         const redirectUrl = response.sendParticipantEmailWorkflow?.redirectUrl
 
         if (errorCode === 'EMAIL_RECENTLY_SENT') {
+          track('error')
           toast({
             variant: 'warning',
             content: intl.formatMessage({
@@ -61,6 +65,7 @@ const EmailParticipantCaptcha: React.FC = () => {
         goToParticipantCheckEmail()
       },
       onError: () => {
+        track('error')
         return mutationErrorToast(intl)
       },
     })

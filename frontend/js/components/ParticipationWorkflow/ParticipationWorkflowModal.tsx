@@ -1,3 +1,4 @@
+import { trackContribution, getContributionTrackingStep } from '~/utils/contributionTracking'
 import { CapUIModalSize, MultiStepModal, clearToasts } from '@cap-collectif/ui'
 import * as React from 'react'
 import PhoneRequirementModal from './PhoneRequirementModal'
@@ -188,14 +189,18 @@ const ParticipationWorkflowModal: React.FC<Props> = ({
   const participantToken = getParticipantToken()
   const contributionGlobalId = ensureGlobalId('AbstractVote', contributionId)
   const isVocalContributionId = fromGlobalId(contributionGlobalId).type === 'VocalContribution'
-  const query = useLazyLoadQuery<ParticipationWorkflowModalQuery>(QUERY, {
+  const query = useLazyLoadQuery<ParticipationWorkflowModalQuery>(
+    QUERY,
+    {
       stepId,
       participantToken,
       isAuthenticated,
       contributionId: contributionGlobalId,
-  }, {
+    },
+    {
       fetchPolicy: isVocalContributionId ? 'network-only' : 'store-or-network',
-  })
+    },
+  )
 
   const viewer = query?.viewer ?? null
   const participant = query?.participant ?? null
@@ -330,14 +335,38 @@ const ParticipationWorkflowModal: React.FC<Props> = ({
     r => !['PhoneRequirement', 'PhoneVerifiedRequirement'].includes(r.__typename),
   )
 
-  const hasMetAllRequirements = filteredRequirements.length === 0 && contribution?.completionStatus === 'COMPLETED'
+  const completionStatus = contribution && 'completionStatus' in contribution ? contribution.completionStatus : null
+  const hasMetAllRequirements = filteredRequirements.length === 0 && completionStatus === 'COMPLETED'
+  const previousTrackingStep = React.useRef(getContributionTrackingStep(contributionTypeName, contributionGlobalId))
+  useEffect(() => {
+    const previous = previousTrackingStep.current
+    const verified =
+      (previous === 'email_verification' && isMeetingEmailRequirement) ||
+      (previous === 'sso' && isMeetingSSORequirement) ||
+      (previous === 'france_connect' && isMeetingFcRequirement)
+    if (verified) {
+      trackContribution(contributionTypeName, 'requirement_validated', previous, contributionGlobalId)
+      previousTrackingStep.current = ''
+    }
+    if (completionStatus === 'COMPLETED') {
+      trackContribution(contributionTypeName, 'completed', 'participation_confirmed', contributionGlobalId)
+    }
+  }, [
+    contributionTypeName,
+    contributionGlobalId,
+    completionStatus,
+    isMeetingEmailRequirement,
+    isMeetingSSORequirement,
+    isMeetingFcRequirement,
+  ])
+
   const email = viewer?.email ?? participant?.email
   const consentInternalCommunication = viewer?.consentInternalCommunication ?? participant?.consentInternalCommunication
   const shouldAskConsent = shouldTriggerConsentInternalCommunication || consentInternalCommunication !== true
   const workflowStepKey = [
     phonesRequirements.map(requirement => requirement.__typename).join(','),
     filteredRequirements.map(requirement => requirement.__typename).join(','),
-    contribution?.completionStatus ?? '',
+    completionStatus ?? '',
     email ? 'email-known' : 'email-unknown',
     shouldAskConsent ? 'consent-required' : 'consent-not-required',
   ].join('|')

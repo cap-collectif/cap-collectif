@@ -1,3 +1,4 @@
+import { useContributionTracking } from './useContributionTracking'
 import React from 'react'
 import ModalLayout from '~/components/ParticipationWorkflow/ModalLayout'
 import { Box, Button, Text, useMultiStepModal } from '@cap-collectif/ui'
@@ -34,6 +35,7 @@ type Props = {
 type Requirement = { requirementId: string; value: boolean }
 
 const CheckboxesRequirementModal: React.FC<Props> = ({ checkboxes, hideGoBackArrow }) => {
+  const track = useContributionTracking('checkboxes')
   const intl = useIntl()
   const isAuthenticated = useSelector((state: GlobalState) => !!state.user.user)
   const { goToNextStep } = useMultiStepModal()
@@ -62,11 +64,14 @@ const CheckboxesRequirementModal: React.FC<Props> = ({ checkboxes, hideGoBackArr
       },
       onCompleted: (response, errors) => {
         if (errors && errors.length > 0) {
+          track('error')
           return mutationErrorToast(intl)
         }
+        track('requirement_validated')
         goToNextStep()
       },
       onError: () => {
+        track('error')
         return mutationErrorToast(intl)
       },
     })
@@ -83,11 +88,14 @@ const CheckboxesRequirementModal: React.FC<Props> = ({ checkboxes, hideGoBackArr
       },
       onCompleted: (response, errors) => {
         if (errors && errors.length > 0) {
+          track('error')
           return mutationErrorToast(intl)
         }
+        track('requirement_validated')
         goToNextStep()
       },
       onError: () => {
+        track('error')
         return mutationErrorToast(intl)
       },
     })
@@ -132,7 +140,7 @@ const CheckboxesRequirementModal: React.FC<Props> = ({ checkboxes, hideGoBackArr
           id: 'the-project-owner-needs-you-to-accept-these-conditions',
         })}
       >
-        <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
+        <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit, () => track('error'))}>
           <Text mb={0} fontWeight={400}>
             {intl.formatMessage({ id: 'check-the-checkboxes' }, { num: checkboxes.length })}
           </Text>

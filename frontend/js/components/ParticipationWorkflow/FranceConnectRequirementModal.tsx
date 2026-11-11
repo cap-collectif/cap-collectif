@@ -1,3 +1,4 @@
+import { useContributionTracking } from './useContributionTracking'
 import React from 'react'
 import ModalLayout from '~/components/ParticipationWorkflow/ModalLayout'
 import { useIntl } from 'react-intl'
@@ -15,6 +16,7 @@ type Props = {
 export const ACCOUNT_FRANCE_CONNECT_INDEX = 4
 
 const FranceConnectRequirementModal: React.FC<Props> = ({ children, hideGoBackArrow = false }) => {
+  useContributionTracking('france_connect')
   const intl = useIntl()
   const { requirementsUrl } = useParticipationWorkflow()
   const { setCurrentStep } = useMultiStepModal()

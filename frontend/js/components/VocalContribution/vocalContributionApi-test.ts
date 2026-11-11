@@ -5,11 +5,17 @@ import { VocalContributionError, addVocalContribution, uploadVocalFile } from '.
 jest.mock('~/mutations/AddVocalContributionMutation', () => ({ __esModule: true, default: { commit: jest.fn() } }))
 
 const commit = AddVocalContributionMutation.commit as jest.Mock
-const config = { uploadUrl: '/api/voice-messages', csrfToken: 'csrf' }
+const config = { uploadUrl: '/api/voice-messages' }
 const audio = new Blob(['audio'], { type: 'audio/webm;codecs=opus' })
 
 const mockFetch = (status: number, body: unknown) => {
-  global.fetch = jest.fn().mockResolvedValue({ ok: status < 300, status, json: () => Promise.resolve(body) })
+  const fetchMock = jest
+    .fn()
+    .mockResolvedValueOnce({ ok: true, json: () => Promise.resolve({ csrfToken: 'csrf' }) })
+    .mockResolvedValue({ ok: status < 300, status, json: () => Promise.resolve(body) })
+  global.fetch = fetchMock
+
+  return fetchMock
 }
 
 describe('uploadVocalFile', () => {
@@ -21,7 +27,8 @@ describe('uploadVocalFile', () => {
       participantToken: 'token',
     })
 
-    const [url, init] = (global.fetch as jest.Mock).mock.calls[0]
+    expect(global.fetch).toHaveBeenNthCalledWith(1, config.uploadUrl, { credentials: 'same-origin', cache: 'no-store' })
+    const [url, init] = (global.fetch as jest.Mock).mock.calls[1]
     expect(url).toBe('/api/voice-messages')
     expect(init.headers).toEqual({ 'X-CSRF-Token': 'csrf' })
     expect((init.body as FormData).get('participantToken')).toBe('cookie')
@@ -37,7 +44,11 @@ describe('uploadVocalFile', () => {
   })
 
   it('rejects with an unknown error when the response is not JSON', async () => {
-    global.fetch = jest.fn().mockResolvedValue({ ok: false, status: 502, json: () => Promise.reject(new Error()) })
+    mockFetch(502, null).mockResolvedValueOnce({
+      ok: false,
+      status: 502,
+      json: () => Promise.reject(new Error()),
+    })
 
     await expect(uploadVocalFile(audio, config, null)).rejects.toMatchObject({ code: 'UNKNOWN' })
   })

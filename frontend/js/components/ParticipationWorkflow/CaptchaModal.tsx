@@ -1,3 +1,4 @@
+import { useContributionTracking } from './useContributionTracking'
 import { Box, CapUIFontSize, Flex, Text, useMultiStepModal } from '@cap-collectif/ui'
 import React from 'react'
 import { useIntl } from 'react-intl'
@@ -14,9 +15,14 @@ type Props = {
 }
 
 const CaptchaModal: React.FC<Props> = ({ onCaptchaSuccess, children }) => {
+  const track = useContributionTracking('captcha')
   const intl = useIntl()
   const { currentStep, goToNextStep } = useMultiStepModal()
   const { captchaError, setCaptchaError, setCaptchaStepIndex } = useParticipationWorkflow()
+
+  React.useEffect(() => {
+    if (captchaError) track('error')
+  }, [captchaError, track])
 
   const title = intl.formatMessage({ id: 'participation-workflow.verification' })
   const info = intl.formatMessage({ id: 'participation-workflow.no_robot' })
@@ -46,7 +52,11 @@ const CaptchaModal: React.FC<Props> = ({ onCaptchaSuccess, children }) => {
               transformOrigin: 'center',
             }}
             onChange={async value => {
-              if (!value) return
+              if (!value) {
+                track('error')
+                return
+              }
+              track('requirement_validated')
               setCaptchaError(null)
 
               if (onCaptchaSuccess) {

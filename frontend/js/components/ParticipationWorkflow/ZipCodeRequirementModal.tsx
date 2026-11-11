@@ -1,3 +1,4 @@
+import { useContributionTracking } from './useContributionTracking'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { Box, Button, CapInputSize, FormLabel, useMultiStepModal } from '@cap-collectif/ui'
 import CookieMonster from '@shared/utils/CookieMonster'
@@ -23,6 +24,7 @@ type Props = {
 const ZIP_CODE_LENGTH = 5
 
 const ZipCodeRequirement: React.FC<Props> = ({ hideGoBackArrow }) => {
+  const track = useContributionTracking('zip_code')
   const { goToNextStep } = useMultiStepModal()
   const intl = useIntl()
   const isAuthenticated = useSelector((state: GlobalState) => !!state.user.user)
@@ -49,11 +51,14 @@ const ZipCodeRequirement: React.FC<Props> = ({ hideGoBackArrow }) => {
       },
       onCompleted: async (response, errors) => {
         if (errors && errors.length > 0) {
+          track('error')
           return mutationErrorToast(intl)
         }
+        track('requirement_validated')
         goToNextStep()
       },
       onError: () => {
+        track('error')
         return mutationErrorToast(intl)
       },
     })
@@ -70,11 +75,14 @@ const ZipCodeRequirement: React.FC<Props> = ({ hideGoBackArrow }) => {
       },
       onCompleted: (response, errors) => {
         if (errors && errors.length > 0) {
+          track('error')
           return mutationErrorToast(intl)
         }
+        track('requirement_validated')
         goToNextStep()
       },
       onError: () => {
+        track('error')
         return mutationErrorToast(intl)
       },
     })
@@ -109,7 +117,7 @@ const ZipCodeRequirement: React.FC<Props> = ({ hideGoBackArrow }) => {
         title={intl.formatMessage({ id: 'participation-workflow.zipCode' })}
         info={intl.formatMessage({ id: 'participation-workflow.zipCode_helptext' })}
       >
-        <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
+        <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit, () => track('error'))}>
           <FormControl name="zipCode" control={control} isRequired>
             <FormLabel fontWeight={[400, 600]} htmlFor="zipCode" label={intl.formatMessage({ id: 'user_zipCode' })} />
             <FieldInput

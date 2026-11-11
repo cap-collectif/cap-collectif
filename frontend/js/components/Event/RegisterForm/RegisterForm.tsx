@@ -84,6 +84,7 @@ export const RegisterForm = ({ queryRef }: Props) => {
         variant="primary"
         variantSize="big"
         label="event_registration.create.register"
+        data-capco-event-registration
         onClick={
           link
             ? () => {}

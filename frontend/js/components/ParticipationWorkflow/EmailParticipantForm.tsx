@@ -1,3 +1,4 @@
+import { useContributionTracking } from './useContributionTracking'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { Box, Button, CapInputSize, Flex, FormLabel, Text, useMultiStepModal } from '@cap-collectif/ui'
 import React from 'react'
@@ -20,6 +21,7 @@ type FormValues = {
 export const PARTICIPANT_FORM_INDEX = 0
 
 const EmailParticipantForm: React.FC<Props> = ({ hideGoBackArrow }) => {
+  const track = useContributionTracking('email')
   const intl = useIntl()
   const { setCurrentStep } = useMultiStepModal()
   const [isLoading, setLoading] = React.useState(false)
@@ -63,7 +65,7 @@ const EmailParticipantForm: React.FC<Props> = ({ hideGoBackArrow }) => {
         title={intl.formatMessage({ id: 'participation-workflow.email_address' })}
         info={intl.formatMessage({ id: 'participation-workflow.email_address_helptext' })}
       >
-        <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
+        <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit, () => track('error'))}>
           <FormControl name="email" control={control} isRequired>
             <FormLabel fontWeight={[400, 600]} htmlFor="email" label={intl.formatMessage({ id: 'user_email' })} />
             <FieldInput

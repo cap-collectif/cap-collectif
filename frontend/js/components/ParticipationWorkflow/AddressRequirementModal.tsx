@@ -1,3 +1,4 @@
+import { useContributionTracking } from './useContributionTracking'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { Box, Button, CapInputSize, FormLabel, useMultiStepModal } from '@cap-collectif/ui'
 import CookieMonster from '@shared/utils/CookieMonster'
@@ -20,6 +21,7 @@ type Props = {
 }
 
 const AddressRequirementModal: React.FC<Props> = ({ hideGoBackArrow }) => {
+  const track = useContributionTracking('address')
   const { goToNextStep } = useMultiStepModal()
   const intl = useIntl()
   const isAuthenticated = useSelector((state: GlobalState) => !!state.user.user)
@@ -47,11 +49,14 @@ const AddressRequirementModal: React.FC<Props> = ({ hideGoBackArrow }) => {
       },
       onCompleted: async (response, errors) => {
         if (errors && errors.length > 0) {
+          track('error')
           return mutationErrorToast(intl)
         }
+        track('requirement_validated')
         goToNextStep()
       },
       onError: () => {
+        track('error')
         return mutationErrorToast(intl)
       },
     })
@@ -68,11 +73,14 @@ const AddressRequirementModal: React.FC<Props> = ({ hideGoBackArrow }) => {
       },
       onCompleted: (response, errors) => {
         if (errors && errors.length > 0) {
+          track('error')
           return mutationErrorToast(intl)
         }
+        track('requirement_validated')
         goToNextStep()
       },
       onError: () => {
+        track('error')
         return mutationErrorToast(intl)
       },
     })
@@ -82,6 +90,7 @@ const AddressRequirementModal: React.FC<Props> = ({ hideGoBackArrow }) => {
     const address = JSON.stringify([values.realAddress])
 
     if (!values.realAddress) {
+      track('error')
       setError('address', {
         type: 'value',
         message: intl.formatMessage({
@@ -119,7 +128,7 @@ const AddressRequirementModal: React.FC<Props> = ({ hideGoBackArrow }) => {
             : null
         }
       >
-        <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
+        <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit, () => track('error'))}>
           <FormControl name="address" control={control} isRequired>
             <FormLabel
               fontWeight={[400, 600]}

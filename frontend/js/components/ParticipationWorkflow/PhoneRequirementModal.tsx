@@ -1,3 +1,4 @@
+import { useContributionTracking } from './useContributionTracking'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { Box, Button, Flex, FormLabel, InputGroup, useMultiStepModal } from '@cap-collectif/ui'
 import CookieMonster from '@shared/utils/CookieMonster'
@@ -26,6 +27,7 @@ type Props = {
 const PHONE_LENGTH = 10
 
 const PhoneRequirementModal: React.FC<Props> = ({ isPhoneVerifiedRequired, hideGoBackArrow }) => {
+  const track = useContributionTracking('phone')
   const { goToNextStep } = useMultiStepModal()
   const intl = useIntl()
   const isAuthenticated = useSelector((state: GlobalState) => !!state.user.user)
@@ -63,6 +65,7 @@ const PhoneRequirementModal: React.FC<Props> = ({ isPhoneVerifiedRequired, hideG
       onCompleted: (response, errors) => {
         if (errors && errors.length > 0) {
           if (errors?.[0]?.message === 'PHONE_SHOULD_BE_MOBILE_NUMBER') {
+            track('error')
             setError('phone', {
               type: 'manual',
               message: intl.formatMessage({
@@ -72,15 +75,18 @@ const PhoneRequirementModal: React.FC<Props> = ({ isPhoneVerifiedRequired, hideG
             return
           }
 
+          track('error')
           return mutationErrorToast(intl)
         }
         if (isPhoneVerifiedRequired) {
           sendCodeToParticipant(phone)
           return
         }
+        track('requirement_validated')
         goToNextStep()
       },
       onError: () => {
+        track('error')
         return mutationErrorToast(intl)
       },
     })
@@ -97,11 +103,13 @@ const PhoneRequirementModal: React.FC<Props> = ({ isPhoneVerifiedRequired, hideG
       },
       onCompleted: (response, errors) => {
         if (errors && errors.length > 0) {
+          track('error')
           return mutationErrorToast(intl)
         }
         const errorCode = response?.sendParticipantPhoneValidationCode?.errorCode
 
         if (!errorCode) {
+          track('requirement_validated')
           goToNextStep()
         }
 
@@ -109,6 +117,7 @@ const PhoneRequirementModal: React.FC<Props> = ({ isPhoneVerifiedRequired, hideG
           case null:
             break
           case 'INVALID_NUMBER':
+            track('error')
             setError('phone', {
               type: 'manual',
               message: intl.formatMessage({
@@ -117,6 +126,7 @@ const PhoneRequirementModal: React.FC<Props> = ({ isPhoneVerifiedRequired, hideG
             })
             return
           case 'RETRY_LIMIT_REACHED':
+            track('error')
             setError('phone', {
               type: 'manual',
               message: intl.formatMessage({
@@ -126,10 +136,12 @@ const PhoneRequirementModal: React.FC<Props> = ({ isPhoneVerifiedRequired, hideG
             return
           case 'SERVER_ERROR':
           default:
+            track('error')
             return mutationErrorToast(intl)
         }
       },
       onError: () => {
+        track('error')
         return mutationErrorToast(intl)
       },
     })
@@ -147,6 +159,7 @@ const PhoneRequirementModal: React.FC<Props> = ({ isPhoneVerifiedRequired, hideG
       onCompleted: async (response, errors) => {
         if (errors && errors.length > 0) {
           if (errors?.[0]?.message === 'PHONE_SHOULD_BE_MOBILE_NUMBER') {
+            track('error')
             setError('phone', {
               type: 'manual',
               message: intl.formatMessage({
@@ -155,15 +168,18 @@ const PhoneRequirementModal: React.FC<Props> = ({ isPhoneVerifiedRequired, hideG
             })
             return
           }
+          track('error')
           return mutationErrorToast(intl)
         }
         if (isPhoneVerifiedRequired) {
           sendCodeToUser()
           return
         }
+        track('requirement_validated')
         goToNextStep()
       },
       onError: () => {
+        track('error')
         return mutationErrorToast(intl)
       },
     })
@@ -177,11 +193,13 @@ const PhoneRequirementModal: React.FC<Props> = ({ isPhoneVerifiedRequired, hideG
       },
       onCompleted: (response, errors) => {
         if (errors && errors.length > 0) {
+          track('error')
           return mutationErrorToast(intl)
         }
         const errorCode = response?.sendSmsPhoneValidationCode?.errorCode
 
         if (!errorCode) {
+          track('requirement_validated')
           goToNextStep()
         }
 
@@ -189,6 +207,7 @@ const PhoneRequirementModal: React.FC<Props> = ({ isPhoneVerifiedRequired, hideG
           case null:
             break
           case 'INVALID_NUMBER':
+            track('error')
             setError('phone', {
               type: 'manual',
               message: intl.formatMessage({
@@ -197,6 +216,7 @@ const PhoneRequirementModal: React.FC<Props> = ({ isPhoneVerifiedRequired, hideG
             })
             return
           case 'RETRY_LIMIT_REACHED':
+            track('error')
             setError('phone', {
               type: 'manual',
               message: intl.formatMessage({
@@ -206,10 +226,12 @@ const PhoneRequirementModal: React.FC<Props> = ({ isPhoneVerifiedRequired, hideG
             return
           case 'SERVER_ERROR':
           default:
+            track('error')
             return mutationErrorToast(intl)
         }
       },
       onError: () => {
+        track('error')
         return mutationErrorToast(intl)
       },
     })
@@ -252,8 +274,8 @@ const PhoneRequirementModal: React.FC<Props> = ({ isPhoneVerifiedRequired, hideG
             : 'participation-workflow.phone_helptext_without_sms',
         })}
       >
-        <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
-          <FormLabel fontWeight={[400, 600]} htmlFor="phone" label={intl.formatMessage({ id: 'form.label_phone' })}  />
+        <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit, () => track('error'))}>
+          <FormLabel fontWeight={[400, 600]} htmlFor="phone" label={intl.formatMessage({ id: 'form.label_phone' })} />
           <Flex>
             <InputGroup width="100%">
               <FormControl name="phone" control={control} isRequired width="auto" flex={1}>

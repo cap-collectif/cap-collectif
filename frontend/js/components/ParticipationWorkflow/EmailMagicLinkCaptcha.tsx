@@ -1,3 +1,4 @@
+import { useContributionTracking } from './useContributionTracking'
 import React from 'react'
 import { toast, useMultiStepModal } from '@cap-collectif/ui'
 import CaptchaModal from '~/components/ParticipationWorkflow/CaptchaModal'
@@ -12,6 +13,7 @@ import { useParticipationWorkflow } from '~/components/ParticipationWorkflow/Par
 export const MAGIC_LINK_CAPTCHA_INDEX = 7
 
 const EmailMagicLinkCaptcha: React.FC = () => {
+  const track = useContributionTracking('captcha', false)
   const { setCurrentStep } = useMultiStepModal()
   const intl = useIntl()
   const { requirementsUrl } = useParticipationWorkflow()
@@ -36,6 +38,7 @@ const EmailMagicLinkCaptcha: React.FC = () => {
       },
       onCompleted: (response, errors) => {
         if (errors && errors.length > 0) {
+          track('error')
           return mutationErrorToast(intl)
         }
 
@@ -43,6 +46,7 @@ const EmailMagicLinkCaptcha: React.FC = () => {
         const magicLinkUrl = response.sendParticipantEmailWorkflow?.redirectUrl
 
         if (errorCode === 'EMAIL_RECENTLY_SENT') {
+          track('error')
           toast({
             variant: 'warning',
             content: intl.formatMessage({
@@ -61,6 +65,7 @@ const EmailMagicLinkCaptcha: React.FC = () => {
         goToMagicLinkCheckEmail()
       },
       onError: () => {
+        track('error')
         return mutationErrorToast(intl)
       },
     })

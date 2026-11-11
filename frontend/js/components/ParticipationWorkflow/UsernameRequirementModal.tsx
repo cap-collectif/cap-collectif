@@ -1,3 +1,4 @@
+import { useContributionTracking } from './useContributionTracking'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { Box, useMultiStepModal, Button, FormLabel, CapInputSize, Text, CapUIFontSize } from '@cap-collectif/ui'
@@ -20,11 +21,10 @@ type Props = {
   onSuccess: (username: string) => void
 }
 
-
 const REGEX_USERNAME = RegExp("^[a-zA-Z0-9_\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F-·' ]+$")
 
-
 const UsernameRequirementModal: React.FC<Props> = ({ hideGoBackArrow, onSuccess }) => {
+  const track = useContributionTracking('username')
   const { goToNextStep } = useMultiStepModal()
   const intl = useIntl()
   const isAuthenticated = useSelector((state: GlobalState) => !!state.user.user)
@@ -51,12 +51,14 @@ const UsernameRequirementModal: React.FC<Props> = ({ hideGoBackArrow, onSuccess 
       },
       onCompleted: async (response, errors) => {
         if (errors && errors.length > 0) {
+          track('error')
           return mutationErrorToast(intl)
         }
         onSuccess(username)
         goToNextStep()
       },
       onError: () => {
+        track('error')
         return mutationErrorToast(intl)
       },
     })
@@ -73,12 +75,14 @@ const UsernameRequirementModal: React.FC<Props> = ({ hideGoBackArrow, onSuccess 
       },
       onCompleted: (response, errors) => {
         if (errors && errors.length > 0) {
+          track('error')
           return mutationErrorToast(intl)
         }
         onSuccess(username)
         goToNextStep()
       },
       onError: () => {
+        track('error')
         return mutationErrorToast(intl)
       },
     })
@@ -117,7 +121,7 @@ const UsernameRequirementModal: React.FC<Props> = ({ hideGoBackArrow, onSuccess 
         title={intl.formatMessage({ id: 'participation-workflow.username' })}
         info={intl.formatMessage({ id: 'participation-workflow.username_helptext' })}
       >
-        <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
+        <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit, () => track('error'))}>
           <FormControl name="username" control={control}>
             <FormLabel fontWeight={[400, 600]} htmlFor="username" label={intl.formatMessage({ id: 'global.username' })}>
               <Text fontSize={CapUIFontSize.Caption} color="gray.500">

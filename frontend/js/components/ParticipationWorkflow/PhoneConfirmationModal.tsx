@@ -1,3 +1,4 @@
+import { useContributionTracking } from './useContributionTracking'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { Box, Button, toast, useMultiStepModal } from '@cap-collectif/ui'
 import CookieMonster from '@shared/utils/CookieMonster'
@@ -18,6 +19,7 @@ import { FormValues as WorkflowFormValues } from './ParticipationWorkflowModal'
 type FormValues = Pick<WorkflowFormValues, 'code'>
 
 const PhoneConfirmationModal: React.FC = () => {
+  const track = useContributionTracking('phone_verification')
   const { goToNextStep } = useMultiStepModal()
   const intl = useIntl()
   const isAuthenticated = useSelector((state: GlobalState) => !!state.user.user)
@@ -27,16 +29,9 @@ const PhoneConfirmationModal: React.FC = () => {
   const sendParticipantPhoneValidationCodeMutation = useSendParticipantPhoneValidationCodeMutation()
   const sendSmsPhoneValidationCodeMutation = useSendSmsPhoneValidationCodeMutation()
 
-  const {
-    control,
-    handleSubmit,
-    watch,
-    setError,
-    setFocus,
-  } = useFormContext()
+  const { control, handleSubmit, watch, setError, setFocus } = useFormContext()
 
-  const verifyCodeIsLoading =
-    verifyUserPhoneNumberMutation.isLoading || verifyParticipantPhoneNumberMutation.isLoading
+  const verifyCodeIsLoading = verifyUserPhoneNumberMutation.isLoading || verifyParticipantPhoneNumberMutation.isLoading
   const sendCodeIsLoading =
     sendParticipantPhoneValidationCodeMutation.isLoading || sendSmsPhoneValidationCodeMutation.isLoading
 
@@ -62,11 +57,13 @@ const PhoneConfirmationModal: React.FC = () => {
       },
       onCompleted: (response, errors) => {
         if (errors && errors.length > 0) {
+          track('error')
           return mutationErrorToast(intl)
         }
         const errorCode = response?.sendParticipantPhoneValidationCode?.errorCode
 
         if (errorCode === 'RETRY_LIMIT_REACHED') {
+          track('error')
           toast({
             variant: 'warning',
             content: intl.formatMessage({
@@ -77,10 +74,12 @@ const PhoneConfirmationModal: React.FC = () => {
         }
 
         if (errorCode) {
+          track('error')
           return mutationErrorToast(intl)
         }
       },
       onError: () => {
+        track('error')
         return mutationErrorToast(intl)
       },
     })
@@ -93,10 +92,12 @@ const PhoneConfirmationModal: React.FC = () => {
       },
       onCompleted: (response, errors) => {
         if (errors && errors.length > 0) {
+          track('error')
           return mutationErrorToast(intl)
         }
         const errorCode = response?.sendSmsPhoneValidationCode?.errorCode
         if (errorCode === 'RETRY_LIMIT_REACHED') {
+          track('error')
           toast({
             variant: 'warning',
             content: intl.formatMessage({
@@ -106,10 +107,12 @@ const PhoneConfirmationModal: React.FC = () => {
           return
         }
         if (errorCode) {
+          track('error')
           return mutationErrorToast(intl)
         }
       },
       onError: () => {
+        track('error')
         return mutationErrorToast(intl)
       },
     })
@@ -125,6 +128,7 @@ const PhoneConfirmationModal: React.FC = () => {
 
   const handleVerificationCompletion = (errorCode?: string | null, reconciliationMode?: string | null) => {
     if (errorCode === 'CODE_EXPIRED' || errorCode === 'CODE_NOT_VALID' || errorCode === 'RETRY_LIMIT_REACHED') {
+      track('error')
       setError('code', {
         type: 'custom',
         message: intl.formatMessage({ id: errorCode }),
@@ -133,6 +137,7 @@ const PhoneConfirmationModal: React.FC = () => {
     }
 
     if (errorCode === 'PHONE_ALREADY_USED_BY_ANOTHER_USER') {
+      track('error')
       toast({
         variant: 'danger',
         content: intl.formatMessage({ id: errorCode }),
@@ -141,9 +146,12 @@ const PhoneConfirmationModal: React.FC = () => {
     }
 
     if (errorCode) {
+      track('error')
       mutationErrorToast(intl)
       return
     }
+
+    track('requirement_validated')
 
     if (reconciliationMode === 'USER_AUTHENTICATED') {
       window.location.href = requirementsUrl
@@ -163,6 +171,7 @@ const PhoneConfirmationModal: React.FC = () => {
         },
         onCompleted: (response, errors) => {
           if (errors && errors.length > 0) {
+            track('error')
             return mutationErrorToast(intl)
           }
           handleVerificationCompletion(
@@ -171,6 +180,7 @@ const PhoneConfirmationModal: React.FC = () => {
           )
         },
         onError: () => {
+          track('error')
           return mutationErrorToast(intl)
         },
       })
@@ -184,6 +194,7 @@ const PhoneConfirmationModal: React.FC = () => {
         },
         onCompleted: (response, errors) => {
           if (errors && errors.length > 0) {
+            track('error')
             return mutationErrorToast(intl)
           }
           handleVerificationCompletion(
@@ -192,6 +203,7 @@ const PhoneConfirmationModal: React.FC = () => {
           )
         },
         onError: () => {
+          track('error')
           return mutationErrorToast(intl)
         },
       })
@@ -209,7 +221,7 @@ const PhoneConfirmationModal: React.FC = () => {
         title={intl.formatMessage({ id: 'participation-workflow.confirm_phone' })}
         info={intl.formatMessage({ id: 'participation-workflow.code_label' })}
       >
-        <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
+        <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit, () => track('error'))}>
           <FormControl
             name="code"
             control={control}
@@ -231,13 +243,7 @@ const PhoneConfirmationModal: React.FC = () => {
               variantColor="hierarchy"
             />
           </FormControl>
-          <Button
-            variantSize="big"
-            justifyContent="center"
-            width="100%"
-            type="submit"
-            isLoading={verifyCodeIsLoading}
-          >
+          <Button variantSize="big" justifyContent="center" width="100%" type="submit" isLoading={verifyCodeIsLoading}>
             {intl.formatMessage({ id: 'global.continue' })}
           </Button>
         </Box>

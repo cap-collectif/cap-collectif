@@ -1,10 +1,9 @@
 import AddVocalContributionMutation from '~/mutations/AddVocalContributionMutation'
 import type { AddVocalContributionMutation$data } from '~relay/AddVocalContributionMutation.graphql'
 
-/** Rendered by the homepage template: the upload route and its CSRF token. */
+/** Rendered by the homepage template. */
 export type UploadConfig = {
   uploadUrl: string
-  csrfToken: string
 }
 
 /** Error codes of the upload route, plus the ones derived from the mutation errors. */
@@ -49,9 +48,15 @@ export type UploadedVocal = { vocalId: string; participantToken: string | null }
 /** Uploads the recorded audio; the back end creates the vocal contribution and returns its id. */
 export const uploadVocalFile = async (
   audio: Blob,
-  { uploadUrl, csrfToken }: UploadConfig,
+  { uploadUrl }: UploadConfig,
   participantToken: string | null,
 ): Promise<UploadedVocal> => {
+  const tokenResponse = await fetch(uploadUrl, { credentials: 'same-origin', cache: 'no-store' })
+  const tokenBody = await tokenResponse.json().catch(() => null)
+  if (!tokenResponse.ok || typeof tokenBody?.csrfToken !== 'string' || !tokenBody.csrfToken) {
+    throw new VocalContributionError('INVALID_CSRF_TOKEN')
+  }
+
   const form = new FormData()
   form.append('file', audio, getFilename(audio))
   if (participantToken) form.append('participantToken', participantToken)
@@ -59,7 +64,7 @@ export const uploadVocalFile = async (
   const response = await fetch(uploadUrl, {
     method: 'POST',
     credentials: 'same-origin',
-    headers: { 'X-CSRF-Token': csrfToken },
+    headers: { 'X-CSRF-Token': tokenBody.csrfToken },
     body: form,
   })
   const body = await response.json().catch(() => null)

@@ -1,3 +1,4 @@
+import { useContributionTracking } from './useContributionTracking'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { Button, toast, Text, Flex, useMultiStepModal } from '@cap-collectif/ui'
@@ -31,6 +32,7 @@ const QUERY_FRAGMENT = graphql`
 export const MAGIC_LINK_CHECK_EMAIL_INDEX = 8
 
 const EmailMagicLinkCheckEmail: React.FC<Props> = ({ query: queryRef }) => {
+  const track = useContributionTracking('email_verification')
   const query = useFragment(QUERY_FRAGMENT, queryRef)
   const isMobile = useIsMobile()
   const intl = useIntl()
@@ -68,6 +70,7 @@ const EmailMagicLinkCheckEmail: React.FC<Props> = ({ query: queryRef }) => {
       },
       onCompleted: (response, errors) => {
         if (errors && errors.length > 0) {
+          track('error')
           return mutationErrorToast(intl)
         }
 
@@ -75,6 +78,7 @@ const EmailMagicLinkCheckEmail: React.FC<Props> = ({ query: queryRef }) => {
 
         if (errorCode === 'EMAIL_RECENTLY_SENT') {
           setRemainingSecondsUntilRetry(60)
+          track('error')
           setHasRetryError(true)
           return
         }
@@ -85,6 +89,7 @@ const EmailMagicLinkCheckEmail: React.FC<Props> = ({ query: queryRef }) => {
         })
       },
       onError: () => {
+        track('error')
         return mutationErrorToast(intl)
       },
     })
