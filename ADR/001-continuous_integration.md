@@ -249,6 +249,15 @@ la clé à partir des fichiers générés empêcherait sa réutilisation au run 
 cache, puis les transmet aux jobs de lint, de vérification TypeScript et de tests Jest par le
 workspace. Ces jobs ne relancent pas le compilateur Relay.
 
+Le workspace de `prepare` conserve les dépendances, les fichiers générés et les
+assets consommés en aval. Pour Next.js, il transmet seulement `standalone`,
+`static` et `types` ; le cache du compilateur reste dans les caches de build.
+Il ne transmet plus `var` : les données et le cache Symfony `test` compilé sous
+`/var/www` viennent de `prepare-test-data`. `prepare-docker` conserve sa dépendance
+à `prepare`, mais n’attache pas son workspace car ses contextes Docker proviennent
+du checkout. L’inventaire des consommateurs et le comparatif sont documentés dans
+[`docs/ci-prepare-workspace.md`](../docs/ci-prepare-workspace.md).
+
 #### Workflow QA à la demande
 
 Le workflow QA est déclenché à la demande lorsqu'une pull request reçoit le label `🔬 In test`.

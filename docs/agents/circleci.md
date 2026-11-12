@@ -93,3 +93,62 @@ Pour analyser le coût, inclure les jobs de préparation, le stockage et le tran
 du workspace, les phases `admin_next_shared_*`, l’attente HTTP et les tests.
 Comparer les mêmes suites et classes de machines, et isoler les relances et les
 délais d’allocation des machines.
+
+Le diagnostic à la demande `scripts/agents/workspace-metrics.php` lit les chemins
+littéraux de `persist_to_workspace` de `prepare` dans la
+configuration, mesure leur taille apparente sans suivre les liens symboliques et
+compte les liens physiques une seule fois. Il signale les chemins absents et
+détaille `var` et `admin-next/.next` ; les détails se recouvrent et ne doivent pas
+être ajoutés au total. Le rapport JSON est écrit hors du workspace et les lignes
+`CI_WORKSPACE_SIZE` reprennent ce rapport. Ce diagnostic et ses tests ne sont
+plus exécutés automatiquement par `prepare` après la campagne de l’issue #20779.
+Les octets compressés réellement transférés et les durées complètes restent
+ceux des étapes CircleCI de publication et de restauration.
+
+Pour vérifier le helper localement avec les artefacts présents :
+`docker exec -w /var/www capco_application_1 php scripts/agents/workspace-metrics.php`.
+Il nécessite les dépendances Composer et GNU `du` ; il écrit seulement son
+rapport dans `/tmp/workspace-metrics/prepare.json` dans le conteneur. Un chemin de
+sortie peut être fourni en premier argument. La mesure porte sur les artefacts
+locaux présents ; elle ne reproduit pas à elle seule le contenu d’un job CI.
+Le test `docker exec -w /var/www capco_application_1 node --test scripts/agents/workspace-metrics.test.cjs`
+vérifie la configuration réelle, les chemins absents et le comptage des liens
+dans des répertoires temporaires, sans utiliser les services applicatifs.
+
+La restauration du runtime crée aussi `var/log/test.log` avec l’utilisateur
+applicatif : une commande de test exécutée en `root` ne doit pas créer un fichier
+que PHP-FPM ne peut plus ouvrir. Le test
+`docker exec -u root -w /var/www capco_application_1 node --test .circleci/test-runtime.test.cjs`
+vérifie cette succession avec le vrai handler Monolog et les utilisateurs
+`root` et `capco`. Il isole le cache et les logs sous `/var/tmp` dans le conteneur
+(hors du montage hôte `/tmp`) et remplace uniquement le reset des feature flags
+par un fichier inerte. Il est exécuté par `prepare-test-data` avant la préparation
+des données partagées.
+
+### Critère de réussite de la réduction du workspace de préparation
+
+Pour l’issue #20779, le résultat attendu est une réduction mesurée du volume du
+workspace de `prepare`, sans régression globale de durée ou de coût pour chacun
+des workflows `test-and-build` (profil `full`), `build-prod` et `qa`. Aucun gain
+minimum de temps ou de crédits n’est imposé. Un job peut ralentir si son workflow
+reste aussi rapide et aussi économique ; un gain sur un workflow ne compense pas
+une régression confirmée sur un autre. Le comparatif doit inclure les éventuelles
+reconstructions chez les consommateurs : une baisse du volume transféré ne
+suffit pas si elle augmente le coût total.
+
+La régénération d’un cache chez un consommateur reste acceptable si le bilan
+global respecte ce critère. La suppression intégrale de `var` doit donc être
+vérifiée par les mesures : conserver un sous-répertoire précis si sa transmission
+reste avantageuse. En particulier, `graphql-doctor` démarre Symfony en
+environnement `dev` et peut bénéficier d’un cache déjà construit par `prepare`.
+
+La campagne est progressive : comparer une paire avant/après pour chacun des
+workflows `test-and-build` (profil `full`), `build-prod` et `qa`, puis répéter
+uniquement les comparaisons ambiguës ou suggérant une régression. Une faible
+différence sur une seule paire reste incertaine ; elle ne démontre pas un gain.
+
+La validation des images utilise les workflows existants sur la branche du
+ticket, avec publication des images et mise à jour de la QA `qa-20779`. Elle
+vérifie la construction puis le démarrage réel de l’image. Le workflow `qa`
+requiert une PR ouverte portant le label `🔬 In test` pour promouvoir l’instance.
+Le profil `build-prod` publie lui aussi l’image et met à jour le dépôt `cluster`.
