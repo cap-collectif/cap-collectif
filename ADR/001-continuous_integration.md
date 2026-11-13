@@ -177,6 +177,29 @@ Corepack sélectionne la version de Yarn déclarée dans `package.json`.
 Les conteneurs applicatifs conservent leur version Node fixée dans le Dockerfile ;
 elle doit rester identique à `.nvmrc` lors d'une montée de version.
 
+#### Images des exécuteurs machine
+
+Les exécuteurs de tests et de builds QA/production utilisent le même tag daté
+`ubuntu-2604:2026.07.1`. Ubuntu 26.04 LTS est supporté par CircleCI ; le tag
+explicite évite qu'une mise à jour de `current` modifie Docker, Compose ou les
+dépendances système sans validation. Le support et les nouveaux tags doivent
+être revérifiés lors des mises à jour, selon la
+[politique CircleCI](https://circleci.com/docs/guides/execute/linux-vm-support-policy/)
+et le [catalogue Ubuntu 26.04](https://circleci.com/developer/machine/image/ubuntu-2604).
+
+Les jobs conservent Docker et Compose fournis par l'image, la version Node de
+`.nvmrc`, leurs classes de ressources et leur parallélisme. Les dépendances
+Cypress utilisent les paquets Ubuntu 24.04 et ultérieurs (`libgtk-3-0t64`, `libasound2t64`).
+Les stacks Docker et les préparations partagées restent propres à chaque
+workflow.
+
+Le profil manuel `validate-machine-images` exécute `prepare`, puis les deux jobs
+de build existants avec `publish: false`. Il construit les images sans les
+publier, modifier le dépôt `cluster`, déclencher Docker Scout, créer de release
+Sentry ou déployer une instance. Les profils habituels conservent leur
+comportement de publication. La procédure de validation et de comparaison est
+décrite dans [le guide CircleCI](../docs/agents/circleci.md).
+
 ### Bonnes pratiques
 
 #### Pour les développeuses

@@ -73,6 +73,19 @@ services:
         ports:
             - '6379:6379'
 
+    # base.yml publishes both SMTP (25:25) and the Mailcatcher HTTP API (1080:80).
+    # On the CircleCI Ubuntu 26.04 machine, host port 25 is already occupied,
+    # so publishing it prevents the test stack from starting. Symfony sends mail
+    # directly to smtp://mailcatchersmtp:25 on the Docker network and does not
+    # need a host SMTP port. Keep only HTTP port 1080 available to host-side tools.
+    # !override replaces the inherited ports list instead of merging with it,
+    # which would otherwise retain the conflicting 25:25 mapping.
+    # This override only affects the CI test stack; local development and the
+    # separately generated production Compose configuration remain unchanged.
+    mailcatcher:
+        ports: !override
+            - '1080:80'
+
     elasticsearch:
         build:
             args:

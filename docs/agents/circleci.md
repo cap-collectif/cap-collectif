@@ -38,6 +38,76 @@ errors, revisions, test inputs, and execution order before concluding that a tes
 is flaky. Reproduce locally with the relevant test guide and keep temporary logs
 and diagnostic scripts outside the repository.
 
+## Validation des images machine
+
+Les exécuteurs `e2e-executor` et `production-executor` sont fixés à
+`ubuntu-2604:2026.07.1` (Ubuntu 26.04 LTS), choisi dans le
+[catalogue CircleCI](https://circleci.com/developer/machine/image/ubuntu-2604)
+selon la [politique de support](https://circleci.com/docs/guides/execute/linux-vm-support-policy/).
+Les paquets système Cypress suivent la
+[liste Ubuntu 24.04 et ultérieurs de Cypress](https://docs.cypress.io/app/get-started/install-cypress#Linux-Prerequisites).
+
+La stack de test ne publie pas le port SMTP 25 de Mailcatcher sur la machine :
+ce port est déjà occupé sur l'image Ubuntu 26.04. Symfony utilise directement
+`smtp://mailcatchersmtp:25` sur le réseau Docker ; seul le port HTTP 1080 reste
+publié pour les outils hôte. Le fichier `testing.yml` remplace la liste des ports
+avec `!override` (Compose 2.24.4 minimum, disponible dans l'image choisie), pour
+éviter que la fusion avec `base.yml` réintroduise le port 25. Le développement
+local conserve ses ports habituels.
+
+Cette migration concerne les VM CircleCI, pas l'OS des instances déployées.
+L'image QA/production reste basée sur `debian:bookworm-slim` dans
+`infrastructure/services/remote/Dockerfile`. Le Compose de production est généré
+par `deployment-tools` : son
+[template](https://github.com/cap-collectif/deployment-tools/blob/preprod/api/templates/docker-compose.yml.twig)
+publie le port HTTP de l'instance vers le port 80, sans Mailcatcher ni publication
+SMTP. Il ne consomme pas `infrastructure/environments/testing.yml`.
+
+Sur une branche de travail, lancer séparément les profils `tests` et
+`validate-machine-images` :
+
+```bash
+circleci run trigger --branch <branche> --parameter ci_profile=tests
+circleci run trigger --branch <branche> --parameter ci_profile=validate-machine-images
+```
+
+Ils sont également disponibles via `workflow_dispatch` dans le workflow GitHub
+Actions `Trigger CircleCI workflows`. `tests` couvre la restauration des images,
+les préparations partagées, Cypress, GraphQL, PHPUnit et les migrations.
+`validate-machine-images` construit les images QA et production avec les mêmes
+jobs et Dockerfile que les workflows habituels, mais avec `publish: false` :
+aucune publication Docker, modification de `cluster`, promotion QA, release
+Sentry, analyse Docker Scout ou commande de déploiement n'est exécutée.
+Ce profil est réservé aux branches de travail, excluant `preprod` et `master`.
+Il n'est pas associé à un label de PR et la réconciliation des labels ne
+l'annule pas. Une nouvelle demande manuelle de ce profil remplace son ancienne
+exécution active sur la même branche.
+
+Comparer l'ancienne et la nouvelle image à code applicatif identique, avec les
+mêmes profils, classes de ressources, parallélisme et états de cache. Relever
+pour chaque workflow son URL, sa révision, son résultat, sa durée murale et ses
+crédits, puis détailler les jobs machine et les phases `CI_TIMING`. Distinguer
+l'attente d'allocation, les premières constructions sans cache et les relances.
+Les crédits facturés CircleCI sont la référence ; ne pas les déduire de la seule
+durée murale d'un workflow parallèle. Une comparaison dont les suites n'ont pas
+terminé ne démontre pas un gain de performance.
+
+Le cache Docker est séparé de celui d'Ubuntu 20.04 par le préfixe
+`v3-docker-ubuntu2604-2026-07-1`, afin que la première exécution construise les
+images avec le nouveau moteur Docker avant leur restauration chez les consommateurs.
+Ce premier coût de construction doit être distingué des exécutions à cache chaud.
+
+Vérifier également une construction des images de test sans cache :
+`prepare-docker` ne reconstruit pas les images si son cache existe. Pour une
+campagne ponctuelle, utiliser une clé Docker temporaire propre à la campagne
+dans la configuration de validation, sans purger les caches partagés. Vérifier
+ensuite leur restauration chez les consommateurs. Conserver les résultats et
+les éventuelles limites de la campagne dans la documentation du ticket.
+
+Les [résultats de la campagne #20777](../ci-ubuntu-executors-validation.md)
+regroupent les pipelines réussis, les durées et crédits par job, la correction
+SMTP et les différences de cache à prendre en compte dans la comparaison.
+
 ## Cache Symfony de test partagé
 
 `prepare-test-data` construit le cache Symfony `test` sans debug dans le conteneur
