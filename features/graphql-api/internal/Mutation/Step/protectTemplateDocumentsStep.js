@@ -88,9 +88,9 @@ const createProtectedDocumentsStep = async projectTypeSlug => {
   )
 }
 
-describe.each(['public-inquiry', 'public-consultation'])('protected documents step for project type %s', projectType => {
+describe('protected documents step for public consultation projects', () => {
   it('cannot be deleted', async () => {
-    await createProtectedDocumentsStep(projectType)
+    await createProtectedDocumentsStep('public-consultation')
 
     await expect(
       graphql(
@@ -102,7 +102,7 @@ describe.each(['public-inquiry', 'public-consultation'])('protected documents st
   })
 
   it('still allows deleting another custom step in the same project', async () => {
-    await createProtectedDocumentsStep(projectType)
+    await createProtectedDocumentsStep('public-consultation')
     const response = await graphql(AddOtherStep, { input: { projectId } }, 'internal_admin')
 
     await expect(
@@ -115,7 +115,7 @@ describe.each(['public-inquiry', 'public-consultation'])('protected documents st
   })
 
   it('allows deleting the documents step when Hub API Green is disabled', async () => {
-    await createProtectedDocumentsStep(projectType)
+    await createProtectedDocumentsStep('public-consultation')
     await setHubApiGreen(false)
 
     try {
@@ -132,7 +132,7 @@ describe.each(['public-inquiry', 'public-consultation'])('protected documents st
   })
 
   it('keeps Hub metadata when the association is disabled', async () => {
-    await createProtectedDocumentsStep(projectType)
+    await createProtectedDocumentsStep('public-consultation')
 
     const input = {
       label: 'Documents et ressources',

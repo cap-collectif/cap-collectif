@@ -22,7 +22,7 @@ import UpdateOtherStepMutation from '@mutations/UpdateOtherStepMutation'
 import { OtherStepFormQuery } from '@relay/OtherStepFormQuery.graphql'
 import { mutationErrorToast, successToast } from '@shared/utils/toasts'
 import withPageAuthRequired from '@utils/withPageAuthRequired'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useIntl } from 'react-intl'
 import { graphql, useLazyLoadQuery } from 'react-relay'
@@ -118,6 +118,12 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
 
   const { operationType, setOperationType } = useOtherStep()
   const isEditing = operationType === 'EDIT'
+  const [isHubAssociationEstablished, setIsHubAssociationEstablished] = useState(
+    !!step.hubMetadata?.enabled &&
+      !!step.hubMetadata.aiotCode &&
+      !!step.hubMetadata.folderNumber &&
+      !!step.hubMetadata.contactEmail,
+  )
   const newProjectPage = useFeatureFlag('new_project_page')
   const hubApiGreen = useFeatureFlag('hub_api_green')
   const isHubDocumentsProjectStep = hubApiGreen && isHubDocumentsProject(project.type?.slug)
@@ -231,6 +237,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       if (!response.updateOtherStep) {
         return mutationErrorToast(intl)
       }
+      setIsHubAssociationEstablished(associationEnabled)
       successToast(intl.formatMessage({ id: 'global.saved' }))
       if (!isEditing) {
         return (window.location.href = `/admin-next/project/${project?.id}`)
@@ -325,6 +332,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
                       name="hubMetadata.aiotCode"
                       control={control}
                       type="text"
+                      disabled={isHubAssociationEstablished}
                     />
                   </FormControl>
                   <FormControl name="hubMetadata.folderNumber" control={control} isRequired mb={4}>
@@ -337,6 +345,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
                       name="hubMetadata.folderNumber"
                       control={control}
                       type="text"
+                      disabled={isHubAssociationEstablished}
                     />
                   </FormControl>
                   <FormControl name="hubMetadata.contactEmail" control={control} isRequired>

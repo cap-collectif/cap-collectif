@@ -64,11 +64,8 @@ describe('project template collect-step requirements', () => {
  * @jest-reason Checks a public function result or error using explicit local inputs and expected values.
  */
 describe('Hub API Green project templates', () => {
-  test.each([
-    ['public inquiry', getPublicInquiryInput],
-    ['public consultation', getPublicConsultationInput],
-  ])('%s enables Hub API Green on the documents step', (_name, getInput) => {
-    const input = getInput({ ...baseParams, isSsoByPassAuthEnabled: false, visibility: 'ADMIN' })
+  test('public consultation enables Hub API Green on the documents step', () => {
+    const input = getPublicConsultationInput({ ...baseParams, isSsoByPassAuthEnabled: false, visibility: 'ADMIN' })
 
     expect(getDocumentsStepHubMetadataEnabled(input)).toBe(true)
     expect(input.project.steps.filter(step => step.hubMetadata)).toHaveLength(1)

@@ -236,9 +236,6 @@ const getPublicInquiryInput = ({
           requirements: [],
           type: 'OTHER',
           timeless: true,
-          hubMetadata: {
-            enabled: true,
-          },
         },
         {
           body: `<p>${intl.formatMessage({ id: 'publicInquiry.collectStep.body' })}</p>`,

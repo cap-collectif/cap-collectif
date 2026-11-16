@@ -78,8 +78,6 @@ class UpdateCollectStepMutationTest extends TestCase
     {
         yield 'public consultation with changed dates' => ['public-consultation', true, 1];
 
-        yield 'public inquiry with changed dates' => ['public-inquiry', true, 1];
-
         yield 'other project type with changed dates' => ['other', true, 0];
 
         yield 'public consultation with unchanged dates' => ['public-consultation', false, 0];

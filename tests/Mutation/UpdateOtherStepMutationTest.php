@@ -170,7 +170,8 @@ class UpdateOtherStepMutationTest extends TestCase
             actionLogger: $actionLogger,
             hubApiGreenClient: $hubApiGreenClient,
             toggleManager: $toggleManager,
-            projectUrlResolver: $projectUrlResolver
+            projectUrlResolver: $projectUrlResolver,
+            hubDocumentsStepGuard: $this->protectedProjectGuard($project)
         );
 
         try {
@@ -228,6 +229,13 @@ class UpdateOtherStepMutationTest extends TestCase
         $toggleManager->expects($this->once())->method('isActive')->with(Manager::hub_api_green)->willReturn(true);
 
         $hubApiGreenClient = $this->createMock(HubApiGreenClient::class);
+        $hubDocumentsStepGuard = $this->createMock(HubDocumentsStepGuard::class);
+        $hubDocumentsStepGuard
+            ->expects($associateHub ? $this->once() : $this->never())
+            ->method('isProtectedDocumentsProject')
+            ->with($project)
+            ->willReturn($associateHub)
+        ;
         if ($associateHub) {
             $projectUrlResolver = $this->createMock(ProjectUrlResolver::class);
             $projectUrlResolver->expects($this->once())->method('__invoke')->with($project)->willReturn('project-url');
@@ -252,7 +260,8 @@ class UpdateOtherStepMutationTest extends TestCase
                 actionLogger: $actionLogger,
                 hubApiGreenClient: $hubApiGreenClient,
                 toggleManager: $toggleManager,
-                projectUrlResolver: $projectUrlResolver
+                projectUrlResolver: $projectUrlResolver,
+                hubDocumentsStepGuard: $hubDocumentsStepGuard
             ),
             'step' => $step,
             'viewer' => $viewer,
@@ -268,6 +277,19 @@ class UpdateOtherStepMutationTest extends TestCase
                 'hubMetadata' => ['enabled' => $enabled],
             ],
         ]);
+    }
+
+    private function protectedProjectGuard(Project $project): HubDocumentsStepGuard
+    {
+        $hubDocumentsStepGuard = $this->createMock(HubDocumentsStepGuard::class);
+        $hubDocumentsStepGuard
+            ->expects($this->once())
+            ->method('isProtectedDocumentsProject')
+            ->with($project)
+            ->willReturn(true)
+        ;
+
+        return $hubDocumentsStepGuard;
     }
 
     private function createMutation(

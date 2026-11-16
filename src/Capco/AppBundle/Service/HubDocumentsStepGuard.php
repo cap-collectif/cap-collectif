@@ -10,7 +10,6 @@ use Capco\AppBundle\Toggle\Manager;
 class HubDocumentsStepGuard
 {
     private const HUB_DOCUMENTS_PROJECT_TYPES = [
-        'public-inquiry',
         'public-consultation',
     ];
 

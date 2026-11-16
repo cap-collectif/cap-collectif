@@ -88,6 +88,7 @@ class UpdateOtherStepMutation implements MutationInterface
             && $hubMetadata->isComplete()
             && $hubMetadataChanged
             && $project
+            && $this->hubDocumentsStepGuard->isProtectedDocumentsProject($project)
         ) {
             try {
                 $this->hubApiGreenClient->associateFolder($step, $hubMetadata, $this->projectUrlResolver->__invoke($project));

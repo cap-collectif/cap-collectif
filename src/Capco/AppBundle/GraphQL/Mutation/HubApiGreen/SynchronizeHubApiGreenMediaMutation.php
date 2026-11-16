@@ -9,6 +9,7 @@ use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\MediaRepository;
+use Capco\AppBundle\Service\HubDocumentsStepGuard;
 use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -32,6 +33,7 @@ final class SynchronizeHubApiGreenMediaMutation implements MutationInterface
         private readonly GlobalIdResolver $globalIdResolver,
         private readonly MediaRepository $mediaRepository,
         private readonly EntityManagerInterface $entityManager,
+        private readonly HubDocumentsStepGuard $hubDocumentsStepGuard,
         private readonly string $hubApiGreenS3Bucket,
         private readonly string $hubApiGreenS3PublicUrl
     ) {}
@@ -64,7 +66,7 @@ final class SynchronizeHubApiGreenMediaMutation implements MutationInterface
             null,
             new \ArrayObject(['disable_acl' => true])
         );
-        if (!$step instanceof OtherStep) {
+        if (!$step instanceof OtherStep || !$this->hubDocumentsStepGuard->isProtectedDocumentsStep($step)) {
             return $this->errorPayload($stepId, $aiotCode, $folderNumber, self::STEP_NOT_FOUND);
         }
         $this->entityManager->lock($step, LockMode::PESSIMISTIC_WRITE);

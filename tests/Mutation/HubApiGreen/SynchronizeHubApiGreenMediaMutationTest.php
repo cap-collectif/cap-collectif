@@ -9,6 +9,7 @@ use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\GraphQL\Mutation\HubApiGreen\SynchronizeHubApiGreenMediaMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\MediaRepository;
+use Capco\AppBundle\Service\HubDocumentsStepGuard;
 use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -84,6 +85,7 @@ class SynchronizeHubApiGreenMediaMutationTest extends TestCase
             $globalIdResolver,
             $mediaRepository,
             $entityManager,
+            $this->protectedStepGuard(),
             'hub-api-green',
             self::S3_PUBLIC_URL
         );
@@ -247,6 +249,7 @@ class SynchronizeHubApiGreenMediaMutationTest extends TestCase
             $globalIdResolver,
             $mediaRepository,
             $entityManager,
+            $this->protectedStepGuard(),
             'hub-api-green',
             self::S3_PUBLIC_URL
         );
@@ -315,6 +318,7 @@ class SynchronizeHubApiGreenMediaMutationTest extends TestCase
             $globalIdResolver,
             $this->createStub(MediaRepository::class),
             $entityManager,
+            $this->protectedStepGuard(),
             'hub-api-green',
             self::S3_PUBLIC_URL
         );
@@ -419,5 +423,13 @@ class SynchronizeHubApiGreenMediaMutationTest extends TestCase
     private function providerReferencePrefix(): string
     {
         return 'hub-api-green-' . hash('sha256', 'step-id-platform') . '-';
+    }
+
+    private function protectedStepGuard(): HubDocumentsStepGuard
+    {
+        $hubDocumentsStepGuard = $this->createMock(HubDocumentsStepGuard::class);
+        $hubDocumentsStepGuard->method('isProtectedDocumentsStep')->willReturn(true);
+
+        return $hubDocumentsStepGuard;
     }
 }
