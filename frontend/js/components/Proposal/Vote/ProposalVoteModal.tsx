@@ -267,7 +267,7 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, trigge
                 : 'vote-for-x-proposals',
             },
             {
-              n: remainingVotesAfterValidation,
+              num: remainingVotesAfterValidation,
               div: (...chunks) => <div>{chunks}</div>,
               b: (...chunks) => <b>{chunks}</b>,
               a: (...chunks) => (
