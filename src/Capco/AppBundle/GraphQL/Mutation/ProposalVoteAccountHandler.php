@@ -45,15 +45,10 @@ class ProposalVoteAccountHandler
 
         if ($isSelectionStep || $step instanceof CollectStep) {
             $votesMin = $step->getVotesMin();
-            if (null === $votesMin) {
-                $vote->setIsAccounted(true);
-
-                return true;
-            }
             // Check if user has voted at least VotesMin times
             $userVotes = $this->getUserVotesFromSpecificClass($step, $user);
             // -1 or +1 corresponds to the vote being removed or added
-            $isAccounted = $votesMin <= \count($userVotes) + ($isAddingVote ? 1 : -1);
+            $isAccounted = null === $votesMin || $votesMin <= \count($userVotes) + ($isAddingVote ? 1 : -1);
             foreach ($userVotes as $userVote) {
                 $userVote->setIsAccounted($isAccounted);
                 $this->proposalVotesDataLoader->invalidate($userVote->getProposal());
@@ -74,14 +69,8 @@ class ProposalVoteAccountHandler
     ): void {
         $min = $step->getVotesMin();
 
-        if (null === $min) {
-            $vote->setIsAccounted(true);
-
-            return;
-        }
-
         $existingVotes = $this->getParticipantVotesFromSpecificClass($step, $participant);
-        $isAccounted = $min <= \count($existingVotes) + ($isAddingVote ? 1 : -1);
+        $isAccounted = null === $min || $min <= \count($existingVotes) + ($isAddingVote ? 1 : -1);
 
         foreach ($existingVotes as $existingVote) {
             $existingVote->setIsAccounted($isAccounted);

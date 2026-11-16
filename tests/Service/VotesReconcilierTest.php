@@ -34,7 +34,7 @@ final class VotesReconcilierTest extends ParticipantWebTestCase
      * @param list<string>       $expected
      * @param array<string, int> $expectedPositions
      */
-    public function testVoteMergeContracts(string $stepType, string $targetType, ?int $min, ?int $max, ?float $budget, bool $ranking, array $targetProposals, array $sourceProposals, array $expected, array $expectedPositions): void
+    public function testVoteMergeContracts(string $stepType, string $targetType, ?int $min, ?int $max, ?float $budget, bool $ranking, array $targetProposals, array $sourceProposals, array $expected, array $expectedPositions, bool $expectedAccounted): void
     {
         $step = $this->em->find('collect' === $stepType ? CollectStep::class : SelectionStep::class, 'collect' === $stepType ? 'collectstep1' : 'selectionstep1');
         self::assertTrue($step instanceof CollectStep || $step instanceof SelectionStep);
@@ -61,6 +61,7 @@ final class VotesReconcilierTest extends ParticipantWebTestCase
                 $vote = 'collect' === $stepType ? (new ProposalCollectVote())->setCollectStep($step) : (new ProposalSelectionVote())->setSelectionStep($step);
                 $vote->setProposal($proposal)->setPosition($position);
                 $vote->setContributor('target' === $owner ? $target : $source);
+                $vote->setIsAccounted(null === $min || \count($ids) >= $min);
                 $this->em->persist($proposal);
                 $this->em->persist($vote);
                 $votes[] = $vote;
@@ -103,6 +104,7 @@ final class VotesReconcilierTest extends ParticipantWebTestCase
         sort($expected);
         self::assertSame($expected, $actual);
         foreach ($survivors as $vote) {
+            self::assertSame($expectedAccounted, $vote->getIsAccounted());
             self::assertSame($target instanceof User ? $targetId : null, $vote->getUser()?->getId());
             self::assertSame($target instanceof Participant ? $targetId : null, $vote->getParticipant()?->getId());
         }
@@ -143,7 +145,7 @@ final class VotesReconcilierTest extends ParticipantWebTestCase
         self::assertSame($neighborVote->getProposal()->getId(), $retainedNeighborVote->getProposal()->getId());
     }
 
-    /** @return iterable<string, array{string, string, ?int, ?int, ?float, bool, list<string>, list<string>, list<string>, array<string, int>}> */
+    /** @return iterable<string, array{string, string, ?int, ?int, ?float, bool, list<string>, list<string>, list<string>, array<string, int>, bool}> */
     public static function voteMerges(): iterable
     {
         $cases = [
@@ -164,12 +166,14 @@ final class VotesReconcilierTest extends ParticipantWebTestCase
             'ranking transfers duplicate position' => [null, 4, null, true, ['A', 'B'], ['B', 'C'], ['A', 'B', 'C'], ['A' => 0, 'B' => 1, 'C' => 2]],
             'CharacterizationGap new ranked votes share position' => [null, 4, null, true, ['A'], ['C', 'D'], ['A', 'C', 'D'], ['A' => 0, 'C' => 1, 'D' => 1]],
             'CharacterizationGap maximum without minimum can be exceeded' => [null, 3, null, false, ['A', 'B'], ['C', 'D'], ['A', 'B', 'C', 'D']],
-            'minimum not reached combines partial ballots' => [3, 5, null, false, ['A'], ['B'], ['A', 'B']],
+            'minimum not reached combines partial ballots' => [3, 5, null, false, ['A'], ['B'], ['A', 'B'], [], false],
+            'merged ballots reach minimum' => [2, 5, null, false, ['A'], ['B'], ['A', 'B']],
+            'duplicate does not reach minimum' => [2, 5, null, false, ['A'], ['A'], ['A'], [], false],
         ];
         foreach (['collect', 'selection'] as $step) {
             foreach (['user', 'participant'] as $target) {
                 foreach ($cases as $name => $case) {
-                    yield $step . '/' . $target . ': ' . $name => [$step, $target, $case[0], $case[1], $case[2], $case[3], $case[4], $case[5], $case[6], $case[7] ?? []];
+                    yield $step . '/' . $target . ': ' . $name => [$step, $target, $case[0], $case[1], $case[2], $case[3], $case[4], $case[5], $case[6], $case[7] ?? [], $case[8] ?? true];
                 }
             }
         }

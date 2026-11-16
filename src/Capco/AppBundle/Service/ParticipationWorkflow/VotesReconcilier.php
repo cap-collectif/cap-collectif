@@ -12,6 +12,7 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ProposalStepInterface;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Filter\ContributionCompletionStatusFilter;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
 use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
@@ -27,6 +28,7 @@ class VotesReconcilier extends ContributionsReconcilier
         private readonly SelectionStepRepository $selectionStepRepository,
         private readonly CollectStepRepository $collectStepRepository,
         private readonly Indexer $indexer,
+        private readonly ProposalVotesDataLoader $proposalVotesDataLoader,
     ) {
         parent::__construct($em);
     }
@@ -104,7 +106,7 @@ class VotesReconcilier extends ContributionsReconcilier
                 }
                 $this->em->flush();
 
-                return;
+                break;
 
                 /*
                  * min = 2
@@ -134,7 +136,7 @@ class VotesReconcilier extends ContributionsReconcilier
                         }
                         $this->em->flush();
 
-                        return;
+                        break;
                     }
                 }
 
@@ -152,7 +154,7 @@ class VotesReconcilier extends ContributionsReconcilier
                     }
                     $this->em->flush();
 
-                    return;
+                    break;
                 }
 
                 /*
@@ -168,7 +170,7 @@ class VotesReconcilier extends ContributionsReconcilier
                     }
                     $this->em->flush();
 
-                    return;
+                    break;
                 }
 
                 foreach ($duplicateVotes as $duplicateVote) {
@@ -180,7 +182,7 @@ class VotesReconcilier extends ContributionsReconcilier
                 }
                 $this->em->flush();
 
-                return;
+                break;
 
                 /*
                  * max = 3
@@ -193,7 +195,7 @@ class VotesReconcilier extends ContributionsReconcilier
                     $this->em->remove($vote);
                 }
 
-                return;
+                break;
 
                 /*
                  * votesRanking = true
@@ -212,7 +214,7 @@ class VotesReconcilier extends ContributionsReconcilier
                 }
                 $this->em->flush();
 
-                return;
+                break;
 
             default:
                 if ($budget) {
@@ -225,7 +227,7 @@ class VotesReconcilier extends ContributionsReconcilier
                         }
                         $this->em->flush();
 
-                        return;
+                        break;
                     }
                 }
 
@@ -254,6 +256,18 @@ class VotesReconcilier extends ContributionsReconcilier
                 $this->indexer->finishBulk();
                 $this->em->flush();
         }
+        $this->em->flush();
+        $votes = $repository->getVotesByStepAndContributor($step, $contributorTarget, false);
+        $isAccounted = null === $votesMin || \count($votes) >= $votesMin;
+        foreach ($votes as $vote) {
+            $vote->setIsAccounted($isAccounted);
+            $this->proposalVotesDataLoader->invalidate($vote->getProposal());
+        }
+        $this->em->flush();
+        foreach ($votes as $vote) {
+            $this->indexer->index(AbstractVote::class, $vote->getId());
+        }
+        $this->indexer->finishBulk();
     }
 
     /**
