@@ -53,7 +53,7 @@
         "scripts"
     ],
     "engines": {
-        "node": ">=20.19.6"
+        "node": ">=24.11.0"
     },
     "pre-commit": "precommit",
     "graphql-doctor": {

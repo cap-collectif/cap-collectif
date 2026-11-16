@@ -98,7 +98,7 @@ EOF
 
 
 # NodeJS
-ENV NODE_VERSION 20.19.6
+ENV NODE_VERSION 24.11.0
 RUN apt-get update \
   && apt-get install -y curl ca-certificates
 
@@ -113,7 +113,7 @@ RUN set -eux; \
     s390x)   ARCH='s390x' ;; \
     *) echo "Unsupported architecture: ${dpkgArch}"; exit 1 ;; \
   esac; \
-  NODE_VERSION=20.19.6; \
+  NODE_VERSION=24.11.0; \
   curl -fsSLO "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-${ARCH}.tar.xz"; \
   curl -fsSLO "https://nodejs.org/dist/v${NODE_VERSION}/SHASUMS256.txt"; \
   grep " node-v${NODE_VERSION}-linux-${ARCH}.tar.xz\$" SHASUMS256.txt | sha256sum -c -; \

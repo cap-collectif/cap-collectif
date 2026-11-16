@@ -7,7 +7,7 @@ Les commandes sont à exécuter depuis la racine du dépôt.
 
 - Git
 - Docker Desktop avec Docker Compose v2
-- Node.js `v20.19.6` (version indiquée dans `.nvmrc`)
+- Node.js `v24.11.0` (version indiquée dans `.nvmrc`)
 - Corepack et Yarn `4.18.0` (version définie dans `package.json`)
 - Castor `v1.8.1` (version définie dans `.castor-version`)
 - `curl` pour installer Castor
