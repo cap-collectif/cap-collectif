@@ -12,6 +12,7 @@ import '@uppy/status-bar/dist/style.min.css'
 import { getApiUrl } from 'config'
 import { Jodit as IJodit } from 'jodit/types'
 import dynamic from 'next/dynamic'
+import { normalizeLegacyTableBorders } from '@shared/utils/normalizeLegacyTableBorders'
 import React, { forwardRef, useMemo, useRef } from 'react'
 import { IntlShape, useIntl } from 'react-intl'
 
@@ -200,7 +201,10 @@ const getConfig = (
     buttonsSM: buttons,
     tabIndex: 0,
     disablePlugins: 'add-new-line',
-    events: { [FILE_UPLOAD_POPUP_OPENED]: (editor: IJodit) => uppyListener(editor, platformLanguage, intl) },
+    events: {
+      beforeSetValueToEditor: normalizeLegacyTableBorders,
+      [FILE_UPLOAD_POPUP_OPENED]: (editor: IJodit) => uppyListener(editor, platformLanguage, intl),
+    },
     popup: {
       a: linktooltip,
     },

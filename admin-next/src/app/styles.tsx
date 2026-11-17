@@ -284,9 +284,12 @@ export const GlobalFrontOfficeCKEDITORStyles = createGlobalStyle<GlobalTheme>`
       padding-inline-start: ${40 / 14}rem;
     }
 
-    .old-editor table,
-    .old-editor td,
-    .old-editorth {
+    .old-editor table.table,
+    .old-editor table.table td,
+    .old-editor table.table th,
+    .old-editor table[border]:not([border='0']):not([border='']),
+    .old-editor table[border]:not([border='0']):not([border='']) td,
+    .old-editor table[border]:not([border='0']):not([border='']) th {
       border-width: 1px;
     }
 

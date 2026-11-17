@@ -1,5 +1,6 @@
 import { FILE_UPLOAD_POPUP_OPENED, joditFileUploader, linktooltip, uppyListener } from '@shared/utils/joditFileUploader'
 import JoditEditor from 'jodit-react'
+import { normalizeLegacyTableBorders } from '@shared/utils/normalizeLegacyTableBorders'
 import { IJodit, InsertMode } from 'jodit/types'
 import { useMemo, useRef } from 'react'
 import { useIntl } from 'react-intl'
@@ -161,6 +162,7 @@ const getConfig = (
     tabIndex: 0,
     disablePlugins: 'add-new-line',
     events: {
+      beforeSetValueToEditor: normalizeLegacyTableBorders,
       [FILE_UPLOAD_POPUP_OPENED]: (editor: IJodit) => uppyListener(editor, currentLanguage, intl, uploadQuestionId),
     },
     popup: {
