@@ -1,6 +1,7 @@
 import {
   BoxProps,
   CapUIIcon,
+  CapUIIconSize,
   CapUIShadow,
   Card,
   CardContent,
@@ -91,6 +92,7 @@ const STEP_FRAGMENT = graphql`
     votesMin
     ... on CollectStep {
       mainView
+      private
     }
     ... on SelectionStep {
       project {
@@ -147,6 +149,7 @@ export const ProposalCard: React.FC<Props> = ({
   const listView = isMobile ? 'grid' : requestedView
   const [isMapShown] = useQueryState('map_shown', parseAsInteger)
 
+  const isPrivate = step.__typename === 'CollectStep' && !!step.private
   const descriptionLineClamp = isMapShown !== 0 ? 3 : 4
   const numericPointsCount = proposal.votes?.totalPointsCount ?? 0
   const paperPointsCount = proposal.paperVotesTotalPointsCount ?? 0
@@ -169,6 +172,30 @@ export const ProposalCard: React.FC<Props> = ({
     </Tag>
   )
 
+  const hasCover = listView === 'grid' || form?.usingIllustration || (proposalIcon && proposalCover)
+  // Same placement as the design system CardRestricted badge, with a barred eye icon
+  const privateBadge = isPrivate ? (
+    <Tooltip label={intl.formatMessage({ id: 'global.private' })}>
+      <Flex
+        className="proposal-card-private"
+        position="absolute"
+        top="xs"
+        right="xs"
+        zIndex={1}
+        align="center"
+        justify="center"
+        width={8}
+        height={8}
+        borderRadius="xxs"
+        bg="neutral-gray.100"
+        tabIndex={0}
+        aria-label={intl.formatMessage({ id: 'global.private' })}
+      >
+        <Icon name={CapUIIcon.EyeClose} size={CapUIIconSize.Md} color="neutral-gray.900" />
+      </Flex>
+    </Tooltip>
+  ) : null
+
   return (
     <Card
       id={`proposal-${id}`}
@@ -181,8 +208,9 @@ export const ProposalCard: React.FC<Props> = ({
       sx={{ boxShadow: active ? CapUIShadow.Small : 'inherit' }}
       {...props}
     >
-      {listView === 'grid' || form?.usingIllustration || (proposalIcon && proposalCover) ? (
+      {hasCover ? (
         <CardCover alignSelf="stretch" maxWidth={listView === 'list' ? 288 : 'auto'} height="initial">
+          {privateBadge}
           {proposalCover ? (
             <CardCoverImage src={proposalCover} />
           ) : (
@@ -200,7 +228,9 @@ export const ProposalCard: React.FC<Props> = ({
             </CardStatusTag>
           ) : null}
         </CardCover>
-      ) : null}
+      ) : (
+        privateBadge
+      )}
       <CardContent
         primaryInfo={title}
         secondaryInfo={summaryOrBodyExcerpt}

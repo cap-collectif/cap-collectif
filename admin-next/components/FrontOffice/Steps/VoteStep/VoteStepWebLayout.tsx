@@ -15,6 +15,8 @@ import VoteStepMap from './Map/VoteStepMap'
 import ProposalDrafts from './ProposalDrafts/ProposalDrafts'
 import VoteStepListHeader from './VoteStepListHeader'
 import VoteStepProposalsList from './VoteStepProposalsList'
+import VoteStepPrivateLogin from './VoteStepPrivateLogin'
+import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 import VoteStepUserInfos from './VoteStepUserInfos'
 import VoteStepProjectHeroStepInfo from './VoteStepProjectHeroStepInfo'
 
@@ -76,6 +78,7 @@ const FRAGMENT = graphql`
     ... on CollectStep {
       mainView
       mapShownByDefault
+      private
     }
     ... on SelectionStep {
       project {
@@ -120,6 +123,7 @@ const getTemplateColumns = (isMapVisible: boolean) => ({
 export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey, customCode, projectCustomCode }) => {
   const step = useFragment(FRAGMENT, stepKey)
   const isMobile = useIsMobile()
+  const { viewerSession } = useAppContext()
 
   const [contributionId, setContributionId] = React.useState(null)
   const [showMapPlaceholder, setShowMapPlaceholder] = React.useState(true)
@@ -153,6 +157,9 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey, customCode, 
     (isMapExpanded || (viewForm?.isMapViewEnabled && !viewForm?.isGridViewEnabled && !viewForm?.isListViewEnabled))
 
   const isMobileMapVisible = isMobile && mobileMapShown === 1
+
+  // Private collect step: proposals are only visible to their authors and admins, so anonymous viewers must log in
+  const isPrivateForAnonymous = step.__typename === 'CollectStep' && !!step.private && !viewerSession
 
   // The size of the filter block, including the padding. Bigger when the vote component is there
   const mapStickyPositionFromTop = step.votable ? 156 : 88
@@ -199,52 +206,58 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey, customCode, 
           </Box>
         ) : null}
 
-        <Box mb="md">
-          <Flex justifyContent="space-between" gap="lg">
-            {((!isMapExpanded && !isMobile) || isMobile) && !isMapOnlyView ? (
-              <Box flex="2 1 0">
-                <React.Suspense
-                  fallback={
-                    <Box width="100%">
-                      <ProjectsListPlaceholder
-                        count={10}
-                        templateColumns={(() => {
-                          const cols = getTemplateColumns(viewForm?.isMapViewEnabled && !isMobile && isMapShown !== 0)
-                          return [cols.base, cols.tablet, cols.desktop]
-                        })()}
-                        mt={0}
-                      />
-                    </Box>
-                  }
+        {isPrivateForAnonymous ? (
+          <Box mb="md">
+            <VoteStepPrivateLogin />
+          </Box>
+        ) : (
+          <Box mb="md">
+            <Flex justifyContent="space-between" gap="lg">
+              {((!isMapExpanded && !isMobile) || isMobile) && !isMapOnlyView ? (
+                <Box flex="2 1 0">
+                  <React.Suspense
+                    fallback={
+                      <Box width="100%">
+                        <ProjectsListPlaceholder
+                          count={10}
+                          templateColumns={(() => {
+                            const cols = getTemplateColumns(viewForm?.isMapViewEnabled && !isMobile && isMapShown !== 0)
+                            return [cols.base, cols.tablet, cols.desktop]
+                          })()}
+                          mt={0}
+                        />
+                      </Box>
+                    }
+                  >
+                    <VoteStepProposalsList
+                      step={step}
+                      templateColumns={getTemplateColumns(viewForm?.isMapViewEnabled && !isMobile && isMapShown !== 0)}
+                      triggerRequirementModal={triggerRequirementModal}
+                      selectedId={selectedProposalId}
+                      onSelectedIdChange={setSelectedProposalId}
+                    />
+                  </React.Suspense>
+                </Box>
+              ) : null}
+              {viewForm?.isMapViewEnabled && (isMapOnlyView || isMapShown !== 0) && !isMobile ? (
+                <Box
+                  flex={isMapOnlyView ? '1 1 100%' : `0 1 ${pxToRem(395)}`}
+                  position="sticky"
+                  top={pxToRem(mapStickyPositionFromTop)}
+                  height={mapHeight}
                 >
-                  <VoteStepProposalsList
+                  <VoteStepMap
                     step={step}
-                    templateColumns={getTemplateColumns(viewForm?.isMapViewEnabled && !isMobile && isMapShown !== 0)}
-                    triggerRequirementModal={triggerRequirementModal}
-                    selectedId={selectedProposalId}
-                    onSelectedIdChange={setSelectedProposalId}
+                    showMapPlaceholder={isMapOnlyView ? false : showMapPlaceholder}
+                    removePlaceholderAndShowMap={() => setShowMapPlaceholder(false)}
+                    onWorkflowTrigger={triggerProposalWorkflow}
                   />
-                </React.Suspense>
-              </Box>
-            ) : null}
-            {viewForm?.isMapViewEnabled && (isMapOnlyView || isMapShown !== 0) && !isMobile ? (
-              <Box
-                flex={isMapOnlyView ? '1 1 100%' : `0 1 ${pxToRem(395)}`}
-                position="sticky"
-                top={pxToRem(mapStickyPositionFromTop)}
-                height={mapHeight}
-              >
-                <VoteStepMap
-                  step={step}
-                  showMapPlaceholder={isMapOnlyView ? false : showMapPlaceholder}
-                  removePlaceholderAndShowMap={() => setShowMapPlaceholder(false)}
-                  onWorkflowTrigger={triggerProposalWorkflow}
-                />
-              </Box>
-            ) : null}
-          </Flex>
-        </Box>
-        {viewForm?.isMapViewEnabled && (isMapOnlyView || isMobileMapVisible) && isMobile ? (
+                </Box>
+              ) : null}
+            </Flex>
+          </Box>
+        )}
+        {viewForm?.isMapViewEnabled && (isMapOnlyView || isMobileMapVisible) && isMobile && !isPrivateForAnonymous ? (
           <Box position="fixed" top={0} left={0} right={0} bottom="72px" zIndex={999} backgroundColor="white">
             <VoteStepMap
               step={step}

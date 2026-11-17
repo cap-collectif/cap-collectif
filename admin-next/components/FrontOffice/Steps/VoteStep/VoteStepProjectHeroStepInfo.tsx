@@ -1,9 +1,9 @@
 'use client'
 
-import * as React from 'react'
+import { Box, CapUIIcon, CapUIIconSize, Flex, Icon, InfoMessage, Text } from '@cap-collectif/ui'
 import moment from 'moment'
+import * as React from 'react'
 import { FormattedDate, FormattedMessage, FormattedTime } from 'react-intl'
-import { Box, CapUIIcon, CapUIIconSize, Flex, Icon, Text } from '@cap-collectif/ui'
 
 type Props = {
   state: string
@@ -102,41 +102,27 @@ const VoteStepProjectHeroStepInfo: React.FC<Props> = ({ state, timeRange }) => {
   return (
     <Box width="100%" marginTop={4} aria-label="step-information">
       {state === 'CLOSED' ? (
-        <Box
-          role="alert"
-          backgroundColor="#d9edf7"
-          border="1px solid #bce8f1"
-          color="#31708f"
-          marginBottom={2}
-          padding={4}
-        >
-          <Text color="inherit">
-            <Text as="span" color="inherit" fontWeight="bold">
-              <FormattedMessage id="step.selection.alert.ended.title" />
-            </Text>{' '}
+        <InfoMessage variant="info" marginBottom={4}>
+          <InfoMessage.Title>
+            <FormattedMessage id="step.selection.alert.ended.title" />
+          </InfoMessage.Title>
+          <InfoMessage.Content>
             <FormattedMessage id="thank.for.contribution" />
-          </Text>
-        </Box>
+          </InfoMessage.Content>
+        </InfoMessage>
       ) : null}
       {state === 'FUTURE' && timeRange.startAt ? (
-        <Box
-          role="alert"
-          backgroundColor="#d9edf7"
-          border="1px solid #bce8f1"
-          color="#31708f"
-          marginBottom={2}
-          padding={4}
-        >
-          <Text color="inherit">
-            <Text as="span" color="inherit" fontWeight="bold">
-              <FormattedMessage id="step.collect.alert.future.title" />
-            </Text>{' '}
+        <InfoMessage variant="info" marginBottom={4}>
+          <InfoMessage.Title>
+            <FormattedMessage id="step.collect.alert.future.title" />
+          </InfoMessage.Title>
+          <InfoMessage.Content>
             <FormattedMessage
               id="step.start.future"
               values={{ date: <FormattedDate value={moment(timeRange.startAt).toDate()} /> }}
             />
-          </Text>
-        </Box>
+          </InfoMessage.Content>
+        </InfoMessage>
       ) : null}
       {hasDates ? (
         <Flex alignItems="center" flexWrap="wrap" gap={4}>
