@@ -49,7 +49,6 @@ const OPINION_FRAGMENT = graphql`
     title
     body
     position
-    published
     pinned
     trashedStatus
     trashedReason
@@ -277,7 +276,7 @@ const OpinionFormWrapper = ({ opinion, sectionKey }: Props): JSX.Element => {
             />
           </Flex>
           <Flex direction="column" spacing="lg" width="30%">
-            <OpinionFormSide published={opinion?.published ?? null} />
+            <OpinionFormSide isEditing={!!opinion} />
           </Flex>
         </Flex>
       </FormProvider>

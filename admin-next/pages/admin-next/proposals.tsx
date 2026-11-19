@@ -42,8 +42,8 @@ const ProposalsTab: React.FC = () => {
         <Search
           onChange={onTermChange}
           value={term}
-          placeholder={intl.formatMessage({ id: 'admin.proposals.search' })}
-          aria-label={intl.formatMessage({ id: 'admin.proposals.search' })}
+          placeholder={intl.formatMessage({ id: 'admin.proposals-collect.search' })}
+          aria-label={intl.formatMessage({ id: 'admin.proposals-collect.search' })}
         />
       </Flex>
 

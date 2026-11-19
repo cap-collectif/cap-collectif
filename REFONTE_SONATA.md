@@ -1730,6 +1730,20 @@ prop-drillé entre la liste et un ancêtre.
   prévenir l'utilisateurice que ces clés doivent être ajoutées côté plateforme de traduction externe pour
   survivre à un futur `yarn trad`. Réutiliser une clé déjà existante (`grep` dans `translations/fr-FR.json`
   avant d'en inventer une nouvelle) reste donc préférable à chaque fois que c'est possible.
+- **Clés de traduction créées par une refonte : fournir des fichiers JSON prêts à importer dans Loco, en
+  français et en anglais.** Un fichier par langue, à la racine du dépôt, nommé
+  `loco-import-<ticket>-<slug>-<locale>.json` (`fr-FR` et `en-GB`, ex: `loco-import-20816-proposals-fr-FR.json`
+  et `loco-import-20816-proposals-en-GB.json`, voir le précédent `loco-import-19994-support-fr-FR.json`).
+  Format : un objet JSON **plat** `{ "clé.complète": "texte" }` (pas d'objets imbriqués, clé écrite en entier
+  avec son préfixe), textes au format ICU (`{n, plural, one {…} other {…}}`), mêmes clés dans les deux fichiers.
+  N'y mettre que les clés **à créer** (absentes de `translations/fr-FR.json`), pas celles réutilisées.
+  ```json
+  {
+    "admin.<entities>.successfully-created": "Le <entité> a été créé",
+    "admin.<entities>.count": "{n, plural, one {{n} <entité>} other {{n} <entités>}}"
+  }
+  ```
+  Ce fichier ne doit PAS être committé, il doit être importé dans Loco par l'utilisatrice, puis supprimé du dépôt avant merge de la branche.
 - **Colonne `NOT NULL` sans défaut sur un champ de traduction optionnel côté GraphQL** (variante du piège
   Gedmo `position`, mais pour un champ texte) : si une mutation `create`/`update`
   manuelle (sans Symfony Form) construit l'entité de traduction directement (ex: `$translation->setBody($input['body'] ?? null)`)

@@ -28,19 +28,19 @@ const FRAGMENT = graphql`
 
 // Widths add up to 100%, sized so that the headers and the dates fit on a 1440px wide screen
 const COLUMNS: ReadonlyArray<{ label: string | null; width: string }> = [
-  { label: 'global.title', width: '11.5%' },
+  { label: 'global.title', width: '13.5%' },
   { label: 'global.author', width: '9%' },
-  { label: 'global.participative.project.label', width: '11.5%' },
-  { label: 'global.category', width: '9%' },
-  { label: 'global.consultation', width: '9.5%' },
+  { label: 'global.participative.project.label', width: '13%' },
+  { label: 'global.consultation', width: '11.5%' },
+  { label: 'global.module', width: '10%' },
   { label: 'global.vote', width: '5%' },
-  { label: 'global.position', width: '6.5%' },
-  { label: 'global.published', width: '6%' },
-  { label: 'global.pinned.label', width: '6%' },
+  { label: 'global.position', width: '5%' },
+  { label: 'global.published', width: '4.5%' },
+  { label: 'global.pinned.label', width: '4.5%' },
   { label: 'global.is_trashed', width: '8.5%' },
-  { label: 'global.maj', width: '8.5%' },
-  // Only ButtonQuickActions: no label
-  { label: null, width: '9%' },
+  { label: 'global.creation', width: '8.5%' },
+  // ButtonQuickActions
+  { label: null, width: '7%' },
 ]
 
 type Props = {

@@ -56,12 +56,9 @@ const ProposalList: React.FC<Props> = ({ queryReference, term, resetFilters }) =
           <Table.Th>{intl.formatMessage({ id: 'global.title' })}</Table.Th>
           <Table.Th>{intl.formatMessage({ id: 'global.author' })}</Table.Th>
           <Table.Th>{intl.formatMessage({ id: 'global.participative.project.label' })}</Table.Th>
-          <Table.Th>{intl.formatMessage({ id: 'global.category' })}</Table.Th>
-          <Table.Th>{intl.formatMessage({ id: 'proposal.district' })}</Table.Th>
           <Table.Th>{intl.formatMessage({ id: 'global.status' })}</Table.Th>
           <Table.Th>{intl.formatMessage({ id: 'global.state' })}</Table.Th>
           <Table.Th>{intl.formatMessage({ id: 'global.creation' })}</Table.Th>
-          <Table.Th>{intl.formatMessage({ id: 'global.maj' })}</Table.Th>
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody

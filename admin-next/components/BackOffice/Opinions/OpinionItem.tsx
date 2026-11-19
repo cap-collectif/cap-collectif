@@ -19,7 +19,7 @@ const FRAGMENT = graphql`
     published
     pinned
     trashedStatus
-    updatedAt
+    createdAt
     author {
       displayName
       adminUrl
@@ -81,8 +81,8 @@ const OpinionItem: React.FC<Props> = ({ opinion: opinionFragment, connectionId }
       <Table.Td>
         {opinion.project ? <Link href={opinion.project.adminAlphaUrl}>{opinion.project.title}</Link> : null}
       </Table.Td>
-      <Table.Td>{opinion.section.title}</Table.Td>
       <Table.Td>{opinion.section.consultation?.title}</Table.Td>
+      <Table.Td>{opinion.section.title}</Table.Td>
       <Table.Td>{opinion.votes.totalCount}</Table.Td>
       <Table.Td>{opinion.position}</Table.Td>
       <Table.Td>
@@ -107,15 +107,13 @@ const OpinionItem: React.FC<Props> = ({ opinion: opinionFragment, connectionId }
         ) : null}
       </Table.Td>
       <Table.Td>
-        {opinion.updatedAt
-          ? intl.formatDate(opinion.updatedAt, {
-              day: 'numeric',
-              month: 'numeric',
-              year: 'numeric',
-              hour: 'numeric',
-              minute: 'numeric',
-            })
-          : null}
+        {intl.formatDate(opinion.createdAt, {
+          day: 'numeric',
+          month: 'numeric',
+          year: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+        })}
       </Table.Td>
       <Table.Td>
         {/* The buttons wrap rather than overflowing the column on a narrow screen */}

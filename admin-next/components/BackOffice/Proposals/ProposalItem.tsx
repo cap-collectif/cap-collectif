@@ -15,26 +15,15 @@ const FRAGMENT = graphql`
     adminUrl
     publicationStatus
     createdAt
-    updatedAt
     author {
       displayName
       ... on User {
         adminUrl
       }
     }
-    updatedBy {
-      displayName
-      adminUrl
-    }
     project {
       title
       adminAlphaUrl
-    }
-    category {
-      name
-    }
-    district {
-      name
     }
     lastStatus {
       name
@@ -83,8 +72,6 @@ const ProposalItem: React.FC<Props> = ({ proposal: fragmentKey }) => {
       <Table.Td>
         {proposal.project ? <Link href={proposal.project.adminAlphaUrl}>{proposal.project.title}</Link> : null}
       </Table.Td>
-      <Table.Td>{proposal.category?.name}</Table.Td>
-      <Table.Td>{proposal.district?.name}</Table.Td>
       <Table.Td>
         {proposal.lastStatus ? <Tag variantColor={statusColor}>{proposal.lastStatus.name}</Tag> : null}
       </Table.Td>
@@ -94,15 +81,6 @@ const ProposalItem: React.FC<Props> = ({ proposal: fragmentKey }) => {
         ) : null}
       </Table.Td>
       <Table.Td>{formatDate(proposal.createdAt)}</Table.Td>
-      <Table.Td>
-        {proposal.updatedAt ? formatDate(proposal.updatedAt) : null}
-        {proposal.updatedBy ? (
-          <Text>
-            {intl.formatMessage({ id: 'global.written_by' })}{' '}
-            <Link href={proposal.updatedBy.adminUrl}>{proposal.updatedBy.displayName}</Link>
-          </Text>
-        ) : null}
-      </Table.Td>
     </>
   )
 }

@@ -1,7 +1,7 @@
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { Button, CapUIFontSize, Flex, FormLabel, Heading, Text } from '@cap-collectif/ui'
-import { UserListField } from '@components/BackOffice/Form/UserListField'
 import TextEditor from '@components/BackOffice/Form/TextEditor/TextEditor'
+import { UserListField } from '@components/BackOffice/Form/UserListField'
 import * as React from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useIntl } from 'react-intl'
@@ -95,7 +95,7 @@ const OpinionForm = ({
           <Text>{consultationTitle}</Text>
         </Flex>
         <Flex direction="column" spacing="xxs">
-          <FormLabel label={intl.formatMessage({ id: 'global.category' })} />
+          <FormLabel label={intl.formatMessage({ id: 'global.module' })} />
           <Text>{sectionTitle}</Text>
         </Flex>
       </Flex>

@@ -29,7 +29,7 @@ describe('Proposals back office', () => {
     cy.wait('@proposals_Query')
 
     cy.interceptGraphQLOperation({ operationName: 'ProposalListPaginationQuery' })
-    cy.get('input[aria-label="admin.proposals.search"]').should('exist').and('be.visible').type('emailing 2')
+    cy.get('input[aria-label="admin.proposals-collect.search"]').should('exist').and('be.visible').type('emailing 2')
     cy.wait('@ProposalListPaginationQuery')
 
     cy.get('tbody tr').should('have.length', 2)

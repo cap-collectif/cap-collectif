@@ -872,7 +872,7 @@ InternalQuery:
                     search:
                         type: 'String'
                         defaultValue: null
-                        description: 'Filter by title.'
+                        description: 'Filter by title, author username or email, or full reference.'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\AdminProposalListResolver", args)'
             newsletterSubscriptions:
                 type: 'NewsletterSubscriptionConnection!'

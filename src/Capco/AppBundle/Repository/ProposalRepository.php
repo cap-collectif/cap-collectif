@@ -1097,8 +1097,23 @@ class ProposalRepository extends EntityRepository
         $qb = $this->createQueryBuilder('p');
 
         if (null !== $search && '' !== trim($search)) {
+            // Search in the title, the author (user or participant)
+            // and the full reference displayed in the list ("<proposal form reference>-<proposal reference>").
+            // These ManyToOne joins do not duplicate rows, so pagination and count stay accurate.
             $qb
-                ->andWhere('p.title LIKE :search')
+                ->leftJoin('p.author', 'author')
+                ->leftJoin('p.participant', 'participant')
+                ->leftJoin('p.proposalForm', 'proposalForm')
+                ->andWhere(
+                    $qb->expr()->orX(
+                        'p.title LIKE :search',
+                        'author.username LIKE :search',
+                        'author.email LIKE :search',
+                        'participant.username LIKE :search',
+                        'participant.email LIKE :search',
+                        "CONCAT(proposalForm.reference, '-', p.reference) LIKE :search"
+                    )
+                )
                 ->setParameter('search', '%' . trim($search) . '%')
             ;
         }

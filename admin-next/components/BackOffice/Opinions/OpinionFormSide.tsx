@@ -1,5 +1,5 @@
 import { FieldInput, FormControl } from '@cap-collectif/form'
-import { Accordion, CapUIAccordionSize, Flex, FormLabel, Switch } from '@cap-collectif/ui'
+import { Accordion, CapUIAccordionSize, FormLabel } from '@cap-collectif/ui'
 import * as React from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useIntl } from 'react-intl'
@@ -7,11 +7,10 @@ import { OpinionFormValues } from './Opinion.type'
 import { NOT_TRASHED } from './utils'
 
 type Props = {
-  // Null on creation: the publication is decided when the opinion is saved
-  published: boolean | null
+  isEditing: boolean
 }
 
-const OpinionFormSide: React.FC<Props> = ({ published }) => {
+const OpinionFormSide: React.FC<Props> = ({ isEditing }) => {
   const intl = useIntl()
   const { control, watch } = useFormContext<OpinionFormValues>()
   const isTrashed = watch('trashedStatus') !== NOT_TRASHED
@@ -33,29 +32,24 @@ const OpinionFormSide: React.FC<Props> = ({ published }) => {
       <Accordion.Item id="publication">
         <Accordion.Button>{intl.formatMessage({ id: 'admin.fields.opinion.group_publication' })}</Accordion.Button>
         <Accordion.Panel>
-          {/* Read only, as in Sonata: the publication is set when the opinion is created */}
-          {published !== null ? (
-            <Flex direction="column" spacing="xxs" mb="lg">
-              <FormLabel htmlFor="published" label={intl.formatMessage({ id: 'global.published' })} />
-              <Switch id="published" checked={published} disabled />
-            </Flex>
-          ) : null}
-
           <FormControl name="pinned" control={control}>
             <FormLabel htmlFor="pinned" label={intl.formatMessage({ id: 'admin.fields.comment.pinned' })} />
             <FieldInput type="switch" name="pinned" control={control} id="pinned" />
           </FormControl>
 
-          <FormControl name="trashedStatus" control={control}>
-            <FormLabel htmlFor="trashedStatus" label={intl.formatMessage({ id: 'global.is_trashed' })} />
-            <FieldInput
-              type="select"
-              id="trashedStatus"
-              name="trashedStatus"
-              control={control}
-              options={trashedStatusOptions}
-            />
-          </FormControl>
+          {/* A new opinion cannot be created directly in the trash */}
+          {isEditing ? (
+            <FormControl name="trashedStatus" control={control}>
+              <FormLabel htmlFor="trashedStatus" label={intl.formatMessage({ id: 'global.is_trashed' })} />
+              <FieldInput
+                type="select"
+                id="trashedStatus"
+                name="trashedStatus"
+                control={control}
+                options={trashedStatusOptions}
+              />
+            </FormControl>
+          ) : null}
 
           {isTrashed ? (
             <FormControl name="trashedReason" control={control}>

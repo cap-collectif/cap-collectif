@@ -16252,7 +16252,7 @@ type Query {
     """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    """Filter by title."""
+    """Filter by title, author username or email, or full reference."""
     search: String = null
   ): ProposalConnection!
 
