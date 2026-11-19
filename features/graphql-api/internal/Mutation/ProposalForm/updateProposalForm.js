@@ -448,21 +448,30 @@ describe('Internal | updateProposalForm', () => {
    * @jest-reason Checks mutation output without a failure-safe final restoration of the changed backend data;
    * the database helper runs only before each test.
    */
-  it.each(['PROPOSAL', 'PROJECT', 'MISSION', 'OPINION', 'IDEA', 'QUESTION', 'REPORTING', 'TESTIMONY', 'PICTURE'])(
-    'admin can set object type %s',
-    async objectType => {
-      const response = await graphql(
-        mutation,
-        {
-          input: {
-            proposalFormId: 'proposalForm13',
-            objectType,
-          },
+  it.each([
+    'PROPOSAL',
+    'PROJECT',
+    'MISSION',
+    'OPINION',
+    'IDEA',
+    'QUESTION',
+    'REPORTING',
+    'TESTIMONY',
+    'PICTURE',
+    'INTERPELLATION',
+    'PETITION',
+  ])('admin can set object type %s', async objectType => {
+    const response = await graphql(
+      mutation,
+      {
+        input: {
+          proposalFormId: 'proposalForm13',
+          objectType,
         },
-        'internal_admin',
-      )
+      },
+      'internal_admin',
+    )
 
-      expect(response.updateProposalForm.proposalForm.objectType).toBe(objectType)
-    },
-  )
+    expect(response.updateProposalForm.proposalForm.objectType).toBe(objectType)
+  })
 })

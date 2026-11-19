@@ -9,20 +9,30 @@ import {
  * @jest-reason Checks the public proposal-type rule with explicit positive and negative parameterized cases.
  */
 describe('isProposalLikeObjectType', () => {
-  it.each(['PROPOSAL', 'PROJECT', 'MISSION', 'IDEA', 'REPORTING', 'TESTIMONY', 'PICTURE'])(
-    'maps %s to proposal behavior',
-    objectType => {
-      expect(isProposalLikeObjectType(objectType)).toBe(true)
-    },
-  )
+  it.each([
+    'PROPOSAL',
+    'PROJECT',
+    'MISSION',
+    'IDEA',
+    'REPORTING',
+    'TESTIMONY',
+    'PICTURE',
+    'INTERPELLATION',
+    'PETITION',
+  ])('maps %s to proposal behavior', objectType => {
+    expect(isProposalLikeObjectType(objectType)).toBe(true)
+  })
 
   it.each(['OPINION', 'QUESTION', null, undefined])('does not map %s to proposal behavior', objectType => {
     expect(isProposalLikeObjectType(objectType)).toBe(false)
   })
 
-  it.each(['PROPOSAL', 'MISSION', 'IDEA', 'QUESTION', 'PICTURE'])('maps %s to feminine filters', objectType => {
-    expect(isFeminineObjectType(objectType)).toBe(true)
-  })
+  it.each(['PROPOSAL', 'MISSION', 'IDEA', 'QUESTION', 'PICTURE', 'INTERPELLATION', 'PETITION'])(
+    'maps %s to feminine filters',
+    objectType => {
+      expect(isFeminineObjectType(objectType)).toBe(true)
+    },
+  )
 
   it.each(['PROJECT', 'OPINION', 'REPORTING', 'TESTIMONY', null, undefined])(
     'does not map %s to feminine filters',
@@ -43,6 +53,8 @@ describe('getContributionObjectTypeTranslationKey', () => {
     ['REPORTING', 'reporting'],
     ['TESTIMONY', 'testimony'],
     ['PICTURE', 'picture'],
+    ['INTERPELLATION', 'interpellation'],
+    ['PETITION', 'petition'],
   ])('maps %s to %s', (objectType, expected) => {
     expect(getContributionObjectTypeTranslationKey(objectType)).toBe(expected)
   })
@@ -53,9 +65,12 @@ describe('getContributionObjectTypeTranslationKey', () => {
 })
 
 describe('isFeminineObjectType', () => {
-  it.each(['PROPOSAL', 'MISSION', 'IDEA', 'QUESTION', 'PICTURE'])('recognizes %s as feminine', objectType => {
-    expect(isFeminineObjectType(objectType)).toBe(true)
-  })
+  it.each(['PROPOSAL', 'MISSION', 'IDEA', 'QUESTION', 'PICTURE', 'INTERPELLATION', 'PETITION'])(
+    'recognizes %s as feminine',
+    objectType => {
+      expect(isFeminineObjectType(objectType)).toBe(true)
+    },
+  )
 
   it.each(['PROJECT', 'OPINION', 'REPORTING', 'TESTIMONY', null, undefined])(
     'does not recognize %s as feminine',

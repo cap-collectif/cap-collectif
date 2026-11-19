@@ -309,9 +309,12 @@ export const ProposalPageHeader = ({
   const modified = moment(proposal?.updatedAt).diff(proposal?.createdAt, 'seconds') > 1
 
   const getGoBackButtonLabel = () => {
-    return isProposalLikeObjectType(proposal?.form.objectType) && isInterpellationContextFromProposal(proposal)
+    // The page renders before the query resolves: wait for the object type to avoid a label flash.
+    if (!proposal) return null
+
+    return isProposalLikeObjectType(proposal.form.objectType) && isInterpellationContextFromProposal(proposal)
       ? 'interpellation.back'
-      : `front.contribution.${getContributionObjectTypeTranslationKey(proposal?.form.objectType)}.back`
+      : `front.contribution.${getContributionObjectTypeTranslationKey(proposal.form.objectType)}.back`
   }
 
   const proposalIllustrationInitialValues = {

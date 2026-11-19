@@ -30,3 +30,9 @@ ProposalFormObjectType:
             PICTURE:
                 value: !php/const Capco\AppBundle\Enum\ProposalFormObjectType::PICTURE
                 description: 'The proposal form allows to submit pictures'
+            INTERPELLATION:
+                value: !php/const Capco\AppBundle\Enum\ProposalFormObjectType::INTERPELLATION
+                description: 'The proposal form allows to submit interpellations'
+            PETITION:
+                value: !php/const Capco\AppBundle\Enum\ProposalFormObjectType::PETITION
+                description: 'The proposal form allows to submit petitions'

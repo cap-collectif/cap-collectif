@@ -10,10 +10,30 @@ export const proposalStepObjectTypeOptions = (intl: IntlShape) => [
   { label: intl.formatMessage({ id: 'proposal.step.object_type.reporting' }), value: 'REPORTING' },
   { label: intl.formatMessage({ id: 'proposal.step.object_type.testimony' }), value: 'TESTIMONY' },
   { label: intl.formatMessage({ id: 'proposal.step.object_type.picture' }), value: 'PICTURE' },
+  { label: intl.formatMessage({ id: 'proposal.step.object_type.interpellation' }), value: 'INTERPELLATION' },
+  { label: intl.formatMessage({ id: 'proposal.step.object_type.petition' }), value: 'PETITION' },
 ]
 
-const proposalLikeObjectTypes = new Set(['PROPOSAL', 'PROJECT', 'MISSION', 'IDEA', 'REPORTING', 'TESTIMONY', 'PICTURE'])
-const feminineObjectTypes = new Set(['PROPOSAL', 'MISSION', 'IDEA', 'QUESTION', 'PICTURE'])
+const proposalLikeObjectTypes = new Set([
+  'PROPOSAL',
+  'PROJECT',
+  'MISSION',
+  'IDEA',
+  'REPORTING',
+  'TESTIMONY',
+  'PICTURE',
+  'INTERPELLATION',
+  'PETITION',
+])
+const feminineObjectTypes = new Set([
+  'PROPOSAL',
+  'MISSION',
+  'IDEA',
+  'QUESTION',
+  'PICTURE',
+  'INTERPELLATION',
+  'PETITION',
+])
 
 const contributionObjectTypes = new Set([
   'PROPOSAL',
@@ -25,6 +45,8 @@ const contributionObjectTypes = new Set([
   'REPORTING',
   'TESTIMONY',
   'PICTURE',
+  'INTERPELLATION',
+  'PETITION',
 ])
 
 export const isProposalLikeObjectType = (objectType: string | null | undefined): boolean =>

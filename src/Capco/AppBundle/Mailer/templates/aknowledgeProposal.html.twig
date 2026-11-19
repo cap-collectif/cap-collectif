@@ -69,7 +69,7 @@
                                     user_locale
                                 )|raw }}
                             {% else %}
-                                {% set editUntilStepClosedTranslationKey = proposal.form.objectType in ['PROPOSAL', 'MISSION', 'IDEA', 'QUESTION', 'PICTURE']
+                                {% set editUntilStepClosedTranslationKey = proposal.form.objectType|upper in ['PROPOSAL', 'MISSION', 'IDEA', 'QUESTION', 'PICTURE', 'INTERPELLATION', 'PETITION']
                                     ? 'front.contribution.edit-until-step-closed-feminine'
                                     : 'front.contribution.edit-until-step-closed-masculine' %}
                                 {{ editUntilStepClosedTranslationKey|trans(

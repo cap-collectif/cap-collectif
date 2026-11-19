@@ -14596,6 +14596,12 @@ enum ProposalFormObjectType {
 
   """The proposal form allows to submit pictures"""
   PICTURE
+
+  """The proposal form allows to submit interpellations"""
+  INTERPELLATION
+
+  """The proposal form allows to submit petitions"""
+  PETITION
 }
 
 """Ways in which lists of proposalForms can be ordered upon return."""

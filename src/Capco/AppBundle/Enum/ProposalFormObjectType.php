@@ -13,4 +13,6 @@ final class ProposalFormObjectType
     public const REPORTING = 'reporting';
     public const TESTIMONY = 'testimony';
     public const PICTURE = 'picture';
+    public const INTERPELLATION = 'interpellation';
+    public const PETITION = 'petition';
 }
