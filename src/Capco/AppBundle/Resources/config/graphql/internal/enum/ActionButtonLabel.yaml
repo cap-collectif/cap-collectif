@@ -9,3 +9,6 @@ ActionButtonLabel:
             SUPPORT:
                 value: !php/const Capco\AppBundle\Enum\ActionButtonLabel::SUPPORT
                 description: 'Represents a support button label.'
+            SIGN:
+                value: !php/const Capco\AppBundle\Enum\ActionButtonLabel::SIGN
+                description: 'Represents a sign button label.'

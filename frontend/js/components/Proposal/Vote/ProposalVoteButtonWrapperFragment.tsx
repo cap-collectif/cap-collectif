@@ -13,6 +13,7 @@ import VoteButtonUI from '~/components/VoteStep/VoteButtonUI'
 import {
   ProposalVoteButtonWrapperFragment_participant$key
 } from '~relay/ProposalVoteButtonWrapperFragment_participant.graphql'
+import { getVoteAction } from '@shared/utils/getVoteAction'
 
 type Props = {
   proposal: ProposalVoteButtonWrapperFragment_proposal$key
@@ -138,7 +139,9 @@ export const ProposalVoteButtonWrapperFragment = ({
   const step = useFragment(STEP_FRAGMENT, stepRef)
   const participant = useFragment(PARTICIPANT_FRAGMENT, participantRef)
 
-  const voteButtonLabel = step?.actionButtonLabel === 'SUPPORT' ? 'global.support.for' : 'global.vote.for'
+  const voteButtonLabel = { VOTE: 'global.vote.for', SUPPORT: 'global.support.for', SIGN: 'global.sign.for' }[
+    getVoteAction(step?.actionButtonLabel)
+  ]
   const hasVoted = viewer ? proposal?.viewerVote?.completionStatus === 'COMPLETED' : proposal?.contributorVote?.completionStatus === 'COMPLETED'
 
   if (proposal && !step?.open && !usesNewUI) {

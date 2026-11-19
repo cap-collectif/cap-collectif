@@ -135,6 +135,9 @@ enum ActionButtonLabel {
 
   """Represents a support button label."""
   SUPPORT
+
+  """Represents a sign button label."""
+  SIGN
 }
 
 """Available errors on `AddAnonymousReply` mutation."""

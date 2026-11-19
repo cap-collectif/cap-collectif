@@ -16,12 +16,19 @@ import { graphql, useFragment } from 'react-relay'
 import VotesPopup from './VotesPopup'
 import VoteStepUserInfos from '../VoteStepUserInfos'
 import { pxToRem } from '@shared/utils/pxToRem'
+import { getVoteAction, VoteAction } from '@shared/utils/getVoteAction'
 
 type Props = {
   step: VoteStepMobileVotesModal_proposalStep$key
   isActive?: boolean
   onButtonClick?: () => void
   onClose?: () => void
+}
+
+const VOTE_ACTION_LABEL_IDS: Record<VoteAction, { tabLabelId: string; ariaLabelId: string }> = {
+  VOTE: { tabLabelId: 'global.vote', ariaLabelId: 'proposal.step.user.votes.infos.btn.votes' },
+  SUPPORT: { tabLabelId: 'global.support', ariaLabelId: 'proposal.step.user.supports.infos.btn.supports' },
+  SIGN: { tabLabelId: 'global.signatures', ariaLabelId: 'proposal.step.user.signatures.infos.btn.signatures' },
 }
 
 const FRAGMENT = graphql`
@@ -49,7 +56,7 @@ const FRAGMENT = graphql`
 const VoteStepMobileVotesModal: FC<Props> = ({ step: stepKey, isActive = false, onButtonClick, onClose }) => {
   const intl = useIntl()
   const step = useFragment(FRAGMENT, stepKey)
-  const isSupport = step.actionButtonLabel === 'SUPPORT'
+  const { tabLabelId, ariaLabelId } = VOTE_ACTION_LABEL_IDS[getVoteAction(step.actionButtonLabel)]
 
   return (
     <Modal
@@ -65,13 +72,11 @@ const VoteStepMobileVotesModal: FC<Props> = ({ step: stepKey, isActive = false, 
         >
           <Icon name={CapUIIcon.ThumbUpO} size={CapUIIconSize.Md} />
           <Box as="span" fontSize={CapUIFontSize.BodySmall} lineHeight={CapUILineHeight.S}>
-            {intl.formatMessage({ id: isSupport ? 'global.support' : 'global.vote' })}
+            {intl.formatMessage({ id: tabLabelId })}
           </Box>
         </Button>
       }
-      ariaLabel={intl.formatMessage({
-        id: isSupport ? 'proposal.step.user.supports.infos.btn.supports' : 'proposal.step.user.votes.infos.btn.votes',
-      })}
+      ariaLabel={intl.formatMessage({ id: ariaLabelId })}
       size={CapUIModalSize.Fullscreen}
       fullSizeOnMobile
       hideCloseButton

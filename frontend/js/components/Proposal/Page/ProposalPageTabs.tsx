@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import colors from '~/utils/colors'
 import type { ProposalPageTabs_proposal$key } from '~relay/ProposalPageTabs_proposal.graphql'
 import type { ProposalPageTabs_step$key } from '~relay/ProposalPageTabs_step.graphql'
+import { getVoteAction } from '@shared/utils/getVoteAction'
 
 type Props = {
   proposal: ProposalPageTabs_proposal$key | null | undefined
@@ -120,7 +121,9 @@ export const ProposalPageTabs = ({ proposal: proposalFragment, step: stepFragmen
   const totalVotesCount = votesCount + (proposal?.paperVotesTotalCount ?? 0)
   const showVotesTab = (totalVotesCount > 0 || proposal?.currentVotableStep !== null) && step?.canDisplayBallot
   const showFollowersTab = proposal?.project?.opinionCanBeFollowed
-  const voteTabLabel = step?.actionButtonLabel === 'SUPPORT' ? 'global.support' : 'global.vote'
+  const voteTabLabel = { VOTE: 'global.vote', SUPPORT: 'global.support', SIGN: 'global.signatures' }[
+    getVoteAction(step?.actionButtonLabel)
+  ]
   const hasOfficialAnswer = proposal?.news?.edges
     ?.filter(Boolean)
     .map(edge => edge.node)

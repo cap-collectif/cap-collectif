@@ -1,6 +1,7 @@
 import { useVoteStepFilters_Query } from '@relay/useVoteStepFilters_Query.graphql'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import { isFeminineObjectType } from '@shared/constants/proposalStepObjectType'
+import { getVoteAction } from '@shared/utils/getVoteAction'
 import { useIntl } from 'react-intl'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 
@@ -183,20 +184,26 @@ export const useVoteStepFilters = (stepId: string): ReturnType => {
     }
 
     if (orderByVotes && step.canDisplayBallot) {
-      const isSupport = step.actionButtonLabel === 'SUPPORT'
-      const supportFilterSuffix = isFeminineObjectType(form.objectType) ? '_f' : ''
+      const voteAction = getVoteAction(step.actionButtonLabel)
+      const genderSuffix = isFeminineObjectType(form.objectType) ? '_f' : ''
+      const mostVotedLabelIds = {
+        VOTE: `${filterPrefix}_votes`,
+        SUPPORT: `filter.most_supported${genderSuffix}`,
+        SIGN: `filter.most_signed${genderSuffix}`,
+      }
+      const leastVotedLabelIds = {
+        VOTE: `${filterPrefix}_least-votes`,
+        SUPPORT: `filter.least_supported${genderSuffix}`,
+        SIGN: `filter.least_signed${genderSuffix}`,
+      }
       options.push(
         {
           id: 'votes',
-          title: intl.formatMessage({
-            id: isSupport ? `filter.most_supported${supportFilterSuffix}` : `${filterPrefix}_votes`,
-          }),
+          title: intl.formatMessage({ id: mostVotedLabelIds[voteAction] }),
         },
         {
           id: 'least-votes',
-          title: intl.formatMessage({
-            id: isSupport ? `filter.least_supported${supportFilterSuffix}` : `${filterPrefix}_least-votes`,
-          }),
+          title: intl.formatMessage({ id: leastVotedLabelIds[voteAction] }),
         },
       )
     }

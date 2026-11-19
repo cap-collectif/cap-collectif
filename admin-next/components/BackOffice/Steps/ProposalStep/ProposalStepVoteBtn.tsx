@@ -15,7 +15,7 @@ const btnIcons = [
   CapUIIcon.Heart,
   CapUIIcon.RatingStar,
 ]
-const btnActions = ['vote', 'support']
+const btnActions = ['vote', 'support', 'sign']
 
 export interface ProposalStepVoteBtnProps {}
 

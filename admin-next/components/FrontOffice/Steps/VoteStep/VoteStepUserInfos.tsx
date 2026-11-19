@@ -23,6 +23,7 @@ import { getContributionObjectTypeTranslationKey } from '@shared/constants/propo
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import useIsMobile from '@shared/hooks/useIsMobile'
 import { getVoteButtonIcon } from '@shared/utils/getVoteButtonIcon'
+import { getVoteAction, VoteAction } from '@shared/utils/getVoteAction'
 import { isWYSIWYGContentEmpty } from '@shared/utils/isWYSIWYGContentEmpty'
 import { FC, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -133,13 +134,39 @@ const VOTE_TYPE_CONFIG: Record<StepUserVotesType, VoteTypeConfig> = {
   },
 }
 
-const SUPPORT_DESC_KEYS = {
-  threshold: 'threshold',
-  'votes-validated': 'supports-validated',
-  'vote-more': 'support-more',
-  'vote-others': 'support-others',
-  'budget-ended': 'budget-ended',
-} as const
+type AlternativeTerminology = {
+  // Namespace of the `proposal.step.user.<namespace>.infos.*` translation keys
+  namespace: 'supports' | 'signatures'
+  // Description keys with a dedicated translation; the others fall back to the votes namespace
+  descKeys: Partial<Record<DescKey, string>>
+  helpLabelId: string
+}
+
+// Terminologies replacing "vote" wording, keyed by ActionButtonLabel
+const ALTERNATIVE_TERMINOLOGIES: Record<Exclude<VoteAction, 'VOTE'>, AlternativeTerminology> = {
+  SUPPORT: {
+    namespace: 'supports',
+    descKeys: {
+      threshold: 'threshold',
+      'votes-validated': 'supports-validated',
+      'vote-more': 'support-more',
+      'vote-others': 'support-others',
+      'budget-ended': 'budget-ended',
+    },
+    helpLabelId: 'front.proposal.supports-popup.help',
+  },
+  SIGN: {
+    namespace: 'signatures',
+    descKeys: {
+      threshold: 'threshold',
+      'votes-validated': 'signatures-validated',
+      'vote-more': 'sign-more',
+      'vote-others': 'sign-others',
+      'budget-ended': 'budget-ended',
+    },
+    helpLabelId: 'front.proposal.signatures-popup.help',
+  },
+}
 
 interface Props {
   step: VoteStepUserInfos_proposalStep$key
@@ -183,7 +210,8 @@ const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
 
   const type = deriveTypeFromVoteTypes(step.voteTypes, step.votesMin)
   const { buttonKey, showCircularProgress, getTitleKey, getDescKey } = VOTE_TYPE_CONFIG[type]
-  const isSupport = step.actionButtonLabel === 'SUPPORT'
+  const voteAction = getVoteAction(step.actionButtonLabel)
+  const terminology = voteAction === 'VOTE' ? null : ALTERNATIVE_TERMINOLOGIES[voteAction]
 
   const currentBudget = step.viewerVotes.edges.reduce((acc, edge) => acc + edge.node.proposal.estimation, 0)
   const voteProgress = step.viewerVotes.totalCount
@@ -203,23 +231,20 @@ const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
 
   const titleKey = getTitleKey(isEnded, isValidated)
   const descKey = getDescKey(isEnded, isValidated, voteProgress)
-  const supportDescKey =
-    isSupport && descKey && descKey in SUPPORT_DESC_KEYS
-      ? SUPPORT_DESC_KEYS[descKey as keyof typeof SUPPORT_DESC_KEYS]
-      : undefined
+  const terminologyDescKey = terminology && descKey ? terminology.descKeys[descKey] : undefined
   const titleNamespace =
-    isSupport && (titleKey === 'proposals' || titleKey === 'proposal-number') ? 'supports' : 'votes'
-  const descNamespace = isSupport && supportDescKey ? 'supports' : 'votes'
-  const buttonNamespace = isSupport ? 'supports' : 'votes'
-  const displayButtonKey = isSupport && buttonKey === 'votes' ? 'supports' : buttonKey
-  const helpLabelId = isSupport ? 'front.proposal.supports-popup.help' : 'front.proposal.votes-popup.help'
-  const titleTranslationKey = isSupport
+    terminology && (titleKey === 'proposals' || titleKey === 'proposal-number') ? terminology.namespace : 'votes'
+  const descNamespace = terminology && terminologyDescKey ? terminology.namespace : 'votes'
+  const buttonNamespace = terminology?.namespace ?? 'votes'
+  const displayButtonKey = terminology && buttonKey === 'votes' ? terminology.namespace : buttonKey
+  const helpLabelId = terminology?.helpLabelId ?? 'front.proposal.votes-popup.help'
+  const titleTranslationKey = terminology
     ? `proposal.step.user.${titleNamespace}.infos.title.${titleKey}`
     : titleKey === 'proposals' || titleKey === 'proposal-number'
     ? `front.contribution.${objectType}.votes.title.${titleKey}`
     : `proposal.step.user.votes.infos.title.${titleKey}`
-  const descTranslationKey = isSupport
-    ? `proposal.step.user.${descNamespace}.infos.desc.${supportDescKey ?? descKey}`
+  const descTranslationKey = terminology
+    ? `proposal.step.user.${descNamespace}.infos.desc.${terminologyDescKey ?? descKey}`
     : descKey === 'vote-more' || descKey === 'vote-others'
     ? `front.contribution.${objectType}.votes.desc.${descKey}`
     : `proposal.step.user.votes.infos.desc.${descKey}`

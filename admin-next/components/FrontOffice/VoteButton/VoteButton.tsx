@@ -14,12 +14,37 @@ import { dangerToast, mutationErrorToast } from '@shared/utils/toasts'
 import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 import CookieMonster from '@shared/utils/CookieMonster'
 import { getVoteButtonIcon } from '@shared/utils/getVoteButtonIcon'
+import { getVoteAction, VoteAction } from '@shared/utils/getVoteAction'
 
 type Props = {
   proposal: VoteButton_proposal$key
   step: VoteButton_step$key
   disabled?: boolean
   triggerRequirementModal: (id: string) => void
+}
+
+const VOTE_ACTION_LABEL_IDS: Record<
+  VoteAction,
+  { numericLabelId: string; paperLabelId: string; votedTextId: string; voteTextId: string }
+> = {
+  VOTE: {
+    numericLabelId: 'numeric-votes-count',
+    paperLabelId: 'paper-votes-count',
+    votedTextId: 'front.proposal.voted-for',
+    voteTextId: 'global.vote.for',
+  },
+  SUPPORT: {
+    numericLabelId: 'numeric-supports-count',
+    paperLabelId: 'paper-supports-count',
+    votedTextId: 'front.proposal.supported',
+    voteTextId: 'global.support.for',
+  },
+  SIGN: {
+    numericLabelId: 'numeric-signatures-count',
+    paperLabelId: 'paper-signatures-count',
+    votedTextId: 'front.proposal.signed',
+    voteTextId: 'global.sign.for',
+  },
 }
 
 const PROPOSAL_FRAGMENT = graphql`
@@ -115,9 +140,8 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
   const numericVotesCount = proposal.votes?.totalCount ?? 0
   const votesCount = numericVotesCount + proposal.paperVotesTotalCount
   const displayedNumericVotesCount = numericVotesCount
-  const isSupport = step.actionButtonLabel === 'SUPPORT'
-  const numericLabelId = isSupport ? 'numeric-supports-count' : 'numeric-votes-count'
-  const paperLabelId = isSupport ? 'paper-supports-count' : 'paper-votes-count'
+  const { numericLabelId, paperLabelId, votedTextId, voteTextId } =
+    VOTE_ACTION_LABEL_IDS[getVoteAction(step.actionButtonLabel)]
   const displayedCount = isViewerVoteAccounted ? Math.max(votesCount, 1) : votesCount
 
   useEffect(() => {
@@ -174,7 +198,7 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
               {
                 id: 'front.vote.error.limit-reached',
                 defaultMessage:
-                  'Vous avez atteint le nombre maximal de {voteAction, select, SUPPORT {soutiens} other {votes}} autorisés. Retirez un {voteAction, select, SUPPORT {soutien} other {vote}} pour {voteAction, select, SUPPORT {soutenir} other {voter pour}} cette {contributionType, select, QUESTION {question} OPINION {proposition (consultation)} other {proposition}}.',
+                  'Vous avez atteint le nombre maximal de {voteAction, select, SUPPORT {soutiens autorisés} SIGN {signatures autorisées} other {votes autorisés}}. Retirez {voteAction, select, SUPPORT {un soutien} SIGN {une signature} other {un vote}} pour {voteAction, select, SUPPORT {soutenir} SIGN {signer} other {voter pour}} cette {contributionType, select, QUESTION {question} OPINION {proposition (consultation)} other {proposition}}.',
               },
               { contributionType: step.form?.objectType, voteAction: step.actionButtonLabel },
             ),
@@ -275,8 +299,6 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
     }
   }, [isLoading, hasIncompleteVote, currentVote, hasVote, addVote, deleteVote, triggerRequirementModal])
 
-  const votedTextId = isSupport ? 'front.proposal.supported' : 'front.proposal.voted-for'
-  const voteTextId = isSupport ? 'global.support.for' : 'global.vote.for'
   const tooltipLabel =
     displayedCount > 0 ? (
       <>

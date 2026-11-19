@@ -33,6 +33,7 @@ import { State } from '~/types'
 import AddProposalVoteMutation from '~/mutations/AddProposalVoteMutation'
 import Captcha from '~/components/Form/Captcha'
 import useIsMobile from '@shared/hooks/useIsMobile'
+import { getVoteAction, VoteAction } from '@shared/utils/getVoteAction'
 
 type ParentProps = {
   proposal: ProposalVoteButton_proposal$key
@@ -46,6 +47,29 @@ type Props = ParentProps & {
   disabled: boolean
   hasVoted: boolean
   triggerRequirementsModal: (voteId: string) => void
+}
+
+type VoteActionLabelIds = { voteFor: string; voted: string; addSuccess: string; deleteSuccess: string }
+
+const VOTE_ACTION_LABEL_IDS: Record<VoteAction, VoteActionLabelIds> = {
+  VOTE: {
+    voteFor: 'global.vote.for',
+    voted: 'voted',
+    addSuccess: 'vote.add_success',
+    deleteSuccess: 'vote.delete_success',
+  },
+  SUPPORT: {
+    voteFor: 'global.support.for',
+    voted: 'interpellation.support.supported',
+    addSuccess: 'support.add_success',
+    deleteSuccess: 'support.delete_success',
+  },
+  SIGN: {
+    voteFor: 'global.sign.for',
+    voted: 'front.proposal.signed',
+    addSuccess: 'signature.add_success',
+    deleteSuccess: 'signature.delete_success',
+  },
 }
 
 const getHasFilledCaptcha = () => {
@@ -113,7 +137,7 @@ const deleteVote = (
   proposal: ProposalVoteButton_proposal$data,
   isAuthenticated: boolean,
   intl: IntlShape,
-  isSupport: boolean,
+  labelIds: VoteActionLabelIds,
 ) => {
   dispatchEvent(VoteStepEvent.AnimateCard, {
     proposalId: proposal.id,
@@ -132,14 +156,9 @@ const deleteVote = (
         })
         toast({
           variant: 'success',
-          content:
-            response.removeProposalVote && isSupport
-              ? intl.formatMessage({
-                  id: 'support.delete_success',
-                })
-              : intl.formatMessage({
-                  id: 'vote.delete_success',
-                }),
+          content: intl.formatMessage({
+            id: response.removeProposalVote ? labelIds.deleteSuccess : 'vote.delete_success',
+          }),
         })
       })
       .catch(() => {
@@ -178,14 +197,9 @@ const deleteVote = (
       })
       toast({
         variant: 'success',
-        content:
-          response.removeProposalSmsVote && isSupport
-            ? intl.formatMessage({
-                id: 'support.delete_success',
-              })
-            : intl.formatMessage({
-                id: 'vote.delete_success',
-              }),
+        content: intl.formatMessage({
+          id: response.removeProposalSmsVote ? labelIds.deleteSuccess : 'vote.delete_success',
+        }),
       })
     })
     .catch(() => {
@@ -225,7 +239,7 @@ const ProposalVoteButton = ({
   const participantToken = CookieMonster.getParticipantCookie()
 
   const vote = isAuthenticated ? proposal.viewerVote : proposal.contributorVote
-  const isSupport = currentStep.actionButtonLabel === 'SUPPORT'
+  const labelIds = VOTE_ACTION_LABEL_IDS[getVoteAction(currentStep.actionButtonLabel)]
 
   const getButtonStyle = () => {
     if (hasVoted && isHovering) {
@@ -239,18 +253,10 @@ const ProposalVoteButton = ({
 
   const getButtonText = () => {
     if (hasVoted) {
-      if (isSupport) {
-        return isHovering ? 'cancel' : 'interpellation.support.supported'
-      }
-
-      return isHovering ? 'cancel' : 'voted'
+      return isHovering ? 'cancel' : labelIds.voted
     }
 
-    if (isSupport) {
-      return 'global.support.for'
-    }
-
-    return 'global.vote.for'
+    return labelIds.voteFor
   }
 
   const classes = classNames({
@@ -262,7 +268,7 @@ const ProposalVoteButton = ({
 
     if (hasVoted && currentStep) {
       setIsLoading(true)
-      await deleteVote(currentStep, proposal, isAuthenticated, intl, isSupport)
+      await deleteVote(currentStep, proposal, isAuthenticated, intl, labelIds)
       setIsLoading(false)
       return
     }
@@ -325,7 +331,7 @@ const ProposalVoteButton = ({
           toast({
             variant: 'success',
             content: intl.formatMessage({
-              id: isSupport ? 'support.add_success' : 'vote.add_success',
+              id: labelIds.addSuccess,
             }),
           })
         }
@@ -389,7 +395,7 @@ const ProposalVoteButton = ({
           toast({
             variant: 'success',
             content: intl.formatMessage({
-              id: isSupport ? 'support.add_success' : 'vote.add_success',
+              id: labelIds.addSuccess,
             }),
           })
         }

@@ -5,6 +5,7 @@ import { VotesPopup_proposalStep$key } from '@relay/VotesPopup_proposalStep.grap
 import VotesPopupCard from './VotesPopupCard'
 import { useIntl } from 'react-intl'
 import { getContributionObjectTypeTranslationKey } from '@shared/constants/proposalStepObjectType'
+import { getVoteAction } from '@shared/utils/getVoteAction'
 
 interface Props {
   step: VotesPopup_proposalStep$key
@@ -49,10 +50,11 @@ const FRAGMENT = graphql`
 const VotesPopup: FC<Props> = ({ step: stepKey }) => {
   const intl = useIntl()
   const step = useFragment(FRAGMENT, stepKey)
-  const emptyVoteLabelId =
-    step.actionButtonLabel === 'SUPPORT'
-      ? 'front.proposal.empty-support'
-      : `front.contribution.${getContributionObjectTypeTranslationKey(step.form?.objectType)}.empty-vote`
+  const emptyVoteLabelId = {
+    VOTE: `front.contribution.${getContributionObjectTypeTranslationKey(step.form?.objectType)}.empty-vote`,
+    SUPPORT: 'front.proposal.empty-support',
+    SIGN: 'front.proposal.empty-signature',
+  }[getVoteAction(step.actionButtonLabel)]
   const viewerVotes = step.votesRanking ? step.rankedViewerVotes : step.defaultViewerVotes
 
   return (
