@@ -48,7 +48,7 @@ const QUERY = graphql`
     step: node(id: $stepId) {
       ... on ProposalStep {
         open
-        kind
+        __typename
         votable
         title
         timeRange {
@@ -87,7 +87,7 @@ export const VoteStepPageMobileLayout: React.FC<Props> = ({ query: queryKey, ste
     }
   }, [removeMapButtonBreakpoint, view, setView])
 
-  const isCollectStep = data.step.kind === 'collect'
+  const isCollectStep = data.step.__typename === 'CollectStep'
 
   const isVotable = data.step.votable
 

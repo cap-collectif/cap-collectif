@@ -25,7 +25,7 @@ const FRAGMENT = graphql`
   }
 `
 
-const deleteList = (id: string, connectionName: string, intl: IntlShape): void => {
+const deleteList = (id: string, _connectionName: string, intl: IntlShape): void => {
   DeleteUserIdentificationCodeListMutation.commit({
     input: { id },
   }).then(response => {

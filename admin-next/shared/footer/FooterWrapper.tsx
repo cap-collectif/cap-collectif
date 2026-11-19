@@ -26,7 +26,7 @@ export const getPrefixedPath = (localeCode: string, pathname: string, localeCode
   return basePath === '/' ? `/${prefix}/` : `/${prefix}${basePath}`
 }
 
-export default ({ SSRData }: Props) => {
+const FooterWrapper = ({ SSRData }: Props) => {
   const { footer, footerTitle, footerBody, locales: queryLocales } = SSRData
 
   const cookies = useCookies()
@@ -117,3 +117,5 @@ export default ({ SSRData }: Props) => {
 
   return <Footer {...data} />
 }
+
+export default FooterWrapper

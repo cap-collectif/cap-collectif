@@ -113,7 +113,7 @@ export class ProposalFusionForm extends React.Component<Props> {
     const projects = query.projects.edges
       .filter(Boolean)
       .map(p => p.node)
-      .filter(p => p.steps.filter(s => s.type === 'collect').length > 0)
+      .filter(p => p.steps.filter(s => s.__typename === 'CollectStep').length > 0)
     return (
       <form>
         <Field
@@ -192,7 +192,7 @@ const getCurrentCollectStep = (state: State, props: Props): Record<string, any> 
     return null
   }
 
-  return project.steps.filter(s => s.type === 'collect')[0]
+  return project.steps.filter(s => s.__typename === 'CollectStep')[0]
 }
 
 const mapStateToProps = (state: State, props: Props) => ({
@@ -220,7 +220,7 @@ export default createFragmentContainer(container, {
             title
             steps {
               id
-              type
+              __typename
             }
           }
         }

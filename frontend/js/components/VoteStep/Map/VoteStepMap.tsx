@@ -65,15 +65,15 @@ type ProposalFormContributionState =
   | undefined
 
 export const isProposalCreationAvailableOnMap = (
-  stepKind: string | null | undefined,
+  stepTypename: string | null | undefined,
   proposalForm: ProposalFormContributionState,
-): boolean => stepKind === 'collect' && Boolean(proposalForm?.contribuable)
+): boolean => stepTypename === 'CollectStep' && Boolean(proposalForm?.contribuable)
 
 export const shouldRenderProposalCreatePopup = (
-  stepKind: string | null | undefined,
+  stepTypename: string | null | undefined,
   proposalForm: ProposalFormContributionState,
   popoverLatLng: L.LatLng | null,
-): boolean => isProposalCreationAvailableOnMap(stepKind, proposalForm) && Boolean(popoverLatLng)
+): boolean => isProposalCreationAvailableOnMap(stepTypename, proposalForm) && Boolean(popoverLatLng)
 
 const FRAGMENT: GraphQLTaggedNode = graphql`
   fragment VoteStepMap_step on ProposalStep
@@ -120,7 +120,7 @@ const FRAGMENT: GraphQLTaggedNode = graphql`
       }
     }
     ...ProposalMapSelectedView_step @arguments(isAuthenticated: $isAuthenticated)
-    kind
+    __typename
     form {
       proposalInAZoneRequired
       districts(order: ALPHABETICAL) {
@@ -242,8 +242,12 @@ export const VoteStepMap = ({
   const dispatch = useDispatch()
   const { isOpen, onOpen, onClose } = useDisclosure(false)
   const [popoverLatLng, setPopoverLatLng] = useState<L.LatLng | null>(null)
-  const canCreateProposalOnMap = isProposalCreationAvailableOnMap(data.kind, proposalForm)
-  const shouldDisplayProposalCreatePopup = shouldRenderProposalCreatePopup(data.kind, proposalForm, popoverLatLng)
+  const canCreateProposalOnMap = isProposalCreationAvailableOnMap(data.__typename, proposalForm)
+  const shouldDisplayProposalCreatePopup = shouldRenderProposalCreatePopup(
+    data.__typename,
+    proposalForm,
+    popoverLatLng,
+  )
   const geoJsons = formatGeoJsons(proposalForm.districts)
 
   useEffect(() => {

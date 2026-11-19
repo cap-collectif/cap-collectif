@@ -29,7 +29,7 @@ export const ConsultationPreviewCover = ({
   </Card.Cover>
 )
 export const ConsultationPreviewBody = ({ consultation }: { consultation: ConsultationPreview_consultation }) => {
-  const { contributions, url, title, contributors, votesCount } = consultation
+  const { contributions, url, title, contributors, votes } = consultation
   return (
     <Card.Body>
       <Card.Title>
@@ -45,7 +45,7 @@ export const ConsultationPreviewBody = ({ consultation }: { consultation: Consul
             archived={false}
           />
           <ProjectPreviewCounter
-            value={votesCount || 0}
+            value={(votes && votes.totalCount) || 0}
             label="project.preview.counters.votes"
             icon="cap-hand-like-2-1"
             showZero
@@ -89,7 +89,9 @@ export default createFragmentContainer(ConsultationPreview, {
       contributors(first: 0) {
         totalCount
       }
-      votesCount
+      votes(first: 0) {
+        totalCount
+      }
     }
   `,
 })

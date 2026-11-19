@@ -60,7 +60,7 @@ export const ProposalsDisplayMap = ({ step, relay, contributorConsentPrivacyPoli
       hasError={hasError}
       proposalInAZoneRequired={step.form?.proposalInAZoneRequired}
       retry={retry}
-      isCollectStep={step.form && step.kind === 'collect'}
+      isCollectStep={step.form && step.__typename === 'CollectStep'}
       contributorConsentPrivacyPolicy={contributorConsentPrivacyPolicy}
       {...rest}
     />
@@ -71,7 +71,7 @@ export default createPaginationContainer(
   {
     step: graphql`
       fragment ProposalsDisplayMap_step on ProposalStep {
-        kind
+        __typename
         form {
           proposalInAZoneRequired
           ...ProposalLeafletMap_proposalForm

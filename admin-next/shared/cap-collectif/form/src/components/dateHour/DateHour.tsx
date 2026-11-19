@@ -96,5 +96,6 @@ export const DateHour = forwardRef<HTMLInputElement, DateHourProps>(
     )
   },
 )
+DateHour.displayName = 'DateHour'
 
 export default DateHour

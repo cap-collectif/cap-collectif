@@ -6,18 +6,11 @@ exports[`<ProposalForm /> should render correctly 1`] = `
     clearable={false}
     component={[Function]}
     id="ProposalFusionForm-project"
-    isLoading={false}
+    isLoading={true}
     label="global.participative.project.label"
     name="project"
     onChange={[Function]}
-    options={
-      Array [
-        Object {
-          "label": "Project 1",
-          "value": "1",
-        },
-      ]
-    }
+    options={Array []}
     placeholder="select-a-participatory-project"
   />
 </form>

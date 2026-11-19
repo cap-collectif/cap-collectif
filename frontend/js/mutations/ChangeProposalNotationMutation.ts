@@ -17,21 +17,6 @@ const mutation = graphql`
           id
           displayName
         }
-        form {
-          evaluationForm {
-            description
-            questions {
-              id
-              ...responsesHelper_adminQuestion @relay(mask: false)
-            }
-          }
-        }
-        evaluation {
-          version
-          responses {
-            ...responsesHelper_response @relay(mask: false)
-          }
-        }
       }
     }
   }

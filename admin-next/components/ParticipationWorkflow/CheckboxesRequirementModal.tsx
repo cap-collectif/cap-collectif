@@ -60,7 +60,7 @@ const CheckboxesRequirementModal: React.FC<Props> = ({ checkboxes, hideGoBackArr
       variables: {
         input,
       },
-      onCompleted: (response, errors) => {
+      onCompleted: (_response, errors) => {
         if (errors && errors.length > 0) {
           return mutationErrorToast(intl)
         }
@@ -81,7 +81,7 @@ const CheckboxesRequirementModal: React.FC<Props> = ({ checkboxes, hideGoBackArr
       variables: {
         input,
       },
-      onCompleted: (response, errors) => {
+      onCompleted: (_response, errors) => {
         if (errors && errors.length > 0) {
           return mutationErrorToast(intl)
         }

@@ -402,13 +402,6 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
-                                "name": "__typename",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
                                 "name": "id",
                                 "storageKey": null,
                               },
@@ -423,7 +416,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                                 "alias": null,
                                 "args": null,
                                 "kind": "ScalarField",
-                                "name": "kind",
+                                "name": "__typename",
                                 "storageKey": null,
                               },
                               Object {
@@ -2454,7 +2447,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "dc0f82e24c39fd75fd691abc1cfda25d",
+            "cacheID": "e5373024431bbff59f17f8085dd1c198",
             "id": null,
             "metadata": Object {},
             "name": "ProposalAdminPageQuery",
@@ -2800,10 +2793,9 @@ fragment ProposalAdminSelections_proposal on Proposal {
   }
   project {
     steps {
-      __typename
       id
       title
-      kind
+      __typename
       ... on SelectionStep {
         allowingProgressSteps
         statuses {

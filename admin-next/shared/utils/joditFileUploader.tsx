@@ -105,7 +105,7 @@ export const uppyListener = (editor: Jodit, platformLanguage: string, intl: Intl
         chunkSize: 5000000,
         endpoint: `${window.location.origin}/tus-upload`,
         removeFingerprintOnSuccess: true,
-        onAfterResponse: function (req, res) {
+        onAfterResponse: function (_req, res) {
           const fileUrl = res.getHeader('File-URL')
 
           if (!fileUrl) {

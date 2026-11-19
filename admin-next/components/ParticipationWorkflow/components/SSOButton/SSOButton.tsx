@@ -105,4 +105,5 @@ const SSOButton = React.forwardRef<HTMLElement, Props>(() =>
     }
   },
 )
+SSOButton.displayName = 'SSOButton'
 export default SSOButton

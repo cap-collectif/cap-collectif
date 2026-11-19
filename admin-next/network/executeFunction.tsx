@@ -1,6 +1,6 @@
 import Fetcher from '../utils/fetch'
 
-const executeFunction = (operation: any, variables: any, cacheConfig: any, uploadables: null | undefined | any) => {
+const executeFunction = (operation: any, variables: any, _cacheConfig: any, uploadables: null | undefined | any) => {
   if (uploadables) {
     if (!window.FormData) {
       throw new Error('Uploading files without `FormData` not supported.')

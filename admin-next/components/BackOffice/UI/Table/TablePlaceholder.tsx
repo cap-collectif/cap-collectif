@@ -22,7 +22,7 @@ const TablePlaceholder: React.FC<TablePlaceholderProps> = ({ rowsCount, columnsC
       </Table.Thead>
 
       <Table.Tbody>
-        {rows.map((row, i) => (
+        {rows.map((_row, i) => (
           <Table.Tr key={i}>
             {columns.map((column, j) => (
               <Table.Td key={j}>{column}</Table.Td>

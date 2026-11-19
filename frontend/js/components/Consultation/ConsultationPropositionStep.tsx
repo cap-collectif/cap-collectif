@@ -132,11 +132,11 @@ export const ConsultationPropositionStep = (props: Props) => {
             )}
             {step.consultation && (
               <div className="mr-15 d-ib">
-                <i className="cap cap-hand-like-2-1" /> {step.consultation.votesCount || 0}{' '}
+                <i className="cap cap-hand-like-2-1" /> {step.consultation.votes?.totalCount || 0}{' '}
                 <FormattedMessage
                   id="project.preview.counters.votes"
                   values={{
-                    num: step.consultation.votesCount,
+                    num: step.consultation.votes?.totalCount,
                   }}
                 />
               </div>
@@ -213,7 +213,9 @@ export default createFragmentContainer(ConsultationPropositionStep, {
         contributors(first: 0) {
           totalCount
         }
-        votesCount
+        votes(first: 0) {
+          totalCount
+        }
         ...ConsultationPlan_consultation
         ...SectionRecursiveList_consultation @arguments(isAuthenticated: $isAuthenticated)
       }

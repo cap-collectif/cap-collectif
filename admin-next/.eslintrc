@@ -18,6 +18,12 @@
       "parser": "@graphql-eslint/eslint-plugin"
     },
     {
+      "files": ["**/*.test.{ts,tsx}", "**/*-test.{ts,tsx}"],
+      "rules": {
+        "react/display-name": "off"
+      }
+    },
+    {
       "files": ["src/app/**/*.{ts,tsx}"],
       "excludedFiles": ["src/app/server/ssr-graphql-with-locale.ts"],
       "rules": {

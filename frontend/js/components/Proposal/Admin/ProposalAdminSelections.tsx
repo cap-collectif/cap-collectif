@@ -218,8 +218,8 @@ export class ProposalAdminSelections extends Component<Props> {
       paperVoteEnabled,
     } = this.props
     const steps = proposal.project ? proposal.project.steps : []
-    const collectStep = steps.filter(step => step.kind === 'collect')[0]
-    const selectionSteps = steps.filter(step => step.kind === 'selection')
+    const collectStep = steps.filter(step => step.__typename === 'CollectStep')[0]
+    const selectionSteps = steps.filter(step => step.__typename === 'SelectionStep')
     return (
       <div className="box box-primary container-fluid">
         <div className="box-header">
@@ -509,7 +509,7 @@ const form = reduxForm({
 
 const mapStateToProps = (state: State, props: PassedProps) => {
   const steps = props.proposal.project ? props.proposal.project.steps : []
-  const selectionSteps = steps.filter(step => step.kind === 'selection')
+  const selectionSteps = steps.filter(step => step.__typename === 'SelectionStep')
   return {
     selectionValues: selector(state, 'selections') || [],
     initialValues: {
@@ -559,7 +559,7 @@ export default createFragmentContainer(container, {
         steps {
           id
           title
-          kind
+          __typename
           ... on SelectionStep {
             allowingProgressSteps
             statuses {

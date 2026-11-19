@@ -1025,9 +1025,6 @@ export default createFragmentContainer(container, {
           isAdmin
         }
       }
-      lat
-      lng
-      fullAddress
       review {
         status
         comment

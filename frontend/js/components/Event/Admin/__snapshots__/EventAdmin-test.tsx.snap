@@ -476,27 +476,6 @@ exports[`<EventAdmin /> it renders correctly with event Id 1`] = `
                         "alias": null,
                         "args": null,
                         "kind": "ScalarField",
-                        "name": "lat",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "lng",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "fullAddress",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
                         "name": "authorAgreeToUsePersonalDataForEventOnly",
                         "storageKey": null,
                       },
@@ -595,7 +574,7 @@ exports[`<EventAdmin /> it renders correctly with event Id 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "bebb5ac11a95ac0619e42acb8aece8c8",
+            "cacheID": "b3b203213af1c8ff8bd15a2941b06f2a",
             "id": null,
             "metadata": Object {},
             "name": "EventAdminQuery",
@@ -683,9 +662,6 @@ fragment EventForm_event on Event {
       isAdmin
     }
   }
-  lat
-  lng
-  fullAddress
   review {
     status
     comment
@@ -1207,27 +1183,6 @@ exports[`<EventAdmin /> it renders correctly without event Id 1`] = `
                         "alias": null,
                         "args": null,
                         "kind": "ScalarField",
-                        "name": "lat",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "lng",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "fullAddress",
-                        "storageKey": null,
-                      },
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
                         "name": "authorAgreeToUsePersonalDataForEventOnly",
                         "storageKey": null,
                       },
@@ -1326,7 +1281,7 @@ exports[`<EventAdmin /> it renders correctly without event Id 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "bebb5ac11a95ac0619e42acb8aece8c8",
+            "cacheID": "b3b203213af1c8ff8bd15a2941b06f2a",
             "id": null,
             "metadata": Object {},
             "name": "EventAdminQuery",
@@ -1414,9 +1369,6 @@ fragment EventForm_event on Event {
       isAdmin
     }
   }
-  lat
-  lng
-  fullAddress
   review {
     status
     comment

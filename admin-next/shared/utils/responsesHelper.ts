@@ -20,7 +20,7 @@ export const MULTIPLE_QUESTION_CHOICES_SEARCH_QUERY = graphql`
     }
   }
 `
-const ResponseFragment = {
+export const ResponseFragment = {
   response: graphql`
     fragment responsesHelper_response on Response {
       question {
@@ -51,7 +51,7 @@ const ResponseFragment = {
  * But this is currently not supported on shared fragment:
  * https://github.com/facebook/relay/issues/2118
  */
-const QuestionAdminFragment = {
+export const QuestionAdminFragment = {
   adminQuestion: graphql`
     fragment responsesHelper_adminQuestion on Question {
       __typename
@@ -149,7 +149,7 @@ const QuestionAdminFragment = {
     }
   `,
 }
-const QuestionFragment = {
+export const QuestionFragment = {
   question: graphql`
     fragment responsesHelper_question on Question {
       __typename

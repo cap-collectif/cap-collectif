@@ -46,6 +46,7 @@ export const NavBarMenu = React.forwardRef<
       </Flex>
     ),
   )
+  MenuButton.displayName = 'MenuButton'
 
   const renderLinks = () =>
     links.map((link, idx) => {
@@ -136,6 +137,7 @@ export const NavBarMenu = React.forwardRef<
     </>
   )
 })
+NavBarMenu.displayName = 'NavBarMenu'
 
 export const NavBarLink = React.forwardRef<
   HTMLElement,

@@ -76,7 +76,7 @@ export const ProposalStepPageHeader = ({ step, displayMode, contributorConsentPr
               }}
             />
           )}
-          {step.form && step.kind === 'collect' && fusionCount > 0 && (
+          {step.form && step.__typename === 'CollectStep' && fusionCount > 0 && (
             <span className="font-weight-300 color-dark-gray">
               {' '}
               <FormattedMessage
@@ -88,7 +88,7 @@ export const ProposalStepPageHeader = ({ step, displayMode, contributorConsentPr
             </span>
           )}
         </h3>
-        {step.form && step.kind === 'collect' && (
+        {step.form && step.__typename === 'CollectStep' && (
           <Box
             as={isMobile ? 'div' : 'span'}
             my={[0, 20]}
@@ -157,7 +157,7 @@ export default createFragmentContainer(ProposalStepPageHeader, {
         }
       }
       ... on CollectStep {
-        kind
+        __typename
         form {
           id
           objectType
@@ -172,7 +172,7 @@ export default createFragmentContainer(ProposalStepPageHeader, {
         voteThreshold
       }
       ... on SelectionStep {
-        kind
+        __typename
         form {
           contribuable
           id

@@ -39,13 +39,13 @@ describe('<ProposalAdminSelections />', () => {
         {
           id: '1',
           title: 'step-1',
-          kind: 'collect',
+          __typename: 'CollectStep',
           statuses: [],
         },
         {
           id: '2',
           title: 'step-2',
-          kind: 'selection',
+          __typename: 'SelectionStep',
           allowingProgressSteps: true,
           statuses: [],
         },

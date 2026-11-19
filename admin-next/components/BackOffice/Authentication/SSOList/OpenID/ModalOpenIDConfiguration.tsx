@@ -36,7 +36,7 @@ const FRAGMENT = graphql`
 
 const onSubmit = (
   data: FormValues,
-  intl: IntlShape,
+  _intl: IntlShape,
   ssoConnectionName: string,
   isEditing: boolean,
   ssoId: string | undefined,

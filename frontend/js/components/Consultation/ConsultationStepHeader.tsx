@@ -73,6 +73,8 @@ export default createFragmentContainer(ConsultationStepHeader, {
       project {
         hasParticipativeStep(exceptStepId: $exceptStepId)
       }
+      # ConsultationStep.votes has no resolver nor connection args, keep the deprecated counter
+      # eslint-disable-next-line @graphql-eslint/no-deprecated
       votesCount
       contributors(first: 0) {
         totalCount

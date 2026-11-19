@@ -114,7 +114,6 @@ export default createFragmentContainer(ProposalList, {
       ...ProposalPreview_step
       ...interpellationLabelHelper_step @relay(mask: false)
       ... on CollectStep {
-        kind
         form {
           id
           objectType

@@ -115,7 +115,7 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
           id="project.preview.counters.votes"
           values={
             Object {
-              "num": 0,
+              "num": undefined,
             }
           }
         />
@@ -289,7 +289,7 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
           id="project.preview.counters.votes"
           values={
             Object {
-              "num": 0,
+              "num": undefined,
             }
           }
         />
@@ -431,7 +431,7 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan and when
           id="project.preview.counters.votes"
           values={
             Object {
-              "num": 0,
+              "num": undefined,
             }
           }
         />
@@ -573,7 +573,7 @@ exports[`<ConsultationPropositionStep /> renders correctly without plan and when
           id="project.preview.counters.votes"
           values={
             Object {
-              "num": 0,
+              "num": undefined,
             }
           }
         />
@@ -743,7 +743,7 @@ exports[`<ConsultationPropositionStep /> should not render the plan when the ste
           id="project.preview.counters.votes"
           values={
             Object {
-              "num": 0,
+              "num": undefined,
             }
           }
         />

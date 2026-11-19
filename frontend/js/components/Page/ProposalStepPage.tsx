@@ -131,7 +131,7 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
           </div>
         ) : null}
         {!new_project_page && <StepPageHeader step={step} />}
-        {isAuthenticated && step.kind === 'collect' && <DraftProposalList step={step} />}
+        {isAuthenticated && step.__typename === 'CollectStep' && <DraftProposalList step={step} />}
         {isAuthenticated && <UnpublishedProposalListView step={step} viewer={viewer} />}
         {relatedMediatorProjectId && step.votable && step.state === 'OPENED' ? (
           <MediatorAddVotesLink projectId={relatedMediatorProjectId} />
@@ -263,7 +263,7 @@ const ProposalStepPage = ({ stepId, isAuthenticated, features, filters, order, p
                     }
                   }
                 }
-                kind
+                __typename
                 ...ProposalsDisplayMap_step
                 ...StepPageHeader_step @arguments(token: $token)
                 ...ProposalListFilters_step

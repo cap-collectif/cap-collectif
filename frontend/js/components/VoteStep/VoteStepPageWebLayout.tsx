@@ -48,7 +48,7 @@ const QUERY = graphql`
     step: node(id: $stepId) {
       ... on ProposalStep {
         open
-        kind
+        __typename
         votable
         form {
           id
@@ -79,7 +79,7 @@ export const VoteStepPageWebLayout = ({ query: queryKey, stepId, isMapView, disa
 
   if (!data || !data.step) return null
 
-  const isCollectStep = data.step.kind === 'collect'
+  const isCollectStep = data.step.__typename === 'CollectStep'
 
   const isLargeScreen = width >= 1920
 

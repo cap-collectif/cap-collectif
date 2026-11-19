@@ -62,7 +62,6 @@ const QUERY = graphql`
           isProposalStepSplitViewEnabled
         }
         label
-        kind
         title
         timeRange {
           startAt

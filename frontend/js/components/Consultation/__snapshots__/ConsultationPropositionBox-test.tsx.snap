@@ -1244,10 +1244,27 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                           },
                           Object {
                             "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "votesCount",
-                            "storageKey": null,
+                            "args": Array [
+                              Object {
+                                "kind": "Literal",
+                                "name": "first",
+                                "value": 0,
+                              },
+                            ],
+                            "concreteType": "VoteConnection",
+                            "kind": "LinkedField",
+                            "name": "votes",
+                            "plural": false,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "totalCount",
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": "votes(first:0)",
                           },
                           Object {
                             "alias": null,
@@ -2592,7 +2609,7 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "8924b6dc2fb2d0581ba8cecd150eac72",
+            "cacheID": "03e0fccdb67662d719f01305fb37d9ca",
             "id": null,
             "metadata": Object {},
             "name": "ConsultationPropositionBoxQuery",
@@ -2689,7 +2706,9 @@ fragment ConsultationPropositionStep_consultationStep_WRRkS on ConsultationStep 
     contributors(first: 0) {
       totalCount
     }
-    votesCount
+    votes(first: 0) {
+      totalCount
+    }
     ...ConsultationPlan_consultation
     ...SectionRecursiveList_consultation_39ngnn
     id
@@ -4339,10 +4358,27 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                           },
                           Object {
                             "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "votesCount",
-                            "storageKey": null,
+                            "args": Array [
+                              Object {
+                                "kind": "Literal",
+                                "name": "first",
+                                "value": 0,
+                              },
+                            ],
+                            "concreteType": "VoteConnection",
+                            "kind": "LinkedField",
+                            "name": "votes",
+                            "plural": false,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "totalCount",
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": "votes(first:0)",
                           },
                           Object {
                             "alias": null,
@@ -5687,7 +5723,7 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "8924b6dc2fb2d0581ba8cecd150eac72",
+            "cacheID": "03e0fccdb67662d719f01305fb37d9ca",
             "id": null,
             "metadata": Object {},
             "name": "ConsultationPropositionBoxQuery",
@@ -5784,7 +5820,9 @@ fragment ConsultationPropositionStep_consultationStep_WRRkS on ConsultationStep 
     contributors(first: 0) {
       totalCount
     }
-    votesCount
+    votes(first: 0) {
+      totalCount
+    }
     ...ConsultationPlan_consultation
     ...SectionRecursiveList_consultation_39ngnn
     id

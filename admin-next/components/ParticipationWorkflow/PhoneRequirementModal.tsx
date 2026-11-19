@@ -60,7 +60,7 @@ const PhoneRequirementModal: React.FC<Props> = ({ isPhoneVerifiedRequired, hideG
       variables: {
         input,
       },
-      onCompleted: (response, errors) => {
+      onCompleted: (_response, errors) => {
         if (errors && errors.length > 0) {
           if (errors?.[0]?.message === 'PHONE_SHOULD_BE_MOBILE_NUMBER') {
             setError('phone', {
@@ -144,7 +144,7 @@ const PhoneRequirementModal: React.FC<Props> = ({ isPhoneVerifiedRequired, hideG
       variables: {
         input,
       },
-      onCompleted: async (response, errors) => {
+      onCompleted: async (_response, errors) => {
         if (errors && errors.length > 0) {
           if (errors?.[0]?.message === 'PHONE_SHOULD_BE_MOBILE_NUMBER') {
             setError('phone', {

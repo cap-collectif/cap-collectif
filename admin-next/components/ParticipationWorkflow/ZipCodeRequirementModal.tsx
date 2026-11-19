@@ -47,7 +47,7 @@ const ZipCodeRequirement: React.FC<Props> = ({ hideGoBackArrow }) => {
       variables: {
         input,
       },
-      onCompleted: async (response, errors) => {
+      onCompleted: async (_response, errors) => {
         if (errors && errors.length > 0) {
           return mutationErrorToast(intl)
         }
@@ -68,7 +68,7 @@ const ZipCodeRequirement: React.FC<Props> = ({ hideGoBackArrow }) => {
       variables: {
         input,
       },
-      onCompleted: (response, errors) => {
+      onCompleted: (_response, errors) => {
         if (errors && errors.length > 0) {
           return mutationErrorToast(intl)
         }

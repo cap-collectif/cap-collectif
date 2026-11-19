@@ -440,10 +440,27 @@ exports[`<ConsultationListBox /> should render correctly 1`] = `
                                 },
                                 Object {
                                   "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "votesCount",
-                                  "storageKey": null,
+                                  "args": Array [
+                                    Object {
+                                      "kind": "Literal",
+                                      "name": "first",
+                                      "value": 0,
+                                    },
+                                  ],
+                                  "concreteType": "VoteConnection",
+                                  "kind": "LinkedField",
+                                  "name": "votes",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "totalCount",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": "votes(first:0)",
                                 },
                               ],
                               "storageKey": null,
@@ -470,7 +487,7 @@ exports[`<ConsultationListBox /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "db073c7e2be4161027dae09b8c16db23",
+          "cacheID": "8716dd41b0999d1644589ba70a282c77",
           "id": null,
           "metadata": Object {},
           "name": "ConsultationListBoxQuery",
@@ -520,7 +537,9 @@ fragment ConsultationPreview_consultation on Consultation {
   contributors(first: 0) {
     totalCount
   }
-  votesCount
+  votes(first: 0) {
+    totalCount
+  }
 }
 
 fragment ConsultationStepHeader_step_3vFc4a on ConsultationStep {
