@@ -71,6 +71,7 @@ export const getActiveFiltersCount = (urlFilters: {
 export const getDefaultAccordions = (urlFilters: {
   category: string | null
   theme: string | null
+  district: string | null
   status: string | null
   userType: string
 }): string[] => {
@@ -80,6 +81,7 @@ export const getDefaultAccordions = (urlFilters: {
   const filterToAccordionMap: Record<string, string> = {
     category: 'category',
     theme: 'theme',
+    district: 'district',
     status: 'status',
     userType: 'userType',
   }

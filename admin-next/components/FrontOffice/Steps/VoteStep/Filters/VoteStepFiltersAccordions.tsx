@@ -126,6 +126,36 @@ const VoteStepFiltersAccordions: React.FC<Props> = ({
         </Accordion.Item>
       ) : null}
 
+      {filters.district.isEnabled ? (
+        <Accordion.Item id="district">
+          <Accordion.Button p={0} pb={1}>
+            <Text
+              fontWeight={CapUIFontWeight.Normal}
+              fontSize={CapUIFontSize.BodyRegular}
+              lineHeight={CapUILineHeight.M}
+            >
+              {filters.district.label}
+            </Text>
+          </Accordion.Button>
+          <Accordion.Panel display="flex" direction="column" ml="0">
+            <RadioGroup pt={2}>
+              {filters.district.options.map(district => (
+                <Radio
+                  id={district.id === 'ALL' ? 'district-all' : district.id}
+                  key={district.id}
+                  name="district"
+                  value={district.id}
+                  checked={currentFilters.district === district.id}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => onFilterChange('district', e.target.value)}
+                >
+                  {district.name}
+                </Radio>
+              ))}
+            </RadioGroup>
+          </Accordion.Panel>
+        </Accordion.Item>
+      ) : null}
+
       {filters.status.isEnabled && filters.status.options.length > 0 && (
         <Accordion.Item id="status">
           <Accordion.Button p={0} pb={1}>

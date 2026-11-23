@@ -258,7 +258,7 @@ export const useVoteStepFilters = (stepId: string): ReturnType => {
       }),
     },
     district: {
-      isEnabled: districtsEnabled && (form?.districts?.length ?? 0) > 0,
+      isEnabled: districtsEnabled && form.usingDistrict && form.districts.length > 0,
       options: form?.districts ? [generateAllOption('global.select_districts'), ...form?.districts] : [],
       label: intl.formatMessage({
         id: 'proposal_form.districts',
