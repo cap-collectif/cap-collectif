@@ -12,11 +12,21 @@ publiés pour consultation.
 | `frontend/js/__generated__`, `admin-next/__generated__` | TypeScript, ESLint, Jest et compilation Admin Next de test. |
 | `src/Capco/AppBundle/GraphQL/__generated__` | Autoload PHP, commandes Symfony et tests. |
 | `vendor`, `bin` | Dépendances et exécutables Composer des contrôles et des stacks de test. |
-| `admin-next/node_modules` | Contrôles Admin Next, build partagé et serveur Cypress. Les dépendances racine et Cypress utilisent leurs caches existants. |
+| `admin-next/node_modules` | Contrôles Admin Next, build partagé et serveur Cypress. Les dépendances sont réconciliées avec celles des autres workspaces avant leur utilisation, selon le parcours ci-dessous. |
 | `translations` | Frontends, commandes Symfony, contrôle CSV et images. |
 | Assets sous `public`, `public/bundles`, workers MapLibre | Requêtes HTTP des tests et construction des images. |
 | `admin-next/.next/standalone`, `admin-next/.next/static`, workers sous `admin-next/public/maplibre` | Le Dockerfile distant copie ces sorties dans les images QA/production. Le serveur utilise le bundle standalone. |
 | `admin-next/.next/types` | Types produits par Next.js, conservés avec les autres fichiers générés. |
+
+Les `node_modules` racine et Cypress ne sont pas transmis par le workspace de
+`prepare`. Les caches peuvent les fournir, mais leur restauration est facultative.
+Après restauration du workspace et des caches `node_modules`, `typecheck-js`, `lint-js`, `unit-js`,
+`prepare-admin-next` et la commande API/Cypress `start-e2e-container` exécutent
+`ensure-js-dependencies`. Cette commande restaure le cache des paquets Yarn et lance
+`yarn install --immutable` pour compléter les dépendances manquantes de tous les
+workspaces. Elle doit réussir avant les contrôles ou le démarrage des conteneurs.
+Le workspace de `prepare-static` transmet, lui, les `node_modules` racine et Admin
+Next ; les consommateurs exécutent néanmoins la même commande de préparation.
 
 `prepare-admin-next` remplace le build de production par un build `test`, puis
 publie sa propre archive, sans bundle standalone ni cache du compilateur.

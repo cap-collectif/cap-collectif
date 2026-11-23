@@ -23,6 +23,15 @@ and authentication first; a browser login failure does not mean CLI access is
 unavailable. See [the CircleCI agent guide](docs/agents/circleci.md) for commands,
 parallel execution logs, and sandbox troubleshooting.
 
+CircleCI cache keys are generated from tracked inputs by
+`.circleci/generate-cache-keys.sh`, including CI commands, archive definitions and
+Node/Yarn configuration. `.circleci/.circle-cache` is a shared manual invalidation
+token included in every fingerprint; change it for a deliberate global cache reset.
+Do not add per-family version counters. For routine changes, keep relying on automatic
+invalidation: when adding build inputs or changing their paths, update the coverage and
+run `node --test .circleci/cache-keys.test.cjs`. See the cache contract in
+[`ADR/001-continuous_integration.md`](ADR/001-continuous_integration.md#cache).
+
 ## Rules for AI Assistants
 
 1. **Comments in English**: Always write code comments in English, regardless of the conversation language.

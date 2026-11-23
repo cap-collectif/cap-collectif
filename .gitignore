@@ -171,3 +171,6 @@ phpstan.neon
 # Temporary selected PHPUnit suites.
 /.phpunit-selected-*
 /.phpunit-runner-*
+
+# Generated CircleCI input fingerprints.
+/.circleci/cache-keys/

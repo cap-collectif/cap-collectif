@@ -172,7 +172,11 @@ correspondent pas aux versions attendues.
 Tous les jobs exécutant JavaScript sur l'exécuteur CircleCI utilisent
 `.circleci/setup-node.sh`. Ce script lit la version exacte de `.nvmrc`, réutilise
 Node si la version correspond et installe sinon le binaire officiel après
-vérification SHA-256. Le PATH est transmis aux étapes suivantes via `BASH_ENV`.
+vérification SHA-256. Le script écrit dans `BASH_ENV` un préfixe contenant les
+répertoires de Node et des exécutables Corepack. À chaque chargement, ce préfixe
+est ajouté au `PATH` courant : les chemins ajoutés par d'autres outils, notamment
+`pyenv`, sont préservés. Enregistrer puis réappliquer une copie figée du `PATH`
+pourrait rendre leurs commandes introuvables dans les shells suivants.
 Corepack sélectionne la version de Yarn déclarée dans `package.json`.
 Les conteneurs applicatifs conservent leur version Node fixée dans le Dockerfile ;
 elle doit rester identique à `.nvmrc` lors d'une montée de version.
@@ -248,6 +252,43 @@ Si l'un des jobs de vérification rapide échoue, les jobs suivants ne sont pas 
 
 #### Cache
 
+Le point d'entrée est [`.circleci/config.yml`](../.circleci/config.yml), qui appelle
+[`.circleci/generate-cache-keys.sh`](../.circleci/generate-cache-keys.sh) pour calculer
+les clés, puis les commandes de restauration et de préparation. Pour les dépendances
+JavaScript et les images Docker de test, le parcours est le suivant :
+
+```mermaid
+---
+config:
+  markdownAutoWrap: false
+  flowchart:
+    wrappingWidth: 360
+---
+flowchart TD
+    A[".circleci/config.yml"] --> B["1. Calculer la clé du cache<br/>generate-cache-keys.sh"]
+    M[".circleci/.circle-cache<br/>Levier manuel"] --> B
+    B --> C{"2. Un cache compatible<br/>est-il disponible ?"}
+    C -->|Oui| D["Restaurer le cache"]
+    D --> E["3. Réutiliser les éléments restaurés<br/>Vérifier et compléter si nécessaire"]
+    C -->|Non| F["3. Installer les dépendances<br/>Construire ou télécharger les images"]
+    E --> G["Dépendances et images prêtes"]
+    F --> G
+    G --> H["4. Exécuter les builds et les tests"]
+```
+
+Le cache évite de refaire les téléchargements, installations ou constructions déjà
+effectués. S'il manque, les fichiers du dépôt permettent de recréer les éléments
+nécessaires avant de lancer les builds ou les tests.
+
+| Élément | Avec un cache utilisable | Sans cache |
+| --- | --- | --- |
+| Dépendances JavaScript | Yarn réutilise les paquets présents et complète si nécessaire. | Yarn télécharge et installe les dépendances. |
+| Images Docker de test | Docker charge les images archivées. | Docker construit ou télécharge les images. |
+
+Pour JavaScript, `yarn install --immutable` est exécuté dans les deux cas : la commande
+reste la même, mais le travail dépend de ce qui est déjà présent. Pour Docker, charger
+une archive utilisable évite de reconstruire l'image ou de la télécharger depuis le registre.
+
 Le Docker Layer Caching (DLC) est désactivé sur `production-executor`, utilisé
 pour construire les images QA et production. Sur le comparatif du 10 novembre
 2026, à SHA, contexte et image de base identiques, le job
@@ -263,19 +304,116 @@ par les machines de test restent indépendants de cette option.
 Le cache CircleCI est limité (2GB inclus par période de facturation). Éviter de stocker des artefacts volumineux inutilement.
 Afin de limiter les problèmes liés au cache et de diminuer les factures, nous avons choisi de diminuer la durée de conservation du cache.
 
-Les clés des caches de build JavaScript et des fichiers Relay sont calculées à partir des
-sources suivies par Git avant leur restauration. Les traductions téléchargées sont également
-prises en compte pour les builds. La même clé est utilisée lors de la sauvegarde : calculer
-la clé à partir des fichiers générés empêcherait sa réutilisation au run suivant.
+Les caches utilisent des empreintes SHA-256 calculées par
+`.circleci/generate-cache-keys.sh` à partir des chemins et contenus suivis par Git.
+Les clés n'utilisent pas de compteurs de version propres à chaque famille. Le fichier global
+`.circleci/.circle-cache` permet une invalidation manuelle et fait
+partie de toutes les empreintes, en complément de l'invalidation automatique.
+La configuration CircleCI et le générateur font partie de chaque empreinte : modifier
+les exécuteurs, les commandes ou les chemins archivés invalide automatiquement les caches.
+La valeur CircleCI `{{ arch }}` figure dans les clés hors Docker et archives de paquets
+Yarn. Elle comprend l'OS, l'architecture, la famille et le modèle du processeur, comme décrit par
+[le support CircleCI](https://circleci.zendesk.com/hc/en-us/articles/33215227752987-Different-Cache-Key-arch-within-Parallel-Runs-in-the-same-Job).
+Pour les archives Docker de test, l'empreinte utilise seulement `uname -s` et
+`uname -m` en plus des entrées de construction, sur les machines utilisant un
+daemon local. À entrées identiques, deux machines Linux x86_64 partagent ainsi
+leurs archives même si leurs modèles de processeur diffèrent ; une machine
+Linux aarch64 utilise une autre clé. La clé Docker ne contient pas le nom de branche.
+Le cache `~/.yarn/berry/cache` utilise l'empreinte des dépendances JavaScript et
+le nom de branche, ce qui permet le partage des paquets entre modèles de processeur.
+
+Les évolutions de sources ou de configuration sont prises en compte automatiquement.
+Pour forcer un renouvellement global, notamment après un cache incorrect, modifier
+la valeur de `.circleci/.circle-cache` avec une valeur inédite, commiter et pousser
+le changement, puis lancer un pipeline sur cette révision. Toutes les familles
+utilisent alors de nouvelles clés, y compris leurs clés de repli vers `preprod`.
+Les anciennes archives ne sont pas supprimées : elles ne sont plus sélectionnées
+par ces nouvelles clés. Une relance à entrées identiques conserve les mêmes clés.
+
+| Famille | Entrées supplémentaires |
+| --- | --- |
+| Dépendances JavaScript | `.nvmrc`, scripts d'installation Node et JavaScript, `yarn.lock`, tous les `package.json` suivis, `.yarnrc.yml`, `.npmrc` et fichiers suivis de `.yarn/`. Les trois archives de `node_modules` et l'archive des paquets Yarn utilisent la même empreinte d'installation. |
+| Builds frontend et Admin Next | Sources des deux applications, y compris les imports partagés et les utilitaires Admin Next, `packages/`, `scripts/`, `assets/`, `webpack/`, `public/`, **`src/Resources/`**, configuration TypeScript racine, Babel, Relay, schéma interne, script et contenu des traductions téléchargées. |
+| Build Admin Next | En plus : `SYMFONY_GOOGLE_MAP_PUBLIC_KEY`, `SYMFONY_TURNSTILE_PUBLIC_KEY` et `NEXT_PUBLIC_SYMFONY_GOOGLE_MAP_PUBLIC_KEY`. L'environnement de compilation est fixé dans la commande CI. |
+| Relay frontend | Entrées JavaScript communes et sources JS/JSX/TS/TSX/GraphQL suivies du dépôt, pour couvrir le périmètre du compilateur racine, notamment `admin-next/shared/` et les tests API. |
+| Relay Admin Next | Entrées JavaScript communes, `admin-next/` et schéma interne. |
+| Composer | `composer.json`, `composer.lock` et `symfony.lock` lorsqu'il existe. |
+| Docker de test | Contextes `infrastructure/services/local/` et `infrastructure/services/elasticsearch/`, **les deux** fichiers Compose `base.yml` et `testing.yml`, helper `.circleci/docker-images.sh`, OS et architecture matérielle de la machine. |
+| Rector | Entrées Composer, `rector.php` et fichiers `.php` suivis dans `src/`, `tests/`, `spec/`, `.castor/` et `scripts/qa/`. |
+
+Les empreintes sont écrites dans `.circleci/cache-keys/*.sha256`, ignorées par Git.
+Les jobs calculent leurs empreintes de dépendances avant restauration. `prepare` calcule
+les empreintes de build après téléchargement des traductions, avant restauration des
+artefacts ; `prepare-static` calcule seulement les empreintes Relay, sans dépendre des
+traductions. Chaque famille conserve la même clé jusqu'à la sauvegarde : les fichiers
+générés non suivis ne participent pas au calcul.
+
+La couverture des sources est volontairement conservatrice : certains changements de
+tests ou de configuration invalident davantage de caches que strictement nécessaire.
+Toute réduction de ce périmètre doit préserver les imports croisés et être vérifiée par
+les tests d'invalidation. Ajouter une entrée de compilation, un workspace ou une variable
+publique doit conduire à vérifier le générateur et ses tests ; le levier manuel ne
+doit pas masquer une entrée manquante dans la couverture automatique.
+
+Le partage reste inchangé : restauration sur la branche courante, puis sur `preprod`
+avec la même empreinte. Docker utilise une clé sans branche. Un cache est immuable ; la
+migration des clés provoque un premier passage à cache froid, les anciennes archives
+expirant selon la rétention CircleCI. Les empreintes ne consultent pas les registres :
+un tag Docker distant mutable inchangé n'est pas renouvelé automatiquement. Changer la
+référence d'image, idéalement son digest, fait partie de sa mise à jour. Un cache corrompu
+reste un incident distinct de l'invalidation des entrées.
+
+`node --test .circleci/cache-keys.test.cjs` vérifie le générateur dans des dépôts Git
+temporaires, sans installer de dépendances ni lancer de build. Ce test est aussi exécuté
+par `check-cypress-spec-coverage`. Le [guide CircleCI](../docs/agents/circleci.md)
+décrit les phases du générateur et leur diagnostic.
+
+Les caches de dépendances JavaScript sont facultatifs. Après les tentatives de
+restauration, `prepare`, `prepare-static`, `typecheck-js`, `lint-js`, `unit-js`,
+`prepare-admin-next` et la commande API/Cypress `start-e2e-container` exécutent
+`ensure-js-dependencies`. Cette commande restaure l'archive des paquets Yarn puis
+lance `yarn install --immutable` à la racine via `.circleci/install-js-dependencies.sh`,
+même si les répertoires `node_modules` sont présents. Yarn réconcilie tous les workspaces
+même si une seule archive a été restaurée et conserve le lockfile. Node et Corepack sont
+préparés avant cette installation, et les machines E2E installent avant de démarrer
+les conteneurs qui utilisent les dépendances. Une erreur d'installation arrête le job.
+`prepare` et `prepare-static` sauvegardent les archives Yarn. Le job `migrations`
+désactive la préparation JavaScript de `start-e2e-container` avec `prepare-js: false`.
+La phase `CI_TIMING js_dependencies_install` permet de mesurer aussi le coût à cache chaud.
+
+Le test `node --test .circleci/install-js-dependencies.test.cjs`, exécuté par
+`check-cypress-spec-coverage`, utilise le vrai Yarn épinglé avec des paquets locaux
+dans des workspaces temporaires. Il couvre les caches présents, absents et partiels,
+ainsi que le refus de modifier le lockfile.
+
+Les archives des images Docker de test sont également facultatives. Le helper
+`.circleci/docker-images.sh prepare` construit ou télécharge chaque image dont
+l'archive `images/<service>.tar` manque ou est vide, puis la sauvegarde atomiquement.
+Un producteur à cache chaud réutilise ses archives sans les charger. Chez chaque
+consommateur, le mode `load` vérifie le chargement et la présence du tag attendu ;
+une archive absente, vide ou inutilisable déclenche la construction ou le téléchargement
+du seul service concerné, selon les fichiers Compose. Les certificats sont préparés
+avant ce chargement car ils font partie du contexte de construction applicatif.
+Une erreur de construction, de téléchargement ou de sauvegarde arrête le job.
+Les consommateurs ne sauvegardent pas leurs images réparées dans le cache CircleCI.
+
+Ce repli reconstruit la recette courante ; avec des tags ou paquets amont mutables,
+il ne garantit pas une image identique octet pour octet à celle du producteur.
+Une archive corrompue reste immuable côté CircleCI, même lorsque le consommateur
+la contourne. Le test `.circleci/docker-images.test.cjs` couvre les restaurations
+et les erreurs avec un CLI Docker simulé ; les phases `CI_TIMING docker_*` et les
+lignes `CI_DOCKER_CACHE` distinguent chargements et reconstructions réels en CI.
 
 `prepare` génère les fichiers Relay seulement en l'absence d'artefacts restaurés depuis le
 cache, puis les transmet aux jobs de lint, de vérification TypeScript et de tests Jest par le
 workspace. Ces jobs ne relancent pas le compilateur Relay.
 
-Le workspace de `prepare` conserve les dépendances, les fichiers générés et les
-assets consommés en aval. Pour Next.js, il transmet seulement `standalone`,
+Le workspace de `prepare` transmet `admin-next/node_modules`, les dépendances PHP,
+les fichiers générés et les assets consommés en aval. Les `node_modules` racine et
+Cypress viennent des caches facultatifs ou de `ensure-js-dependencies` chez les
+consommateurs JavaScript concernés. Pour Next.js, il transmet seulement `standalone`,
 `static` et `types` ; le cache du compilateur reste dans les caches de build.
-Il ne transmet plus `var` : les données et le cache Symfony `test` compilé sous
+Il ne transmet pas `var` : les données et le cache Symfony `test` compilé sous
 `/var/www` viennent de `prepare-test-data`. `prepare-docker` conserve sa dépendance
 à `prepare`, mais n’attache pas son workspace car ses contextes Docker proviennent
 du checkout. L’inventaire des consommateurs et le comparatif sont documentés dans

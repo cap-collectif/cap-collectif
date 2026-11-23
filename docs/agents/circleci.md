@@ -92,21 +92,147 @@ Les crédits facturés CircleCI sont la référence ; ne pas les déduire de la 
 durée murale d'un workflow parallèle. Une comparaison dont les suites n'ont pas
 terminé ne démontre pas un gain de performance.
 
-Le cache Docker est séparé de celui d'Ubuntu 20.04 par le préfixe
-`v3-docker-ubuntu2604-2026-07-1`, afin que la première exécution construise les
-images avec le nouveau moteur Docker avant leur restauration chez les consommateurs.
-Ce premier coût de construction doit être distingué des exécutions à cache chaud.
+La configuration des exécuteurs fait partie de l'empreinte Docker. Une modification
+de l'image machine renouvelle donc automatiquement sa clé, sans préfixe de version
+manuel. Ce premier coût de construction doit être distingué des exécutions à cache chaud.
 
 Vérifier également une construction des images de test sans cache :
-`prepare-docker` ne reconstruit pas les images si son cache existe. Pour une
-campagne ponctuelle, utiliser une clé Docker temporaire propre à la campagne
-dans la configuration de validation, sans purger les caches partagés. Vérifier
-ensuite leur restauration chez les consommateurs. Conserver les résultats et
-les éventuelles limites de la campagne dans la documentation du ticket.
+`prepare-docker` ne reconstruit pas les images dont les archives existent et ne sont pas vides. Pour une
+campagne ponctuelle, omettre la restauration Docker dans une configuration de
+validation dédiée et conserver la sauvegarde puis la restauration chez les
+consommateurs. Cette modification de configuration possède sa propre empreinte ;
+elle n'écrase pas les caches habituels. Conserver les résultats et les éventuelles
+limites de la campagne dans la documentation du ticket.
 
 Les [résultats de la campagne #20777](../ci-ubuntu-executors-validation.md)
 regroupent les pipelines réussis, les durées et crédits par job, la correction
 SMTP et les différences de cache à prendre en compte dans la comparaison.
+
+## Invalidation des caches CircleCI
+
+La source de vérité est `.circleci/generate-cache-keys.sh`. Il calcule les empreintes
+des chemins et contenus suivis par Git ; la configuration CI, le script lui-même
+et le jeton manuel `.circleci/.circle-cache` font partie de toutes les familles.
+Les clés hors Docker et archives de paquets Yarn ajoutent `{{ arch }}`, qui inclut
+l'OS, l'architecture, la famille et le modèle du processeur. L'archive
+`~/.yarn/berry/cache` utilise la même empreinte que les caches `node_modules` et se
+partage entre modèles de processeur. Pour les archives Docker de test, l'empreinte
+contient l'OS et l'architecture matérielle (`uname -s` et `uname -m`) de la machine
+utilisant un daemon local, indépendamment du modèle de processeur. À entrées identiques,
+deux machines Linux x86_64 peuvent partager le cache, mais une machine Linux aarch64
+utilise une autre clé.
+Les changements habituels invalident automatiquement les caches. Les anciennes clés
+ne sont pas restaurées après cette migration ; prévoir un premier run à cache froid.
+
+Pour forcer une invalidation globale, modifier la valeur de `.circleci/.circle-cache`
+avec une valeur inédite, commiter et pousser ce changement, puis lancer un pipeline
+sur cette révision. Toutes les familles obtiennent de nouvelles clés, y compris
+le repli vers `preprod` ; les archives existantes restent stockées mais ne sont plus
+sélectionnées par ces clés. Ce levier est réservé aux renouvellements volontaires :
+les changements de code ordinaires doivent rester couverts par les empreintes.
+
+Depuis la racine du dépôt :
+
+```bash
+bash .circleci/generate-cache-keys.sh dependencies # JS et Composer, avant restauration
+bash .circleci/generate-cache-keys.sh relay        # Contrôles statiques, sans traductions
+bash .circleci/generate-cache-keys.sh builds       # Builds et Relay, après téléchargement Loco
+bash .circleci/generate-cache-keys.sh docker       # Contextes Docker et les deux fichiers Compose
+bash .circleci/generate-cache-keys.sh rector       # Configuration, dépendances et fichiers PHP
+node --test .circleci/cache-keys.test.cjs
+```
+
+Ces commandes nécessitent Bash, Git et les outils SHA-256 (`sha256sum`, `sort -z`,
+`xargs -0 -r`), disponibles sur les exécuteurs Linux CI. Elles écrivent seulement
+dans `.circleci/cache-keys/`, ignoré par Git. Le mode `builds` nécessite les traductions
+déjà téléchargées et les variables publiques du build Next ; les autres modes n'en
+dépendent pas. Les tests créent et suppriment leurs propres dépôts temporaires et
+n'appellent ni Yarn, ni PHP, ni Docker, ni les services distants.
+
+Pour diagnostiquer une réutilisation incorrecte, comparer les entrées du compilateur
+avec celles du générateur, ajouter un test d'invalidation et corriger ce périmètre.
+Le détail des familles, des variables publiques et du partage entre branches figure
+dans l'[ADR CI](../../ADR/001-continuous_integration.md#cache). Le calcul doit précéder
+chaque restauration chez les producteurs et consommateurs, avec une empreinte identique
+pour les mêmes entrées. Ne pas recalculer une clé après restauration ou compilation.
+
+Les fichiers générés non suivis sont exclus ; les traductions téléchargées constituent
+l'exception explicite pour les builds. Les entrées couvrent notamment `src/Resources/`,
+les imports entre frontend et Admin Next, les manifestes des workspaces et les réglages
+Node/Yarn. La sélection est conservatrice et peut invalider un build pour un changement
+de test ; ne pas la réduire sans vérifier les dépendances réelles.
+
+Les tags Docker distants mutables ne sont pas résolus par le générateur. Pour adopter
+une nouvelle image amont, mettre à jour sa référence versionnée, idéalement son digest.
+Un cache immuable incorrect peut être contourné globalement en modifiant
+`.circleci/.circle-cache`. Une simple relance à entrées identiques conserve les mêmes clés.
+
+## Restauration des dépendances JavaScript
+
+La commande CircleCI `ensure-js-dependencies` restaure le cache des paquets Yarn puis
+lance `bash .circleci/install-js-dependencies.sh`.
+Le script exécute `yarn install --immutable` à la racine pour réconcilier tous les
+workspaces, que les caches soient présents, absents ou partiels. Yarn réutilise les
+paquets restaurés et installe ceux qui manquent ; la présence d'un répertoire
+`node_modules` ne dispense pas de cette étape. Une erreur Yarn fait échouer le job.
+Les jobs consommateurs ne sauvegardent pas les dépendances réparées.
+
+Cette commande est utilisée par `prepare`, `prepare-static`, `typecheck-js`,
+`lint-js`, `unit-js`, `prepare-admin-next` et la commande API/Cypress
+`start-e2e-container`. Chez les consommateurs, elle suit la restauration du workspace
+et des caches `node_modules`, avant les contrôles ou le démarrage des conteneurs.
+Le job `migrations` utilise `start-e2e-container` avec `prepare-js: false` pour
+démarrer la stack Docker et exécuter PHPUnit directement.
+
+Exécuter `setup-node` avant cette commande. Dans les préparations E2E, terminer
+l'installation avant le démarrage Docker : les conteneurs utilisent les dépendances
+du répertoire partagé. La phase `CI_TIMING js_dependencies_install` mesure le coût
+avec ou sans restauration.
+
+Si une commande devient introuvable après `setup-node`, vérifier la transmission du
+`PATH` dans `BASH_ENV`. Le script y ajoute seulement les répertoires de Node et des
+exécutables Corepack au `PATH` courant. Conserver son évaluation lors du chargement
+du fichier : une copie figée peut écraser les chemins ajoutés par des outils comme
+`pyenv`. Le contrat est décrit dans l'[ADR CI](../../ADR/001-continuous_integration.md#version-de-node-et-yarn).
+
+Pour vérifier les scénarios sans modifier les dépendances du checkout, avec Node
+de `.nvmrc` et après `corepack enable` :
+
+```bash
+node --test .circleci/install-js-dependencies.test.cjs
+```
+
+Ce test utilise le vrai Yarn défini par `packageManager`, Bash et `tar`. Il crée puis
+supprime des workspaces et un cache Yarn isolés, avec des paquets locaux sans accès
+au registre. Corepack doit déjà disposer de la version épinglée de Yarn, comme après
+`setup-node`. Il vérifie les caches présents, absents, les restaurations partielles
+racine/Admin Next/Cypress et la propagation d'un échec d'installation immuable.
+
+## Restauration des images Docker de test
+
+Le helper `bash .circleci/docker-images.sh prepare` utilise les services et images
+du Compose de test. Il construit ou télécharge les images dont `images/<service>.tar`
+manque ou est vide, puis sauvegarde chaque archive par renommage atomique. Les archives
+présentes ne sont pas chargées par le producteur.
+
+Le mode `load`, utilisé par tous les consommateurs, charge chaque archive et vérifie
+le tag attendu. Une archive absente ou inutilisable entraîne la construction ou le
+téléchargement du service concerné. Installer les certificats avant ce helper : le
+Dockerfile applicatif les copie pendant la construction. Un échec Docker est propagé,
+et les consommateurs ne sauvegardent pas de cache CircleCI.
+
+Les phases `CI_TIMING docker_load_*`, `docker_build_*`, `docker_pull_*` et
+`docker_save_*` mesurent ces opérations ; `CI_DOCKER_CACHE` indique pour chaque service
+`hit`, `miss`, `invalid`, `recovered` ou `archive_present` chez le producteur. Une
+reconstruction peut récupérer des versions amont différentes si les références sont
+mutables. Le helper ne répare pas l'archive immuable enregistrée par CircleCI.
+
+Prérequis : Bash, `jq` et Docker Compose, déjà présents sur les machines CI.
+`node --test .circleci/docker-images.test.cjs` vérifie le helper avec un CLI Docker
+simulé, sans daemon ni registre : caches présents, absents, partiels, archives invalides,
+propagation des erreurs et nettoyage d'une sauvegarde interrompue. Ce test est exécuté
+par `check-cypress-spec-coverage`. Une validation réelle doit également observer le
+producteur à cache froid et les chargements chez ses consommateurs dans un workflow.
 
 ## Cache Symfony de test partagé
 
