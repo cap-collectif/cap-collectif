@@ -106,10 +106,6 @@
             "./pre-commit-phpstan.sh",
             "git add"
         ],
-        "*.py": [
-            "pycodestyle --ignore=E501,W605",
-            "git add"
-        ],
         "*.twig": [
             "./scripts/docker-pre-commit-hook.sh php -d memory_limit=-1 bin/console lint:twig"
         ]

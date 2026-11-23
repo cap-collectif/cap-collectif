@@ -273,7 +273,7 @@ afin que le CTA reste accessible. Vérifier ce cas avec le beacon activé avant 
       une query) plutôt qu'un test PHPUnit qui appelle la mutation avec des mocks : c'est ce que recommande
       `docs/tests/phpunit/frontieres.md`, et `tests/Mutation/VideoMutationTest.php` est marqué `non-compliant` pour
       cette raison. Exemple : `features/graphql-api/internal/Mutation/Theme/manageTheme.js`. En local, le lancer
-      via `pipenv run yarn test-e2e-mutations <dossier>` : les helpers appellent `fab` directement.
+      via `yarn test-e2e-mutations <dossier>`.
     - Ne pas chercher à lire / modifier les variables d'environnement, demander à la développeuse aux commandes de modifier les éléments nécessaires.
     - Vérifier les tests **Cypress** qui couvrent la page Sonata migrée, rangés dans `cypress/e2e/backOffice/<feature>/`
       (convention de dossier par feature, ex: `cypress/e2e/backOffice/project/`).
