@@ -59,11 +59,6 @@ const UserAdminTabs: React.FC<UserAdminTabsProps> = ({ user, query }) => {
 
   // The active tab is kept in the URL, so that a refresh stays on it
   const [activeTab, setActiveTab] = useQueryState('tab', parseAsStringLiteral(TABS).withDefault('account'))
-  // TabBar never calls onChange: the clicked tab header is found from the DOM id it gets from its pane
-  const syncActiveTab = (event: React.SyntheticEvent) => {
-    const tab = (event.target as HTMLElement).closest('[id]')?.id
-    if (TABS.includes(tab as UserAdminTab)) setActiveTab(tab as UserAdminTab)
-  }
 
   const breadCrumbItems = React.useMemo(
     () => [
@@ -81,10 +76,9 @@ const UserAdminTabs: React.FC<UserAdminTabsProps> = ({ user, query }) => {
   return (
     <Flex direction="column" width="100%">
       <TabBar
-        defaultTab={activeTab}
-        onClickCapture={syncActiveTab}
-        onKeyDownCapture={(event: React.KeyboardEvent) => {
-          if (event.key === 'Enter' || event.key === ' ') syncActiveTab(event)
+        selectedTab={activeTab}
+        onChange={tab => {
+          if (TABS.includes(tab as UserAdminTab)) setActiveTab(tab as UserAdminTab)
         }}
         borderRadius="8px 8px 0 0"
         sideContent={

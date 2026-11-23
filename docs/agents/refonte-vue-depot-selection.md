@@ -20,7 +20,8 @@
 - The API already filters proposals to the viewer's own ones; the front only handles display:
   - anonymous viewer: `VoteStepPrivateLogin.tsx` replaces list and map
     (`proposal.private.show_login` + login button), filters header stays visible.
-  - logged-in viewer: barred eye icon (`CapUIIcon.EyeClose`) with tooltip `global.private` on each card.
+  - logged-in viewer: barred eye icon (`CapUIIcon.EyeClose`) with tooltip `global.private` on each card,
+    rendered with the DS `CardRestricted` (`variant="square"`, DS ≥ 7.0.0).
 - Legacy also lets anonymous participants with a `participantToken` see their proposals
   (`VisibilityBox`); not handled in the new view yet.
 

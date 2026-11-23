@@ -1,7 +1,6 @@
 import {
   BoxProps,
   CapUIIcon,
-  CapUIIconSize,
   CapUIShadow,
   Card,
   CardContent,
@@ -9,6 +8,7 @@ import {
   CardCoverImage,
   CardCoverPlaceholder,
   CardProps,
+  CardRestricted,
   CardStatusTag,
   CardTagLabel,
   CardTagList,
@@ -173,27 +173,13 @@ export const ProposalCard: React.FC<Props> = ({
   )
 
   const hasCover = listView === 'grid' || form?.usingIllustration || (proposalIcon && proposalCover)
-  // Same placement as the design system CardRestricted badge, with a barred eye icon
   const privateBadge = isPrivate ? (
-    <Tooltip label={intl.formatMessage({ id: 'global.private' })}>
-      <Flex
-        className="proposal-card-private"
-        position="absolute"
-        top="xs"
-        right="xs"
-        zIndex={1}
-        align="center"
-        justify="center"
-        width={8}
-        height={8}
-        borderRadius="xxs"
-        bg="neutral-gray.100"
-        tabIndex={0}
-        aria-label={intl.formatMessage({ id: 'global.private' })}
-      >
-        <Icon name={CapUIIcon.EyeClose} size={CapUIIconSize.Md} color="neutral-gray.900" />
-      </Flex>
-    </Tooltip>
+    <CardRestricted
+      variant="square"
+      icon={CapUIIcon.EyeClose}
+      srOnlyText={intl.formatMessage({ id: 'global.private' })}
+      tooltipLabel={intl.formatMessage({ id: 'global.private' })}
+    />
   ) : null
 
   return (

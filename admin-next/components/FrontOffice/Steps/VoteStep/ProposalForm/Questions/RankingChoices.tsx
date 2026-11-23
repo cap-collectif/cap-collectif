@@ -1,7 +1,7 @@
 import { Box, Button, CapUIIcon, CapUIIconSize, DragnDrop, Flex, Icon, ListCard, Text } from '@cap-collectif/ui'
 import Image from '@shared/ui/Image'
 import * as React from 'react'
-import type { DropResult } from '@cap-collectif/ui/dist/components/dragnDrop/DragnDrop'
+import type { DropResult } from '@cap-collectif/ui'
 import { useController } from 'react-hook-form'
 import { useIntl } from 'react-intl'
 import { RankingChoice, RankingChoicesProps } from '../ProposalFormModal.type'

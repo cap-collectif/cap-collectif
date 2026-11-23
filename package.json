@@ -151,7 +151,7 @@
         "@babel/plugin-transform-arrow-functions": "^7.2.0",
         "@babel/preset-env": "^7.22.7",
         "@babel/preset-react": "^7.0.0",
-        "@cap-collectif/ui": "6.1.0",
+        "@cap-collectif/ui": "7.0.2",
         "@cfaester/enzyme-adapter-react-18": "0.7.1",
         "@emotion/babel-preset-css-prop": "^11.11.0",
         "@emotion/react": "^11.4.0",

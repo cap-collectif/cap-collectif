@@ -1728,9 +1728,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@cap-collectif/ui@npm:6.1.0":
-  version: 6.1.0
-  resolution: "@cap-collectif/ui@npm:6.1.0"
+"@cap-collectif/ui@npm:7.0.2":
+  version: 7.0.2
+  resolution: "@cap-collectif/ui@npm:7.0.2"
   dependencies:
     "@ariakit/react": "npm:^0.4.17"
     "@atlaskit/pragmatic-drag-and-drop": "npm:^1.7.7"
@@ -1738,7 +1738,7 @@ __metadata:
     "@styled-system/css": "npm:^5.1.5"
     "@styled-system/should-forward-prop": "npm:^5.1.5"
     "@styled-system/theme-get": "npm:^5.1.2"
-    classnames: "npm:^2.3.1"
+    classnames: "npm:^2.5.1"
     deepmerge: "npm:^4.3.1"
     framer-motion: "npm:^4.1.17"
     input-otp: "npm:^1.2.4"
@@ -1754,7 +1754,7 @@ __metadata:
     moment: ^2.29.1
     react: ">=18"
     styled-components: ^6.1.8
-  checksum: 10c0/f225eb5c5acbd8da1d8dce0948390d815bd019882d968bf7a63a2016adba0c4bd16fd3503a681d7f52ccac5ffac583d23b150d62b37b1482d63d731163cb9f02
+  checksum: 10c0/6a20dc7787e71dd683cf73e29783b98675dec540d4159bf6fcc93d0843ed2e4f20444c59062deaeb2e6cfee18300b30b041cbc6c911587a6f1c261fe83ff9727
   languageName: node
   linkType: hard
 
@@ -7304,7 +7304,7 @@ __metadata:
     "@babel/preset-react": "npm:^7.0.0"
     "@babel/preset-typescript": "npm:^7.23.0"
     "@babel/runtime-corejs3": "npm:^7.28.4"
-    "@cap-collectif/ui": "npm:6.1.0"
+    "@cap-collectif/ui": "npm:7.0.2"
     "@cfaester/enzyme-adapter-react-18": "npm:0.7.1"
     "@emotion/babel-preset-css-prop": "npm:^11.11.0"
     "@emotion/react": "npm:^11.4.0"
@@ -7691,10 +7691,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"classnames@npm:^2.2.5, classnames@npm:^2.2.6, classnames@npm:^2.3.1":
+"classnames@npm:^2.2.5, classnames@npm:^2.2.6":
   version: 2.3.1
   resolution: "classnames@npm:2.3.1"
   checksum: 10c0/e3b832219042802464e648c41c2e8be96c2c64d2522cfa22fbb5ec088418406c61ab351a682c077c07f691c8b00c9f0ee7939b20fabc6c23da69063252a4ab89
+  languageName: node
+  linkType: hard
+
+"classnames@npm:^2.5.1":
+  version: 2.5.1
+  resolution: "classnames@npm:2.5.1"
+  checksum: 10c0/afff4f77e62cea2d79c39962980bf316bacb0d7c49e13a21adaadb9221e1c6b9d3cdb829d8bb1b23c406f4e740507f37e1dcf506f7e3b7113d17c5bab787aa69
   languageName: node
   linkType: hard
 

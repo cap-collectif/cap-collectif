@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Button, CapUIFontSize, Flex, FormLabel, Text, UPLOADER_SIZE } from '@cap-collectif/ui'
-import type { DropResult } from '@cap-collectif/ui/dist/components/dragnDrop/DragnDrop'
+import type { DropResult } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { UPLOAD_PATH } from '@utils/config'
 import { useIntl } from 'react-intl'

@@ -138,7 +138,9 @@ export default new (class AdminUserGroupsListPage {
     return this.findGroupTitle(2, true, 'Utilisateurs')
   }
   getModalTab(tabName: 'members' | 'params') {
-    return this.cy.get('.cap-modal').find(`ul ${tabName === 'members' ? '#members' : '#settings'}`)
+    // Target the tab by role and label: the DS generates the tab DOM ids
+    const label = tabName === 'members' ? 'organisation.members' : 'global.params'
+    return this.cy.get('.cap-modal').contains('[role="tab"]', label)
   }
   getCreateGroupButton() {
     return this.cy.get('button').should('exist').and('be.visible').contains('users.group-create')

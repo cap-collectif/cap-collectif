@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, DragnDrop } from '@cap-collectif/ui'
-import type { DropResult } from '@cap-collectif/ui/dist/components/dragnDrop/DragnDrop'
+import type { DropResult } from '@cap-collectif/ui'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import SectionListItem from '@components/BackOffice/Steps/ConsultationStep/SectionListItem'
 import { FormValues } from '@components/BackOffice/Steps/ConsultationStep/ConsultationStepForm'
