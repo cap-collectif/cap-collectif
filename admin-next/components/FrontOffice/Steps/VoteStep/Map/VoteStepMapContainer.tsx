@@ -5,10 +5,10 @@ import LocateAndZoomControl, { ChangeSizeButton } from '@components/FrontOffice/
 import ProposalMapDiscoverPane from '@components/FrontOffice/Leaflet/ProposalMapDiscoverPane'
 import { VoteStepMapContainer_proposalStep$key } from '@relay/VoteStepMapContainer_proposalStep.graphql'
 import useIsMobile from '@shared/hooks/useIsMobile'
-import { CapcoTileLayer, parseLatLng, parseLatLngBounds } from '@utils/leaflet'
+import { CapcoTileLayer, convertToGeoJsonStyle, formatGeoJsons, parseLatLng, parseLatLngBounds } from '@utils/leaflet'
 import { parseAsInteger, useQueryState } from 'nuqs'
 import { FC, Suspense, useState } from 'react'
-import { MapContainer } from 'react-leaflet'
+import { GeoJSON, MapContainer } from 'react-leaflet'
 import { graphql, useFragment } from 'react-relay'
 import MapCustomEvents from './VoteStepMapCustomEvents'
 import VoteStepMapMarkers from './VoteStepMapMarkers'
@@ -53,6 +53,21 @@ const FRAGMENT = graphql`
         lng
       }
       zoomMap
+      districts(order: ALPHABETICAL) {
+        id
+        geojson
+        displayedOnMap
+        border {
+          color
+          opacity
+          size
+        }
+        background {
+          color
+          opacity
+          size
+        }
+      }
     }
   }
 `
@@ -72,6 +87,7 @@ const VoteStepMapContainer: FC<Props> = ({ step: stepKey, onWorkflowTrigger }) =
 
   const filterBounds = parseLatLngBounds(latlngBounds || '')
   const { form } = step
+  const districts = formatGeoJsons(form?.districts ?? [])
 
   const urlCenter = latlng ? parseLatLng(latlng) : null
 
@@ -115,6 +131,9 @@ const VoteStepMapContainer: FC<Props> = ({ step: stepKey, onWorkflowTrigger }) =
           <VoteStepMapMarkers step={step} />
         </Suspense>
         <CapcoTileLayer />
+        {districts.map(({ id, district, style }) => (
+          <GeoJSON key={id} data={district} style={convertToGeoJsonStyle(style)} />
+        ))}
         <LocateAndZoomControl>
           <ChangeSizeButton
             display={['none', 'block']}

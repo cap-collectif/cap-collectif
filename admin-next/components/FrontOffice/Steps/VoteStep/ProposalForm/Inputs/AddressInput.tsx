@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic'
 import * as React from 'react'
 import { Control, useFormContext } from 'react-hook-form'
 import { useIntl } from 'react-intl'
+import type { District } from '@utils/geojson'
 import { FormValues } from '../ProposalFormModal.type'
 
 const LocateOnMapModal = dynamic(() => import('../LocateOnMapModal'), { ssr: false })
@@ -23,8 +24,7 @@ type Props = {
   category?: { color?: string | null; icon?: string | null } | null
   mapCenter?: { lat: number; lng: number } | null
   proposalInAZoneRequired: boolean
-  districts: any[]
-  onDistrictChange: (district: string | null) => void
+  districts: readonly District[]
 }
 
 const AddressInput: React.FC<Props> = ({
@@ -38,7 +38,6 @@ const AddressInput: React.FC<Props> = ({
   mapCenter,
   proposalInAZoneRequired,
   districts,
-  onDistrictChange,
 }) => {
   const intl = useIntl()
   const { setValue } = useFormContext<FormValues>()
@@ -49,8 +48,8 @@ const AddressInput: React.FC<Props> = ({
   })
 
   const handleMapAddressConfirm = (address: AddressComplete) => {
-    setValue('address', address.formatted_address)
     onAddressChange?.(address)
+    setValue('address', address.formatted_address, { shouldValidate: true, shouldTouch: true })
   }
 
   React.useEffect(() => {
@@ -63,8 +62,8 @@ const AddressInput: React.FC<Props> = ({
         ...address,
         geometry: { ...address.geometry, location: initialPosition },
       } as unknown as AddressComplete
-      setValue('address', completeAddress.formatted_address)
       onAddressChange?.(completeAddress)
+      setValue('address', completeAddress.formatted_address)
     })
   }, [currentAddress, initialPosition, isLoaded, onAddressChange, setValue])
 
@@ -119,7 +118,6 @@ const AddressInput: React.FC<Props> = ({
           mapCenter={mapCenter || null}
           proposalInAZoneRequired={proposalInAZoneRequired}
           districts={districts}
-          onDistrictChange={onDistrictChange}
         />
       )}
     </>

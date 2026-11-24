@@ -14,11 +14,10 @@ import {
   Input,
   Modal,
 } from '@cap-collectif/ui'
-import { CapcoTileLayer } from '@utils/leaflet'
+import { CapcoTileLayer, convertToGeoJsonStyle, formatGeoJsons } from '@utils/leaflet'
+import { District, findDistrictAt } from '@utils/geojson'
 import convertIconToDs from '@shared/utils/convertIconToDs'
 import ProposalMapDiscoverPane from '@components/FrontOffice/Leaflet/ProposalMapDiscoverPane'
-import { convertToGeoJsonStyle, formatGeoJsons } from '@utils/leaflet'
-import GeoJsonGeometriesLookup from 'geojson-geometries-lookup'
 import L from 'leaflet'
 import * as React from 'react'
 import { GeoJSON, MapContainer, Marker, useMap, useMapEvents } from 'react-leaflet'
@@ -118,8 +117,7 @@ type Props = {
   mapCenter: { lat: number; lng: number } | null
   category: { color?: string | null; icon?: string | null } | null
   proposalInAZoneRequired: boolean
-  districts: any[]
-  onDistrictChange: (district: string | null) => void
+  districts: readonly District[]
 }
 
 const LocateOnMapModal: React.FC<Props> = ({
@@ -131,7 +129,6 @@ const LocateOnMapModal: React.FC<Props> = ({
   category,
   proposalInAZoneRequired,
   districts,
-  onDistrictChange,
 }) => {
   const intl = useIntl()
   const [selectedAddress, setSelectedAddress] = React.useState<AddressComplete | null>(initialAddress)
@@ -154,21 +151,8 @@ const LocateOnMapModal: React.FC<Props> = ({
 
   const center = initialAddress?.geometry?.location || mapCenter || DEFAULT_CENTER
   const geoJsons = formatGeoJsons(districts)
-  const getDistrictAt = (location: { lat: number; lng: number }) =>
-    districts.find(district => {
-      const [geoJson] = formatGeoJsons([district])
-      return (
-        geoJson &&
-        new GeoJsonGeometriesLookup(geoJson.district).hasContainers({
-          type: 'Point',
-          coordinates: [location.lng, location.lat],
-        })
-      )
-    })
-  const isInZone = (location: { lat: number; lng: number }) => Boolean(getDistrictAt(location))
-
   const handleMapClick = async (lat: number, lng: number) => {
-    if (proposalInAZoneRequired && !isInZone({ lat, lng })) return
+    if (proposalInAZoneRequired && !findDistrictAt(districts, { lat, lng })) return
     setSelectedPosition({ lat, lng })
     const addr = await getAddressFromLatLng(lat, lng)
     if (addr) {
@@ -189,7 +173,7 @@ const LocateOnMapModal: React.FC<Props> = ({
             location: { lat: latLng.lat, lng: latLng.lng },
           },
         } as unknown as AddressComplete
-        if (proposalInAZoneRequired && !isInZone(addressComplete.geometry.location)) return
+        if (proposalInAZoneRequired && !findDistrictAt(districts, addressComplete.geometry.location)) return
         setSelectedAddress(addressComplete)
         setSelectedPosition(addressComplete.geometry.location)
         setSearchValue(addressComplete.formatted_address)
@@ -293,10 +277,6 @@ const LocateOnMapModal: React.FC<Props> = ({
             variant="primary"
             onClick={() => {
               if (selectedAddress) {
-                if (proposalInAZoneRequired) {
-                  const district = getDistrictAt(selectedAddress.geometry.location)
-                  onDistrictChange(district?.id || null)
-                }
                 onConfirm(selectedAddress)
                 onClose()
               }

@@ -1,3 +1,5 @@
+import type { AddressComplete } from '@cap-collectif/form'
+import { findDistrictAt } from '@utils/geojson'
 import { ProposalFormModal_proposalForm$data } from '@relay/ProposalFormModal_proposalForm.graphql'
 import { IntlShape } from 'react-intl'
 import * as yup from 'yup'
@@ -191,7 +193,11 @@ export const parseResponseValue = (response: any, question: any): ParsedResponse
   return { value: null }
 }
 
-export const createProposalSchema = (proposalForm: ProposalFormModal_proposalForm$data, intl: IntlShape) => {
+export const createProposalSchema = (
+  proposalForm: ProposalFormModal_proposalForm$data,
+  intl: IntlShape,
+  getSelectedAddress: () => AddressComplete | null,
+) => {
   const requiredMessage = intl.formatMessage({ id: requiredMessageId })
   const invalidUrlMessage = intl.formatMessage({ id: 'global.invalid-url' })
 
@@ -208,6 +214,25 @@ export const createProposalSchema = (proposalForm: ProposalFormModal_proposalFor
         return false
       }
     })
+
+  let addressSchema = yup.string()
+  if (proposalForm.usingAddress) {
+    addressSchema = addressSchema.required(requiredMessage)
+    if (proposalForm.usingDistrict && proposalForm.proposalInAZoneRequired) {
+      addressSchema = addressSchema.test(
+        'address-in-zone',
+        intl.formatMessage({ id: 'constraints.address_in_zone' }),
+        value => {
+          if (!value) return true
+          const address = getSelectedAddress()
+          return (
+            address?.formatted_address === value &&
+            Boolean(findDistrictAt(proposalForm.districts, address.geometry?.location))
+          )
+        },
+      )
+    }
+  }
 
   return yup.object().shape({
     title: yup.string().required(requiredMessage),
@@ -231,7 +256,7 @@ export const createProposalSchema = (proposalForm: ProposalFormModal_proposalFor
         ? yup.string().required(requiredMessage)
         : yup.string(),
 
-    address: proposalForm.usingAddress ? yup.string().required(requiredMessage) : yup.string(),
+    address: addressSchema,
 
     media: yup
       .object()

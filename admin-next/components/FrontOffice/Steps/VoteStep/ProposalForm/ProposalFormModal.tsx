@@ -1,3 +1,4 @@
+import type { AddressComplete } from '@cap-collectif/form'
 import {
   Box,
   Button,
@@ -26,6 +27,7 @@ import CookieMonster from '@shared/utils/CookieMonster'
 import { isResponseValueEmpty } from '@shared/utils/isResponseValueEmpty'
 import { isWYSIWYGContentEmpty } from '@shared/utils/isWYSIWYGContentEmpty'
 import { mutationErrorToast, successToast } from '@shared/utils/toasts'
+import { findDistrictAt } from '@utils/geojson'
 import { environment } from '@utils/relay-environement'
 import * as React from 'react'
 import { FormProvider, useForm, useWatch } from 'react-hook-form'
@@ -246,9 +248,9 @@ const ProposalFormModal: React.FC<Props> = props => {
   const canSaveDraft = !!viewerSession?.id
   const proposalForm = useFragment(PROPOSAL_FORM_FRAGMENT, proposalFormKey)
   const proposal = useFragment(PROPOSAL_FRAGMENT, mode === 'edit' ? props.proposal : null)
-  const addressJsonRef = React.useRef<any>(null)
+  const addressJsonRef = React.useRef<AddressComplete | null>(null)
   const createdProposalIdRef = React.useRef<string | null>(null)
-  const [selectedAddress, setSelectedAddress] = React.useState<any>(null)
+  const [selectedAddress, setSelectedAddress] = React.useState<AddressComplete | null>(null)
   const submitButtonRef = React.useRef<SubmitButtonType | null>(null)
   const participantToken = viewerSession ? undefined : CookieMonster.getParticipantCookie()
   const emailToken = React.useMemo(
@@ -350,7 +352,7 @@ const ProposalFormModal: React.FC<Props> = props => {
   const methods = useForm<FormValues>({
     mode: 'onChange',
     defaultValues,
-    resolver: yupResolver(createProposalSchema(proposalForm, intl)),
+    resolver: yupResolver(createProposalSchema(proposalForm, intl, () => addressJsonRef.current)),
   })
 
   const {
@@ -362,6 +364,18 @@ const ProposalFormModal: React.FC<Props> = props => {
     setError,
     formState: { isSubmitting },
   } = methods
+
+  const handleAddressChange = (address: AddressComplete | null) => {
+    addressJsonRef.current = address
+    setSelectedAddress(address)
+
+    if (proposalForm.usingDistrict) {
+      const district = findDistrictAt(proposalForm.districts, address?.geometry?.location)
+      if (district || proposalForm.proposalInAZoneRequired) {
+        setValue('district', district ?? '', { shouldValidate: true })
+      }
+    }
+  }
 
   const resetProposalForm = () => {
     reset()
@@ -463,6 +477,7 @@ const ProposalFormModal: React.FC<Props> = props => {
   }
 
   const handlePublish = async (hide?: () => void) => {
+    if (proposalForm.usingAddress) setValue('address', getValues('address'), { shouldTouch: true })
     const isSchemaValid = await methods.trigger()
     if (!isSchemaValid) touchErrorFields()
     const data = getValues() as FormValues
@@ -761,17 +776,13 @@ const ProposalFormModal: React.FC<Props> = props => {
               control={control}
               addressHelpText={proposalForm.addressHelpText}
               showLocateButton={mode === 'create' || proposal?.publicationStatus === 'DRAFT'}
-              onAddressChange={address => {
-                addressJsonRef.current = address
-                setSelectedAddress(address)
-              }}
+              onAddressChange={handleAddressChange}
               currentAddress={selectedAddress}
               initialPosition={initialPosition}
               category={proposalForm.categories.find(category => category.id === selectedCategoryId)}
               mapCenter={proposalForm.mapCenter}
-              proposalInAZoneRequired={proposalForm.proposalInAZoneRequired}
+              proposalInAZoneRequired={proposalForm.usingDistrict && proposalForm.proposalInAZoneRequired}
               districts={proposalForm.districts}
-              onDistrictChange={district => setValue('district', district)}
             />
           )}
 

@@ -19,7 +19,6 @@ const AddressForm = () => {
         showLocateButton={false}
         proposalInAZoneRequired={false}
         districts={[]}
-        onDistrictChange={() => {}}
       />
     </FormProvider>
   )

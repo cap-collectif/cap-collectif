@@ -4,20 +4,14 @@ import L from 'leaflet'
 import { setWorkerUrl } from 'maplibre-gl'
 import '@maplibre/maplibre-gl-leaflet'
 import 'maplibre-gl/dist/maplibre-gl.css'
+import type { District } from './geojson'
+
+export { formatGeoJsons } from './geojson'
+export type { District } from './geojson'
 
 const MAP_STYLE_URL = '/map-style.json'
 
 setWorkerUrl('/maplibre/maplibre-gl-worker.mjs')
-
-export type District = {
-  id: string
-  geojson: string
-  border?: string
-  background?: string
-  displayedOnMap?: boolean
-  titleOnMap?: string
-  slug?: string
-}
 
 export type FormattedDistrict = {
   id: string
@@ -39,7 +33,7 @@ export type FormattedDistrict = {
   cover?: { id: string }
 }
 
-export const convertToGeoJsonStyle = (style: FormattedDistrict) => {
+export const convertToGeoJsonStyle = (style: Pick<District, 'border' | 'background'>) => {
   const defaultDistrictStyle = {
     color: '#ff0000',
     weight: 1,
@@ -64,37 +58,6 @@ export const convertToGeoJsonStyle = (style: FormattedDistrict) => {
   }
 
   return districtStyle || defaultDistrictStyle
-}
-
-const parseGeoJson = (district: District) => {
-  const { geojson, id } = district
-  try {
-    return JSON.parse(geojson || '')
-  } catch (e) {
-    console.error(false, `Using empty geojson for ${id} because we couldn't parse the geojson : ${geojson || ''}`)
-    return null
-  }
-}
-
-export const formatGeoJsons = (districts: ReadonlyArray<District>, getAllGeojsons: boolean = false) => {
-  let geoJsons: any = []
-
-  if (districts) {
-    geoJsons = districts
-      .filter(d => d && d.geojson && (d.displayedOnMap || getAllGeojsons))
-      .map(d => ({
-        district: parseGeoJson(d),
-        style: {
-          border: d.border,
-          background: d.background,
-        },
-        titleOnMap: d.titleOnMap || undefined,
-        id: d.id || undefined,
-        slug: d.slug || undefined,
-      }))
-  }
-
-  return geoJsons
 }
 
 const MapLibreTileLayer = () => {
