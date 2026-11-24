@@ -109,7 +109,7 @@ const UserAdminPersonalData: React.FC<Props> = ({ user: userRef, methods }) => {
   const formId = React.useId()
   const user = useFragment(FRAGMENT, userRef)
   const { viewerSession } = useAppContext()
-  const { control, formState, handleSubmit, reset } = methods
+  const { control, formState, handleSubmit, reset, setError } = methods
 
   // Same rule as the legacy form: the user themself or a super admin
   const isDisabled = !user.isViewer && !viewerSession.isSuperAdmin
@@ -123,6 +123,10 @@ const UserAdminPersonalData: React.FC<Props> = ({ user: userRef, methods }) => {
   ]
 
   const onSubmit = async (values: UserAdminPersonalDataFormValues) => {
+    // Only a super admin can change it, and only a changed code is sent:
+    // the back rejects a code already held by any user, this same user included
+    const hasIdentificationCodeChanged =
+      viewerSession.isSuperAdmin && values.userIdentificationCode !== formState.defaultValues?.userIdentificationCode
     try {
       const response = await UpdateUserAdminPersonalDataMutation.commit({
         input: {
@@ -137,10 +141,17 @@ const UserAdminPersonalData: React.FC<Props> = ({ user: userRef, methods }) => {
           city: emptyToNull(values.city),
           zipCode: emptyToNull(values.zipCode),
           phone: emptyToNull(values.phone),
-          // Only a super admin can change it, sending it otherwise would not change anything
-          ...(viewerSession.isSuperAdmin ? { userIdentificationCode: emptyToNull(values.userIdentificationCode) } : {}),
+          ...(hasIdentificationCodeChanged
+            ? { userIdentificationCode: emptyToNull(values.userIdentificationCode) }
+            : {}),
         },
       })
+      const errorCode = response.updateProfilePersonalData?.errorCode
+      // The code must belong to a generated list and be free: the reason is shown under the field
+      if (errorCode === 'BAD_CODE' || errorCode === 'CODE_ALREADY_USED') {
+        setError('userIdentificationCode', { type: 'manual', message: intl.formatMessage({ id: errorCode }) })
+        return
+      }
       if (!response.updateProfilePersonalData?.user || response.updateProfilePersonalData.errorCode) {
         mutationErrorToast(intl)
         return
