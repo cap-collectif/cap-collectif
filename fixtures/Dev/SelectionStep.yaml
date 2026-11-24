@@ -240,3 +240,26 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
         voteType: 0
         defaultStatus: '@statusSelectionStepNoVoteEmailing'
         body: Faites votre sélection ! (no vote)
+    selectionStepPetitionReview:
+        id: selectionStepPetitionReview
+        title: Examen des pétitions
+        label: Examen
+        body: Étape sans vote, les pétitions archivées y portent l'étiquette « Archivée ».
+        startAt: <identity((new \DateTime('2026-01-01 12:00:00')))>
+        timeless: true
+        isEnabled: true
+        voteType: 0
+    selectionStepPetitionSecretBallot:
+        id: selectionStepPetitionSecretBallot
+        title: Signature des pétitions à scrutin secret
+        label: Scrutin secret
+        body: Étape à seuil et à scrutin secret, les résultats seront publiés en 2035.
+        startAt: <identity((new \DateTime('2026-01-01 12:00:00')))>
+        timeless: true
+        isEnabled: true
+        voteType: 1
+        voteThreshold: 150000
+        secretBallot: true
+        publishedVoteDate: <identity((new \DateTime('2035-01-01 12:00:00')))>
+        actionButtonLabel: sign
+        voteButtonIcon: pen

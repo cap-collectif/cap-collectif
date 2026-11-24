@@ -15,7 +15,7 @@ describe('Search Feature', () => {
   })
 
   it('should allow anonymous user to search across all types', () => {
-    cy.get(resultCountSelector).should('contain', '3722')
+    cy.get(resultCountSelector).should('contain', '3737')
 
     cy.get(searchInputSelector).type('article')
     cy.get('.btn[type="submit"]').click({ force: true })

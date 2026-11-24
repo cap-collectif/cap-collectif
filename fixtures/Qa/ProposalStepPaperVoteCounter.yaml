@@ -1,0 +1,56 @@
+Capco\AppBundle\Entity\ProposalStepPaperVoteCounter:
+    qaPaperVotesPetitionInProgress:
+        totalCount: 15470
+        totalPointsCount: 0
+        proposal: '@qaPetitionInProgress'
+        step: '@qaCollectStepPetitionThreshold'
+    qaPaperVotesPetitionAlmostReached:
+        totalCount: 148900
+        totalPointsCount: 0
+        proposal: '@qaPetitionAlmostReached'
+        step: '@qaCollectStepPetitionThreshold'
+    qaPaperVotesPetitionThresholdReached:
+        totalCount: 150000
+        totalPointsCount: 0
+        proposal: '@qaPetitionThresholdReached'
+        step: '@qaCollectStepPetitionThreshold'
+    qaPaperVotesPetitionThresholdExceeded:
+        totalCount: 198229
+        totalPointsCount: 0
+        proposal: '@qaPetitionThresholdExceeded'
+        step: '@qaCollectStepPetitionThreshold'
+    qaPaperVotesPetitionDeadlineReached:
+        totalCount: 198230
+        totalPointsCount: 0
+        proposal: '@qaPetitionDeadlineReached'
+        step: '@qaCollectStepPetitionThreshold'
+    qaPaperVotesPetitionArchived:
+        totalCount: 15470
+        totalPointsCount: 0
+        proposal: '@qaPetitionArchived'
+        step: '@qaCollectStepPetitionThreshold'
+    qaPaperVotesPetitionDeadlineNotArchivedYet:
+        totalCount: 320
+        totalPointsCount: 0
+        proposal: '@qaPetitionDeadlineNotArchivedYet'
+        step: '@qaCollectStepPetitionThreshold'
+    qaPaperVotesPetitionArchivedNoStatus:
+        totalCount: 2100
+        totalPointsCount: 0
+        proposal: '@qaPetitionArchivedNoStatus'
+        step: '@qaCollectStepPetitionThreshold'
+    qaPaperVotesPetitionArchivedLongStatus:
+        totalCount: 8640
+        totalPointsCount: 0
+        proposal: '@qaPetitionArchivedLongStatus'
+        step: '@qaCollectStepPetitionThreshold'
+    qaPaperVotesPetitionClosedStepReached:
+        totalCount: 198230
+        totalPointsCount: 0
+        proposal: '@qaPetitionClosedStepReached'
+        step: '@qaCollectStepPetitionClosed'
+    qaPaperVotesPetitionClosedStepNotReached:
+        totalCount: 15470
+        totalPointsCount: 0
+        proposal: '@qaPetitionClosedStepNotReached'
+        step: '@qaCollectStepPetitionClosed'

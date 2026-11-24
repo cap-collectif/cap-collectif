@@ -26,6 +26,7 @@ use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Service\ContributionValidator;
 use Capco\AppBundle\Service\ParticipantHelper;
 use Capco\AppBundle\Service\ProjectParticipantsTotalCountCacheHandler;
+use Capco\AppBundle\Service\ProposalVotePeriodChecker;
 use Capco\AppBundle\Utils\RequestGuesserInterface;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
@@ -64,6 +65,7 @@ class AddProposalSmsVoteMutation implements MutationInterface
         private readonly Indexer $indexer,
         private readonly ParticipantRepository $participantRepository,
         private readonly ProjectParticipantsTotalCountCacheHandler $participantsTotalCountCacheHandler,
+        private readonly ProposalVotePeriodChecker $proposalVotePeriodChecker,
     ) {}
 
     public function __invoke(Argument $input): array
@@ -119,6 +121,10 @@ class AddProposalSmsVoteMutation implements MutationInterface
         // Check if step is votable
         if (!$step->isVotable()) {
             throw new UserError('This step is not votable.');
+        }
+
+        if ($this->proposalVotePeriodChecker->isVotePeriodOver($proposal, $step)) {
+            throw new UserError('This proposal no longer accepts votes.');
         }
 
         // Check if user has reached limit of votes

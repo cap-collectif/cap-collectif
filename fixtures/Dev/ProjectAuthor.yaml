@@ -191,3 +191,11 @@ Capco\AppBundle\Entity\ProjectAuthor:
         createdAt: <(new \DateTime('2025-07-03 06:00:00'))>
         user: '@emailingAdmin'
         project: '@projectForEmailingConsultation'
+    pa49:
+        createdAt: <(new \DateTime('2025-12-01 12:00:00'))>
+        user: '@user1'
+        project: '@projectPetitionThreshold'
+    pa50:
+        createdAt: <(new \DateTime('2025-12-01 12:05:00'))>
+        user: '@user1'
+        project: '@projectPetitionClosedStep'

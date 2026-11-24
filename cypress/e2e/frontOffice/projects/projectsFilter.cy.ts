@@ -40,7 +40,7 @@ context('Projects', () => {
       ProjectsPage.applyModalFilter('#status-2') // ongoing
       ProjectsPage.assertProjectsCardLength(16)
       ProjectsPage.applyModalFilter('#status-3') // closed
-      ProjectsPage.assertProjectsCardLength(6)
+      ProjectsPage.assertProjectsCardLength(7)
       ProjectsPage.applyModalFilter('#status-0') // future
       ProjectsPage.assertProjectsCardLength(1)
     })

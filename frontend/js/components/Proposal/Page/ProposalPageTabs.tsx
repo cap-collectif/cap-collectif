@@ -1,12 +1,12 @@
+import { getVoteAction } from '@shared/utils/getVoteAction'
 import React from 'react'
-import { graphql, useFragment } from 'react-relay'
-import { FormattedMessage } from 'react-intl'
 import { Nav, NavItem } from 'react-bootstrap'
+import { FormattedMessage } from 'react-intl'
+import { graphql, useFragment } from 'react-relay'
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 import type { ProposalPageTabs_proposal$key } from '~relay/ProposalPageTabs_proposal.graphql'
 import type { ProposalPageTabs_step$key } from '~relay/ProposalPageTabs_step.graphql'
-import { getVoteAction } from '@shared/utils/getVoteAction'
 
 type Props = {
   proposal: ProposalPageTabs_proposal$key | null | undefined

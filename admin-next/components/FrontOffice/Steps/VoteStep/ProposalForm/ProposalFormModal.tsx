@@ -13,26 +13,26 @@ import {
   Modal,
   Text,
 } from '@cap-collectif/ui'
-import useIsMobile from '@shared/hooks/useIsMobile'
-import { getContributionObjectTypeTranslationKey } from '@shared/constants/proposalStepObjectType'
 import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 import { yupResolver } from '@hookform/resolvers/yup'
 import ChangeProposalContentMutation from '@mutations/ChangeProposalContentMutation'
 import CreateProposalMutation from '@mutations/CreateProposalMutation'
 import { ProposalFormModalThemesQuery } from '@relay/ProposalFormModalThemesQuery.graphql'
+import { getContributionObjectTypeTranslationKey } from '@shared/constants/proposalStepObjectType'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
-import CookieMonster from '@shared/utils/CookieMonster'
+import useIsMobile from '@shared/hooks/useIsMobile'
 import { openChartModal } from '@shared/register/ChartModal'
+import CookieMonster from '@shared/utils/CookieMonster'
 import { isResponseValueEmpty } from '@shared/utils/isResponseValueEmpty'
 import { isWYSIWYGContentEmpty } from '@shared/utils/isWYSIWYGContentEmpty'
 import { mutationErrorToast, successToast } from '@shared/utils/toasts'
+import { environment } from '@utils/relay-environement'
 import * as React from 'react'
 import { FormProvider, useForm, useWatch } from 'react-hook-form'
 import { useIntl } from 'react-intl'
 import { fetchQuery, graphql, useFragment, useLazyLoadQuery } from 'react-relay'
-import { environment } from '@utils/relay-environement'
-import { SubmitButtonType } from '../VoteStep.type'
 import { buildVoteStepQueryVariables, VOTE_STEP_POST_CREATE_REFRESH_QUERY } from '../VoteStep.queries'
+import { SubmitButtonType } from '../VoteStep.type'
 import ExternalLinks from './ExternalLinks'
 import {
   AddressInput,
@@ -671,6 +671,7 @@ const ProposalFormModal: React.FC<Props> = props => {
                   category: searchParams.get('category'),
                   theme: searchParams.get('theme'),
                   status: searchParams.get('status'),
+                  state: searchParams.get('state'),
                   userType: searchParams.get('userType'),
                   district: searchParams.get('district'),
                   term: searchParams.get('term'),
@@ -942,7 +943,12 @@ const ProposalFormModal: React.FC<Props> = props => {
             disabled={props.disabled}
           >
             <Icon name={CapUIIcon.Add} size={CapUIIconSize.Md} />
-            <Box as="span" fontSize={CapUIFontSize.BodySmall} lineHeight={CapUILineHeight.S} sx={{ whiteSpace: 'nowrap' }}>
+            <Box
+              as="span"
+              fontSize={CapUIFontSize.BodySmall}
+              lineHeight={CapUILineHeight.S}
+              sx={{ whiteSpace: 'nowrap' }}
+            >
               {intl.formatMessage({ id: 'global.collect' })}
             </Box>
           </Button>

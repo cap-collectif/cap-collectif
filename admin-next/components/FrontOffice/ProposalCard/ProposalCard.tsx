@@ -21,8 +21,9 @@ import {
 import { VoteButton } from '@components/FrontOffice/VoteButton/VoteButton'
 import { ProposalCard_proposal$key } from '@relay/ProposalCard_proposal.graphql'
 import { ProposalCard_step$key } from '@relay/ProposalCard_step.graphql'
-import convertIconToDs from '@shared/utils/convertIconToDs'
+import { isFeminineObjectType } from '@shared/constants/proposalStepObjectType'
 import useIsMobile from '@shared/hooks/useIsMobile'
+import convertIconToDs from '@shared/utils/convertIconToDs'
 import stripHTML from '@shared/utils/stripHTML'
 import { getProposalAuthorDisplayName } from '@utils/proposalAuthor'
 import { parseAsInteger, useQueryState } from 'nuqs'
@@ -74,6 +75,7 @@ const PROPOSAL_FRAGMENT = graphql`
       color
     }
     estimation
+    isArchived
     form {
       usingIllustration
     }
@@ -90,6 +92,10 @@ const STEP_FRAGMENT = graphql`
     votesRanking
     votesLimit
     votesMin
+    voteThreshold
+    form {
+      objectType
+    }
     ... on CollectStep {
       mainView
       private
@@ -151,6 +157,10 @@ export const ProposalCard: React.FC<Props> = ({
 
   const isPrivate = step.__typename === 'CollectStep' && !!step.private
   const descriptionLineClamp = isMapShown !== 0 ? 3 : 4
+  // In a step with a vote threshold, the action line is dedicated to the gauge (or its outcome) and the vote button
+  const hasVoteThreshold = Boolean(step.votable) && (step.voteThreshold ?? 0) > 0
+  // The threshold outcome already tells an archived proposal apart, so the archived look is kept for the other steps
+  const showArchivedState = proposal.isArchived && !hasVoteThreshold
   const numericPointsCount = proposal.votes?.totalPointsCount ?? 0
   const paperPointsCount = proposal.paperVotesTotalPointsCount ?? 0
   const pointsTooltip =
@@ -187,6 +197,7 @@ export const ProposalCard: React.FC<Props> = ({
       id={`proposal-${id}`}
       format={listView === 'grid' ? 'vertical' : 'horizontal'}
       hasButton={step?.votable}
+      isArchived={showArchivedState}
       minWidth="unset"
       variantSize="medium"
       height={listView === 'list' ? 224 : '100%'}
@@ -200,9 +211,44 @@ export const ProposalCard: React.FC<Props> = ({
           {proposalCover ? (
             <CardCoverImage src={proposalCover} />
           ) : (
-            <CardCoverPlaceholder icon={proposalIcon} color={proposalColor} />
+            <CardCoverPlaceholder
+              icon={proposalIcon}
+              color={proposalColor}
+              // The archived card darkens its placeholder, which only suits the icon variant:
+              // behind the default illustration it would show as a dark edge
+              {...(showArchivedState && !proposalIcon ? { backgroundColor: 'neutral-gray.100' } : {})}
+            />
           )}
-          {status ? (
+          {showArchivedState ? (
+            <Flex
+              className="cap-proposal-card-archived-tags"
+              position="absolute"
+              left="xs"
+              bottom={listView === 'grid' ? '-sm' : undefined}
+              top={listView === 'grid' ? undefined : 'xs'}
+              gap="xs"
+              maxWidth="calc(100% - 16px)"
+            >
+              {status ? (
+                <Tag variantColor="infoGray" minWidth={0}>
+                  <CardTagLabel overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap">
+                    {status.name}
+                  </CardTagLabel>
+                </Tag>
+              ) : null}
+              <Tag variantColor="infoGray" flexShrink={0}>
+                <CardTagLabel whiteSpace="nowrap">
+                  {intl.formatMessage(
+                    {
+                      id: 'front.proposal.archived-tag',
+                      defaultMessage: '{feminine, select, true {Archivée} other {Archivé}}',
+                    },
+                    { feminine: String(isFeminineObjectType(step.form?.objectType)) },
+                  )}
+                </CardTagLabel>
+              </Tag>
+            </Flex>
+          ) : status ? (
             <CardStatusTag
               variantColor={STATUS_COLOR_MAP[status.color] ?? 'infoGray'}
               maxWidth="calc(100% - 16px)"
@@ -246,39 +292,46 @@ export const ProposalCard: React.FC<Props> = ({
           } as any
         }
       >
-        <CardTagList>
-          <Flex justifyContent="space-between" align="center" width="100%">
-            <Flex align="center" gap="md" flexShrink={0}>
-              {step.votable ? (
-                <VoteButton proposal={proposal} step={step} triggerRequirementModal={triggerRequirementModal} />
-              ) : null}
-              {step.budget !== null ? (
-                <Tag variantColor="infoGray" transparent>
-                  <Icon name={CapUIIcon.Budget} />
-                  <Text>{proposal.estimation}€</Text>
-                </Tag>
-              ) : step.votesRanking ? (
-                pointsTooltip ? (
-                  <Tooltip label={pointsTooltip}>{pointsTag}</Tooltip>
-                ) : (
-                  pointsTag
-                )
-              ) : (
-                <Tag variantColor="infoGray" transparent flexShrink={0}>
-                  <Icon name={CapUIIcon.BubbleO} />
-                  <Text>{proposal.comments.totalCountWithAnswers}</Text>
-                </Tag>
-              )}
+        {/* With a threshold, the action line sticks to the bottom to keem gauges and threshold aligned */}
+        <CardTagList mt={hasVoteThreshold ? 'auto' : undefined}>
+          {hasVoteThreshold ? (
+            <Flex align="center" width="100%" minHeight="32px">
+              <VoteButton proposal={proposal} step={step} triggerRequirementModal={triggerRequirementModal} />
             </Flex>
-            {proposal?.author ? (
-              <Tag variantColor="infoGray" transparent flex={1} minWidth={0} ml="md" tooltipLabel={authorName}>
-                <Icon name={CapUIIcon.UserO} flexShrink={0} />
-                <Text overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap">
-                  {authorName}
-                </Text>
-              </Tag>
-            ) : null}
-          </Flex>
+          ) : (
+            <Flex justifyContent="space-between" align="center" width="100%">
+              <Flex align="center" gap="md" flexShrink={0}>
+                {step.votable ? (
+                  <VoteButton proposal={proposal} step={step} triggerRequirementModal={triggerRequirementModal} />
+                ) : null}
+                {step.budget !== null ? (
+                  <Tag variantColor="infoGray" transparent>
+                    <Icon name={CapUIIcon.Budget} />
+                    <Text>{proposal.estimation}€</Text>
+                  </Tag>
+                ) : step.votesRanking ? (
+                  pointsTooltip ? (
+                    <Tooltip label={pointsTooltip}>{pointsTag}</Tooltip>
+                  ) : (
+                    pointsTag
+                  )
+                ) : (
+                  <Tag variantColor="infoGray" transparent flexShrink={0}>
+                    <Icon name={CapUIIcon.BubbleO} />
+                    <Text>{proposal.comments.totalCountWithAnswers}</Text>
+                  </Tag>
+                )}
+              </Flex>
+              {proposal?.author ? (
+                <Tag variantColor="infoGray" transparent flex={1} minWidth={0} ml="md" tooltipLabel={authorName}>
+                  <Icon name={CapUIIcon.UserO} flexShrink={0} />
+                  <Text overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap">
+                    {authorName}
+                  </Text>
+                </Tag>
+              ) : null}
+            </Flex>
+          )}
         </CardTagList>
       </CardContent>
     </Card>

@@ -5,6 +5,9 @@ import { graphql } from 'react-relay'
 
 export const DEFAULT_SORT = 'random'
 export const DEFAULT_FILTER = 'ALL'
+// Publication states a visitor can filter by; any other value falls back to both of them
+const PROPOSAL_STATE_FILTERS = ['PUBLISHED', 'ARCHIVED'] as const
+type ProposalStateFilter = typeof PROPOSAL_STATE_FILTERS[number]
 export const VOTE_STEP_PROPOSALS_COUNT = 50
 
 type VoteStepSearchParams = {
@@ -12,6 +15,7 @@ type VoteStepSearchParams = {
   category?: string | null
   theme?: string | null
   status?: string | null
+  state?: string | null
   userType?: string | null
   district?: string | null
   term?: string | null
@@ -34,6 +38,7 @@ export const VOTE_STEP_QUERY = graphql`
     $category: ID
     $district: ID
     $status: ID
+    $state: ProposalsState
     $isAuthenticated: Boolean!
   ) {
     step: node(id: $stepId) {
@@ -49,6 +54,7 @@ export const VOTE_STEP_QUERY = graphql`
             category: $category
             district: $district
             status: $status
+            state: $state
             isAuthenticated: $isAuthenticated
           )
       }
@@ -76,6 +82,7 @@ export const VOTE_STEP_POST_CREATE_REFRESH_QUERY = graphql`
     $category: ID
     $district: ID
     $status: ID
+    $state: ProposalsState
     $geoBoundingBox: GeoBoundingBox
     $isAuthenticated: Boolean!
   ) {
@@ -92,6 +99,7 @@ export const VOTE_STEP_POST_CREATE_REFRESH_QUERY = graphql`
             category: $category
             district: $district
             status: $status
+            state: $state
             geoBoundingBox: $geoBoundingBox
             isAuthenticated: $isAuthenticated
           )
@@ -158,6 +166,7 @@ export const normalizeVoteStepSearchParams = (searchParams: VoteStepSearchParams
   category: searchParams.category || DEFAULT_FILTER,
   theme: searchParams.theme || DEFAULT_FILTER,
   status: searchParams.status || DEFAULT_FILTER,
+  state: searchParams.state || DEFAULT_FILTER,
   userType: searchParams.userType || DEFAULT_FILTER,
   district: searchParams.district || DEFAULT_FILTER,
   term: searchParams.term || undefined,
@@ -196,6 +205,10 @@ export const buildVoteStepQueryVariables = ({
     category: filters.category === DEFAULT_FILTER ? undefined : filters.category,
     district: filters.district === DEFAULT_FILTER ? undefined : filters.district,
     status: filters.status === DEFAULT_FILTER ? undefined : filters.status,
+    // Without a state, the step lists published and archived proposals alike
+    state: PROPOSAL_STATE_FILTERS.includes(filters.state as ProposalStateFilter)
+      ? (filters.state as ProposalStateFilter)
+      : undefined,
     geoBoundingBox,
   }
 }

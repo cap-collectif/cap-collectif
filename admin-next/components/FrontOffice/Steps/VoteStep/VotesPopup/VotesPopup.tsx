@@ -1,11 +1,11 @@
-import { FC } from 'react'
 import { Box, CapUIFontSize, Flex } from '@cap-collectif/ui'
-import { graphql, useFragment } from 'react-relay'
 import { VotesPopup_proposalStep$key } from '@relay/VotesPopup_proposalStep.graphql'
-import VotesPopupCard from './VotesPopupCard'
-import { useIntl } from 'react-intl'
 import { getContributionObjectTypeTranslationKey } from '@shared/constants/proposalStepObjectType'
 import { getVoteAction } from '@shared/utils/getVoteAction'
+import { FC } from 'react'
+import { useIntl } from 'react-intl'
+import { graphql, useFragment } from 'react-relay'
+import VotesPopupCard from './VotesPopupCard'
 
 interface Props {
   step: VotesPopup_proposalStep$key

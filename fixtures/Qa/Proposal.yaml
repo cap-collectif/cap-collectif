@@ -1074,3 +1074,147 @@ Capco\AppBundle\Entity\Proposal:
         createdAt: $publishedAt
         updatedAt: $publishedAt
         undraftAt: $publishedAt
+    qaPetitionNoSignature:
+        id: qaPetitionNoSignature
+        title: Pétition sans signature
+        summary: Massifier la rénovation des passoires thermiques.
+        body: Massifier la rénovation des passoires thermiques pour réduire les factures et les émissions de gaz à effet de serre des logements.
+        author: '@userOrgaMax'
+        proposalForm: '@qaProposalFormPetitionThreshold'
+        status: '@qaStatusPetitionSigning'
+        publishedAt: <identity((new \DateTime('2026-06-01 10:00:00'))->modify("+ 1 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    qaPetitionInProgress:
+        id: qaPetitionInProgress
+        title: Accélérer la rénovation énergétique des logements
+        summary: Massifier la rénovation des passoires thermiques.
+        body: Massifier la rénovation des passoires thermiques pour réduire les factures et les émissions de gaz à effet de serre des logements.
+        author: '@userCollectivite'
+        proposalForm: '@qaProposalFormPetitionThreshold'
+        status: '@qaStatusPetitionSigning'
+        publishedAt: <identity((new \DateTime('2026-06-01 10:00:00'))->modify("+ 2 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    qaPetitionAlmostReached:
+        id: qaPetitionAlmostReached
+        title: Pétition proche du seuil (compteur à six chiffres)
+        summary: Massifier la rénovation des passoires thermiques.
+        body: Massifier la rénovation des passoires thermiques pour réduire les factures et les émissions de gaz à effet de serre des logements.
+        author: '@userCreateurProjet'
+        proposalForm: '@qaProposalFormPetitionThreshold'
+        status: '@qaStatusPetitionSigning'
+        publishedAt: <identity((new \DateTime('2026-06-01 10:00:00'))->modify("+ 3 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    qaPetitionThresholdReached:
+        id: qaPetitionThresholdReached
+        title: Pétition au seuil, délai en cours
+        summary: Massifier la rénovation des passoires thermiques.
+        body: Massifier la rénovation des passoires thermiques pour réduire les factures et les émissions de gaz à effet de serre des logements.
+        author: '@userOrgaMax'
+        proposalForm: '@qaProposalFormPetitionThreshold'
+        status: '@qaStatusPetitionSigning'
+        publishedAt: <identity((new \DateTime('2026-06-01 10:00:00'))->modify("+ 4 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    qaPetitionThresholdExceeded:
+        id: qaPetitionThresholdExceeded
+        title: Pétition au-delà du seuil, délai en cours
+        summary: Massifier la rénovation des passoires thermiques.
+        body: Massifier la rénovation des passoires thermiques pour réduire les factures et les émissions de gaz à effet de serre des logements.
+        author: '@userCollectivite'
+        proposalForm: '@qaProposalFormPetitionThreshold'
+        status: '@qaStatusPetitionSigning'
+        publishedAt: <identity((new \DateTime('2026-06-01 10:00:00'))->modify("+ 5 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    qaPetitionDeadlineReached:
+        id: qaPetitionDeadlineReached
+        title: Pétition au seuil atteint, délai écoulé
+        summary: Massifier la rénovation des passoires thermiques.
+        body: Massifier la rénovation des passoires thermiques pour réduire les factures et les émissions de gaz à effet de serre des logements.
+        author: '@userCreateurProjet'
+        proposalForm: '@qaProposalFormPetitionThreshold'
+        status: '@qaStatusPetitionSigning'
+        publishedAt: <identity((new \DateTime('2015-01-05 10:00:00'))->modify("+ 1 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    qaPetitionArchived:
+        id: qaPetitionArchived
+        title: Pétition archivée, seuil non atteint
+        summary: Massifier la rénovation des passoires thermiques.
+        body: Massifier la rénovation des passoires thermiques pour réduire les factures et les émissions de gaz à effet de serre des logements.
+        author: '@userOrgaMax'
+        proposalForm: '@qaProposalFormPetitionThreshold'
+        status: '@qaStatusPetitionSigning'
+        publishedAt: <identity((new \DateTime('2015-01-05 10:00:00'))->modify("+ 2 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+        isArchived: true
+    qaPetitionDeadlineNotArchivedYet:
+        id: qaPetitionDeadlineNotArchivedYet
+        title: Pétition au délai écoulé, pas encore archivée par le cron
+        summary: Massifier la rénovation des passoires thermiques.
+        body: Massifier la rénovation des passoires thermiques pour réduire les factures et les émissions de gaz à effet de serre des logements.
+        author: '@userCollectivite'
+        proposalForm: '@qaProposalFormPetitionThreshold'
+        status: '@qaStatusPetitionSigning'
+        publishedAt: <identity((new \DateTime('2015-01-05 10:00:00'))->modify("+ 3 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    qaPetitionArchivedNoStatus:
+        id: qaPetitionArchivedNoStatus
+        title: Pétition archivée sans statut
+        summary: Massifier la rénovation des passoires thermiques.
+        body: Massifier la rénovation des passoires thermiques pour réduire les factures et les émissions de gaz à effet de serre des logements.
+        author: '@userCreateurProjet'
+        proposalForm: '@qaProposalFormPetitionThreshold'
+        publishedAt: <identity((new \DateTime('2015-01-05 10:00:00'))->modify("+ 4 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+        isArchived: true
+    qaPetitionArchivedLongStatus:
+        id: qaPetitionArchivedLongStatus
+        title: Pétition archivée avec un statut long
+        summary: Massifier la rénovation des passoires thermiques.
+        body: Massifier la rénovation des passoires thermiques pour réduire les factures et les émissions de gaz à effet de serre des logements.
+        author: '@userOrgaMax'
+        proposalForm: '@qaProposalFormPetitionThreshold'
+        status: '@qaStatusPetitionSigning'
+        publishedAt: <identity((new \DateTime('2015-01-05 10:00:00'))->modify("+ 5 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+        isArchived: true
+    qaPetitionClosedStepReached:
+        id: qaPetitionClosedStepReached
+        title: Pétition d'une étape terminée, seuil atteint
+        summary: Massifier la rénovation des passoires thermiques.
+        body: Massifier la rénovation des passoires thermiques pour réduire les factures et les émissions de gaz à effet de serre des logements.
+        author: '@userOrgaMax'
+        proposalForm: '@qaProposalFormPetitionClosed'
+        publishedAt: <identity((new \DateTime('2024-02-01 10:00:00'))->modify("+ 1 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+    qaPetitionClosedStepNotReached:
+        id: qaPetitionClosedStepNotReached
+        title: Pétition d'une étape terminée, seuil non atteint
+        summary: Massifier la rénovation des passoires thermiques.
+        body: Massifier la rénovation des passoires thermiques pour réduire les factures et les émissions de gaz à effet de serre des logements.
+        author: '@userCollectivite'
+        proposalForm: '@qaProposalFormPetitionClosed'
+        publishedAt: <identity((new \DateTime('2024-02-01 10:00:00'))->modify("+ 2 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt

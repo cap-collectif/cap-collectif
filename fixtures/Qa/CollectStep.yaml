@@ -6,3 +6,29 @@ Capco\AppBundle\Entity\Steps\CollectStep:
         body: Déposez votre projet pour le budget participatif.
         startAt: <identity((new \DateTime('2024-02-01')))>
         endAt: <identity((new \DateTime('2031-12-31')))>
+    qaCollectStepPetitionThreshold:
+        id: qaCollectStepPetitionThreshold
+        title: Dépôt et signature des pétitions
+        label: Pétitions
+        body: Une pétition doit réunir 150 000 signatures dans le délai imparti, faute de quoi elle est archivée automatiquement.
+        timeless: true
+        startAt: <identity((new \DateTime('2014-01-01 12:00:00')))>
+        endAt: null
+        voteType: 1
+        voteThreshold: 150000
+        proposalArchivedTime: 120
+        proposalArchivedUnitTime: MONTHS
+        actionButtonLabel: sign
+        voteButtonIcon: pen
+    qaCollectStepPetitionClosed:
+        id: qaCollectStepPetitionClosed
+        title: Dépôt et signature des pétitions (étape terminée)
+        label: Pétitions closes
+        body: Étape terminée, on ne peut plus signer.
+        timeless: false
+        startAt: <identity((new \DateTime('2024-01-01 12:00:00')))>
+        endAt: <identity((new \DateTime('2025-01-01 12:00:00')))>
+        voteType: 1
+        voteThreshold: 150000
+        actionButtonLabel: sign
+        voteButtonIcon: pen

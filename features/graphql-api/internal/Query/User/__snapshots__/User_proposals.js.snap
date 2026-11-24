@@ -12,6 +12,26 @@ Object {
               "title": "Budget Participatif Rennes",
               "visibility": "PUBLIC",
             },
+            "title": "Proposal 55",
+          },
+        },
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "project6",
+              "title": "Budget Participatif Rennes",
+              "visibility": "PUBLIC",
+            },
+            "title": "Proposal 54",
+          },
+        },
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "project6",
+              "title": "Budget Participatif Rennes",
+              "visibility": "PUBLIC",
+            },
             "title": "Proposal 53",
           },
         },
@@ -35,26 +55,6 @@ Object {
             "title": "Proposal 51",
           },
         },
-        Object {
-          "node": Object {
-            "project": Object {
-              "_id": "project6",
-              "title": "Budget Participatif Rennes",
-              "visibility": "PUBLIC",
-            },
-            "title": "Proposal 50",
-          },
-        },
-        Object {
-          "node": Object {
-            "project": Object {
-              "_id": "project6",
-              "title": "Budget Participatif Rennes",
-              "visibility": "PUBLIC",
-            },
-            "title": "Proposal 49",
-          },
-        },
       ],
     },
   },
@@ -62,128 +62,6 @@ Object {
 `;
 
 exports[`Internal|User.proposals visibility returns public proposals to an anonymous user 1`] = `
-Object {
-  "user": Object {
-    "proposals": Object {
-      "edges": Array [
-        Object {
-          "node": Object {
-            "project": Object {
-              "_id": "project6",
-              "title": "Budget Participatif Rennes",
-              "visibility": "PUBLIC",
-            },
-            "title": "Test de publication avec accusé de réception",
-          },
-        },
-        Object {
-          "node": Object {
-            "project": Object {
-              "_id": "project6",
-              "title": "Budget Participatif Rennes",
-              "visibility": "PUBLIC",
-            },
-            "title": "Test de publication sans accusé de réception",
-          },
-        },
-        Object {
-          "node": Object {
-            "project": Object {
-              "_id": "project6",
-              "title": "Budget Participatif Rennes",
-              "visibility": "PUBLIC",
-            },
-            "title": "Proposition très intéressante",
-          },
-        },
-        Object {
-          "node": Object {
-            "project": Object {
-              "_id": "project6",
-              "title": "Budget Participatif Rennes",
-              "visibility": "PUBLIC",
-            },
-            "title": "Proposition vraiment intéressante",
-          },
-        },
-        Object {
-          "node": Object {
-            "project": Object {
-              "_id": "project7",
-              "title": "Dépot avec selection vote budget",
-              "visibility": "PUBLIC",
-            },
-            "title": "Proposition pas chère",
-          },
-        },
-      ],
-    },
-  },
-}
-`;
-
-exports[`Internal|User.proposals visibility returns visible proposals to a super admin 1`] = `
-Object {
-  "user": Object {
-    "proposals": Object {
-      "edges": Array [
-        Object {
-          "node": Object {
-            "project": Object {
-              "_id": "project6",
-              "title": "Budget Participatif Rennes",
-              "visibility": "PUBLIC",
-            },
-            "title": "Test de publication sans accusé de réception",
-          },
-        },
-        Object {
-          "node": Object {
-            "project": Object {
-              "_id": "project6",
-              "title": "Budget Participatif Rennes",
-              "visibility": "PUBLIC",
-            },
-            "title": "Proposition très intéressante",
-          },
-        },
-        Object {
-          "node": Object {
-            "project": Object {
-              "_id": "project6",
-              "title": "Budget Participatif Rennes",
-              "visibility": "PUBLIC",
-            },
-            "title": "Proposition vraiment intéressante",
-          },
-        },
-        Object {
-          "node": Object {
-            "project": Object {
-              "_id": "ProjectAccessibleForAdminOnly",
-              "title": "Qui doit conquérir le monde ? | Visible par les admins seulement",
-              "visibility": "ADMIN",
-            },
-            "title": "Batman",
-          },
-        },
-        Object {
-          "node": Object {
-            "project": Object {
-              "_id": "ProjectAccessibleForMeOnly",
-              "title": "Project pour La Force (visible par mauriau seulement)",
-              "visibility": "ME",
-            },
-            "title": "Trouver un anti dote à la force",
-          },
-        },
-      ],
-    },
-  },
-}
-`;
-
-exports[`Internal|User.proposals visibility returns visible proposals to an admin 1`] = `
 Object {
   "user": Object {
     "proposals": Object {
@@ -236,6 +114,128 @@ Object {
               "visibility": "PUBLIC",
             },
             "title": "Test de publication sans accusé de réception",
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Internal|User.proposals visibility returns visible proposals to a super admin 1`] = `
+Object {
+  "user": Object {
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "project25",
+              "title": "Projet avec beaucoup d'opinions",
+              "visibility": "PUBLIC",
+            },
+            "title": "Proposition n'est pas jetée",
+          },
+        },
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "project25",
+              "title": "Projet avec beaucoup d'opinions",
+              "visibility": "PUBLIC",
+            },
+            "title": "Proposition qui va être jetée",
+          },
+        },
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "project6",
+              "title": "Budget Participatif Rennes",
+              "visibility": "PUBLIC",
+            },
+            "title": "Test de publication avec accusé de réception",
+          },
+        },
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "project6",
+              "title": "Budget Participatif Rennes",
+              "visibility": "PUBLIC",
+            },
+            "title": "Test de publication sans accusé de réception",
+          },
+        },
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "project6",
+              "title": "Budget Participatif Rennes",
+              "visibility": "PUBLIC",
+            },
+            "title": "Proposition très intéressante",
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Internal|User.proposals visibility returns visible proposals to an admin 1`] = `
+Object {
+  "user": Object {
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "projectPetitionThreshold",
+              "title": "Pétitions avec seuil et archivage automatique",
+              "visibility": "PUBLIC",
+            },
+            "title": "Pétition proche du seuil (compteur à six chiffres)",
+          },
+        },
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "projectPetitionThreshold",
+              "title": "Pétitions avec seuil et archivage automatique",
+              "visibility": "PUBLIC",
+            },
+            "title": "Accélérer la rénovation énergétique des logements",
+          },
+        },
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "projectCorona",
+              "title": "Solidarité Covid-19",
+              "visibility": "PUBLIC",
+            },
+            "title": "Jurer allégeance à Nurgle",
+          },
+        },
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "project25",
+              "title": "Projet avec beaucoup d'opinions",
+              "visibility": "PUBLIC",
+            },
+            "title": "Proposition n'est pas jetée",
+          },
+        },
+        Object {
+          "node": Object {
+            "project": Object {
+              "_id": "project25",
+              "title": "Projet avec beaucoup d'opinions",
+              "visibility": "PUBLIC",
+            },
+            "title": "Proposition qui va être jetée",
           },
         },
       ],

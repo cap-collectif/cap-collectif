@@ -208,10 +208,10 @@ exports[`Internal|Query projects and proposals lists project authors 1`] = `
 Object {
   "projectAuthors": Array [
     Object {
-      "username": "emailingadmin",
+      "username": "lbrunet",
     },
     Object {
-      "username": "lbrunet",
+      "username": "emailingadmin",
     },
     Object {
       "username": "admin",

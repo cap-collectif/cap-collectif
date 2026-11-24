@@ -33,3 +33,6 @@ VoteButtonIcon:
             RATING_STAR:
                 value: !php/const Capco\AppBundle\Enum\VoteButtonIcon::RATING_STAR
                 description: 'Represents a rating star icon'
+            PEN:
+                value: !php/const Capco\AppBundle\Enum\VoteButtonIcon::PEN
+                description: 'Represents a pen icon'

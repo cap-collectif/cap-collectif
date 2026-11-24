@@ -25608,6 +25608,9 @@ enum VoteButtonIcon {
 
   """Represents a rating star icon"""
   RATING_STAR
+
+  """Represents a pen icon"""
+  PEN
 }
 
 """A connection to a list of items."""

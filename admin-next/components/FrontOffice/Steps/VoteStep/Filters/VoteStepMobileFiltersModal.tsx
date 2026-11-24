@@ -51,6 +51,7 @@ const VoteStepMobileFiltersModal: React.FC<Props> = ({
       category: parseAsString.withDefault(DEFAULT_FILTERS.category),
       theme: parseAsString.withDefault(DEFAULT_FILTERS.theme),
       status: parseAsString.withDefault(DEFAULT_FILTERS.status),
+      state: parseAsString.withDefault(DEFAULT_FILTERS.state),
       userType: parseAsString.withDefault(DEFAULT_FILTERS.userType),
       district: parseAsString.withDefault(DEFAULT_FILTERS.district),
       contributor: parseAsString.withDefault(DEFAULT_FILTERS.contributor),

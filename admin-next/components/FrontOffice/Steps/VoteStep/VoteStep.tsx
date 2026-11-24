@@ -35,6 +35,7 @@ export const VoteStepWeb: React.FC<{
       category: parseAsString.withDefault('ALL'),
       theme: parseAsString.withDefault('ALL'),
       status: parseAsString.withDefault('ALL'),
+      state: parseAsString.withDefault('ALL'),
       userType: parseAsString.withDefault('ALL'),
       district: parseAsString.withDefault('ALL'),
       term: parseAsString,

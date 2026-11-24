@@ -1,0 +1,37 @@
+Capco\AppBundle\Entity\Selection:
+    qaSelectionReviewPetitionInProgress:
+        proposal: '@qaPetitionInProgress'
+        selectionStep: '@qaSelectionStepPetitionReview'
+        status: '@qaStatusPetitionReview'
+        createdAt: <(new \DateTime('2026-06-02 08:00:00'))>
+    qaSelectionReviewPetitionDeadlineReached:
+        proposal: '@qaPetitionDeadlineReached'
+        selectionStep: '@qaSelectionStepPetitionReview'
+        status: '@qaStatusPetitionReview'
+        createdAt: <(new \DateTime('2026-06-02 08:00:00'))>
+    qaSelectionReviewPetitionArchived:
+        proposal: '@qaPetitionArchived'
+        selectionStep: '@qaSelectionStepPetitionReview'
+        status: '@qaStatusPetitionReview'
+        createdAt: <(new \DateTime('2026-06-02 08:00:00'))>
+    qaSelectionReviewPetitionArchivedNoStatus:
+        proposal: '@qaPetitionArchivedNoStatus'
+        selectionStep: '@qaSelectionStepPetitionReview'
+        createdAt: <(new \DateTime('2026-06-02 08:00:00'))>
+    qaSelectionReviewPetitionArchivedLongStatus:
+        proposal: '@qaPetitionArchivedLongStatus'
+        selectionStep: '@qaSelectionStepPetitionReview'
+        status: '@qaStatusPetitionReviewLong'
+        createdAt: <(new \DateTime('2026-06-02 08:00:00'))>
+    qaSelectionSecretBallotPetitionNoSignature:
+        proposal: '@qaPetitionNoSignature'
+        selectionStep: '@qaSelectionStepPetitionSecretBallot'
+        createdAt: <(new \DateTime('2026-06-02 08:00:00'))>
+    qaSelectionSecretBallotPetitionInProgress:
+        proposal: '@qaPetitionInProgress'
+        selectionStep: '@qaSelectionStepPetitionSecretBallot'
+        createdAt: <(new \DateTime('2026-06-02 08:00:00'))>
+    qaSelectionSecretBallotPetitionThresholdExceeded:
+        proposal: '@qaPetitionThresholdExceeded'
+        selectionStep: '@qaSelectionStepPetitionSecretBallot'
+        createdAt: <(new \DateTime('2026-06-02 08:00:00'))>

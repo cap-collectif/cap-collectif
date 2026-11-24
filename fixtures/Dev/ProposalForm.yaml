@@ -545,3 +545,23 @@ Capco\AppBundle\Entity\ProposalForm:
         reference: 256
         owner: '@emailingAdmin'
         creator: '@emailingAdmin'
+    proposalFormPetitionThreshold:
+        id: proposalFormPetitionThreshold
+        title: Formulaire de dépôt des pétitions
+        description: Formulaire de dépôt des pétitions
+        step: '@collectStepPetitionThreshold'
+        usingSummary: true
+        objectType: 'proposal'
+        owner: '@user1'
+        creator: '@user1'
+        reference: 35
+    proposalFormPetitionClosed:
+        id: proposalFormPetitionClosed
+        title: Formulaire de dépôt des pétitions (étape terminée)
+        description: Formulaire de dépôt des pétitions (étape terminée)
+        step: '@collectStepPetitionClosed'
+        usingSummary: true
+        objectType: 'proposal'
+        owner: '@user1'
+        creator: '@user1'
+        reference: 36

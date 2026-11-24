@@ -7,6 +7,12 @@ Object {
       Object {
         "node": Object {
           "status": "CLOSED",
+          "title": "Pétitions avec seuil (étape terminée)",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "CLOSED",
           "title": "Projet pour campagne (consultation)",
         },
       },
@@ -70,6 +76,12 @@ exports[`Internal project status OPENED_PARTICIPATION project 1`] = `
 Object {
   "projects": Object {
     "edges": Array [
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Pétitions avec seuil et archivage automatique",
+        },
+      },
       Object {
         "node": Object {
           "status": "OPENED_PARTICIPATION",

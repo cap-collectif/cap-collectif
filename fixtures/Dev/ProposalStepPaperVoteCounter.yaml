@@ -19,3 +19,58 @@ Capco\AppBundle\Entity\ProposalStepPaperVoteCounter:
         totalPointsCount: 4
         proposal: '@question2'
         step: '@collectstep13'
+    paperVotesPetitionInProgress:
+        totalCount: 15470
+        totalPointsCount: 0
+        proposal: '@petitionInProgress'
+        step: '@collectStepPetitionThreshold'
+    paperVotesPetitionAlmostReached:
+        totalCount: 148900
+        totalPointsCount: 0
+        proposal: '@petitionAlmostReached'
+        step: '@collectStepPetitionThreshold'
+    paperVotesPetitionThresholdReached:
+        totalCount: 150000
+        totalPointsCount: 0
+        proposal: '@petitionThresholdReached'
+        step: '@collectStepPetitionThreshold'
+    paperVotesPetitionThresholdExceeded:
+        totalCount: 198229
+        totalPointsCount: 0
+        proposal: '@petitionThresholdExceeded'
+        step: '@collectStepPetitionThreshold'
+    paperVotesPetitionDeadlineReached:
+        totalCount: 198230
+        totalPointsCount: 0
+        proposal: '@petitionDeadlineReached'
+        step: '@collectStepPetitionThreshold'
+    paperVotesPetitionArchived:
+        totalCount: 15470
+        totalPointsCount: 0
+        proposal: '@petitionArchived'
+        step: '@collectStepPetitionThreshold'
+    paperVotesPetitionDeadlineNotArchivedYet:
+        totalCount: 320
+        totalPointsCount: 0
+        proposal: '@petitionDeadlineNotArchivedYet'
+        step: '@collectStepPetitionThreshold'
+    paperVotesPetitionArchivedNoStatus:
+        totalCount: 2100
+        totalPointsCount: 0
+        proposal: '@petitionArchivedNoStatus'
+        step: '@collectStepPetitionThreshold'
+    paperVotesPetitionArchivedLongStatus:
+        totalCount: 8640
+        totalPointsCount: 0
+        proposal: '@petitionArchivedLongStatus'
+        step: '@collectStepPetitionThreshold'
+    paperVotesPetitionClosedStepReached:
+        totalCount: 198230
+        totalPointsCount: 0
+        proposal: '@petitionClosedStepReached'
+        step: '@collectStepPetitionClosed'
+    paperVotesPetitionClosedStepNotReached:
+        totalCount: 15470
+        totalPointsCount: 0
+        proposal: '@petitionClosedStepNotReached'
+        step: '@collectStepPetitionClosed'

@@ -1,17 +1,17 @@
 import 'leaflet/dist/leaflet.css'
 
 import { Box, CapUIIcon } from '@cap-collectif/ui'
+import LocateAndZoomControl, { ChangeSizeButton } from '@components/FrontOffice/Leaflet/LocateAndZoomControl'
+import ProposalMapDiscoverPane from '@components/FrontOffice/Leaflet/ProposalMapDiscoverPane'
+import { VoteStepMapContainer_proposalStep$key } from '@relay/VoteStepMapContainer_proposalStep.graphql'
+import useIsMobile from '@shared/hooks/useIsMobile'
 import { CapcoTileLayer, parseLatLng, parseLatLngBounds } from '@utils/leaflet'
+import { parseAsInteger, useQueryState } from 'nuqs'
 import { FC, Suspense, useState } from 'react'
 import { MapContainer } from 'react-leaflet'
 import { graphql, useFragment } from 'react-relay'
-import { VoteStepMapContainer_proposalStep$key } from '@relay/VoteStepMapContainer_proposalStep.graphql'
-import useIsMobile from '@shared/hooks/useIsMobile'
-import VoteStepMapMarkers from './VoteStepMapMarkers'
-import LocateAndZoomControl, { ChangeSizeButton } from '@components/FrontOffice/Leaflet/LocateAndZoomControl'
-import { parseAsInteger, useQueryState } from 'nuqs'
 import MapCustomEvents from './VoteStepMapCustomEvents'
-import ProposalMapDiscoverPane from '@components/FrontOffice/Leaflet/ProposalMapDiscoverPane'
+import VoteStepMapMarkers from './VoteStepMapMarkers'
 
 export const mapId = 'map'
 export const MAX_MAP_ZOOM = 18
@@ -27,6 +27,7 @@ const FRAGMENT = graphql`
     category: { type: "ID" }
     district: { type: "ID" }
     status: { type: "ID" }
+    state: { type: "ProposalsState" }
     geoBoundingBox: { type: "GeoBoundingBox" }
     term: { type: "String" }
   ) {
@@ -42,6 +43,7 @@ const FRAGMENT = graphql`
         geoBoundingBox: $geoBoundingBox
         theme: $theme
         status: $status
+        state: $state
         userType: $userType
       )
     __typename

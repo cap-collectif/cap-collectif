@@ -14,3 +14,23 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
         step: '@selectionStepBPVote'
         project: '@projectBP'
         position: 3
+    qaPasPetitionThreshold:
+        id: qaPasPetitionThreshold
+        step: '@qaCollectStepPetitionThreshold'
+        project: '@qaProjectPetitionThreshold'
+        position: 1
+    qaPasPetitionReview:
+        id: qaPasPetitionReview
+        step: '@qaSelectionStepPetitionReview'
+        project: '@qaProjectPetitionThreshold'
+        position: 2
+    qaPasPetitionSecretBallot:
+        id: qaPasPetitionSecretBallot
+        step: '@qaSelectionStepPetitionSecretBallot'
+        project: '@qaProjectPetitionThreshold'
+        position: 3
+    qaPasPetitionClosed:
+        id: qaPasPetitionClosed
+        step: '@qaCollectStepPetitionClosed'
+        project: '@qaProjectPetitionClosedStep'
+        position: 1

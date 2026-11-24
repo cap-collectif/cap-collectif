@@ -14,4 +14,5 @@ final class VoteButtonIcon
     public const HAND_HOLDING_HEART = 'hand_holding_heart';
     public const HEART = 'heart';
     public const RATING_STAR = 'rating_star';
+    public const PEN = 'pen';
 }

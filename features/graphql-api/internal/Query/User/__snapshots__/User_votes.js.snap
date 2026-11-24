@@ -333,6 +333,12 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "id": "2077",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
             "id": "1063",
             "isAccounted": true,
           },
@@ -494,7 +500,7 @@ Object {
           },
         },
       ],
-      "totalCount": 27,
+      "totalCount": 28,
     },
   },
 }
@@ -505,6 +511,12 @@ Object {
   "node": Object {
     "votes": Object {
       "edges": Array [
+        Object {
+          "node": Object {
+            "id": "2077",
+            "isAccounted": true,
+          },
+        },
         Object {
           "node": Object {
             "id": "1063",
@@ -674,7 +686,7 @@ Object {
           },
         },
       ],
-      "totalCount": 28,
+      "totalCount": 29,
     },
   },
 }

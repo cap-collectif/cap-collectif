@@ -8,6 +8,7 @@ export const urlFiltersToLocalState = (urlFilters: {
   category: string | null
   theme: string | null
   status: string | null
+  state: string | null
   userType: string
   district: string | null
   contributor: string | null
@@ -19,6 +20,7 @@ export const urlFiltersToLocalState = (urlFilters: {
   category: urlFilters.category,
   theme: urlFilters.theme,
   status: urlFilters.status,
+  state: urlFilters.state,
   userType: urlFilters.userType,
   district: urlFilters.district,
   contributor: urlFilters.contributor,
@@ -46,12 +48,21 @@ export const getActiveFiltersCount = (urlFilters: {
   category: string | null
   theme: string | null
   status: string | null
+  state: string | null
   userType: string
   district: string | null
   contributor: string | null
 }): number => {
   let count = 0
-  const filtersToCount: (keyof FilterState)[] = ['category', 'theme', 'status', 'userType', 'district', 'contributor']
+  const filtersToCount: (keyof FilterState)[] = [
+    'category',
+    'theme',
+    'status',
+    'state',
+    'userType',
+    'district',
+    'contributor',
+  ]
 
   filtersToCount.forEach(key => {
     const currentValue = urlFilters[key]
@@ -73,6 +84,7 @@ export const getDefaultAccordions = (urlFilters: {
   theme: string | null
   district: string | null
   status: string | null
+  state: string | null
   userType: string
 }): string[] => {
   const accordions: string[] = ['sort'] // sort must always be open by default
@@ -83,6 +95,7 @@ export const getDefaultAccordions = (urlFilters: {
     theme: 'theme',
     district: 'district',
     status: 'status',
+    state: 'state',
     userType: 'userType',
   }
 

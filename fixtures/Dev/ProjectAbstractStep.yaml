@@ -561,3 +561,23 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
         step: '@cstepEmailing'
         project: '@projectForEmailingConsultation'
         position: 1
+    pasPetitionThreshold:
+        id: pasPetitionThreshold
+        step: '@collectStepPetitionThreshold'
+        project: '@projectPetitionThreshold'
+        position: 1
+    pasPetitionReview:
+        id: pasPetitionReview
+        step: '@selectionStepPetitionReview'
+        project: '@projectPetitionThreshold'
+        position: 2
+    pasPetitionSecretBallot:
+        id: pasPetitionSecretBallot
+        step: '@selectionStepPetitionSecretBallot'
+        project: '@projectPetitionThreshold'
+        position: 3
+    pasPetitionClosed:
+        id: pasPetitionClosed
+        step: '@collectStepPetitionClosed'
+        project: '@projectPetitionClosedStep'
+        position: 1

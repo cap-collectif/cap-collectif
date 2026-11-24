@@ -36,6 +36,7 @@ const PROPOSALS_FRAGMENT = graphql`
     category: { type: "ID" }
     district: { type: "ID" }
     status: { type: "ID" }
+    state: { type: "ProposalsState" }
     geoBoundingBox: { type: "GeoBoundingBox" }
     term: { type: "String" }
     isAuthenticated: { type: "Boolean!" }
@@ -68,11 +69,11 @@ const PROPOSALS_FRAGMENT = graphql`
       status: $status
       geoBoundingBox: $geoBoundingBox
       term: $term
-      state: PUBLISHED
+      state: $state
     )
       @connection(
         key: "ProposalsList_proposals"
-        filters: ["term", "orderBy", "userType", "theme", "category", "district", "status", "geoBoundingBox"]
+        filters: ["term", "orderBy", "userType", "theme", "category", "district", "status", "state", "geoBoundingBox"]
       ) {
       edges {
         node {

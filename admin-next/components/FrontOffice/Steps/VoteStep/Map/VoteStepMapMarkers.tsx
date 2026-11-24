@@ -1,12 +1,12 @@
+import { VoteStepMapMarkers_proposalStep$key } from '@relay/VoteStepMapMarkers_proposalStep.graphql'
+import useIsMobile from '@shared/hooks/useIsMobile'
+import { isValidLatLng } from '@utils/leaflet'
 import { FC, useEffect, useMemo, useState } from 'react'
 import MarkerClusterGroup from 'react-leaflet-markercluster'
 import { graphql, usePaginationFragment } from 'react-relay'
-import { VoteStepMapMarkers_proposalStep$key } from '@relay/VoteStepMapMarkers_proposalStep.graphql'
-import VoteStepMapBoundsHandler from './VoteStepMapBoundsHandler'
-import ProposalMarker from './ProposalMarker'
-import useIsMobile from '@shared/hooks/useIsMobile'
 import MobileProposalCard from './MobileProposalCard'
-import { isValidLatLng } from '@utils/leaflet'
+import ProposalMarker from './ProposalMarker'
+import VoteStepMapBoundsHandler from './VoteStepMapBoundsHandler'
 
 type Props = { step: VoteStepMapMarkers_proposalStep$key }
 
@@ -21,6 +21,7 @@ const MARKERS_FRAGMENT = graphql`
     category: { type: "ID" }
     district: { type: "ID" }
     status: { type: "ID" }
+    state: { type: "ProposalsState" }
     geoBoundingBox: { type: "GeoBoundingBox" }
     term: { type: "String" }
   )
@@ -34,12 +35,13 @@ const MARKERS_FRAGMENT = graphql`
       category: $category
       district: $district
       status: $status
+      state: $state
       geoBoundingBox: $geoBoundingBox
       term: $term
     )
       @connection(
         key: "VoteStepMapMarkers_entity"
-        filters: ["term", "orderBy", "userType", "theme", "category", "district", "status", "geoBoundingBox"]
+        filters: ["term", "orderBy", "userType", "theme", "category", "district", "status", "state", "geoBoundingBox"]
       ) {
       edges {
         node {
@@ -99,9 +101,7 @@ const VoteStepMapMarkers: FC<Props> = ({ step: stepKey }) => {
           <ProposalMarker key={proposal.id} proposal={proposal} />
         ))}
       </MarkerClusterGroup>
-      {isMobile && selectedProposal && (
-        <MobileProposalCard proposal={selectedProposal} />
-      )}
+      {isMobile && selectedProposal && <MobileProposalCard proposal={selectedProposal} />}
     </>
   )
 }

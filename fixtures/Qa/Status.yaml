@@ -23,3 +23,21 @@ Capco\AppBundle\Entity\Status:
         position: 0
         step: '@selectionStepBPVote'
         color: primary
+    qaStatusPetitionSigning:
+        id: qaStatusPetitionSigning
+        name: Ouverte aux signatures
+        position: 0
+        step: '@qaCollectStepPetitionThreshold'
+        color: success
+    qaStatusPetitionReview:
+        id: qaStatusPetitionReview
+        name: En cours d'examen
+        position: 0
+        step: '@qaSelectionStepPetitionReview'
+        color: success
+    qaStatusPetitionReviewLong:
+        id: qaStatusPetitionReviewLong
+        name: En cours d'examen par la commission des pétitions de l'assemblée
+        position: 1
+        step: '@qaSelectionStepPetitionReview'
+        color: warning

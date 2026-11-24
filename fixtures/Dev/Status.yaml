@@ -189,3 +189,21 @@ Capco\AppBundle\Entity\Status:
         position: 1
         step: '@collectStepNoVoteEmailing'
         color: success
+    statusPetitionSigning:
+        id: statusPetitionSigning
+        name: Ouverte aux signatures
+        position: 0
+        step: '@collectStepPetitionThreshold'
+        color: success
+    statusPetitionReview:
+        id: statusPetitionReview
+        name: En cours d'examen
+        position: 0
+        step: '@selectionStepPetitionReview'
+        color: success
+    statusPetitionReviewLong:
+        id: statusPetitionReviewLong
+        name: En cours d'examen par la commission des pétitions de l'assemblée
+        position: 1
+        step: '@selectionStepPetitionReview'
+        color: warning

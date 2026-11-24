@@ -7,3 +7,19 @@ Capco\AppBundle\Entity\Project:
         updatedAt: <identity((new \DateTime('2024-02-01 00:00:00')))>
         publishedAt: <identity((new \DateTime('2024-02-01 00:00:00')))>
         visibility: 2
+    qaProjectPetitionThreshold:
+        id: 'qaProjectPetitionThreshold'
+        title: Pétitions avec seuil et archivage automatique (QA)
+        createdAt: <identity((new \DateTime('2025-12-01 12:00:00')))>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        visibility: 2
+        creator: '@userMax'
+    qaProjectPetitionClosedStep:
+        id: 'qaProjectPetitionClosedStep'
+        title: Pétitions avec seuil, étape terminée (QA)
+        createdAt: <identity((new \DateTime('2025-12-01 12:05:00')))>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        visibility: 2
+        creator: '@userMax'

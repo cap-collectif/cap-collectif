@@ -43,7 +43,7 @@ describe('Internal | viewer_proposalForm', () => {
   })
   it('admin get all proposalForms', async () => {
     const response = await graphql(countAllProposalFormsQuery, { availableOnly: false }, 'internal_admin')
-    expect(response.viewer.proposalForms.totalCount).toBe(38)
+    expect(response.viewer.proposalForms.totalCount).toBe(40)
   })
   it('admin get all available proposalForms', async () => {
     const response = await graphql(countAllProposalFormsQuery, { availableOnly: true }, 'internal_admin')

@@ -8,6 +8,42 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
         "node": Object {
           "contributions": Object {
+            "totalCount": 9,
+          },
+          "contributionsCount": 9,
+          "contributors": Object {
+            "totalCount": 7,
+          },
+          "cover": null,
+          "id": "UHJvamVjdDpwcm9qZWN0Rm9yRW1haWxpbmdDb25zdWx0YXRpb24=",
+          "title": "Projet pour campagne (consultation)",
+          "votes": Object {
+            "totalCount": 3,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "node": Object {
+          "contributions": Object {
+            "totalCount": 2,
+          },
+          "contributionsCount": 2,
+          "contributors": Object {
+            "totalCount": 3,
+          },
+          "cover": null,
+          "id": "UHJvamVjdDpwcm9qZWN0Rm9yRW1haWxpbmdTZWxlY3Rpb25Wb3Rl",
+          "title": "Projet pour campagne (vote à la sélection)",
+          "votes": Object {
+            "totalCount": 3,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "node": Object {
+          "contributions": Object {
             "totalCount": 6,
           },
           "contributionsCount": 6,
@@ -23,7 +59,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "contributions": Object {
             "totalCount": 6,
@@ -41,7 +77,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
         "node": Object {
           "contributions": Object {
             "totalCount": 4,
@@ -58,48 +94,12 @@ Object {
           },
         },
       },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
-        "node": Object {
-          "contributions": Object {
-            "totalCount": 2,
-          },
-          "contributionsCount": 2,
-          "contributors": Object {
-            "totalCount": 1,
-          },
-          "cover": null,
-          "id": "UHJvamVjdDpwcm9qZWN0UHJvcG9zYWxBcmNoaXZpbmc=",
-          "title": "BP avec archivage des propositions",
-          "votes": Object {
-            "totalCount": 0,
-          },
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
-        "node": Object {
-          "contributions": Object {
-            "totalCount": 0,
-          },
-          "contributionsCount": 0,
-          "contributors": Object {
-            "totalCount": 0,
-          },
-          "cover": null,
-          "id": "UHJvamVjdDpwcm9qZWN0V2l0aE9ubHlPdGhlclN0ZXBPcGVu",
-          "title": "BP avec étape personalisée ouverte",
-          "votes": Object {
-            "totalCount": 0,
-          },
-        },
-      },
     ],
     "pageInfo": Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjc=",
       "hasNextPage": true,
     },
-    "totalCount": 55,
+    "totalCount": 57,
   },
 }
 `;
@@ -199,7 +199,7 @@ Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjQ=",
       "hasNextPage": true,
     },
-    "totalCount": 48,
+    "totalCount": 50,
   },
 }
 `;
@@ -210,6 +210,42 @@ Object {
     "edges": Array [
       Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "node": Object {
+          "contributions": Object {
+            "totalCount": 9,
+          },
+          "contributionsCount": 5,
+          "contributors": Object {
+            "totalCount": 19,
+          },
+          "cover": null,
+          "id": "UHJvamVjdDpwcm9qZWN0Rm9yRW1haWxpbmdDb2xsZWN0Vm90ZQ==",
+          "title": "Projet pour campagne (vote au dépôt)",
+          "votes": Object {
+            "totalCount": 17,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "node": Object {
+          "contributions": Object {
+            "totalCount": 9,
+          },
+          "contributionsCount": 9,
+          "contributors": Object {
+            "totalCount": 7,
+          },
+          "cover": null,
+          "id": "UHJvamVjdDpwcm9qZWN0Rm9yRW1haWxpbmdDb25zdWx0YXRpb24=",
+          "title": "Projet pour campagne (consultation)",
+          "votes": Object {
+            "totalCount": 3,
+          },
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
           "contributions": Object {
             "totalCount": 2,
@@ -227,7 +263,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "contributions": Object {
             "totalCount": 6,
@@ -245,7 +281,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "contributions": Object {
             "totalCount": 6,
@@ -262,48 +298,12 @@ Object {
           },
         },
       },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
-        "node": Object {
-          "contributions": Object {
-            "totalCount": 4,
-          },
-          "contributionsCount": 4,
-          "contributors": Object {
-            "totalCount": 1,
-          },
-          "cover": null,
-          "id": "UHJvamVjdDpwcm9qZWN0V29ya2Zsb3dWb3RlMg==",
-          "title": "BP vote parcours min 2 max 2",
-          "votes": Object {
-            "totalCount": 0,
-          },
-        },
-      },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
-        "node": Object {
-          "contributions": Object {
-            "totalCount": 2,
-          },
-          "contributionsCount": 2,
-          "contributors": Object {
-            "totalCount": 1,
-          },
-          "cover": null,
-          "id": "UHJvamVjdDpwcm9qZWN0UHJvcG9zYWxBcmNoaXZpbmc=",
-          "title": "BP avec archivage des propositions",
-          "votes": Object {
-            "totalCount": 0,
-          },
-        },
-      },
     ],
     "pageInfo": Object {
       "endCursor": "YXJyYXljb25uZWN0aW9uOjY=",
       "hasNextPage": true,
     },
-    "totalCount": 48,
+    "totalCount": 50,
   },
 }
 `;

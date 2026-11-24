@@ -17,6 +17,7 @@ const FRAGMENT = graphql`
     category: { type: "ID" }
     district: { type: "ID" }
     status: { type: "ID" }
+    state: { type: "ProposalsState" }
     geoBoundingBox: { type: "GeoBoundingBox" }
     term: { type: "String" }
   ) {
@@ -31,6 +32,7 @@ const FRAGMENT = graphql`
         geoBoundingBox: $geoBoundingBox
         theme: $theme
         status: $status
+        state: $state
         userType: $userType
       )
   }

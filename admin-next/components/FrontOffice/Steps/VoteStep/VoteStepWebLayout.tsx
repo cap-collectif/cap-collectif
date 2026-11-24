@@ -36,6 +36,7 @@ const FRAGMENT = graphql`
     category: { type: "ID" }
     district: { type: "ID" }
     status: { type: "ID" }
+    state: { type: "ProposalsState" }
     geoBoundingBox: { type: "GeoBoundingBox" }
     term: { type: "String" }
     isAuthenticated: { type: "Boolean!" }
@@ -57,6 +58,7 @@ const FRAGMENT = graphql`
         category: $category
         district: $district
         status: $status
+        state: $state
         geoBoundingBox: $geoBoundingBox
         isAuthenticated: $isAuthenticated
       )
@@ -70,6 +72,7 @@ const FRAGMENT = graphql`
         category: $category
         district: $district
         status: $status
+        state: $state
         geoBoundingBox: $geoBoundingBox
       )
     ...VoteStepListHeader_proposalStep

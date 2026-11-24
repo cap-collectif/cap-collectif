@@ -25,6 +25,7 @@ use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Service\ContributionValidator;
 use Capco\AppBundle\Service\ParticipantHelper;
 use Capco\AppBundle\Service\ProjectParticipantsTotalCountCacheHandler;
+use Capco\AppBundle\Service\ProposalVotePeriodChecker;
 use Capco\AppBundle\Utils\RequestGuesserInterface;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Doctrine\ORM\EntityManagerInterface;
@@ -62,7 +63,10 @@ class AddProposalSmsVoteMutationSpec extends ObjectBehavior
         Indexer $indexer,
         ParticipantRepository $participantRepository,
         ProjectParticipantsTotalCountCacheHandler $participantsTotalCountCacheHandler,
+        ProposalVotePeriodChecker $proposalVotePeriodChecker,
     ) {
+        $proposalVotePeriodChecker->isVotePeriodOver(Argument::cetera())->willReturn(false);
+
         $this->beConstructedWith(
             $em,
             $validator,
@@ -80,7 +84,8 @@ class AddProposalSmsVoteMutationSpec extends ObjectBehavior
             $contributionValidator,
             $indexer,
             $participantRepository,
-            $participantsTotalCountCacheHandler
+            $participantsTotalCountCacheHandler,
+            $proposalVotePeriodChecker
         );
     }
 

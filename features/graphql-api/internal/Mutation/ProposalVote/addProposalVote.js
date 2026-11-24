@@ -199,6 +199,46 @@ describe('mutations.addProposalVote', () => {
   })
 
   /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
+  it('Logged in API client wants to vote for an archived proposal', async () => {
+    await expect(
+      graphql(
+        AddProposalVoteMutation,
+        {
+          input: {
+            stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdFN0ZXBQcm9wb3NhbEFyY2hpdmluZw==',
+            proposalId: 'UHJvcG9zYWw6cHJvcG9zYWxBcmNoaXZpbmdTdGVwQXJjaGl2ZWQ=',
+          },
+        },
+        'internal_user',
+      ),
+    ).rejects.toThrowError('This proposal no longer accepts votes.')
+  })
+
+  /**
+   * @jest-status compliant
+   * @jest-reason Checks an awaited explicit refusal from the real GraphQL API with controlled request inputs
+   * and identity.
+   */
+  it('Logged in API client wants to vote for a proposal whose archiving deadline has passed', async () => {
+    await expect(
+      graphql(
+        AddProposalVoteMutation,
+        {
+          input: {
+            stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdFN0ZXBQcm9wb3NhbEFyY2hpdmluZw==',
+            proposalId: 'UHJvcG9zYWw6cHJvcG9zYWxBcmNoaXZpbmdTdGVwTm90QXJjaGl2ZWQ=',
+          },
+        },
+        'internal_user',
+      ),
+    ).rejects.toThrowError('This proposal no longer accepts votes.')
+  })
+
+  /**
    * @jest-status non-compliant
    * @jest-reason Checks only a GraphQL response snapshot; add explicit assertions for the API contract.
    */

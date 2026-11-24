@@ -1079,7 +1079,7 @@ Object {
         },
         Object {
           "key": "2015-01-01T00:00:00.000+01:00",
-          "totalCount": 34,
+          "totalCount": 39,
         },
         Object {
           "key": "2015-02-01T00:00:00.000+01:00",
@@ -3071,7 +3071,7 @@ Object {
       },
       Object {
         "user": Object {
-          "id": "VXNlcjp1c2VyMw==",
+          "id": "VXNlcjp1c2VyQWRtaW4=",
         },
       },
     ],

@@ -9,6 +9,30 @@ Object {
           "node": Object {
             "authors": Array [
               Object {
+                "username": "lbrunet",
+              },
+            ],
+            "owner": Object {
+              "username": "lbrunet",
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "lbrunet",
+              },
+            ],
+            "owner": Object {
+              "username": "lbrunet",
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
                 "username": "emailingadmin",
               },
             ],
@@ -563,7 +587,7 @@ Object {
           },
         },
       ],
-      "totalCount": 56,
+      "totalCount": 58,
     },
   },
 }
@@ -1004,8 +1028,20 @@ Object {
             "title": "Projet pour campagne (vote à la sélection)",
           },
         },
+        Object {
+          "node": Object {
+            "publishedAt": "2025-12-01 12:00:00",
+            "title": "Pétitions avec seuil et archivage automatique",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2025-12-01 12:05:00",
+            "title": "Pétitions avec seuil (étape terminée)",
+          },
+        },
       ],
-      "totalCount": 56,
+      "totalCount": 58,
     },
   },
 }

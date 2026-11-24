@@ -8629,6 +8629,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                         },
                         Object {
                           "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "proposalArchivedTime",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
                           "args": Array [
                             Object {
                               "kind": "Literal",
@@ -8971,7 +8978,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "3033dbbb237dda20d86e4394ba69e2ab",
+          "cacheID": "98012bae2a3c030b80a2245a018d11a1",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -11228,6 +11235,8 @@ fragment ProposalVoteButtonWrapperFragment_proposal_3IH2WL on Proposal {
     totalCount
   }
   paper: paperVotesTotalCount(stepId: $stepId)
+  isArchived
+  archiveLimitDate
   viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
   viewerVote(step: $stepId) @include(if: $isAuthenticated) {
     completionStatus
@@ -11248,6 +11257,7 @@ fragment ProposalVoteButtonWrapperFragment_step_477vzn on ProposalStep {
   budget
   actionButtonLabel
   open
+  proposalArchivedTime
   viewerVotes(orderBy: {field: POSITION, direction: ASC}, token: $participantToken) {
     totalCount
     edges {

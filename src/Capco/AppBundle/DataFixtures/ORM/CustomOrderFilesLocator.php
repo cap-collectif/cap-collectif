@@ -367,6 +367,11 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Qa/ProposalFormNotificationConfiguration.yaml',
             $this->fixturesDir . 'Qa/ProposalForm.yaml',
             $this->fixturesDir . 'Qa/Proposal.yaml',
+
+            // Petitions with vote threshold and automatic archiving.
+            $this->fixturesDir . 'Qa/Selection.yaml',
+            $this->fixturesDir . 'Qa/ProposalCollectVote.yaml',
+            $this->fixturesDir . 'Qa/ProposalStepPaperVoteCounter.yaml',
         ];
     }
 }

@@ -1,20 +1,23 @@
-import { CapUIIcon, Icon, Text, CapUIFontWeight, Button, Tooltip, Tag } from '@cap-collectif/ui'
-import { graphql, useFragment } from 'react-relay'
-import { useIntl } from 'react-intl'
-import { useCallback, useEffect, useState } from 'react'
+import { Button, CapUIFontWeight, CapUIIcon, Flex, Icon, Tag, Text, Tooltip } from '@cap-collectif/ui'
+import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
+import AddProposalSmsVoteMutation from '@mutations/AddProposalSmsVoteMutation'
+import AddProposalVoteMutation from '@mutations/AddProposalVoteMutation'
+import RemoveProposalSmsVoteMutation from '@mutations/RemoveProposalSmsVoteMutation'
+import RemoveProposalVoteMutation from '@mutations/RemoveProposalVoteMutation'
+import type { AddProposalSmsVoteMutation$data } from '@relay/AddProposalSmsVoteMutation.graphql'
+import type { AddProposalVoteMutation$data } from '@relay/AddProposalVoteMutation.graphql'
 import { VoteButton_proposal$key } from '@relay/VoteButton_proposal.graphql'
 import { VoteButton_step$key } from '@relay/VoteButton_step.graphql'
-import type { AddProposalVoteMutation$data } from '@relay/AddProposalVoteMutation.graphql'
-import type { AddProposalSmsVoteMutation$data } from '@relay/AddProposalSmsVoteMutation.graphql'
-import AddProposalVoteMutation from '@mutations/AddProposalVoteMutation'
-import AddProposalSmsVoteMutation from '@mutations/AddProposalSmsVoteMutation'
-import RemoveProposalVoteMutation from '@mutations/RemoveProposalVoteMutation'
-import RemoveProposalSmsVoteMutation from '@mutations/RemoveProposalSmsVoteMutation'
-import { dangerToast, mutationErrorToast } from '@shared/utils/toasts'
-import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 import CookieMonster from '@shared/utils/CookieMonster'
-import { getVoteButtonIcon } from '@shared/utils/getVoteButtonIcon'
 import { getVoteAction, VoteAction } from '@shared/utils/getVoteAction'
+import { getVoteButtonIcon } from '@shared/utils/getVoteButtonIcon'
+import { dangerToast, mutationErrorToast } from '@shared/utils/toasts'
+import { useCallback, useEffect, useState } from 'react'
+import { useIntl } from 'react-intl'
+import { graphql, useFragment } from 'react-relay'
+import VoteThresholdGauge from './VoteThresholdGauge'
+import VoteThresholdOutcome from './VoteThresholdOutcome'
+import { isVotePeriodOver } from '@shared/utils/isVotePeriodOver'
 
 type Props = {
   proposal: VoteButton_proposal$key
@@ -62,6 +65,8 @@ const PROPOSAL_FRAGMENT = graphql`
     }
     paperVotesTotalCount(stepId: $stepId)
     paperVotesTotalPointsCount(stepId: $stepId)
+    isArchived
+    archiveLimitDate
   }
 `
 
@@ -73,6 +78,8 @@ const STEP_FRAGMENT = graphql`
     votesRanking
     budget
     open
+    state
+    proposalArchivedTime
     form {
       objectType
     }
@@ -110,6 +117,10 @@ const STEP_FRAGMENT = graphql`
  *
  * When requirements are not met after reaching votesMin, displays an alert.
  * TODO: Integrate ParticipationWorkflowModal when migrated to admin-next.
+ *
+ * In a step with a vote threshold, the vote count leaves the button: a gauge sits next to the
+ * labelled button while the proposal can be voted for, and an outcome sentence replaces both
+ * once the step is closed or the vote period of the proposal is over (archived or deadline passed).
  */
 export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepRef, triggerRequirementModal }) => {
   const step = useFragment(STEP_FRAGMENT, stepRef)
@@ -140,8 +151,8 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
   const numericVotesCount = proposal.votes?.totalCount ?? 0
   const votesCount = numericVotesCount + proposal.paperVotesTotalCount
   const displayedNumericVotesCount = numericVotesCount
-  const { numericLabelId, paperLabelId, votedTextId, voteTextId } =
-    VOTE_ACTION_LABEL_IDS[getVoteAction(step.actionButtonLabel)]
+  const voteAction = getVoteAction(step.actionButtonLabel)
+  const { numericLabelId, paperLabelId, votedTextId, voteTextId } = VOTE_ACTION_LABEL_IDS[voteAction]
   const displayedCount = isViewerVoteAccounted ? Math.max(votesCount, 1) : votesCount
 
   useEffect(() => {
@@ -314,8 +325,24 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
 
   const voteIcon = getVoteButtonIcon(step.voteButtonIcon)
 
-  // Step closed: show vote count only
-  if (!step.open) {
+  const voteThreshold = step.voteThreshold ?? 0
+  const hasThreshold = voteThreshold > 0
+  const votePeriodOver = isVotePeriodOver({
+    isArchived: proposal.isArchived,
+    archiveLimitDate: proposal.archiveLimitDate,
+    proposalArchivedTime: step.proposalArchivedTime,
+  })
+  const canVote = step.open && !votePeriodOver
+
+  if (hasThreshold && step.canDisplayBallot && (step.state === 'CLOSED' || votePeriodOver)) {
+    return <VoteThresholdOutcome votesCount={displayedCount} voteThreshold={voteThreshold} voteAction={voteAction} />
+  }
+
+  // Secret ballot not published yet: nothing reveals the outcome of a proposal that can no longer be voted for
+  if (hasThreshold && step.open && votePeriodOver) return null
+
+  // Step closed or proposal no longer votable: show vote count only
+  if (!canVote) {
     const tagContent = (
       <Tag variantColor="infoGray" transparent>
         <Icon name={voteIcon} />
@@ -332,12 +359,18 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
     return <Tooltip label={tooltipLabel}>{tagContent}</Tooltip>
   }
 
+  // With a threshold the count is carried by the gauge, so the button states its action instead
+  const showCountInButton = step.canDisplayBallot && !hasThreshold
+  const buttonLabel = intl.formatMessage({ id: hasVote ? votedTextId : voteTextId })
+
   const buttonContent = (
     <Button
       id={`proposal-vote-btn-${proposal.id}`}
       onClick={onClick}
       variant={hasVote ? 'primary' : 'secondary'}
-      aria-label={intl.formatMessage({ id: hasVote ? 'global.delete' : 'global.add' })}
+      {...(hasThreshold
+        ? { 'aria-pressed': Boolean(hasVote) }
+        : { 'aria-label': intl.formatMessage({ id: hasVote ? 'global.delete' : 'global.add' }) })}
       height="32px"
       leftIcon={voteIcon}
       disabled={isLoading}
@@ -345,17 +378,26 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
       flexShrink={0}
     >
       <Text fontWeight={CapUIFontWeight.Semibold} whiteSpace="nowrap">
-        {step.canDisplayBallot ? (
-          <>
-            {displayedCount}
-            {step.voteThreshold ? ` / ${step.voteThreshold}` : ''}
-          </>
-        ) : (
-          intl.formatMessage({ id: hasVote ? votedTextId : voteTextId })
-        )}
+        {showCountInButton ? displayedCount : buttonLabel}
       </Text>
     </Button>
   )
+
+  if (hasThreshold) {
+    return (
+      <Flex align="center" justifyContent="flex-end" gap="md" width="100%" minWidth={0}>
+        {step.canDisplayBallot ? (
+          <VoteThresholdGauge
+            votesCount={displayedCount}
+            voteThreshold={voteThreshold}
+            voteAction={voteAction}
+            tooltipLabel={tooltipLabel}
+          />
+        ) : null}
+        {buttonContent}
+      </Flex>
+    )
+  }
 
   if (!tooltipLabel) return buttonContent
 

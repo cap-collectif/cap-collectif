@@ -14,6 +14,7 @@ const btnIcons = [
   CapUIIcon.HandHoldingHeart,
   CapUIIcon.Heart,
   CapUIIcon.RatingStar,
+  CapUIIcon.Pen,
 ]
 const btnActions = ['vote', 'support', 'sign']
 

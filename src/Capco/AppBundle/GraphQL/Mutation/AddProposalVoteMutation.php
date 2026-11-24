@@ -24,6 +24,7 @@ use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Service\ContributionValidator;
+use Capco\AppBundle\Service\ProposalVotePeriodChecker;
 use Capco\AppBundle\Utils\RequestGuesserInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
@@ -62,6 +63,7 @@ class AddProposalVoteMutation implements MutationInterface
         private readonly ContributionValidator $contributionValidator,
         private readonly Indexer $indexer,
         private readonly UserRepository $userRepository,
+        private readonly ProposalVotePeriodChecker $proposalVotePeriodChecker,
     ) {}
 
     public function __invoke(Argument $input, User $user): array
@@ -112,6 +114,10 @@ class AddProposalVoteMutation implements MutationInterface
         // Check if step is votable
         if (!$step->isVotable()) {
             throw new UserError('This step is not votable.');
+        }
+
+        if ($this->proposalVotePeriodChecker->isVotePeriodOver($proposal, $step)) {
+            throw new UserError('This proposal no longer accepts votes.');
         }
 
         // Check if user has reached limit of votes

@@ -583,3 +583,21 @@ Capco\AppBundle\Entity\Project:
         publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 20 days"))>
         visibility: 3
         restrictedViewerGroups: ['@group2', '@group3']
+    projectPetitionThreshold:
+        id: 'projectPetitionThreshold'
+        title: Pétitions avec seuil et archivage automatique
+        createdAt: <identity((new \DateTime('2025-12-01 12:00:00')))>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        visibility: 2
+        owner: '@user1'
+        creator: '@user1'
+    projectPetitionClosedStep:
+        id: 'projectPetitionClosedStep'
+        title: Pétitions avec seuil (étape terminée)
+        createdAt: <identity((new \DateTime('2025-12-01 12:05:00')))>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        visibility: 2
+        owner: '@user1'
+        creator: '@user1'

@@ -10,6 +10,7 @@ export type FilterState = {
   category: string | null
   theme: string | null
   status: string | null
+  state: string | null
   userType: string | null
   district: string | null
   contributor: string | null
@@ -23,6 +24,7 @@ export const DEFAULT_FILTERS: FilterState = {
   category: 'ALL',
   theme: 'ALL',
   status: 'ALL',
+  state: 'ALL',
   userType: 'ALL',
   district: 'ALL',
   contributor: 'ALL',
@@ -40,6 +42,7 @@ const QUERY = graphql`
         defaultSort
         votesRanking
         voteType
+        proposalArchivedTime
         statuses {
           id
           name
@@ -88,7 +91,7 @@ export type FilterOptions = ReadonlyArray<{
   title?: string
 }>
 
-type FilterType = 'sort' | 'userType' | 'theme' | 'category' | 'district' | 'status'
+type FilterType = 'sort' | 'userType' | 'theme' | 'category' | 'district' | 'status' | 'state'
 
 type Filter = {
   isEnabled: boolean
@@ -269,6 +272,36 @@ export const useVoteStepFilters = (stepId: string): ReturnType => {
       options: step.statuses ? [generateAllOption('global.select_statuses'), ...step.statuses] : [],
       label: intl.formatMessage({
         id: 'global.statuses',
+      }),
+    },
+    // Archived proposals stay in the list: this filter only exists when the step archives proposals automatically
+    state: {
+      isEnabled: (step.proposalArchivedTime ?? 0) > 0,
+      options: [
+        generateAllOption('global.select_state'),
+        {
+          id: 'PUBLISHED',
+          name: intl.formatMessage(
+            {
+              id: 'front.collect-vote-step.filter-state.published',
+              defaultMessage: '{feminine, select, true {Publiées} other {Publiés}}',
+            },
+            { feminine: String(isFeminineObjectType(form.objectType)) },
+          ),
+        },
+        {
+          id: 'ARCHIVED',
+          name: intl.formatMessage(
+            {
+              id: 'front.collect-vote-step.filter-state.archived',
+              defaultMessage: '{feminine, select, true {Archivées} other {Archivés}}',
+            },
+            { feminine: String(isFeminineObjectType(form.objectType)) },
+          ),
+        },
+      ],
+      label: intl.formatMessage({
+        id: 'global.state',
       }),
     },
   }

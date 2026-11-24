@@ -1,0 +1,7 @@
+Capco\AppBundle\Entity\ProposalCollectVote:
+    qaPcvPetitionThresholdExceeded:
+        proposal: '@qaPetitionThresholdExceeded'
+        collectStep: '@qaCollectStepPetitionThreshold'
+        user: '@userCollectivite'
+        publishedAt: <(new \DateTime('2026-06-03 09:00:00'))>
+        createdAt: <(new \DateTime('2026-06-03 09:00:00'))>

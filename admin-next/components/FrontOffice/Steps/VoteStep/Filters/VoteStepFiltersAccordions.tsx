@@ -54,6 +54,36 @@ const VoteStepFiltersAccordions: React.FC<Props> = ({
         </Accordion.Panel>
       </Accordion.Item>
 
+      {filters.state.isEnabled ? (
+        <Accordion.Item id="state">
+          <Accordion.Button p={0} pb={1}>
+            <Text
+              fontWeight={CapUIFontWeight.Normal}
+              fontSize={CapUIFontSize.BodyRegular}
+              lineHeight={CapUILineHeight.M}
+            >
+              {filters.state.label}
+            </Text>
+          </Accordion.Button>
+          <Accordion.Panel display="flex" direction="column" ml="0">
+            <RadioGroup pt={2}>
+              {filters.state.options.map(stateItem => (
+                <Radio
+                  key={`state-${stateItem.id}`}
+                  id={`state-${stateItem.id.toLowerCase()}`}
+                  name="state"
+                  value={stateItem.id}
+                  checked={currentFilters.state === stateItem.id}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => onFilterChange('state', e.target.value)}
+                >
+                  {stateItem.name}
+                </Radio>
+              ))}
+            </RadioGroup>
+          </Accordion.Panel>
+        </Accordion.Item>
+      ) : null}
+
       {filters.category.isEnabled && filters.category.options.length > 0 ? (
         <Accordion.Item id="category">
           <Accordion.Button p={0} pb={1}>

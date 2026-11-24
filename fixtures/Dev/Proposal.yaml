@@ -1471,3 +1471,159 @@ Capco\AppBundle\Entity\Proposal:
         undraftAt: $createdAt
         reference: 258
         updatedAt: $createdAt
+    petitionNoSignature:
+        id: petitionNoSignature
+        title: Pétition sans signature
+        summary: Massifier la rénovation des passoires thermiques.
+        body: Massifier la rénovation des passoires thermiques pour réduire les factures et les émissions de gaz à effet de serre des logements.
+        author: '@user5'
+        proposalForm: '@proposalFormPetitionThreshold'
+        status: '@statusPetitionSigning'
+        publishedAt: <identity((new \DateTime('2026-06-01 10:00:00'))->modify("+ 1 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+        reference: 2068801
+    petitionInProgress:
+        id: petitionInProgress
+        title: Accélérer la rénovation énergétique des logements
+        summary: Massifier la rénovation des passoires thermiques.
+        body: Massifier la rénovation des passoires thermiques pour réduire les factures et les émissions de gaz à effet de serre des logements.
+        author: '@user4'
+        proposalForm: '@proposalFormPetitionThreshold'
+        status: '@statusPetitionSigning'
+        publishedAt: <identity((new \DateTime('2026-06-01 10:00:00'))->modify("+ 2 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+        reference: 2068802
+    petitionAlmostReached:
+        id: petitionAlmostReached
+        title: Pétition proche du seuil (compteur à six chiffres)
+        summary: Massifier la rénovation des passoires thermiques.
+        body: Massifier la rénovation des passoires thermiques pour réduire les factures et les émissions de gaz à effet de serre des logements.
+        author: '@user4'
+        proposalForm: '@proposalFormPetitionThreshold'
+        status: '@statusPetitionSigning'
+        publishedAt: <identity((new \DateTime('2026-06-01 10:00:00'))->modify("+ 3 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+        reference: 2068803
+    petitionThresholdReached:
+        id: petitionThresholdReached
+        title: Pétition au seuil, délai en cours
+        summary: Massifier la rénovation des passoires thermiques.
+        body: Massifier la rénovation des passoires thermiques pour réduire les factures et les émissions de gaz à effet de serre des logements.
+        author: '@user1'
+        proposalForm: '@proposalFormPetitionThreshold'
+        status: '@statusPetitionSigning'
+        publishedAt: <identity((new \DateTime('2026-06-01 10:00:00'))->modify("+ 4 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+        reference: 2068804
+    petitionThresholdExceeded:
+        id: petitionThresholdExceeded
+        title: Pétition au-delà du seuil, délai en cours
+        summary: Massifier la rénovation des passoires thermiques.
+        body: Massifier la rénovation des passoires thermiques pour réduire les factures et les émissions de gaz à effet de serre des logements.
+        author: '@user1'
+        proposalForm: '@proposalFormPetitionThreshold'
+        status: '@statusPetitionSigning'
+        publishedAt: <identity((new \DateTime('2026-06-01 10:00:00'))->modify("+ 5 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+        reference: 2068805
+    petitionDeadlineReached:
+        id: petitionDeadlineReached
+        title: Pétition au seuil atteint, délai écoulé
+        summary: Massifier la rénovation des passoires thermiques.
+        body: Massifier la rénovation des passoires thermiques pour réduire les factures et les émissions de gaz à effet de serre des logements.
+        author: '@user4'
+        proposalForm: '@proposalFormPetitionThreshold'
+        status: '@statusPetitionSigning'
+        publishedAt: <identity((new \DateTime('2015-01-05 10:00:00'))->modify("+ 1 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+        reference: 2068806
+    petitionArchived:
+        id: petitionArchived
+        title: Pétition archivée, seuil non atteint
+        summary: Massifier la rénovation des passoires thermiques.
+        body: Massifier la rénovation des passoires thermiques pour réduire les factures et les émissions de gaz à effet de serre des logements.
+        author: '@user1'
+        proposalForm: '@proposalFormPetitionThreshold'
+        status: '@statusPetitionSigning'
+        publishedAt: <identity((new \DateTime('2015-01-05 10:00:00'))->modify("+ 2 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+        reference: 2068807
+        isArchived: true
+    petitionDeadlineNotArchivedYet:
+        id: petitionDeadlineNotArchivedYet
+        title: Pétition au délai écoulé, pas encore archivée par le cron
+        summary: Massifier la rénovation des passoires thermiques.
+        body: Massifier la rénovation des passoires thermiques pour réduire les factures et les émissions de gaz à effet de serre des logements.
+        author: '@user4'
+        proposalForm: '@proposalFormPetitionThreshold'
+        status: '@statusPetitionSigning'
+        publishedAt: <identity((new \DateTime('2015-01-05 10:00:00'))->modify("+ 3 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+        reference: 2068808
+    petitionArchivedNoStatus:
+        id: petitionArchivedNoStatus
+        title: Pétition archivée sans statut
+        summary: Massifier la rénovation des passoires thermiques.
+        body: Massifier la rénovation des passoires thermiques pour réduire les factures et les émissions de gaz à effet de serre des logements.
+        author: '@user4'
+        proposalForm: '@proposalFormPetitionThreshold'
+        publishedAt: <identity((new \DateTime('2015-01-05 10:00:00'))->modify("+ 4 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+        reference: 2068809
+        isArchived: true
+    petitionArchivedLongStatus:
+        id: petitionArchivedLongStatus
+        title: Pétition archivée avec un statut long
+        summary: Massifier la rénovation des passoires thermiques.
+        body: Massifier la rénovation des passoires thermiques pour réduire les factures et les émissions de gaz à effet de serre des logements.
+        author: '@user1'
+        proposalForm: '@proposalFormPetitionThreshold'
+        status: '@statusPetitionSigning'
+        publishedAt: <identity((new \DateTime('2015-01-05 10:00:00'))->modify("+ 5 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+        reference: 2068810
+        isArchived: true
+    petitionClosedStepReached:
+        id: petitionClosedStepReached
+        title: Pétition d'une étape terminée, seuil atteint
+        summary: Massifier la rénovation des passoires thermiques.
+        body: Massifier la rénovation des passoires thermiques pour réduire les factures et les émissions de gaz à effet de serre des logements.
+        author: '@user5'
+        proposalForm: '@proposalFormPetitionClosed'
+        publishedAt: <identity((new \DateTime('2024-02-01 10:00:00'))->modify("+ 1 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+        reference: 2068811
+    petitionClosedStepNotReached:
+        id: petitionClosedStepNotReached
+        title: Pétition d'une étape terminée, seuil non atteint
+        summary: Massifier la rénovation des passoires thermiques.
+        body: Massifier la rénovation des passoires thermiques pour réduire les factures et les émissions de gaz à effet de serre des logements.
+        author: '@user5'
+        proposalForm: '@proposalFormPetitionClosed'
+        publishedAt: <identity((new \DateTime('2024-02-01 10:00:00'))->modify("+ 2 minutes"))>
+        createdAt: $publishedAt
+        updatedAt: $publishedAt
+        undraftAt: $publishedAt
+        reference: 2068812

@@ -192,3 +192,39 @@ Capco\AppBundle\Entity\Selection:
         proposal: '@proposalEmailingSelectionVote2'
         selectionStep: '@selectionStepVoteEmailing'
         createdAt: <(new \DateTime('2025-08-15 08:00:00'))>
+    selectionReviewPetitionInProgress:
+        proposal: '@petitionInProgress'
+        selectionStep: '@selectionStepPetitionReview'
+        status: '@statusPetitionReview'
+        createdAt: <(new \DateTime('2026-06-02 08:00:00'))>
+    selectionReviewPetitionDeadlineReached:
+        proposal: '@petitionDeadlineReached'
+        selectionStep: '@selectionStepPetitionReview'
+        status: '@statusPetitionReview'
+        createdAt: <(new \DateTime('2026-06-02 08:00:00'))>
+    selectionReviewPetitionArchived:
+        proposal: '@petitionArchived'
+        selectionStep: '@selectionStepPetitionReview'
+        status: '@statusPetitionReview'
+        createdAt: <(new \DateTime('2026-06-02 08:00:00'))>
+    selectionReviewPetitionArchivedNoStatus:
+        proposal: '@petitionArchivedNoStatus'
+        selectionStep: '@selectionStepPetitionReview'
+        createdAt: <(new \DateTime('2026-06-02 08:00:00'))>
+    selectionReviewPetitionArchivedLongStatus:
+        proposal: '@petitionArchivedLongStatus'
+        selectionStep: '@selectionStepPetitionReview'
+        status: '@statusPetitionReviewLong'
+        createdAt: <(new \DateTime('2026-06-02 08:00:00'))>
+    selectionSecretBallotPetitionNoSignature:
+        proposal: '@petitionNoSignature'
+        selectionStep: '@selectionStepPetitionSecretBallot'
+        createdAt: <(new \DateTime('2026-06-02 08:00:00'))>
+    selectionSecretBallotPetitionInProgress:
+        proposal: '@petitionInProgress'
+        selectionStep: '@selectionStepPetitionSecretBallot'
+        createdAt: <(new \DateTime('2026-06-02 08:00:00'))>
+    selectionSecretBallotPetitionThresholdExceeded:
+        proposal: '@petitionThresholdExceeded'
+        selectionStep: '@selectionStepPetitionSecretBallot'
+        createdAt: <(new \DateTime('2026-06-02 08:00:00'))>

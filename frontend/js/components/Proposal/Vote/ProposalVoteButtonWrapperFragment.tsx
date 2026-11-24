@@ -14,6 +14,7 @@ import {
   ProposalVoteButtonWrapperFragment_participant$key
 } from '~relay/ProposalVoteButtonWrapperFragment_participant.graphql'
 import { getVoteAction } from '@shared/utils/getVoteAction'
+import { isVotePeriodOver } from '@shared/utils/isVotePeriodOver'
 
 type Props = {
   proposal: ProposalVoteButtonWrapperFragment_proposal$key
@@ -58,6 +59,8 @@ const PROPOSAL_FRAGMENT = graphql`
       totalCount
     }
     paper: paperVotesTotalCount(stepId: $stepId)
+    isArchived
+    archiveLimitDate
     viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
     viewerVote(step: $stepId) @include(if: $isAuthenticated) {
         completionStatus
@@ -78,6 +81,7 @@ const STEP_FRAGMENT = graphql`
     budget
     actionButtonLabel
     open
+    proposalArchivedTime
     viewerVotes(orderBy: { field: POSITION, direction: ASC }, token: $token) {
       totalCount
       edges {
@@ -145,6 +149,21 @@ export const ProposalVoteButtonWrapperFragment = ({
   const hasVoted = viewer ? proposal?.viewerVote?.completionStatus === 'COMPLETED' : proposal?.contributorVote?.completionStatus === 'COMPLETED'
 
   if (proposal && !step?.open && !usesNewUI) {
+    return null
+  }
+
+  // Once the archiving deadline has passed, the proposal no longer accepts votes even in an open step
+  // (the backend refuses them), whether or not its vote threshold has been reached
+  if (
+    proposal &&
+    step &&
+    !usesNewUI &&
+    isVotePeriodOver({
+      isArchived: proposal.isArchived,
+      archiveLimitDate: proposal.archiveLimitDate,
+      proposalArchivedTime: step.proposalArchivedTime,
+    })
+  ) {
     return null
   }
 
