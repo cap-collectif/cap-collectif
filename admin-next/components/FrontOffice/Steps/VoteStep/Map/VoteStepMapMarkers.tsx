@@ -1,7 +1,9 @@
 import { VoteStepMapMarkers_proposalStep$key } from '@relay/VoteStepMapMarkers_proposalStep.graphql'
 import useIsMobile from '@shared/hooks/useIsMobile'
 import { isValidLatLng } from '@utils/leaflet'
-import { FC, useEffect, useMemo, useState } from 'react'
+import L from 'leaflet'
+import { FC, useCallback, useEffect, useMemo, useState } from 'react'
+import { useIntl } from 'react-intl'
 import MarkerClusterGroup from 'react-leaflet-markercluster'
 import { graphql, usePaginationFragment } from 'react-relay'
 import MobileProposalCard from './MobileProposalCard'
@@ -61,7 +63,23 @@ const MARKERS_FRAGMENT = graphql`
 const VoteStepMapMarkers: FC<Props> = ({ step: stepKey }) => {
   const { data, loadNext, hasNext, isLoadingNext } = usePaginationFragment(MARKERS_FRAGMENT, stepKey)
   const isMobile = useIsMobile()
+  const intl = useIntl()
   const [selectedProposalId, setSelectedProposalId] = useState<string | null>(null)
+
+  // Same icon as the markercluster default one, with an accessible name ("7 propositions" instead of "7")
+  const createClusterIcon = useCallback(
+    (cluster: { getChildCount: () => number }) => {
+      const childCount = cluster.getChildCount()
+      const size = childCount < 10 ? 'small' : childCount < 100 ? 'medium' : 'large'
+      const label = intl.formatMessage({ id: 'count-proposal' }, { num: childCount })
+      return new L.DivIcon({
+        html: `<div><span aria-hidden="true">${childCount}</span><span class="sr-only">${label}</span></div>`,
+        className: `marker-cluster marker-cluster-${size}`,
+        iconSize: new L.Point(40, 40),
+      })
+    },
+    [intl],
+  )
 
   useEffect(() => {
     if (hasNext) loadNext(50)
@@ -96,6 +114,7 @@ const VoteStepMapMarkers: FC<Props> = ({ step: stepKey }) => {
         zoomToBoundsOnClick
         spiderfyDistanceMultiplier={4}
         maxClusterRadius={30}
+        iconCreateFunction={createClusterIcon}
       >
         {proposals.map(proposal => (
           <ProposalMarker key={proposal.id} proposal={proposal} />

@@ -1,3 +1,4 @@
+// @ts-ignore
 import 'leaflet/dist/leaflet.css'
 
 import { Box, CapUIIcon } from '@cap-collectif/ui'
@@ -6,8 +7,10 @@ import ProposalMapDiscoverPane from '@components/FrontOffice/Leaflet/ProposalMap
 import { VoteStepMapContainer_proposalStep$key } from '@relay/VoteStepMapContainer_proposalStep.graphql'
 import useIsMobile from '@shared/hooks/useIsMobile'
 import { CapcoTileLayer, convertToGeoJsonStyle, formatGeoJsons, parseLatLng, parseLatLngBounds } from '@utils/leaflet'
+import type L from 'leaflet'
 import { parseAsInteger, useQueryState } from 'nuqs'
-import { FC, Suspense, useState } from 'react'
+import { FC, Suspense, useCallback, useState } from 'react'
+import { useIntl } from 'react-intl'
 import { GeoJSON, MapContainer } from 'react-leaflet'
 import { graphql, useFragment } from 'react-relay'
 import MapCustomEvents from './VoteStepMapCustomEvents'
@@ -75,9 +78,12 @@ const FRAGMENT = graphql`
 type Props = {
   step: VoteStepMapContainer_proposalStep$key
   onWorkflowTrigger?: (contributionId: string) => void
+  // Move the focus to the map once displayed (after the user asked for it)
+  focusOnMount?: boolean
 }
 
-const VoteStepMapContainer: FC<Props> = ({ step: stepKey, onWorkflowTrigger }) => {
+const VoteStepMapContainer: FC<Props> = ({ step: stepKey, onWorkflowTrigger, focusOnMount = false }) => {
+  const intl = useIntl()
   const step = useFragment<VoteStepMapContainer_proposalStep$key>(FRAGMENT, stepKey)
   const isMobile = useIsMobile()
   const [latlngBounds] = useQueryState('latlngBounds')
@@ -102,6 +108,23 @@ const VoteStepMapContainer: FC<Props> = ({ step: stepKey, onWorkflowTrigger }) =
   }
   const zoom = urlCenter ? 14 : filterBounds && !isMobile ? null : form?.zoomMap || 10
 
+  const mapLabel = intl.formatMessage({ id: 'global.card' })
+  // The Leaflet container is focusable (keyboard panning): give it a name, and the focus when the user
+  // has just asked to display the map (the button that did it disappears)
+  const onMapReady = useCallback(
+    (map: L.Map | null) => {
+      if (!map) return
+      const container = map.getContainer()
+      container.setAttribute('role', 'region')
+      container.setAttribute('aria-label', mapLabel)
+      if (focusOnMount && !container.dataset.focusedOnMount) {
+        container.dataset.focusedOnMount = 'true'
+        container.focus()
+      }
+    },
+    [focusOnMount, mapLabel],
+  )
+
   return (
     <Box
       height="100%"
@@ -113,6 +136,7 @@ const VoteStepMapContainer: FC<Props> = ({ step: stepKey, onWorkflowTrigger }) =
       }}
     >
       <MapContainer
+        ref={onMapReady}
         id={mapId}
         center={center}
         zoom={zoom}
@@ -139,6 +163,9 @@ const VoteStepMapContainer: FC<Props> = ({ step: stepKey, onWorkflowTrigger }) =
             display={['none', 'block']}
             onClick={() => setIsMapExpanded(isMapExpanded == 1 ? 0 : 1)}
             icon={isMapExpanded ? CapUIIcon.Shrink : CapUIIcon.Expand}
+            aria-label={intl.formatMessage({
+              id: isMapExpanded ? 'front.vote-step.map-shrink' : 'front.vote-step.map-expand',
+            })}
           />
         </LocateAndZoomControl>
       </MapContainer>

@@ -1,6 +1,7 @@
 import type { AddressComplete } from '@cap-collectif/form'
 import { findDistrictAt } from '@utils/geojson'
 import { ProposalFormModal_proposalForm$data } from '@relay/ProposalFormModal_proposalForm.graphql'
+import { isWYSIWYGContentEmpty } from '@shared/utils/isWYSIWYGContentEmpty'
 import { IntlShape } from 'react-intl'
 import * as yup from 'yup'
 import { ParsedResponse, ResponseValue, ValidationRule } from './ProposalFormModal.type'
@@ -240,7 +241,10 @@ export const createProposalSchema = (
 
     body:
       proposalForm.usingDescription && proposalForm.descriptionMandatory
-        ? yup.string().required(requiredMessage)
+        ? yup
+            .string()
+            // An emptied editor still holds markup (<p><br></p>)
+            .test('wysiwyg-not-empty', requiredMessage, value => !isWYSIWYGContentEmpty(value))
         : yup.string(),
 
     theme:

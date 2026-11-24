@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { useIntl } from 'react-intl'
 import { useMap } from 'react-leaflet'
 import L from 'leaflet'
 import 'maplibre-gl/dist/maplibre-gl.css'
@@ -22,7 +23,10 @@ type MaplibreLayer = L.Layer & {
 const isMapMounted = (map: L.Map | null | undefined) =>
   Boolean(map && (map as L.Map & { _mapPane?: HTMLElement })._mapPane)
 
-export const createGuardedMaplibreLayer = (leaflet: typeof L, options: { style: string }): MaplibreLayer => {
+export const createGuardedMaplibreLayer = (
+  leaflet: typeof L,
+  options: { style: string; locale?: Record<string, string> },
+): MaplibreLayer => {
   const layer = leaflet.maplibreGL(options) as unknown as MaplibreLayer
 
   const isLayerMounted = () => isMapMounted(layer._map) && Boolean(layer._glMap)
@@ -58,6 +62,9 @@ export const createGuardedMaplibreLayer = (leaflet: typeof L, options: { style: 
 
 const CapcoTileLayer = () => {
   const map = useMap()
+  const intl = useIntl()
+  // MapLibre names its canvas region "Map" (English) by default
+  const mapLabel = intl.formatMessage({ id: 'global.card' })
 
   useEffect(() => {
     let glLayer: MaplibreLayer | null = null
@@ -74,6 +81,7 @@ const CapcoTileLayer = () => {
 
       glLayer = createGuardedMaplibreLayer(L, {
         style: MAP_STYLE_URL,
+        locale: { 'Map.Title': mapLabel },
       }).addTo(map)
     }
 
@@ -83,7 +91,7 @@ const CapcoTileLayer = () => {
       hasUnmounted = true
       glLayer?.remove()
     }
-  }, [map])
+  }, [map, mapLabel])
 
   return null
 }

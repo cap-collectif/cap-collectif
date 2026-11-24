@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useIntl } from 'react-intl'
 import L from 'leaflet'
 import { CapUIIcon, CapUIIconSize, Flex, FlexProps, Icon } from '@cap-collectif/ui'
 import { Marker, useMap, useMapEvents } from 'react-leaflet'
@@ -20,6 +21,7 @@ export const ControlButton: React.FC<FlexProps & { icon: CapUIIcon }> = ({ icon,
   <Flex
     borderRadius="normal"
     as="button"
+    type="button"
     bg="white"
     align="center"
     justifyContent="center"
@@ -50,6 +52,7 @@ export const ChangeSizeButton: React.FC<FlexProps & { icon?: CapUIIcon }> = ({
 }
 
 const LocateAndZoomControl: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
+  const intl = useIntl()
   const [position, setPosition] = React.useState(null)
   const map = useMapEvents({
     locationfound(e: { latlng }) {
@@ -61,10 +64,25 @@ const LocateAndZoomControl: React.FC<{ children?: React.ReactNode }> = ({ childr
     <>
       <LeafletControl position="topright">
         <Flex direction="column" m="1rem">
-          <ControlButton mb={4} onClick={() => map.locate()} icon={CapUIIcon.LocationTarget} />
+          <ControlButton
+            mb={4}
+            onClick={() => map.locate()}
+            icon={CapUIIcon.LocationTarget}
+            aria-label={intl.formatMessage({ id: 'front.vote-step.map-locate-me' })}
+          />
           <Flex direction="column" display={['none', 'flex']}>
-            <ControlButton mb={1} onClick={() => map.zoomIn()} icon={CapUIIcon.Add} />
-            <ControlButton onClick={() => map.zoomOut()} icon={CapUIIcon.Minus} mb={4} />
+            <ControlButton
+              mb={1}
+              onClick={() => map.zoomIn()}
+              icon={CapUIIcon.Add}
+              aria-label={intl.formatMessage({ id: 'front.vote-step.map-zoom-in' })}
+            />
+            <ControlButton
+              onClick={() => map.zoomOut()}
+              icon={CapUIIcon.Minus}
+              mb={4}
+              aria-label={intl.formatMessage({ id: 'front.vote-step.map-zoom-out' })}
+            />
           </Flex>
           {children}
         </Flex>

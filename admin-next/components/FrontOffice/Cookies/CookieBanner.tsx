@@ -1,6 +1,7 @@
 import { Box, Flex, Text } from '@cap-collectif/ui'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
+import useReserveSpaceForFixedBanner from '@shared/hooks/useReserveSpaceForFixedBanner'
 
 type Props = {
   onOpen: () => void
@@ -10,11 +11,16 @@ type Props = {
 
 export const CookieBanner: React.FC<Props> = ({ onOpen, onAccept, onRefuse }: Props) => {
   const intl = useIntl()
+  const bannerRef = React.useRef<HTMLDivElement>(null)
+  useReserveSpaceForFixedBanner(bannerRef)
 
   return (
     <Flex
+      ref={bannerRef}
       id="cookie-banner"
       className="cookie-banner"
+      role="region"
+      aria-label={intl.formatMessage({ id: 'cookies-management' })}
       direction={['column', 'column', 'row']}
       p={8}
       gap={[4, 4, 6]}

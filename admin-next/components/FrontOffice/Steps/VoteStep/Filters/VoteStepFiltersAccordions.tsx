@@ -36,7 +36,7 @@ const VoteStepFiltersAccordions: React.FC<Props> = ({
           </Text>
         </Accordion.Button>
         <Accordion.Panel display="flex" direction="column" ml="0">
-          <RadioGroup pt={2}>
+          <RadioGroup pt={2} role="radiogroup" aria-labelledby="accordion-button-sort">
             {filters.sort.options.map(option => (
               <Flex alignItems="center" key={option.id}>
                 <Radio
@@ -96,7 +96,7 @@ const VoteStepFiltersAccordions: React.FC<Props> = ({
             </Text>
           </Accordion.Button>
           <Accordion.Panel display="flex" direction="column" ml="0">
-            <RadioGroup pt={2}>
+            <RadioGroup pt={2} role="radiogroup" aria-labelledby="accordion-button-category">
               {filters.category.options.map(category => (
                 <Radio
                   id={category.id === 'ALL' ? 'category-all' : category.id}
@@ -126,7 +126,7 @@ const VoteStepFiltersAccordions: React.FC<Props> = ({
             </Text>
           </Accordion.Button>
           <Accordion.Panel display="flex" direction="column" ml="0">
-            <RadioGroup pt={2}>
+            <RadioGroup pt={2} role="radiogroup" aria-labelledby="accordion-button-theme">
               {[
                 ...filters.theme.options.map(theme => (
                   <Radio
@@ -199,7 +199,7 @@ const VoteStepFiltersAccordions: React.FC<Props> = ({
           </Accordion.Button>
 
           <Accordion.Panel display="flex" direction="column" ml="0">
-            <RadioGroup pt={2}>
+            <RadioGroup pt={2} role="radiogroup" aria-labelledby="accordion-button-status">
               {filters.status.options.map(statusItem => (
                 <Radio
                   key={statusItem.id}
@@ -224,7 +224,7 @@ const VoteStepFiltersAccordions: React.FC<Props> = ({
           </Text>
         </Accordion.Button>
         <Accordion.Panel display="flex" direction="column" ml="0">
-          <RadioGroup pt={2}>
+          <RadioGroup pt={2} role="radiogroup" aria-labelledby="accordion-button-userType">
             {filters.userType.options.map(userType => (
               <Radio
                 key={userType.id}

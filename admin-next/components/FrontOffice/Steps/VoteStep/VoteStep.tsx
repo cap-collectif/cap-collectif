@@ -15,6 +15,7 @@ import { LeafletStyles } from 'src/app/styles'
 import { buildVoteStepQueryVariables, VOTE_STEP_HERO_QUERY, VOTE_STEP_QUERY } from './VoteStep.queries'
 import VoteStepWebLayout from './VoteStepWebLayout'
 import VoteStepHeroSection from './VoteStepHeroSection'
+import VoteStepResultsAnnouncer from './VoteStepResultsAnnouncer'
 import { VoteStepProjectHeroSkeleton, VoteStepWebLayoutSkeleton } from './VoteStepWebLayoutSkeleton'
 import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 
@@ -103,15 +104,17 @@ export const VoteStep: React.FC<{
       <React.Suspense fallback={<VoteStepProjectHeroSkeleton />}>
         <VoteStepHero stepId={prefetchedStep.id} />
       </React.Suspense>
-      <React.Suspense fallback={<VoteStepWebLayoutSkeleton hasMapView={hasMapView} />}>
-        <VoteStepWeb
-          stepId={prefetchedStep.id}
-          token={token}
-          customCode={customCode}
-          defaultSort={defaultSort}
-          projectCustomCode={projectCustomCode}
-        />
-      </React.Suspense>
+      <VoteStepResultsAnnouncer>
+        <React.Suspense fallback={<VoteStepWebLayoutSkeleton hasMapView={hasMapView} />}>
+          <VoteStepWeb
+            stepId={prefetchedStep.id}
+            token={token}
+            customCode={customCode}
+            defaultSort={defaultSort}
+            projectCustomCode={projectCustomCode}
+          />
+        </React.Suspense>
+      </VoteStepResultsAnnouncer>
     </>
   )
 }

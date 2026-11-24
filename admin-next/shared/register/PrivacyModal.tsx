@@ -41,12 +41,12 @@ export const PrivacyModal: FC<{ query: PrivacyModal_query$key }> = ({ query: que
       size={CapUIModalSize.Lg}
       id="privacy-modal"
       className="privacy-policy"
-      ariaLabel="contained-modal-title-lg"
+      ariaLabel={intl.formatMessage({ id: 'privacy-policy' })}
       alwaysOpenInPortal
       forceModalDialogToFalse
       zIndex={9999}
     >
-      <Modal.Header className="privacy-policy">
+      <Modal.Header className="privacy-policy" closeIconLabel={intl.formatMessage({ id: 'global.close' })}>
         <Heading>{intl.formatMessage({ id: 'privacy-policy' })}</Heading>
       </Modal.Header>
       <Modal.Body>

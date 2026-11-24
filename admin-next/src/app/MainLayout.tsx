@@ -71,13 +71,15 @@ const MainLayout: FC<{ SSRData: layoutQuery$data; children: React.ReactNode }> =
   if (shield_mode && (!session?.viewerSession || accessDenied))
     return (
       <>
-        <ShieldPageWrapper SSRData={SSRData} accessDenied={accessDenied} />
         <CookieManager SSRData={SSRData} mode="BANNER" />
+        <ShieldPageWrapper SSRData={SSRData} accessDenied={accessDenied} />
       </>
     )
 
   return (
     <>
+      {/* Cookie banner first in the DOM so that keyboard and screen reader users reach it before the page content */}
+      <CookieManager SSRData={SSRData} mode="BANNER" />
       <NavBarContextProvider>
         <ChangeLanguageNavBar locales={locales} />
         <NavBarQuery SSRData={SSRData}>
@@ -96,7 +98,6 @@ const MainLayout: FC<{ SSRData: layoutQuery$data; children: React.ReactNode }> =
         {children}
         <FooterWrapper SSRData={SSRData} />
       </NavBarContextProvider>
-      <CookieManager SSRData={SSRData} mode="BANNER" />
     </>
   )
 }

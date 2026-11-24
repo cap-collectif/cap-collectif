@@ -238,7 +238,23 @@ export const NavBarSkipLinks: React.FC = () => {
       {skipLinks.map(({ href, title }, idx) => {
         return (
           <Box as="li" key={idx}>
-            <Box as="a" display="block" href={href} px={[4]} py={2} color="neutral-gray.900">
+            <Box
+              as="a"
+              display="block"
+              href={href}
+              px={[4]}
+              py={2}
+              color="neutral-gray.900"
+              onClick={(event: React.MouseEvent<HTMLAnchorElement>) => {
+                // admin-next pages give their own id to <main> (#project-page…): fall back to the <main> element
+                if (href !== '#main' || document.getElementById('main')) return
+                const main = document.querySelector<HTMLElement>('main')
+                if (!main) return
+                event.preventDefault()
+                if (!main.hasAttribute('tabindex')) main.setAttribute('tabindex', '-1')
+                main.focus()
+              }}
+            >
               {title}
             </Box>
           </Box>

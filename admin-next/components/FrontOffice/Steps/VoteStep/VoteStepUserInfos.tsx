@@ -348,7 +348,7 @@ const VoteStepUserInfos: FC<Props> = ({ step: stepKey }) => {
           >
             {({ hide }) => (
               <>
-                <Modal.Header>
+                <Modal.Header closeIconLabel={intl.formatMessage({ id: 'global.close' })}>
                   <Heading as="h2" color={`${colors.text.secondary}!important`}>
                     {/* Needs !important otherwise it's overridden by the default color u_U */}
                     {intl.formatMessage({ id: helpLabelId })}

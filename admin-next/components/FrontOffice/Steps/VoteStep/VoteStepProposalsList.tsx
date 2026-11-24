@@ -10,6 +10,7 @@ import { exportLatLngBounds } from '@utils/leaflet'
 import ProjectsListPlaceholder from '@shared/projectCard/ProjectsListSkeleton'
 import { VOTE_STEP_PROPOSALS_COUNT } from './VoteStep.queries'
 import useIsMobile from '@shared/hooks/useIsMobile'
+import { useAnnounceResults } from './VoteStepResultsAnnouncer'
 
 type TemplateColumns = {
   base: string
@@ -75,6 +76,7 @@ const PROPOSALS_FRAGMENT = graphql`
         key: "ProposalsList_proposals"
         filters: ["term", "orderBy", "userType", "theme", "category", "district", "status", "state", "geoBoundingBox"]
       ) {
+      totalCount
       edges {
         node {
           id
@@ -102,6 +104,26 @@ export const VoteStepProposalsList: React.FC<Props> = ({
 
   const [latlngBounds] = useQueryState('latlngBounds')
   const [sort] = useQueryState('sort')
+  const [term] = useQueryState('term')
+  const [category] = useQueryState('category')
+  const [theme] = useQueryState('theme')
+  const [status] = useQueryState('status')
+  const [userType] = useQueryState('userType')
+  const [district] = useQueryState('district')
+  const announceResults = useAnnounceResults()
+  const resultsConnection = data?.proposals
+  const filtersKey = JSON.stringify([sort, term, category, theme, status, userType, district, latlngBounds])
+  const lastAnnounced = React.useRef<{ filtersKey: string; connection: unknown } | null>(null)
+
+  // Announces the number of results once per filters change, with the data fetched for these filters:
+  // the URL changes before the new data arrives, and loading the next page keeps the same filters.
+  React.useEffect(() => {
+    if (typeof resultsConnection?.totalCount !== 'number') return
+    const last = lastAnnounced.current
+    if (last && (last.filtersKey === filtersKey || last.connection === resultsConnection)) return
+    lastAnnounced.current = { filtersKey, connection: resultsConnection }
+    announceResults(resultsConnection.totalCount)
+  }, [announceResults, filtersKey, resultsConnection])
   const mainView =
     data.__typename === 'CollectStep'
       ? data.mainView
@@ -182,9 +204,11 @@ export const VoteStepProposalsList: React.FC<Props> = ({
       hasMore={hasNext && !isLoadingNext}
       loadMore={() => loadNext(VOTE_STEP_PROPOSALS_COUNT)}
     >
-      <Grid id="proposals-list" templateColumns={gridTemplateColumns} gap="lg" justifyItems="stretch">
+      {/* A list, so that screen readers announce the number of proposals and allow skipping them */}
+      <Grid role="list" id="proposals-list" templateColumns={gridTemplateColumns} gap="lg" justifyItems="stretch">
         {sortedEdges.map(({ node }) => (
           <Box
+            role="listitem"
             key={node.id}
             ref={node.id === selectedId ? scrollToSelectedCard : undefined}
             onMouseEnter={() => handlerMouseOver(node.id, node.id)}
@@ -193,7 +217,7 @@ export const VoteStepProposalsList: React.FC<Props> = ({
             <ProposalCard
               proposal={node}
               step={data}
-              primaryInfoTag="h2"
+              primaryInfoTag="h3"
               minWidth="unset"
               active={node.id === selectedId}
               triggerRequirementModal={triggerRequirementModal}

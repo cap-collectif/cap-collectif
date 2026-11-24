@@ -2,6 +2,7 @@ import { FieldInput, FormControl } from '@cap-collectif/form'
 import { FormLabel, Text } from '@cap-collectif/ui'
 import { useFormContext } from 'react-hook-form'
 import { useIntl } from 'react-intl'
+import OptionalMention from './OptionalMention'
 
 interface Props {
   usingWebPage: boolean
@@ -37,7 +38,9 @@ const ExternalLinks: React.FC<Props> = props => {
             id="label-proposal_wep_page"
             htmlFor="proposal_wep_page"
             label={intl.formatMessage({ id: 'form.label_website' })}
-          />
+          >
+            <OptionalMention />
+          </FormLabel>
           <FieldInput
             type="text"
             control={control}
@@ -54,7 +57,9 @@ const ExternalLinks: React.FC<Props> = props => {
             id="label-proposal_twitter"
             htmlFor="proposal_twitter"
             label={intl.formatMessage({ id: 'share.twitter' })}
-          />
+          >
+            <OptionalMention />
+          </FormLabel>
           <FieldInput
             type="text"
             control={control}
@@ -71,7 +76,9 @@ const ExternalLinks: React.FC<Props> = props => {
             id="label-proposal_facebook"
             htmlFor="proposal_facebook"
             label={intl.formatMessage({ id: 'share.facebook' })}
-          />
+          >
+            <OptionalMention />
+          </FormLabel>
           <FieldInput
             type="text"
             control={control}
@@ -88,7 +95,9 @@ const ExternalLinks: React.FC<Props> = props => {
             id="label-proposal_instagram"
             htmlFor="proposal_instagram"
             label={intl.formatMessage({ id: 'instagram' })}
-          />
+          >
+            <OptionalMention />
+          </FormLabel>
           <FieldInput
             type="text"
             control={control}
@@ -105,7 +114,9 @@ const ExternalLinks: React.FC<Props> = props => {
             id="label-proposal_linkedin"
             htmlFor="proposal_linkedin"
             label={intl.formatMessage({ id: 'share.linkedin' })}
-          />
+          >
+            <OptionalMention />
+          </FormLabel>
           <FieldInput
             type="text"
             control={control}
@@ -122,7 +133,9 @@ const ExternalLinks: React.FC<Props> = props => {
             id="label-proposal_youtube"
             htmlFor="proposal_youtube"
             label={intl.formatMessage({ id: 'youtube' })}
-          />
+          >
+            <OptionalMention />
+          </FormLabel>
           <FieldInput
             type="text"
             control={control}

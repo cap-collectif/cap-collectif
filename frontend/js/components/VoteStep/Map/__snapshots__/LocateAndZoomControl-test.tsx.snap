@@ -18,8 +18,10 @@ Array [
           className="sc-bcXGCL gOAKjw"
         >
           <button
+            aria-label="front.vote-step.map-locate-me"
             className="sc-bcXGCL dDVeQB"
             onClick={[Function]}
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -44,8 +46,10 @@ Array [
             </svg>
           </button>
           <button
+            aria-label="front.vote-step.map-zoom-in"
             className="sc-bcXGCL cPkHBa"
             onClick={[Function]}
+            type="button"
           >
             <svg
               aria-hidden="true"
@@ -66,8 +70,10 @@ Array [
             </svg>
           </button>
           <button
+            aria-label="front.vote-step.map-zoom-out"
             className="sc-bcXGCL WkuvV"
             onClick={[Function]}
+            type="button"
           >
             <svg
               aria-hidden="true"

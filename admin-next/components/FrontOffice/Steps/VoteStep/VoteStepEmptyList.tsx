@@ -633,7 +633,7 @@ const VoteStepEmptyList: React.FC<Props> = ({ objectType }) => {
         </svg>
       </Box>
       <Box width={!hasData ? '100%' : ''} p="md">
-        <Text as="h2" role="status" mb="xxs" color="text.primary" fontSize={CapUIFontSize.Headline} fontWeight="700">
+        <Text as="h2" mb="xxs" color="text.primary" fontSize={CapUIFontSize.Headline} fontWeight="700">
           {intl.formatMessage({
             id: !hasData
               ? `front.contribution.${getContributionObjectTypeTranslationKey(objectType)}.empty-list`

@@ -4,6 +4,7 @@ import * as React from 'react'
 import { Control } from 'react-hook-form'
 import { useIntl } from 'react-intl'
 import { FormValues } from '../ProposalFormModal.type'
+import OptionalMention from '../OptionalMention'
 
 type District = {
   id: string
@@ -26,12 +27,18 @@ const DistrictInput: React.FC<Props> = ({ control, districts, districtHelpText, 
         id="label-proposal_district"
         htmlFor="proposal_district"
         label={intl.formatMessage({ id: 'proposal.district' })}
-      />
+      >
+        {districtMandatory ? null : <OptionalMention />}
+      </FormLabel>
       <FieldInput
         type="select"
         control={control}
         name="district"
         id="proposal_district"
+        // The visible label targets the select container: name the focused react-select input explicitly
+        aria-labelledby="label-proposal_district"
+        // react-select keeps aria-describedby for its placeholder while empty: link the error message this way
+        aria-errormessage="proposal_district-error"
         placeholder={intl.formatMessage({ id: 'proposal.select.district' })}
         menuPortalTarget={null}
         options={districts.map((district: District) => ({

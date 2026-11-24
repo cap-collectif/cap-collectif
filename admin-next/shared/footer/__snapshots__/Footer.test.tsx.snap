@@ -63,10 +63,12 @@ exports[`<Footer /> renders correctly 1`] = `
           class="sc-bcXGCL cnDtzR"
         >
           <a
+            aria-label="powered_by Cap Collectif"
             class="sc-bcXGCL fjrJsl"
             href="https://cap-collectif.com"
           >
             <svg
+              aria-hidden="true"
               class="sc-bcXGCL qxitp"
               fill="none"
               viewBox="0 0 180 33"
@@ -220,10 +222,12 @@ exports[`<Footer /> renders correctly 1`] = `
         class="sc-bcXGCL kySytZ"
       >
         <a
+          aria-label="powered_by Cap Collectif"
           class="sc-bcXGCL fjrJsl"
           href="https://cap-collectif.com"
         >
           <svg
+            aria-hidden="true"
             class="sc-bcXGCL qxitp"
             fill="none"
             viewBox="0 0 180 33"

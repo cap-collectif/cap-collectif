@@ -1,9 +1,10 @@
-import * as React from 'react'
-import L from 'leaflet'
 import { CapUIIcon, CapUIIconSize, Flex, Icon } from '@cap-collectif/ui'
+import L from 'leaflet'
+import * as React from 'react'
+import { useIntl } from 'react-intl'
 import { Marker, useMapEvents } from 'react-leaflet'
-import LeafletControl from './LeafletControl'
 import type { MapCenterObject } from '~/components/Proposal/Map/Map.types'
+import LeafletControl from './LeafletControl'
 const svgIcon = L.divIcon({
   html: `<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" version="1.1" viewBox="-24 -24 48 48">
           <circle id="circle1" r="7" style="animation-delay: -3s" />
@@ -18,15 +19,19 @@ const svgIcon = L.divIcon({
 
 const ControlButton = ({
   icon,
+  label,
   ...rest
 }: {
   readonly mb?: number
   readonly onClick: () => void
   readonly icon: string
+  readonly label: string
 }) => (
   <Flex
     borderRadius="normal"
     as="button"
+    type="button"
+    aria-label={label}
     bg="white"
     align="center"
     justifyContent="center"
@@ -35,11 +40,13 @@ const ControlButton = ({
     {...rest}
     p={0}
   >
+    {/* @ts-ignore */}
     <Icon name={icon} size={CapUIIconSize.Md} color="gray.700" />
   </Flex>
 )
 
 const LocateAndZoomControl = () => {
+  const intl = useIntl()
   const [position, setPosition] = React.useState(null)
   const map: L.Map = useMapEvents({
     locationfound(e: { latlng: MapCenterObject }) {
@@ -57,6 +64,7 @@ const LocateAndZoomControl = () => {
               map.locate()
             }}
             icon={CapUIIcon.LocationTarget}
+            label={intl.formatMessage({ id: 'front.vote-step.map-locate-me' })}
           />
           <ControlButton
             mb={1}
@@ -64,12 +72,14 @@ const LocateAndZoomControl = () => {
               map.zoomIn()
             }}
             icon={CapUIIcon.Add}
+            label={intl.formatMessage({ id: 'front.vote-step.map-zoom-in' })}
           />
           <ControlButton
             onClick={() => {
               map.zoomOut()
             }}
             icon={CapUIIcon.Minus}
+            label={intl.formatMessage({ id: 'front.vote-step.map-zoom-out' })}
           />
         </Flex>
       </LeafletControl>

@@ -75,7 +75,14 @@ const VoteStepFiltersModal: React.FC<Props> = ({ stepId }) => {
 
   return (
     <>
-      <Button variant="tertiary" variantColor="hierarchy" leftIcon={CapUIIcon.Filter} onClick={onOpen}>
+      <Button
+        variant="tertiary"
+        variantColor="hierarchy"
+        leftIcon={CapUIIcon.Filter}
+        onClick={onOpen}
+        aria-haspopup="dialog"
+        aria-expanded={isOpen}
+      >
         {activeFiltersCount > 0
           ? `${intl.formatMessage({ id: 'btn_filter' })} (${activeFiltersCount})`
           : intl.formatMessage({ id: 'btn_filter' })}
@@ -89,7 +96,7 @@ const VoteStepFiltersModal: React.FC<Props> = ({ stepId }) => {
         size={CapUIModalSize.Xl}
         alwaysOpenInPortal
       >
-        <Modal.Header>
+        <Modal.Header closeIconLabel={intl.formatMessage({ id: 'global.close' })}>
           <Heading as="h4" color="blue.900">
             {intl.formatMessage({ id: `front.contribution.${objectType}.filter-count` }, { n: totalCount })}
           </Heading>

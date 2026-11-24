@@ -422,23 +422,29 @@ const ProposalFormModal: React.FC<Props> = props => {
   }
 
   const scrollToFirstError = () => {
-    requestAnimationFrame(() => {
+    // Wait for React to render the errors (aria-invalid) set just before: an animation frame can come too early
+    setTimeout(() => {
       const dialog = document.querySelector('[role="dialog"]')
       const firstError =
         (dialog?.querySelector('[aria-invalid="true"]') as HTMLElement) ??
         (document.querySelector('[aria-invalid="true"]') as HTMLElement)
       if (firstError) {
         firstError.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        // The focus on the first invalid field also makes screen readers announce its error message
+        firstError.focus({ preventScroll: true })
       }
-    })
+    }, 100)
   }
 
   const touchErrorFields = () => {
-    const errors = methods.formState.errors
-    Object.entries(errors).forEach(([key, error]) => {
+    // formState.errors is the state of the last render, still empty right after trigger(): read the live field
+    // states instead, otherwise untouched invalid fields never display their error (mode onChange)
+    Object.keys(getValues()).forEach(key => {
       if (key === 'responses') return
+      const { error } = methods.getFieldState(key as any)
+      if (!error) return
       setValue(key as any, getValues(key as any), { shouldTouch: true })
-      if (error?.message) {
+      if (error.message) {
         setError(key as any, { type: 'manual', message: error.message as string })
       }
     })
@@ -729,7 +735,7 @@ const ProposalFormModal: React.FC<Props> = props => {
 
   const renderFormContent = (hide?: () => void) => (
     <FormProvider {...methods}>
-      <Modal.Header>
+      <Modal.Header closeIconLabel={intl.formatMessage({ id: 'global.close' })}>
         <Heading>
           {intl.formatMessage({
             id:
@@ -740,7 +746,11 @@ const ProposalFormModal: React.FC<Props> = props => {
         </Heading>
       </Modal.Header>
       <Modal.Body pt={4}>
-        <Flex as="form" id="proposal-form" direction="column" gap={4}>
+        {/* position relative: containing block of the visually hidden (sr-only, absolute) texts, otherwise they
+            overflow the outer modal and add a second scrollbar */}
+        <Flex as="form" id="proposal-form" direction="column" gap={4} position="relative">
+          {/* Explains the convention to screen reader users: the optional fields have a "(facultatif)" mention */}
+          <p className="sr-only">{intl.formatMessage({ id: 'form.fields_mandatory_without_mention' })}</p>
           <TitleInput
             control={control}
             objectType={proposalForm.objectType}
@@ -768,6 +778,7 @@ const ProposalFormModal: React.FC<Props> = props => {
               control={control}
               categories={proposalForm.categories}
               categoryHelpText={proposalForm.categoryHelpText}
+              categoryMandatory={proposalForm.categoryMandatory}
             />
           )}
 
@@ -797,6 +808,7 @@ const ProposalFormModal: React.FC<Props> = props => {
 
           {proposalForm.usingDescription && (
             <DescriptionInput
+              control={control}
               descriptionMandatory={proposalForm.descriptionMandatory}
               descriptionHelpText={proposalForm.descriptionHelpText}
               defaultLocale={defaultLocale}

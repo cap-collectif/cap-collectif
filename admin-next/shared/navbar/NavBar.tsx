@@ -170,6 +170,7 @@ const NavBarMobile = ({ children, links, theme, showBorder, logo }: NavBarProps)
       height={isOpen ? '100vw' : ''}
       borderBottom={showBorder ? `1px solid ${colors['neutral-gray'][150]}` : null}
     >
+      <NavBar.SkipLinks />
       <Flex
         px={4}
         justifyContent="space-between"
@@ -211,6 +212,16 @@ const NavBarMobile = ({ children, links, theme, showBorder, logo }: NavBarProps)
         width="100vw"
         display="block"
         maxHeight={isOpen ? undefined : 0}
+        // Folded menu: its buttons and links are off screen but stay focusable. Hide them, not the whole panel,
+        // which also renders the login and registration modals (they must stay visible when opened).
+        sx={
+          isOpen
+            ? undefined
+            : {
+                '& a, & button': { visibility: 'hidden' },
+                '& [role="dialog"] a, & [role="dialog"] button': { visibility: 'visible' },
+              }
+        }
       >
         {children}
       </Box>

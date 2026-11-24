@@ -4,7 +4,16 @@ import { Box, BoxPropsOf } from '@cap-collectif/ui'
 interface LogoPropulsedByProps extends BoxPropsOf<'svg'> {}
 
 const LogoPropulsedBy: FC<LogoPropulsedByProps> = ({ width, height }) => (
-  <Box as="svg" width={width} height={height} viewBox="0 0 180 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+  // Decorative: the link around it (FooterBrand) carries the name
+  <Box
+    as="svg"
+    width={width}
+    height={height}
+    viewBox="0 0 180 33"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
     <path
       d="M7.89294 14.8769C4.81777 14.8769 2.78815 17.132 2.78815 20.6172C2.78815 24.0614 4.85877 26.3575 7.93394 26.3575H14.2688V28.8177H7.60592C3.05467 28.8177 0 25.4965 0 20.6172C0 15.6969 3.05467 12.4167 7.60592 12.4167H13.7768V14.8769H7.89294Z"
       fill="currentColor"

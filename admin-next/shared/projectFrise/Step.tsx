@@ -75,6 +75,8 @@ export const Step: FC<StepProps> = ({
   }
 
   const isValidTooltip = typeof tooltipLabel === 'number' || !!tooltipLabel
+  // Conveys the current step to assistive technologies, not only through color
+  const ariaCurrent = state === 'ACTIVE' ? 'step' : undefined
 
   const renderStep = () => (
     <Flex
@@ -111,6 +113,7 @@ export const Step: FC<StepProps> = ({
         left="50%"
         as="a"
         href={url || undefined}
+        aria-current={ariaCurrent}
         paddingX={4}
         textAlign="center"
         height="100%"
@@ -140,12 +143,17 @@ export const Step: FC<StepProps> = ({
             color={getTextColor()}
             truncate={50}
             fontWeight="semibold"
-            as="h2"
           >
             {title}
           </Text>
         )}
-        <Text className="frise__stepItem__link__content platform__body" {...headingStyles.h5} color={getTextColor()}>
+        {/* div: the step status can contain a tooltip trigger (div), which is not allowed inside a p */}
+        <Text
+          as="div"
+          className="frise__stepItem__link__content platform__body"
+          {...headingStyles.h5}
+          color={getTextColor()}
+        >
           {content}
         </Text>
       </Flex>
@@ -204,13 +212,13 @@ export const Step: FC<StepProps> = ({
               left="50%"
               as="a"
               href={url}
+              aria-current={ariaCurrent}
               style={{
                 transform: 'translate(-50%,-50%)',
               }}
             >
               <Text
                 className="frise__stepItem__link__title platform__body"
-                as="h2"
                 fontSize={CapUIFontSize.Caption}
                 lineHeight={CapUILineHeight.S}
                 fontWeight="semibold"
@@ -267,6 +275,7 @@ export const Step: FC<StepProps> = ({
               left="50%"
               as="a"
               href={url}
+              aria-current={ariaCurrent}
               style={{
                 transform: 'translate(-50%,-50%)',
               }}

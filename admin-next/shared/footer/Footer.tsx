@@ -57,7 +57,12 @@ export const Footer: FC<Props> = props => {
   const intl = useIntl()
   const multilangue = useFeatureFlag('multilangue')
   const { cookies, locales, footer, onLanguageChange, defaultLanguage, cookieManager } = props
-  const { socialNetworks, links, legalPath, legals, cookiesPath, privacyPath } = footer
+  const { links, legalPath, legals, cookiesPath, privacyPath } = footer
+  // A social network without a real URL would render a link that leads nowhere
+  const socialNetworks = footer.socialNetworks?.filter(socialNetwork => {
+    const link = socialNetwork.link?.trim()
+    return !!link && link !== '#'
+  })
   const pathname = usePathname()
 
   const normalizeLocale = (locale?: string | null): string => (locale || '').replace(/_/g, '-').toLowerCase()

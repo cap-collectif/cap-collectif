@@ -25,13 +25,17 @@ const ThemeInput: React.FC<Props> = ({ control, themes, themeHelpText, themeMand
     : `${intl.formatMessage({ id: 'global.theme' })} (${intl.formatMessage({ id: 'global.optional' })})`
 
   return (
-    <FormControl errorId="global.theme-error" name="theme" control={control}>
+    <FormControl errorId="global.theme-error" name="theme" control={control} isRequired={themeMandatory}>
       <FormLabel id="label-global.theme" htmlFor="global.theme" label={label} />
       <FieldInput
         type="select"
         control={control}
         name="theme"
         id="global.theme"
+        // The visible label targets the select container: name the focused react-select input explicitly
+        aria-labelledby="label-global.theme"
+        // react-select keeps aria-describedby for its placeholder while empty: link the error message this way
+        aria-errormessage="global.theme-error"
         placeholder={intl.formatMessage({ id: 'proposal.select.theme' })}
         menuPortalTarget={null}
         options={themes.map((theme: Theme) => ({

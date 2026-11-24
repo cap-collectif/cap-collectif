@@ -34,6 +34,9 @@ export type TextEditorProps = FlexProps & {
   advancedEditor?: boolean
   noModalAdvancedEditor?: boolean
   variantColor?: InputProps['variantColor']
+  // Id of the error message rendered by the surrounding FormControl: when given, the field validation state is
+  // exposed on the editable area (aria-invalid, aria-describedby)
+  errorId?: string
 }
 
 const TextEditor: React.FC<TextEditorProps> = ({
@@ -51,13 +54,17 @@ const TextEditor: React.FC<TextEditorProps> = ({
   noModalAdvancedEditor = false,
   disabled,
   variantColor = 'default',
+  errorId,
   ...rest
 }) => {
   const intl = useIntl()
   const [isOpen, setIsOpen] = React.useState(false)
   const [reloadContent, setReloadContent] = React.useState(false)
-  const { control, setValue, watch } = useFormContext()
+  const { control, setValue, watch, getFieldState, formState } = useFormContext()
   const value = watch(name)
+  const { error, isTouched } = getFieldState(name, formState)
+  // Same rule as FormControl, which displays the error message: in onChange mode, only once the field is touched
+  const isInvalid = !!errorId && !!error && (control._options.mode !== 'onChange' || isTouched)
 
   const [inModalValue, setInModalValue] = React.useState(value)
 
@@ -81,13 +88,18 @@ const TextEditor: React.FC<TextEditorProps> = ({
           <Jodit
             id={`${name}-JoditModal-${selectedLanguage}`}
             placeholder={placeholder}
-            onChange={value => setValue(name, value)}
+            // Revalidate only an invalid field, so that its error disappears once it is filled
+            onChange={value => setValue(name, value, { shouldValidate: !!getFieldState(name).error })}
             value={value}
             selectedLanguage={selectedLanguage}
             platformLanguage={platformLanguage}
             limitChars={limitChars}
             clientConfig={clientConfig}
             disabled={disabled}
+            labelId={labelId}
+            required={required}
+            invalid={isInvalid}
+            errorId={errorId}
           />
         </>
       )}
@@ -95,7 +107,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
       {!noModalAdvancedEditor && (
         <>
           <Flex justify="space-between" mb={1}>
-            <FormLabel htmlFor={name} label={label}>
+            <FormLabel id={labelId} htmlFor={name} label={label}>
               {required ? null : (
                 <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                   {intl.formatMessage({ id: 'global.optional' })}
@@ -185,6 +197,10 @@ const TextEditor: React.FC<TextEditorProps> = ({
                   clientConfig={clientConfig}
                   disabled={disabled}
                   variantColor={variantColor}
+                  labelId={labelId}
+                  required={required}
+                  invalid={isInvalid}
+                  errorId={errorId}
                 />
               )
             }}

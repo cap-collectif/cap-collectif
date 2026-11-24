@@ -28,7 +28,7 @@ export const DeleteQuestionButton: React.FC<Props> = ({ hasResponses, onDelete }
   return (
     <Modal
       size={CapUIModalSize.Sm}
-      ariaLabel="contained-modal-title-lg"
+      ariaLabel={intl.formatMessage({ id: 'question.alert.delete' })}
       alwaysOpenInPortal
       disclosure={
         <ButtonQuickAction

@@ -2,7 +2,7 @@ import * as React from 'react'
 
 const MiddleStep = () => {
   return (
-    <svg width="248" height="56" viewBox="0 0 248 56" fill="none">
+    <svg width="248" height="56" viewBox="0 0 248 56" fill="none" aria-hidden="true">
       <path
         fillRule="evenodd"
         clipRule="evenodd"

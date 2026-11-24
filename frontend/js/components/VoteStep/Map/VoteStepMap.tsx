@@ -108,6 +108,7 @@ const FRAGMENT: GraphQLTaggedNode = graphql`
         node {
           ...ProposalMapSelectedView_proposal @arguments(isAuthenticated: $isAuthenticated, stepId: $stepId)
           id
+          title
           address {
             lat
             lng
@@ -237,6 +238,20 @@ export const VoteStepMap = ({
       ?.map(edge => edge?.node)
       .filter(Boolean)
       .filter(proposal => isValidLatLng(proposal?.address)) || []
+  // Same icon as the markercluster default one, with an accessible name ("7 propositions" instead of "7")
+  const createClusterIcon = React.useCallback(
+    (cluster: { getChildCount: () => number }) => {
+      const childCount = cluster.getChildCount()
+      const size = childCount < 10 ? 'small' : childCount < 100 ? 'medium' : 'large'
+      const label = intl.formatMessage({ id: 'count-proposal' }, { num: childCount })
+      return new L.DivIcon({
+        html: `<div><span aria-hidden="true">${childCount}</span><span class="sr-only">${label}</span></div>`,
+        className: `marker-cluster marker-cluster-${size}`,
+        iconSize: new L.Point(40, 40),
+      })
+    },
+    [intl],
+  )
   const proposal = data.proposals.edges?.map(edge => edge?.node).find(p => p?.id === selectedProposal)
   const proposalForm = data.form
   const dispatch = useDispatch()
@@ -338,6 +353,7 @@ export const VoteStepMap = ({
             zoomToBoundsOnClick
             spiderfyDistanceMultiplier={4}
             maxClusterRadius={30}
+            iconCreateFunction={createClusterIcon}
           >
             {markers?.length > 0 &&
               markers.map(mark => {
@@ -349,6 +365,7 @@ export const VoteStepMap = ({
                   <VoteStepMapMarker
                     key={mark.id}
                     id={mark.id}
+                    title={mark.title}
                     lat={mark.address.lat}
                     lng={mark.address.lng}
                     icon={icon}

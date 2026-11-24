@@ -67,6 +67,13 @@ const MapLibreTileLayer = () => {
     const gl = L.maplibreGL({
       style: MAP_STYLE_URL,
     }).addTo(map)
+    // The MapLibre canvas only draws the (non-interactive) tiles: hide it from assistive technologies,
+    // otherwise it is exposed as a region named "Map" in English
+    gl.getCanvas()?.setAttribute('aria-hidden', 'true')
+    // Leaflet's attribution prefix links to leafletjs.com with an English title, read by screen readers
+    // after the link text: keep the link and its flag, without that title
+    const prefix = map.attributionControl?.options.prefix
+    if (typeof prefix === 'string') map.attributionControl.setPrefix(prefix.replace(/\s+title="[^"]*"/, ''))
 
     return () => {
       gl.remove()

@@ -6,8 +6,10 @@ exports[`<CookieBanner /> renders correctly 1`] = `
     class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />
   <div
+    aria-label="cookies-management"
     class="sc-bcXGCL gYDMaH cookie-banner"
     id="cookie-banner"
+    role="region"
   >
     <div
       class="sc-bcXGCL ovXMQ cookie-text-wrapper"
@@ -94,8 +96,10 @@ exports[`<CookieManager /> renders correctly 1`] = `
     class="sc-bcXGCL keKWCf"
   >
     <div
+      aria-label="cookies-management"
       class="sc-bcXGCL gYDMaH cookie-banner"
       id="cookie-banner"
+      role="region"
     >
       <div
         class="sc-bcXGCL ovXMQ cookie-text-wrapper"

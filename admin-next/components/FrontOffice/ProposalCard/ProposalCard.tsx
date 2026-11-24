@@ -272,7 +272,7 @@ export const ProposalCard: React.FC<Props> = ({
         primaryInfo={title}
         secondaryInfo={summaryOrBodyExcerpt}
         href={url}
-        primaryInfoTag={'h2'}
+        primaryInfoTag={primaryInfoTag ?? 'h2'}
         flex={1}
         sx={
           {
@@ -322,27 +322,32 @@ export const ProposalCard: React.FC<Props> = ({
                       pointsTag
                     )
                   ) : showComments ? (
-                    <Tag variantColor="infoGray" transparent flexShrink={0}>
-                      <Icon name={CapUIIcon.BubbleO} />
-                      <Text>{proposal.comments.totalCountWithAnswers}</Text>
-                    </Tag>
+                    <>
+                      {/* The icon alone does not say what the number counts. The text stays outside the Tag:
+                          Tag builds its title from its whole text content. */}
+                      <span className="sr-only">
+                        {intl.formatMessage({ id: 'global.comments' }, { num: proposal.comments.totalCountWithAnswers })}
+                      </span>
+                      <Tag variantColor="infoGray" transparent flexShrink={0} aria-hidden="true">
+                        <Icon name={CapUIIcon.BubbleO} />
+                        <Text>{proposal.comments.totalCountWithAnswers}</Text>
+                      </Tag>
+                    </>
                   ) : null}
                 </Flex>
               ) : null}
               {proposal?.author ? (
-                <Tag
-                  variantColor="infoGray"
-                  transparent
-                  flex={1}
-                  minWidth={0}
-                  ml={hasLeftCounters ? 'md' : 0}
-                  tooltipLabel={authorName}
-                >
-                  <Icon name={CapUIIcon.UserO} flexShrink={0} />
-                  <Text overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap">
-                    {authorName}
-                  </Text>
-                </Tag>
+                <>
+                  <span className="sr-only">{intl.formatMessage({ id: 'global.author' })}</span>
+                  {/* No tooltipLabel: it made the tag a keyboard stop repeating the visible name, once per card.
+                      Tag still sets a native title with the full name, for truncated names. */}
+                  <Tag variantColor="infoGray" transparent flex={1} minWidth={0} ml={hasLeftCounters ? 'md' : 0}>
+                    <Icon name={CapUIIcon.UserO} flexShrink={0} />
+                    <Text overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap">
+                      {authorName}
+                    </Text>
+                  </Tag>
+                </>
               ) : null}
             </Flex>
           )}

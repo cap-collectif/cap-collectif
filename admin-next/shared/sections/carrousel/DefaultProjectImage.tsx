@@ -5,7 +5,8 @@ export const DefaultProjectImage: React.FC<BoxProps> = props => (
   <Box
     as="svg"
     version="1.1"
-    role="img"
+    // Decorative placeholder (no project image): hidden from assistive technologies
+    aria-hidden="true"
     xmlns="http://www.w3.org/2000/svg"
     x="0px"
     y="0px"

@@ -31,6 +31,17 @@
 {% endblock %}
 
 {% block mainContent %}
+    {# Cookie banner: first in the DOM so that keyboard and screen reader users reach it before the page content #}
+    {% set analytic_js = capco_site_parameter_value('snalytical-tracking-scripts-on-all-pages') %}
+    {% set ads_js = capco_site_parameter_value('ad-scripts-on-all-pages') %}
+    {%  if ads_js or analytic_js %}
+        {{ react_render_component('CookieManagerApp', {
+            'props': {
+                'isLink': false,
+            }
+        }) }}
+    {%  endif %}
+
     {# Header  #}
     {% block header %}
         {% include '@CapcoApp/Default/header.html.twig' %}
@@ -49,15 +60,6 @@
     }) }}
 
     {# Footer #}
-    {% set analytic_js = capco_site_parameter_value('snalytical-tracking-scripts-on-all-pages') %}
-    {% set ads_js = capco_site_parameter_value('ad-scripts-on-all-pages') %}
-    {%  if ads_js or analytic_js %}
-        {{ react_render_component('CookieManagerApp', {
-            'props': {
-                'isLink': false,
-            }
-        }) }}
-    {%  endif %}
     {% include '@CapcoApp/Default/footer.html.twig' %}
 
 {% endblock %}

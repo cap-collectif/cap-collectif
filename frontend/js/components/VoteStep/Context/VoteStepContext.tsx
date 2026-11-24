@@ -21,6 +21,7 @@ type Context = {
   hasMapView: boolean
   isParticipationAnonymous: boolean
   setIsParticipationAnonymous: (value: boolean) => void
+  announceResults: (message: string) => void
 }
 
 // @ts-ignore Context is initialized after
@@ -61,6 +62,17 @@ export const VoteStepContextProvider = ({
   const [address, setAddress] = useUrlState('address', '')
   const [view, setView] = useUrlState('view', isMapView ? View.Map : View.List)
   const [isParticipationAnonymous, setIsParticipationAnonymous] = React.useState(initialIsParticipationAnonymous)
+  const [resultsStatus, setResultsStatus] = React.useState('')
+  const isInitialResults = React.useRef(true)
+  const announceResults = React.useCallback((message: string) => {
+    // Only the updates after a search, a filter or a sort are announced, not the results on page load
+    if (isInitialResults.current) {
+      isInitialResults.current = false
+      return
+    }
+    // A repeated message must still change the content to be announced again
+    setResultsStatus(previous => (previous === message ? `${message} ` : message))
+  }, [])
 
   const contextValue: Context = {
     filters: {
@@ -121,6 +133,15 @@ export const VoteStepContextProvider = ({
     hasMapView,
     isParticipationAnonymous,
     setIsParticipationAnonymous,
+    announceResults,
   }
-  return <VoteStepContext.Provider value={contextValue}>{children}</VoteStepContext.Provider>
+  return (
+    <VoteStepContext.Provider value={contextValue}>
+      {children}
+      {/* Kept mounted outside the list Suspense boundaries, otherwise updates would not be announced */}
+      <p role="status" className="sr-only">
+        {resultsStatus}
+      </p>
+    </VoteStepContext.Provider>
+  )
 }

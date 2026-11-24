@@ -4,7 +4,7 @@ import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
 import { useIntl } from 'react-intl'
 import moment from 'moment'
-import { Box, CapUIFontSize, CapUILineHeight, Heading, Text, Tooltip } from '@cap-collectif/ui'
+import { Box, CapUIFontSize, CapUILineHeight, Text, Tooltip } from '@cap-collectif/ui'
 import { VoteStepProjectHeroStats_project$key } from '@relay/VoteStepProjectHeroStats_project.graphql'
 import { formatBigNumber } from '@utils/format-number'
 
@@ -195,13 +195,15 @@ const VoteStepProjectHeroStats: React.FC<Props> = ({ project: projectKey }) => {
         marginRight={[6, 8]}
         marginBottom={[2, 0]}
         maxHeight={10}
-        as={tooltipLabel ? 'button' : 'li'}
+        // Not a button: it has no action. The tooltip keeps it focusable and describes it.
+        as={tooltipLabel ? 'div' : 'li'}
         border="none"
         backgroundColor="transparent"
         p={0}
         sx={{ listStyle: 'none', cursor: tooltipLabel ? 'pointer' : 'default' }}
       >
-        <Heading
+        {/* A number alone is not a heading */}
+        <Text
           className="projectHeader__block__content platform__body"
           id={contentId}
           fontSize={[CapUIFontSize.BodySmall, CapUIFontSize.Headline]}
@@ -211,7 +213,7 @@ const VoteStepProjectHeroStats: React.FC<Props> = ({ project: projectKey }) => {
           color="neutral-gray.900"
         >
           {formatBigNumber(content)}
-        </Heading>
+        </Text>
         <Text
           className="projectHeader__block__title platform__body"
           color="neutral-gray.900"

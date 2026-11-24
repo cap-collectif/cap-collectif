@@ -1,5 +1,5 @@
 import { Button } from '@cap-collectif/ui'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import VoteStepMapContainer, { mapId } from './VoteStepMapContainer'
 import { graphql, useFragment } from 'react-relay'
 import { VoteStepMap_proposalStep$key } from '@relay/VoteStepMap_proposalStep.graphql'
@@ -55,6 +55,7 @@ export const VoteStepMap: FC<Props> = ({
 }) => {
   const intl = useIntl()
   const step = useFragment(FRAGMENT, stepKey)
+  const [shouldFocusMap, setShouldFocusMap] = useState(false)
 
   return (
     <>
@@ -64,12 +65,22 @@ export const VoteStepMap: FC<Props> = ({
       </a>
       {showMapPlaceholder ? (
         <VoteStepMapPlaceholder>
-          <Button variant="secondary" variantSize="big" onClick={removePlaceholderAndShowMap} id={mapId}>
+          <Button
+            variant="secondary"
+            variantSize="big"
+            onClick={() => {
+              setShouldFocusMap(true)
+              removePlaceholderAndShowMap()
+            }}
+            id={mapId}
+            // Distinct from the toolbar "Afficher la carte" toggle, and starts with the visible text (WCAG 2.5.3)
+            aria-label={intl.formatMessage({ id: 'front.vote-step.map-load' })}
+          >
             {intl.formatMessage({ id: 'map.display' })}
           </Button>
         </VoteStepMapPlaceholder>
       ) : (
-        <VoteStepMapContainer step={step} onWorkflowTrigger={onWorkflowTrigger} />
+        <VoteStepMapContainer step={step} onWorkflowTrigger={onWorkflowTrigger} focusOnMount={shouldFocusMap} />
       )}
       <a href={`#${mapId}`} id={backOnCardId} className="sr-only sr-only-focusable">
         {intl.formatMessage({ id: 'return-on-map' })}

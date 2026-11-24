@@ -24,7 +24,6 @@ export const CookieModal: FC<BoxProps & { separator?: React.ReactNode; SSRData: 
           size={CapUIModalSize.Xl}
           id="cookies-modal"
           ariaLabel={intl.formatMessage({ id: 'cookies' })}
-          aria-labelledby="contained-modal-title-lg"
         >
           <Modal.Header
             closeIconLabel={intl.formatMessage({

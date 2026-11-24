@@ -2,7 +2,7 @@ import * as React from 'react'
 
 const EndStep = () => {
   return (
-    <svg width="248" height="56" viewBox="0 0 232 56" fill="none">
+    <svg width="248" height="56" viewBox="0 0 232 56" fill="none" aria-hidden="true">
       <path
         d="M16 0H223.6C228.018 0 231.6 3.58172 231.6 8V48C231.6 52.4183 228.018 56 223.6 56H16V0Z"
         fill="currentColor"

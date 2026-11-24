@@ -6,7 +6,7 @@ exports[`<PrivacyModal /> renders correctly 1`] = `
     class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />
   <div
-    aria-label="contained-modal-title-lg"
+    aria-label="privacy-policy"
     class="cap-modal-dialog"
     data-dialog=""
     data-open="true"
@@ -42,6 +42,7 @@ exports[`<PrivacyModal /> renders correctly 1`] = `
           >
             <svg
               aria-hidden="false"
+              aria-label="global.close"
               class="sc-bcXGCL sc-oZHua JBVPO cCzERh cap-icon"
               fill="none"
               height="1em"

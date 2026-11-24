@@ -57,7 +57,9 @@ const TitleInput: React.FC<Props> = ({
         .toPromise()
         .then((response: any) => {
           if (isCurrent)
-            setSuggestions(response.form?.proposals?.edges?.flatMap((edge: any) => (edge?.node ? [edge.node] : [])) ?? [])
+            setSuggestions(
+              response.form?.proposals?.edges?.flatMap((edge: any) => (edge?.node ? [edge.node] : [])) ?? [],
+            )
         })
         .catch(() => {
           if (isCurrent) setSuggestions([])
@@ -77,7 +79,7 @@ const TitleInput: React.FC<Props> = ({
   }
 
   return (
-    <FormControl errorId="proposal_title-error" name="title" control={control}>
+    <FormControl errorId="proposal_title-error" name="title" control={control} isRequired>
       <FormLabel
         id="label-proposal_title"
         htmlFor="proposal_title"
@@ -86,7 +88,15 @@ const TitleInput: React.FC<Props> = ({
       <FieldInput type="text" control={control} name="title" id="proposal_title" />
       {suggestions.length > 0 && (
         <Box mt={2} border="1px solid" borderColor="gray.200" borderRadius="normal" overflow="hidden">
-          <Flex align="center" justify="space-between" gap={2} p={3} bg="gray.100" borderBottom="1px solid" borderColor="gray.200">
+          <Flex
+            align="center"
+            justify="space-between"
+            gap={2}
+            p={3}
+            bg="gray.100"
+            borderBottom="1px solid"
+            borderColor="gray.200"
+          >
             <Text>
               {intl.formatMessage(
                 { id: 'proposal.suggest_header' },

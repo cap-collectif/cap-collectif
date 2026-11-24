@@ -278,6 +278,30 @@ React.useEffect(() => {
 <FieldInput type="uploader" />  {/* File upload */}
 ```
 
+> **Listes deroulantes** : privilegier `FieldInput type="select"` (ou le `Select` exporte par
+> `@cap-collectif/form` hors react-hook-form). Avec `loadOptions`, il rend l'`AsyncSelect` de CapUI
+> (recherche debouncee 400 ms, messages de chargement et d'absence de resultat traduits) ; sans, le
+> `Select` de CapUI. Dans les deux cas, il traduit les annonces lues par les lecteurs d'ecran, que
+> react-select ecrit en anglais en dur (« 5 results available. Use Up and Down… »).
+>
+> Il n'est pas iso avec un usage direct de CapUI : `onChange` renvoie la `value` (l'option entiere
+> en asynchrone ou en multiple), le debounce est impose, et les variantes `Creatable` ne sont pas
+> couvertes. Quand un composant CapUI ou react-select est utilise directement, lui passer les memes
+> messages :
+>
+> ```tsx
+> import {
+>   getSelectAriaLiveMessages,
+>   getSelectScreenReaderStatus,
+> } from '@shared/cap-collectif/form/src/utils/selectAriaLiveMessages'
+>
+> <AsyncSelect
+>   ariaLiveMessages={getSelectAriaLiveMessages(intl)}
+>   screenReaderStatus={getSelectScreenReaderStatus(intl)}
+>   {...props}
+> />
+> ```
+
 ## Exemples du projet
 
 - Validation yup : [ProjectConfigForm.tsx](admin-next/components/BackOffice/Projects/ProjectConfig/ProjectConfigForm.tsx)

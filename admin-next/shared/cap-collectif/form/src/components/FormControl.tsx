@@ -72,7 +72,10 @@ export const FormControl: FC<FormControlProps> = ({
       if (child?.type?.displayName === 'FieldInput') {
         return React.cloneElement(child, {
           ref: field.ref,
-          'aria-describedby': isInvalid ? errorFieldId : undefined,
+          // Keep the field own descriptions (help text, constraints) after the error message, instead of dropping them
+          'aria-describedby':
+            [isInvalid ? errorFieldId : undefined, child.props['aria-describedby']].filter(Boolean).join(' ') ||
+            undefined,
           id: shouldAssignGeneratedId ? generatedId : child.props.id,
         })
       }

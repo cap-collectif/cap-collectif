@@ -8,7 +8,9 @@ import { pxToRem } from '@shared/utils/pxToRem'
 import { parseAsInteger, useQueryState } from 'nuqs'
 import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
+import { useIntl } from 'react-intl'
 import { evalCustomCode } from 'src/app/custom-code'
+import { getContributionObjectTypeTranslationKey } from '@shared/constants/proposalStepObjectType'
 import StepLinkedEvents from '../StepLinkedEvents'
 import StepVoteMobileActions from './ListActions/VoteStepMobileActions'
 import VoteStepMap from './Map/VoteStepMap'
@@ -43,6 +45,7 @@ const FRAGMENT = graphql`
   ) {
     id
     __typename
+    label
     state
     timeRange {
       startAt
@@ -125,6 +128,7 @@ const getTemplateColumns = (isMapVisible: boolean) => ({
 
 export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey, customCode, projectCustomCode }) => {
   const step = useFragment(FRAGMENT, stepKey)
+  const intl = useIntl()
   const isMobile = useIsMobile()
   const { viewerSession } = useAppContext()
 
@@ -192,6 +196,8 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey, customCode, 
     <Box backgroundColor="neutral-gray.50">
       <Box maxWidth={pxToRem(1280)} width="100%" margin="auto" py={8} px={[4, 6]}>
         <Flex direction="column" gap="md" mb="xl">
+          {/* Headings for screen reader navigation: the step name is already visible in the frieze and breadcrumb */}
+          <h2 className="sr-only">{step.label}</h2>
           <VoteStepProjectHeroStepInfo state={step.state} timeRange={step.timeRange} />
           <StepLinkedEvents step={step} />
           <AbstractCard width="100%" border="none" backgroundColor="white">
@@ -209,6 +215,11 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey, customCode, 
           </Box>
         ) : null}
 
+        <h2 className="sr-only">
+          {intl.formatMessage({
+            id: `front.contribution.${getContributionObjectTypeTranslationKey(step.form?.objectType)}.back`,
+          })}
+        </h2>
         {isPrivateForAnonymous ? (
           <Box mb="md">
             <VoteStepPrivateLogin />

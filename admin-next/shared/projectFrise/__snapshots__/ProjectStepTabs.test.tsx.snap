@@ -7,7 +7,8 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
   <div
     class="sc-bcXGCL gHoLKQ toasts-container toasts-container--top"
   />
-  <div
+  <nav
+    aria-label="project-header-step-modal-title"
     class="sc-bcXGCL hHvZtB frise"
   >
     <ul
@@ -35,6 +36,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                   class="sc-bcXGCL xlUXF frise__stepItem"
                 >
                   <svg
+                    aria-hidden="true"
                     fill="none"
                     height="56"
                     viewBox="0 0 231 56"
@@ -61,13 +63,13 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                     href="https://capco.dev/consultation/projet-avec-administrateur-de-projet/presentation/presentation-project-with-owner"
                     style="transform: translate(-45%,-50%);"
                   >
-                    <h2
+                    <p
                       class="sc-bcXGCL JFfEn cap-text frise__stepItem__link__title platform__body"
                       title="Présentation"
                     >
                       Présentation
-                    </h2>
-                    <p
+                    </p>
+                    <div
                       class="sc-bcXGCL dXoHgl cap-text frise__stepItem__link__content platform__body"
                     />
                   </a>
@@ -86,6 +88,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                   class="sc-bcXGCL gnopSP frise__stepItem"
                 >
                   <svg
+                    aria-hidden="true"
                     fill="none"
                     height="56"
                     viewBox="0 0 248 56"
@@ -113,17 +116,17 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                     href="https://capco.dev/project/projet-avec-administrateur-de-projet/consultation/etape-de-consultation-dans-un-projet-avec-administrateur-de-projet"
                     style="transform: translate(-45%,-50%);"
                   >
-                    <h2
+                    <p
                       class="sc-bcXGCL JFfEn cap-text frise__stepItem__link__title platform__body"
                       title="Consultation"
                     >
                       Consultation
-                    </h2>
-                    <p
+                    </p>
+                    <div
                       class="sc-bcXGCL dXoHgl cap-text frise__stepItem__link__content platform__body"
                     >
                       step.status.closed
-                    </p>
+                    </div>
                   </a>
                 </li>
               </div>
@@ -140,6 +143,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                   class="sc-bcXGCL gnopSP frise__stepItem"
                 >
                   <svg
+                    aria-hidden="true"
                     fill="none"
                     height="56"
                     viewBox="0 0 248 56"
@@ -167,78 +171,78 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                     href="https://capco.dev/project/projet-avec-administrateur-de-projet/collect/budget-participatif-du-projet-avec-administrateur-de-projet"
                     style="transform: translate(-45%,-50%);"
                   >
-                    <h2
+                    <p
                       class="sc-bcXGCL JFfEn cap-text frise__stepItem__link__title platform__body"
                       title="Dépôt"
                     >
                       Dépôt
-                    </h2>
-                    <p
+                    </p>
+                    <div
                       class="sc-bcXGCL dXoHgl cap-text frise__stepItem__link__content platform__body"
-                    />
-                    <div
-                      aria-describedby=":r8:"
-                      tabindex="0"
-                    >
-                      count.block.daysLeft
-                    </div>
-                    <div
-                      style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
                     >
                       <div
-                        class="cap-tooltip"
-                        data-dialog=""
-                        data-placing="true"
-                        hidden=""
-                        id=":r8:"
-                        role="tooltip"
-                        style="position: relative; z-index: 1800; display: none;"
-                        tabindex="-1"
+                        aria-describedby=":r8:"
+                        tabindex="0"
+                      >
+                        count.block.daysLeft
+                      </div>
+                      <div
+                        style="position: absolute; top: 0px; left: 0px; --popover-overflow-padding: 8px;"
                       >
                         <div
-                          aria-hidden="true"
-                          style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
+                          class="cap-tooltip"
+                          data-dialog=""
+                          data-placing="true"
+                          hidden=""
+                          id=":r8:"
+                          role="tooltip"
+                          style="position: relative; z-index: 1800; display: none;"
+                          tabindex="-1"
                         >
-                          <svg
-                            display="block"
-                            viewBox="0 0 30 30"
+                          <div
+                            aria-hidden="true"
+                            style="position: absolute; font-size: 16px; width: 1em; height: 1em; pointer-events: none; fill: #3D454C; stroke: var(--ak-layer-border, none); stroke-width: 0;"
                           >
-                            <g
-                              transform="rotate(180 15 15)"
+                            <svg
+                              display="block"
+                              viewBox="0 0 30 30"
                             >
-                              <path
-                                d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
-                                fill="none"
-                                mask="url(#:re:)"
-                              />
-                              <path
-                                d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
-                                stroke="none"
-                              />
-                              <mask
-                                id=":re:"
-                                maskUnits="userSpaceOnUse"
+                              <g
+                                transform="rotate(180 15 15)"
                               >
-                                <rect
-                                  fill="white"
-                                  height="30"
-                                  stroke="black"
-                                  width="60"
-                                  x="-15"
-                                  y="0"
+                                <path
+                                  d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                                  fill="none"
+                                  mask="url(#:re:)"
                                 />
-                              </mask>
-                            </g>
-                          </svg>
-                        </div>
-                        <div
-                          class="sc-bcXGCL cHeekz"
-                        >
-                          fromDayToDay
+                                <path
+                                  d="M23 27.8C24.1 29 26.4 30 28 30H30H0H2C3.7 30 5.9 29 7 27.8L14 20.6C14.7 19.8 15.3 19.8 16 20.6L23 27.8Z"
+                                  stroke="none"
+                                />
+                                <mask
+                                  id=":re:"
+                                  maskUnits="userSpaceOnUse"
+                                >
+                                  <rect
+                                    fill="white"
+                                    height="30"
+                                    stroke="black"
+                                    width="60"
+                                    x="-15"
+                                    y="0"
+                                  />
+                                </mask>
+                              </g>
+                            </svg>
+                          </div>
+                          <div
+                            class="sc-bcXGCL cHeekz"
+                          >
+                            fromDayToDay
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <p />
                   </a>
                 </li>
               </div>
@@ -255,6 +259,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                   class="sc-bcXGCL hsvYLJ frise__stepItem"
                 >
                   <svg
+                    aria-hidden="true"
                     fill="none"
                     height="56"
                     viewBox="0 0 232 56"
@@ -340,7 +345,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                         </div>
                       </div>
                     </div>
-                    <p
+                    <div
                       class="sc-bcXGCL dlvOxF cap-text frise__stepItem__link__content platform__body"
                     />
                   </a>
@@ -351,6 +356,6 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
         </div>
       </div>
     </ul>
-  </div>
+  </nav>
 </DocumentFragment>
 `;

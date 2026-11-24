@@ -277,7 +277,7 @@ const VoteStepActionsModal: React.FC<Props> = ({ form, filtersConnection }) => {
         </Button>
       }
     >
-      <Modal.Header>
+      <Modal.Header closeIconLabel={intl.formatMessage({ id: 'global.close' })}>
         <Heading as="h4" color="blue.900">
           {/* TODO: replace with actual proposal count */}
           {intl.formatMessage({ id: 'front.collect-vote-step.filter-n-proposals' }, { n: 123 })}

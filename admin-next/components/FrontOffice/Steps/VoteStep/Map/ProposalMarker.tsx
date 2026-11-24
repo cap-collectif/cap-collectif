@@ -85,13 +85,15 @@ const ProposalMarkerComponent: FC<ProposalMarkerProps> = ({ proposal: proposalKe
             color={proposal.category?.color || colors['neutral-gray'].darker}
           />
           {icon && <Icon name={convertIconToDs(icon)} size={CapUIIconSize.Xs} color="white" />}
+          {/* Accessible name of the marker, which Leaflet exposes as a button */}
+          <span className="sr-only">{proposal.title}</span>
         </>,
       ),
       iconSize: [iconSize, iconSize],
       iconAnchor: [iconSize / 2, iconSize],
       popupAnchor: [0, -iconSize - 2],
     })
-  }, [icon, proposal.category?.color, colors])
+  }, [icon, proposal.category?.color, proposal.title, colors])
 
   if (!proposal || !isValidLatLng(proposal.address)) return null
 
@@ -103,6 +105,16 @@ const ProposalMarkerComponent: FC<ProposalMarkerProps> = ({ proposal: proposalKe
       eventHandlers={{
         click: () => {
           if (isMobile) window.dispatchEvent(new CustomEvent('proposal-selected', { detail: proposal.id }))
+        },
+        // Leaflet exposes markers as buttons. With a bound popup (desktop) it already toggles the popup on Enter, but
+        // not on Space; without a popup (mobile) it handles neither key
+        keypress: (event: L.LeafletKeyboardEvent) => {
+          const { key } = event.originalEvent
+          const handledKeys = isMobile ? ['Enter', ' '] : [' ']
+          if (!handledKeys.includes(key)) return
+          event.originalEvent.preventDefault()
+          if (isMobile) window.dispatchEvent(new CustomEvent('proposal-selected', { detail: proposal.id }))
+          else markerRef.current?.togglePopup()
         },
         popupopen: () => {
           markerRef.current?.getElement()?.classList.add('active')

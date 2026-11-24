@@ -6,6 +6,7 @@ import { useDisclosure } from '@liinkiing/react-hooks'
 import CloseButton from '../Form/CloseButton'
 import Cookie from './Cookie'
 import CookieMonster from '@shared/utils/CookieMonster'
+import useReserveSpaceForFixedBanner from '@shared/hooks/useReserveSpaceForFixedBanner'
 import type { State } from '~/types'
 import Flex from '~ui/Primitives/Layout/Flex'
 import Text from '~ui/Primitives/Text'
@@ -23,6 +24,8 @@ export const CookieManagerModal = ({ isLink = false, analyticsJs, adJs, cookieTr
   const intl = useIntl()
   const { isOpen, onOpen, onClose } = useDisclosure(false)
   const cookie = React.useRef(null)
+  const bannerRef = React.useRef<HTMLDivElement>(null)
+  useReserveSpaceForFixedBanner(bannerRef, !isLink && (!!analyticsJs || !!adJs))
   const changeShowModalState = React.useCallback(() => {
     const hash = window.location.href.split('#')
 
@@ -71,7 +74,13 @@ export const CookieManagerModal = ({ isLink = false, analyticsJs, adJs, cookieTr
         </li>
       ) : (
         <div>
-          <CookieBanner id="cookie-banner" className="cookie-banner">
+          <CookieBanner
+            ref={bannerRef}
+            id="cookie-banner"
+            className="cookie-banner"
+            role="region"
+            aria-label={intl.formatMessage({ id: 'cookies-management' })}
+          >
             <Flex direction="column" spacing={2} className="cookie-text-wrapper">
               <Text>
                 {intl.formatMessage({

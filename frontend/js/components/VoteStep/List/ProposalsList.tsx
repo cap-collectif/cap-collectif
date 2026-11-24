@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useIntl } from 'react-intl'
 import InfiniteScroll from 'react-infinite-scroller'
 import { Box, Flex, Spinner, CapUIIconSize } from '@cap-collectif/ui'
 import { AnimatePresence, m as motion } from 'framer-motion'
@@ -51,7 +52,7 @@ const QUERY = graphql`
             geoBoundingBox: $geoBoundingBox
             term: $term
             stepId: $stepId
-            isAuthenticated: $isAuthenticated,
+            isAuthenticated: $isAuthenticated
             token: $token
           )
       }
@@ -93,6 +94,7 @@ const FRAGMENT = graphql`
       term: $term
     ) @connection(key: "ProposalsList_proposals", filters: []) {
       __id
+      totalCount
       edges {
         node {
           id
@@ -145,7 +147,7 @@ export const List = ({
       id={id}
       pr={[4, 4, 8]}
       pl={[4, 2, 6]}
-      sx={{ 'li': { listStyle: 'none' } }}
+      sx={{ li: { listStyle: 'none' } }}
     >
       <InfiniteScroll
         key="infinite-scroll-proposals"
@@ -174,7 +176,8 @@ export const ProposalsList = ({ stepId, showImages }: Props) => {
   const isAuthenticated = useSelector((state: State) => state.user.user !== null)
   const [animateCard, setAnimateCard] = React.useState(false)
   const LOAD_PROPOSAL_COUNT = isMobile ? 25 : 50
-  const { filters, view } = useVoteStepContext()
+  const intl = useIntl()
+  const { filters, view, announceResults } = useVoteStepContext()
   const { sort, userType, theme, category, district, status, term, latlngBounds } = filters
   const geoBoundingBox = !isMobile && latlngBounds && view === View.Map ? parseLatLngBounds(latlngBounds) : null
 
@@ -212,6 +215,13 @@ export const ProposalsList = ({ stepId, showImages }: Props) => {
     FRAGMENT,
     query.voteStep,
   )
+
+  const resultsCount = data?.proposals?.totalCount
+  // Announces the number of results after each reload (not after loading the next page)
+  React.useEffect(() => {
+    if (typeof resultsCount !== 'number') return
+    announceResults(intl.formatMessage({ id: 'search-results-count' }, { count: resultsCount }))
+  }, [announceResults, intl, resultsCount, sort, userType, theme, category, district, status, term, latlngBounds])
 
   const scrollTo = (proposalId: string) => {
     const hoveredProposalCard = document.getElementById(`proposal-${proposalId || ''}`)

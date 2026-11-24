@@ -1,5 +1,6 @@
 import { Box, CapUIFontSize, CapUIIcon, CapUIIconSize, Flex, Icon, Text } from '@cap-collectif/ui'
 import * as React from 'react'
+import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
 import htmlDecode from '~/components/Utils/htmlDecode'
 import { formatBigNumber } from '~/utils/bigNumberFormatter'
@@ -46,6 +47,7 @@ const Counter = ({ label, value }: { label: string; value: number }) => (
 )
 
 const ProjectHeaderIdf = ({ project, title, showCounters = true }: Props): JSX.Element => {
+  const intl = useIntl()
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
   const data = useFragment(FRAGMENT, project)
   const counters = React.useMemo(() => {
@@ -152,15 +154,19 @@ const ProjectHeaderIdf = ({ project, title, showCounters = true }: Props): JSX.E
       {/* Right: mobile burger block */}
       <Flex display={['flex', 'none']} direction="column" flex="1">
         <Box
+          as="button"
+          type="button"
           alignSelf="flex-end"
           onClick={() => setIsMenuOpen(prev => !prev)}
+          bg="transparent"
           border="1px solid"
           borderColor="rgba(255,255,255,0.5)"
           borderRadius="4px"
           padding={2}
           sx={{ cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-          aria-label="Ouvrir le menu"
+          aria-label={intl.formatMessage({ id: 'global.menu' })}
           aria-expanded={isMenuOpen}
+          aria-controls="projectHeaderIdfLinksMobile"
         >
           <Icon name={CapUIIcon.Burger} size={CapUIIconSize.Md} color="inherit" />
         </Box>

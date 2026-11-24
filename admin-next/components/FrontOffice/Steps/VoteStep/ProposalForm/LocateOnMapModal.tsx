@@ -14,16 +14,16 @@ import {
   Input,
   Modal,
 } from '@cap-collectif/ui'
-import { CapcoTileLayer, convertToGeoJsonStyle, formatGeoJsons } from '@utils/leaflet'
-import { District, findDistrictAt } from '@utils/geojson'
-import convertIconToDs from '@shared/utils/convertIconToDs'
 import ProposalMapDiscoverPane from '@components/FrontOffice/Leaflet/ProposalMapDiscoverPane'
+import convertIconToDs from '@shared/utils/convertIconToDs'
+import { District, findDistrictAt } from '@utils/geojson'
+import { CapcoTileLayer, convertToGeoJsonStyle, formatGeoJsons } from '@utils/leaflet'
 import L from 'leaflet'
 import * as React from 'react'
-import { GeoJSON, MapContainer, Marker, useMap, useMapEvents } from 'react-leaflet'
-import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 import { renderToString } from 'react-dom/server'
 import { useIntl } from 'react-intl'
+import { GeoJSON, MapContainer, Marker, useMap, useMapEvents } from 'react-leaflet'
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 
 const MAX_MAP_ZOOM = 18
 const DEFAULT_CENTER = { lat: 48.8586047, lng: 2.3137325 }
@@ -138,6 +138,17 @@ const LocateOnMapModal: React.FC<Props> = ({
   const [searchValue, setSearchValue] = React.useState<string>(initialAddress?.formatted_address || '')
   const [flyTarget, setFlyTarget] = React.useState<{ lat: number; lng: number } | null>(null)
   const [showDiscoverPane, setShowDiscoverPane] = React.useState(!initialAddress)
+  const mapLabel = intl.formatMessage({ id: 'global.card' })
+  // The Leaflet container is focusable (keyboard panning): give it a name, as on the step map
+  const onMapReady = React.useCallback(
+    (map: L.Map | null) => {
+      if (!map) return
+      const container = map.getContainer()
+      container.setAttribute('role', 'region')
+      container.setAttribute('aria-label', mapLabel)
+    },
+    [mapLabel],
+  )
 
   React.useEffect(() => {
     if (show) {
@@ -197,7 +208,7 @@ const LocateOnMapModal: React.FC<Props> = ({
       fullSizeOnMobile
       zIndex={2002}
     >
-      <Modal.Header>
+      <Modal.Header closeIconLabel={intl.formatMessage({ id: 'global.close' })}>
         <Heading>{intl.formatMessage({ id: 'front.proposal.locate-on-map' })}</Heading>
       </Modal.Header>
       <Modal.Body p={2}>
@@ -213,8 +224,12 @@ const LocateOnMapModal: React.FC<Props> = ({
             <PlacesAutocomplete value={searchValue} onChange={setSearchValue} onSelect={handleAddressSelect}>
               {({ getInputProps, suggestions, getSuggestionItemProps }) => (
                 <Box position="relative">
+                  <label htmlFor="locate-on-map-search" className="sr-only">
+                    {intl.formatMessage({ id: 'proposal_form.address' })}
+                  </label>
                   <Input
                     {...getInputProps({
+                      id: 'locate-on-map-search',
                       placeholder: intl.formatMessage({ id: 'proposal.map.form.placeholder' }),
                     })}
                     width="100%"
@@ -233,6 +248,7 @@ const LocateOnMapModal: React.FC<Props> = ({
             </PlacesAutocomplete>
           </Box>
           <MapContainer
+            ref={onMapReady}
             center={center}
             zoom={16}
             maxZoom={MAX_MAP_ZOOM}
@@ -261,6 +277,10 @@ const LocateOnMapModal: React.FC<Props> = ({
                 position={[selectedPosition.lat, selectedPosition.lng]}
                 icon={getMarkerIcon(category)}
                 zIndexOffset={1000}
+                // Leaflet exposes markers as unnamed focusable buttons by default: this one has no action,
+                // the selected place is given by the search field and the confirmation. It stays interactive
+                // so that a click on it does not reach the map, which would move the selected position
+                keyboard={false}
               />
             )}
           </MapContainer>

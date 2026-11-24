@@ -11,8 +11,9 @@ import {
   Modal,
 } from '@cap-collectif/ui'
 import { useDisclosure } from '@liinkiing/react-hooks'
+import useInertOutside from '@shared/hooks/useInertOutside'
 import { parseAsString, useQueryStates } from 'nuqs'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { getDefaultAccordions } from './utils'
 import useVoteStepFilters, { DEFAULT_FILTERS, FilterState } from './useVoteStepFilters'
@@ -39,6 +40,10 @@ const VoteStepMobileFiltersModal: React.FC<Props> = ({
   const { filters, defaultSort, form } = useVoteStepFilters(stepId)
   const objectType = getContributionObjectTypeTranslationKey(form?.objectType)
   const { isOpen, onOpen, onClose } = useDisclosure(false)
+  const [searchContainer, setSearchContainer] = useState<HTMLDivElement | null>(null)
+  // The modal stays non-modal on mobile (CapUI behaviour) but covers the whole screen:
+  // keep the keyboard and screen readers inside it, like a modal dialog
+  useInertOutside(searchContainer, isOpen)
 
   const handleOpen = () => {
     onOpen()
@@ -83,7 +88,14 @@ const VoteStepMobileFiltersModal: React.FC<Props> = ({
 
   return (
     <>
-      <Button variant={isActive ? 'primary' : 'tertiary'} flexDirection="column" flex="1 0 0" onClick={handleOpen}>
+      <Button
+        variant={isActive ? 'primary' : 'tertiary'}
+        flexDirection="column"
+        flex="1 0 0"
+        onClick={handleOpen}
+        aria-haspopup="dialog"
+        aria-expanded={isOpen}
+      >
         <Icon name={CapUIIcon.Search} size={CapUIIconSize.Md} />
         <Box as="span" fontSize={CapUIFontSize.BodySmall} lineHeight={CapUILineHeight.S}>
           {intl.formatMessage({ id: 'global.search.label' })}
@@ -99,15 +111,17 @@ const VoteStepMobileFiltersModal: React.FC<Props> = ({
         fullSizeOnMobile
         alwaysOpenInPortal
         forceModalDialogToFalse
+        // Leaving the modal with Tab must not close it (focus would go back to the page top)
+        hideOnClickOutside={false}
       >
-        <Modal.Header>
+        <Modal.Header closeIconLabel={intl.formatMessage({ id: 'global.close' })}>
           <Heading as="h4" color="blue.900">
             {intl.formatMessage({ id: `front.contribution.${objectType}.filter` })}
           </Heading>
         </Modal.Header>
         <Modal.Body spacing={5}>
-          <Box pt={2}>
-            <VoteStepSearchBar proposalsCount={proposalsCount} objectType={form?.objectType} />
+          <Box pt={2} ref={setSearchContainer}>
+            <VoteStepSearchBar proposalsCount={proposalsCount} objectType={form?.objectType} autoFocus={isOpen} />
           </Box>
           <Box mt="md">
             <VoteStepFiltersAccordions

@@ -45,7 +45,8 @@ describe('<ProposalsList />', () => {
             setView,
             hasMapView: false,
             isParticipationAnonymous: false,
-            setIsParticipationAnonymous
+            setIsParticipationAnonymous,
+            announceResults: jest.fn(),
           }}
         >
           <TestRenderer showImages={showImages} />

@@ -56,11 +56,14 @@ const AddressMapPreview = ({ address, category }: Props) => {
         zoom={16}
         maxZoom={18}
         zoomControl={false}
+        // Visual preview only, the address is written in the field above: keep it out of the tab order
+        keyboard={false}
         style={{ height: '100%', width: '100%' }}
       >
         <CapcoTileLayer />
         <MapCenterUpdater address={address} />
-        <Marker position={[lat, lng]} icon={markerIcon} />
+        {/* Leaflet exposes markers as unnamed focusable buttons by default: this one has no action */}
+        <Marker position={[lat, lng]} icon={markerIcon} keyboard={false} interactive={false} />
       </MapContainer>
     </Box>
   )

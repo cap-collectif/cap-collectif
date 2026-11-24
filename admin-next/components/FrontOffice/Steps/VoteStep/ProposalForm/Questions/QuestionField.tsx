@@ -11,6 +11,7 @@ import { ValidationRule } from '../ProposalFormModal.type'
 import ButtonChoices from './ButtonChoices'
 import MultipleChoiceQuestion from './MultipleChoiceQuestion'
 import RankingChoices from './RankingChoices'
+import OptionalMention from '../OptionalMention'
 
 type QuestionChoice = {
   id: string
@@ -54,7 +55,11 @@ const QuestionField: React.FC<Props> = ({ question, id, name, control, defaultLo
   const renderQuestionLabel = () => (
     <>
       <FormLabel id={type === 'select' ? `label-select-${id}` : `label-${id}`} htmlFor={id} label={title}>
-        {question.required && <Text color="red.700">{intl.formatMessage({ id: 'global.mandatory' })}</Text>}
+        {question.required ? (
+          <Text color="red.700">{intl.formatMessage({ id: 'global.mandatory' })}</Text>
+        ) : (
+          <OptionalMention />
+        )}
       </FormLabel>
       {helpText && <FormGuideline id={type === 'select' ? undefined : `${id}-help`}>{helpText}</FormGuideline>}
       {description && !isWYSIWYGContentEmpty(description) && (
@@ -105,6 +110,7 @@ const QuestionField: React.FC<Props> = ({ question, id, name, control, defaultLo
             label={title}
             name={name}
             required={question.required}
+            errorId={`${id}-error`}
             noModalAdvancedEditor
             clientConfig
             platformLanguage={defaultLocale}

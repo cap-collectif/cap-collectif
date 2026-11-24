@@ -221,15 +221,11 @@ const ProjectStepTabs: React.FC<Props> = ({
     return null
   }
 
+  const stepsLabel = intl.formatMessage({ id: 'project-header-step-modal-title' })
+
   return (
-    <Box className="frise" width="100%" paddingX={[4, 0]} {...rest}>
-      <Steps
-        modalTitle={intl.formatMessage({
-          id: 'project-header-step-modal-title',
-        })}
-        currentStepIndex={currentStepIndex}
-        mainColor={mainColor}
-      >
+    <Box as="nav" aria-label={stepsLabel} className="frise" width="100%" paddingX={[4, 0]} {...rest}>
+      <Steps modalTitle={stepsLabel} currentStepIndex={currentStepIndex} mainColor={mainColor}>
         {data.steps
           .filter(step => step.enabled)
           .map(step => (

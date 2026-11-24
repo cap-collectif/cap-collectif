@@ -71,7 +71,7 @@ const VoteStepFiltersMobile: React.FC<Props> = ({ stepId, onClose }) => {
       {view === 'map' && <VoteStepFilterSearchBar />}
       {view !== 'map' && (
         <Box mb={4}>
-          <VoteStepPageSearchBar />
+          <VoteStepPageSearchBar autoFocus />
         </Box>
       )}
       <VoteStepFiltersAccordions filters={filters} isMobile />

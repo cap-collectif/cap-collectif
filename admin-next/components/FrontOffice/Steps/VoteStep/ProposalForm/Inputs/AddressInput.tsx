@@ -69,7 +69,13 @@ const AddressInput: React.FC<Props> = ({
 
   return (
     <>
-      <FormControl errorId="proposal_address-error" name="address" control={control} mb={showLocateButton ? 1 : 4}>
+      <FormControl
+        errorId="proposal_address-error"
+        name="address"
+        control={control}
+        isRequired
+        mb={showLocateButton ? 1 : 4}
+      >
         <FormLabel
           id="label-proposal_address"
           label={intl.formatMessage({ id: 'proposal_form.address' })}

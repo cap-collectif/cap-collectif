@@ -334,7 +334,7 @@ const VoteStepProjectHero: React.FC<Props> = ({ step: stepKey }) => {
           show={openedModal === 'authors'}
           onClose={closeModal}
         >
-          <Modal.Header>
+          <Modal.Header closeIconLabel={intl.formatMessage({ id: 'global.close' })}>
             <Heading>{intl.formatMessage({ id: 'global.authors' })}</Heading>
           </Modal.Header>
           <Modal.Body>
@@ -403,7 +403,7 @@ const VoteStepProjectHero: React.FC<Props> = ({ step: stepKey }) => {
           show={openedModal === 'districts'}
           onClose={closeModal}
         >
-          <Modal.Header>
+          <Modal.Header closeIconLabel={intl.formatMessage({ id: 'global.close' })}>
             <Heading>{intl.formatMessage({ id: 'count-area' }, { count: project.districts?.totalCount ?? 0 })}</Heading>
           </Modal.Header>
           <Modal.Body>
@@ -456,7 +456,7 @@ const VoteStepProjectHero: React.FC<Props> = ({ step: stepKey }) => {
           show={openedModal === 'themes'}
           onClose={closeModal}
         >
-          <Modal.Header>
+          <Modal.Header closeIconLabel={intl.formatMessage({ id: 'global.close' })}>
             <Heading>{intl.formatMessage({ id: 'count-themes' }, { count: project.themes.length })}</Heading>
           </Modal.Header>
           <Modal.Body>
@@ -545,7 +545,7 @@ const VoteStepProjectHero: React.FC<Props> = ({ step: stepKey }) => {
           show={openedModal === 'restrictedViewers'}
           onClose={closeModal}
         >
-          <Modal.Header>
+          <Modal.Header closeIconLabel={intl.formatMessage({ id: 'global.close' })}>
             <Heading>{intl.formatMessage({ id: 'people-with-access-to-project' })}</Heading>
           </Modal.Header>
           <Modal.Body>
@@ -578,7 +578,7 @@ const VoteStepProjectHero: React.FC<Props> = ({ step: stepKey }) => {
           show={!!openedRestrictedGroup}
           onClose={() => setOpenedRestrictedGroupId(null)}
         >
-          <Modal.Header>
+          <Modal.Header closeIconLabel={intl.formatMessage({ id: 'global.close' })}>
             <Heading>{openedRestrictedGroup?.title}</Heading>
           </Modal.Header>
           <Modal.Body>

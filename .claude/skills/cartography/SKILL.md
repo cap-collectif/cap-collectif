@@ -1,18 +1,19 @@
 ---
 name: cartography
-description: Implemente des cartes interactives avec Leaflet et react-leaflet. Couvre markers, clusters, popups, geolocalisation et integration Mapbox.
+description: Implemente des cartes interactives avec Leaflet et react-leaflet. Couvre markers, clusters, popups, geolocalisation, fond de carte MapLibre/OpenStreetMap et accessibilite.
 ---
 
 # Cartographie / Maps
 
-Guide pour implementer des cartes interactives dans `admin-next/` avec Leaflet, react-leaflet et Mapbox.
+Guide pour implementer des cartes interactives dans `admin-next/` avec Leaflet, react-leaflet et MapLibre (fond de carte OpenStreetMap).
 
 ## Stack technique
 
 - **leaflet** : 1.9.4 - Librairie de cartographie
 - **react-leaflet** : 4.2.1 - Binding React pour Leaflet
 - **react-leaflet-markercluster** : Clustering de markers
-- **Mapbox** : Tiles et geocoding
+- **MapLibre GL** (via `@maplibre/maplibre-gl-leaflet`) : fond de carte vectoriel OpenStreetMap/OpenFreeMap,
+  style versionne dans `public/map-style.json`. Mapbox a ete retire : voir `ADR/001-map_stack_maplibre_openstreetmap.md`
 
 ## Structure recommandee
 
@@ -74,10 +75,11 @@ const MapSkeleton = () => (
 ```typescript
 // MyFeatureMapContainer.tsx
 import 'leaflet/dist/leaflet.css'
-import { MapContainer, TileLayer, useMapEvents } from 'react-leaflet'
+import type L from 'leaflet'
+import { MapContainer, useMapEvents } from 'react-leaflet'
+import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
-import { CapcoTileLayer, getMapboxUrl } from '@utils/leaflet'
-import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
+import { CapcoTileLayer } from '@utils/leaflet'
 
 const FRAGMENT = graphql`
   fragment MyFeatureMapContainer_query on Query
@@ -99,10 +101,21 @@ type Props = {
 
 export const MyFeatureMapContainer: React.FC<Props> = ({ query: queryRef }) => {
   const data = useFragment(FRAGMENT, queryRef)
-  const { mapTokens } = useAppContext()
+  const intl = useIntl()
+  const mapLabel = intl.formatMessage({ id: 'global.card' })
+  // Leaflet makes the container focusable (keyboard panning): give it a name
+  const onMapReady = React.useCallback(
+    (map: L.Map | null) => {
+      if (!map) return
+      map.getContainer().setAttribute('role', 'region')
+      map.getContainer().setAttribute('aria-label', mapLabel)
+    },
+    [mapLabel],
+  )
 
   return (
     <MapContainer
+      ref={onMapReady}
       center={DEFAULT_CENTER}
       zoom={DEFAULT_ZOOM}
       maxZoom={MAX_ZOOM}
@@ -110,7 +123,7 @@ export const MyFeatureMapContainer: React.FC<Props> = ({ query: queryRef }) => {
       scrollWheelZoom={true}
       zoomControl={false} // On utilise des controles custom
     >
-      <CapcoTileLayer mapTokens={mapTokens} />
+      <CapcoTileLayer />
       <MapEventHandler />
       <MyFeatureMapMarkers query={data} />
       <MapControls />
@@ -221,6 +234,7 @@ type Props = {
 
 export const MyFeatureMarker: React.FC<Props> = ({ item }) => {
   const { address, category } = item
+  const markerRef = React.useRef<L.Marker>(null)
 
   // Creer une icone custom avec React
   const icon = React.useMemo(() => {
@@ -235,21 +249,30 @@ export const MyFeatureMarker: React.FC<Props> = ({ item }) => {
             size="xl"
             color={color}
           />
+          {/* Accessible name of the marker, which Leaflet exposes as a button */}
+          <span className="sr-only">{item.title}</span>
         </div>
       ),
       iconSize: [30, 40],
       iconAnchor: [15, 40], // Point d'ancrage en bas au centre
       popupAnchor: [0, -40], // Popup au-dessus du marker
     })
-  }, [category?.color])
+  }, [category?.color, item.title])
 
   return (
     <Marker
       position={[address.lat, address.lng]}
       icon={icon}
+      ref={markerRef}
       eventHandlers={{
         click: () => {
           // Analytics, navigation, etc.
+        },
+        // Leaflet exposes markers as buttons but does not turn Enter or Space into a click
+        keypress: (event: L.LeafletKeyboardEvent) => {
+          if (event.originalEvent.key !== 'Enter' && event.originalEvent.key !== ' ') return
+          event.originalEvent.preventDefault()
+          markerRef.current?.openPopup()
         },
       }}
     >
@@ -412,9 +435,27 @@ const MapUrlSync: React.FC = () => {
 
 ### Accessibilite
 
-1. **Labels ARIA** sur tous les boutons de controle
-2. **Alt text** pour les markers si possible
-3. **Navigation clavier** : Les popups doivent etre accessibles
+Leaflet rend chaque marker focusable et l'expose comme un bouton (`keyboard: true` par defaut),
+meme sans action. Son nom vient de `title`, ou de `alt` pour une icone `<img>` seulement :
+avec `L.divIcon`, un marker sans nom est lu « bouton ».
+
+1. **Marker avec action** (popup, selection) : le nommer avec un texte masque dans le `html` du
+   `divIcon` (`<span className="sr-only">{titre}</span>`), et gerer Entree/Espace via l'evenement
+   `keypress` : Leaflet ne les transforme pas en clic. Exemple : ProposalMarker.tsx.
+2. **Marker sans action** (simple reperage) : `keyboard={false}`, qui retire le role et la tabulation
+   (`interactive={false}` seul ne le fait pas). Ajouter `interactive={false}` seulement si la carte ne
+   reagit pas au clic : un marker non interactif laisse passer les clics vers la carte (sur
+   LocateOnMapModal.tsx, cela deplacerait la position choisie). Exemple : AddressMapPreview.tsx.
+3. **Conteneur de carte** : Leaflet le rend focusable (deplacement aux fleches).
+   - Carte outil : lui donner un nom via `ref` (`role="region"` + `aria-label`, cle `global.card`),
+     comme VoteStepMapContainer.tsx et LocateOnMapModal.tsx.
+   - Apercu purement visuel dont l'information existe en texte : `keyboard={false}` sur `MapContainer`.
+4. **Fond de carte** : toujours passer par `CapcoTileLayer`. Il masque le canvas MapLibre (« Map »
+   en anglais) et retire le titre anglais du lien d'attribution « Leaflet ».
+5. **Champ superpose a la carte** (recherche d'adresse) : un vrai `<label>` (`sr-only` si besoin),
+   pas seulement un placeholder.
+6. **Labels ARIA** sur tous les boutons de controle.
+7. **Popups** accessibles au clavier (voir point 1).
 
 ### SSR / Hydration
 
@@ -450,8 +491,9 @@ const MapWithErrorBoundary: React.FC<Props> = (props) => (
 ```typescript
 // admin-next/utils/leaflet.tsx
 
-// Generer l'URL des tiles Mapbox
-import { getMapboxUrl, CapcoTileLayer } from '@utils/leaflet'
+// Fond de carte MapLibre (style public/map-style.json), deja accessible : canvas masque aux
+// lecteurs d'ecran, lien d'attribution « Leaflet » sans titre anglais
+import { CapcoTileLayer } from '@utils/leaflet'
 
 // Parser les coordonnees depuis l'URL
 import { parseLatLng, parseLatLngBounds } from '@utils/leaflet'
@@ -465,6 +507,7 @@ import { formatGeoJsons, convertToGeoJsonStyle } from '@utils/leaflet'
 - Map complete : [VoteStepMapContainer.tsx](admin-next/components/FrontOffice/Steps/VoteStep/Map/VoteStepMapContainer.tsx)
 - Markers avec clustering : [VoteStepMapMarkers.tsx](admin-next/components/FrontOffice/Steps/VoteStep/Map/VoteStepMapMarkers.tsx)
 - Marker custom : [ProposalMarker.tsx](admin-next/components/FrontOffice/Steps/VoteStep/Map/ProposalMarker.tsx)
+- Apercu non interactif : [AddressMapPreview.tsx](admin-next/components/FrontOffice/Steps/VoteStep/ProposalForm/Inputs/AddressMapPreview.tsx)
 - Controles : [LocateAndZoomControl.tsx](admin-next/components/FrontOffice/Leaflet/LocateAndZoomControl.tsx)
 
 ## Checklist
@@ -473,6 +516,9 @@ import { formatGeoJsons, convertToGeoJsonStyle } from '@utils/leaflet'
 - [ ] `leaflet/dist/leaflet.css` importe
 - [ ] MarkerClusterGroup pour les listes de markers
 - [ ] Icones custom avec `L.divIcon` et `className: 'custom-marker'`
+- [ ] Markers nommes (texte `sr-only` + Entree/Espace), ou `keyboard={false}` sans action
+- [ ] Conteneur de carte nomme (`role="region"` + `aria-label`), ou retire du clavier s'il est purement visuel
+- [ ] Fond de carte via `CapcoTileLayer`
 - [ ] Controles avec labels ARIA
 - [ ] Gestion des erreurs (ErrorBoundary)
 - [ ] Pagination Relay pour les markers

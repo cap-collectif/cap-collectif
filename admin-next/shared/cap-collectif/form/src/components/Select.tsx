@@ -2,6 +2,7 @@ import * as React from 'react'
 import { useIntl } from 'react-intl'
 import debounce from '../utils/debounce-promise'
 import { Select as CapSelect, AsyncSelect } from '@cap-collectif/ui'
+import { getSelectAriaLiveMessages, getSelectScreenReaderStatus } from '../utils/selectAriaLiveMessages'
 
 export type Option = { value: string; label: string }
 export type Value = string | Array<{ value: string }> | { value: string } | Option
@@ -35,6 +36,14 @@ export const Select: React.FC<SelectProps> = ({
   ...rest
 }) => {
   const intl = useIntl()
+  // Translated screen reader announcements; a caller can still override them through rest props
+  const a11yProps = React.useMemo(
+    () => ({
+      ariaLiveMessages: getSelectAriaLiveMessages(intl),
+      screenReaderStatus: getSelectScreenReaderStatus(intl),
+    }),
+    [intl],
+  )
   const resolvedMenuPortalTarget =
     typeof menuPortalTarget === 'boolean' ? (menuPortalTarget ? document.body : undefined) : menuPortalTarget
   const menuPortalProps = resolvedMenuPortalTarget === undefined ? {} : { menuPortalTarget: resolvedMenuPortalTarget }
@@ -45,6 +54,7 @@ export const Select: React.FC<SelectProps> = ({
 
     return (
       <AsyncSelect
+        {...a11yProps}
         {...rest}
         {...menuPortalProps}
         isClearable={clearable}
@@ -63,6 +73,7 @@ export const Select: React.FC<SelectProps> = ({
   }
   return (
     <CapSelect
+      {...a11yProps}
       {...rest}
       {...menuPortalProps}
       isClearable={clearable}
