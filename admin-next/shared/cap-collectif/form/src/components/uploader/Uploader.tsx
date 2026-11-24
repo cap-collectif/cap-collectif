@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useEffect, useRef, useState, forwardRef } from 'react'
-import { Uploader as CapUploader, InfoMessage, FileList } from '@cap-collectif/ui'
+import { Box, Uploader as CapUploader, InfoMessage, FileList } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import {
   handleErrors,
@@ -48,7 +48,7 @@ export const Uploader = forwardRef<HTMLInputElement, UploaderProps>(
     }
 
     return (
-      <div id={props.id}>
+      <Box id={props.id} sx={multiple ? { '& > .cap-uploader': { height: 'auto' } } : undefined}>
         <CapUploader
           ref={ref}
           wording={wordingUploader}
@@ -129,7 +129,7 @@ export const Uploader = forwardRef<HTMLInputElement, UploaderProps>(
             }}
           />
         )}
-      </div>
+      </Box>
     )
   },
 )
