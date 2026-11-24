@@ -43,6 +43,7 @@ const FRAGMENT = graphql`
     ...VoteStepQuickFilter_proposalStep
     form {
       objectType
+      commentable
       isMapViewEnabled
       isGridViewEnabled
       isListViewEnabled
@@ -89,15 +90,20 @@ const VoteStepListActions: React.FC<Props> = ({ step: stepKey }) => {
       filter: 'votes',
       icon: CapUIIcon.ThumbUpO,
     },
-    {
-      label: intl.formatMessage({
-        id: isFeminineObjectType(step.form?.objectType)
-          ? 'step.vote.list_actions.quick_filter.comments_f'
-          : 'step.vote.list_actions.quick_filter.comments',
-      }),
-      filter: 'comments',
-      icon: CapUIIcon.BubbleO,
-    },
+    // Sorting by comments is meaningless when comments are disabled on the form
+    ...(step.form?.commentable
+      ? [
+          {
+            label: intl.formatMessage({
+              id: isFeminineObjectType(step.form?.objectType)
+                ? 'step.vote.list_actions.quick_filter.comments_f'
+                : 'step.vote.list_actions.quick_filter.comments',
+            }),
+            filter: 'comments',
+            icon: CapUIIcon.BubbleO,
+          },
+        ]
+      : []),
     {
       label: intl.formatMessage({ id: 'step.vote.list_actions.quick_filter.news' }),
       filter: 'last',

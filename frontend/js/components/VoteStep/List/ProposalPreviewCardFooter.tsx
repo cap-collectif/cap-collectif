@@ -1,15 +1,15 @@
+import { Box, BoxProps, CapUIFontSize, CapUIIcon, CapUIIconSize, Flex, Icon, Proposal } from '@cap-collectif/ui'
 import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
-import { Box, Flex, Icon, CapUIIconSize, Proposal, CapUIIcon, BoxProps, CapUIFontSize } from '@cap-collectif/ui'
-import type { ProposalPreviewCardFooter_proposal$key } from '~relay/ProposalPreviewCardFooter_proposal.graphql'
-import type { ProposalPreviewCardFooter_viewer$key } from '~relay/ProposalPreviewCardFooter_viewer.graphql'
-import type { ProposalPreviewCardFooter_step$key } from '~relay/ProposalPreviewCardFooter_step.graphql'
+import { formatBigNumber } from '~/utils/bigNumberFormatter'
 import useIsMobile from '~/utils/hooks/useIsMobile'
+import type { ProposalPreviewCardFooter_proposal$key } from '~relay/ProposalPreviewCardFooter_proposal.graphql'
+import type { ProposalPreviewCardFooter_step$key } from '~relay/ProposalPreviewCardFooter_step.graphql'
+import type { ProposalPreviewCardFooter_viewer$key } from '~relay/ProposalPreviewCardFooter_viewer.graphql'
+import { useVoteStepContext } from '../Context/VoteStepContext'
 import VoteButton from '../VoteButton'
 import { View } from '../utils'
-import { formatBigNumber } from '~/utils/bigNumberFormatter'
 import ProposalPreviewCardRankVoteActions from './ProposalPreviewCardRankVoteActions'
-import { useVoteStepContext } from '../Context/VoteStepContext'
 
 const FRAGMENT = graphql`
   fragment ProposalPreviewCardFooter_proposal on Proposal
@@ -22,7 +22,7 @@ const FRAGMENT = graphql`
     body
     author {
       displayName
-      ...on User {
+      ... on User {
         media {
           url
         }
@@ -46,6 +46,7 @@ const FRAGMENT = graphql`
     isArchived
     form {
       objectType
+      commentable
     }
     ...VoteButton_proposal @arguments(isAuthenticated: $isAuthenticated, stepId: $stepId, token: $token)
     viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
@@ -116,7 +117,6 @@ export const ProposalPreviewCardFooter = ({
   stepId: string
   disabled: boolean
 }) => {
-
   const isMobile = useIsMobile()
   const proposal = useFragment(FRAGMENT, proposalFragment)
   const viewer = useFragment(FRAGMENT_VIEWER, viewerFragment)
@@ -125,7 +125,7 @@ export const ProposalPreviewCardFooter = ({
 
   if (!proposal || !step) return null
 
-  const { votes, estimation, paperVotesTotalPointsCount, comments, likers } = proposal
+  const { votes, estimation, paperVotesTotalPointsCount, comments, likers, form } = proposal
 
   const { viewerVotes, votesRanking, budget, votesLimit } = step
 
@@ -139,10 +139,7 @@ export const ProposalPreviewCardFooter = ({
   if (isFuture) return null
 
   const showVoteButton =
-    step &&
-    proposal.currentVotableStep &&
-    step.id === proposal.currentVotableStep.id &&
-    !proposal.isArchived
+    step && proposal.currentVotableStep && step.id === proposal.currentVotableStep.id && !proposal.isArchived
 
   const votesTotalPointsCount = votes.totalPointsCount + paperVotesTotalPointsCount
   const userPointsNumber = votesLimit - viewerVotes?.edges?.findIndex(edge => edge?.node?.proposal?.id === proposal.id)
@@ -156,6 +153,7 @@ export const ProposalPreviewCardFooter = ({
         <Flex gap={6} direction={['column', 'row']} align={['center', 'stretch']} zIndex={2}>
           {showVoteActions ? (
             <Flex gap={6} className={disabled ? 'disabled' : 'open'}>
+              {/* @ts-ignore - legacy, won't be fixed */}
               <VoteButton
                 stepId={stepId}
                 proposalId={proposal.id}
@@ -198,7 +196,7 @@ export const ProposalPreviewCardFooter = ({
           ) : null}
         </Flex>
       ) : null}
-      {comments.totalCount && !isMobile ? (
+      {form?.commentable && comments.totalCount && !isMobile ? (
         <TextIcon icon={CapUIIcon.BubbleO}>{formatBigNumber(comments.totalCount || 0)}</TextIcon>
       ) : null}
       {likers.length && !isMobile ? (

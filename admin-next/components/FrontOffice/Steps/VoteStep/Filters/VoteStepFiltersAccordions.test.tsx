@@ -19,6 +19,7 @@ const renderFilters = (districtEnabled: boolean) => {
       ],
     },
     status: disabled,
+    state: disabled,
     userType: disabled,
   }
   const currentFilters: FilterState = {
@@ -26,6 +27,7 @@ const renderFilters = (districtEnabled: boolean) => {
     category: 'ALL',
     theme: 'ALL',
     status: 'ALL',
+    state: 'ALL',
     userType: 'ALL',
     district: 'ALL',
     contributor: 'ALL',

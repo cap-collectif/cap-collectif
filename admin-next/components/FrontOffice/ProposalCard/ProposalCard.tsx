@@ -78,6 +78,7 @@ const PROPOSAL_FRAGMENT = graphql`
     isArchived
     form {
       usingIllustration
+      commentable
     }
     ...VoteButton_proposal @arguments(isAuthenticated: $isAuthenticated)
   }
@@ -181,6 +182,10 @@ export const ProposalCard: React.FC<Props> = ({
       <Text>{numericPointsCount + paperPointsCount}</Text>
     </Tag>
   )
+
+  const showComments = !!form?.commentable
+  // Left-side counters: vote button, then budget, points or comments
+  const hasLeftCounters = step.votable || step.budget !== null || !!step.votesRanking || showComments
 
   const hasCover = listView === 'grid' || form?.usingIllustration || (proposalIcon && proposalCover)
   const privateBadge = isPrivate ? (
@@ -300,30 +305,39 @@ export const ProposalCard: React.FC<Props> = ({
             </Flex>
           ) : (
             <Flex justifyContent="space-between" align="center" width="100%">
-              <Flex align="center" gap="md" flexShrink={0}>
-                {step.votable ? (
-                  <VoteButton proposal={proposal} step={step} triggerRequirementModal={triggerRequirementModal} />
-                ) : null}
-                {step.budget !== null ? (
-                  <Tag variantColor="infoGray" transparent>
-                    <Icon name={CapUIIcon.Budget} />
-                    <Text>{proposal.estimation}€</Text>
-                  </Tag>
-                ) : step.votesRanking ? (
-                  pointsTooltip ? (
-                    <Tooltip label={pointsTooltip}>{pointsTag}</Tooltip>
-                  ) : (
-                    pointsTag
-                  )
-                ) : (
-                  <Tag variantColor="infoGray" transparent flexShrink={0}>
-                    <Icon name={CapUIIcon.BubbleO} />
-                    <Text>{proposal.comments.totalCountWithAnswers}</Text>
-                  </Tag>
-                )}
-              </Flex>
+              {hasLeftCounters ? (
+                <Flex align="center" gap="md" flexShrink={0}>
+                  {step.votable ? (
+                    <VoteButton proposal={proposal} step={step} triggerRequirementModal={triggerRequirementModal} />
+                  ) : null}
+                  {step.budget !== null ? (
+                    <Tag variantColor="infoGray" transparent>
+                      <Icon name={CapUIIcon.Budget} />
+                      <Text>{proposal.estimation}€</Text>
+                    </Tag>
+                  ) : step.votesRanking ? (
+                    pointsTooltip ? (
+                      <Tooltip label={pointsTooltip}>{pointsTag}</Tooltip>
+                    ) : (
+                      pointsTag
+                    )
+                  ) : showComments ? (
+                    <Tag variantColor="infoGray" transparent flexShrink={0}>
+                      <Icon name={CapUIIcon.BubbleO} />
+                      <Text>{proposal.comments.totalCountWithAnswers}</Text>
+                    </Tag>
+                  ) : null}
+                </Flex>
+              ) : null}
               {proposal?.author ? (
-                <Tag variantColor="infoGray" transparent flex={1} minWidth={0} ml="md" tooltipLabel={authorName}>
+                <Tag
+                  variantColor="infoGray"
+                  transparent
+                  flex={1}
+                  minWidth={0}
+                  ml={hasLeftCounters ? 'md' : 0}
+                  tooltipLabel={authorName}
+                >
                   <Icon name={CapUIIcon.UserO} flexShrink={0} />
                   <Text overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap">
                     {authorName}
