@@ -29,6 +29,11 @@ Reporting:
                 resolve: 'report'
             url:
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Reporting\\ReportingUrlResolver", value)'
+            relatedAdminUrl:
+                type: 'URI'
+                access: "@=hasRole('ROLE_ADMIN')"
+                description: 'The back office URL of the reported contribution, null when it has no admin page.'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Reporting\\ReportingRelatedAdminUrlResolver", value)'
             isArchived:
                 type: 'Boolean!'
                 access: "@=hasRole('ROLE_ADMIN')"

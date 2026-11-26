@@ -14,6 +14,16 @@ const mutation = graphql`
       reporting {
         id
         isArchived
+        # Refreshes the state displayed in the list (and in the other reportings of the same contribution)
+        related {
+          ... on Trashable {
+            trashedStatus
+          }
+          # Comment exposes trashedStatus without implementing Trashable
+          ... on Comment {
+            trashedStatus
+          }
+        }
       }
       errorCode
     }

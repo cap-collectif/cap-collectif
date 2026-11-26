@@ -6,10 +6,11 @@ import { useIntl } from 'react-intl'
 
 export type ReportingAction = Exclude<ModerateReportingAction, '%future added value'>
 
+// TRASH keeps the content visible in the trash, DISABLE hides it
 export const ACTION_LABEL: Record<ReportingAction, string> = {
-  ARCHIVE: 'admin.action.reporting.archive.label',
-  TRASH: 'admin.action.reporting.trash.label',
-  DISABLE: 'admin.action.reporting.disable.label',
+  ARCHIVE: 'admin.reporting.keep-published-button',
+  TRASH: 'move.contribution.to.trash',
+  DISABLE: 'admin.reporting.trash-hidden-content-button',
 }
 
 const SUCCESS_MESSAGE: Record<ReportingAction, string> = {
@@ -18,7 +19,7 @@ const SUCCESS_MESSAGE: Record<ReportingAction, string> = {
   DISABLE: 'admin.action.reporting.disable.success',
 }
 
-// Shared by the details modal and the list confirmation modal; resolves to true on success
+// Used by the details modal; resolves to true on success
 export const useModerateReporting = () => {
   const intl = useIntl()
   const [pendingAction, setPendingAction] = React.useState<ReportingAction | null>(null)

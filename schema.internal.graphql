@@ -17917,6 +17917,11 @@ type Reporting implements Contribution & ContributionWithAuthor {
   body: String!
   kind: String!
 
+  """
+  The back office URL of the reported contribution, null when it has no admin page.
+  """
+  relatedAdminUrl: URI
+
   """Whether the reporting has been processed by an administrator."""
   isArchived: Boolean!
 }

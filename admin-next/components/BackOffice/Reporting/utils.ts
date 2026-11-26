@@ -1,4 +1,4 @@
-import type { ReportingType } from '@relay/ReportingItem_reporting.graphql'
+import type { ReportingType, TrashableStatus } from '@relay/ReportingItem_reporting.graphql'
 
 export const CONNECTION_NODES_PER_PAGE = 50
 
@@ -37,3 +37,18 @@ type RelatedContribution = {
 // Contributions without a title (argument, comment...) are displayed by their content
 export const getContributionLabel = (related: RelatedContribution | undefined): string =>
   related?.title ?? related?.body ?? ''
+
+type ReportingState = { label: string; color: 'success' | 'warning' | 'danger' }
+
+// Current state of the reported contribution, derived from the reporting and the contribution itself.
+// A trashed contribution wins over a pending reporting: it may have been trashed through another reporting.
+export const getReportingState = (
+  isArchived: boolean,
+  trashedStatus: TrashableStatus | null | undefined,
+): ReportingState => {
+  if (trashedStatus === 'INVISIBLE') return { label: 'proposal.state.hidden_content', color: 'danger' }
+  if (trashedStatus === 'VISIBLE') return { label: 'project.trash', color: 'danger' }
+  if (isArchived) return { label: 'global.published', color: 'success' }
+
+  return { label: 'waiting', color: 'warning' }
+}

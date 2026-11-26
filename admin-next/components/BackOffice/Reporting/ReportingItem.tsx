@@ -1,21 +1,9 @@
-import {
-  Box,
-  ButtonGroup,
-  ButtonQuickAction,
-  CapUIIcon,
-  CapUIIconSize,
-  Flex,
-  Link,
-  Table,
-  Tag,
-} from '@cap-collectif/ui'
+import { Box, Link, Table, Tag } from '@cap-collectif/ui'
 import type { ReportingItem_reporting$key } from '@relay/ReportingItem_reporting.graphql'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
-import ModerateReportingConfirmationModal, { ConfirmableReportingAction } from './ModerateReportingConfirmationModal'
-import { ACTION_LABEL } from './useModerateReporting'
-import { CONTRIBUTION_TYPE_LABEL, getContributionLabel, getReportingTypeLabel } from './utils'
+import { CONTRIBUTION_TYPE_LABEL, getContributionLabel, getReportingState, getReportingTypeLabel } from './utils'
 
 const CONTRIBUTION_LABEL_MAX_LENGTH = 100
 
@@ -31,6 +19,9 @@ const FRAGMENT = graphql`
     }
     related {
       __typename
+      ... on Trashable {
+        trashedStatus
+      }
       ... on Opinion {
         title
       }
@@ -48,6 +39,8 @@ const FRAGMENT = graphql`
       }
       ... on Comment {
         body
+        # Comment exposes trashedStatus without implementing Trashable
+        trashedStatus
       }
       ... on DebateArgument {
         body
@@ -64,10 +57,10 @@ type Props = {
 const ReportingItem: React.FC<Props> = ({ reporting: fragmentKey, onShow }) => {
   const intl = useIntl()
   const reporting = useFragment(FRAGMENT, fragmentKey)
-  const [confirmAction, setConfirmAction] = React.useState<ConfirmableReportingAction | null>(null)
   const contributionLabel = getContributionLabel(reporting.related)
   const contributionType = reporting.related ? CONTRIBUTION_TYPE_LABEL[reporting.related.__typename] : null
   const reportingType = getReportingTypeLabel(reporting.type)
+  const state = getReportingState(reporting.isArchived, reporting.related?.trashedStatus)
   const isTruncated = contributionLabel.length > CONTRIBUTION_LABEL_MAX_LENGTH
   const truncatedLabel = isTruncated
     ? `${contributionLabel.slice(0, CONTRIBUTION_LABEL_MAX_LENGTH)}…`
@@ -92,9 +85,7 @@ const ReportingItem: React.FC<Props> = ({ reporting: fragmentKey, onShow }) => {
       <Table.Td>{contributionType ? intl.formatMessage({ id: contributionType }) : null}</Table.Td>
       <Table.Td>{reportingType ? intl.formatMessage({ id: reportingType }) : null}</Table.Td>
       <Table.Td>
-        <Tag variantColor={reporting.isArchived ? 'success' : 'infoGray'}>
-          {intl.formatMessage({ id: reporting.isArchived ? 'global.yes' : 'global.no' })}
-        </Tag>
+        <Tag variantColor={state.color}>{intl.formatMessage({ id: state.label })}</Tag>
       </Table.Td>
       <Table.Td>
         <Link href={reporting.author.adminUrl}>{reporting.author.username}</Link>
@@ -107,34 +98,6 @@ const ReportingItem: React.FC<Props> = ({ reporting: fragmentKey, onShow }) => {
           hour: 'numeric',
           minute: 'numeric',
         })}
-      </Table.Td>
-      <Table.Td>
-        <Flex justifyContent="center">
-          <ButtonGroup>
-            <ButtonQuickAction
-              icon={CapUIIcon.Trash}
-              size={CapUIIconSize.Md}
-              variantColor="danger"
-              label={intl.formatMessage({ id: ACTION_LABEL.TRASH })}
-              onClick={() => setConfirmAction('TRASH')}
-            />
-            <ButtonQuickAction
-              icon={CapUIIcon.EyeClose}
-              size={CapUIIconSize.Md}
-              variantColor="danger"
-              label={intl.formatMessage({ id: ACTION_LABEL.DISABLE })}
-              onClick={() => setConfirmAction('DISABLE')}
-            />
-          </ButtonGroup>
-        </Flex>
-        {confirmAction && (
-          <ModerateReportingConfirmationModal
-            reportingId={reporting.id}
-            action={confirmAction}
-            contributionLabel={contributionLabel}
-            onClose={() => setConfirmAction(null)}
-          />
-        )}
       </Table.Td>
     </>
   )

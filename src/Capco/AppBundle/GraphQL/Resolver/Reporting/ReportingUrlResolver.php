@@ -12,7 +12,8 @@ class ReportingUrlResolver implements QueryInterface
         private readonly UrlResolver $urlResolver
     ) {}
 
-    // Public URL of the reported contribution, as the "Link" row of the former Sonata page
+    // Public URL of the reported contribution, as the "Link" row of the former Sonata page.
+    // The back office link is exposed separately by Reporting.relatedAdminUrl.
     public function __invoke(Reporting $reporting): string
     {
         return $this->urlResolver->getObjectUrl($reporting, true);

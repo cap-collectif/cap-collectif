@@ -24,7 +24,7 @@ describe('Reporting back office', () => {
     cy.wait('@ReportingModalQuery').its('response.statusCode').should('not.eq', 500)
     cy.get('[role="dialog"]').within(() => {
       cy.contains('admin.fields.reporting.body').should('be.visible')
-      cy.contains('button', 'admin.action.reporting.archive.label').should('be.visible')
+      cy.contains('button', 'admin.reporting.keep-published-button').should('be.visible')
     })
   })
 })

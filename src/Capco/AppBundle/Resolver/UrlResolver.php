@@ -254,7 +254,7 @@ class UrlResolver
 
         if ($object instanceof Opinion) {
             return $this->router->generate(
-                'admin_capco_app_opinion_show',
+                'admin_capco_app_opinion_edit',
                 ['id' => $object->getId()],
                 $referenceType
             );

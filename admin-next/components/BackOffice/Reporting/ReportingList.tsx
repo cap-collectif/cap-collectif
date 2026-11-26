@@ -1,6 +1,7 @@
 import { Table, Text } from '@cap-collectif/ui'
 import { useLayoutContext } from '@components/BackOffice/Layout/Layout.context'
 import type { ReportingList_query$key } from '@relay/ReportingList_query.graphql'
+import { pxToRem } from '@shared/utils/pxToRem'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { graphql, usePaginationFragment } from 'react-relay'
@@ -39,13 +40,12 @@ const ReportingList: React.FC<Props> = ({ queryReference, onShow }) => {
     <Table emptyMessage={<Text>{intl.formatMessage({ id: 'no_result' })}</Text>} style={{ border: 'none' }}>
       <Table.Thead>
         <Table.Tr>
-          <Table.Th lineHeight="sm">{intl.formatMessage({ id: 'admin.fields.reporting.object' })}</Table.Th>
-          <Table.Th lineHeight="sm">{intl.formatMessage({ id: 'admin.fields.reporting.type' })}</Table.Th>
-          <Table.Th lineHeight="sm">{intl.formatMessage({ id: 'admin.fields.reporting.status' })}</Table.Th>
-          <Table.Th lineHeight="sm">{intl.formatMessage({ id: 'admin.fields.reporting.is_archived' })}</Table.Th>
-          <Table.Th lineHeight="sm">{intl.formatMessage({ id: 'global.author' })}</Table.Th>
-          <Table.Th lineHeight="sm">{intl.formatMessage({ id: 'global.creation' })}</Table.Th>
-          <Table.Th />
+          <Table.Th>{intl.formatMessage({ id: 'admin.fields.reporting.object' })}</Table.Th>
+          <Table.Th>{intl.formatMessage({ id: 'admin.fields.reporting.type' })}</Table.Th>
+          <Table.Th>{intl.formatMessage({ id: 'admin.fields.reporting.status' })}</Table.Th>
+          <Table.Th minWidth={pxToRem(120)}>{intl.formatMessage({ id: 'global.state' })}</Table.Th>
+          <Table.Th minWidth={pxToRem(150)}>{intl.formatMessage({ id: 'admin.reporting.author' })}</Table.Th>
+          <Table.Th>{intl.formatMessage({ id: 'global.date.text' })}</Table.Th>
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody
