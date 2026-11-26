@@ -81,6 +81,32 @@ class ProposalVoteAccountHandler
         $vote->setIsAccounted($isAccounted);
     }
 
+    public function indexVoteAddition(
+        CollectStep|SelectionStep $step,
+        AbstractVote $vote,
+        Participant|User $contributor,
+        int $previousVoteCount
+    ): void {
+        if ($step->isVotesRanking() && $vote->getIsAccounted() && $step->getVotesMin() === $previousVoteCount + 1) {
+            // The indexed points use SQL totals, so rebuild the ballot after its votes are persisted.
+            $this->indexBallot($step, $contributor);
+
+            return;
+        }
+
+        $this->indexer->index(AbstractVote::class, $vote->getId());
+    }
+
+    public function indexBallot(CollectStep|SelectionStep $step, Participant|User $contributor): void
+    {
+        $ballot = $contributor instanceof User
+            ? $this->getUserVotesFromSpecificClass($step, $contributor)
+            : $this->getParticipantVotesFromSpecificClass($step, $contributor);
+        foreach ($ballot as $ballotVote) {
+            $this->indexer->index(AbstractVote::class, $ballotVote->getId());
+        }
+    }
+
     public function checkIfMediatorParticipantVotesAreStillAccounted(
         SelectionStep $step,
         Mediator $mediator,

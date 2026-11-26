@@ -51,9 +51,10 @@ describe('RGPD - Gestion des cookies', () => {
   })
 
   it('should not accept cookies when an anonymous user scrolls the page', () => {
+    cy.setFeatureFlags({ new_new_vote_step: true })
     Base.visit({
       path: `project/budget-participatif-rennes/collect/collecte-des-propositions`,
-      operationName: 'ProposalListViewRefetchQuery',
+      operationName: 'VoteStepQuery',
     })
     cy.get('#cookie-banner').should('be.visible')
     cy.scrollTo('bottom')

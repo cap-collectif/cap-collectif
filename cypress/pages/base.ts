@@ -16,7 +16,7 @@ export default new (class Base {
   }) {
     if (operationName) this.cy.interceptGraphQLOperation({ operationName })
 
-    this.cy.visit(path, { failOnStatusCode: failOnStatusCode })
+    this.cy.visit(path, { failOnStatusCode: failOnStatusCode, timeout })
 
     if (operationName && timeout) this.cy.wait(`@${operationName}`, { timeout: timeout })
     else if (operationName) this.cy.wait(`@${operationName}`)

@@ -126,7 +126,13 @@ const VoteStepFiltersModal: React.FC<Props> = ({ stepId }) => {
             <Button variant="secondary" variantColor="primary" variantSize="medium" onClick={handleReset}>
               {intl.formatMessage({ id: 'front.collect-vote-step.reset-filters' })}
             </Button>
-            <Button variant="primary" variantColor="primary" variantSize="medium" onClick={applyFilters}>
+            <Button
+              data-cy="apply-vote-step-filters"
+              variant="primary"
+              variantColor="primary"
+              variantSize="medium"
+              onClick={applyFilters}
+            >
               {intl.formatMessage({ id: `front.contribution.${objectType}.filter-apply` })}
             </Button>
           </Flex>

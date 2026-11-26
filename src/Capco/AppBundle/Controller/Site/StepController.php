@@ -27,6 +27,7 @@ use Capco\AppBundle\Search\OpinionSearch;
 use Capco\AppBundle\Search\VersionSearch;
 use Capco\AppBundle\Security\StepVoter;
 use Capco\AppBundle\Service\ParticipantAuthentication;
+use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
@@ -52,7 +53,8 @@ class StepController extends Controller
         private readonly QuestionnaireResultsAccessResolver $questionnaireResultsAccessResolver,
         private readonly ParticipantAuthentication $participantAuthentication,
         private readonly EntityManagerInterface $em,
-        private readonly AuthorizationCheckerInterface $authorizationChecker
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly Manager $toggleManager
     ) {}
 
     /**
@@ -367,6 +369,11 @@ class StepController extends Controller
             throw $this->createNotFoundException();
         }
 
+        if ($this->toggleManager->isActive(Manager::new_new_vote_step)) {
+            // Nginx serves the Next.js view at the original URL.
+            return new Response('', Response::HTTP_I_AM_A_TEAPOT);
+        }
+
         return [
             'project' => $project,
             'currentStep' => $step,
@@ -476,6 +483,11 @@ class StepController extends Controller
     {
         if (!$this->authorizationChecker->isGranted(StepVoter::VIEW, $step)) {
             return $this->redirect403();
+        }
+
+        if ($this->toggleManager->isActive(Manager::new_new_vote_step)) {
+            // Nginx serves the Next.js view at the original URL.
+            return new Response('', Response::HTTP_I_AM_A_TEAPOT);
         }
 
         return [

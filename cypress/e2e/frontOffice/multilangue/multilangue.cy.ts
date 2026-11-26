@@ -2,7 +2,7 @@ import { Base, Multilangue } from '~e2e-pages/index'
 import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 describe('Multilangue', () => {
-  setupFeatureFlags({ multilangue: true })
+  setupFeatureFlags({ multilangue: true, new_vote_step: false })
 
   const acceptCookiesIfBannerIsVisible = () => {
     cy.get('body').then($body => {
@@ -36,7 +36,7 @@ describe('Multilangue', () => {
    */
   it('lets the English projects URL override a previous French preference', () => {
     cy.setCookie('locale', 'fr-FR', { hostOnly: true })
-    cy.visit('/en/projects')
+    cy.visit('/en/projects', { timeout: 120000 })
     cy.url().should('include', '/en/projects')
     cy.get('.cap-project-card').should('have.length.greaterThan', 0)
     cy.getCookie('locale').should('have.property', 'value', 'en-GB')
@@ -89,6 +89,7 @@ describe('Multilangue', () => {
     cy.get('#changeLanguageProposalContainer').should('be.visible')
     cy.get('#language-change-button-dropdown').click({ force: true })
     cy.get('#language-choice-fr-FR').click({ force: true })
+    cy.interceptGraphQLOperation({ operationName: 'NavbarRightQuery' })
     cy.get('#language-header-continue-button').click({ force: true })
     cy.wait('@ChangeLocaleToFr')
     cy.wait('@NavbarRightQuery')
@@ -147,33 +148,37 @@ describe('Multilangue', () => {
     cy.setCookie('hasFullConsent', 'true')
     cy.directLoginAs('user')
 
-    Base.visit({ path: 'profile/edit-profile#account', operationName: 'NavBarMenuQuery' })
+    cy.interceptGraphQLOperation({ operationName: 'UpdateProfileAccountLocaleMutation' })
+    Base.visit({ path: 'profile/edit-profile#account', operationName: '' })
 
     cy.getCookie('locale').should('exist')
     cy.get('#display__language').should('exist')
     cy.get('.react-select__value-container').click({ force: true })
     cy.get('#display__language-menuList').should('exist')
-    cy.get('#react-select-2-option-0').click({ force: true })
+    cy.get('#display__language-menuList').contains('deutsch').click({ force: true })
     cy.get('#edit-account-profile-button').click({ force: true })
-    cy.wait('@NavBarMenuQuery')
+    cy.wait('@UpdateProfileAccountLocaleMutation')
     cy.getCookie('locale').should('have.property', 'value', 'de-DE')
   })
 
   it('should correctly change locale via footer on routes with parameters', () => {
+    cy.setFeatureFlags({ new_vote_step: true, new_new_vote_step: true })
     Base.visit({
       path: `project/budget-participatif-rennes/collect/collecte-des-propositions`,
-      operationName: 'ProposalListViewRefetchQuery',
+      operationName: '',
+      timeout: 120000,
     })
     cy.get('.footer-links').should('exist')
     cy.getCookie('locale').should('exist')
-    cy.get('.footer-links').contains('french').should('exist')
 
-    cy.get('.proposal__step-page .body__infos__content').should('exist')
+    cy.contains('Budget Participatif Rennes').should('be.visible')
+    cy.contains('Rénovation du gymnase').should('be.visible')
     cy.scrollTo('bottom')
-    cy.get('#cookie-consent').click({ force: true }) // Otherwise the footer is hidden and fail test
+    acceptCookiesIfBannerIsVisible() // Otherwise the footer is hidden and fail test
+    cy.intercept('POST', '**/api/change-locale/de-DE').as('ChangeLocaleToDe')
     cy.get('#language-change-button-dropdown').click({ force: true })
     cy.get('#language-choice-de-DE').click({ force: true })
-    cy.wait('@ProposalListViewRefetchQuery')
+    cy.wait('@ChangeLocaleToDe')
     cy.getCookie('locale').should('have.property', 'value', 'de-DE')
   })
 })

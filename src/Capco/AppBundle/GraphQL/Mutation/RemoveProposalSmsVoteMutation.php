@@ -111,6 +111,7 @@ class RemoveProposalSmsVoteMutation implements MutationInterface
             ClassUtils::getClass($proposal),
             $proposal->getId()
         );
+        $this->indexer->finishBulk();
 
         $this->proposalVotesDataLoader->invalidate($proposal);
         $this->proposalViewerVoteDataLoader->invalidate($proposal);

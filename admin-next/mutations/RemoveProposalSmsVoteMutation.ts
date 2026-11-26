@@ -14,6 +14,15 @@ const mutation = graphql`
     removeProposalSmsVote(input: $input) {
       errorCode
       previousVoteId
+      step {
+        id
+        viewerPendingVotes {
+          id
+          proposal {
+            id
+          }
+        }
+      }
     }
   }
 ` as GraphQLTaggedNode

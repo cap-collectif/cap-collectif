@@ -2631,6 +2631,11 @@ type CollectStep implements NodeSlug & Node & Step & ProposalStep & RequirementS
     """If anonymous user the token used to vote."""
     token: String
   ): ProposalVoteConnection!
+
+  """
+  Votes by the current viewer or participant on this step with missing participation requirements.
+  """
+  viewerPendingVotes: [ProposalVote!]!
   form: ProposalForm
 
   """Whether or not secret ballot is enable"""
@@ -15223,6 +15228,11 @@ interface ProposalStep implements NodeSlug {
     """If anonymous user the token used to vote."""
     token: String
   ): ProposalVoteConnection!
+
+  """
+  Votes by the current viewer or participant on this step with missing participation requirements.
+  """
+  viewerPendingVotes: [ProposalVote!]!
   form: ProposalForm
 
   """Whether or not secret ballot is enable"""
@@ -18919,6 +18929,11 @@ type SelectionStep implements NodeSlug & Node & Step & ProposalStep & Requiremen
     """If anonymous user the token used to vote."""
     token: String
   ): ProposalVoteConnection!
+
+  """
+  Votes by the current viewer or participant on this step with missing participation requirements.
+  """
+  viewerPendingVotes: [ProposalVote!]!
   form: ProposalForm
 
   """Whether or not secret ballot is enable"""

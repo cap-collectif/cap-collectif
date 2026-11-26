@@ -1,14 +1,19 @@
 /* eslint-disable relay/unused-fields */
+import { cache } from 'react'
 import { graphql } from 'relay-runtime'
 import { Metadata } from 'next'
 import { pageProjectStepMetadataQuery$data } from '@relay/pageProjectStepMetadataQuery.graphql'
+import { pageProjectStepAccessQuery$data } from '@relay/pageProjectStepAccessQuery.graphql'
 import { notFound } from 'next/navigation'
 import { removeAccents } from '@shared/utils/removeAccents'
 import VoteStep from '@components/FrontOffice/Steps/VoteStep/VoteStep'
 import ProjectShowTrash from '@components/FrontOffice/ProjectTrash/ProjectShowTrash'
+import ProjectAccessDenied from '@components/FrontOffice/Project/ProjectAccessDenied'
 import { ssrGraphqlWithLocale } from '../../../../server/ssr-graphql-with-locale'
+import { getRequestLocale } from '../../../../server/request-locale'
+import { messages } from '@utils/withPageAuthRequired'
 
-export const COLLECT_SELECTION_STEP_METADATA_QUERY = graphql`
+const COLLECT_SELECTION_STEP_METADATA_QUERY = graphql`
   query pageProjectStepMetadataQuery($slug: String!, $projectSlug: String) {
     siteTitle: siteParameter(keyname: "global.site.fullname") {
       value
@@ -44,9 +49,32 @@ export const COLLECT_SELECTION_STEP_METADATA_QUERY = graphql`
   }
 `
 
+// `nodeSlug` does not check the viewer's permissions, whereas `node` returns null when the viewer
+// cannot see the step: the page then reproduces the legacy access-denied pages.
+const COLLECT_SELECTION_STEP_ACCESS_QUERY = graphql`
+  query pageProjectStepAccessQuery($stepId: ID!) {
+    isAuthenticated
+    step: node(id: $stepId) {
+      id
+    }
+  }
+`
+
+// Cached per request, so that the metadata and the page share a single access check.
+const getStepAccess = cache(async (stepId: string) => {
+  const data = await ssrGraphqlWithLocale<pageProjectStepAccessQuery$data>(COLLECT_SELECTION_STEP_ACCESS_QUERY, {
+    stepId,
+  })
+
+  return {
+    viewerCanSeeStep: !!data?.step,
+    isAuthenticated: !!data?.isAuthenticated,
+  }
+})
+
 type Params = { params: { stepSlug: string; projectSlug: string } }
 
-export const getCollectAndSelectionStepPageMetadata = async function ({ params }: Params): Promise<Metadata> {
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { stepSlug, projectSlug: ps } = params
 
   const slug = removeAccents(decodeURI(stepSlug))
@@ -62,10 +90,22 @@ export const getCollectAndSelectionStepPageMetadata = async function ({ params }
 
   const baseTitle = siteTitle?.value ?? 'Cap Collectif'
 
-  if (!step)
+  if (!step?.id)
     return {
       title: `${baseTitle}`,
     }
+
+  const { viewerCanSeeStep } = await getStepAccess(step.id)
+
+  // Do not expose a private project's title and description to a viewer who cannot see it,
+  // but keep a page title that tells the viewer why the page is empty.
+  if (!viewerCanSeeStep) {
+    const unauthorizedAccess = messages[getRequestLocale()]?.['unauthorized-access'] ?? 'unauthorized-access'
+
+    return {
+      title: `${baseTitle} - ${unauthorizedAccess}`,
+    }
+  }
 
   const { label, metaDescription, project } = step
   const { title, cover } = project
@@ -85,11 +125,7 @@ export const getCollectAndSelectionStepPageMetadata = async function ({ params }
   }
 }
 
-export async function generateMetadata({ params }: Params): Promise<Metadata> {
-  return getCollectAndSelectionStepPageMetadata({ params })
-}
-
-export const getCollectAndSelectionStepPage = async ({ params }: Params) => {
+export default async function Page({ params }: Params) {
   const { stepSlug, projectSlug: ps } = params
 
   if (!stepSlug) return notFound()
@@ -105,7 +141,11 @@ export const getCollectAndSelectionStepPage = async ({ params }: Params) => {
     },
   )
 
-  if (!step) return notFound()
+  if (!step?.id) return notFound()
+
+  const { viewerCanSeeStep, isAuthenticated } = await getStepAccess(step.id)
+
+  if (!viewerCanSeeStep) return <ProjectAccessDenied isAuthenticated={isAuthenticated} />
 
   return (
     <>
@@ -125,8 +165,4 @@ export const getCollectAndSelectionStepPage = async ({ params }: Params) => {
       <ProjectShowTrash projectSlug={projectSlug} />
     </>
   )
-}
-
-export default async function Page({ params }: Params) {
-  return getCollectAndSelectionStepPage({ params })
 }

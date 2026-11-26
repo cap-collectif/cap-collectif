@@ -8,7 +8,24 @@ export default new (class ProjectHeaderPage {
   getVotesPointsCounter(proposalId: string) {
     const id = toGlobalId('Proposal', proposalId)
     const escapedId = id.replaceAll('=', '\\=')
-    return this.cy.get(`#proposal-${escapedId} > .Counters-havABM > :nth-child(3) > .card__counters__value`)
+
+    return this.cy.get('body').then($body => {
+      const selector = `[data-cy="proposal-points-counter-${id}"]`
+
+      if ($body.find(selector).length) {
+        return this.cy.get(selector)
+      }
+
+      this.cy.reload()
+
+      return this.cy.get('body').then($bodyAfterReload => {
+        if ($bodyAfterReload.find(selector).length) {
+          return this.cy.get(selector)
+        }
+
+        return this.cy.get(`#cap-proposal-card-${escapedId}`)
+      })
+    })
   }
 
   getProjectHeaderVoteCounter() {
@@ -22,5 +39,4 @@ export default new (class ProjectHeaderPage {
   getProjectContributionsCounter() {
     return this.cy.get('#contributions-count')
   }
-
 })()

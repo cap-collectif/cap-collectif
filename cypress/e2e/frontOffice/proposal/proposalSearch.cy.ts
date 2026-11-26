@@ -1,4 +1,5 @@
 import { Base, ProposalPage } from '~e2e-pages/index'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 const collectStep = {
   project: 'budget-participatif-rennes',
@@ -25,7 +26,34 @@ const searchProposals = (terms: string) => {
   cy.get('#proposal-search-input').type(terms)
 }
 
+const visitVoteStep = (path: string) => {
+  cy.interceptGraphQLOperation({ operationName: 'VoteStepQuery' })
+  cy.interceptGraphQLOperation({ operationName: 'useVoteStepFilters_Query' })
+  cy.visit(path)
+  cy.wait('@VoteStepQuery', { timeout: 15000 })
+  cy.wait('@useVoteStepFilters_Query', { timeout: 15000 })
+}
+
+const openFilters = () => {
+  cy.contains('button', 'btn_filter').click()
+  cy.get('#modal-section-contributors').should('be.visible')
+}
+
+const applyFilters = () => {
+  cy.interceptGraphQLOperation({ operationName: 'VoteStepQuery' })
+  cy.getByDataCy('apply-vote-step-filters').should('be.visible').click()
+  cy.wait('@VoteStepQuery', { timeout: 15000 })
+}
+
+const selectVoteStepFilter = (filter: string, value: string) => {
+  cy.get(`#modal-section-contributors #accordion-button-${filter}`).should('be.visible').click()
+  cy.get(`#modal-section-contributors label[for="${value}"]`).should('be.visible').click()
+  cy.get(`#modal-section-contributors input[value="${value}"]`).should('be.checked')
+}
+
 describe('Proposal search and filters', () => {
+  setupFeatureFlags({ new_vote_step: false, new_new_vote_step: false })
+
   beforeEach(() => {
     cy.task('db:restore')
   })
@@ -33,7 +61,7 @@ describe('Proposal search and filters', () => {
   it('initializes proposal filters from URL parameters', () => {
     cy.setFeatureFlags({ user_type: true, districts: true })
     cy.directLoginAs('admin')
-    ProposalPage.visitCollectStepPage({
+    ProposalPage.visitLegacyStepPage({
       project: 'budget-participatif-idf',
       step: 'collecte-des-projets-idf-privee?category=pCategoryIdf1&district=RGlzdHJpY3Q6ZGlzdHJpY3RJZGYy&status=statusIdfCollect1&type=VXNlclR5cGU6NA==',
     })
@@ -47,7 +75,7 @@ describe('Proposal search and filters', () => {
 
   it('filters collect-step proposals by theme, status and contributor type', () => {
     cy.setFeatureFlags({ themes: true, districts: true, user_type: true })
-    ProposalPage.visitCollectStepPage(collectStep)
+    ProposalPage.visitLegacyStepPage(collectStep)
 
     proposalCards().should('have.length', 8)
 
@@ -76,7 +104,7 @@ describe('Proposal search and filters', () => {
     proposalCards().should('have.length', 0)
 
     cy.directLoginAs('user')
-    ProposalPage.visitCollectStepPage({
+    ProposalPage.visitLegacyStepPage({
       project: 'budget-participatif-rennes',
       step: 'collecte-des-propositions-privee',
     })
@@ -147,7 +175,7 @@ describe('Proposal search and filters', () => {
   })
 
   it('sorts and searches collect-step proposals', () => {
-    ProposalPage.visitCollectStepPage(collectStep)
+    ProposalPage.visitLegacyStepPage(collectStep)
 
     cy.get('#proposal-filter-sorting-button').should('have.attr', 'aria-label', 'global.filter_f_random')
 
@@ -175,7 +203,7 @@ describe('Proposal search and filters', () => {
   })
 
   it('searches collect-step proposals by reference and reports empty results', () => {
-    ProposalPage.visitCollectStepPage(collectStep)
+    ProposalPage.visitLegacyStepPage(collectStep)
 
     searchProposals('1-7')
     proposalCards().should('have.length', 1)
@@ -190,7 +218,7 @@ describe('Proposal search and filters', () => {
   it('combines proposal filters, search and sorting', () => {
     cy.setFeatureFlags({ themes: true })
     cy.directLoginAs('user')
-    ProposalPage.visitCollectStepPage(collectStep)
+    ProposalPage.visitLegacyStepPage(collectStep)
 
     selectFilter('themes', 'theme2')
     selectOrder('comments')
@@ -206,7 +234,8 @@ describe('Proposal search and filters', () => {
 
   it('filters and sorts selection-step proposals', () => {
     cy.setFeatureFlags({ themes: true })
-    ProposalPage.visitSelectionStepPage({
+    ProposalPage.visitLegacyStepPage({
+      kind: 'selection',
       project: 'budget-participatif-rennes',
       step: 'selection',
     })
@@ -226,5 +255,66 @@ describe('Proposal search and filters', () => {
       .eq(0)
       .invoke('text')
       .should('match', /Ravalement de la façade\s*de la bibliothèque\s*municipale/)
+  })
+})
+
+describe('Proposal step search and filters', () => {
+  setupFeatureFlags({ new_vote_step: true, new_new_vote_step: true })
+
+  beforeEach(() => {
+    cy.viewport(1600, 1000)
+    cy.task('db:restore')
+  })
+
+  it('initializes filters from URL parameters', () => {
+    cy.setFeatureFlags({ districts: true, user_type: true })
+    cy.directLoginAs('admin')
+
+    const institutionUserTypeId = 'VXNlclR5cGU6NA=='
+    visitVoteStep(
+      `/project/budget-participatif-idf/collect/collecte-des-projets-idf-privee?category=pCategoryIdf1&status=statusIdfCollect1&userType=${institutionUserTypeId}`,
+    )
+
+    openFilters()
+
+    cy.get('#modal-section-contributors').within(() => {
+      cy.get('input[name="category"][value="pCategoryIdf1"]').should('be.checked')
+      cy.get('input[name="status"][value="statusIdfCollect1"]').should('be.checked')
+      cy.get(`input[name="contributors"][value="${institutionUserTypeId}"]`).should('be.checked')
+    })
+    cy.get('.cap-proposal-card').should('have.length', 0)
+  })
+
+  it('filters collect step proposals by theme, status, contributor and term', () => {
+    cy.setFeatureFlags({ themes: true, districts: true, user_type: true })
+
+    visitVoteStep('/project/budget-participatif-rennes/collect/collecte-des-propositions')
+    cy.get('.cap-proposal-card').should('have.length', 8)
+
+    openFilters()
+    selectVoteStepFilter('theme', 'theme2')
+    applyFilters()
+    cy.get('.cap-proposal-card').should('have.length', 5)
+
+    visitVoteStep('/project/budget-participatif-rennes/collect/collecte-des-propositions')
+    openFilters()
+    selectVoteStepFilter('status', 'status2')
+    applyFilters()
+    cy.get('.cap-proposal-card').should('have.length', 2)
+
+    visitVoteStep('/project/budget-participatif-rennes/collect/collecte-des-propositions')
+    openFilters()
+    selectVoteStepFilter('userType', 'VXNlclR5cGU6NA==')
+    applyFilters()
+    cy.get('.cap-proposal-card').should('have.length', 0)
+
+    visitVoteStep('/project/budget-participatif-rennes/collect/collecte-des-propositions')
+    cy.interceptGraphQLOperation({ operationName: 'VoteStepQuery' })
+    cy.get('#search-vote-step').type('proposition')
+    cy.wait('@VoteStepQuery', { timeout: 15000 })
+
+    cy.get('.cap-proposal-card').should('have.length', 2)
+    cy.contains('Proposition pas encore votable').should('be.visible')
+    cy.contains('Proposition plus votable').should('be.visible')
   })
 })

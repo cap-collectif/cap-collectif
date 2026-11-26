@@ -57,6 +57,10 @@ ProposalStep:
                     token:
                         type: 'String'
                         description: 'If anonymous user the token used to vote.'
+            viewerPendingVotes:
+                type: '[InternalProposalVote!]!'
+                description: 'Votes by the current viewer or participant on this step with missing participation requirements.'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerPendingProposalVotesResolver", value, getUser())'
             form:
                 type: 'InternalProposalForm'
                 resolve: '@=value.getProposalForm()'

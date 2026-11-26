@@ -15,6 +15,9 @@ export type AddressProps = BaseField &
 
 const Address = forwardRef<HTMLInputElement, AddressProps>(
   ({ value, onChange, placeholder, className, width, getAddress, getPosition, ...props }, ref) => {
+    const isGooglePlacesReady =
+      typeof window !== 'undefined' && window.google && window.google.maps && window.google.maps.places
+
     const handleSelect = async (address: string) => {
       const addressWithoutPosition: AddressWithoutPosition = await geocodeByAddress(address)
         .then((results: AddressWithoutPosition[]) => {
@@ -41,6 +44,44 @@ const Address = forwardRef<HTMLInputElement, AddressProps>(
         })
         .catch(error => console.error('Error', error))
     }
+
+    const handleFallbackChange = event => {
+      const address = event.target.value
+      onChange(event)
+
+      if (getAddress) {
+        getAddress({
+          address_components: [],
+          formatted_address: address,
+          geometry: {
+            location: {
+              lat: 0,
+              lng: 0,
+            },
+          },
+          types: [],
+        })
+      }
+    }
+
+    if (!isGooglePlacesReady) {
+      return (
+        <Box position="relative">
+          <Icon name={CapUIIcon.Search} position="absolute" left="xxs" top="xxs" />
+          <Input
+            ref={ref}
+            width={width}
+            pl="28px!important"
+            placeholder={placeholder}
+            className={cn('cap-address__input', className)}
+            value={value}
+            onChange={handleFallbackChange}
+            {...props}
+          />
+        </Box>
+      )
+    }
+
     return (
       <PlacesAutocomplete value={value} onChange={onChange} onSelect={handleSelect}>
         {({ getInputProps, suggestions, getSuggestionItemProps }) => (

@@ -26,6 +26,24 @@ type Props = {
   triggerRequirementModal: (id: string) => void
 }
 
+type BallotUpdateResult = 'MISSING_REQUIREMENTS' | void
+
+// Anonymous votes share a cookie and a ballot across all proposal buttons.
+let pendingAnonymousVote: Promise<BallotUpdateResult> | undefined
+
+const updateAnonymousBallot = async (updateVote: () => Promise<BallotUpdateResult>) => {
+  const vote = pendingAnonymousVote
+    ? pendingAnonymousVote.then(status => (status === 'MISSING_REQUIREMENTS' ? status : updateVote()), updateVote)
+    : updateVote()
+  pendingAnonymousVote = vote
+
+  try {
+    await vote
+  } finally {
+    if (pendingAnonymousVote === vote) pendingAnonymousVote = undefined
+  }
+}
+
 const VOTE_ACTION_LABEL_IDS: Record<
   VoteAction,
   { numericLabelId: string; paperLabelId: string; votedTextId: string; voteTextId: string }
@@ -97,6 +115,12 @@ const STEP_FRAGMENT = graphql`
         }
       }
     }
+    viewerPendingVotes @skip(if: $isAuthenticated) {
+      id
+      proposal {
+        id
+      }
+    }
     voteThreshold
     canDisplayBallot
     voteButtonIcon
@@ -140,14 +164,17 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
     ? persistedAnonymousVote
     : anonymousVote
   const hasVote = isAuthenticated ? proposal.viewerHasVote : currentVote !== null && currentVote !== undefined
-  const hasIncompleteVote = currentVote?.completionStatus === 'MISSING_REQUIREMENTS'
+  const pendingVote =
+    currentVote?.completionStatus === 'MISSING_REQUIREMENTS'
+      ? currentVote
+      : step.viewerPendingVotes?.find(vote => vote.proposal.id === proposal.id)
   const votesMin = step.votesMin ?? 0
   const viewerVotesCount = step.viewerVotes?.totalCount ?? 0
 
   // When the viewer has a valid counted vote, show at least 1.
   // This handles the case where the server vote count update is async (message queue)
   // and the count hasn't been reflected yet after a page reload.
-  const isViewerVoteAccounted = hasVote && !hasIncompleteVote && (votesMin === 0 || viewerVotesCount >= votesMin)
+  const isViewerVoteAccounted = hasVote && !pendingVote && (votesMin === 0 || viewerVotesCount >= votesMin)
   const numericVotesCount = proposal.votes?.totalCount ?? 0
   const votesCount = numericVotesCount + proposal.paperVotesTotalCount
   const displayedNumericVotesCount = numericVotesCount
@@ -221,13 +248,11 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
         return
       }
 
-      const hasNowReachedVotesMin = votesMin === 0 || step.viewerVotes?.totalCount + 1 >= votesMin
       const createdVote = payload?.vote
       if (!isAuthenticated && createdVote) setAnonymousVote(createdVote)
-      // The mutation is the source of truth: open the workflow only when the created vote is incomplete.
-      if (createdVote?.completionStatus === 'MISSING_REQUIREMENTS' && hasNowReachedVotesMin) {
+      if (createdVote?.completionStatus === 'MISSING_REQUIREMENTS') {
         triggerRequirementModal(createdVote.id)
-        return
+        return createdVote.completionStatus
       }
     } catch {
       mutationErrorToast(intl)
@@ -239,8 +264,6 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
     step.actionButtonLabel,
     proposal?.id,
     intl,
-    votesMin,
-    step.viewerVotes?.totalCount,
     triggerRequirementModal,
   ])
 
@@ -292,23 +315,24 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
     if (isLoading) return
 
     // User has an incomplete vote from a previous session, re-trigger requirements
-    if (hasIncompleteVote && currentVote) {
-      triggerRequirementModal(currentVote.id)
+    if (pendingVote) {
+      triggerRequirementModal(pendingVote.id)
       return
     }
 
     setIsLoading(true)
 
     try {
-      if (hasVote) {
-        await deleteVote()
+      const updateVote = hasVote ? deleteVote : addVote
+      if (isAuthenticated) {
+        await updateVote()
       } else {
-        await addVote()
+        await updateAnonymousBallot(updateVote)
       }
     } finally {
       setIsLoading(false)
     }
-  }, [isLoading, hasIncompleteVote, currentVote, hasVote, addVote, deleteVote, triggerRequirementModal])
+  }, [isLoading, pendingVote, hasVote, addVote, deleteVote, isAuthenticated, triggerRequirementModal])
 
   const tooltipLabel =
     displayedCount > 0 ? (
@@ -366,6 +390,7 @@ export const VoteButton: React.FC<Props> = ({ proposal: proposalRef, step: stepR
   const buttonContent = (
     <Button
       id={`proposal-vote-btn-${proposal.id}`}
+      data-cy={`proposal-vote-button-${proposal.id}`}
       onClick={onClick}
       variant={hasVote ? 'primary' : 'secondary'}
       {...(hasThreshold

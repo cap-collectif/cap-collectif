@@ -122,6 +122,7 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
         $currentVote->getProposal()->willReturn($proposal);
         $currentVote->getIsAccounted()->willReturn(false);
         $indexer->index(Argument::type('string'), $proposalId)->shouldBeCalledOnce();
+        $indexer->finishBulk()->shouldBeCalledOnce();
 
         $proposalVotesDataLoader->invalidate($proposal)->shouldBeCalledOnce();
         $proposalViewerVoteDataLoader->invalidate($proposal)->shouldBeCalledOnce();

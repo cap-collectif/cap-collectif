@@ -130,6 +130,31 @@ import { FieldInput, FormControl } from '@cap-collectif/form'
 <Box mt="-sm" />         // margin-top: -12px
 ```
 
+## Valeurs hors tokens : `pxToRem()` plutôt que `px`
+
+Quand aucun token CapUI ne convient (largeur max, hauteur fixe, espacement repris d'une maquette...),
+convertir la valeur avec `pxToRem` au lieu d'écrire une chaîne en `px` :
+
+```typescript
+import { pxToRem } from '@shared/utils/pxToRem'
+
+<Box maxWidth={pxToRem(1280)} py={pxToRem(100)} />  // ✅
+<Box maxWidth="1280px" py="100px" />                // ❌
+```
+
+Ordre de préférence :
+
+1. **Token CapUI** : spacing (`"md"`), `CapUIFontSize`, `CapUIRadius`, `CapUIShadow`, `CapUIIconSize`...
+2. **`pxToRem(n)`** pour toute autre dimension : tailles, espacements, positions, tailles de police.
+3. **`px`** uniquement pour les traits fins qui ne doivent pas grossir avec le texte : bordures
+   (`1px`, `2px`), `outline`, décalages d'ombre.
+
+Pourquoi : la racine vaut `14px` en front-office comme en back-office (`admin-next/styles/GlobalCSS.ts`,
+styles front), et CapUI convertit ses propres tokens avec la même base (`px / 14` rem). Aujourd'hui
+`pxToRem(n)` rend donc exactement `n` pixels, mais seules les valeurs en `rem` suivront la racine si elle
+devient relative (respect de la taille de police choisie dans le navigateur, critère WCAG 1.4.4).
+Beaucoup de composants existants écrivent encore des valeurs en `px` : ne pas les reprendre comme modèle.
+
 ## Couleurs
 
 ### Palette
@@ -532,7 +557,7 @@ CapUIIcon.Search     // Recherche
 
 1. **styled-components** : Ne pas utiliser, migrer vers CapUI
 2. **CSS inline** : Eviter `style={{}}`, utiliser les props ou `sx`
-3. **Valeurs magiques** : Pas de `padding: '17px'`, utiliser les tokens
+3. **Valeurs magiques** : Pas de `padding: '17px'`, utiliser les tokens, sinon `pxToRem(17)`
 4. **!important** : Jamais necessaire avec CapUI
 5. **Classes CSS** : Eviter sauf pour integration externe (Leaflet, etc.)
 
@@ -570,6 +595,7 @@ const Container = styled.div`
 
 - [ ] Pas de styled-components
 - [ ] Tokens semantiques pour spacing (`"md"` pas `16`)
+- [ ] Hors tokens, `pxToRem(n)` plutôt que `"npx"` (sauf bordures et traits fins)
 - [ ] Props responsive avec `base`, `md`, `lg`
 - [ ] Couleurs du theme (`gray.600` pas `#999`)
 - [ ] Texte gris sur fond blanc en `gray.600` minimum (contraste)

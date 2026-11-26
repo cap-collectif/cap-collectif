@@ -35,7 +35,11 @@ jest.mock('@shared/utils/CookieMonster', () => ({
 jest.mock('@shared/utils/toasts', () => ({ mutationErrorToast: jest.fn() }))
 
 describe('VoteButton', () => {
-  it('votes through the participant mutation when the viewer is anonymous', async () => {
+  beforeEach(() => {
+    ;(CookieMonster.getParticipantCookie as jest.Mock).mockReset()
+  })
+
+  it('votes through the participant mutation when the participant has no vote for the proposal', async () => {
     const dispatchEvent = jest.spyOn(window, 'dispatchEvent')
     const step = {
       id: 'step-id',
@@ -68,7 +72,7 @@ describe('VoteButton', () => {
       removeProposalSmsVote: { errorCode: null },
     })
     ;(CookieMonster.getParticipantCookie as jest.Mock)
-      .mockReturnValueOnce(undefined)
+      .mockReturnValueOnce('existing-cookie')
       .mockReturnValue('participant-token')
 
     render(<VoteButton proposal={{} as any} step={{} as any} triggerRequirementModal={jest.fn()} />)
@@ -76,7 +80,7 @@ describe('VoteButton', () => {
 
     await waitFor(() =>
       expect(AddProposalSmsVoteMutation.commit).toHaveBeenCalledWith({
-        input: { proposalId: 'proposal-id', stepId: 'step-id', token: undefined },
+        input: { proposalId: 'proposal-id', stepId: 'step-id', token: 'existing-cookie' },
         stepId: 'step-id',
       }),
     )
@@ -127,6 +131,36 @@ describe('VoteButton', () => {
     expect(screen.getByRole('button', { name: 'global.delete' })).toBeTruthy()
   })
 
+  it('resumes an anonymous vote with missing requirements after returning to the step', async () => {
+    const step = {
+      id: 'step-id',
+      votesMin: 3,
+      votesLimit: 5,
+      viewerVotes: {
+        totalCount: 2,
+        edges: ['a', 'b'].map(id => ({ node: { proposal: { id }, completionStatus: 'COMPLETED' } })),
+      },
+      viewerPendingVotes: [{ id: 'existing-vote-c', proposal: { id: 'c' } }],
+      open: true,
+    }
+    const proposal = { id: 'c', viewerVote: null, votes: { totalCount: 0 }, paperVotesTotalCount: 0 }
+    ;(useFragment as jest.Mock).mockImplementation(() =>
+      (useFragment as jest.Mock).mock.calls.length % 2 ? step : proposal,
+    )
+    ;(CookieMonster.getParticipantCookie as jest.Mock).mockReturnValue('participant-cookie')
+    ;(AddProposalSmsVoteMutation.commit as jest.Mock).mockResolvedValue({
+      addProposalSmsVote: { errorCode: 'PROPOSAL_ALREADY_VOTED' },
+    })
+    const triggerRequirementModal = jest.fn()
+    render(<VoteButton proposal={{} as any} step={{} as any} triggerRequirementModal={triggerRequirementModal} />)
+
+    fireEvent.click(screen.getByRole('button', { name: 'global.add' }))
+
+    await waitFor(() => expect(triggerRequirementModal).toHaveBeenCalledWith('existing-vote-c'))
+    expect(AddProposalSmsVoteMutation.commit).not.toHaveBeenCalled()
+    expect(RemoveProposalSmsVoteMutation.commit).not.toHaveBeenCalled()
+  })
+
   it('locks the button while the mutation is pending', async () => {
     const step = {
       id: 'step-id',
@@ -159,6 +193,10 @@ describe('VoteButton', () => {
     const button = screen.getByRole('button', { name: 'global.add' })
     fireEvent.click(button)
 
+    expect(AddProposalSmsVoteMutation.commit).toHaveBeenCalledWith({
+      input: { proposalId: 'proposal-id', stepId: 'step-id', token: undefined },
+      stepId: 'step-id',
+    })
     expect(button.disabled).toBe(true)
     expect(button.getAttribute('data-loading')).toBe('true')
 

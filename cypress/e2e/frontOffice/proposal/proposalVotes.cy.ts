@@ -1,7 +1,15 @@
 import { Base } from '~e2e-pages/index'
 import proposalVote from '~e2e-pages/proposal/proposalVote'
+import { toGlobalId } from '~e2e/helper'
+import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
+
+const getProposalVoteButton = (proposalId: string) => {
+  return cy.getByDataCy(`proposal-vote-button-${toGlobalId('Proposal', proposalId)}`)
+}
 
 context('Votes from selection step page', () => {
+  setupFeatureFlags({ new_vote_step: true, new_new_vote_step: true })
+
   beforeEach(() => {
     cy.task('db:restore')
   })
@@ -12,42 +20,54 @@ context('Votes from selection step page', () => {
     proposalVote.visitSelection({
       projectSlug: 'budget-participatif-rennes',
       stepSlug: 'selection',
-      operationName: 'ProposalListViewRefetchQuery',
+      operationName: 'VoteStepQuery',
     })
 
-    // eslint-disable-next-line jest/valid-expect-in-promise
-    cy.get('#proposal-UHJvcG9zYWw6cHJvcG9zYWwy').then(intercept => {
-      cy.wrap(intercept).find('.card__counters__value').contains('2')
-      cy.wrap(intercept).find('.proposal__button__vote').click({ force: true })
-      cy.get('.toasts-container--top div').should('contain', 'vote.add_success')
-      cy.wrap(intercept).find('.card__counters__value').contains('3')
-      cy.wrap(intercept).find('.proposal__button__vote').click({ force: true })
-      cy.wrap(intercept).find('.card__counters__value').contains('2').should('exist').and('be.visible')
+    cy.interceptGraphQLOperation({ operationName: 'AddProposalVoteMutation' })
+    cy.interceptGraphQLOperation({ operationName: 'RemoveProposalVoteMutation' })
+    getProposalVoteButton('proposal2').should('contain', '2').click({ scrollBehavior: 'center' })
+    cy.wait('@AddProposalVoteMutation').its('response.body.data.addProposalVote').should('deep.include', {
+      errorCode: null,
     })
+    getProposalVoteButton('proposal2').should('have.attr', 'aria-label', 'global.delete')
+    getProposalVoteButton('proposal2').should('contain', '3').click({ scrollBehavior: 'center' })
+    cy.wait('@RemoveProposalVoteMutation').its('response.body.data.removeProposalVote').should('exist')
+    getProposalVoteButton('proposal2').should('be.visible').and('contain', '2')
+    getProposalVoteButton('proposal2').should('have.attr', 'aria-label', 'global.add')
   })
 
-  it('should disable vote button when user has not enough credits in budget vote step', () => {
+  it('rejects an additional vote when the remaining budget is too low', () => {
     cy.directLoginAs('admin')
 
     proposalVote.visitSelection({
       projectSlug: 'depot-avec-selection-vote-budget',
       stepSlug: 'selection-avec-vote-selon-le-budget',
-      operationName: 'ProposalListViewRefetchQuery',
+      operationName: 'VoteStepQuery',
     })
-    cy.get('#proposal-UHJvcG9zYWw6cHJvcG9zYWw4').find('.proposal__button__vote.disabled').should('exist')
+    cy.interceptGraphQLOperation({ operationName: 'AddProposalVoteMutation' })
+    getProposalVoteButton('proposal8').should('be.enabled').click({ scrollBehavior: 'center' })
+    cy.wait('@AddProposalVoteMutation')
+      .its('response.body.data.addProposalVote.errorCode')
+      .should('eq', 'NOT_ENOUGH_CREDITS')
+    cy.contains(/front\.vote\.error\.budget-exceeded|dépasse le budget restant/).should('be.visible')
   })
 
-  it('should disable vote button when user has reached limit in selection step', () => {
+  it('rejects an additional vote when the user has reached the selection vote limit', () => {
     cy.directLoginAs('user')
 
     proposalVote.visitSelection({
       projectSlug: 'budget-avec-vote-limite',
       stepSlug: 'selection-avec-vote-budget-limite',
-      operationName: 'ProposalListViewRefetchQuery',
+      operationName: 'VoteStepQuery',
     })
 
-    cy.get('.proposal__button__vote').contains('voted')
-    cy.get('.proposal__button__vote.disabled').should('exist')
+    getProposalVoteButton('proposal17').should('have.attr', 'aria-label', 'global.delete')
+    cy.interceptGraphQLOperation({ operationName: 'AddProposalVoteMutation' })
+    getProposalVoteButton('proposal18').should('be.enabled').click({ scrollBehavior: 'center' })
+    cy.wait('@AddProposalVoteMutation')
+      .its('response.body.data.addProposalVote.errorCode')
+      .should('eq', 'VOTE_LIMIT_REACHED')
+    cy.contains(/front\.vote\.error\.limit-reached|nombre maximal de votes/).should('be.visible')
   })
 })
 
@@ -91,6 +111,8 @@ context('Votes from proposal page', () => {
 })
 
 context('Votes management page', () => {
+  setupFeatureFlags({ new_new_vote_step: true })
+
   beforeEach(() => {
     cy.task('db:restore')
   })
@@ -101,12 +123,11 @@ context('Votes management page', () => {
     proposalVote.visitSelection({
       projectSlug: 'budget-participatif-rennes',
       stepSlug: 'selection',
-      operationName: 'ProposalListViewRefetchQuery',
+      operationName: 'VoteStepQuery',
     })
 
-    cy.get('#proposal-UHJvcG9zYWw6cHJvcG9zYWwz').find('.card__counters__value').contains('47')
-    cy.get('#proposal-UHJvcG9zYWw6cHJvcG9zYWwz').find('.proposal__button__vote').click({ force: true })
-    cy.get('#proposal-UHJvcG9zYWw6cHJvcG9zYWwz').find('.card__counters__value').contains('46')
+    getProposalVoteButton('proposal3').should('contain', '47').click({ force: true })
+    getProposalVoteButton('proposal3').should('contain', '46')
   })
 
   it('should allow user to set a vote as anonymous', () => {

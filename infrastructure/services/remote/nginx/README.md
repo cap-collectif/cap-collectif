@@ -25,3 +25,11 @@ ce test une fois dans `prepare-test-data`, avant la préparation des données.
 Pour vérifier une autre révision de la configuration, fournir un chemin accessible
 dans le conteneur avec `docker exec -e NGINX_TEST_CONFIG=/tmp/nginx-before.conf …`.
 Le test doit échouer avec la configuration antérieure au correctif de #20713.
+
+## Routage des étapes de dépôt et de sélection
+
+Symfony reçoit les requêtes sur `/project/{projet}/collect/{etape}` et
+`/project/{projet}/selection/{etape}`. Lorsque `new_new_vote_step` est actif,
+il renvoie un statut interne 418 après les contrôles d’accès de l’étape.
+Nginx transmet alors la requête d’origine à Next.js via `@next_public_app`,
+avec les paramètres de requête et l’éventuel préfixe de langue.

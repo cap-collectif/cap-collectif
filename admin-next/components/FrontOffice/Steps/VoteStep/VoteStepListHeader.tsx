@@ -37,7 +37,7 @@ const VoteStepListHeader: React.FC<Props> = ({ step: stepKey, onWorkflowTrigger 
 
   return (
     <Flex gap="lg" width="100%" align="start">
-      <Box width="100%" flex="2 1 0">
+      <Box minWidth="0" flex="2 1 0">
         <Flex gap="xl" width="100%" alignItems="stretch" direction={!step.votable ? 'row' : 'column'}>
           <Flex gap="md" alignItems="stretch" justifyContent="flex-start" flexGrow={1} flexShrink={0}>
             {step.form && isCollectStep ? (
@@ -55,7 +55,7 @@ const VoteStepListHeader: React.FC<Props> = ({ step: stepKey, onWorkflowTrigger 
         </Flex>
       </Box>
       {step.votable ? (
-        <Box flex={`0 1 ${pxToRem(395)}`} position="relative" minHeight={pxToRem(116)}>
+        <Box flex={`0 0 min(32%, ${pxToRem(395)})`} position="relative" minHeight={pxToRem(116)}>
           <VoteStepUserInfos step={step} />
         </Box>
       ) : null}

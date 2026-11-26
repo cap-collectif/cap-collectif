@@ -108,6 +108,10 @@ export const config = {
     '/:locale(en|fr|es|de|nl|sv|eu|oc|ur)/admin-next/:path*',
     '/:locale(en|fr|es|de|nl|sv|eu|oc|ur)/profile/organization/:path*',
     '/:locale(en|fr|es|de|nl|sv|eu|oc|ur)/project-district/:path*',
+    // A trailing single-segment parameter is dropped by Next 14 when it compiles matchers with i18n
+    // (it becomes the optional `.json` suffix): `:stepSlug*` keeps the step URLs matched.
+    '/:locale(en|fr|es|de|nl|sv|eu|oc|ur)/project/:projectSlug/collect/:stepSlug*',
+    '/:locale(en|fr|es|de|nl|sv|eu|oc|ur)/project/:projectSlug/selection/:stepSlug*',
     '/:locale(en|fr|es|de|nl|sv|eu|oc|ur)/test-project/:projectSlug',
     '/:locale(en|fr|es|de|nl|sv|eu|oc|ur)/pages/:path*',
     '/:locale(en|fr|es|de|nl|sv|eu|oc|ur)/contact',

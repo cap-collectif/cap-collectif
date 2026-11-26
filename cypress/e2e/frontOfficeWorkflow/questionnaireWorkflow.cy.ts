@@ -10,6 +10,7 @@ describe('Questionnaire participation contracts: should add / edit / delete a re
 
   beforeEach(() => {
     cy.task('db:restore')
+    ParticipationWorkflowPage.useMockedGooglePlaces()
   })
 
   after(() => {
@@ -55,6 +56,7 @@ describe('Questionnaire participation contracts: should add / edit / delete a re
     ParticipationWorkflowPage.fillPostalAddress({
       isAnonymous,
       address: '25 rue claude tillier',
+      selectSuggestion: true,
     })
     ParticipationWorkflowPage.fillZipCode({
       isAnonymous,
@@ -75,7 +77,7 @@ describe('Questionnaire participation contracts: should add / edit / delete a re
       assert.isString(response?.body.data?.validateContribution?.redirectUrl)
       assert.isNotEmpty(response?.body.data?.validateContribution?.redirectUrl)
     })
-    ParticipationWorkflowPage.consentInternalCommunication()
+    ParticipationWorkflowPage.consentInternalCommunication({ isAnonymous })
     ParticipationWorkflowPage.assertRepliesCount({
       expected: 1,
     })
@@ -101,6 +103,7 @@ describe('Questionnaire participation contracts: should reply a questionnaire wi
 
   beforeEach(() => {
     cy.task('db:restore')
+    ParticipationWorkflowPage.useMockedGooglePlaces()
   })
 
   after(() => {
@@ -139,6 +142,7 @@ describe('Questionnaire participation contracts: should reply a questionnaire wi
     ParticipationWorkflowPage.fillPostalAddress({
       isAnonymous: false,
       address: '25 rue claude tillier',
+      selectSuggestion: true,
     })
     ParticipationWorkflowPage.fillZipCode({
       isAnonymous: false,
@@ -160,7 +164,7 @@ describe('Questionnaire participation contracts: should reply a questionnaire wi
       assert.isString(response?.body.data?.validateContribution?.redirectUrl)
       assert.isNotEmpty(response?.body.data?.validateContribution?.redirectUrl)
     })
-    ParticipationWorkflowPage.consentInternalCommunication()
+    ParticipationWorkflowPage.consentInternalCommunication({ isAnonymous: false })
     ParticipationWorkflowPage.assertRepliesCount({
       expected: 1,
     })
@@ -172,6 +176,7 @@ describe('Questionnaire participation contracts: should reconcile replies as par
 
   beforeEach(() => {
     cy.task('db:restore')
+    ParticipationWorkflowPage.useMockedGooglePlaces()
   })
 
   after(() => {
@@ -217,6 +222,7 @@ describe('Questionnaire participation contracts: should reconcile replies as par
     ParticipationWorkflowPage.fillPostalAddress({
       isAnonymous,
       address: '25 rue claude tillier',
+      selectSuggestion: true,
     })
     ParticipationWorkflowPage.fillZipCode({
       isAnonymous,
@@ -238,7 +244,7 @@ describe('Questionnaire participation contracts: should reconcile replies as par
       assert.isString(response?.body.data?.validateContribution?.redirectUrl)
       assert.isNotEmpty(response?.body.data?.validateContribution?.redirectUrl)
     })
-    ParticipationWorkflowPage.consentInternalCommunication()
+    ParticipationWorkflowPage.consentInternalCommunication({ isAnonymous })
     ParticipationWorkflowPage.assertRepliesCount({
       expected: 1,
     })

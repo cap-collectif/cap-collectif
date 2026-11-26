@@ -3,10 +3,47 @@ export default new (class AdminCollectStepPage {
     return cy
   }
 
+  useMockedGooglePlaces() {
+    // Keep the mock installed by Cypress support when the requirements page loads the Maps script.
+    cy.intercept({ method: 'GET', hostname: 'maps.googleapis.com', pathname: '/maps/api/js' }, { body: '' })
+  }
+
+  useMockedTurnstile() {
+    cy.intercept(
+      { method: 'GET', hostname: 'challenges.cloudflare.com', pathname: '/turnstile/v0/api.js' },
+      {
+        headers: { 'content-type': 'application/javascript' },
+        body: `
+        window.turnstile = {
+          render(container, options) {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.dataset.cy = 'confirm-test-turnstile';
+            button.textContent = 'Confirm test captcha';
+            button.addEventListener('click', () => options.callback('cypress-turnstile-token'));
+            container.append(button);
+            return container.id;
+          },
+          remove(id) { document.getElementById(id)?.querySelector('[data-cy="confirm-test-turnstile"]')?.remove(); },
+          reset() {},
+        };
+        {
+          const onload = document.currentScript.src.split('onload=')[1]?.split('&')[0];
+          if (onload) window[decodeURIComponent(onload)]?.();
+        }
+      `,
+      },
+    )
+  }
+
+  confirmMockedTurnstile() {
+    this.activeDialog().find('[data-cy="confirm-test-turnstile"]').should('be.visible').click()
+  }
+
   consentPrivacyPolicy(isAnonymous: boolean) {
     AdminCollectStepPage.interceptUpdateContributorMutation(isAnonymous)
     cy.contains('participation-workflow.consentPrivacyPolicy')
-    cy.contains('i-accept').click({ force: true })
+    this.activeDialog().contains('button', 'i-accept').should('be.visible').click()
     AdminCollectStepPage.waitUpdateContributorMutation(isAnonymous)
   }
 
@@ -32,17 +69,33 @@ export default new (class AdminCollectStepPage {
     this.submitStep()
   }
 
-  sendParticipantEmailWorkflowMutation({ email, isAnonymous }: { email: string; isAnonymous: boolean }) {
+  sendParticipantEmailWorkflowMutation({
+    email,
+    mockedTurnstile = false,
+  }: {
+    email: string
+    isAnonymous: boolean
+    mockedTurnstile?: boolean
+  }) {
     cy.interceptGraphQLOperation({ operationName: 'SendParticipantEmailWorkflowMutation' })
     this.fillEmail({
       email,
     })
-    cy.contains('participation-workflow.verification')
-    cy.confirmCaptcha()
+    cy.contains('participation-workflow.verification').should('be.visible')
+    if (mockedTurnstile) this.confirmMockedTurnstile()
+    else cy.confirmCaptcha()
     cy.wait('@SendParticipantEmailWorkflowMutation')
   }
 
-  fillPostalAddress({ isAnonymous, address }: { isAnonymous: boolean; address: string }) {
+  fillPostalAddress({
+    isAnonymous,
+    address,
+    selectSuggestion = false,
+  }: {
+    isAnonymous: boolean
+    address: string
+    selectSuggestion?: boolean
+  }) {
     const operationName = isAnonymous ? 'UpdateParticipantMutation' : 'UpdateProfilePersonalDataMutation'
     cy.interceptGraphQLOperation({ operationName }, req => {
       if (req.body.variables.input.postalAddress) {
@@ -50,9 +103,17 @@ export default new (class AdminCollectStepPage {
       }
     })
     cy.get('#address').clear().type(address)
-    cy.get('.cap-address__dropdown').children().first().click({ force: true })
-    // Geocoding sets the address data before replacing the search text with the formatted address.
-    cy.get('#address').should('not.have.value', address).and('not.have.value', '')
+    if (selectSuggestion) {
+      this.activeDialog().find('.cap-address__dropdown').contains(address).should('be.visible').click()
+    } else {
+      cy.get('body').then($body => {
+        if ($body.find('.cap-address__dropdown').length) {
+          cy.get('.cap-address__dropdown').children().first().should('be.visible').click({ force: true })
+          // The Cypress Google Places mock returns the typed text as the formatted address.
+          cy.get('#address').should('not.have.value', '')
+        }
+      })
+    }
     this.submitStep()
     cy.wait('@UpdatePostalAddressMutation').then(({ response }) => {
       assert.notExists(response?.body.errors)
@@ -62,6 +123,7 @@ export default new (class AdminCollectStepPage {
         assert.isNull(response?.body.data.updateProfilePersonalData.errorCode)
       }
     })
+    cy.contains('participation-workflow.zipCode', { timeout: 10000 }).should('be.visible')
   }
   fillPhoneNumber({
     number,
@@ -127,7 +189,10 @@ export default new (class AdminCollectStepPage {
         cy.wait('@SendParticipantPhoneValidationCodeMutation')
       }
     } else {
-      cy.wait('@UpdateProfilePersonalDataMutation')
+      cy.wait('@UpdateProfilePersonalDataMutation').then(({ response }) => {
+        assert.notExists(response?.body.errors, JSON.stringify(response?.body.errors))
+        assert.isNull(response?.body.data.updateProfilePersonalData.errorCode)
+      })
       if (isSendingSms) {
         cy.wait('@SendSmsPhoneValidationCodeMutation')
       }
@@ -136,11 +201,14 @@ export default new (class AdminCollectStepPage {
   fillSMSCode({ isAnonymous, code }: { isAnonymous: boolean; code: string }) {
     if (isAnonymous) {
       cy.interceptGraphQLOperation({ operationName: 'VerifyParticipantPhoneNumberMutation' })
+    } else {
+      cy.interceptGraphQLOperation({ operationName: 'VerifyUserPhoneNumberMutation' })
     }
-    cy.get('[name="code"]').clear().type(code)
-    this.submitStep()
+    cy.get('#code').clear().type(code)
     if (isAnonymous) {
       cy.wait('@VerifyParticipantPhoneNumberMutation')
+    } else {
+      cy.wait('@VerifyUserPhoneNumberMutation')
     }
   }
 
@@ -186,7 +254,7 @@ export default new (class AdminCollectStepPage {
     } else {
       cy.interceptGraphQLOperation({ operationName: 'UpdateRequirementMutation' })
     }
-    this.cy.contains('check-everything-and-continue').click({ force: true })
+    this.activeDialog().contains('button', 'check-everything-and-continue').should('be.visible').click()
     if (isAnonymous) {
       cy.wait('@UpdateParticipantRequirementMutation')
     } else {
@@ -195,25 +263,47 @@ export default new (class AdminCollectStepPage {
   }
 
   loginWithCredentials({ email, password }: { email: string; password: string }) {
-    cy.contains('log-on-to').click({ force: true })
+    cy.intercept('POST', '/login_check').as('WorkflowLogin')
+    cy.interceptGraphQLOperation({ operationName: 'ParticipationWorkflowModalQuery', alias: 'WorkflowAfterLogin' })
+
+    this.activeDialog().contains('button', 'log-on-to').should('be.visible').click()
     cy.get('#email').clear().type(email)
     cy.get('#password').clear().type(password)
-    cy.contains('global.login_me').click({ force: true })
+    this.activeDialog().contains('button', 'global.login_me').should('be.visible').click()
+    cy.wait('@WorkflowLogin').then(({ response }) => {
+      assert.strictEqual(response?.statusCode, 200)
+      assert.isTrue(response?.body.success)
+    })
+    cy.wait('@WorkflowAfterLogin').then(({ request, response }) => {
+      assert.isTrue(request.body.variables.isAuthenticated)
+      assert.notExists(response?.body.errors)
+      assert.strictEqual(response?.body.data.viewer?.email, email)
+    })
   }
 
   loginWithMagicLink({ email }: { email: string }) {
     cy.interceptGraphQLOperation({ operationName: 'SendParticipantEmailWorkflowMutation' })
-    cy.contains('log-on-to').click({ force: true })
-    cy.get('#email').clear().type(email)
-    cy.contains('get-connection-link').click({ force: true })
-    cy.contains('global.continue').click({ force: true })
-    cy.contains('participation-workflow.verification')
-    cy.confirmCaptcha()
-    cy.wait('@SendParticipantEmailWorkflowMutation')
+    cy.interceptGraphQLOperation({ operationName: 'ParticipationWorkflowModalQuery', alias: 'WorkflowAfterMagicLink' })
+
+    this.activeDialog().contains('button', 'log-on-to').should('be.visible').click()
+    this.activeDialog().contains('button', 'get-connection-link').should('be.visible').click()
+    this.fillEmail({ email })
+    cy.contains('participation-workflow.verification').should('be.visible')
+    this.confirmMockedTurnstile()
+    cy.wait('@SendParticipantEmailWorkflowMutation').then(({ request, response }) => {
+      assert.strictEqual(request.body.variables.input.emailType, 'MAGIC_LINK')
+      assert.notExists(response?.body.errors)
+      assert.isNotEmpty(response?.body.data?.sendParticipantEmailWorkflow?.redirectUrl)
+    })
+    return cy.wait('@WorkflowAfterMagicLink').then(({ request, response }) => {
+      assert.isTrue(request.body.variables.isAuthenticated)
+      assert.notExists(response?.body.errors)
+      assert.strictEqual(response?.body.data.viewer?.email, email)
+    })
   }
 
   submitStep() {
-    cy.get('[type="submit"]').click({ force: true })
+    this.activeDialog().find('button[type="submit"]:visible').should('be.enabled').click()
   }
 
   assertSuccess({ contributionType }: { contributionType: 'REPLY' }) {
@@ -250,9 +340,55 @@ export default new (class AdminCollectStepPage {
     cy.contains('consent-internal-comm-email-send')
   }
 
-  consentInternalCommunication() {
-    cy.contains('vote_step.participation_validated')
-    cy.contains('participation-workflow.yes').click({ force: true })
+  consentInternalCommunication({ isAnonymous }: { isAnonymous?: boolean } = {}) {
+    cy.contains('vote_step.participation_validated', { timeout: 10000 }).should('be.visible')
+
+    if (isAnonymous !== undefined) {
+      AdminCollectStepPage.interceptUpdateContributorMutation(isAnonymous)
+    }
+
+    this.activeDialog().contains('button', 'participation-workflow.yes').should('be.visible').click()
+
+    if (isAnonymous !== undefined) {
+      AdminCollectStepPage.waitUpdateContributorMutation(isAnonymous)
+    }
+  }
+
+  finishVoteWorkflow({
+    isAnonymous,
+    path,
+    shouldConsent,
+  }: {
+    isAnonymous: boolean
+    path: string
+    shouldConsent: boolean
+  }) {
+    cy.interceptGraphQLOperation({ operationName: 'ValidateContributionMutation' })
+    cy.interceptGraphQLOperation({ operationName: 'VoteStepQuery', alias: 'VoteStepAfterValidation' })
+
+    this.fillCheckboxes({ isAnonymous })
+    // Email confirmation and login reload the workflow on the legacy requirements route.
+    cy.contains('participation-workflow.no_robot').should('be.visible')
+    this.confirmMockedTurnstile()
+    cy.wait('@ValidateContributionMutation').then(({ response }) => {
+      assert.strictEqual(response?.statusCode, 200)
+      assert.notExists(response?.body.errors)
+      assert.isString(response?.body.data?.validateContribution?.redirectUrl)
+      assert.isNotEmpty(response?.body.data?.validateContribution?.redirectUrl)
+    })
+
+    if (shouldConsent) {
+      this.consentInternalCommunication({ isAnonymous })
+    }
+
+    cy.location('pathname').should(pathname => {
+      assert.isTrue(pathname.endsWith(path), `Expected ${pathname} to end with ${path}`)
+    })
+    cy.wait('@VoteStepAfterValidation')
+  }
+
+  private activeDialog() {
+    return cy.get('[role="dialog"][aria-label="participation-workflow.requirements"]').filter(':visible')
   }
 
   private static interceptUpdateContributorMutation(isAnonymous: boolean) {

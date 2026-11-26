@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Requirement;
@@ -186,8 +185,11 @@ class AddProposalVoteMutation implements MutationInterface
             $this->proposalViewerVoteDataLoader->invalidate($proposal);
             $this->proposalViewerHasVoteDataLoader->invalidate($proposal);
             $this->viewerProposalVotesDataLoader->invalidate($user);
-            $this->indexer->index(AbstractVote::class, $vote->getId());
+            $this->proposalVoteAccountHandler->indexVoteAddition($step, $vote, $user, $countUserVotes);
             $this->indexer->index(User::class, $user->getId());
+            if ($vote->getIsAccounted()) {
+                $this->indexer->finishBulk();
+            }
         } catch (UniqueConstraintViolationException) {
             throw new UserError('proposal.vote.already_voted');
         }

@@ -70,13 +70,15 @@ context('Events list filters as anonymous', () => {
 })
 
 context('Events linked to a step as anonymous', () => {
-  setupFeatureFlags({ calendar: true })
+  setupFeatureFlags({ calendar: true, new_vote_step: true, new_new_vote_step: true })
 
   before(() => cy.task('db:restore'))
 
   it('anonymous user can see events linked to a specific step', () => {
+    cy.interceptGraphQLOperation({ operationName: 'VoteStepQuery' })
     cy.visit('/project/budget-participatif-idf/collect/collecte-des-projets-idf-privee')
+    cy.wait('@VoteStepQuery')
     cy.isLoggedOut()
-    EventPage.waitForEventPreviewsToAppear()
+    cy.get('#StepEvents').contains('Le droit de suite').should('be.visible')
   })
 })

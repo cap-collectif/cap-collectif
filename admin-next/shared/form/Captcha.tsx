@@ -60,7 +60,7 @@ export const CaptchaSwitch = React.forwardRef<React.Ref<any>, Props>(({ onChange
 
   if (turnstile_captcha) {
     // @ts-ignore TURNSTILE_PUBLIC_KEY not on DOM by default
-    if (typeof window === 'undefined' || !canUseDOM || !window.TURNSTILE_PUBLIC_KEY) {
+    if (typeof window === 'undefined' || !canUseDOM || (!isTest && !window.TURNSTILE_PUBLIC_KEY)) {
       console.warn('[TURNSTILE_PUBLIC_KEY] must be defined to use a captcha !')
       return null
     }

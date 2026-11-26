@@ -1,11 +1,13 @@
 import { AbstractCard, Box, Flex } from '@cap-collectif/ui'
-import ParticipationWorkflow from '@components/ParticipationWorkflow/ParticipationWorkflow'
+import ParticipationWorkflow, {
+  CONTRIBUTION_ID_URL_PARAM,
+} from '@components/ParticipationWorkflow/ParticipationWorkflow'
 import { VoteStepWebLayout_proposalStep$key } from '@relay/VoteStepWebLayout_proposalStep.graphql'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import useIsMobile from '@shared/hooks/useIsMobile'
 import ProjectsListPlaceholder from '@shared/projectCard/ProjectsListSkeleton'
 import { pxToRem } from '@shared/utils/pxToRem'
-import { parseAsInteger, useQueryState } from 'nuqs'
+import { parseAsInteger, parseAsString, useQueryState, useQueryStates } from 'nuqs'
 import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
 import { useIntl } from 'react-intl'
@@ -132,7 +134,11 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey, customCode, 
   const isMobile = useIsMobile()
   const { viewerSession } = useAppContext()
 
-  const [contributionId, setContributionId] = React.useState(null)
+  const [voteContributionId, setVoteContributionId] = React.useState<string | null>(null)
+  const [{ workflow, contributionId: proposalContributionId }, setProposalWorkflow] = useQueryStates(
+    { workflow: parseAsString, [CONTRIBUTION_ID_URL_PARAM]: parseAsString },
+    { history: 'push' },
+  )
   const [showMapPlaceholder, setShowMapPlaceholder] = React.useState(true)
   const [selectedProposalId, setSelectedProposalId] = React.useState<string | null>(null)
 
@@ -180,16 +186,23 @@ export const VoteStepWebLayout: React.FC<Props> = ({ step: stepKey, customCode, 
   React.useEffect(() => {
     evalCustomCode(projectCustomCode)
   }, [projectCustomCode])
+  const contributionId =
+    step.__typename === 'CollectStep' && workflow !== null && proposalContributionId
+      ? proposalContributionId
+      : voteContributionId
   if (contributionId) {
-    return <ParticipationWorkflow stepId={step.id} contributionId={contributionId} returnUrl={window.location.href} />
+    const returnUrl = new URL(window.location.href)
+    returnUrl.searchParams.delete('workflow')
+    returnUrl.searchParams.delete(CONTRIBUTION_ID_URL_PARAM)
+    return <ParticipationWorkflow stepId={step.id} contributionId={contributionId} returnUrl={returnUrl.href} />
   }
 
   const triggerRequirementModal = (id: string) => {
-    setContributionId(id)
+    setVoteContributionId(id)
   }
 
   const triggerProposalWorkflow = (id: string) => {
-    setContributionId(id)
+    void setProposalWorkflow({ workflow: '', [CONTRIBUTION_ID_URL_PARAM]: id })
   }
 
   return (

@@ -17,6 +17,15 @@ const mutation = graphql`
       vote {
         id
         completionStatus
+        step {
+          id
+          viewerPendingVotes {
+            id
+            proposal {
+              id
+            }
+          }
+        }
       }
     }
   }

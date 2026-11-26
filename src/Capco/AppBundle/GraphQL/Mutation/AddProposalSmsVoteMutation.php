@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
@@ -206,7 +205,10 @@ class AddProposalSmsVoteMutation implements MutationInterface
                 conditionCallBack: fn ($cachedItem) => $cachedItem->isHit() && $isParticipantMeetingRequirements && !$hasAlreadyParticipatedInThisProject && $vote->getIsAccounted(),
             );
 
-            $this->indexer->index(AbstractVote::class, $vote->getId());
+            $this->proposalVoteAccountHandler->indexVoteAddition($step, $vote, $participant, $countParticipantsVotes);
+            if ($vote->getIsAccounted()) {
+                $this->indexer->finishBulk();
+            }
         } catch (UniqueConstraintViolationException) {
             return ['errorCode' => self::PROPOSAL_ALREADY_VOTED, 'shouldTriggerConsentInternalCommunication' => false, 'participant' => $participant];
         }

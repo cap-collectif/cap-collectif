@@ -132,8 +132,18 @@ Cypress.Commands.add('directLogin', ({ email, password }: Cypress.LoginOptions) 
         retryOnStatusCodeFailure: true,
         retryOnNetworkFailure: true,
       }).then(response => {
+        // eslint-disable-next-line jest/valid-expect
         expect(response.status).to.eq(200)
         expect(response.body.success).to.eq(true)
+        const setCookieHeader = response.headers['set-cookie']
+        const setCookieHeaders = Array.isArray(setCookieHeader) ? setCookieHeader : [setCookieHeader]
+        const sessionCookie = setCookieHeaders.find(cookie => cookie?.startsWith('PHPSESSID='))
+        const sessionId = sessionCookie?.match(/^PHPSESSID=([^;]+)/)?.[1]
+
+        if (sessionId) {
+          cy.setCookie('PHPSESSID', sessionId, { secure: true })
+        }
+
         log.set({
           consoleProps() {
             return {

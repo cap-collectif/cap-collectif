@@ -270,7 +270,11 @@ class ValidateContributionMutation implements MutationInterface
             } elseif ($contributor instanceof User) {
                 $this->proposalVoteAccountHandler->checkIfUserVotesAreStillAccounted($step, $contribution, $contributor, true);
                 $this->em->flush();
-                $this->indexer->index(AbstractVote::class, $contribution->getId());
+                if (($step instanceof CollectStep || $step instanceof SelectionStep) && $step->isVotesRanking()) {
+                    $this->proposalVoteAccountHandler->indexBallot($step, $contributor);
+                } else {
+                    $this->indexer->index(AbstractVote::class, $contribution->getId());
+                }
                 $this->indexer->finishBulk();
 
                 $this->indexer->index(User::class, $contributor->getId());

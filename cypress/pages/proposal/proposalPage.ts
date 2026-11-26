@@ -70,19 +70,47 @@ export default new (class ProposalPage {
     })
   }
 
-  visitCollectStepPage({ project, step }: { project: string; step: string }) {
+  visitLegacyStepPage({
+    project,
+    step,
+    kind = 'collect',
+  }: {
+    project: string
+    step: string
+    kind?: 'collect' | 'selection'
+  }) {
     this.cy.interceptGraphQLOperation({ operationName: 'ProposalStepPageQuery' })
     this.cy.interceptGraphQLOperation({ operationName: 'ProposalListViewRefetchQuery' })
-    this.cy.visit(`/project/${project}/collect/${step}`)
+    this.cy.visit(`/project/${project}/${kind}/${step}`)
     this.cy.wait('@ProposalStepPageQuery')
     this.cy.wait('@ProposalListViewRefetchQuery')
   }
 
+  visitCollectStepPage({
+    project,
+    step,
+    waitForVoteStep = true,
+  }: {
+    project: string
+    step: string
+    waitForVoteStep?: boolean
+  }) {
+    if (waitForVoteStep) {
+      this.cy.interceptGraphQLOperation({ operationName: 'VoteStepQuery' })
+      this.cy.interceptGraphQLOperation({ operationName: 'useVoteStepFilters_Query' })
+    }
+    this.cy.visit(`/project/${project}/collect/${step}`, { timeout: 120000 })
+    if (waitForVoteStep) {
+      this.cy.wait('@VoteStepQuery', { timeout: 15000 })
+      this.cy.wait('@useVoteStepFilters_Query', { timeout: 15000 })
+    }
+  }
+
   visitSelectionStepPage({ project, step }: { project: string; step: string }) {
-    this.cy.interceptGraphQLOperation({ operationName: 'ProposalStepPageQuery' })
-    this.cy.interceptGraphQLOperation({ operationName: 'ProposalListViewRefetchQuery' })
+    this.cy.interceptGraphQLOperation({ operationName: 'VoteStepQuery' })
+    this.cy.interceptGraphQLOperation({ operationName: 'useVoteStepFilters_Query' })
     this.cy.visit(`/project/${project}/selection/${step}`)
-    this.cy.wait('@ProposalStepPageQuery')
-    this.cy.wait('@ProposalListViewRefetchQuery')
+    this.cy.wait('@VoteStepQuery', { timeout: 15000 })
+    this.cy.wait('@useVoteStepFilters_Query', { timeout: 15000 })
   }
 })()

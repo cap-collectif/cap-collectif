@@ -177,7 +177,7 @@ export const ProposalCard: React.FC<Props> = ({
       </>
     ) : null
   const pointsTag = (
-    <Tag variantColor="infoGray" transparent>
+    <Tag variantColor="infoGray" transparent data-cy={`proposal-points-counter-${id}`}>
       <Icon name={CapUIIcon.Trophy} />
       <Text>{numericPointsCount + paperPointsCount}</Text>
     </Tag>

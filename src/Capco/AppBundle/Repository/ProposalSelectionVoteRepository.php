@@ -118,10 +118,14 @@ class ProposalSelectionVoteRepository extends EntityRepository
 
     // TODO remove this duplicate
     /**
-     * @return array<ProposalSelectionVote>
+     * @return list<ProposalSelectionVote>
      */
-    public function getVotesByStepAndContributor(SelectionStep $step, ContributorInterface $contributor, bool $published = true): array
-    {
+    public function getVotesByStepAndContributor(
+        SelectionStep $step,
+        ContributorInterface $contributor,
+        bool $published = true,
+        ?string $completionStatus = null
+    ): array {
         $qb = $this->createQueryBuilder('pv')
             ->select('pv', 'proposal')
             ->andWhere('pv.selectionStep = :step')
@@ -141,6 +145,10 @@ class ProposalSelectionVoteRepository extends EntityRepository
 
         if ($published) {
             $qb->andWhere('pv.published = true');
+        }
+
+        if (null !== $completionStatus) {
+            $qb->andWhere('pv.completionStatus = :completionStatus')->setParameter('completionStatus', $completionStatus);
         }
 
         return $qb

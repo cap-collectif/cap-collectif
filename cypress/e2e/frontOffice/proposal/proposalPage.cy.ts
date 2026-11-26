@@ -2,7 +2,7 @@ import { ProposalPage } from '~e2e-pages/index'
 import { setupFeatureFlags } from '../../../support/setupFeatureFlags'
 
 context('Proposal Page', () => {
-  setupFeatureFlags({ new_vote_step: false })
+  setupFeatureFlags({ new_vote_step: false, new_new_vote_step: false })
 
   beforeEach(() => {
     cy.task('db:restore')
@@ -75,7 +75,7 @@ context('Proposal Page', () => {
       cy.interceptGraphQLOperation({ operationName: 'UpdateFollowProposalMutation' })
       cy.interceptGraphQLOperation({ operationName: 'UnfollowProposalMutation' })
 
-      ProposalPage.visitCollectStepPage({
+      ProposalPage.visitLegacyStepPage({
         project: 'budget-participatif-rennes',
         step: 'depot-avec-vote',
       })
@@ -85,7 +85,7 @@ context('Proposal Page', () => {
       cy.get(essentialOption).check({ force: true })
       cy.wait('@UpdateFollowProposalMutation')
 
-      ProposalPage.visitCollectStepPage({
+      ProposalPage.visitLegacyStepPage({
         project: 'budget-participatif-rennes',
         step: 'depot-avec-vote',
       })
@@ -100,7 +100,7 @@ context('Proposal Page', () => {
       cy.get(unfollowButton).click()
       cy.wait('@UnfollowProposalMutation')
 
-      ProposalPage.visitCollectStepPage({
+      ProposalPage.visitLegacyStepPage({
         project: 'budget-participatif-rennes',
         step: 'depot-avec-vote',
       })
@@ -195,7 +195,7 @@ context('Proposal Page', () => {
     })
     it('prevents contributions when proposal collection is closed', () => {
       cy.directLoginAs('user')
-      ProposalPage.visitCollectStepPage({
+      ProposalPage.visitLegacyStepPage({
         project: 'budget-participatif-rennes',
         step: 'collecte-des-propositions-fermee',
       })
@@ -206,7 +206,7 @@ context('Proposal Page', () => {
     it('opens the proposal form for anonymous visitors who want to contribute', () => {
       cy.clearCookies()
       cy.clearLocalStorage()
-      ProposalPage.visitCollectStepPage({
+      ProposalPage.visitLegacyStepPage({
         project: 'budget-participatif-rennes',
         step: 'collecte-des-propositions',
       })
@@ -235,7 +235,7 @@ context('Proposal Page', () => {
       cy.directLoginAs('user')
       cy.interceptGraphQLOperation({ operationName: 'CreateProposalMutation' })
       cy.intercept('POST', '**/files').as('uploadDocument')
-      ProposalPage.visitCollectStepPage({
+      ProposalPage.visitLegacyStepPage({
         project: 'budget-participatif-rennes',
         step: 'collecte-des-propositions',
       })
@@ -268,7 +268,7 @@ context('Proposal Page', () => {
     it('shows a validation error when a required response is missing', () => {
       cy.setFeatureFlags({ districts: true })
       cy.directLoginAs('user')
-      ProposalPage.visitCollectStepPage({
+      ProposalPage.visitLegacyStepPage({
         project: 'budget-participatif-rennes',
         step: 'collecte-des-propositions',
       })
@@ -292,7 +292,7 @@ context('Proposal Page', () => {
     it('allows an author to delete their proposal', () => {
       cy.directLoginAs('user')
       cy.interceptGraphQLOperation({ operationName: 'DeleteProposalMutation' })
-      ProposalPage.visitCollectStepPage({
+      ProposalPage.visitLegacyStepPage({
         project: 'budget-participatif-rennes',
         step: 'collecte-des-propositions',
       })
@@ -392,31 +392,25 @@ context('Proposal Page', () => {
     })
   })
   it('should be possible to see every private proposal as a member of an organization', () => {
-    cy.setFeatureFlags({ new_vote_step: false })
+    cy.setFeatureFlags({ new_vote_step: true, new_new_vote_step: true })
     cy.directLoginAs('christophe')
     ProposalPage.visitCollectStepPage({
       project: 'budget-participatif-dorganisation',
       step: 'collecte-des-propositions-privee',
+      waitForVoteStep: false,
     })
-    cy.get('.proposal-preview-list')
-      .should('exist')
-      .and('be.visible')
-      .children()
-      .should('have.length', 2)
-      .should('contain', 'Proposition de Valérie')
+    cy.contains("Proposition d'un utilisateur externe sur un formulaire d'organisation").should('be.visible')
+    cy.contains('Proposition de Valérie').should('be.visible')
   })
   it('should be possible to see only my proposal as not a member of an organization', () => {
-    cy.setFeatureFlags({ new_vote_step: false })
+    cy.setFeatureFlags({ new_vote_step: true, new_new_vote_step: true })
     cy.directLoginAs('user')
     ProposalPage.visitCollectStepPage({
       project: 'budget-participatif-dorganisation',
       step: 'collecte-des-propositions-privee',
+      waitForVoteStep: false,
     })
-    cy.get('.proposal-preview-list')
-      .should('exist')
-      .and('be.visible')
-      .children()
-      .should('have.length', 1)
-      .should('not.contain', 'Proposition de Valérie')
+    cy.contains("Proposition d'un utilisateur externe sur un formulaire d'organisation").should('be.visible')
+    cy.contains('Proposition de Valérie').should('not.exist')
   })
 })

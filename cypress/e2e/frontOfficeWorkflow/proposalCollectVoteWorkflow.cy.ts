@@ -1,40 +1,74 @@
 import { ParticipationWorkflowPage, ProposalPage, ProposalVoteListPage } from '~e2e/pages'
+import { proposalVoteWorkflowMatrix } from '../../pages/proposal/proposalVoteWorkflowMatrix'
 import { setupFeatureFlags } from '../../support/setupFeatureFlags'
 
-// Algorithmic vote matrices are covered in PHPUnit; see user-tests-audit.md.
+const step = { project: 'bp-vote-etape-de-depot', step: 'collecte-des-propositions-vote-parcours-min-3-max-5' }
+const stepPath = `/project/${step.project}/collect/${step.step}`
+const proposalA = 'proposalWorkflowCollectVoteA'
+const proposalB = 'proposalWorkflowCollectVoteB'
+const proposalC = 'proposalWorkflowCollectVoteC'
+const proposalD = 'proposalWorkflowCollectVoteD'
+const firstThreeProposals = ['A', 'B', 'C'].map(letter => `Proposition Collect + Vote ${letter}`)
 
-// Each suite has one scenario; retries must also start with restored data.
-
-describe('Collect vote participation contracts: as participant', () => {
-  setupFeatureFlags({ turnstile_captcha: true })
+describe('Collect vote participation contracts', () => {
+  setupFeatureFlags({ turnstile_captcha: true, new_vote_step: true, new_new_vote_step: true })
 
   beforeEach(() => {
+    cy.viewport(1600, 1000)
     cy.task('db:restore')
+    ParticipationWorkflowPage.useMockedGooglePlaces()
+    ParticipationWorkflowPage.useMockedTurnstile()
   })
 
   after(() => {
     cy.task('db:restore')
   })
 
-  it('as participant', () => {
-    ProposalPage.visitCollectStepPage({
-      project: 'bp-vote-etape-de-depot',
-      step: 'collecte-des-propositions-vote-parcours-min-3-max-5',
-    })
-    cy.isLoggedOut()
-    const userAuthenticationState = 'ANONYMOUS'
-    const isAnonymous = true
-    ProposalVoteListPage.validateVoteMin('proposalWorkflowCollectVoteA', userAuthenticationState)
-    ProposalVoteListPage.validateVoteMin('proposalWorkflowCollectVoteB', userAuthenticationState)
-    ProposalVoteListPage.validateVoteMin('proposalWorkflowCollectVoteC', userAuthenticationState)
+  /** @cypress-status compliant */
+  it('resumes the proposal submission workflow after reloading the collect step', () => {
+    ProposalPage.visitCollectStepPage(step)
+    cy.interceptGraphQLOperation({ operationName: 'CreateProposalMutation' })
+    cy.interceptGraphQLOperation({ operationName: 'ParticipationWorkflowModalQuery' })
 
-    cy.interceptGraphQLOperation({ operationName: 'ValidateContributionMutation' })
+    cy.get('#add-proposal').should('be.visible').click()
+    cy.get('#proposal_title').type('Proposition Cypress à reprendre après rechargement')
+    cy.get('#confirm-proposal-create').should('be.enabled').click()
+
+    return cy.wait('@CreateProposalMutation').then(({ response }) => {
+      const proposal = response?.body.data.createProposal
+      assert.isTrue(proposal?.shouldTriggerWorkflow)
+      assert.isString(proposal.proposalId?.id)
+
+      cy.location('search').should(search => {
+        const params = new URLSearchParams(search)
+        assert.isTrue(params.has('workflow'))
+        assert.strictEqual(params.get('contributionId'), proposal.proposalId.id)
+      })
+      cy.wait('@ParticipationWorkflowModalQuery')
+      cy.get('#email').should('be.visible')
+
+      cy.reload()
+
+      cy.wait('@ParticipationWorkflowModalQuery')
+        .its('request.body.variables.contributionId')
+        .should('equal', proposal.proposalId.id)
+      cy.get('#email').should('be.visible')
+      cy.get('@CreateProposalMutation.all').should('have.length', 1)
+    })
+  })
+
+  it('as participant', () => {
+    ProposalPage.visitCollectStepPage(step)
+    cy.isLoggedOut()
+    const isAnonymous = true
+    ProposalVoteListPage.castParticipationVotes([proposalA, proposalB, proposalC], stepPath)
 
     const email = 'participant-proposalCollectVoteWorkflow@gmail.com'
 
     ParticipationWorkflowPage.sendParticipantEmailWorkflowMutation({
       email,
       isAnonymous,
+      mockedTurnstile: true,
     })
     ParticipationWorkflowPage.fillPhoneNumber({
       number: '0609988761',
@@ -58,130 +92,70 @@ describe('Collect vote participation contracts: as participant', () => {
     ParticipationWorkflowPage.fillPostalAddress({
       isAnonymous,
       address: '25 rue claude tillier',
+      selectSuggestion: true,
     })
     ParticipationWorkflowPage.fillZipCode({
       isAnonymous,
       zipCode: '75100',
     })
-    ParticipationWorkflowPage.fillCheckboxes({
+    ParticipationWorkflowPage.finishVoteWorkflow({
+      path: stepPath,
       isAnonymous,
+      shouldConsent: true,
     })
-    cy.contains('participation-workflow.no_robot').should('be.visible')
-    cy.confirmCaptcha()
+    ProposalVoteListPage.expectParticipationBallot(firstThreeProposals)
+  })
+  for (const loginMethod of ['password', 'magic link']) {
+    it(`as logged in user through the workflow using ${loginMethod}`, () => {
+      ProposalPage.visitCollectStepPage(step)
+      cy.isLoggedOut()
+      const isAnonymous = false
+      ProposalVoteListPage.castParticipationVotes([proposalA, proposalB, proposalC])
 
-    ParticipationWorkflowPage.consentInternalCommunication()
-    cy.wait('@ValidateContributionMutation').should(({ response }) => {
-      assert.equal(response?.statusCode, 200)
-      assert.notExists(response?.body.errors)
-      assert.isString(response?.body.data?.validateContribution?.redirectUrl)
-      assert.isNotEmpty(response?.body.data?.validateContribution?.redirectUrl)
+      const email = 'pierre@cap-collectif.com'
+      if (loginMethod === 'password') {
+        ParticipationWorkflowPage.loginWithCredentials({ email, password: 'toto' })
+      } else {
+        ParticipationWorkflowPage.loginWithMagicLink({ email })
+      }
+
+      ParticipationWorkflowPage.fillPhoneNumber({
+        number: '0601010101',
+        isAnonymous,
+        isSendingSms: true,
+      })
+      ParticipationWorkflowPage.fillSMSCode({
+        code: '123456',
+        isAnonymous,
+      })
+      ParticipationWorkflowPage.consentPrivacyPolicy(isAnonymous)
+      ParticipationWorkflowPage.fillBirthDate({
+        isAnonymous,
+        date: '1990-01-01',
+      })
+      ParticipationWorkflowPage.fillPostalAddress({
+        isAnonymous,
+        address: '25 rue claude tillier',
+        selectSuggestion: true,
+      })
+      ParticipationWorkflowPage.fillZipCode({
+        isAnonymous,
+        zipCode: '75100',
+      })
+      ParticipationWorkflowPage.finishVoteWorkflow({
+        path: stepPath,
+        isAnonymous,
+        shouldConsent: true,
+      })
+      ProposalVoteListPage.expectParticipationBallot(firstThreeProposals)
     })
+  }
 
-    ProposalVoteListPage.getVoteWidgetCounter().should('have.text', '3')
-    ProposalVoteListPage.getProposalVoteButton('proposalWorkflowCollectVoteA').contains('voted')
-    ProposalVoteListPage.getProposalVoteButton('proposalWorkflowCollectVoteB').contains('voted')
-    ProposalVoteListPage.getProposalVoteButton('proposalWorkflowCollectVoteC').contains('voted')
-  })
-})
-
-describe('Collect vote participation contracts: as logged in user through the workflow using login/password', () => {
-  setupFeatureFlags({ turnstile_captcha: true })
-
-  beforeEach(() => {
-    cy.task('db:restore')
-  })
-
-  after(() => {
-    cy.task('db:restore')
-  })
-
-  it('as logged in user through the workflow using login/password', () => {
-    ProposalPage.visitCollectStepPage({
-      project: 'bp-vote-etape-de-depot',
-      step: 'collecte-des-propositions-vote-parcours-min-3-max-5',
-    })
+  it('merges ballots and enforces the five-vote limit', () => {
+    ProposalPage.visitCollectStepPage(step)
     cy.isLoggedOut()
-    const userAuthenticationState = 'ANONYMOUS'
     const isAnonymous = false
-    ProposalVoteListPage.validateVoteMin('proposalWorkflowCollectVoteA', userAuthenticationState)
-    ProposalVoteListPage.validateVoteMin('proposalWorkflowCollectVoteB', userAuthenticationState)
-    ProposalVoteListPage.validateVoteMin('proposalWorkflowCollectVoteC', userAuthenticationState)
-
-    cy.interceptGraphQLOperation({ operationName: 'ValidateContributionMutation' })
-
-    ParticipationWorkflowPage.loginWithCredentials({
-      email: 'pierre@cap-collectif.com',
-      password: 'toto',
-    })
-
-    ParticipationWorkflowPage.fillPhoneNumber({
-      number: '0601010101',
-      isAnonymous,
-      isSendingSms: true,
-    })
-    ParticipationWorkflowPage.fillSMSCode({
-      code: '123456',
-      isAnonymous,
-    })
-    ParticipationWorkflowPage.consentPrivacyPolicy(isAnonymous)
-    ParticipationWorkflowPage.fillBirthDate({
-      isAnonymous,
-      date: '1990-01-01',
-    })
-    ParticipationWorkflowPage.fillPostalAddress({
-      isAnonymous,
-      address: '25 rue claude tillier',
-    })
-    ParticipationWorkflowPage.fillZipCode({
-      isAnonymous,
-      zipCode: '75100',
-    })
-    ParticipationWorkflowPage.fillCheckboxes({
-      isAnonymous,
-    })
-    cy.contains('participation-workflow.no_robot').should('be.visible')
-    cy.confirmCaptcha()
-
-    ParticipationWorkflowPage.consentInternalCommunication()
-    cy.wait('@ValidateContributionMutation').should(({ response }) => {
-      assert.equal(response?.statusCode, 200)
-      assert.notExists(response?.body.errors)
-      assert.isString(response?.body.data?.validateContribution?.redirectUrl)
-      assert.isNotEmpty(response?.body.data?.validateContribution?.redirectUrl)
-    })
-
-    ProposalVoteListPage.getVoteWidgetCounter().should('have.text', '3')
-
-    ProposalVoteListPage.getProposalVoteButton('proposalWorkflowCollectVoteA').contains('voted')
-    ProposalVoteListPage.getProposalVoteButton('proposalWorkflowCollectVoteB').contains('voted')
-    ProposalVoteListPage.getProposalVoteButton('proposalWorkflowCollectVoteC').contains('voted')
-  })
-})
-
-describe('Collect vote participation contracts: merges participant and user ballots into four distinct votes', () => {
-  setupFeatureFlags({ turnstile_captcha: true })
-
-  beforeEach(() => {
-    cy.task('db:restore')
-  })
-
-  after(() => {
-    cy.task('db:restore')
-  })
-
-  it('merges participant and user ballots into four distinct votes', () => {
-    ProposalPage.visitCollectStepPage({
-      project: 'bp-vote-etape-de-depot',
-      step: 'collecte-des-propositions-vote-parcours-min-3-max-5',
-    })
-    cy.isLoggedOut()
-    const userAuthenticationState = 'ANONYMOUS'
-    const isAnonymous = false
-    ProposalVoteListPage.validateVoteMin('proposalWorkflowCollectVoteA', userAuthenticationState)
-    ProposalVoteListPage.validateVoteMin('proposalWorkflowCollectVoteB', userAuthenticationState)
-    ProposalVoteListPage.validateVoteMin('proposalWorkflowCollectVoteD', userAuthenticationState)
-
-    cy.interceptGraphQLOperation({ operationName: 'ValidateContributionMutation' })
+    ProposalVoteListPage.castParticipationVotes([proposalA, proposalB, proposalD])
 
     ParticipationWorkflowPage.loginWithCredentials({
       email: 'lbrunet@cap-collectif.com',
@@ -204,29 +178,23 @@ describe('Collect vote participation contracts: merges participant and user ball
     ParticipationWorkflowPage.fillPostalAddress({
       isAnonymous,
       address: '25 rue claude tillier',
+      selectSuggestion: true,
     })
     ParticipationWorkflowPage.fillZipCode({
       isAnonymous,
       zipCode: '75100',
     })
-    ParticipationWorkflowPage.fillCheckboxes({
+    ParticipationWorkflowPage.finishVoteWorkflow({
+      path: stepPath,
       isAnonymous,
+      shouldConsent: false,
     })
-    cy.contains('participation-workflow.no_robot').should('be.visible')
-    cy.confirmCaptcha()
-
-    cy.wait('@ValidateContributionMutation').should(({ response }) => {
-      assert.equal(response?.statusCode, 200)
-      assert.notExists(response?.body.errors)
-      assert.isString(response?.body.data?.validateContribution?.redirectUrl)
-      assert.isNotEmpty(response?.body.data?.validateContribution?.redirectUrl)
-    })
-
-    ProposalVoteListPage.getVoteWidgetCounter().should('have.text', '4')
-
-    ProposalVoteListPage.getProposalVoteButton('proposalWorkflowCollectVoteA').contains('voted')
-    ProposalVoteListPage.getProposalVoteButton('proposalWorkflowCollectVoteB').contains('voted')
-    ProposalVoteListPage.getProposalVoteButton('proposalWorkflowCollectVoteC').contains('voted')
-    ProposalVoteListPage.getProposalVoteButton('proposalWorkflowCollectVoteD').contains('voted')
+    ProposalVoteListPage.expectParticipationVoteLimit(
+      [...firstThreeProposals, 'Proposition Collect + Vote D'],
+      { id: 'proposalWorkflowCollectVoteE', title: 'Proposition Collect + Vote E' },
+      { id: 'proposalWorkflowCollectVoteF', title: 'Proposition Collect + Vote F' },
+    )
   })
+
+  proposalVoteWorkflowMatrix('collect', step)
 })

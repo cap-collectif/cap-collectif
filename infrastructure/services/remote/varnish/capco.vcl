@@ -28,6 +28,11 @@ sub vcl_recv {
     return (pass);
   }
 
+  # Resolve the vote step renderer dynamically, even for anonymous visitors.
+  if (req.url ~ "^/(?:(?:en|fr|es|de|nl|sv|eu|oc|ur)/)?project/[^/?]+/(?:collect|selection)/[^/?]+/?([?]|$)") {
+    return (pass);
+  }
+
   # Only cache requests to eelv
   if (req.http.host == "projet.lesecologistes.fr") {
     # Continue to caching logic
