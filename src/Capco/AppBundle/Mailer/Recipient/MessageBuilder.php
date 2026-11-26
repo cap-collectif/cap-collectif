@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Mailer\Recipient;
 
-use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Mailer\Enum\RecipientType;
 use Capco\AppBundle\Mailer\Model\EmailCampaignRecipient;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -25,9 +24,7 @@ class MessageBuilder
     // We ignore missingType.iterableValue because the messages structure depends on the MailJet API
     // @phpstan-ignore missingType.iterableValue
     public function buildOneMessage(
-        EmailingCampaign $emailingCampaign,
         EmailCampaignRecipient $recipientFromPage,
-        string $htmlPart,
         string $siteName,
         string $siteUrl,
     ): array {
@@ -43,8 +40,6 @@ class MessageBuilder
                     'Name' => $recipientFromPage->getUsername(),
                 ],
             ],
-            'HTMLPart' => $htmlPart,
-            'TextPart' => $emailingCampaign->getContent(),
             'TemplateLanguage' => true,
             'Variables' => [
                 'unsubscribePart' => str_replace(

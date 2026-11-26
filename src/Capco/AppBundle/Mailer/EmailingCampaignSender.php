@@ -59,7 +59,7 @@ class EmailingCampaignSender
         $siteName = $this->siteParams->getValue('global.site.fullname');
         $siteUrl = $this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL);
         $htmlPart = $this->buildHtmlPart($emailingCampaign, $siteName, $siteUrl);
-        $basePayload = $this->getBasePayload($emailingCampaign);
+        $basePayload = $this->getBasePayload($emailingCampaign, $htmlPart);
         // end
 
         $totalRecipientsProcessed = 0;
@@ -84,9 +84,7 @@ class EmailingCampaignSender
             foreach ($recipientsPage as $recipientFromPage) {
                 try {
                     $messages[] = $this->messageBuilder->buildOneMessage(
-                        emailingCampaign: $emailingCampaign,
                         recipientFromPage: $recipientFromPage,
-                        htmlPart: $htmlPart,
                         siteName: $siteName,
                         siteUrl: $siteUrl,
                     );
@@ -186,7 +184,7 @@ class EmailingCampaignSender
 
     // We ignore missingType.iterableValue because the messages structure depends on the MailJet API
     // @phpstan-ignore missingType.iterableValue
-    private function getBasePayload(EmailingCampaign $emailingCampaign): array
+    private function getBasePayload(EmailingCampaign $emailingCampaign, string $htmlPart): array
     {
         return [
             'Globals' => [
@@ -195,6 +193,8 @@ class EmailingCampaignSender
                     'Name' => $emailingCampaign->getSenderName(),
                 ],
                 'Subject' => $emailingCampaign->getObject(),
+                'HTMLPart' => $htmlPart,
+                'TextPart' => $emailingCampaign->getContent(),
                 'CustomCampaign' => sprintf('%s (%s)', $emailingCampaign->getName(), $emailingCampaign->getId()),
                 'DeduplicateCampaign' => true,
             ],

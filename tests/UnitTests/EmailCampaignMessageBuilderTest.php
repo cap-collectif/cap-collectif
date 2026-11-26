@@ -2,7 +2,6 @@
 
 namespace Capco\Tests\UnitTests;
 
-use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Mailer\Enum\RecipientType;
 use Capco\AppBundle\Mailer\Model\EmailCampaignRecipient;
 use Capco\AppBundle\Mailer\Recipient\MessageBuilder;
@@ -25,16 +24,27 @@ final class EmailCampaignMessageBuilderTest extends TestCase
             ['capco_app_unsubscribe_anonymous', ['token' => '_UNSUBSCRIBE_TOKEN_', 'email' => '_EMAIL_'], UrlGeneratorInterface::ABSOLUTE_URL, 'https://capco.test/unsubscribe/_UNSUBSCRIBE_TOKEN_?email=_EMAIL_'],
         ]);
         $builder = new MessageBuilder($this->createTranslator(), $router);
-        $campaign = (new EmailingCampaign())->setContent('Campaign content');
         $user = new EmailCampaignRecipient('user@example.org', RecipientType::User, 'user-id', 'User', 'fr-FR', null, 'user-token');
-        $participant = new EmailCampaignRecipient('participant+test@example.org', RecipientType::Participant, 'participant-id', 'Participant', 'fr-FR', 'participant-token');
+        $participant = new EmailCampaignRecipient('participant+test@example.org', RecipientType::Participant, 'participant-id', 'Participant', 'en-GB', 'participant-token');
 
-        $userMessage = $builder->buildOneMessage($campaign, $user, '<p>Content</p>', 'Site', 'https://capco.test');
-        $participantMessage = $builder->buildOneMessage($campaign, $participant, '<p>Content</p>', 'Site', 'https://capco.test');
-        $repeatedMessage = $builder->buildOneMessage($campaign, $user, '<p>Content</p>', 'Site', 'https://capco.test');
+        $userMessage = $builder->buildOneMessage($user, 'Site', 'https://capco.test');
+        $participantMessage = $builder->buildOneMessage($participant, 'Site', 'https://capco.test');
+        $repeatedMessage = $builder->buildOneMessage($user, 'Site', 'https://capco.test');
 
-        self::assertSame('https://capco.test/action/user-token', $userMessage['Variables']['unsubscribePart']);
-        self::assertSame('https://capco.test/unsubscribe/participant-token?email=participant%2Btest%40example.org', $participantMessage['Variables']['unsubscribePart']);
+        self::assertSame(['To', 'TemplateLanguage', 'Variables'], array_keys($userMessage));
+        self::assertTrue($userMessage['TemplateLanguage']);
+        self::assertSame([['Email' => 'user@example.org', 'Name' => 'User']], $userMessage['To']);
+        self::assertSame([['Email' => 'participant+test@example.org', 'Name' => 'Participant']], $participantMessage['To']);
+        self::assertSame([
+            'unsubscribePart' => 'fr-FR https://capco.test/action/user-token',
+            'subscribedPart' => 'fr-FR email.notification.footer.subscribe.to',
+            'signaturePart' => 'fr-FR email.propulsed.by.capco',
+        ], $userMessage['Variables']);
+        self::assertSame([
+            'unsubscribePart' => 'en-GB https://capco.test/unsubscribe/participant-token?email=participant%2Btest%40example.org',
+            'subscribedPart' => 'en-GB email.notification.footer.subscribe.to',
+            'signaturePart' => 'en-GB email.propulsed.by.capco',
+        ], $participantMessage['Variables']);
         self::assertSame($userMessage, $repeatedMessage);
     }
 
@@ -53,28 +63,29 @@ final class EmailCampaignMessageBuilderTest extends TestCase
             }
         );
         $builder = new MessageBuilder($this->createTranslator(), $router);
-        $campaign = (new EmailingCampaign())->setContent('Campaign content');
         $recipient = new EmailCampaignRecipient('user@example.org', RecipientType::User, 'user-id', 'User', 'fr-FR', null, 'user-token');
 
         $failure = null;
 
         try {
-            $builder->buildOneMessage($campaign, $recipient, '', 'Site', 'https://capco.test');
+            $builder->buildOneMessage($recipient, 'Site', 'https://capco.test');
         } catch (\RuntimeException $exception) {
             $failure = $exception;
         }
         self::assertInstanceOf(\RuntimeException::class, $failure);
         self::assertSame('Database unavailable', $failure->getMessage());
 
-        $message = $builder->buildOneMessage($campaign, $recipient, '', 'Site', 'https://capco.test');
-        self::assertSame('https://capco.test/capco_app_action_token/user-token', $message['Variables']['unsubscribePart']);
+        $message = $builder->buildOneMessage($recipient, 'Site', 'https://capco.test');
+        self::assertSame('fr-FR https://capco.test/capco_app_action_token/user-token', $message['Variables']['unsubscribePart']);
     }
 
     private function createTranslator(): TranslatorInterface
     {
         $translator = $this->createStub(TranslatorInterface::class);
         $translator->method('trans')->willReturnCallback(
-            static fn (string $id): string => 'click-here-to-unsubscribe' === $id ? '_UNSUBSCRIBE_URL_' : $id
+            static fn (string $id, array $parameters, ?string $domain, ?string $locale): string => $locale . ' ' . (
+                'click-here-to-unsubscribe' === $id ? $parameters['unsubscribeUrl'] : $id
+            )
         );
 
         return $translator;
